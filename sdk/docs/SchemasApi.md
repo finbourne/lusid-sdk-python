@@ -22,6 +22,7 @@ Gets the schema and meta-data for a given entity
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -57,6 +66,9 @@ async def main():
         entity = 'entity_example' # str | The name of a valid entity
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_entity_schema(entity, opts=opts)
+
             # [EARLY ACCESS] GetEntitySchema: Get schema
             api_response = await api_instance.get_entity_schema(entity)
             pprint(api_response)
@@ -102,6 +114,7 @@ Get the schemas for the provided list of property keys.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -128,6 +141,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -138,6 +159,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_property_schema(property_keys=property_keys, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetPropertySchema: Get property schema
             api_response = await api_instance.get_property_schema(property_keys=property_keys, as_at=as_at)
             pprint(api_response)
@@ -184,6 +208,7 @@ Gets the available value types for which a schema is available.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -210,6 +235,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -220,6 +253,9 @@ async def main():
         limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_value_types(sort_by=sort_by, limit=limit, opts=opts)
+
             # [EARLY ACCESS] GetValueTypes: Get value types
             api_response = await api_instance.get_value_types(sort_by=sort_by, limit=limit)
             pprint(api_response)
@@ -266,6 +302,7 @@ List all available entities for which schema information is available.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -292,6 +329,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -300,6 +345,9 @@ async def main():
         api_instance = api_client_factory.build(SchemasApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_entities(opts=opts)
+
             # [EARLY ACCESS] ListEntities: List entities
             api_response = await api_instance.list_entities()
             pprint(api_response)

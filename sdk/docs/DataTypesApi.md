@@ -27,6 +27,7 @@ Create a new data type definition    Data types cannot be created in either the 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -53,6 +54,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -67,6 +76,9 @@ async def main():
         create_data_type_request = CreateDataTypeRequest.from_dict({"scope":"TestScope","code":"MyType","typeValueRange":"Open","displayName":"My data format","description":"Data type description","valueType":"Int","unitSchema":"Basic","acceptableUnits":[{"code":"Ap","displayName":"Apples","description":"A quantity of apples"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}]}) # CreateDataTypeRequest | The definition of the new data type (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_data_type(create_data_type_request=create_data_type_request, opts=opts)
+
             # [EARLY ACCESS] CreateDataType: Create data type definition
             api_response = await api_instance.create_data_type(create_data_type_request=create_data_type_request)
             pprint(api_response)
@@ -112,6 +124,7 @@ Delete an existing data type definition.    Data types cannot be deleted in eith
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -138,6 +151,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -148,6 +169,9 @@ async def main():
         code = 'code_example' # str | The code of the data type
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_data_type(scope, code, opts=opts)
+
             # DeleteDataType: Delete a data type definition.
             api_response = await api_instance.delete_data_type(scope, code)
             pprint(api_response)
@@ -194,6 +218,7 @@ Get the definition of a specified data type
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -220,6 +245,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -231,6 +264,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_data_type(scope, code, as_at=as_at, opts=opts)
+
             # GetDataType: Get data type definition
             api_response = await api_instance.get_data_type(scope, code, as_at=as_at)
             pprint(api_response)
@@ -278,6 +314,7 @@ Get the definitions of the specified units associated bound to a specific data t
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -304,6 +341,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -317,6 +362,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at of the requested data type (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetUnitsFromDataType: Get units from data type
             api_response = await api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
             pprint(api_response)
@@ -366,6 +414,7 @@ List all data type summaries
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -392,6 +441,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -405,6 +462,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data
             api_response = await api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -454,6 +514,7 @@ List all data types in a specified scope
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -480,6 +541,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -494,6 +563,9 @@ async def main():
         filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+
             # ListDataTypes: List data types
             api_response = await api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter)
             pprint(api_response)
@@ -544,6 +616,7 @@ Update the definition of the specified existing data type    Not all elements wi
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -570,6 +643,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -586,6 +667,9 @@ async def main():
         update_data_type_request = UpdateDataTypeRequest.from_dict({"displayName":"My data format","description":"Data type description","acceptableUnits":[{"code":"Pe","displayName":"Pears","description":"A quantity of Pears"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}]}) # UpdateDataTypeRequest | The updated definition of the data type
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_data_type(scope, code, update_data_type_request, opts=opts)
+
             # [EARLY ACCESS] UpdateDataType: Update data type definition
             api_response = await api_instance.update_data_type(scope, code, update_data_type_request)
             pprint(api_response)
@@ -633,6 +717,7 @@ Replaces the whole set of reference data
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -659,6 +744,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -675,6 +768,9 @@ async def main():
         update_reference_data_request = UpdateReferenceDataRequest.from_dict({"requestDefinitions":[{"key":"Field1","isRequired":true,"isUnique":false},{"key":"Field2","isRequired":true,"isUnique":false},{"key":"Field3","isRequired":true,"isUnique":false}],"requestValues":[{"value":"ValueOne","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}},{"value":"ValueTwo","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}},{"value":"ValueThree","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}}]}) # UpdateReferenceDataRequest | The updated reference data
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_reference_data(scope, code, update_reference_data_request, opts=opts)
+
             # [EARLY ACCESS] UpdateReferenceData: Update all reference data on a data type, includes the reference values, the field definitions, field values
             api_response = await api_instance.update_reference_data(scope, code, update_reference_data_request)
             pprint(api_response)
@@ -722,6 +818,7 @@ Replaces the whole set of reference values
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -748,6 +845,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -759,6 +864,9 @@ async def main():
         field_value = [{"value":"FRA","fields":{"english_short_name":"France","continent":"Europe"}},{"value":"DEU","fields":{"english_short_name":"Germany","continent":"Europe"}}] # List[FieldValue] | The updated reference values
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_reference_values(scope, code, field_value, opts=opts)
+
             # [EARLY ACCESS] UpdateReferenceValues: Update reference data on a data type
             api_response = await api_instance.update_reference_values(scope, code, field_value)
             pprint(api_response)

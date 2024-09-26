@@ -22,6 +22,7 @@ Create a new sequence
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -63,6 +72,9 @@ async def main():
         create_sequence_request = CreateSequenceRequest.from_dict({"code":"TestCode","increment":1,"minValue":0,"maxValue":10,"start":0,"cycle":false,"pattern":"TXN-{{seqValue}}"}) # CreateSequenceRequest | Request to create sequence
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_sequence(scope, create_sequence_request, opts=opts)
+
             # [EARLY ACCESS] CreateSequence: Create a new sequence
             api_response = await api_instance.create_sequence(scope, create_sequence_request)
             pprint(api_response)
@@ -109,6 +121,7 @@ Return the details of a specified sequence
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -135,6 +148,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -145,6 +166,9 @@ async def main():
         code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_sequence(scope, code, opts=opts)
+
             # [EARLY ACCESS] GetSequence: Get a specified sequence
             api_response = await api_instance.get_sequence(scope, code)
             pprint(api_response)
@@ -191,6 +215,7 @@ List sequences which satisfies filtering criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -217,6 +242,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -228,6 +261,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_sequences(page=page, limit=limit, filter=filter, opts=opts)
+
             # [EARLY ACCESS] ListSequences: List Sequences
             api_response = await api_instance.list_sequences(page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -275,6 +311,7 @@ Get the next set of values from a specified sequence
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -301,6 +338,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -312,6 +357,9 @@ async def main():
         batch = 56 # int | Number of sequences items to return for the specified sequence. Default to 1 if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.next(scope, code, batch=batch, opts=opts)
+
             # [EARLY ACCESS] Next: Get next values from sequence
             api_response = await api_instance.next(scope, code, batch=batch)
             pprint(api_response)

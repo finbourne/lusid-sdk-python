@@ -22,6 +22,7 @@ The API will return a Bad Request if the Custom Entity Type already exists.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -62,6 +71,9 @@ async def main():
         create_custom_entity_type_request = CreateCustomEntityTypeRequest.from_dict({"entityTypeName":"Support Ticket","displayName":"Support Ticket","description":"SupportTicket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]}) # CreateCustomEntityTypeRequest | The payload containing the description of the Custom Entity Type.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_custom_entity_type(create_custom_entity_type_request, opts=opts)
+
             # [EARLY ACCESS] CreateCustomEntityType: Define a new Custom Entity Type.
             api_response = await api_instance.create_custom_entity_type(create_custom_entity_type_request)
             pprint(api_response)
@@ -107,6 +119,7 @@ Retrieve a specific Custom Entity Type at a point in AsAt time.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -133,6 +146,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -143,6 +164,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the definition. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_custom_entity_type(entity_type, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetCustomEntityType: Get a Custom Entity Type.
             api_response = await api_instance.get_custom_entity_type(entity_type, as_at=as_at)
             pprint(api_response)
@@ -189,6 +213,7 @@ List all Custom Entity Types matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -215,6 +240,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -228,6 +261,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_custom_entity_types(as_at=as_at, limit=limit, filter=filter, sort_by=sort_by, page=page, opts=opts)
+
             # [EARLY ACCESS] ListCustomEntityTypes: List Custom Entity Types.
             api_response = await api_instance.list_custom_entity_types(as_at=as_at, limit=limit, filter=filter, sort_by=sort_by, page=page)
             pprint(api_response)
@@ -277,6 +313,7 @@ The API will return a Bad Request if the Custom Entity Type does not exist.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -303,6 +340,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -318,6 +363,9 @@ async def main():
         update_custom_entity_type_request = UpdateCustomEntityTypeRequest.from_dict({"displayName":"Support Ticket","description":"Support Ticket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]}) # UpdateCustomEntityTypeRequest | The payload containing the description of the Custom Entity Type.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_custom_entity_type(entity_type, update_custom_entity_type_request, opts=opts)
+
             # [EARLY ACCESS] UpdateCustomEntityType: Modify an existing Custom Entity Type.
             api_response = await api_instance.update_custom_entity_type(entity_type, update_custom_entity_type_request)
             pprint(api_response)

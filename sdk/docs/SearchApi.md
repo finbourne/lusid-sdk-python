@@ -22,6 +22,7 @@ Search across all instruments that have been mastered in LUSID. Optionally augme
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -60,6 +69,9 @@ async def main():
         scope = 'scope_example' # str | The scope in which the instrument lies. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.instruments_search(instrument_search_property, mastered_effective_at=mastered_effective_at, mastered_only=mastered_only, scope=scope, opts=opts)
+
             # [EARLY ACCESS] InstrumentsSearch: Instruments search
             api_response = await api_instance.instruments_search(instrument_search_property, mastered_effective_at=mastered_effective_at, mastered_only=mastered_only, scope=scope)
             pprint(api_response)
@@ -108,6 +120,7 @@ Search through all portfolio groups
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -134,6 +147,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -147,6 +168,9 @@ async def main():
         page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.search_portfolio_groups(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+
             # SearchPortfolioGroups: Search Portfolio Groups
             api_response = await api_instance.search_portfolio_groups(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
             pprint(api_response)
@@ -196,6 +220,7 @@ Search through all portfolios
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -222,6 +247,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -235,6 +268,9 @@ async def main():
         page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.search_portfolios(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+
             # SearchPortfolios: Search Portfolios
             api_response = await api_instance.search_portfolios(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
             pprint(api_response)
@@ -284,6 +320,7 @@ Search through all Property Definitions
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -310,6 +347,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -323,6 +368,9 @@ async def main():
         page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.search_properties(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+
             # SearchProperties: Search Property Definitions
             api_response = await api_instance.search_properties(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
             pprint(api_response)

@@ -23,6 +23,7 @@ Create a new relationship definition to be used for creating relationships betwe
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -63,6 +72,9 @@ async def main():
         create_relationship_definition_request = CreateRelationshipDefinitionRequest.from_dict({"scope":"PortfolioManagementTeam","code":"Traders","sourceEntityType":"Portfolio","targetEntityType":"Person","displayName":"Authorised traders to trade for specific portfolio ","outwardDescription":"can be traded by","inwardDescription":"can trade with portfolio","lifeTime":"TimeVariant","relationshipCardinality":"ManyToMany"}) # CreateRelationshipDefinitionRequest | The definition of the new relationship.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_relationship_definition(create_relationship_definition_request, opts=opts)
+
             # [EARLY ACCESS] CreateRelationshipDefinition: Create Relationship Definition
             api_response = await api_instance.create_relationship_definition(create_relationship_definition_request)
             pprint(api_response)
@@ -108,6 +120,7 @@ Delete the definition of the specified relationship.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -134,6 +147,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -144,6 +165,9 @@ async def main():
         code = 'code_example' # str | The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_relationship_definition(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteRelationshipDefinition: Delete Relationship Definition
             api_response = await api_instance.delete_relationship_definition(scope, code)
             pprint(api_response)
@@ -190,6 +214,7 @@ Retrieve the specified relationship definition
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -216,6 +241,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -227,6 +260,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_relationship_definition(scope, code, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetRelationshipDefinition: Get relationship definition
             api_response = await api_instance.get_relationship_definition(scope, code, as_at=as_at)
             pprint(api_response)
@@ -274,6 +310,7 @@ Retrieve one or more specified relationship definitions.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -300,6 +337,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -313,6 +358,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_relationship_definitions(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EARLY ACCESS] ListRelationshipDefinitions: List relationship definitions
             api_response = await api_instance.list_relationship_definitions(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -362,6 +410,7 @@ Update the definition of a specified existing relationship. Not all elements wit
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -388,6 +437,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -404,6 +461,9 @@ async def main():
         update_relationship_definition_request = UpdateRelationshipDefinitionRequest.from_dict({"displayName":"Authorised traders to trade for specific portfolio ","outwardDescription":"can be traded by","inwardDescription":"can trade with portfolio"}) # UpdateRelationshipDefinitionRequest | The details of relationship definition to update.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_relationship_definition(scope, code, update_relationship_definition_request, opts=opts)
+
             # [EARLY ACCESS] UpdateRelationshipDefinition: Update Relationship Definition
             api_response = await api_instance.update_relationship_definition(scope, code, update_relationship_definition_request)
             pprint(api_response)

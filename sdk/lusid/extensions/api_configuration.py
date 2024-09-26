@@ -1,7 +1,8 @@
 import re
 import logging
 from typing import Optional, Union, Tuple, Any, Callable
-from lusid.configuration import Configuration
+from lusid.configuration import Configuration, Timeouts
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.extensions.refreshing_token import RefreshingToken
 from lusid.extensions.socket_keep_alive import keep_alive_socket_options
 from lusid.extensions.proxy_config import ProxyConfig
@@ -22,6 +23,10 @@ class ApiConfiguration:
         certificate_filename=None,
         proxy_config:Optional[ProxyConfig]=None,
         access_token=None,
+        total_timeout_ms=None,
+        connect_timeout_ms=None,
+        read_timeout_ms=None,
+        rate_limit_retries=None,
     ):
         """
         The configuration required to access LUSID, read more at https://support.finbourne.com/getting-started-with-apis-sdks
@@ -46,6 +51,10 @@ class ApiConfiguration:
         self.__certificate_filename = certificate_filename
         self.__proxy_config = proxy_config
         self.__access_token = access_token
+        self.__total_timeout_ms = total_timeout_ms
+        self.__connect_timeout_ms = connect_timeout_ms
+        self.__read_timeout_ms = read_timeout_ms
+        self.__rate_limit_retries = rate_limit_retries
 
     @property
     def token_url(self):
@@ -181,6 +190,35 @@ class ApiConfiguration:
             )
             raise
 
+    @property
+    def total_timeout_ms(self):
+        return self.__total_timeout_ms
+
+    @total_timeout_ms.setter
+    def total_timeout_ms(self, value):
+        self.__total_timeout_ms = value
+
+    @property
+    def connect_timeout_ms(self):
+        return self.__connect_timeout_ms
+
+    @connect_timeout_ms.setter
+    def connect_timeout_ms(self, value):
+        self.__connect_timeout_ms = value
+
+    @property
+    def read_timeout_ms(self):
+        return self.__read_timeout_ms
+
+    @read_timeout_ms.setter
+    def read_timeout_ms(self, value):
+        self.__read_timeout_ms = value
+
+    @property
+    def rate_limit_retries(self):
+        return self.__rate_limit_retries
+
+
     def build_api_client_config(
         self,
         tcp_keep_alive: bool = True,
@@ -188,6 +226,7 @@ class ApiConfiguration:
             Union[Tuple[Any, Any, Any], Tuple[Any, Any, None, int]]
         ] = keep_alive_socket_options(),
         id_provider_response_handler: Optional[Callable[[Response], None]] = None,
+        opts: ConfigurationOptions = None,
     ) -> Configuration:
         """Builds lusid.Configuration for initialising an api client.
 
@@ -219,6 +258,16 @@ class ApiConfiguration:
                 access_token=access_token,
                 host=self.api_url,
                 ssl_ca_cert=self.certificate_filename,
+                timeouts=Timeouts(
+                    total_timeout_ms=opts.total_timeout_ms if opts and opts.total_timeout_ms != None else 
+                        self.total_timeout_ms if self.total_timeout_ms != None else Configuration.DEFAULT_TOTAL_TIMEOUT_MS,
+                    connect_timeout_ms=opts.connect_timeout_ms if opts and opts.connect_timeout_ms != None else 
+                        self.connect_timeout_ms if self.connect_timeout_ms != None else Configuration.DEFAULT_CONNECT_TIMEOUT_MS,
+                    read_timeout_ms=opts.read_timeout_ms if opts and opts.read_timeout_ms != None else 
+                        self.read_timeout_ms if self.read_timeout_ms != None else Configuration.DEFAULT_READ_TIMEOUT_MS
+                ),
+                rate_limit_retries=opts.rate_limit_retries if opts != None and opts.rate_limit_retries != None else 
+                        self.rate_limit_retries if self.rate_limit_retries != None else Configuration.DEFAULT_RATE_LIMIT_RETRIES
             )
             if tcp_keep_alive:
                 config.socket_options = socket_options or keep_alive_socket_options()

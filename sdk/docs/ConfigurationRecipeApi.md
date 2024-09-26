@@ -29,6 +29,7 @@ Delete the specified Configuration Recipe from a single scope.                Th
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -55,6 +56,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -65,6 +74,9 @@ async def main():
         code = 'code_example' # str | The Configuration Recipe to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_configuration_recipe(scope, code, opts=opts)
+
             # DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.
             api_response = await api_instance.delete_configuration_recipe(scope, code)
             pprint(api_response)
@@ -111,6 +123,7 @@ Delete the specified Recipe Composer from a single scope.                The res
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -137,6 +150,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -147,6 +168,9 @@ async def main():
         code = 'code_example' # str | The Recipe Composer to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_recipe_composer(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
             api_response = await api_instance.delete_recipe_composer(scope, code)
             pprint(api_response)
@@ -193,6 +217,7 @@ Get a Configuration Recipe from a single scope.                The response will
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -219,6 +244,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_configuration_recipe(scope, code, as_at=as_at, opts=opts)
+
             # GetConfigurationRecipe: Get Configuration Recipe
             api_response = await api_instance.get_configuration_recipe(scope, code, as_at=as_at)
             pprint(api_response)
@@ -277,6 +313,7 @@ If scope-code is referring to a Configuration Recipe it is returned, if it refer
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -303,6 +340,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -314,6 +359,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_derived_recipe(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
             api_response = await api_instance.get_derived_recipe(scope, code, as_at=as_at)
             pprint(api_response)
@@ -361,6 +409,7 @@ Get a Recipe Composer from a single scope.                The response will retu
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -387,6 +436,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -398,6 +455,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_recipe_composer(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer
             api_response = await api_instance.get_recipe_composer(scope, code, as_at=as_at)
             pprint(api_response)
@@ -445,6 +505,7 @@ Resolves an inline recipe composer into a ConfigurationRecipe.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -471,6 +532,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -485,6 +554,9 @@ async def main():
         upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({"recipeComposer":{"scope":"someScope","code":"someCode","operations":[{"value":{"fromRecipe":{"scope":"someRecipeScope","code":"SomeRecipeCode"}},"path":".","op":"Insert"},{"value":{"asString":"SimpleStatic"},"path":"Pricing.ModelRules.[*].ModelName","op":"Update"}]}}) # UpsertRecipeComposerRequest | Recipe composer used to expand into the Configuration Recipe.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request, opts=opts)
+
             # [EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
             api_response = await api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request)
             pprint(api_response)
@@ -530,6 +602,7 @@ List the set of configuration recipes at the specified date/time and scope. Note
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -556,6 +629,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -566,6 +647,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_configuration_recipes(as_at=as_at, filter=filter, opts=opts)
+
             # ListConfigurationRecipes: List the set of Configuration Recipes
             api_response = await api_instance.list_configuration_recipes(as_at=as_at, filter=filter)
             pprint(api_response)
@@ -612,6 +696,7 @@ This endpoints returns a union of the output of ListConfigurationRecipes and the
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -638,6 +723,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -648,6 +741,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_derived_recipes(as_at=as_at, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
             api_response = await api_instance.list_derived_recipes(as_at=as_at, filter=filter)
             pprint(api_response)
@@ -694,6 +790,7 @@ List the set of Recipe Composers at the specified date/time and scope
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -720,6 +817,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -730,6 +835,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_recipe_composers(as_at=as_at, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers
             api_response = await api_instance.list_recipe_composers(as_at=as_at, filter=filter)
             pprint(api_response)
@@ -776,6 +884,7 @@ Update or insert one Configuration Recipe in a single scope. An item will be upd
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -802,6 +911,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -816,6 +933,9 @@ async def main():
         upsert_recipe_request = UpsertRecipeRequest.from_dict({"configurationRecipe":{"scope":"scopeName","code":"MyNamedRecipe12345","market":{"marketRules":[{"key":"Fx.CurrencyPair.*","supplier":"DataScope","dataScope":"SomeScopeToLookAt","quoteType":"Rate","field":"Mid","priceSource":"","sourceSystem":"Lusid","fallThroughOnAccessDenied":false}],"suppliers":{},"options":{"defaultSupplier":"Lusid","defaultInstrumentCodeType":"LusidInstrumentId","defaultScope":"default","attemptToInferMissingFx":false,"calendarScope":"CoppClarkHolidayCalendars","conventionScope":"Conventions"},"specificRules":[],"groupedMarketRules":[]},"pricing":{"modelRules":[],"modelChoice":{},"options":{"modelSelection":{"library":"Lusid","model":"SimpleStatic"},"useInstrumentTypeToDeterminePricer":false,"allowAnyInstrumentsWithSecUidToPriceOffLookup":false,"allowPartiallySuccessfulEvaluation":false,"produceSeparateResultForLinearOtcLegs":false,"enableUseOfCachedUnitResults":false,"windowValuationOnInstrumentStartEnd":false,"removeContingentCashflowsInPaymentDiary":false,"useChildSubHoldingKeysForPortfolioExpansion":false,"validateDomesticAndQuoteCurrenciesAreConsistent":false,"conservedQuantityForLookthroughExpansion":"PV"},"resultDataRules":[],"holdingPricingInfo":{"specificFallbacks":[],"specificOverrides":[]}},"aggregation":{"options":{"useAnsiLikeSyntax":false,"allowPartialEntitlementSuccess":false,"applyIso4217Rounding":false}},"description":"","holding":{"taxLotLevelHoldings":true}}}) # UpsertRecipeRequest | The Configuration Recipe to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_configuration_recipe(upsert_recipe_request, opts=opts)
+
             # UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.
             api_response = await api_instance.upsert_configuration_recipe(upsert_recipe_request)
             pprint(api_response)
@@ -861,6 +981,7 @@ Update or insert one Recipe Composer in a single scope. An item will be updated 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -887,6 +1008,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -901,6 +1030,9 @@ async def main():
         upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({"recipeComposer":{"scope":"someScope","code":"someCode","operations":[{"value":{"fromRecipe":{"scope":"someRecipeScope","code":"SomeRecipeCode"}},"path":".","op":"Insert"},{"value":{"asString":"SimpleStatic"},"path":"Pricing.ModelRules.[*].ModelName","op":"Update"}]}}) # UpsertRecipeComposerRequest | The Recipe Composer to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_recipe_composer(upsert_recipe_composer_request, opts=opts)
+
             # [EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
             api_response = await api_instance.upsert_recipe_composer(upsert_recipe_composer_request)
             pprint(api_response)

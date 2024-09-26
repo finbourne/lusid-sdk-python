@@ -189,6 +189,7 @@ Class | Method | HTTP request | Description
 *DerivedTransactionPortfoliosApi* | [**delete_derived_portfolio_details**](docs/DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
 *EntitiesApi* | [**get_custom_entity_by_entity_unique_id**](docs/EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | [EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | [EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
+*EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | [EXPERIMENTAL] GetEntityHistory: List an entity's history information
 *EntitiesApi* | [**get_instrument_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | [EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_by_entity_unique_id**](docs/EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_changes**](docs/EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
@@ -207,6 +208,7 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**delete_fund_configuration**](docs/FundConfigurationApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
 *FundConfigurationApi* | [**get_fund_configuration**](docs/FundConfigurationApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
 *FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
+*FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
@@ -675,6 +677,7 @@ Class | Method | HTTP request | Description
  - [BondCouponEvent](docs/BondCouponEvent.md)
  - [BondDefaultEvent](docs/BondDefaultEvent.md)
  - [BondPrincipalEvent](docs/BondPrincipalEvent.md)
+ - [BonusIssueEvent](docs/BonusIssueEvent.md)
  - [BookTransactionsRequest](docs/BookTransactionsRequest.md)
  - [BookTransactionsResponse](docs/BookTransactionsResponse.md)
  - [BoolComplianceParameter](docs/BoolComplianceParameter.md)
@@ -715,6 +718,7 @@ Class | Method | HTTP request | Description
  - [Change](docs/Change.md)
  - [ChangeHistory](docs/ChangeHistory.md)
  - [ChangeHistoryAction](docs/ChangeHistoryAction.md)
+ - [ChangeInterval](docs/ChangeInterval.md)
  - [ChangeIntervalWithOrderManagementDetail](docs/ChangeIntervalWithOrderManagementDetail.md)
  - [ChangeItem](docs/ChangeItem.md)
  - [ChartOfAccounts](docs/ChartOfAccounts.md)
@@ -883,6 +887,7 @@ Class | Method | HTTP request | Description
  - [EconomicDependencyType](docs/EconomicDependencyType.md)
  - [EconomicDependencyWithComplexMarketData](docs/EconomicDependencyWithComplexMarketData.md)
  - [EconomicDependencyWithQuote](docs/EconomicDependencyWithQuote.md)
+ - [EffectiveRange](docs/EffectiveRange.md)
  - [ElectionSpecification](docs/ElectionSpecification.md)
  - [EligibilityCalculation](docs/EligibilityCalculation.md)
  - [EmptyModelOptions](docs/EmptyModelOptions.md)
@@ -1072,6 +1077,7 @@ Class | Method | HTTP request | Description
  - [JournalEntryLine](docs/JournalEntryLine.md)
  - [JournalEntryLinesQueryParameters](docs/JournalEntryLinesQueryParameters.md)
  - [LabelValueSet](docs/LabelValueSet.md)
+ - [LapseElection](docs/LapseElection.md)
  - [LegDefinition](docs/LegDefinition.md)
  - [LegalEntity](docs/LegalEntity.md)
  - [LevelStep](docs/LevelStep.md)
@@ -1103,6 +1109,7 @@ Class | Method | HTTP request | Description
  - [MarketObservableType](docs/MarketObservableType.md)
  - [MarketOptions](docs/MarketOptions.md)
  - [MarketQuote](docs/MarketQuote.md)
+ - [MasteredInstrument](docs/MasteredInstrument.md)
  - [MatchCriterion](docs/MatchCriterion.md)
  - [MaturityEvent](docs/MaturityEvent.md)
  - [MbsCouponEvent](docs/MbsCouponEvent.md)
@@ -1371,6 +1378,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfCalendarDate](docs/ResourceListOfCalendarDate.md)
  - [ResourceListOfChange](docs/ResourceListOfChange.md)
  - [ResourceListOfChangeHistory](docs/ResourceListOfChangeHistory.md)
+ - [ResourceListOfChangeInterval](docs/ResourceListOfChangeInterval.md)
  - [ResourceListOfChangeIntervalWithOrderManagementDetail](docs/ResourceListOfChangeIntervalWithOrderManagementDetail.md)
  - [ResourceListOfComplianceBreachedOrderInfo](docs/ResourceListOfComplianceBreachedOrderInfo.md)
  - [ResourceListOfComplianceRule](docs/ResourceListOfComplianceRule.md)

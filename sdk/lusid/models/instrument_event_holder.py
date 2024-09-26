@@ -36,11 +36,12 @@ class InstrumentEventHolder(BaseModel):
     instrument_scope: constr(strict=True, min_length=1) = Field(..., alias="instrumentScope", description="The scope of the instrument.")
     description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of the instrument event.")
     event_date_range: EventDateRange = Field(..., alias="eventDateRange")
+    completeness: Optional[StrictStr] = Field(None, description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete).")
     instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
     participation_type: Optional[StrictStr] = Field('Mandatory', alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.")
-    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
+    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
 
     @validator('instrument_event_id')
     def instrument_event_id_validate_regular_expression(cls, value):
@@ -78,6 +79,7 @@ class InstrumentEventHolder(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "completeness",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
@@ -96,6 +98,11 @@ class InstrumentEventHolder(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['properties'] = _items
+        # set to None if completeness (nullable) is None
+        # and __fields_set__ contains the field
+        if self.completeness is None and "completeness" in self.__fields_set__:
+            _dict['completeness'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -125,6 +132,7 @@ class InstrumentEventHolder(BaseModel):
             "instrument_scope": obj.get("instrumentScope"),
             "description": obj.get("description"),
             "event_date_range": EventDateRange.from_dict(obj.get("eventDateRange")) if obj.get("eventDateRange") is not None else None,
+            "completeness": obj.get("completeness"),
             "instrument_event": InstrumentEvent.from_dict(obj.get("instrumentEvent")) if obj.get("instrumentEvent") is not None else None,
             "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
             "sequence_number": obj.get("sequenceNumber"),

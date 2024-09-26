@@ -23,6 +23,7 @@ Creates a tax rule set definition at the given effective time.  The user must be
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -64,6 +73,9 @@ async def main():
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_tax_rule_set(create_tax_rule_set_request, effective_at=effective_at, opts=opts)
+
             # [EXPERIMENTAL] CreateTaxRuleSet: Create a tax rule set.
             api_response = await api_instance.create_tax_rule_set(create_tax_rule_set_request, effective_at=effective_at)
             pprint(api_response)
@@ -110,6 +122,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -136,6 +149,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -146,6 +167,9 @@ async def main():
         code = 'code_example' # str | The rule set code.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_tax_rule_set(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteTaxRuleSet: Delete a tax rule set.
             api_response = await api_instance.delete_tax_rule_set(scope, code)
             pprint(api_response)
@@ -192,6 +216,7 @@ Retrieves the tax rule set definition at the given effective and as at times.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -218,6 +243,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_tax_rule_set(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetTaxRuleSet: Retrieve the definition of single tax rule set.
             api_response = await api_instance.get_tax_rule_set(scope, code, effective_at=effective_at, as_at=as_at)
             pprint(api_response)
@@ -278,6 +314,7 @@ Retrieves all tax rule set definitions at the given effective and as at times
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -304,6 +341,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -314,6 +359,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_tax_rule_sets(effective_at=effective_at, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] ListTaxRuleSets: List tax rule sets.
             api_response = await api_instance.list_tax_rule_sets(effective_at=effective_at, as_at=as_at)
             pprint(api_response)
@@ -360,6 +408,7 @@ Updates the tax rule set definition at the given effective time.  The changes wi
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -386,6 +435,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -403,6 +460,9 @@ async def main():
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_tax_rule_set(scope, code, update_tax_rule_set_request, effective_at=effective_at, opts=opts)
+
             # [EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.
             api_response = await api_instance.update_tax_rule_set(scope, code, update_tax_rule_set_request, effective_at=effective_at)
             pprint(api_response)

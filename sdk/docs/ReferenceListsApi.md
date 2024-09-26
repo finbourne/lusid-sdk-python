@@ -22,6 +22,7 @@ Delete a Reference List instance.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -58,6 +67,9 @@ async def main():
         code = 'code_example' # str | The Reference List's unique identifier.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_reference_list(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteReferenceList: Delete Reference List
             api_response = await api_instance.delete_reference_list(scope, code)
             pprint(api_response)
@@ -104,6 +116,7 @@ Retrieve a Reference List instance at a point in AsAt time.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -130,6 +143,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -141,6 +162,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_reference_list(scope, code, as_at=as_at, opts=opts)
+
             # GetReferenceList: Get Reference List
             api_response = await api_instance.get_reference_list(scope, code, as_at=as_at)
             pprint(api_response)
@@ -188,6 +212,7 @@ List all the Reference Lists matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -214,6 +239,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -226,6 +259,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_reference_lists(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EARLY ACCESS] ListReferenceLists: List Reference Lists
             api_response = await api_instance.list_reference_lists(as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -274,6 +310,7 @@ Insert the Reference List if it does not exist or update the Reference List with
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -300,6 +337,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -314,6 +359,9 @@ async def main():
         reference_list_request = ReferenceListRequest.from_dict({"id":{"scope":"MyScope","code":"MyStringList"},"name":"MyReferenceListName","description":"My reference list description","tags":["tags","associated","with","my","list"],"referenceList":{"values":["value1","value2"],"referenceListType":"StringList"}}) # ReferenceListRequest | The payload describing the Reference List instance. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_reference_list(reference_list_request=reference_list_request, opts=opts)
+
             # [EARLY ACCESS] UpsertReferenceList: Upsert Reference List
             api_response = await api_instance.upsert_reference_list(reference_list_request=reference_list_request)
             pprint(api_response)

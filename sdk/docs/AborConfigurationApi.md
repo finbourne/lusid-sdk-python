@@ -23,6 +23,7 @@ Create the given AborConfiguration.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -64,6 +73,9 @@ async def main():
         abor_configuration_request = AborConfigurationRequest.from_dict({"code":"AborCode","displayName":"AborConfiguration Name","description":"Standard AborConfigurationRequest","recipeId":{"scope":"RecipeScope","code":"RecipeCode"},"chartOfAccountsId":{"scope":"CoAScope","code":"CoACode"},"postingModuleCodes":["PostingModuleCode"],"cleardownModuleCodes":["CleardownModuleCode"],"properties":{"AborConfiguration/MyScope/FundManagerName":{"key":"AborConfiguration/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # AborConfigurationRequest | The definition of the AborConfiguration.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_abor_configuration(scope, abor_configuration_request, opts=opts)
+
             # [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
             api_response = await api_instance.create_abor_configuration(scope, abor_configuration_request)
             pprint(api_response)
@@ -110,6 +122,7 @@ Delete the given AborConfiguration.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -136,6 +149,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -146,6 +167,9 @@ async def main():
         code = 'code_example' # str | The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_abor_configuration(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
             api_response = await api_instance.delete_abor_configuration(scope, code)
             pprint(api_response)
@@ -192,6 +216,7 @@ Retrieve the definition of a particular AborConfiguration.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -218,6 +243,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -231,6 +264,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'AborConfiguration' domain to decorate onto the AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_abor_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
             api_response = await api_instance.get_abor_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -280,6 +316,7 @@ List all the AborConfiguration matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -306,6 +343,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -321,6 +366,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'AborConfiguration' domain to decorate onto each AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_abor_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
             api_response = await api_instance.list_abor_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
             pprint(api_response)
@@ -372,6 +420,7 @@ Update or insert one or more properties onto a single AborConfiguration. A prope
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -398,6 +447,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -409,6 +466,9 @@ async def main():
         request_body = {"Abor/MyScope/FundManagerName":{"key":"Abor/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Abor/MyScope/SomeProperty":{"key":"Abor/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Abor/MyScope/AnotherProperty":{"key":"Abor/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Abor/MyScope/ReBalanceInterval":{"key":"Abor/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"AborConfiguration/Manager/Id\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_abor_configuration_properties(scope, code, request_body=request_body, opts=opts)
+
             # [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
             api_response = await api_instance.upsert_abor_configuration_properties(scope, code, request_body=request_body)
             pprint(api_response)

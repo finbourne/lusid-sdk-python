@@ -22,6 +22,7 @@ Delete one or more specified complex market data items from a single scope. Each
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -58,6 +67,9 @@ async def main():
         request_body = {"first-item":{"provider":"DataScope","priceSource":"Some Bank Plc","lineage":"Swaps Desk Trader A","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USDOIS"},"second-item":{"provider":"DataScope","priceSource":"AN.Other Bank Plc","lineage":"Swaps Desk Trader B","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"RBS"}} # Dict[str, ComplexMarketDataId] | The complex market data Ids to delete, each keyed by a unique correlation id.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_complex_market_data(scope, request_body, opts=opts)
+
             # [EARLY ACCESS] DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
             api_response = await api_instance.delete_complex_market_data(scope, request_body)
             pprint(api_response)
@@ -104,6 +116,7 @@ Get one or more items of complex market data from a single scope.               
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -130,6 +143,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -143,6 +164,9 @@ async def main():
         max_age = 'max_age_example' # str | The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_complex_market_data(scope, request_body, effective_at=effective_at, as_at=as_at, max_age=max_age, opts=opts)
+
             # [EARLY ACCESS] GetComplexMarketData: Get complex market data
             api_response = await api_instance.get_complex_market_data(scope, request_body, effective_at=effective_at, as_at=as_at, max_age=max_age)
             pprint(api_response)
@@ -192,6 +216,7 @@ List the set of ComplexMarketData at the specified date/time,  along with the sc
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -218,6 +243,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -227,6 +260,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_complex_market_data(as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] ListComplexMarketData: List the set of ComplexMarketData
             api_response = await api_instance.list_complex_market_data(as_at=as_at)
             pprint(api_response)
@@ -272,6 +308,7 @@ Update or insert one or more complex market data items in a single scope. An ite
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -298,6 +335,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -308,6 +353,9 @@ async def main():
         request_body = {"first-item":{"marketDataId":{"provider":"DataScope","priceSource":"Some Bank Plc","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USD/USDOIS"},"marketData":{"baseDate":"1970-01-01T00:00:00.0000000+00:00","dates":["1970-01-01T00:00:00.0000000+00:00"],"discountFactors":[1],"lineage":"SomeLineage","marketDataOptions":{"dayCountConvention":"Actual365","frontExtrapolationType":"Linear","backExtrapolationType":"None","marketDataOptionsType":"CurveOptions"},"marketDataType":"DiscountFactorCurveData"}},"second-item":{"marketDataId":{"provider":"Lusid","effectiveAt":"2021-01-20T00:00:00.0000000+00:00","marketAsset":"EUR/USD/FxFwdCurve"},"marketData":{"baseDate":"2021-01-20T00:00:00.0000000+00:00","domCcy":"EUR","fgnCcy":"USD","tenors":["1D","1W","2W","3W","1M","2M","3M","4M","5M","6M","9M","1Y","15M","18M","2Y","3Y"],"pipRates":[0.6375,1.4975,3.0275,4.5625,6.7525,19.5125,27.3225,34.0625,41.5175,49.2025,74.8125,104.9125,141.1925,176.8375,260.1475,453.2625],"lineage":"","marketDataOptions":{"dayCountConvention":"Actual365","frontExtrapolationType":"Flat","backExtrapolationType":"Flat","marketDataOptionsType":"CurveOptions"},"calendars":[],"spotDaysCalculationType":"SingleCalendar","marketDataType":"FxForwardTenorPipsCurveData"}},"third-item":{"marketDataId":{"provider":"Lusid","effectiveAt":"2021-01-20T00:00:00.0000000+00:00","marketAsset":"USD/JPY/FxVol/Ln"},"marketData":{"baseDate":"2021-01-20T00:00:00.0000000+00:00","assetType":"FxVol","lineage":"Some-market-data-provider-or-other","volatility":0.15,"marketDataType":"ConstantVolatilitySurface"}}} # Dict[str, UpsertComplexMarketDataRequest] | The set of complex market data items to update or insert keyed by a unique correlation id.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_complex_market_data(scope, request_body, opts=opts)
+
             # UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
             api_response = await api_instance.upsert_complex_market_data(scope, request_body)
             pprint(api_response)

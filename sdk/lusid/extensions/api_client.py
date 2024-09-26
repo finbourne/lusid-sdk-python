@@ -154,7 +154,7 @@ class SyncApiClient:
             files=None, response_types_map=None, auth_settings=None,
             _return_http_data_only=None, collection_formats=None,
             _preload_content=True, _request_timeout=None, _host=None,
-            _request_auth=None):
+            _request_auth=None, opts=None):
 
         config = self.configuration
 
@@ -222,7 +222,8 @@ class SyncApiClient:
                 headers=header_params,
                 post_params=post_params, body=body,
                 _preload_content=_preload_content,
-                _request_timeout=_request_timeout)
+                _request_timeout=_request_timeout,
+                opts=opts)
         except ApiException as e:
             if e.body:
                 e.body = e.body.decode('utf-8')
@@ -371,7 +372,8 @@ class SyncApiClient:
                  response_types_map=None, auth_settings=None,
                  async_req=None, _return_http_data_only=None,
                  collection_formats=None, _preload_content=True,
-                 _request_timeout=None, _host=None, _request_auth=None):
+                 _request_timeout=None, _host=None, _request_auth=None,
+                 opts=None):
         """Makes the HTTP request (synchronous) and returns deserialized data.
 
         To make an async_req request, set the async_req parameter.
@@ -398,10 +400,9 @@ class SyncApiClient:
                                  Default is True.
         :param collection_formats: dict of collection formats for path, query,
             header, and post parameters.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -420,7 +421,7 @@ class SyncApiClient:
                                    response_types_map, auth_settings,
                                    _return_http_data_only, collection_formats,
                                    _preload_content, _request_timeout, _host,
-                                   _request_auth)
+                                   _request_auth, opts)
 
         return self.pool.apply_async(self.__call_api, (resource_path,
                                                        method, path_params,
@@ -433,30 +434,33 @@ class SyncApiClient:
                                                        collection_formats,
                                                        _preload_content,
                                                        _request_timeout,
-                                                       _host, _request_auth))
+                                                       _host, _request_auth, opts))
 
     def request(self, method, url, query_params=None, headers=None,
                 post_params=None, body=None, _preload_content=True,
-                _request_timeout=None):
+                _request_timeout=None, opts=None):
         """Makes the HTTP request using RESTClient."""
         if method == "GET":
             return self.rest_client.get_request(url,
                                         query_params=query_params,
                                         _preload_content=_preload_content,
                                         _request_timeout=_request_timeout,
-                                        headers=headers)
+                                        headers=headers,
+                                        opts=opts)
         elif method == "HEAD":
             return self.rest_client.head_request(url,
                                          query_params=query_params,
                                          _preload_content=_preload_content,
                                          _request_timeout=_request_timeout,
-                                         headers=headers)
+                                         headers=headers,
+                                         opts=opts)
         elif method == "OPTIONS":
             return self.rest_client.options_request(url,
                                             query_params=query_params,
                                             headers=headers,
                                             _preload_content=_preload_content,
-                                            _request_timeout=_request_timeout)
+                                            _request_timeout=_request_timeout,
+                                            opts=opts)
         elif method == "POST":
             return self.rest_client.post_request(url,
                                          query_params=query_params,
@@ -464,7 +468,8 @@ class SyncApiClient:
                                          post_params=post_params,
                                          _preload_content=_preload_content,
                                          _request_timeout=_request_timeout,
-                                         body=body)
+                                         body=body,
+                                         opts=opts)
         elif method == "PUT":
             return self.rest_client.put_request(url,
                                         query_params=query_params,
@@ -472,7 +477,8 @@ class SyncApiClient:
                                         post_params=post_params,
                                         _preload_content=_preload_content,
                                         _request_timeout=_request_timeout,
-                                        body=body)
+                                        body=body,
+                                        opts=opts)
         elif method == "PATCH":
             return self.rest_client.patch_request(url,
                                           query_params=query_params,
@@ -480,14 +486,16 @@ class SyncApiClient:
                                           post_params=post_params,
                                           _preload_content=_preload_content,
                                           _request_timeout=_request_timeout,
-                                          body=body)
+                                          body=body,
+                                          opts=opts)
         elif method == "DELETE":
             return self.rest_client.delete_request(url,
                                            query_params=query_params,
                                            headers=headers,
                                            _preload_content=_preload_content,
                                            _request_timeout=_request_timeout,
-                                           body=body)
+                                           body=body,
+                                           opts=opts)
         else:
             raise ApiValueError(
                 "http method must be `GET`, `HEAD`, `OPTIONS`,"

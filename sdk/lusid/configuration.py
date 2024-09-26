@@ -26,6 +26,56 @@ JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'minLength', 'pattern', 'maxItems', 'minItems'
 }
 
+class Timeouts:
+
+    @property
+    def total_timeout_ms(self):
+        return self.__total_timeout_ms
+
+    @total_timeout_ms.setter
+    def total_timeout_ms(self, value):
+        if not isinstance(value, int):
+            raise TypeError(f"total_timeout_ms must be type int but type '{type(value)}' used")
+        if value < 0:
+            raise ValueError(f"total_timeout_ms must be an integer greater than or equal to zero")
+        self.__total_timeout_ms = value
+
+    @property
+    def connect_timeout_ms(self):
+        return self.__connect_timeout_ms
+
+    @connect_timeout_ms.setter
+    def connect_timeout_ms(self, value):
+        if not isinstance(value, int):
+            raise TypeError(f"connect_timeout_ms must be type int but type '{type(value)}' used")
+        if value < 0:
+            raise ValueError(f"connect_timeout_ms must be an integer greater than or equal to zero")
+        self.__connect_timeout_ms = value
+
+    @property
+    def read_timeout_ms(self):
+        return self.__read_timeout_ms
+
+    @read_timeout_ms.setter
+    def read_timeout_ms(self, value):
+        if not isinstance(value, int):
+            raise TypeError(f"read_timeout_ms must be type int but type '{type(value)}' used")
+        if value < 0:
+            raise ValueError(f"read_timeout_ms must be an integer greater than or equal to zero")
+        self.__read_timeout_ms = value
+        
+    def __init__(self, total_timeout_ms: int, connect_timeout_ms: int, read_timeout_ms: int):
+        self.total_timeout_ms = total_timeout_ms
+        self.connect_timeout_ms = connect_timeout_ms
+        self.read_timeout_ms = read_timeout_ms
+        
+    def get_default():
+        return Timeouts(
+            total_timeout_ms=Configuration.DEFAULT_TOTAL_TIMEOUT_MS,
+            connect_timeout_ms=Configuration.DEFAULT_CONNECT_TIMEOUT_MS,
+            read_timeout_ms=Configuration.DEFAULT_READ_TIMEOUT_MS
+        )
+        
 class Configuration:
     """This class contains various settings of the API client.
 
@@ -55,6 +105,12 @@ class Configuration:
 
     :Example:
     """
+    
+    DEFAULT_TOTAL_TIMEOUT_MS: int = 1800_000
+    DEFAULT_CONNECT_TIMEOUT_MS: int = 0
+    DEFAULT_READ_TIMEOUT_MS: int = 0
+    DEFAULT_RATE_LIMIT_RETRIES: int = 2
+    DEFAULT_RETRIES: int = 3
 
     _default = None
 
@@ -65,7 +121,11 @@ class Configuration:
                  server_index=None, server_variables=None,
                  server_operation_index=None, server_operation_variables=None,
                  ssl_ca_cert=None,
-                 ) -> None:
+                 timeouts=Timeouts(
+                     total_timeout_ms=DEFAULT_TOTAL_TIMEOUT_MS,
+                     connect_timeout_ms=DEFAULT_CONNECT_TIMEOUT_MS,
+                     read_timeout_ms=DEFAULT_READ_TIMEOUT_MS),
+                 rate_limit_retries=DEFAULT_RATE_LIMIT_RETRIES) -> None:
         """Constructor
         """
         self._base_path = "https://www.lusid.com/api" if host is None else host
@@ -179,6 +239,9 @@ class Configuration:
         self.date_format = "%Y-%m-%d"
         """date format
         """
+        
+        self.timeouts = timeouts
+        self.rate_limit_retries = rate_limit_retries
 
     def __deepcopy__(self, memo):
         cls = self.__class__
@@ -382,7 +445,7 @@ class Configuration:
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 0.11.6865\n"\
+               "Version of the API: 0.11.6870\n"\
                "SDK Package Version: {package_version}".\
                format(env=sys.platform, pyversion=sys.version, package_version=package_version)
 
@@ -447,3 +510,25 @@ class Configuration:
         """Fix base path."""
         self._base_path = value
         self.server_index = None
+
+    @property
+    def timeouts(self):
+        return self._timeouts
+
+    @timeouts.setter
+    def timeouts(self, value):
+        if not isinstance(value, Timeouts):
+            raise TypeError(f"timeouts must be type Timeouts but type '{type(value)}' used")
+        self._timeouts = value
+
+    @property
+    def rate_limit_retries(self):
+        return self._rate_limit_retries
+
+    @rate_limit_retries.setter
+    def rate_limit_retries(self, value):
+        if not isinstance(value, int):
+            raise TypeError(f"rate_limit_retries must be type int but type '{type(value)}' used")
+        if value < 0:
+            raise ValueError(f"rate_limit_retries must be greater than or equal to zero but was '{value}'")
+        self._rate_limit_retries = value

@@ -33,6 +33,7 @@ Use this endpoint to create a compliance template.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -59,6 +60,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -74,6 +83,9 @@ async def main():
         create_compliance_template_request = CreateComplianceTemplateRequest.from_dict({"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepTypeRequest":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepTypeRequest":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepTypeRequest":"BranchStepRequest"},{"label":"Compare","complianceStepTypeRequest":"GroupFilterStepRequest"},{"label":"PercentCalculation","complianceStepTypeRequest":"PercentCheckStepRequest"}]}]}) # CreateComplianceTemplateRequest | Request to create a compliance rule template.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_compliance_template(scope, create_compliance_template_request, opts=opts)
+
             # [EARLY ACCESS] CreateComplianceTemplate: Create a Compliance Rule Template
             api_response = await api_instance.create_compliance_template(scope, create_compliance_template_request)
             pprint(api_response)
@@ -120,6 +132,7 @@ Use this endpoint to delete a compliance rule. The rule will be recoverable for 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -146,6 +159,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -156,6 +177,9 @@ async def main():
         code = 'code_example' # str | The compliance rule's code.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_compliance_rule(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteComplianceRule: Delete compliance rule.
             api_response = await api_instance.delete_compliance_rule(scope, code)
             pprint(api_response)
@@ -202,6 +226,7 @@ Delete the compliance rule template uniquely defined by the scope and code.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -228,6 +253,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -238,6 +271,9 @@ async def main():
         code = 'code_example' # str | The code of the template to be deleted.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_compliance_template(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteComplianceTemplate: Delete a ComplianceRuleTemplate
             api_response = await api_instance.delete_compliance_template(scope, code)
             pprint(api_response)
@@ -284,6 +320,7 @@ Use this endpoint to retrieve a single compliance rule.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -310,6 +347,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -322,6 +367,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_compliance_rule(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EARLY ACCESS] GetComplianceRule: Get compliance rule.
             api_response = await api_instance.get_compliance_rule(scope, code, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -370,6 +418,7 @@ Specify a run scope and code from a previously run compliance check, and the sco
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -396,6 +445,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -408,6 +465,9 @@ async def main():
         rule_code = 'rule_code_example' # str | Required: Rule Code.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_compliance_rule_result(run_scope, run_code, rule_scope, rule_code, opts=opts)
+
             # [EARLY ACCESS] GetComplianceRuleResult: Get detailed results for a specific rule within a compliance run.
             api_response = await api_instance.get_compliance_rule_result(run_scope, run_code, rule_scope, rule_code)
             pprint(api_response)
@@ -456,6 +516,7 @@ Use this endpoint to fetch a specific compliance template.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -482,6 +543,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -493,6 +562,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The time at which to get results from. Default : latest (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_compliance_template(scope, code, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
             api_response = await api_instance.get_compliance_template(scope, code, as_at=as_at)
             pprint(api_response)
@@ -540,6 +612,7 @@ Specify a run scope and code from a previously run compliance check to get an ov
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -566,6 +639,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -576,6 +657,9 @@ async def main():
         code = 'code_example' # str | Required: Run Code.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_decorated_compliance_run_summary(scope, code, opts=opts)
+
             # [EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.
             api_response = await api_instance.get_decorated_compliance_run_summary(scope, code)
             pprint(api_response)
@@ -622,6 +706,7 @@ Use this endpoint to retrieve all compliance rules, or a subset defined by an op
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -648,6 +733,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -661,6 +754,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for each rule. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_compliance_rules(as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
+
             # [EARLY ACCESS] ListComplianceRules: List compliance rules.
             api_response = await api_instance.list_compliance_rules(as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
             pprint(api_response)
@@ -710,6 +806,7 @@ Lists RunIds of prior compliance runs, or a subset with a filter.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -736,6 +833,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -749,6 +854,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | Optional. A list of field names to sort by, each suffixed by \"ASC\" or \"DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_compliance_runs(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EARLY ACCESS] ListComplianceRuns: List historical compliance run identifiers.
             api_response = await api_instance.list_compliance_runs(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -798,6 +906,7 @@ Use this endpoint to fetch a list of all available compliance template ids, or a
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -824,6 +933,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -836,6 +953,9 @@ async def main():
         filter = 'filter_example' # str | Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_compliance_templates(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EARLY ACCESS] ListComplianceTemplates: List compliance templates.
             api_response = await api_instance.list_compliance_templates(as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -884,6 +1004,7 @@ Use this endpoint to run a compliance check using rules from a specific scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -910,6 +1031,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -923,6 +1052,9 @@ async def main():
         recipe_id_code = 'recipe_id_code_example' # str | Required: The code of the recipe to be used. If left blank, the default recipe will be used.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.run_compliance(run_scope, rule_scope, is_pre_trade, recipe_id_scope, recipe_id_code, opts=opts)
+
             # [EARLY ACCESS] RunCompliance: Run a compliance check.
             api_response = await api_instance.run_compliance(run_scope, rule_scope, is_pre_trade, recipe_id_scope, recipe_id_code)
             pprint(api_response)
@@ -972,6 +1104,7 @@ Use this endpoint to run a compliance check using rules from a specific scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -998,6 +1131,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1016,6 +1157,9 @@ async def main():
         compliance_run_configuration = ComplianceRunConfiguration.from_dict({"preTradeConfiguration":{"includeEntityTypes":"OrdersAndAllocations"}}) # ComplianceRunConfiguration | Configuration options for the compliance run. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.run_compliance_preview(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration=compliance_run_configuration, opts=opts)
+
             # [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
             api_response = await api_instance.run_compliance_preview(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration=compliance_run_configuration)
             pprint(api_response)
@@ -1065,6 +1209,7 @@ Use this endpoint to update a specified compliance template.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1091,6 +1236,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1107,6 +1260,9 @@ async def main():
         update_compliance_template_request = UpdateComplianceTemplateRequest.from_dict({"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepTypeRequest":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepTypeRequest":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepTypeRequest":"BranchStepRequest"},{"label":"Compare","complianceStepTypeRequest":"GroupFilterStepRequest"},{"label":"PercentCalculation","complianceStepTypeRequest":"PercentCheckStepRequest"}]}]}) # UpdateComplianceTemplateRequest | Request to update a compliance rule template.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_compliance_template(scope, code, update_compliance_template_request, opts=opts)
+
             # [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
             api_response = await api_instance.update_compliance_template(scope, code, update_compliance_template_request)
             pprint(api_response)
@@ -1154,6 +1310,7 @@ Use this endpoint to upsert a single compliance rule. The template and variation
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1180,6 +1337,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1194,6 +1359,9 @@ async def main():
         upsert_compliance_rule_request = UpsertComplianceRuleRequest.from_dict({"id":{"scope":"live","code":"exampleRule"},"name":"A friendly name.","description":"A friendly description.","active":true,"templateId":{"scope":"system","code":"PercentCheck"},"variation":"standard","portfolioGroupId":{"scope":"examples","code":"examplePortfolioGroup"},"parameters":{"BoolParameter":{"value":true,"complianceParameterType":"BoolComplianceParameter"},"DecimalParameter":{"value":0,"complianceParameterType":"DecimalComplianceParameter"},"StringParameter":{"value":"An example string parameter","complianceParameterType":"StringComplianceParameter"},"DateTimeParameter":{"value":"2023-06-06T00:00:00.0000000+00:00","complianceParameterType":"DateTimeComplianceParameter"},"PropertyKeyParameter":{"value":"Compliance/live/RuleGroup","complianceParameterType":"PropertyKeyComplianceParameter"},"AddressKeyParameter":{"value":"Valuation/PvInReportCcy","complianceParameterType":"AddressKeyComplianceParameter"},"PortfolioIdParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioIdComplianceParameter"},"PortfolioGroupIdParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioGroupIdComplianceParameter"},"DecimalListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"DecimalListComplianceParameter"},"AddressKeyListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"AddressKeyListComplianceParameter"},"BoolListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"BoolListComplianceParameter"},"StringListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"StringListComplianceParameter"},"DateTimeListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"DateTimeListComplianceParameter"},"PropertyKeyListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PropertyKeyListComplianceParameter"},"PortfolioIdListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioIdListComplianceParameter"},"PortfolioGroupIdListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioGroupIdListComplianceParameter"}},"properties":{"Compliance/MyScope/SomeRuleProperty":{"key":"Compliance/MyScope/SomeRuleProperty","value":{"labelValue":"XYZ000034567"}}}}) # UpsertComplianceRuleRequest |  (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_compliance_rule(upsert_compliance_rule_request=upsert_compliance_rule_request, opts=opts)
+
             # [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
             api_response = await api_instance.upsert_compliance_rule(upsert_compliance_rule_request=upsert_compliance_rule_request)
             pprint(api_response)
@@ -1239,6 +1407,7 @@ Use this endpoint to upsert a compliance run result summary.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1265,6 +1434,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1279,6 +1456,9 @@ async def main():
         upsert_compliance_run_summary_request = UpsertComplianceRunSummaryRequest.from_dict({"runId":{"scope":"SomeScope","code":"run-1"},"instigatedAt":"2020-01-05T00:00:00.0000000+00:00","completedAt":"2020-01-05T00:00:01.0000000+00:00","schedule":"PreTrade","results":[{"ruleId":{"scope":"SomeScope","code":"rule-1"},"templateId":{"scope":"system","code":"template-1"},"variation":"standard","ruleStatus":"passed","affectedPortfolios":[{"scope":"PortfolioScope","code":"PortfolioCode"}],"affectedOrders":[{"scope":"OrderScope","code":"OrderCode"}],"parametersUsed":{"UpperBound":"30","LowerBound":"0"},"ruleBreakdown":[{"groupStatus":"failed","resultsUsed":{"Valuation/PV":650,"Exposure/PV":650},"propertiesUsed":{"Instrument/data/Issuer":[{"key":"Instrument/data/Issuer","value":{"labelValue":"ABC"}}]},"missingDataInformation":["No Missing Data"],"lineage":[{"index":0,"label":"Initial","subLabel":"Initial","infoType":"","information":""},{"index":1,"label":"Step1","subLabel":"SomeStep1Information","infoType":"","information":""},{"index":2,"label":"Step2","subLabel":"Step2","infoType":"","information":""}]}]}]}) # UpsertComplianceRunSummaryRequest |  (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_compliance_run_summary(upsert_compliance_run_summary_request=upsert_compliance_run_summary_request, opts=opts)
+
             # [EARLY ACCESS] UpsertComplianceRunSummary: Upsert a compliance run summary.
             api_response = await api_instance.upsert_compliance_run_summary(upsert_compliance_run_summary_request=upsert_compliance_run_summary_request)
             pprint(api_response)

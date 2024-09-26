@@ -49,6 +49,7 @@ from lusid.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )
+from lusid.extensions.configuration_options import ConfigurationOptions
 
 
 class ComplianceApi:
@@ -88,10 +89,9 @@ class ComplianceApi:
         :type create_compliance_template_request: CreateComplianceTemplateRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -130,10 +130,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -159,7 +158,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -226,6 +226,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -254,10 +255,9 @@ class ComplianceApi:
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -296,10 +296,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -325,7 +324,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -385,6 +385,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -413,10 +414,9 @@ class ComplianceApi:
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -455,10 +455,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -484,7 +483,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -544,6 +544,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -576,10 +577,9 @@ class ComplianceApi:
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -622,10 +622,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -653,7 +652,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -723,6 +723,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -755,10 +756,9 @@ class ComplianceApi:
         :type rule_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -801,10 +801,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -832,7 +831,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -898,6 +898,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -928,10 +929,9 @@ class ComplianceApi:
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -972,10 +972,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -1002,7 +1001,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -1068,6 +1068,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -1096,10 +1097,9 @@ class ComplianceApi:
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1138,10 +1138,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -1167,7 +1166,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -1227,6 +1227,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -1261,10 +1262,9 @@ class ComplianceApi:
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1309,10 +1309,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -1341,7 +1340,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -1414,6 +1414,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -1448,10 +1449,9 @@ class ComplianceApi:
         :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1496,10 +1496,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -1528,7 +1527,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -1601,6 +1601,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -1633,10 +1634,9 @@ class ComplianceApi:
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1679,10 +1679,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -1710,7 +1709,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -1779,6 +1779,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -1813,10 +1814,9 @@ class ComplianceApi:
         :type recipe_id_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1861,10 +1861,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -1893,7 +1892,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -1962,6 +1962,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -1996,10 +1997,9 @@ class ComplianceApi:
         :type compliance_run_configuration: ComplianceRunConfiguration
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2044,10 +2044,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -2076,7 +2075,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -2152,6 +2152,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -2182,10 +2183,9 @@ class ComplianceApi:
         :type update_compliance_template_request: UpdateComplianceTemplateRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2226,10 +2226,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -2256,7 +2255,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -2326,6 +2326,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -2352,10 +2353,9 @@ class ComplianceApi:
         :type upsert_compliance_rule_request: UpsertComplianceRuleRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2392,10 +2392,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -2420,7 +2419,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -2484,6 +2484,7 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -2510,10 +2511,9 @@ class ComplianceApi:
         :type upsert_compliance_run_summary_request: UpsertComplianceRunSummaryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2550,10 +2550,9 @@ class ComplianceApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -2578,7 +2577,8 @@ class ComplianceApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -2642,5 +2642,6 @@ class ComplianceApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))

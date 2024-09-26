@@ -28,6 +28,7 @@ Creates a set of core and aggregate rules to be run for a group reconciliation
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -54,6 +55,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -68,6 +77,9 @@ async def main():
         create_group_reconciliation_comparison_ruleset_request = CreateGroupReconciliationComparisonRulesetRequest.from_dict({"id":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"displayName":"Compare by instrument and strategy","reconciliationType":"Holding","coreAttributeRules":[{"left":{"key":"path to instrument property","operation":"Value"},"right":{"key":"path to LUID property","operation":"Value"},"allowableStringMappings":[{"leftValue":"Microsoft","rightValue":"MSFT","direction":"UniDirectional"}],"isComparisonCaseSensitive":false},{"left":{"key":"path to strategy property","operation":"Value"},"right":{"key":"path to investment strategy property","operation":"Value"},"allowableStringMappings":[{"leftValue":"HighRisk","rightValue":"HR","direction":"BiDirectional"}],"isComparisonCaseSensitive":true}],"aggregateAttributeRules":[{"left":{"key":"path to units property","operation":"Sum"},"right":{"key":"path to count property","operation":"Sum"},"tolerance":{"type":"Absolute","value":10}},{"left":{"key":"path to price property","operation":"Sum"},"right":{"key":"path to price property","operation":"Sum"},"tolerance":{"type":"Relative","value":2}}]}) # CreateGroupReconciliationComparisonRulesetRequest | The request containing the details of the ruleset (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_comparison_ruleset(create_group_reconciliation_comparison_ruleset_request=create_group_reconciliation_comparison_ruleset_request, opts=opts)
+
             # [EXPERIMENTAL] CreateComparisonRuleset: Create a Group Reconciliation Comparison Ruleset
             api_response = await api_instance.create_comparison_ruleset(create_group_reconciliation_comparison_ruleset_request=create_group_reconciliation_comparison_ruleset_request)
             pprint(api_response)
@@ -113,6 +125,7 @@ Creates a Group Reconciliation Definition
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -139,6 +152,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -153,6 +174,9 @@ async def main():
         create_group_reconciliation_definition_request = CreateGroupReconciliationDefinitionRequest.from_dict({"id":{"scope":"MyScope","code":"MyCode"},"displayName":"My Group Reconciliation Definition","description":"The Group Reconciliation Definition description","portfolioEntityIds":{"left":[{"scope":"MyPortfolioScope","code":"MyPortfolioCode","portfolioEntityType":"SinglePortfolio"}],"right":[{"scope":"MyOtherPortfolioScope","code":"MyOtherPortfolioCode","portfolioEntityType":"SinglePortfolio"}]},"recipeIds":{"left":{"scope":"MyRecipeScope","code":"MyRecipeCode"},"right":{"scope":"MyOtherRecipeScope","code":"MyOtherRecipeCode"}},"currencies":{"left":"USD","right":"CHF"},"comparisonRulesetIds":{"valuationReconciliation":{"scope":"MyValuationComparisonRulesetScope","code":"MyValuationComparisonRulesetCode"}},"breakCodeSource":{"dataTypeId":{"scope":"MyBreakCodeSourceScope","code":"MyBreakCodeSourceCode"}}}) # CreateGroupReconciliationDefinitionRequest | The definition Group Reconciliation Definition details (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_group_reconciliation_definition(create_group_reconciliation_definition_request=create_group_reconciliation_definition_request, opts=opts)
+
             # [EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition
             api_response = await api_instance.create_group_reconciliation_definition(create_group_reconciliation_definition_request=create_group_reconciliation_definition_request)
             pprint(api_response)
@@ -198,6 +222,7 @@ The deletion will take effect from the reconciliation comparison ruleset deletio
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -224,6 +249,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -234,6 +267,9 @@ async def main():
         code = 'code_example' # str | The code of the specified comparison ruleset. Together with the domain and scope this uniquely              identifies the reconciliation comparison ruleset.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_comparison_ruleset(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteComparisonRuleset: Deletes a particular Group Reconciliation Comparison Ruleset
             api_response = await api_instance.delete_comparison_ruleset(scope, code)
             pprint(api_response)
@@ -280,6 +316,7 @@ Delete the group reconciliation definition.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -306,6 +343,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -316,6 +361,9 @@ async def main():
         code = 'code_example' # str | The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_group_reconciliation_definition(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteGroupReconciliationDefinition: Delete Group Reconciliation Definition
             api_response = await api_instance.delete_group_reconciliation_definition(scope, code)
             pprint(api_response)
@@ -362,6 +410,7 @@ Retrieves one Group Reconciliation Comparison Ruleset by scope and code
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -388,6 +437,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -399,6 +456,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the comparison ruleset definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_comparison_ruleset(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code
             api_response = await api_instance.get_comparison_ruleset(scope, code, as_at=as_at)
             pprint(api_response)
@@ -446,6 +506,7 @@ Retrieves a Group Reconciliation Definition by scope and code
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -472,6 +533,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -484,6 +553,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_group_reconciliation_definition(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetGroupReconciliationDefinition: Get group reconciliation definition
             api_response = await api_instance.get_group_reconciliation_definition(scope, code, effective_at=effective_at, as_at=as_at)
             pprint(api_response)
@@ -532,6 +604,7 @@ Retrieves all Group Reconciliation Comparison Ruleset that fit the filter, in a 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -558,6 +631,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -571,6 +652,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_comparison_rulesets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets
             api_response = await api_instance.list_comparison_rulesets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
             pprint(api_response)
@@ -620,6 +704,7 @@ Lists Group Reconciliation Definitions matching any provided filter, limit and s
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -646,6 +731,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -660,6 +753,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_group_reconciliation_definitions(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions
             api_response = await api_instance.list_group_reconciliation_definitions(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -710,6 +806,7 @@ Overwrites an existing Group Reconciliation Comparison Ruleset  Update request h
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -736,6 +833,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -752,6 +857,9 @@ async def main():
         update_group_reconciliation_comparison_ruleset_request = UpdateGroupReconciliationComparisonRulesetRequest.from_dict({"displayName":"Compare by instrument and strategy","reconciliationType":"Holding","coreAttributeRules":[{"left":{"key":"path to instrument property","operation":"Value"},"right":{"key":"path to LUID property","operation":"Value"},"allowableStringMappings":[{"leftValue":"Microsoft","rightValue":"MSFT","direction":"UniDirectional"}],"isComparisonCaseSensitive":false},{"left":{"key":"path to strategy property","operation":"Value"},"right":{"key":"path to investment strategy property","operation":"Value"},"allowableStringMappings":[{"leftValue":"HighRisk","rightValue":"HR","direction":"BiDirectional"}],"isComparisonCaseSensitive":true}],"aggregateAttributeRules":[{"left":{"key":"path to units property","operation":"Sum"},"right":{"key":"path to count property","operation":"Sum"},"tolerance":{"type":"Absolute","value":10}},{"left":{"key":"path to price property","operation":"Sum"},"right":{"key":"path to price property","operation":"Sum"},"tolerance":{"type":"Relative","value":2}}]}) # UpdateGroupReconciliationComparisonRulesetRequest | The request containing the updated details of the ruleset (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_comparison_ruleset(scope, code, update_group_reconciliation_comparison_ruleset_request=update_group_reconciliation_comparison_ruleset_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code
             api_response = await api_instance.update_comparison_ruleset(scope, code, update_group_reconciliation_comparison_ruleset_request=update_group_reconciliation_comparison_ruleset_request)
             pprint(api_response)
@@ -799,6 +907,7 @@ Update the group reconciliation definition.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -825,6 +934,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -841,6 +958,9 @@ async def main():
         update_group_reconciliation_definition_request = UpdateGroupReconciliationDefinitionRequest.from_dict({"displayName":"My Group Reconciliation Definition","description":"The Group Reconciliation Definition description","portfolioEntityIds":{"left":[{"scope":"MyPortfolioScope","code":"MyPortfolioCode","portfolioEntityType":"SinglePortfolio"}],"right":[{"scope":"MyOtherPortfolioScope","code":"MyOtherPortfolioCode","portfolioEntityType":"SinglePortfolio"}]},"recipeIds":{"left":{"scope":"MyRecipeScope","code":"MyRecipeCode"},"right":{"scope":"MyOtherRecipeScope","code":"MyOtherRecipeCode"}},"currencies":{"left":"USD","right":"CHF"},"comparisonRulesetIds":{"valuationReconciliation":{"scope":"MyValuationComparisonRulesetScope","code":"MyValuationComparisonRulesetCode"}},"breakCodeSource":{"dataTypeId":{"scope":"MyBreakCodeSourceScope","code":"MyBreakCodeSourceCode"}}}) # UpdateGroupReconciliationDefinitionRequest | The updated group reconciliation definition. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_group_reconciliation_definition(scope, code, update_group_reconciliation_definition_request=update_group_reconciliation_definition_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateGroupReconciliationDefinition: Update group reconciliation definition
             api_response = await api_instance.update_group_reconciliation_definition(scope, code, update_group_reconciliation_definition_request=update_group_reconciliation_definition_request)
             pprint(api_response)

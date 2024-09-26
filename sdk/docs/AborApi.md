@@ -31,6 +31,7 @@ Adds a new diary entry to the specified Abor
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -57,6 +58,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -73,6 +82,9 @@ async def main():
         diary_entry_request = DiaryEntryRequest.from_dict({"diaryEntryCode":"DiaryEntryCode","name":"2023_Q1","status":"Estimate","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}}) # DiaryEntryRequest | The diary entry to add.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.add_diary_entry(scope, code, diary_entry_request, opts=opts)
+
             # [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.
             api_response = await api_instance.add_diary_entry(scope, code, diary_entry_request)
             pprint(api_response)
@@ -120,6 +132,7 @@ Closes or Locks the current open period for the given Abor.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -146,6 +159,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -162,6 +183,9 @@ async def main():
         close_period_diary_entry_request = ClosePeriodDiaryEntryRequest.from_dict({"diaryEntryCode":"2023","name":"2023","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","status":"Estimate","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}},"closingOptions":[]}) # ClosePeriodDiaryEntryRequest | The request body, containing details to apply to the closing/locking period.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.close_period(scope, code, close_period_diary_entry_request, opts=opts)
+
             # [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
             api_response = await api_instance.close_period(scope, code, close_period_diary_entry_request)
             pprint(api_response)
@@ -209,6 +233,7 @@ Create the given Abor.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -235,6 +260,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -250,6 +283,9 @@ async def main():
         abor_request = AborRequest.from_dict({"code":"AborCode","displayName":"Standard Abor","description":"A standard Abor","portfolioIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"aborConfigurationId":{"scope":"ConfigScope","code":"ConfigCode"},"properties":{"Abor/MyScope/FundManagerName":{"key":"Abor/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # AborRequest | The definition of the Abor.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_abor(scope, abor_request, opts=opts)
+
             # [EXPERIMENTAL] CreateAbor: Create an Abor.
             api_response = await api_instance.create_abor(scope, abor_request)
             pprint(api_response)
@@ -296,6 +332,7 @@ Delete the given Abor.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -322,6 +359,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -332,6 +377,9 @@ async def main():
         code = 'code_example' # str | The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_abor(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteAbor: Delete an Abor.
             api_response = await api_instance.delete_abor(scope, code)
             pprint(api_response)
@@ -378,6 +426,7 @@ Retrieve the definition of a particular Abor.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -404,6 +453,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -417,6 +474,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Abor' domain to decorate onto the Abor.              These must take the format {domain}/{scope}/{code}, for example 'Abor/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_abor(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] GetAbor: Get Abor.
             api_response = await api_instance.get_abor(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -466,6 +526,7 @@ Gets the Journal Entry lines for the given Abor                The Journal Entry
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -492,6 +553,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -512,6 +581,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing Journal Entry lines from a previous call to GetJournalEntryLines. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_journal_entry_lines(scope, code, journal_entry_lines_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
+
             # [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
             api_response = await api_instance.get_journal_entry_lines(scope, code, journal_entry_lines_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
             pprint(api_response)
@@ -563,6 +635,7 @@ Gets the Trial balance for the given Abor    The Trial balance has been generate
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -589,6 +662,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -609,6 +690,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing Trial balance from a previous call to Trial balance. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
+
             # [EXPERIMENTAL] GetTrialBalance: Get the Trial balance for the given Abor.
             api_response = await api_instance.get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
             pprint(api_response)
@@ -660,6 +744,7 @@ List all the Abors matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -686,6 +771,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -701,6 +794,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Abor' domain to decorate onto each Abor.              These must take the format {domain}/{scope}/{code}, for example 'Abor/Manager/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_abors(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListAbors: List Abors.
             api_response = await api_instance.list_abors(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
             pprint(api_response)
@@ -752,6 +848,7 @@ List all the diary entries matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -778,6 +875,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -795,6 +900,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'DiaryEntry' domain to decorate onto each DiaryEntry.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/Report/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_diary_entries(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListDiaryEntries: List diary entries.
             api_response = await api_instance.list_diary_entries(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
             pprint(api_response)
@@ -848,6 +956,7 @@ Locks the specified or last locked period for the given Abor.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -874,6 +983,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -890,6 +1007,9 @@ async def main():
         lock_period_diary_entry_request = LockPeriodDiaryEntryRequest.from_dict({"diaryEntryCode":"YearEnd2023","closingOptions":[]}) # LockPeriodDiaryEntryRequest | The request body, detailing lock details (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request, opts=opts)
+
             # [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
             api_response = await api_instance.lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request)
             pprint(api_response)
@@ -937,6 +1057,7 @@ Create or update certain fields for a particular Abor.  The behaviour is defined
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -963,6 +1084,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -974,6 +1103,9 @@ async def main():
         operation = [{"value":[{"scope":"UKScope","code":"Portfolio1","portfolioEntityType":"SinglePortfolio"},{"scope":"UKScope","code":"Portfolio2","portfolioEntityType":"SinglePortfolio"}],"path":"/portfolioids","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.patch_abor(scope, code, operation, opts=opts)
+
             # [EXPERIMENTAL] PatchAbor: Patch Abor.
             api_response = await api_instance.patch_abor(scope, code, operation)
             pprint(api_response)
@@ -1021,6 +1153,7 @@ Reopens one or more periods.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1047,6 +1180,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1063,6 +1204,9 @@ async def main():
         re_open_period_diary_entry_request = ReOpenPeriodDiaryEntryRequest.from_dict({"diaryEntryCode":"YearEnd2023"}) # ReOpenPeriodDiaryEntryRequest | The request body, detailing re open details (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request, opts=opts)
+
             # [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
             api_response = await api_instance.re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request)
             pprint(api_response)
@@ -1110,6 +1254,7 @@ Update or insert one or more properties onto a single Abor. A property will be u
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1136,6 +1281,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1147,6 +1300,9 @@ async def main():
         request_body = {"Abor/MyScope/FundManagerName":{"key":"Abor/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Abor/MyScope/SomeProperty":{"key":"Abor/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Abor/MyScope/AnotherProperty":{"key":"Abor/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Abor/MyScope/ReBalanceInterval":{"key":"Abor/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Abor. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Abor/Manager/Id\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_abor_properties(scope, code, request_body=request_body, opts=opts)
+
             # [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
             api_response = await api_instance.upsert_abor_properties(scope, code, request_body=request_body)
             pprint(api_response)

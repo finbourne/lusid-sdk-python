@@ -38,6 +38,7 @@ Create or update one or more properties for particular instruments.    Each inst
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -64,6 +65,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -76,6 +85,9 @@ async def main():
         success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode, opts=opts)
+
             # BatchUpsertInstrumentProperties: Batch upsert instruments properties
             api_response = await api_instance.batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode)
             pprint(api_response)
@@ -124,6 +136,7 @@ Soft delete a particular instrument, as identified by a particular instrument id
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -150,6 +163,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -161,6 +182,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_instrument(identifier_type, identifier, scope=scope, opts=opts)
+
             # DeleteInstrument: Soft delete a single instrument
             api_response = await api_instance.delete_instrument(identifier_type, identifier, scope=scope)
             pprint(api_response)
@@ -208,6 +232,7 @@ Delete one or more properties from a particular instrument. If the properties ar
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -234,6 +259,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -247,6 +280,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, opts=opts)
+
             # [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
             api_response = await api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope)
             pprint(api_response)
@@ -296,6 +332,7 @@ Deletes a number of instruments identified by LusidInstrumentId.                
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -322,6 +359,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -333,6 +378,9 @@ async def main():
         scope = 'default' # str | The scope in which the instruments lie. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_instruments(request_body, delete_mode=delete_mode, scope=scope, opts=opts)
+
             # DeleteInstruments: Soft or hard delete multiple instruments
             api_response = await api_instance.delete_instruments(request_body, delete_mode=delete_mode, scope=scope)
             pprint(api_response)
@@ -380,6 +428,7 @@ Provides all possible instrument features an instrument of a given type can prov
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -406,6 +455,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -415,6 +472,9 @@ async def main():
         instrument_type = 'instrument_type_example' # str | A lusid instrument type e.g. Bond, FxOption.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_all_possible_features(instrument_type, opts=opts)
+
             # [EXPERIMENTAL] GetAllPossibleFeatures: Provides list of all possible features for instrument type.
             api_response = await api_instance.get_all_possible_features(instrument_type)
             pprint(api_response)
@@ -460,6 +520,7 @@ Returns instrument capabilities containing useful information about the instrume
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -486,6 +547,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -501,6 +570,9 @@ async def main():
         recipe_code = 'recipe_code_example' # str | A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code, opts=opts)
+
             # [EXPERIMENTAL] GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
             api_response = await api_instance.get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
             pprint(api_response)
@@ -552,6 +624,7 @@ Get the supported pricing models of a single instrument.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -578,6 +651,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -592,6 +673,9 @@ async def main():
         recipe_code = 'recipe_code_example' # str | A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_existing_instrument_models(identifier, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code, opts=opts)
+
             # GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.
             api_response = await api_instance.get_existing_instrument_models(identifier, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
             pprint(api_response)
@@ -642,6 +726,7 @@ Retrieve the definition of a particular instrument, as identified by a particula
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -668,6 +753,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -683,6 +776,9 @@ async def main():
         relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, opts=opts)
+
             # GetInstrument: Get instrument
             api_response = await api_instance.get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
             pprint(api_response)
@@ -734,6 +830,7 @@ Retrieve a list of all valid instrument identifier types and whether they are un
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -760,6 +857,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -768,6 +873,9 @@ async def main():
         api_instance = api_client_factory.build(InstrumentsApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instrument_identifier_types(opts=opts)
+
             # GetInstrumentIdentifierTypes: Get instrument identifier types
             api_response = await api_instance.get_instrument_identifier_types()
             pprint(api_response)
@@ -809,6 +917,7 @@ Get the payment diary of a single instrument.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -835,6 +944,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -850,6 +967,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instrument_payment_diary(identifier_type, identifier, recipe_scope, recipe_code, effective_at=effective_at, as_at=as_at, scope=scope, opts=opts)
+
             # [EXPERIMENTAL] GetInstrumentPaymentDiary: Get instrument payment diary
             api_response = await api_instance.get_instrument_payment_diary(identifier_type, identifier, recipe_scope, recipe_code, effective_at=effective_at, as_at=as_at, scope=scope)
             pprint(api_response)
@@ -901,6 +1021,7 @@ List all the properties of a particular instrument, as identified by a particula
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -927,6 +1048,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -940,6 +1069,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, scope=scope, opts=opts)
+
             # GetInstrumentProperties: Get instrument properties
             api_response = await api_instance.get_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, scope=scope)
             pprint(api_response)
@@ -989,6 +1121,7 @@ Retrieve the complete time series (history) for a particular property of an inst
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1015,6 +1148,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1032,6 +1173,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instrument_property_time_series(identifier_type, identifier, property_key, identifier_effective_at=identifier_effective_at, as_at=as_at, filter=filter, page=page, limit=limit, scope=scope, opts=opts)
+
             # GetInstrumentPropertyTimeSeries: Get instrument property time series
             api_response = await api_instance.get_instrument_property_time_series(identifier_type, identifier, property_key, identifier_effective_at=identifier_effective_at, as_at=as_at, filter=filter, page=page, limit=limit, scope=scope)
             pprint(api_response)
@@ -1085,6 +1229,7 @@ Get relationships for a particular Instrument.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1111,6 +1256,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1126,6 +1279,9 @@ async def main():
         scope = 'default' # str | The entity scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instrument_relationships(identifier_type, identifier, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types, scope=scope, opts=opts)
+
             # [EARLY ACCESS] GetInstrumentRelationships: Get Instrument relationships
             api_response = await api_instance.get_instrument_relationships(identifier_type, identifier, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types, scope=scope)
             pprint(api_response)
@@ -1177,6 +1333,7 @@ Retrieve the definition of one or more instruments, as identified by a collectio
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1203,6 +1360,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1218,6 +1383,9 @@ async def main():
         relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instruments(identifier_type, request_body, effective_at=effective_at, as_at=as_at, property_keys=property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, opts=opts)
+
             # GetInstruments: Get instruments
             api_response = await api_instance.get_instruments(identifier_type, request_body, effective_at=effective_at, as_at=as_at, property_keys=property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
             pprint(api_response)
@@ -1269,6 +1437,7 @@ List all the properties of a particular instrument, as identified by a particula
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1295,6 +1464,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1310,6 +1487,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, page=page, limit=limit, scope=scope, opts=opts)
+
             # [EARLY ACCESS] ListInstrumentProperties: Get instrument properties (with Pagination)
             api_response = await api_instance.list_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, page=page, limit=limit, scope=scope)
             pprint(api_response)
@@ -1361,6 +1541,7 @@ List all the instruments in the instrument master.                To retrieve a 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1387,6 +1568,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1404,6 +1593,9 @@ async def main():
         relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, opts=opts)
+
             # ListInstruments: List instruments
             api_response = await api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
             pprint(api_response)
@@ -1457,6 +1649,7 @@ Returns instrument capabilities containing useful information about the instrume
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1483,6 +1676,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1498,6 +1699,9 @@ async def main():
         model = 'model_example' # str | A pricing model for the instrument. Defaults to Unknown if not specified. If not specified the SupportedAddresses and EconomicDependencies are not provided. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.query_instrument_capabilities(lusid_instrument, model=model, opts=opts)
+
             # [EXPERIMENTAL] QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
             api_response = await api_instance.query_instrument_capabilities(lusid_instrument, model=model)
             pprint(api_response)
@@ -1544,6 +1748,7 @@ Create, update or delete a particular instrument identifier for an instrument.  
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1570,6 +1775,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1587,6 +1800,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope, opts=opts)
+
             # UpdateInstrumentIdentifier: Update instrument identifier
             api_response = await api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope)
             pprint(api_response)
@@ -1635,6 +1851,7 @@ Create or update one or more instruments in the instrument master. An instrument
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1661,6 +1878,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1671,6 +1896,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_instruments(request_body, scope=scope, opts=opts)
+
             # UpsertInstruments: Upsert instruments
             api_response = await api_instance.upsert_instruments(request_body, scope=scope)
             pprint(api_response)
@@ -1717,6 +1945,7 @@ Create or update one or more properties for particular instruments.             
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1743,6 +1972,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1753,6 +1990,9 @@ async def main():
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_instruments_properties(upsert_instrument_property_request, scope=scope, opts=opts)
+
             # UpsertInstrumentsProperties: Upsert instruments properties
             api_response = await api_instance.upsert_instruments_properties(upsert_instrument_property_request, scope=scope)
             pprint(api_response)

@@ -21,6 +21,7 @@ Download the LUSID Excel Addin for Microsoft Excel. Not providing a specific val
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -47,6 +48,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -56,6 +65,9 @@ async def main():
         version = 'version_example' # str | The requested version of the Excel plugin (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_excel_addin(version=version, opts=opts)
+
             # GetExcelAddin: Download Excel Addin
             api_response = await api_instance.get_excel_addin(version=version)
             pprint(api_response)
@@ -101,6 +113,7 @@ Get the semantic versions associated with LUSID and its ecosystem
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -127,6 +140,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -135,6 +156,9 @@ async def main():
         api_instance = api_client_factory.build(ApplicationMetadataApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_lusid_versions(opts=opts)
+
             # GetLusidVersions: Get LUSID versions
             api_response = await api_instance.get_lusid_versions()
             pprint(api_response)
@@ -176,6 +200,7 @@ Get the comprehensive set of resources that are available for access control
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -202,6 +227,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -211,6 +244,9 @@ async def main():
         filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_access_controlled_resources(filter=filter, opts=opts)
+
             # ListAccessControlledResources: Get resources available for access control
             api_response = await api_instance.list_access_controlled_resources(filter=filter)
             pprint(api_response)

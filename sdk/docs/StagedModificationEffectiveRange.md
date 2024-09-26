@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**from_date** | **datetime** | Time the decision request is made. | [optional] 
-**until_date** | **datetime** | ID of user that approved the request. | [optional] 
+**from_date** | **datetime** | The datetime that this requested change is effective from. | [optional] 
+**until_date** | **datetime** | The datetime that this requested change is effective until. | [optional] 
 
 ## Example
 

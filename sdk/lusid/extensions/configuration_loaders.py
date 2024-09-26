@@ -5,6 +5,7 @@ import logging
 from lusid.extensions.proxy_config import ProxyConfig
 from lusid.extensions.api_configuration import ApiConfiguration
 from lusid.extensions.file_access_token import FileAccessToken
+from lusid.extensions.configuration_options import ConfigurationOptions
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +22,11 @@ ENVIRONMENT_CONFIG_KEYS = {
     "proxy_address": "FBN_PROXY_ADDRESS",
     "proxy_username": "FBN_PROXY_USERNAME",
     "proxy_password": "FBN_PROXY_PASSWORD",
-    "access_token": "FBN_ACCESS_TOKEN"
+    "access_token": "FBN_ACCESS_TOKEN",
+    "total_timeout_ms": "FBN_TOTAL_TIMEOUT_MS",
+    "connect_timeout_ms": "FBN_CONNECT_TIMEOUT_MS",
+    "read_timeout_ms": "FBN_READ_TIMEOUT_MS",
+    "rate_limit_retries": "FBN_RATE_LIMIT_RETRIES",
 }
 
 SECRETS_FILE_CONFIG_KEYS = {
@@ -37,7 +42,11 @@ SECRETS_FILE_CONFIG_KEYS = {
     "proxy_address": "address",
     "proxy_username": "username",
     "proxy_password": "password",
-    "access_token": "accessToken"
+    "access_token": "accessToken",
+    "total_timeout_ms": "totalTimeoutMs",
+    "connect_timeout_ms": "connectTimeoutMs",
+    "read_timeout_ms": "readTimeoutMs",
+    "rate_limit_retries": "rateLimitRetries",
 }
 
 
@@ -47,7 +56,7 @@ class ConfigurationLoader(Protocol):
     environment variables with preference given to the secrets file.
     """
 
-    def load_config(self) -> Dict[str, str]:
+    def load_config(self) -> Dict[str, object]:
         pass
 
 
@@ -67,12 +76,12 @@ class SecretsFileConfigurationLoader:
         """
         self._api_secrets_file = api_secrets_file or ""
 
-    def load_config(self) -> Dict[str, str]:
+    def load_config(self) -> Dict[str, object]:
         """reads config from the provided secrets file
 
         Returns
         -------
-        Dict[str, str]
+        Dict[str, object]
             dictionary that can be loaded into an ApiConfiguration object
         """
         # The secrets file is a nested dictionary, set the names of the top level keys
@@ -117,12 +126,12 @@ class SecretsFileConfigurationLoader:
 class EnvironmentVariablesConfigurationLoader:
     """ConfigurationLoader which reads config from environment variables
     """    
-    def load_config(self) -> Dict[str, str]:
+    def load_config(self) -> Dict[str, object]:
         """reads config from environment variables
 
         Returns
         -------
-        Dict[str, str]
+        Dict[str, object]
             dictionary that can be loaded into an ApiConfiguration object
         """
         logger.debug("loading config from environment variables")
@@ -134,6 +143,13 @@ class EnvironmentVariablesConfigurationLoader:
         }
         if not populated_api_config_values["api_url"]:
             populated_api_config_values["api_url"] = populated_api_config_values["previous_api_url"]
+        # ensure that these values are ints
+        for key in ["total_timeout_ms", "connect_timeout_ms", "read_timeout_ms", "rate_limit_retries"]:
+            if populated_api_config_values[key]:
+                try:
+                    populated_api_config_values[key] = int(populated_api_config_values[key])
+                except ValueError as e:
+                    raise ValueError(f"invalid value for '{key}' - value must be an integer if set")
         del(populated_api_config_values["previous_api_url"])
         populated_proxy_values = {
             key: os.environ.get(value)
@@ -162,7 +178,11 @@ class ArgsConfigurationLoader:
         proxy_address:Optional[str]=None,
         proxy_username:Optional[str]=None,
         proxy_password:Optional[str]=None,
-        access_token:Optional[str]=None
+        access_token:Optional[str]=None,
+        total_timeout_ms:Optional[int]=None,
+        connect_timeout_ms:Optional[int]=None,
+        read_timeout_ms:Optional[int]=None,
+        rate_limit_retries:Optional[int]=None,
         ):
         """kwargs passed to this constructor used to build ApiConfiguration
         """
@@ -178,13 +198,17 @@ class ArgsConfigurationLoader:
         self.__proxy_username = proxy_username
         self.__proxy_password = proxy_password
         self.__access_token = access_token
+        self.__total_timeout_ms = total_timeout_ms
+        self.__connect_timeout_ms = connect_timeout_ms
+        self.__read_timeout_ms = read_timeout_ms
+        self.__rate_limit_retries = rate_limit_retries
 
-    def load_config(self) -> Dict[str, str]:
+    def load_config(self) -> Dict[str, object]:
         """load configuration from kwargs passed to constructor
 
         Returns
         -------
-        Dict[str, str]
+        Dict[str, object]
             dictionary that can be loaded into an ApiConfiguration object
         """
         logger.debug("loading config from arguments passed to ArgsConfigurationLoader")
@@ -200,7 +224,11 @@ class ArgsConfigurationLoader:
             "proxy_address" : self.__proxy_address, 
             "proxy_username" : self.__proxy_username, 
             "proxy_password" : self.__proxy_password, 
-            "access_token" : self.__access_token
+            "access_token" : self.__access_token,
+            "total_timeout_ms" : self.__total_timeout_ms,
+            "connect_timeout_ms" : self.__connect_timeout_ms,
+            "read_timeout_ms" : self.__read_timeout_ms,
+            "rate_limit_retries" : self.__rate_limit_retries,
         }
 
 

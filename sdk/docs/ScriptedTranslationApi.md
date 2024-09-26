@@ -26,6 +26,7 @@ Get the dialect with the given identifier at the specific asAt time.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -52,6 +53,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -67,6 +76,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialect. Defaults to return the latest version of the dialect if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_translation_dialect(scope, vendor, source_system, entity_type, serialisation_format, version, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetTranslationDialect: Get a dialect.
             api_response = await api_instance.get_translation_dialect(scope, vendor, source_system, entity_type, serialisation_format, version, as_at=as_at)
             pprint(api_response)
@@ -118,6 +130,7 @@ Retrieves a translation script to be used for translating financial entities.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -144,6 +157,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -156,6 +177,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the translation script. Defaults to latest. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_translation_script(scope, code, version, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetTranslationScript: Retrieve a translation script by its identifier.
             api_response = await api_instance.get_translation_script(scope, code, version, as_at=as_at)
             pprint(api_response)
@@ -204,6 +228,7 @@ List the stored dialects' identifiers with pagination and filtering at the speci
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -230,6 +255,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -242,6 +275,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_dialect_ids(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EARLY ACCESS] ListDialectIds: List dialect identifiers matching an optional filter.
             api_response = await api_instance.list_dialect_ids(as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -290,6 +326,7 @@ List translation script ids.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -316,6 +353,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -328,6 +373,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_translation_script_ids(as_at=as_at, limit=limit, filter=filter, page=page, opts=opts)
+
             # [EARLY ACCESS] ListTranslationScriptIds: List translation script identifiers.
             api_response = await api_instance.list_translation_script_ids(as_at=as_at, limit=limit, filter=filter, page=page)
             pprint(api_response)
@@ -376,6 +424,7 @@ Run the provided translation request. The entities to translate are specified in
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -402,6 +451,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -416,6 +473,9 @@ async def main():
         translate_entities_request = TranslateEntitiesRequest.from_dict({"entityPayloads":{"myFxFwd-0":{"entity":"{ \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\", \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\", \"domAmount\": 1, \"domCcy\": \"GBP\", \"fgnAmount\": -1.5,  \"fgnCcy\": \"USD\",  \"refSpotRate\": 1.5,  \"isNdf\": false, \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",  \"instrumentType\": \"FxForward\" }"}},"scriptId":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"dialectId":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"}}) # TranslateEntitiesRequest | The entities to translate, along with identifiers for the script and (optional) dialect to use.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.translate_entities(translate_entities_request, opts=opts)
+
             # [EARLY ACCESS] TranslateEntities: Translate a collection of entities with a specified translation script.
             api_response = await api_instance.translate_entities(translate_entities_request)
             pprint(api_response)
@@ -461,6 +521,7 @@ Run the provided translation request. The entities to translate, script to use a
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -487,6 +548,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -501,6 +570,9 @@ async def main():
         translate_entities_inlined_request = TranslateEntitiesInlinedRequest.from_dict({"entityPayloads":{"myFxFwd-0":{"entity":"{\r\n \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\",\r\n \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\",\r\n \"domAmount\": 1,\r\n \"domCcy\": \"GBP\",\r\n \"fgnAmount\": -1.5,\r\n  \"fgnCcy\": \"USD\",\r\n      \"refSpotRate\": 1.5,\r\n \"isNdf\": false,\r\n \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",\r\n \"instrumentType\": \"FxForward\"\r\n}"},"myFxFwd-that-will-fail-translation":{"entity":"some-bad-payload"}},"scriptBody":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }","schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}}) # TranslateEntitiesInlinedRequest | The entities to translate, along with the script to use and an optional schema for validation.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.translate_entities_inlined(translate_entities_inlined_request, opts=opts)
+
             # [EARLY ACCESS] TranslateEntitiesInlined: Translate a collection of entities, inlining the body of the translation script.
             api_response = await api_instance.translate_entities_inlined(translate_entities_inlined_request)
             pprint(api_response)
@@ -546,6 +618,7 @@ Upsert the given dialect.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -572,6 +645,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -586,6 +667,9 @@ async def main():
         upsert_dialect_request = UpsertDialectRequest.from_dict({"id":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"},"schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}}) # UpsertDialectRequest | The dialect to upsert.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_translation_dialect(upsert_dialect_request, opts=opts)
+
             # [EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.
             api_response = await api_instance.upsert_translation_dialect(upsert_dialect_request)
             pprint(api_response)
@@ -631,6 +715,7 @@ Upserts a translation script to be used for translating financial entities.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -657,6 +742,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -671,6 +764,9 @@ async def main():
         upsert_translation_script_request = UpsertTranslationScriptRequest.from_dict({"id":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"body":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"}) # UpsertTranslationScriptRequest | The translation script to be upserted.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_translation_script(upsert_translation_script_request, opts=opts)
+
             # [EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.
             api_response = await api_instance.upsert_translation_script(upsert_translation_script_request)
             pprint(api_response)

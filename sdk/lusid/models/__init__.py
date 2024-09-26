@@ -99,6 +99,7 @@ from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_principal_event import BondPrincipalEvent
+from lusid.models.bonus_issue_event import BonusIssueEvent
 from lusid.models.book_transactions_request import BookTransactionsRequest
 from lusid.models.book_transactions_response import BookTransactionsResponse
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
@@ -139,6 +140,7 @@ from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
 from lusid.models.change_history import ChangeHistory
 from lusid.models.change_history_action import ChangeHistoryAction
+from lusid.models.change_interval import ChangeInterval
 from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
 from lusid.models.change_item import ChangeItem
 from lusid.models.chart_of_accounts import ChartOfAccounts
@@ -307,6 +309,7 @@ from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.economic_dependency_type import EconomicDependencyType
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
 from lusid.models.economic_dependency_with_quote import EconomicDependencyWithQuote
+from lusid.models.effective_range import EffectiveRange
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.empty_model_options import EmptyModelOptions
@@ -496,6 +499,7 @@ from lusid.models.is_business_day_response import IsBusinessDayResponse
 from lusid.models.journal_entry_line import JournalEntryLine
 from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQueryParameters
 from lusid.models.label_value_set import LabelValueSet
+from lusid.models.lapse_election import LapseElection
 from lusid.models.leg_definition import LegDefinition
 from lusid.models.legal_entity import LegalEntity
 from lusid.models.level_step import LevelStep
@@ -527,6 +531,7 @@ from lusid.models.market_data_type import MarketDataType
 from lusid.models.market_observable_type import MarketObservableType
 from lusid.models.market_options import MarketOptions
 from lusid.models.market_quote import MarketQuote
+from lusid.models.mastered_instrument import MasteredInstrument
 from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
 from lusid.models.mbs_coupon_event import MbsCouponEvent
@@ -795,6 +800,7 @@ from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAn
 from lusid.models.resource_list_of_calendar_date import ResourceListOfCalendarDate
 from lusid.models.resource_list_of_change import ResourceListOfChange
 from lusid.models.resource_list_of_change_history import ResourceListOfChangeHistory
+from lusid.models.resource_list_of_change_interval import ResourceListOfChangeInterval
 from lusid.models.resource_list_of_change_interval_with_order_management_detail import ResourceListOfChangeIntervalWithOrderManagementDetail
 from lusid.models.resource_list_of_compliance_breached_order_info import ResourceListOfComplianceBreachedOrderInfo
 from lusid.models.resource_list_of_compliance_rule import ResourceListOfComplianceRule
@@ -1189,6 +1195,7 @@ __all__ = [
     "BondCouponEvent",
     "BondDefaultEvent",
     "BondPrincipalEvent",
+    "BonusIssueEvent",
     "BookTransactionsRequest",
     "BookTransactionsResponse",
     "BoolComplianceParameter",
@@ -1229,6 +1236,7 @@ __all__ = [
     "Change",
     "ChangeHistory",
     "ChangeHistoryAction",
+    "ChangeInterval",
     "ChangeIntervalWithOrderManagementDetail",
     "ChangeItem",
     "ChartOfAccounts",
@@ -1397,6 +1405,7 @@ __all__ = [
     "EconomicDependencyType",
     "EconomicDependencyWithComplexMarketData",
     "EconomicDependencyWithQuote",
+    "EffectiveRange",
     "ElectionSpecification",
     "EligibilityCalculation",
     "EmptyModelOptions",
@@ -1586,6 +1595,7 @@ __all__ = [
     "JournalEntryLine",
     "JournalEntryLinesQueryParameters",
     "LabelValueSet",
+    "LapseElection",
     "LegDefinition",
     "LegalEntity",
     "LevelStep",
@@ -1617,6 +1627,7 @@ __all__ = [
     "MarketObservableType",
     "MarketOptions",
     "MarketQuote",
+    "MasteredInstrument",
     "MatchCriterion",
     "MaturityEvent",
     "MbsCouponEvent",
@@ -1885,6 +1896,7 @@ __all__ = [
     "ResourceListOfCalendarDate",
     "ResourceListOfChange",
     "ResourceListOfChangeHistory",
+    "ResourceListOfChangeInterval",
     "ResourceListOfChangeIntervalWithOrderManagementDetail",
     "ResourceListOfComplianceBreachedOrderInfo",
     "ResourceListOfComplianceRule",

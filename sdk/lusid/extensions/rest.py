@@ -103,9 +103,15 @@ class RESTClientObject(object):
                 **addition_pool_args
             )
 
+        self.timeout = self.get_timeout(
+            total=configuration.timeouts.total_timeout_ms / 1000.0,
+            connect=configuration.timeouts.connect_timeout_ms / 1000.0,
+            read=configuration.timeouts.read_timeout_ms / 1000.0,
+        )
+
     def request(self, method, url, query_params=None, headers=None,
                 body=None, post_params=None, _preload_content=True,
-                _request_timeout=None):
+                _request_timeout=None, opts=None):
         """Perform requests.
 
         :param method: http request method
@@ -119,10 +125,9 @@ class RESTClientObject(object):
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         """
         method = method.upper()
         assert method in ['GET', 'HEAD', 'DELETE', 'POST', 'PUT',
@@ -139,14 +144,45 @@ class RESTClientObject(object):
         # so reset query_params to empty dict
         query_params = {}
 
+        # _request_timeout param cannot be removed for backwards compatability
+        # values from opts override values from _request_timeout
+        # try to get values from opts first, then _request_timeout, then self.timeout, else set to None
+        # timeout = _request_timeout or self.timeout
         timeout = None
-        if _request_timeout:
-            if isinstance(_request_timeout, (int,float)):  # noqa: E501,F821
-                timeout = urllib3.Timeout(total=_request_timeout)
-            elif (isinstance(_request_timeout, tuple) and
-                  len(_request_timeout) == 2):
-                timeout = urllib3.Timeout(
-                    connect=_request_timeout[0], read=_request_timeout[1])
+        opts_total_timeout = opts.total_timeout_ms / 1000.0 if opts and opts.total_timeout_ms != None else None
+        opts_connect_timeout = opts.connect_timeout_ms / 1000.0 if opts and opts.connect_timeout_ms != None else None
+        opts_read_timeout = opts.read_timeout_ms / 1000.0 if opts and opts.read_timeout_ms != None else None
+        if not _request_timeout:
+            timeout = self.get_timeout(
+                total=opts_total_timeout if opts_total_timeout != None
+                    else self.timeout.total, 
+                connect=opts_connect_timeout if opts_connect_timeout != None
+                    else self.timeout._connect,
+                read=opts_read_timeout if opts_read_timeout != None
+                    else self.timeout._read)
+        elif isinstance(_request_timeout, urllib3.Timeout):
+            timeout = self.get_timeout(
+                total=opts_total_timeout if opts_total_timeout != None
+                    else _request_timeout.total if _request_timeout.total != None
+                        else self.timeout.total, 
+                connect=opts_connect_timeout if opts_connect_timeout != None
+                    else _request_timeout._connect if _request_timeout._connect != None
+                        else self.timeout._connect,
+                read=opts_read_timeout if opts_read_timeout != None
+                    else _request_timeout._read if _request_timeout._read != None
+                        else self.timeout._read)
+        elif isinstance(_request_timeout, (int, float)):
+            timeout = self.get_timeout(
+                total=opts_total_timeout if opts_total_timeout != None else _request_timeout, 
+                connect=opts_connect_timeout if opts_connect_timeout != None else self.timeout._connect, 
+                read=opts_read_timeout if opts_read_timeout != None else self.timeout._read)
+        elif (isinstance(_request_timeout, tuple) and len(_request_timeout) == 2):
+            timeout = self.get_timeout(
+                total=opts_total_timeout if opts_total_timeout != None else self.timeout.total,
+                connect=opts_connect_timeout if opts_connect_timeout != None else _request_timeout[0],
+                read=opts_read_timeout if opts_read_timeout != None else _request_timeout[1])
+        else:
+            raise f"unexpected type '{type(_request_timeout)}' for _request_timeout"
 
         try:
             # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
@@ -235,66 +271,82 @@ class RESTClientObject(object):
         return r
 
     def get_request(self, url, headers=None, query_params=None, _preload_content=True,
-            _request_timeout=None):
+            _request_timeout=None, opts=None):
         return self.request("GET", url,
                             headers=headers,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            query_params=query_params)
+                            query_params=query_params,
+                            opts=opts)
 
     def head_request(self, url, headers=None, query_params=None, _preload_content=True,
-             _request_timeout=None):
+             _request_timeout=None, opts=None):
         return self.request("HEAD", url,
                             headers=headers,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            query_params=query_params)
+                            query_params=query_params,
+                            opts=opts)
 
     def options_request(self, url, headers=None, query_params=None, post_params=None,
-                body=None, _preload_content=True, _request_timeout=None):
+                body=None, _preload_content=True, _request_timeout=None, opts=None):
         return self.request("OPTIONS", url,
                             headers=headers,
                             query_params=query_params,
                             post_params=post_params,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            body=body)
+                            body=body,
+                            opts=opts)
 
     def delete_request(self, url, headers=None, query_params=None, body=None,
-               _preload_content=True, _request_timeout=None):
+               _preload_content=True, _request_timeout=None, opts=None):
         return self.request("DELETE", url,
                             headers=headers,
                             query_params=query_params,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            body=body)
+                            body=body,
+                            opts=opts)
 
     def post_request(self, url, headers=None, query_params=None, post_params=None,
-             body=None, _preload_content=True, _request_timeout=None):
+             body=None, _preload_content=True, _request_timeout=None, opts=None):
         return self.request("POST", url,
                             headers=headers,
                             query_params=query_params,
                             post_params=post_params,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            body=body)
+                            body=body,
+                            opts=opts)
 
     def put_request(self, url, headers=None, query_params=None, post_params=None,
-            body=None, _preload_content=True, _request_timeout=None):
+            body=None, _preload_content=True, _request_timeout=None, opts=None):
         return self.request("PUT", url,
                             headers=headers,
                             query_params=query_params,
                             post_params=post_params,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            body=body)
+                            body=body,
+                            opts=opts)
 
     def patch_request(self, url, headers=None, query_params=None, post_params=None,
-              body=None, _preload_content=True, _request_timeout=None):
+              body=None, _preload_content=True, _request_timeout=None, opts=None):
         return self.request("PATCH", url,
                             headers=headers,
                             query_params=query_params,
                             post_params=post_params,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            body=body)
+                            body=body,
+                            opts=opts)
+
+    def get_timeout(self, total: int, connect: int, read: int):
+        # zero is used in the sdk config to explicitly set to infinity (and None is used to indicate the value has not been set)
+        # but zero is not an allowed value for urllib3.Timeout so change any zeros to Nones
+        return urllib3.Timeout(
+            total=total if total != 0 else None,
+            connect=connect if connect != 0 else None,
+            read=read if read != 0 else None,
+        )

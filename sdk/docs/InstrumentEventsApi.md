@@ -23,6 +23,7 @@ Returns a list of applicable instrument events based on the holdings of the port
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -66,6 +75,9 @@ async def main():
         query_applicable_instrument_events_request = QueryApplicableInstrumentEventsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","effectiveAt":"2022-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"forecastingRecipeId":{"scope":"default","code":"default"}}) # QueryApplicableInstrumentEventsRequest | The filter parameters used to retrieve applicable instrument events. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.query_applicable_instrument_events(as_at=as_at, limit=limit, page=page, query_applicable_instrument_events_request=query_applicable_instrument_events_request, opts=opts)
+
             # [EXPERIMENTAL] QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.
             api_response = await api_instance.query_applicable_instrument_events(as_at=as_at, limit=limit, page=page, query_applicable_instrument_events_request=query_applicable_instrument_events_request)
             pprint(api_response)
@@ -114,6 +126,7 @@ Returns bucketed cashflows based on the holdings of the portfolios and date rang
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -140,6 +153,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -154,6 +175,9 @@ async def main():
         query_bucketed_cash_flows_request = QueryBucketedCashFlowsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2023-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"effectiveAt":"2022-01-01T00:00:00.0000000+00:00","recipeId":{"scope":"default","code":"default"},"roundingMethod":"RoundUp","bucketingDates":["2020-01-01T00:00:00.0000000+00:00","2020-07-01T00:00:00.0000000+00:00","2021-01-01T00:00:00.0000000+00:00","2021-07-01T00:00:00.0000000+00:00"],"reportCurrency":"USD","equipWithSubtotals":false,"excludeUnsettledTrades":false,"cashFlowType":"InstrumentCashFlow"}) # QueryBucketedCashFlowsRequest | The Query Information. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.query_bucketed_cash_flows(query_bucketed_cash_flows_request=query_bucketed_cash_flows_request, opts=opts)
+
             # QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.
             api_response = await api_instance.query_bucketed_cash_flows(query_bucketed_cash_flows_request=query_bucketed_cash_flows_request)
             pprint(api_response)
@@ -199,6 +223,7 @@ Returns a list of cashflows based on the holdings of the portfolios and date ran
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -225,6 +250,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -241,6 +274,9 @@ async def main():
         query_cash_flows_request = QueryCashFlowsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"recipeId":{"scope":"default","code":"default"},"effectiveAt":"2022-01-01T00:00:00.0000000+00:00"}) # QueryCashFlowsRequest | The filter parameters used to retrieve instrument events. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.query_cash_flows(limit=limit, page=page, query_cash_flows_request=query_cash_flows_request, opts=opts)
+
             # [EXPERIMENTAL] QueryCashFlows: Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query.
             api_response = await api_instance.query_cash_flows(limit=limit, page=page, query_cash_flows_request=query_cash_flows_request)
             pprint(api_response)
@@ -288,6 +324,7 @@ Returns a list of instrument events based on the holdings of the portfolios and 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -314,6 +351,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -330,6 +375,9 @@ async def main():
         query_instrument_events_request = QueryInstrumentEventsRequest.from_dict({"asAt":"2022-06-01T01:01:00.0000000+00:00","windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"effectiveAt":"2022-01-01T00:00:00.0000000+00:00","recipeId":{"scope":"default","code":"default"},"filterInstrumentEvents":""}) # QueryInstrumentEventsRequest | The filter parameters used to retrieve instrument events. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.query_instrument_events(limit=limit, page=page, query_instrument_events_request=query_instrument_events_request, opts=opts)
+
             # [EXPERIMENTAL] QueryInstrumentEvents: Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query.
             api_response = await api_instance.query_instrument_events(limit=limit, page=page, query_instrument_events_request=query_instrument_events_request)
             pprint(api_response)
@@ -377,6 +425,7 @@ Returns a list of trade tickets based on the holdings of the portfolios and date
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -403,6 +452,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -419,6 +476,9 @@ async def main():
         query_trade_tickets_request = QueryTradeTicketsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"recipeId":{"scope":"default","code":"default"},"effectiveAt":"2022-01-01T00:00:00.0000000+00:00"}) # QueryTradeTicketsRequest | The filter parameters used to retrieve instrument events. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.query_trade_tickets(limit=limit, page=page, query_trade_tickets_request=query_trade_tickets_request, opts=opts)
+
             # [EXPERIMENTAL] QueryTradeTickets: Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.
             api_response = await api_instance.query_trade_tickets(limit=limit, page=page, query_trade_tickets_request=query_trade_tickets_request)
             pprint(api_response)

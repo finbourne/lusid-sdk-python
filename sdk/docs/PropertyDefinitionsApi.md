@@ -29,6 +29,7 @@ Define a new derived property.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -55,6 +56,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -69,6 +78,9 @@ async def main():
         create_derived_property_definition_request = CreateDerivedPropertyDefinitionRequest.from_dict({"domain":"Instrument","scope":"MyScope","code":"MyDerivedPropertyName","displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"}) # CreateDerivedPropertyDefinitionRequest | The definition of the new derived property.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_derived_property_definition(create_derived_property_definition_request, opts=opts)
+
             # [EARLY ACCESS] CreateDerivedPropertyDefinition: Create derived property definition
             api_response = await api_instance.create_derived_property_definition(create_derived_property_definition_request)
             pprint(api_response)
@@ -114,6 +126,7 @@ Define a new property.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -140,6 +153,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -154,6 +175,9 @@ async def main():
         create_property_definition_request = CreatePropertyDefinitionRequest.from_dict({"domain":"Portfolio","scope":"MyScope","code":"MyPropertyName","valueRequired":false,"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"string"},"lifeTime":"Perpetual","constraintStyle":"Property","propertyDescription":"Optional property description"}) # CreatePropertyDefinitionRequest | The definition of the new property.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_property_definition(create_property_definition_request, opts=opts)
+
             # CreatePropertyDefinition: Create property definition
             api_response = await api_instance.create_property_definition(create_property_definition_request)
             pprint(api_response)
@@ -199,6 +223,7 @@ Delete the definition of the specified property.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -225,6 +250,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -236,6 +269,9 @@ async def main():
         code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_property_definition(domain, scope, code, opts=opts)
+
             # DeletePropertyDefinition: Delete property definition
             api_response = await api_instance.delete_property_definition(domain, scope, code)
             pprint(api_response)
@@ -283,6 +319,7 @@ Delete one or more properties from a single property definition. If the properti
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -309,6 +346,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -322,6 +367,9 @@ async def main():
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_property_definition_properties(domain, scope, code, request_body, effective_at=effective_at, opts=opts)
+
             # [EARLY ACCESS] DeletePropertyDefinitionProperties: Delete property definition properties
             api_response = await api_instance.delete_property_definition_properties(domain, scope, code, request_body, effective_at=effective_at)
             pprint(api_response)
@@ -371,6 +419,7 @@ Retrieve the definition of one or more specified properties.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -397,6 +446,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -409,6 +466,9 @@ async def main():
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter, effective_at=effective_at, opts=opts)
+
             # GetMultiplePropertyDefinitions: Get multiple property definitions
             api_response = await api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter, effective_at=effective_at)
             pprint(api_response)
@@ -457,6 +517,7 @@ Retrieve the definition of a specified property.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -483,6 +544,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -496,6 +565,9 @@ async def main():
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_property_definition(domain, scope, code, as_at=as_at, effective_at=effective_at, opts=opts)
+
             # GetPropertyDefinition: Get property definition
             api_response = await api_instance.get_property_definition(domain, scope, code, as_at=as_at, effective_at=effective_at)
             pprint(api_response)
@@ -545,6 +617,7 @@ List the complete time series of a property definition property.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -571,6 +644,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -587,6 +668,9 @@ async def main():
         limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_property_definition_property_time_series(domain, scope, code, property_key, as_at=as_at, filter=filter, page=page, limit=limit, opts=opts)
+
             # [EARLY ACCESS] GetPropertyDefinitionPropertyTimeSeries: Get Property Definition Property Time Series
             api_response = await api_instance.get_property_definition_property_time_series(domain, scope, code, property_key, as_at=as_at, filter=filter, page=page, limit=limit)
             pprint(api_response)
@@ -639,6 +723,7 @@ List all the property definitions matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -665,6 +750,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -680,6 +773,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_property_definitions(effective_at=effective_at, as_at=as_at, property_keys=property_keys, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # ListPropertyDefinitions: List property definitions
             api_response = await api_instance.list_property_definitions(effective_at=effective_at, as_at=as_at, property_keys=property_keys, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -731,6 +827,7 @@ This will fail if the property definition does not exist
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -757,6 +854,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -774,6 +879,9 @@ async def main():
         update_derived_property_definition_request = UpdateDerivedPropertyDefinitionRequest.from_dict({"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"}) # UpdateDerivedPropertyDefinitionRequest | Information about the derived property definition being updated
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_derived_property_definition(domain, scope, code, update_derived_property_definition_request, opts=opts)
+
             # [EARLY ACCESS] UpdateDerivedPropertyDefinition: Update a pre-existing derived property definition
             api_response = await api_instance.update_derived_property_definition(domain, scope, code, update_derived_property_definition_request)
             pprint(api_response)
@@ -822,6 +930,7 @@ Update the definition of a specified existing property. Not all elements within 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -848,6 +957,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -865,6 +982,9 @@ async def main():
         update_property_definition_request = UpdatePropertyDefinitionRequest.from_dict({"displayName":"MyPropertyName","propertyDescription":"Option Property description"}) # UpdatePropertyDefinitionRequest | The updated definition of the property.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_property_definition(domain, scope, code, update_property_definition_request, opts=opts)
+
             # UpdatePropertyDefinition: Update property definition
             api_response = await api_instance.update_property_definition(domain, scope, code, update_property_definition_request)
             pprint(api_response)
@@ -913,6 +1033,7 @@ Create or update properties for a particular property definition
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -939,6 +1060,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -952,6 +1081,9 @@ async def main():
         success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode, opts=opts)
+
             # UpsertPropertyDefinitionProperties: Upsert properties to a property definition
             api_response = await api_instance.upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
             pprint(api_response)

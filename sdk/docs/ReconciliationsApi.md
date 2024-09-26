@@ -33,6 +33,7 @@ Create a scheduled reconciliation for the given request
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -59,6 +60,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -74,6 +83,9 @@ async def main():
         create_reconciliation_request = CreateReconciliationRequest.from_dict({"code":"Reconciliation","name":"ReconciliationName","description":"Reconciliation description","isPortfolioGroup":false,"left":{"scope":"MyScope","code":"SideA"},"right":{"scope":"MyScope","code":"SideB"},"transactions":{"transactionWindow":{"fromDate":"2018-03-04T00:00:00.0000000+00:00","untilDate":"2018-03-05T00:00:00.0000000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"positions":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"valuations":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00","currency":"GBP"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"properties":{"Reconciliation/MyScope/BrokerName":{"key":"Reconciliation/MyScope/BrokerName","value":{"labelValue":"BrokerA"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"}}}) # CreateReconciliationRequest | The definition of the reconciliation (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_scheduled_reconciliation(scope, create_reconciliation_request=create_reconciliation_request, opts=opts)
+
             # [EXPERIMENTAL] CreateScheduledReconciliation: Create a scheduled reconciliation
             api_response = await api_instance.create_scheduled_reconciliation(scope, create_reconciliation_request=create_reconciliation_request)
             pprint(api_response)
@@ -120,6 +132,7 @@ Delete the given scheduled reconciliation
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -146,6 +159,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -156,6 +177,9 @@ async def main():
         code = 'code_example' # str | The code of the scheduled reconciliation
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_reconciliation(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteReconciliation: Delete scheduled reconciliation
             api_response = await api_instance.delete_reconciliation(scope, code)
             pprint(api_response)
@@ -202,6 +226,7 @@ Deletes the mapping identified by the scope and code
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -228,6 +253,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -238,6 +271,9 @@ async def main():
         code = 'code_example' # str | The code fof the mapping.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_reconciliation_mapping(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteReconciliationMapping: Delete a mapping
             api_response = await api_instance.delete_reconciliation_mapping(scope, code)
             pprint(api_response)
@@ -284,6 +320,7 @@ Get the requested scheduled reconciliation
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -310,6 +347,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -323,6 +368,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_reconciliation(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] GetReconciliation: Get scheduled reconciliation
             api_response = await api_instance.get_reconciliation(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -372,6 +420,7 @@ Gets a mapping identified by the given scope and code
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -398,6 +447,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -408,6 +465,9 @@ async def main():
         code = 'code_example' # str | The code of the mapping.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_reconciliation_mapping(scope, code, opts=opts)
+
             # [EARLY ACCESS] GetReconciliationMapping: Get a mapping
             api_response = await api_instance.get_reconciliation_mapping(scope, code)
             pprint(api_response)
@@ -454,6 +514,7 @@ Lists all mappings this user is entitled to see
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -480,6 +541,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -489,6 +558,9 @@ async def main():
         reconciliation_type = 'reconciliation_type_example' # str | Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_reconciliation_mappings(reconciliation_type=reconciliation_type, opts=opts)
+
             # [EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings
             api_response = await api_instance.list_reconciliation_mappings(reconciliation_type=reconciliation_type)
             pprint(api_response)
@@ -534,6 +606,7 @@ List all the scheduled reconciliations matching particular criteria
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -560,6 +633,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -574,6 +655,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_reconciliations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListReconciliations: List scheduled reconciliations
             api_response = await api_instance.list_reconciliations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
             pprint(api_response)
@@ -624,6 +708,7 @@ Perform evaluation of one or two set of holdings (a portfolio of instruments) us
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -650,6 +735,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -664,6 +757,9 @@ async def main():
         reconciliation_request = ReconciliationRequest.from_dict({"left":{"recipeId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"right":{"recipeId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"leftToRightMapping":[],"comparisonRules":[{"comparisonType":"AbsoluteDifference","tolerance":1.2345,"appliesTo":{"key":"Valuation/PV","op":"Sum","options":{}},"ruleType":"ReconcileNumericRule"}],"preserveKeys":["Instrument/default/Name"]}) # ReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.reconcile_generic(reconciliation_request=reconciliation_request, opts=opts)
+
             # ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are 'empty' or null or zero.
             api_response = await api_instance.reconcile_generic(reconciliation_request=reconciliation_request)
             pprint(api_response)
@@ -709,6 +805,7 @@ Reconcile the holdings of two portfolios.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -735,6 +832,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -752,6 +857,9 @@ async def main():
         portfolios_reconciliation_request = PortfoliosReconciliationRequest.from_dict({"left":{"portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"right":{"portfolioId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"instrumentPropertyKeys":["Instrument/default/Name"]}) # PortfoliosReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.reconcile_holdings(sort_by=sort_by, limit=limit, filter=filter, portfolios_reconciliation_request=portfolios_reconciliation_request, opts=opts)
+
             # [EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings
             api_response = await api_instance.reconcile_holdings(sort_by=sort_by, limit=limit, filter=filter, portfolios_reconciliation_request=portfolios_reconciliation_request)
             pprint(api_response)
@@ -800,6 +908,7 @@ Perform valuation of one or two set of inline instruments using different one or
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -826,6 +935,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -840,6 +957,9 @@ async def main():
         inline_valuations_reconciliation_request = InlineValuationsReconciliationRequest.from_dict({"left":{"recipeId":{"scope":"MyScope","code":"default"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Value","options":{}}],"groupBy":["Instrument/default/Name"],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"},"instruments":[{"quantity":10000,"holdingIdentifier":"fx-fwd-GBPUSD","instrument":{"startDate":"2018-03-01T00:00:00.0000000+00:00","maturityDate":"2018-03-30T00:00:00.0000000+00:00","domAmount":100,"domCcy":"GBP","fgnAmount":-150,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"inLineLookupIdentifiers":{}}]},"right":{"recipeId":{"scope":"MyScope","code":"default"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Value","options":{}}],"groupBy":["Instrument/default/Name"],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"},"instruments":[{"quantity":10000,"holdingIdentifier":"fx-fwd-GBPJPY","instrument":{"startDate":"2018-03-01T00:00:00.0000000+00:00","maturityDate":"2018-03-30T00:00:00.0000000+00:00","domAmount":100,"domCcy":"GBP","fgnAmount":-150,"fgnCcy":"JPY","refSpotRate":132,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"inLineLookupIdentifiers":{}}]},"leftToRightMapping":[],"preserveKeys":[]}) # InlineValuationsReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.reconcile_inline(inline_valuations_reconciliation_request=inline_valuations_reconciliation_request, opts=opts)
+
             # ReconcileInline: Reconcile valuations performed on one or two sets of inline instruments using one or two configuration recipes.
             api_response = await api_instance.reconcile_inline(inline_valuations_reconciliation_request=inline_valuations_reconciliation_request)
             pprint(api_response)
@@ -885,6 +1005,7 @@ Evaluates two sets of transactions to determine which transactions from each set
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -911,6 +1032,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -925,6 +1054,9 @@ async def main():
         transaction_reconciliation_request = TransactionReconciliationRequest.from_dict({"leftPortfolioId":{"scope":"street","code":"Global-Equity"},"rightPortfolioId":{"scope":"custodian","code":"Global-Equity"},"fromTransactionDate":"2019-04-01T12:00:00.0000000+00:00","toTransactionDate":"2019-05-01T12:00:00.0000000+00:00","propertyKeys":["Instrument/default/Name","Transaction/common/Strategy"]}) # TransactionReconciliationRequest |  (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.reconcile_transactions(transaction_reconciliation_request=transaction_reconciliation_request, opts=opts)
+
             # [EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.
             api_response = await api_instance.reconcile_transactions(transaction_reconciliation_request=transaction_reconciliation_request)
             pprint(api_response)
@@ -970,6 +1102,7 @@ Evaluates two sets of transactions to determine which transactions from each set
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -996,6 +1129,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1010,6 +1151,9 @@ async def main():
         transaction_reconciliation_request_v2 = TransactionReconciliationRequestV2.from_dict({"left":{"fromTransactionDate":"2018-03-05T00:00:00.0000000+00:00","toTransactionDate":"2018-04-05T00:00:00.0000000+00:00","portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolio"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Transaction/TotalConsideration","op":"Sum","options":{}},{"key":"Transaction/InstrumentUID","op":"Value","options":{}},{"key":"Transaction/CounterpartyId","op":"Value","options":{}}],"groupBy":["Transaction/CounterpartyId","Transaction/InstrumentUID"]},"right":{"fromTransactionDate":"2018-03-05T00:00:00.0000000+00:00","toTransactionDate":"2018-04-05T00:00:00.0000000+00:00","portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolio"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Transaction/TotalConsideration","op":"Sum","options":{}},{"key":"Transaction/InstrumentUID","op":"Value","options":{}},{"key":"Transaction/CounterpartyId","op":"Value","options":{}}],"groupBy":["Transaction/CounterpartyId","Transaction/InstrumentUID"]},"leftToRightMapping":[],"comparisonRules":[{"comparisonType":"AbsoluteDifference","tolerance":0.001,"appliesTo":{"key":"Transaction/TotalConsideration","op":"Sum","options":{}},"ruleType":"ReconcileNumericRule"},{"comparisonType":"CaseInsensitive","oneOfCandidates":{},"appliesTo":{"key":"Transaction/CounterpartyId","op":"Value","options":{}},"ruleType":"ReconcileStringRule"}],"preserveKeys":[]}) # TransactionReconciliationRequestV2 |  (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.reconcile_transactions_v2(transaction_reconciliation_request_v2=transaction_reconciliation_request_v2, opts=opts)
+
             # [EXPERIMENTAL] ReconcileTransactionsV2: Perform a Transactions Reconciliation.
             api_response = await api_instance.reconcile_transactions_v2(transaction_reconciliation_request_v2=transaction_reconciliation_request_v2)
             pprint(api_response)
@@ -1055,6 +1199,7 @@ Perform valuation of one or two set of holdings using different one or two confi
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1081,6 +1226,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1095,6 +1248,9 @@ async def main():
         valuations_reconciliation_request = ValuationsReconciliationRequest.from_dict({"left":{"recipeId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"right":{"recipeId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"leftToRightMapping":[],"preserveKeys":["Instrument/default/Name"]}) # ValuationsReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.reconcile_valuation(valuations_reconciliation_request=valuations_reconciliation_request, opts=opts)
+
             # ReconcileValuation: Reconcile valuations performed on one or two sets of holdings using one or two configuration recipes.
             api_response = await api_instance.reconcile_valuation(valuations_reconciliation_request=valuations_reconciliation_request)
             pprint(api_response)
@@ -1140,6 +1296,7 @@ Update a given scheduled reconciliation
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1166,6 +1323,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1182,6 +1347,9 @@ async def main():
         update_reconciliation_request = UpdateReconciliationRequest.from_dict({"name":"UpdatedReconciliationName","description":"Updated reconciliation description","isPortfolioGroup":false,"left":{"scope":"MyScope","code":"SideA"},"right":{"scope":"MyScope","code":"SideB"},"transactions":{"transactionWindow":{"fromDate":"2018-03-04T00:00:00.0000000+00:00","untilDate":"2018-03-05T00:00:00.0000000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"positions":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"valuations":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00","currency":"GBP"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00","currency":"GBP"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"properties":{"Reconciliation/MyScope/BrokerName":{"key":"Reconciliation/MyScope/BrokerName","value":{"labelValue":"BrokerA"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"}}}) # UpdateReconciliationRequest | The updated definition of the reconciliation (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_reconciliation(scope, code, update_reconciliation_request=update_reconciliation_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateReconciliation: Update scheduled reconciliation
             api_response = await api_instance.update_reconciliation(scope, code, update_reconciliation_request=update_reconciliation_request)
             pprint(api_response)
@@ -1229,6 +1397,7 @@ If no mapping exists with the specified scope and code will create a new one.  E
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1255,6 +1424,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1269,6 +1446,9 @@ async def main():
         mapping = Mapping.from_dict({"scope":"default","code":"TransactionReconciliationMapping","name":"Mapping Name","reconciliationType":"Transaction","rules":[{"left":"TransactionId","right":"TransactionId","comparisonType":"Equals","weight":10,"isCaseSensitive":false},{"left":"InstrumentUid","right":"InstrumentUid","comparisonType":"Equals","weight":5,"isCaseSensitive":false},{"left":"TransactionPrice","right":"TransactionPrice","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"TransactionCurrency","right":"TransactionCurrency","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"TransactionDate","right":"TransactionDate","comparisonType":"SameDate","weight":1,"isCaseSensitive":false},{"left":"SettlementDate","right":"SettlementDate","comparisonType":"SameDate","weight":1,"isCaseSensitive":false},{"left":"CounterpartyId","right":"CounterpartyId","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"ExchangeRate","right":"ExchangeRate","comparisonType":"WithinPercentage","comparisonValue":0.5,"weight":1,"isCaseSensitive":false},{"left":"Type","right":"Type","comparisonType":"MappedString","weight":1,"mappedStrings":[{"leftValue":"Buy","rightValue":"Purchase","mappingDirection":"BothWays","isCaseSensitive":false}],"isCaseSensitive":false}]}) # Mapping | The mapping to be created / updated. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_reconciliation_mapping(mapping=mapping, opts=opts)
+
             # [EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping
             api_response = await api_instance.upsert_reconciliation_mapping(mapping=mapping)
             pprint(api_response)

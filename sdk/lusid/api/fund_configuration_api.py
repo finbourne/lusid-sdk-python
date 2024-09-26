@@ -31,6 +31,7 @@ from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
 from lusid.models.model_property import ModelProperty
+from lusid.models.operation import Operation
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 
 from lusid.api_client import ApiClient
@@ -39,6 +40,7 @@ from lusid.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )
+from lusid.extensions.configuration_options import ConfigurationOptions
 
 
 class FundConfigurationApi:
@@ -78,10 +80,9 @@ class FundConfigurationApi:
         :type fund_configuration_request: FundConfigurationRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -120,10 +121,9 @@ class FundConfigurationApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -149,7 +149,8 @@ class FundConfigurationApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -216,6 +217,7 @@ class FundConfigurationApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -244,10 +246,9 @@ class FundConfigurationApi:
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -286,10 +287,9 @@ class FundConfigurationApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -315,7 +315,8 @@ class FundConfigurationApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -375,6 +376,7 @@ class FundConfigurationApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -409,10 +411,9 @@ class FundConfigurationApi:
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -457,10 +458,9 @@ class FundConfigurationApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -489,7 +489,8 @@ class FundConfigurationApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -562,6 +563,7 @@ class FundConfigurationApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -600,10 +602,9 @@ class FundConfigurationApi:
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -652,10 +653,9 @@ class FundConfigurationApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -686,7 +686,8 @@ class FundConfigurationApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -766,6 +767,181 @@ class FundConfigurationApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def patch_fund_configuration(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the FundConfiguration.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> FundConfiguration:  # noqa: E501
+        ...
+
+    @overload
+    def patch_fund_configuration(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the FundConfiguration.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> FundConfiguration:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def patch_fund_configuration(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the FundConfiguration.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundConfiguration, Awaitable[FundConfiguration]]:  # noqa: E501
+        """[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
+
+        Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: displayName, description, dealingFilters, pnlFilters, backOutFilters.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_fund_configuration(scope, code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the FundConfiguration. (required)
+        :type scope: str
+        :param code: The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration. (required)
+        :type code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: FundConfiguration
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the patch_fund_configuration_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.patch_fund_configuration_with_http_info(scope, code, operation, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def patch_fund_configuration_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the FundConfiguration.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
+
+        Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: displayName, description, dealingFilters, pnlFilters, backOutFilters.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_fund_configuration_with_http_info(scope, code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the FundConfiguration. (required)
+        :type scope: str
+        :param code: The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration. (required)
+        :type code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(FundConfiguration, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'operation'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_fund_configuration" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['operation'] is not None:
+            _body_params = _params['operation']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "FundConfiguration",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/fundconfigurations/{scope}/{code}', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -796,10 +972,9 @@ class FundConfigurationApi:
         :type request_body: Dict[str, ModelProperty]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -840,10 +1015,9 @@ class FundConfigurationApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -870,7 +1044,8 @@ class FundConfigurationApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -940,5 +1115,6 @@ class FundConfigurationApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))

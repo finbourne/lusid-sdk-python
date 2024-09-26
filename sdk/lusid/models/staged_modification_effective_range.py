@@ -25,8 +25,8 @@ class StagedModificationEffectiveRange(BaseModel):
     """
     StagedModificationEffectiveRange
     """
-    from_date: Optional[datetime] = Field(None, alias="fromDate", description="Time the decision request is made.")
-    until_date: Optional[datetime] = Field(None, alias="untilDate", description="ID of user that approved the request.")
+    from_date: Optional[datetime] = Field(None, alias="fromDate", description="The datetime that this requested change is effective from.")
+    until_date: Optional[datetime] = Field(None, alias="untilDate", description="The datetime that this requested change is effective until.")
     __properties = ["fromDate", "untilDate"]
 
     class Config:

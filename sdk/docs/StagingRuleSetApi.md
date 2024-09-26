@@ -23,6 +23,7 @@ Create a new staging rule set.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -64,6 +73,9 @@ async def main():
         create_staging_rule_set_request = CreateStagingRuleSetRequest.from_dict({"displayName":"Test Entity Staging Rules","description":"The rules that determine whether a modification is staged","rules":[{"ruleId":"1","description":"Any user updating this entity must get approval from 2 admins","status":"Active","matchCriteria":{"actionIn":["Create","Delete"],"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10","changedAttributeNameIn":["Properties[myEntityType/myScope/protected-property]"]},"approvalCriteria":{"requiredApprovals":2,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":true}},{"ruleId":"2","description":"Any user updating this entity must get approval from one admin","status":"Inactive","matchCriteria":{"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10"},"approvalCriteria":{"requiredApprovals":1,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":false}}]}) # CreateStagingRuleSetRequest | Request to create a staging rule set.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_staging_rule_set(entity_type, create_staging_rule_set_request, opts=opts)
+
             # [EXPERIMENTAL] CreateStagingRuleSet: Create a StagingRuleSet
             api_response = await api_instance.create_staging_rule_set(entity_type, create_staging_rule_set_request)
             pprint(api_response)
@@ -110,6 +122,7 @@ Delete a staging rule set of a specific entity type. Deletion will be valid from
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -136,6 +149,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -145,6 +166,9 @@ async def main():
         entity_type = 'entity_type_example' # str | The entity type for which to delete the staging rule set.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_staging_rule_set(entity_type, opts=opts)
+
             # [EXPERIMENTAL] DeleteStagingRuleSet: Delete a StagingRuleSet
             api_response = await api_instance.delete_staging_rule_set(entity_type)
             pprint(api_response)
@@ -190,6 +214,7 @@ Get the staging rule set for the given entity type at the specific asAt time.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -216,6 +241,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -226,6 +259,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the staging rule set. Defaults to return the latest              version of the staging rule set if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_staging_rule_set(entity_type, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetStagingRuleSet: Get a StagingRuleSet
             api_response = await api_instance.get_staging_rule_set(entity_type, as_at=as_at)
             pprint(api_response)
@@ -272,6 +308,7 @@ List all the staging rule sets matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -298,6 +335,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -311,6 +356,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_staging_rule_sets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] ListStagingRuleSets: List StagingRuleSets
             api_response = await api_instance.list_staging_rule_sets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
             pprint(api_response)
@@ -360,6 +408,7 @@ Update an existing staging rule set.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -386,6 +435,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -401,6 +458,9 @@ async def main():
         update_staging_rule_set_request = UpdateStagingRuleSetRequest.from_dict({"displayName":"Test Entity Staging Rules","description":"The rules that determine whether a modification is staged","rules":[{"ruleId":"1","description":"Any user updating this entity must get approval from 2 admins","status":"Active","matchCriteria":{"actionIn":["Create","Delete"],"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10","changedAttributeNameIn":["Properties[myEntityType/myScope/protected-property]"]},"approvalCriteria":{"requiredApprovals":2,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":true}},{"ruleId":"2","description":"Any user updating this entity must get approval from one admin","status":"Inactive","matchCriteria":{"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10"},"approvalCriteria":{"requiredApprovals":1,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":false}}]}) # UpdateStagingRuleSetRequest | Request to update a staging rule set.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_staging_rule_set(entity_type, update_staging_rule_set_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateStagingRuleSet: Update a StagingRuleSet
             api_response = await api_instance.update_staging_rule_set(entity_type, update_staging_rule_set_request)
             pprint(api_response)

@@ -20,6 +20,7 @@ Create a relationship between two entity objects by their identifiers
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -46,6 +47,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -62,6 +71,9 @@ async def main():
         create_relationship_request = CreateRelationshipRequest.from_dict({"sourceEntityId":{"scope":"UkPortfolio","code":"PortfolioId-148176"},"targetEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"},"effectiveFrom":"2019-01-01T12:00:00.0000000+00:00","effectiveUntil":"2022-01-01T12:00:00.0000000+00:00"}) # CreateRelationshipRequest | The details of the relationship to create.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_relationship(scope, code, create_relationship_request, opts=opts)
+
             # CreateRelationship: Create Relationship
             api_response = await api_instance.create_relationship(scope, code, create_relationship_request)
             pprint(api_response)
@@ -109,6 +121,7 @@ Delete a relationship between two entity objects represented by their identifier
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -135,6 +148,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -151,6 +172,9 @@ async def main():
         delete_relationship_request = DeleteRelationshipRequest.from_dict({"sourceEntityId":{"scope":"UkPortfolio","code":"PortfolioId-148176"},"targetEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"},"effectiveFrom":"2019-01-10T00:00:00.0000000+00:00"}) # DeleteRelationshipRequest | The details of the relationship to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_relationship(scope, code, delete_relationship_request, opts=opts)
+
             # [EARLY ACCESS] DeleteRelationship: Delete Relationship
             api_response = await api_instance.delete_relationship(scope, code, delete_relationship_request)
             pprint(api_response)

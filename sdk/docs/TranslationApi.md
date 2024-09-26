@@ -20,6 +20,7 @@ Translates one or more instruments into the given target dialect.               
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -46,6 +47,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -60,6 +69,9 @@ async def main():
         translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest.from_dict({"instruments":{"MyFavouriteInstrument":{"instrumentFormat":{"sourceSystem":"someSource","vendor":"someVendor","version":"someVersion"},"content":"{\"InstrumentContentShouldBeGivenAsAJsonString\": \"OrAnXmlString\"}","instrumentType":"ExoticInstrument"},"MyFavouriteLusidInstrument":{"startDate":"2018-01-01T00:00:00.0000000+00:00","maturityDate":"2019-01-01T00:00:00.0000000+00:00","domAmount":1,"domCcy":"GBP","fgnAmount":-1.5,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"}},"dialect":"targetDialect"}) # TranslateInstrumentDefinitionsRequest | The definitions of the instruments to translate along with the target dialect.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.translate_instrument_definitions(translate_instrument_definitions_request, opts=opts)
+
             # [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
             api_response = await api_instance.translate_instrument_definitions(translate_instrument_definitions_request)
             pprint(api_response)
@@ -105,6 +117,7 @@ Translates one or more trade tickets into the given target dialect.             
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -131,6 +144,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -145,6 +166,9 @@ async def main():
         translate_trade_ticket_request = TranslateTradeTicketRequest.from_dict({"tickets":{"MyTicket":{"transactionId":"TradeTicket-1111111","transactionType":"OpenTradeTicket","source":"default","transactionDate":"2020-01-01T09:00:00.00Z","settlementDate":"2020-01-01T09:00:00.00Z","totalConsideration":{"amount":1020000,"currency":"GBP"},"units":1000000,"instrumentIdentifiers":{"Instrument/default/ClientInternal":"my-bond"},"instrumentScope":"myScope","instrumentName":"my_bond","instrumentDefinition":{"startDate":"2018-01-01T00:00:00.0000000+00:00","maturityDate":"2019-01-01T00:00:00.0000000+00:00","domAmount":1,"domCcy":"GBP","fgnAmount":-1.5,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"counterpartyAgreementId":{"scope":"demoScope","code":"myCounterparty"},"tradeTicketType":"LusidTradeTicket"}},"dialect":"targetDialect"}) # TranslateTradeTicketRequest | The definitions of the trade ticket to translate along with the target dialect.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.translate_trade_tickets(translate_trade_ticket_request, opts=opts)
+
             # [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
             api_response = await api_instance.translate_trade_tickets(translate_trade_ticket_request)
             pprint(api_response)

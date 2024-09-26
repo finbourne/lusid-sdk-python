@@ -22,6 +22,7 @@ Delete an orderInstruction. Deletion will be valid from the orderInstruction's c
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -58,6 +67,9 @@ async def main():
         code = 'code_example' # str | The orderInstruction's code. This, together with the scope uniquely identifies the orderInstruction to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_order_instruction(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteOrderInstruction: Delete orderInstruction
             api_response = await api_instance.delete_order_instruction(scope, code)
             pprint(api_response)
@@ -104,6 +116,7 @@ Fetch a OrderInstruction that matches the specified identifier
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -130,6 +143,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -142,6 +163,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"OrderInstruction\" domain to decorate onto the orderInstruction.              These take the format {domain}/{scope}/{code} e.g. \"OrderInstruction/system/Name\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_order_instruction(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] GetOrderInstruction: Get OrderInstruction
             api_response = await api_instance.get_order_instruction(scope, code, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -190,6 +214,7 @@ Fetch the last pre-AsAt date version of each orderInstruction in scope (does not
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -216,6 +241,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"OrderInstruction\" domain to decorate onto each orderInstruction.                  These take the format {domain}/{scope}/{code} e.g. \"OrderInstruction/system/Name\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_order_instructions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListOrderInstructions: List OrderInstructions
             api_response = await api_instance.list_order_instructions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
             pprint(api_response)
@@ -280,6 +316,7 @@ Upsert; update existing orderInstructions with given ids, or create new orderIns
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -306,6 +343,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -320,6 +365,9 @@ async def main():
         order_instruction_set_request = OrderInstructionSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PACK00000123"},"createdDate":"2020-01-01T00:00:00.0000000+00:00","portfolioId":{"scope":"MyScope","code":"testPortfolio"},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":10,"properties":{"OrderInstruction/MyScope/SomeOrderInstructionProperty":{"key":"OrderInstruction/MyScope/SomeOrderInstructionProperty","value":{"labelValue":"XYZ000034567"}}}}]}) # OrderInstructionSetRequest | The collection of orderInstruction requests. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_order_instructions(order_instruction_set_request=order_instruction_set_request, opts=opts)
+
             # [EXPERIMENTAL] UpsertOrderInstructions: Upsert OrderInstruction
             api_response = await api_instance.upsert_order_instructions(order_instruction_set_request=order_instruction_set_request)
             pprint(api_response)

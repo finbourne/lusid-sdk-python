@@ -25,6 +25,7 @@ Create a transaction template for a particular instrument event type in a scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -51,6 +52,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -68,6 +77,9 @@ async def main():
         transaction_template_request = TransactionTemplateRequest.from_dict({"description":"User-created template for overriding the default bond coupon template.","componentTransactions":[{"displayName":"Bond Income Override","transactionFieldMap":{"transactionId":"{{instrumentEventId}}-{{holdingId}}","type":"BondCoupon","source":"MyTransactionTypeSource","instrument":"{{instrument}}","transactionDate":"{{BondCouponEvent.exDate}}","settlementDate":"{{BondCouponEvent.paymentDate}}","units":"{{eligibleBalance}}","transactionPrice":{"price":"{{BondCouponEvent.couponPerUnit}}","type":"CashFlowPerUnit"},"transactionCurrency":"{{BondCouponEvent.currency}}","exchangeRate":"1","totalConsideration":{"currency":"{{BondCouponEvent.currency}}","amount":"{{BondCouponEvent.couponAmount}}"}},"transactionPropertyMap":[{"propertyKey":"Transaction/MyScope/MyCurrencyProperty","value":"{{BondCouponEvent.currency}}"}]}]}) # TransactionTemplateRequest | A request defining a new transaction template to be created.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
+
             # [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
             api_response = await api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
             pprint(api_response)
@@ -116,6 +128,7 @@ Delete a transaction template for a particular instrument event type in a scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -142,6 +155,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -153,6 +174,9 @@ async def main():
         scope = 'scope_example' # str | The scope of the template.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope, opts=opts)
+
             # [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
             api_response = await api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope)
             pprint(api_response)
@@ -200,6 +224,7 @@ Gets the Transaction Template that for the instrument event type within the scop
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -226,6 +251,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -238,6 +271,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time of the requested Transaction Template (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
             api_response = await api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at)
             pprint(api_response)
@@ -286,6 +322,7 @@ Retrieve the transaction template specification for a particular event type.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -312,6 +349,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -321,6 +366,9 @@ async def main():
         instrument_event_type = 'instrument_event_type_example' # str | The requested instrument event type.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_transaction_template_specification(instrument_event_type, opts=opts)
+
             # [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
             api_response = await api_instance.get_transaction_template_specification(instrument_event_type)
             pprint(api_response)
@@ -366,6 +414,7 @@ Retrieves all transaction template specifications.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -392,6 +441,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -405,6 +462,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
             api_response = await api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -454,6 +514,7 @@ Lists all Transaction Templates.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -480,6 +541,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -493,6 +562,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
             api_response = await api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -542,6 +614,7 @@ Update a transaction template for a particular instrument event type in a scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -568,6 +641,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -585,6 +666,9 @@ async def main():
         transaction_template_request = TransactionTemplateRequest.from_dict({"description":"User-created template for overriding the default bond coupon template.","componentTransactions":[{"displayName":"Bond Income Override","transactionFieldMap":{"transactionId":"{{instrumentEventId}}-{{holdingId}}","type":"BondCoupon","source":"MyTransactionTypeSource","instrument":"{{instrument}}","transactionDate":"{{BondCouponEvent.exDate}}","settlementDate":"{{BondCouponEvent.paymentDate}}","units":"{{eligibleBalance}}","transactionPrice":{"price":"{{BondCouponEvent.couponPerUnit}}","type":"CashFlowPerUnit"},"transactionCurrency":"{{BondCouponEvent.currency}}","exchangeRate":"1","totalConsideration":{"currency":"{{BondCouponEvent.currency}}","amount":"{{BondCouponEvent.couponAmount}}"}},"transactionPropertyMap":[{"propertyKey":"Transaction/MyScope/MyCurrencyProperty","value":"{{BondCouponEvent.currency}}"}]}]}) # TransactionTemplateRequest | A request defining the updated values for the transaction template.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
             api_response = await api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
             pprint(api_response)

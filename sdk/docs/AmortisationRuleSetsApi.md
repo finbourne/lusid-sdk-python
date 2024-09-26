@@ -24,6 +24,7 @@ Creates an amortisation rule set definition at the given effective time.  The us
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -50,6 +51,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -65,6 +74,9 @@ async def main():
         create_amortisation_rule_set_request = CreateAmortisationRuleSetRequest.from_dict({"code":"RuleSetCode","displayName":"RuleSetDisplayName","description":"RuleSet Description"}) # CreateAmortisationRuleSetRequest | The contents of the rule set.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_amortisation_rule_set(scope, create_amortisation_rule_set_request, opts=opts)
+
             # [EXPERIMENTAL] CreateAmortisationRuleSet: Create an amortisation rule set.
             api_response = await api_instance.create_amortisation_rule_set(scope, create_amortisation_rule_set_request)
             pprint(api_response)
@@ -111,6 +123,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -137,6 +150,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -147,6 +168,9 @@ async def main():
         code = 'code_example' # str | The rule set code.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_amortisation_ruleset(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.
             api_response = await api_instance.delete_amortisation_ruleset(scope, code)
             pprint(api_response)
@@ -193,6 +217,7 @@ Retrieves the amortisation rule set definition at the given effective and as at 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -219,6 +244,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -231,6 +264,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_amortisation_rule_set(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetAmortisationRuleSet: Retrieve the definition of a single amortisation rule set
             api_response = await api_instance.get_amortisation_rule_set(scope, code, effective_at=effective_at, as_at=as_at)
             pprint(api_response)
@@ -279,6 +315,7 @@ Retrieves all amortisation rule sets at the given effective and as at times
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -305,6 +342,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -319,6 +364,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_amortisation_rule_sets(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EXPERIMENTAL] ListAmortisationRuleSets: List amortisation rule sets.
             api_response = await api_instance.list_amortisation_rule_sets(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -369,6 +417,7 @@ Sets the rules on the Amortisation Rule Set, replacing the existing rules with t
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -395,6 +444,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -411,6 +468,9 @@ async def main():
         set_amortisation_rules_request = SetAmortisationRulesRequest.from_dict({"rulesInterval":{"effectiveRange":{"fromDate":"2024-01-01T00:00:00.0000000+00:00"},"rules":[{"name":"AmortisationRule1","description":"Rule 1 Description","filter":"True eq True","amortisationMethod":"EffectiveYield"}]}}) # SetAmortisationRulesRequest | The contents of the rules.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_amortisation_rules(scope, code, set_amortisation_rules_request, opts=opts)
+
             # [EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
             api_response = await api_instance.set_amortisation_rules(scope, code, set_amortisation_rules_request)
             pprint(api_response)
@@ -458,6 +518,7 @@ Updates the amortisation rule set definition for all effective time.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -484,6 +545,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -500,6 +569,9 @@ async def main():
         update_amortisation_rule_set_details_request = UpdateAmortisationRuleSetDetailsRequest.from_dict({"displayName":"Updated display name","description":"Update description"}) # UpdateAmortisationRuleSetDetailsRequest | The contents of the rule set.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_amortisation_rule_set_details(scope, code, update_amortisation_rule_set_details_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateAmortisationRuleSetDetails: Update an amortisation rule set.
             api_response = await api_instance.update_amortisation_rule_set_details(scope, code, update_amortisation_rule_set_details_request)
             pprint(api_response)

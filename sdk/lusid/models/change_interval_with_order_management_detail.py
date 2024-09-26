@@ -20,8 +20,8 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from lusid.models.effective_range import EffectiveRange
 from lusid.models.property_value import PropertyValue
-from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
 
 class ChangeIntervalWithOrderManagementDetail(BaseModel):
     """
@@ -38,7 +38,7 @@ class ChangeIntervalWithOrderManagementDetail(BaseModel):
     attribute_name: Optional[StrictStr] = Field(None, alias="attributeName", description="The name of the field or property that has been changed.")
     previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
     new_value: Optional[PropertyValue] = Field(None, alias="newValue")
-    effective_range: Optional[StagedModificationEffectiveRange] = Field(None, alias="effectiveRange")
+    effective_range: Optional[EffectiveRange] = Field(None, alias="effectiveRange")
     __properties = ["detail", "actionDescription", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "stagedModificationIdModified", "action", "attributeName", "previousValue", "newValue", "effectiveRange"]
 
     class Config:
@@ -132,6 +132,6 @@ class ChangeIntervalWithOrderManagementDetail(BaseModel):
             "attribute_name": obj.get("attributeName"),
             "previous_value": PropertyValue.from_dict(obj.get("previousValue")) if obj.get("previousValue") is not None else None,
             "new_value": PropertyValue.from_dict(obj.get("newValue")) if obj.get("newValue") is not None else None,
-            "effective_range": StagedModificationEffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None
+            "effective_range": EffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None
         })
         return _obj

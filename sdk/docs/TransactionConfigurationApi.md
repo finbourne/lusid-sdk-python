@@ -29,6 +29,7 @@ Delete the side which user specify in the request.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -55,6 +56,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -65,6 +74,9 @@ async def main():
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_side_definition(side, scope=scope, opts=opts)
+
             # DeleteSideDefinition: Delete the given side definition
             api_response = await api_instance.delete_side_definition(side, scope=scope)
             pprint(api_response)
@@ -111,6 +123,7 @@ DeleteTransactionType: Delete a transaction type
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -137,6 +150,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -148,6 +169,9 @@ async def main():
         scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_transaction_type(source, type, scope=scope, opts=opts)
+
             # DeleteTransactionType: Delete a transaction type
             api_response = await api_instance.delete_transaction_type(source, type, scope=scope)
             pprint(api_response)
@@ -195,6 +219,7 @@ Delete all the types for the given source and scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -221,6 +246,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -231,6 +264,9 @@ async def main():
         scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_transaction_type_source(source, scope=scope, opts=opts)
+
             # DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
             api_response = await api_instance.delete_transaction_type_source(source, scope=scope)
             pprint(api_response)
@@ -277,6 +313,7 @@ Get the side definition user requested.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -303,6 +340,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -314,6 +359,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_side_definition(side, scope=scope, as_at=as_at, opts=opts)
+
             # GetSideDefinition: Get the side definition for a given side name( or label)
             api_response = await api_instance.get_side_definition(side, scope=scope, as_at=as_at)
             pprint(api_response)
@@ -361,6 +409,7 @@ Get a single transaction type. Returns failure if not found
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -387,6 +436,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -399,6 +456,9 @@ async def main():
         scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, opts=opts)
+
             # GetTransactionType: Get a single transaction configuration type
             api_response = await api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope)
             pprint(api_response)
@@ -447,6 +507,7 @@ List all the side definitions in the given scope
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -473,6 +534,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -483,6 +552,9 @@ async def main():
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_side_definitions(as_at=as_at, scope=scope, opts=opts)
+
             # ListSideDefinitions: List the side definitions
             api_response = await api_instance.list_side_definitions(as_at=as_at, scope=scope)
             pprint(api_response)
@@ -529,6 +601,7 @@ Get the list of current transaction types. For information on the default transa
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -555,6 +628,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -565,6 +646,9 @@ async def main():
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_transaction_types(as_at=as_at, scope=scope, opts=opts)
+
             # ListTransactionTypes: List transaction types
             api_response = await api_instance.list_transaction_types(as_at=as_at, scope=scope)
             pprint(api_response)
@@ -611,6 +695,7 @@ Set a new side definition for use in a transaction type. For more information, s
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -637,6 +722,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -653,6 +746,9 @@ async def main():
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_side_definition(side, side_definition_request, scope=scope, opts=opts)
+
             # SetSideDefinition: Set a side definition
             api_response = await api_instance.set_side_definition(side, side_definition_request, scope=scope)
             pprint(api_response)
@@ -700,6 +796,7 @@ Set a new side definition for use in a transaction type. For more information, s
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -726,6 +823,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -736,6 +841,9 @@ async def main():
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_side_definitions(sides_definition_request, scope=scope, opts=opts)
+
             # SetSideDefinitions: Set the given side definitions
             api_response = await api_instance.set_side_definitions(sides_definition_request, scope=scope)
             pprint(api_response)
@@ -782,6 +890,7 @@ Set a transaction type for the given source and type. If the requested transacti
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -808,6 +917,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -825,6 +942,9 @@ async def main():
         scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_transaction_type(source, type, transaction_type_request, scope=scope, opts=opts)
+
             # SetTransactionType: Set a specific transaction type
             api_response = await api_instance.set_transaction_type(source, type, transaction_type_request, scope=scope)
             pprint(api_response)
@@ -873,6 +993,7 @@ The complete set of transaction types for the source.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -899,6 +1020,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -910,6 +1039,9 @@ async def main():
         scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_transaction_type_source(source, transaction_type_request, scope=scope, opts=opts)
+
             # SetTransactionTypeSource: Set the transaction types for the given source and scope
             api_response = await api_instance.set_transaction_type_source(source, transaction_type_request, scope=scope)
             pprint(api_response)

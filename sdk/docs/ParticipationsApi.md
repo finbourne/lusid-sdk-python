@@ -22,6 +22,7 @@ Delete an participation. Deletion will be valid from the participation's creatio
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -58,6 +67,9 @@ async def main():
         code = 'code_example' # str | The participation's code. This, together with the scope uniquely identifies the participation to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_participation(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteParticipation: Delete participation
             api_response = await api_instance.delete_participation(scope, code)
             pprint(api_response)
@@ -104,6 +116,7 @@ Fetch a Participation that matches the specified identifier
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -130,6 +143,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -142,6 +163,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Participation\" domain to decorate onto the participation.              These take the format {domain}/{scope}/{code} e.g. \"Participation/system/Name\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_participation(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EARLY ACCESS] GetParticipation: Get Participation
             api_response = await api_instance.get_participation(scope, code, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -190,6 +214,7 @@ Fetch the last pre-AsAt date version of each Participation in scope (does not fe
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -216,6 +241,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Participation\" domain to decorate onto each participation.                  These take the format {domain}/{scope}/{code} e.g. \"Participation/system/Name\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_participations(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
+
             # [EARLY ACCESS] ListParticipations: List Participations
             api_response = await api_instance.list_participations(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
             pprint(api_response)
@@ -280,6 +316,7 @@ Upsert; update existing participations with given ids, or create new participati
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -306,6 +343,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -320,6 +365,9 @@ async def main():
         participation_set_request = ParticipationSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PART00000123"},"placementId":{"scope":"MyScope","code":"PLAC00000123"},"orderId":{"scope":"MyScope","code":"ORDER00000123"}}]}) # ParticipationSetRequest | The collection of participation requests. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_participations(participation_set_request=participation_set_request, opts=opts)
+
             # [EARLY ACCESS] UpsertParticipations: Upsert Participation
             api_response = await api_instance.upsert_participations(participation_set_request=participation_set_request)
             pprint(api_response)

@@ -26,6 +26,7 @@ Delete the specified Counterparty Agreement from a single scope.  The response w
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -52,6 +53,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -62,6 +71,9 @@ async def main():
         code = 'code_example' # str | The Counterparty Agreement to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_counterparty_agreement(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteCounterpartyAgreement: Delete the Counterparty Agreement of given scope and code
             api_response = await api_instance.delete_counterparty_agreement(scope, code)
             pprint(api_response)
@@ -108,6 +120,7 @@ Delete the specified Credit Support Annex from a single scope.  The response wil
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -134,6 +147,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -144,6 +165,9 @@ async def main():
         code = 'code_example' # str | The Credit Support Annex to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_credit_support_annex(scope, code, opts=opts)
+
             # [EARLY ACCESS] DeleteCreditSupportAnnex: Delete the Credit Support Annex of given scope and code
             api_response = await api_instance.delete_credit_support_annex(scope, code)
             pprint(api_response)
@@ -190,6 +214,7 @@ Get a Counterparty Agreement from a single scope.  The response will return eith
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -216,6 +241,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -227,6 +260,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Counterparty Agreement. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_counterparty_agreement(scope, code, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetCounterpartyAgreement: Get Counterparty Agreement
             api_response = await api_instance.get_counterparty_agreement(scope, code, as_at=as_at)
             pprint(api_response)
@@ -274,6 +310,7 @@ Get a Credit Support Annex from a single scope.  The response will return either
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -300,6 +337,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -311,6 +356,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Credit Support Annex . Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_credit_support_annex(scope, code, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetCreditSupportAnnex: Get Credit Support Annex
             api_response = await api_instance.get_credit_support_annex(scope, code, as_at=as_at)
             pprint(api_response)
@@ -358,6 +406,7 @@ List the set of Counterparty Agreements at the specified AsAt date/time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -384,6 +433,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -393,6 +450,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Counterparty Agreements. Defaults to latest if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_counterparty_agreements(as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] ListCounterpartyAgreements: List the set of Counterparty Agreements
             api_response = await api_instance.list_counterparty_agreements(as_at=as_at)
             pprint(api_response)
@@ -438,6 +498,7 @@ List the set of Credit Support Annexes at the specified AsAt date/time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -464,6 +525,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -473,6 +542,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Credit Support Annexes. Defaults to latest if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_credit_support_annexes(as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] ListCreditSupportAnnexes: List the set of Credit Support Annexes
             api_response = await api_instance.list_credit_support_annexes(as_at=as_at)
             pprint(api_response)
@@ -518,6 +590,7 @@ Update or insert Counterparty Agreement in a single scope. An item will be updat
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -544,6 +617,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -558,6 +639,9 @@ async def main():
         upsert_counterparty_agreement_request = UpsertCounterpartyAgreementRequest.from_dict({"counterpartyAgreement":{"displayName":"display-name","agreementType":"type","counterpartySignatory":{"name":"counterparty-signatory-name","legalEntityIdentifier":{"idTypeScope":"legal-identifier-idTypeScope","idTypeCode":"legal-identifier-idTypeCode","code":"legal-identifier-code"}},"datedAsOf":"2020-01-01T01:00:00.0000000+00:00","creditSupportAnnexId":{"scope":"credit-support-annex-scope","code":"credit-support-annex-code"},"id":{"scope":"some-scope","code":"some-code"}}}) # UpsertCounterpartyAgreementRequest | The Counterparty Agreement to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_counterparty_agreement(upsert_counterparty_agreement_request, opts=opts)
+
             # [EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement
             api_response = await api_instance.upsert_counterparty_agreement(upsert_counterparty_agreement_request)
             pprint(api_response)
@@ -603,6 +687,7 @@ Update or insert Credit Support Annex in a single scope. An item will be updated
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -629,6 +714,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -643,6 +736,9 @@ async def main():
         upsert_credit_support_annex_request = UpsertCreditSupportAnnexRequest.from_dict({"creditSupportAnnex":{"referenceCurrency":"GBP","collateralCurrencies":["GBP"],"isdaAgreementVersion":"ISDA2002","marginCallFrequency":"1W","valuationAgent":"Institution","thresholdAmount":0,"roundingDecimalPlaces":2,"initialMarginAmount":100000,"minimumTransferAmount":10000,"id":{"scope":"some-scope","code":"some-code"}}}) # UpsertCreditSupportAnnexRequest | The Credit Support Annex to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_credit_support_annex(upsert_credit_support_annex_request, opts=opts)
+
             # [EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex
             api_response = await api_instance.upsert_credit_support_annex(upsert_credit_support_annex_request)
             pprint(api_response)

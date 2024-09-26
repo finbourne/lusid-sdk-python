@@ -36,6 +36,7 @@ from lusid.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )
+from lusid.extensions.configuration_options import ConfigurationOptions
 
 
 class SearchApi:
@@ -79,10 +80,9 @@ class SearchApi:
         :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -125,10 +125,9 @@ class SearchApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -156,7 +155,8 @@ class SearchApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -229,6 +229,7 @@ class SearchApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -263,10 +264,9 @@ class SearchApi:
         :type page: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -311,10 +311,9 @@ class SearchApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -343,7 +342,8 @@ class SearchApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -412,6 +412,7 @@ class SearchApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -446,10 +447,9 @@ class SearchApi:
         :type page: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -494,10 +494,9 @@ class SearchApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -526,7 +525,8 @@ class SearchApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -595,6 +595,7 @@ class SearchApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
@@ -629,10 +630,9 @@ class SearchApi:
         :type page: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request.
-               If one number provided, it will be total request
-               timeout. It can also be a pair (tuple) of
-               (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -677,10 +677,9 @@ class SearchApi:
         :param _return_http_data_only: response data instead of ApiResponse
                                        object with status code, headers, etc
         :type _return_http_data_only: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
@@ -709,7 +708,8 @@ class SearchApi:
                 '_request_timeout',
                 '_request_auth',
                 '_content_type',
-                '_headers'
+                '_headers',
+                'opts'
             ]
         )
 
@@ -778,5 +778,6 @@ class SearchApi:
             _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=_params.get('_preload_content', True),
             _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))

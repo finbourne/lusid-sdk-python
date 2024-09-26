@@ -21,6 +21,7 @@ Create the given address key definition.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -47,6 +48,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -61,6 +70,9 @@ async def main():
         create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_dict({"addressKey":"Instrument/default/LusidInstrumentId","type":"Text"}) # CreateAddressKeyDefinitionRequest | The request used to create the address key definition.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_address_key_definition(create_address_key_definition_request, opts=opts)
+
             # [EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.
             api_response = await api_instance.create_address_key_definition(create_address_key_definition_request)
             pprint(api_response)
@@ -106,6 +118,7 @@ Get the address key definition with the given address key at the specific asAt t
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -132,6 +145,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -142,6 +163,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition. Defaults to return the latest version of the address key definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_address_key_definition(key, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetAddressKeyDefinition: Get an AddressKeyDefinition.
             api_response = await api_instance.get_address_key_definition(key, as_at=as_at)
             pprint(api_response)
@@ -188,6 +212,7 @@ Fetch the last pre-AsAt date version of each address key definition.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -214,6 +239,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -226,6 +259,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_address_key_definitions(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.
             api_response = await api_instance.list_address_key_definitions(as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)

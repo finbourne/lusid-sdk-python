@@ -23,6 +23,7 @@ Create a reference portfolio in a particular scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -64,6 +73,9 @@ async def main():
         create_reference_portfolio_request = CreateReferencePortfolioRequest.from_dict({"displayName":"MyPortfolioName","description":"Description of my portfolio","code":"MyPortfolioCode","created":"2018-03-05T00:00:00.0000000+00:00","properties":{},"instrumentScopes":[],"baseCurrency":"GBP"}) # CreateReferencePortfolioRequest | The definition of the reference portfolio.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_reference_portfolio(scope, create_reference_portfolio_request, opts=opts)
+
             # CreateReferencePortfolio: Create reference portfolio
             api_response = await api_instance.create_reference_portfolio(scope, create_reference_portfolio_request)
             pprint(api_response)
@@ -110,6 +122,7 @@ Get constituents from a reference portfolio at a particular effective time.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -136,6 +149,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -149,6 +170,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # GetReferencePortfolioConstituents: Get reference portfolio constituents
             api_response = await api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -198,6 +222,7 @@ List adjustments made to constituents in a reference portfolio.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -224,6 +249,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -237,6 +270,9 @@ async def main():
         as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The asAt time for which the result is valid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time, opts=opts)
+
             # ListConstituentsAdjustments: List constituents adjustments
             api_response = await api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
             pprint(api_response)
@@ -286,6 +322,7 @@ Create or update one or more constituent properties for a single constituent in 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -312,6 +349,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -328,6 +373,9 @@ async def main():
         upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_dict({"identifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"properties":{"Transaction/MyScope/MyPropertyName":{"key":"Transaction/MyScope/MyPropertyName","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}},"Transaction/MyScope/MyPropertyName2":{"key":"Transaction/MyScope/MyPropertyName2","value":{"metricValue":{"value":925.3,"unit":"Unit"}}}}}) # UpsertReferencePortfolioConstituentPropertiesRequest | The request to modify properties for the constituent.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request, opts=opts)
+
             # [EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties
             api_response = await api_instance.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request)
             pprint(api_response)
@@ -375,6 +423,7 @@ Add constituents to a reference portfolio.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -401,6 +450,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -417,6 +474,9 @@ async def main():
         upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_dict({"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","weightType":"Periodical","periodType":"Quarterly","periodCount":2,"constituents":[{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG0077GZM13","Instrument/default/Isin":"GB00BH4HKS39"},"properties":{"Portfolio/MyScope/MyPropertyKey":{"key":"Portfolio/MyScope/MyPropertyKey","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}}},"weight":100,"currency":"GBP"},{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG0077H2WN1","Instrument/default/Isin":"US0378331005"},"properties":{},"weight":50,"currency":"USD"}]}) # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the reference portfolio.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request, opts=opts)
+
             # UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents
             api_response = await api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request)
             pprint(api_response)

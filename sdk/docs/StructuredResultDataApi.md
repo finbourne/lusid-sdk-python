@@ -27,6 +27,7 @@ Create or update one or more structured result store address definition data map
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -53,6 +54,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -63,6 +72,9 @@ async def main():
         request_body = {"id1":{"id":{"version":"1.0.0","code":"dataMapCode"},"data":{"dataDefinitions":[{"address":"Instrument/default/LusidInstrumentId","name":"luid","dataType":"String","keyType":"Unique","allowNull":false,"allowMissing":false},{"address":"Valuation/PV","dataType":"Result0D","keyType":"Leaf","allowNull":false,"allowMissing":false},{"address":"Valuation/PV/Amount","name":"pv","dataType":"Decimal","keyType":"Leaf","allowNull":false,"allowMissing":false},{"address":"Valuation/PV/Ccy","name":"pv-ccy","dataType":"String","keyType":"Leaf","allowNull":false,"allowMissing":false},{"address":"Instrument/default/Name","name":"instrument-name","dataType":"String","keyType":"Leaf","allowNull":false,"allowMissing":false}]}}} # Dict[str, CreateDataMapRequest] | Individual data map creation requests.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_data_map(scope, request_body, opts=opts)
+
             # CreateDataMap: Create data map
             api_response = await api_instance.create_data_map(scope, request_body)
             pprint(api_response)
@@ -109,6 +121,7 @@ Delete one or more structured result data items from a particular scope. Each it
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -135,6 +148,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -145,6 +166,9 @@ async def main():
         request_body = {"SomeCorrelationId1":{"source":"MiddleOffice","code":"MyUploadedRiskResults","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"Risk"}} # Dict[str, StructuredResultDataId] | The data IDs to delete, each keyed by a unique, ephemeral correlation ID.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_structured_result_data(scope, request_body, opts=opts)
+
             # [EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data
             api_response = await api_instance.delete_structured_result_data(scope, request_body)
             pprint(api_response)
@@ -191,6 +215,7 @@ For a given virtual document retrieve all the address key definitions that are i
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -217,6 +242,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -231,6 +264,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_address_key_definitions_for_document(scope, code, source, result_type, effective_at=effective_at, as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
             api_response = await api_instance.get_address_key_definitions_for_document(scope, code, source, result_type, effective_at=effective_at, as_at=as_at)
             pprint(api_response)
@@ -281,6 +317,7 @@ Retrieve one or more structured result store address definition data maps from a
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -307,6 +344,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -317,6 +362,9 @@ async def main():
         request_body = {"id1":{"version":"1.0.0","code":"dataMapCode"}} # Dict[str, DataMapKey] | The data map keys to look up, each keyed by a unique, ephemeral correlation ID.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_data_map(scope, request_body, opts=opts)
+
             # [EXPERIMENTAL] GetDataMap: Get data map
             api_response = await api_instance.get_data_map(scope, request_body)
             pprint(api_response)
@@ -363,6 +411,7 @@ Retrieve one or more structured result data items from a particular scope.      
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -389,6 +438,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -401,6 +458,9 @@ async def main():
         max_age = 'max_age_example' # str | The duration of the look-back window in ISO8601 time interval format, for example 'P1Y2M3DT4H30M' (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_structured_result_data(scope, request_body, as_at=as_at, max_age=max_age, opts=opts)
+
             # GetStructuredResultData: Get structured result data
             api_response = await api_instance.get_structured_result_data(scope, request_body, as_at=as_at, max_age=max_age)
             pprint(api_response)
@@ -449,6 +509,7 @@ Retrieve one or more virtual documents from a particular scope.                E
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -475,6 +536,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -486,6 +555,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_virtual_document(scope, request_body, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents
             api_response = await api_instance.get_virtual_document(scope, request_body, as_at=as_at)
             pprint(api_response)
@@ -533,6 +605,7 @@ Retrieve the rows of the virtual document with the specified identifiers and the
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -559,6 +632,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -576,6 +657,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:               https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_virtual_document_rows(scope, code, source, result_type, effective_at, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows
             api_response = await api_instance.get_virtual_document_rows(scope, code, source, result_type, effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -629,6 +713,7 @@ Create or update one or more Upsert one or more result values in a particular sc
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -655,6 +740,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -665,6 +758,9 @@ async def main():
         request_body = {"SomeCorrelationId1":{"documentId":{"source":"MiddleOffice","code":"MyUploadedRiskResults","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"UnitResult/Analytic"},"key":{"UnitResult/LusidInstrumentId":"LUID_0000ABCD"},"dataAddress":"UnitResult/Valuation/InstrumentAccrued","resultValue":{"units":"USD","value":0.0102,"dimension":0,"resultValueType":"ResultValue0D"}}} # Dict[str, UpsertResultValuesDataRequest] | The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_result_value(scope, request_body, opts=opts)
+
             # [EXPERIMENTAL] UpsertResultValue: Upsert result value
             api_response = await api_instance.upsert_result_value(scope, request_body)
             pprint(api_response)
@@ -711,6 +807,7 @@ Create or update one or more structured result data items in a particular scope.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -737,6 +834,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -747,6 +852,9 @@ async def main():
         request_body = {"first-item":{"id":{"source":"Client","code":"MyCustomDocument","effectiveAt":"2020-01-01T00:00:00.0000000+00:00","resultType":"UnitResult/Custom"},"data":{"documentFormat":"Csv","version":"1.0.0","name":"my document identifier","document":"luid,pv,pv-ccy,instrument-name\nLUID_11111111,1,GBP,instr1\nLUID_22222222,2,USD,instr2","dataMapKey":{"version":"1.0.0","code":"dataMapCode"}}},"second-item":{"id":{"source":"Client","code":"MyUploadedRiskResults-1","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"Risk"},"data":{"documentFormat":"Xml","version":"1.0.0","name":"free text identifier of document 1","document":"<xml>data</xml>"}},"third-item":{"id":{"source":"Client","code":"MyUploadedRiskResults-2","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"Risk"},"data":{"documentFormat":"Json","version":"1.0.0","name":"free text identifier of document 2","document":"{ \"some\":\"valid json\"}"}}} # Dict[str, UpsertStructuredResultDataRequest] | The set of data items to create or update, keyed by a unique, ephemeral correlation ID.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_structured_result_data(scope, request_body, opts=opts)
+
             # UpsertStructuredResultData: Upsert structured result data
             api_response = await api_instance.upsert_structured_result_data(scope, request_body)
             pprint(api_response)

@@ -26,6 +26,7 @@ Deletes the rule for all effective time.                The rule will remain vie
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -52,6 +53,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -62,6 +71,9 @@ async def main():
         code = 'code_example' # str | The compliance rule code.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_legacy_compliance_rule(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteLegacyComplianceRule: Deletes a compliance rule.
             api_response = await api_instance.delete_legacy_compliance_rule(scope, code)
             pprint(api_response)
@@ -108,6 +120,7 @@ Use this endpoint to get a list or breached orders and the set of rules that may
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -134,6 +147,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -146,6 +167,9 @@ async def main():
         limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_legacy_breached_orders_info(run_id, order_scope=order_scope, order_code=order_code, limit=limit, opts=opts)
+
             # [EXPERIMENTAL] GetLegacyBreachedOrdersInfo: Get the Ids of Breached orders in a given compliance run and the corresponding list of rules that could have caused it.
             api_response = await api_instance.get_legacy_breached_orders_info(run_id, order_scope=order_scope, order_code=order_code, limit=limit)
             pprint(api_response)
@@ -194,6 +218,7 @@ Retrieves the compliance rule definition at the given effective and as at times.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -220,6 +245,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -232,6 +265,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_legacy_compliance_rule(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetLegacyComplianceRule: Retrieve the definition of single compliance rule.
             api_response = await api_instance.get_legacy_compliance_rule(scope, code, effective_at=effective_at, as_at=as_at)
             pprint(api_response)
@@ -280,6 +316,7 @@ Use this endpoint to fetch the detail associated with a specific compliance run,
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -306,6 +343,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -318,6 +363,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_legacy_compliance_run_results(run_id, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] GetLegacyComplianceRunResults: Get the details of a single compliance run.
             api_response = await api_instance.get_legacy_compliance_run_results(run_id, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -366,6 +414,7 @@ For more information about filtering results,  see https://support.lusid.com/kno
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -392,6 +441,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -405,6 +462,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the results. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_legacy_compliance_rules(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering.
             api_response = await api_instance.list_legacy_compliance_rules(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -454,6 +514,7 @@ Use this endpoint to fetch a list of all historical compliance runs.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -480,6 +541,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -492,6 +561,9 @@ async def main():
         filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_legacy_compliance_run_info(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+
             # [EXPERIMENTAL] ListLegacyComplianceRunInfo: List historical compliance run ids.
             api_response = await api_instance.list_legacy_compliance_run_info(as_at=as_at, page=page, limit=limit, filter=filter)
             pprint(api_response)
@@ -540,6 +612,7 @@ Use this endpoint to fetch the start a compliance run, based on a pre-set mappin
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -566,6 +639,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -578,6 +659,9 @@ async def main():
         by_taxlots = True # bool | Optional. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.run_legacy_compliance(is_pre_trade, recipe_id_scope, recipe_id_code=recipe_id_code, by_taxlots=by_taxlots, opts=opts)
+
             # [EXPERIMENTAL] RunLegacyCompliance: Kick off the compliance check process
             api_response = await api_instance.run_legacy_compliance(is_pre_trade, recipe_id_scope, recipe_id_code=recipe_id_code, by_taxlots=by_taxlots)
             pprint(api_response)
@@ -626,6 +710,7 @@ To upsert a new rule, the code field must be left empty, a code will then be ass
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -652,6 +737,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -662,6 +755,9 @@ async def main():
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_legacy_compliance_rules(request_body, effective_at=effective_at, opts=opts)
+
             # [EXPERIMENTAL] UpsertLegacyComplianceRules: Upsert compliance rules.
             api_response = await api_instance.upsert_legacy_compliance_rules(request_body, effective_at=effective_at)
             pprint(api_response)

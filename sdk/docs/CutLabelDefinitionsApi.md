@@ -23,6 +23,7 @@ Create a Cut Label valid in all scopes
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -49,6 +50,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -63,6 +72,9 @@ async def main():
         create_cut_label_definition_request = CreateCutLabelDefinitionRequest.from_dict({"code":"CutLabelCode","displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"}) # CreateCutLabelDefinitionRequest | The cut label definition (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_cut_label_definition(create_cut_label_definition_request=create_cut_label_definition_request, opts=opts)
+
             # CreateCutLabelDefinition: Create a Cut Label
             api_response = await api_instance.create_cut_label_definition(create_cut_label_definition_request=create_cut_label_definition_request)
             pprint(api_response)
@@ -108,6 +120,7 @@ Delete a specified cut label
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -134,6 +147,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -143,6 +164,9 @@ async def main():
         code = 'code_example' # str | The Code of the Cut Label that is being Deleted
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_cut_label_definition(code, opts=opts)
+
             # DeleteCutLabelDefinition: Delete a Cut Label
             api_response = await api_instance.delete_cut_label_definition(code)
             pprint(api_response)
@@ -188,6 +212,7 @@ Get a specified cut label at a given time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -214,6 +239,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -224,6 +257,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The time at which to get the Cut Label (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_cut_label_definition(code, as_at=as_at, opts=opts)
+
             # GetCutLabelDefinition: Get a Cut Label
             api_response = await api_instance.get_cut_label_definition(code, as_at=as_at)
             pprint(api_response)
@@ -270,6 +306,7 @@ List all the Cut Label Definitions that are valid at the given AsAt time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -296,6 +333,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -309,6 +354,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_cut_label_definitions(as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, page=page, opts=opts)
+
             # ListCutLabelDefinitions: List Existing Cut Labels
             api_response = await api_instance.list_cut_label_definitions(as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, page=page)
             pprint(api_response)
@@ -358,6 +406,7 @@ Update a specified cut label
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -384,6 +433,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -399,6 +456,9 @@ async def main():
         update_cut_label_definition_request = UpdateCutLabelDefinitionRequest.from_dict({"displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"}) # UpdateCutLabelDefinitionRequest | The cut label update definition (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_cut_label_definition(code, update_cut_label_definition_request=update_cut_label_definition_request, opts=opts)
+
             # UpdateCutLabelDefinition: Update a Cut Label
             api_response = await api_instance.update_cut_label_definition(code, update_cut_label_definition_request=update_cut_label_definition_request)
             pprint(api_response)

@@ -18,15 +18,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class ValuationPointDataQueryParameters(BaseModel):
     """
     The parameters used in getting the ValuationPointData.  # noqa: E501
     """
-    end: Optional[DateOrDiaryEntry] = None
+    end: DateOrDiaryEntry = Field(...)
     __properties = ["end"]
 
     class Config:

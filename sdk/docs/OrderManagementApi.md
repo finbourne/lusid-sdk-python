@@ -28,6 +28,7 @@ Takes a collection of allocation IDs, and maps fields from those allocations and
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -54,6 +55,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -69,6 +78,9 @@ async def main():
         apply_fees_and_commission = True # bool | Whether to apply fees and commissions to transactions (default: true) (optional) (default to True)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission, opts=opts)
+
             # [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
             api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission)
             pprint(api_response)
@@ -115,6 +127,7 @@ The response returns both the collection of successfully canceled orders, as wel
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -141,6 +154,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -150,6 +171,9 @@ async def main():
         request_body = {"request1":{"scope":"MyScope","code":"Order00000123"},"request2":{"scope":"MyScope","code":"Order00000124"}} # Dict[str, ResourceId] | The request containing the ids of the orders to be cancelled.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.cancel_orders(request_body, opts=opts)
+
             # [EARLY ACCESS] CancelOrders: Cancel existing orders
             api_response = await api_instance.cancel_orders(request_body)
             pprint(api_response)
@@ -195,6 +219,7 @@ The response returns both the collection of successfully canceled placements, as
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -221,6 +246,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         request_body = {"request1":{"scope":"MyScope","code":"PLAC00000123"},"request2":{"scope":"MyScope","code":"PLAC00000124"}} # Dict[str, ResourceId] | The request containing the ids of the placements to be cancelled.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.cancel_placements(request_body, opts=opts)
+
             # [EARLY ACCESS] CancelPlacements: Cancel existing placements
             api_response = await api_instance.cancel_placements(request_body)
             pprint(api_response)
@@ -275,6 +311,7 @@ Upsert a Block and create associated orders.  This will fail if the block exists
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -301,6 +338,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -315,6 +360,9 @@ async def main():
         block_and_orders_create_request = BlockAndOrdersCreateRequest.from_dict({"requests":[{"blockId":{"scope":"MyScope","code":"BLOCK00000123"},"orders":[{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"quantity":100,"id":{"scope":"MyScope","code":"ORDER00000123"},"state":"New","date":"0001-01-01T00:00:00.0000000+00:00"},{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"quantity":150,"id":{"scope":"MyScope","code":"ORDER00000124"},"state":"New","date":"0001-01-01T00:00:00.0000000+00:00"}],"blockProperties":{"Block/MyScope/SomeOrderProperty":{"key":"Block/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"side":"Buy","type":"Limit","timeInForce":"GoodTilCancel","date":"1999-06-05T00:00:00.0000000+00:00","limitPrice":{"amount":534,"currency":"USD"}}]}) # BlockAndOrdersCreateRequest | The collection of block and orders requests.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_orders(block_and_orders_create_request, opts=opts)
+
             # [EARLY ACCESS] CreateOrders: Upsert a Block and associated orders
             api_response = await api_instance.create_orders(block_and_orders_create_request)
             pprint(api_response)
@@ -360,6 +408,7 @@ Get the changes that have happened to an order and related entities.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -386,6 +435,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -397,6 +454,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_order_history(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes
             api_response = await api_instance.get_order_history(scope, code, as_at=as_at)
             pprint(api_response)
@@ -445,6 +505,7 @@ Move an order to a block, creating the block if it does not already exist.   Thi
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -471,6 +532,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -485,6 +554,9 @@ async def main():
         move_orders_to_different_blocks_request = MoveOrdersToDifferentBlocksRequest.from_dict({"requests":[{"destinationBlockId":{"scope":"MyScope","code":"BLOCK00000123"},"orderId":{"scope":"MyScope","code":"ORDER00000123"}}]}) # MoveOrdersToDifferentBlocksRequest | The collection of order and destination block ids.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.move_orders(move_orders_to_different_blocks_request, opts=opts)
+
             # [EARLY ACCESS] MoveOrders: Move orders to new or existing block
             api_response = await api_instance.move_orders(move_orders_to_different_blocks_request)
             pprint(api_response)
@@ -530,6 +602,7 @@ The referenced block's existence will be verified.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -556,6 +629,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -570,6 +651,9 @@ async def main():
         place_blocks_request = PlaceBlocksRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PLAC00000123"},"blockIds":[{"scope":"MyScope","code":"BLOCK00000123"}],"properties":{"Placement/MyScope/SomePlacementProperty":{"key":"Placement/MyScope/SomePlacementProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"state":"New","side":"Buy","timeInForce":"GoodTilCancel","type":"Limit","createdDate":"2006-04-11T00:00:00.0000000+00:00","limitPrice":{"amount":12413.33,"currency":"USD"},"stopPrice":{"amount":124335.33,"currency":"USD"},"counterparty":"SomeCounterparty","entryType":"Manual"}]}) # PlaceBlocksRequest | The request containing the blocks to the placed. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.place_blocks(place_blocks_request=place_blocks_request, opts=opts)
+
             # [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
             api_response = await api_instance.place_blocks(place_blocks_request=place_blocks_request)
             pprint(api_response)
@@ -615,6 +699,7 @@ This will allocate executions for a given list of placements back to their origi
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -641,6 +726,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -651,6 +744,9 @@ async def main():
         allocation_algorithm = 'allocation_algorithm_example' # str | A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.run_allocation_service(resource_id, allocation_algorithm=allocation_algorithm, opts=opts)
+
             # [EXPERIMENTAL] RunAllocationService: Runs the Allocation Service
             api_response = await api_instance.run_allocation_service(resource_id, allocation_algorithm=allocation_algorithm)
             pprint(api_response)
@@ -697,6 +793,7 @@ The response returns both the collection of successfully updated orders, as well
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -723,6 +820,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -732,6 +837,9 @@ async def main():
         request_body = {"update1":{"id":{"scope":"MyScope","code":"Code1"},"quantity":101},"update2":{"id":{"scope":"MyScope","code":"Code2"},"quantity":100,"portfolioId":{"scope":"MyScope","code":"NewPortfolio"},"properties":{"Order/MyScope/OrderProperty":{"key":"Order/MyScope/OrderProperty","value":{"labelValue":"NewValue"}}}}} # Dict[str, OrderUpdateRequest] | The request containing the orders to be updated.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_orders(request_body, opts=opts)
+
             # [EARLY ACCESS] UpdateOrders: Update existing orders
             api_response = await api_instance.update_orders(request_body)
             pprint(api_response)
@@ -777,6 +885,7 @@ The response returns both the collection of successfully updated placements, as 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -803,6 +912,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -812,6 +929,9 @@ async def main():
         request_body = {"request1":{"id":{"scope":"MyScope","code":"PLAC00000123"},"quantity":100,"properties":{"Placement/MyScope/SomePlacementProperty":{"key":"Placement/MyScope/SomePlacementProperty","value":{"labelValue":"XYZ000034567"}}},"counterparty":"SomeCounterparty","entryType":"Manual"}} # Dict[str, PlacementUpdateRequest] | The request containing the placements to be updated.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_placements(request_body, opts=opts)
+
             # [EARLY ACCESS] UpdatePlacements: Update existing placements
             api_response = await api_instance.update_placements(request_body)
             pprint(api_response)

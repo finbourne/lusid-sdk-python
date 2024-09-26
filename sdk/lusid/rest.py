@@ -68,6 +68,11 @@ class RESTClientObject:
 
         self.proxy = configuration.proxy
         self.proxy_headers = configuration.proxy_headers
+        self.timeout = aiohttp.ClientTimeout(
+            total=configuration.timeouts.total_timeout_ms / 1000.0 if configuration.timeouts != None and configuration.timeouts.total_timeout_ms != None else None,
+            connect=configuration.timeouts.connect_timeout_ms / 1000.0 if configuration.timeouts != None and configuration.timeouts.connect_timeout_ms != None else None,
+            sock_read=configuration.timeouts.read_timeout_ms / 1000.0 if configuration.timeouts != None and configuration.timeouts.read_timeout_ms != None else None,
+        )
 
         # https pool manager
         self.pool_manager = aiohttp.ClientSession(
@@ -80,7 +85,7 @@ class RESTClientObject:
 
     async def request(self, method, url, query_params=None, headers=None,
                       body=None, post_params=None, _preload_content=True,
-                      _request_timeout=None):
+                      _request_timeout=None, opts=None):
         """Execute request
 
         :param method: http request method
@@ -93,10 +98,9 @@ class RESTClientObject:
                             and `multipart/form-data`
         :param _preload_content: this is a non-applicable field for
                                  the AiohttpClient.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
         """
         method = method.upper()
         assert method in ['GET', 'HEAD', 'DELETE', 'POST', 'PUT',
@@ -112,7 +116,44 @@ class RESTClientObject:
         # url already contains the URL query string
         # so reset query_params to empty dict
         query_params = {}
-        timeout = _request_timeout or 5 * 60
+
+        # _request_timeout param cannot be removed for backwards compatability
+        # values from opts override values from _request_timeout
+        # try to get values from opts first, then _request_timeout, then self.timeout, else set to None
+        # timeout = _request_timeout or self.timeout
+        timeout = None
+        opts_total_timeout = opts.total_timeout_ms / 1000.0 if opts and opts.total_timeout_ms != None else None
+        opts_connect_timeout = opts.connect_timeout_ms / 1000.0 if opts and opts.connect_timeout_ms != None else None
+        opts_read_timeout = opts.read_timeout_ms / 1000.0 if opts and opts.read_timeout_ms != None else None
+        if not _request_timeout:
+            timeout = aiohttp.ClientTimeout(
+                total=opts_total_timeout if opts_total_timeout != None
+                    else self.timeout.total, 
+                connect=opts_connect_timeout if opts_connect_timeout != None
+                    else self.timeout.connect,
+                sock_read=opts_read_timeout if opts_read_timeout != None
+                    else self.timeout.sock_read)
+        elif isinstance(_request_timeout, aiohttp.ClientTimeout):
+            timeout = aiohttp.ClientTimeout(
+                total=opts_total_timeout if opts_total_timeout != None
+                    else _request_timeout.total if _request_timeout.total != None
+                        else self.timeout.total, 
+                connect=opts_connect_timeout if opts_connect_timeout != None
+                    else _request_timeout.connect if _request_timeout.connect != None
+                        else self.timeout.connect,
+                sock_read=opts_read_timeout if opts_read_timeout != None
+                    else _request_timeout.sock_read if _request_timeout.sock_read != None
+                        else self.timeout.sock_read)
+        elif isinstance(_request_timeout, (int, float)):
+            timeout = aiohttp.ClientTimeout(
+                total=opts_total_timeout if opts_total_timeout != None
+                    else _request_timeout, 
+                connect=opts_connect_timeout if opts_connect_timeout != None
+                    else self.timeout.connect, 
+                sock_read=opts_read_timeout if opts_read_timeout != None
+                    else self.timeout.sock_read)
+        else:
+            raise f"unexpected type '{type(_request_timeout)}' for _request_timeout"
 
         if 'Content-Type' not in headers:
             headers['Content-Type'] = 'application/json'
@@ -186,69 +227,78 @@ class RESTClientObject:
         return r
 
     async def get_request(self, url, headers=None, query_params=None,
-                  _preload_content=True, _request_timeout=None):
+                  _preload_content=True, _request_timeout=None, opts=None):
         return (await self.request("GET", url,
                                    headers=headers,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   query_params=query_params))
+                                   query_params=query_params,
+                                   opts=opts))
 
     async def head_request(self, url, headers=None, query_params=None,
-                   _preload_content=True, _request_timeout=None):
+                   _preload_content=True, _request_timeout=None, opts=None):
         return (await self.request("HEAD", url,
                                    headers=headers,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   query_params=query_params))
+                                   query_params=query_params,
+                                   opts=opts))
 
     async def options_request(self, url, headers=None, query_params=None,
                       post_params=None, body=None, _preload_content=True,
-                      _request_timeout=None):
+                      _request_timeout=None, opts=None):
         return (await self.request("OPTIONS", url,
                                    headers=headers,
                                    query_params=query_params,
                                    post_params=post_params,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   body=body))
+                                   body=body,
+                                   opts=opts))
 
     async def delete_request(self, url, headers=None, query_params=None, body=None,
-                     _preload_content=True, _request_timeout=None):
+                     _preload_content=True, _request_timeout=None, 
+                     opts=None):
         return (await self.request("DELETE", url,
                                    headers=headers,
                                    query_params=query_params,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   body=body))
+                                   body=body,
+                                   opts=opts))
 
     async def post_request(self, url, headers=None, query_params=None,
                    post_params=None, body=None, _preload_content=True,
-                   _request_timeout=None):
+                   _request_timeout=None, opts=None):
         return (await self.request("POST", url,
                                    headers=headers,
                                    query_params=query_params,
                                    post_params=post_params,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   body=body))
+                                   body=body,
+                                   opts=opts))
 
     async def put_request(self, url, headers=None, query_params=None, post_params=None,
-                  body=None, _preload_content=True, _request_timeout=None):
+                  body=None, _preload_content=True, _request_timeout=None, 
+                  opts=None):
         return (await self.request("PUT", url,
                                    headers=headers,
                                    query_params=query_params,
                                    post_params=post_params,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   body=body))
+                                   body=body,
+                                   opts=opts))
 
     async def patch_request(self, url, headers=None, query_params=None,
                     post_params=None, body=None, _preload_content=True,
-                    _request_timeout=None):
+                    _request_timeout=None, opts=None):
         return (await self.request("PATCH", url,
                                    headers=headers,
                                    query_params=query_params,
                                    post_params=post_params,
                                    _preload_content=_preload_content,
                                    _request_timeout=_request_timeout,
-                                   body=body))
+                                   body=body,
+                                   opts=opts))

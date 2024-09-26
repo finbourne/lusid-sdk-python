@@ -25,6 +25,7 @@ Create a new transaction type by specifying a definition and mappings to movemen
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -51,6 +52,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -65,6 +74,9 @@ async def main():
         transaction_configuration_data_request = TransactionConfigurationDataRequest.from_dict({"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"mysource","source":"mysource","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{}}) # TransactionConfigurationDataRequest | A transaction type definition. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_configuration_transaction_type(transaction_configuration_data_request=transaction_configuration_data_request, opts=opts)
+
             # [EARLY ACCESS] CreateConfigurationTransactionType: Create transaction type
             api_response = await api_instance.create_configuration_transaction_type(transaction_configuration_data_request=transaction_configuration_data_request)
             pprint(api_response)
@@ -110,6 +122,7 @@ Create a new side definition for use in a transaction type. For more information
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -136,6 +149,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -150,6 +171,9 @@ async def main():
         side_configuration_data_request = SideConfigurationDataRequest.from_dict({"side":"Side_Test","security":"security","currency":"currency","rate":"0.7","units":"300","amount":"2000"}) # SideConfigurationDataRequest | The definition of the side. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_side_definition(side_configuration_data_request=side_configuration_data_request, opts=opts)
+
             # [EXPERIMENTAL] CreateSideDefinition: Create side definition
             api_response = await api_instance.create_side_definition(side_configuration_data_request=side_configuration_data_request)
             pprint(api_response)
@@ -195,6 +219,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -221,6 +246,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         source = 'source_example' # str | The source to delete transaction configurations for
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_transaction_configuration_source(source, opts=opts)
+
             # [EXPERIMENTAL] DeleteTransactionConfigurationSource: Delete all transaction configurations for a source
             api_response = await api_instance.delete_transaction_configuration_source(source)
             pprint(api_response)
@@ -275,6 +311,7 @@ Returns failure if requested source is not found
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -301,6 +338,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -311,6 +356,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_transaction_configuration_source(source, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetTransactionConfigurationSource: Get all transaction configurations for a source
             api_response = await api_instance.get_transaction_configuration_source(source, as_at=as_at)
             pprint(api_response)
@@ -357,6 +405,7 @@ Get the list of current transaction types. For information on the default transa
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -383,6 +432,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -392,6 +449,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_configuration_transaction_types(as_at=as_at, opts=opts)
+
             # [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
             api_response = await api_instance.list_configuration_transaction_types(as_at=as_at)
             pprint(api_response)
@@ -437,6 +497,7 @@ Configure all existing transaction types. Note it is not possible to configure a
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -463,6 +524,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -477,6 +546,9 @@ async def main():
         transaction_set_configuration_data_request = TransactionSetConfigurationDataRequest.from_dict({"transactionConfigRequests":[{"aliases":[{"type":"Simple-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"mysource","source":"mysource","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{}},{"aliases":[{"type":"Sell-FIFO","description":"Sale using FIFO logic","transactionClass":"FIFO","transactionGroup":"mysource","source":"mysource","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{"TransactionConfiguration/default/TaxLotSelectionMethod":{"key":"TransactionConfiguration/default/TaxLotSelectionMethod","value":{"labelValue":"FirstInFirstOut"}}},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{"TransactionConfiguration/default/Example":{"key":"TransactionConfiguration/default/Example","value":{"labelValue":"Value"}}}}],"sideConfigRequests":[{"side":"Side1","security":"security","currency":"currency","rate":"0.5","units":"500","amount":"1000"},{"side":"Side2","security":"security","currency":"currency","rate":"0.75","units":"250","amount":"2000"}]}) # TransactionSetConfigurationDataRequest | The complete set of transaction type definitions. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_configuration_transaction_types(transaction_set_configuration_data_request=transaction_set_configuration_data_request, opts=opts)
+
             # [EXPERIMENTAL] SetConfigurationTransactionTypes: Set transaction types
             api_response = await api_instance.set_configuration_transaction_types(transaction_set_configuration_data_request=transaction_set_configuration_data_request)
             pprint(api_response)
@@ -522,6 +594,7 @@ This will replace all the existing transaction configurations for the given sour
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -548,6 +621,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -558,6 +639,9 @@ async def main():
         set_transaction_configuration_source_request = [{"aliases":[{"type":"Simple-Sell","description":"Sale","transactionClass":"MyDefault","transactionRole":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{"TransactionConfiguration/default/Example":{"key":"TransactionConfiguration/default/Example","value":{"labelValue":"Value"}}}}] # List[SetTransactionConfigurationSourceRequest] | The set of transaction configurations
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_transaction_configuration_source(source, set_transaction_configuration_source_request, opts=opts)
+
             # [EXPERIMENTAL] SetTransactionConfigurationSource: Set transaction types for a source
             api_response = await api_instance.set_transaction_configuration_source(source, set_transaction_configuration_source_request)
             pprint(api_response)

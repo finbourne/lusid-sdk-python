@@ -21,6 +21,7 @@ Define a new relation.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -47,6 +48,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -61,6 +70,9 @@ async def main():
         create_relation_definition_request = CreateRelationDefinitionRequest.from_dict({"scope":"PortfolioManagementTeam","code":"Traders","sourceEntityDomain":"Portfolio","targetEntityDomain":"Person","displayName":"Authorised traders to trade for specific portfolio ","outwardDescription":"can be traded by","inwardDescription":"can trade with portfolio","lifeTime":"TimeVariant","constraintStyle":"Collection"}) # CreateRelationDefinitionRequest | The definition of the new relation.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_relation_definition(create_relation_definition_request, opts=opts)
+
             # [EXPERIMENTAL] CreateRelationDefinition: Create a relation definition
             api_response = await api_instance.create_relation_definition(create_relation_definition_request)
             pprint(api_response)
@@ -106,6 +118,7 @@ Delete the definition of the specified relation.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -132,6 +145,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -142,6 +163,9 @@ async def main():
         code = 'code_example' # str | The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_relation_definition(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteRelationDefinition: Delete relation definition
             api_response = await api_instance.delete_relation_definition(scope, code)
             pprint(api_response)
@@ -188,6 +212,7 @@ Retrieve the definition of a specified relation.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -214,6 +239,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -225,6 +258,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_relation_definition(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetRelationDefinition: Get relation definition
             api_response = await api_instance.get_relation_definition(scope, code, as_at=as_at)
             pprint(api_response)

@@ -36,6 +36,7 @@ Accepts the specified estimate Valuation Point.  Should the Valuation Point diff
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -62,6 +63,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -78,6 +87,9 @@ async def main():
         valuation_point_data_request = ValuationPointDataRequest.from_dict({"diaryEntryCode":"DiaryEntryCode"}) # ValuationPointDataRequest | The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request, opts=opts)
+
             # [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
             api_response = await api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request)
             pprint(api_response)
@@ -125,6 +137,7 @@ Create the given Fee.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -151,6 +164,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -167,6 +188,9 @@ async def main():
         fee_request = FeeRequest.from_dict({"code":"FeeCode","feeTypeId":{"scope":"FeeTypeScope","code":"FeeTypeCode"},"displayName":"Legal Fees","description":"Legal Fees","origin":"Separate Agreement","accrualCurrency":"GBP","treatment":"Monthly","totalAnnualAccrualAmount":75000,"payableFrequency":"Annually","businessDayConvention":"Previous","startDate":"2020-10-25T00:00:00.0000000+00:00","endDate":"2023-10-25T00:00:00.0000000+00:00","anchorDate":{"day":1,"month":1},"properties":{}}) # FeeRequest | The Fee to create.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_fee(scope, code, fee_request, opts=opts)
+
             # [EXPERIMENTAL] CreateFee: Create a Fee.
             api_response = await api_instance.create_fee(scope, code, fee_request)
             pprint(api_response)
@@ -214,6 +238,7 @@ Create the given Fund.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -240,6 +265,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -255,6 +288,9 @@ async def main():
         fund_request = FundRequest.from_dict({"code":"FundCode","displayName":"Fund Name","description":"Standard Fund","fundConfigurationId":{"scope":"FundConfigurationScope","code":"FundConfigurationCode"},"aborId":{"scope":"AborScope","code":"AborCode"},"shareClassInstrumentScopes":["Scope1","Scope2"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/Figi":"GB0007980598"}}],"type":"Master","inceptionDate":"9999-12-31T23:59:59.9999999+00:00","decimalPlaces":6,"yearEndDate":{"day":1,"month":12},"properties":{"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # FundRequest | The definition of the Fund.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_fund(scope, fund_request, opts=opts)
+
             # [EXPERIMENTAL] CreateFund: Create a Fund.
             api_response = await api_instance.create_fund(scope, fund_request)
             pprint(api_response)
@@ -301,6 +337,7 @@ Delete the given Fee.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -327,6 +364,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -338,6 +383,9 @@ async def main():
         fee_code = 'fee_code_example' # str | The code of the Fee to be deleted.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_fee(scope, code, fee_code, opts=opts)
+
             # [EXPERIMENTAL] DeleteFee: Delete a Fee.
             api_response = await api_instance.delete_fee(scope, code, fee_code)
             pprint(api_response)
@@ -385,6 +433,7 @@ Delete the given Fund.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -411,6 +460,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -421,6 +478,9 @@ async def main():
         code = 'code_example' # str | The code of the Fund to be deleted. Together with the scope this uniquely identifies the Fund.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_fund(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteFund: Delete a Fund.
             api_response = await api_instance.delete_fund(scope, code)
             pprint(api_response)
@@ -467,6 +527,7 @@ Deletes the given Valuation Point.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -493,6 +554,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -504,6 +573,9 @@ async def main():
         diary_entry_code = 'diary_entry_code_example' # str | The diary entry code for the valuation Point to be deleted.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_valuation_point(scope, code, diary_entry_code, opts=opts)
+
             # [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
             api_response = await api_instance.delete_valuation_point(scope, code, diary_entry_code)
             pprint(api_response)
@@ -551,6 +623,7 @@ Moves a 'Candidate' status Valuation Point to status 'Final'.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -577,6 +650,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -593,6 +674,9 @@ async def main():
         valuation_point_data_request = ValuationPointDataRequest.from_dict({"diaryEntryCode":"DiaryEntryCode"}) # ValuationPointDataRequest | The valuationPointDataRequest which contains the diary entry code to mark as final.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, opts=opts)
+
             # [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
             api_response = await api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request)
             pprint(api_response)
@@ -640,6 +724,7 @@ Retrieve a fee for a specified Fund
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -666,6 +751,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -680,6 +773,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_fee(scope, code, fee_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
             api_response = await api_instance.get_fee(scope, code, fee_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -730,6 +826,7 @@ Retrieve the definition of a particular Fund.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -756,6 +853,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -769,6 +874,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_fund(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] GetFund: Get a Fund.
             api_response = await api_instance.get_fund(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
@@ -818,6 +926,7 @@ Retrieves the Valuation Point data for a date or specified Diary Entry Id.  The 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -844,6 +953,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -861,6 +978,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
             api_response = await api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at)
             pprint(api_response)
@@ -909,6 +1029,7 @@ List all the Fees matching a particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -935,6 +1056,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -952,6 +1081,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_fees(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
             api_response = await api_instance.list_fees(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
             pprint(api_response)
@@ -1005,6 +1137,7 @@ List all the Funds matching particular criteria.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1031,6 +1164,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1046,6 +1187,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_funds(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListFunds: List Funds.
             api_response = await api_instance.list_funds(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
             pprint(api_response)
@@ -1097,6 +1241,7 @@ List all the Valuation Points that match the given criteria for a given Fund.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1123,6 +1268,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1139,6 +1292,9 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
+
             # [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
             api_response = await api_instance.list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
             pprint(api_response)
@@ -1191,6 +1347,7 @@ Create or update certain fields for a particular Fee.  The behaviour is defined 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1217,6 +1374,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1229,6 +1394,9 @@ async def main():
         operation = [{"value":"2027-12-31T00:00:00.0000000+00:00","path":"/endDate","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.patch_fee(scope, code, fee_code, operation, opts=opts)
+
             # [EXPERIMENTAL] PatchFee: Patch Fee.
             api_response = await api_instance.patch_fee(scope, code, fee_code, operation)
             pprint(api_response)
@@ -1277,6 +1445,7 @@ Update the ShareClass Instruments on an existing fund with the set of instrument
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1303,6 +1472,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1319,6 +1496,9 @@ async def main():
         set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_dict({"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"},"launchPrice":1}]}) # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request, opts=opts)
+
             # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
             api_response = await api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request)
             pprint(api_response)
@@ -1366,6 +1546,7 @@ Update or insert the estimate Valuation Point.                If the Valuation P
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1392,6 +1573,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1408,6 +1597,9 @@ async def main():
         upsert_valuation_point_request = UpsertValuationPointRequest.from_dict({"diaryEntryCode":"ValuationJan2024","name":"ValuationJan2024","effectiveAt":"2024-01-31T23:59:59.0000000+00:00","queryAsAt":"2024-01-31T23:59:59.0000000+00:00","properties":{}}) # UpsertValuationPointRequest | The Valuation Point Estimate definition to Upsert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, opts=opts)
+
             # [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
             api_response = await api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request)
             pprint(api_response)
@@ -1455,6 +1647,7 @@ Update or insert one or more properties onto a single Fee. A property will be up
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1481,6 +1674,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1493,6 +1694,9 @@ async def main():
         request_body = {"Fee/MyScope/FundManagerName":{"key":"Fee/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fee/MyScope/SomeProperty":{"key":"Fee/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/AnotherProperty":{"key":"Fee/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/ReBalanceInterval":{"key":"Fee/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_fee_properties(scope, code, fee_code, request_body=request_body, opts=opts)
+
             # [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
             api_response = await api_instance.upsert_fee_properties(scope, code, fee_code, request_body=request_body)
             pprint(api_response)
@@ -1541,6 +1745,7 @@ Update or insert one or more properties onto a single Fund. A property will be u
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -1567,6 +1772,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -1578,6 +1791,9 @@ async def main():
         request_body = {"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fund/MyScope/SomeProperty":{"key":"Fund/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/AnotherProperty":{"key":"Fund/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/ReBalanceInterval":{"key":"Fund/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\". (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_fund_properties(scope, code, request_body=request_body, opts=opts)
+
             # [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
             api_response = await api_instance.upsert_fund_properties(scope, code, request_body=request_body)
             pprint(api_response)

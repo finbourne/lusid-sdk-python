@@ -30,6 +30,7 @@ Delete the specified CDS Flow Conventions from a single scope.  The response wil
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -56,6 +57,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -66,6 +75,9 @@ async def main():
         code = 'code_example' # str | The CDS Flow Conventions to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_cds_flow_conventions(scope, code, opts=opts)
+
             # [BETA] DeleteCdsFlowConventions: Delete the CDS Flow Conventions of given scope and code, assuming that it is present.
             api_response = await api_instance.delete_cds_flow_conventions(scope, code)
             pprint(api_response)
@@ -112,6 +124,7 @@ Delete the specified conventions from a single scope.  The response will return 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -138,6 +151,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -148,6 +169,9 @@ async def main():
         code = 'code_example' # str | The Flow Conventions to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_flow_conventions(scope, code, opts=opts)
+
             # [BETA] DeleteFlowConventions: Delete the Flow Conventions of given scope and code, assuming that it is present.
             api_response = await api_instance.delete_flow_conventions(scope, code)
             pprint(api_response)
@@ -194,6 +218,7 @@ Delete the specified Index Convention from a single scope.  The response will re
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -220,6 +245,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         code = 'code_example' # str | The Index Convention to delete.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_index_convention(scope, code, opts=opts)
+
             # [BETA] DeleteIndexConvention: Delete the Index Convention of given scope and code, assuming that it is present.
             api_response = await api_instance.delete_index_convention(scope, code)
             pprint(api_response)
@@ -276,6 +312,7 @@ Get a CDS Flow Conventions from a single scope.  The response will return either
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -302,6 +339,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -313,6 +358,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the CDS Flow Conventions. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_cds_flow_conventions(scope, code, as_at=as_at, opts=opts)
+
             # [BETA] GetCdsFlowConventions: Get CDS Flow Conventions
             api_response = await api_instance.get_cds_flow_conventions(scope, code, as_at=as_at)
             pprint(api_response)
@@ -360,6 +408,7 @@ Get a Flow Conventions from a single scope.  The response will return either the
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -386,6 +435,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -397,6 +454,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Flow Conventions. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_flow_conventions(scope, code, as_at=as_at, opts=opts)
+
             # [BETA] GetFlowConventions: Get Flow Conventions
             api_response = await api_instance.get_flow_conventions(scope, code, as_at=as_at)
             pprint(api_response)
@@ -444,6 +504,7 @@ Get a Index Convention from a single scope.  The response will return either the
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -470,6 +531,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -481,6 +550,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Index Convention. Defaults to return the latest version if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_index_convention(scope, code, as_at=as_at, opts=opts)
+
             # [BETA] GetIndexConvention: Get Index Convention
             api_response = await api_instance.get_index_convention(scope, code, as_at=as_at)
             pprint(api_response)
@@ -528,6 +600,7 @@ List the set of CDS Flow Conventions at the specified date/time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -554,6 +627,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -563,6 +644,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the conventions. Defaults to latest if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_cds_flow_conventions(as_at=as_at, opts=opts)
+
             # [BETA] ListCdsFlowConventions: List the set of CDS Flow Conventions
             api_response = await api_instance.list_cds_flow_conventions(as_at=as_at)
             pprint(api_response)
@@ -608,6 +692,7 @@ List the set of Flow Conventions at the specified date/time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -634,6 +719,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -643,6 +736,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the conventions. Defaults to latest if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_flow_conventions(as_at=as_at, opts=opts)
+
             # [BETA] ListFlowConventions: List the set of Flow Conventions
             api_response = await api_instance.list_flow_conventions(as_at=as_at)
             pprint(api_response)
@@ -688,6 +784,7 @@ List the set of Index Conventions at the specified date/time
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -714,6 +811,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -723,6 +828,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the conventions. Defaults to latest if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_index_convention(as_at=as_at, opts=opts)
+
             # [BETA] ListIndexConvention: List the set of Index Conventions
             api_response = await api_instance.list_index_convention(as_at=as_at)
             pprint(api_response)
@@ -768,6 +876,7 @@ Update or insert CDS Flow Conventions in a single scope. An item will be updated
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -794,6 +903,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -808,6 +925,9 @@ async def main():
         upsert_cds_flow_conventions_request = UpsertCdsFlowConventionsRequest.from_dict({"cdsFlowConventions":{"rollFrequency":"3M","currency":"USD","paymentFrequency":"3M","dayCountConvention":"Act360","rollConvention":"20","paymentCalendars":["NYC"],"resetCalendars":["NYC"],"settleDays":0,"resetDays":0,"businessDayConvention":"Following","scope":"someScope","code":"exampleCdsFlowConventionsName"}}) # UpsertCdsFlowConventionsRequest | The CDS Flow Conventions to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_cds_flow_conventions(upsert_cds_flow_conventions_request, opts=opts)
+
             # [BETA] UpsertCdsFlowConventions: Upsert a set of CDS Flow Conventions. This creates or updates the data in Lusid.
             api_response = await api_instance.upsert_cds_flow_conventions(upsert_cds_flow_conventions_request)
             pprint(api_response)
@@ -853,6 +973,7 @@ Update or insert Flow Conventions in a single scope. An item will be updated if 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -879,6 +1000,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -893,6 +1022,9 @@ async def main():
         upsert_flow_conventions_request = UpsertFlowConventionsRequest.from_dict({"flowConventions":{"currency":"GBP","paymentFrequency":"1Y","dayCountConvention":"Act360","rollConvention":"None","paymentCalendars":["LON"],"resetCalendars":["LON"],"settleDays":2,"resetDays":2,"leapDaysIncluded":true,"accrualDateAdjustment":"Adjusted","businessDayConvention":"Following","accrualDayCountConvention":"Act360","scope":"someScope","code":"exampleFlowConventionsName"}}) # UpsertFlowConventionsRequest | The Flow Conventions to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_flow_conventions(upsert_flow_conventions_request, opts=opts)
+
             # [BETA] UpsertFlowConventions: Upsert Flow Conventions. This creates or updates the data in Lusid.
             api_response = await api_instance.upsert_flow_conventions(upsert_flow_conventions_request)
             pprint(api_response)
@@ -938,6 +1070,7 @@ Update or insert Index Convention in a single scope. An item will be updated if 
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -964,6 +1097,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -978,6 +1119,9 @@ async def main():
         upsert_index_convention_request = UpsertIndexConventionRequest.from_dict({"indexConvention":{"fixingReference":"Unknown","publicationDayLag":2,"paymentTenor":"1Y","dayCountConvention":"Act360","currency":"GBP","indexName":"LIBOR","scope":"someScope","code":"exampleIndexonventionsName"}}) # UpsertIndexConventionRequest | The Index Conventions to update or insert
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.upsert_index_convention(upsert_index_convention_request, opts=opts)
+
             # [BETA] UpsertIndexConvention: Upsert a set of Index Convention. This creates or updates the data in Lusid.
             api_response = await api_instance.upsert_index_convention(upsert_index_convention_request)
             pprint(api_response)

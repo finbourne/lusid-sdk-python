@@ -24,6 +24,7 @@ Create a FeeType that contains templates used to create fee transactions.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -50,6 +51,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -65,6 +74,9 @@ async def main():
         fee_type_request = FeeTypeRequest.from_dict({"code":"AdminFees","displayName":"AdminFees","description":"Generating transactions to accrue and settle admin fees for funds","componentTransactions":[{"displayName":"Transaction for admin fee accruals","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Accrual","type":"FeeAccrual","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]},{"displayName":"Transaction for admin fee payables","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Payable","type":"FeePayment","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]}]}) # FeeTypeRequest | The contents of the FeeType.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_fee_type(scope, fee_type_request, opts=opts)
+
             # [EXPERIMENTAL] CreateFeeType: Create a FeeType.
             api_response = await api_instance.create_fee_type(scope, fee_type_request)
             pprint(api_response)
@@ -111,6 +123,7 @@ Delete a FeeType that contains templates used to create fee transactions.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -137,6 +150,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -147,6 +168,9 @@ async def main():
         code = 'code_example' # str | The code of the fee type
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_fee_type(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
             api_response = await api_instance.delete_fee_type(scope, code)
             pprint(api_response)
@@ -193,6 +217,7 @@ Get FeeTemplateSpecifications used in the FeeType.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -219,6 +244,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -227,6 +260,9 @@ async def main():
         api_instance = api_client_factory.build(FeeTypesApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_fee_template_specifications(opts=opts)
+
             # [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
             api_response = await api_instance.get_fee_template_specifications()
             pprint(api_response)
@@ -268,6 +304,7 @@ Get a FeeType that contains templates used to create fee transactions.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -294,6 +331,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -305,6 +350,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the FeeType. Defaults to returning the latest version of the FeeType, if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_fee_type(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetFeeType: Get a FeeType
             api_response = await api_instance.get_fee_type(scope, code, as_at=as_at)
             pprint(api_response)
@@ -352,6 +400,7 @@ List FeeTypes that contain templates used to create fee transactions.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -378,6 +427,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -391,6 +448,9 @@ async def main():
         sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_fee_types(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
             # [EXPERIMENTAL] ListFeeTypes: List FeeTypes
             api_response = await api_instance.list_fee_types(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
             pprint(api_response)
@@ -440,6 +500,7 @@ Update a FeeType that contains templates used to create fee transactions.
 ```python
 import asyncio
 from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
@@ -466,6 +527,14 @@ async def main():
     # Use the lusid ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -482,6 +551,9 @@ async def main():
         update_fee_type_request = UpdateFeeTypeRequest.from_dict({"displayName":"AdminFees","description":"Generating transactions to accrue and settle admin fees for funds","componentTransactions":[{"displayName":"Transaction for admin fee accruals","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Accrual","type":"FeeAccrual","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]},{"displayName":"Transaction for admin fee payables","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Payable","type":"FeePayment","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]}]}) # UpdateFeeTypeRequest | The contents of the FeeType.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_fee_type(scope, code, update_fee_type_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
             api_response = await api_instance.update_fee_type(scope, code, update_fee_type_request)
             pprint(api_response)

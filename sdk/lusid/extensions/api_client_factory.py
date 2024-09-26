@@ -1,5 +1,6 @@
 from __future__ import annotations
 from lusid.api_client import ApiClient
+from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.extensions.retry import (
     RetryingRestWrapper,
     RetryingRestWrapperAsync
@@ -68,6 +69,7 @@ class SyncApiClientFactory:
         ] = keep_alive_socket_options(),
         correlation_id: Optional[str] = None,
         app_name: Optional[str] = None,
+        opts: Optional[ConfigurationOptions] = None,
     ):
         """Create an ApiClientFactory which can build
         api objects with a configured ApiClient object
@@ -96,7 +98,8 @@ class SyncApiClientFactory:
         api_client_config = api_config.build_api_client_config(
             tcp_keep_alive=tcp_keep_alive,
             socket_options=socket_options,
-            id_provider_response_handler=id_provider_response_handler
+            id_provider_response_handler=id_provider_response_handler,
+            opts=opts
         )
         self.__api_client = SyncApiClient(
             configuration=api_client_config,
@@ -107,7 +110,9 @@ class SyncApiClientFactory:
         if tcp_keep_alive:
             rc.pool_manager.pool_classes_by_scheme = {"http": TCPKeepAliveHTTPConnectionPool, "https": TCPKeepAliveHTTPSConnectionPool}
 
-        wrapped_rest_client = rest_client_wrapper(rc)
+        wrapped_rest_client = rest_client_wrapper(
+            rest_object=rc, 
+            rate_limit_retries=api_client_config.rate_limit_retries)
         self.__api_client.rest_client = wrapped_rest_client
 
         set_additional_api_client_headers(
@@ -153,7 +158,8 @@ class ApiClientFactory:
         correlation_id: Optional[str] = None,
         app_name: Optional[str] = None,
         client_session: Optional[ClientSession] = None,
-        trace_configs: Optional[List[TraceConfig]] = None
+        trace_configs: Optional[List[TraceConfig]] = None,
+        opts: Optional[ConfigurationOptions] = None,
     ):
         """Create an ApiClientFactory which can build api 
         objects with a configured ApiClient object
@@ -189,7 +195,8 @@ class ApiClientFactory:
         api_client_config = api_config.build_api_client_config(
             tcp_keep_alive=tcp_keep_alive,
             socket_options=socket_options,
-            id_provider_response_handler=id_provider_response_handler
+            id_provider_response_handler=id_provider_response_handler,
+            opts=opts
         )
         self.__api_client = ApiClient(
             configuration=api_client_config,
@@ -218,7 +225,9 @@ class ApiClientFactory:
             logger.exception("client_session must be an aiohttp.ClientSession"
                              " object with an initialised TCP Connector")
         rest_client_wrapper = RetryingRestWrapperAsync
-        wrapped_rest_client = rest_client_wrapper(rc)
+        wrapped_rest_client = rest_client_wrapper(
+            rest_object=rc, 
+            rate_limit_retries=api_client_config.rate_limit_retries)
         self.__api_client.rest_client = wrapped_rest_client
         set_additional_api_client_headers(
             self.__api_client, app_name=app_name, correlation_id=correlation_id

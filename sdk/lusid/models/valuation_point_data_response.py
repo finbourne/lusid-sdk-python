@@ -42,7 +42,7 @@ class ValuationPointDataResponse(BaseModel):
     previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="DEPRECATED. The Net Asset Value of the Fund at the End of the last Period.")
     fund_details: FundDetails = Field(..., alias="fundDetails")
     fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
-    share_class_data: Dict[str, ShareClassData] = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
+    share_class_data: conlist(ShareClassData) = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
     valuation_point_code: Optional[StrictStr] = Field(None, alias="valuationPointCode", description="The code of the valuation point.")
     previous_valuation_point_code: Optional[StrictStr] = Field(None, alias="previousValuationPointCode", description="The code of the previous valuation point.")
     links: Optional[conlist(Link)] = None
@@ -85,13 +85,13 @@ class ValuationPointDataResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fund_valuation_point_data
         if self.fund_valuation_point_data:
             _dict['fundValuationPointData'] = self.fund_valuation_point_data.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each value in share_class_data (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of each item in share_class_data (list)
+        _items = []
         if self.share_class_data:
-            for _key in self.share_class_data:
-                if self.share_class_data[_key]:
-                    _field_dict[_key] = self.share_class_data[_key].to_dict()
-            _dict['shareClassData'] = _field_dict
+            for _item in self.share_class_data:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['shareClassData'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -148,12 +148,7 @@ class ValuationPointDataResponse(BaseModel):
             "previous_nav": obj.get("previousNav"),
             "fund_details": FundDetails.from_dict(obj.get("fundDetails")) if obj.get("fundDetails") is not None else None,
             "fund_valuation_point_data": FundValuationPointData.from_dict(obj.get("fundValuationPointData")) if obj.get("fundValuationPointData") is not None else None,
-            "share_class_data": dict(
-                (_k, ShareClassData.from_dict(_v))
-                for _k, _v in obj.get("shareClassData").items()
-            )
-            if obj.get("shareClassData") is not None
-            else None,
+            "share_class_data": [ShareClassData.from_dict(_item) for _item in obj.get("shareClassData")] if obj.get("shareClassData") is not None else None,
             "valuation_point_code": obj.get("valuationPointCode"),
             "previous_valuation_point_code": obj.get("previousValuationPointCode"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
