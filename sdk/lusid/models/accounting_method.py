@@ -38,6 +38,13 @@ class AccountingMethod(str, Enum):
     PRORATEBYUNITS = 'ProRateByUnits'
     PRORATEBYCOST = 'ProRateByCost'
     PRORATEBYCOSTPORTFOLIOCURRENCY = 'ProRateByCostPortfolioCurrency'
+    INTRADAYTHENFIRSTINFIRSTOUT = 'IntraDayThenFirstInFirstOut'
+    LONGTERMHIGHESTCOSTFIRST = 'LongTermHighestCostFirst'
+    LONGTERMHIGHESTCOSTFIRSTPORTFOLIOCURRENCY = 'LongTermHighestCostFirstPortfolioCurrency'
+    HIGHESTCOSTFIRSTPORTFOLIOCURRENCY = 'HighestCostFirstPortfolioCurrency'
+    LOWESTCOSTFIRSTPORTFOLIOCURRENCY = 'LowestCostFirstPortfolioCurrency'
+    MAXIMUMLOSSMINIMUMGAIN = 'MaximumLossMinimumGain'
+    MAXIMUMLOSSMINIMUMGAINPORTFOLIOCURRENCY = 'MaximumLossMinimumGainPortfolioCurrency'
 
     @classmethod
     def from_json(cls, json_str: str) -> AccountingMethod:

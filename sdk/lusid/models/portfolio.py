@@ -46,7 +46,7 @@ class Portfolio(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the portfolio.")
     instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The instrument scope resolution strategy of this portfolio.")
-    accounting_method: Optional[StrictStr] = Field(None, alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency")
+    accounting_method: Optional[StrictStr] = Field(None, alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency")
     amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
     transaction_type_scope: Optional[StrictStr] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
     cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The scope of the transaction types.")
@@ -68,8 +68,8 @@ class Portfolio(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency'):
-            raise ValueError("must be one of enum values ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency')")
+        if value not in ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency'):
+            raise ValueError("must be one of enum values ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency')")
         return value
 
     class Config:

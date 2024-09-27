@@ -18,21 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class CreditPremiumCashFlowEvent(InstrumentEvent):
+class MbsInterestDeferralEvent(InstrumentEvent):
     """
-    Definition of a credit premium cash flow event.  This event describes a premium cashflow for credit default instruments (CDS or CDX).  # noqa: E501
+    Definition of an MBS Interest Deferral Event  This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and  capitalised into the outstanding principal balance of a mortgage-backed security.  # noqa: E501
     """
-    ex_date: datetime = Field(..., alias="exDate", description="The ex-dividend date of the cashflow.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the cashflow.")
-    currency: StrictStr = Field(..., description="The currency in which the cashflow is paid.")
-    cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashFlowPerUnit", description="The cashflow amount received for each unit of the instrument held on the ex date.")
+    ex_date: datetime = Field(..., alias="exDate", description="The ex date (entitlement date) of the interest payment, usually several weeks prior to the payment date")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the interest that is deferred and capitalised")
+    currency: StrictStr = Field(..., description="The currency in which the interest amount is notated")
+    interest_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="interestPerUnit", description="The interest amount to be deferred and capitalised for each unit of the instrument held on the ex date")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "cashFlowPerUnit"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "interestPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -55,8 +55,8 @@ class CreditPremiumCashFlowEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreditPremiumCashFlowEvent:
-        """Create an instance of CreditPremiumCashFlowEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> MbsInterestDeferralEvent:
+        """Create an instance of MbsInterestDeferralEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -71,28 +71,23 @@ class CreditPremiumCashFlowEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if cash_flow_per_unit (nullable) is None
-        # and __fields_set__ contains the field
-        if self.cash_flow_per_unit is None and "cash_flow_per_unit" in self.__fields_set__:
-            _dict['cashFlowPerUnit'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreditPremiumCashFlowEvent:
-        """Create an instance of CreditPremiumCashFlowEvent from a dict"""
+    def from_dict(cls, obj: dict) -> MbsInterestDeferralEvent:
+        """Create an instance of MbsInterestDeferralEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreditPremiumCashFlowEvent.parse_obj(obj)
+            return MbsInterestDeferralEvent.parse_obj(obj)
 
-        _obj = CreditPremiumCashFlowEvent.parse_obj({
+        _obj = MbsInterestDeferralEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
             "currency": obj.get("currency"),
-            "cash_flow_per_unit": obj.get("cashFlowPerUnit")
+            "interest_per_unit": obj.get("interestPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

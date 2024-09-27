@@ -616,7 +616,9 @@ from lusid.models.mastered_instrument import MasteredInstrument
 from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
 from lusid.models.mbs_coupon_event import MbsCouponEvent
+from lusid.models.mbs_interest_deferral_event import MbsInterestDeferralEvent
 from lusid.models.mbs_principal_event import MbsPrincipalEvent
+from lusid.models.mbs_principal_write_off_event import MbsPrincipalWriteOffEvent
 from lusid.models.merger_event import MergerEvent
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
@@ -988,6 +990,7 @@ from lusid.models.side_definition_request import SideDefinitionRequest
 from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
+from lusid.models.simple_rounding_convention import SimpleRoundingConvention
 from lusid.models.sort_order import SortOrder
 from lusid.models.specific_holding_pricing_info import SpecificHoldingPricingInfo
 from lusid.models.spin_off_event import SpinOffEvent
@@ -1792,7 +1795,9 @@ __all__ = [
     "MatchCriterion",
     "MaturityEvent",
     "MbsCouponEvent",
+    "MbsInterestDeferralEvent",
     "MbsPrincipalEvent",
+    "MbsPrincipalWriteOffEvent",
     "MergerEvent",
     "MetricValue",
     "ModelOptions",
@@ -2164,6 +2169,7 @@ __all__ = [
     "SidesDefinitionRequest",
     "SimpleCashFlowLoan",
     "SimpleInstrument",
+    "SimpleRoundingConvention",
     "SortOrder",
     "SpecificHoldingPricingInfo",
     "SpinOffEvent",
