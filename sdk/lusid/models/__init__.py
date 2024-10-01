@@ -114,6 +114,9 @@ from lusid.models.calculation_info import CalculationInfo
 from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.calendar_dependency import CalendarDependency
+from lusid.models.cancel_order_and_move_remaining_result import CancelOrderAndMoveRemainingResult
+from lusid.models.cancel_orders_and_move_remaining_request import CancelOrdersAndMoveRemainingRequest
+from lusid.models.cancel_orders_and_move_remaining_response import CancelOrdersAndMoveRemainingResponse
 from lusid.models.cancel_orders_response import CancelOrdersResponse
 from lusid.models.cancel_placements_response import CancelPlacementsResponse
 from lusid.models.cancelled_order_result import CancelledOrderResult
@@ -1213,6 +1216,9 @@ __all__ = [
     "Calendar",
     "CalendarDate",
     "CalendarDependency",
+    "CancelOrderAndMoveRemainingResult",
+    "CancelOrdersAndMoveRemainingRequest",
+    "CancelOrdersAndMoveRemainingResponse",
     "CancelOrdersResponse",
     "CancelPlacementsResponse",
     "CancelledOrderResult",

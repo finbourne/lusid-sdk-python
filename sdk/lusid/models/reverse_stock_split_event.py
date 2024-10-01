@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.units_ratio import UnitsRatio
 
@@ -32,9 +32,11 @@ class ReverseStockSplitEvent(InstrumentEvent):
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to have their shares merged.")
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date the reverse stock split was announced.")
+    fractional_units_cash_currency: Optional[StrictStr] = Field(None, alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractionalUnits.")
+    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price paid in lieu of fractionalUnits.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "paymentDate", "exDate", "unitsRatio", "recordDate", "announcementDate"]
+    __properties = ["instrumentEventType", "paymentDate", "exDate", "unitsRatio", "recordDate", "announcementDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -86,6 +88,16 @@ class ReverseStockSplitEvent(InstrumentEvent):
         if self.announcement_date is None and "announcement_date" in self.__fields_set__:
             _dict['announcementDate'] = None
 
+        # set to None if fractional_units_cash_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
+            _dict['fractionalUnitsCashCurrency'] = None
+
+        # set to None if fractional_units_cash_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_price is None and "fractional_units_cash_price" in self.__fields_set__:
+            _dict['fractionalUnitsCashPrice'] = None
+
         return _dict
 
     @classmethod
@@ -103,7 +115,9 @@ class ReverseStockSplitEvent(InstrumentEvent):
             "ex_date": obj.get("exDate"),
             "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
             "record_date": obj.get("recordDate"),
-            "announcement_date": obj.get("announcementDate")
+            "announcement_date": obj.get("announcementDate"),
+            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
