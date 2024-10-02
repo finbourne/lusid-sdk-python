@@ -17,22 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
-from lusid.models.fx_forward import FxForward
+from datetime import datetime
+from typing import Any, Dict
+from pydantic.v1 import Field, StrictStr, constr, validator
 from lusid.models.lusid_instrument import LusidInstrument
 
-class FxSwap(LusidInstrument):
+class LoanFacility(LusidInstrument):
     """
-    LUSID representation of an FX Swap. Composed of two FX Forwards.                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | FarDomesticLeg | Cash flows in the domestic currency for the far forward. |  | 2 | FarForeignLeg | Cash flows in the foreign currency for the far forward (not present for non-deliverable forwards). |  | 3 | NearDomesticLeg | Cash flows in the domestic currency for the near forward. |  | 4 | NearForeignLeg | Cash flows in the foreign currency for the near forward (not present for non-deliverable forwards). |  # noqa: E501
+    Loan Facility. This is a very lightweight instrument which acts as a placeholder for the events occurring within  the related facility Portfolio. This Portfolio is identified by its Scope and Code, which is recorded on the  instrument definition. The instrument acts as an agreement between a single borrower and many lenders (investors).  Several contracts may be drawn up to enable the lending of funds to the borrower. These contracts are modelled via  FlexibleLoan instruments in LUSID. The events occurring within the linked Portfolio may be related  to the facility as a whole (for example to define a global commitment amount), or they may relate to a single  contract (such as a paydown transaction on a particular contract).  # noqa: E501
     """
-    near_fx_forward: FxForward = Field(..., alias="nearFxForward")
-    far_fx_forward: FxForward = Field(..., alias="farFxForward")
-    notional_symmetry: Optional[StrictStr] = Field(None, alias="notionalSymmetry", description="The NotionalSymmetry allows for even and uneven FxSwaps to be supported.  An even FxSwap is one where the near and far fx forwards have the same notional value on at least one of the  legs. An uneven FxSwap is one where near and far fx forwards don't have the same notional on both the  domestic and foreign legs.  By default NotionalSymmetry will be set as even.    Supported string (enumeration) values are: [Even, Uneven].")
+    start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
+    dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
+    facility_portfolio_scope: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="facilityPortfolioScope", description="The Scope of the Transaction Portfolio to which the Loan Facility instrument is linked.")
+    facility_portfolio_code: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="facilityPortfolioCode", description="The Code of the Transaction Portfolio to which the Loan Facility instrument is linked.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "nearFxForward", "farFxForward", "notionalSymmetry"]
+    __properties = ["instrumentType", "startDate", "domCcy", "facilityPortfolioScope", "facilityPortfolioCode"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -55,8 +55,8 @@ class FxSwap(LusidInstrument):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FxSwap:
-        """Create an instance of FxSwap from a JSON string"""
+    def from_json(cls, json_str: str) -> LoanFacility:
+        """Create an instance of LoanFacility from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,38 +66,28 @@ class FxSwap(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of near_fx_forward
-        if self.near_fx_forward:
-            _dict['nearFxForward'] = self.near_fx_forward.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of far_fx_forward
-        if self.far_fx_forward:
-            _dict['farFxForward'] = self.far_fx_forward.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if notional_symmetry (nullable) is None
-        # and __fields_set__ contains the field
-        if self.notional_symmetry is None and "notional_symmetry" in self.__fields_set__:
-            _dict['notionalSymmetry'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FxSwap:
-        """Create an instance of FxSwap from a dict"""
+    def from_dict(cls, obj: dict) -> LoanFacility:
+        """Create an instance of LoanFacility from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FxSwap.parse_obj(obj)
+            return LoanFacility.parse_obj(obj)
 
-        _obj = FxSwap.parse_obj({
+        _obj = LoanFacility.parse_obj({
             "instrument_type": obj.get("instrumentType"),
-            "near_fx_forward": FxForward.from_dict(obj.get("nearFxForward")) if obj.get("nearFxForward") is not None else None,
-            "far_fx_forward": FxForward.from_dict(obj.get("farFxForward")) if obj.get("farFxForward") is not None else None,
-            "notional_symmetry": obj.get("notionalSymmetry")
+            "start_date": obj.get("startDate"),
+            "dom_ccy": obj.get("domCcy"),
+            "facility_portfolio_scope": obj.get("facilityPortfolioScope"),
+            "facility_portfolio_code": obj.get("facilityPortfolioCode")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

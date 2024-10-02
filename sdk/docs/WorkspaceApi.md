@@ -83,9 +83,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_item_creation_request = WorkspaceItemCreationRequest()
         # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
-        workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({"format":1,"name":"example-name","description":"example-description","content":"example-content","type":"rebalance-config"}) # WorkspaceItemCreationRequest | The item to be created. (optional)
+        # workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({})
+        workspace_item_creation_request = WorkspaceItemCreationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -181,9 +181,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_creation_request = WorkspaceCreationRequest()
         # workspace_creation_request = WorkspaceCreationRequest.from_json("")
-        workspace_creation_request = WorkspaceCreationRequest.from_dict({"name":"example-name","description":"example description"}) # WorkspaceCreationRequest | The workspace to be created. (optional)
+        # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
+        workspace_creation_request = WorkspaceCreationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -279,9 +279,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_item_creation_request = WorkspaceItemCreationRequest()
         # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
-        workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({"format":1,"name":"example-name","description":"example-description","content":"example-content","type":"rebalance-config"}) # WorkspaceItemCreationRequest | The item to be created. (optional)
+        # workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({})
+        workspace_item_creation_request = WorkspaceItemCreationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -377,9 +377,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_creation_request = WorkspaceCreationRequest()
         # workspace_creation_request = WorkspaceCreationRequest.from_json("")
-        workspace_creation_request = WorkspaceCreationRequest.from_dict({"name":"example-name","description":"example description"}) # WorkspaceCreationRequest | The workspace to be created. (optional)
+        # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
+        workspace_creation_request = WorkspaceCreationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1632,9 +1632,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_item_update_request = WorkspaceItemUpdateRequest()
         # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
-        workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({"format":2,"description":"updated-example-description","content":"updated-example-content","type":"rebalance-config"}) # WorkspaceItemUpdateRequest | The new item details. (optional)
+        # workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({})
+        workspace_item_update_request = WorkspaceItemUpdateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1732,9 +1732,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_update_request = WorkspaceUpdateRequest()
         # workspace_update_request = WorkspaceUpdateRequest.from_json("")
-        workspace_update_request = WorkspaceUpdateRequest.from_dict({"description":"updated example description"}) # WorkspaceUpdateRequest | The new workspace details. (optional)
+        # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
+        workspace_update_request = WorkspaceUpdateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1832,9 +1832,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_item_update_request = WorkspaceItemUpdateRequest()
         # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
-        workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({"format":2,"description":"updated-example-description","content":"updated-example-content","type":"rebalance-config"}) # WorkspaceItemUpdateRequest | The new item details. (optional)
+        # workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({})
+        workspace_item_update_request = WorkspaceItemUpdateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1932,9 +1932,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # workspace_update_request = WorkspaceUpdateRequest()
         # workspace_update_request = WorkspaceUpdateRequest.from_json("")
-        workspace_update_request = WorkspaceUpdateRequest.from_dict({"description":"updated example description"}) # WorkspaceUpdateRequest | The new workspace details. (optional)
+        # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
+        workspace_update_request = WorkspaceUpdateRequest()
 
         try:
             # uncomment the below to set overrides at the request level

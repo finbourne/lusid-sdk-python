@@ -360,9 +360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # order_instruction_set_request = OrderInstructionSetRequest()
         # order_instruction_set_request = OrderInstructionSetRequest.from_json("")
-        order_instruction_set_request = OrderInstructionSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PACK00000123"},"createdDate":"2020-01-01T00:00:00.0000000+00:00","portfolioId":{"scope":"MyScope","code":"testPortfolio"},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":10,"properties":{"OrderInstruction/MyScope/SomeOrderInstructionProperty":{"key":"OrderInstruction/MyScope/SomeOrderInstructionProperty","value":{"labelValue":"XYZ000034567"}}}}]}) # OrderInstructionSetRequest | The collection of orderInstruction requests. (optional)
+        # order_instruction_set_request = OrderInstructionSetRequest.from_dict({})
+        order_instruction_set_request = OrderInstructionSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

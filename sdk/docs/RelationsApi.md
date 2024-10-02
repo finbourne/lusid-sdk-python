@@ -66,9 +66,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_relation_request = CreateRelationRequest()
         # create_relation_request = CreateRelationRequest.from_json("")
-        create_relation_request = CreateRelationRequest.from_dict({"sourceEntityId":{"IdTypeScope":"HrSystem1","IdTypeCode":"InternalId","Code":"XY10001111"},"targetEntityId":{"IdTypeScope":"HrSystem1","IdTypeCode":"InternalId","Code":"XY10001111"}}) # CreateRelationRequest | The details of the relation to create.
+        # create_relation_request = CreateRelationRequest.from_dict({})
+        create_relation_request = CreateRelationRequest()
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:
@@ -169,9 +169,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # delete_relation_request = DeleteRelationRequest()
         # delete_relation_request = DeleteRelationRequest.from_json("")
-        delete_relation_request = DeleteRelationRequest.from_dict({"sourceEntityId":{"EntityType":"PortfolioGroup","Scope":"UkPortfolio","Code":"PortfolioId-148176"},"targetEntityId":{"EntityType":"Person","IdTypeScope":"HrSystem1","IdTypeCode":"InternalId","Code":"XY10001111"}}) # DeleteRelationRequest | The details of the relation to delete.
+        # delete_relation_request = DeleteRelationRequest.from_dict({})
+        delete_relation_request = DeleteRelationRequest()
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:

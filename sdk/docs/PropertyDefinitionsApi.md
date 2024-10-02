@@ -73,9 +73,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_derived_property_definition_request = CreateDerivedPropertyDefinitionRequest()
         # create_derived_property_definition_request = CreateDerivedPropertyDefinitionRequest.from_json("")
-        create_derived_property_definition_request = CreateDerivedPropertyDefinitionRequest.from_dict({"domain":"Instrument","scope":"MyScope","code":"MyDerivedPropertyName","displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"}) # CreateDerivedPropertyDefinitionRequest | The definition of the new derived property.
+        # create_derived_property_definition_request = CreateDerivedPropertyDefinitionRequest.from_dict({})
+        create_derived_property_definition_request = CreateDerivedPropertyDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -170,9 +170,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_property_definition_request = CreatePropertyDefinitionRequest()
         # create_property_definition_request = CreatePropertyDefinitionRequest.from_json("")
-        create_property_definition_request = CreatePropertyDefinitionRequest.from_dict({"domain":"Portfolio","scope":"MyScope","code":"MyPropertyName","valueRequired":false,"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"string"},"lifeTime":"Perpetual","constraintStyle":"Property","propertyDescription":"Optional property description"}) # CreatePropertyDefinitionRequest | The definition of the new property.
+        # create_property_definition_request = CreatePropertyDefinitionRequest.from_dict({})
+        create_property_definition_request = CreatePropertyDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -874,9 +874,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_derived_property_definition_request = UpdateDerivedPropertyDefinitionRequest()
         # update_derived_property_definition_request = UpdateDerivedPropertyDefinitionRequest.from_json("")
-        update_derived_property_definition_request = UpdateDerivedPropertyDefinitionRequest.from_dict({"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"}) # UpdateDerivedPropertyDefinitionRequest | Information about the derived property definition being updated
+        # update_derived_property_definition_request = UpdateDerivedPropertyDefinitionRequest.from_dict({})
+        update_derived_property_definition_request = UpdateDerivedPropertyDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -977,9 +977,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_property_definition_request = UpdatePropertyDefinitionRequest()
         # update_property_definition_request = UpdatePropertyDefinitionRequest.from_json("")
-        update_property_definition_request = UpdatePropertyDefinitionRequest.from_dict({"displayName":"MyPropertyName","propertyDescription":"Option Property description"}) # UpdatePropertyDefinitionRequest | The updated definition of the property.
+        # update_property_definition_request = UpdatePropertyDefinitionRequest.from_dict({})
+        update_property_definition_request = UpdatePropertyDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

@@ -740,9 +740,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # side_definition_request = SideDefinitionRequest()
         # side_definition_request = SideDefinitionRequest.from_json("")
-        side_definition_request = SideDefinitionRequest.from_dict({"security":"Txn:LusidInstrumentId","currency":"Txn:TradeCurrency","rate":"Txn:Units","units":"1","amount":"Transaction/MyScope/TradeAmount","notionalAmount":"Transaction/default/NotionalAmount"}) # SideDefinitionRequest | The side definition to create or replace.
+        # side_definition_request = SideDefinitionRequest.from_dict({})
+        side_definition_request = SideDefinitionRequest()
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:
@@ -936,9 +936,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_type_request = TransactionTypeRequest()
         # transaction_type_request = TransactionTypeRequest.from_json("")
-        transaction_type_request = TransactionTypeRequest.from_dict({"aliases":[{"type":"CustomBuy","description":"A custom buy type","transactionClass":"Buy","transactionRoles":"Longer","isDefault":false},{"type":"BuyAlias","description":"A similar buy type","transactionClass":"Buy","transactionRoles":"Longer","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{"TransactionConfiguration/default/TaxLotSelectionMethod":{"key":"TransactionConfiguration/default/TaxLotSelectionMethod","value":{"labelValue":"FirstInFirstOut"}}},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side1","direction":1,"properties":{},"mappings":[{"propertyKey":"Transaction/scopeA/Strategy","setTo":"Cash"}],"movementOptions":[],"settlementDateOverride":"Transaction/MyScope/SettlementDateOverride"}],"properties":{"TransactionConfiguration/default/TotalConsiderationPolicy":{"key":"TransactionConfiguration/default/TotalConsiderationPolicy","value":{"labelValue":"Add"}}},"calculations":[{"type":"TaxAmounts","side":"Side1"}]}) # TransactionTypeRequest | The transaction configuration to set
+        # transaction_type_request = TransactionTypeRequest.from_dict({})
+        transaction_type_request = TransactionTypeRequest()
         scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:

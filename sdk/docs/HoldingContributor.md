@@ -6,6 +6,7 @@ A list of transactions contributed to a holding.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction** | [**Transaction**](Transaction.md) |  | 
+**holding_id** | **int** | The unique holding identifier | [optional] 
 
 ## Example
 

@@ -774,9 +774,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_quote_access_metadata_rule_request = UpsertQuoteAccessMetadataRuleRequest()
         # upsert_quote_access_metadata_rule_request = UpsertQuoteAccessMetadataRuleRequest.from_json("")
-        upsert_quote_access_metadata_rule_request = UpsertQuoteAccessMetadataRuleRequest.from_dict({"id":{"provider":"ExampleDataProvider","field":"ExampleQuoteField"},"metadata":{"InformationClassification":[{"value":"Public"}],"Region":[{"value":"EMEA"}]}}) # UpsertQuoteAccessMetadataRuleRequest | The Quote Access Metadata Rule to update or insert
+        # upsert_quote_access_metadata_rule_request = UpsertQuoteAccessMetadataRuleRequest.from_dict({})
+        upsert_quote_access_metadata_rule_request = UpsertQuoteAccessMetadataRuleRequest()
         effective_at = 'effective_at_example' # str | The date this rule will effective from (optional)
         effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata (optional)
 

@@ -72,9 +72,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_group_reconciliation_comparison_ruleset_request = CreateGroupReconciliationComparisonRulesetRequest()
         # create_group_reconciliation_comparison_ruleset_request = CreateGroupReconciliationComparisonRulesetRequest.from_json("")
-        create_group_reconciliation_comparison_ruleset_request = CreateGroupReconciliationComparisonRulesetRequest.from_dict({"id":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"displayName":"Compare by instrument and strategy","reconciliationType":"Holding","coreAttributeRules":[{"left":{"key":"path to instrument property","operation":"Value"},"right":{"key":"path to LUID property","operation":"Value"},"allowableStringMappings":[{"leftValue":"Microsoft","rightValue":"MSFT","direction":"UniDirectional"}],"isComparisonCaseSensitive":false},{"left":{"key":"path to strategy property","operation":"Value"},"right":{"key":"path to investment strategy property","operation":"Value"},"allowableStringMappings":[{"leftValue":"HighRisk","rightValue":"HR","direction":"BiDirectional"}],"isComparisonCaseSensitive":true}],"aggregateAttributeRules":[{"left":{"key":"path to units property","operation":"Sum"},"right":{"key":"path to count property","operation":"Sum"},"tolerance":{"type":"Absolute","value":10}},{"left":{"key":"path to price property","operation":"Sum"},"right":{"key":"path to price property","operation":"Sum"},"tolerance":{"type":"Relative","value":2}}]}) # CreateGroupReconciliationComparisonRulesetRequest | The request containing the details of the ruleset (optional)
+        # create_group_reconciliation_comparison_ruleset_request = CreateGroupReconciliationComparisonRulesetRequest.from_dict({})
+        create_group_reconciliation_comparison_ruleset_request = CreateGroupReconciliationComparisonRulesetRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -169,9 +169,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_group_reconciliation_definition_request = CreateGroupReconciliationDefinitionRequest()
         # create_group_reconciliation_definition_request = CreateGroupReconciliationDefinitionRequest.from_json("")
-        create_group_reconciliation_definition_request = CreateGroupReconciliationDefinitionRequest.from_dict({"id":{"scope":"MyScope","code":"MyCode"},"displayName":"My Group Reconciliation Definition","description":"The Group Reconciliation Definition description","portfolioEntityIds":{"left":[{"scope":"MyPortfolioScope","code":"MyPortfolioCode","portfolioEntityType":"SinglePortfolio"}],"right":[{"scope":"MyOtherPortfolioScope","code":"MyOtherPortfolioCode","portfolioEntityType":"SinglePortfolio"}]},"recipeIds":{"left":{"scope":"MyRecipeScope","code":"MyRecipeCode"},"right":{"scope":"MyOtherRecipeScope","code":"MyOtherRecipeCode"}},"currencies":{"left":"USD","right":"CHF"},"comparisonRulesetIds":{"valuationReconciliation":{"scope":"MyValuationComparisonRulesetScope","code":"MyValuationComparisonRulesetCode"}},"breakCodeSource":{"dataTypeId":{"scope":"MyBreakCodeSourceScope","code":"MyBreakCodeSourceCode"}}}) # CreateGroupReconciliationDefinitionRequest | The definition Group Reconciliation Definition details (optional)
+        # create_group_reconciliation_definition_request = CreateGroupReconciliationDefinitionRequest.from_dict({})
+        create_group_reconciliation_definition_request = CreateGroupReconciliationDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -852,9 +852,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_group_reconciliation_comparison_ruleset_request = UpdateGroupReconciliationComparisonRulesetRequest()
         # update_group_reconciliation_comparison_ruleset_request = UpdateGroupReconciliationComparisonRulesetRequest.from_json("")
-        update_group_reconciliation_comparison_ruleset_request = UpdateGroupReconciliationComparisonRulesetRequest.from_dict({"displayName":"Compare by instrument and strategy","reconciliationType":"Holding","coreAttributeRules":[{"left":{"key":"path to instrument property","operation":"Value"},"right":{"key":"path to LUID property","operation":"Value"},"allowableStringMappings":[{"leftValue":"Microsoft","rightValue":"MSFT","direction":"UniDirectional"}],"isComparisonCaseSensitive":false},{"left":{"key":"path to strategy property","operation":"Value"},"right":{"key":"path to investment strategy property","operation":"Value"},"allowableStringMappings":[{"leftValue":"HighRisk","rightValue":"HR","direction":"BiDirectional"}],"isComparisonCaseSensitive":true}],"aggregateAttributeRules":[{"left":{"key":"path to units property","operation":"Sum"},"right":{"key":"path to count property","operation":"Sum"},"tolerance":{"type":"Absolute","value":10}},{"left":{"key":"path to price property","operation":"Sum"},"right":{"key":"path to price property","operation":"Sum"},"tolerance":{"type":"Relative","value":2}}]}) # UpdateGroupReconciliationComparisonRulesetRequest | The request containing the updated details of the ruleset (optional)
+        # update_group_reconciliation_comparison_ruleset_request = UpdateGroupReconciliationComparisonRulesetRequest.from_dict({})
+        update_group_reconciliation_comparison_ruleset_request = UpdateGroupReconciliationComparisonRulesetRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -953,9 +953,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_group_reconciliation_definition_request = UpdateGroupReconciliationDefinitionRequest()
         # update_group_reconciliation_definition_request = UpdateGroupReconciliationDefinitionRequest.from_json("")
-        update_group_reconciliation_definition_request = UpdateGroupReconciliationDefinitionRequest.from_dict({"displayName":"My Group Reconciliation Definition","description":"The Group Reconciliation Definition description","portfolioEntityIds":{"left":[{"scope":"MyPortfolioScope","code":"MyPortfolioCode","portfolioEntityType":"SinglePortfolio"}],"right":[{"scope":"MyOtherPortfolioScope","code":"MyOtherPortfolioCode","portfolioEntityType":"SinglePortfolio"}]},"recipeIds":{"left":{"scope":"MyRecipeScope","code":"MyRecipeCode"},"right":{"scope":"MyOtherRecipeScope","code":"MyOtherRecipeCode"}},"currencies":{"left":"USD","right":"CHF"},"comparisonRulesetIds":{"valuationReconciliation":{"scope":"MyValuationComparisonRulesetScope","code":"MyValuationComparisonRulesetCode"}},"breakCodeSource":{"dataTypeId":{"scope":"MyBreakCodeSourceScope","code":"MyBreakCodeSourceCode"}}}) # UpdateGroupReconciliationDefinitionRequest | The updated group reconciliation definition. (optional)
+        # update_group_reconciliation_definition_request = UpdateGroupReconciliationDefinitionRequest.from_dict({})
+        update_group_reconciliation_definition_request = UpdateGroupReconciliationDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

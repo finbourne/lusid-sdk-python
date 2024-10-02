@@ -69,9 +69,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_configuration_data_request = TransactionConfigurationDataRequest()
         # transaction_configuration_data_request = TransactionConfigurationDataRequest.from_json("")
-        transaction_configuration_data_request = TransactionConfigurationDataRequest.from_dict({"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"mysource","source":"mysource","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{}}) # TransactionConfigurationDataRequest | A transaction type definition. (optional)
+        # transaction_configuration_data_request = TransactionConfigurationDataRequest.from_dict({})
+        transaction_configuration_data_request = TransactionConfigurationDataRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -166,9 +166,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # side_configuration_data_request = SideConfigurationDataRequest()
         # side_configuration_data_request = SideConfigurationDataRequest.from_json("")
-        side_configuration_data_request = SideConfigurationDataRequest.from_dict({"side":"Side_Test","security":"security","currency":"currency","rate":"0.7","units":"300","amount":"2000"}) # SideConfigurationDataRequest | The definition of the side. (optional)
+        # side_configuration_data_request = SideConfigurationDataRequest.from_dict({})
+        side_configuration_data_request = SideConfigurationDataRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -541,9 +541,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_set_configuration_data_request = TransactionSetConfigurationDataRequest()
         # transaction_set_configuration_data_request = TransactionSetConfigurationDataRequest.from_json("")
-        transaction_set_configuration_data_request = TransactionSetConfigurationDataRequest.from_dict({"transactionConfigRequests":[{"aliases":[{"type":"Simple-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"mysource","source":"mysource","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{}},{"aliases":[{"type":"Sell-FIFO","description":"Sale using FIFO logic","transactionClass":"FIFO","transactionGroup":"mysource","source":"mysource","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{"TransactionConfiguration/default/TaxLotSelectionMethod":{"key":"TransactionConfiguration/default/TaxLotSelectionMethod","value":{"labelValue":"FirstInFirstOut"}}},"mappings":[],"movementOptions":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[],"movementOptions":[]}],"properties":{"TransactionConfiguration/default/Example":{"key":"TransactionConfiguration/default/Example","value":{"labelValue":"Value"}}}}],"sideConfigRequests":[{"side":"Side1","security":"security","currency":"currency","rate":"0.5","units":"500","amount":"1000"},{"side":"Side2","security":"security","currency":"currency","rate":"0.75","units":"250","amount":"2000"}]}) # TransactionSetConfigurationDataRequest | The complete set of transaction type definitions. (optional)
+        # transaction_set_configuration_data_request = TransactionSetConfigurationDataRequest.from_dict({})
+        transaction_set_configuration_data_request = TransactionSetConfigurationDataRequest()
 
         try:
             # uncomment the below to set overrides at the request level

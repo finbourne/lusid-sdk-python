@@ -66,9 +66,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # custom_entity_definition_request = CustomEntityDefinitionRequest()
         # custom_entity_definition_request = CustomEntityDefinitionRequest.from_json("")
-        custom_entity_definition_request = CustomEntityDefinitionRequest.from_dict({"entityTypeName":"SupportTicket","displayName":"Support Ticket","description":"Support Ticket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]}) # CustomEntityDefinitionRequest | The payload containing the description of the Custom Entity type.
+        # custom_entity_definition_request = CustomEntityDefinitionRequest.from_dict({})
+        custom_entity_definition_request = CustomEntityDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -356,9 +356,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_custom_entity_definition_request = UpdateCustomEntityDefinitionRequest()
         # update_custom_entity_definition_request = UpdateCustomEntityDefinitionRequest.from_json("")
-        update_custom_entity_definition_request = UpdateCustomEntityDefinitionRequest.from_dict({"displayName":"Support Ticket","description":"Support Ticket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]}) # UpdateCustomEntityDefinitionRequest | The payload containing the description of the Custom Entity type.
+        # update_custom_entity_definition_request = UpdateCustomEntityDefinitionRequest.from_dict({})
+        update_custom_entity_definition_request = UpdateCustomEntityDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

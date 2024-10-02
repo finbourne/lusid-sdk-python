@@ -685,9 +685,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # aggregated_returns_dispersion_request = AggregatedReturnsDispersionRequest()
         # aggregated_returns_dispersion_request = AggregatedReturnsDispersionRequest.from_json("")
-        aggregated_returns_dispersion_request = AggregatedReturnsDispersionRequest.from_dict({"toEffectiveAt":"2023-01-01","yearsCount":10,"returnIds":[{"scope":"TestScope","code":"default"}],"recipeId":{"scope":"ReturnsScope","code":"ReturnCode"},"compositeMethod":"Asset","alternativeInceptionDate":"2020-01-01"}) # AggregatedReturnsDispersionRequest | The request used in the AggregatedReturnsDispersionMetric.
+        # aggregated_returns_dispersion_request = AggregatedReturnsDispersionRequest.from_dict({})
+        aggregated_returns_dispersion_request = AggregatedReturnsDispersionRequest()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Returns. Defaults to the latest. (optional)
 
         try:
@@ -788,9 +788,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # composite_breakdown_request = CompositeBreakdownRequest()
         # composite_breakdown_request = CompositeBreakdownRequest.from_json("")
-        composite_breakdown_request = CompositeBreakdownRequest.from_dict({"returnIds":[{"scope":"TestScope","code":"default"}],"recipeId":{"scope":"ReturnsScope","code":"ReturnCode"},"compositeMethod":"Asset","period":"Monthly","holidayCalendars":[]}) # CompositeBreakdownRequest | The request used in the GetCompositeBreakdown.
+        # composite_breakdown_request = CompositeBreakdownRequest.from_dict({})
+        composite_breakdown_request = CompositeBreakdownRequest()
         from_effective_at = 'from_effective_at_example' # str | The start date from which to calculate the Returns. (optional)
         to_effective_at = 'to_effective_at_example' # str | The end date for which to calculate the Returns. (optional)
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Returns. Defaults to the latest. (optional)
@@ -1215,9 +1215,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # aggregated_returns_request = AggregatedReturnsRequest()
         # aggregated_returns_request = AggregatedReturnsRequest.from_json("")
-        aggregated_returns_request = AggregatedReturnsRequest.from_dict({"metrics":[{"type":"Return","window":"1Y","allowPartial":false,"annualised":false,"withFee":true,"alias":"1M"}],"returnIds":[{"scope":"TestScope","code":"default"}],"recipeId":{"scope":"ReturnsScope","code":"ReturnCode"},"compositeMethod":"Asset","period":"Daily","outputFrequency":"Daily","alternativeInceptionDate":"2020-01-01","holidayCalendars":[],"currency":"USD","runMode":"ReturnData"}) # AggregatedReturnsRequest | The request used in the AggregatedReturns.
+        # aggregated_returns_request = AggregatedReturnsRequest.from_dict({})
+        aggregated_returns_request = AggregatedReturnsRequest()
         from_effective_at = 'from_effective_at_example' # str | The start date from which to calculate the Returns. (optional)
         to_effective_at = 'to_effective_at_example' # str | The end date for which to calculate the Returns. (optional)
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Returns. Defaults to the latest. (optional)
@@ -2758,9 +2758,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_portfolio_request = UpdatePortfolioRequest()
         # update_portfolio_request = UpdatePortfolioRequest.from_json("")
-        update_portfolio_request = UpdatePortfolioRequest.from_dict({"displayName":"MyPortfolioName","description":"Long form description of portfolio"}) # UpdatePortfolioRequest | The updated portfolio definition.
+        # update_portfolio_request = UpdatePortfolioRequest.from_dict({})
+        update_portfolio_request = UpdatePortfolioRequest()
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to update the definition. Defaults to the current               LUSID system datetime if not specified. (optional)
 
         try:
@@ -2962,9 +2962,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_portfolio_access_metadata_request = UpsertPortfolioAccessMetadataRequest()
         # upsert_portfolio_access_metadata_request = UpsertPortfolioAccessMetadataRequest.from_json("")
-        upsert_portfolio_access_metadata_request = UpsertPortfolioAccessMetadataRequest.from_dict({"metadata":[{"value":"SilverLicence","provider":"TestDataProvider"}]}) # UpsertPortfolioAccessMetadataRequest | The Portfolio Access Metadata Rule to update or insert
+        # upsert_portfolio_access_metadata_request = UpsertPortfolioAccessMetadataRequest.from_dict({})
+        upsert_portfolio_access_metadata_request = UpsertPortfolioAccessMetadataRequest()
         effective_at = 'effective_at_example' # str | The date this rule will effective from (optional)
         effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata (optional)
 

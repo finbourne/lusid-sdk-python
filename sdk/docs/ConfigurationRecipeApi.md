@@ -549,9 +549,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_recipe_composer_request = UpsertRecipeComposerRequest()
         # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_json("")
-        upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({"recipeComposer":{"scope":"someScope","code":"someCode","operations":[{"value":{"fromRecipe":{"scope":"someRecipeScope","code":"SomeRecipeCode"}},"path":".","op":"Insert"},{"value":{"asString":"SimpleStatic"},"path":"Pricing.ModelRules.[*].ModelName","op":"Update"}]}}) # UpsertRecipeComposerRequest | Recipe composer used to expand into the Configuration Recipe.
+        # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({})
+        upsert_recipe_composer_request = UpsertRecipeComposerRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -928,9 +928,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_recipe_request = UpsertRecipeRequest()
         # upsert_recipe_request = UpsertRecipeRequest.from_json("")
-        upsert_recipe_request = UpsertRecipeRequest.from_dict({"configurationRecipe":{"scope":"scopeName","code":"MyNamedRecipe12345","market":{"marketRules":[{"key":"Fx.CurrencyPair.*","supplier":"DataScope","dataScope":"SomeScopeToLookAt","quoteType":"Rate","field":"Mid","priceSource":"","sourceSystem":"Lusid","fallThroughOnAccessDenied":false}],"suppliers":{},"options":{"defaultSupplier":"Lusid","defaultInstrumentCodeType":"LusidInstrumentId","defaultScope":"default","attemptToInferMissingFx":false,"calendarScope":"CoppClarkHolidayCalendars","conventionScope":"Conventions"},"specificRules":[],"groupedMarketRules":[]},"pricing":{"modelRules":[],"modelChoice":{},"options":{"modelSelection":{"library":"Lusid","model":"SimpleStatic"},"useInstrumentTypeToDeterminePricer":false,"allowAnyInstrumentsWithSecUidToPriceOffLookup":false,"allowPartiallySuccessfulEvaluation":false,"produceSeparateResultForLinearOtcLegs":false,"enableUseOfCachedUnitResults":false,"windowValuationOnInstrumentStartEnd":false,"removeContingentCashflowsInPaymentDiary":false,"useChildSubHoldingKeysForPortfolioExpansion":false,"validateDomesticAndQuoteCurrenciesAreConsistent":false,"conservedQuantityForLookthroughExpansion":"PV"},"resultDataRules":[],"holdingPricingInfo":{"specificFallbacks":[],"specificOverrides":[]}},"aggregation":{"options":{"useAnsiLikeSyntax":false,"allowPartialEntitlementSuccess":false,"applyIso4217Rounding":false}},"description":"","holding":{"taxLotLevelHoldings":true}}}) # UpsertRecipeRequest | The Configuration Recipe to update or insert
+        # upsert_recipe_request = UpsertRecipeRequest.from_dict({})
+        upsert_recipe_request = UpsertRecipeRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1025,9 +1025,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_recipe_composer_request = UpsertRecipeComposerRequest()
         # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_json("")
-        upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({"recipeComposer":{"scope":"someScope","code":"someCode","operations":[{"value":{"fromRecipe":{"scope":"someRecipeScope","code":"SomeRecipeCode"}},"path":".","op":"Insert"},{"value":{"asString":"SimpleStatic"},"path":"Pricing.ModelRules.[*].ModelName","op":"Update"}]}}) # UpsertRecipeComposerRequest | The Recipe Composer to update or insert
+        # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({})
+        upsert_recipe_composer_request = UpsertRecipeComposerRequest()
 
         try:
             # uncomment the below to set overrides at the request level

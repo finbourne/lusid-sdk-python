@@ -73,9 +73,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # book_transactions_request = BookTransactionsRequest()
         # book_transactions_request = BookTransactionsRequest.from_json("")
-        book_transactions_request = BookTransactionsRequest.from_dict({"allocationIds":[{"scope":"MyScope","code":"ALLOC00000123"},{"scope":"MyScope","code":"ALLOC00000456"}],"transactionProperties":{}}) # BookTransactionsRequest | The allocations to create transactions for
+        # book_transactions_request = BookTransactionsRequest.from_dict({})
+        book_transactions_request = BookTransactionsRequest()
         apply_fees_and_commission = True # bool | Whether to apply fees and commissions to transactions (default: true) (optional) (default to True)
 
         try:
@@ -448,9 +448,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # block_and_orders_create_request = BlockAndOrdersCreateRequest()
         # block_and_orders_create_request = BlockAndOrdersCreateRequest.from_json("")
-        block_and_orders_create_request = BlockAndOrdersCreateRequest.from_dict({"requests":[{"blockId":{"scope":"MyScope","code":"BLOCK00000123"},"orders":[{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"quantity":100,"id":{"scope":"MyScope","code":"ORDER00000123"},"state":"New","date":"0001-01-01T00:00:00.0000000+00:00"},{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"quantity":150,"id":{"scope":"MyScope","code":"ORDER00000124"},"state":"New","date":"0001-01-01T00:00:00.0000000+00:00"}],"blockProperties":{"Block/MyScope/SomeOrderProperty":{"key":"Block/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"side":"Buy","type":"Limit","timeInForce":"GoodTilCancel","date":"1999-06-05T00:00:00.0000000+00:00","limitPrice":{"amount":534,"currency":"USD"}}]}) # BlockAndOrdersCreateRequest | The collection of block and orders requests.
+        # block_and_orders_create_request = BlockAndOrdersCreateRequest.from_dict({})
+        block_and_orders_create_request = BlockAndOrdersCreateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -642,9 +642,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # move_orders_to_different_blocks_request = MoveOrdersToDifferentBlocksRequest()
         # move_orders_to_different_blocks_request = MoveOrdersToDifferentBlocksRequest.from_json("")
-        move_orders_to_different_blocks_request = MoveOrdersToDifferentBlocksRequest.from_dict({"requests":[{"destinationBlockId":{"scope":"MyScope","code":"BLOCK00000123"},"orderId":{"scope":"MyScope","code":"ORDER00000123"}}]}) # MoveOrdersToDifferentBlocksRequest | The collection of order and destination block ids.
+        # move_orders_to_different_blocks_request = MoveOrdersToDifferentBlocksRequest.from_dict({})
+        move_orders_to_different_blocks_request = MoveOrdersToDifferentBlocksRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -739,9 +739,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # place_blocks_request = PlaceBlocksRequest()
         # place_blocks_request = PlaceBlocksRequest.from_json("")
-        place_blocks_request = PlaceBlocksRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PLAC00000123"},"blockIds":[{"scope":"MyScope","code":"BLOCK00000123"}],"properties":{"Placement/MyScope/SomePlacementProperty":{"key":"Placement/MyScope/SomePlacementProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"state":"New","side":"Buy","timeInForce":"GoodTilCancel","type":"Limit","createdDate":"2006-04-11T00:00:00.0000000+00:00","limitPrice":{"amount":12413.33,"currency":"USD"},"stopPrice":{"amount":124335.33,"currency":"USD"},"counterparty":"SomeCounterparty","entryType":"Manual"}]}) # PlaceBlocksRequest | The request containing the blocks to the placed. (optional)
+        # place_blocks_request = PlaceBlocksRequest.from_dict({})
+        place_blocks_request = PlaceBlocksRequest()
 
         try:
             # uncomment the below to set overrides at the request level

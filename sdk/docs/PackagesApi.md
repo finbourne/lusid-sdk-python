@@ -360,9 +360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # package_set_request = PackageSetRequest()
         # package_set_request = PackageSetRequest.from_json("")
-        package_set_request = PackageSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PACK00000123"},"orderIds":[{"scope":"MyScope","code":"ORDER00000123"}],"orderInstructionIds":[{"scope":"MyScope","code":"INSTR00000123"}],"properties":{"Package/MyScope/SomePackageProperty":{"key":"Package/MyScope/SomePackageProperty","value":{"labelValue":"XYZ000034567"}}}}]}) # PackageSetRequest | The collection of package requests. (optional)
+        # package_set_request = PackageSetRequest.from_dict({})
+        package_set_request = PackageSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

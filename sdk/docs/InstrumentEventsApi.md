@@ -70,9 +70,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # query_applicable_instrument_events_request = QueryApplicableInstrumentEventsRequest()
         # query_applicable_instrument_events_request = QueryApplicableInstrumentEventsRequest.from_json("")
-        query_applicable_instrument_events_request = QueryApplicableInstrumentEventsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","effectiveAt":"2022-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"forecastingRecipeId":{"scope":"default","code":"default"}}) # QueryApplicableInstrumentEventsRequest | The filter parameters used to retrieve applicable instrument events. (optional)
+        # query_applicable_instrument_events_request = QueryApplicableInstrumentEventsRequest.from_dict({})
+        query_applicable_instrument_events_request = QueryApplicableInstrumentEventsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -170,9 +170,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # query_bucketed_cash_flows_request = QueryBucketedCashFlowsRequest()
         # query_bucketed_cash_flows_request = QueryBucketedCashFlowsRequest.from_json("")
-        query_bucketed_cash_flows_request = QueryBucketedCashFlowsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2023-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"effectiveAt":"2022-01-01T00:00:00.0000000+00:00","recipeId":{"scope":"default","code":"default"},"roundingMethod":"RoundUp","bucketingDates":["2020-01-01T00:00:00.0000000+00:00","2020-07-01T00:00:00.0000000+00:00","2021-01-01T00:00:00.0000000+00:00","2021-07-01T00:00:00.0000000+00:00"],"reportCurrency":"USD","equipWithSubtotals":false,"excludeUnsettledTrades":false,"cashFlowType":"InstrumentCashFlow"}) # QueryBucketedCashFlowsRequest | The Query Information. (optional)
+        # query_bucketed_cash_flows_request = QueryBucketedCashFlowsRequest.from_dict({})
+        query_bucketed_cash_flows_request = QueryBucketedCashFlowsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -269,9 +269,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # query_cash_flows_request = QueryCashFlowsRequest()
         # query_cash_flows_request = QueryCashFlowsRequest.from_json("")
-        query_cash_flows_request = QueryCashFlowsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"recipeId":{"scope":"default","code":"default"},"effectiveAt":"2022-01-01T00:00:00.0000000+00:00"}) # QueryCashFlowsRequest | The filter parameters used to retrieve instrument events. (optional)
+        # query_cash_flows_request = QueryCashFlowsRequest.from_dict({})
+        query_cash_flows_request = QueryCashFlowsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -370,9 +370,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # query_instrument_events_request = QueryInstrumentEventsRequest()
         # query_instrument_events_request = QueryInstrumentEventsRequest.from_json("")
-        query_instrument_events_request = QueryInstrumentEventsRequest.from_dict({"asAt":"2022-06-01T01:01:00.0000000+00:00","windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"effectiveAt":"2022-01-01T00:00:00.0000000+00:00","recipeId":{"scope":"default","code":"default"},"filterInstrumentEvents":""}) # QueryInstrumentEventsRequest | The filter parameters used to retrieve instrument events. (optional)
+        # query_instrument_events_request = QueryInstrumentEventsRequest.from_dict({})
+        query_instrument_events_request = QueryInstrumentEventsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -471,9 +471,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # query_trade_tickets_request = QueryTradeTicketsRequest()
         # query_trade_tickets_request = QueryTradeTicketsRequest.from_json("")
-        query_trade_tickets_request = QueryTradeTicketsRequest.from_dict({"windowStart":"2015-01-01T00:00:00.0000000+00:00","windowEnd":"2030-01-01T00:00:00.0000000+00:00","portfolioEntityIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"recipeId":{"scope":"default","code":"default"},"effectiveAt":"2022-01-01T00:00:00.0000000+00:00"}) # QueryTradeTicketsRequest | The filter parameters used to retrieve instrument events. (optional)
+        # query_trade_tickets_request = QueryTradeTicketsRequest.from_dict({})
+        query_trade_tickets_request = QueryTradeTicketsRequest()
 
         try:
             # uncomment the below to set overrides at the request level

@@ -67,9 +67,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_relationship_definition_request = CreateRelationshipDefinitionRequest()
         # create_relationship_definition_request = CreateRelationshipDefinitionRequest.from_json("")
-        create_relationship_definition_request = CreateRelationshipDefinitionRequest.from_dict({"scope":"PortfolioManagementTeam","code":"Traders","sourceEntityType":"Portfolio","targetEntityType":"Person","displayName":"Authorised traders to trade for specific portfolio ","outwardDescription":"can be traded by","inwardDescription":"can trade with portfolio","lifeTime":"TimeVariant","relationshipCardinality":"ManyToMany"}) # CreateRelationshipDefinitionRequest | The definition of the new relationship.
+        # create_relationship_definition_request = CreateRelationshipDefinitionRequest.from_dict({})
+        create_relationship_definition_request = CreateRelationshipDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -456,9 +456,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_relationship_definition_request = UpdateRelationshipDefinitionRequest()
         # update_relationship_definition_request = UpdateRelationshipDefinitionRequest.from_json("")
-        update_relationship_definition_request = UpdateRelationshipDefinitionRequest.from_dict({"displayName":"Authorised traders to trade for specific portfolio ","outwardDescription":"can be traded by","inwardDescription":"can trade with portfolio"}) # UpdateRelationshipDefinitionRequest | The details of relationship definition to update.
+        # update_relationship_definition_request = UpdateRelationshipDefinitionRequest.from_dict({})
+        update_relationship_definition_request = UpdateRelationshipDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

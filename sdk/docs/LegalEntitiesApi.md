@@ -1419,9 +1419,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # set_legal_entity_identifiers_request = SetLegalEntityIdentifiersRequest()
         # set_legal_entity_identifiers_request = SetLegalEntityIdentifiersRequest.from_json("")
-        set_legal_entity_identifiers_request = SetLegalEntityIdentifiersRequest.from_dict({"identifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}},"LegalEntity/InternalIdentifier/InternalLeiId":{"key":"LegalEntity/InternalIdentifier/InternalLeiId","value":{"labelValue":"Internal_XHSP2038"}}}}) # SetLegalEntityIdentifiersRequest | Request containing identifiers to set for the legal entity. Identifiers not specified in request will not be changed.
+        # set_legal_entity_identifiers_request = SetLegalEntityIdentifiersRequest.from_dict({})
+        set_legal_entity_identifiers_request = SetLegalEntityIdentifiersRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1522,9 +1522,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # set_legal_entity_properties_request = SetLegalEntityPropertiesRequest()
         # set_legal_entity_properties_request = SetLegalEntityPropertiesRequest.from_json("")
-        set_legal_entity_properties_request = SetLegalEntityPropertiesRequest.from_dict({"properties":{"LegalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"John Smith"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"},"LegalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}}}) # SetLegalEntityPropertiesRequest | Request containing properties to set for the legal entity. Properties not specified in request will not be changed.
+        # set_legal_entity_properties_request = SetLegalEntityPropertiesRequest.from_dict({})
+        set_legal_entity_properties_request = SetLegalEntityPropertiesRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1716,9 +1716,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_legal_entity_request = UpsertLegalEntityRequest()
         # upsert_legal_entity_request = UpsertLegalEntityRequest.from_json("")
-        upsert_legal_entity_request = UpsertLegalEntityRequest.from_dict({"identifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}},"LegalEntity/InternalIdentifier/InternalLeiId":{"key":"LegalEntity/InternalIdentifier/InternalLeiId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"LegalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"Legal Entity Inc."}},"LegalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"LegalEntity/Status/Active":{"key":"LegalEntity/Status/Active","value":{"labelValue":"Active"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"LegalEntity1DisplayName","description":"LegalEntity1Description","counterpartyRiskInformation":{"countryOfRisk":"UnitedKingdom","creditRatings":[{"ratingSource":"StandardAndPoors","rating":"AA+"}],"industryClassifiers":[{"classificationSystemName":"GICS2018","classificationCode":"10101010"}]}}) # UpsertLegalEntityRequest | Request to create or update a legal entity.
+        # upsert_legal_entity_request = UpsertLegalEntityRequest.from_dict({})
+        upsert_legal_entity_request = UpsertLegalEntityRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1817,9 +1817,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_legal_entity_access_metadata_request = UpsertLegalEntityAccessMetadataRequest()
         # upsert_legal_entity_access_metadata_request = UpsertLegalEntityAccessMetadataRequest.from_json("")
-        upsert_legal_entity_access_metadata_request = UpsertLegalEntityAccessMetadataRequest.from_dict({"metadata":[{"value":"SilverLicence","provider":"TestDataProvider"}]}) # UpsertLegalEntityAccessMetadataRequest | The Legal Entity Access Metadata entry to upsert
+        # upsert_legal_entity_access_metadata_request = UpsertLegalEntityAccessMetadataRequest.from_dict({})
+        upsert_legal_entity_access_metadata_request = UpsertLegalEntityAccessMetadataRequest()
         effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to upsert the Access Metadata (optional)
         effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata (optional)
 

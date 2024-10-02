@@ -66,9 +66,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_relationship_request = CreateRelationshipRequest()
         # create_relationship_request = CreateRelationshipRequest.from_json("")
-        create_relationship_request = CreateRelationshipRequest.from_dict({"sourceEntityId":{"scope":"UkPortfolio","code":"PortfolioId-148176"},"targetEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"},"effectiveFrom":"2019-01-01T12:00:00.0000000+00:00","effectiveUntil":"2022-01-01T12:00:00.0000000+00:00"}) # CreateRelationshipRequest | The details of the relationship to create.
+        # create_relationship_request = CreateRelationshipRequest.from_dict({})
+        create_relationship_request = CreateRelationshipRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -167,9 +167,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # delete_relationship_request = DeleteRelationshipRequest()
         # delete_relationship_request = DeleteRelationshipRequest.from_json("")
-        delete_relationship_request = DeleteRelationshipRequest.from_dict({"sourceEntityId":{"scope":"UkPortfolio","code":"PortfolioId-148176"},"targetEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"},"effectiveFrom":"2019-01-10T00:00:00.0000000+00:00"}) # DeleteRelationshipRequest | The details of the relationship to delete.
+        # delete_relationship_request = DeleteRelationshipRequest.from_dict({})
+        delete_relationship_request = DeleteRelationshipRequest()
 
         try:
             # uncomment the below to set overrides at the request level

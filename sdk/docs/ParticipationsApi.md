@@ -360,9 +360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # participation_set_request = ParticipationSetRequest()
         # participation_set_request = ParticipationSetRequest.from_json("")
-        participation_set_request = ParticipationSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"PART00000123"},"placementId":{"scope":"MyScope","code":"PLAC00000123"},"orderId":{"scope":"MyScope","code":"ORDER00000123"}}]}) # ParticipationSetRequest | The collection of participation requests. (optional)
+        # participation_set_request = ParticipationSetRequest.from_dict({})
+        participation_set_request = ParticipationSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

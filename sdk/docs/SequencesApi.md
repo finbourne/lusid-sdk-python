@@ -67,9 +67,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_sequence_request = CreateSequenceRequest()
         # create_sequence_request = CreateSequenceRequest.from_json("")
-        create_sequence_request = CreateSequenceRequest.from_dict({"code":"TestCode","increment":1,"minValue":0,"maxValue":10,"start":0,"cycle":false,"pattern":"TXN-{{seqValue}}"}) # CreateSequenceRequest | Request to create sequence
+        # create_sequence_request = CreateSequenceRequest.from_dict({})
+        create_sequence_request = CreateSequenceRequest()
 
         try:
             # uncomment the below to set overrides at the request level

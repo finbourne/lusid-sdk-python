@@ -68,9 +68,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_reference_portfolio_request = CreateReferencePortfolioRequest()
         # create_reference_portfolio_request = CreateReferencePortfolioRequest.from_json("")
-        create_reference_portfolio_request = CreateReferencePortfolioRequest.from_dict({"displayName":"MyPortfolioName","description":"Description of my portfolio","code":"MyPortfolioCode","created":"2018-03-05T00:00:00.0000000+00:00","properties":{},"instrumentScopes":[],"baseCurrency":"GBP"}) # CreateReferencePortfolioRequest | The definition of the reference portfolio.
+        # create_reference_portfolio_request = CreateReferencePortfolioRequest.from_dict({})
+        create_reference_portfolio_request = CreateReferencePortfolioRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -368,9 +368,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest()
         # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_json("")
-        upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_dict({"identifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"properties":{"Transaction/MyScope/MyPropertyName":{"key":"Transaction/MyScope/MyPropertyName","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}},"Transaction/MyScope/MyPropertyName2":{"key":"Transaction/MyScope/MyPropertyName2","value":{"metricValue":{"value":925.3,"unit":"Unit"}}}}}) # UpsertReferencePortfolioConstituentPropertiesRequest | The request to modify properties for the constituent.
+        # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_dict({})
+        upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -469,9 +469,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest()
         # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_json("")
-        upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_dict({"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","weightType":"Periodical","periodType":"Quarterly","periodCount":2,"constituents":[{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG0077GZM13","Instrument/default/Isin":"GB00BH4HKS39"},"properties":{"Portfolio/MyScope/MyPropertyKey":{"key":"Portfolio/MyScope/MyPropertyKey","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}}},"weight":100,"currency":"GBP"},{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG0077H2WN1","Instrument/default/Isin":"US0378331005"},"properties":{},"weight":50,"currency":"USD"}]}) # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the reference portfolio.
+        # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_dict({})
+        upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest()
 
         try:
             # uncomment the below to set overrides at the request level

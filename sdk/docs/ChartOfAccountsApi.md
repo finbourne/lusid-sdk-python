@@ -95,9 +95,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # chart_of_accounts_request = ChartOfAccountsRequest()
         # chart_of_accounts_request = ChartOfAccountsRequest.from_json("")
-        chart_of_accounts_request = ChartOfAccountsRequest.from_dict({"code":"ChartOfAccounts","displayName":"ChartOfAccountsName","description":"Standard COA","properties":{"ChartOfAccounts/MyScope/FundManagerName":{"key":"ChartOfAccounts/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"}}}) # ChartOfAccountsRequest | The definition of the Chart of Accounts.
+        # chart_of_accounts_request = ChartOfAccountsRequest.from_dict({})
+        chart_of_accounts_request = ChartOfAccountsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -195,9 +195,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # cleardown_module_request = CleardownModuleRequest()
         # cleardown_module_request = CleardownModuleRequest.from_json("")
-        cleardown_module_request = CleardownModuleRequest.from_dict({"code":"CleardownModuleCode","displayName":"CleardownModuleName","description":"CleardownModuleDescription","rules":[{"ruleId":"rule1Id","generalLedgerAccountCode":"account1","ruleFilter":"Properties[Account/MyScope/Cleardown] eq 'Y'"}]}) # CleardownModuleRequest | The definition of the Cleardown Module.
+        # cleardown_module_request = CleardownModuleRequest.from_dict({})
+        cleardown_module_request = CleardownModuleRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -296,9 +296,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # general_ledger_profile_request = GeneralLedgerProfileRequest()
         # general_ledger_profile_request = GeneralLedgerProfileRequest.from_json("")
-        general_ledger_profile_request = GeneralLedgerProfileRequest.from_dict({"generalLedgerProfileCode":"STEM1","displayName":"STEM","description":"STEM profile","generalLedgerProfileMappings":[{"mappingFilter":"GeneralLedgerAccountCode eq 'INVESTMENTS'","levels":["EconomicBucket","Instrument.Identifiers['ClientInternal']"]},{"mappingFilter":"Properties['Account/default/Profile'] eq 'CCY'","levels":["DefaultCurrency"]},{"mappingFilter":"true","levels":["DefaultCurrency"]}]}) # GeneralLedgerProfileRequest | The definition of the General Ledger Profile.
+        # general_ledger_profile_request = GeneralLedgerProfileRequest.from_dict({})
+        general_ledger_profile_request = GeneralLedgerProfileRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -397,9 +397,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # posting_module_request = PostingModuleRequest()
         # posting_module_request = PostingModuleRequest.from_json("")
-        posting_module_request = PostingModuleRequest.from_dict({"code":"PostingModuleCode","displayName":"PostingModuleName","description":"PostingModuleDescription","rules":[{"ruleId":"rule1Id","generalLedgerAccountCode":"account1","ruleFilter":"Transaction.TransactionId eq 'Transaction_1'"}]}) # PostingModuleRequest | The definition of the Posting Module.
+        # posting_module_request = PostingModuleRequest.from_dict({})
+        posting_module_request = PostingModuleRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -2497,9 +2497,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # cleardown_module_details = CleardownModuleDetails()
         # cleardown_module_details = CleardownModuleDetails.from_json("")
-        cleardown_module_details = CleardownModuleDetails.from_dict({"displayName":"CleardownModuleNameUpdated","description":"CleardownModuleDescriptionUpdated","status":"Active"}) # CleardownModuleDetails | The new details for the Cleardown Module.
+        # cleardown_module_details = CleardownModuleDetails.from_dict({})
+        cleardown_module_details = CleardownModuleDetails()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -2796,9 +2796,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # posting_module_details = PostingModuleDetails()
         # posting_module_details = PostingModuleDetails.from_json("")
-        posting_module_details = PostingModuleDetails.from_dict({"displayName":"PostingModuleNameUpdated","description":"PostingModuleDescriptionUpdated","status":"Active"}) # PostingModuleDetails | The new details for the Posting Module.
+        # posting_module_details = PostingModuleDetails.from_dict({})
+        posting_module_details = PostingModuleDetails()
 
         try:
             # uncomment the below to set overrides at the request level

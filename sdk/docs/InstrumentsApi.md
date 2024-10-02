@@ -1693,9 +1693,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # lusid_instrument = LusidInstrument()
         # lusid_instrument = LusidInstrument.from_json("")
-        lusid_instrument = LusidInstrument.from_dict({"startDate":"2022-01-01T05:10:00.0000000+00:00","domCcy":"GBP","domAmount":1,"fgnCcy":"USD","strike":1,"barriers":[],"exerciseType":"European","isCallNotPut":true,"isDeliveryNotCash":true,"isPayoffDigital":false,"optionMaturityDate":"2023-01-01T05:10:00.0000000+00:00","optionSettlementDate":"2023-01-03T05:10:00.0000000+00:00","payoutStyle":"None","touches":[],"instrumentType":"FxOption"}) # LusidInstrument | The definition of the instrument.
+        # lusid_instrument = LusidInstrument.from_dict({})
+        lusid_instrument = LusidInstrument()
         model = 'model_example' # str | A pricing model for the instrument. Defaults to Unknown if not specified. If not specified the SupportedAddresses and EconomicDependencies are not provided. (optional)
 
         try:
@@ -1794,9 +1794,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_instrument_identifier_request = UpdateInstrumentIdentifierRequest()
         # update_instrument_identifier_request = UpdateInstrumentIdentifierRequest.from_json("")
-        update_instrument_identifier_request = UpdateInstrumentIdentifierRequest.from_dict({"type":"Figi","value":"updated-figi","effectiveAt":"2018-02-01T10:00:00.0000000+00:00"}) # UpdateInstrumentIdentifierRequest | The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.
+        # update_instrument_identifier_request = UpdateInstrumentIdentifierRequest.from_dict({})
+        update_instrument_identifier_request = UpdateInstrumentIdentifierRequest()
         scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:

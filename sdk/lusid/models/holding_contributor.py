@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt
 from lusid.models.transaction import Transaction
 
 class HoldingContributor(BaseModel):
@@ -27,7 +27,8 @@ class HoldingContributor(BaseModel):
     A list of transactions contributed to a holding.  # noqa: E501
     """
     transaction: Transaction = Field(...)
-    __properties = ["transaction"]
+    holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="The unique holding identifier")
+    __properties = ["transaction", "holdingId"]
 
     class Config:
         """Pydantic configuration"""
@@ -56,6 +57,11 @@ class HoldingContributor(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transaction
         if self.transaction:
             _dict['transaction'] = self.transaction.to_dict()
+        # set to None if holding_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_id is None and "holding_id" in self.__fields_set__:
+            _dict['holdingId'] = None
+
         return _dict
 
     @classmethod
@@ -68,6 +74,7 @@ class HoldingContributor(BaseModel):
             return HoldingContributor.parse_obj(obj)
 
         _obj = HoldingContributor.parse_obj({
-            "transaction": Transaction.from_dict(obj.get("transaction")) if obj.get("transaction") is not None else None
+            "transaction": Transaction.from_dict(obj.get("transaction")) if obj.get("transaction") is not None else None,
+            "holding_id": obj.get("holdingId")
         })
         return _obj

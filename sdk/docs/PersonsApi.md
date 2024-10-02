@@ -1415,9 +1415,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # set_person_identifiers_request = SetPersonIdentifiersRequest()
         # set_person_identifiers_request = SetPersonIdentifiersRequest.from_json("")
-        set_person_identifiers_request = SetPersonIdentifiersRequest.from_dict({"identifiers":{"Person/PayrollSystem1/Id":{"key":"Person/PayrollSystem1/Id","value":{"labelValue":"HSI3453333"}}}}) # SetPersonIdentifiersRequest | Request containing identifiers to set for the person. Identifiers not specified in request will not be changed.
+        # set_person_identifiers_request = SetPersonIdentifiersRequest.from_dict({})
+        set_person_identifiers_request = SetPersonIdentifiersRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1518,9 +1518,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # set_person_properties_request = SetPersonPropertiesRequest()
         # set_person_properties_request = SetPersonPropertiesRequest.from_json("")
-        set_person_properties_request = SetPersonPropertiesRequest.from_dict({"properties":{"Person/ContactDetails/Phone":{"key":"Person/ContactDetails/Phone","value":{"labelValue":"01156786789"},"effectiveFrom":"2019-07-01T00:00:00.0000000+00:00"}}}) # SetPersonPropertiesRequest | Request containing properties to set for the person. Properties not specified in request will not be changed.
+        # set_person_properties_request = SetPersonPropertiesRequest.from_dict({})
+        set_person_properties_request = SetPersonPropertiesRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1618,9 +1618,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_person_request = UpsertPersonRequest()
         # upsert_person_request = UpsertPersonRequest.from_json("")
-        upsert_person_request = UpsertPersonRequest.from_dict({"identifiers":{"Person/HrSystem1/InternalId":{"key":"Person/HrSystem1/InternalId","value":{"labelValue":"XY10001111"}},"Person/PayrollSystem1/Id":{"key":"Person/PayrollSystem1/Id","value":{"labelValue":"HSI3453456"}},"Person/CompanyIntranet/LoginId":{"key":"Person/CompanyIntranet/LoginId","value":{"labelValue":"johnsmith001"}}},"properties":{"Person/PersonalDetails/Name":{"key":"Person/PersonalDetails/Name","value":{"labelValue":"John Smith"}},"Person/CompanyDetails/Role":{"key":"Person/CompanyDetails/Role","value":{"labelValueSet":{"values":["SalesRepresentative","CustomerServiceRepresentative"]}},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"Person1DisplayName","description":"Person1Description"}) # UpsertPersonRequest | Request to create or update a person.
+        # upsert_person_request = UpsertPersonRequest.from_dict({})
+        upsert_person_request = UpsertPersonRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1719,9 +1719,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_person_access_metadata_request = UpsertPersonAccessMetadataRequest()
         # upsert_person_access_metadata_request = UpsertPersonAccessMetadataRequest.from_json("")
-        upsert_person_access_metadata_request = UpsertPersonAccessMetadataRequest.from_dict({"metadata":[{"value":"SilverLicence","provider":"TestDataProvider"}]}) # UpsertPersonAccessMetadataRequest | The Person Access Metadata entry to upsert
+        # upsert_person_access_metadata_request = UpsertPersonAccessMetadataRequest.from_dict({})
+        upsert_person_access_metadata_request = UpsertPersonAccessMetadataRequest()
         effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to upsert the Access Metadata (optional)
         effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata (optional)
 

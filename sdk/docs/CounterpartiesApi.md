@@ -634,9 +634,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_counterparty_agreement_request = UpsertCounterpartyAgreementRequest()
         # upsert_counterparty_agreement_request = UpsertCounterpartyAgreementRequest.from_json("")
-        upsert_counterparty_agreement_request = UpsertCounterpartyAgreementRequest.from_dict({"counterpartyAgreement":{"displayName":"display-name","agreementType":"type","counterpartySignatory":{"name":"counterparty-signatory-name","legalEntityIdentifier":{"idTypeScope":"legal-identifier-idTypeScope","idTypeCode":"legal-identifier-idTypeCode","code":"legal-identifier-code"}},"datedAsOf":"2020-01-01T01:00:00.0000000+00:00","creditSupportAnnexId":{"scope":"credit-support-annex-scope","code":"credit-support-annex-code"},"id":{"scope":"some-scope","code":"some-code"}}}) # UpsertCounterpartyAgreementRequest | The Counterparty Agreement to update or insert
+        # upsert_counterparty_agreement_request = UpsertCounterpartyAgreementRequest.from_dict({})
+        upsert_counterparty_agreement_request = UpsertCounterpartyAgreementRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -731,9 +731,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_credit_support_annex_request = UpsertCreditSupportAnnexRequest()
         # upsert_credit_support_annex_request = UpsertCreditSupportAnnexRequest.from_json("")
-        upsert_credit_support_annex_request = UpsertCreditSupportAnnexRequest.from_dict({"creditSupportAnnex":{"referenceCurrency":"GBP","collateralCurrencies":["GBP"],"isdaAgreementVersion":"ISDA2002","marginCallFrequency":"1W","valuationAgent":"Institution","thresholdAmount":0,"roundingDecimalPlaces":2,"initialMarginAmount":100000,"minimumTransferAmount":10000,"id":{"scope":"some-scope","code":"some-code"}}}) # UpsertCreditSupportAnnexRequest | The Credit Support Annex to update or insert
+        # upsert_credit_support_annex_request = UpsertCreditSupportAnnexRequest.from_dict({})
+        upsert_credit_support_annex_request = UpsertCreditSupportAnnexRequest()
 
         try:
             # uncomment the below to set overrides at the request level

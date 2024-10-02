@@ -920,9 +920,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_cds_flow_conventions_request = UpsertCdsFlowConventionsRequest()
         # upsert_cds_flow_conventions_request = UpsertCdsFlowConventionsRequest.from_json("")
-        upsert_cds_flow_conventions_request = UpsertCdsFlowConventionsRequest.from_dict({"cdsFlowConventions":{"rollFrequency":"3M","currency":"USD","paymentFrequency":"3M","dayCountConvention":"Act360","rollConvention":"20","paymentCalendars":["NYC"],"resetCalendars":["NYC"],"settleDays":0,"resetDays":0,"businessDayConvention":"Following","scope":"someScope","code":"exampleCdsFlowConventionsName"}}) # UpsertCdsFlowConventionsRequest | The CDS Flow Conventions to update or insert
+        # upsert_cds_flow_conventions_request = UpsertCdsFlowConventionsRequest.from_dict({})
+        upsert_cds_flow_conventions_request = UpsertCdsFlowConventionsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1017,9 +1017,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_flow_conventions_request = UpsertFlowConventionsRequest()
         # upsert_flow_conventions_request = UpsertFlowConventionsRequest.from_json("")
-        upsert_flow_conventions_request = UpsertFlowConventionsRequest.from_dict({"flowConventions":{"currency":"GBP","paymentFrequency":"1Y","dayCountConvention":"Act360","rollConvention":"None","paymentCalendars":["LON"],"resetCalendars":["LON"],"settleDays":2,"resetDays":2,"leapDaysIncluded":true,"accrualDateAdjustment":"Adjusted","businessDayConvention":"Following","accrualDayCountConvention":"Act360","scope":"someScope","code":"exampleFlowConventionsName"}}) # UpsertFlowConventionsRequest | The Flow Conventions to update or insert
+        # upsert_flow_conventions_request = UpsertFlowConventionsRequest.from_dict({})
+        upsert_flow_conventions_request = UpsertFlowConventionsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1114,9 +1114,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_index_convention_request = UpsertIndexConventionRequest()
         # upsert_index_convention_request = UpsertIndexConventionRequest.from_json("")
-        upsert_index_convention_request = UpsertIndexConventionRequest.from_dict({"indexConvention":{"fixingReference":"Unknown","publicationDayLag":2,"paymentTenor":"1Y","dayCountConvention":"Act360","currency":"GBP","indexName":"LIBOR","scope":"someScope","code":"exampleIndexonventionsName"}}) # UpsertIndexConventionRequest | The Index Conventions to update or insert
+        # upsert_index_convention_request = UpsertIndexConventionRequest.from_dict({})
+        upsert_index_convention_request = UpsertIndexConventionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

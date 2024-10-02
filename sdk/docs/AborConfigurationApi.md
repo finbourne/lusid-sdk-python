@@ -68,9 +68,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # abor_configuration_request = AborConfigurationRequest()
         # abor_configuration_request = AborConfigurationRequest.from_json("")
-        abor_configuration_request = AborConfigurationRequest.from_dict({"code":"AborCode","displayName":"AborConfiguration Name","description":"Standard AborConfigurationRequest","recipeId":{"scope":"RecipeScope","code":"RecipeCode"},"chartOfAccountsId":{"scope":"CoAScope","code":"CoACode"},"postingModuleCodes":["PostingModuleCode"],"cleardownModuleCodes":["CleardownModuleCode"],"properties":{"AborConfiguration/MyScope/FundManagerName":{"key":"AborConfiguration/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # AborConfigurationRequest | The definition of the AborConfiguration.
+        # abor_configuration_request = AborConfigurationRequest.from_dict({})
+        abor_configuration_request = AborConfigurationRequest()
 
         try:
             # uncomment the below to set overrides at the request level

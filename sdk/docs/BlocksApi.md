@@ -360,9 +360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # block_set_request = BlockSetRequest()
         # block_set_request = BlockSetRequest.from_json("")
-        block_set_request = BlockSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"BLOC00000123"},"orderIds":[{"scope":"MyScope","code":"BLOC00000123"}],"properties":{"Block/MyScope/SomeBlockProperty":{"key":"Block/MyScope/SomeBlockProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"side":"Buy","type":"Limit","timeInForce":"GoodTilCancel","createdDate":"2006-04-11T00:00:00.0000000+00:00","limitPrice":{"amount":12413.33,"currency":"USD"},"stopPrice":{"amount":122345.33,"currency":"USD"}}]}) # BlockSetRequest | The collection of block requests. (optional)
+        # block_set_request = BlockSetRequest.from_dict({})
+        block_set_request = BlockSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

@@ -65,9 +65,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_relation_definition_request = CreateRelationDefinitionRequest()
         # create_relation_definition_request = CreateRelationDefinitionRequest.from_json("")
-        create_relation_definition_request = CreateRelationDefinitionRequest.from_dict({"scope":"PortfolioManagementTeam","code":"Traders","sourceEntityDomain":"Portfolio","targetEntityDomain":"Person","displayName":"Authorised traders to trade for specific portfolio ","outwardDescription":"can be traded by","inwardDescription":"can trade with portfolio","lifeTime":"TimeVariant","constraintStyle":"Collection"}) # CreateRelationDefinitionRequest | The definition of the new relation.
+        # create_relation_definition_request = CreateRelationDefinitionRequest.from_dict({})
+        create_relation_definition_request = CreateRelationDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

@@ -67,9 +67,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # staged_modification_decision_request = StagedModificationDecisionRequest()
         # staged_modification_decision_request = StagedModificationDecisionRequest.from_json("")
-        staged_modification_decision_request = StagedModificationDecisionRequest.from_dict({"decision":"Approve","comment":"Looks Good"}) # StagedModificationDecisionRequest | The decision on the requested staged modification, \"Approve\" or \"Reject\".
+        # staged_modification_decision_request = StagedModificationDecisionRequest.from_dict({})
+        staged_modification_decision_request = StagedModificationDecisionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

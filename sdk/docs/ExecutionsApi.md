@@ -360,9 +360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # execution_set_request = ExecutionSetRequest()
         # execution_set_request = ExecutionSetRequest.from_json("")
-        execution_set_request = ExecutionSetRequest.from_dict({"requests":[{"id":{"scope":"MyScope","code":"EXEC00000123"},"placementId":{"scope":"MyScope","code":"PLAC00000123"},"properties":{"Execution/MyScope/SomeExecutionProperty":{"key":"Execution/MyScope/SomeExecutionProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"state":"New","side":"Buy","type":"Limit","createdDate":"2006-04-11T00:00:00.0000000+00:00","settlementDate":"2006-04-13T00:00:00.0000000+00:00","price":{"amount":12413.33,"currency":"USD"},"settlementCurrency":"GBP","settlementCurrencyFxRate":0.67,"counterparty":"SomeCounterparty","averagePrice":12419.2}]}) # ExecutionSetRequest | The collection of execution requests. (optional)
+        # execution_set_request = ExecutionSetRequest.from_dict({})
+        execution_set_request = ExecutionSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

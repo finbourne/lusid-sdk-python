@@ -68,9 +68,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_staging_rule_set_request = CreateStagingRuleSetRequest()
         # create_staging_rule_set_request = CreateStagingRuleSetRequest.from_json("")
-        create_staging_rule_set_request = CreateStagingRuleSetRequest.from_dict({"displayName":"Test Entity Staging Rules","description":"The rules that determine whether a modification is staged","rules":[{"ruleId":"1","description":"Any user updating this entity must get approval from 2 admins","status":"Active","matchCriteria":{"actionIn":["Create","Delete"],"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10","changedAttributeNameIn":["Properties[myEntityType/myScope/protected-property]"]},"approvalCriteria":{"requiredApprovals":2,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":true}},{"ruleId":"2","description":"Any user updating this entity must get approval from one admin","status":"Inactive","matchCriteria":{"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10"},"approvalCriteria":{"requiredApprovals":1,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":false}}]}) # CreateStagingRuleSetRequest | Request to create a staging rule set.
+        # create_staging_rule_set_request = CreateStagingRuleSetRequest.from_dict({})
+        create_staging_rule_set_request = CreateStagingRuleSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -453,9 +453,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_staging_rule_set_request = UpdateStagingRuleSetRequest()
         # update_staging_rule_set_request = UpdateStagingRuleSetRequest.from_json("")
-        update_staging_rule_set_request = UpdateStagingRuleSetRequest.from_dict({"displayName":"Test Entity Staging Rules","description":"The rules that determine whether a modification is staged","rules":[{"ruleId":"1","description":"Any user updating this entity must get approval from 2 admins","status":"Active","matchCriteria":{"actionIn":["Create","Delete"],"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10","changedAttributeNameIn":["Properties[myEntityType/myScope/protected-property]"]},"approvalCriteria":{"requiredApprovals":2,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":true}},{"ruleId":"2","description":"Any user updating this entity must get approval from one admin","status":"Inactive","matchCriteria":{"requestingUser":"id.code eq 'not admin'","entityAttributes":"version.asAtVersionNumber gt 10"},"approvalCriteria":{"requiredApprovals":1,"decidingUser":"id.code eq 'admin'","stagingUserCanDecide":false}}]}) # UpdateStagingRuleSetRequest | Request to update a staging rule set.
+        # update_staging_rule_set_request = UpdateStagingRuleSetRequest.from_dict({})
+        update_staging_rule_set_request = UpdateStagingRuleSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

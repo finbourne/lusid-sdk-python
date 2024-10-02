@@ -67,9 +67,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_cut_label_definition_request = CreateCutLabelDefinitionRequest()
         # create_cut_label_definition_request = CreateCutLabelDefinitionRequest.from_json("")
-        create_cut_label_definition_request = CreateCutLabelDefinitionRequest.from_dict({"code":"CutLabelCode","displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"}) # CreateCutLabelDefinitionRequest | The cut label definition (optional)
+        # create_cut_label_definition_request = CreateCutLabelDefinitionRequest.from_dict({})
+        create_cut_label_definition_request = CreateCutLabelDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -451,9 +451,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_cut_label_definition_request = UpdateCutLabelDefinitionRequest()
         # update_cut_label_definition_request = UpdateCutLabelDefinitionRequest.from_json("")
-        update_cut_label_definition_request = UpdateCutLabelDefinitionRequest.from_dict({"displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"}) # UpdateCutLabelDefinitionRequest | The cut label update definition (optional)
+        # update_cut_label_definition_request = UpdateCutLabelDefinitionRequest.from_dict({})
+        update_cut_label_definition_request = UpdateCutLabelDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

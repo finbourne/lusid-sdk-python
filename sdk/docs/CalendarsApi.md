@@ -77,9 +77,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # add_business_days_to_date_request = AddBusinessDaysToDateRequest()
         # add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_json("")
-        add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_dict({"businessDayOffset":5,"holidayCodes":["GBP"],"startDate":"2020-02-10T00:00:00.0000000+00:00"}) # AddBusinessDaysToDateRequest | Request Details: start date, number of days to add (which can be negative, but not zero), calendar codes and optionally an AsAt date for searching the calendar store
+        # add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_dict({})
+        add_business_days_to_date_request = AddBusinessDaysToDateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -177,9 +177,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_date_request = CreateDateRequest()
         # create_date_request = CreateDateRequest.from_json("")
-        create_date_request = CreateDateRequest.from_dict({"dateId":"TestDate","fromUtc":"2020-01-25T00:00:00.0000000+00:00","toUtc":"2020-01-26T00:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New year","type":"Holiday","sourceData":{}}) # CreateDateRequest | Add date to calendar request
+        # create_date_request = CreateDateRequest.from_dict({})
+        create_date_request = CreateDateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -374,9 +374,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_calendar_request = CreateCalendarRequest()
         # create_calendar_request = CreateCalendarRequest.from_json("")
-        create_calendar_request = CreateCalendarRequest.from_dict({"calendarId":{"scope":"TestScope","code":"TestCode"},"calendarType":"Holiday","weekendMask":{"days":["Saturday","Sunday"],"timeZone":"UTC"},"sourceProvider":"Finbourne-Calendar-Service","properties":[{"key":"Calendar/HolidayType/Statutory","value":{"labelValue":"CBTR"}}]}) # CreateCalendarRequest | A request to create the calendar
+        # create_calendar_request = CreateCalendarRequest.from_dict({})
+        create_calendar_request = CreateCalendarRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -758,9 +758,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # valuation_schedule = ValuationSchedule()
         # valuation_schedule = ValuationSchedule.from_json("")
-        valuation_schedule = ValuationSchedule.from_dict({"effectiveFrom":"2020-01-01","effectiveAt":"2021-01-01","tenor":"1M","rollConvention":"None","holidayCalendars":["GBP","USD"],"valuationDateTimes":[],"businessDayConvention":"F"}) # ValuationSchedule | The ValuationSchedule to generate schedule dates from
+        # valuation_schedule = ValuationSchedule.from_dict({})
+        valuation_schedule = ValuationSchedule()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional AsAt for searching the calendar store. Defaults to Latest. (optional)
 
         try:
@@ -1360,9 +1360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_calendar_request = UpdateCalendarRequest()
         # update_calendar_request = UpdateCalendarRequest.from_json("")
-        update_calendar_request = UpdateCalendarRequest.from_dict({"weekendMask":{"days":["Saturday","Sunday"],"timeZone":"UTC"},"sourceProvider":"Finbourne-Calendar-Service","properties":[{"key":"Calendar/HolidayType/Statutory","value":{"labelValue":"CBTR"}}]}) # UpdateCalendarRequest | The new state of the calendar
+        # update_calendar_request = UpdateCalendarRequest.from_dict({})
+        update_calendar_request = UpdateCalendarRequest()
 
         try:
             # uncomment the below to set overrides at the request level

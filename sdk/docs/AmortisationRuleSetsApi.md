@@ -69,9 +69,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_amortisation_rule_set_request = CreateAmortisationRuleSetRequest()
         # create_amortisation_rule_set_request = CreateAmortisationRuleSetRequest.from_json("")
-        create_amortisation_rule_set_request = CreateAmortisationRuleSetRequest.from_dict({"code":"RuleSetCode","displayName":"RuleSetDisplayName","description":"RuleSet Description"}) # CreateAmortisationRuleSetRequest | The contents of the rule set.
+        # create_amortisation_rule_set_request = CreateAmortisationRuleSetRequest.from_dict({})
+        create_amortisation_rule_set_request = CreateAmortisationRuleSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -463,9 +463,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # set_amortisation_rules_request = SetAmortisationRulesRequest()
         # set_amortisation_rules_request = SetAmortisationRulesRequest.from_json("")
-        set_amortisation_rules_request = SetAmortisationRulesRequest.from_dict({"rulesInterval":{"effectiveRange":{"fromDate":"2024-01-01T00:00:00.0000000+00:00"},"rules":[{"name":"AmortisationRule1","description":"Rule 1 Description","filter":"True eq True","amortisationMethod":"EffectiveYield"}]}}) # SetAmortisationRulesRequest | The contents of the rules.
+        # set_amortisation_rules_request = SetAmortisationRulesRequest.from_dict({})
+        set_amortisation_rules_request = SetAmortisationRulesRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -564,9 +564,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_amortisation_rule_set_details_request = UpdateAmortisationRuleSetDetailsRequest()
         # update_amortisation_rule_set_details_request = UpdateAmortisationRuleSetDetailsRequest.from_json("")
-        update_amortisation_rule_set_details_request = UpdateAmortisationRuleSetDetailsRequest.from_dict({"displayName":"Updated display name","description":"Update description"}) # UpdateAmortisationRuleSetDetailsRequest | The contents of the rule set.
+        # update_amortisation_rule_set_details_request = UpdateAmortisationRuleSetDetailsRequest.from_dict({})
+        update_amortisation_rule_set_details_request = UpdateAmortisationRuleSetDetailsRequest()
 
         try:
             # uncomment the below to set overrides at the request level

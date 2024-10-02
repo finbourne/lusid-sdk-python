@@ -1002,9 +1002,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # custom_entity_request = CustomEntityRequest()
         # custom_entity_request = CustomEntityRequest.from_json("")
-        custom_entity_request = CustomEntityRequest.from_dict({"displayName":"Portfolio Access Denied","description":"User cannot access the portfolio","identifiers":[{"identifierScope":"someScope","identifierType":"supportTicketId","identifierValue":"xyz123pqr"}],"fields":[{"name":"clientId","value":"AcmeLtd"},{"name":"issueDescription","value":"I can't access this portfolio","effectiveFrom":"2023-03-03T09:00:00.0000000+00:00"}]}) # CustomEntityRequest | The payload describing the Custom Entity instance.
+        # custom_entity_request = CustomEntityRequest.from_dict({})
+        custom_entity_request = CustomEntityRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1105,9 +1105,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_custom_entity_access_metadata_request = UpsertCustomEntityAccessMetadataRequest()
         # upsert_custom_entity_access_metadata_request = UpsertCustomEntityAccessMetadataRequest.from_json("")
-        upsert_custom_entity_access_metadata_request = UpsertCustomEntityAccessMetadataRequest.from_dict({"metadata":[{"value":"SilverLicence","provider":"TestDataProvider"}]}) # UpsertCustomEntityAccessMetadataRequest | The Custom Entity Access Metadata entry to upsert
+        # upsert_custom_entity_access_metadata_request = UpsertCustomEntityAccessMetadataRequest.from_dict({})
+        upsert_custom_entity_access_metadata_request = UpsertCustomEntityAccessMetadataRequest()
         effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the Access Metadata will be effective from (optional)
         effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata (optional)
 

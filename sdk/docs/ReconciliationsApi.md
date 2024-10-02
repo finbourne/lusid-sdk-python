@@ -78,9 +78,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_reconciliation_request = CreateReconciliationRequest()
         # create_reconciliation_request = CreateReconciliationRequest.from_json("")
-        create_reconciliation_request = CreateReconciliationRequest.from_dict({"code":"Reconciliation","name":"ReconciliationName","description":"Reconciliation description","isPortfolioGroup":false,"left":{"scope":"MyScope","code":"SideA"},"right":{"scope":"MyScope","code":"SideB"},"transactions":{"transactionWindow":{"fromDate":"2018-03-04T00:00:00.0000000+00:00","untilDate":"2018-03-05T00:00:00.0000000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"positions":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"valuations":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00","currency":"GBP"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00","asAt":"2019-01-01T12:00:00.0100000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"properties":{"Reconciliation/MyScope/BrokerName":{"key":"Reconciliation/MyScope/BrokerName","value":{"labelValue":"BrokerA"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"}}}) # CreateReconciliationRequest | The definition of the reconciliation (optional)
+        # create_reconciliation_request = CreateReconciliationRequest.from_dict({})
+        create_reconciliation_request = CreateReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -752,9 +752,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # reconciliation_request = ReconciliationRequest()
         # reconciliation_request = ReconciliationRequest.from_json("")
-        reconciliation_request = ReconciliationRequest.from_dict({"left":{"recipeId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"right":{"recipeId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"leftToRightMapping":[],"comparisonRules":[{"comparisonType":"AbsoluteDifference","tolerance":1.2345,"appliesTo":{"key":"Valuation/PV","op":"Sum","options":{}},"ruleType":"ReconcileNumericRule"}],"preserveKeys":["Instrument/default/Name"]}) # ReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
+        # reconciliation_request = ReconciliationRequest.from_dict({})
+        reconciliation_request = ReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -852,9 +852,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # portfolios_reconciliation_request = PortfoliosReconciliationRequest()
         # portfolios_reconciliation_request = PortfoliosReconciliationRequest.from_json("")
-        portfolios_reconciliation_request = PortfoliosReconciliationRequest.from_dict({"left":{"portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"right":{"portfolioId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"instrumentPropertyKeys":["Instrument/default/Name"]}) # PortfoliosReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
+        # portfolios_reconciliation_request = PortfoliosReconciliationRequest.from_dict({})
+        portfolios_reconciliation_request = PortfoliosReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -952,9 +952,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # inline_valuations_reconciliation_request = InlineValuationsReconciliationRequest()
         # inline_valuations_reconciliation_request = InlineValuationsReconciliationRequest.from_json("")
-        inline_valuations_reconciliation_request = InlineValuationsReconciliationRequest.from_dict({"left":{"recipeId":{"scope":"MyScope","code":"default"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Value","options":{}}],"groupBy":["Instrument/default/Name"],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"},"instruments":[{"quantity":10000,"holdingIdentifier":"fx-fwd-GBPUSD","instrument":{"startDate":"2018-03-01T00:00:00.0000000+00:00","maturityDate":"2018-03-30T00:00:00.0000000+00:00","domAmount":100,"domCcy":"GBP","fgnAmount":-150,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"inLineLookupIdentifiers":{}}]},"right":{"recipeId":{"scope":"MyScope","code":"default"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Value","options":{}}],"groupBy":["Instrument/default/Name"],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"},"instruments":[{"quantity":10000,"holdingIdentifier":"fx-fwd-GBPJPY","instrument":{"startDate":"2018-03-01T00:00:00.0000000+00:00","maturityDate":"2018-03-30T00:00:00.0000000+00:00","domAmount":100,"domCcy":"GBP","fgnAmount":-150,"fgnCcy":"JPY","refSpotRate":132,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"inLineLookupIdentifiers":{}}]},"leftToRightMapping":[],"preserveKeys":[]}) # InlineValuationsReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
+        # inline_valuations_reconciliation_request = InlineValuationsReconciliationRequest.from_dict({})
+        inline_valuations_reconciliation_request = InlineValuationsReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1049,9 +1049,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_reconciliation_request = TransactionReconciliationRequest()
         # transaction_reconciliation_request = TransactionReconciliationRequest.from_json("")
-        transaction_reconciliation_request = TransactionReconciliationRequest.from_dict({"leftPortfolioId":{"scope":"street","code":"Global-Equity"},"rightPortfolioId":{"scope":"custodian","code":"Global-Equity"},"fromTransactionDate":"2019-04-01T12:00:00.0000000+00:00","toTransactionDate":"2019-05-01T12:00:00.0000000+00:00","propertyKeys":["Instrument/default/Name","Transaction/common/Strategy"]}) # TransactionReconciliationRequest |  (optional)
+        # transaction_reconciliation_request = TransactionReconciliationRequest.from_dict({})
+        transaction_reconciliation_request = TransactionReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1146,9 +1146,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_reconciliation_request_v2 = TransactionReconciliationRequestV2()
         # transaction_reconciliation_request_v2 = TransactionReconciliationRequestV2.from_json("")
-        transaction_reconciliation_request_v2 = TransactionReconciliationRequestV2.from_dict({"left":{"fromTransactionDate":"2018-03-05T00:00:00.0000000+00:00","toTransactionDate":"2018-04-05T00:00:00.0000000+00:00","portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolio"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Transaction/TotalConsideration","op":"Sum","options":{}},{"key":"Transaction/InstrumentUID","op":"Value","options":{}},{"key":"Transaction/CounterpartyId","op":"Value","options":{}}],"groupBy":["Transaction/CounterpartyId","Transaction/InstrumentUID"]},"right":{"fromTransactionDate":"2018-03-05T00:00:00.0000000+00:00","toTransactionDate":"2018-04-05T00:00:00.0000000+00:00","portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolio"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Transaction/TotalConsideration","op":"Sum","options":{}},{"key":"Transaction/InstrumentUID","op":"Value","options":{}},{"key":"Transaction/CounterpartyId","op":"Value","options":{}}],"groupBy":["Transaction/CounterpartyId","Transaction/InstrumentUID"]},"leftToRightMapping":[],"comparisonRules":[{"comparisonType":"AbsoluteDifference","tolerance":0.001,"appliesTo":{"key":"Transaction/TotalConsideration","op":"Sum","options":{}},"ruleType":"ReconcileNumericRule"},{"comparisonType":"CaseInsensitive","oneOfCandidates":{},"appliesTo":{"key":"Transaction/CounterpartyId","op":"Value","options":{}},"ruleType":"ReconcileStringRule"}],"preserveKeys":[]}) # TransactionReconciliationRequestV2 |  (optional)
+        # transaction_reconciliation_request_v2 = TransactionReconciliationRequestV2.from_dict({})
+        transaction_reconciliation_request_v2 = TransactionReconciliationRequestV2()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1243,9 +1243,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # valuations_reconciliation_request = ValuationsReconciliationRequest()
         # valuations_reconciliation_request = ValuationsReconciliationRequest.from_json("")
-        valuations_reconciliation_request = ValuationsReconciliationRequest.from_dict({"left":{"recipeId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"right":{"recipeId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value","options":{}},{"key":"Valuation/PV","op":"Sum","options":{}}],"groupBy":["Instrument/default/Name"],"sort":[],"reportCurrency":"USD","equipWithSubtotals":false,"returnResultAsExpandedTypes":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"None","holidayCalendars":[],"valuationDateTimes":[],"businessDayConvention":"F"}},"leftToRightMapping":[],"preserveKeys":["Instrument/default/Name"]}) # ValuationsReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
+        # valuations_reconciliation_request = ValuationsReconciliationRequest.from_dict({})
+        valuations_reconciliation_request = ValuationsReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1342,9 +1342,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_reconciliation_request = UpdateReconciliationRequest()
         # update_reconciliation_request = UpdateReconciliationRequest.from_json("")
-        update_reconciliation_request = UpdateReconciliationRequest.from_dict({"name":"UpdatedReconciliationName","description":"Updated reconciliation description","isPortfolioGroup":false,"left":{"scope":"MyScope","code":"SideA"},"right":{"scope":"MyScope","code":"SideB"},"transactions":{"transactionWindow":{"fromDate":"2018-03-04T00:00:00.0000000+00:00","untilDate":"2018-03-05T00:00:00.0000000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"positions":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"valuations":{"left":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00","currency":"GBP"},"right":{"recipeId":{"scope":"MyScope","code":"PMS"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00","currency":"GBP"},"mappingId":{"scope":"MyScope","code":"TestMapping"}},"properties":{"Reconciliation/MyScope/BrokerName":{"key":"Reconciliation/MyScope/BrokerName","value":{"labelValue":"BrokerA"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"}}}) # UpdateReconciliationRequest | The updated definition of the reconciliation (optional)
+        # update_reconciliation_request = UpdateReconciliationRequest.from_dict({})
+        update_reconciliation_request = UpdateReconciliationRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1441,9 +1441,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # mapping = Mapping()
         # mapping = Mapping.from_json("")
-        mapping = Mapping.from_dict({"scope":"default","code":"TransactionReconciliationMapping","name":"Mapping Name","reconciliationType":"Transaction","rules":[{"left":"TransactionId","right":"TransactionId","comparisonType":"Equals","weight":10,"isCaseSensitive":false},{"left":"InstrumentUid","right":"InstrumentUid","comparisonType":"Equals","weight":5,"isCaseSensitive":false},{"left":"TransactionPrice","right":"TransactionPrice","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"TransactionCurrency","right":"TransactionCurrency","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"TransactionDate","right":"TransactionDate","comparisonType":"SameDate","weight":1,"isCaseSensitive":false},{"left":"SettlementDate","right":"SettlementDate","comparisonType":"SameDate","weight":1,"isCaseSensitive":false},{"left":"CounterpartyId","right":"CounterpartyId","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"ExchangeRate","right":"ExchangeRate","comparisonType":"WithinPercentage","comparisonValue":0.5,"weight":1,"isCaseSensitive":false},{"left":"Type","right":"Type","comparisonType":"MappedString","weight":1,"mappedStrings":[{"leftValue":"Buy","rightValue":"Purchase","mappingDirection":"BothWays","isCaseSensitive":false}],"isCaseSensitive":false}]}) # Mapping | The mapping to be created / updated. (optional)
+        # mapping = Mapping.from_dict({})
+        mapping = Mapping()
 
         try:
             # uncomment the below to set overrides at the request level

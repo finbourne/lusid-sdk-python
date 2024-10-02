@@ -167,9 +167,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_corporate_action_source_request = CreateCorporateActionSourceRequest()
         # create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_json("")
-        create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_dict({"scope":"ExampleScope","code":"ExampleCode","displayName":"ExampleDisplayName","description":"Example Description","instrumentScopes":[]}) # CreateCorporateActionSourceRequest | The corporate action source definition
+        # create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_dict({})
+        create_corporate_action_source_request = CreateCorporateActionSourceRequest()
 
         try:
             # uncomment the below to set overrides at the request level

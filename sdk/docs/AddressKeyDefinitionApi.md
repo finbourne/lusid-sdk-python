@@ -65,9 +65,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_address_key_definition_request = CreateAddressKeyDefinitionRequest()
         # create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_json("")
-        create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_dict({"addressKey":"Instrument/default/LusidInstrumentId","type":"Text"}) # CreateAddressKeyDefinitionRequest | The request used to create the address key definition.
+        # create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_dict({})
+        create_address_key_definition_request = CreateAddressKeyDefinitionRequest()
 
         try:
             # uncomment the below to set overrides at the request level

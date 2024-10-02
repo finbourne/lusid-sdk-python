@@ -468,9 +468,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # translate_entities_request = TranslateEntitiesRequest()
         # translate_entities_request = TranslateEntitiesRequest.from_json("")
-        translate_entities_request = TranslateEntitiesRequest.from_dict({"entityPayloads":{"myFxFwd-0":{"entity":"{ \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\", \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\", \"domAmount\": 1, \"domCcy\": \"GBP\", \"fgnAmount\": -1.5,  \"fgnCcy\": \"USD\",  \"refSpotRate\": 1.5,  \"isNdf\": false, \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",  \"instrumentType\": \"FxForward\" }"}},"scriptId":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"dialectId":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"}}) # TranslateEntitiesRequest | The entities to translate, along with identifiers for the script and (optional) dialect to use.
+        # translate_entities_request = TranslateEntitiesRequest.from_dict({})
+        translate_entities_request = TranslateEntitiesRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -565,9 +565,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # translate_entities_inlined_request = TranslateEntitiesInlinedRequest()
         # translate_entities_inlined_request = TranslateEntitiesInlinedRequest.from_json("")
-        translate_entities_inlined_request = TranslateEntitiesInlinedRequest.from_dict({"entityPayloads":{"myFxFwd-0":{"entity":"{\r\n \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\",\r\n \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\",\r\n \"domAmount\": 1,\r\n \"domCcy\": \"GBP\",\r\n \"fgnAmount\": -1.5,\r\n  \"fgnCcy\": \"USD\",\r\n      \"refSpotRate\": 1.5,\r\n \"isNdf\": false,\r\n \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",\r\n \"instrumentType\": \"FxForward\"\r\n}"},"myFxFwd-that-will-fail-translation":{"entity":"some-bad-payload"}},"scriptBody":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }","schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}}) # TranslateEntitiesInlinedRequest | The entities to translate, along with the script to use and an optional schema for validation.
+        # translate_entities_inlined_request = TranslateEntitiesInlinedRequest.from_dict({})
+        translate_entities_inlined_request = TranslateEntitiesInlinedRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -662,9 +662,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_dialect_request = UpsertDialectRequest()
         # upsert_dialect_request = UpsertDialectRequest.from_json("")
-        upsert_dialect_request = UpsertDialectRequest.from_dict({"id":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"},"schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}}) # UpsertDialectRequest | The dialect to upsert.
+        # upsert_dialect_request = UpsertDialectRequest.from_dict({})
+        upsert_dialect_request = UpsertDialectRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -759,9 +759,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_translation_script_request = UpsertTranslationScriptRequest()
         # upsert_translation_script_request = UpsertTranslationScriptRequest.from_json("")
-        upsert_translation_script_request = UpsertTranslationScriptRequest.from_dict({"id":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"body":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"}) # UpsertTranslationScriptRequest | The translation script to be upserted.
+        # upsert_translation_script_request = UpsertTranslationScriptRequest.from_dict({})
+        upsert_translation_script_request = UpsertTranslationScriptRequest()
 
         try:
             # uncomment the below to set overrides at the request level

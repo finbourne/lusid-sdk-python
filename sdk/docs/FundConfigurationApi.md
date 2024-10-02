@@ -69,9 +69,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # fund_configuration_request = FundConfigurationRequest()
         # fund_configuration_request = FundConfigurationRequest.from_json("")
-        fund_configuration_request = FundConfigurationRequest.from_dict({"code":"FundConfigurationCode","displayName":"My Fund Configuration","description":"Standard Fund Configuration","dealingFilters":[{"filterId":"SUB","filter":"account startswith 3001"},{"filterId":"RED","filter":"account startswith 3002"}],"pnlFilters":[{"filterId":"SUB","filter":"account startswith 3001"},{"filterId":"RED","filter":"account startswith 3002"}],"backOutFilters":[{"filterId":"SUB","filter":"account startswith 3001"},{"filterId":"RED","filter":"account startswith 3002"}],"properties":{"FundConfiguration/MyScope/FundManagerName":{"key":"FundConfiguration/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # FundConfigurationRequest | The definition of the FundConfiguration.
+        # fund_configuration_request = FundConfigurationRequest.from_dict({})
+        fund_configuration_request = FundConfigurationRequest()
 
         try:
             # uncomment the below to set overrides at the request level

@@ -354,9 +354,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # reference_list_request = ReferenceListRequest()
         # reference_list_request = ReferenceListRequest.from_json("")
-        reference_list_request = ReferenceListRequest.from_dict({"id":{"scope":"MyScope","code":"MyStringList"},"name":"MyReferenceListName","description":"My reference list description","tags":["tags","associated","with","my","list"],"referenceList":{"values":["value1","value2"],"referenceListType":"StringList"}}) # ReferenceListRequest | The payload describing the Reference List instance. (optional)
+        # reference_list_request = ReferenceListRequest.from_dict({})
+        reference_list_request = ReferenceListRequest()
 
         try:
             # uncomment the below to set overrides at the request level

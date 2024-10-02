@@ -444,6 +444,7 @@ from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
 from lusid.models.holding_context import HoldingContext
 from lusid.models.holding_contributor import HoldingContributor
+from lusid.models.holding_ids_request import HoldingIdsRequest
 from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.holdings_adjustment import HoldingsAdjustment
 from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
@@ -513,6 +514,7 @@ from lusid.models.link import Link
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
+from lusid.models.loan_facility import LoanFacility
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
 from lusid.models.lusid_instrument import LusidInstrument
@@ -1546,6 +1548,7 @@ __all__ = [
     "HoldingAdjustmentWithDate",
     "HoldingContext",
     "HoldingContributor",
+    "HoldingIdsRequest",
     "HoldingPricingInfo",
     "HoldingsAdjustment",
     "HoldingsAdjustmentHeader",
@@ -1615,6 +1618,7 @@ __all__ = [
     "ListAggregationReconciliation",
     "ListAggregationResponse",
     "ListComplexMarketDataWithMetaDataResponse",
+    "LoanFacility",
     "LoanPeriod",
     "LockPeriodDiaryEntryRequest",
     "LusidInstrument",

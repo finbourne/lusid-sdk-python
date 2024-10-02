@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | GetHoldings: Get holdings
 [**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | GetHoldingsAdjustment: Get holdings adjustment
 [**get_holdings_with_orders**](TransactionPortfoliosApi.md#get_holdings_with_orders) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsWithOrders | [EXPERIMENTAL] GetHoldingsWithOrders: Get holdings with orders
+[**get_multiple_holding_contributors**](TransactionPortfoliosApi.md#get_multiple_holding_contributors) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/contributors/$get | [EARLY ACCESS] GetMultipleHoldingContributors: Get Multiple Holding Contributors
 [**get_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 [**get_portfolio_cash_ladder**](TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 [**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
@@ -496,9 +497,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_query_parameters = TransactionQueryParameters()
         # transaction_query_parameters = TransactionQueryParameters.from_json("")
-        transaction_query_parameters = TransactionQueryParameters.from_dict({"startDate":"2018-03-05T00:00:00.0000000+00:00","endDate":"2018-03-19T00:00:00.0000000+00:00","queryMode":"TradeDate","showCancelledTransactions":false}) # TransactionQueryParameters | The query queryParameters which control how the output transactions are built.
+        # transaction_query_parameters = TransactionQueryParameters.from_dict({})
+        transaction_query_parameters = TransactionQueryParameters()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
         filter = 'filter_example' # str | Expression to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
@@ -798,9 +799,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_transaction_portfolio_request = CreateTransactionPortfolioRequest()
         # create_transaction_portfolio_request = CreateTransactionPortfolioRequest.from_json("")
-        create_transaction_portfolio_request = CreateTransactionPortfolioRequest.from_dict({"displayName":"Portfolio UK","description":"Portfolio for UK market","code":"PortfolioUk","created":"2018-03-05T12:00:00.0000000+00:00","baseCurrency":"GBP","corporateActionSourceId":{"scope":"Sources","code":"Vendor1"},"accountingMethod":"Default","subHoldingKeys":[],"properties":{"Portfolio/Manager/Name":{"key":"Portfolio/Manager/Name","value":{"labelValue":"Matt Smith"},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00"},"Portfolio/Manager/Id":{"key":"Portfolio/Manager/Id","value":{"metricValue":{"value":1628483,"unit":"NoUnits"}},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00"}},"instrumentScopes":[],"amortisationMethod":"NoAmortisation","transactionTypeScope":"SomeScope","instrumentEventConfiguration":{"transactionTemplateScopes":["default"],"recipeId":{"scope":"default","code":"MyRecipeCode"}},"amortisationRuleSetId":{"scope":"default","code":"MyAmortisationRuleSet"}}) # CreateTransactionPortfolioRequest | The definition of the transaction portfolio.
+        # create_transaction_portfolio_request = CreateTransactionPortfolioRequest.from_dict({})
+        create_transaction_portfolio_request = CreateTransactionPortfolioRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -898,9 +899,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # lusid_trade_ticket = LusidTradeTicket()
         # lusid_trade_ticket = LusidTradeTicket.from_json("")
-        lusid_trade_ticket = LusidTradeTicket.from_dict({"transactionId":"TradeTicket-1111111","transactionType":"OpenTradeTicket","source":"default","transactionDate":"2020-01-01T09:00:00.00Z","settlementDate":"2020-01-01T09:00:00.00Z","totalConsideration":{"amount":1020000,"currency":"GBP"},"units":1000000,"instrumentIdentifiers":{"Instrument/default/ClientInternal":"my-bond"},"instrumentScope":"myScope","instrumentName":"my_bond","instrumentDefinition":{"startDate":"2018-01-01T00:00:00.0000000+00:00","maturityDate":"2019-01-01T00:00:00.0000000+00:00","domAmount":1,"domCcy":"GBP","fgnAmount":-1.5,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"counterpartyAgreementId":{"scope":"demoScope","code":"myCounterparty"},"tradeTicketType":"LusidTradeTicket"}) # LusidTradeTicket | the trade ticket to upsert (optional)
+        # lusid_trade_ticket = LusidTradeTicket.from_dict({})
+        lusid_trade_ticket = LusidTradeTicket()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1411,9 +1412,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # bucketed_cash_flow_request = BucketedCashFlowRequest()
         # bucketed_cash_flow_request = BucketedCashFlowRequest.from_json("")
-        bucketed_cash_flow_request = BucketedCashFlowRequest.from_dict({"roundingMethod":"RoundUp","bucketingDates":["2020-01-01T00:00:00.0000000+00:00","2020-07-01T00:00:00.0000000+00:00","2021-01-01T00:00:00.0000000+00:00","2021-07-01T00:00:00.0000000+00:00"],"equipWithSubtotals":false,"excludeUnsettledTrades":false,"cashFlowType":"InstrumentCashFlow"}) # BucketedCashFlowRequest | Request specifying the bucketing of cashflows (optional)
+        # bucketed_cash_flow_request = BucketedCashFlowRequest.from_dict({})
+        bucketed_cash_flow_request = BucketedCashFlowRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -2079,6 +2080,123 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The holdings and version of the specified transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_multiple_holding_contributors**
+> VersionedResourceListOfHoldingContributor get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
+
+[EARLY ACCESS] GetMultipleHoldingContributors: Get Multiple Holding Contributors
+
+Lists all transactions that affect multiple specified holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TransactionPortfoliosApi)
+        scope = 'scope_example' # str | The scope of the transaction portfolio.
+        code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # holding_ids_request = HoldingIdsRequest.from_json("")
+        # holding_ids_request = HoldingIdsRequest.from_dict({})
+        holding_ids_request = HoldingIdsRequest()
+        effective_date = 'effective_date_example' # str | Effective date (optional)
+        from_transaction_date = 'from_transaction_date_example' # str | The from trade date, defaults to first time this holding is opened, lower bound for transactions (optional)
+        to_transaction_date = 'to_transaction_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
+        include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
+        tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
+        limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page, opts=opts)
+
+            # [EARLY ACCESS] GetMultipleHoldingContributors: Get Multiple Holding Contributors
+            api_response = await api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TransactionPortfoliosApi->get_multiple_holding_contributors: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **holding_ids_request** | [**HoldingIdsRequest**](HoldingIdsRequest.md)| The array of unique holding identifiers | 
+ **effective_date** | **str**| Effective date | [optional] 
+ **from_transaction_date** | **str**| The from trade date, defaults to first time this holding is opened, lower bound for transactions | [optional] 
+ **to_transaction_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
+ **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
+ **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
+
+### Return type
+
+[**VersionedResourceListOfHoldingContributor**](VersionedResourceListOfHoldingContributor.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested holding contributors for each specified holding from the specified transaction portfolio |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -3492,9 +3610,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_portfolio_details = CreatePortfolioDetails()
         # create_portfolio_details = CreatePortfolioDetails.from_json("")
-        create_portfolio_details = CreatePortfolioDetails.from_dict({"corporateActionSourceId":{"scope":"Sources","code":"Vendor1"}}) # CreatePortfolioDetails | The details to create or update for the specified transaction portfolio.
+        # create_portfolio_details = CreatePortfolioDetails.from_dict({})
+        create_portfolio_details = CreatePortfolioDetails()
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:

@@ -72,9 +72,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_template_request = TransactionTemplateRequest()
         # transaction_template_request = TransactionTemplateRequest.from_json("")
-        transaction_template_request = TransactionTemplateRequest.from_dict({"description":"User-created template for overriding the default bond coupon template.","componentTransactions":[{"displayName":"Bond Income Override","transactionFieldMap":{"transactionId":"{{instrumentEventId}}-{{holdingId}}","type":"BondCoupon","source":"MyTransactionTypeSource","instrument":"{{instrument}}","transactionDate":"{{BondCouponEvent.exDate}}","settlementDate":"{{BondCouponEvent.paymentDate}}","units":"{{eligibleBalance}}","transactionPrice":{"price":"{{BondCouponEvent.couponPerUnit}}","type":"CashFlowPerUnit"},"transactionCurrency":"{{BondCouponEvent.currency}}","exchangeRate":"1","totalConsideration":{"currency":"{{BondCouponEvent.currency}}","amount":"{{BondCouponEvent.couponAmount}}"}},"transactionPropertyMap":[{"propertyKey":"Transaction/MyScope/MyCurrencyProperty","value":"{{BondCouponEvent.currency}}"}]}]}) # TransactionTemplateRequest | A request defining a new transaction template to be created.
+        # transaction_template_request = TransactionTemplateRequest.from_dict({})
+        transaction_template_request = TransactionTemplateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -661,9 +661,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_template_request = TransactionTemplateRequest()
         # transaction_template_request = TransactionTemplateRequest.from_json("")
-        transaction_template_request = TransactionTemplateRequest.from_dict({"description":"User-created template for overriding the default bond coupon template.","componentTransactions":[{"displayName":"Bond Income Override","transactionFieldMap":{"transactionId":"{{instrumentEventId}}-{{holdingId}}","type":"BondCoupon","source":"MyTransactionTypeSource","instrument":"{{instrument}}","transactionDate":"{{BondCouponEvent.exDate}}","settlementDate":"{{BondCouponEvent.paymentDate}}","units":"{{eligibleBalance}}","transactionPrice":{"price":"{{BondCouponEvent.couponPerUnit}}","type":"CashFlowPerUnit"},"transactionCurrency":"{{BondCouponEvent.currency}}","exchangeRate":"1","totalConsideration":{"currency":"{{BondCouponEvent.currency}}","amount":"{{BondCouponEvent.couponAmount}}"}},"transactionPropertyMap":[{"propertyKey":"Transaction/MyScope/MyCurrencyProperty","value":"{{BondCouponEvent.currency}}"}]}]}) # TransactionTemplateRequest | A request defining the updated values for the transaction template.
+        # transaction_template_request = TransactionTemplateRequest.from_dict({})
+        transaction_template_request = TransactionTemplateRequest()
 
         try:
             # uncomment the below to set overrides at the request level

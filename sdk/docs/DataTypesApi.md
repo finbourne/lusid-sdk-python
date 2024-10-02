@@ -71,9 +71,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_data_type_request = CreateDataTypeRequest()
         # create_data_type_request = CreateDataTypeRequest.from_json("")
-        create_data_type_request = CreateDataTypeRequest.from_dict({"scope":"TestScope","code":"MyType","typeValueRange":"Open","displayName":"My data format","description":"Data type description","valueType":"Int","unitSchema":"Basic","acceptableUnits":[{"code":"Ap","displayName":"Apples","description":"A quantity of apples"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}]}) # CreateDataTypeRequest | The definition of the new data type (optional)
+        # create_data_type_request = CreateDataTypeRequest.from_dict({})
+        create_data_type_request = CreateDataTypeRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -662,9 +662,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_data_type_request = UpdateDataTypeRequest()
         # update_data_type_request = UpdateDataTypeRequest.from_json("")
-        update_data_type_request = UpdateDataTypeRequest.from_dict({"displayName":"My data format","description":"Data type description","acceptableUnits":[{"code":"Pe","displayName":"Pears","description":"A quantity of Pears"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}]}) # UpdateDataTypeRequest | The updated definition of the data type
+        # update_data_type_request = UpdateDataTypeRequest.from_dict({})
+        update_data_type_request = UpdateDataTypeRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -763,9 +763,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_reference_data_request = UpdateReferenceDataRequest()
         # update_reference_data_request = UpdateReferenceDataRequest.from_json("")
-        update_reference_data_request = UpdateReferenceDataRequest.from_dict({"requestDefinitions":[{"key":"Field1","isRequired":true,"isUnique":false},{"key":"Field2","isRequired":true,"isUnique":false},{"key":"Field3","isRequired":true,"isUnique":false}],"requestValues":[{"value":"ValueOne","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}},{"value":"ValueTwo","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}},{"value":"ValueThree","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}}]}) # UpdateReferenceDataRequest | The updated reference data
+        # update_reference_data_request = UpdateReferenceDataRequest.from_dict({})
+        update_reference_data_request = UpdateReferenceDataRequest()
 
         try:
             # uncomment the below to set overrides at the request level

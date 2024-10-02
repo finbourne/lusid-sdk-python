@@ -67,9 +67,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_tax_rule_set_request = CreateTaxRuleSetRequest()
         # create_tax_rule_set_request = CreateTaxRuleSetRequest.from_json("")
-        create_tax_rule_set_request = CreateTaxRuleSetRequest.from_dict({"id":{"scope":"RuleSetScope","code":"RuleSetName"},"displayName":"Rule set display name","description":"Rule set description","outputPropertyKey":"Transaction/default/TaxAmount","rules":[{"name":"UKTaxRule","description":"Rule for the UK tax rate","rate":0.25,"matchCriteria":[{"propertyKey":"Instrument/myScope/market","value":"GB","criterionType":"PropertyValueEquals"},{"propertyKey":"Portfolio/myScope/taxDomicile","value":"GB","criterionType":"PropertyValueEquals"}]}]}) # CreateTaxRuleSetRequest | The contents of the rule set.
+        # create_tax_rule_set_request = CreateTaxRuleSetRequest.from_dict({})
+        create_tax_rule_set_request = CreateTaxRuleSetRequest()
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:
@@ -454,9 +454,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_tax_rule_set_request = UpdateTaxRuleSetRequest()
         # update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_json("")
-        update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_dict({"displayName":"Rule set display name","description":"Rule set description","rules":[{"name":"UKTaxRule","description":"Rule for the UK tax rate","rate":0.25,"matchCriteria":[{"propertyKey":"Instrument/myScope/market","value":"GB","criterionType":"PropertyValueEquals"},{"propertyKey":"Portfolio/myScope/taxDomicile","value":"GB","criterionType":"PropertyValueEquals"}]}]}) # UpdateTaxRuleSetRequest | The contents of the rule set.
+        # update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_dict({})
+        update_tax_rule_set_request = UpdateTaxRuleSetRequest()
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
         try:

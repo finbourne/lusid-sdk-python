@@ -78,9 +78,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_compliance_template_request = CreateComplianceTemplateRequest()
         # create_compliance_template_request = CreateComplianceTemplateRequest.from_json("")
-        create_compliance_template_request = CreateComplianceTemplateRequest.from_dict({"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepTypeRequest":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepTypeRequest":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepTypeRequest":"BranchStepRequest"},{"label":"Compare","complianceStepTypeRequest":"GroupFilterStepRequest"},{"label":"PercentCalculation","complianceStepTypeRequest":"PercentCheckStepRequest"}]}]}) # CreateComplianceTemplateRequest | Request to create a compliance rule template.
+        # create_compliance_template_request = CreateComplianceTemplateRequest.from_dict({})
+        create_compliance_template_request = CreateComplianceTemplateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1152,9 +1152,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # compliance_run_configuration = ComplianceRunConfiguration()
         # compliance_run_configuration = ComplianceRunConfiguration.from_json("")
-        compliance_run_configuration = ComplianceRunConfiguration.from_dict({"preTradeConfiguration":{"includeEntityTypes":"OrdersAndAllocations"}}) # ComplianceRunConfiguration | Configuration options for the compliance run. (optional)
+        # compliance_run_configuration = ComplianceRunConfiguration.from_dict({})
+        compliance_run_configuration = ComplianceRunConfiguration()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1255,9 +1255,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_compliance_template_request = UpdateComplianceTemplateRequest()
         # update_compliance_template_request = UpdateComplianceTemplateRequest.from_json("")
-        update_compliance_template_request = UpdateComplianceTemplateRequest.from_dict({"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepTypeRequest":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepTypeRequest":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepTypeRequest":"BranchStepRequest"},{"label":"Compare","complianceStepTypeRequest":"GroupFilterStepRequest"},{"label":"PercentCalculation","complianceStepTypeRequest":"PercentCheckStepRequest"}]}]}) # UpdateComplianceTemplateRequest | Request to update a compliance rule template.
+        # update_compliance_template_request = UpdateComplianceTemplateRequest.from_dict({})
+        update_compliance_template_request = UpdateComplianceTemplateRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1354,9 +1354,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_compliance_rule_request = UpsertComplianceRuleRequest()
         # upsert_compliance_rule_request = UpsertComplianceRuleRequest.from_json("")
-        upsert_compliance_rule_request = UpsertComplianceRuleRequest.from_dict({"id":{"scope":"live","code":"exampleRule"},"name":"A friendly name.","description":"A friendly description.","active":true,"templateId":{"scope":"system","code":"PercentCheck"},"variation":"standard","portfolioGroupId":{"scope":"examples","code":"examplePortfolioGroup"},"parameters":{"BoolParameter":{"value":true,"complianceParameterType":"BoolComplianceParameter"},"DecimalParameter":{"value":0,"complianceParameterType":"DecimalComplianceParameter"},"StringParameter":{"value":"An example string parameter","complianceParameterType":"StringComplianceParameter"},"DateTimeParameter":{"value":"2023-06-06T00:00:00.0000000+00:00","complianceParameterType":"DateTimeComplianceParameter"},"PropertyKeyParameter":{"value":"Compliance/live/RuleGroup","complianceParameterType":"PropertyKeyComplianceParameter"},"AddressKeyParameter":{"value":"Valuation/PvInReportCcy","complianceParameterType":"AddressKeyComplianceParameter"},"PortfolioIdParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioIdComplianceParameter"},"PortfolioGroupIdParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioGroupIdComplianceParameter"},"DecimalListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"DecimalListComplianceParameter"},"AddressKeyListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"AddressKeyListComplianceParameter"},"BoolListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"BoolListComplianceParameter"},"StringListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"StringListComplianceParameter"},"DateTimeListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"DateTimeListComplianceParameter"},"PropertyKeyListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PropertyKeyListComplianceParameter"},"PortfolioIdListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioIdListComplianceParameter"},"PortfolioGroupIdListParameter":{"value":{"scope":"testscope","code":"testcode"},"complianceParameterType":"PortfolioGroupIdListComplianceParameter"}},"properties":{"Compliance/MyScope/SomeRuleProperty":{"key":"Compliance/MyScope/SomeRuleProperty","value":{"labelValue":"XYZ000034567"}}}}) # UpsertComplianceRuleRequest |  (optional)
+        # upsert_compliance_rule_request = UpsertComplianceRuleRequest.from_dict({})
+        upsert_compliance_rule_request = UpsertComplianceRuleRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1451,9 +1451,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_compliance_run_summary_request = UpsertComplianceRunSummaryRequest()
         # upsert_compliance_run_summary_request = UpsertComplianceRunSummaryRequest.from_json("")
-        upsert_compliance_run_summary_request = UpsertComplianceRunSummaryRequest.from_dict({"runId":{"scope":"SomeScope","code":"run-1"},"instigatedAt":"2020-01-05T00:00:00.0000000+00:00","completedAt":"2020-01-05T00:00:01.0000000+00:00","schedule":"PreTrade","results":[{"ruleId":{"scope":"SomeScope","code":"rule-1"},"templateId":{"scope":"system","code":"template-1"},"variation":"standard","ruleStatus":"passed","affectedPortfolios":[{"scope":"PortfolioScope","code":"PortfolioCode"}],"affectedOrders":[{"scope":"OrderScope","code":"OrderCode"}],"parametersUsed":{"UpperBound":"30","LowerBound":"0"},"ruleBreakdown":[{"groupStatus":"failed","resultsUsed":{"Valuation/PV":650,"Exposure/PV":650},"propertiesUsed":{"Instrument/data/Issuer":[{"key":"Instrument/data/Issuer","value":{"labelValue":"ABC"}}]},"missingDataInformation":["No Missing Data"],"lineage":[{"index":0,"label":"Initial","subLabel":"Initial","infoType":"","information":""},{"index":1,"label":"Step1","subLabel":"SomeStep1Information","infoType":"","information":""},{"index":2,"label":"Step2","subLabel":"Step2","infoType":"","information":""}]}]}]}) # UpsertComplianceRunSummaryRequest |  (optional)
+        # upsert_compliance_run_summary_request = UpsertComplianceRunSummaryRequest.from_dict({})
+        upsert_compliance_run_summary_request = UpsertComplianceRunSummaryRequest()
 
         try:
             # uncomment the below to set overrides at the request level

@@ -360,9 +360,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # order_set_request = OrderSetRequest()
         # order_set_request = OrderSetRequest.from_json("")
-        order_set_request = OrderSetRequest.from_dict({"orderRequests":[{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"side":"Buy","orderBookId":{"scope":"MyScope","code":"UKEQ-Orders"},"portfolioId":{"scope":"MyScope","code":"UK-Equity"},"id":{"scope":"MyScope","code":"ORD00000123"},"state":"New","type":"Limit","timeInForce":"GoodTilCancel","date":"2023-05-02T00:00:00.0000000+00:00","price":{"amount":534,"currency":"USD"},"orderInstruction":{"scope":"MyScope","code":"Instruction-06"},"package":{"scope":"MyScope","code":"UKEQ-Package"}}]}) # OrderSetRequest | The collection of order requests. (optional)
+        # order_set_request = OrderSetRequest.from_dict({})
+        order_set_request = OrderSetRequest()
 
         try:
             # uncomment the below to set overrides at the request level

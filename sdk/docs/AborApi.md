@@ -77,9 +77,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # diary_entry_request = DiaryEntryRequest()
         # diary_entry_request = DiaryEntryRequest.from_json("")
-        diary_entry_request = DiaryEntryRequest.from_dict({"diaryEntryCode":"DiaryEntryCode","name":"2023_Q1","status":"Estimate","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}}) # DiaryEntryRequest | The diary entry to add.
+        # diary_entry_request = DiaryEntryRequest.from_dict({})
+        diary_entry_request = DiaryEntryRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -178,9 +178,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # close_period_diary_entry_request = ClosePeriodDiaryEntryRequest()
         # close_period_diary_entry_request = ClosePeriodDiaryEntryRequest.from_json("")
-        close_period_diary_entry_request = ClosePeriodDiaryEntryRequest.from_dict({"diaryEntryCode":"2023","name":"2023","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","status":"Estimate","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}},"closingOptions":[]}) # ClosePeriodDiaryEntryRequest | The request body, containing details to apply to the closing/locking period.
+        # close_period_diary_entry_request = ClosePeriodDiaryEntryRequest.from_dict({})
+        close_period_diary_entry_request = ClosePeriodDiaryEntryRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -278,9 +278,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # abor_request = AborRequest()
         # abor_request = AborRequest.from_json("")
-        abor_request = AborRequest.from_dict({"code":"AborCode","displayName":"Standard Abor","description":"A standard Abor","portfolioIds":[{"scope":"portfolioScope","code":"portfolioCode","portfolioEntityType":"SinglePortfolio"}],"aborConfigurationId":{"scope":"ConfigScope","code":"ConfigCode"},"properties":{"Abor/MyScope/FundManagerName":{"key":"Abor/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # AborRequest | The definition of the Abor.
+        # abor_request = AborRequest.from_dict({})
+        abor_request = AborRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -572,9 +572,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # journal_entry_lines_query_parameters = JournalEntryLinesQueryParameters()
         # journal_entry_lines_query_parameters = JournalEntryLinesQueryParameters.from_json("")
-        journal_entry_lines_query_parameters = JournalEntryLinesQueryParameters.from_dict({"start":{"date":"2018-03-05T00:00:00.0000000+00:00"},"end":{"diaryEntry":"2023_01"},"dateMode":"ActivityDate","generalLedgerProfileCode":"STEMProfile1","propertyKeys":[]}) # JournalEntryLinesQueryParameters | The query parameters used in running the generation of the Journal Entry lines.
+        # journal_entry_lines_query_parameters = JournalEntryLinesQueryParameters.from_dict({})
+        journal_entry_lines_query_parameters = JournalEntryLinesQueryParameters()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified. (optional)
         filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
         limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -681,9 +681,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # trial_balance_query_parameters = TrialBalanceQueryParameters()
         # trial_balance_query_parameters = TrialBalanceQueryParameters.from_json("")
-        trial_balance_query_parameters = TrialBalanceQueryParameters.from_dict({"start":{"date":"2018-03-05T00:00:00.0000000+00:00"},"end":{"diaryEntry":"2023_01"},"dateMode":"ActivityDate","generalLedgerProfileCode":"STEMProfile1","propertyKeys":[],"excludeCleardownModule":true}) # TrialBalanceQueryParameters | The query parameters used in running the generation of the Trial Balance.
+        # trial_balance_query_parameters = TrialBalanceQueryParameters.from_dict({})
+        trial_balance_query_parameters = TrialBalanceQueryParameters()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve trial balance. Defaults to returning the latest version              of each transaction if not specified. (optional)
         filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
         limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -1002,9 +1002,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # lock_period_diary_entry_request = LockPeriodDiaryEntryRequest()
         # lock_period_diary_entry_request = LockPeriodDiaryEntryRequest.from_json("")
-        lock_period_diary_entry_request = LockPeriodDiaryEntryRequest.from_dict({"diaryEntryCode":"YearEnd2023","closingOptions":[]}) # LockPeriodDiaryEntryRequest | The request body, detailing lock details (optional)
+        # lock_period_diary_entry_request = LockPeriodDiaryEntryRequest.from_dict({})
+        lock_period_diary_entry_request = LockPeriodDiaryEntryRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1199,9 +1199,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # re_open_period_diary_entry_request = ReOpenPeriodDiaryEntryRequest()
         # re_open_period_diary_entry_request = ReOpenPeriodDiaryEntryRequest.from_json("")
-        re_open_period_diary_entry_request = ReOpenPeriodDiaryEntryRequest.from_dict({"diaryEntryCode":"YearEnd2023"}) # ReOpenPeriodDiaryEntryRequest | The request body, detailing re open details (optional)
+        # re_open_period_diary_entry_request = ReOpenPeriodDiaryEntryRequest.from_dict({})
+        re_open_period_diary_entry_request = ReOpenPeriodDiaryEntryRequest()
 
         try:
             # uncomment the below to set overrides at the request level

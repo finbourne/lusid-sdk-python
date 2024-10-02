@@ -69,9 +69,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # fee_type_request = FeeTypeRequest()
         # fee_type_request = FeeTypeRequest.from_json("")
-        fee_type_request = FeeTypeRequest.from_dict({"code":"AdminFees","displayName":"AdminFees","description":"Generating transactions to accrue and settle admin fees for funds","componentTransactions":[{"displayName":"Transaction for admin fee accruals","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Accrual","type":"FeeAccrual","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]},{"displayName":"Transaction for admin fee payables","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Payable","type":"FeePayment","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]}]}) # FeeTypeRequest | The contents of the FeeType.
+        # fee_type_request = FeeTypeRequest.from_dict({})
+        fee_type_request = FeeTypeRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -546,9 +546,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_fee_type_request = UpdateFeeTypeRequest()
         # update_fee_type_request = UpdateFeeTypeRequest.from_json("")
-        update_fee_type_request = UpdateFeeTypeRequest.from_dict({"displayName":"AdminFees","description":"Generating transactions to accrue and settle admin fees for funds","componentTransactions":[{"displayName":"Transaction for admin fee accruals","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Accrual","type":"FeeAccrual","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]},{"displayName":"Transaction for admin fee payables","transactionFieldMap":{"transactionId":"{{FundFee.defaultFeeTransactionId}}-Payable","type":"FeePayment","source":"default","instrument":"{{FundFee.feeInstrument}}","transactionDate":"{{FundFee.valuationPointDate}}","settlementDate":"{{FundFee.valuationPointDate}}","units":"{{FundFee.amount}}","transactionPrice":{"price":"1.0","type":"Price"},"transactionCurrency":"{{FundFee.feeCurrency}}","exchangeRate":"1.0","totalConsideration":{"currency":"{{FundFee.feeCurrency}}","amount":"{{FundFee.amount}}"}},"transactionPropertyMap":[]}]}) # UpdateFeeTypeRequest | The contents of the FeeType.
+        # update_fee_type_request = UpdateFeeTypeRequest.from_dict({})
+        update_fee_type_request = UpdateFeeTypeRequest()
 
         try:
             # uncomment the below to set overrides at the request level

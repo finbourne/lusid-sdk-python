@@ -91,9 +91,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # resource_id = ResourceId()
         # resource_id = ResourceId.from_json("")
-        resource_id = ResourceId.from_dict({"scope":"MyScope","code":"MyCode"}) # ResourceId | The resource identifier of the portfolio to add to the portfolio group. (optional)
+        # resource_id = ResourceId.from_dict({})
+        resource_id = ResourceId()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -194,9 +194,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # resource_id = ResourceId()
         # resource_id = ResourceId.from_json("")
-        resource_id = ResourceId.from_dict({"scope":"MyScope","code":"MyCode"}) # ResourceId | The resource identifier of the portfolio group to add to the portfolio group as a sub group. (optional)
+        # resource_id = ResourceId.from_dict({})
+        resource_id = ResourceId()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -296,9 +296,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # transaction_query_parameters = TransactionQueryParameters()
         # transaction_query_parameters = TransactionQueryParameters.from_json("")
-        transaction_query_parameters = TransactionQueryParameters.from_dict({"startDate":"2018-03-05T00:00:00.0000000+00:00","endDate":"2018-03-19T00:00:00.0000000+00:00","queryMode":"TradeDate","showCancelledTransactions":false}) # TransactionQueryParameters | The query queryParameters which control how the output transactions are built.
+        # transaction_query_parameters = TransactionQueryParameters.from_dict({})
+        transaction_query_parameters = TransactionQueryParameters()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest               version of each transaction if not specified. (optional)
         filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Transaction Type, use \"type eq 'Buy'\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or               \"Transaction/strategy/quantsignal\". (optional)
@@ -406,9 +406,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_portfolio_group_request = CreatePortfolioGroupRequest()
         # create_portfolio_group_request = CreatePortfolioGroupRequest.from_json("")
-        create_portfolio_group_request = CreatePortfolioGroupRequest.from_dict({"code":"MyGroupCode","created":"2019-10-04T00:00:00.0000000+00:00","values":[{"scope":"MyScope","code":"MyPortfolioCode1"},{"scope":"MyScope","code":"MyPortfolioCode2"}],"subGroups":[{"scope":"MyScope","code":"MySubGroupCode"}],"properties":{},"displayName":"MyGroupName","description":"My group description"}) # CreatePortfolioGroupRequest | The definition and details of the portfolio group. (optional)
+        # create_portfolio_group_request = CreatePortfolioGroupRequest.from_dict({})
+        create_portfolio_group_request = CreatePortfolioGroupRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -2441,9 +2441,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_portfolio_group_request = UpdatePortfolioGroupRequest()
         # update_portfolio_group_request = UpdatePortfolioGroupRequest.from_json("")
-        update_portfolio_group_request = UpdatePortfolioGroupRequest.from_dict({"displayName":"MyGroupName","description":"My Group Description"}) # UpdatePortfolioGroupRequest | The updated portfolio group definition. (optional)
+        # update_portfolio_group_request = UpdatePortfolioGroupRequest.from_dict({})
+        update_portfolio_group_request = UpdatePortfolioGroupRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -2640,9 +2640,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_portfolio_group_access_metadata_request = UpsertPortfolioGroupAccessMetadataRequest()
         # upsert_portfolio_group_access_metadata_request = UpsertPortfolioGroupAccessMetadataRequest.from_json("")
-        upsert_portfolio_group_access_metadata_request = UpsertPortfolioGroupAccessMetadataRequest.from_dict({"metadata":[{"value":"SilverLicence","provider":"TestDataProvider"}]}) # UpsertPortfolioGroupAccessMetadataRequest | The Portfolio Group Access Metadata rule to upsert
+        # upsert_portfolio_group_access_metadata_request = UpsertPortfolioGroupAccessMetadataRequest.from_dict({})
+        upsert_portfolio_group_access_metadata_request = UpsertPortfolioGroupAccessMetadataRequest()
         effective_at = 'effective_at_example' # str | The date this rule will be effective from (optional)
         effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata (optional)
 

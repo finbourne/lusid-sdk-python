@@ -83,9 +83,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # valuation_point_data_request = ValuationPointDataRequest()
         # valuation_point_data_request = ValuationPointDataRequest.from_json("")
-        valuation_point_data_request = ValuationPointDataRequest.from_dict({"diaryEntryCode":"DiaryEntryCode"}) # ValuationPointDataRequest | The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.
+        # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
+        valuation_point_data_request = ValuationPointDataRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -184,9 +184,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # fee_request = FeeRequest()
         # fee_request = FeeRequest.from_json("")
-        fee_request = FeeRequest.from_dict({"code":"FeeCode","feeTypeId":{"scope":"FeeTypeScope","code":"FeeTypeCode"},"displayName":"Legal Fees","description":"Legal Fees","origin":"Separate Agreement","accrualCurrency":"GBP","treatment":"Monthly","totalAnnualAccrualAmount":75000,"payableFrequency":"Annually","businessDayConvention":"Previous","startDate":"2020-10-25T00:00:00.0000000+00:00","endDate":"2023-10-25T00:00:00.0000000+00:00","anchorDate":{"day":1,"month":1},"properties":{}}) # FeeRequest | The Fee to create.
+        # fee_request = FeeRequest.from_dict({})
+        fee_request = FeeRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -284,9 +284,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # fund_request = FundRequest()
         # fund_request = FundRequest.from_json("")
-        fund_request = FundRequest.from_dict({"code":"FundCode","displayName":"Fund Name","description":"Standard Fund","fundConfigurationId":{"scope":"FundConfigurationScope","code":"FundConfigurationCode"},"aborId":{"scope":"AborScope","code":"AborCode"},"shareClassInstrumentScopes":["Scope1","Scope2"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/Figi":"GB0007980598"}}],"type":"Master","inceptionDate":"9999-12-31T23:59:59.9999999+00:00","decimalPlaces":6,"yearEndDate":{"day":1,"month":12},"properties":{"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # FundRequest | The definition of the Fund.
+        # fund_request = FundRequest.from_dict({})
+        fund_request = FundRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -670,9 +670,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # valuation_point_data_request = ValuationPointDataRequest()
         # valuation_point_data_request = ValuationPointDataRequest.from_json("")
-        valuation_point_data_request = ValuationPointDataRequest.from_dict({"diaryEntryCode":"DiaryEntryCode"}) # ValuationPointDataRequest | The valuationPointDataRequest which contains the diary entry code to mark as final.
+        # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
+        valuation_point_data_request = ValuationPointDataRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -973,9 +973,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
         # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
-        valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({"end":{"diaryEntry":"DiaryEntryCode"}}) # ValuationPointDataQueryParameters | The arguments to use for querying the Valuation Point data
+        # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
+        valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
 
         try:
@@ -1588,9 +1588,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # set_share_class_instruments_request = SetShareClassInstrumentsRequest()
         # set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_json("")
-        set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_dict({"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"},"launchPrice":1}]}) # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
+        # set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_dict({})
+        set_share_class_instruments_request = SetShareClassInstrumentsRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -1689,9 +1689,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # upsert_valuation_point_request = UpsertValuationPointRequest()
         # upsert_valuation_point_request = UpsertValuationPointRequest.from_json("")
-        upsert_valuation_point_request = UpsertValuationPointRequest.from_dict({"diaryEntryCode":"ValuationJan2024","name":"ValuationJan2024","effectiveAt":"2024-01-31T23:59:59.0000000+00:00","queryAsAt":"2024-01-31T23:59:59.0000000+00:00","properties":{}}) # UpsertValuationPointRequest | The Valuation Point Estimate definition to Upsert
+        # upsert_valuation_point_request = UpsertValuationPointRequest.from_dict({})
+        upsert_valuation_point_request = UpsertValuationPointRequest()
 
         try:
             # uncomment the below to set overrides at the request level
