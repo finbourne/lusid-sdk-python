@@ -18,25 +18,31 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
+from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.instrument_event import InstrumentEvent
-from lusid.models.units_ratio import UnitsRatio
+from lusid.models.new_instrument import NewInstrument
+from lusid.models.security_offer_election import SecurityOfferElection
 
-class StockDividendEvent(InstrumentEvent):
+class TenderEvent(InstrumentEvent):
     """
-    A payment to shareholders that consists of additional shares rather than cash.  # noqa: E501
+    Tender Event (TEND).  # noqa: E501
     """
-    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
-    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
+    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="The date the tender is announced.")
+    ex_date: datetime = Field(..., alias="exDate", description="The ex date (entitlement date) of the event.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the event.")
+    new_instrument: NewInstrument = Field(..., alias="newInstrument")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price paid in lieu of fractionalUnits.")
     fractional_units_cash_currency: Optional[StrictStr] = Field(None, alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractionalUnits.")
-    units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
+    security_offer_elections: Optional[conlist(SecurityOfferElection)] = Field(None, alias="securityOfferElections", description="List of possible SecurityOfferElections for this event.")
+    cash_and_security_offer_elections: Optional[conlist(CashAndSecurityOfferElection)] = Field(None, alias="cashAndSecurityOfferElections", description="List of possible CashAndSecurityOfferElections for this event.")
+    cash_offer_elections: Optional[conlist(CashOfferElection)] = Field(None, alias="cashOfferElections", description="List of possible CashOfferElections for this event.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "exDate", "paymentDate", "recordDate", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "unitsRatio"]
+    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "newInstrument", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -59,8 +65,8 @@ class StockDividendEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> StockDividendEvent:
-        """Create an instance of StockDividendEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> TenderEvent:
+        """Create an instance of TenderEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,9 +76,30 @@ class StockDividendEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of units_ratio
-        if self.units_ratio:
-            _dict['unitsRatio'] = self.units_ratio.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of new_instrument
+        if self.new_instrument:
+            _dict['newInstrument'] = self.new_instrument.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in security_offer_elections (list)
+        _items = []
+        if self.security_offer_elections:
+            for _item in self.security_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['securityOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_and_security_offer_elections (list)
+        _items = []
+        if self.cash_and_security_offer_elections:
+            for _item in self.cash_and_security_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashAndSecurityOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_offer_elections (list)
+        _items = []
+        if self.cash_offer_elections:
+            for _item in self.cash_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashOfferElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -98,26 +125,44 @@ class StockDividendEvent(InstrumentEvent):
         if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
             _dict['fractionalUnitsCashCurrency'] = None
 
+        # set to None if security_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.security_offer_elections is None and "security_offer_elections" in self.__fields_set__:
+            _dict['securityOfferElections'] = None
+
+        # set to None if cash_and_security_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_and_security_offer_elections is None and "cash_and_security_offer_elections" in self.__fields_set__:
+            _dict['cashAndSecurityOfferElections'] = None
+
+        # set to None if cash_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
+            _dict['cashOfferElections'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> StockDividendEvent:
-        """Create an instance of StockDividendEvent from a dict"""
+    def from_dict(cls, obj: dict) -> TenderEvent:
+        """Create an instance of TenderEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return StockDividendEvent.parse_obj(obj)
+            return TenderEvent.parse_obj(obj)
 
-        _obj = StockDividendEvent.parse_obj({
+        _obj = TenderEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "announcement_date": obj.get("announcementDate"),
             "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate"),
             "record_date": obj.get("recordDate"),
+            "payment_date": obj.get("paymentDate"),
+            "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
-            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
+            "security_offer_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityOfferElections")] if obj.get("securityOfferElections") is not None else None,
+            "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
+            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

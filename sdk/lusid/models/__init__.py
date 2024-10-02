@@ -541,6 +541,7 @@ from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
 from lusid.models.mbs_coupon_event import MbsCouponEvent
 from lusid.models.mbs_interest_deferral_event import MbsInterestDeferralEvent
+from lusid.models.mbs_interest_shortfall_event import MbsInterestShortfallEvent
 from lusid.models.mbs_principal_event import MbsPrincipalEvent
 from lusid.models.mbs_principal_write_off_event import MbsPrincipalWriteOffEvent
 from lusid.models.merger_event import MergerEvent
@@ -948,6 +949,7 @@ from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 from lusid.models.tax_rule import TaxRule
 from lusid.models.tax_rule_set import TaxRuleSet
 from lusid.models.template_field import TemplateField
+from lusid.models.tender_event import TenderEvent
 from lusid.models.term_deposit import TermDeposit
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
@@ -1645,6 +1647,7 @@ __all__ = [
     "MaturityEvent",
     "MbsCouponEvent",
     "MbsInterestDeferralEvent",
+    "MbsInterestShortfallEvent",
     "MbsPrincipalEvent",
     "MbsPrincipalWriteOffEvent",
     "MergerEvent",
@@ -2052,6 +2055,7 @@ __all__ = [
     "TaxRule",
     "TaxRuleSet",
     "TemplateField",
+    "TenderEvent",
     "TermDeposit",
     "TotalReturnSwap",
     "Touch",

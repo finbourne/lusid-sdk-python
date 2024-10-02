@@ -68,6 +68,8 @@ class InstrumentEventType(str, Enum):
     BONUSISSUEEVENT = 'BonusIssueEvent'
     MBSPRINCIPALWRITEOFFEVENT = 'MbsPrincipalWriteOffEvent'
     MBSINTERESTDEFERRALEVENT = 'MbsInterestDeferralEvent'
+    MBSINTERESTSHORTFALLEVENT = 'MbsInterestShortfallEvent'
+    TENDEREVENT = 'TenderEvent'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentEventType:

@@ -18,20 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class CdsCreditEvent(InstrumentEvent):
+class MbsInterestShortfallEvent(InstrumentEvent):
     """
-    Definition of a credit event for credit default swap (CDS) instruments.  # noqa: E501
+    Definition of an MBS Interest Shortfall Event  This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and  not capitalised into the outstanding principal balance of a mortgage-backed security.  # noqa: E501
     """
-    effective_date: datetime = Field(..., alias="effectiveDate", description="The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation.")
-    auction_date: Optional[datetime] = Field(None, alias="auctionDate", description="The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined.")
-    recovery_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="recoveryRate", description="The fraction of the defaulted debt that can be recovered.")
+    ex_date: datetime = Field(..., alias="exDate", description="The ex date (entitlement date) of the interest payment, usually several weeks prior to the payment date")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the interest")
+    currency: StrictStr = Field(..., description="The currency in which the interest amount is notated")
+    interest_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="interestPerUnit", description="The amount by which the coupon amount will fall short for each unit of the instrument held on the ex date")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "auctionDate", "recoveryRate"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "interestPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -54,8 +55,8 @@ class CdsCreditEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CdsCreditEvent:
-        """Create an instance of CdsCreditEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> MbsInterestShortfallEvent:
+        """Create an instance of MbsInterestShortfallEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,32 +71,23 @@ class CdsCreditEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if auction_date (nullable) is None
-        # and __fields_set__ contains the field
-        if self.auction_date is None and "auction_date" in self.__fields_set__:
-            _dict['auctionDate'] = None
-
-        # set to None if recovery_rate (nullable) is None
-        # and __fields_set__ contains the field
-        if self.recovery_rate is None and "recovery_rate" in self.__fields_set__:
-            _dict['recoveryRate'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CdsCreditEvent:
-        """Create an instance of CdsCreditEvent from a dict"""
+    def from_dict(cls, obj: dict) -> MbsInterestShortfallEvent:
+        """Create an instance of MbsInterestShortfallEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CdsCreditEvent.parse_obj(obj)
+            return MbsInterestShortfallEvent.parse_obj(obj)
 
-        _obj = CdsCreditEvent.parse_obj({
+        _obj = MbsInterestShortfallEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_date": obj.get("effectiveDate"),
-            "auction_date": obj.get("auctionDate"),
-            "recovery_rate": obj.get("recoveryRate")
+            "ex_date": obj.get("exDate"),
+            "payment_date": obj.get("paymentDate"),
+            "currency": obj.get("currency"),
+            "interest_per_unit": obj.get("interestPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
