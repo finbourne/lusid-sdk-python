@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **price** | **float** |  | [optional] 
-**type** | **str** | The available values are: Price, Yield, Spread, CashFlowPerUnit | [optional] 
+**type** | **str** | The available values are: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice | [optional] 
 
 ## Example
 

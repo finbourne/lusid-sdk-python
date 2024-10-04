@@ -5,6 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_upsert_instrument_properties**](InstrumentsApi.md#batch_upsert_instrument_properties) | **POST** /api/instruments/$batchupsertproperties | BatchUpsertInstrumentProperties: Batch upsert instruments properties
+[**calculate_settlement_date**](InstrumentsApi.md#calculate_settlement_date) | **GET** /api/instruments/{identifierType}/{identifier}/settlementdate | [EARLY ACCESS] CalculateSettlementDate: Get the settlement date for an instrument.
 [**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | DeleteInstrument: Soft delete a single instrument
 [**delete_instrument_properties**](InstrumentsApi.md#delete_instrument_properties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
 [**delete_instruments**](InstrumentsApi.md#delete_instruments) | **POST** /api/instruments/$delete | DeleteInstruments: Soft or hard delete multiple instruments
@@ -119,6 +120,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The successfully upserted properties along with any failures. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **calculate_settlement_date**
+> AddBusinessDaysToDateResponse calculate_settlement_date(identifier_type, identifier, transaction_date=transaction_date, scope=scope, as_at=as_at)
+
+[EARLY ACCESS] CalculateSettlementDate: Get the settlement date for an instrument.
+
+Get the settlement date for a given trade date and instrument. The calculated settlement date will be in UTC.  If a cut label transaction date is provided, the settlement date will be calculated relative to the absolute UTC datetime.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    InstrumentsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(InstrumentsApi)
+        identifier_type = 'identifier_type_example' # str | An identifier type attached to the Instrument.
+        identifier = 'identifier_example' # str | The identifier value.
+        transaction_date = 'transaction_date_example' # str | The transaction date to calculate the settlement date from. This can be a UTC datetime offset or a cut label. (optional)
+        scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the related instrument and calendars for calculation. Defaults to              returning the latest version if not specified. (optional)
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.calculate_settlement_date(identifier_type, identifier, transaction_date=transaction_date, scope=scope, as_at=as_at, opts=opts)
+
+            # [EARLY ACCESS] CalculateSettlementDate: Get the settlement date for an instrument.
+            api_response = await api_instance.calculate_settlement_date(identifier_type, identifier, transaction_date=transaction_date, scope=scope, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling InstrumentsApi->calculate_settlement_date: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **identifier_type** | **str**| An identifier type attached to the Instrument. | 
+ **identifier** | **str**| The identifier value. | 
+ **transaction_date** | **str**| The transaction date to calculate the settlement date from. This can be a UTC datetime offset or a cut label. | [optional] 
+ **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the related instrument and calendars for calculation. Defaults to              returning the latest version if not specified. | [optional] 
+
+### Return type
+
+[**AddBusinessDaysToDateResponse**](AddBusinessDaysToDateResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The calculated settlement date. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
