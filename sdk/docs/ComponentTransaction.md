@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **condition** | **str** |  | [optional] 
 **transaction_field_map** | [**TransactionFieldMap**](TransactionFieldMap.md) |  | 
 **transaction_property_map** | [**List[TransactionPropertyMap]**](TransactionPropertyMap.md) |  | 
+**preserve_tax_lot_structure** | **bool** | Controls if tax lot structure should be preserved when cost base is transferred to a new holding. For example in Spin Off instrument events. | [optional] 
 
 ## Example
 

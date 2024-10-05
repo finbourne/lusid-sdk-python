@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, conlist, constr
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_property_map import TransactionPropertyMap
 
@@ -31,7 +31,8 @@ class ComponentTransaction(BaseModel):
     condition: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
     transaction_field_map: TransactionFieldMap = Field(..., alias="transactionFieldMap")
     transaction_property_map: conlist(TransactionPropertyMap) = Field(..., alias="transactionPropertyMap")
-    __properties = ["displayName", "condition", "transactionFieldMap", "transactionPropertyMap"]
+    preserve_tax_lot_structure: Optional[StrictBool] = Field(None, alias="preserveTaxLotStructure", description="Controls if tax lot structure should be preserved when cost base is transferred to a new holding. For example in Spin Off instrument events.")
+    __properties = ["displayName", "condition", "transactionFieldMap", "transactionPropertyMap", "preserveTaxLotStructure"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +73,11 @@ class ComponentTransaction(BaseModel):
         if self.condition is None and "condition" in self.__fields_set__:
             _dict['condition'] = None
 
+        # set to None if preserve_tax_lot_structure (nullable) is None
+        # and __fields_set__ contains the field
+        if self.preserve_tax_lot_structure is None and "preserve_tax_lot_structure" in self.__fields_set__:
+            _dict['preserveTaxLotStructure'] = None
+
         return _dict
 
     @classmethod
@@ -87,6 +93,7 @@ class ComponentTransaction(BaseModel):
             "display_name": obj.get("displayName"),
             "condition": obj.get("condition"),
             "transaction_field_map": TransactionFieldMap.from_dict(obj.get("transactionFieldMap")) if obj.get("transactionFieldMap") is not None else None,
-            "transaction_property_map": [TransactionPropertyMap.from_dict(_item) for _item in obj.get("transactionPropertyMap")] if obj.get("transactionPropertyMap") is not None else None
+            "transaction_property_map": [TransactionPropertyMap.from_dict(_item) for _item in obj.get("transactionPropertyMap")] if obj.get("transactionPropertyMap") is not None else None,
+            "preserve_tax_lot_structure": obj.get("preserveTaxLotStructure")
         })
         return _obj
