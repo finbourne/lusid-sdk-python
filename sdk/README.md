@@ -233,8 +233,10 @@ Class | Method | HTTP request | Description
 *GroupReconciliationsApi* | [**create_group_reconciliation_definition**](docs/GroupReconciliationsApi.md#create_group_reconciliation_definition) | **POST** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition
 *GroupReconciliationsApi* | [**delete_comparison_ruleset**](docs/GroupReconciliationsApi.md#delete_comparison_ruleset) | **DELETE** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] DeleteComparisonRuleset: Deletes a particular Group Reconciliation Comparison Ruleset
 *GroupReconciliationsApi* | [**delete_group_reconciliation_definition**](docs/GroupReconciliationsApi.md#delete_group_reconciliation_definition) | **DELETE** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code} | [EXPERIMENTAL] DeleteGroupReconciliationDefinition: Delete Group Reconciliation Definition
-*GroupReconciliationsApi* | [**get_comparison_ruleset**](docs/GroupReconciliationsApi.md#get_comparison_ruleset) | **GET** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code
+*GroupReconciliationsApi* | [**get_comparison_result**](docs/GroupReconciliationsApi.md#get_comparison_result) | **GET** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/{resultId} | [EXPERIMENTAL] GetComparisonResult: Get a single Group Reconciliation Comparison Result by scope and code.
+*GroupReconciliationsApi* | [**get_comparison_ruleset**](docs/GroupReconciliationsApi.md#get_comparison_ruleset) | **GET** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code.
 *GroupReconciliationsApi* | [**get_group_reconciliation_definition**](docs/GroupReconciliationsApi.md#get_group_reconciliation_definition) | **GET** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code} | [EXPERIMENTAL] GetGroupReconciliationDefinition: Get group reconciliation definition
+*GroupReconciliationsApi* | [**list_comparison_results**](docs/GroupReconciliationsApi.md#list_comparison_results) | **GET** /api/reconciliations/comparisonresults | [EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.
 *GroupReconciliationsApi* | [**list_comparison_rulesets**](docs/GroupReconciliationsApi.md#list_comparison_rulesets) | **GET** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets
 *GroupReconciliationsApi* | [**list_group_reconciliation_definitions**](docs/GroupReconciliationsApi.md#list_group_reconciliation_definitions) | **GET** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions
 *GroupReconciliationsApi* | [**update_comparison_ruleset**](docs/GroupReconciliationsApi.md#update_comparison_ruleset) | **PUT** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code
@@ -562,7 +564,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**list_custodian_accounts**](docs/TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
 *TransactionPortfoliosApi* | [**list_holdings_adjustments**](docs/TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
 *TransactionPortfoliosApi* | [**patch_portfolio_details**](docs/TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
-*TransactionPortfoliosApi* | [**resolve_instrument**](docs/TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | [EARLY ACCESS] ResolveInstrument: Resolve instrument
+*TransactionPortfoliosApi* | [**resolve_instrument**](docs/TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
 *TransactionPortfoliosApi* | [**set_holdings**](docs/TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | SetHoldings: Set holdings
 *TransactionPortfoliosApi* | [**upsert_custodian_accounts**](docs/TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
 *TransactionPortfoliosApi* | [**upsert_custodian_accounts_properties**](docs/TransactionPortfoliosApi.md#upsert_custodian_accounts_properties) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode}/properties/$upsert | [EXPERIMENTAL] UpsertCustodianAccountsProperties: Upsert custodian accounts properties
@@ -696,6 +698,7 @@ Class | Method | HTTP request | Description
  - [Calendar](docs/Calendar.md)
  - [CalendarDate](docs/CalendarDate.md)
  - [CalendarDependency](docs/CalendarDependency.md)
+ - [CallOnIntermediateSecuritiesEvent](docs/CallOnIntermediateSecuritiesEvent.md)
  - [CancelOrderAndMoveRemainingResult](docs/CancelOrderAndMoveRemainingResult.md)
  - [CancelOrdersAndMoveRemainingRequest](docs/CancelOrdersAndMoveRemainingRequest.md)
  - [CancelOrdersAndMoveRemainingResponse](docs/CancelOrdersAndMoveRemainingResponse.md)
@@ -741,6 +744,7 @@ Class | Method | HTTP request | Description
  - [Client](docs/Client.md)
  - [CloseEvent](docs/CloseEvent.md)
  - [ClosePeriodDiaryEntryRequest](docs/ClosePeriodDiaryEntryRequest.md)
+ - [ComparisonAttributeValuePair](docs/ComparisonAttributeValuePair.md)
  - [CompletePortfolio](docs/CompletePortfolio.md)
  - [CompleteRelation](docs/CompleteRelation.md)
  - [CompleteRelationship](docs/CompleteRelationship.md)
@@ -1010,17 +1014,27 @@ Class | Method | HTTP request | Description
  - [GroupFilterStepRequest](docs/GroupFilterStepRequest.md)
  - [GroupOfMarketDataKeyRules](docs/GroupOfMarketDataKeyRules.md)
  - [GroupReconciliationAggregateAttributeRule](docs/GroupReconciliationAggregateAttributeRule.md)
+ - [GroupReconciliationAggregateAttributeValues](docs/GroupReconciliationAggregateAttributeValues.md)
  - [GroupReconciliationAggregateComparisonRuleOperand](docs/GroupReconciliationAggregateComparisonRuleOperand.md)
+ - [GroupReconciliationComparisonResult](docs/GroupReconciliationComparisonResult.md)
  - [GroupReconciliationComparisonRuleStringValueMap](docs/GroupReconciliationComparisonRuleStringValueMap.md)
  - [GroupReconciliationComparisonRuleTolerance](docs/GroupReconciliationComparisonRuleTolerance.md)
  - [GroupReconciliationComparisonRuleset](docs/GroupReconciliationComparisonRuleset.md)
  - [GroupReconciliationCoreAttributeRule](docs/GroupReconciliationCoreAttributeRule.md)
+ - [GroupReconciliationCoreAttributeValues](docs/GroupReconciliationCoreAttributeValues.md)
  - [GroupReconciliationCoreComparisonRuleOperand](docs/GroupReconciliationCoreComparisonRuleOperand.md)
+ - [GroupReconciliationDatePair](docs/GroupReconciliationDatePair.md)
+ - [GroupReconciliationDates](docs/GroupReconciliationDates.md)
  - [GroupReconciliationDefinition](docs/GroupReconciliationDefinition.md)
  - [GroupReconciliationDefinitionComparisonRulesetIds](docs/GroupReconciliationDefinitionComparisonRulesetIds.md)
  - [GroupReconciliationDefinitionCurrencies](docs/GroupReconciliationDefinitionCurrencies.md)
  - [GroupReconciliationDefinitionPortfolioEntityIds](docs/GroupReconciliationDefinitionPortfolioEntityIds.md)
  - [GroupReconciliationDefinitionRecipeIds](docs/GroupReconciliationDefinitionRecipeIds.md)
+ - [GroupReconciliationInstanceId](docs/GroupReconciliationInstanceId.md)
+ - [GroupReconciliationUserReview](docs/GroupReconciliationUserReview.md)
+ - [GroupReconciliationUserReviewBreakCode](docs/GroupReconciliationUserReviewBreakCode.md)
+ - [GroupReconciliationUserReviewComment](docs/GroupReconciliationUserReviewComment.md)
+ - [GroupReconciliationUserReviewMatchKey](docs/GroupReconciliationUserReviewMatchKey.md)
  - [GroupedResultOfAddressKey](docs/GroupedResultOfAddressKey.md)
  - [HoldingAdjustment](docs/HoldingAdjustment.md)
  - [HoldingAdjustmentWithDate](docs/HoldingAdjustmentWithDate.md)
@@ -1149,6 +1163,7 @@ Class | Method | HTTP request | Description
  - [OperationType](docs/OperationType.md)
  - [Operator](docs/Operator.md)
  - [OptionEntry](docs/OptionEntry.md)
+ - [OptionExerciseElection](docs/OptionExerciseElection.md)
  - [OptionalitySchedule](docs/OptionalitySchedule.md)
  - [Order](docs/Order.md)
  - [OrderBySpec](docs/OrderBySpec.md)
@@ -1214,6 +1229,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfFund](docs/PagedResourceListOfFund.md)
  - [PagedResourceListOfFundConfiguration](docs/PagedResourceListOfFundConfiguration.md)
  - [PagedResourceListOfGeneralLedgerProfileResponse](docs/PagedResourceListOfGeneralLedgerProfileResponse.md)
+ - [PagedResourceListOfGroupReconciliationComparisonResult](docs/PagedResourceListOfGroupReconciliationComparisonResult.md)
  - [PagedResourceListOfGroupReconciliationComparisonRuleset](docs/PagedResourceListOfGroupReconciliationComparisonRuleset.md)
  - [PagedResourceListOfGroupReconciliationDefinition](docs/PagedResourceListOfGroupReconciliationDefinition.md)
  - [PagedResourceListOfInstrument](docs/PagedResourceListOfInstrument.md)

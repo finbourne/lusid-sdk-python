@@ -29,8 +29,10 @@ from typing import Optional
 from lusid.models.create_group_reconciliation_comparison_ruleset_request import CreateGroupReconciliationComparisonRulesetRequest
 from lusid.models.create_group_reconciliation_definition_request import CreateGroupReconciliationDefinitionRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
+from lusid.models.group_reconciliation_comparison_result import GroupReconciliationComparisonResult
 from lusid.models.group_reconciliation_comparison_ruleset import GroupReconciliationComparisonRuleset
 from lusid.models.group_reconciliation_definition import GroupReconciliationDefinition
+from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
 from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
 from lusid.models.update_group_reconciliation_comparison_ruleset_request import UpdateGroupReconciliationComparisonRulesetRequest
@@ -692,6 +694,184 @@ class GroupReconciliationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def get_comparison_result(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison result and its related reconciliation definition.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reconciliation definition that was used to produce the reconciliation result.")], result_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified.")] = None, **kwargs) -> GroupReconciliationComparisonResult:  # noqa: E501
+        ...
+
+    @overload
+    def get_comparison_result(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison result and its related reconciliation definition.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reconciliation definition that was used to produce the reconciliation result.")], result_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationComparisonResult:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_comparison_result(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison result and its related reconciliation definition.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reconciliation definition that was used to produce the reconciliation result.")], result_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationComparisonResult, Awaitable[GroupReconciliationComparisonResult]]:  # noqa: E501
+        """[EXPERIMENTAL] GetComparisonResult: Get a single Group Reconciliation Comparison Result by scope and code.  # noqa: E501
+
+        Retrieves one Group Reconciliation Comparison Result by scope and code  with the prior validation that its related reconciliation definition exists.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_comparison_result(scope, code, result_id, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified comparison result and its related reconciliation definition. (required)
+        :type scope: str
+        :param code: The code of the reconciliation definition that was used to produce the reconciliation result. (required)
+        :type code: str
+        :param result_id: The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values. (required)
+        :type result_id: str
+        :param as_at: The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GroupReconciliationComparisonResult
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_comparison_result_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_comparison_result_with_http_info(scope, code, result_id, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_comparison_result_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison result and its related reconciliation definition.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reconciliation definition that was used to produce the reconciliation result.")], result_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetComparisonResult: Get a single Group Reconciliation Comparison Result by scope and code.  # noqa: E501
+
+        Retrieves one Group Reconciliation Comparison Result by scope and code  with the prior validation that its related reconciliation definition exists.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_comparison_result_with_http_info(scope, code, result_id, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified comparison result and its related reconciliation definition. (required)
+        :type scope: str
+        :param code: The code of the reconciliation definition that was used to produce the reconciliation result. (required)
+        :type code: str
+        :param result_id: The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values. (required)
+        :type result_id: str
+        :param as_at: The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GroupReconciliationComparisonResult, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'result_id',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_comparison_result" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['result_id']:
+            _path_params['resultId'] = _params['result_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GroupReconciliationComparisonResult",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/{resultId}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def get_comparison_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely              identifies the reconciliation comparison ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison ruleset definition. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> GroupReconciliationComparisonRuleset:  # noqa: E501
         ...
 
@@ -701,9 +881,9 @@ class GroupReconciliationsApi:
 
     @validate_arguments
     def get_comparison_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely              identifies the reconciliation comparison ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison ruleset definition. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationComparisonRuleset, Awaitable[GroupReconciliationComparisonRuleset]]:  # noqa: E501
-        """[EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code  # noqa: E501
+        """[EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code.  # noqa: E501
 
-        Retrieves one Group Reconciliation Comparison Ruleset by scope and code  # noqa: E501
+        Retrieves one Group Reconciliation Comparison Ruleset by scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -736,9 +916,9 @@ class GroupReconciliationsApi:
 
     @validate_arguments
     def get_comparison_ruleset_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely              identifies the reconciliation comparison ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison ruleset definition. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code  # noqa: E501
+        """[EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code.  # noqa: E501
 
-        Retrieves one Group Reconciliation Comparison Ruleset by scope and code  # noqa: E501
+        Retrieves one Group Reconciliation Comparison Ruleset by scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1040,15 +1220,202 @@ class GroupReconciliationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonRuleset:  # noqa: E501
+    async def list_comparison_results(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonResult:  # noqa: E501
         ...
 
     @overload
-    def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonRuleset:  # noqa: E501
+    def list_comparison_results(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonResult:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfGroupReconciliationComparisonRuleset, Awaitable[PagedResourceListOfGroupReconciliationComparisonRuleset]]:  # noqa: E501
+    def list_comparison_results(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfGroupReconciliationComparisonResult, Awaitable[PagedResourceListOfGroupReconciliationComparisonResult]]:  # noqa: E501
+        """[EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.  # noqa: E501
+
+        Retrieves all Group Reconciliation Comparison Results that fit the filter, in a specific order if sortBy is provided.  Supports pagination.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_comparison_results(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfGroupReconciliationComparisonResult
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_comparison_results_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_comparison_results_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_comparison_results_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.  # noqa: E501
+
+        Retrieves all Group Reconciliation Comparison Results that fit the filter, in a specific order if sortBy is provided.  Supports pagination.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_comparison_results_with_http_info(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfGroupReconciliationComparisonResult, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'as_at',
+            'page',
+            'sort_by',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_comparison_results" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfGroupReconciliationComparisonResult",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/comparisonresults', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfGroupReconciliationComparisonRuleset, Awaitable[PagedResourceListOfGroupReconciliationComparisonRuleset]]:  # noqa: E501
         """[EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets  # noqa: E501
 
         Retrieves all Group Reconciliation Comparison Ruleset that fit the filter, in a specific order if sortBy is provided  Supports pagination  # noqa: E501
@@ -1058,7 +1425,7 @@ class GroupReconciliationsApi:
         >>> thread = api.list_comparison_rulesets(as_at, page, sort_by, limit, filter, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.
+        :param as_at: The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified.
         :type as_at: datetime
         :param page: The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.
         :type page: str
@@ -1087,7 +1454,7 @@ class GroupReconciliationsApi:
         return self.list_comparison_rulesets_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_comparison_rulesets_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_comparison_rulesets_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets  # noqa: E501
 
         Retrieves all Group Reconciliation Comparison Ruleset that fit the filter, in a specific order if sortBy is provided  Supports pagination  # noqa: E501
@@ -1097,7 +1464,7 @@ class GroupReconciliationsApi:
         >>> thread = api.list_comparison_rulesets_with_http_info(as_at, page, sort_by, limit, filter, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.
+        :param as_at: The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified.
         :type as_at: datetime
         :param page: The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.
         :type page: str

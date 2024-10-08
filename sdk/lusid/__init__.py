@@ -195,6 +195,7 @@ from lusid.models.calculation_info import CalculationInfo
 from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.calendar_dependency import CalendarDependency
+from lusid.models.call_on_intermediate_securities_event import CallOnIntermediateSecuritiesEvent
 from lusid.models.cancel_order_and_move_remaining_result import CancelOrderAndMoveRemainingResult
 from lusid.models.cancel_orders_and_move_remaining_request import CancelOrdersAndMoveRemainingRequest
 from lusid.models.cancel_orders_and_move_remaining_response import CancelOrdersAndMoveRemainingResponse
@@ -240,6 +241,7 @@ from lusid.models.cleardown_module_rules_updated_response import CleardownModule
 from lusid.models.client import Client
 from lusid.models.close_event import CloseEvent
 from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryRequest
+from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
 from lusid.models.complete_relationship import CompleteRelationship
@@ -509,17 +511,27 @@ from lusid.models.group_filter_step import GroupFilterStep
 from lusid.models.group_filter_step_request import GroupFilterStepRequest
 from lusid.models.group_of_market_data_key_rules import GroupOfMarketDataKeyRules
 from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
+from lusid.models.group_reconciliation_aggregate_attribute_values import GroupReconciliationAggregateAttributeValues
 from lusid.models.group_reconciliation_aggregate_comparison_rule_operand import GroupReconciliationAggregateComparisonRuleOperand
+from lusid.models.group_reconciliation_comparison_result import GroupReconciliationComparisonResult
 from lusid.models.group_reconciliation_comparison_rule_string_value_map import GroupReconciliationComparisonRuleStringValueMap
 from lusid.models.group_reconciliation_comparison_rule_tolerance import GroupReconciliationComparisonRuleTolerance
 from lusid.models.group_reconciliation_comparison_ruleset import GroupReconciliationComparisonRuleset
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
+from lusid.models.group_reconciliation_core_attribute_values import GroupReconciliationCoreAttributeValues
 from lusid.models.group_reconciliation_core_comparison_rule_operand import GroupReconciliationCoreComparisonRuleOperand
+from lusid.models.group_reconciliation_date_pair import GroupReconciliationDatePair
+from lusid.models.group_reconciliation_dates import GroupReconciliationDates
 from lusid.models.group_reconciliation_definition import GroupReconciliationDefinition
 from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import GroupReconciliationDefinitionComparisonRulesetIds
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
 from lusid.models.group_reconciliation_definition_portfolio_entity_ids import GroupReconciliationDefinitionPortfolioEntityIds
 from lusid.models.group_reconciliation_definition_recipe_ids import GroupReconciliationDefinitionRecipeIds
+from lusid.models.group_reconciliation_instance_id import GroupReconciliationInstanceId
+from lusid.models.group_reconciliation_user_review import GroupReconciliationUserReview
+from lusid.models.group_reconciliation_user_review_break_code import GroupReconciliationUserReviewBreakCode
+from lusid.models.group_reconciliation_user_review_comment import GroupReconciliationUserReviewComment
+from lusid.models.group_reconciliation_user_review_match_key import GroupReconciliationUserReviewMatchKey
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
@@ -648,6 +660,7 @@ from lusid.models.operation import Operation
 from lusid.models.operation_type import OperationType
 from lusid.models.operator import Operator
 from lusid.models.option_entry import OptionEntry
+from lusid.models.option_exercise_election import OptionExerciseElection
 from lusid.models.optionality_schedule import OptionalitySchedule
 from lusid.models.order import Order
 from lusid.models.order_by_spec import OrderBySpec
@@ -713,6 +726,7 @@ from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeT
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
+from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
 from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
@@ -1381,6 +1395,7 @@ __all__ = [
     "Calendar",
     "CalendarDate",
     "CalendarDependency",
+    "CallOnIntermediateSecuritiesEvent",
     "CancelOrderAndMoveRemainingResult",
     "CancelOrdersAndMoveRemainingRequest",
     "CancelOrdersAndMoveRemainingResponse",
@@ -1426,6 +1441,7 @@ __all__ = [
     "Client",
     "CloseEvent",
     "ClosePeriodDiaryEntryRequest",
+    "ComparisonAttributeValuePair",
     "CompletePortfolio",
     "CompleteRelation",
     "CompleteRelationship",
@@ -1695,17 +1711,27 @@ __all__ = [
     "GroupFilterStepRequest",
     "GroupOfMarketDataKeyRules",
     "GroupReconciliationAggregateAttributeRule",
+    "GroupReconciliationAggregateAttributeValues",
     "GroupReconciliationAggregateComparisonRuleOperand",
+    "GroupReconciliationComparisonResult",
     "GroupReconciliationComparisonRuleStringValueMap",
     "GroupReconciliationComparisonRuleTolerance",
     "GroupReconciliationComparisonRuleset",
     "GroupReconciliationCoreAttributeRule",
+    "GroupReconciliationCoreAttributeValues",
     "GroupReconciliationCoreComparisonRuleOperand",
+    "GroupReconciliationDatePair",
+    "GroupReconciliationDates",
     "GroupReconciliationDefinition",
     "GroupReconciliationDefinitionComparisonRulesetIds",
     "GroupReconciliationDefinitionCurrencies",
     "GroupReconciliationDefinitionPortfolioEntityIds",
     "GroupReconciliationDefinitionRecipeIds",
+    "GroupReconciliationInstanceId",
+    "GroupReconciliationUserReview",
+    "GroupReconciliationUserReviewBreakCode",
+    "GroupReconciliationUserReviewComment",
+    "GroupReconciliationUserReviewMatchKey",
     "GroupedResultOfAddressKey",
     "HoldingAdjustment",
     "HoldingAdjustmentWithDate",
@@ -1834,6 +1860,7 @@ __all__ = [
     "OperationType",
     "Operator",
     "OptionEntry",
+    "OptionExerciseElection",
     "OptionalitySchedule",
     "Order",
     "OrderBySpec",
@@ -1899,6 +1926,7 @@ __all__ = [
     "PagedResourceListOfFund",
     "PagedResourceListOfFundConfiguration",
     "PagedResourceListOfGeneralLedgerProfileResponse",
+    "PagedResourceListOfGroupReconciliationComparisonResult",
     "PagedResourceListOfGroupReconciliationComparisonRuleset",
     "PagedResourceListOfGroupReconciliationDefinition",
     "PagedResourceListOfInstrument",

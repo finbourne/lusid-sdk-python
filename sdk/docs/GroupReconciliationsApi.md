@@ -8,8 +8,10 @@ Method | HTTP request | Description
 [**create_group_reconciliation_definition**](GroupReconciliationsApi.md#create_group_reconciliation_definition) | **POST** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition
 [**delete_comparison_ruleset**](GroupReconciliationsApi.md#delete_comparison_ruleset) | **DELETE** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] DeleteComparisonRuleset: Deletes a particular Group Reconciliation Comparison Ruleset
 [**delete_group_reconciliation_definition**](GroupReconciliationsApi.md#delete_group_reconciliation_definition) | **DELETE** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code} | [EXPERIMENTAL] DeleteGroupReconciliationDefinition: Delete Group Reconciliation Definition
-[**get_comparison_ruleset**](GroupReconciliationsApi.md#get_comparison_ruleset) | **GET** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code
+[**get_comparison_result**](GroupReconciliationsApi.md#get_comparison_result) | **GET** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/{resultId} | [EXPERIMENTAL] GetComparisonResult: Get a single Group Reconciliation Comparison Result by scope and code.
+[**get_comparison_ruleset**](GroupReconciliationsApi.md#get_comparison_ruleset) | **GET** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code.
 [**get_group_reconciliation_definition**](GroupReconciliationsApi.md#get_group_reconciliation_definition) | **GET** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code} | [EXPERIMENTAL] GetGroupReconciliationDefinition: Get group reconciliation definition
+[**list_comparison_results**](GroupReconciliationsApi.md#list_comparison_results) | **GET** /api/reconciliations/comparisonresults | [EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.
 [**list_comparison_rulesets**](GroupReconciliationsApi.md#list_comparison_rulesets) | **GET** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets
 [**list_group_reconciliation_definitions**](GroupReconciliationsApi.md#list_group_reconciliation_definitions) | **GET** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions
 [**update_comparison_ruleset**](GroupReconciliationsApi.md#update_comparison_ruleset) | **PUT** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code
@@ -398,12 +400,110 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_comparison_result**
+> GroupReconciliationComparisonResult get_comparison_result(scope, code, result_id, as_at=as_at)
+
+[EXPERIMENTAL] GetComparisonResult: Get a single Group Reconciliation Comparison Result by scope and code.
+
+Retrieves one Group Reconciliation Comparison Result by scope and code  with the prior validation that its related reconciliation definition exists.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    GroupReconciliationsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(GroupReconciliationsApi)
+        scope = 'scope_example' # str | The scope of the specified comparison result and its related reconciliation definition.
+        code = 'code_example' # str | The code of the reconciliation definition that was used to produce the reconciliation result.
+        result_id = 'result_id_example' # str | The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values.
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified. (optional)
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_comparison_result(scope, code, result_id, as_at=as_at, opts=opts)
+
+            # [EXPERIMENTAL] GetComparisonResult: Get a single Group Reconciliation Comparison Result by scope and code.
+            api_response = await api_instance.get_comparison_result(scope, code, result_id, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling GroupReconciliationsApi->get_comparison_result: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the specified comparison result and its related reconciliation definition. | 
+ **code** | **str**| The code of the reconciliation definition that was used to produce the reconciliation result. | 
+ **result_id** | **str**| The code of the specified reconciliation result. Together with the domain and scope this uniquely              identifies the reconciliation comparison result. This value is also the same as the computed result hash based on property values. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the comparison result definition. Defaults to return              the latest version if not specified. | [optional] 
+
+### Return type
+
+[**GroupReconciliationComparisonResult**](GroupReconciliationComparisonResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested comparison result |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_comparison_ruleset**
 > GroupReconciliationComparisonRuleset get_comparison_ruleset(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code
+[EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code.
 
-Retrieves one Group Reconciliation Comparison Ruleset by scope and code
+Retrieves one Group Reconciliation Comparison Ruleset by scope and code.
 
 ### Example
 
@@ -459,7 +559,7 @@ async def main():
             # uncomment the below to set overrides at the request level
             # api_response = await api_instance.get_comparison_ruleset(scope, code, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code
+            # [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code.
             api_response = await api_instance.get_comparison_ruleset(scope, code, as_at=as_at)
             pprint(api_response)
         except ApiException as e:
@@ -592,6 +692,106 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_comparison_results**
+> PagedResourceListOfGroupReconciliationComparisonResult list_comparison_results(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+
+[EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.
+
+Retrieves all Group Reconciliation Comparison Results that fit the filter, in a specific order if sortBy is provided.  Supports pagination.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    GroupReconciliationsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(GroupReconciliationsApi)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+        limit = 56 # int | When paginating, limit the number of returned results to this many per page. (optional)
+        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_comparison_results(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+
+            # [EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.
+            api_response = await api_instance.list_comparison_results(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling GroupReconciliationsApi->list_comparison_results: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the comparison results. Defaults to return the latest              version of the comparison results if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing comparison results from a previous call to list              comparison results. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many per page. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfGroupReconciliationComparisonResult**](PagedResourceListOfGroupReconciliationComparisonResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested list of comparison results |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_comparison_rulesets**
 > PagedResourceListOfGroupReconciliationComparisonRuleset list_comparison_rulesets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
 
@@ -645,7 +845,7 @@ async def main():
     async with api_client_factory:
         # Create an instance of the API class
         api_instance = api_client_factory.build(GroupReconciliationsApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified. (optional)
         page = 'page_example' # str | The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
         sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
         limit = 56 # int | When paginating, limit the number of returned results to this many per page. (optional)
@@ -668,7 +868,7 @@ asyncio.run(main())
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the comparison rulesets. Defaults to return the latest              version of the comparison rulesets if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many per page. | [optional] 
