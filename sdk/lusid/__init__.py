@@ -932,6 +932,7 @@ from lusid.models.resource_list_of_mapping import ResourceListOfMapping
 from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
 from lusid.models.resource_list_of_order import ResourceListOfOrder
 from lusid.models.resource_list_of_order_instruction import ResourceListOfOrderInstruction
+from lusid.models.resource_list_of_output_transaction import ResourceListOfOutputTransaction
 from lusid.models.resource_list_of_package import ResourceListOfPackage
 from lusid.models.resource_list_of_participation import ResourceListOfParticipation
 from lusid.models.resource_list_of_performance_return import ResourceListOfPerformanceReturn
@@ -2132,6 +2133,7 @@ __all__ = [
     "ResourceListOfMovedOrderToDifferentBlockResponse",
     "ResourceListOfOrder",
     "ResourceListOfOrderInstruction",
+    "ResourceListOfOutputTransaction",
     "ResourceListOfPackage",
     "ResourceListOfParticipation",
     "ResourceListOfPerformanceReturn",

@@ -34,6 +34,7 @@ Method | HTTP request | Description
 [**list_custodian_accounts**](TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
 [**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
 [**patch_portfolio_details**](TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
+[**preview_transaction**](TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | [EARLY ACCESS] PreviewTransaction: Preview a transaction
 [**resolve_instrument**](TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
 [**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | SetHoldings: Set holdings
 [**upsert_custodian_accounts**](TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
@@ -3147,6 +3148,113 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The newly patched details |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **preview_transaction**
+> ResourceListOfOutputTransaction preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties)
+
+[EARLY ACCESS] PreviewTransaction: Preview a transaction
+
+Returns the output-transaction(s) - e.g. as returned by BuildTransactions  that would come out of LUSID if the provided TransactionRequest was booked.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TransactionPortfoliosApi)
+        scope = 'scope_example' # str | The scope of the transaction portfolio.
+        code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # transaction_request = TransactionRequest.from_json("")
+        # transaction_request = TransactionRequest.from_dict({})
+        transaction_request = TransactionRequest()
+        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+        show_cancelled_transactions = True # bool | Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified. (optional)
+        preserve_properties = True # bool | If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version. (optional)
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties, opts=opts)
+
+            # [EARLY ACCESS] PreviewTransaction: Preview a transaction
+            api_response = await api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TransactionPortfoliosApi->preview_transaction: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **transaction_request** | [**TransactionRequest**](TransactionRequest.md)| The transaction to be previewed. | 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **show_cancelled_transactions** | **bool**| Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified. | [optional] 
+ **preserve_properties** | **bool**| If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version. | [optional] 
+
+### Return type
+
+[**ResourceListOfOutputTransaction**](ResourceListOfOutputTransaction.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The predicted output relating to the Preview Transaction. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

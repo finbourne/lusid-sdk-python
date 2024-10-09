@@ -564,6 +564,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**list_custodian_accounts**](docs/TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
 *TransactionPortfoliosApi* | [**list_holdings_adjustments**](docs/TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
 *TransactionPortfoliosApi* | [**patch_portfolio_details**](docs/TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
+*TransactionPortfoliosApi* | [**preview_transaction**](docs/TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | [EARLY ACCESS] PreviewTransaction: Preview a transaction
 *TransactionPortfoliosApi* | [**resolve_instrument**](docs/TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
 *TransactionPortfoliosApi* | [**set_holdings**](docs/TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | SetHoldings: Set holdings
 *TransactionPortfoliosApi* | [**upsert_custodian_accounts**](docs/TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
@@ -1435,6 +1436,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfMovedOrderToDifferentBlockResponse](docs/ResourceListOfMovedOrderToDifferentBlockResponse.md)
  - [ResourceListOfOrder](docs/ResourceListOfOrder.md)
  - [ResourceListOfOrderInstruction](docs/ResourceListOfOrderInstruction.md)
+ - [ResourceListOfOutputTransaction](docs/ResourceListOfOutputTransaction.md)
  - [ResourceListOfPackage](docs/ResourceListOfPackage.md)
  - [ResourceListOfParticipation](docs/ResourceListOfParticipation.md)
  - [ResourceListOfPerformanceReturn](docs/ResourceListOfPerformanceReturn.md)
