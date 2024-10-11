@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**list_comparison_results**](GroupReconciliationsApi.md#list_comparison_results) | **GET** /api/reconciliations/comparisonresults | [EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.
 [**list_comparison_rulesets**](GroupReconciliationsApi.md#list_comparison_rulesets) | **GET** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets
 [**list_group_reconciliation_definitions**](GroupReconciliationsApi.md#list_group_reconciliation_definitions) | **GET** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions
+[**run_reconciliation**](GroupReconciliationsApi.md#run_reconciliation) | **POST** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/$run | [EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
 [**update_comparison_ruleset**](GroupReconciliationsApi.md#update_comparison_ruleset) | **PUT** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code
 [**update_group_reconciliation_definition**](GroupReconciliationsApi.md#update_group_reconciliation_definition) | **PUT** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code} | [EXPERIMENTAL] UpdateGroupReconciliationDefinition: Update group reconciliation definition
 
@@ -989,6 +990,107 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The group reconciliation definition in the specified scope |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **run_reconciliation**
+> GroupReconciliationRunResponse run_reconciliation(scope, code, group_reconciliation_run_request=group_reconciliation_run_request)
+
+[EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
+
+Runs a Group Reconciliation using the definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code  Supports pagination.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    GroupReconciliationsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(GroupReconciliationsApi)
+        scope = 'scope_example' # str | The scope of the group reconciliation definition to use for the reconciliation.
+        code = 'code_example' # str | The code of the group reconciliation definition to use for the reconciliation.
+
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # group_reconciliation_run_request = GroupReconciliationRunRequest.from_json("")
+        # group_reconciliation_run_request = GroupReconciliationRunRequest.from_dict({})
+        group_reconciliation_run_request = GroupReconciliationRunRequest()
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.run_reconciliation(scope, code, group_reconciliation_run_request=group_reconciliation_run_request, opts=opts)
+
+            # [EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
+            api_response = await api_instance.run_reconciliation(scope, code, group_reconciliation_run_request=group_reconciliation_run_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling GroupReconciliationsApi->run_reconciliation: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the group reconciliation definition to use for the reconciliation. | 
+ **code** | **str**| The code of the group reconciliation definition to use for the reconciliation. | 
+ **group_reconciliation_run_request** | [**GroupReconciliationRunRequest**](GroupReconciliationRunRequest.md)|  | [optional] 
+
+### Return type
+
+[**GroupReconciliationRunResponse**](GroupReconciliationRunResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The results of the reconciliation run |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

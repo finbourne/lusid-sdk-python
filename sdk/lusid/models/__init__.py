@@ -447,6 +447,13 @@ from lusid.models.group_reconciliation_definition_currencies import GroupReconci
 from lusid.models.group_reconciliation_definition_portfolio_entity_ids import GroupReconciliationDefinitionPortfolioEntityIds
 from lusid.models.group_reconciliation_definition_recipe_ids import GroupReconciliationDefinitionRecipeIds
 from lusid.models.group_reconciliation_instance_id import GroupReconciliationInstanceId
+from lusid.models.group_reconciliation_result_statuses import GroupReconciliationResultStatuses
+from lusid.models.group_reconciliation_result_types import GroupReconciliationResultTypes
+from lusid.models.group_reconciliation_review_statuses import GroupReconciliationReviewStatuses
+from lusid.models.group_reconciliation_run_details import GroupReconciliationRunDetails
+from lusid.models.group_reconciliation_run_request import GroupReconciliationRunRequest
+from lusid.models.group_reconciliation_run_response import GroupReconciliationRunResponse
+from lusid.models.group_reconciliation_summary import GroupReconciliationSummary
 from lusid.models.group_reconciliation_user_review import GroupReconciliationUserReview
 from lusid.models.group_reconciliation_user_review_break_code import GroupReconciliationUserReviewBreakCode
 from lusid.models.group_reconciliation_user_review_comment import GroupReconciliationUserReviewComment
@@ -1569,6 +1576,13 @@ __all__ = [
     "GroupReconciliationDefinitionPortfolioEntityIds",
     "GroupReconciliationDefinitionRecipeIds",
     "GroupReconciliationInstanceId",
+    "GroupReconciliationResultStatuses",
+    "GroupReconciliationResultTypes",
+    "GroupReconciliationReviewStatuses",
+    "GroupReconciliationRunDetails",
+    "GroupReconciliationRunRequest",
+    "GroupReconciliationRunResponse",
+    "GroupReconciliationSummary",
     "GroupReconciliationUserReview",
     "GroupReconciliationUserReviewBreakCode",
     "GroupReconciliationUserReviewComment",

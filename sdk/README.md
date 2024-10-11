@@ -239,6 +239,7 @@ Class | Method | HTTP request | Description
 *GroupReconciliationsApi* | [**list_comparison_results**](docs/GroupReconciliationsApi.md#list_comparison_results) | **GET** /api/reconciliations/comparisonresults | [EXPERIMENTAL] ListComparisonResults: Get a set of Group Reconciliation Comparison Results.
 *GroupReconciliationsApi* | [**list_comparison_rulesets**](docs/GroupReconciliationsApi.md#list_comparison_rulesets) | **GET** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets
 *GroupReconciliationsApi* | [**list_group_reconciliation_definitions**](docs/GroupReconciliationsApi.md#list_group_reconciliation_definitions) | **GET** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions
+*GroupReconciliationsApi* | [**run_reconciliation**](docs/GroupReconciliationsApi.md#run_reconciliation) | **POST** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/$run | [EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
 *GroupReconciliationsApi* | [**update_comparison_ruleset**](docs/GroupReconciliationsApi.md#update_comparison_ruleset) | **PUT** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code
 *GroupReconciliationsApi* | [**update_group_reconciliation_definition**](docs/GroupReconciliationsApi.md#update_group_reconciliation_definition) | **PUT** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code} | [EXPERIMENTAL] UpdateGroupReconciliationDefinition: Update group reconciliation definition
 *InstrumentEventTypesApi* | [**create_transaction_template**](docs/InstrumentEventTypesApi.md#create_transaction_template) | **POST** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
@@ -1032,6 +1033,13 @@ Class | Method | HTTP request | Description
  - [GroupReconciliationDefinitionPortfolioEntityIds](docs/GroupReconciliationDefinitionPortfolioEntityIds.md)
  - [GroupReconciliationDefinitionRecipeIds](docs/GroupReconciliationDefinitionRecipeIds.md)
  - [GroupReconciliationInstanceId](docs/GroupReconciliationInstanceId.md)
+ - [GroupReconciliationResultStatuses](docs/GroupReconciliationResultStatuses.md)
+ - [GroupReconciliationResultTypes](docs/GroupReconciliationResultTypes.md)
+ - [GroupReconciliationReviewStatuses](docs/GroupReconciliationReviewStatuses.md)
+ - [GroupReconciliationRunDetails](docs/GroupReconciliationRunDetails.md)
+ - [GroupReconciliationRunRequest](docs/GroupReconciliationRunRequest.md)
+ - [GroupReconciliationRunResponse](docs/GroupReconciliationRunResponse.md)
+ - [GroupReconciliationSummary](docs/GroupReconciliationSummary.md)
  - [GroupReconciliationUserReview](docs/GroupReconciliationUserReview.md)
  - [GroupReconciliationUserReviewBreakCode](docs/GroupReconciliationUserReviewBreakCode.md)
  - [GroupReconciliationUserReviewComment](docs/GroupReconciliationUserReviewComment.md)
