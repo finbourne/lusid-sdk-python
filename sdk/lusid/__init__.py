@@ -590,6 +590,7 @@ from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.interest_rate_swaption import InterestRateSwaption
 from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
 from lusid.models.intermediate_compliance_step_request import IntermediateComplianceStepRequest
+from lusid.models.intermediate_securities_distribution_event import IntermediateSecuritiesDistributionEvent
 from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
@@ -1791,6 +1792,7 @@ __all__ = [
     "InterestRateSwaption",
     "IntermediateComplianceStep",
     "IntermediateComplianceStepRequest",
+    "IntermediateSecuritiesDistributionEvent",
     "IrVolCubeData",
     "IrVolDependency",
     "IsBusinessDayResponse",

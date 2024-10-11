@@ -1,6 +1,6 @@
-# SpinOffEvent
+# IntermediateSecuritiesDistributionEvent
 
-Spin-off event (SOFF), representing the distribution of securities issued by another company.
+IntermediateSecuritiesDistribution event (RHDI), representing the distribution of securities.
 
 ## Properties
 Name | Type | Description | Notes
@@ -19,19 +19,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.spin_off_event import SpinOffEvent
+from lusid.models.intermediate_securities_distribution_event import IntermediateSecuritiesDistributionEvent
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of SpinOffEvent from a JSON string
-spin_off_event_instance = SpinOffEvent.from_json(json)
+# create an instance of IntermediateSecuritiesDistributionEvent from a JSON string
+intermediate_securities_distribution_event_instance = IntermediateSecuritiesDistributionEvent.from_json(json)
 # print the JSON string representation of the object
-print SpinOffEvent.to_json()
+print IntermediateSecuritiesDistributionEvent.to_json()
 
 # convert the object into a dict
-spin_off_event_dict = spin_off_event_instance.to_dict()
-# create an instance of SpinOffEvent from a dict
-spin_off_event_form_dict = spin_off_event.from_dict(spin_off_event_dict)
+intermediate_securities_distribution_event_dict = intermediate_securities_distribution_event_instance.to_dict()
+# create an instance of IntermediateSecuritiesDistributionEvent from a dict
+intermediate_securities_distribution_event_form_dict = intermediate_securities_distribution_event.from_dict(intermediate_securities_distribution_event_dict)
 ```
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

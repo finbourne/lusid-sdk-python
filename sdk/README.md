@@ -1094,6 +1094,7 @@ Class | Method | HTTP request | Description
  - [InterestRateSwaption](docs/InterestRateSwaption.md)
  - [IntermediateComplianceStep](docs/IntermediateComplianceStep.md)
  - [IntermediateComplianceStepRequest](docs/IntermediateComplianceStepRequest.md)
+ - [IntermediateSecuritiesDistributionEvent](docs/IntermediateSecuritiesDistributionEvent.md)
  - [IrVolCubeData](docs/IrVolCubeData.md)
  - [IrVolDependency](docs/IrVolDependency.md)
  - [IsBusinessDayResponse](docs/IsBusinessDayResponse.md)

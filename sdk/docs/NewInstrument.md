@@ -1,6 +1,6 @@
 # NewInstrument
 
-Set of identifiers of an existing instrument that will be the subject of a SpinOffEvent.
+Set of identifiers of an existing instrument that will be the subject or distribution of a corporate action.
 
 ## Properties
 Name | Type | Description | Notes

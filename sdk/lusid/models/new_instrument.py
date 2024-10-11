@@ -23,7 +23,7 @@ from pydantic.v1 import BaseModel, Field, StrictStr
 
 class NewInstrument(BaseModel):
     """
-    Set of identifiers of an existing instrument that will be the subject of a SpinOffEvent.  # noqa: E501
+    Set of identifiers of an existing instrument that will be the subject or distribution of a corporate action.  # noqa: E501
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers.")
     lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers.")
