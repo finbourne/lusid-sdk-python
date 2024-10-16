@@ -22,18 +22,17 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class CdxCreditEvent(InstrumentEvent):
+class ProtectionPayoutCashFlowEvent(InstrumentEvent):
     """
-    Definition of a credit event for credit default swap index (CDX) instruments.  # noqa: E501
+    Protection payout cashflow for credit default instruments (CDS or CDX).  # noqa: E501
     """
-    effective_date: datetime = Field(..., alias="effectiveDate", description="The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation.")
-    auction_date: Optional[datetime] = Field(None, alias="auctionDate", description="The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined.")
-    recovery_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="recoveryRate", description="The fraction of the defaulted debt that can be recovered.")
-    constituent_weight: Union[StrictFloat, StrictInt] = Field(..., alias="constituentWeight", description="The relative weight of the CDX constituent.")
-    constituent_reference: Optional[StrictStr] = Field(None, alias="constituentReference", description="Reference value used to identify the CDX constituent.")
+    ex_date: datetime = Field(..., alias="exDate", description="The ex-dividend date of the cashflow.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the cashflow.")
+    currency: StrictStr = Field(..., description="The currency in which the cashflow is paid.")
+    cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashFlowPerUnit", description="The cashflow amount received for each unit of the instrument held on the ex date.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, ProtectionPayoutCashFlowEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "auctionDate", "recoveryRate", "constituentWeight", "constituentReference"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "cashFlowPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -56,8 +55,8 @@ class CdxCreditEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CdxCreditEvent:
-        """Create an instance of CdxCreditEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> ProtectionPayoutCashFlowEvent:
+        """Create an instance of ProtectionPayoutCashFlowEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -72,39 +71,28 @@ class CdxCreditEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if auction_date (nullable) is None
+        # set to None if cash_flow_per_unit (nullable) is None
         # and __fields_set__ contains the field
-        if self.auction_date is None and "auction_date" in self.__fields_set__:
-            _dict['auctionDate'] = None
-
-        # set to None if recovery_rate (nullable) is None
-        # and __fields_set__ contains the field
-        if self.recovery_rate is None and "recovery_rate" in self.__fields_set__:
-            _dict['recoveryRate'] = None
-
-        # set to None if constituent_reference (nullable) is None
-        # and __fields_set__ contains the field
-        if self.constituent_reference is None and "constituent_reference" in self.__fields_set__:
-            _dict['constituentReference'] = None
+        if self.cash_flow_per_unit is None and "cash_flow_per_unit" in self.__fields_set__:
+            _dict['cashFlowPerUnit'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CdxCreditEvent:
-        """Create an instance of CdxCreditEvent from a dict"""
+    def from_dict(cls, obj: dict) -> ProtectionPayoutCashFlowEvent:
+        """Create an instance of ProtectionPayoutCashFlowEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CdxCreditEvent.parse_obj(obj)
+            return ProtectionPayoutCashFlowEvent.parse_obj(obj)
 
-        _obj = CdxCreditEvent.parse_obj({
+        _obj = ProtectionPayoutCashFlowEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_date": obj.get("effectiveDate"),
-            "auction_date": obj.get("auctionDate"),
-            "recovery_rate": obj.get("recoveryRate"),
-            "constituent_weight": obj.get("constituentWeight"),
-            "constituent_reference": obj.get("constituentReference")
+            "ex_date": obj.get("exDate"),
+            "payment_date": obj.get("paymentDate"),
+            "currency": obj.get("currency"),
+            "cash_flow_per_unit": obj.get("cashFlowPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

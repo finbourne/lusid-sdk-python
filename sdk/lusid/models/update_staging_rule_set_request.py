@@ -26,7 +26,7 @@ class UpdateStagingRuleSetRequest(BaseModel):
     """
     UpdateStagingRuleSetRequest
     """
-    display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the staging rule set.")
+    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the staging rule set.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the staging rule set.")
     rules: conlist(StagingRule) = Field(..., description="The list of staging rules that apply to a specific entity type.")
     __properties = ["displayName", "description", "rules"]
@@ -62,11 +62,6 @@ class UpdateStagingRuleSetRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['rules'] = _items
-        # set to None if display_name (nullable) is None
-        # and __fields_set__ contains the field
-        if self.display_name is None and "display_name" in self.__fields_set__:
-            _dict['displayName'] = None
-
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:

@@ -588,6 +588,7 @@ from lusid.models.operation_type import OperationType
 from lusid.models.operator import Operator
 from lusid.models.option_entry import OptionEntry
 from lusid.models.option_exercise_election import OptionExerciseElection
+from lusid.models.option_exercise_physical_event import OptionExercisePhysicalEvent
 from lusid.models.optionality_schedule import OptionalitySchedule
 from lusid.models.order import Order
 from lusid.models.order_by_spec import OrderBySpec
@@ -762,6 +763,7 @@ from lusid.models.property_type import PropertyType
 from lusid.models.property_value import PropertyValue
 from lusid.models.property_value_equals import PropertyValueEquals
 from lusid.models.property_value_in import PropertyValueIn
+from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashFlowEvent
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
@@ -1717,6 +1719,7 @@ __all__ = [
     "Operator",
     "OptionEntry",
     "OptionExerciseElection",
+    "OptionExercisePhysicalEvent",
     "OptionalitySchedule",
     "Order",
     "OrderBySpec",
@@ -1891,6 +1894,7 @@ __all__ = [
     "PropertyValue",
     "PropertyValueEquals",
     "PropertyValueIn",
+    "ProtectionPayoutCashFlowEvent",
     "QueryApplicableInstrumentEventsRequest",
     "QueryBucketedCashFlowsRequest",
     "QueryCashFlowsRequest",

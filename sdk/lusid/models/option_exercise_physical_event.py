@@ -18,25 +18,32 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.new_instrument import NewInstrument
+from lusid.models.option_exercise_election import OptionExerciseElection
 from lusid.models.units_ratio import UnitsRatio
 
-class ScripDividendEvent(InstrumentEvent):
+class OptionExercisePhysicalEvent(InstrumentEvent):
     """
-    A scrip dividend issued to shareholders.  # noqa: E501
+    Event for physical option exercises.  # noqa: E501
     """
-    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
-    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
-    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
-    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price per unit paid in lieu when fractional units can not be distributed.")
-    fractional_units_cash_currency: Optional[StrictStr] = Field(None, alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractional units.")
+    exercise_date: Optional[datetime] = Field(None, alias="exerciseDate", description="The exercise date of the option.")
+    exercise_type: constr(strict=True, min_length=1) = Field(..., alias="exerciseType", description="The optionality type of the underlying option e.g. American, European.    Supported string (enumeration) values are: [European, Bermudan, American].")
+    maturity_date: datetime = Field(..., alias="maturityDate", description="The maturity date of the option.")
+    moneyness: Optional[StrictStr] = Field(None, description="The moneyness of the option e.g. InTheMoney, OutOfTheMoney.    Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney].")
+    new_instrument: NewInstrument = Field(..., alias="newInstrument")
+    option_exercise_elections: Optional[conlist(OptionExerciseElection)] = Field(None, alias="optionExerciseElections", description="Option exercise election for this OptionExercisePhysicalEvent.")
+    option_type: constr(strict=True, min_length=1) = Field(..., alias="optionType", description="Type of optionality that is present e.g. call, put.    Supported string (enumeration) values are: [Call, Put].")
+    start_date: datetime = Field(..., alias="startDate", description="The trade date of the option.")
+    strike_currency: StrictStr = Field(..., alias="strikeCurrency", description="The strike currency of the equity option.")
+    strike_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="strikePerUnit", description="The strike of the equity option times the number of shares to exchange if exercised.")
+    underlying_value_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="underlyingValuePerUnit", description="The underlying price times the number of shares to exchange if exercised.")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, ProtectionPayoutCashFlowEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "unitsRatio"]
+    __properties = ["instrumentEventType", "exerciseDate", "exerciseType", "maturityDate", "moneyness", "newInstrument", "optionExerciseElections", "optionType", "startDate", "strikeCurrency", "strikePerUnit", "underlyingValuePerUnit", "unitsRatio"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -59,8 +66,8 @@ class ScripDividendEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ScripDividendEvent:
-        """Create an instance of ScripDividendEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> OptionExercisePhysicalEvent:
+        """Create an instance of OptionExercisePhysicalEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,6 +77,16 @@ class ScripDividendEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of new_instrument
+        if self.new_instrument:
+            _dict['newInstrument'] = self.new_instrument.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in option_exercise_elections (list)
+        _items = []
+        if self.option_exercise_elections:
+            for _item in self.option_exercise_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['optionExerciseElections'] = _items
         # override the default output from pydantic by calling `to_dict()` of units_ratio
         if self.units_ratio:
             _dict['unitsRatio'] = self.units_ratio.to_dict()
@@ -78,45 +95,50 @@ class ScripDividendEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if announcement_date (nullable) is None
+        # set to None if exercise_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
-            _dict['announcementDate'] = None
+        if self.exercise_date is None and "exercise_date" in self.__fields_set__:
+            _dict['exerciseDate'] = None
 
-        # set to None if record_date (nullable) is None
+        # set to None if moneyness (nullable) is None
         # and __fields_set__ contains the field
-        if self.record_date is None and "record_date" in self.__fields_set__:
-            _dict['recordDate'] = None
+        if self.moneyness is None and "moneyness" in self.__fields_set__:
+            _dict['moneyness'] = None
 
-        # set to None if fractional_units_cash_price (nullable) is None
+        # set to None if option_exercise_elections (nullable) is None
         # and __fields_set__ contains the field
-        if self.fractional_units_cash_price is None and "fractional_units_cash_price" in self.__fields_set__:
-            _dict['fractionalUnitsCashPrice'] = None
+        if self.option_exercise_elections is None and "option_exercise_elections" in self.__fields_set__:
+            _dict['optionExerciseElections'] = None
 
-        # set to None if fractional_units_cash_currency (nullable) is None
+        # set to None if underlying_value_per_unit (nullable) is None
         # and __fields_set__ contains the field
-        if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
-            _dict['fractionalUnitsCashCurrency'] = None
+        if self.underlying_value_per_unit is None and "underlying_value_per_unit" in self.__fields_set__:
+            _dict['underlyingValuePerUnit'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ScripDividendEvent:
-        """Create an instance of ScripDividendEvent from a dict"""
+    def from_dict(cls, obj: dict) -> OptionExercisePhysicalEvent:
+        """Create an instance of OptionExercisePhysicalEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ScripDividendEvent.parse_obj(obj)
+            return OptionExercisePhysicalEvent.parse_obj(obj)
 
-        _obj = ScripDividendEvent.parse_obj({
+        _obj = OptionExercisePhysicalEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "announcement_date": obj.get("announcementDate"),
-            "ex_date": obj.get("exDate"),
-            "record_date": obj.get("recordDate"),
-            "payment_date": obj.get("paymentDate"),
-            "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
-            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "exercise_date": obj.get("exerciseDate"),
+            "exercise_type": obj.get("exerciseType"),
+            "maturity_date": obj.get("maturityDate"),
+            "moneyness": obj.get("moneyness"),
+            "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
+            "option_exercise_elections": [OptionExerciseElection.from_dict(_item) for _item in obj.get("optionExerciseElections")] if obj.get("optionExerciseElections") is not None else None,
+            "option_type": obj.get("optionType"),
+            "start_date": obj.get("startDate"),
+            "strike_currency": obj.get("strikeCurrency"),
+            "strike_per_unit": obj.get("strikePerUnit"),
+            "underlying_value_per_unit": obj.get("underlyingValuePerUnit"),
             "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
         })
         # store additional fields in additional_properties

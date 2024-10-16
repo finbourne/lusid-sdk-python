@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **as_at** | **datetime** | The asAt datetime at which the deletion was committed to LUSID. | 
 **entity_type** | **str** | The type of the entity that the deleted response applies to. | [optional] 
 **entity_unique_id** | **str** | The unique Id of the entity that the deleted response applies to. | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

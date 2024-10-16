@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.link import Link
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 
 class DeletedEntityResponse(BaseModel):
     """
@@ -31,8 +32,9 @@ class DeletedEntityResponse(BaseModel):
     as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the deletion was committed to LUSID.")
     entity_type: Optional[StrictStr] = Field(None, alias="entityType", description="The type of the entity that the deleted response applies to.")
     entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique Id of the entity that the deleted response applies to.")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "effectiveFrom", "asAt", "entityType", "entityUniqueId", "links"]
+    __properties = ["href", "effectiveFrom", "asAt", "entityType", "entityUniqueId", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,6 +60,9 @@ class DeletedEntityResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -107,6 +112,7 @@ class DeletedEntityResponse(BaseModel):
             "as_at": obj.get("asAt"),
             "entity_type": obj.get("entityType"),
             "entity_unique_id": obj.get("entityUniqueId"),
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
