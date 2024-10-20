@@ -78,6 +78,8 @@ from lusid.models.barrier import Barrier
 from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
+from lusid.models.batch_update_user_review_for_comparison_result_request import BatchUpdateUserReviewForComparisonResultRequest
+from lusid.models.batch_update_user_review_for_comparison_result_response import BatchUpdateUserReviewForComparisonResultResponse
 from lusid.models.batch_upsert_dates_for_calendar_response import BatchUpsertDatesForCalendarResponse
 from lusid.models.batch_upsert_instrument_properties_response import BatchUpsertInstrumentPropertiesResponse
 from lusid.models.batch_upsert_portfolio_access_metadata_request import BatchUpsertPortfolioAccessMetadataRequest
@@ -455,9 +457,11 @@ from lusid.models.group_reconciliation_run_request import GroupReconciliationRun
 from lusid.models.group_reconciliation_run_response import GroupReconciliationRunResponse
 from lusid.models.group_reconciliation_summary import GroupReconciliationSummary
 from lusid.models.group_reconciliation_user_review import GroupReconciliationUserReview
+from lusid.models.group_reconciliation_user_review_add import GroupReconciliationUserReviewAdd
 from lusid.models.group_reconciliation_user_review_break_code import GroupReconciliationUserReviewBreakCode
 from lusid.models.group_reconciliation_user_review_comment import GroupReconciliationUserReviewComment
 from lusid.models.group_reconciliation_user_review_match_key import GroupReconciliationUserReviewMatchKey
+from lusid.models.group_reconciliation_user_review_remove import GroupReconciliationUserReviewRemove
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
@@ -1209,6 +1213,8 @@ __all__ = [
     "Basket",
     "BasketIdentifier",
     "BatchAdjustHoldingsResponse",
+    "BatchUpdateUserReviewForComparisonResultRequest",
+    "BatchUpdateUserReviewForComparisonResultResponse",
     "BatchUpsertDatesForCalendarResponse",
     "BatchUpsertInstrumentPropertiesResponse",
     "BatchUpsertPortfolioAccessMetadataRequest",
@@ -1586,9 +1592,11 @@ __all__ = [
     "GroupReconciliationRunResponse",
     "GroupReconciliationSummary",
     "GroupReconciliationUserReview",
+    "GroupReconciliationUserReviewAdd",
     "GroupReconciliationUserReviewBreakCode",
     "GroupReconciliationUserReviewComment",
     "GroupReconciliationUserReviewMatchKey",
+    "GroupReconciliationUserReviewRemove",
     "GroupedResultOfAddressKey",
     "HoldingAdjustment",
     "HoldingAdjustmentWithDate",

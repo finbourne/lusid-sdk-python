@@ -32,7 +32,10 @@ class TargetTaxLotRequest(BaseModel):
     price: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The purchase price of each unit of the instrument held in this tax-lot. This forms part of the unique key required for multiple tax-lots.")
     purchase_date: Optional[datetime] = Field(None, alias="purchaseDate", description="The purchase date of this tax-lot. This forms part of the unique key required for multiple tax-lots.")
     settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The settlement date of the tax-lot's opening transaction.")
-    __properties = ["units", "cost", "portfolioCost", "price", "purchaseDate", "settlementDate"]
+    notional_cost: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="notionalCost", description="The notional cost of the tax-lot's opening transaction.")
+    variation_margin: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="variationMargin", description="The variation margin of the tax-lot's opening transaction.")
+    variation_margin_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="variationMarginPortfolioCcy", description="The variation margin in portfolio currency of the tax-lot's opening transaction.")
+    __properties = ["units", "cost", "portfolioCost", "price", "purchaseDate", "settlementDate", "notionalCost", "variationMargin", "variationMarginPortfolioCcy"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +84,21 @@ class TargetTaxLotRequest(BaseModel):
         if self.settlement_date is None and "settlement_date" in self.__fields_set__:
             _dict['settlementDate'] = None
 
+        # set to None if notional_cost (nullable) is None
+        # and __fields_set__ contains the field
+        if self.notional_cost is None and "notional_cost" in self.__fields_set__:
+            _dict['notionalCost'] = None
+
+        # set to None if variation_margin (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variation_margin is None and "variation_margin" in self.__fields_set__:
+            _dict['variationMargin'] = None
+
+        # set to None if variation_margin_portfolio_ccy (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variation_margin_portfolio_ccy is None and "variation_margin_portfolio_ccy" in self.__fields_set__:
+            _dict['variationMarginPortfolioCcy'] = None
+
         return _dict
 
     @classmethod
@@ -98,6 +116,9 @@ class TargetTaxLotRequest(BaseModel):
             "portfolio_cost": obj.get("portfolioCost"),
             "price": obj.get("price"),
             "purchase_date": obj.get("purchaseDate"),
-            "settlement_date": obj.get("settlementDate")
+            "settlement_date": obj.get("settlementDate"),
+            "notional_cost": obj.get("notionalCost"),
+            "variation_margin": obj.get("variationMargin"),
+            "variation_margin_portfolio_ccy": obj.get("variationMarginPortfolioCcy")
         })
         return _obj

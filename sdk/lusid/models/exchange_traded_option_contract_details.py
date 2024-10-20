@@ -33,7 +33,7 @@ class ExchangeTradedOptionContractDetails(BaseModel):
     delivery_type: constr(strict=True, min_length=1) = Field(..., alias="deliveryType", description="The delivery type, cash or physical. An option on a future is physically settled if upon exercising the  holder receives a future.    Supported string (enumeration) values are: [Cash, Physical].")
     description: constr(strict=True, min_length=1) = Field(..., description="Description of contract")
     exchange_code: constr(strict=True, min_length=1) = Field(..., alias="exchangeCode", description="Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code).")
-    exercise_date: datetime = Field(..., alias="exerciseDate", description="Exercise Date.")
+    exercise_date: datetime = Field(..., alias="exerciseDate", description="The last exercise date of the option.")
     exercise_type: constr(strict=True, min_length=1) = Field(..., alias="exerciseType", description="The exercise type, European, American or Bermudan.    Supported string (enumeration) values are: [European, Bermudan, American].")
     option_code: constr(strict=True, min_length=1) = Field(..., alias="optionCode", description="Option Contract Code, typically one or two letters, e.g. OG => Option on Gold.")
     option_type: constr(strict=True, min_length=1) = Field(..., alias="optionType", description="The option type, Call or Put.    Supported string (enumeration) values are: [Call, Put].")

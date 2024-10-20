@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
 from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.resource_id import ResourceId
@@ -40,7 +40,7 @@ class ApplicableInstrumentEvent(BaseModel):
     generated_event: Optional[InstrumentEventHolder] = Field(None, alias="generatedEvent")
     generated_event_diagnostics: Optional[GeneratedEventDiagnostics] = Field(None, alias="generatedEventDiagnostics")
     loaded_event: Optional[InstrumentEventHolder] = Field(None, alias="loadedEvent")
-    applied_instrument_event_instruction_id: constr(strict=True, min_length=1) = Field(..., alias="appliedInstrumentEventInstructionId")
+    applied_instrument_event_instruction_id: Optional[StrictStr] = Field(None, alias="appliedInstrumentEventInstructionId")
     transactions: Optional[conlist(Transaction)] = None
     transaction_diagnostics: Optional[TransactionDiagnostics] = Field(None, alias="transactionDiagnostics")
     __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics"]
@@ -91,6 +91,11 @@ class ApplicableInstrumentEvent(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transaction_diagnostics
         if self.transaction_diagnostics:
             _dict['transactionDiagnostics'] = self.transaction_diagnostics.to_dict()
+        # set to None if applied_instrument_event_instruction_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.applied_instrument_event_instruction_id is None and "applied_instrument_event_instruction_id" in self.__fields_set__:
+            _dict['appliedInstrumentEventInstructionId'] = None
+
         # set to None if transactions (nullable) is None
         # and __fields_set__ contains the field
         if self.transactions is None and "transactions" in self.__fields_set__:

@@ -40,9 +40,10 @@ class EquityOption(LusidInstrument):
     number_of_shares: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="numberOfShares", description="The amount of shares to exchange if the option is exercised.")
     premium: Optional[Premium] = None
     exercise_type: Optional[StrictStr] = Field(None, alias="exerciseType", description="Type of optionality that is present; European, American.    Supported string (enumeration) values are: [European, American].")
+    underlying: Optional[LusidInstrument] = None
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "optionMaturityDate", "optionSettlementDate", "deliveryType", "optionType", "strike", "domCcy", "underlyingIdentifier", "code", "equityOptionType", "numberOfShares", "premium", "exerciseType"]
+    __properties = ["instrumentType", "startDate", "optionMaturityDate", "optionSettlementDate", "deliveryType", "optionType", "strike", "domCcy", "underlyingIdentifier", "code", "equityOptionType", "numberOfShares", "premium", "exerciseType", "underlying"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -79,6 +80,9 @@ class EquityOption(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of premium
         if self.premium:
             _dict['premium'] = self.premium.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of underlying
+        if self.underlying:
+            _dict['underlying'] = self.underlying.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -124,7 +128,8 @@ class EquityOption(LusidInstrument):
             "equity_option_type": obj.get("equityOptionType"),
             "number_of_shares": obj.get("numberOfShares"),
             "premium": Premium.from_dict(obj.get("premium")) if obj.get("premium") is not None else None,
-            "exercise_type": obj.get("exerciseType")
+            "exercise_type": obj.get("exerciseType"),
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
