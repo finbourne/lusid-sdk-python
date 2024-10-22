@@ -1178,6 +1178,7 @@ Class | Method | HTTP request | Description
  - [OperationType](docs/OperationType.md)
  - [Operator](docs/Operator.md)
  - [OptionEntry](docs/OptionEntry.md)
+ - [OptionExerciseCashEvent](docs/OptionExerciseCashEvent.md)
  - [OptionExerciseElection](docs/OptionExerciseElection.md)
  - [OptionExercisePhysicalEvent](docs/OptionExercisePhysicalEvent.md)
  - [OptionalitySchedule](docs/OptionalitySchedule.md)

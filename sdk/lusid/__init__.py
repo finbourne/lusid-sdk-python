@@ -672,6 +672,7 @@ from lusid.models.operation import Operation
 from lusid.models.operation_type import OperationType
 from lusid.models.operator import Operator
 from lusid.models.option_entry import OptionEntry
+from lusid.models.option_exercise_cash_event import OptionExerciseCashEvent
 from lusid.models.option_exercise_election import OptionExerciseElection
 from lusid.models.option_exercise_physical_event import OptionExercisePhysicalEvent
 from lusid.models.optionality_schedule import OptionalitySchedule
@@ -1887,6 +1888,7 @@ __all__ = [
     "OperationType",
     "Operator",
     "OptionEntry",
+    "OptionExerciseCashEvent",
     "OptionExerciseElection",
     "OptionExercisePhysicalEvent",
     "OptionalitySchedule",

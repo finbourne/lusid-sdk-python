@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.day_month import DayMonth
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -33,7 +33,7 @@ class FeeRequest(BaseModel):
     display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the Fee.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fee.")
     origin: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The origin or source of the Fee accrual.")
-    calculation_base: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="calculationBase", description="The calculation base for the Fee that is calculated using a percentage. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)")
+    calculation_base: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="calculationBase", description="The calculation base for a Fee that is calculated using a percentage (TotalAnnualAccrualAmount and CalculationBase cannot both be present). When the Fee is a ShareClass Fee (i.e: when ShareClasses contains at least one value), each of the following would be a valid CalculationBase: \"10000.00\", \"ShareClass.GAV\", \"ShareClass.GAV - ShareClass.Fees[ShareClassFeeCode1].Amount\", \"ShareClass.Fees[ShareClassFeeCode1].CalculationBase\". When the Fee is a NonShareClassSpecific Fee (i.e: when ShareClasses contains no values), each of the following would be a valid CalculationBase: \"10000.00\", \"GAV\", \"GAV - Fees[NonClassSpecificFeeCode1].Amount\", \"Fees[NonClassSpecificFeeCode1].CalculationBase\". ")
     accrual_currency: constr(strict=True, max_length=3, min_length=0) = Field(..., alias="accrualCurrency", description="The accrual currency.")
     treatment: constr(strict=True, min_length=1) = Field(..., description="The accrual period of the Fee; 'Monthly' or 'Daily'.")
     total_annual_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAnnualAccrualAmount", description="The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)")
@@ -45,7 +45,8 @@ class FeeRequest(BaseModel):
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    __properties = ["code", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId"]
+    share_classes: Optional[conlist(StrictStr)] = Field(None, alias="shareClasses", description="The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio.")
+    __properties = ["code", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId", "shareClasses"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -139,6 +140,11 @@ class FeeRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if share_classes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.share_classes is None and "share_classes" in self.__fields_set__:
+            _dict['shareClasses'] = None
+
         return _dict
 
     @classmethod
@@ -172,6 +178,7 @@ class FeeRequest(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
+            "share_classes": obj.get("shareClasses")
         })
         return _obj

@@ -73,6 +73,7 @@ class InstrumentEventType(str, Enum):
     CALLONINTERMEDIATESECURITIESEVENT = 'CallOnIntermediateSecuritiesEvent'
     INTERMEDIATESECURITIESDISTRIBUTIONEVENT = 'IntermediateSecuritiesDistributionEvent'
     OPTIONEXERCISEPHYSICALEVENT = 'OptionExercisePhysicalEvent'
+    OPTIONEXERCISECASHEVENT = 'OptionExerciseCashEvent'
     PROTECTIONPAYOUTCASHFLOWEVENT = 'ProtectionPayoutCashFlowEvent'
 
     @classmethod
