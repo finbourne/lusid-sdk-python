@@ -989,6 +989,7 @@ from lusid.models.result_value_dictionary import ResultValueDictionary
 from lusid.models.result_value_int import ResultValueInt
 from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
+from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
@@ -2205,6 +2206,7 @@ __all__ = [
     "ResultValueInt",
     "ResultValueString",
     "ResultValueType",
+    "ReturnZeroPvOptions",
     "ReverseStockSplitEvent",
     "RoundingConfiguration",
     "RoundingConfigurationComponent",
