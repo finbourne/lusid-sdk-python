@@ -34,8 +34,8 @@ class EquityOption(LusidInstrument):
     option_type: constr(strict=True, min_length=1) = Field(..., alias="optionType", description="Type of optionality for the option    Supported string (enumeration) values are: [Call, Put].")
     strike: Union[StrictFloat, StrictInt] = Field(..., description="The strike of the option.")
     dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
-    underlying_identifier: constr(strict=True, min_length=1) = Field(..., alias="underlyingIdentifier", description="The market identifier type of the underlying code, e.g RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].")
-    code: constr(strict=True, min_length=1) = Field(..., description="The identifying code for the equity underlying, e.g. 'IBM.N'.")
+    underlying_identifier: Optional[StrictStr] = Field(None, alias="underlyingIdentifier", description="The market identifier type of the underlying code, e.g RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].  Optional field, should be used in combination with the Code field.  Not compatible with the Underlying field.")
+    code: Optional[StrictStr] = Field(None, description="The identifying code for the equity underlying, e.g. 'IBM.N'.  Optional field, should be used in combination with the UnderlyingIdentifier field.  Not compatible with the Underlying field.")
     equity_option_type: Optional[StrictStr] = Field(None, alias="equityOptionType", description="Equity option types. E.g. Vanilla (default), RightsIssue, Warrant.    Supported string (enumeration) values are: [Vanilla, RightsIssue, Warrant].")
     number_of_shares: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="numberOfShares", description="The amount of shares to exchange if the option is exercised.")
     premium: Optional[Premium] = None
@@ -87,6 +87,16 @@ class EquityOption(LusidInstrument):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if underlying_identifier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.underlying_identifier is None and "underlying_identifier" in self.__fields_set__:
+            _dict['underlyingIdentifier'] = None
+
+        # set to None if code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.code is None and "code" in self.__fields_set__:
+            _dict['code'] = None
 
         # set to None if equity_option_type (nullable) is None
         # and __fields_set__ contains the field

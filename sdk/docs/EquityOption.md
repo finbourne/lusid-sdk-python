@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **option_type** | **str** | Type of optionality for the option    Supported string (enumeration) values are: [Call, Put]. | 
 **strike** | **float** | The strike of the option. | 
 **dom_ccy** | **str** | The domestic currency of the instrument. | 
-**underlying_identifier** | **str** | The market identifier type of the underlying code, e.g RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | 
-**code** | **str** | The identifying code for the equity underlying, e.g. &#39;IBM.N&#39;. | 
+**underlying_identifier** | **str** | The market identifier type of the underlying code, e.g RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].  Optional field, should be used in combination with the Code field.  Not compatible with the Underlying field. | [optional] 
+**code** | **str** | The identifying code for the equity underlying, e.g. &#39;IBM.N&#39;.  Optional field, should be used in combination with the UnderlyingIdentifier field.  Not compatible with the Underlying field. | [optional] 
 **equity_option_type** | **str** | Equity option types. E.g. Vanilla (default), RightsIssue, Warrant.    Supported string (enumeration) values are: [Vanilla, RightsIssue, Warrant]. | [optional] 
 **number_of_shares** | **float** | The amount of shares to exchange if the option is exercised. | [optional] 
 **premium** | [**Premium**](Premium.md) |  | [optional] 
