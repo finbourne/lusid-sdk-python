@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **as_at** | **datetime** | The as-at datetime at which properties were deleted. | 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

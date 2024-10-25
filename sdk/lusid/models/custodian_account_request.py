@@ -27,7 +27,7 @@ class CustodianAccountRequest(BaseModel):
     """
     CustodianAccountRequest
     """
-    scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, description="The Scope assigned to the Custodian Account, where left blank the parent Portfolio Scope will be used")
+    scope: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, description="The Scope assigned to the Custodian Account, where left blank the parent Portfolio Scope will be used")
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="Unique Code representing the Custodian Account")
     status: Optional[StrictStr] = Field(None, description="The Account status. Can be Active, Inactive or Deleted.")
     account_number: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="accountNumber", description="The Custodian Account Number")

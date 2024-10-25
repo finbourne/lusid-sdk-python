@@ -21,14 +21,16 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.link import Link
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 
 class DeleteInstrumentPropertiesResponse(BaseModel):
     """
     DeleteInstrumentPropertiesResponse
     """
     as_at: datetime = Field(..., alias="asAt", description="The as-at datetime at which properties were deleted.")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["asAt", "links"]
+    __properties = ["asAt", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,6 +56,9 @@ class DeleteInstrumentPropertiesResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -79,6 +84,7 @@ class DeleteInstrumentPropertiesResponse(BaseModel):
 
         _obj = DeleteInstrumentPropertiesResponse.parse_obj({
             "as_at": obj.get("asAt"),
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

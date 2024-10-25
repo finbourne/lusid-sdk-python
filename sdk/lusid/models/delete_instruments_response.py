@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.link import Link
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 
 class DeleteInstrumentsResponse(BaseModel):
     """
@@ -28,8 +29,9 @@ class DeleteInstrumentsResponse(BaseModel):
     """
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     as_at: datetime = Field(..., alias="asAt", description="The as-at datetime at which the instrument was deleted.")
+    staged: Optional[Dict[str, StagedModificationsInfo]] = Field(None, description="Information about the pending staged modifications for the current entity.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "asAt", "links"]
+    __properties = ["href", "asAt", "staged", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,8 +55,16 @@ class DeleteInstrumentsResponse(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "staged",
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each value in staged (dict)
+        _field_dict = {}
+        if self.staged:
+            for _key in self.staged:
+                if self.staged[_key]:
+                    _field_dict[_key] = self.staged[_key].to_dict()
+            _dict['staged'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -66,6 +76,11 @@ class DeleteInstrumentsResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
+
+        # set to None if staged (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staged is None and "staged" in self.__fields_set__:
+            _dict['staged'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -86,6 +101,12 @@ class DeleteInstrumentsResponse(BaseModel):
         _obj = DeleteInstrumentsResponse.parse_obj({
             "href": obj.get("href"),
             "as_at": obj.get("asAt"),
+            "staged": dict(
+                (_k, StagedModificationsInfo.from_dict(_v))
+                for _k, _v in obj.get("staged").items()
+            )
+            if obj.get("staged") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
