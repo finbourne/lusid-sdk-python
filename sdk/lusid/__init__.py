@@ -1063,6 +1063,8 @@ from lusid.models.tax_rule_set import TaxRuleSet
 from lusid.models.template_field import TemplateField
 from lusid.models.tender_event import TenderEvent
 from lusid.models.term_deposit import TermDeposit
+from lusid.models.term_deposit_interest_event import TermDepositInterestEvent
+from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
 from lusid.models.trade_ticket import TradeTicket
@@ -2280,6 +2282,8 @@ __all__ = [
     "TemplateField",
     "TenderEvent",
     "TermDeposit",
+    "TermDepositInterestEvent",
+    "TermDepositPrincipalEvent",
     "TotalReturnSwap",
     "Touch",
     "TradeTicket",

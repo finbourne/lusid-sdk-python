@@ -1569,6 +1569,8 @@ Class | Method | HTTP request | Description
  - [TemplateField](docs/TemplateField.md)
  - [TenderEvent](docs/TenderEvent.md)
  - [TermDeposit](docs/TermDeposit.md)
+ - [TermDepositInterestEvent](docs/TermDepositInterestEvent.md)
+ - [TermDepositPrincipalEvent](docs/TermDepositPrincipalEvent.md)
  - [TotalReturnSwap](docs/TotalReturnSwap.md)
  - [Touch](docs/Touch.md)
  - [TradeTicket](docs/TradeTicket.md)
