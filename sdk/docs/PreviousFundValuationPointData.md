@@ -6,7 +6,6 @@ The data for a Fund at the previous valuation point.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nav** | [**FundPreviousNAV**](FundPreviousNAV.md) |  | 
-**unitisation** | [**UnitisationData**](UnitisationData.md) |  | [optional] 
 
 ## Example
 

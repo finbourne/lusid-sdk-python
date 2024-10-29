@@ -27,15 +27,15 @@ class MasteredInstrument(LusidInstrument):
     LUSID representation of a reference to another instrument that has already been upserted (Mastered)  # noqa: E501
     """
     identifiers: Dict[str, StrictStr] = Field(..., description="Dictionary of identifiers of the mastered instrument")
-    asset_class: Optional[StrictStr] = Field(None, alias="assetClass", description="Asset class of the mastered instrument - read only field    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].")
     mastered_dom_ccy: Optional[StrictStr] = Field(None, alias="masteredDomCcy", description="DomCcy of the Instrument that Mastered Instrument points to - read only field")
     mastered_instrument_type: Optional[StrictStr] = Field(None, alias="masteredInstrumentType", description="Type of the Instrument that Mastered Instrument points to - read only field")
     mastered_lusid_instrument_id: Optional[StrictStr] = Field(None, alias="masteredLusidInstrumentId", description="Luid of the Instrument that Mastered Instrument points to - read only field")
     mastered_name: Optional[StrictStr] = Field(None, alias="masteredName", description="Name of the Instrument that Mastered Instrument points to - read only field")
     mastered_scope: Optional[StrictStr] = Field(None, alias="masteredScope", description="Scope of the Instrument that Mastered Instrument points to - read only field")
+    mastered_asset_class: Optional[StrictStr] = Field(None, alias="masteredAssetClass", description="Asset class of the underlying mastered instrument - read only field    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "identifiers", "assetClass", "masteredDomCcy", "masteredInstrumentType", "masteredLusidInstrumentId", "masteredName", "masteredScope"]
+    __properties = ["instrumentType", "identifiers", "masteredDomCcy", "masteredInstrumentType", "masteredLusidInstrumentId", "masteredName", "masteredScope", "masteredAssetClass"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -66,12 +66,12 @@ class MasteredInstrument(LusidInstrument):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "asset_class",
                             "mastered_dom_ccy",
                             "mastered_instrument_type",
                             "mastered_lusid_instrument_id",
                             "mastered_name",
                             "mastered_scope",
+                            "mastered_asset_class",
                             "additional_properties"
                           },
                           exclude_none=True)
@@ -79,11 +79,6 @@ class MasteredInstrument(LusidInstrument):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
-
-        # set to None if asset_class (nullable) is None
-        # and __fields_set__ contains the field
-        if self.asset_class is None and "asset_class" in self.__fields_set__:
-            _dict['assetClass'] = None
 
         # set to None if mastered_dom_ccy (nullable) is None
         # and __fields_set__ contains the field
@@ -110,6 +105,11 @@ class MasteredInstrument(LusidInstrument):
         if self.mastered_scope is None and "mastered_scope" in self.__fields_set__:
             _dict['masteredScope'] = None
 
+        # set to None if mastered_asset_class (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mastered_asset_class is None and "mastered_asset_class" in self.__fields_set__:
+            _dict['masteredAssetClass'] = None
+
         return _dict
 
     @classmethod
@@ -124,12 +124,12 @@ class MasteredInstrument(LusidInstrument):
         _obj = MasteredInstrument.parse_obj({
             "instrument_type": obj.get("instrumentType"),
             "identifiers": obj.get("identifiers"),
-            "asset_class": obj.get("assetClass"),
             "mastered_dom_ccy": obj.get("masteredDomCcy"),
             "mastered_instrument_type": obj.get("masteredInstrumentType"),
             "mastered_lusid_instrument_id": obj.get("masteredLusidInstrumentId"),
             "mastered_name": obj.get("masteredName"),
-            "mastered_scope": obj.get("masteredScope")
+            "mastered_scope": obj.get("masteredScope"),
+            "mastered_asset_class": obj.get("masteredAssetClass")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

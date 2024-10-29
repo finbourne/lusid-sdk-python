@@ -18,18 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from pydantic.v1 import BaseModel, Field
 from lusid.models.fund_previous_nav import FundPreviousNAV
-from lusid.models.unitisation_data import UnitisationData
 
 class PreviousFundValuationPointData(BaseModel):
     """
     The data for a Fund at the previous valuation point.  # noqa: E501
     """
     nav: FundPreviousNAV = Field(...)
-    unitisation: Optional[UnitisationData] = None
-    __properties = ["nav", "unitisation"]
+    __properties = ["nav"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,9 +56,6 @@ class PreviousFundValuationPointData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of nav
         if self.nav:
             _dict['nav'] = self.nav.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unitisation
-        if self.unitisation:
-            _dict['unitisation'] = self.unitisation.to_dict()
         return _dict
 
     @classmethod
@@ -73,7 +68,6 @@ class PreviousFundValuationPointData(BaseModel):
             return PreviousFundValuationPointData.parse_obj(obj)
 
         _obj = PreviousFundValuationPointData.parse_obj({
-            "nav": FundPreviousNAV.from_dict(obj.get("nav")) if obj.get("nav") is not None else None,
-            "unitisation": UnitisationData.from_dict(obj.get("unitisation")) if obj.get("unitisation") is not None else None
+            "nav": FundPreviousNAV.from_dict(obj.get("nav")) if obj.get("nav") is not None else None
         })
         return _obj

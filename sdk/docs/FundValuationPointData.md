@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **gav** | **float** | The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types &#39;Asset&#39; and &#39;Liabilities&#39;. | 
 **fees** | [**Dict[str, FeeAccrual]**](FeeAccrual.md) | Bucket of detail for any &#39;Fees&#39; that have been charged in the selected period. | 
 **nav** | **float** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | 
-**unitisation** | [**UnitisationData**](UnitisationData.md) |  | [optional] 
 **miscellaneous** | [**Dict[str, FundAmount]**](FundAmount.md) | Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations). | [optional] 
 **previous_valuation_point_data** | [**PreviousFundValuationPointData**](PreviousFundValuationPointData.md) |  | [optional] 
 

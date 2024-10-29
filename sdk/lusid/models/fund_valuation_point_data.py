@@ -24,7 +24,6 @@ from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
-from lusid.models.unitisation_data import UnitisationData
 
 class FundValuationPointData(BaseModel):
     """
@@ -36,10 +35,9 @@ class FundValuationPointData(BaseModel):
     gav: Union[StrictFloat, StrictInt] = Field(..., description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
     fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
     nav: Union[StrictFloat, StrictInt] = Field(..., description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
-    unitisation: Optional[UnitisationData] = None
     miscellaneous: Optional[Dict[str, FundAmount]] = Field(None, description="Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations).")
     previous_valuation_point_data: Optional[PreviousFundValuationPointData] = Field(None, alias="previousValuationPointData")
-    __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "unitisation", "miscellaneous", "previousValuationPointData"]
+    __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "miscellaneous", "previousValuationPointData"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,9 +87,6 @@ class FundValuationPointData(BaseModel):
                 if self.fees[_key]:
                     _field_dict[_key] = self.fees[_key].to_dict()
             _dict['fees'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of unitisation
-        if self.unitisation:
-            _dict['unitisation'] = self.unitisation.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in miscellaneous (dict)
         _field_dict = {}
         if self.miscellaneous:
@@ -140,7 +135,6 @@ class FundValuationPointData(BaseModel):
             if obj.get("fees") is not None
             else None,
             "nav": obj.get("nav"),
-            "unitisation": UnitisationData.from_dict(obj.get("unitisation")) if obj.get("unitisation") is not None else None,
             "miscellaneous": dict(
                 (_k, FundAmount.from_dict(_v))
                 for _k, _v in obj.get("miscellaneous").items()
