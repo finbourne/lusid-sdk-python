@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, constr, validator
 
 class WorkspaceItemCreationRequest(BaseModel):
@@ -28,7 +28,7 @@ class WorkspaceItemCreationRequest(BaseModel):
     format: StrictInt = Field(..., description="A simple integer format identifier.")
     name: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A workspace item's name; a unique identifier.")
     description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of a workspace item.")
-    content: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="The content associated with a workspace item.")
+    content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
     type: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="The type of the workspace item.")
     __properties = ["format", "name", "description", "content", "type"]
 
@@ -70,6 +70,11 @@ class WorkspaceItemCreationRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if content (nullable) is None
+        # and __fields_set__ contains the field
+        if self.content is None and "content" in self.__fields_set__:
+            _dict['content'] = None
+
         return _dict
 
     @classmethod

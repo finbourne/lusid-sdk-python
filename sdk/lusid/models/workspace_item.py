@@ -31,7 +31,7 @@ class WorkspaceItem(BaseModel):
     format: StrictInt = Field(..., description="A simple integer format identifier.")
     name: constr(strict=True, min_length=1) = Field(..., description="A workspace item's name; a unique identifier.")
     description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of a workspace item.")
-    content: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="The content associated with a workspace item.")
+    content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["type", "format", "name", "description", "content", "version", "links"]
@@ -77,6 +77,11 @@ class WorkspaceItem(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if content (nullable) is None
+        # and __fields_set__ contains the field
+        if self.content is None and "content" in self.__fields_set__:
+            _dict['content'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:

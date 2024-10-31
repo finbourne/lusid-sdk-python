@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **format** | **int** | A simple integer format identifier. | 
 **description** | **str** | The description of a workspace item. | 
-**content** | **str** | The content associated with a workspace item. | 
+**content** | **object** | The content associated with a workspace item. | 
 **type** | **str** | The type of the workspace item. | 
 
 ## Example

@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.lusid_instrument import LusidInstrument
 
 class ExchangeTradedOptionContractDetails(BaseModel):
@@ -39,7 +39,10 @@ class ExchangeTradedOptionContractDetails(BaseModel):
     option_type: constr(strict=True, min_length=1) = Field(..., alias="optionType", description="The option type, Call or Put.    Supported string (enumeration) values are: [Call, Put].")
     underlying: LusidInstrument = Field(...)
     underlying_code: constr(strict=True, min_length=1) = Field(..., alias="underlyingCode", description="Code of the underlying, for an option on futures this should be the futures code.")
-    __properties = ["domCcy", "strike", "contractSize", "country", "deliveryType", "description", "exchangeCode", "exerciseDate", "exerciseType", "optionCode", "optionType", "underlying", "underlyingCode"]
+    delivery_days: Optional[StrictInt] = Field(None, alias="deliveryDays", description="Number of business days between exercise date and settlement of the option payoff or underlying.")
+    business_day_convention: Optional[StrictStr] = Field(None, alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].")
+    settlement_calendars: Optional[conlist(StrictStr)] = Field(None, alias="settlementCalendars", description="An array of strings denoting calendars used in calculating the option settlement date.")
+    __properties = ["domCcy", "strike", "contractSize", "country", "deliveryType", "description", "exchangeCode", "exerciseDate", "exerciseType", "optionCode", "optionType", "underlying", "underlyingCode", "deliveryDays", "businessDayConvention", "settlementCalendars"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +71,16 @@ class ExchangeTradedOptionContractDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of underlying
         if self.underlying:
             _dict['underlying'] = self.underlying.to_dict()
+        # set to None if business_day_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.business_day_convention is None and "business_day_convention" in self.__fields_set__:
+            _dict['businessDayConvention'] = None
+
+        # set to None if settlement_calendars (nullable) is None
+        # and __fields_set__ contains the field
+        if self.settlement_calendars is None and "settlement_calendars" in self.__fields_set__:
+            _dict['settlementCalendars'] = None
+
         return _dict
 
     @classmethod
@@ -92,6 +105,9 @@ class ExchangeTradedOptionContractDetails(BaseModel):
             "option_code": obj.get("optionCode"),
             "option_type": obj.get("optionType"),
             "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
-            "underlying_code": obj.get("underlyingCode")
+            "underlying_code": obj.get("underlyingCode"),
+            "delivery_days": obj.get("deliveryDays"),
+            "business_day_convention": obj.get("businessDayConvention"),
+            "settlement_calendars": obj.get("settlementCalendars")
         })
         return _obj
