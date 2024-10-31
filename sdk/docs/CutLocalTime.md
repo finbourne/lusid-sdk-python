@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hours** | **int** |  | [optional] 
 **minutes** | **int** |  | [optional] 
+**seconds** | **float** |  | [optional] 
 
 ## Example
 

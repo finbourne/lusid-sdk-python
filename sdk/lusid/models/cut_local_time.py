@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictInt
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, StrictFloat, StrictInt
 
 class CutLocalTime(BaseModel):
     """
@@ -27,7 +27,8 @@ class CutLocalTime(BaseModel):
     """
     hours: Optional[StrictInt] = None
     minutes: Optional[StrictInt] = None
-    __properties = ["hours", "minutes"]
+    seconds: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties = ["hours", "minutes", "seconds"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,7 @@ class CutLocalTime(BaseModel):
 
         _obj = CutLocalTime.parse_obj({
             "hours": obj.get("hours"),
-            "minutes": obj.get("minutes")
+            "minutes": obj.get("minutes"),
+            "seconds": obj.get("seconds")
         })
         return _obj
