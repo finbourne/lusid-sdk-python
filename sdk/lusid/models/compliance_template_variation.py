@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
@@ -35,7 +35,8 @@ class ComplianceTemplateVariation(BaseModel):
     properties: Dict[str, PerpetualProperty] = Field(..., description="Properties associated with the Compliance Template Variation")
     accepted_address_keys: ResourceId = Field(..., alias="acceptedAddressKeys")
     steps: conlist(ComplianceStep) = Field(..., description="The steps expressed in this template, with their required parameters")
-    __properties = ["label", "description", "requiredParameters", "properties", "acceptedAddressKeys", "steps"]
+    referenced_group_label: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="referencedGroupLabel", description="The label of a given referenced group in a Compliance Rule Template Variation")
+    __properties = ["label", "description", "requiredParameters", "properties", "acceptedAddressKeys", "steps", "referencedGroupLabel"]
 
     class Config:
         """Pydantic configuration"""
@@ -85,6 +86,11 @@ class ComplianceTemplateVariation(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['steps'] = _items
+        # set to None if referenced_group_label (nullable) is None
+        # and __fields_set__ contains the field
+        if self.referenced_group_label is None and "referenced_group_label" in self.__fields_set__:
+            _dict['referencedGroupLabel'] = None
+
         return _dict
 
     @classmethod
@@ -107,6 +113,7 @@ class ComplianceTemplateVariation(BaseModel):
             if obj.get("properties") is not None
             else None,
             "accepted_address_keys": ResourceId.from_dict(obj.get("acceptedAddressKeys")) if obj.get("acceptedAddressKeys") is not None else None,
-            "steps": [ComplianceStep.from_dict(_item) for _item in obj.get("steps")] if obj.get("steps") is not None else None
+            "steps": [ComplianceStep.from_dict(_item) for _item in obj.get("steps")] if obj.get("steps") is not None else None,
+            "referenced_group_label": obj.get("referencedGroupLabel")
         })
         return _obj

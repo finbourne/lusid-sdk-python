@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties associated with the Compliance Template Variation | 
 **accepted_address_keys** | [**ResourceId**](ResourceId.md) |  | 
 **steps** | [**List[ComplianceStep]**](ComplianceStep.md) | The steps expressed in this template, with their required parameters | 
+**referenced_group_label** | **str** | The label of a given referenced group in a Compliance Rule Template Variation | [optional] 
 
 ## Example
 
