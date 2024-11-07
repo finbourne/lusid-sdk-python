@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 from lusid.models.component_filter import ComponentFilter
+from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.model_property import ModelProperty
 
 class FundConfigurationRequest(BaseModel):
@@ -33,8 +34,9 @@ class FundConfigurationRequest(BaseModel):
     dealing_filters: conlist(ComponentFilter) = Field(..., alias="dealingFilters", description="The set of filters used to decide which JE lines are included in the dealing.")
     pnl_filters: conlist(ComponentFilter) = Field(..., alias="pnlFilters", description="The set of filters used to decide which JE lines are included in the PnL.")
     back_out_filters: conlist(ComponentFilter) = Field(..., alias="backOutFilters", description="The set of filters used to decide which JE lines are included in the back outs.")
+    external_fee_filters: Optional[conlist(ExternalFeeComponentFilter)] = Field(None, alias="externalFeeFilters", description="The set of filters used to decide which JE lines are used for inputting fees from an external source.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
-    __properties = ["code", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "properties"]
+    __properties = ["code", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "externalFeeFilters", "properties"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -98,6 +100,13 @@ class FundConfigurationRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['backOutFilters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in external_fee_filters (list)
+        _items = []
+        if self.external_fee_filters:
+            for _item in self.external_fee_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['externalFeeFilters'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -114,6 +123,11 @@ class FundConfigurationRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if external_fee_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.external_fee_filters is None and "external_fee_filters" in self.__fields_set__:
+            _dict['externalFeeFilters'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -138,6 +152,7 @@ class FundConfigurationRequest(BaseModel):
             "dealing_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("dealingFilters")] if obj.get("dealingFilters") is not None else None,
             "pnl_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("pnlFilters")] if obj.get("pnlFilters") is not None else None,
             "back_out_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("backOutFilters")] if obj.get("backOutFilters") is not None else None,
+            "external_fee_filters": [ExternalFeeComponentFilter.from_dict(_item) for _item in obj.get("externalFeeFilters")] if obj.get("externalFeeFilters") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

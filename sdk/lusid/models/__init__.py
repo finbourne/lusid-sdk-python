@@ -342,6 +342,7 @@ from lusid.models.exercise_event import ExerciseEvent
 from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
+from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.fee import Fee
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fee_properties import FeeProperties
@@ -965,6 +966,7 @@ from lusid.models.staging_rule_set import StagingRuleSet
 from lusid.models.step_schedule import StepSchedule
 from lusid.models.stock_dividend_event import StockDividendEvent
 from lusid.models.stock_split_event import StockSplitEvent
+from lusid.models.strategy import Strategy
 from lusid.models.stream import Stream
 from lusid.models.string_comparison_type import StringComparisonType
 from lusid.models.string_compliance_parameter import StringComplianceParameter
@@ -1481,6 +1483,7 @@ __all__ = [
     "ExoticInstrument",
     "ExpandedGroup",
     "ExpiryEvent",
+    "ExternalFeeComponentFilter",
     "Fee",
     "FeeAccrual",
     "FeeProperties",
@@ -2104,6 +2107,7 @@ __all__ = [
     "StepSchedule",
     "StockDividendEvent",
     "StockSplitEvent",
+    "Strategy",
     "Stream",
     "StringComparisonType",
     "StringComplianceParameter",

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attribute_name** | **str** | Comparison rule attribute name. | 
-**value** | **str** | Computed value for the comparison rule attribute. | 
+**value** | **str** | Computed value for the comparison rule attribute. | [optional] 
 
 ## Example
 

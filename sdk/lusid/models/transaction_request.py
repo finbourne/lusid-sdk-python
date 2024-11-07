@@ -18,12 +18,13 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.strategy import Strategy
 from lusid.models.transaction_price import TransactionPrice
 
 class TransactionRequest(BaseModel):
@@ -48,7 +49,8 @@ class TransactionRequest(BaseModel):
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
     transaction_group_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId"]
+    strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A Json representing the allocation of units accross multiple sub-holding keys")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId", "strategyTag"]
 
     class Config:
         """Pydantic configuration"""
@@ -99,6 +101,13 @@ class TransactionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of custodian_account_id
         if self.custodian_account_id:
             _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in strategy_tag (list)
+        _items = []
+        if self.strategy_tag:
+            for _item in self.strategy_tag:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['strategyTag'] = _items
         # set to None if exchange_rate (nullable) is None
         # and __fields_set__ contains the field
         if self.exchange_rate is None and "exchange_rate" in self.__fields_set__:
@@ -128,6 +137,11 @@ class TransactionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.transaction_group_id is None and "transaction_group_id" in self.__fields_set__:
             _dict['transactionGroupId'] = None
+
+        # set to None if strategy_tag (nullable) is None
+        # and __fields_set__ contains the field
+        if self.strategy_tag is None and "strategy_tag" in self.__fields_set__:
+            _dict['strategyTag'] = None
 
         return _dict
 
@@ -163,6 +177,7 @@ class TransactionRequest(BaseModel):
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
             "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
-            "transaction_group_id": obj.get("transactionGroupId")
+            "transaction_group_id": obj.get("transactionGroupId"),
+            "strategy_tag": [Strategy.from_dict(_item) for _item in obj.get("strategyTag")] if obj.get("strategyTag") is not None else None
         })
         return _obj

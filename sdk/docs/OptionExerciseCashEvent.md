@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cash_flow_per_unit** | **float** | The cashflow per unit | [optional] 
 **exercise_date** | **datetime** | The exercise date of the option. | [optional] 
+**delivery_date** | **datetime** | The delivery date of the option. | [optional] 
 **exercise_type** | **str** | The optionality type of the underlying option e.g. American, European.    Supported string (enumeration) values are: [European, Bermudan, American]. | 
 **maturity_date** | **datetime** | The maturity date of the option. | 
 **moneyness** | **str** | The moneyness of the option e.g. InTheMoney, OutOfTheMoney.    Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney]. | [optional] 

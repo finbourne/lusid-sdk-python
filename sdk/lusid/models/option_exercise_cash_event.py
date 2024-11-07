@@ -29,6 +29,7 @@ class OptionExerciseCashEvent(InstrumentEvent):
     """
     cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashFlowPerUnit", description="The cashflow per unit")
     exercise_date: Optional[datetime] = Field(None, alias="exerciseDate", description="The exercise date of the option.")
+    delivery_date: Optional[datetime] = Field(None, alias="deliveryDate", description="The delivery date of the option.")
     exercise_type: constr(strict=True, min_length=1) = Field(..., alias="exerciseType", description="The optionality type of the underlying option e.g. American, European.    Supported string (enumeration) values are: [European, Bermudan, American].")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The maturity date of the option.")
     moneyness: Optional[StrictStr] = Field(None, description="The moneyness of the option e.g. InTheMoney, OutOfTheMoney.    Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney].")
@@ -40,7 +41,7 @@ class OptionExerciseCashEvent(InstrumentEvent):
     underlying_value_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="underlyingValuePerUnit", description="The underlying price times the number of shares to exchange if exercised.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "cashFlowPerUnit", "exerciseDate", "exerciseType", "maturityDate", "moneyness", "optionExerciseElections", "optionType", "startDate", "strikeCurrency", "strikePerUnit", "underlyingValuePerUnit"]
+    __properties = ["instrumentEventType", "cashFlowPerUnit", "exerciseDate", "deliveryDate", "exerciseType", "maturityDate", "moneyness", "optionExerciseElections", "optionType", "startDate", "strikeCurrency", "strikePerUnit", "underlyingValuePerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -96,6 +97,11 @@ class OptionExerciseCashEvent(InstrumentEvent):
         if self.exercise_date is None and "exercise_date" in self.__fields_set__:
             _dict['exerciseDate'] = None
 
+        # set to None if delivery_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.delivery_date is None and "delivery_date" in self.__fields_set__:
+            _dict['deliveryDate'] = None
+
         # set to None if moneyness (nullable) is None
         # and __fields_set__ contains the field
         if self.moneyness is None and "moneyness" in self.__fields_set__:
@@ -126,6 +132,7 @@ class OptionExerciseCashEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "cash_flow_per_unit": obj.get("cashFlowPerUnit"),
             "exercise_date": obj.get("exerciseDate"),
+            "delivery_date": obj.get("deliveryDate"),
             "exercise_type": obj.get("exerciseType"),
             "maturity_date": obj.get("maturityDate"),
             "moneyness": obj.get("moneyness"),

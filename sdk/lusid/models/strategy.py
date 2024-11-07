@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import Any, Dict, List, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr
+from lusid.models.perpetual_property import PerpetualProperty
 
-class ComparisonAttributeValuePair(BaseModel):
+class Strategy(BaseModel):
     """
-    ComparisonAttributeValuePair
+    Strategy
     """
-    attribute_name: constr(strict=True, min_length=1) = Field(..., alias="attributeName", description="Comparison rule attribute name.")
-    value: Optional[StrictStr] = Field(None, description="Computed value for the comparison rule attribute.")
-    __properties = ["attributeName", "value"]
+    keys: conlist(PerpetualProperty, min_items=1) = Field(...)
+    value_type: constr(strict=True, min_length=1) = Field(..., alias="valueType")
+    value: Union[StrictFloat, StrictInt] = Field(...)
+    __properties = ["keys", "valueType", "value"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +45,8 @@ class ComparisonAttributeValuePair(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComparisonAttributeValuePair:
-        """Create an instance of ComparisonAttributeValuePair from a JSON string"""
+    def from_json(cls, json_str: str) -> Strategy:
+        """Create an instance of Strategy from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,24 +55,27 @@ class ComparisonAttributeValuePair(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if value (nullable) is None
-        # and __fields_set__ contains the field
-        if self.value is None and "value" in self.__fields_set__:
-            _dict['value'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in keys (list)
+        _items = []
+        if self.keys:
+            for _item in self.keys:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['keys'] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComparisonAttributeValuePair:
-        """Create an instance of ComparisonAttributeValuePair from a dict"""
+    def from_dict(cls, obj: dict) -> Strategy:
+        """Create an instance of Strategy from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComparisonAttributeValuePair.parse_obj(obj)
+            return Strategy.parse_obj(obj)
 
-        _obj = ComparisonAttributeValuePair.parse_obj({
-            "attribute_name": obj.get("attributeName"),
+        _obj = Strategy.parse_obj({
+            "keys": [PerpetualProperty.from_dict(_item) for _item in obj.get("keys")] if obj.get("keys") is not None else None,
+            "value_type": obj.get("valueType"),
             "value": obj.get("value")
         })
         return _obj
