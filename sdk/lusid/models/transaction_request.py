@@ -49,7 +49,7 @@ class TransactionRequest(BaseModel):
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
     transaction_group_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
-    strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A Json representing the allocation of units accross multiple sub-holding keys")
+    strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A list of strategies representing the allocation of units across multiple sub-holding keys")
     __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId", "strategyTag"]
 
     class Config:

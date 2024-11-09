@@ -1102,6 +1102,7 @@ from lusid.models.transaction_template_specification import TransactionTemplateS
 from lusid.models.transaction_type import TransactionType
 from lusid.models.transaction_type_alias import TransactionTypeAlias
 from lusid.models.transaction_type_calculation import TransactionTypeCalculation
+from lusid.models.transaction_type_details import TransactionTypeDetails
 from lusid.models.transaction_type_movement import TransactionTypeMovement
 from lusid.models.transaction_type_property_mapping import TransactionTypePropertyMapping
 from lusid.models.transaction_type_request import TransactionTypeRequest
@@ -2323,6 +2324,7 @@ __all__ = [
     "TransactionType",
     "TransactionTypeAlias",
     "TransactionTypeCalculation",
+    "TransactionTypeDetails",
     "TransactionTypeMovement",
     "TransactionTypePropertyMapping",
     "TransactionTypeRequest",

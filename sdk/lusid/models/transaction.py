@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.strategy import Strategy
 from lusid.models.transaction_price import TransactionPrice
+from lusid.models.transaction_type_details import TransactionTypeDetails
 
 class Transaction(BaseModel):
     """
@@ -54,7 +56,9 @@ class Transaction(BaseModel):
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     custodian_account: Optional[CustodianAccount] = Field(None, alias="custodianAccount")
     transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId"]
+    strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A list of strategies representing the allocation of units across multiple sub-holding keys")
+    resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -115,6 +119,16 @@ class Transaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of custodian_account
         if self.custodian_account:
             _dict['custodianAccount'] = self.custodian_account.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in strategy_tag (list)
+        _items = []
+        if self.strategy_tag:
+            for _item in self.strategy_tag:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['strategyTag'] = _items
+        # override the default output from pydantic by calling `to_dict()` of resolved_transaction_type_details
+        if self.resolved_transaction_type_details:
+            _dict['resolvedTransactionTypeDetails'] = self.resolved_transaction_type_details.to_dict()
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
@@ -160,6 +174,11 @@ class Transaction(BaseModel):
         if self.transaction_group_id is None and "transaction_group_id" in self.__fields_set__:
             _dict['transactionGroupId'] = None
 
+        # set to None if strategy_tag (nullable) is None
+        # and __fields_set__ contains the field
+        if self.strategy_tag is None and "strategy_tag" in self.__fields_set__:
+            _dict['strategyTag'] = None
+
         return _dict
 
     @classmethod
@@ -199,6 +218,8 @@ class Transaction(BaseModel):
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
             "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
-            "transaction_group_id": obj.get("transactionGroupId")
+            "transaction_group_id": obj.get("transactionGroupId"),
+            "strategy_tag": [Strategy.from_dict(_item) for _item in obj.get("strategyTag")] if obj.get("strategyTag") is not None else None,
+            "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None
         })
         return _obj

@@ -30,6 +30,7 @@ class AggregationOp(str, Enum):
     allowed enum values
     """
     SUM = 'Sum'
+    DEFAULTSUM = 'DefaultSum'
     PROPORTION = 'Proportion'
     AVERAGE = 'Average'
     COUNT = 'Count'

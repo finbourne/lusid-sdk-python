@@ -1609,6 +1609,7 @@ Class | Method | HTTP request | Description
  - [TransactionType](docs/TransactionType.md)
  - [TransactionTypeAlias](docs/TransactionTypeAlias.md)
  - [TransactionTypeCalculation](docs/TransactionTypeCalculation.md)
+ - [TransactionTypeDetails](docs/TransactionTypeDetails.md)
  - [TransactionTypeMovement](docs/TransactionTypeMovement.md)
  - [TransactionTypePropertyMapping](docs/TransactionTypePropertyMapping.md)
  - [TransactionTypeRequest](docs/TransactionTypeRequest.md)

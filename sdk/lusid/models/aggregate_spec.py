@@ -26,15 +26,15 @@ class AggregateSpec(BaseModel):
     AggregateSpec
     """
     key: StrictStr = Field(..., description="The key that uniquely identifies a queryable address in Lusid.")
-    op: StrictStr = Field(..., description="The available values are: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears")
+    op: StrictStr = Field(..., description="The available values are: Sum, DefaultSum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears")
     options: Optional[Dict[str, Dict[str, Any]]] = Field(None, description="Additional options to apply when performing computations. Options that do not apply to the Key will be  ignored. Option values can be boolean, numeric, string or date-time.")
     __properties = ["key", "op", "options"]
 
     @validator('op')
     def op_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Sum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears'):
-            raise ValueError("must be one of enum values ('Sum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears')")
+        if value not in ('Sum', 'DefaultSum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears'):
+            raise ValueError("must be one of enum values ('Sum', 'DefaultSum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears')")
         return value
 
     class Config:
