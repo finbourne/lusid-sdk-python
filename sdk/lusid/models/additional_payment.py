@@ -25,9 +25,9 @@ class AdditionalPayment(BaseModel):
     """
     Record describing additional payment entity.  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="The upfront amount.")
-    currency: StrictStr = Field(..., description="The upfront currency.")
-    pay_date: datetime = Field(..., alias="payDate", description="Date when the upfront is paid.")
+    amount: Union[StrictFloat, StrictInt] = Field(..., description="The payment amount.")
+    currency: StrictStr = Field(..., description="The payment currency.")
+    pay_date: datetime = Field(..., alias="payDate", description="Date when the payment is made.")
     pay_receive: constr(strict=True, min_length=1) = Field(..., alias="payReceive", description="Is it pay or receive.    Supported string (enumeration) values are: [Pay, Receive].")
     __properties = ["amount", "currency", "payDate", "payReceive"]
 

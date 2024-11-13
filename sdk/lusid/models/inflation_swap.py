@@ -18,23 +18,25 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, validator
+from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.inflation_leg import InflationLeg
 from lusid.models.lusid_instrument import LusidInstrument
 
 class InflationSwap(LusidInstrument):
     """
-    LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  # noqa: E501
+    LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     inflation_leg: InflationLeg = Field(..., alias="inflationLeg")
     fixed_leg: FixedLeg = Field(..., alias="fixedLeg")
+    additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven inflation swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "inflationLeg", "fixedLeg"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "inflationLeg", "fixedLeg", "additionalPayments"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -74,10 +76,22 @@ class InflationSwap(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of fixed_leg
         if self.fixed_leg:
             _dict['fixedLeg'] = self.fixed_leg.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in additional_payments (list)
+        _items = []
+        if self.additional_payments:
+            for _item in self.additional_payments:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['additionalPayments'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if additional_payments (nullable) is None
+        # and __fields_set__ contains the field
+        if self.additional_payments is None and "additional_payments" in self.__fields_set__:
+            _dict['additionalPayments'] = None
 
         return _dict
 
@@ -95,7 +109,8 @@ class InflationSwap(LusidInstrument):
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "inflation_leg": InflationLeg.from_dict(obj.get("inflationLeg")) if obj.get("inflationLeg") is not None else None,
-            "fixed_leg": FixedLeg.from_dict(obj.get("fixedLeg")) if obj.get("fixedLeg") is not None else None
+            "fixed_leg": FixedLeg.from_dict(obj.get("fixedLeg")) if obj.get("fixedLeg") is not None else None,
+            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

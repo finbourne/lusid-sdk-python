@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.basket import Basket
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.flow_convention_name import FlowConventionName
@@ -27,7 +28,7 @@ from lusid.models.lusid_instrument import LusidInstrument
 
 class CdsIndex(LusidInstrument):
     """
-    LUSID representation of a Credit Default Swap Index (CDX).                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | ProtectionLeg | Payments made by the protection seller in the case of default across all CDS instruments in the index. |  | 2 | PremiumLeg | The premium payments made by the protection buyer across all CDS instruments in the index. |  # noqa: E501
+    LUSID representation of a Credit Default Swap Index (CDX).                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | ProtectionLeg | Payments made by the protection seller in the case of default across all CDS instruments in the index. |  | 2 | PremiumLeg | The premium payments made by the protection buyer across all CDS instruments in the index. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
@@ -37,9 +38,10 @@ class CdsIndex(LusidInstrument):
     basket: Optional[Basket] = None
     convention_name: Optional[FlowConventionName] = Field(None, alias="conventionName")
     notional: Union[StrictFloat, StrictInt] = Field(..., description="The notional quantity that applies to both the premium and protection legs.")
+    additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "couponRate", "identifiers", "basket", "conventionName", "notional"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "couponRate", "identifiers", "basket", "conventionName", "notional", "additionalPayments"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -82,10 +84,22 @@ class CdsIndex(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of convention_name
         if self.convention_name:
             _dict['conventionName'] = self.convention_name.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in additional_payments (list)
+        _items = []
+        if self.additional_payments:
+            for _item in self.additional_payments:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['additionalPayments'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if additional_payments (nullable) is None
+        # and __fields_set__ contains the field
+        if self.additional_payments is None and "additional_payments" in self.__fields_set__:
+            _dict['additionalPayments'] = None
 
         return _dict
 
@@ -107,7 +121,8 @@ class CdsIndex(LusidInstrument):
             "identifiers": obj.get("identifiers"),
             "basket": Basket.from_dict(obj.get("basket")) if obj.get("basket") is not None else None,
             "convention_name": FlowConventionName.from_dict(obj.get("conventionName")) if obj.get("conventionName") is not None else None,
-            "notional": obj.get("notional")
+            "notional": obj.get("notional"),
+            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

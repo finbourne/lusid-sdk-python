@@ -5,9 +5,9 @@ Record describing additional payment entity.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** | The upfront amount. | 
-**currency** | **str** | The upfront currency. | 
-**pay_date** | **datetime** | Date when the upfront is paid. | 
+**amount** | **float** | The payment amount. | 
+**currency** | **str** | The payment currency. | 
+**pay_date** | **datetime** | Date when the payment is made. | 
 **pay_receive** | **str** | Is it pay or receive.    Supported string (enumeration) values are: [Pay, Receive]. | 
 
 ## Example
