@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **portfolio_name** | **str** | The name of the order&#39;s referenced Portfolio. | [optional] 
 **order_approval_task_id** | **str** | The task id associated with the approval state of the order. | [optional] 
 **order_approval_task_definition_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**non_passing_compliance_rule_results** | [**List[ContributionToNonPassingRuleDetail]**](ContributionToNonPassingRuleDetail.md) | The details of compliance rules in non-passing states. | [optional] 
 
 ## Example
 

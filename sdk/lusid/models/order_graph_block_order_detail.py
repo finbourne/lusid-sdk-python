@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.resource_id import ResourceId
 
 class OrderGraphBlockOrderDetail(BaseModel):
@@ -33,7 +34,8 @@ class OrderGraphBlockOrderDetail(BaseModel):
     portfolio_name: Optional[StrictStr] = Field(None, alias="portfolioName", description="The name of the order's referenced Portfolio.")
     order_approval_task_id: Optional[StrictStr] = Field(None, alias="orderApprovalTaskId", description="The task id associated with the approval state of the order.")
     order_approval_task_definition_id: Optional[ResourceId] = Field(None, alias="orderApprovalTaskDefinitionId")
-    __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName", "orderApprovalTaskId", "orderApprovalTaskDefinitionId"]
+    non_passing_compliance_rule_results: Optional[conlist(ContributionToNonPassingRuleDetail)] = Field(None, alias="nonPassingComplianceRuleResults", description="The details of compliance rules in non-passing states.")
+    __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName", "orderApprovalTaskId", "orderApprovalTaskDefinitionId", "nonPassingComplianceRuleResults"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +70,13 @@ class OrderGraphBlockOrderDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of order_approval_task_definition_id
         if self.order_approval_task_definition_id:
             _dict['orderApprovalTaskDefinitionId'] = self.order_approval_task_definition_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in non_passing_compliance_rule_results (list)
+        _items = []
+        if self.non_passing_compliance_rule_results:
+            for _item in self.non_passing_compliance_rule_results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['nonPassingComplianceRuleResults'] = _items
         # set to None if portfolio_name (nullable) is None
         # and __fields_set__ contains the field
         if self.portfolio_name is None and "portfolio_name" in self.__fields_set__:
@@ -77,6 +86,11 @@ class OrderGraphBlockOrderDetail(BaseModel):
         # and __fields_set__ contains the field
         if self.order_approval_task_id is None and "order_approval_task_id" in self.__fields_set__:
             _dict['orderApprovalTaskId'] = None
+
+        # set to None if non_passing_compliance_rule_results (nullable) is None
+        # and __fields_set__ contains the field
+        if self.non_passing_compliance_rule_results is None and "non_passing_compliance_rule_results" in self.__fields_set__:
+            _dict['nonPassingComplianceRuleResults'] = None
 
         return _dict
 
@@ -96,6 +110,7 @@ class OrderGraphBlockOrderDetail(BaseModel):
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "portfolio_name": obj.get("portfolioName"),
             "order_approval_task_id": obj.get("orderApprovalTaskId"),
-            "order_approval_task_definition_id": ResourceId.from_dict(obj.get("orderApprovalTaskDefinitionId")) if obj.get("orderApprovalTaskDefinitionId") is not None else None
+            "order_approval_task_definition_id": ResourceId.from_dict(obj.get("orderApprovalTaskDefinitionId")) if obj.get("orderApprovalTaskDefinitionId") is not None else None,
+            "non_passing_compliance_rule_results": [ContributionToNonPassingRuleDetail.from_dict(_item) for _item in obj.get("nonPassingComplianceRuleResults")] if obj.get("nonPassingComplianceRuleResults") is not None else None
         })
         return _obj

@@ -797,6 +797,7 @@ Class | Method | HTTP request | Description
  - [ConstantVolatilitySurface](docs/ConstantVolatilitySurface.md)
  - [ConstituentsAdjustmentHeader](docs/ConstituentsAdjustmentHeader.md)
  - [ContractForDifference](docs/ContractForDifference.md)
+ - [ContributionToNonPassingRuleDetail](docs/ContributionToNonPassingRuleDetail.md)
  - [CorporateAction](docs/CorporateAction.md)
  - [CorporateActionSource](docs/CorporateActionSource.md)
  - [CorporateActionTransition](docs/CorporateActionTransition.md)

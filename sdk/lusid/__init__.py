@@ -290,6 +290,7 @@ from lusid.models.configuration_recipe import ConfigurationRecipe
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
 from lusid.models.contract_for_difference import ContractForDifference
+from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.corporate_action import CorporateAction
 from lusid.models.corporate_action_source import CorporateActionSource
 from lusid.models.corporate_action_transition import CorporateActionTransition
@@ -1512,6 +1513,7 @@ __all__ = [
     "ConstantVolatilitySurface",
     "ConstituentsAdjustmentHeader",
     "ContractForDifference",
+    "ContributionToNonPassingRuleDetail",
     "CorporateAction",
     "CorporateActionSource",
     "CorporateActionTransition",
