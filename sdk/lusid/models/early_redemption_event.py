@@ -18,20 +18,24 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from lusid.models.early_redemption_election import EarlyRedemptionElection
 from lusid.models.instrument_event import InstrumentEvent
 
-class TermDepositInterestEvent(InstrumentEvent):
+class EarlyRedemptionEvent(InstrumentEvent):
     """
-    Definition of a Term Deposit Interest Event.  This is an event that describes the occurence of interest on a term deposit ().  # noqa: E501
+    Early redemption as a consequence of a bond being called or putted.  # noqa: E501
     """
-    currency: StrictStr = Field(..., description="Currency of the interest payment.")
-    interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="interestPerUnit", description="The interest payment made per unit of the held .")
-    payment_date: datetime = Field(..., alias="paymentDate", description="Payment date of the interest payment.")
+    effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="Date of redemption.  For internally generated European callables, this is set to the exercise date.  For internally generated American callables, this is set to the start of the exercise period.")
+    currency: StrictStr = Field(..., description="Currency of the redemption.")
+    early_redemption_elections: conlist(EarlyRedemptionElection) = Field(..., alias="earlyRedemptionElections", description="EarlyRedemptionElection for the redemption.  Used to trigger the redemption.")
+    redemption_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="redemptionPercentage", description="Percentage of the original issue that is redeemed, where 0.5 implies 50%.  Defaults to 1 if not set.  Must be between 0 and 1.")
+    price_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="pricePerUnit", description="The price, or strike, that each unit is redeemed at.")
+    accrued_interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="accruedInterestPerUnit", description="Unpaid accrued interest also repaid as part of the redemption, per unit.  Optional field.  If left empty, will be resolved internally by calculating the accrued owed on the EffectiveDate.  This process may require additional market data.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "currency", "interestPerUnit", "paymentDate"]
+    __properties = ["instrumentEventType", "effectiveDate", "currency", "earlyRedemptionElections", "redemptionPercentage", "pricePerUnit", "accruedInterestPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -54,8 +58,8 @@ class TermDepositInterestEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TermDepositInterestEvent:
-        """Create an instance of TermDepositInterestEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> EarlyRedemptionEvent:
+        """Create an instance of EarlyRedemptionEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -65,32 +69,52 @@ class TermDepositInterestEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in early_redemption_elections (list)
+        _items = []
+        if self.early_redemption_elections:
+            for _item in self.early_redemption_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['earlyRedemptionElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if interest_per_unit (nullable) is None
+        # set to None if effective_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.interest_per_unit is None and "interest_per_unit" in self.__fields_set__:
-            _dict['interestPerUnit'] = None
+        if self.effective_date is None and "effective_date" in self.__fields_set__:
+            _dict['effectiveDate'] = None
+
+        # set to None if price_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_per_unit is None and "price_per_unit" in self.__fields_set__:
+            _dict['pricePerUnit'] = None
+
+        # set to None if accrued_interest_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accrued_interest_per_unit is None and "accrued_interest_per_unit" in self.__fields_set__:
+            _dict['accruedInterestPerUnit'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TermDepositInterestEvent:
-        """Create an instance of TermDepositInterestEvent from a dict"""
+    def from_dict(cls, obj: dict) -> EarlyRedemptionEvent:
+        """Create an instance of EarlyRedemptionEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TermDepositInterestEvent.parse_obj(obj)
+            return EarlyRedemptionEvent.parse_obj(obj)
 
-        _obj = TermDepositInterestEvent.parse_obj({
+        _obj = EarlyRedemptionEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
+            "effective_date": obj.get("effectiveDate"),
             "currency": obj.get("currency"),
-            "interest_per_unit": obj.get("interestPerUnit"),
-            "payment_date": obj.get("paymentDate")
+            "early_redemption_elections": [EarlyRedemptionElection.from_dict(_item) for _item in obj.get("earlyRedemptionElections")] if obj.get("earlyRedemptionElections") is not None else None,
+            "redemption_percentage": obj.get("redemptionPercentage"),
+            "price_per_unit": obj.get("pricePerUnit"),
+            "accrued_interest_per_unit": obj.get("accruedInterestPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

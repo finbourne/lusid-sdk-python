@@ -27,7 +27,7 @@ class TransactionConfigurationMovementData(BaseModel):
     """
     TransactionConfigurationMovementData
     """
-    movement_types: StrictStr = Field(..., alias="movementTypes", description="Movement types determine the impact of the movement on the holdings. The available values are: Settlement, Traded, StockMovement, FutureCash,  Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee. The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee")
+    movement_types: StrictStr = Field(..., alias="movementTypes", description="Movement types determine the impact of the movement on the holdings. The available values are: Settlement, Traded, StockMovement, FutureCash,  Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee. The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment")
     side: constr(strict=True, min_length=1) = Field(..., description="The Side determines which of the fields from our transaction are used to generate the Movement. Side1 means the 'security' side of the transaction, ie the Instrument and Units; Side2 means the 'cash' side, ie the Total Consideration")
     direction: StrictInt = Field(..., description=" A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement")
@@ -39,8 +39,8 @@ class TransactionConfigurationMovementData(BaseModel):
     @validator('movement_types')
     def movement_types_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee'):
-            raise ValueError("must be one of enum values ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee')")
+        if value not in ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment'):
+            raise ValueError("must be one of enum values ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment')")
         return value
 
     class Config:

@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
+from pydantic.v1 import Field, StrictBool, StrictStr, conint, conlist, constr, validator
 
 from typing import Optional
 
@@ -588,26 +588,30 @@ class AllocationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def upsert_allocations(self, allocation_set_request : Annotated[Optional[AllocationSetRequest], Field(description="The collection of allocation requests.")] = None, **kwargs) -> ResourceListOfAllocation:  # noqa: E501
+    async def upsert_allocations(self, allocation_set_request : Annotated[AllocationSetRequest, Field(..., description="The collection of allocation requests.")], verification_as_at : Annotated[Optional[datetime], Field(description="An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert.")] = None, retry_without_changed_entities : Annotated[Optional[StrictBool], Field(description="Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted.")] = None, **kwargs) -> ResourceListOfAllocation:  # noqa: E501
         ...
 
     @overload
-    def upsert_allocations(self, allocation_set_request : Annotated[Optional[AllocationSetRequest], Field(description="The collection of allocation requests.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfAllocation:  # noqa: E501
+    def upsert_allocations(self, allocation_set_request : Annotated[AllocationSetRequest, Field(..., description="The collection of allocation requests.")], verification_as_at : Annotated[Optional[datetime], Field(description="An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert.")] = None, retry_without_changed_entities : Annotated[Optional[StrictBool], Field(description="Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfAllocation:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_allocations(self, allocation_set_request : Annotated[Optional[AllocationSetRequest], Field(description="The collection of allocation requests.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAllocation, Awaitable[ResourceListOfAllocation]]:  # noqa: E501
+    def upsert_allocations(self, allocation_set_request : Annotated[AllocationSetRequest, Field(..., description="The collection of allocation requests.")], verification_as_at : Annotated[Optional[datetime], Field(description="An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert.")] = None, retry_without_changed_entities : Annotated[Optional[StrictBool], Field(description="Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAllocation, Awaitable[ResourceListOfAllocation]]:  # noqa: E501
         """UpsertAllocations: Upsert Allocations  # noqa: E501
 
         Upsert; update existing allocations with given ids, or create new allocations otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_allocations(allocation_set_request, async_req=True)
+        >>> thread = api.upsert_allocations(allocation_set_request, verification_as_at, retry_without_changed_entities, async_req=True)
         >>> result = thread.get()
 
-        :param allocation_set_request: The collection of allocation requests.
+        :param allocation_set_request: The collection of allocation requests. (required)
         :type allocation_set_request: AllocationSetRequest
+        :param verification_as_at: An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert.
+        :type verification_as_at: datetime
+        :param retry_without_changed_entities: Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted.
+        :type retry_without_changed_entities: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -624,21 +628,25 @@ class AllocationsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_allocations_with_http_info(allocation_set_request, **kwargs)  # noqa: E501
+        return self.upsert_allocations_with_http_info(allocation_set_request, verification_as_at, retry_without_changed_entities, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_allocations_with_http_info(self, allocation_set_request : Annotated[Optional[AllocationSetRequest], Field(description="The collection of allocation requests.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_allocations_with_http_info(self, allocation_set_request : Annotated[AllocationSetRequest, Field(..., description="The collection of allocation requests.")], verification_as_at : Annotated[Optional[datetime], Field(description="An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert.")] = None, retry_without_changed_entities : Annotated[Optional[StrictBool], Field(description="Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertAllocations: Upsert Allocations  # noqa: E501
 
         Upsert; update existing allocations with given ids, or create new allocations otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_allocations_with_http_info(allocation_set_request, async_req=True)
+        >>> thread = api.upsert_allocations_with_http_info(allocation_set_request, verification_as_at, retry_without_changed_entities, async_req=True)
         >>> result = thread.get()
 
-        :param allocation_set_request: The collection of allocation requests.
+        :param allocation_set_request: The collection of allocation requests. (required)
         :type allocation_set_request: AllocationSetRequest
+        :param verification_as_at: An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert.
+        :type verification_as_at: datetime
+        :param retry_without_changed_entities: Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted.
+        :type retry_without_changed_entities: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -666,7 +674,9 @@ class AllocationsApi:
         _params = locals()
 
         _all_params = [
-            'allocation_set_request'
+            'allocation_set_request',
+            'verification_as_at',
+            'retry_without_changed_entities'
         ]
         _all_params.extend(
             [
@@ -698,6 +708,15 @@ class AllocationsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('verification_as_at') is not None:  # noqa: E501
+            if isinstance(_params['verification_as_at'], datetime):
+                _query_params.append(('verificationAsAt', _params['verification_as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('verificationAsAt', _params['verification_as_at']))
+
+        if _params.get('retry_without_changed_entities') is not None:  # noqa: E501
+            _query_params.append(('retryWithoutChangedEntities', _params['retry_without_changed_entities']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

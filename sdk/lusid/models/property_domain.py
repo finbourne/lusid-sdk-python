@@ -71,6 +71,7 @@ class PropertyDomain(str, Enum):
     DIARYENTRY = 'DiaryEntry'
     LEG = 'Leg'
     DERIVEDVALUATION = 'DerivedValuation'
+    TIMELINE = 'Timeline'
     ADDRESSKEYDEFINITION = 'AddressKeyDefinition'
     AMORTISATIONRULESET = 'AmortisationRuleSet'
     ANALYTICSSETINVENTORY = 'AnalyticsSetInventory'

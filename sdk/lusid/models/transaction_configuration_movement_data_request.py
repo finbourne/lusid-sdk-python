@@ -27,7 +27,7 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
     """
     TransactionConfigurationMovementDataRequest
     """
-    movement_types: StrictStr = Field(..., alias="movementTypes", description=". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee")
+    movement_types: StrictStr = Field(..., alias="movementTypes", description=". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment")
     side: constr(strict=True, min_length=1) = Field(..., description="The movement side")
     direction: StrictInt = Field(..., description="The movement direction")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement.")
@@ -39,8 +39,8 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
     @validator('movement_types')
     def movement_types_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee'):
-            raise ValueError("must be one of enum values ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee')")
+        if value not in ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment'):
+            raise ValueError("must be one of enum values ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'UnsettledCashTypes', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment')")
         return value
 
     class Config:

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 
 class OptionEntry(BaseModel):
@@ -27,7 +27,8 @@ class OptionEntry(BaseModel):
     """
     strike: Union[StrictFloat, StrictInt] = Field(..., description="The strike on this date")
     var_date: datetime = Field(..., alias="date", description="The date at which the option can be actioned at this strike")
-    __properties = ["strike", "date"]
+    end_date: Optional[datetime] = Field(None, alias="endDate", description="If American exercise, this is the end of the exercise period.  Optional field. Defaults to the Date field if not set.")
+    __properties = ["strike", "date", "endDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,6 +54,11 @@ class OptionEntry(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if end_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.end_date is None and "end_date" in self.__fields_set__:
+            _dict['endDate'] = None
+
         return _dict
 
     @classmethod
@@ -66,6 +72,7 @@ class OptionEntry(BaseModel):
 
         _obj = OptionEntry.parse_obj({
             "strike": obj.get("strike"),
-            "var_date": obj.get("date")
+            "var_date": obj.get("date"),
+            "end_date": obj.get("endDate")
         })
         return _obj

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Union
 from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.floating_leg import FloatingLeg
 from lusid.models.lusid_instrument import LusidInstrument
@@ -28,8 +28,8 @@ class CapFloor(LusidInstrument):
     LUSID representation of Cap, Floor, or Collar.  # noqa: E501
     """
     cap_floor_type: constr(strict=True, min_length=1) = Field(..., alias="capFloorType", description="Determine if it's CAP, FLOOR, or COLLAR.    Supported string (enumeration) values are: [Cap, Floor, Collar].")
-    cap_strike: Union[StrictFloat, StrictInt] = Field(..., alias="capStrike", description="Strike rate of the Cap.")
-    floor_strike: Union[StrictFloat, StrictInt] = Field(..., alias="floorStrike", description="Strike rate of the Floor.")
+    cap_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="capStrike", description="Strike rate of the Cap.")
+    floor_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floorStrike", description="Strike rate of the Floor.")
     include_first_caplet: StrictBool = Field(..., alias="includeFirstCaplet", description="Include first caplet flag.")
     underlying_floating_leg: FloatingLeg = Field(..., alias="underlyingFloatingLeg")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility")
@@ -75,6 +75,16 @@ class CapFloor(LusidInstrument):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if cap_strike (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cap_strike is None and "cap_strike" in self.__fields_set__:
+            _dict['capStrike'] = None
+
+        # set to None if floor_strike (nullable) is None
+        # and __fields_set__ contains the field
+        if self.floor_strike is None and "floor_strike" in self.__fields_set__:
+            _dict['floorStrike'] = None
 
         return _dict
 

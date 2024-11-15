@@ -24,6 +24,7 @@ from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.transaction_price import TransactionPrice
+from lusid.models.transaction_type_details import TransactionTypeDetails
 
 class OutputTransaction(BaseModel):
     """
@@ -55,7 +56,8 @@ class OutputTransaction(BaseModel):
     source_type: Optional[StrictStr] = Field(None, alias="sourceType", description="The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment")
     source_instrument_event_id: Optional[StrictStr] = Field(None, alias="sourceInstrumentEventId", description="The unique ID of the instrument event that the transaction is related to.")
     transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "transactionGroupId"]
+    resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "transactionGroupId", "resolvedTransactionTypeDetails"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -111,6 +113,9 @@ class OutputTransaction(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['realisedGainLoss'] = _items
+        # override the default output from pydantic by calling `to_dict()` of resolved_transaction_type_details
+        if self.resolved_transaction_type_details:
+            _dict['resolvedTransactionTypeDetails'] = self.resolved_transaction_type_details.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -223,6 +228,7 @@ class OutputTransaction(BaseModel):
             "holding_ids": obj.get("holdingIds"),
             "source_type": obj.get("sourceType"),
             "source_instrument_event_id": obj.get("sourceInstrumentEventId"),
-            "transaction_group_id": obj.get("transactionGroupId")
+            "transaction_group_id": obj.get("transactionGroupId"),
+            "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None
         })
         return _obj

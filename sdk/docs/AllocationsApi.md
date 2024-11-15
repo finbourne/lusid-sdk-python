@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_allocations**
-> ResourceListOfAllocation upsert_allocations(allocation_set_request=allocation_set_request)
+> ResourceListOfAllocation upsert_allocations(allocation_set_request, verification_as_at=verification_as_at, retry_without_changed_entities=retry_without_changed_entities)
 
 UpsertAllocations: Upsert Allocations
 
@@ -363,13 +363,15 @@ async def main():
         # allocation_set_request = AllocationSetRequest.from_json("")
         # allocation_set_request = AllocationSetRequest.from_dict({})
         allocation_set_request = AllocationSetRequest()
+        verification_as_at = '2013-10-20T19:20:30+01:00' # datetime | An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert. (optional)
+        retry_without_changed_entities = False # bool | Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted. (optional) (default to False)
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.upsert_allocations(allocation_set_request=allocation_set_request, opts=opts)
+            # api_response = await api_instance.upsert_allocations(allocation_set_request, verification_as_at=verification_as_at, retry_without_changed_entities=retry_without_changed_entities, opts=opts)
 
             # UpsertAllocations: Upsert Allocations
-            api_response = await api_instance.upsert_allocations(allocation_set_request=allocation_set_request)
+            api_response = await api_instance.upsert_allocations(allocation_set_request, verification_as_at=verification_as_at, retry_without_changed_entities=retry_without_changed_entities)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling AllocationsApi->upsert_allocations: %s\n" % e)
@@ -381,7 +383,9 @@ asyncio.run(main())
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **allocation_set_request** | [**AllocationSetRequest**](AllocationSetRequest.md)| The collection of allocation requests. | [optional] 
+ **allocation_set_request** | [**AllocationSetRequest**](AllocationSetRequest.md)| The collection of allocation requests. | 
+ **verification_as_at** | **datetime**| An optional verification asAt; individual upserts will fail if an existing entity has been updated between the verification asAt and time of upsert. | [optional] 
+ **retry_without_changed_entities** | **bool**| Optionally choose to keep retrying upsert for remaining entities if some are being updated concurrently. If set to true, any entities that have              changed since the verificationAsAt will be dropped from the set of allocations to upsert and the upsert will be retried. The response will only contain the allocations in the original request              that have been successfully upserted. | [optional] [default to False]
 
 ### Return type
 

@@ -313,6 +313,8 @@ from lusid.models.discounting_dependency import DiscountingDependency
 from lusid.models.discounting_method import DiscountingMethod
 from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
+from lusid.models.early_redemption_election import EarlyRedemptionElection
+from lusid.models.early_redemption_event import EarlyRedemptionEvent
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.economic_dependency_type import EconomicDependencyType
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
@@ -1121,6 +1123,7 @@ from lusid.models.valuation_point_data_query_parameters import ValuationPointDat
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_overview import ValuationPointOverview
+from lusid.models.valuation_point_resource_list_of_journal_entry_line import ValuationPointResourceListOfJournalEntryLine
 from lusid.models.valuation_request import ValuationRequest
 from lusid.models.valuation_schedule import ValuationSchedule
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
@@ -1456,6 +1459,8 @@ __all__ = [
     "DiscountingMethod",
     "DividendOptionEvent",
     "DividendReinvestmentEvent",
+    "EarlyRedemptionElection",
+    "EarlyRedemptionEvent",
     "EconomicDependency",
     "EconomicDependencyType",
     "EconomicDependencyWithComplexMarketData",
@@ -2264,6 +2269,7 @@ __all__ = [
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
     "ValuationPointOverview",
+    "ValuationPointResourceListOfJournalEntryLine",
     "ValuationRequest",
     "ValuationSchedule",
     "ValuationsReconciliationRequest",

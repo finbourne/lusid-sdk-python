@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **strike** | **float** | The strike on this date | 
 **var_date** | **datetime** | The date at which the option can be actioned at this strike | 
+**end_date** | **datetime** | If American exercise, this is the end of the exercise period.  Optional field. Defaults to the Date field if not set. | [optional] 
 
 ## Example
 

@@ -18,16 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr
 
 class TransactionTypeDetails(BaseModel):
     """
     TransactionTypeDetails
     """
-    scope: Optional[StrictStr] = Field(None, description="The scope in which the TransactionType was resolved. If the portfolio has a TransactionTypeScope, this will have been used. Otherwise the default scope will have been used.")
-    source: Optional[StrictStr] = Field(None, description="The source in which the TransactionType was resolved.")
-    type: Optional[StrictStr] = Field(None, description="The resolved TransactionType. More information on TransactionType resolution can be found at https://support.lusid.com/docs/how-does-lusid-resolve-transactions-to-transaction-types")
+    scope: constr(strict=True, min_length=1) = Field(..., description="The scope in which the TransactionType was resolved. If the portfolio has a TransactionTypeScope, this will have been used. Otherwise the default scope will have been used.")
+    source: constr(strict=True, min_length=1) = Field(..., description="The source in which the TransactionType was resolved.")
+    type: constr(strict=True, min_length=1) = Field(..., description="The resolved TransactionType. More information on TransactionType resolution can be found at https://support.lusid.com/docs/how-does-lusid-resolve-transactions-to-transaction-types")
     __properties = ["scope", "source", "type"]
 
     class Config:
@@ -54,21 +54,6 @@ class TransactionTypeDetails(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if scope (nullable) is None
-        # and __fields_set__ contains the field
-        if self.scope is None and "scope" in self.__fields_set__:
-            _dict['scope'] = None
-
-        # set to None if source (nullable) is None
-        # and __fields_set__ contains the field
-        if self.source is None and "source" in self.__fields_set__:
-            _dict['source'] = None
-
-        # set to None if type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.type is None and "type" in self.__fields_set__:
-            _dict['type'] = None
-
         return _dict
 
     @classmethod
