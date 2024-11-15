@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**delete_abor**](AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EXPERIMENTAL] DeleteAbor: Delete an Abor.
 [**get_abor**](AborApi.md#get_abor) | **GET** /api/abor/{scope}/{code} | [EXPERIMENTAL] GetAbor: Get Abor.
 [**get_journal_entry_lines**](AborApi.md#get_journal_entry_lines) | **POST** /api/abor/{scope}/{code}/journalentrylines/$query | [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
-[**get_trial_balance**](AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EXPERIMENTAL] GetTrialBalance: Get the Trial balance for the given Abor.
+[**get_trial_balance**](AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
 [**list_abors**](AborApi.md#list_abors) | **GET** /api/abor | [EXPERIMENTAL] ListAbors: List Abors.
 [**list_diary_entries**](AborApi.md#list_diary_entries) | **GET** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] ListDiaryEntries: List diary entries.
 [**lock_period**](AborApi.md#lock_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$lockperiod | [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
@@ -626,9 +626,9 @@ Name | Type | Description  | Notes
 # **get_trial_balance**
 > VersionedResourceListOfTrialBalance get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
 
-[EXPERIMENTAL] GetTrialBalance: Get the Trial balance for the given Abor.
+[EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
 
-Gets the Trial balance for the given Abor    The Trial balance has been generated from transactions, translated via posting rules and aggregated based on a General Ledger Profile (where specified)
+Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).
 
 ### Example
 
@@ -677,23 +677,23 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(AborApi)
         scope = 'scope_example' # str | The scope of the Abor.
-        code = 'code_example' # str | The code of the Abor. Together with the scope is the unique identifier for the given Abor.
+        code = 'code_example' # str | The code of the Abor. Together with the scope this uniquely identifies the Abor.
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
         # trial_balance_query_parameters = TrialBalanceQueryParameters.from_json("")
         # trial_balance_query_parameters = TrialBalanceQueryParameters.from_dict({})
         trial_balance_query_parameters = TrialBalanceQueryParameters()
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve trial balance. Defaults to returning the latest version              of each transaction if not specified. (optional)
-        filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing Trial balance from a previous call to Trial balance. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
+        filter = 'filter_example' # str | Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+        limit = 56 # int | When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
 
         try:
             # uncomment the below to set overrides at the request level
             # api_response = await api_instance.get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
 
-            # [EXPERIMENTAL] GetTrialBalance: Get the Trial balance for the given Abor.
+            # [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
             api_response = await api_instance.get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
             pprint(api_response)
         except ApiException as e:
@@ -707,12 +707,12 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Abor. | 
- **code** | **str**| The code of the Abor. Together with the scope is the unique identifier for the given Abor. | 
+ **code** | **str**| The code of the Abor. Together with the scope this uniquely identifies the Abor. | 
  **trial_balance_query_parameters** | [**TrialBalanceQueryParameters**](TrialBalanceQueryParameters.md)| The query parameters used in running the generation of the Trial Balance. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve trial balance. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
- **filter** | **str**| \&quot;Expression to filter the result set.\&quot; | [optional] 
- **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Trial balance from a previous call to Trial balance. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. | [optional] 
 
 ### Return type
 

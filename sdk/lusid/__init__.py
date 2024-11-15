@@ -1205,6 +1205,7 @@ from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_journal_entry_line import ValuationPointResourceListOfJournalEntryLine
+from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
 from lusid.models.valuation_request import ValuationRequest
 from lusid.models.valuation_schedule import ValuationSchedule
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
@@ -2431,6 +2432,7 @@ __all__ = [
     "ValuationPointDataResponse",
     "ValuationPointOverview",
     "ValuationPointResourceListOfJournalEntryLine",
+    "ValuationPointResourceListOfTrialBalance",
     "ValuationRequest",
     "ValuationSchedule",
     "ValuationsReconciliationRequest",
