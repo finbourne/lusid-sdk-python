@@ -29,7 +29,7 @@ class EquityOption(LusidInstrument):
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     option_maturity_date: datetime = Field(..., alias="optionMaturityDate", description="The maturity date of the option.")
-    option_settlement_date: datetime = Field(..., alias="optionSettlementDate", description="The settlement date of the option.")
+    option_settlement_date: Optional[datetime] = Field(None, alias="optionSettlementDate", description="The settlement date of the option.")
     delivery_type: constr(strict=True, min_length=1) = Field(..., alias="deliveryType", description="Is the option cash settled or physical delivery of option    Supported string (enumeration) values are: [Cash, Physical].")
     option_type: constr(strict=True, min_length=1) = Field(..., alias="optionType", description="Type of optionality for the option    Supported string (enumeration) values are: [Call, Put].")
     strike: Union[StrictFloat, StrictInt] = Field(..., description="The strike of the option.")
@@ -87,6 +87,11 @@ class EquityOption(LusidInstrument):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if option_settlement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.option_settlement_date is None and "option_settlement_date" in self.__fields_set__:
+            _dict['optionSettlementDate'] = None
 
         # set to None if underlying_identifier (nullable) is None
         # and __fields_set__ contains the field

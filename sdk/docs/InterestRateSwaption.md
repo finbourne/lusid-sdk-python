@@ -6,7 +6,7 @@ LUSID representation of an Interest Rate Swaption.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The start date of the instrument. This is normally synonymous with the trade-date. | 
-**pay_or_receive_fixed** | **str** | True if on exercise the holder of the option enters the swap paying fixed, false if floating.    Supported string (enumeration) values are: [Pay, Receive]. | 
+**pay_or_receive_fixed** | **str** | Pay or Receive the fixed leg of the underlying swap.    Supported string (enumeration) values are: [Pay, Receive]. | 
 **premium** | [**Premium**](Premium.md) |  | [optional] 
 **delivery_method** | **str** | How does the option settle    Supported string (enumeration) values are: [Cash, Physical]. | 
 **swap** | [**InterestRateSwap**](InterestRateSwap.md) |  | 

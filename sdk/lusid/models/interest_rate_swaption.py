@@ -29,7 +29,7 @@ class InterestRateSwaption(LusidInstrument):
     LUSID representation of an Interest Rate Swaption.  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
-    pay_or_receive_fixed: constr(strict=True, min_length=1) = Field(..., alias="payOrReceiveFixed", description="True if on exercise the holder of the option enters the swap paying fixed, false if floating.    Supported string (enumeration) values are: [Pay, Receive].")
+    pay_or_receive_fixed: constr(strict=True, min_length=1) = Field(..., alias="payOrReceiveFixed", description="Pay or Receive the fixed leg of the underlying swap.    Supported string (enumeration) values are: [Pay, Receive].")
     premium: Optional[Premium] = None
     delivery_method: constr(strict=True, min_length=1) = Field(..., alias="deliveryMethod", description="How does the option settle    Supported string (enumeration) values are: [Cash, Physical].")
     swap: InterestRateSwap = Field(...)
