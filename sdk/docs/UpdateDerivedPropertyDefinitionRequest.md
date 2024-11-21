@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **data_type_id** | [**ResourceId**](ResourceId.md) |  | 
 **property_description** | **str** | Describes the property | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | 
+**is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | 
 
 ## Example
 

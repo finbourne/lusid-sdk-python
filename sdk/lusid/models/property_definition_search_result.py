@@ -43,8 +43,9 @@ class PropertyDefinitionSearchResult(BaseModel):
     property_definition_type: Optional[StrictStr] = Field(None, alias="propertyDefinitionType", description="The definition type (DerivedDefinition or Definition). The available values are: ValueProperty, DerivedDefinition")
     property_description: Optional[StrictStr] = Field(None, alias="propertyDescription", description="A brief description of what a property of this property definition contains.")
     derivation_formula: Optional[StrictStr] = Field(None, alias="derivationFormula", description="The rule that defines how data is composed for a derived property.")
+    is_filterable: Optional[StrictBool] = Field(None, alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "links"]
+    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "isFilterable", "links"]
 
     @validator('value_type')
     def value_type_validate_enum(cls, value):
@@ -215,6 +216,7 @@ class PropertyDefinitionSearchResult(BaseModel):
             "property_definition_type": obj.get("propertyDefinitionType"),
             "property_description": obj.get("propertyDescription"),
             "derivation_formula": obj.get("derivationFormula"),
+            "is_filterable": obj.get("isFilterable"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

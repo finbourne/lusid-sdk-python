@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 from lusid.models.resource_id import ResourceId
 
 class CreateDerivedPropertyDefinitionRequest(BaseModel):
@@ -33,7 +33,8 @@ class CreateDerivedPropertyDefinitionRequest(BaseModel):
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
     property_description: Optional[constr(strict=True, max_length=512)] = Field(None, alias="propertyDescription", description="Describes the property")
     derivation_formula: constr(strict=True, min_length=1) = Field(..., alias="derivationFormula", description="The rule that defines how data is composed for a derived property.")
-    __properties = ["domain", "scope", "code", "displayName", "dataTypeId", "propertyDescription", "derivationFormula"]
+    is_filterable: StrictBool = Field(..., alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
+    __properties = ["domain", "scope", "code", "displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable"]
 
     @validator('domain')
     def domain_validate_enum(cls, value):
@@ -92,6 +93,7 @@ class CreateDerivedPropertyDefinitionRequest(BaseModel):
             "display_name": obj.get("displayName"),
             "data_type_id": ResourceId.from_dict(obj.get("dataTypeId")) if obj.get("dataTypeId") is not None else None,
             "property_description": obj.get("propertyDescription"),
-            "derivation_formula": obj.get("derivationFormula")
+            "derivation_formula": obj.get("derivationFormula"),
+            "is_filterable": obj.get("isFilterable")
         })
         return _obj

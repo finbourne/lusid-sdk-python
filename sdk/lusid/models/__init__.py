@@ -246,6 +246,7 @@ from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
+from lusid.models.create_timeline_request import CreateTimelineRequest
 from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from lusid.models.create_unit_definition import CreateUnitDefinition
@@ -989,6 +990,7 @@ from lusid.models.tender_event import TenderEvent
 from lusid.models.term_deposit import TermDeposit
 from lusid.models.term_deposit_interest_event import TermDepositInterestEvent
 from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
+from lusid.models.timeline import Timeline
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
 from lusid.models.trade_ticket import TradeTicket
@@ -1072,6 +1074,7 @@ from lusid.models.update_reference_data_request import UpdateReferenceDataReques
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
+from lusid.models.update_timeline_request import UpdateTimelineRequest
 from lusid.models.update_unit_request import UpdateUnitRequest
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
 from lusid.models.upsert_complex_market_data_request import UpsertComplexMarketDataRequest
@@ -1393,6 +1396,7 @@ __all__ = [
     "CreateSequenceRequest",
     "CreateStagingRuleSetRequest",
     "CreateTaxRuleSetRequest",
+    "CreateTimelineRequest",
     "CreateTradeTicketsResponse",
     "CreateTransactionPortfolioRequest",
     "CreateUnitDefinition",
@@ -2136,6 +2140,7 @@ __all__ = [
     "TermDeposit",
     "TermDepositInterestEvent",
     "TermDepositPrincipalEvent",
+    "Timeline",
     "TotalReturnSwap",
     "Touch",
     "TradeTicket",
@@ -2219,6 +2224,7 @@ __all__ = [
     "UpdateRelationshipDefinitionRequest",
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
+    "UpdateTimelineRequest",
     "UpdateUnitRequest",
     "UpsertCdsFlowConventionsRequest",
     "UpsertComplexMarketDataRequest",

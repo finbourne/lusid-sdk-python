@@ -50,8 +50,9 @@ class PropertyDefinition(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique property definition properties and associated values to store with the property definition. Each property must be from the 'PropertyDefinition' domain.")
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
+    is_filterable: Optional[StrictBool] = Field(None, alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "collectionType", "properties", "version", "stagedModifications", "links"]
+    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "collectionType", "properties", "version", "stagedModifications", "isFilterable", "links"]
 
     @validator('value_type')
     def value_type_validate_enum(cls, value):
@@ -254,6 +255,7 @@ class PropertyDefinition(BaseModel):
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
+            "is_filterable": obj.get("isFilterable"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

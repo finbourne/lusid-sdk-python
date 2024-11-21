@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.currency_and_amount import CurrencyAndAmount
+from lusid.models.custodian_account import CustodianAccount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.transaction_price import TransactionPrice
@@ -55,9 +56,10 @@ class OutputTransaction(BaseModel):
     holding_ids: Optional[conlist(StrictInt)] = Field(None, alias="holdingIds", description="The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.")
     source_type: Optional[StrictStr] = Field(None, alias="sourceType", description="The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment")
     source_instrument_event_id: Optional[StrictStr] = Field(None, alias="sourceInstrumentEventId", description="The unique ID of the instrument event that the transaction is related to.")
+    custodian_account: Optional[CustodianAccount] = Field(None, alias="custodianAccount")
     transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
     resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "transactionGroupId", "resolvedTransactionTypeDetails"]
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -113,6 +115,9 @@ class OutputTransaction(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['realisedGainLoss'] = _items
+        # override the default output from pydantic by calling `to_dict()` of custodian_account
+        if self.custodian_account:
+            _dict['custodianAccount'] = self.custodian_account.to_dict()
         # override the default output from pydantic by calling `to_dict()` of resolved_transaction_type_details
         if self.resolved_transaction_type_details:
             _dict['resolvedTransactionTypeDetails'] = self.resolved_transaction_type_details.to_dict()
@@ -228,6 +233,7 @@ class OutputTransaction(BaseModel):
             "holding_ids": obj.get("holdingIds"),
             "source_type": obj.get("sourceType"),
             "source_instrument_event_id": obj.get("sourceInstrumentEventId"),
+            "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
             "transaction_group_id": obj.get("transactionGroupId"),
             "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None
         })

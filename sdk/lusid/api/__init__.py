@@ -64,6 +64,7 @@ from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
 from lusid.api.tax_rule_sets_api import TaxRuleSetsApi
+from lusid.api.timelines_api import TimelinesApi
 from lusid.api.transaction_configuration_api import TransactionConfigurationApi
 from lusid.api.transaction_fees_api import TransactionFeesApi
 from lusid.api.transaction_portfolios_api import TransactionPortfoliosApi
@@ -135,6 +136,7 @@ __all__ = [
     "StructuredResultDataApi",
     "SystemConfigurationApi",
     "TaxRuleSetsApi",
+    "TimelinesApi",
     "TransactionConfigurationApi",
     "TransactionFeesApi",
     "TransactionPortfoliosApi",
