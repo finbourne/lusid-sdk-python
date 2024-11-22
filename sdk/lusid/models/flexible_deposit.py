@@ -18,22 +18,22 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
-from lusid.models.instrument_leg import InstrumentLeg
-from lusid.models.leg_definition import LegDefinition
+from typing import Any, Dict, List
+from pydantic.v1 import Field, StrictStr, conlist, validator
+from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.schedule import Schedule
 
-class FundingLeg(InstrumentLeg):
+class FlexibleDeposit(LusidInstrument):
     """
-    LUSID representation of a Funding Leg with variable notional.    This Funding Leg is a hybrid between a single leg swap and a loan facility; the notional is not fixed and can vary within a reset period.                 The model can be used to represent the funding leg of a basket of instruments (e.g. equities) where the contents  of the basket can change over time. The actual notional history is stored in the FundingLegHistory object.     The actual notional history is stored in the FundingLegHistory object.                The main analytic calculated for this instrument is Accrual rather than PV.  # noqa: E501
+    LUSID flexible deposit instrument. Represents the basic building block of a bank account  structure that can handle deferred interest payments.  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
-    maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates beyond their last payment date.")
-    leg_definition: LegDefinition = Field(..., alias="legDefinition")
-    notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The initial notional of the Funding Leg instrument.  When \"RequiresFundingLegHistory\" property key is present in transaction key, during a GetValuation endpoint call (for instance),  this field would overriden by the Funding Leg history's notional and this notional field would not be used in the pricing and accrual calculations.  As such, we recommend setting this to 0 or not setting it at all.  Please see the following Notebook example and Knowledge Base article:  Notebook: https://github.com/finbourne/sample-notebooks/blob/master/examples/use-cases/instruments/Funding%20Leg%20Swap.ipynb  Knowledge Base article: https://support.lusid.com/knowledgebase/article/KA-01764/")
+    maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
+    dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
+    schedules: conlist(Schedule) = Field(..., description="Repayment schedules for the deposit instrument.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "legDefinition", "notional"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "schedules"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -56,8 +56,8 @@ class FundingLeg(InstrumentLeg):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FundingLeg:
-        """Create an instance of FundingLeg from a JSON string"""
+    def from_json(cls, json_str: str) -> FlexibleDeposit:
+        """Create an instance of FlexibleDeposit from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,36 +67,35 @@ class FundingLeg(InstrumentLeg):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of leg_definition
-        if self.leg_definition:
-            _dict['legDefinition'] = self.leg_definition.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in schedules (list)
+        _items = []
+        if self.schedules:
+            for _item in self.schedules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['schedules'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if notional (nullable) is None
-        # and __fields_set__ contains the field
-        if self.notional is None and "notional" in self.__fields_set__:
-            _dict['notional'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FundingLeg:
-        """Create an instance of FundingLeg from a dict"""
+    def from_dict(cls, obj: dict) -> FlexibleDeposit:
+        """Create an instance of FlexibleDeposit from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FundingLeg.parse_obj(obj)
+            return FlexibleDeposit.parse_obj(obj)
 
-        _obj = FundingLeg.parse_obj({
+        _obj = FlexibleDeposit.parse_obj({
             "instrument_type": obj.get("instrumentType"),
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
-            "leg_definition": LegDefinition.from_dict(obj.get("legDefinition")) if obj.get("legDefinition") is not None else None,
-            "notional": obj.get("notional")
+            "dom_ccy": obj.get("domCcy"),
+            "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

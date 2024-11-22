@@ -961,6 +961,7 @@ Class | Method | HTTP request | Description
  - [FixedLeg](docs/FixedLeg.md)
  - [FixedLegAllOfOverrides](docs/FixedLegAllOfOverrides.md)
  - [FixedSchedule](docs/FixedSchedule.md)
+ - [FlexibleDeposit](docs/FlexibleDeposit.md)
  - [FlexibleLoan](docs/FlexibleLoan.md)
  - [FloatSchedule](docs/FloatSchedule.md)
  - [FloatingLeg](docs/FloatingLeg.md)

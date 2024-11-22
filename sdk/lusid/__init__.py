@@ -449,6 +449,7 @@ from lusid.models.filter_step_request import FilterStepRequest
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
+from lusid.models.flexible_deposit import FlexibleDeposit
 from lusid.models.flexible_loan import FlexibleLoan
 from lusid.models.float_schedule import FloatSchedule
 from lusid.models.floating_leg import FloatingLeg
@@ -1680,6 +1681,7 @@ __all__ = [
     "FixedLeg",
     "FixedLegAllOfOverrides",
     "FixedSchedule",
+    "FlexibleDeposit",
     "FlexibleLoan",
     "FloatSchedule",
     "FloatingLeg",
