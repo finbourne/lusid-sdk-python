@@ -6,7 +6,8 @@ A request to create an item in a workspace.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **format** | **int** | A simple integer format identifier. | 
-**name** | **str** | A workspace item&#39;s name; a unique identifier. | 
+**name** | **str** | A workspace item&#39;s name. | 
+**group** | **str** | The group containing a workspace item. | 
 **description** | **str** | The description of a workspace item. | 
 **content** | **object** | The content associated with a workspace item. | 
 **type** | **str** | The type of the workspace item. | 

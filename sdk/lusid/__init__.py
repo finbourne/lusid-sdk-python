@@ -127,6 +127,7 @@ from lusid.models.address_key_filter import AddressKeyFilter
 from lusid.models.address_key_list import AddressKeyList
 from lusid.models.address_key_list_compliance_parameter import AddressKeyListComplianceParameter
 from lusid.models.address_key_option_definition import AddressKeyOptionDefinition
+from lusid.models.adjust_global_commitment_event import AdjustGlobalCommitmentEvent
 from lusid.models.adjust_holding import AdjustHolding
 from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateRequest
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
@@ -290,7 +291,9 @@ from lusid.models.compounding import Compounding
 from lusid.models.configuration_recipe import ConfigurationRecipe
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
+from lusid.models.contract_details import ContractDetails
 from lusid.models.contract_for_difference import ContractForDifference
+from lusid.models.contract_initialisation_event import ContractInitialisationEvent
 from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.corporate_action import CorporateAction
 from lusid.models.corporate_action_source import CorporateActionSource
@@ -396,6 +399,7 @@ from lusid.models.discounting_dependency import DiscountingDependency
 from lusid.models.discounting_method import DiscountingMethod
 from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
+from lusid.models.drawdown_event import DrawdownEvent
 from lusid.models.early_redemption_election import EarlyRedemptionElection
 from lusid.models.early_redemption_event import EarlyRedemptionEvent
 from lusid.models.economic_dependency import EconomicDependency
@@ -474,6 +478,7 @@ from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future
 from lusid.models.future_expiry_event import FutureExpiryEvent
+from lusid.models.future_mark_to_market_event import FutureMarkToMarketEvent
 from lusid.models.futures_contract_details import FuturesContractDetails
 from lusid.models.fx_conventions import FxConventions
 from lusid.models.fx_dependency import FxDependency
@@ -1359,6 +1364,7 @@ __all__ = [
     "AddressKeyList",
     "AddressKeyListComplianceParameter",
     "AddressKeyOptionDefinition",
+    "AdjustGlobalCommitmentEvent",
     "AdjustHolding",
     "AdjustHoldingForDateRequest",
     "AdjustHoldingRequest",
@@ -1522,7 +1528,9 @@ __all__ = [
     "ConfigurationRecipe",
     "ConstantVolatilitySurface",
     "ConstituentsAdjustmentHeader",
+    "ContractDetails",
     "ContractForDifference",
+    "ContractInitialisationEvent",
     "ContributionToNonPassingRuleDetail",
     "CorporateAction",
     "CorporateActionSource",
@@ -1628,6 +1636,7 @@ __all__ = [
     "DiscountingMethod",
     "DividendOptionEvent",
     "DividendReinvestmentEvent",
+    "DrawdownEvent",
     "EarlyRedemptionElection",
     "EarlyRedemptionEvent",
     "EconomicDependency",
@@ -1706,6 +1715,7 @@ __all__ = [
     "FundingLegOptions",
     "Future",
     "FutureExpiryEvent",
+    "FutureMarkToMarketEvent",
     "FuturesContractDetails",
     "FxConventions",
     "FxDependency",

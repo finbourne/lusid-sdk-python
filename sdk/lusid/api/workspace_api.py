@@ -706,26 +706,28 @@ class WorkspaceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.  # noqa: E501
 
         Delete an item from a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_personal_item(workspace_name, item_name, async_req=True)
+        >>> thread = api.delete_personal_item(workspace_name, group_name, item_name, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the personal workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param async_req: Whether to execute the request asynchronously.
@@ -744,21 +746,23 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_personal_item_with_http_info(workspace_name, item_name, **kwargs)  # noqa: E501
+        return self.delete_personal_item_with_http_info(workspace_name, group_name, item_name, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.  # noqa: E501
 
         Delete an item from a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_personal_item_with_http_info(workspace_name, item_name, async_req=True)
+        >>> thread = api.delete_personal_item_with_http_info(workspace_name, group_name, item_name, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the personal workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param async_req: Whether to execute the request asynchronously.
@@ -789,6 +793,7 @@ class WorkspaceApi:
 
         _all_params = [
             'workspace_name',
+            'group_name',
             'item_name'
         ]
         _all_params.extend(
@@ -821,6 +826,9 @@ class WorkspaceApi:
         if _params['workspace_name']:
             _path_params['workspaceName'] = _params['workspace_name']
 
+        if _params['group_name']:
+            _path_params['groupName'] = _params['group_name']
+
         if _params['item_name']:
             _path_params['itemName'] = _params['item_name']
 
@@ -847,7 +855,7 @@ class WorkspaceApi:
         }
 
         return self.api_client.call_api(
-            '/api/workspaces/personal/{workspaceName}/items/{itemName}', 'DELETE',
+            '/api/workspaces/personal/{workspaceName}/items/{groupName}/{itemName}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -1016,26 +1024,28 @@ class WorkspaceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.  # noqa: E501
 
         Delete an item from a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_shared_item(workspace_name, item_name, async_req=True)
+        >>> thread = api.delete_shared_item(workspace_name, group_name, item_name, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the shared workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param async_req: Whether to execute the request asynchronously.
@@ -1054,21 +1064,23 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_shared_item_with_http_info(workspace_name, item_name, **kwargs)  # noqa: E501
+        return self.delete_shared_item_with_http_info(workspace_name, group_name, item_name, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.  # noqa: E501
 
         Delete an item from a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_shared_item_with_http_info(workspace_name, item_name, async_req=True)
+        >>> thread = api.delete_shared_item_with_http_info(workspace_name, group_name, item_name, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the shared workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param async_req: Whether to execute the request asynchronously.
@@ -1099,6 +1111,7 @@ class WorkspaceApi:
 
         _all_params = [
             'workspace_name',
+            'group_name',
             'item_name'
         ]
         _all_params.extend(
@@ -1131,6 +1144,9 @@ class WorkspaceApi:
         if _params['workspace_name']:
             _path_params['workspaceName'] = _params['workspace_name']
 
+        if _params['group_name']:
+            _path_params['groupName'] = _params['group_name']
+
         if _params['item_name']:
             _path_params['itemName'] = _params['item_name']
 
@@ -1157,7 +1173,7 @@ class WorkspaceApi:
         }
 
         return self.api_client.call_api(
-            '/api/workspaces/shared/{workspaceName}/items/{itemName}', 'DELETE',
+            '/api/workspaces/shared/{workspaceName}/items/{groupName}/{itemName}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -1326,26 +1342,28 @@ class WorkspaceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
+    async def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @overload
-    def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
+    def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
+    def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
         """[EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.  # noqa: E501
 
         Get a single personal workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_personal_item(workspace_name, item_name, as_at, async_req=True)
+        >>> thread = api.get_personal_item(workspace_name, group_name, item_name, as_at, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the personal workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param as_at: The datetime at which to request the workspace item. If not provided, defaults to 'latest'.
@@ -1366,21 +1384,23 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_personal_item_with_http_info(workspace_name, item_name, as_at, **kwargs)  # noqa: E501
+        return self.get_personal_item_with_http_info(workspace_name, group_name, item_name, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.  # noqa: E501
 
         Get a single personal workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_personal_item_with_http_info(workspace_name, item_name, as_at, async_req=True)
+        >>> thread = api.get_personal_item_with_http_info(workspace_name, group_name, item_name, as_at, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the personal workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param as_at: The datetime at which to request the workspace item. If not provided, defaults to 'latest'.
@@ -1413,6 +1433,7 @@ class WorkspaceApi:
 
         _all_params = [
             'workspace_name',
+            'group_name',
             'item_name',
             'as_at'
         ]
@@ -1446,6 +1467,9 @@ class WorkspaceApi:
         if _params['workspace_name']:
             _path_params['workspaceName'] = _params['workspace_name']
 
+        if _params['group_name']:
+            _path_params['groupName'] = _params['group_name']
+
         if _params['item_name']:
             _path_params['itemName'] = _params['item_name']
 
@@ -1478,7 +1502,7 @@ class WorkspaceApi:
         }
 
         return self.api_client.call_api(
-            '/api/workspaces/personal/{workspaceName}/items/{itemName}', 'GET',
+            '/api/workspaces/personal/{workspaceName}/items/{groupName}/{itemName}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -1658,26 +1682,28 @@ class WorkspaceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
+    async def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @overload
-    def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
+    def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
+    def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
         """[EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.  # noqa: E501
 
         Get a single shared workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_shared_item(workspace_name, item_name, as_at, async_req=True)
+        >>> thread = api.get_shared_item(workspace_name, group_name, item_name, as_at, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the shared workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param as_at: The datetime at which to request the workspace item. If not provided, defaults to 'latest'.
@@ -1698,21 +1724,23 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_shared_item_with_http_info(workspace_name, item_name, as_at, **kwargs)  # noqa: E501
+        return self.get_shared_item_with_http_info(workspace_name, group_name, item_name, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.  # noqa: E501
 
         Get a single shared workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_shared_item_with_http_info(workspace_name, item_name, as_at, async_req=True)
+        >>> thread = api.get_shared_item_with_http_info(workspace_name, group_name, item_name, as_at, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The name of the shared workspace. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The name of the item. (required)
         :type item_name: str
         :param as_at: The datetime at which to request the workspace item. If not provided, defaults to 'latest'.
@@ -1745,6 +1773,7 @@ class WorkspaceApi:
 
         _all_params = [
             'workspace_name',
+            'group_name',
             'item_name',
             'as_at'
         ]
@@ -1778,6 +1807,9 @@ class WorkspaceApi:
         if _params['workspace_name']:
             _path_params['workspaceName'] = _params['workspace_name']
 
+        if _params['group_name']:
+            _path_params['groupName'] = _params['group_name']
+
         if _params['item_name']:
             _path_params['itemName'] = _params['item_name']
 
@@ -1810,7 +1842,7 @@ class WorkspaceApi:
         }
 
         return self.api_client.call_api(
-            '/api/workspaces/shared/{workspaceName}/items/{itemName}', 'GET',
+            '/api/workspaces/shared/{workspaceName}/items/{groupName}/{itemName}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -2754,26 +2786,28 @@ class WorkspaceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
+    async def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @overload
-    def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
+    def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
+    def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
         """[EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.  # noqa: E501
 
         Update an item in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_personal_item(workspace_name, item_name, workspace_item_update_request, async_req=True)
+        >>> thread = api.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The personal workspace name. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The item name. (required)
         :type item_name: str
         :param workspace_item_update_request: The new item details.
@@ -2794,21 +2828,23 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.update_personal_item_with_http_info(workspace_name, item_name, workspace_item_update_request, **kwargs)  # noqa: E501
+        return self.update_personal_item_with_http_info(workspace_name, group_name, item_name, workspace_item_update_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.  # noqa: E501
 
         Update an item in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_personal_item_with_http_info(workspace_name, item_name, workspace_item_update_request, async_req=True)
+        >>> thread = api.update_personal_item_with_http_info(workspace_name, group_name, item_name, workspace_item_update_request, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The personal workspace name. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The item name. (required)
         :type item_name: str
         :param workspace_item_update_request: The new item details.
@@ -2841,6 +2877,7 @@ class WorkspaceApi:
 
         _all_params = [
             'workspace_name',
+            'group_name',
             'item_name',
             'workspace_item_update_request'
         ]
@@ -2873,6 +2910,9 @@ class WorkspaceApi:
         _path_params = {}
         if _params['workspace_name']:
             _path_params['workspaceName'] = _params['workspace_name']
+
+        if _params['group_name']:
+            _path_params['groupName'] = _params['group_name']
 
         if _params['item_name']:
             _path_params['itemName'] = _params['item_name']
@@ -2910,7 +2950,7 @@ class WorkspaceApi:
         }
 
         return self.api_client.call_api(
-            '/api/workspaces/personal/{workspaceName}/items/{itemName}', 'PUT',
+            '/api/workspaces/personal/{workspaceName}/items/{groupName}/{itemName}', 'PUT',
             _path_params,
             _query_params,
             _header_params,
@@ -3094,26 +3134,28 @@ class WorkspaceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
+    async def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @overload
-    def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
+    def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkspaceItem:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
+    def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.  # noqa: E501
 
         Update an item in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_shared_item(workspace_name, item_name, workspace_item_update_request, async_req=True)
+        >>> thread = api.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The shared workspace name. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The item name. (required)
         :type item_name: str
         :param workspace_item_update_request: The new item details.
@@ -3134,21 +3176,23 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.update_shared_item_with_http_info(workspace_name, item_name, workspace_item_update_request, **kwargs)  # noqa: E501
+        return self.update_shared_item_with_http_info(workspace_name, group_name, item_name, workspace_item_update_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], group_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The group containing the item.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.  # noqa: E501
 
         Update an item in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_shared_item_with_http_info(workspace_name, item_name, workspace_item_update_request, async_req=True)
+        >>> thread = api.update_shared_item_with_http_info(workspace_name, group_name, item_name, workspace_item_update_request, async_req=True)
         >>> result = thread.get()
 
         :param workspace_name: The shared workspace name. (required)
         :type workspace_name: str
+        :param group_name: The group containing the item. (required)
+        :type group_name: str
         :param item_name: The item name. (required)
         :type item_name: str
         :param workspace_item_update_request: The new item details.
@@ -3181,6 +3225,7 @@ class WorkspaceApi:
 
         _all_params = [
             'workspace_name',
+            'group_name',
             'item_name',
             'workspace_item_update_request'
         ]
@@ -3213,6 +3258,9 @@ class WorkspaceApi:
         _path_params = {}
         if _params['workspace_name']:
             _path_params['workspaceName'] = _params['workspace_name']
+
+        if _params['group_name']:
+            _path_params['groupName'] = _params['group_name']
 
         if _params['item_name']:
             _path_params['itemName'] = _params['item_name']
@@ -3250,7 +3298,7 @@ class WorkspaceApi:
         }
 
         return self.api_client.call_api(
-            '/api/workspaces/shared/{workspaceName}/items/{itemName}', 'PUT',
+            '/api/workspaces/shared/{workspaceName}/items/{groupName}/{itemName}', 'PUT',
             _path_params,
             _query_params,
             _header_params,

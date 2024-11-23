@@ -5,7 +5,7 @@ A request to create an empty workspace.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | A workspace&#39;s name; a unique identifier. | 
+**name** | **str** | A workspace&#39;s name. | 
 **description** | **str** | A friendly description for the workspace. | 
 
 ## Example

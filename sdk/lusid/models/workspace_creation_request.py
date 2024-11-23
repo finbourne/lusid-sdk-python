@@ -25,7 +25,7 @@ class WorkspaceCreationRequest(BaseModel):
     """
     A request to create an empty workspace.  # noqa: E501
     """
-    name: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A workspace's name; a unique identifier.")
+    name: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A workspace's name.")
     description: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="A friendly description for the workspace.")
     __properties = ["name", "description"]
 

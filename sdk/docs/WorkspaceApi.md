@@ -8,21 +8,21 @@ Method | HTTP request | Description
 [**create_personal_workspace**](WorkspaceApi.md#create_personal_workspace) | **POST** /api/workspaces/personal | [EXPERIMENTAL] CreatePersonalWorkspace: Create a new personal workspace.
 [**create_shared_item**](WorkspaceApi.md#create_shared_item) | **POST** /api/workspaces/shared/{workspaceName}/items | [EXPERIMENTAL] CreateSharedItem: Create a new item in a shared workspace.
 [**create_shared_workspace**](WorkspaceApi.md#create_shared_workspace) | **POST** /api/workspaces/shared | [EXPERIMENTAL] CreateSharedWorkspace: Create a new shared workspace.
-[**delete_personal_item**](WorkspaceApi.md#delete_personal_item) | **DELETE** /api/workspaces/personal/{workspaceName}/items/{itemName} | [EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.
+[**delete_personal_item**](WorkspaceApi.md#delete_personal_item) | **DELETE** /api/workspaces/personal/{workspaceName}/items/{groupName}/{itemName} | [EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.
 [**delete_personal_workspace**](WorkspaceApi.md#delete_personal_workspace) | **DELETE** /api/workspaces/personal/{workspaceName} | [EXPERIMENTAL] DeletePersonalWorkspace: Delete a personal workspace.
-[**delete_shared_item**](WorkspaceApi.md#delete_shared_item) | **DELETE** /api/workspaces/shared/{workspaceName}/items/{itemName} | [EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.
+[**delete_shared_item**](WorkspaceApi.md#delete_shared_item) | **DELETE** /api/workspaces/shared/{workspaceName}/items/{groupName}/{itemName} | [EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.
 [**delete_shared_workspace**](WorkspaceApi.md#delete_shared_workspace) | **DELETE** /api/workspaces/shared/{workspaceName} | [EXPERIMENTAL] DeleteSharedWorkspace: Delete a shared workspace.
-[**get_personal_item**](WorkspaceApi.md#get_personal_item) | **GET** /api/workspaces/personal/{workspaceName}/items/{itemName} | [EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.
+[**get_personal_item**](WorkspaceApi.md#get_personal_item) | **GET** /api/workspaces/personal/{workspaceName}/items/{groupName}/{itemName} | [EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.
 [**get_personal_workspace**](WorkspaceApi.md#get_personal_workspace) | **GET** /api/workspaces/personal/{workspaceName} | [EXPERIMENTAL] GetPersonalWorkspace: Get a personal workspace.
-[**get_shared_item**](WorkspaceApi.md#get_shared_item) | **GET** /api/workspaces/shared/{workspaceName}/items/{itemName} | [EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.
+[**get_shared_item**](WorkspaceApi.md#get_shared_item) | **GET** /api/workspaces/shared/{workspaceName}/items/{groupName}/{itemName} | [EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.
 [**get_shared_workspace**](WorkspaceApi.md#get_shared_workspace) | **GET** /api/workspaces/shared/{workspaceName} | [EXPERIMENTAL] GetSharedWorkspace: Get a shared workspace.
 [**list_personal_items**](WorkspaceApi.md#list_personal_items) | **GET** /api/workspaces/personal/{workspaceName}/items | [EXPERIMENTAL] ListPersonalItems: List the items in a personal workspace.
 [**list_personal_workspaces**](WorkspaceApi.md#list_personal_workspaces) | **GET** /api/workspaces/personal | [EXPERIMENTAL] ListPersonalWorkspaces: List personal workspaces.
 [**list_shared_items**](WorkspaceApi.md#list_shared_items) | **GET** /api/workspaces/shared/{workspaceName}/items | [EXPERIMENTAL] ListSharedItems: List the items in a shared workspace.
 [**list_shared_workspaces**](WorkspaceApi.md#list_shared_workspaces) | **GET** /api/workspaces/shared | [EXPERIMENTAL] ListSharedWorkspaces: List shared workspaces.
-[**update_personal_item**](WorkspaceApi.md#update_personal_item) | **PUT** /api/workspaces/personal/{workspaceName}/items/{itemName} | [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
+[**update_personal_item**](WorkspaceApi.md#update_personal_item) | **PUT** /api/workspaces/personal/{workspaceName}/items/{groupName}/{itemName} | [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
 [**update_personal_workspace**](WorkspaceApi.md#update_personal_workspace) | **PUT** /api/workspaces/personal/{workspaceName} | [EXPERIMENTAL] UpdatePersonalWorkspace: Update a personal workspace.
-[**update_shared_item**](WorkspaceApi.md#update_shared_item) | **PUT** /api/workspaces/shared/{workspaceName}/items/{itemName} | [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.
+[**update_shared_item**](WorkspaceApi.md#update_shared_item) | **PUT** /api/workspaces/shared/{workspaceName}/items/{groupName}/{itemName} | [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.
 [**update_shared_workspace**](WorkspaceApi.md#update_shared_workspace) | **PUT** /api/workspaces/shared/{workspaceName} | [EXPERIMENTAL] UpdateSharedWorkspace: Update a shared workspace.
 
 
@@ -419,7 +419,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_personal_item**
-> DeletedEntityResponse delete_personal_item(workspace_name, item_name)
+> DeletedEntityResponse delete_personal_item(workspace_name, group_name, item_name)
 
 [EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.
 
@@ -472,14 +472,15 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(WorkspaceApi)
         workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
+        group_name = 'group_name_example' # str | The group containing the item.
         item_name = 'item_name_example' # str | The name of the item.
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_personal_item(workspace_name, item_name, opts=opts)
+            # api_response = await api_instance.delete_personal_item(workspace_name, group_name, item_name, opts=opts)
 
             # [EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.
-            api_response = await api_instance.delete_personal_item(workspace_name, item_name)
+            api_response = await api_instance.delete_personal_item(workspace_name, group_name, item_name)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling WorkspaceApi->delete_personal_item: %s\n" % e)
@@ -492,6 +493,7 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_name** | **str**| The name of the personal workspace. | 
+ **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The name of the item. | 
 
 ### Return type
@@ -605,7 +607,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_shared_item**
-> DeletedEntityResponse delete_shared_item(workspace_name, item_name)
+> DeletedEntityResponse delete_shared_item(workspace_name, group_name, item_name)
 
 [EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.
 
@@ -658,14 +660,15 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(WorkspaceApi)
         workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
+        group_name = 'group_name_example' # str | The group containing the item.
         item_name = 'item_name_example' # str | The name of the item.
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_shared_item(workspace_name, item_name, opts=opts)
+            # api_response = await api_instance.delete_shared_item(workspace_name, group_name, item_name, opts=opts)
 
             # [EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.
-            api_response = await api_instance.delete_shared_item(workspace_name, item_name)
+            api_response = await api_instance.delete_shared_item(workspace_name, group_name, item_name)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling WorkspaceApi->delete_shared_item: %s\n" % e)
@@ -678,6 +681,7 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_name** | **str**| The name of the shared workspace. | 
+ **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The name of the item. | 
 
 ### Return type
@@ -791,7 +795,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_personal_item**
-> WorkspaceItem get_personal_item(workspace_name, item_name, as_at=as_at)
+> WorkspaceItem get_personal_item(workspace_name, group_name, item_name, as_at=as_at)
 
 [EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.
 
@@ -844,15 +848,16 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(WorkspaceApi)
         workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
+        group_name = 'group_name_example' # str | The group containing the item.
         item_name = 'item_name_example' # str | The name of the item.
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The datetime at which to request the workspace item. If not provided, defaults to 'latest'. (optional)
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_personal_item(workspace_name, item_name, as_at=as_at, opts=opts)
+            # api_response = await api_instance.get_personal_item(workspace_name, group_name, item_name, as_at=as_at, opts=opts)
 
             # [EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.
-            api_response = await api_instance.get_personal_item(workspace_name, item_name, as_at=as_at)
+            api_response = await api_instance.get_personal_item(workspace_name, group_name, item_name, as_at=as_at)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling WorkspaceApi->get_personal_item: %s\n" % e)
@@ -865,6 +870,7 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_name** | **str**| The name of the personal workspace. | 
+ **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The name of the item. | 
  **as_at** | **datetime**| The datetime at which to request the workspace item. If not provided, defaults to &#39;latest&#39;. | [optional] 
 
@@ -981,7 +987,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_shared_item**
-> WorkspaceItem get_shared_item(workspace_name, item_name, as_at=as_at)
+> WorkspaceItem get_shared_item(workspace_name, group_name, item_name, as_at=as_at)
 
 [EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.
 
@@ -1034,15 +1040,16 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(WorkspaceApi)
         workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
+        group_name = 'group_name_example' # str | The group containing the item.
         item_name = 'item_name_example' # str | The name of the item.
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The datetime at which to request the workspace item. If not provided, defaults to 'latest'. (optional)
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_shared_item(workspace_name, item_name, as_at=as_at, opts=opts)
+            # api_response = await api_instance.get_shared_item(workspace_name, group_name, item_name, as_at=as_at, opts=opts)
 
             # [EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.
-            api_response = await api_instance.get_shared_item(workspace_name, item_name, as_at=as_at)
+            api_response = await api_instance.get_shared_item(workspace_name, group_name, item_name, as_at=as_at)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling WorkspaceApi->get_shared_item: %s\n" % e)
@@ -1055,6 +1062,7 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_name** | **str**| The name of the shared workspace. | 
+ **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The name of the item. | 
  **as_at** | **datetime**| The datetime at which to request the workspace item. If not provided, defaults to &#39;latest&#39;. | [optional] 
 
@@ -1575,7 +1583,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_personal_item**
-> WorkspaceItem update_personal_item(workspace_name, item_name, workspace_item_update_request=workspace_item_update_request)
+> WorkspaceItem update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
 
 [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
 
@@ -1628,6 +1636,7 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(WorkspaceApi)
         workspace_name = 'workspace_name_example' # str | The personal workspace name.
+        group_name = 'group_name_example' # str | The group containing the item.
         item_name = 'item_name_example' # str | The item name.
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -1638,10 +1647,10 @@ async def main():
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_personal_item(workspace_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
+            # api_response = await api_instance.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
 
             # [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
-            api_response = await api_instance.update_personal_item(workspace_name, item_name, workspace_item_update_request=workspace_item_update_request)
+            api_response = await api_instance.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling WorkspaceApi->update_personal_item: %s\n" % e)
@@ -1654,6 +1663,7 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_name** | **str**| The personal workspace name. | 
+ **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The item name. | 
  **workspace_item_update_request** | [**WorkspaceItemUpdateRequest**](WorkspaceItemUpdateRequest.md)| The new item details. | [optional] 
 
@@ -1775,7 +1785,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_shared_item**
-> WorkspaceItem update_shared_item(workspace_name, item_name, workspace_item_update_request=workspace_item_update_request)
+> WorkspaceItem update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
 
 [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.
 
@@ -1828,6 +1838,7 @@ async def main():
         # Create an instance of the API class
         api_instance = api_client_factory.build(WorkspaceApi)
         workspace_name = 'workspace_name_example' # str | The shared workspace name.
+        group_name = 'group_name_example' # str | The group containing the item.
         item_name = 'item_name_example' # str | The item name.
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -1838,10 +1849,10 @@ async def main():
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_shared_item(workspace_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
+            # api_response = await api_instance.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
 
             # [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.
-            api_response = await api_instance.update_shared_item(workspace_name, item_name, workspace_item_update_request=workspace_item_update_request)
+            api_response = await api_instance.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling WorkspaceApi->update_shared_item: %s\n" % e)
@@ -1854,6 +1865,7 @@ asyncio.run(main())
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_name** | **str**| The shared workspace name. | 
+ **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The item name. | 
  **workspace_item_update_request** | [**WorkspaceItemUpdateRequest**](WorkspaceItemUpdateRequest.md)| The new item details. | [optional] 
 

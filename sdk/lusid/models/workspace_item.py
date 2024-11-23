@@ -29,12 +29,13 @@ class WorkspaceItem(BaseModel):
     """
     type: constr(strict=True, min_length=1) = Field(..., description="The type of the workspace item.")
     format: StrictInt = Field(..., description="A simple integer format identifier.")
-    name: constr(strict=True, min_length=1) = Field(..., description="A workspace item's name; a unique identifier.")
+    name: constr(strict=True, min_length=1) = Field(..., description="A workspace item's name.")
+    group: constr(strict=True, min_length=1) = Field(..., description="The group containing a workspace item.")
     description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of a workspace item.")
     content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["type", "format", "name", "description", "content", "version", "links"]
+    __properties = ["type", "format", "name", "group", "description", "content", "version", "links"]
 
     @validator('description')
     def description_validate_regular_expression(cls, value):
@@ -102,6 +103,7 @@ class WorkspaceItem(BaseModel):
             "type": obj.get("type"),
             "format": obj.get("format"),
             "name": obj.get("name"),
+            "group": obj.get("group"),
             "description": obj.get("description"),
             "content": obj.get("content"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
