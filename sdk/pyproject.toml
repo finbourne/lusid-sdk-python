@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lusid-sdk"
-version = "2.1.608"
+version = "2.1.609"
 description = "LUSID API"
 authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
