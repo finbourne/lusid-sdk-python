@@ -23,6 +23,7 @@ from pydantic.v1 import Field, StrictBool, StrictStr, conlist, constr, validator
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.rounding_convention import RoundingConvention
 from lusid.models.schedule import Schedule
+from lusid.models.trading_conventions import TradingConventions
 
 class ComplexBond(LusidInstrument):
     """
@@ -34,9 +35,10 @@ class ComplexBond(LusidInstrument):
     rounding_conventions: Optional[conlist(RoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding conventions for analytics, if any.")
     asset_backed: Optional[StrictBool] = Field(None, alias="assetBacked", description="If this flag is set to true, then the outstanding notional and principal repayments will be calculated based  on pool factors in the quote store. Usually AssetBacked bonds also require a RollConvention setting of   within the FlowConventions any given rates schedule (to ensure payment dates always happen on the same day  of the month) and US Agency MBSs with Pay Delay features also require their rates schedules to include an  ExDividendConfiguration to drive the lag between interest accrual and payment.")
     asset_pool_identifier: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="assetPoolIdentifier", description="Identifier used to retrieve pool factor information about this bond from the quote store. This is typically  the bond's ISIN, but can also be ClientInternal. Please ensure you align the MarketDataKeyRule with the  correct Quote (Quote.ClientInternal.* or Quote.Isin.*)")
+    trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "identifiers", "calculationType", "schedules", "roundingConventions", "assetBacked", "assetPoolIdentifier"]
+    __properties = ["instrumentType", "identifiers", "calculationType", "schedules", "roundingConventions", "assetBacked", "assetPoolIdentifier", "tradingConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -84,6 +86,9 @@ class ComplexBond(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['roundingConventions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of trading_conventions
+        if self.trading_conventions:
+            _dict['tradingConventions'] = self.trading_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -137,7 +142,8 @@ class ComplexBond(LusidInstrument):
             "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None,
             "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
             "asset_backed": obj.get("assetBacked"),
-            "asset_pool_identifier": obj.get("assetPoolIdentifier")
+            "asset_pool_identifier": obj.get("assetPoolIdentifier"),
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

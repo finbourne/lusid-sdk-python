@@ -470,6 +470,11 @@ Class | Method | HTTP request | Description
 *RelationshipDefinitionsApi* | [**update_relationship_definition**](docs/RelationshipDefinitionsApi.md#update_relationship_definition) | **PUT** /api/relationshipdefinitions/{scope}/{code} | [EARLY ACCESS] UpdateRelationshipDefinition: Update Relationship Definition
 *RelationshipsApi* | [**create_relationship**](docs/RelationshipsApi.md#create_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships | CreateRelationship: Create Relationship
 *RelationshipsApi* | [**delete_relationship**](docs/RelationshipsApi.md#delete_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships/$delete | [EARLY ACCESS] DeleteRelationship: Delete Relationship
+*RiskModelFactorSetsApi* | [**create_risk_model_factor_set**](docs/RiskModelFactorSetsApi.md#create_risk_model_factor_set) | **POST** /api/riskmodels/factorsets | [EXPERIMENTAL] CreateRiskModelFactorSet: Create a Factor Set
+*RiskModelFactorSetsApi* | [**delete_risk_model_factor_set**](docs/RiskModelFactorSetsApi.md#delete_risk_model_factor_set) | **DELETE** /api/riskmodels/factorsets/{scope}/{code} | [EXPERIMENTAL] DeleteRiskModelFactorSet: Deletes a particular Factor Set
+*RiskModelFactorSetsApi* | [**get_risk_model_factor_set**](docs/RiskModelFactorSetsApi.md#get_risk_model_factor_set) | **GET** /api/riskmodels/factorsets/{scope}/{code} | [EXPERIMENTAL] GetRiskModelFactorSet: Get a single Factor Set by scope and code.
+*RiskModelFactorSetsApi* | [**list_risk_model_factor_sets**](docs/RiskModelFactorSetsApi.md#list_risk_model_factor_sets) | **GET** /api/riskmodels/factorsets | [EXPERIMENTAL] ListRiskModelFactorSets: Get a set of Factor Sets
+*RiskModelFactorSetsApi* | [**update_risk_model_factor_set_name**](docs/RiskModelFactorSetsApi.md#update_risk_model_factor_set_name) | **PUT** /api/riskmodels/factorsets/{scope}/{code} | [EXPERIMENTAL] UpdateRiskModelFactorSetName: Update Factor Set Display Name
 *SchemasApi* | [**get_entity_schema**](docs/SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
 *SchemasApi* | [**get_property_schema**](docs/SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [EARLY ACCESS] GetPropertySchema: Get property schema
 *SchemasApi* | [**get_value_types**](docs/SchemasApi.md#get_value_types) | **GET** /api/schemas/types | [EARLY ACCESS] GetValueTypes: Get value types
@@ -840,6 +845,7 @@ Class | Method | HTTP request | Description
  - [CreateRelationRequest](docs/CreateRelationRequest.md)
  - [CreateRelationshipDefinitionRequest](docs/CreateRelationshipDefinitionRequest.md)
  - [CreateRelationshipRequest](docs/CreateRelationshipRequest.md)
+ - [CreateRiskModelFactorSetRequest](docs/CreateRiskModelFactorSetRequest.md)
  - [CreateSequenceRequest](docs/CreateSequenceRequest.md)
  - [CreateStagingRuleSetRequest](docs/CreateStagingRuleSetRequest.md)
  - [CreateTaxRuleSetRequest](docs/CreateTaxRuleSetRequest.md)
@@ -1154,6 +1160,7 @@ Class | Method | HTTP request | Description
  - [MappedString](docs/MappedString.md)
  - [Mapping](docs/Mapping.md)
  - [MappingRule](docs/MappingRule.md)
+ - [MarkToMarketConventions](docs/MarkToMarketConventions.md)
  - [MarketContext](docs/MarketContext.md)
  - [MarketContextSuppliers](docs/MarketContextSuppliers.md)
  - [MarketDataKeyRule](docs/MarketDataKeyRule.md)
@@ -1289,6 +1296,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfReconciliation](docs/PagedResourceListOfReconciliation.md)
  - [PagedResourceListOfReferenceListResponse](docs/PagedResourceListOfReferenceListResponse.md)
  - [PagedResourceListOfRelationshipDefinition](docs/PagedResourceListOfRelationshipDefinition.md)
+ - [PagedResourceListOfRiskModelFactorSet](docs/PagedResourceListOfRiskModelFactorSet.md)
  - [PagedResourceListOfSequenceDefinition](docs/PagedResourceListOfSequenceDefinition.md)
  - [PagedResourceListOfStagedModification](docs/PagedResourceListOfStagedModification.md)
  - [PagedResourceListOfStagedModificationsRequestedChangeInterval](docs/PagedResourceListOfStagedModificationsRequestedChangeInterval.md)
@@ -1515,6 +1523,7 @@ Class | Method | HTTP request | Description
  - [ResultValueType](docs/ResultValueType.md)
  - [ReturnZeroPvOptions](docs/ReturnZeroPvOptions.md)
  - [ReverseStockSplitEvent](docs/ReverseStockSplitEvent.md)
+ - [RiskModelFactorSet](docs/RiskModelFactorSet.md)
  - [RoundingConfiguration](docs/RoundingConfiguration.md)
  - [RoundingConfigurationComponent](docs/RoundingConfigurationComponent.md)
  - [RoundingConvention](docs/RoundingConvention.md)
@@ -1595,6 +1604,7 @@ Class | Method | HTTP request | Description
  - [Touch](docs/Touch.md)
  - [TradeTicket](docs/TradeTicket.md)
  - [TradeTicketType](docs/TradeTicketType.md)
+ - [TradingConventions](docs/TradingConventions.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionConfigurationData](docs/TransactionConfigurationData.md)
  - [TransactionConfigurationDataRequest](docs/TransactionConfigurationDataRequest.md)
@@ -1672,6 +1682,7 @@ Class | Method | HTTP request | Description
  - [UpdateReconciliationRequest](docs/UpdateReconciliationRequest.md)
  - [UpdateReferenceDataRequest](docs/UpdateReferenceDataRequest.md)
  - [UpdateRelationshipDefinitionRequest](docs/UpdateRelationshipDefinitionRequest.md)
+ - [UpdateRiskModelFactorSetRequest](docs/UpdateRiskModelFactorSetRequest.md)
  - [UpdateStagingRuleSetRequest](docs/UpdateStagingRuleSetRequest.md)
  - [UpdateTaxRuleSetRequest](docs/UpdateTaxRuleSetRequest.md)
  - [UpdateTimelineRequest](docs/UpdateTimelineRequest.md)

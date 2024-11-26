@@ -24,6 +24,7 @@ from lusid.models.flow_conventions import FlowConventions
 from lusid.models.inflation_index_conventions import InflationIndexConventions
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.rounding_convention import RoundingConvention
+from lusid.models.trading_conventions import TradingConventions
 
 class InflationLinkedBond(LusidInstrument):
     """
@@ -44,9 +45,10 @@ class InflationLinkedBond(LusidInstrument):
     principal_protection: Optional[StrictBool] = Field(None, alias="principalProtection", description="If true then the principal is protected in that the redemption amount will be at least the face value (Principal).  This is typically set to true for inflation linked bonds issued by the United States and France (for example).  This is typically set to false for inflation linked bonds issued by the United Kingdom (post 2005).  For other sovereigns this can vary from issue to issue.  If not set this property defaults to true.  This is sometimes referred to as Deflation protection or an inflation floor of 0%.")
     stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType. Most Inflation linked bonds have a ShortFront stub type so this is the default, however in some cases  with a long front stub LongFront should be selected.  StubType Both is not supported for InflationLinkedBonds.    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
     rounding_conventions: Optional[conlist(RoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding conventions for analytics, if any.")
+    trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "inflationIndexConventions", "couponRate", "identifiers", "baseCPI", "baseCPIDate", "calculationType", "exDividendDays", "indexPrecision", "principal", "principalProtection", "stubType", "roundingConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "inflationIndexConventions", "couponRate", "identifiers", "baseCPI", "baseCPIDate", "calculationType", "exDividendDays", "indexPrecision", "principal", "principalProtection", "stubType", "roundingConventions", "tradingConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -93,6 +95,9 @@ class InflationLinkedBond(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['roundingConventions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of trading_conventions
+        if self.trading_conventions:
+            _dict['tradingConventions'] = self.trading_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -160,7 +165,8 @@ class InflationLinkedBond(LusidInstrument):
             "principal": obj.get("principal"),
             "principal_protection": obj.get("principalProtection"),
             "stub_type": obj.get("stubType"),
-            "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None
+            "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

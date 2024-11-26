@@ -246,6 +246,7 @@ from lusid.models.create_relation_definition_request import CreateRelationDefini
 from lusid.models.create_relation_request import CreateRelationRequest
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
+from lusid.models.create_risk_model_factor_set_request import CreateRiskModelFactorSetRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
@@ -560,6 +561,7 @@ from lusid.models.lusid_validation_problem_details import LusidValidationProblem
 from lusid.models.mapped_string import MappedString
 from lusid.models.mapping import Mapping
 from lusid.models.mapping_rule import MappingRule
+from lusid.models.mark_to_market_conventions import MarkToMarketConventions
 from lusid.models.market_context import MarketContext
 from lusid.models.market_context_suppliers import MarketContextSuppliers
 from lusid.models.market_data_key_rule import MarketDataKeyRule
@@ -695,6 +697,7 @@ from lusid.models.paged_resource_list_of_property_definition_search_result impor
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
+from lusid.models.paged_resource_list_of_risk_model_factor_set import PagedResourceListOfRiskModelFactorSet
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
 from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
 from lusid.models.paged_resource_list_of_staged_modifications_requested_change_interval import PagedResourceListOfStagedModificationsRequestedChangeInterval
@@ -921,6 +924,7 @@ from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
+from lusid.models.risk_model_factor_set import RiskModelFactorSet
 from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
 from lusid.models.rounding_convention import RoundingConvention
@@ -1001,6 +1005,7 @@ from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
 from lusid.models.trade_ticket import TradeTicket
 from lusid.models.trade_ticket_type import TradeTicketType
+from lusid.models.trading_conventions import TradingConventions
 from lusid.models.transaction import Transaction
 from lusid.models.transaction_configuration_data import TransactionConfigurationData
 from lusid.models.transaction_configuration_data_request import TransactionConfigurationDataRequest
@@ -1078,6 +1083,7 @@ from lusid.models.update_property_definition_request import UpdatePropertyDefini
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
 from lusid.models.update_reference_data_request import UpdateReferenceDataRequest
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
+from lusid.models.update_risk_model_factor_set_request import UpdateRiskModelFactorSetRequest
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
 from lusid.models.update_timeline_request import UpdateTimelineRequest
@@ -1402,6 +1408,7 @@ __all__ = [
     "CreateRelationRequest",
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
+    "CreateRiskModelFactorSetRequest",
     "CreateSequenceRequest",
     "CreateStagingRuleSetRequest",
     "CreateTaxRuleSetRequest",
@@ -1716,6 +1723,7 @@ __all__ = [
     "MappedString",
     "Mapping",
     "MappingRule",
+    "MarkToMarketConventions",
     "MarketContext",
     "MarketContextSuppliers",
     "MarketDataKeyRule",
@@ -1851,6 +1859,7 @@ __all__ = [
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
     "PagedResourceListOfRelationshipDefinition",
+    "PagedResourceListOfRiskModelFactorSet",
     "PagedResourceListOfSequenceDefinition",
     "PagedResourceListOfStagedModification",
     "PagedResourceListOfStagedModificationsRequestedChangeInterval",
@@ -2077,6 +2086,7 @@ __all__ = [
     "ResultValueType",
     "ReturnZeroPvOptions",
     "ReverseStockSplitEvent",
+    "RiskModelFactorSet",
     "RoundingConfiguration",
     "RoundingConfigurationComponent",
     "RoundingConvention",
@@ -2157,6 +2167,7 @@ __all__ = [
     "Touch",
     "TradeTicket",
     "TradeTicketType",
+    "TradingConventions",
     "Transaction",
     "TransactionConfigurationData",
     "TransactionConfigurationDataRequest",
@@ -2234,6 +2245,7 @@ __all__ = [
     "UpdateReconciliationRequest",
     "UpdateReferenceDataRequest",
     "UpdateRelationshipDefinitionRequest",
+    "UpdateRiskModelFactorSetRequest",
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
     "UpdateTimelineRequest",

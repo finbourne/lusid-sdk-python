@@ -22,6 +22,8 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.futures_contract_details import FuturesContractDetails
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.mark_to_market_conventions import MarkToMarketConventions
+from lusid.models.trading_conventions import TradingConventions
 
 class Future(LusidInstrument):
     """
@@ -32,12 +34,14 @@ class Future(LusidInstrument):
     identifiers: Dict[str, StrictStr] = Field(..., description="External market codes and identifiers for the bond, e.g. ISIN.")
     contract_details: FuturesContractDetails = Field(..., alias="contractDetails")
     contracts: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The number of contracts held.")
+    mark_to_market_conventions: Optional[MarkToMarketConventions] = Field(None, alias="markToMarketConventions")
     ref_spot_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="refSpotPrice", description="The reference spot price for the future at which the contract was entered into.")
     underlying: Optional[LusidInstrument] = None
-    calculation_type: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="calculationType", description="Calculation type for some Future instruments which have non-standard methodology.  Optional, if not set defaults as follows:  - If ExchangeCode is \"ASX\" and ContractCode is \"IR\" or \"BB\" set to ASX_BankBills  - If ExchangeCode is \"ASX\" and ContractCode is \"YT\" set to ASX_3Year  - If ExchangeCode is \"ASX\" and ContractCode is \"VT\" set to ASX_5Year  - If ExchangeCode is \"ASX\" and ContractCode is \"XT\" set to ASX_10Year  - If ExchangeCode is \"ASX\" and ContractCode is \"LT\" set to ASX_20Year  - otherwise set to Standard    Specific calculation types for bond and interest rate futures are:  - [Standard] The default calculation type, which does not fit into any of the categories below.  - [ASX_BankBills] Used for AUD and NZD futures “IR” and “BB” on ASX. 90D Bank Bills.  - [ASX_3Year] Used for “YT” on ASX. 3YR semi-annual bond (6 coupons) @ 6%.  - [ASX_5Year] Used for “VT” on ASX. 5yr semi-annual bond (10 coupons) @ 2%.  - [ASX_10Year] Used for “XT” on ASX. 10yr semi-annual bond (20 coupons) @ 6%.  - [ASX_20Year] Used for “LT” on ASX. 20yr semi-annual bond (40 coupons) @ 4%.  - [B3_DI1] Used for “DI1” on B3. Average of 1D interbank deposit rates.    - For futures with this calculation type, quote values are expected to be specified as a percentage.      For example, a quoted rate of 13.205% should be specified as a quote of 13.205 with a face value of 100.    Supported string (enumeration) values are: [Standard, ASX_BankBills, ASX_3Year, ASX_5Year, ASX_10Year, ASX_20Year, B3_DI1].")
+    calculation_type: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="calculationType", description="Calculation type for some Future instruments which have non-standard methodology.  Optional, if not set defaults as follows:  - If ExchangeCode is \"ASX\" and ContractCode is \"IR\" or \"BB\" set to ASX_BankBills  - If ExchangeCode is \"ASX\" and ContractCode is \"YT\" set to ASX_3Year  - If ExchangeCode is \"ASX\" and ContractCode is \"VT\" set to ASX_5Year  - If ExchangeCode is \"ASX\" and ContractCode is \"XT\" set to ASX_10Year  - If ExchangeCode is \"ASX\" and ContractCode is \"LT\" set to ASX_20Year  - otherwise set to Standard                Specific calculation types for bond and interest rate futures are:  - [Standard] The default calculation type, which does not fit into any of the categories below.  - [ASX_BankBills] Used for AUD and NZD futures “IR” and “BB” on ASX. 90D Bank Bills.  - [ASX_3Year] Used for “YT” on ASX. 3YR semi-annual bond (6 coupons) @ 6%.  - [ASX_5Year] Used for “VT” on ASX. 5yr semi-annual bond (10 coupons) @ 2%.  - [ASX_10Year] Used for “XT” on ASX. 10yr semi-annual bond (20 coupons) @ 6%.  - [ASX_20Year] Used for “LT” on ASX. 20yr semi-annual bond (40 coupons) @ 4%.  - [B3_DI1] Used for “DI1” on B3. Average of 1D interbank deposit rates.    - For futures with this calculation type, quote values are expected to be specified as a percentage.      For example, a quoted rate of 13.205% should be specified as a quote of 13.205 with a face value of 100.                Supported string (enumeration) values are: [Standard, ASX_BankBills, ASX_3Year, ASX_5Year, ASX_10Year, ASX_20Year, B3_DI1].")
+    trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "identifiers", "contractDetails", "contracts", "refSpotPrice", "underlying", "calculationType"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "identifiers", "contractDetails", "contracts", "markToMarketConventions", "refSpotPrice", "underlying", "calculationType", "tradingConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -74,9 +78,15 @@ class Future(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of contract_details
         if self.contract_details:
             _dict['contractDetails'] = self.contract_details.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of mark_to_market_conventions
+        if self.mark_to_market_conventions:
+            _dict['markToMarketConventions'] = self.mark_to_market_conventions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of underlying
         if self.underlying:
             _dict['underlying'] = self.underlying.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of trading_conventions
+        if self.trading_conventions:
+            _dict['tradingConventions'] = self.trading_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -105,9 +115,11 @@ class Future(LusidInstrument):
             "identifiers": obj.get("identifiers"),
             "contract_details": FuturesContractDetails.from_dict(obj.get("contractDetails")) if obj.get("contractDetails") is not None else None,
             "contracts": obj.get("contracts"),
+            "mark_to_market_conventions": MarkToMarketConventions.from_dict(obj.get("markToMarketConventions")) if obj.get("markToMarketConventions") is not None else None,
             "ref_spot_price": obj.get("refSpotPrice"),
             "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
-            "calculation_type": obj.get("calculationType")
+            "calculation_type": obj.get("calculationType"),
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
