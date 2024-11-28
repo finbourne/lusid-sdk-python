@@ -206,6 +206,7 @@ from lusid.models.cancel_orders_and_move_remaining_request import CancelOrdersAn
 from lusid.models.cancel_orders_and_move_remaining_response import CancelOrdersAndMoveRemainingResponse
 from lusid.models.cancel_orders_response import CancelOrdersResponse
 from lusid.models.cancel_placements_response import CancelPlacementsResponse
+from lusid.models.cancel_single_holding_adjustment_request import CancelSingleHoldingAdjustmentRequest
 from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
@@ -1450,6 +1451,7 @@ __all__ = [
     "CancelOrdersAndMoveRemainingResponse",
     "CancelOrdersResponse",
     "CancelPlacementsResponse",
+    "CancelSingleHoldingAdjustmentRequest",
     "CancelledOrderResult",
     "CancelledPlacementResult",
     "CapFloor",

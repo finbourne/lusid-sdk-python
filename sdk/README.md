@@ -554,6 +554,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**batch_upsert_transactions**](docs/TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | [EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions
 *TransactionPortfoliosApi* | [**build_transactions**](docs/TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
 *TransactionPortfoliosApi* | [**cancel_adjust_holdings**](docs/TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
+*TransactionPortfoliosApi* | [**cancel_single_adjust_holding**](docs/TransactionPortfoliosApi.md#cancel_single_adjust_holding) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$cancelAdjustment | [EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
 *TransactionPortfoliosApi* | [**cancel_transactions**](docs/TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | CancelTransactions: Cancel transactions
 *TransactionPortfoliosApi* | [**create_portfolio**](docs/TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | CreatePortfolio: Create portfolio
 *TransactionPortfoliosApi* | [**create_trade_ticket**](docs/TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | [EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
@@ -722,6 +723,7 @@ Class | Method | HTTP request | Description
  - [CancelOrdersAndMoveRemainingResponse](docs/CancelOrdersAndMoveRemainingResponse.md)
  - [CancelOrdersResponse](docs/CancelOrdersResponse.md)
  - [CancelPlacementsResponse](docs/CancelPlacementsResponse.md)
+ - [CancelSingleHoldingAdjustmentRequest](docs/CancelSingleHoldingAdjustmentRequest.md)
  - [CancelledOrderResult](docs/CancelledOrderResult.md)
  - [CancelledPlacementResult](docs/CancelledPlacementResult.md)
  - [CapFloor](docs/CapFloor.md)

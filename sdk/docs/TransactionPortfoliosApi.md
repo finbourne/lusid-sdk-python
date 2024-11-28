@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**batch_upsert_transactions**](TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | [EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
 [**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
+[**cancel_single_adjust_holding**](TransactionPortfoliosApi.md#cancel_single_adjust_holding) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$cancelAdjustment | [EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
 [**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | CancelTransactions: Cancel transactions
 [**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | CreatePortfolio: Create portfolio
 [**create_trade_ticket**](TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | [EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
@@ -743,6 +744,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the holding adjustments were cancelled |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **cancel_single_adjust_holding**
+> DeletedEntityResponse cancel_single_adjust_holding(scope, code, effective_at, cancel_single_holding_adjustment_request)
+
+[EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
+
+Cancel one previously sent holding adjustment without affecting the rest of the adjustment in the previous request on the specified effective datetime.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TransactionPortfoliosApi)
+        scope = 'scope_example' # str | The scope of the transaction portfolio.
+        code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the previous adjustment was made.
+
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # cancel_single_holding_adjustment_request = CancelSingleHoldingAdjustmentRequest.from_json("")
+        # cancel_single_holding_adjustment_request = CancelSingleHoldingAdjustmentRequest.from_dict({})
+        cancel_single_holding_adjustment_request = CancelSingleHoldingAdjustmentRequest()
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.cancel_single_adjust_holding(scope, code, effective_at, cancel_single_holding_adjustment_request, opts=opts)
+
+            # [EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
+            api_response = await api_instance.cancel_single_adjust_holding(scope, code, effective_at, cancel_single_holding_adjustment_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TransactionPortfoliosApi->cancel_single_adjust_holding: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **effective_at** | **str**| The effective datetime or cut label at which the previous adjustment was made. | 
+ **cancel_single_holding_adjustment_request** | [**CancelSingleHoldingAdjustmentRequest**](CancelSingleHoldingAdjustmentRequest.md)| The selected holding adjustment to be canceled. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the holding adjustment was cancelled |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
