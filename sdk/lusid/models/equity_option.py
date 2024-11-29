@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium
 
@@ -41,9 +41,12 @@ class EquityOption(LusidInstrument):
     premium: Optional[Premium] = None
     exercise_type: Optional[StrictStr] = Field(None, alias="exerciseType", description="Type of optionality that is present; European, American.    Supported string (enumeration) values are: [European, American].")
     underlying: Optional[LusidInstrument] = None
+    delivery_days: Optional[StrictInt] = Field(None, alias="deliveryDays", description="Number of business days between exercise date and settlement of the option payoff or underlying.")
+    business_day_convention: Optional[StrictStr] = Field(None, alias="businessDayConvention", description="Business day convention for option exercise date to settlement date calculation.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].")
+    settlement_calendars: Optional[conlist(StrictStr)] = Field(None, alias="settlementCalendars", description="Holiday calendars for option exercise date to settlement date calculation.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "optionMaturityDate", "optionSettlementDate", "deliveryType", "optionType", "strike", "domCcy", "underlyingIdentifier", "code", "equityOptionType", "numberOfShares", "premium", "exerciseType", "underlying"]
+    __properties = ["instrumentType", "startDate", "optionMaturityDate", "optionSettlementDate", "deliveryType", "optionType", "strike", "domCcy", "underlyingIdentifier", "code", "equityOptionType", "numberOfShares", "premium", "exerciseType", "underlying", "deliveryDays", "businessDayConvention", "settlementCalendars"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -118,6 +121,16 @@ class EquityOption(LusidInstrument):
         if self.exercise_type is None and "exercise_type" in self.__fields_set__:
             _dict['exerciseType'] = None
 
+        # set to None if business_day_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.business_day_convention is None and "business_day_convention" in self.__fields_set__:
+            _dict['businessDayConvention'] = None
+
+        # set to None if settlement_calendars (nullable) is None
+        # and __fields_set__ contains the field
+        if self.settlement_calendars is None and "settlement_calendars" in self.__fields_set__:
+            _dict['settlementCalendars'] = None
+
         return _dict
 
     @classmethod
@@ -144,7 +157,10 @@ class EquityOption(LusidInstrument):
             "number_of_shares": obj.get("numberOfShares"),
             "premium": Premium.from_dict(obj.get("premium")) if obj.get("premium") is not None else None,
             "exercise_type": obj.get("exerciseType"),
-            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
+            "delivery_days": obj.get("deliveryDays"),
+            "business_day_convention": obj.get("businessDayConvention"),
+            "settlement_calendars": obj.get("settlementCalendars")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
