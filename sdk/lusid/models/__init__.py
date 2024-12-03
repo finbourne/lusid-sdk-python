@@ -727,6 +727,7 @@ from lusid.models.placement import Placement
 from lusid.models.placement_request import PlacementRequest
 from lusid.models.placement_set_request import PlacementSetRequest
 from lusid.models.placement_update_request import PlacementUpdateRequest
+from lusid.models.pnl_journal_entry_line import PnlJournalEntryLine
 from lusid.models.portfolio import Portfolio
 from lusid.models.portfolio_cash_flow import PortfolioCashFlow
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
@@ -1140,6 +1141,7 @@ from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_journal_entry_line import ValuationPointResourceListOfJournalEntryLine
+from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
 from lusid.models.valuation_request import ValuationRequest
 from lusid.models.valuation_schedule import ValuationSchedule
@@ -1890,6 +1892,7 @@ __all__ = [
     "PlacementRequest",
     "PlacementSetRequest",
     "PlacementUpdateRequest",
+    "PnlJournalEntryLine",
     "Portfolio",
     "PortfolioCashFlow",
     "PortfolioCashLadder",
@@ -2303,6 +2306,7 @@ __all__ = [
     "ValuationPointDataResponse",
     "ValuationPointOverview",
     "ValuationPointResourceListOfJournalEntryLine",
+    "ValuationPointResourceListOfPnlJournalEntryLine",
     "ValuationPointResourceListOfTrialBalance",
     "ValuationRequest",
     "ValuationSchedule",

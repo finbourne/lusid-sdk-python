@@ -33,8 +33,9 @@ class SideDefinition(BaseModel):
     units: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The value, field or property key defining the side's units.")
     amount: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The value, field or property key defining the side's amount")
     notional_amount: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="notionalAmount", description="The value, field or property key defining the side's notional amount")
+    current_face: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="currentFace", description="The value, field or property key defining the side's current face / outstanding notional.")
     links: Optional[conlist(Link)] = None
-    __properties = ["side", "security", "currency", "rate", "units", "amount", "notionalAmount", "links"]
+    __properties = ["side", "security", "currency", "rate", "units", "amount", "notionalAmount", "currentFace", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +73,11 @@ class SideDefinition(BaseModel):
         if self.notional_amount is None and "notional_amount" in self.__fields_set__:
             _dict['notionalAmount'] = None
 
+        # set to None if current_face (nullable) is None
+        # and __fields_set__ contains the field
+        if self.current_face is None and "current_face" in self.__fields_set__:
+            _dict['currentFace'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -96,6 +102,7 @@ class SideDefinition(BaseModel):
             "units": obj.get("units"),
             "amount": obj.get("amount"),
             "notional_amount": obj.get("notionalAmount"),
+            "current_face": obj.get("currentFace"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

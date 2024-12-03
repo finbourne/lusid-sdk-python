@@ -837,7 +837,7 @@ async def main():
     async with api_client_factory:
         # Create an instance of the API class
         api_instance = api_client_factory.build(TransactionConfigurationApi)
-        sides_definition_request = [{"side":"Side1","sideRequest":{"security":"Txn:LusidInstrumentId","currency":"Txn:TradeCurrency","rate":"Txn:Units","units":"1","amount":"Transaction/MyScope/TradeAmount","notionalAmount":"Transaction/default/NotionalAmount"}}] # List[SidesDefinitionRequest] | The list of side definitions to create, or replace.
+        sides_definition_request = [{"side":"Side1","sideRequest":{"security":"Txn:LusidInstrumentId","currency":"Txn:TradeCurrency","rate":"Txn:Units","units":"1","amount":"Transaction/MyScope/TradeAmount","notionalAmount":"Transaction/default/NotionalAmount","currentFace":"Txn:CurrentFace"}}] # List[SidesDefinitionRequest] | The list of side definitions to create, or replace.
         scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
         try:

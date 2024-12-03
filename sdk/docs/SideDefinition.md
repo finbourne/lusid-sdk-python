@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **units** | **str** | The value, field or property key defining the side&#39;s units. | 
 **amount** | **str** | The value, field or property key defining the side&#39;s amount | 
 **notional_amount** | **str** | The value, field or property key defining the side&#39;s notional amount | [optional] 
+**current_face** | **str** | The value, field or property key defining the side&#39;s current face / outstanding notional. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

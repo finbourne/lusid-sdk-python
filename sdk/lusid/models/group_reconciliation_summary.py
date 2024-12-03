@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, constr
 from lusid.models.group_reconciliation_dates import GroupReconciliationDates
@@ -38,7 +38,7 @@ class GroupReconciliationSummary(BaseModel):
     reconciliation_type: constr(strict=True, min_length=1) = Field(..., alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"")
     instance_id: GroupReconciliationInstanceId = Field(..., alias="instanceId")
     dates_reconciled: GroupReconciliationDates = Field(..., alias="datesReconciled")
-    reconciliation_run_as_at: constr(strict=True, min_length=1) = Field(..., alias="reconciliationRunAsAt", description="The date and time the reconciliation was run")
+    reconciliation_run_as_at: datetime = Field(..., alias="reconciliationRunAsAt", description="The date and time the reconciliation was run")
     count_comparison_results: StrictInt = Field(..., alias="countComparisonResults", description="The total number of comparison results with this InstanceId and ReconciliationType")
     link_comparison_results: Optional[Link] = Field(None, alias="linkComparisonResults")
     result_types: Optional[GroupReconciliationResultTypes] = Field(None, alias="resultTypes")

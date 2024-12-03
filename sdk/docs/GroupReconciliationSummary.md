@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **reconciliation_type** | **str** | The type of reconciliation to perform. \&quot;Holding\&quot; | \&quot;Transaction\&quot; | \&quot;Valuation\&quot; | 
 **instance_id** | [**GroupReconciliationInstanceId**](GroupReconciliationInstanceId.md) |  | 
 **dates_reconciled** | [**GroupReconciliationDates**](GroupReconciliationDates.md) |  | 
-**reconciliation_run_as_at** | **str** | The date and time the reconciliation was run | 
+**reconciliation_run_as_at** | **datetime** | The date and time the reconciliation was run | 
 **count_comparison_results** | **int** | The total number of comparison results with this InstanceId and ReconciliationType | 
 **link_comparison_results** | [**Link**](Link.md) |  | [optional] 
 **result_types** | [**GroupReconciliationResultTypes**](GroupReconciliationResultTypes.md) |  | [optional] 

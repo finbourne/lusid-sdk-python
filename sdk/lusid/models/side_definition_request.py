@@ -31,7 +31,8 @@ class SideDefinitionRequest(BaseModel):
     units: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The value, field or property key defining the side's units.")
     amount: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The value, field or property key defining the side's amount")
     notional_amount: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="notionalAmount", description="The value, field or property key defining the side's notional amount")
-    __properties = ["security", "currency", "rate", "units", "amount", "notionalAmount"]
+    current_face: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="currentFace", description="The value, field or property key defining the side's current face / outstanding notional.")
+    __properties = ["security", "currency", "rate", "units", "amount", "notionalAmount", "currentFace"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,6 +63,11 @@ class SideDefinitionRequest(BaseModel):
         if self.notional_amount is None and "notional_amount" in self.__fields_set__:
             _dict['notionalAmount'] = None
 
+        # set to None if current_face (nullable) is None
+        # and __fields_set__ contains the field
+        if self.current_face is None and "current_face" in self.__fields_set__:
+            _dict['currentFace'] = None
+
         return _dict
 
     @classmethod
@@ -79,6 +85,7 @@ class SideDefinitionRequest(BaseModel):
             "rate": obj.get("rate"),
             "units": obj.get("units"),
             "amount": obj.get("amount"),
-            "notional_amount": obj.get("notionalAmount")
+            "notional_amount": obj.get("notionalAmount"),
+            "current_face": obj.get("currentFace")
         })
         return _obj
