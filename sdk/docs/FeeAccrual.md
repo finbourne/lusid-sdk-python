@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **calculation_base** | **float** | The result of the evaluating the fee&#39;s calculation base expression. | [optional] 
 **amount** | **float** | The result of applying the fee to the calculation base, and scaled down to a day. | [optional] 
 **previous_accrual** | **float** | The previous valuation point&#39;s total accrual. | [optional] 
+**previous_total_accrual** | **float** | The previous valuation point&#39;s total accrual. | [optional] 
 **total_accrual** | **float** | The sum of the PreviousAccrual and Amount. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 

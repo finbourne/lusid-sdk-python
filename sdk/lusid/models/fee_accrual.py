@@ -32,9 +32,10 @@ class FeeAccrual(BaseModel):
     calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculationBase", description="The result of the evaluating the fee's calculation base expression.")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The result of applying the fee to the calculation base, and scaled down to a day.")
     previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousAccrual", description="The previous valuation point's total accrual.")
+    previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousTotalAccrual", description="The previous valuation point's total accrual.")
     total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAccrual", description="The sum of the PreviousAccrual and Amount.")
     links: Optional[conlist(Link)] = None
-    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "totalAccrual", "links"]
+    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "links"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -97,6 +98,7 @@ class FeeAccrual(BaseModel):
             "calculation_base": obj.get("calculationBase"),
             "amount": obj.get("amount"),
             "previous_accrual": obj.get("previousAccrual"),
+            "previous_total_accrual": obj.get("previousTotalAccrual"),
             "total_accrual": obj.get("totalAccrual"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

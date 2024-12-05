@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.floating_leg import FloatingLeg
 from lusid.models.lusid_instrument import LusidInstrument
 
@@ -32,9 +33,10 @@ class CapFloor(LusidInstrument):
     floor_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floorStrike", description="Strike rate of the Floor.")
     include_first_caplet: StrictBool = Field(..., alias="includeFirstCaplet", description="Include first caplet flag.")
     underlying_floating_leg: FloatingLeg = Field(..., alias="underlyingFloatingLeg")
+    additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "capFloorType", "capStrike", "floorStrike", "includeFirstCaplet", "underlyingFloatingLeg"]
+    __properties = ["instrumentType", "capFloorType", "capStrike", "floorStrike", "includeFirstCaplet", "underlyingFloatingLeg", "additionalPayments"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -71,6 +73,13 @@ class CapFloor(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of underlying_floating_leg
         if self.underlying_floating_leg:
             _dict['underlyingFloatingLeg'] = self.underlying_floating_leg.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in additional_payments (list)
+        _items = []
+        if self.additional_payments:
+            for _item in self.additional_payments:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['additionalPayments'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -85,6 +94,11 @@ class CapFloor(LusidInstrument):
         # and __fields_set__ contains the field
         if self.floor_strike is None and "floor_strike" in self.__fields_set__:
             _dict['floorStrike'] = None
+
+        # set to None if additional_payments (nullable) is None
+        # and __fields_set__ contains the field
+        if self.additional_payments is None and "additional_payments" in self.__fields_set__:
+            _dict['additionalPayments'] = None
 
         return _dict
 
@@ -103,7 +117,8 @@ class CapFloor(LusidInstrument):
             "cap_strike": obj.get("capStrike"),
             "floor_strike": obj.get("floorStrike"),
             "include_first_caplet": obj.get("includeFirstCaplet"),
-            "underlying_floating_leg": FloatingLeg.from_dict(obj.get("underlyingFloatingLeg")) if obj.get("underlyingFloatingLeg") is not None else None
+            "underlying_floating_leg": FloatingLeg.from_dict(obj.get("underlyingFloatingLeg")) if obj.get("underlyingFloatingLeg") is not None else None,
+            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
