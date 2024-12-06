@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import BaseModel, StrictStr
+from lusid.models.data_scope import DataScope
 
-class EligibilityCalculation(BaseModel):
+class PortfolioId(BaseModel):
     """
-    EligibilityCalculation
+    PortfolioId
     """
-    entitlement_date: constr(strict=True, min_length=1) = Field(..., alias="entitlementDate")
-    eligible_units: constr(strict=True, min_length=1) = Field(..., alias="eligibleUnits")
-    date_modifiable_by_instruction: Optional[StrictBool] = Field(None, alias="dateModifiableByInstruction")
-    __properties = ["entitlementDate", "eligibleUnits", "dateModifiableByInstruction"]
+    scope: Optional[DataScope] = None
+    identifier: Optional[StrictStr] = None
+    __properties = ["scope", "identifier"]
 
     class Config:
         """Pydantic configuration"""
@@ -44,8 +44,8 @@ class EligibilityCalculation(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> EligibilityCalculation:
-        """Create an instance of EligibilityCalculation from a JSON string"""
+    def from_json(cls, json_str: str) -> PortfolioId:
+        """Create an instance of PortfolioId from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -54,20 +54,27 @@ class EligibilityCalculation(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of scope
+        if self.scope:
+            _dict['scope'] = self.scope.to_dict()
+        # set to None if identifier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.identifier is None and "identifier" in self.__fields_set__:
+            _dict['identifier'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> EligibilityCalculation:
-        """Create an instance of EligibilityCalculation from a dict"""
+    def from_dict(cls, obj: dict) -> PortfolioId:
+        """Create an instance of PortfolioId from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return EligibilityCalculation.parse_obj(obj)
+            return PortfolioId.parse_obj(obj)
 
-        _obj = EligibilityCalculation.parse_obj({
-            "entitlement_date": obj.get("entitlementDate"),
-            "eligible_units": obj.get("eligibleUnits"),
-            "date_modifiable_by_instruction": obj.get("dateModifiableByInstruction")
+        _obj = PortfolioId.parse_obj({
+            "scope": DataScope.from_dict(obj.get("scope")) if obj.get("scope") is not None else None,
+            "identifier": obj.get("identifier")
         })
         return _obj

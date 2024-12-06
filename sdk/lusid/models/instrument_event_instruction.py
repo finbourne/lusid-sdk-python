@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
 from lusid.models.link import Link
@@ -36,8 +36,9 @@ class InstrumentEventInstruction(BaseModel):
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     version: Optional[Version] = None
     href: Optional[StrictStr] = Field(None, description="The uri for this version of this instruction")
+    entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
     links: Optional[conlist(Link)] = None
-    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "links"]
+    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -106,6 +107,11 @@ class InstrumentEventInstruction(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
+        # set to None if entitlement_date_instructed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.entitlement_date_instructed is None and "entitlement_date_instructed" in self.__fields_set__:
+            _dict['entitlementDateInstructed'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -131,6 +137,7 @@ class InstrumentEventInstruction(BaseModel):
             "holding_id": obj.get("holdingId"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
+            "entitlement_date_instructed": obj.get("entitlementDateInstructed"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

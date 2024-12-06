@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entitlement_date** | **str** |  | 
 **eligible_units** | **str** |  | 
+**date_modifiable_by_instruction** | **bool** |  | [optional] 
 
 ## Example
 

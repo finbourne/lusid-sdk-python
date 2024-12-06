@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **book_transactions**
-> BookTransactionsResponse book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission)
+> BookTransactionsResponse book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission, mark_orders_and_allocations_as_booked=mark_orders_and_allocations_as_booked)
 
 [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
 
@@ -77,13 +77,14 @@ async def main():
         # book_transactions_request = BookTransactionsRequest.from_dict({})
         book_transactions_request = BookTransactionsRequest()
         apply_fees_and_commission = True # bool | Whether to apply fees and commissions to transactions (default: true) (optional) (default to True)
+        mark_orders_and_allocations_as_booked = False # bool | Whether to mark allocations and fully-booked orders with state Booked (optional) (default to False)
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission, opts=opts)
+            # api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission, mark_orders_and_allocations_as_booked=mark_orders_and_allocations_as_booked, opts=opts)
 
             # [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
-            api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission)
+            api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission, mark_orders_and_allocations_as_booked=mark_orders_and_allocations_as_booked)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling OrderManagementApi->book_transactions: %s\n" % e)
@@ -97,6 +98,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **book_transactions_request** | [**BookTransactionsRequest**](BookTransactionsRequest.md)| The allocations to create transactions for | 
  **apply_fees_and_commission** | **bool**| Whether to apply fees and commissions to transactions (default: true) | [optional] [default to True]
+ **mark_orders_and_allocations_as_booked** | **bool**| Whether to mark allocations and fully-booked orders with state Booked | [optional] [default to False]
 
 ### Return type
 

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **holding_id** | **int** | For holding instructions, the id of the holding for which the instruction will apply | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The uri for this version of this instruction | [optional] 
+**entitlement_date_instructed** | **datetime** | The instructed entitlement date for the event (where none is set on the event itself) | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

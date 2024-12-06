@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr
 
@@ -30,7 +30,8 @@ class InstrumentEventInstructionRequest(BaseModel):
     instruction_type: constr(strict=True, min_length=1) = Field(..., alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)")
     election_key: Optional[StrictStr] = Field(None, alias="electionKey", description="For elected instructions, the key to be chosen")
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
-    __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId"]
+    entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
+    __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "entitlementDateInstructed"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class InstrumentEventInstructionRequest(BaseModel):
         if self.holding_id is None and "holding_id" in self.__fields_set__:
             _dict['holdingId'] = None
 
+        # set to None if entitlement_date_instructed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.entitlement_date_instructed is None and "entitlement_date_instructed" in self.__fields_set__:
+            _dict['entitlementDateInstructed'] = None
+
         return _dict
 
     @classmethod
@@ -82,6 +88,7 @@ class InstrumentEventInstructionRequest(BaseModel):
             "instrument_event_id": obj.get("instrumentEventId"),
             "instruction_type": obj.get("instructionType"),
             "election_key": obj.get("electionKey"),
-            "holding_id": obj.get("holdingId")
+            "holding_id": obj.get("holdingId"),
+            "entitlement_date_instructed": obj.get("entitlementDateInstructed")
         })
         return _obj

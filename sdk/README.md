@@ -222,6 +222,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_valuation_point_data**](docs/FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
 *FundsApi* | [**get_valuation_point_journal_entry_lines**](docs/FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
 *FundsApi* | [**get_valuation_point_pnl_summary**](docs/FundsApi.md#get_valuation_point_pnl_summary) | **POST** /api/funds/{scope}/{code}/valuationpoints/pnlsummary/$query | [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
+*FundsApi* | [**get_valuation_point_transactions**](docs/FundsApi.md#get_valuation_point_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/transactions/$query | [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
 *FundsApi* | [**get_valuation_point_trial_balance**](docs/FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
 *FundsApi* | [**list_fees**](docs/FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
 *FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
@@ -632,6 +633,7 @@ Class | Method | HTTP request | Description
  - [AccessMetadataValue](docs/AccessMetadataValue.md)
  - [Account](docs/Account.md)
  - [AccountProperties](docs/AccountProperties.md)
+ - [AccountedTransaction](docs/AccountedTransaction.md)
  - [AccountingMethod](docs/AccountingMethod.md)
  - [AccountsUpsertResponse](docs/AccountsUpsertResponse.md)
  - [AccumulationEvent](docs/AccumulationEvent.md)
@@ -1342,6 +1344,7 @@ Class | Method | HTTP request | Description
  - [PortfolioGroupProperties](docs/PortfolioGroupProperties.md)
  - [PortfolioGroupSearchResult](docs/PortfolioGroupSearchResult.md)
  - [PortfolioHolding](docs/PortfolioHolding.md)
+ - [PortfolioId](docs/PortfolioId.md)
  - [PortfolioIdComplianceParameter](docs/PortfolioIdComplianceParameter.md)
  - [PortfolioIdList](docs/PortfolioIdList.md)
  - [PortfolioIdListComplianceParameter](docs/PortfolioIdListComplianceParameter.md)
@@ -1741,6 +1744,7 @@ Class | Method | HTTP request | Description
  - [ValuationPointDataRequest](docs/ValuationPointDataRequest.md)
  - [ValuationPointDataResponse](docs/ValuationPointDataResponse.md)
  - [ValuationPointOverview](docs/ValuationPointOverview.md)
+ - [ValuationPointResourceListOfAccountedTransaction](docs/ValuationPointResourceListOfAccountedTransaction.md)
  - [ValuationPointResourceListOfJournalEntryLine](docs/ValuationPointResourceListOfJournalEntryLine.md)
  - [ValuationPointResourceListOfPnlJournalEntryLine](docs/ValuationPointResourceListOfPnlJournalEntryLine.md)
  - [ValuationPointResourceListOfTrialBalance](docs/ValuationPointResourceListOfTrialBalance.md)

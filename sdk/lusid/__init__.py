@@ -114,6 +114,7 @@ from lusid.models.access_metadata_operation import AccessMetadataOperation
 from lusid.models.access_metadata_value import AccessMetadataValue
 from lusid.models.account import Account
 from lusid.models.account_properties import AccountProperties
+from lusid.models.accounted_transaction import AccountedTransaction
 from lusid.models.accounting_method import AccountingMethod
 from lusid.models.accounts_upsert_response import AccountsUpsertResponse
 from lusid.models.accumulation_event import AccumulationEvent
@@ -824,6 +825,7 @@ from lusid.models.portfolio_group_id_list_compliance_parameter import PortfolioG
 from lusid.models.portfolio_group_properties import PortfolioGroupProperties
 from lusid.models.portfolio_group_search_result import PortfolioGroupSearchResult
 from lusid.models.portfolio_holding import PortfolioHolding
+from lusid.models.portfolio_id import PortfolioId
 from lusid.models.portfolio_id_compliance_parameter import PortfolioIdComplianceParameter
 from lusid.models.portfolio_id_list import PortfolioIdList
 from lusid.models.portfolio_id_list_compliance_parameter import PortfolioIdListComplianceParameter
@@ -1223,6 +1225,7 @@ from lusid.models.valuation_point_data_query_parameters import ValuationPointDat
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_overview import ValuationPointOverview
+from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
 from lusid.models.valuation_point_resource_list_of_journal_entry_line import ValuationPointResourceListOfJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
@@ -1361,6 +1364,7 @@ __all__ = [
     "AccessMetadataValue",
     "Account",
     "AccountProperties",
+    "AccountedTransaction",
     "AccountingMethod",
     "AccountsUpsertResponse",
     "AccumulationEvent",
@@ -2071,6 +2075,7 @@ __all__ = [
     "PortfolioGroupProperties",
     "PortfolioGroupSearchResult",
     "PortfolioHolding",
+    "PortfolioId",
     "PortfolioIdComplianceParameter",
     "PortfolioIdList",
     "PortfolioIdListComplianceParameter",
@@ -2470,6 +2475,7 @@ __all__ = [
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
     "ValuationPointOverview",
+    "ValuationPointResourceListOfAccountedTransaction",
     "ValuationPointResourceListOfJournalEntryLine",
     "ValuationPointResourceListOfPnlJournalEntryLine",
     "ValuationPointResourceListOfTrialBalance",
