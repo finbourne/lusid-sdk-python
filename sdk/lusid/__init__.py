@@ -636,6 +636,7 @@ from lusid.models.list_aggregation_reconciliation import ListAggregationReconcil
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
 from lusid.models.loan_facility import LoanFacility
+from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEvent
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
 from lusid.models.lusid_instrument import LusidInstrument
@@ -1886,6 +1887,7 @@ __all__ = [
     "ListAggregationResponse",
     "ListComplexMarketDataWithMetaDataResponse",
     "LoanFacility",
+    "LoanInterestRepaymentEvent",
     "LoanPeriod",
     "LockPeriodDiaryEntryRequest",
     "LusidInstrument",

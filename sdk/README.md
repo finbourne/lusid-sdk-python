@@ -1155,6 +1155,7 @@ Class | Method | HTTP request | Description
  - [ListAggregationResponse](docs/ListAggregationResponse.md)
  - [ListComplexMarketDataWithMetaDataResponse](docs/ListComplexMarketDataWithMetaDataResponse.md)
  - [LoanFacility](docs/LoanFacility.md)
+ - [LoanInterestRepaymentEvent](docs/LoanInterestRepaymentEvent.md)
  - [LoanPeriod](docs/LoanPeriod.md)
  - [LockPeriodDiaryEntryRequest](docs/LockPeriodDiaryEntryRequest.md)
  - [LusidInstrument](docs/LusidInstrument.md)
