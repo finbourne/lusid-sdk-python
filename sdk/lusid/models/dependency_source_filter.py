@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from lusid.models.address_key_filter import AddressKeyFilter
 
 class DependencySourceFilter(BaseModel):
     """
@@ -29,7 +30,8 @@ class DependencySourceFilter(BaseModel):
     asset_class: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="assetClass", description="Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.  If null, then no filtering on asset class is applied.")
     dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied.")
     long_or_short_indicator: Optional[StrictStr] = Field(None, alias="longOrShortIndicator", description="Specify that a rule should apply if the market data is requested by a model with a given long or short indicator.  If none, then no filtering on LongOrShortIndicator is applied.")
-    __properties = ["instrumentType", "assetClass", "domCcy", "longOrShortIndicator"]
+    address_key_filters: Optional[conlist(AddressKeyFilter)] = Field(None, alias="addressKeyFilters")
+    __properties = ["instrumentType", "assetClass", "domCcy", "longOrShortIndicator", "addressKeyFilters"]
 
     class Config:
         """Pydantic configuration"""
@@ -55,6 +57,13 @@ class DependencySourceFilter(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in address_key_filters (list)
+        _items = []
+        if self.address_key_filters:
+            for _item in self.address_key_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['addressKeyFilters'] = _items
         # set to None if instrument_type (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_type is None and "instrument_type" in self.__fields_set__:
@@ -75,6 +84,11 @@ class DependencySourceFilter(BaseModel):
         if self.long_or_short_indicator is None and "long_or_short_indicator" in self.__fields_set__:
             _dict['longOrShortIndicator'] = None
 
+        # set to None if address_key_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.address_key_filters is None and "address_key_filters" in self.__fields_set__:
+            _dict['addressKeyFilters'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +104,7 @@ class DependencySourceFilter(BaseModel):
             "instrument_type": obj.get("instrumentType"),
             "asset_class": obj.get("assetClass"),
             "dom_ccy": obj.get("domCcy"),
-            "long_or_short_indicator": obj.get("longOrShortIndicator")
+            "long_or_short_indicator": obj.get("longOrShortIndicator"),
+            "address_key_filters": [AddressKeyFilter.from_dict(_item) for _item in obj.get("addressKeyFilters")] if obj.get("addressKeyFilters") is not None else None
         })
         return _obj
