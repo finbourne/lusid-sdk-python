@@ -6,9 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_upsert_corporate_actions**](CorporateActionSourcesApi.md#batch_upsert_corporate_actions) | **POST** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] BatchUpsertCorporateActions: Batch upsert corporate actions (instrument transition events) to corporate action source.
 [**create_corporate_action_source**](CorporateActionSourcesApi.md#create_corporate_action_source) | **POST** /api/corporateactionsources | [EARLY ACCESS] CreateCorporateActionSource: Create corporate action source
-[**delete_corporate_action_source**](CorporateActionSourcesApi.md#delete_corporate_action_source) | **DELETE** /api/corporateactionsources/{scope}/{code} | [BETA] DeleteCorporateActionSource: Delete corporate actions (instrument transition events) from the corporate action source.
-[**delete_corporate_actions**](CorporateActionSourcesApi.md#delete_corporate_actions) | **DELETE** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions
-[**delete_instrument_events**](CorporateActionSourcesApi.md#delete_instrument_events) | **DELETE** /api/corporateactionsources/{scope}/{code}/instrumentevents | [EARLY ACCESS] DeleteInstrumentEvents: Delete corporate actions (instrument transition events) from the corporate action source.
+[**delete_corporate_action_source**](CorporateActionSourcesApi.md#delete_corporate_action_source) | **DELETE** /api/corporateactionsources/{scope}/{code} | [BETA] DeleteCorporateActionSource: Delete a corporate action source
+[**delete_corporate_actions**](CorporateActionSourcesApi.md#delete_corporate_actions) | **DELETE** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source
+[**delete_instrument_events**](CorporateActionSourcesApi.md#delete_instrument_events) | **DELETE** /api/corporateactionsources/{scope}/{code}/instrumentevents | [EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source
 [**get_corporate_actions**](CorporateActionSourcesApi.md#get_corporate_actions) | **GET** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] GetCorporateActions: List corporate actions (instrument transition events) from the corporate action source.
 [**get_instrument_events**](CorporateActionSourcesApi.md#get_instrument_events) | **GET** /api/corporateactionsources/{scope}/{code}/instrumentevents | [EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.
 [**list_corporate_action_sources**](CorporateActionSourcesApi.md#list_corporate_action_sources) | **GET** /api/corporateactionsources | [EARLY ACCESS] ListCorporateActionSources: List corporate action sources
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 # **delete_corporate_action_source**
 > DeletedEntityResponse delete_corporate_action_source(scope, code)
 
-[BETA] DeleteCorporateActionSource: Delete corporate actions (instrument transition events) from the corporate action source.
+[BETA] DeleteCorporateActionSource: Delete a corporate action source
 
 Deletes a single corporate action source
 
@@ -268,7 +268,7 @@ async def main():
             # uncomment the below to set overrides at the request level
             # api_response = await api_instance.delete_corporate_action_source(scope, code, opts=opts)
 
-            # [BETA] DeleteCorporateActionSource: Delete corporate actions (instrument transition events) from the corporate action source.
+            # [BETA] DeleteCorporateActionSource: Delete a corporate action source
             api_response = await api_instance.delete_corporate_action_source(scope, code)
             pprint(api_response)
         except ApiException as e:
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 # **delete_corporate_actions**
 > DeletedEntityResponse delete_corporate_actions(scope, code, corporate_action_ids)
 
-[EARLY ACCESS] DeleteCorporateActions: Delete corporate actions
+[EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source
 
 Delete one or more corporate actions from a particular corporate action source.                The maximum number of corporate actions that this method can delete per request is 1,000.
 
@@ -363,7 +363,7 @@ async def main():
             # uncomment the below to set overrides at the request level
             # api_response = await api_instance.delete_corporate_actions(scope, code, corporate_action_ids, opts=opts)
 
-            # [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions
+            # [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source
             api_response = await api_instance.delete_corporate_actions(scope, code, corporate_action_ids)
             pprint(api_response)
         except ApiException as e:
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 # **delete_instrument_events**
 > DeletedEntityResponse delete_instrument_events(scope, code, instrument_event_ids)
 
-[EARLY ACCESS] DeleteInstrumentEvents: Delete corporate actions (instrument transition events) from the corporate action source.
+[EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source
 
 Delete one or more corporate actions from a particular corporate action source.                The maximum number of instrument events that this method can delete per request is 1,000.
 
@@ -459,7 +459,7 @@ async def main():
             # uncomment the below to set overrides at the request level
             # api_response = await api_instance.delete_instrument_events(scope, code, instrument_event_ids, opts=opts)
 
-            # [EARLY ACCESS] DeleteInstrumentEvents: Delete corporate actions (instrument transition events) from the corporate action source.
+            # [EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source
             api_response = await api_instance.delete_instrument_events(scope, code, instrument_event_ids)
             pprint(api_response)
         except ApiException as e:

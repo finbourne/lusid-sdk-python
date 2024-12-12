@@ -400,7 +400,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_corporate_action_source(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the corporate action source to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the corporate action source to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[BETA] DeleteCorporateActionSource: Delete corporate actions (instrument transition events) from the corporate action source.  # noqa: E501
+        """[BETA] DeleteCorporateActionSource: Delete a corporate action source  # noqa: E501
 
         Deletes a single corporate action source  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -433,7 +433,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_corporate_action_source_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the corporate action source to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the corporate action source to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[BETA] DeleteCorporateActionSource: Delete corporate actions (instrument transition events) from the corporate action source.  # noqa: E501
+        """[BETA] DeleteCorporateActionSource: Delete a corporate action source  # noqa: E501
 
         Deletes a single corporate action source  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -559,7 +559,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_corporate_actions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the corporate action source")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the corporate action source")], corporate_action_ids : Annotated[conlist(StrictStr, max_items=1000), Field(..., description="The IDs of the corporate actions to delete")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteCorporateActions: Delete corporate actions  # noqa: E501
+        """[EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source  # noqa: E501
 
         Delete one or more corporate actions from a particular corporate action source.                The maximum number of corporate actions that this method can delete per request is 1,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -594,7 +594,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_corporate_actions_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the corporate action source")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the corporate action source")], corporate_action_ids : Annotated[conlist(StrictStr, max_items=1000), Field(..., description="The IDs of the corporate actions to delete")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteCorporateActions: Delete corporate actions  # noqa: E501
+        """[EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source  # noqa: E501
 
         Delete one or more corporate actions from a particular corporate action source.                The maximum number of corporate actions that this method can delete per request is 1,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -727,7 +727,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_instrument_events(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the corporate action source")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the corporate action source")], instrument_event_ids : Annotated[conlist(StrictStr, max_items=1000), Field(..., description="The IDs of the instrument events to delete")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteInstrumentEvents: Delete corporate actions (instrument transition events) from the corporate action source.  # noqa: E501
+        """[EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source  # noqa: E501
 
         Delete one or more corporate actions from a particular corporate action source.                The maximum number of instrument events that this method can delete per request is 1,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -762,7 +762,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_instrument_events_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the corporate action source")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the corporate action source")], instrument_event_ids : Annotated[conlist(StrictStr, max_items=1000), Field(..., description="The IDs of the instrument events to delete")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteInstrumentEvents: Delete corporate actions (instrument transition events) from the corporate action source.  # noqa: E501
+        """[EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source  # noqa: E501
 
         Delete one or more corporate actions from a particular corporate action source.                The maximum number of instrument events that this method can delete per request is 1,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
