@@ -70,7 +70,6 @@ from lusid.api.relation_definitions_api import RelationDefinitionsApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
-from lusid.api.risk_model_factor_sets_api import RiskModelFactorSetsApi
 from lusid.api.schemas_api import SchemasApi
 from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
@@ -248,6 +247,7 @@ from lusid.models.cleardown_module_rules_updated_response import CleardownModule
 from lusid.models.client import Client
 from lusid.models.close_event import CloseEvent
 from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryRequest
+from lusid.models.closed_period import ClosedPeriod
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
@@ -310,6 +310,7 @@ from lusid.models.counterparty_signatory import CounterpartySignatory
 from lusid.models.create_address_key_definition_request import CreateAddressKeyDefinitionRequest
 from lusid.models.create_amortisation_rule_set_request import CreateAmortisationRuleSetRequest
 from lusid.models.create_calendar_request import CreateCalendarRequest
+from lusid.models.create_closed_period_request import CreateClosedPeriodRequest
 from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
 from lusid.models.create_custom_entity_type_request import CreateCustomEntityTypeRequest
@@ -331,7 +332,6 @@ from lusid.models.create_relation_definition_request import CreateRelationDefini
 from lusid.models.create_relation_request import CreateRelationRequest
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
-from lusid.models.create_risk_model_factor_set_request import CreateRiskModelFactorSetRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
@@ -783,7 +783,6 @@ from lusid.models.paged_resource_list_of_property_definition_search_result impor
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
-from lusid.models.paged_resource_list_of_risk_model_factor_set import PagedResourceListOfRiskModelFactorSet
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
 from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
 from lusid.models.paged_resource_list_of_staged_modifications_requested_change_interval import PagedResourceListOfStagedModificationsRequestedChangeInterval
@@ -1012,7 +1011,6 @@ from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
-from lusid.models.risk_model_factor_set import RiskModelFactorSet
 from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
 from lusid.models.rounding_convention import RoundingConvention
@@ -1171,7 +1169,6 @@ from lusid.models.update_property_definition_request import UpdatePropertyDefini
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
 from lusid.models.update_reference_data_request import UpdateReferenceDataRequest
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
-from lusid.models.update_risk_model_factor_set_request import UpdateRiskModelFactorSetRequest
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
 from lusid.models.update_timeline_request import UpdateTimelineRequest
@@ -1331,7 +1328,6 @@ __all__ = [
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
-    "RiskModelFactorSetsApi",
     "SchemasApi",
     "ScopesApi",
     "ScriptedTranslationApi",
@@ -1499,6 +1495,7 @@ __all__ = [
     "Client",
     "CloseEvent",
     "ClosePeriodDiaryEntryRequest",
+    "ClosedPeriod",
     "ComparisonAttributeValuePair",
     "CompletePortfolio",
     "CompleteRelation",
@@ -1561,6 +1558,7 @@ __all__ = [
     "CreateAddressKeyDefinitionRequest",
     "CreateAmortisationRuleSetRequest",
     "CreateCalendarRequest",
+    "CreateClosedPeriodRequest",
     "CreateComplianceTemplateRequest",
     "CreateCorporateActionSourceRequest",
     "CreateCustomEntityTypeRequest",
@@ -1582,7 +1580,6 @@ __all__ = [
     "CreateRelationRequest",
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
-    "CreateRiskModelFactorSetRequest",
     "CreateSequenceRequest",
     "CreateStagingRuleSetRequest",
     "CreateTaxRuleSetRequest",
@@ -2034,7 +2031,6 @@ __all__ = [
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
     "PagedResourceListOfRelationshipDefinition",
-    "PagedResourceListOfRiskModelFactorSet",
     "PagedResourceListOfSequenceDefinition",
     "PagedResourceListOfStagedModification",
     "PagedResourceListOfStagedModificationsRequestedChangeInterval",
@@ -2263,7 +2259,6 @@ __all__ = [
     "ResultValueType",
     "ReturnZeroPvOptions",
     "ReverseStockSplitEvent",
-    "RiskModelFactorSet",
     "RoundingConfiguration",
     "RoundingConfigurationComponent",
     "RoundingConvention",
@@ -2422,7 +2417,6 @@ __all__ = [
     "UpdateReconciliationRequest",
     "UpdateReferenceDataRequest",
     "UpdateRelationshipDefinitionRequest",
-    "UpdateRiskModelFactorSetRequest",
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
     "UpdateTimelineRequest",

@@ -72,6 +72,7 @@ class PropertyDomain(str, Enum):
     LEG = 'Leg'
     DERIVEDVALUATION = 'DerivedValuation'
     TIMELINE = 'Timeline'
+    CLOSEDPERIOD = 'ClosedPeriod'
     ADDRESSKEYDEFINITION = 'AddressKeyDefinition'
     AMORTISATIONRULESET = 'AmortisationRuleSet'
     ANALYTICSSETINVENTORY = 'AnalyticsSetInventory'

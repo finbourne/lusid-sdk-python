@@ -54,7 +54,6 @@ from lusid.api.relation_definitions_api import RelationDefinitionsApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
-from lusid.api.risk_model_factor_sets_api import RiskModelFactorSetsApi
 from lusid.api.schemas_api import SchemasApi
 from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
@@ -127,7 +126,6 @@ __all__ = [
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
-    "RiskModelFactorSetsApi",
     "SchemasApi",
     "ScopesApi",
     "ScriptedTranslationApi",
