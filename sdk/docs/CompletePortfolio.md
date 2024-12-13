@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **created** | **datetime** | The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date. | [optional] 
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] [readonly] 
-**type** | **str** | The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction | [optional] 
+**type** | **str** | The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition | [optional] 
 **version** | [**Version**](Version.md) |  | 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **base_currency** | **str** | If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio. | [optional] 

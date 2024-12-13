@@ -36,7 +36,7 @@ class CompletePortfolio(BaseModel):
     created: Optional[datetime] = Field(None, description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     parent_portfolio_id: Optional[ResourceId] = Field(None, alias="parentPortfolioId")
     is_derived: Optional[StrictBool] = Field(None, alias="isDerived", description="Whether or not this is a derived portfolio.")
-    type: Optional[StrictStr] = Field(None, description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction")
+    type: Optional[StrictStr] = Field(None, description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition")
     version: Version = Field(...)
     properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.")
@@ -50,8 +50,8 @@ class CompletePortfolio(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Transaction', 'Reference', 'DerivedTransaction'):
-            raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction')")
+        if value not in ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition'):
+            raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition')")
         return value
 
     class Config:

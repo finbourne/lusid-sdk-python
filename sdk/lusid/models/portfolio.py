@@ -34,7 +34,7 @@ class Portfolio(BaseModel):
     """
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     id: ResourceId = Field(...)
-    type: StrictStr = Field(..., description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction")
+    type: StrictStr = Field(..., description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition")
     display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the portfolio.")
     description: Optional[StrictStr] = Field(None, description="The long form description of the portfolio.")
     created: datetime = Field(..., description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
@@ -58,8 +58,8 @@ class Portfolio(BaseModel):
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Transaction', 'Reference', 'DerivedTransaction'):
-            raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction')")
+        if value not in ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition'):
+            raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition')")
         return value
 
     @validator('accounting_method')
