@@ -740,6 +740,7 @@ from lusid.models.paged_resource_list_of_calendar import PagedResourceListOfCale
 from lusid.models.paged_resource_list_of_chart_of_accounts import PagedResourceListOfChartOfAccounts
 from lusid.models.paged_resource_list_of_cleardown_module_response import PagedResourceListOfCleardownModuleResponse
 from lusid.models.paged_resource_list_of_cleardown_module_rule import PagedResourceListOfCleardownModuleRule
+from lusid.models.paged_resource_list_of_closed_period import PagedResourceListOfClosedPeriod
 from lusid.models.paged_resource_list_of_compliance_rule_response import PagedResourceListOfComplianceRuleResponse
 from lusid.models.paged_resource_list_of_compliance_run_info_v2 import PagedResourceListOfComplianceRunInfoV2
 from lusid.models.paged_resource_list_of_compliance_template import PagedResourceListOfComplianceTemplate
@@ -1988,6 +1989,7 @@ __all__ = [
     "PagedResourceListOfChartOfAccounts",
     "PagedResourceListOfCleardownModuleResponse",
     "PagedResourceListOfCleardownModuleRule",
+    "PagedResourceListOfClosedPeriod",
     "PagedResourceListOfComplianceRuleResponse",
     "PagedResourceListOfComplianceRunInfoV2",
     "PagedResourceListOfComplianceTemplate",

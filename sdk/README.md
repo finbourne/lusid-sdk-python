@@ -529,6 +529,7 @@ Class | Method | HTTP request | Description
 *TimelinesApi* | [**delete_timeline**](docs/TimelinesApi.md#delete_timeline) | **DELETE** /api/timelines/{scope}/{code} | [EXPERIMENTAL] DeleteTimeline: Deletes a particular Timeline
 *TimelinesApi* | [**get_closed_period**](docs/TimelinesApi.md#get_closed_period) | **GET** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId} | [EXPERIMENTAL] GetClosedPeriod: Gets a Closed Period entity.
 *TimelinesApi* | [**get_timeline**](docs/TimelinesApi.md#get_timeline) | **GET** /api/timelines/{scope}/{code} | [EXPERIMENTAL] GetTimeline: Get a single Timeline by scope and code.
+*TimelinesApi* | [**list_closed_periods**](docs/TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
 *TimelinesApi* | [**update_timeline**](docs/TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 *TransactionConfigurationApi* | [**delete_side_definition**](docs/TransactionConfigurationApi.md#delete_side_definition) | **DELETE** /api/transactionconfiguration/sides/{side}/$delete | DeleteSideDefinition: Delete the given side definition
 *TransactionConfigurationApi* | [**delete_transaction_type**](docs/TransactionConfigurationApi.md#delete_transaction_type) | **DELETE** /api/transactionconfiguration/types/{source}/{type} | DeleteTransactionType: Delete a transaction type
@@ -1257,6 +1258,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfChartOfAccounts](docs/PagedResourceListOfChartOfAccounts.md)
  - [PagedResourceListOfCleardownModuleResponse](docs/PagedResourceListOfCleardownModuleResponse.md)
  - [PagedResourceListOfCleardownModuleRule](docs/PagedResourceListOfCleardownModuleRule.md)
+ - [PagedResourceListOfClosedPeriod](docs/PagedResourceListOfClosedPeriod.md)
  - [PagedResourceListOfComplianceRuleResponse](docs/PagedResourceListOfComplianceRuleResponse.md)
  - [PagedResourceListOfComplianceRunInfoV2](docs/PagedResourceListOfComplianceRunInfoV2.md)
  - [PagedResourceListOfComplianceTemplate](docs/PagedResourceListOfComplianceTemplate.md)
