@@ -4793,7 +4793,7 @@ class PortfoliosApi:
     def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
         """PatchPortfolio: Patch portfolio.  # noqa: E501
 
-        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes.  # noqa: E501
+        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes, Type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4828,7 +4828,7 @@ class PortfoliosApi:
     def patch_portfolio_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """PatchPortfolio: Patch portfolio.  # noqa: E501
 
-        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes.  # noqa: E501
+        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes, Type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
