@@ -36,33 +36,32 @@ Create a new item in a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -71,33 +70,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The item's workspace name.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The item's workspace name.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
-        # workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({})
-        workspace_item_creation_request = WorkspaceItemCreationRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
+    # workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({})
+    workspace_item_creation_request = WorkspaceItemCreationRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_personal_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_personal_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request, opts=opts)
 
-            # [EXPERIMENTAL] CreatePersonalItem: Create a new item in a personal workspace.
-            api_response = await api_instance.create_personal_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->create_personal_item: %s\n" % e)
+        # [EXPERIMENTAL] CreatePersonalItem: Create a new item in a personal workspace.
+        api_response = api_instance.create_personal_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->create_personal_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -135,33 +135,32 @@ Create a new personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -170,32 +169,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_creation_request = WorkspaceCreationRequest.from_json("")
-        # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
-        workspace_creation_request = WorkspaceCreationRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_creation_request = WorkspaceCreationRequest.from_json("")
+    # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
+    workspace_creation_request = WorkspaceCreationRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_personal_workspace(workspace_creation_request=workspace_creation_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_personal_workspace(workspace_creation_request=workspace_creation_request, opts=opts)
 
-            # [EXPERIMENTAL] CreatePersonalWorkspace: Create a new personal workspace.
-            api_response = await api_instance.create_personal_workspace(workspace_creation_request=workspace_creation_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->create_personal_workspace: %s\n" % e)
+        # [EXPERIMENTAL] CreatePersonalWorkspace: Create a new personal workspace.
+        api_response = api_instance.create_personal_workspace(workspace_creation_request=workspace_creation_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->create_personal_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -232,33 +232,32 @@ Create a new item in a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -267,33 +266,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The item's workspace name.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The item's workspace name.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
-        # workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({})
-        workspace_item_creation_request = WorkspaceItemCreationRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
+    # workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({})
+    workspace_item_creation_request = WorkspaceItemCreationRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_shared_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_shared_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request, opts=opts)
 
-            # [EXPERIMENTAL] CreateSharedItem: Create a new item in a shared workspace.
-            api_response = await api_instance.create_shared_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->create_shared_item: %s\n" % e)
+        # [EXPERIMENTAL] CreateSharedItem: Create a new item in a shared workspace.
+        api_response = api_instance.create_shared_item(workspace_name, workspace_item_creation_request=workspace_item_creation_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->create_shared_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -331,33 +331,32 @@ Create a new shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -366,32 +365,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_creation_request = WorkspaceCreationRequest.from_json("")
-        # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
-        workspace_creation_request = WorkspaceCreationRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_creation_request = WorkspaceCreationRequest.from_json("")
+    # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
+    workspace_creation_request = WorkspaceCreationRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_shared_workspace(workspace_creation_request=workspace_creation_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_shared_workspace(workspace_creation_request=workspace_creation_request, opts=opts)
 
-            # [EXPERIMENTAL] CreateSharedWorkspace: Create a new shared workspace.
-            api_response = await api_instance.create_shared_workspace(workspace_creation_request=workspace_creation_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->create_shared_workspace: %s\n" % e)
+        # [EXPERIMENTAL] CreateSharedWorkspace: Create a new shared workspace.
+        api_response = api_instance.create_shared_workspace(workspace_creation_request=workspace_creation_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->create_shared_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -428,33 +428,32 @@ Delete an item from a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -463,29 +462,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
-        group_name = 'group_name_example' # str | The group containing the item.
-        item_name = 'item_name_example' # str | The name of the item.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
+    group_name = 'group_name_example' # str | The group containing the item.
+    item_name = 'item_name_example' # str | The name of the item.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_personal_item(workspace_name, group_name, item_name, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_personal_item(workspace_name, group_name, item_name, opts=opts)
 
-            # [EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.
-            api_response = await api_instance.delete_personal_item(workspace_name, group_name, item_name)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->delete_personal_item: %s\n" % e)
+        # [EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.
+        api_response = api_instance.delete_personal_item(workspace_name, group_name, item_name)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->delete_personal_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -524,33 +524,32 @@ Delete a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -559,27 +558,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_personal_workspace(workspace_name, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_personal_workspace(workspace_name, opts=opts)
 
-            # [EXPERIMENTAL] DeletePersonalWorkspace: Delete a personal workspace.
-            api_response = await api_instance.delete_personal_workspace(workspace_name)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->delete_personal_workspace: %s\n" % e)
+        # [EXPERIMENTAL] DeletePersonalWorkspace: Delete a personal workspace.
+        api_response = api_instance.delete_personal_workspace(workspace_name)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->delete_personal_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -616,33 +616,32 @@ Delete an item from a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -651,29 +650,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
-        group_name = 'group_name_example' # str | The group containing the item.
-        item_name = 'item_name_example' # str | The name of the item.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
+    group_name = 'group_name_example' # str | The group containing the item.
+    item_name = 'item_name_example' # str | The name of the item.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_shared_item(workspace_name, group_name, item_name, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_shared_item(workspace_name, group_name, item_name, opts=opts)
 
-            # [EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.
-            api_response = await api_instance.delete_shared_item(workspace_name, group_name, item_name)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->delete_shared_item: %s\n" % e)
+        # [EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.
+        api_response = api_instance.delete_shared_item(workspace_name, group_name, item_name)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->delete_shared_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -712,33 +712,32 @@ Delete a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -747,27 +746,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_shared_workspace(workspace_name, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_shared_workspace(workspace_name, opts=opts)
 
-            # [EXPERIMENTAL] DeleteSharedWorkspace: Delete a shared workspace.
-            api_response = await api_instance.delete_shared_workspace(workspace_name)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->delete_shared_workspace: %s\n" % e)
+        # [EXPERIMENTAL] DeleteSharedWorkspace: Delete a shared workspace.
+        api_response = api_instance.delete_shared_workspace(workspace_name)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->delete_shared_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -804,33 +804,32 @@ Get a single personal workspace item.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -839,30 +838,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
-        group_name = 'group_name_example' # str | The group containing the item.
-        item_name = 'item_name_example' # str | The name of the item.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The datetime at which to request the workspace item. If not provided, defaults to 'latest'. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The name of the personal workspace.
+    group_name = 'group_name_example' # str | The group containing the item.
+    item_name = 'item_name_example' # str | The name of the item.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The datetime at which to request the workspace item. If not provided, defaults to 'latest'. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_personal_item(workspace_name, group_name, item_name, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_personal_item(workspace_name, group_name, item_name, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.
-            api_response = await api_instance.get_personal_item(workspace_name, group_name, item_name, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->get_personal_item: %s\n" % e)
+        # [EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.
+        api_response = api_instance.get_personal_item(workspace_name, group_name, item_name, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->get_personal_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -902,33 +902,32 @@ Get a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -937,28 +936,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The personal workspace name.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The personal workspace name.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_personal_workspace(workspace_name, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_personal_workspace(workspace_name, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetPersonalWorkspace: Get a personal workspace.
-            api_response = await api_instance.get_personal_workspace(workspace_name, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->get_personal_workspace: %s\n" % e)
+        # [EXPERIMENTAL] GetPersonalWorkspace: Get a personal workspace.
+        api_response = api_instance.get_personal_workspace(workspace_name, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->get_personal_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -996,33 +996,32 @@ Get a single shared workspace item.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1031,30 +1030,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
-        group_name = 'group_name_example' # str | The group containing the item.
-        item_name = 'item_name_example' # str | The name of the item.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The datetime at which to request the workspace item. If not provided, defaults to 'latest'. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The name of the shared workspace.
+    group_name = 'group_name_example' # str | The group containing the item.
+    item_name = 'item_name_example' # str | The name of the item.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The datetime at which to request the workspace item. If not provided, defaults to 'latest'. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_shared_item(workspace_name, group_name, item_name, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_shared_item(workspace_name, group_name, item_name, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.
-            api_response = await api_instance.get_shared_item(workspace_name, group_name, item_name, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->get_shared_item: %s\n" % e)
+        # [EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.
+        api_response = api_instance.get_shared_item(workspace_name, group_name, item_name, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->get_shared_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1094,33 +1094,32 @@ Get a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1129,28 +1128,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The shared workspace name.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The shared workspace name.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_shared_workspace(workspace_name, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_shared_workspace(workspace_name, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetSharedWorkspace: Get a shared workspace.
-            api_response = await api_instance.get_shared_workspace(workspace_name, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->get_shared_workspace: %s\n" % e)
+        # [EXPERIMENTAL] GetSharedWorkspace: Get a shared workspace.
+        api_response = api_instance.get_shared_workspace(workspace_name, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->get_shared_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1188,33 +1188,32 @@ List the items in a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1223,32 +1222,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The item's workspace name.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified. (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The item's workspace name.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_personal_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_personal_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-            # [EXPERIMENTAL] ListPersonalItems: List the items in a personal workspace.
-            api_response = await api_instance.list_personal_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->list_personal_items: %s\n" % e)
+        # [EXPERIMENTAL] ListPersonalItems: List the items in a personal workspace.
+        api_response = api_instance.list_personal_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->list_personal_items: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1290,33 +1290,32 @@ List personal workspaces.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1325,31 +1324,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_personal_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_personal_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-            # [EXPERIMENTAL] ListPersonalWorkspaces: List personal workspaces.
-            api_response = await api_instance.list_personal_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->list_personal_workspaces: %s\n" % e)
+        # [EXPERIMENTAL] ListPersonalWorkspaces: List personal workspaces.
+        api_response = api_instance.list_personal_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->list_personal_workspaces: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1390,33 +1390,32 @@ List the items in a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1425,32 +1424,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The item's workspace name.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified. (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The item's workspace name.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_shared_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_shared_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-            # [EXPERIMENTAL] ListSharedItems: List the items in a shared workspace.
-            api_response = await api_instance.list_shared_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->list_shared_items: %s\n" % e)
+        # [EXPERIMENTAL] ListSharedItems: List the items in a shared workspace.
+        api_response = api_instance.list_shared_items(workspace_name, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->list_shared_items: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1492,33 +1492,32 @@ List shared workspaces.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1527,31 +1526,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_shared_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_shared_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-            # [EXPERIMENTAL] ListSharedWorkspaces: List shared workspaces.
-            api_response = await api_instance.list_shared_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->list_shared_workspaces: %s\n" % e)
+        # [EXPERIMENTAL] ListSharedWorkspaces: List shared workspaces.
+        api_response = api_instance.list_shared_workspaces(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->list_shared_workspaces: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1592,33 +1592,32 @@ Update an item in a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1627,35 +1626,36 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The personal workspace name.
-        group_name = 'group_name_example' # str | The group containing the item.
-        item_name = 'item_name_example' # str | The item name.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The personal workspace name.
+    group_name = 'group_name_example' # str | The group containing the item.
+    item_name = 'item_name_example' # str | The item name.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
-        # workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({})
-        workspace_item_update_request = WorkspaceItemUpdateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
+    # workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({})
+    workspace_item_update_request = WorkspaceItemUpdateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
-            api_response = await api_instance.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->update_personal_item: %s\n" % e)
+        # [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
+        api_response = api_instance.update_personal_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->update_personal_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1695,33 +1695,32 @@ Update a personal workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1730,33 +1729,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The personal workspace name.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The personal workspace name.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_update_request = WorkspaceUpdateRequest.from_json("")
-        # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
-        workspace_update_request = WorkspaceUpdateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_update_request = WorkspaceUpdateRequest.from_json("")
+    # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
+    workspace_update_request = WorkspaceUpdateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_personal_workspace(workspace_name, workspace_update_request=workspace_update_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_personal_workspace(workspace_name, workspace_update_request=workspace_update_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdatePersonalWorkspace: Update a personal workspace.
-            api_response = await api_instance.update_personal_workspace(workspace_name, workspace_update_request=workspace_update_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->update_personal_workspace: %s\n" % e)
+        # [EXPERIMENTAL] UpdatePersonalWorkspace: Update a personal workspace.
+        api_response = api_instance.update_personal_workspace(workspace_name, workspace_update_request=workspace_update_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->update_personal_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1794,33 +1794,32 @@ Update an item in a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1829,35 +1828,36 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The shared workspace name.
-        group_name = 'group_name_example' # str | The group containing the item.
-        item_name = 'item_name_example' # str | The item name.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The shared workspace name.
+    group_name = 'group_name_example' # str | The group containing the item.
+    item_name = 'item_name_example' # str | The item name.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
-        # workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({})
-        workspace_item_update_request = WorkspaceItemUpdateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
+    # workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({})
+    workspace_item_update_request = WorkspaceItemUpdateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.
-            api_response = await api_instance.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->update_shared_item: %s\n" % e)
+        # [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.
+        api_response = api_instance.update_shared_item(workspace_name, group_name, item_name, workspace_item_update_request=workspace_item_update_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->update_shared_item: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1897,33 +1897,32 @@ Update a shared workspace.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkspaceApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1932,33 +1931,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkspaceApi)
-        workspace_name = 'workspace_name_example' # str | The shared workspace name.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkspaceApi)
+    workspace_name = 'workspace_name_example' # str | The shared workspace name.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # workspace_update_request = WorkspaceUpdateRequest.from_json("")
-        # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
-        workspace_update_request = WorkspaceUpdateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # workspace_update_request = WorkspaceUpdateRequest.from_json("")
+    # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
+    workspace_update_request = WorkspaceUpdateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_shared_workspace(workspace_name, workspace_update_request=workspace_update_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_shared_workspace(workspace_name, workspace_update_request=workspace_update_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdateSharedWorkspace: Update a shared workspace.
-            api_response = await api_instance.update_shared_workspace(workspace_name, workspace_update_request=workspace_update_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkspaceApi->update_shared_workspace: %s\n" % e)
+        # [EXPERIMENTAL] UpdateSharedWorkspace: Update a shared workspace.
+        api_response = api_instance.update_shared_workspace(workspace_name, workspace_update_request=workspace_update_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkspaceApi->update_shared_workspace: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

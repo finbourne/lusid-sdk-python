@@ -19,33 +19,32 @@ Create the given address key definition.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AddressKeyDefinitionApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -54,32 +53,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AddressKeyDefinitionApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AddressKeyDefinitionApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_json("")
-        # create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_dict({})
-        create_address_key_definition_request = CreateAddressKeyDefinitionRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_json("")
+    # create_address_key_definition_request = CreateAddressKeyDefinitionRequest.from_dict({})
+    create_address_key_definition_request = CreateAddressKeyDefinitionRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_address_key_definition(create_address_key_definition_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_address_key_definition(create_address_key_definition_request, opts=opts)
 
-            # [EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.
-            api_response = await api_instance.create_address_key_definition(create_address_key_definition_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AddressKeyDefinitionApi->create_address_key_definition: %s\n" % e)
+        # [EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.
+        api_response = api_instance.create_address_key_definition(create_address_key_definition_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AddressKeyDefinitionApi->create_address_key_definition: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -116,33 +116,32 @@ Get the address key definition with the given address key at the specific asAt t
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AddressKeyDefinitionApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -151,28 +150,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AddressKeyDefinitionApi)
-        key = 'key_example' # str | The address key of the address key definition.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition. Defaults to return the latest version of the address key definition if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AddressKeyDefinitionApi)
+    key = 'key_example' # str | The address key of the address key definition.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition. Defaults to return the latest version of the address key definition if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_address_key_definition(key, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_address_key_definition(key, as_at=as_at, opts=opts)
 
-            # [EARLY ACCESS] GetAddressKeyDefinition: Get an AddressKeyDefinition.
-            api_response = await api_instance.get_address_key_definition(key, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AddressKeyDefinitionApi->get_address_key_definition: %s\n" % e)
+        # [EARLY ACCESS] GetAddressKeyDefinition: Get an AddressKeyDefinition.
+        api_response = api_instance.get_address_key_definition(key, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AddressKeyDefinitionApi->get_address_key_definition: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -210,33 +210,32 @@ Fetch the last pre-AsAt date version of each address key definition.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AddressKeyDefinitionApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -245,30 +244,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AddressKeyDefinitionApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified. (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AddressKeyDefinitionApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_address_key_definitions(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_address_key_definitions(as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
 
-            # [EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.
-            api_response = await api_instance.list_address_key_definitions(as_at=as_at, page=page, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AddressKeyDefinitionApi->list_address_key_definitions: %s\n" % e)
+        # [EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.
+        api_response = api_instance.list_address_key_definitions(as_at=as_at, page=page, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AddressKeyDefinitionApi->list_address_key_definitions: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

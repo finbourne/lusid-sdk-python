@@ -21,33 +21,32 @@ Create a reference portfolio in a particular scope.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ReferencePortfolioApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -56,33 +55,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ReferencePortfolioApi)
-        scope = 'scope_example' # str | The scope in which to create the reference portfolio.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ReferencePortfolioApi)
+    scope = 'scope_example' # str | The scope in which to create the reference portfolio.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_reference_portfolio_request = CreateReferencePortfolioRequest.from_json("")
-        # create_reference_portfolio_request = CreateReferencePortfolioRequest.from_dict({})
-        create_reference_portfolio_request = CreateReferencePortfolioRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_reference_portfolio_request = CreateReferencePortfolioRequest.from_json("")
+    # create_reference_portfolio_request = CreateReferencePortfolioRequest.from_dict({})
+    create_reference_portfolio_request = CreateReferencePortfolioRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_reference_portfolio(scope, create_reference_portfolio_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_reference_portfolio(scope, create_reference_portfolio_request, opts=opts)
 
-            # CreateReferencePortfolio: Create reference portfolio
-            api_response = await api_instance.create_reference_portfolio(scope, create_reference_portfolio_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ReferencePortfolioApi->create_reference_portfolio: %s\n" % e)
+        # CreateReferencePortfolio: Create reference portfolio
+        api_response = api_instance.create_reference_portfolio(scope, create_reference_portfolio_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->create_reference_portfolio: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -120,33 +120,32 @@ Get constituents from a reference portfolio at a particular effective time.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ReferencePortfolioApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -155,31 +154,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ReferencePortfolioApi)
-        scope = 'scope_example' # str | The scope of the reference portfolio.
-        code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
-        effective_at = 'effective_at_example' # str | The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified. (optional)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified. (optional)
-        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ReferencePortfolioApi)
+    scope = 'scope_example' # str | The scope of the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    effective_at = 'effective_at_example' # str | The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-            # GetReferencePortfolioConstituents: Get reference portfolio constituents
-            api_response = await api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ReferencePortfolioApi->get_reference_portfolio_constituents: %s\n" % e)
+        # GetReferencePortfolioConstituents: Get reference portfolio constituents
+        api_response = api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->get_reference_portfolio_constituents: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -220,33 +220,32 @@ List adjustments made to constituents in a reference portfolio.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ReferencePortfolioApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -255,31 +254,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ReferencePortfolioApi)
-        scope = 'scope_example' # str | The scope of the reference portfolio.
-        code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
-        from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned.
-        to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned.
-        as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The asAt time for which the result is valid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ReferencePortfolioApi)
+    scope = 'scope_example' # str | The scope of the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned.
+    to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned.
+    as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The asAt time for which the result is valid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time, opts=opts)
 
-            # ListConstituentsAdjustments: List constituents adjustments
-            api_response = await api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ReferencePortfolioApi->list_constituents_adjustments: %s\n" % e)
+        # ListConstituentsAdjustments: List constituents adjustments
+        api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->list_constituents_adjustments: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -320,33 +320,32 @@ Create or update one or more constituent properties for a single constituent in 
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ReferencePortfolioApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -355,34 +354,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ReferencePortfolioApi)
-        scope = 'scope_example' # str | The scope of the reference portfolio.
-        code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ReferencePortfolioApi)
+    scope = 'scope_example' # str | The scope of the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_json("")
-        # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_dict({})
-        upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_json("")
+    # upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest.from_dict({})
+    upsert_reference_portfolio_constituent_properties_request = UpsertReferencePortfolioConstituentPropertiesRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request, opts=opts)
 
-            # [EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties
-            api_response = await api_instance.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituent_properties: %s\n" % e)
+        # [EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties
+        api_response = api_instance.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituent_properties: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -421,33 +421,32 @@ Add constituents to a reference portfolio.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ReferencePortfolioApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -456,34 +455,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ReferencePortfolioApi)
-        scope = 'scope_example' # str | The scope of the reference portfolio.
-        code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ReferencePortfolioApi)
+    scope = 'scope_example' # str | The scope of the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_json("")
-        # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_dict({})
-        upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_json("")
+    # upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest.from_dict({})
+    upsert_reference_portfolio_constituents_request = UpsertReferencePortfolioConstituentsRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request, opts=opts)
 
-            # UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents
-            api_response = await api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituents: %s\n" % e)
+        # UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents
+        api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituents: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

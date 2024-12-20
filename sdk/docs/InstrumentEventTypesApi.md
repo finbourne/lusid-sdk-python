@@ -23,33 +23,32 @@ Create a transaction template for a particular instrument event type in a scope.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -58,35 +57,36 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
-        instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
-        scope = 'scope_example' # str | The scope in which the template lies.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    scope = 'scope_example' # str | The scope in which the template lies.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # transaction_template_request = TransactionTemplateRequest.from_json("")
-        # transaction_template_request = TransactionTemplateRequest.from_dict({})
-        transaction_template_request = TransactionTemplateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # transaction_template_request = TransactionTemplateRequest.from_json("")
+    # transaction_template_request = TransactionTemplateRequest.from_dict({})
+    transaction_template_request = TransactionTemplateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
 
-            # [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
-            api_response = await api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->create_transaction_template: %s\n" % e)
+        # [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
+        api_response = api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->create_transaction_template: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -126,33 +126,32 @@ Delete a transaction template for a particular instrument event type in a scope.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -161,29 +160,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
-        instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
-        scope = 'scope_example' # str | The scope of the template.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    scope = 'scope_example' # str | The scope of the template.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope, opts=opts)
 
-            # [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
-            api_response = await api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->delete_transaction_template: %s\n" % e)
+        # [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
+        api_response = api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->delete_transaction_template: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -222,33 +222,32 @@ Gets the Transaction Template that for the instrument event type within the scop
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -257,30 +256,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        instrument_event_type = 'instrument_event_type_example' # str | The instrument event type of the transaction template
-        instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
-        scope = 'scope_example' # str | The scope in which the template lies. When not supplied the scope is 'default'.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time of the requested Transaction Template (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    instrument_event_type = 'instrument_event_type_example' # str | The instrument event type of the transaction template
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    scope = 'scope_example' # str | The scope in which the template lies. When not supplied the scope is 'default'.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time of the requested Transaction Template (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
-            api_response = await api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->get_transaction_template: %s\n" % e)
+        # [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
+        api_response = api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->get_transaction_template: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -320,33 +320,32 @@ Retrieve the transaction template specification for a particular event type.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -355,27 +354,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        instrument_event_type = 'instrument_event_type_example' # str | The requested instrument event type.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    instrument_event_type = 'instrument_event_type_example' # str | The requested instrument event type.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_transaction_template_specification(instrument_event_type, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_transaction_template_specification(instrument_event_type, opts=opts)
 
-            # [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
-            api_response = await api_instance.get_transaction_template_specification(instrument_event_type)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->get_transaction_template_specification: %s\n" % e)
+        # [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
+        api_response = api_instance.get_transaction_template_specification(instrument_event_type)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->get_transaction_template_specification: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -412,33 +412,32 @@ Retrieves all transaction template specifications.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -447,31 +446,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt of the request (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request. (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt of the request (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-            # [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
-            api_response = await api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->list_transaction_template_specifications: %s\n" % e)
+        # [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
+        api_response = api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->list_transaction_template_specifications: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -512,33 +512,32 @@ Lists all Transaction Templates.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -547,31 +546,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time at which to retrieve the Transaction Templates (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request. (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time at which to retrieve the Transaction Templates (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-            # [EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
-            api_response = await api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->list_transaction_templates: %s\n" % e)
+        # [EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
+        api_response = api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->list_transaction_templates: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -612,33 +612,32 @@ Update a transaction template for a particular instrument event type in a scope.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentEventTypesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -647,35 +646,36 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentEventTypesApi)
-        instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
-        instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
-        scope = 'scope_example' # str | The scope in which the template lies.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentEventTypesApi)
+    instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    scope = 'scope_example' # str | The scope in which the template lies.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # transaction_template_request = TransactionTemplateRequest.from_json("")
-        # transaction_template_request = TransactionTemplateRequest.from_dict({})
-        transaction_template_request = TransactionTemplateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # transaction_template_request = TransactionTemplateRequest.from_json("")
+    # transaction_template_request = TransactionTemplateRequest.from_dict({})
+    transaction_template_request = TransactionTemplateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
-            api_response = await api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentEventTypesApi->update_transaction_template: %s\n" % e)
+        # [EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
+        api_response = api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentEventTypesApi->update_transaction_template: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

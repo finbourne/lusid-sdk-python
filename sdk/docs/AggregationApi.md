@@ -20,33 +20,32 @@ Given a set of scopes, a portfolio Id and a basic recipe, this endpoint generate
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AggregationApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -55,34 +54,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AggregationApi)
-        scope = 'scope_example' # str | The scope of the portfolio
-        code = 'code_example' # str | The code of the portfolio
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AggregationApi)
+    scope = 'scope_example' # str | The scope of the portfolio
+    code = 'code_example' # str | The code of the portfolio
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_recipe_request = CreateRecipeRequest.from_json("")
-        # create_recipe_request = CreateRecipeRequest.from_dict({})
-        create_recipe_request = CreateRecipeRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_recipe_request = CreateRecipeRequest.from_json("")
+    # create_recipe_request = CreateRecipeRequest.from_dict({})
+    create_recipe_request = CreateRecipeRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.generate_configuration_recipe(scope, code, create_recipe_request=create_recipe_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.generate_configuration_recipe(scope, code, create_recipe_request=create_recipe_request, opts=opts)
 
-            # [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
-            api_response = await api_instance.generate_configuration_recipe(scope, code, create_recipe_request=create_recipe_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AggregationApi->generate_configuration_recipe: %s\n" % e)
+        # [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
+        api_response = api_instance.generate_configuration_recipe(scope, code, create_recipe_request=create_recipe_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AggregationApi->generate_configuration_recipe: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -121,33 +121,32 @@ When a request is made for aggregation, the user needs to know what keys can be 
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AggregationApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -156,29 +155,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AggregationApi)
-        page = 'page_example' # str | The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.              This value is returned from the previous call. (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AggregationApi)
+    page = 'page_example' # str | The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.              This value is returned from the previous call. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_queryable_keys(page=page, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_queryable_keys(page=page, limit=limit, filter=filter, opts=opts)
 
-            # GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
-            api_response = await api_instance.get_queryable_keys(page=page, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AggregationApi->get_queryable_keys: %s\n" % e)
+        # GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
+        api_response = api_instance.get_queryable_keys(page=page, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_queryable_keys: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -217,33 +217,32 @@ Perform valuation on specified list of portfolio and/or portfolio groups for a s
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AggregationApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -252,32 +251,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AggregationApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AggregationApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # valuation_request = ValuationRequest.from_json("")
-        # valuation_request = ValuationRequest.from_dict({})
-        valuation_request = ValuationRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # valuation_request = ValuationRequest.from_json("")
+    # valuation_request = ValuationRequest.from_dict({})
+    valuation_request = ValuationRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_valuation(valuation_request=valuation_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_valuation(valuation_request=valuation_request, opts=opts)
 
-            # GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
-            api_response = await api_instance.get_valuation(valuation_request=valuation_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AggregationApi->get_valuation: %s\n" % e)
+        # GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
+        api_response = api_instance.get_valuation(valuation_request=valuation_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_valuation: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -314,33 +314,32 @@ Perform valuation on the portfolio that is defined by the weighted set of instru
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     AggregationApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -349,32 +348,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(AggregationApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AggregationApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # inline_valuation_request = InlineValuationRequest.from_json("")
-        # inline_valuation_request = InlineValuationRequest.from_dict({})
-        inline_valuation_request = InlineValuationRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # inline_valuation_request = InlineValuationRequest.from_json("")
+    # inline_valuation_request = InlineValuationRequest.from_dict({})
+    inline_valuation_request = InlineValuationRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_valuation_of_weighted_instruments(inline_valuation_request=inline_valuation_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_valuation_of_weighted_instruments(inline_valuation_request=inline_valuation_request, opts=opts)
 
-            # GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
-            api_response = await api_instance.get_valuation_of_weighted_instruments(inline_valuation_request=inline_valuation_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling AggregationApi->get_valuation_of_weighted_instruments: %s\n" % e)
+        # GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
+        api_response = api_instance.get_valuation_of_weighted_instruments(inline_valuation_request=inline_valuation_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_valuation_of_weighted_instruments: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

@@ -68,22 +68,22 @@ class OrderManagementApi:
         self.api_client = api_client
 
     @overload
-    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.book_transactions(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, async_req=True)
+        >>> thread = api.book_transactions(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, use_preview_transactions_for_pricing, async_req=True)
         >>> result = thread.get()
 
         :param book_transactions_request: The allocations to create transactions for (required)
@@ -92,6 +92,8 @@ class OrderManagementApi:
         :type apply_fees_and_commission: bool
         :param mark_orders_and_allocations_as_booked: Whether to mark allocations and fully-booked orders with state Booked
         :type mark_orders_and_allocations_as_booked: bool
+        :param use_preview_transactions_for_pricing: Whether to use calculators for the transaction type to work out pricing fields on the booked transactions
+        :type use_preview_transactions_for_pricing: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -108,17 +110,17 @@ class OrderManagementApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, **kwargs)  # noqa: E501
+        return self.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, use_preview_transactions_for_pricing, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, async_req=True)
+        >>> thread = api.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, use_preview_transactions_for_pricing, async_req=True)
         >>> result = thread.get()
 
         :param book_transactions_request: The allocations to create transactions for (required)
@@ -127,6 +129,8 @@ class OrderManagementApi:
         :type apply_fees_and_commission: bool
         :param mark_orders_and_allocations_as_booked: Whether to mark allocations and fully-booked orders with state Booked
         :type mark_orders_and_allocations_as_booked: bool
+        :param use_preview_transactions_for_pricing: Whether to use calculators for the transaction type to work out pricing fields on the booked transactions
+        :type use_preview_transactions_for_pricing: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -156,7 +160,8 @@ class OrderManagementApi:
         _all_params = [
             'book_transactions_request',
             'apply_fees_and_commission',
-            'mark_orders_and_allocations_as_booked'
+            'mark_orders_and_allocations_as_booked',
+            'use_preview_transactions_for_pricing'
         ]
         _all_params.extend(
             [
@@ -193,6 +198,9 @@ class OrderManagementApi:
 
         if _params.get('mark_orders_and_allocations_as_booked') is not None:  # noqa: E501
             _query_params.append(('markOrdersAndAllocationsAsBooked', _params['mark_orders_and_allocations_as_booked']))
+
+        if _params.get('use_preview_transactions_for_pricing') is not None:  # noqa: E501
+            _query_params.append(('usePreviewTransactionsForPricing', _params['use_preview_transactions_for_pricing']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

@@ -30,33 +30,32 @@ A Business day is defined as a point in time that:      * Does not represent a d
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -65,33 +64,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope within which to search for the calendars
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope within which to search for the calendars
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_json("")
-        # add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_dict({})
-        add_business_days_to_date_request = AddBusinessDaysToDateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_json("")
+    # add_business_days_to_date_request = AddBusinessDaysToDateRequest.from_dict({})
+    add_business_days_to_date_request = AddBusinessDaysToDateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.add_business_days_to_date(scope, add_business_days_to_date_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.add_business_days_to_date(scope, add_business_days_to_date_request, opts=opts)
 
-            # [EARLY ACCESS] AddBusinessDaysToDate: Adds the requested number of Business Days to the provided date.
-            api_response = await api_instance.add_business_days_to_date(scope, add_business_days_to_date_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->add_business_days_to_date: %s\n" % e)
+        # [EARLY ACCESS] AddBusinessDaysToDate: Adds the requested number of Business Days to the provided date.
+        api_response = api_instance.add_business_days_to_date(scope, add_business_days_to_date_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->add_business_days_to_date: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -129,33 +129,32 @@ Add an event to the calendar. These Events can be a maximum of 24 hours and must
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -164,34 +163,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_date_request = CreateDateRequest.from_json("")
-        # create_date_request = CreateDateRequest.from_dict({})
-        create_date_request = CreateDateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_date_request = CreateDateRequest.from_json("")
+    # create_date_request = CreateDateRequest.from_dict({})
+    create_date_request = CreateDateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.add_date_to_calendar(scope, code, create_date_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.add_date_to_calendar(scope, code, create_date_request, opts=opts)
 
-            # AddDateToCalendar: Add a date to a calendar
-            api_response = await api_instance.add_date_to_calendar(scope, code, create_date_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->add_date_to_calendar: %s\n" % e)
+        # AddDateToCalendar: Add a date to a calendar
+        api_response = api_instance.add_date_to_calendar(scope, code, create_date_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->add_date_to_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -230,33 +230,32 @@ Create or update events in the calendar. These Events can be a maximum of 24 hou
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -265,30 +264,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
-        success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (default to 'Partial')
-        request_body = {"ChineseNewYear":{"dateId":"TestDate","fromUtc":"2020-01-25T00:00:00.0000000+00:00","toUtc":"2020-01-26T00:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New Year","type":"Holiday","sourceData":{}}} # Dict[str, CreateDateRequest] | Create Date Requests of dates to upsert
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (default to 'Partial')
+    request_body = {"ChineseNewYear":{"dateId":"TestDate","fromUtc":"2020-01-25T00:00:00.0000000+00:00","toUtc":"2020-01-26T00:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New Year","type":"Holiday","sourceData":{}}} # Dict[str, CreateDateRequest] | Create Date Requests of dates to upsert
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.batch_upsert_dates_for_calendar(scope, code, success_mode, request_body, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_upsert_dates_for_calendar(scope, code, success_mode, request_body, opts=opts)
 
-            # BatchUpsertDatesForCalendar: Batch upsert dates to a calendar
-            api_response = await api_instance.batch_upsert_dates_for_calendar(scope, code, success_mode, request_body)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->batch_upsert_dates_for_calendar: %s\n" % e)
+        # BatchUpsertDatesForCalendar: Batch upsert dates to a calendar
+        api_response = api_instance.batch_upsert_dates_for_calendar(scope, code, success_mode, request_body)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->batch_upsert_dates_for_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -328,33 +328,32 @@ Create a calendar in a generic form which can be used to store date events.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -363,32 +362,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_calendar_request = CreateCalendarRequest.from_json("")
-        # create_calendar_request = CreateCalendarRequest.from_dict({})
-        create_calendar_request = CreateCalendarRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_calendar_request = CreateCalendarRequest.from_json("")
+    # create_calendar_request = CreateCalendarRequest.from_dict({})
+    create_calendar_request = CreateCalendarRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_calendar(create_calendar_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_calendar(create_calendar_request, opts=opts)
 
-            # [EARLY ACCESS] CreateCalendar: Create a calendar in its generic form
-            api_response = await api_instance.create_calendar(create_calendar_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->create_calendar: %s\n" % e)
+        # [EARLY ACCESS] CreateCalendar: Create a calendar in its generic form
+        api_response = api_instance.create_calendar(create_calendar_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->create_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -425,33 +425,32 @@ Delete a calendar and all of its respective dates
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -460,28 +459,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_calendar(scope, code, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_calendar(scope, code, opts=opts)
 
-            # [EARLY ACCESS] DeleteCalendar: Delete a calendar
-            api_response = await api_instance.delete_calendar(scope, code)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->delete_calendar: %s\n" % e)
+        # [EARLY ACCESS] DeleteCalendar: Delete a calendar
+        api_response = api_instance.delete_calendar(scope, code)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->delete_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -519,33 +519,32 @@ Remove a date from a calendar.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -554,29 +553,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
-        date_id = 'date_id_example' # str | Identifier of the date to be removed
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
+    date_id = 'date_id_example' # str | Identifier of the date to be removed
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_date_from_calendar(scope, code, date_id, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_date_from_calendar(scope, code, date_id, opts=opts)
 
-            # DeleteDateFromCalendar: Remove a date from a calendar
-            api_response = await api_instance.delete_date_from_calendar(scope, code, date_id)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->delete_date_from_calendar: %s\n" % e)
+        # DeleteDateFromCalendar: Remove a date from a calendar
+        api_response = api_instance.delete_date_from_calendar(scope, code, date_id)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->delete_date_from_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -615,33 +615,32 @@ Delete dates from a calendar.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -650,29 +649,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
-        request_body = ["dateId1","dateId2"] # List[str] | Identifiers of the dates to be removed
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
+    request_body = ["dateId1","dateId2"] # List[str] | Identifiers of the dates to be removed
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_dates_from_calendar(scope, code, request_body, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_dates_from_calendar(scope, code, request_body, opts=opts)
 
-            # DeleteDatesFromCalendar: Delete dates from a calendar
-            api_response = await api_instance.delete_dates_from_calendar(scope, code, request_body)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->delete_dates_from_calendar: %s\n" % e)
+        # DeleteDatesFromCalendar: Delete dates from a calendar
+        api_response = api_instance.delete_dates_from_calendar(scope, code, request_body)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->delete_dates_from_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -711,33 +711,32 @@ Returns an ordered array of dates. The dates will only fall on business  days as
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -746,34 +745,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendars to use
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendars to use
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # valuation_schedule = ValuationSchedule.from_json("")
-        # valuation_schedule = ValuationSchedule.from_dict({})
-        valuation_schedule = ValuationSchedule()
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional AsAt for searching the calendar store. Defaults to Latest. (optional)
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # valuation_schedule = ValuationSchedule.from_json("")
+    # valuation_schedule = ValuationSchedule.from_dict({})
+    valuation_schedule = ValuationSchedule()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional AsAt for searching the calendar store. Defaults to Latest. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.generate_schedule(scope, valuation_schedule, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.generate_schedule(scope, valuation_schedule, as_at=as_at, opts=opts)
 
-            # [EARLY ACCESS] GenerateSchedule: Generate an ordered schedule of dates.
-            api_response = await api_instance.generate_schedule(scope, valuation_schedule, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->generate_schedule: %s\n" % e)
+        # [EARLY ACCESS] GenerateSchedule: Generate an ordered schedule of dates.
+        api_response = api_instance.generate_schedule(scope, valuation_schedule, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->generate_schedule: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -812,33 +812,32 @@ Retrieve a generic calendar by a specific ID at a point in AsAt time
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -847,30 +846,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar identifier
-        code = 'code_example' # str | Code of the calendar identifier
-        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendar (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar identifier
+    code = 'code_example' # str | Code of the calendar identifier
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendar (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_calendar(scope, code, property_keys=property_keys, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_calendar(scope, code, property_keys=property_keys, as_at=as_at, opts=opts)
 
-            # GetCalendar: Get a calendar in its generic form
-            api_response = await api_instance.get_calendar(scope, code, property_keys=property_keys, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->get_calendar: %s\n" % e)
+        # GetCalendar: Get a calendar in its generic form
+        api_response = api_instance.get_calendar(scope, code, property_keys=property_keys, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->get_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -910,33 +910,32 @@ Get dates from a specific calendar within a specific window of effective time, a
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -945,32 +944,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
-        from_effective_at = 'from_effective_at_example' # str | Where the effective window of dates should begin from (optional)
-        to_effective_at = 'to_effective_at_example' # str | Where the effective window of dates should end (optional)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt the dates should be retrieved at (optional)
-        id_filter = ['id_filter_example'] # List[str] | An additional filter that will filter dates based on their identifer (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
+    from_effective_at = 'from_effective_at_example' # str | Where the effective window of dates should begin from (optional)
+    to_effective_at = 'to_effective_at_example' # str | Where the effective window of dates should end (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt the dates should be retrieved at (optional)
+    id_filter = ['id_filter_example'] # List[str] | An additional filter that will filter dates based on their identifer (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_dates(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, id_filter=id_filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_dates(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, id_filter=id_filter, opts=opts)
 
-            # [EARLY ACCESS] GetDates: Get dates for a specific calendar
-            api_response = await api_instance.get_dates(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, id_filter=id_filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->get_dates: %s\n" % e)
+        # [EARLY ACCESS] GetDates: Get dates for a specific calendar
+        api_response = api_instance.get_dates(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, id_filter=id_filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->get_dates: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1012,33 +1012,32 @@ A Business DateTime is defined as a point in time that:      * Does not represen
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1047,30 +1046,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        date_time = '2013-10-20T19:20:30+01:00' # datetime | DateTime to check - This DateTime must be UTC
-        scope = 'scope_example' # str | Scope of the calendar
-        code = 'code_example' # str | Code of the calendar
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt for the request (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    date_time = '2013-10-20T19:20:30+01:00' # datetime | DateTime to check - This DateTime must be UTC
+    scope = 'scope_example' # str | Scope of the calendar
+    code = 'code_example' # str | Code of the calendar
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt for the request (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.is_business_date_time(date_time, scope, code, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.is_business_date_time(date_time, scope, code, as_at=as_at, opts=opts)
 
-            # [EARLY ACCESS] IsBusinessDateTime: Check whether a DateTime is a \"Business DateTime\"
-            api_response = await api_instance.is_business_date_time(date_time, scope, code, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->is_business_date_time: %s\n" % e)
+        # [EARLY ACCESS] IsBusinessDateTime: Check whether a DateTime is a \"Business DateTime\"
+        api_response = api_instance.is_business_date_time(date_time, scope, code, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->is_business_date_time: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1110,33 +1110,32 @@ List calendars at a point in AsAt time.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1145,31 +1144,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendars (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendars (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_calendars(as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_calendars(as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter, opts=opts)
 
-            # [EARLY ACCESS] ListCalendars: List Calendars
-            api_response = await api_instance.list_calendars(as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->list_calendars: %s\n" % e)
+        # [EARLY ACCESS] ListCalendars: List Calendars
+        api_response = api_instance.list_calendars(as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->list_calendars: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1210,33 +1210,32 @@ List calendars in a Scope at a point in AsAt time.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1245,32 +1244,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the calendars
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendars (optional)
-        page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
-        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the calendars
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendars (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter, opts=opts)
 
-            # ListCalendarsInScope: List all calenders in a specified scope
-            api_response = await api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->list_calendars_in_scope: %s\n" % e)
+        # ListCalendarsInScope: List all calenders in a specified scope
+        api_response = api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->list_calendars_in_scope: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -1312,33 +1312,32 @@ Update the calendars WeekendMask, SourceProvider or Properties
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CalendarsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1347,34 +1346,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CalendarsApi)
-        scope = 'scope_example' # str | Scope of the request
-        code = 'code_example' # str | Code of the request
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CalendarsApi)
+    scope = 'scope_example' # str | Scope of the request
+    code = 'code_example' # str | Code of the request
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # update_calendar_request = UpdateCalendarRequest.from_json("")
-        # update_calendar_request = UpdateCalendarRequest.from_dict({})
-        update_calendar_request = UpdateCalendarRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # update_calendar_request = UpdateCalendarRequest.from_json("")
+    # update_calendar_request = UpdateCalendarRequest.from_dict({})
+    update_calendar_request = UpdateCalendarRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_calendar(scope, code, update_calendar_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_calendar(scope, code, update_calendar_request, opts=opts)
 
-            # [EARLY ACCESS] UpdateCalendar: Update a calendar
-            api_response = await api_instance.update_calendar(scope, code, update_calendar_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CalendarsApi->update_calendar: %s\n" % e)
+        # [EARLY ACCESS] UpdateCalendar: Update a calendar
+        api_response = api_instance.update_calendar(scope, code, update_calendar_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CalendarsApi->update_calendar: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

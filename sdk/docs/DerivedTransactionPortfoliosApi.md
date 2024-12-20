@@ -18,33 +18,32 @@ Create a derived transaction portfolio from a parent transaction portfolio (whic
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     DerivedTransactionPortfoliosApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -53,33 +52,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(DerivedTransactionPortfoliosApi)
-        scope = 'scope_example' # str | The scope in which to create the derived transaction portfolio.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(DerivedTransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope in which to create the derived transaction portfolio.
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_derived_transaction_portfolio_request = CreateDerivedTransactionPortfolioRequest.from_json("")
-        # create_derived_transaction_portfolio_request = CreateDerivedTransactionPortfolioRequest.from_dict({})
-        create_derived_transaction_portfolio_request = CreateDerivedTransactionPortfolioRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_derived_transaction_portfolio_request = CreateDerivedTransactionPortfolioRequest.from_json("")
+    # create_derived_transaction_portfolio_request = CreateDerivedTransactionPortfolioRequest.from_dict({})
+    create_derived_transaction_portfolio_request = CreateDerivedTransactionPortfolioRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_derived_portfolio(scope, create_derived_transaction_portfolio_request=create_derived_transaction_portfolio_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_derived_portfolio(scope, create_derived_transaction_portfolio_request=create_derived_transaction_portfolio_request, opts=opts)
 
-            # CreateDerivedPortfolio: Create derived portfolio
-            api_response = await api_instance.create_derived_portfolio(scope, create_derived_transaction_portfolio_request=create_derived_transaction_portfolio_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling DerivedTransactionPortfoliosApi->create_derived_portfolio: %s\n" % e)
+        # CreateDerivedPortfolio: Create derived portfolio
+        api_response = api_instance.create_derived_portfolio(scope, create_derived_transaction_portfolio_request=create_derived_transaction_portfolio_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling DerivedTransactionPortfoliosApi->create_derived_portfolio: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -117,33 +117,32 @@ Delete all the portfolio details for a derived transaction portfolio.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     DerivedTransactionPortfoliosApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -152,29 +151,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(DerivedTransactionPortfoliosApi)
-        scope = 'scope_example' # str | The scope of the derived transaction portfolio.
-        code = 'code_example' # str | The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.
-        effective_at = 'effective_at_example' # str | The effective date of the change. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(DerivedTransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the derived transaction portfolio.
+    code = 'code_example' # str | The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.
+    effective_at = 'effective_at_example' # str | The effective date of the change. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at, opts=opts)
 
-            # [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
-            api_response = await api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling DerivedTransactionPortfoliosApi->delete_derived_portfolio_details: %s\n" % e)
+        # [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
+        api_response = api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling DerivedTransactionPortfoliosApi->delete_derived_portfolio_details: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

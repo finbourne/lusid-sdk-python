@@ -25,33 +25,32 @@ Create or update one or more corporate actions in a particular corporate action 
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -60,29 +59,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of corporate action source
-        code = 'code_example' # str | The code of the corporate action source
-        upsert_corporate_action_request = [{"corporateActionCode":"MyStockSplitId","description":"2-for-1 stock split of instrument BBG001S6PJ31","announcementDate":"2018-03-01T00:00:00.0000000+00:00","exDate":"2018-06-01T00:00:00.0000000+00:00","recordDate":"2018-06-02T00:00:00.0000000+00:00","paymentDate":"2018-08-02T00:00:00.0000000+00:00","transitions":[{"inputTransition":{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"unitsFactor":1,"costFactor":1},"outputTransitions":[{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"unitsFactor":2,"costFactor":1}]}]}] # List[UpsertCorporateActionRequest] | The corporate action definitions (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of corporate action source
+    code = 'code_example' # str | The code of the corporate action source
+    upsert_corporate_action_request = [{"corporateActionCode":"MyStockSplitId","description":"2-for-1 stock split of instrument BBG001S6PJ31","announcementDate":"2018-03-01T00:00:00.0000000+00:00","exDate":"2018-06-01T00:00:00.0000000+00:00","recordDate":"2018-06-02T00:00:00.0000000+00:00","paymentDate":"2018-08-02T00:00:00.0000000+00:00","transitions":[{"inputTransition":{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"unitsFactor":1,"costFactor":1},"outputTransitions":[{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"unitsFactor":2,"costFactor":1}]}]}] # List[UpsertCorporateActionRequest] | The corporate action definitions (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.batch_upsert_corporate_actions(scope, code, upsert_corporate_action_request=upsert_corporate_action_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_upsert_corporate_actions(scope, code, upsert_corporate_action_request=upsert_corporate_action_request, opts=opts)
 
-            # [EARLY ACCESS] BatchUpsertCorporateActions: Batch upsert corporate actions (instrument transition events) to corporate action source.
-            api_response = await api_instance.batch_upsert_corporate_actions(scope, code, upsert_corporate_action_request=upsert_corporate_action_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->batch_upsert_corporate_actions: %s\n" % e)
+        # [EARLY ACCESS] BatchUpsertCorporateActions: Batch upsert corporate actions (instrument transition events) to corporate action source.
+        api_response = api_instance.batch_upsert_corporate_actions(scope, code, upsert_corporate_action_request=upsert_corporate_action_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->batch_upsert_corporate_actions: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -121,33 +121,32 @@ Create a corporate action source.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -156,32 +155,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_json("")
-        # create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_dict({})
-        create_corporate_action_source_request = CreateCorporateActionSourceRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_json("")
+    # create_corporate_action_source_request = CreateCorporateActionSourceRequest.from_dict({})
+    create_corporate_action_source_request = CreateCorporateActionSourceRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_corporate_action_source(create_corporate_action_source_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_corporate_action_source(create_corporate_action_source_request, opts=opts)
 
-            # [EARLY ACCESS] CreateCorporateActionSource: Create corporate action source
-            api_response = await api_instance.create_corporate_action_source(create_corporate_action_source_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->create_corporate_action_source: %s\n" % e)
+        # [EARLY ACCESS] CreateCorporateActionSource: Create corporate action source
+        api_response = api_instance.create_corporate_action_source(create_corporate_action_source_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->create_corporate_action_source: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -218,33 +218,32 @@ Deletes a single corporate action source
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -253,28 +252,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of the corporate action source to be deleted
-        code = 'code_example' # str | The code of the corporate action source to be deleted
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of the corporate action source to be deleted
+    code = 'code_example' # str | The code of the corporate action source to be deleted
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_corporate_action_source(scope, code, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_corporate_action_source(scope, code, opts=opts)
 
-            # [BETA] DeleteCorporateActionSource: Delete a corporate action source
-            api_response = await api_instance.delete_corporate_action_source(scope, code)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->delete_corporate_action_source: %s\n" % e)
+        # [BETA] DeleteCorporateActionSource: Delete a corporate action source
+        api_response = api_instance.delete_corporate_action_source(scope, code)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->delete_corporate_action_source: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -312,33 +312,32 @@ Delete one or more corporate actions from a particular corporate action source. 
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -347,29 +346,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of the corporate action source
-        code = 'code_example' # str | The code of the corporate action source
-        corporate_action_ids = ['corporate_action_ids_example'] # List[str] | The IDs of the corporate actions to delete
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of the corporate action source
+    code = 'code_example' # str | The code of the corporate action source
+    corporate_action_ids = ['corporate_action_ids_example'] # List[str] | The IDs of the corporate actions to delete
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_corporate_actions(scope, code, corporate_action_ids, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_corporate_actions(scope, code, corporate_action_ids, opts=opts)
 
-            # [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source
-            api_response = await api_instance.delete_corporate_actions(scope, code, corporate_action_ids)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->delete_corporate_actions: %s\n" % e)
+        # [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source
+        api_response = api_instance.delete_corporate_actions(scope, code, corporate_action_ids)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->delete_corporate_actions: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -408,33 +408,32 @@ Delete one or more corporate actions from a particular corporate action source. 
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -443,29 +442,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of the corporate action source
-        code = 'code_example' # str | The code of the corporate action source
-        instrument_event_ids = ['instrument_event_ids_example'] # List[str] | The IDs of the instrument events to delete
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of the corporate action source
+    code = 'code_example' # str | The code of the corporate action source
+    instrument_event_ids = ['instrument_event_ids_example'] # List[str] | The IDs of the instrument events to delete
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_instrument_events(scope, code, instrument_event_ids, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_instrument_events(scope, code, instrument_event_ids, opts=opts)
 
-            # [EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source
-            api_response = await api_instance.delete_instrument_events(scope, code, instrument_event_ids)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->delete_instrument_events: %s\n" % e)
+        # [EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source
+        api_response = api_instance.delete_instrument_events(scope, code, instrument_event_ids)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->delete_instrument_events: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -504,33 +504,32 @@ Get corporate actions from a particular corporate action source.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -539,34 +538,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of the corporate action source.
-        code = 'code_example' # str | The code of the corporate action source.
-        from_effective_at = 'from_effective_at_example' # str | Optional. The start effective date of the data range. (optional)
-        to_effective_at = 'to_effective_at_example' # str | Optional. The end effective date of the data range. (optional)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data. (optional)
-        sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-        limit = 56 # int | Optional. When paginating, limit the results to this number. (optional)
-        filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Announcement Date, use \"announcementDate eq '2020-03-06'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of the corporate action source.
+    code = 'code_example' # str | The code of the corporate action source.
+    from_effective_at = 'from_effective_at_example' # str | Optional. The start effective date of the data range. (optional)
+    to_effective_at = 'to_effective_at_example' # str | Optional. The end effective date of the data range. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data. (optional)
+    sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
+    limit = 56 # int | Optional. When paginating, limit the results to this number. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Announcement Date, use \"announcementDate eq '2020-03-06'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_corporate_actions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_corporate_actions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-            # [EARLY ACCESS] GetCorporateActions: List corporate actions (instrument transition events) from the corporate action source.
-            api_response = await api_instance.get_corporate_actions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, sort_by=sort_by, limit=limit, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->get_corporate_actions: %s\n" % e)
+        # [EARLY ACCESS] GetCorporateActions: List corporate actions (instrument transition events) from the corporate action source.
+        api_response = api_instance.get_corporate_actions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, sort_by=sort_by, limit=limit, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->get_corporate_actions: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -610,33 +610,32 @@ Retrieves extrinsic corporate actions out of a corporate actions source
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -645,32 +644,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of the corporate action source.
-        code = 'code_example' # str | The code of the corporate action source.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data. (optional)
-        limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. (optional) (default to 1000)
-        page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified. (optional)
-        filter = 'filter_example' # str | Optional. Expression to filter the result set. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of the corporate action source.
+    code = 'code_example' # str | The code of the corporate action source.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data. (optional)
+    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. (optional) (default to 1000)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter, opts=opts)
 
-            # [EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.
-            api_response = await api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->get_instrument_events: %s\n" % e)
+        # [EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.
+        api_response = api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->get_instrument_events: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -712,33 +712,32 @@ Gets a list of all corporate action sources
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -747,31 +746,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
-        sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-        limit = 100 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used. (optional) (default to 100)
-        filter = 'filter_example' # str | Optional. Expression to filter the result set. For example, to  filter on the Display Name, use \"displayName eq 'string'\"  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-        page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, the filter, asAt, and limit must not  be modified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
+    sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
+    limit = 100 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used. (optional) (default to 100)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set. For example, to  filter on the Display Name, use \"displayName eq 'string'\"  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, the filter, asAt, and limit must not  be modified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_corporate_action_sources(as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, page=page, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_corporate_action_sources(as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, page=page, opts=opts)
 
-            # [EARLY ACCESS] ListCorporateActionSources: List corporate action sources
-            api_response = await api_instance.list_corporate_action_sources(as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, page=page)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->list_corporate_action_sources: %s\n" % e)
+        # [EARLY ACCESS] ListCorporateActionSources: List corporate action sources
+        api_response = api_instance.list_corporate_action_sources(as_at=as_at, sort_by=sort_by, limit=limit, filter=filter, page=page)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->list_corporate_action_sources: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -812,33 +812,32 @@ Batch upsert instrument events to corporate action sources.                The m
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     CorporateActionSourcesApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -847,29 +846,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(CorporateActionSourcesApi)
-        scope = 'scope_example' # str | The scope of the corporate action source.
-        code = 'code_example' # str | The code of the corporate action source.
-        upsert_instrument_event_request = [{"instrumentEventId":"MyStockSplitId","instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"description":"2-for-1 stock split of instrument BBG001S6PJ31","instrumentEvent":{"announcementDate":"2018-03-01T00:00:00.0000000+00:00","exDate":"2018-06-01T00:00:00.0000000+00:00","recordDate":"2018-06-02T00:00:00.0000000+00:00","paymentDate":"2018-08-02T00:00:00.0000000+00:00","inputTransition":{"unitsFactor":1,"costFactor":1},"outputTransitions":[{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"unitsFactor":2,"costFactor":1,"rounding":{"stockUnits":{"roundingType":"NearestRoundHalfAwayFromZero"}}}],"instrumentEventType":"TransitionEvent"},"properties":[],"sequenceNumber":0,"participationType":"thing"}] # List[UpsertInstrumentEventRequest] | The instrument event definitions. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CorporateActionSourcesApi)
+    scope = 'scope_example' # str | The scope of the corporate action source.
+    code = 'code_example' # str | The code of the corporate action source.
+    upsert_instrument_event_request = [{"instrumentEventId":"MyStockSplitId","instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"description":"2-for-1 stock split of instrument BBG001S6PJ31","instrumentEvent":{"announcementDate":"2018-03-01T00:00:00.0000000+00:00","exDate":"2018-06-01T00:00:00.0000000+00:00","recordDate":"2018-06-02T00:00:00.0000000+00:00","paymentDate":"2018-08-02T00:00:00.0000000+00:00","inputTransition":{"unitsFactor":1,"costFactor":1},"outputTransitions":[{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG001S6PJ31"},"unitsFactor":2,"costFactor":1,"rounding":{"stockUnits":{"roundingType":"NearestRoundHalfAwayFromZero"}}}],"instrumentEventType":"TransitionEvent"},"properties":[],"sequenceNumber":0,"participationType":"thing"}] # List[UpsertInstrumentEventRequest] | The instrument event definitions. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.upsert_instrument_events(scope, code, upsert_instrument_event_request=upsert_instrument_event_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_instrument_events(scope, code, upsert_instrument_event_request=upsert_instrument_event_request, opts=opts)
 
-            # [EARLY ACCESS] UpsertInstrumentEvents: Upsert instrument events to the provided corporate actions source.
-            api_response = await api_instance.upsert_instrument_events(scope, code, upsert_instrument_event_request=upsert_instrument_event_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling CorporateActionSourcesApi->upsert_instrument_events: %s\n" % e)
+        # [EARLY ACCESS] UpsertInstrumentEvents: Upsert instrument events to the provided corporate actions source.
+        api_response = api_instance.upsert_instrument_events(scope, code, upsert_instrument_event_request=upsert_instrument_event_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling CorporateActionSourcesApi->upsert_instrument_events: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

@@ -28,16 +28,16 @@ class TrialBalance(BaseModel):
     """
     A TrialBalance entity.  # noqa: E501
     """
-    general_ledger_account_code: constr(strict=True, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The Account code that the trial balance results have been grouped against")
-    description: Optional[StrictStr] = Field(None, description="The description of the record")
-    levels: conlist(StrictStr) = Field(..., description="The levels that have been derived from the specified General Ledger Profile")
-    account_type: constr(strict=True, min_length=1) = Field(..., alias="accountType", description="The account type attributed to the record")
-    local_currency: constr(strict=True, min_length=1) = Field(..., alias="localCurrency", description="The account type attributed to the record")
+    general_ledger_account_code: constr(strict=True, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The Account code that the trial balance results have been grouped against.")
+    description: Optional[StrictStr] = Field(None, description="The description of the record.")
+    levels: conlist(StrictStr) = Field(..., description="The levels that have been derived from the specified General Ledger Profile.")
+    account_type: constr(strict=True, min_length=1) = Field(..., alias="accountType", description="The account type attributed to the record.")
+    local_currency: constr(strict=True, min_length=1) = Field(..., alias="localCurrency", description="The local currency for the amounts specified. Defaults to base currency if multiple different currencies present in the grouped line.")
     opening: MultiCurrencyAmounts = Field(...)
     closing: MultiCurrencyAmounts = Field(...)
     debit: MultiCurrencyAmounts = Field(...)
     credit: MultiCurrencyAmounts = Field(...)
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Properties found on the mapped 'Account', as specified in request")
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Properties found on the mapped 'Account', as specified in request.")
     links: Optional[conlist(Link)] = None
     __properties = ["generalLedgerAccountCode", "description", "levels", "accountType", "localCurrency", "opening", "closing", "debit", "credit", "properties", "links"]
 
@@ -45,6 +45,14 @@ class TrialBalance(BaseModel):
         """Pydantic configuration"""
         allow_population_by_field_name = True
         validate_assignment = True
+
+    def __str__(self):
+        """For `print` and `pprint`"""
+        return pprint.pformat(self.dict(by_alias=False))
+
+    def __repr__(self):
+        """For `print` and `pprint`"""
+        return self.to_str()
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -27,33 +27,32 @@ Delete the specified Configuration Recipe from a single scope.                Th
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -62,28 +61,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        scope = 'scope_example' # str | The scope of the Configuration Recipe to delete.
-        code = 'code_example' # str | The Configuration Recipe to delete.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    scope = 'scope_example' # str | The scope of the Configuration Recipe to delete.
+    code = 'code_example' # str | The Configuration Recipe to delete.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_configuration_recipe(scope, code, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_configuration_recipe(scope, code, opts=opts)
 
-            # DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.
-            api_response = await api_instance.delete_configuration_recipe(scope, code)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->delete_configuration_recipe: %s\n" % e)
+        # DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.
+        api_response = api_instance.delete_configuration_recipe(scope, code)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->delete_configuration_recipe: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -121,33 +121,32 @@ Delete the specified Recipe Composer from a single scope.                The res
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -156,28 +155,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        scope = 'scope_example' # str | The scope of the Recipe Composer to delete.
-        code = 'code_example' # str | The Recipe Composer to delete.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    scope = 'scope_example' # str | The scope of the Recipe Composer to delete.
+    code = 'code_example' # str | The Recipe Composer to delete.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_recipe_composer(scope, code, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_recipe_composer(scope, code, opts=opts)
 
-            # [EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
-            api_response = await api_instance.delete_recipe_composer(scope, code)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->delete_recipe_composer: %s\n" % e)
+        # [EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
+        api_response = api_instance.delete_recipe_composer(scope, code)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->delete_recipe_composer: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -215,33 +215,32 @@ Get a Configuration Recipe from a single scope.                The response will
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -250,29 +249,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        scope = 'scope_example' # str | The scope of the Configuration Recipe to retrieve.
-        code = 'code_example' # str | The name of the recipe to retrieve the data for.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    scope = 'scope_example' # str | The scope of the Configuration Recipe to retrieve.
+    code = 'code_example' # str | The name of the recipe to retrieve the data for.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_configuration_recipe(scope, code, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_configuration_recipe(scope, code, as_at=as_at, opts=opts)
 
-            # GetConfigurationRecipe: Get Configuration Recipe
-            api_response = await api_instance.get_configuration_recipe(scope, code, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->get_configuration_recipe: %s\n" % e)
+        # GetConfigurationRecipe: Get Configuration Recipe
+        api_response = api_instance.get_configuration_recipe(scope, code, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->get_configuration_recipe: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -311,33 +311,32 @@ If scope-code is referring to a Configuration Recipe it is returned, if it refer
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -346,29 +345,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        scope = 'scope_example' # str | The scope of the Configuration Recipe or Recipe Composer to return.
-        code = 'code_example' # str | The code of the Configuration Recipe or Recipe Composer to return.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    scope = 'scope_example' # str | The scope of the Configuration Recipe or Recipe Composer to return.
+    code = 'code_example' # str | The code of the Configuration Recipe or Recipe Composer to return.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_derived_recipe(scope, code, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_derived_recipe(scope, code, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
-            api_response = await api_instance.get_derived_recipe(scope, code, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->get_derived_recipe: %s\n" % e)
+        # [EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
+        api_response = api_instance.get_derived_recipe(scope, code, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->get_derived_recipe: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -407,33 +407,32 @@ Get a Recipe Composer from a single scope.                The response will retu
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -442,29 +441,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        scope = 'scope_example' # str | The scope of the Recipe Composer to retrieve.
-        code = 'code_example' # str | The name of the Recipe Composer to retrieve the data for.
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    scope = 'scope_example' # str | The scope of the Recipe Composer to retrieve.
+    code = 'code_example' # str | The name of the Recipe Composer to retrieve the data for.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_recipe_composer(scope, code, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_recipe_composer(scope, code, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer
-            api_response = await api_instance.get_recipe_composer(scope, code, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->get_recipe_composer: %s\n" % e)
+        # [EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer
+        api_response = api_instance.get_recipe_composer(scope, code, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->get_recipe_composer: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -503,33 +503,32 @@ Resolves an inline recipe composer into a ConfigurationRecipe.
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -538,32 +537,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_json("")
-        # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({})
-        upsert_recipe_composer_request = UpsertRecipeComposerRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_json("")
+    # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({})
+    upsert_recipe_composer_request = UpsertRecipeComposerRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request, opts=opts)
 
-            # [EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
-            api_response = await api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->get_recipe_composer_resolved_inline: %s\n" % e)
+        # [EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
+        api_response = api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->get_recipe_composer_resolved_inline: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -600,33 +600,32 @@ List the set of configuration recipes at the specified date/time and scope. Note
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -635,28 +634,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_configuration_recipes(as_at=as_at, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_configuration_recipes(as_at=as_at, filter=filter, opts=opts)
 
-            # ListConfigurationRecipes: List the set of Configuration Recipes
-            api_response = await api_instance.list_configuration_recipes(as_at=as_at, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->list_configuration_recipes: %s\n" % e)
+        # ListConfigurationRecipes: List the set of Configuration Recipes
+        api_response = api_instance.list_configuration_recipes(as_at=as_at, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->list_configuration_recipes: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -694,33 +694,32 @@ This endpoints returns a union of the output of ListConfigurationRecipes and the
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -729,28 +728,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_derived_recipes(as_at=as_at, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_derived_recipes(as_at=as_at, filter=filter, opts=opts)
 
-            # [EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
-            api_response = await api_instance.list_derived_recipes(as_at=as_at, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->list_derived_recipes: %s\n" % e)
+        # [EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
+        api_response = api_instance.list_derived_recipes(as_at=as_at, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->list_derived_recipes: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -788,33 +788,32 @@ List the set of Recipe Composers at the specified date/time and scope
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -823,28 +822,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_recipe_composers(as_at=as_at, filter=filter, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_recipe_composers(as_at=as_at, filter=filter, opts=opts)
 
-            # [EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers
-            api_response = await api_instance.list_recipe_composers(as_at=as_at, filter=filter)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->list_recipe_composers: %s\n" % e)
+        # [EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers
+        api_response = api_instance.list_recipe_composers(as_at=as_at, filter=filter)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->list_recipe_composers: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -882,33 +882,32 @@ Update or insert one Configuration Recipe in a single scope. An item will be upd
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -917,32 +916,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # upsert_recipe_request = UpsertRecipeRequest.from_json("")
-        # upsert_recipe_request = UpsertRecipeRequest.from_dict({})
-        upsert_recipe_request = UpsertRecipeRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_recipe_request = UpsertRecipeRequest.from_json("")
+    # upsert_recipe_request = UpsertRecipeRequest.from_dict({})
+    upsert_recipe_request = UpsertRecipeRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.upsert_configuration_recipe(upsert_recipe_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_configuration_recipe(upsert_recipe_request, opts=opts)
 
-            # UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.
-            api_response = await api_instance.upsert_configuration_recipe(upsert_recipe_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->upsert_configuration_recipe: %s\n" % e)
+        # UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.
+        api_response = api_instance.upsert_configuration_recipe(upsert_recipe_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->upsert_configuration_recipe: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -979,33 +979,32 @@ Update or insert one Recipe Composer in a single scope. An item will be updated 
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ConfigurationRecipeApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -1014,32 +1013,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ConfigurationRecipeApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ConfigurationRecipeApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_json("")
-        # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({})
-        upsert_recipe_composer_request = UpsertRecipeComposerRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_json("")
+    # upsert_recipe_composer_request = UpsertRecipeComposerRequest.from_dict({})
+    upsert_recipe_composer_request = UpsertRecipeComposerRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.upsert_recipe_composer(upsert_recipe_composer_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_recipe_composer(upsert_recipe_composer_request, opts=opts)
 
-            # [EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
-            api_response = await api_instance.upsert_recipe_composer(upsert_recipe_composer_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ConfigurationRecipeApi->upsert_recipe_composer: %s\n" % e)
+        # [EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
+        api_response = api_instance.upsert_recipe_composer(upsert_recipe_composer_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ConfigurationRecipeApi->upsert_recipe_composer: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

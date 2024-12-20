@@ -18,33 +18,32 @@ Translates one or more instruments into the given target dialect.               
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TranslationApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -53,32 +52,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TranslationApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TranslationApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest.from_json("")
-        # translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest.from_dict({})
-        translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest.from_json("")
+    # translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest.from_dict({})
+    translate_instrument_definitions_request = TranslateInstrumentDefinitionsRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.translate_instrument_definitions(translate_instrument_definitions_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.translate_instrument_definitions(translate_instrument_definitions_request, opts=opts)
 
-            # [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
-            api_response = await api_instance.translate_instrument_definitions(translate_instrument_definitions_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TranslationApi->translate_instrument_definitions: %s\n" % e)
+        # [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
+        api_response = api_instance.translate_instrument_definitions(translate_instrument_definitions_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TranslationApi->translate_instrument_definitions: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -115,33 +115,32 @@ Translates one or more trade tickets into the given target dialect.             
 ### Example
 
 ```python
-import asyncio
 from lusid.exceptions import ApiException
 from lusid.extensions.configuration_options import ConfigurationOptions
 from lusid.models import *
 from pprint import pprint
 from lusid import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TranslationApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "lusidUrl":"https://<your-domain>.lusid.com/api",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -150,32 +149,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TranslationApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TranslationApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # translate_trade_ticket_request = TranslateTradeTicketRequest.from_json("")
-        # translate_trade_ticket_request = TranslateTradeTicketRequest.from_dict({})
-        translate_trade_ticket_request = TranslateTradeTicketRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # translate_trade_ticket_request = TranslateTradeTicketRequest.from_json("")
+    # translate_trade_ticket_request = TranslateTradeTicketRequest.from_dict({})
+    translate_trade_ticket_request = TranslateTradeTicketRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.translate_trade_tickets(translate_trade_ticket_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.translate_trade_tickets(translate_trade_ticket_request, opts=opts)
 
-            # [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
-            api_response = await api_instance.translate_trade_tickets(translate_trade_ticket_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TranslationApi->translate_trade_tickets: %s\n" % e)
+        # [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
+        api_response = api_instance.translate_trade_tickets(translate_trade_ticket_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TranslationApi->translate_trade_tickets: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
