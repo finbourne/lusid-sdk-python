@@ -59,7 +59,8 @@ class OutputTransaction(BaseModel):
     custodian_account: Optional[CustodianAccount] = Field(None, alias="custodianAccount")
     transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
     resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails"]
+    gross_transaction_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="grossTransactionAmount", description="The total gross value of the transaction in the transaction currency.")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -243,6 +244,7 @@ class OutputTransaction(BaseModel):
             "source_instrument_event_id": obj.get("sourceInstrumentEventId"),
             "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
             "transaction_group_id": obj.get("transactionGroupId"),
-            "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None
+            "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None,
+            "gross_transaction_amount": obj.get("grossTransactionAmount")
         })
         return _obj

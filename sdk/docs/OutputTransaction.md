@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **custodian_account** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] 
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 **resolved_transaction_type_details** | [**TransactionTypeDetails**](TransactionTypeDetails.md) |  | [optional] 
+**gross_transaction_amount** | **float** | The total gross value of the transaction in the transaction currency. | [optional] 
 
 ## Example
 
