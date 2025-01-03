@@ -19,20 +19,19 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.lusid_instrument import LusidInstrument
 
 class LoanFacility(LusidInstrument):
     """
-    Loan Facility. This is a very lightweight instrument which acts as a placeholder for the events occurring within  the related facility Portfolio. This Portfolio is identified by its Scope and Code, which is recorded on the  instrument definition. The instrument acts as an agreement between a single borrower and many lenders (investors).  Several contracts may be drawn up to enable the lending of funds to the borrower. These contracts are modelled via  FlexibleLoan instruments in LUSID. The events occurring within the linked Portfolio may be related  to the facility as a whole (for example to define a global commitment amount), or they may relate to a single  contract (such as a paydown transaction on a particular contract).  # noqa: E501
+    Loan Facility. This is a very lightweight instrument which acts as a placeholder for the state that is built  from the instrument events. The facility acts as an agreement between a single borrower and many lenders (investors).  Several contracts may be drawn up to enable the lending of funds to the borrower. These contracts are modelled via  FlexibleLoan instruments in LUSID. The instrument events on the facility may relate to the facility as a whole  (for example to define a global commitment amount), or they may relate to a single contract (such as a paydown  transaction on a particular contract).  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
+    maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
-    facility_portfolio_scope: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="facilityPortfolioScope", description="The Scope of the Transaction Portfolio to which the Loan Facility instrument is linked.")
-    facility_portfolio_code: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="facilityPortfolioCode", description="The Code of the Transaction Portfolio to which the Loan Facility instrument is linked.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "domCcy", "facilityPortfolioScope", "facilityPortfolioCode"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -93,9 +92,8 @@ class LoanFacility(LusidInstrument):
         _obj = LoanFacility.parse_obj({
             "instrument_type": obj.get("instrumentType"),
             "start_date": obj.get("startDate"),
-            "dom_ccy": obj.get("domCcy"),
-            "facility_portfolio_scope": obj.get("facilityPortfolioScope"),
-            "facility_portfolio_code": obj.get("facilityPortfolioCode")
+            "maturity_date": obj.get("maturityDate"),
+            "dom_ccy": obj.get("domCcy")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
