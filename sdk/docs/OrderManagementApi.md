@@ -77,7 +77,7 @@ def main():
     book_transactions_request = BookTransactionsRequest()
     apply_fees_and_commission = True # bool | Whether to apply fees and commissions to transactions (default: true) (optional) (default to True)
     mark_orders_and_allocations_as_booked = False # bool | Whether to mark allocations and fully-booked orders with state Booked (optional) (default to False)
-    use_preview_transactions_for_pricing = False # bool | Whether to use calculators for the transaction type to work out pricing fields on the booked transactions (optional) (default to False)
+    use_preview_transactions_for_pricing = True # bool | Whether to use calculators for the transaction type to work out pricing fields on the booked transactions (optional) (default to True)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
  **book_transactions_request** | [**BookTransactionsRequest**](BookTransactionsRequest.md)| The allocations to create transactions for | 
  **apply_fees_and_commission** | **bool**| Whether to apply fees and commissions to transactions (default: true) | [optional] [default to True]
  **mark_orders_and_allocations_as_booked** | **bool**| Whether to mark allocations and fully-booked orders with state Booked | [optional] [default to False]
- **use_preview_transactions_for_pricing** | **bool**| Whether to use calculators for the transaction type to work out pricing fields on the booked transactions | [optional] [default to False]
+ **use_preview_transactions_for_pricing** | **bool**| Whether to use calculators for the transaction type to work out pricing fields on the booked transactions | [optional] [default to True]
 
 ### Return type
 
