@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **property_key** | **str** | The key that uniquely identifies the property. It has the format {domain}/{scope}/{code} | 
 **map_from** | **str** | The Property Key of the Property to map from | [optional] 
 **set_to** | **str** | A pointer to the Property being mapped from | [optional] 
+**template_from** | **str** | The template that defines how the property value is constructed from transaction, instrument and portfolio details. | [optional] 
 
 ## Example
 

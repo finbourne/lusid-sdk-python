@@ -28,10 +28,21 @@ class TransactionTypePropertyMapping(BaseModel):
     property_key: StrictStr = Field(..., alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}")
     map_from: Optional[StrictStr] = Field(None, alias="mapFrom", description="The Property Key of the Property to map from")
     set_to: Optional[constr(strict=True, max_length=512, min_length=0)] = Field(None, alias="setTo", description="A pointer to the Property being mapped from")
-    __properties = ["propertyKey", "mapFrom", "setTo"]
+    template_from: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="templateFrom", description="The template that defines how the property value is constructed from transaction, instrument and portfolio details.")
+    __properties = ["propertyKey", "mapFrom", "setTo", "templateFrom"]
 
     @validator('set_to')
     def set_to_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[\s\S]*$", value):
+            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
+        return value
+
+    @validator('template_from')
+    def template_from_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
@@ -82,6 +93,11 @@ class TransactionTypePropertyMapping(BaseModel):
         if self.set_to is None and "set_to" in self.__fields_set__:
             _dict['setTo'] = None
 
+        # set to None if template_from (nullable) is None
+        # and __fields_set__ contains the field
+        if self.template_from is None and "template_from" in self.__fields_set__:
+            _dict['templateFrom'] = None
+
         return _dict
 
     @classmethod
@@ -96,6 +112,7 @@ class TransactionTypePropertyMapping(BaseModel):
         _obj = TransactionTypePropertyMapping.parse_obj({
             "property_key": obj.get("propertyKey"),
             "map_from": obj.get("mapFrom"),
-            "set_to": obj.get("setTo")
+            "set_to": obj.get("setTo"),
+            "template_from": obj.get("templateFrom")
         })
         return _obj
