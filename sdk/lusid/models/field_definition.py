@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
 class FieldDefinition(BaseModel):
     """
@@ -28,7 +28,8 @@ class FieldDefinition(BaseModel):
     key: constr(strict=True, max_length=512, min_length=1) = Field(...)
     is_required: StrictBool = Field(..., alias="isRequired")
     is_unique: StrictBool = Field(..., alias="isUnique")
-    __properties = ["key", "isRequired", "isUnique"]
+    value_type: Optional[StrictStr] = Field(None, alias="valueType")
+    __properties = ["key", "isRequired", "isUnique", "valueType"]
 
     @validator('key')
     def key_validate_regular_expression(cls, value):
@@ -69,6 +70,11 @@ class FieldDefinition(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if value_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.value_type is None and "value_type" in self.__fields_set__:
+            _dict['valueType'] = None
+
         return _dict
 
     @classmethod
@@ -83,6 +89,7 @@ class FieldDefinition(BaseModel):
         _obj = FieldDefinition.parse_obj({
             "key": obj.get("key"),
             "is_required": obj.get("isRequired"),
-            "is_unique": obj.get("isUnique")
+            "is_unique": obj.get("isUnique"),
+            "value_type": obj.get("valueType")
         })
         return _obj

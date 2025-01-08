@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **map_from** | **str** | The Property Key of the Property to map from | [optional] 
 **set_to** | **str** | A pointer to the Property being mapped from | [optional] 
 **template_from** | **str** | The template that defines how the property value is constructed from transaction, instrument and portfolio details. | [optional] 
+**nullify** | **bool** | Flag to unset the Property Key for the mapping | [optional] 
 
 ## Example
 

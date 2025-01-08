@@ -860,7 +860,7 @@ def main():
     api_instance = api_client_factory.build(DataTypesApi)
     scope = 'scope_example' # str | The scope of the data type
     code = 'code_example' # str | The code of the data type
-    field_value = [{"value":"FRA","fields":{"english_short_name":"France","continent":"Europe"}},{"value":"DEU","fields":{"english_short_name":"Germany","continent":"Europe"}}] # List[FieldValue] | The updated reference values
+    field_value = [{"value":"FRA","fields":{"english_short_name":"France","continent":"Europe"},"numericFields":{"population_in_millions":68}},{"value":"DEU","fields":{"english_short_name":"Germany","continent":"Europe"},"numericFields":{"population_in_millions":84}}] # List[FieldValue] | The updated reference values
 
     try:
         # uncomment the below to set overrides at the request level

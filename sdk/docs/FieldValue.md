@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **str** |  | 
-**fields** | **Dict[str, str]** |  | 
+**fields** | **Dict[str, str]** |  | [optional] 
+**numeric_fields** | **Dict[str, float]** |  | [optional] 
 
 ## Example
 

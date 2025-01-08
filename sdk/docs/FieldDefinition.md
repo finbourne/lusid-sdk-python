@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **key** | **str** |  | 
 **is_required** | **bool** |  | 
 **is_unique** | **bool** |  | 
+**value_type** | **str** |  | [optional] 
 
 ## Example
 

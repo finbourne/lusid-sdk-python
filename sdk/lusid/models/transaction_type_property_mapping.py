@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
 class TransactionTypePropertyMapping(BaseModel):
     """
@@ -29,7 +29,8 @@ class TransactionTypePropertyMapping(BaseModel):
     map_from: Optional[StrictStr] = Field(None, alias="mapFrom", description="The Property Key of the Property to map from")
     set_to: Optional[constr(strict=True, max_length=512, min_length=0)] = Field(None, alias="setTo", description="A pointer to the Property being mapped from")
     template_from: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="templateFrom", description="The template that defines how the property value is constructed from transaction, instrument and portfolio details.")
-    __properties = ["propertyKey", "mapFrom", "setTo", "templateFrom"]
+    nullify: Optional[StrictBool] = Field(None, description="Flag to unset the Property Key for the mapping")
+    __properties = ["propertyKey", "mapFrom", "setTo", "templateFrom", "nullify"]
 
     @validator('set_to')
     def set_to_validate_regular_expression(cls, value):
@@ -98,6 +99,11 @@ class TransactionTypePropertyMapping(BaseModel):
         if self.template_from is None and "template_from" in self.__fields_set__:
             _dict['templateFrom'] = None
 
+        # set to None if nullify (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nullify is None and "nullify" in self.__fields_set__:
+            _dict['nullify'] = None
+
         return _dict
 
     @classmethod
@@ -113,6 +119,7 @@ class TransactionTypePropertyMapping(BaseModel):
             "property_key": obj.get("propertyKey"),
             "map_from": obj.get("mapFrom"),
             "set_to": obj.get("setTo"),
-            "template_from": obj.get("templateFrom")
+            "template_from": obj.get("templateFrom"),
+            "nullify": obj.get("nullify")
         })
         return _obj

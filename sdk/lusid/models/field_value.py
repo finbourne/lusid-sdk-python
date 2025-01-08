@@ -18,16 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
 
 class FieldValue(BaseModel):
     """
     FieldValue
     """
     value: constr(strict=True, max_length=512, min_length=1) = Field(...)
-    fields: Dict[str, StrictStr] = Field(...)
-    __properties = ["value", "fields"]
+    fields: Optional[Dict[str, StrictStr]] = None
+    numeric_fields: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(None, alias="numericFields")
+    __properties = ["value", "fields", "numericFields"]
 
     @validator('value')
     def value_validate_regular_expression(cls, value):
@@ -68,6 +69,16 @@ class FieldValue(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if fields (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fields is None and "fields" in self.__fields_set__:
+            _dict['fields'] = None
+
+        # set to None if numeric_fields (nullable) is None
+        # and __fields_set__ contains the field
+        if self.numeric_fields is None and "numeric_fields" in self.__fields_set__:
+            _dict['numericFields'] = None
+
         return _dict
 
     @classmethod
@@ -81,6 +92,7 @@ class FieldValue(BaseModel):
 
         _obj = FieldValue.parse_obj({
             "value": obj.get("value"),
-            "fields": obj.get("fields")
+            "fields": obj.get("fields"),
+            "numeric_fields": obj.get("numericFields")
         })
         return _obj
