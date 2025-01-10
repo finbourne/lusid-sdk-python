@@ -1,6 +1,6 @@
 # SecurityOfferElection
 
-Security election for Events that result in equity via a merger
+Election for events that result in cash via a merger or acquisition
 
 ## Properties
 Name | Type | Description | Notes

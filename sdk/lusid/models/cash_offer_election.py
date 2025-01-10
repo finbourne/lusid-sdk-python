@@ -23,7 +23,7 @@ from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, St
 
 class CashOfferElection(BaseModel):
     """
-    CashOfferElection for events for merger events resulting in cash  # noqa: E501
+    Election for events that result in cash via a merger or acquisition  # noqa: E501
     """
     cash_offer_currency: StrictStr = Field(..., alias="cashOfferCurrency", description="Currency of the cash offer")
     cash_offer_price: Union[StrictFloat, StrictInt] = Field(..., alias="cashOfferPrice", description="Price per share of the cash offer")

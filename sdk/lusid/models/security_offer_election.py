@@ -24,7 +24,7 @@ from lusid.models.units_ratio import UnitsRatio
 
 class SecurityOfferElection(BaseModel):
     """
-    Security election for Events that result in equity via a merger  # noqa: E501
+    Election for events that result in cash via a merger or acquisition  # noqa: E501
     """
     election_key: constr(strict=True, min_length=1) = Field(..., alias="electionKey", description="Unique key associated to this election.")
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")

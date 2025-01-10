@@ -24,7 +24,7 @@ from lusid.models.units_ratio import UnitsRatio
 
 class CashAndSecurityOfferElection(BaseModel):
     """
-      # noqa: E501
+    Election for events that result in both cash and equity via a merger or acquisition  # noqa: E501
     """
     cash_offer_currency: StrictStr = Field(..., alias="cashOfferCurrency", description="Currency of the cash offer")
     cash_offer_price: Union[StrictFloat, StrictInt] = Field(..., alias="cashOfferPrice", description="Price per share of the cash offer")

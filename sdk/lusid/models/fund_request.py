@@ -32,7 +32,7 @@ class FundRequest(BaseModel):
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Fund.")
     display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
-    fund_configuration_id: Optional[ResourceId] = Field(None, alias="fundConfigurationId")
+    fund_configuration_id: ResourceId = Field(..., alias="fundConfigurationId")
     abor_id: ResourceId = Field(..., alias="aborId")
     share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")

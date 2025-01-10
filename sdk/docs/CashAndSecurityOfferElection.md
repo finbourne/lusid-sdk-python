@@ -1,6 +1,6 @@
 # CashAndSecurityOfferElection
 
-
+Election for events that result in both cash and equity via a merger or acquisition
 
 ## Properties
 Name | Type | Description | Notes
