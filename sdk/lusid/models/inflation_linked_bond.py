@@ -46,9 +46,10 @@ class InflationLinkedBond(LusidInstrument):
     stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType. Most Inflation linked bonds have a ShortFront stub type so this is the default, however in some cases  with a long front stub LongFront should be selected.  StubType Both is not supported for InflationLinkedBonds.    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
     rounding_conventions: Optional[conlist(RoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding conventions for analytics, if any.")
     trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
+    original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="originalIssuePrice", description="The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "inflationIndexConventions", "couponRate", "identifiers", "baseCPI", "baseCPIDate", "calculationType", "exDividendDays", "indexPrecision", "principal", "principalProtection", "stubType", "roundingConventions", "tradingConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "inflationIndexConventions", "couponRate", "identifiers", "baseCPI", "baseCPIDate", "calculationType", "exDividendDays", "indexPrecision", "principal", "principalProtection", "stubType", "roundingConventions", "tradingConventions", "originalIssuePrice"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -146,6 +147,11 @@ class InflationLinkedBond(LusidInstrument):
         if self.rounding_conventions is None and "rounding_conventions" in self.__fields_set__:
             _dict['roundingConventions'] = None
 
+        # set to None if original_issue_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.original_issue_price is None and "original_issue_price" in self.__fields_set__:
+            _dict['originalIssuePrice'] = None
+
         return _dict
 
     @classmethod
@@ -174,7 +180,8 @@ class InflationLinkedBond(LusidInstrument):
             "principal_protection": obj.get("principalProtection"),
             "stub_type": obj.get("stubType"),
             "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
-            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
+            "original_issue_price": obj.get("originalIssuePrice")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

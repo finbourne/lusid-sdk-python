@@ -35,6 +35,7 @@ from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
 from lusid.api.counterparties_api import CounterpartiesApi
 from lusid.api.custom_entities_api import CustomEntitiesApi
 from lusid.api.custom_entity_definitions_api import CustomEntityDefinitionsApi
+from lusid.api.custom_data_models_api import CustomDataModelsApi
 from lusid.api.custom_entity_types_api import CustomEntityTypesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
@@ -75,6 +76,7 @@ from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
+from lusid.api.simple_position_portfolios_api import SimplePositionPortfoliosApi
 from lusid.api.staged_modifications_api import StagedModificationsApi
 from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
@@ -144,6 +146,7 @@ from lusid.models.aggregation_op import AggregationOp
 from lusid.models.aggregation_options import AggregationOptions
 from lusid.models.aggregation_query import AggregationQuery
 from lusid.models.aggregation_type import AggregationType
+from lusid.models.alias import Alias
 from lusid.models.allocation import Allocation
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
@@ -333,6 +336,7 @@ from lusid.models.create_relation_request import CreateRelationRequest
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
+from lusid.models.create_simple_position_portfolio_request import CreateSimplePositionPortfolioRequest
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
 from lusid.models.create_timeline_request import CreateTimelineRequest
@@ -351,6 +355,12 @@ from lusid.models.custodian_account import CustodianAccount
 from lusid.models.custodian_account_properties import CustodianAccountProperties
 from lusid.models.custodian_account_request import CustodianAccountRequest
 from lusid.models.custodian_accounts_upsert_response import CustodianAccountsUpsertResponse
+from lusid.models.custom_data_model import CustomDataModel
+from lusid.models.custom_data_model_criteria import CustomDataModelCriteria
+from lusid.models.custom_data_model_identifier_type_specification import CustomDataModelIdentifierTypeSpecification
+from lusid.models.custom_data_model_identifier_type_specification_with_display_name import CustomDataModelIdentifierTypeSpecificationWithDisplayName
+from lusid.models.custom_data_model_property_specification import CustomDataModelPropertySpecification
+from lusid.models.custom_data_model_property_specification_with_display_name import CustomDataModelPropertySpecificationWithDisplayName
 from lusid.models.custom_entity_definition import CustomEntityDefinition
 from lusid.models.custom_entity_definition_request import CustomEntityDefinitionRequest
 from lusid.models.custom_entity_entity import CustomEntityEntity
@@ -365,6 +375,7 @@ from lusid.models.cut_local_time import CutLocalTime
 from lusid.models.data_definition import DataDefinition
 from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
+from lusid.models.data_model_summary import DataModelSummary
 from lusid.models.data_scope import DataScope
 from lusid.models.data_type import DataType
 from lusid.models.data_type_entity import DataTypeEntity
@@ -892,6 +903,7 @@ from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
 from lusid.models.recipe_value import RecipeValue
 from lusid.models.recombine_step import RecombineStep
+from lusid.models.recommended_sort_by import RecommendedSortBy
 from lusid.models.reconcile_date_time_rule import ReconcileDateTimeRule
 from lusid.models.reconcile_numeric_rule import ReconcileNumericRule
 from lusid.models.reconcile_string_rule import ReconcileStringRule
@@ -947,6 +959,7 @@ from lusid.models.resource_list_of_compliance_rule_result import ResourceListOfC
 from lusid.models.resource_list_of_compliance_run_info import ResourceListOfComplianceRunInfo
 from lusid.models.resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
 from lusid.models.resource_list_of_corporate_action import ResourceListOfCorporateAction
+from lusid.models.resource_list_of_data_model_summary import ResourceListOfDataModelSummary
 from lusid.models.resource_list_of_data_type import ResourceListOfDataType
 from lusid.models.resource_list_of_execution import ResourceListOfExecution
 from lusid.models.resource_list_of_fee_rule import ResourceListOfFeeRule
@@ -1183,6 +1196,7 @@ from lusid.models.upsert_corporate_action_request import UpsertCorporateActionRe
 from lusid.models.upsert_corporate_actions_response import UpsertCorporateActionsResponse
 from lusid.models.upsert_counterparty_agreement_request import UpsertCounterpartyAgreementRequest
 from lusid.models.upsert_credit_support_annex_request import UpsertCreditSupportAnnexRequest
+from lusid.models.upsert_custom_data_model_request import UpsertCustomDataModelRequest
 from lusid.models.upsert_custom_entities_response import UpsertCustomEntitiesResponse
 from lusid.models.upsert_custom_entity_access_metadata_request import UpsertCustomEntityAccessMetadataRequest
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
@@ -1294,6 +1308,7 @@ __all__ = [
     "CounterpartiesApi",
     "CustomEntitiesApi",
     "CustomEntityDefinitionsApi",
+    "CustomDataModelsApi",
     "CustomEntityTypesApi",
     "CutLabelDefinitionsApi",
     "DataTypesApi",
@@ -1334,6 +1349,7 @@ __all__ = [
     "ScriptedTranslationApi",
     "SearchApi",
     "SequencesApi",
+    "SimplePositionPortfoliosApi",
     "StagedModificationsApi",
     "StagingRuleSetApi",
     "StructuredResultDataApi",
@@ -1393,6 +1409,7 @@ __all__ = [
     "AggregationOptions",
     "AggregationQuery",
     "AggregationType",
+    "Alias",
     "Allocation",
     "AllocationRequest",
     "AllocationServiceRunResponse",
@@ -1582,6 +1599,7 @@ __all__ = [
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
     "CreateSequenceRequest",
+    "CreateSimplePositionPortfolioRequest",
     "CreateStagingRuleSetRequest",
     "CreateTaxRuleSetRequest",
     "CreateTimelineRequest",
@@ -1600,6 +1618,12 @@ __all__ = [
     "CustodianAccountProperties",
     "CustodianAccountRequest",
     "CustodianAccountsUpsertResponse",
+    "CustomDataModel",
+    "CustomDataModelCriteria",
+    "CustomDataModelIdentifierTypeSpecification",
+    "CustomDataModelIdentifierTypeSpecificationWithDisplayName",
+    "CustomDataModelPropertySpecification",
+    "CustomDataModelPropertySpecificationWithDisplayName",
     "CustomEntityDefinition",
     "CustomEntityDefinitionRequest",
     "CustomEntityEntity",
@@ -1614,6 +1638,7 @@ __all__ = [
     "DataDefinition",
     "DataMapKey",
     "DataMapping",
+    "DataModelSummary",
     "DataScope",
     "DataType",
     "DataTypeEntity",
@@ -2141,6 +2166,7 @@ __all__ = [
     "RecipeComposer",
     "RecipeValue",
     "RecombineStep",
+    "RecommendedSortBy",
     "ReconcileDateTimeRule",
     "ReconcileNumericRule",
     "ReconcileStringRule",
@@ -2196,6 +2222,7 @@ __all__ = [
     "ResourceListOfComplianceRunInfo",
     "ResourceListOfConstituentsAdjustmentHeader",
     "ResourceListOfCorporateAction",
+    "ResourceListOfDataModelSummary",
     "ResourceListOfDataType",
     "ResourceListOfExecution",
     "ResourceListOfFeeRule",
@@ -2432,6 +2459,7 @@ __all__ = [
     "UpsertCorporateActionsResponse",
     "UpsertCounterpartyAgreementRequest",
     "UpsertCreditSupportAnnexRequest",
+    "UpsertCustomDataModelRequest",
     "UpsertCustomEntitiesResponse",
     "UpsertCustomEntityAccessMetadataRequest",
     "UpsertDialectRequest",

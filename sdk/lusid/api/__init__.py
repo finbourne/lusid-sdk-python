@@ -19,6 +19,7 @@ from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
 from lusid.api.counterparties_api import CounterpartiesApi
 from lusid.api.custom_entities_api import CustomEntitiesApi
 from lusid.api.custom_entity_definitions_api import CustomEntityDefinitionsApi
+from lusid.api.custom_data_models_api import CustomDataModelsApi
 from lusid.api.custom_entity_types_api import CustomEntityTypesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
@@ -59,6 +60,7 @@ from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
+from lusid.api.simple_position_portfolios_api import SimplePositionPortfoliosApi
 from lusid.api.staged_modifications_api import StagedModificationsApi
 from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
@@ -91,6 +93,7 @@ __all__ = [
     "CounterpartiesApi",
     "CustomEntitiesApi",
     "CustomEntityDefinitionsApi",
+    "CustomDataModelsApi",
     "CustomEntityTypesApi",
     "CutLabelDefinitionsApi",
     "DataTypesApi",
@@ -131,6 +134,7 @@ __all__ = [
     "ScriptedTranslationApi",
     "SearchApi",
     "SequencesApi",
+    "SimplePositionPortfoliosApi",
     "StagedModificationsApi",
     "StagingRuleSetApi",
     "StructuredResultDataApi",

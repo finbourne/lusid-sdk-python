@@ -27,7 +27,7 @@ class PropertyList(ReferenceList):
     """
     PropertyList
     """
-    values: conlist(ModelProperty, max_items=100, min_items=0) = Field(...)
+    values: conlist(ModelProperty, max_items=10000, min_items=0) = Field(...)
     reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList")
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
