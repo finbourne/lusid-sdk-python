@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.lapse_election import LapseElection
 
 class LoanInterestRepaymentEvent(InstrumentEvent):
     """
@@ -30,9 +31,10 @@ class LoanInterestRepaymentEvent(InstrumentEvent):
     ex_date: datetime = Field(..., alias="exDate", description="Date that the accrued interest is calculated up until.")
     currency: StrictStr = Field(..., description="Currency of the repayment.")
     fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Fraction of the accrued on the holding to be repaid.  Must be between 0 and 1, inclusive.  Defaults to 1 if not set.")
+    lapse_elections: Optional[conlist(LapseElection)] = Field(None, alias="lapseElections", description="Election for controlling whether the interest is paid automatically or not.  Exactly one election must be provided.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "paymentDate", "exDate", "currency", "fraction"]
+    __properties = ["instrumentEventType", "paymentDate", "exDate", "currency", "fraction", "lapseElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -74,10 +76,22 @@ class LoanInterestRepaymentEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in lapse_elections (list)
+        _items = []
+        if self.lapse_elections:
+            for _item in self.lapse_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lapseElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if lapse_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
+            _dict['lapseElections'] = None
 
         return _dict
 
@@ -95,7 +109,8 @@ class LoanInterestRepaymentEvent(InstrumentEvent):
             "payment_date": obj.get("paymentDate"),
             "ex_date": obj.get("exDate"),
             "currency": obj.get("currency"),
-            "fraction": obj.get("fraction")
+            "fraction": obj.get("fraction"),
+            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
