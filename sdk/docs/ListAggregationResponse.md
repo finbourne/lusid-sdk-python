@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **aggregation_currency** | **str** |  | [optional] 
 **data_schema** | [**ResultDataSchema**](ResultDataSchema.md) |  | [optional] 
 **aggregation_failures** | [**List[AggregationMeasureFailureDetail]**](AggregationMeasureFailureDetail.md) |  | [optional] 
+**recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
