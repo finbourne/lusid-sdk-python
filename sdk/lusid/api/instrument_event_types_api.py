@@ -63,7 +63,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template  # noqa: E501
+        """[EARLY ACCESS] CreateTransactionTemplate: Create Transaction Template  # noqa: E501
 
         Create a transaction template for a particular instrument event type in a scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -100,7 +100,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def create_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template  # noqa: E501
+        """[EARLY ACCESS] CreateTransactionTemplate: Create Transaction Template  # noqa: E501
 
         Create a transaction template for a particular instrument event type in a scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -245,7 +245,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the template.")], async_req: Optional[bool]=None, **kwargs) -> Union[datetime, Awaitable[datetime]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template  # noqa: E501
+        """[EARLY ACCESS] DeleteTransactionTemplate: Delete Transaction Template  # noqa: E501
 
         Delete a transaction template for a particular instrument event type in a scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -280,7 +280,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def delete_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the template.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template  # noqa: E501
+        """[EARLY ACCESS] DeleteTransactionTemplate: Delete Transaction Template  # noqa: E501
 
         Delete a transaction template for a particular instrument event type in a scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -412,7 +412,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template  # noqa: E501
+        """[EARLY ACCESS] GetTransactionTemplate: Get Transaction Template  # noqa: E501
 
         Gets the Transaction Template that for the instrument event type within the scope specified.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -449,7 +449,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def get_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template  # noqa: E501
+        """[EARLY ACCESS] GetTransactionTemplate: Get Transaction Template  # noqa: E501
 
         Gets the Transaction Template that for the instrument event type within the scope specified.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -590,7 +590,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplateSpecification, Awaitable[TransactionTemplateSpecification]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
+        """[EARLY ACCESS] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
 
         Retrieve the transaction template specification for a particular event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -621,7 +621,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def get_transaction_template_specification_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
+        """[EARLY ACCESS] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
 
         Retrieve the transaction template specification for a particular event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -741,7 +741,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionTemplateSpecification, Awaitable[PagedResourceListOfTransactionTemplateSpecification]]:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.  # noqa: E501
+        """[EARLY ACCESS] ListTransactionTemplateSpecifications: List Transaction Template Specifications.  # noqa: E501
 
         Retrieves all transaction template specifications.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -780,7 +780,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def list_transaction_template_specifications_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.  # noqa: E501
+        """[EARLY ACCESS] ListTransactionTemplateSpecifications: List Transaction Template Specifications.  # noqa: E501
 
         Retrieves all transaction template specifications.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -928,7 +928,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionTemplate, Awaitable[PagedResourceListOfTransactionTemplate]]:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates  # noqa: E501
+        """[EARLY ACCESS] ListTransactionTemplates: List Transaction Templates  # noqa: E501
 
         Lists all Transaction Templates.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -967,7 +967,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def list_transaction_templates_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates  # noqa: E501
+        """[EARLY ACCESS] ListTransactionTemplates: List Transaction Templates  # noqa: E501
 
         Lists all Transaction Templates.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1115,7 +1115,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template  # noqa: E501
+        """[EARLY ACCESS] UpdateTransactionTemplate: Update Transaction Template  # noqa: E501
 
         Update a transaction template for a particular instrument event type in a scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1152,7 +1152,7 @@ class InstrumentEventTypesApi:
 
     @validate_arguments
     def update_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template  # noqa: E501
+        """[EARLY ACCESS] UpdateTransactionTemplate: Update Transaction Template  # noqa: E501
 
         Update a transaction template for a particular instrument event type in a scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

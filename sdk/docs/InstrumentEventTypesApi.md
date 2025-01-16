@@ -4,19 +4,19 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_transaction_template**](InstrumentEventTypesApi.md#create_transaction_template) | **POST** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
-[**delete_transaction_template**](InstrumentEventTypesApi.md#delete_transaction_template) | **DELETE** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
-[**get_transaction_template**](InstrumentEventTypesApi.md#get_transaction_template) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
-[**get_transaction_template_specification**](InstrumentEventTypesApi.md#get_transaction_template_specification) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification | [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
-[**list_transaction_template_specifications**](InstrumentEventTypesApi.md#list_transaction_template_specifications) | **GET** /api/instrumenteventtypes/transactiontemplatespecifications | [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
-[**list_transaction_templates**](InstrumentEventTypesApi.md#list_transaction_templates) | **GET** /api/instrumenteventtypes/transactiontemplates | [EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
-[**update_transaction_template**](InstrumentEventTypesApi.md#update_transaction_template) | **PUT** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
+[**create_transaction_template**](InstrumentEventTypesApi.md#create_transaction_template) | **POST** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EARLY ACCESS] CreateTransactionTemplate: Create Transaction Template
+[**delete_transaction_template**](InstrumentEventTypesApi.md#delete_transaction_template) | **DELETE** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EARLY ACCESS] DeleteTransactionTemplate: Delete Transaction Template
+[**get_transaction_template**](InstrumentEventTypesApi.md#get_transaction_template) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EARLY ACCESS] GetTransactionTemplate: Get Transaction Template
+[**get_transaction_template_specification**](InstrumentEventTypesApi.md#get_transaction_template_specification) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification | [EARLY ACCESS] GetTransactionTemplateSpecification: Get Transaction Template Specification.
+[**list_transaction_template_specifications**](InstrumentEventTypesApi.md#list_transaction_template_specifications) | **GET** /api/instrumenteventtypes/transactiontemplatespecifications | [EARLY ACCESS] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
+[**list_transaction_templates**](InstrumentEventTypesApi.md#list_transaction_templates) | **GET** /api/instrumenteventtypes/transactiontemplates | [EARLY ACCESS] ListTransactionTemplates: List Transaction Templates
+[**update_transaction_template**](InstrumentEventTypesApi.md#update_transaction_template) | **PUT** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EARLY ACCESS] UpdateTransactionTemplate: Update Transaction Template
 
 
 # **create_transaction_template**
 > TransactionTemplate create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
 
-[EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
+[EARLY ACCESS] CreateTransactionTemplate: Create Transaction Template
 
 Create a transaction template for a particular instrument event type in a scope.
 
@@ -79,7 +79,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
+        # [EARLY ACCESS] CreateTransactionTemplate: Create Transaction Template
         api_response = api_instance.create_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
         pprint(api_response)
 
@@ -119,7 +119,7 @@ Name | Type | Description  | Notes
 # **delete_transaction_template**
 > datetime delete_transaction_template(instrument_event_type, instrument_type, scope)
 
-[EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
+[EARLY ACCESS] DeleteTransactionTemplate: Delete Transaction Template
 
 Delete a transaction template for a particular instrument event type in a scope.
 
@@ -176,7 +176,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope, opts=opts)
 
-        # [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
+        # [EARLY ACCESS] DeleteTransactionTemplate: Delete Transaction Template
         api_response = api_instance.delete_transaction_template(instrument_event_type, instrument_type, scope)
         pprint(api_response)
 
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 # **get_transaction_template**
 > TransactionTemplate get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at)
 
-[EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
+[EARLY ACCESS] GetTransactionTemplate: Get Transaction Template
 
 Gets the Transaction Template that for the instrument event type within the scope specified.
 
@@ -273,7 +273,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
+        # [EARLY ACCESS] GetTransactionTemplate: Get Transaction Template
         api_response = api_instance.get_transaction_template(instrument_event_type, instrument_type, scope, as_at=as_at)
         pprint(api_response)
 
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 # **get_transaction_template_specification**
 > TransactionTemplateSpecification get_transaction_template_specification(instrument_event_type)
 
-[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
+[EARLY ACCESS] GetTransactionTemplateSpecification: Get Transaction Template Specification.
 
 Retrieve the transaction template specification for a particular event type.
 
@@ -368,7 +368,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_transaction_template_specification(instrument_event_type, opts=opts)
 
-        # [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
+        # [EARLY ACCESS] GetTransactionTemplateSpecification: Get Transaction Template Specification.
         api_response = api_instance.get_transaction_template_specification(instrument_event_type)
         pprint(api_response)
 
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 # **list_transaction_template_specifications**
 > PagedResourceListOfTransactionTemplateSpecification list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
+[EARLY ACCESS] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
 
 Retrieves all transaction template specifications.
 
@@ -464,7 +464,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
+        # [EARLY ACCESS] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
         api_response = api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 # **list_transaction_templates**
 > PagedResourceListOfTransactionTemplate list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
+[EARLY ACCESS] ListTransactionTemplates: List Transaction Templates
 
 Lists all Transaction Templates.
 
@@ -564,7 +564,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
+        # [EARLY ACCESS] ListTransactionTemplates: List Transaction Templates
         api_response = api_instance.list_transaction_templates(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -605,7 +605,7 @@ Name | Type | Description  | Notes
 # **update_transaction_template**
 > TransactionTemplate update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
 
-[EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
+[EARLY ACCESS] UpdateTransactionTemplate: Update Transaction Template
 
 Update a transaction template for a particular instrument event type in a scope.
 
@@ -668,7 +668,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
+        # [EARLY ACCESS] UpdateTransactionTemplate: Update Transaction Template
         api_response = api_instance.update_transaction_template(instrument_event_type, instrument_type, scope, transaction_template_request)
         pprint(api_response)
 

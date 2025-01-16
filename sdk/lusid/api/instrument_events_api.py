@@ -68,7 +68,7 @@ class InstrumentEventsApi:
 
     @validate_arguments
     def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfApplicableInstrumentEvent, Awaitable[ResourceListOfApplicableInstrumentEvent]]:  # noqa: E501
-        """[EXPERIMENTAL] QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
+        """[EARLY ACCESS] QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -105,7 +105,7 @@ class InstrumentEventsApi:
 
     @validate_arguments
     def query_applicable_instrument_events_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
+        """[EARLY ACCESS] QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
