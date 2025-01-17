@@ -28,17 +28,18 @@ class ContractForDifference(LusidInstrument):
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the CFD.")
     maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="The maturity date for the CFD. If CFDType is Futures, this should be set to be the maturity date of the underlying  future. If CFDType is Cash, this should not be set.")
-    code: constr(strict=True, min_length=1) = Field(..., description="The code of the underlying.")
+    code: Optional[StrictStr] = Field(None, description="The code of the underlying.")
     contract_size: Union[StrictFloat, StrictInt] = Field(..., alias="contractSize", description="The size of the CFD contract, this should represent the total number of stocks that the CFD represents.")
     pay_ccy: StrictStr = Field(..., alias="payCcy", description="The currency that this CFD pays out, this can be different to the UnderlyingCcy.")
     reference_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="referenceRate", description="The reference rate of the CFD, this can be set to 0 but not negative values.  This field is optional, if not set it will default to 0.")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of CFD.    Supported string (enumeration) values are: [Cash, Futures].")
-    underlying_ccy: StrictStr = Field(..., alias="underlyingCcy", description="The currency of the underlying")
-    underlying_identifier: constr(strict=True, min_length=1) = Field(..., alias="underlyingIdentifier", description="External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].")
+    underlying_ccy: Optional[StrictStr] = Field(None, alias="underlyingCcy", description="The currency of the underlying")
+    underlying_identifier: Optional[StrictStr] = Field(None, alias="underlyingIdentifier", description="External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].")
     lot_size: Optional[StrictInt] = Field(None, alias="lotSize", description="CFD LotSize, the minimum number of shares that can be bought or sold at once.  Optional, if set must be non-negative, if not set defaults to 1.")
+    underlying: Optional[LusidInstrument] = None
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "code", "contractSize", "payCcy", "referenceRate", "type", "underlyingCcy", "underlyingIdentifier", "lotSize"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "code", "contractSize", "payCcy", "referenceRate", "type", "underlyingCcy", "underlyingIdentifier", "lotSize", "underlying"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -80,10 +81,28 @@ class ContractForDifference(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of underlying
+        if self.underlying:
+            _dict['underlying'] = self.underlying.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.code is None and "code" in self.__fields_set__:
+            _dict['code'] = None
+
+        # set to None if underlying_ccy (nullable) is None
+        # and __fields_set__ contains the field
+        if self.underlying_ccy is None and "underlying_ccy" in self.__fields_set__:
+            _dict['underlyingCcy'] = None
+
+        # set to None if underlying_identifier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.underlying_identifier is None and "underlying_identifier" in self.__fields_set__:
+            _dict['underlyingIdentifier'] = None
 
         return _dict
 
@@ -107,7 +126,8 @@ class ContractForDifference(LusidInstrument):
             "type": obj.get("type"),
             "underlying_ccy": obj.get("underlyingCcy"),
             "underlying_identifier": obj.get("underlyingIdentifier"),
-            "lot_size": obj.get("lotSize")
+            "lot_size": obj.get("lotSize"),
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

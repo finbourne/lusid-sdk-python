@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_abor_configuration**](AborConfigurationApi.md#create_abor_configuration) | **POST** /api/aborconfiguration/{scope} | [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
 [**delete_abor_configuration**](AborConfigurationApi.md#delete_abor_configuration) | **DELETE** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
 [**get_abor_configuration**](AborConfigurationApi.md#get_abor_configuration) | **GET** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+[**get_abor_configuration_properties**](AborConfigurationApi.md#get_abor_configuration_properties) | **GET** /api/aborconfiguration/{scope}/{code}/properties | [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
 [**list_abor_configurations**](AborConfigurationApi.md#list_abor_configurations) | **GET** /api/aborconfiguration | [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
 [**upsert_abor_configuration_properties**](AborConfigurationApi.md#upsert_abor_configuration_properties) | **POST** /api/aborconfiguration/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
 
@@ -299,6 +300,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested AborConfiguration definition. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_abor_configuration_properties**
+> AborConfigurationProperties get_abor_configuration_properties(scope, code, effective_at=effective_at, as_at=as_at)
+
+[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+
+Get all the properties of a single abor Configuration.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AborConfigurationApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AborConfigurationApi)
+    scope = 'scope_example' # str | The scope of the Abor Configuration to list the properties for.
+    code = 'code_example' # str | The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_abor_configuration_properties(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
+
+        # [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+        api_response = api_instance.get_abor_configuration_properties(scope, code, effective_at=effective_at, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AborConfigurationApi->get_abor_configuration_properties: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Abor Configuration to list the properties for. | 
+ **code** | **str**| The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the Abor Configuration&#39;s properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the Abor Configuration&#39;s properties. Defaults to return the latest version of each property if not specified. | [optional] 
+
+### Return type
+
+[**AborConfigurationProperties**](AborConfigurationProperties.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The properties of the specified abor Configuration |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -567,6 +567,184 @@ class AborConfigurationApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def get_abor_configuration_properties(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor Configuration to list the properties for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> AborConfigurationProperties:  # noqa: E501
+        ...
+
+    @overload
+    def get_abor_configuration_properties(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor Configuration to list the properties for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AborConfigurationProperties:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_abor_configuration_properties(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor Configuration to list the properties for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AborConfigurationProperties, Awaitable[AborConfigurationProperties]]:  # noqa: E501
+        """[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties  # noqa: E501
+
+        Get all the properties of a single abor Configuration.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_abor_configuration_properties(scope, code, effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Abor Configuration to list the properties for. (required)
+        :type scope: str
+        :param code: The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: AborConfigurationProperties
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_abor_configuration_properties_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_abor_configuration_properties_with_http_info(scope, code, effective_at, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_abor_configuration_properties_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor Configuration to list the properties for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties  # noqa: E501
+
+        Get all the properties of a single abor Configuration.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_abor_configuration_properties_with_http_info(scope, code, effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Abor Configuration to list the properties for. (required)
+        :type scope: str
+        :param code: The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(AborConfigurationProperties, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_abor_configuration_properties" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "AborConfigurationProperties",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/aborconfiguration/{scope}/{code}/properties', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def list_abor_configurations(self, effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AAborConfigurationbor if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing AborConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the AborConfiguration type, specify \"id.Code eq 'AborConfiguration1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'AborConfiguration' domain to decorate onto each AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'.")] = None, **kwargs) -> PagedResourceListOfAborConfiguration:  # noqa: E501
         ...
 
