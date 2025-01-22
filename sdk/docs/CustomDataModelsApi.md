@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_data_model_hierarchies**
-> ResourceListOfDataModelSummary list_data_model_hierarchies(as_at=as_at)
+> ResourceListOfDataModelSummary list_data_model_hierarchies(as_at=as_at, filter=filter)
 
 [EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.
 
@@ -358,13 +358,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. Only EntityType is supported (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_data_model_hierarchies(as_at=as_at, opts=opts)
+        # api_response =  api_instance.list_data_model_hierarchies(as_at=as_at, filter=filter, opts=opts)
 
         # [EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.
-        api_response = api_instance.list_data_model_hierarchies(as_at=as_at)
+        api_response = api_instance.list_data_model_hierarchies(as_at=as_at, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -378,6 +379,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results. Only EntityType is supported | [optional] 
 
 ### Return type
 
