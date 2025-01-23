@@ -30,6 +30,7 @@ from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
 from lusid.api.funds_api import FundsApi
 from lusid.api.group_reconciliations_api import GroupReconciliationsApi
+from lusid.api.identifier_definitions_api import IdentifierDefinitionsApi
 from lusid.api.instrument_event_types_api import InstrumentEventTypesApi
 from lusid.api.instrument_events_api import InstrumentEventsApi
 from lusid.api.instruments_api import InstrumentsApi
@@ -104,6 +105,7 @@ __all__ = [
     "FundConfigurationApi",
     "FundsApi",
     "GroupReconciliationsApi",
+    "IdentifierDefinitionsApi",
     "InstrumentEventTypesApi",
     "InstrumentEventsApi",
     "InstrumentsApi",

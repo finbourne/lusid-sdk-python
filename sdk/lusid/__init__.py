@@ -46,6 +46,7 @@ from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
 from lusid.api.funds_api import FundsApi
 from lusid.api.group_reconciliations_api import GroupReconciliationsApi
+from lusid.api.identifier_definitions_api import IdentifierDefinitionsApi
 from lusid.api.instrument_event_types_api import InstrumentEventTypesApi
 from lusid.api.instrument_events_api import InstrumentEventsApi
 from lusid.api.instruments_api import InstrumentsApi
@@ -325,6 +326,7 @@ from lusid.models.create_derived_property_definition_request import CreateDerive
 from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from lusid.models.create_group_reconciliation_comparison_ruleset_request import CreateGroupReconciliationComparisonRulesetRequest
 from lusid.models.create_group_reconciliation_definition_request import CreateGroupReconciliationDefinitionRequest
+from lusid.models.create_identifier_definition_request import CreateIdentifierDefinitionRequest
 from lusid.models.create_portfolio_details import CreatePortfolioDetails
 from lusid.models.create_portfolio_group_request import CreatePortfolioGroupRequest
 from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
@@ -581,6 +583,7 @@ from lusid.models.holdings_adjustment import HoldingsAdjustment
 from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.id_selector_definition import IdSelectorDefinition
+from lusid.models.identifier_definition import IdentifierDefinition
 from lusid.models.identifier_part_schema import IdentifierPartSchema
 from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
@@ -773,6 +776,7 @@ from lusid.models.paged_resource_list_of_general_ledger_profile_response import 
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
 from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
+from lusid.models.paged_resource_list_of_identifier_definition import PagedResourceListOfIdentifierDefinition
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
 from lusid.models.paged_resource_list_of_instrument_event_instruction import PagedResourceListOfInstrumentEventInstruction
@@ -1174,6 +1178,7 @@ from lusid.models.update_derived_property_definition_request import UpdateDerive
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
 from lusid.models.update_group_reconciliation_comparison_ruleset_request import UpdateGroupReconciliationComparisonRulesetRequest
 from lusid.models.update_group_reconciliation_definition_request import UpdateGroupReconciliationDefinitionRequest
+from lusid.models.update_identifier_definition_request import UpdateIdentifierDefinitionRequest
 from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
 from lusid.models.update_orders_response import UpdateOrdersResponse
 from lusid.models.update_placements_response import UpdatePlacementsResponse
@@ -1319,6 +1324,7 @@ __all__ = [
     "FundConfigurationApi",
     "FundsApi",
     "GroupReconciliationsApi",
+    "IdentifierDefinitionsApi",
     "InstrumentEventTypesApi",
     "InstrumentEventsApi",
     "InstrumentsApi",
@@ -1588,6 +1594,7 @@ __all__ = [
     "CreateDerivedTransactionPortfolioRequest",
     "CreateGroupReconciliationComparisonRulesetRequest",
     "CreateGroupReconciliationDefinitionRequest",
+    "CreateIdentifierDefinitionRequest",
     "CreatePortfolioDetails",
     "CreatePortfolioGroupRequest",
     "CreatePropertyDefinitionRequest",
@@ -1844,6 +1851,7 @@ __all__ = [
     "HoldingsAdjustmentHeader",
     "IUnitDefinitionDto",
     "IdSelectorDefinition",
+    "IdentifierDefinition",
     "IdentifierPartSchema",
     "IndexConvention",
     "IndexModelOptions",
@@ -2036,6 +2044,7 @@ __all__ = [
     "PagedResourceListOfGroupReconciliationComparisonResult",
     "PagedResourceListOfGroupReconciliationComparisonRuleset",
     "PagedResourceListOfGroupReconciliationDefinition",
+    "PagedResourceListOfIdentifierDefinition",
     "PagedResourceListOfInstrument",
     "PagedResourceListOfInstrumentEventHolder",
     "PagedResourceListOfInstrumentEventInstruction",
@@ -2437,6 +2446,7 @@ __all__ = [
     "UpdateFeeTypeRequest",
     "UpdateGroupReconciliationComparisonRulesetRequest",
     "UpdateGroupReconciliationDefinitionRequest",
+    "UpdateIdentifierDefinitionRequest",
     "UpdateInstrumentIdentifierRequest",
     "UpdateOrdersResponse",
     "UpdatePlacementsResponse",
