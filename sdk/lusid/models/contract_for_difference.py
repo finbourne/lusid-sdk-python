@@ -29,7 +29,7 @@ class ContractForDifference(LusidInstrument):
     start_date: datetime = Field(..., alias="startDate", description="The start date of the CFD.")
     maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="The maturity date for the CFD. If CFDType is Futures, this should be set to be the maturity date of the underlying  future. If CFDType is Cash, this should not be set.")
     code: Optional[StrictStr] = Field(None, description="The code of the underlying.")
-    contract_size: Union[StrictFloat, StrictInt] = Field(..., alias="contractSize", description="The size of the CFD contract, this should represent the total number of stocks that the CFD represents.")
+    contract_size: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="contractSize", description="The size of the CFD contract, this should represent the total number of stocks that the CFD represents.   This field is optional, if not set it will default to 1.")
     pay_ccy: StrictStr = Field(..., alias="payCcy", description="The currency that this CFD pays out, this can be different to the UnderlyingCcy.")
     reference_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="referenceRate", description="The reference rate of the CFD, this can be set to 0 but not negative values.  This field is optional, if not set it will default to 0.")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of CFD.    Supported string (enumeration) values are: [Cash, Futures].")

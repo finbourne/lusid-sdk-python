@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **election_key** | **str** | For elected instructions, the key to be chosen | [optional] 
 **holding_id** | **int** | For holding instructions, the id of the holding for which the instruction will apply | [optional] 
 **entitlement_date_instructed** | **datetime** | The instructed entitlement date for the event (where none is set on the event itself) | [optional] 
+**quantity_instructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] 
 
 ## Example
 

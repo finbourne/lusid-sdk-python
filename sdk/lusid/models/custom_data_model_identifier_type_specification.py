@@ -26,7 +26,7 @@ class CustomDataModelIdentifierTypeSpecification(BaseModel):
     CustomDataModelIdentifierTypeSpecification
     """
     identifier_key: StrictStr = Field(..., alias="identifierKey", description="The identifier type that is required/allowed on the bound entity.")
-    required: Optional[StrictBool] = Field(None, description="Whether dentifier type is required or allowed.")
+    required: Optional[StrictBool] = Field(None, description="Whether identifier type is required or allowed.")
     __properties = ["identifierKey", "required"]
 
     class Config:

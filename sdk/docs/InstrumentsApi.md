@@ -1941,7 +1941,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_instruments**
-> UpsertInstrumentsResponse upsert_instruments(request_body, scope=scope)
+> UpsertInstrumentsResponse upsert_instruments(request_body, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 UpsertInstruments: Upsert instruments
 
@@ -1994,13 +1994,15 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     request_body = {"request_id_1":{"name":"Instrument name","identifiers":{"ClientInternal":{"value":"some-identifier","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"Figi":{"value":"some-figi-code","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"Isin":{"value":"some-isin-code","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"}},"properties":[{"key":"Instrument/someScope/somePropertyName","value":{"labelValue":"some-property-value"},"effectiveFrom":"2018-06-18T09:00:00.0000000+00:00"}],"lookThroughPortfolioId":{"scope":"MyScope","code":"portfolio-code"},"definition":{"instrumentFormat":{"sourceSystem":"systemA","vendor":"Unknown","version":"1.0.0"},"content":"{\"some-key\": \"some-value\"}","instrumentType":"ExoticInstrument"},"settlementCycle":{"businessDayOffset":2,"calendars":[{"scope":"Holidays","code":"UK"}]}},"request_id_2":{"name":"Instrument name","identifiers":{"ClientInternal":{"value":"some-identifier-2","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"Figi":{"value":"some-figi-code-2","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"}},"properties":[],"lookThroughPortfolioId":{"scope":"MyScope","code":"portfolio-code"},"definition":{"instrumentFormat":{"sourceSystem":"systemA","vendor":"Unknown","version":"1.0.0"},"content":"{\"some-key\": \"some-value\"}","instrumentType":"ExoticInstrument"}}} # Dict[str, InstrumentDefinition] | The definitions of the instruments to create or update.
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_instruments(request_body, scope=scope, opts=opts)
+        # api_response =  api_instance.upsert_instruments(request_body, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # UpsertInstruments: Upsert instruments
-        api_response = api_instance.upsert_instruments(request_body, scope=scope)
+        api_response = api_instance.upsert_instruments(request_body, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -2015,6 +2017,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **request_body** | [**Dict[str, InstrumentDefinition]**](InstrumentDefinition.md)| The definitions of the instruments to create or update. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
 
 ### Return type
 

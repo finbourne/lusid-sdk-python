@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **identifier_key** | **str** | The identifier type that is required/allowed on the bound entity. | 
-**required** | **bool** | Whether dentifier type is required or allowed. | [optional] 
+**required** | **bool** | Whether identifier type is required or allowed. | [optional] 
 
 ## Example
 

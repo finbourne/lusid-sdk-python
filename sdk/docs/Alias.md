@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attribute_name** | **str** | The property key, identifier type, or field to be replaced by an alias. | 
-**attribute_alias** | **str** | The alias to replace tPrecedencehe property key, identifier type, or field on the bound entity. | 
+**attribute_alias** | **str** | The alias to replace the property key, identifier type, or field on the bound entity. | 
 
 ## Example
 

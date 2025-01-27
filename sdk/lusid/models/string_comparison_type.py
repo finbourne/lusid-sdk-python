@@ -34,6 +34,7 @@ class StringComparisonType(str, Enum):
     CASEINSENSITIVE = 'CaseInsensitive'
     CONTAINSANYCASE = 'ContainsAnyCase'
     ISONEOF = 'IsOneOf'
+    ISONEOFCASEINSENSITIVE = 'IsOneOfCaseInsensitive'
 
     @classmethod
     def from_json(cls, json_str: str) -> StringComparisonType:

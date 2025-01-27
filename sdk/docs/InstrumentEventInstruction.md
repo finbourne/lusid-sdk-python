@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The uri for this version of this instruction | [optional] 
 **entitlement_date_instructed** | **datetime** | The instructed entitlement date for the event (where none is set on the event itself) | [optional] 
+**quantity_instructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

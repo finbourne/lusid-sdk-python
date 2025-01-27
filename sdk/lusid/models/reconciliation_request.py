@@ -31,7 +31,7 @@ class ReconciliationRequest(BaseModel):
     left: ValuationRequest = Field(...)
     right: ValuationRequest = Field(...)
     left_to_right_mapping: Optional[conlist(ReconciliationLeftRightAddressKeyPair)] = Field(None, alias="leftToRightMapping", description="The mapping from property keys requested by left aggregation to property keys on right hand side")
-    comparison_rules: Optional[conlist(ReconciliationRule)] = Field(None, alias="comparisonRules", description="The set of rules to be used in comparing values. These are the rules that determine what constitues a match.  The simplest is obviously an exact one-for-one comparison, but tolerances on numerical or date time values and  case-insensitive string comparison are supported amongst other types.")
+    comparison_rules: Optional[conlist(ReconciliationRule)] = Field(None, alias="comparisonRules", description="The set of rules to be used in comparing values. These are the rules that determine what constitutes a match.  The simplest is obviously an exact one-for-one comparison, but tolerances on numerical or date time values and  case-insensitive string comparison are supported amongst other types.")
     preserve_keys: Optional[conlist(StrictStr)] = Field(None, alias="preserveKeys", description="List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping.  If two values are equal, for a given key then the value is elided from the results. Setting it here  will preserve it (takes the values from the RHS and puts it into the line by line results).")
     __properties = ["left", "right", "leftToRightMapping", "comparisonRules", "preserveKeys"]
 

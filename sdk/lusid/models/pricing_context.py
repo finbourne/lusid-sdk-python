@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.model_selection import ModelSelection
 from lusid.models.pricing_options import PricingOptions
@@ -35,7 +35,8 @@ class PricingContext(BaseModel):
     options: Optional[PricingOptions] = None
     result_data_rules: Optional[conlist(ResultKeyRule)] = Field(None, alias="resultDataRules", description="Set of rules that control querying of unit results either for direct queries into aggregation or for  overriding intermediate calculations. For example, a dirty price is made up from a clean price and the accrued interest.  One might consider overriding the accrued interest calculated by a model (perhaps one wants to match an external value or simply disagrees with the  calculated result) and use that in calculation of the dirty price.")
     holding_pricing_info: Optional[HoldingPricingInfo] = Field(None, alias="holdingPricingInfo")
-    __properties = ["modelRules", "modelChoice", "options", "resultDataRules", "holdingPricingInfo"]
+    accrual_definition: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="accrualDefinition", description="Determines which method to use for the calculation of accrued interest. Defaults to SOD.")
+    __properties = ["modelRules", "modelChoice", "options", "resultDataRules", "holdingPricingInfo", "accrualDefinition"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +112,11 @@ class PricingContext(BaseModel):
         if self.result_data_rules is None and "result_data_rules" in self.__fields_set__:
             _dict['resultDataRules'] = None
 
+        # set to None if accrual_definition (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accrual_definition is None and "accrual_definition" in self.__fields_set__:
+            _dict['accrualDefinition'] = None
+
         return _dict
 
     @classmethod
@@ -132,6 +138,7 @@ class PricingContext(BaseModel):
             else None,
             "options": PricingOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
             "result_data_rules": [ResultKeyRule.from_dict(_item) for _item in obj.get("resultDataRules")] if obj.get("resultDataRules") is not None else None,
-            "holding_pricing_info": HoldingPricingInfo.from_dict(obj.get("holdingPricingInfo")) if obj.get("holdingPricingInfo") is not None else None
+            "holding_pricing_info": HoldingPricingInfo.from_dict(obj.get("holdingPricingInfo")) if obj.get("holdingPricingInfo") is not None else None,
+            "accrual_definition": obj.get("accrualDefinition")
         })
         return _obj

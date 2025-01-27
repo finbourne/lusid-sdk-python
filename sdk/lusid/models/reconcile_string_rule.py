@@ -27,8 +27,8 @@ class ReconcileStringRule(ReconciliationRule):
     """
     Comparison of string values  # noqa: E501
     """
-    comparison_type: StrictStr = Field(..., alias="comparisonType", description="The available values are: Exact, Contains, CaseInsensitive, ContainsAnyCase, IsOneOf")
-    one_of_candidates: Optional[Dict[str, conlist(StrictStr)]] = Field(None, alias="oneOfCandidates", description="For cases of \"IsOneOf\" a set is required to match values against.  Fuzzy matching of strings against one of a set. There can be cases where systems \"A\" and \"B\" might use different terms for the same logical entity. A common case would be  comparison of something like a day count fraction where some convention like the \"actual 365\" convention might be represented as one of [\"A365\", \"Act365\", \"Actual365\"] or similar.  This is to allow this kind of fuzzy matching of values. Note that as this is exhaustive comparison across sets it will be slow and should therefore be used sparingly.")
+    comparison_type: StrictStr = Field(..., alias="comparisonType", description="The available values are: Exact, Contains, CaseInsensitive, ContainsAnyCase, IsOneOf, IsOneOfCaseInsensitive")
+    one_of_candidates: Optional[Dict[str, conlist(StrictStr)]] = Field(None, alias="oneOfCandidates", description="For cases of \"IsOneOf\" or \"IsOneOfCaseInsensitive\", a mapping from the left hand to side to lists of  equivalent alternative values on the right hand side.  Fuzzy matching of strings against one of a set. There can be cases where systems \"A\" and \"B\" might use different terms for the same logical entity. A common case would be  comparison of something like a day count fraction where some convention like the \"actual 365\" convention might be represented as one of [\"A365\", \"Act365\", \"Actual365\"] or similar.  This is to allow this kind of fuzzy matching of values. Note that as this is exhaustive comparison across sets it will be slow and should therefore be used sparingly.")
     applies_to: AggregateSpec = Field(..., alias="appliesTo")
     rule_type: StrictStr = Field(..., alias="ruleType", description="The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact")
     additional_properties: Dict[str, Any] = {}
@@ -37,8 +37,8 @@ class ReconcileStringRule(ReconciliationRule):
     @validator('comparison_type')
     def comparison_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf'):
-            raise ValueError("must be one of enum values ('Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf')")
+        if value not in ('Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf', 'IsOneOfCaseInsensitive'):
+            raise ValueError("must be one of enum values ('Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf', 'IsOneOfCaseInsensitive')")
         return value
 
     @validator('rule_type')

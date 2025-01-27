@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **options** | [**PricingOptions**](PricingOptions.md) |  | [optional] 
 **result_data_rules** | [**List[ResultKeyRule]**](ResultKeyRule.md) | Set of rules that control querying of unit results either for direct queries into aggregation or for  overriding intermediate calculations. For example, a dirty price is made up from a clean price and the accrued interest.  One might consider overriding the accrued interest calculated by a model (perhaps one wants to match an external value or simply disagrees with the  calculated result) and use that in calculation of the dirty price. | [optional] 
 **holding_pricing_info** | [**HoldingPricingInfo**](HoldingPricingInfo.md) |  | [optional] 
+**accrual_definition** | **str** | Determines which method to use for the calculation of accrued interest. Defaults to SOD. | [optional] 
 
 ## Example
 

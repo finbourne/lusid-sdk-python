@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr
+from lusid.models.quantity_instructed import QuantityInstructed
 
 class InstrumentEventInstructionRequest(BaseModel):
     """
@@ -31,7 +32,8 @@ class InstrumentEventInstructionRequest(BaseModel):
     election_key: Optional[StrictStr] = Field(None, alias="electionKey", description="For elected instructions, the key to be chosen")
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
-    __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "entitlementDateInstructed"]
+    quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
+    __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "entitlementDateInstructed", "quantityInstructed"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,9 @@ class InstrumentEventInstructionRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of quantity_instructed
+        if self.quantity_instructed:
+            _dict['quantityInstructed'] = self.quantity_instructed.to_dict()
         # set to None if election_key (nullable) is None
         # and __fields_set__ contains the field
         if self.election_key is None and "election_key" in self.__fields_set__:
@@ -97,6 +102,7 @@ class InstrumentEventInstructionRequest(BaseModel):
             "instruction_type": obj.get("instructionType"),
             "election_key": obj.get("electionKey"),
             "holding_id": obj.get("holdingId"),
-            "entitlement_date_instructed": obj.get("entitlementDateInstructed")
+            "entitlement_date_instructed": obj.get("entitlementDateInstructed"),
+            "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None
         })
         return _obj

@@ -801,6 +801,7 @@ from lusid.models.property_value import PropertyValue
 from lusid.models.property_value_equals import PropertyValueEquals
 from lusid.models.property_value_in import PropertyValueIn
 from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashFlowEvent
+from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
@@ -1089,6 +1090,7 @@ from lusid.models.update_custom_entity_definition_request import UpdateCustomEnt
 from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTypeRequest
 from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
 from lusid.models.update_data_type_request import UpdateDataTypeRequest
+from lusid.models.update_deposit_amount_event import UpdateDepositAmountEvent
 from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
 from lusid.models.update_group_reconciliation_comparison_ruleset_request import UpdateGroupReconciliationComparisonRulesetRequest
@@ -1985,6 +1987,7 @@ __all__ = [
     "PropertyValueEquals",
     "PropertyValueIn",
     "ProtectionPayoutCashFlowEvent",
+    "QuantityInstructed",
     "QueryApplicableInstrumentEventsRequest",
     "QueryBucketedCashFlowsRequest",
     "QueryCashFlowsRequest",
@@ -2273,6 +2276,7 @@ __all__ = [
     "UpdateCustomEntityTypeRequest",
     "UpdateCutLabelDefinitionRequest",
     "UpdateDataTypeRequest",
+    "UpdateDepositAmountEvent",
     "UpdateDerivedPropertyDefinitionRequest",
     "UpdateFeeTypeRequest",
     "UpdateGroupReconciliationComparisonRulesetRequest",

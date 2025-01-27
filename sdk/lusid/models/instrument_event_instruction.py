@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
 from lusid.models.link import Link
+from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -37,8 +38,9 @@ class InstrumentEventInstruction(BaseModel):
     version: Optional[Version] = None
     href: Optional[StrictStr] = Field(None, description="The uri for this version of this instruction")
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
+    quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
     links: Optional[conlist(Link)] = None
-    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "links"]
+    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,6 +80,9 @@ class InstrumentEventInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of quantity_instructed
+        if self.quantity_instructed:
+            _dict['quantityInstructed'] = self.quantity_instructed.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -146,6 +151,7 @@ class InstrumentEventInstruction(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
             "entitlement_date_instructed": obj.get("entitlementDateInstructed"),
+            "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

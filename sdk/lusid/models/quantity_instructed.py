@@ -18,16 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import Any, Dict, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
 
-class Alias(BaseModel):
+class QuantityInstructed(BaseModel):
     """
-    Alias
+    QuantityInstructed
     """
-    attribute_name: constr(strict=True, max_length=576, min_length=0) = Field(..., alias="attributeName", description="The property key, identifier type, or field to be replaced by an alias.")
-    attribute_alias: constr(strict=True, max_length=128, min_length=0) = Field(..., alias="attributeAlias", description="The alias to replace the property key, identifier type, or field on the bound entity.")
-    __properties = ["attributeName", "attributeAlias"]
+    type: constr(strict=True, min_length=1) = Field(...)
+    amount: Union[StrictFloat, StrictInt] = Field(...)
+    __properties = ["type", "amount"]
 
     class Config:
         """Pydantic configuration"""
@@ -51,8 +51,8 @@ class Alias(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Alias:
-        """Create an instance of Alias from a JSON string"""
+    def from_json(cls, json_str: str) -> QuantityInstructed:
+        """Create an instance of QuantityInstructed from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,16 +64,16 @@ class Alias(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Alias:
-        """Create an instance of Alias from a dict"""
+    def from_dict(cls, obj: dict) -> QuantityInstructed:
+        """Create an instance of QuantityInstructed from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Alias.parse_obj(obj)
+            return QuantityInstructed.parse_obj(obj)
 
-        _obj = Alias.parse_obj({
-            "attribute_name": obj.get("attributeName"),
-            "attribute_alias": obj.get("attributeAlias")
+        _obj = QuantityInstructed.parse_obj({
+            "type": obj.get("type"),
+            "amount": obj.get("amount")
         })
         return _obj

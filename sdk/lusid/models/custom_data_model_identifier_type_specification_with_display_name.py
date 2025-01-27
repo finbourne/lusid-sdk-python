@@ -27,7 +27,7 @@ class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
     """
     display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the property definition.")
     identifier_key: StrictStr = Field(..., alias="identifierKey", description="The identifier type that is required/allowed on the bound entity.")
-    required: Optional[StrictBool] = Field(None, description="Whether dentifier type is required or allowed.")
+    required: Optional[StrictBool] = Field(None, description="Whether identifier type is required or allowed.")
     __properties = ["displayName", "identifierKey", "required"]
 
     class Config:

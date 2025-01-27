@@ -3654,28 +3654,32 @@ class InstrumentsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def upsert_instruments(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> UpsertInstrumentsResponse:  # noqa: E501
+    async def upsert_instruments(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> UpsertInstrumentsResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_instruments(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertInstrumentsResponse:  # noqa: E501
+    def upsert_instruments(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertInstrumentsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_instruments(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertInstrumentsResponse, Awaitable[UpsertInstrumentsResponse]]:  # noqa: E501
+    def upsert_instruments(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertInstrumentsResponse, Awaitable[UpsertInstrumentsResponse]]:  # noqa: E501
         """UpsertInstruments: Upsert instruments  # noqa: E501
 
         Create or update one or more instruments in the instrument master. An instrument is updated  if it already exists and created if it does not.                In the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral  and not stored by LUSID. It serves only to easily identify each instrument in the response.                Note that an instrument must have at least one unique identifier, which is a combination of a type  (such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically  generated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see  https://support.lusid.com/knowledgebase/article/KA-01862.                The response returns both the collection of successfully created or updated instruments, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_instruments(request_body, scope, async_req=True)
+        >>> thread = api.upsert_instruments(request_body, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param request_body: The definitions of the instruments to create or update. (required)
         :type request_body: Dict[str, InstrumentDefinition]
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -3692,23 +3696,27 @@ class InstrumentsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_instruments_with_http_info(request_body, scope, **kwargs)  # noqa: E501
+        return self.upsert_instruments_with_http_info(request_body, scope, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_instruments_with_http_info(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_instruments_with_http_info(self, request_body : Annotated[Dict[str, InstrumentDefinition], Field(..., description="The definitions of the instruments to create or update.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertInstruments: Upsert instruments  # noqa: E501
 
         Create or update one or more instruments in the instrument master. An instrument is updated  if it already exists and created if it does not.                In the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral  and not stored by LUSID. It serves only to easily identify each instrument in the response.                Note that an instrument must have at least one unique identifier, which is a combination of a type  (such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically  generated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see  https://support.lusid.com/knowledgebase/article/KA-01862.                The response returns both the collection of successfully created or updated instruments, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_instruments_with_http_info(request_body, scope, async_req=True)
+        >>> thread = api.upsert_instruments_with_http_info(request_body, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param request_body: The definitions of the instruments to create or update. (required)
         :type request_body: Dict[str, InstrumentDefinition]
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -3737,7 +3745,9 @@ class InstrumentsApi:
 
         _all_params = [
             'request_body',
-            'scope'
+            'scope',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -3771,6 +3781,12 @@ class InstrumentsApi:
         _query_params = []
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

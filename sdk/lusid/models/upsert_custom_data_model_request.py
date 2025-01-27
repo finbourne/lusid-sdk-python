@@ -36,7 +36,7 @@ class UpsertCustomDataModelRequest(BaseModel):
     conditions: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, description="The conditions that the bound entity must meet to be valid.")
     properties: Optional[conlist(CustomDataModelPropertySpecification)] = Field(None, description="The properties that are required or allowed on the bound entity.")
     identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecification)] = Field(None, alias="identifierTypes", description="The identifier types that are required or allowed on the bound entity.")
-    attribute_aliases: Optional[conlist(Alias)] = Field(None, alias="attributeAliases", description="The aliaes for property keys, identifier types, and fields on the bound entity.")
+    attribute_aliases: Optional[conlist(Alias)] = Field(None, alias="attributeAliases", description="The aliases for property keys, identifier types, and fields on the bound entity.")
     recommended_sort_by: Optional[conlist(RecommendedSortBy)] = Field(None, alias="recommendedSortBy", description="The preferred default sorting instructions.")
     __properties = ["displayName", "description", "parentDataModel", "conditions", "properties", "identifierTypes", "attributeAliases", "recommendedSortBy"]
 
