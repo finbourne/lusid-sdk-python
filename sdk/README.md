@@ -1619,7 +1619,6 @@ Class | Method | HTTP request | Description
  - [StockDividendEvent](docs/StockDividendEvent.md)
  - [StockSplitEvent](docs/StockSplitEvent.md)
  - [Strategy](docs/Strategy.md)
- - [Stream](docs/Stream.md)
  - [StringComparisonType](docs/StringComparisonType.md)
  - [StringComplianceParameter](docs/StringComplianceParameter.md)
  - [StringList](docs/StringList.md)

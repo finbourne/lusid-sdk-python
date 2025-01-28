@@ -1001,7 +1001,6 @@ from lusid.models.step_schedule import StepSchedule
 from lusid.models.stock_dividend_event import StockDividendEvent
 from lusid.models.stock_split_event import StockSplitEvent
 from lusid.models.strategy import Strategy
-from lusid.models.stream import Stream
 from lusid.models.string_comparison_type import StringComparisonType
 from lusid.models.string_compliance_parameter import StringComplianceParameter
 from lusid.models.string_list import StringList
@@ -2187,7 +2186,6 @@ __all__ = [
     "StockDividendEvent",
     "StockSplitEvent",
     "Strategy",
-    "Stream",
     "StringComparisonType",
     "StringComplianceParameter",
     "StringList",

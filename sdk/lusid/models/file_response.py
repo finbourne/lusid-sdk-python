@@ -18,15 +18,14 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
-from lusid.models.stream import Stream
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBytes, StrictStr
 
 class FileResponse(BaseModel):
     """
     Allows a file (represented as a stream) to be returned from an Api call  # noqa: E501
     """
-    file_stream: Optional[Stream] = Field(None, alias="fileStream")
+    file_stream: Optional[Union[StrictBytes, StrictStr]] = Field(None, alias="fileStream")
     content_type: Optional[StrictStr] = Field(None, alias="contentType")
     downloaded_filename: Optional[StrictStr] = Field(None, alias="downloadedFilename")
     __properties = ["fileStream", "contentType", "downloadedFilename"]
@@ -63,9 +62,11 @@ class FileResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of file_stream
-        if self.file_stream:
-            _dict['fileStream'] = self.file_stream.to_dict()
+        # set to None if file_stream (nullable) is None
+        # and __fields_set__ contains the field
+        if self.file_stream is None and "file_stream" in self.__fields_set__:
+            _dict['fileStream'] = None
+
         # set to None if content_type (nullable) is None
         # and __fields_set__ contains the field
         if self.content_type is None and "content_type" in self.__fields_set__:
@@ -88,7 +89,7 @@ class FileResponse(BaseModel):
             return FileResponse.parse_obj(obj)
 
         _obj = FileResponse.parse_obj({
-            "file_stream": Stream.from_dict(obj.get("fileStream")) if obj.get("fileStream") is not None else None,
+            "file_stream": obj.get("fileStream"),
             "content_type": obj.get("contentType"),
             "downloaded_filename": obj.get("downloadedFilename")
         })

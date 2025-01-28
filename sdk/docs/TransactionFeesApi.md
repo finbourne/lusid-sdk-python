@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] DeleteTransactionFeeRule: Deletes a fee rule.
 
-<br>              Deletes the rule for all effective time.                <br>              The rule will remain viewable at previous as at times, but it will no longer be considered by              GetApplicableFees.                <br>              This cannot be undone.              
+               Deletes the rule for all effective time.                               The rule will remain viewable at previous as at times, but it will no longer be considered by              GetApplicableFees.                               This cannot be undone.              
 
 ### Example
 
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpsertTransactionFeeRules: Upsert fee rules.
 
-<br>              To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part              of the response. To update an existing rule, include the fee code. It is possible to both create and update              fee rules in the same request.                <br>              The upsert is transactional - either all create/update operations will succeed or none of them will.              
+               To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part              of the response. To update an existing rule, include the fee code. It is possible to both create and update              fee rules in the same request.                               The upsert is transactional - either all create/update operations will succeed or none of them will.              
 
 ### Example
 
