@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **order_instruction** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **package** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | [optional] 
 
 ## Example
 

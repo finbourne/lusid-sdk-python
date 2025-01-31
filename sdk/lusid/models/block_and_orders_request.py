@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.blocked_order_request import BlockedOrderRequest
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
@@ -33,7 +33,7 @@ class BlockAndOrdersRequest(BaseModel):
     orders: conlist(BlockedOrderRequest) = Field(..., description="An order which belongs to a block. Fields common to both entities (such as instrument) should be derived from the block.")
     block_properties: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="blockProperties", description="Client-defined properties associated with this block.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    side: constr(strict=True, min_length=1) = Field(..., description="The client's representation of the block's side (buy, sell, short, etc)")
+    side: Optional[StrictStr] = Field(None, description="The client's representation of the block's side (buy, sell, short, etc). BlockedOrders in the request which do not specify a side will have their side populated with this value.")
     type: Optional[StrictStr] = Field(None, description="The block order's type (examples: Limit, Market, ...)")
     time_in_force: Optional[StrictStr] = Field(None, alias="timeInForce", description="The block orders' time in force (examples: Day, GoodTilCancel, ...)")
     var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the block was made")
@@ -100,6 +100,11 @@ class BlockAndOrdersRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.block_properties is None and "block_properties" in self.__fields_set__:
             _dict['blockProperties'] = None
+
+        # set to None if side (nullable) is None
+        # and __fields_set__ contains the field
+        if self.side is None and "side" in self.__fields_set__:
+            _dict['side'] = None
 
         # set to None if type (nullable) is None
         # and __fields_set__ contains the field

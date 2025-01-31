@@ -38,7 +38,8 @@ class BlockedOrderRequest(BaseModel):
     price: Optional[CurrencyAndAmount] = None
     order_instruction: Optional[ResourceId] = Field(None, alias="orderInstruction")
     package: Optional[ResourceId] = None
-    __properties = ["properties", "quantity", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package"]
+    side: Optional[StrictStr] = Field(None, description="The client's representation of the order's side (buy, sell, short, etc)")
+    __properties = ["properties", "quantity", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,6 +108,11 @@ class BlockedOrderRequest(BaseModel):
         if self.state is None and "state" in self.__fields_set__:
             _dict['state'] = None
 
+        # set to None if side (nullable) is None
+        # and __fields_set__ contains the field
+        if self.side is None and "side" in self.__fields_set__:
+            _dict['side'] = None
+
         return _dict
 
     @classmethod
@@ -133,6 +139,7 @@ class BlockedOrderRequest(BaseModel):
             "var_date": obj.get("date"),
             "price": CurrencyAndAmount.from_dict(obj.get("price")) if obj.get("price") is not None else None,
             "order_instruction": ResourceId.from_dict(obj.get("orderInstruction")) if obj.get("orderInstruction") is not None else None,
-            "package": ResourceId.from_dict(obj.get("package")) if obj.get("package") is not None else None
+            "package": ResourceId.from_dict(obj.get("package")) if obj.get("package") is not None else None,
+            "side": obj.get("side")
         })
         return _obj
