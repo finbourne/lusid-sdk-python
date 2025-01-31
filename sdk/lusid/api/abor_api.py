@@ -2295,15 +2295,15 @@ class AborApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def re_open_periods(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, detailing re open details")] = None, **kwargs) -> PeriodDiaryEntriesReopenedResponse:  # noqa: E501
+    async def re_open_periods(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, containing details about the period to be re-opened.")] = None, **kwargs) -> PeriodDiaryEntriesReopenedResponse:  # noqa: E501
         ...
 
     @overload
-    def re_open_periods(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, detailing re open details")] = None, async_req: Optional[bool]=True, **kwargs) -> PeriodDiaryEntriesReopenedResponse:  # noqa: E501
+    def re_open_periods(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, containing details about the period to be re-opened.")] = None, async_req: Optional[bool]=True, **kwargs) -> PeriodDiaryEntriesReopenedResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def re_open_periods(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, detailing re open details")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PeriodDiaryEntriesReopenedResponse, Awaitable[PeriodDiaryEntriesReopenedResponse]]:  # noqa: E501
+    def re_open_periods(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, containing details about the period to be re-opened.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PeriodDiaryEntriesReopenedResponse, Awaitable[PeriodDiaryEntriesReopenedResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.  # noqa: E501
 
         Reopens one or more periods.  # noqa: E501
@@ -2313,11 +2313,11 @@ class AborApi:
         >>> thread = api.re_open_periods(scope, code, re_open_period_diary_entry_request, async_req=True)
         >>> result = thread.get()
 
-        :param scope: The scope of the Abor to be deleted. (required)
+        :param scope: The scope of the Abor. (required)
         :type scope: str
-        :param code: The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
+        :param code: The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
         :type code: str
-        :param re_open_period_diary_entry_request: The request body, detailing re open details
+        :param re_open_period_diary_entry_request: The request body, containing details about the period to be re-opened.
         :type re_open_period_diary_entry_request: ReOpenPeriodDiaryEntryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2338,7 +2338,7 @@ class AborApi:
         return self.re_open_periods_with_http_info(scope, code, re_open_period_diary_entry_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def re_open_periods_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, detailing re open details")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def re_open_periods_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor. Together with the scope this uniquely identifies the Abor.")], re_open_period_diary_entry_request : Annotated[Optional[ReOpenPeriodDiaryEntryRequest], Field(description="The request body, containing details about the period to be re-opened.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.  # noqa: E501
 
         Reopens one or more periods.  # noqa: E501
@@ -2348,11 +2348,11 @@ class AborApi:
         >>> thread = api.re_open_periods_with_http_info(scope, code, re_open_period_diary_entry_request, async_req=True)
         >>> result = thread.get()
 
-        :param scope: The scope of the Abor to be deleted. (required)
+        :param scope: The scope of the Abor. (required)
         :type scope: str
-        :param code: The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. (required)
+        :param code: The code of the Abor. Together with the scope this uniquely identifies the Abor. (required)
         :type code: str
-        :param re_open_period_diary_entry_request: The request body, detailing re open details
+        :param re_open_period_diary_entry_request: The request body, containing details about the period to be re-opened.
         :type re_open_period_diary_entry_request: ReOpenPeriodDiaryEntryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

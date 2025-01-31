@@ -1292,8 +1292,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(AborApi)
-    scope = 'scope_example' # str | The scope of the Abor to be deleted.
-    code = 'code_example' # str | The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.
+    scope = 'scope_example' # str | The scope of the Abor.
+    code = 'code_example' # str | The code of the Abor. Together with the scope this uniquely identifies the Abor.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1319,9 +1319,9 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Abor to be deleted. | 
- **code** | **str**| The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. | 
- **re_open_period_diary_entry_request** | [**ReOpenPeriodDiaryEntryRequest**](ReOpenPeriodDiaryEntryRequest.md)| The request body, detailing re open details | [optional] 
+ **scope** | **str**| The scope of the Abor. | 
+ **code** | **str**| The code of the Abor. Together with the scope this uniquely identifies the Abor. | 
+ **re_open_period_diary_entry_request** | [**ReOpenPeriodDiaryEntryRequest**](ReOpenPeriodDiaryEntryRequest.md)| The request body, containing details about the period to be re-opened. | [optional] 
 
 ### Return type
 
