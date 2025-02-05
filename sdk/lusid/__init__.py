@@ -377,6 +377,7 @@ from lusid.models.cut_local_time import CutLocalTime
 from lusid.models.data_definition import DataDefinition
 from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.data_model_summary import DataModelSummary
 from lusid.models.data_scope import DataScope
 from lusid.models.data_type import DataType
@@ -681,6 +682,8 @@ from lusid.models.mbs_interest_deferral_event import MbsInterestDeferralEvent
 from lusid.models.mbs_interest_shortfall_event import MbsInterestShortfallEvent
 from lusid.models.mbs_principal_event import MbsPrincipalEvent
 from lusid.models.mbs_principal_write_off_event import MbsPrincipalWriteOffEvent
+from lusid.models.membership import Membership
+from lusid.models.membership_and_status import MembershipAndStatus
 from lusid.models.merger_event import MergerEvent
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
@@ -1646,6 +1649,7 @@ __all__ = [
     "DataDefinition",
     "DataMapKey",
     "DataMapping",
+    "DataModelMembership",
     "DataModelSummary",
     "DataScope",
     "DataType",
@@ -1950,6 +1954,8 @@ __all__ = [
     "MbsInterestShortfallEvent",
     "MbsPrincipalEvent",
     "MbsPrincipalWriteOffEvent",
+    "Membership",
+    "MembershipAndStatus",
     "MergerEvent",
     "MetricValue",
     "ModelOptions",

@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
@@ -48,8 +49,9 @@ class Instrument(BaseModel):
     dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the instrument.")
     settlement_cycle: Optional[SettlementCycle] = Field(None, alias="settlementCycle")
+    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "scope", "lusidInstrumentId", "version", "stagedModifications", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "settlementCycle", "links"]
+    __properties = ["href", "scope", "lusidInstrumentId", "version", "stagedModifications", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "settlementCycle", "dataModelMembership", "links"]
 
     @validator('state')
     def state_validate_enum(cls, value):
@@ -129,6 +131,9 @@ class Instrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settlement_cycle
         if self.settlement_cycle:
             _dict['settlementCycle'] = self.settlement_cycle.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of data_model_membership
+        if self.data_model_membership:
+            _dict['dataModelMembership'] = self.data_model_membership.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -193,6 +198,7 @@ class Instrument(BaseModel):
             "dom_ccy": obj.get("domCcy"),
             "relationships": [Relationship.from_dict(_item) for _item in obj.get("relationships")] if obj.get("relationships") is not None else None,
             "settlement_cycle": SettlementCycle.from_dict(obj.get("settlementCycle")) if obj.get("settlementCycle") is not None else None,
+            "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

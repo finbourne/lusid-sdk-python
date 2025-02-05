@@ -22,8 +22,10 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
+from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_price import TransactionPrice
 from lusid.models.transaction_type_details import TransactionTypeDetails
 
@@ -60,7 +62,10 @@ class OutputTransaction(BaseModel):
     transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
     resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
     gross_transaction_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="grossTransactionAmount", description="The total gross value of the transaction in the transaction currency.")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount"]
+    otc_confirmation: Optional[OtcConfirmation] = Field(None, alias="otcConfirmation")
+    order_id: Optional[ResourceId] = Field(None, alias="orderId")
+    allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -130,6 +135,15 @@ class OutputTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of resolved_transaction_type_details
         if self.resolved_transaction_type_details:
             _dict['resolvedTransactionTypeDetails'] = self.resolved_transaction_type_details.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of otc_confirmation
+        if self.otc_confirmation:
+            _dict['otcConfirmation'] = self.otc_confirmation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of order_id
+        if self.order_id:
+            _dict['orderId'] = self.order_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of allocation_id
+        if self.allocation_id:
+            _dict['allocationId'] = self.allocation_id.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -245,6 +259,9 @@ class OutputTransaction(BaseModel):
             "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
             "transaction_group_id": obj.get("transactionGroupId"),
             "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None,
-            "gross_transaction_amount": obj.get("grossTransactionAmount")
+            "gross_transaction_amount": obj.get("grossTransactionAmount"),
+            "otc_confirmation": OtcConfirmation.from_dict(obj.get("otcConfirmation")) if obj.get("otcConfirmation") is not None else None,
+            "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
+            "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None
         })
         return _obj

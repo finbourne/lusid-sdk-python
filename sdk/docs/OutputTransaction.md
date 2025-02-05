@@ -34,6 +34,9 @@ Name | Type | Description | Notes
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 **resolved_transaction_type_details** | [**TransactionTypeDetails**](TransactionTypeDetails.md) |  | [optional] 
 **gross_transaction_amount** | **float** | The total gross value of the transaction in the transaction currency. | [optional] 
+**otc_confirmation** | [**OtcConfirmation**](OtcConfirmation.md) |  | [optional] 
+**order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 ## Example
 

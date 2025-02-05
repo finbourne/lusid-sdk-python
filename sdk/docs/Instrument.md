@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **dom_ccy** | **str** | The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD. | [optional] 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the instrument. | [optional] 
 **settlement_cycle** | [**SettlementCycle**](SettlementCycle.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
