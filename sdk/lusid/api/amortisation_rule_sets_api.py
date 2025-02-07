@@ -232,7 +232,7 @@ class AmortisationRuleSetsApi:
     def delete_amortisation_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set code.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.  # noqa: E501
 
-                       Deletes the rule set perpetually, including its rules.                               The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.                               This cannot be undone.                # noqa: E501
+        Deletes the rule set perpetually, including its rules.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -265,7 +265,7 @@ class AmortisationRuleSetsApi:
     def delete_amortisation_ruleset_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set code.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.  # noqa: E501
 
-                       Deletes the rule set perpetually, including its rules.                               The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.                               This cannot be undone.                # noqa: E501
+        Deletes the rule set perpetually, including its rules.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

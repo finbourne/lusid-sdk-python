@@ -65,7 +65,7 @@ class TransactionFeesApi:
     def delete_transaction_fee_rule(self, code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The fee rule code.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteTransactionFeeRule: Deletes a fee rule.  # noqa: E501
 
-                       Deletes the rule for all effective time.                               The rule will remain viewable at previous as at times, but it will no longer be considered by              GetApplicableFees.                               This cannot be undone.                # noqa: E501
+        Deletes the rule for all effective time.    The rule will remain viewable at previous as at times, but it will no longer be considered by  GetApplicableFees.    This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -96,7 +96,7 @@ class TransactionFeesApi:
     def delete_transaction_fee_rule_with_http_info(self, code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The fee rule code.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteTransactionFeeRule: Deletes a fee rule.  # noqa: E501
 
-                       Deletes the rule for all effective time.                               The rule will remain viewable at previous as at times, but it will no longer be considered by              GetApplicableFees.                               This cannot be undone.                # noqa: E501
+        Deletes the rule for all effective time.    The rule will remain viewable at previous as at times, but it will no longer be considered by  GetApplicableFees.    This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -781,7 +781,7 @@ class TransactionFeesApi:
     def upsert_transaction_fee_rules(self, request_body : Annotated[Dict[str, FeeRuleUpsertRequest], Field(..., description="A dictionary of upsert request identifiers to rule upsert requests. The request              identifiers are valid for the request only and can be used to link the upserted fee rule to the code of a              created fee rule.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FeeRuleUpsertResponse, Awaitable[FeeRuleUpsertResponse]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertTransactionFeeRules: Upsert fee rules.  # noqa: E501
 
-                       To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part              of the response. To update an existing rule, include the fee code. It is possible to both create and update              fee rules in the same request.                               The upsert is transactional - either all create/update operations will succeed or none of them will.                # noqa: E501
+        To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part  of the response. To update an existing rule, include the fee code. It is possible to both create and update  fee rules in the same request.    The upsert is transactional - either all create/update operations will succeed or none of them will.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -814,7 +814,7 @@ class TransactionFeesApi:
     def upsert_transaction_fee_rules_with_http_info(self, request_body : Annotated[Dict[str, FeeRuleUpsertRequest], Field(..., description="A dictionary of upsert request identifiers to rule upsert requests. The request              identifiers are valid for the request only and can be used to link the upserted fee rule to the code of a              created fee rule.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertTransactionFeeRules: Upsert fee rules.  # noqa: E501
 
-                       To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part              of the response. To update an existing rule, include the fee code. It is possible to both create and update              fee rules in the same request.                               The upsert is transactional - either all create/update operations will succeed or none of them will.                # noqa: E501
+        To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part  of the response. To update an existing rule, include the fee code. It is possible to both create and update  fee rules in the same request.    The upsert is transactional - either all create/update operations will succeed or none of them will.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

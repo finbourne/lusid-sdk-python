@@ -1223,7 +1223,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_journal_entry_lines**
-> ValuationPointResourceListOfJournalEntryLine get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+> ValuationPointResourceListOfFundJournalEntryLine get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
 
 [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
 
@@ -1319,7 +1319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ValuationPointResourceListOfJournalEntryLine**](ValuationPointResourceListOfJournalEntryLine.md)
+[**ValuationPointResourceListOfFundJournalEntryLine**](ValuationPointResourceListOfFundJournalEntryLine.md)
 
 ### HTTP request headers
 

@@ -21,17 +21,17 @@ import json
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.diary_entry import DiaryEntry
-from lusid.models.journal_entry_line import JournalEntryLine
+from lusid.models.fund_journal_entry_line import FundJournalEntryLine
 from lusid.models.link import Link
 from lusid.models.version import Version
 
-class ValuationPointResourceListOfJournalEntryLine(BaseModel):
+class ValuationPointResourceListOfFundJournalEntryLine(BaseModel):
     """
     ResourceList with extra header fields used by the various ValuationPoint endpoints for returning additional context related to the list of results.  # noqa: E501
     """
     start_valuation_point: Optional[DiaryEntry] = Field(None, alias="startValuationPoint")
     version: Version = Field(...)
-    values: conlist(JournalEntryLine) = Field(...)
+    values: conlist(FundJournalEntryLine) = Field(...)
     href: Optional[StrictStr] = None
     next_page: Optional[StrictStr] = Field(None, alias="nextPage")
     previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
@@ -60,8 +60,8 @@ class ValuationPointResourceListOfJournalEntryLine(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ValuationPointResourceListOfJournalEntryLine:
-        """Create an instance of ValuationPointResourceListOfJournalEntryLine from a JSON string"""
+    def from_json(cls, json_str: str) -> ValuationPointResourceListOfFundJournalEntryLine:
+        """Create an instance of ValuationPointResourceListOfFundJournalEntryLine from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -113,18 +113,18 @@ class ValuationPointResourceListOfJournalEntryLine(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ValuationPointResourceListOfJournalEntryLine:
-        """Create an instance of ValuationPointResourceListOfJournalEntryLine from a dict"""
+    def from_dict(cls, obj: dict) -> ValuationPointResourceListOfFundJournalEntryLine:
+        """Create an instance of ValuationPointResourceListOfFundJournalEntryLine from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ValuationPointResourceListOfJournalEntryLine.parse_obj(obj)
+            return ValuationPointResourceListOfFundJournalEntryLine.parse_obj(obj)
 
-        _obj = ValuationPointResourceListOfJournalEntryLine.parse_obj({
+        _obj = ValuationPointResourceListOfFundJournalEntryLine.parse_obj({
             "start_valuation_point": DiaryEntry.from_dict(obj.get("startValuationPoint")) if obj.get("startValuationPoint") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "values": [JournalEntryLine.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+            "values": [FundJournalEntryLine.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "href": obj.get("href"),
             "next_page": obj.get("nextPage"),
             "previous_page": obj.get("previousPage"),

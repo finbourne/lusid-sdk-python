@@ -231,7 +231,7 @@ class TaxRuleSetsApi:
     def delete_tax_rule_set(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set code.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteTaxRuleSet: Delete a tax rule set.  # noqa: E501
 
-                       Deletes the rule set for all effective time.                               The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.                               This cannot be undone.                # noqa: E501
+        Deletes the rule set for all effective time.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -264,7 +264,7 @@ class TaxRuleSetsApi:
     def delete_tax_rule_set_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The rule set code.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteTaxRuleSet: Delete a tax rule set.  # noqa: E501
 
-                       Deletes the rule set for all effective time.                               The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.                               This cannot be undone.                # noqa: E501
+        Deletes the rule set for all effective time.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

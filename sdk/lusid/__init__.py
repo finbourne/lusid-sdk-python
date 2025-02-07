@@ -486,6 +486,7 @@ from lusid.models.fund_configuration_properties import FundConfigurationProperti
 from lusid.models.fund_configuration_request import FundConfigurationRequest
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_id_list import FundIdList
+from lusid.models.fund_journal_entry_line import FundJournalEntryLine
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
@@ -637,6 +638,7 @@ from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
 from lusid.models.journal_entry_line import JournalEntryLine
+from lusid.models.journal_entry_line_share_class_breakdown import JournalEntryLineShareClassBreakdown
 from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQueryParameters
 from lusid.models.label_value_set import LabelValueSet
 from lusid.models.lapse_election import LapseElection
@@ -653,6 +655,7 @@ from lusid.models.list_complex_market_data_with_meta_data_response import ListCo
 from lusid.models.loan_facility import LoanFacility
 from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEvent
 from lusid.models.loan_period import LoanPeriod
+from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.lusid_problem_details import LusidProblemDetails
@@ -1248,7 +1251,7 @@ from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
-from lusid.models.valuation_point_resource_list_of_journal_entry_line import ValuationPointResourceListOfJournalEntryLine
+from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
 from lusid.models.valuation_request import ValuationRequest
@@ -1758,6 +1761,7 @@ __all__ = [
     "FundConfigurationRequest",
     "FundDetails",
     "FundIdList",
+    "FundJournalEntryLine",
     "FundPnlBreakdown",
     "FundPreviousNAV",
     "FundProperties",
@@ -1909,6 +1913,7 @@ __all__ = [
     "IrVolDependency",
     "IsBusinessDayResponse",
     "JournalEntryLine",
+    "JournalEntryLineShareClassBreakdown",
     "JournalEntryLinesQueryParameters",
     "LabelValueSet",
     "LapseElection",
@@ -1925,6 +1930,7 @@ __all__ = [
     "LoanFacility",
     "LoanInterestRepaymentEvent",
     "LoanPeriod",
+    "LoanPrincipalRepaymentEvent",
     "LockPeriodDiaryEntryRequest",
     "LusidInstrument",
     "LusidProblemDetails",
@@ -2520,7 +2526,7 @@ __all__ = [
     "ValuationPointDataResponse",
     "ValuationPointOverview",
     "ValuationPointResourceListOfAccountedTransaction",
-    "ValuationPointResourceListOfJournalEntryLine",
+    "ValuationPointResourceListOfFundJournalEntryLine",
     "ValuationPointResourceListOfPnlJournalEntryLine",
     "ValuationPointResourceListOfTrialBalance",
     "ValuationRequest",
