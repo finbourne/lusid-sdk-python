@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.membership import Membership
 from lusid.models.membership_and_status import MembershipAndStatus
@@ -28,7 +28,7 @@ class DataModelMembership(BaseModel):
     DataModelMembership
     """
     membership: conlist(Membership) = Field(..., description="The collection of data models this entity is a member of.")
-    current_model: MembershipAndStatus = Field(..., alias="currentModel")
+    current_model: Optional[MembershipAndStatus] = Field(None, alias="currentModel")
     __properties = ["membership", "currentModel"]
 
     class Config:

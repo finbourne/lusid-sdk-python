@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **membership** | [**List[Membership]**](Membership.md) | The collection of data models this entity is a member of. | 
-**current_model** | [**MembershipAndStatus**](MembershipAndStatus.md) |  | 
+**current_model** | [**MembershipAndStatus**](MembershipAndStatus.md) |  | [optional] 
 
 ## Example
 
