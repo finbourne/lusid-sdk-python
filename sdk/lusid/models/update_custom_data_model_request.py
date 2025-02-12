@@ -26,9 +26,9 @@ from lusid.models.custom_data_model_property_specification import CustomDataMode
 from lusid.models.recommended_sort_by import RecommendedSortBy
 from lusid.models.resource_id import ResourceId
 
-class UpsertCustomDataModelRequest(BaseModel):
+class UpdateCustomDataModelRequest(BaseModel):
     """
-    UpsertCustomDataModelRequest
+    UpdateCustomDataModelRequest
     """
     display_name: constr(strict=True, max_length=512, min_length=0) = Field(..., alias="displayName", description="The name of the Custom Data Model.")
     description: constr(strict=True, max_length=512, min_length=0) = Field(..., description="A description for the Custom Data Model.")
@@ -86,8 +86,8 @@ class UpsertCustomDataModelRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertCustomDataModelRequest:
-        """Create an instance of UpsertCustomDataModelRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> UpdateCustomDataModelRequest:
+        """Create an instance of UpdateCustomDataModelRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -155,15 +155,15 @@ class UpsertCustomDataModelRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertCustomDataModelRequest:
-        """Create an instance of UpsertCustomDataModelRequest from a dict"""
+    def from_dict(cls, obj: dict) -> UpdateCustomDataModelRequest:
+        """Create an instance of UpdateCustomDataModelRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertCustomDataModelRequest.parse_obj(obj)
+            return UpdateCustomDataModelRequest.parse_obj(obj)
 
-        _obj = UpsertCustomDataModelRequest.parse_obj({
+        _obj = UpdateCustomDataModelRequest.parse_obj({
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "parent_data_model": ResourceId.from_dict(obj.get("parentDataModel")) if obj.get("parentDataModel") is not None else None,

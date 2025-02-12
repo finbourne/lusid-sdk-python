@@ -26,11 +26,12 @@ from pydantic.v1 import Field, constr, validator
 
 from typing import Optional
 
+from lusid.models.create_custom_data_model_request import CreateCustomDataModelRequest
 from lusid.models.custom_data_model import CustomDataModel
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.resource_list_of_data_model_summary import ResourceListOfDataModelSummary
 from lusid.models.resource_list_of_string import ResourceListOfString
-from lusid.models.upsert_custom_data_model_request import UpsertCustomDataModelRequest
+from lusid.models.update_custom_data_model_request import UpdateCustomDataModelRequest
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -54,32 +55,28 @@ class CustomDataModelsApi:
         self.api_client = api_client
 
     @overload
-    async def create_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
+    async def create_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], create_custom_data_model_request : Annotated[Optional[CreateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @overload
-    def create_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
+    def create_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], create_custom_data_model_request : Annotated[Optional[CreateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
+    def create_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], create_custom_data_model_request : Annotated[Optional[CreateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
         """[EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model  # noqa: E501
 
         Creates a Custom Data Model.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request, async_req=True)
+        >>> thread = api.create_custom_data_model(entity_type, create_custom_data_model_request, async_req=True)
         >>> result = thread.get()
 
-        :param scope: The scope of the specified Data Model. (required)
-        :type scope: str
-        :param code: The code of the specified Data Model. (required)
-        :type code: str
         :param entity_type: The entity type of the Data Model. (required)
         :type entity_type: str
-        :param upsert_custom_data_model_request: The request containing the details of the Data Model.
-        :type upsert_custom_data_model_request: UpsertCustomDataModelRequest
+        :param create_custom_data_model_request: The request containing the details of the Data Model.
+        :type create_custom_data_model_request: CreateCustomDataModelRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -96,27 +93,23 @@ class CustomDataModelsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.create_custom_data_model_with_http_info(scope, code, entity_type, upsert_custom_data_model_request, **kwargs)  # noqa: E501
+        return self.create_custom_data_model_with_http_info(entity_type, create_custom_data_model_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_custom_data_model_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_custom_data_model_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], create_custom_data_model_request : Annotated[Optional[CreateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model  # noqa: E501
 
         Creates a Custom Data Model.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_custom_data_model_with_http_info(scope, code, entity_type, upsert_custom_data_model_request, async_req=True)
+        >>> thread = api.create_custom_data_model_with_http_info(entity_type, create_custom_data_model_request, async_req=True)
         >>> result = thread.get()
 
-        :param scope: The scope of the specified Data Model. (required)
-        :type scope: str
-        :param code: The code of the specified Data Model. (required)
-        :type code: str
         :param entity_type: The entity type of the Data Model. (required)
         :type entity_type: str
-        :param upsert_custom_data_model_request: The request containing the details of the Data Model.
-        :type upsert_custom_data_model_request: UpsertCustomDataModelRequest
+        :param create_custom_data_model_request: The request containing the details of the Data Model.
+        :type create_custom_data_model_request: CreateCustomDataModelRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -144,10 +137,8 @@ class CustomDataModelsApi:
         _params = locals()
 
         _all_params = [
-            'scope',
-            'code',
             'entity_type',
-            'upsert_custom_data_model_request'
+            'create_custom_data_model_request'
         ]
         _all_params.extend(
             [
@@ -176,12 +167,6 @@ class CustomDataModelsApi:
 
         # process the path parameters
         _path_params = {}
-        if _params['scope']:
-            _path_params['scope'] = _params['scope']
-
-        if _params['code']:
-            _path_params['code'] = _params['code']
-
         if _params['entity_type']:
             _path_params['entityType'] = _params['entity_type']
 
@@ -195,8 +180,8 @@ class CustomDataModelsApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['upsert_custom_data_model_request'] is not None:
-            _body_params = _params['upsert_custom_data_model_request']
+        if _params['create_custom_data_model_request'] is not None:
+            _body_params = _params['create_custom_data_model_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
@@ -218,7 +203,7 @@ class CustomDataModelsApi:
         }
 
         return self.api_client.call_api(
-            '/api/datamodel/{entityType}/{scope}/{code}', 'POST',
+            '/api/datamodel/{entityType}', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -236,24 +221,26 @@ class CustomDataModelsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def delete_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model  # noqa: E501
 
         Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer  be part of any hierarchies.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_custom_data_model(scope, code, async_req=True)
+        >>> thread = api.delete_custom_data_model(entity_type, scope, code, async_req=True)
         >>> result = thread.get()
 
+        :param entity_type: The entity type of the Data Model. (required)
+        :type entity_type: str
         :param scope: The scope of the specified Data Model. (required)
         :type scope: str
         :param code: The code of the specified Data Model. (required)
@@ -274,19 +261,21 @@ class CustomDataModelsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_custom_data_model_with_http_info(scope, code, **kwargs)  # noqa: E501
+        return self.delete_custom_data_model_with_http_info(entity_type, scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_custom_data_model_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_custom_data_model_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model  # noqa: E501
 
         Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer  be part of any hierarchies.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_custom_data_model_with_http_info(scope, code, async_req=True)
+        >>> thread = api.delete_custom_data_model_with_http_info(entity_type, scope, code, async_req=True)
         >>> result = thread.get()
 
+        :param entity_type: The entity type of the Data Model. (required)
+        :type entity_type: str
         :param scope: The scope of the specified Data Model. (required)
         :type scope: str
         :param code: The code of the specified Data Model. (required)
@@ -318,6 +307,7 @@ class CustomDataModelsApi:
         _params = locals()
 
         _all_params = [
+            'entity_type',
             'scope',
             'code'
         ]
@@ -348,6 +338,9 @@ class CustomDataModelsApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['entity_type']:
+            _path_params['entityType'] = _params['entity_type']
+
         if _params['scope']:
             _path_params['scope'] = _params['scope']
 
@@ -377,7 +370,7 @@ class CustomDataModelsApi:
         }
 
         return self.api_client.call_api(
-            '/api/datamodel/{scope}/{code}', 'DELETE',
+            '/api/datamodel/{entityType}/{scope}/{code}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -395,24 +388,26 @@ class CustomDataModelsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
+    async def get_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @overload
-    def get_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
+    def get_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
+    def get_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
         """[EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model  # noqa: E501
 
         Retrieves a Custom Data Model at a given as at time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_custom_data_model(scope, code, as_at, async_req=True)
+        >>> thread = api.get_custom_data_model(entity_type, scope, code, as_at, async_req=True)
         >>> result = thread.get()
 
+        :param entity_type: The entity type of the Data Model. (required)
+        :type entity_type: str
         :param scope: The scope of the specified Data Model. (required)
         :type scope: str
         :param code: The code of the specified Data Model. (required)
@@ -435,19 +430,21 @@ class CustomDataModelsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_custom_data_model_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_custom_data_model_with_http_info(entity_type, scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_custom_data_model_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_custom_data_model_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model  # noqa: E501
 
         Retrieves a Custom Data Model at a given as at time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_custom_data_model_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_custom_data_model_with_http_info(entity_type, scope, code, as_at, async_req=True)
         >>> result = thread.get()
 
+        :param entity_type: The entity type of the Data Model. (required)
+        :type entity_type: str
         :param scope: The scope of the specified Data Model. (required)
         :type scope: str
         :param code: The code of the specified Data Model. (required)
@@ -481,6 +478,7 @@ class CustomDataModelsApi:
         _params = locals()
 
         _all_params = [
+            'entity_type',
             'scope',
             'code',
             'as_at'
@@ -512,6 +510,9 @@ class CustomDataModelsApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['entity_type']:
+            _path_params['entityType'] = _params['entity_type']
+
         if _params['scope']:
             _path_params['scope'] = _params['scope']
 
@@ -547,7 +548,7 @@ class CustomDataModelsApi:
         }
 
         return self.api_client.call_api(
-            '/api/datamodel/{scope}/{code}', 'GET',
+            '/api/datamodel/{entityType}/{scope}/{code}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -869,32 +870,32 @@ class CustomDataModelsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def update_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
+    async def update_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], update_custom_data_model_request : Annotated[Optional[UpdateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @overload
-    def update_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
+    def update_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], update_custom_data_model_request : Annotated[Optional[UpdateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_custom_data_model(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
+    def update_custom_data_model(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], update_custom_data_model_request : Annotated[Optional[UpdateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model  # noqa: E501
 
         Updates a Custom Data Model.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request, async_req=True)
+        >>> thread = api.update_custom_data_model(entity_type, scope, code, update_custom_data_model_request, async_req=True)
         >>> result = thread.get()
 
+        :param entity_type: The entity type of the Data Model. (required)
+        :type entity_type: str
         :param scope: The scope of the specified Data Model. (required)
         :type scope: str
         :param code: The code of the specified Data Model. (required)
         :type code: str
-        :param entity_type: The entity type of the Data Model. (required)
-        :type entity_type: str
-        :param upsert_custom_data_model_request: The request containing the details of the Data Model.
-        :type upsert_custom_data_model_request: UpsertCustomDataModelRequest
+        :param update_custom_data_model_request: The request containing the details of the Data Model.
+        :type update_custom_data_model_request: UpdateCustomDataModelRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -911,27 +912,27 @@ class CustomDataModelsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.update_custom_data_model_with_http_info(scope, code, entity_type, upsert_custom_data_model_request, **kwargs)  # noqa: E501
+        return self.update_custom_data_model_with_http_info(entity_type, scope, code, update_custom_data_model_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_custom_data_model_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], upsert_custom_data_model_request : Annotated[Optional[UpsertCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_custom_data_model_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The entity type of the Data Model.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified Data Model.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified Data Model.")], update_custom_data_model_request : Annotated[Optional[UpdateCustomDataModelRequest], Field(description="The request containing the details of the Data Model.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model  # noqa: E501
 
         Updates a Custom Data Model.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_custom_data_model_with_http_info(scope, code, entity_type, upsert_custom_data_model_request, async_req=True)
+        >>> thread = api.update_custom_data_model_with_http_info(entity_type, scope, code, update_custom_data_model_request, async_req=True)
         >>> result = thread.get()
 
+        :param entity_type: The entity type of the Data Model. (required)
+        :type entity_type: str
         :param scope: The scope of the specified Data Model. (required)
         :type scope: str
         :param code: The code of the specified Data Model. (required)
         :type code: str
-        :param entity_type: The entity type of the Data Model. (required)
-        :type entity_type: str
-        :param upsert_custom_data_model_request: The request containing the details of the Data Model.
-        :type upsert_custom_data_model_request: UpsertCustomDataModelRequest
+        :param update_custom_data_model_request: The request containing the details of the Data Model.
+        :type update_custom_data_model_request: UpdateCustomDataModelRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -959,10 +960,10 @@ class CustomDataModelsApi:
         _params = locals()
 
         _all_params = [
+            'entity_type',
             'scope',
             'code',
-            'entity_type',
-            'upsert_custom_data_model_request'
+            'update_custom_data_model_request'
         ]
         _all_params.extend(
             [
@@ -991,14 +992,14 @@ class CustomDataModelsApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['entity_type']:
+            _path_params['entityType'] = _params['entity_type']
+
         if _params['scope']:
             _path_params['scope'] = _params['scope']
 
         if _params['code']:
             _path_params['code'] = _params['code']
-
-        if _params['entity_type']:
-            _path_params['entityType'] = _params['entity_type']
 
 
         # process the query parameters
@@ -1010,8 +1011,8 @@ class CustomDataModelsApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['upsert_custom_data_model_request'] is not None:
-            _body_params = _params['upsert_custom_data_model_request']
+        if _params['update_custom_data_model_request'] is not None:
+            _body_params = _params['update_custom_data_model_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

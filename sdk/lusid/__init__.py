@@ -317,6 +317,7 @@ from lusid.models.create_calendar_request import CreateCalendarRequest
 from lusid.models.create_closed_period_request import CreateClosedPeriodRequest
 from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
+from lusid.models.create_custom_data_model_request import CreateCustomDataModelRequest
 from lusid.models.create_custom_entity_type_request import CreateCustomEntityTypeRequest
 from lusid.models.create_cut_label_definition_request import CreateCutLabelDefinitionRequest
 from lusid.models.create_data_map_request import CreateDataMapRequest
@@ -1177,6 +1178,7 @@ from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
 from lusid.models.update_compliance_template_request import UpdateComplianceTemplateRequest
+from lusid.models.update_custom_data_model_request import UpdateCustomDataModelRequest
 from lusid.models.update_custom_entity_definition_request import UpdateCustomEntityDefinitionRequest
 from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTypeRequest
 from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
@@ -1209,7 +1211,6 @@ from lusid.models.upsert_corporate_action_request import UpsertCorporateActionRe
 from lusid.models.upsert_corporate_actions_response import UpsertCorporateActionsResponse
 from lusid.models.upsert_counterparty_agreement_request import UpsertCounterpartyAgreementRequest
 from lusid.models.upsert_credit_support_annex_request import UpsertCreditSupportAnnexRequest
-from lusid.models.upsert_custom_data_model_request import UpsertCustomDataModelRequest
 from lusid.models.upsert_custom_entities_response import UpsertCustomEntitiesResponse
 from lusid.models.upsert_custom_entity_access_metadata_request import UpsertCustomEntityAccessMetadataRequest
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
@@ -1593,6 +1594,7 @@ __all__ = [
     "CreateClosedPeriodRequest",
     "CreateComplianceTemplateRequest",
     "CreateCorporateActionSourceRequest",
+    "CreateCustomDataModelRequest",
     "CreateCustomEntityTypeRequest",
     "CreateCutLabelDefinitionRequest",
     "CreateDataMapRequest",
@@ -2453,6 +2455,7 @@ __all__ = [
     "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
     "UpdateComplianceTemplateRequest",
+    "UpdateCustomDataModelRequest",
     "UpdateCustomEntityDefinitionRequest",
     "UpdateCustomEntityTypeRequest",
     "UpdateCutLabelDefinitionRequest",
@@ -2485,7 +2488,6 @@ __all__ = [
     "UpsertCorporateActionsResponse",
     "UpsertCounterpartyAgreementRequest",
     "UpsertCreditSupportAnnexRequest",
-    "UpsertCustomDataModelRequest",
     "UpsertCustomEntitiesResponse",
     "UpsertCustomEntityAccessMetadataRequest",
     "UpsertDialectRequest",

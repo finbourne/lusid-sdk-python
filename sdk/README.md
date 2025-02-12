@@ -171,9 +171,9 @@ Class | Method | HTTP request | Description
 *CustomEntityDefinitionsApi* | [**get_definition**](docs/CustomEntityDefinitionsApi.md#get_definition) | **GET** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.
 *CustomEntityDefinitionsApi* | [**list_custom_entity_definitions**](docs/CustomEntityDefinitionsApi.md#list_custom_entity_definitions) | **GET** /api/customentities/entitytypes | [EARLY ACCESS] ListCustomEntityDefinitions: List the Custom Entity type definitions
 *CustomEntityDefinitionsApi* | [**update_custom_entity_definition**](docs/CustomEntityDefinitionsApi.md#update_custom_entity_definition) | **PUT** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] UpdateCustomEntityDefinition: Modify an existing Custom Entity type.
-*CustomDataModelsApi* | [**create_custom_data_model**](docs/CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
-*CustomDataModelsApi* | [**delete_custom_data_model**](docs/CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
-*CustomDataModelsApi* | [**get_custom_data_model**](docs/CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
+*CustomDataModelsApi* | [**create_custom_data_model**](docs/CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
+*CustomDataModelsApi* | [**delete_custom_data_model**](docs/CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
+*CustomDataModelsApi* | [**get_custom_data_model**](docs/CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
 *CustomDataModelsApi* | [**list_data_model_hierarchies**](docs/CustomDataModelsApi.md#list_data_model_hierarchies) | **GET** /api/datamodel/hierarchies | [EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.
 *CustomDataModelsApi* | [**list_supported_entity_types**](docs/CustomDataModelsApi.md#list_supported_entity_types) | **GET** /api/datamodel/entitytype | [EXPERIMENTAL] ListSupportedEntityTypes: List the currently supported entity types for use in Custom Data Models.
 *CustomDataModelsApi* | [**update_custom_data_model**](docs/CustomDataModelsApi.md#update_custom_data_model) | **PUT** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model
@@ -850,6 +850,7 @@ Class | Method | HTTP request | Description
  - [CreateClosedPeriodRequest](docs/CreateClosedPeriodRequest.md)
  - [CreateComplianceTemplateRequest](docs/CreateComplianceTemplateRequest.md)
  - [CreateCorporateActionSourceRequest](docs/CreateCorporateActionSourceRequest.md)
+ - [CreateCustomDataModelRequest](docs/CreateCustomDataModelRequest.md)
  - [CreateCustomEntityTypeRequest](docs/CreateCustomEntityTypeRequest.md)
  - [CreateCutLabelDefinitionRequest](docs/CreateCutLabelDefinitionRequest.md)
  - [CreateDataMapRequest](docs/CreateDataMapRequest.md)
@@ -1710,6 +1711,7 @@ Class | Method | HTTP request | Description
  - [UpdateAmortisationRuleSetDetailsRequest](docs/UpdateAmortisationRuleSetDetailsRequest.md)
  - [UpdateCalendarRequest](docs/UpdateCalendarRequest.md)
  - [UpdateComplianceTemplateRequest](docs/UpdateComplianceTemplateRequest.md)
+ - [UpdateCustomDataModelRequest](docs/UpdateCustomDataModelRequest.md)
  - [UpdateCustomEntityDefinitionRequest](docs/UpdateCustomEntityDefinitionRequest.md)
  - [UpdateCustomEntityTypeRequest](docs/UpdateCustomEntityTypeRequest.md)
  - [UpdateCutLabelDefinitionRequest](docs/UpdateCutLabelDefinitionRequest.md)
@@ -1742,7 +1744,6 @@ Class | Method | HTTP request | Description
  - [UpsertCorporateActionsResponse](docs/UpsertCorporateActionsResponse.md)
  - [UpsertCounterpartyAgreementRequest](docs/UpsertCounterpartyAgreementRequest.md)
  - [UpsertCreditSupportAnnexRequest](docs/UpsertCreditSupportAnnexRequest.md)
- - [UpsertCustomDataModelRequest](docs/UpsertCustomDataModelRequest.md)
  - [UpsertCustomEntitiesResponse](docs/UpsertCustomEntitiesResponse.md)
  - [UpsertCustomEntityAccessMetadataRequest](docs/UpsertCustomEntityAccessMetadataRequest.md)
  - [UpsertDialectRequest](docs/UpsertDialectRequest.md)

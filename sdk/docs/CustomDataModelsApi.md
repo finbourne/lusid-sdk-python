@@ -4,16 +4,16 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_custom_data_model**](CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
-[**delete_custom_data_model**](CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
-[**get_custom_data_model**](CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
+[**create_custom_data_model**](CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
+[**delete_custom_data_model**](CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
+[**get_custom_data_model**](CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
 [**list_data_model_hierarchies**](CustomDataModelsApi.md#list_data_model_hierarchies) | **GET** /api/datamodel/hierarchies | [EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.
 [**list_supported_entity_types**](CustomDataModelsApi.md#list_supported_entity_types) | **GET** /api/datamodel/entitytype | [EXPERIMENTAL] ListSupportedEntityTypes: List the currently supported entity types for use in Custom Data Models.
 [**update_custom_data_model**](CustomDataModelsApi.md#update_custom_data_model) | **PUT** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model
 
 
 # **create_custom_data_model**
-> CustomDataModel create_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request=upsert_custom_data_model_request)
+> CustomDataModel create_custom_data_model(entity_type, create_custom_data_model_request=create_custom_data_model_request)
 
 [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
 
@@ -64,22 +64,20 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
-    scope = 'scope_example' # str | The scope of the specified Data Model.
-    code = 'code_example' # str | The code of the specified Data Model.
     entity_type = 'entity_type_example' # str | The entity type of the Data Model.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
-    # upsert_custom_data_model_request = UpsertCustomDataModelRequest.from_json("")
-    # upsert_custom_data_model_request = UpsertCustomDataModelRequest.from_dict({})
-    upsert_custom_data_model_request = UpsertCustomDataModelRequest()
+    # create_custom_data_model_request = CreateCustomDataModelRequest.from_json("")
+    # create_custom_data_model_request = CreateCustomDataModelRequest.from_dict({})
+    create_custom_data_model_request = CreateCustomDataModelRequest()
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.create_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request=upsert_custom_data_model_request, opts=opts)
+        # api_response =  api_instance.create_custom_data_model(entity_type, create_custom_data_model_request=create_custom_data_model_request, opts=opts)
 
         # [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
-        api_response = api_instance.create_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request=upsert_custom_data_model_request)
+        api_response = api_instance.create_custom_data_model(entity_type, create_custom_data_model_request=create_custom_data_model_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -92,10 +90,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the specified Data Model. | 
- **code** | **str**| The code of the specified Data Model. | 
  **entity_type** | **str**| The entity type of the Data Model. | 
- **upsert_custom_data_model_request** | [**UpsertCustomDataModelRequest**](UpsertCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] 
+ **create_custom_data_model_request** | [**CreateCustomDataModelRequest**](CreateCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] 
 
 ### Return type
 
@@ -116,7 +112,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_custom_data_model**
-> DeletedEntityResponse delete_custom_data_model(scope, code)
+> DeletedEntityResponse delete_custom_data_model(entity_type, scope, code)
 
 [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
 
@@ -167,15 +163,16 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
+    entity_type = 'entity_type_example' # str | The entity type of the Data Model.
     scope = 'scope_example' # str | The scope of the specified Data Model.
     code = 'code_example' # str | The code of the specified Data Model.
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_custom_data_model(scope, code, opts=opts)
+        # api_response =  api_instance.delete_custom_data_model(entity_type, scope, code, opts=opts)
 
         # [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
-        api_response = api_instance.delete_custom_data_model(scope, code)
+        api_response = api_instance.delete_custom_data_model(entity_type, scope, code)
         pprint(api_response)
 
     except ApiException as e:
@@ -188,6 +185,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **entity_type** | **str**| The entity type of the Data Model. | 
  **scope** | **str**| The scope of the specified Data Model. | 
  **code** | **str**| The code of the specified Data Model. | 
 
@@ -210,7 +208,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_custom_data_model**
-> CustomDataModel get_custom_data_model(scope, code, as_at=as_at)
+> CustomDataModel get_custom_data_model(entity_type, scope, code, as_at=as_at)
 
 [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
 
@@ -261,16 +259,17 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
+    entity_type = 'entity_type_example' # str | The entity type of the Data Model.
     scope = 'scope_example' # str | The scope of the specified Data Model.
     code = 'code_example' # str | The code of the specified Data Model.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_custom_data_model(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_custom_data_model(entity_type, scope, code, as_at=as_at, opts=opts)
 
         # [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
-        api_response = api_instance.get_custom_data_model(scope, code, as_at=as_at)
+        api_response = api_instance.get_custom_data_model(entity_type, scope, code, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -283,6 +282,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **entity_type** | **str**| The entity type of the Data Model. | 
  **scope** | **str**| The scope of the specified Data Model. | 
  **code** | **str**| The code of the specified Data Model. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. | [optional] 
@@ -487,7 +487,7 @@ This endpoint does not need any parameter.
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_custom_data_model**
-> CustomDataModel update_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request=upsert_custom_data_model_request)
+> CustomDataModel update_custom_data_model(entity_type, scope, code, update_custom_data_model_request=update_custom_data_model_request)
 
 [EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model
 
@@ -538,22 +538,22 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
+    entity_type = 'entity_type_example' # str | The entity type of the Data Model.
     scope = 'scope_example' # str | The scope of the specified Data Model.
     code = 'code_example' # str | The code of the specified Data Model.
-    entity_type = 'entity_type_example' # str | The entity type of the Data Model.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
-    # upsert_custom_data_model_request = UpsertCustomDataModelRequest.from_json("")
-    # upsert_custom_data_model_request = UpsertCustomDataModelRequest.from_dict({})
-    upsert_custom_data_model_request = UpsertCustomDataModelRequest()
+    # update_custom_data_model_request = UpdateCustomDataModelRequest.from_json("")
+    # update_custom_data_model_request = UpdateCustomDataModelRequest.from_dict({})
+    update_custom_data_model_request = UpdateCustomDataModelRequest()
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.update_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request=upsert_custom_data_model_request, opts=opts)
+        # api_response =  api_instance.update_custom_data_model(entity_type, scope, code, update_custom_data_model_request=update_custom_data_model_request, opts=opts)
 
         # [EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model
-        api_response = api_instance.update_custom_data_model(scope, code, entity_type, upsert_custom_data_model_request=upsert_custom_data_model_request)
+        api_response = api_instance.update_custom_data_model(entity_type, scope, code, update_custom_data_model_request=update_custom_data_model_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -566,10 +566,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **entity_type** | **str**| The entity type of the Data Model. | 
  **scope** | **str**| The scope of the specified Data Model. | 
  **code** | **str**| The code of the specified Data Model. | 
- **entity_type** | **str**| The entity type of the Data Model. | 
- **upsert_custom_data_model_request** | [**UpsertCustomDataModelRequest**](UpsertCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] 
+ **update_custom_data_model_request** | [**UpdateCustomDataModelRequest**](UpdateCustomDataModelRequest.md)| The request containing the details of the Data Model. | [optional] 
 
 ### Return type
 

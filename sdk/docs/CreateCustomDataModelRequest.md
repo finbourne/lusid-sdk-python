@@ -1,9 +1,10 @@
-# UpsertCustomDataModelRequest
+# CreateCustomDataModelRequest
 
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the Custom Data Model. | 
 **description** | **str** | A description for the Custom Data Model. | 
 **parent_data_model** | [**ResourceId**](ResourceId.md) |  | [optional] 
@@ -16,19 +17,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.upsert_custom_data_model_request import UpsertCustomDataModelRequest
+from lusid.models.create_custom_data_model_request import CreateCustomDataModelRequest
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of UpsertCustomDataModelRequest from a JSON string
-upsert_custom_data_model_request_instance = UpsertCustomDataModelRequest.from_json(json)
+# create an instance of CreateCustomDataModelRequest from a JSON string
+create_custom_data_model_request_instance = CreateCustomDataModelRequest.from_json(json)
 # print the JSON string representation of the object
-print UpsertCustomDataModelRequest.to_json()
+print CreateCustomDataModelRequest.to_json()
 
 # convert the object into a dict
-upsert_custom_data_model_request_dict = upsert_custom_data_model_request_instance.to_dict()
-# create an instance of UpsertCustomDataModelRequest from a dict
-upsert_custom_data_model_request_form_dict = upsert_custom_data_model_request.from_dict(upsert_custom_data_model_request_dict)
+create_custom_data_model_request_dict = create_custom_data_model_request_instance.to_dict()
+# create an instance of CreateCustomDataModelRequest from a dict
+create_custom_data_model_request_form_dict = create_custom_data_model_request.from_dict(create_custom_data_model_request_dict)
 ```
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
