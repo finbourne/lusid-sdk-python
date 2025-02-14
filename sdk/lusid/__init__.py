@@ -407,6 +407,7 @@ from lusid.models.delete_relation_request import DeleteRelationRequest
 from lusid.models.delete_relationship_request import DeleteRelationshipRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.dependency_source_filter import DependencySourceFilter
+from lusid.models.deposit_close_event import DepositCloseEvent
 from lusid.models.deposit_interest_payment_event import DepositInterestPaymentEvent
 from lusid.models.described_address_key import DescribedAddressKey
 from lusid.models.dialect import Dialect
@@ -1684,6 +1685,7 @@ __all__ = [
     "DeleteRelationshipRequest",
     "DeletedEntityResponse",
     "DependencySourceFilter",
+    "DepositCloseEvent",
     "DepositInterestPaymentEvent",
     "DescribedAddressKey",
     "Dialect",

@@ -19,19 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class InformationalErrorEvent(InstrumentEvent):
+class DepositCloseEvent(InstrumentEvent):
     """
-    Event holder containing error information  # noqa: E501
+    Event to trigger the termination of a deposit.  # noqa: E501
     """
-    error_detail: constr(strict=True, min_length=1) = Field(..., alias="errorDetail", description="The details of the error")
-    error_reason: constr(strict=True, min_length=1) = Field(..., alias="errorReason", description="The error reason")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date of the evaulation")
+    effective_date: datetime = Field(..., alias="effectiveDate", description="Date on which the deposit is terminated.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "errorDetail", "errorReason", "effectiveAt"]
+    __properties = ["instrumentEventType", "effectiveDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -62,8 +60,8 @@ class InformationalErrorEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> InformationalErrorEvent:
-        """Create an instance of InformationalErrorEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> DepositCloseEvent:
+        """Create an instance of DepositCloseEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -81,19 +79,17 @@ class InformationalErrorEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> InformationalErrorEvent:
-        """Create an instance of InformationalErrorEvent from a dict"""
+    def from_dict(cls, obj: dict) -> DepositCloseEvent:
+        """Create an instance of DepositCloseEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return InformationalErrorEvent.parse_obj(obj)
+            return DepositCloseEvent.parse_obj(obj)
 
-        _obj = InformationalErrorEvent.parse_obj({
+        _obj = DepositCloseEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "error_detail": obj.get("errorDetail"),
-            "error_reason": obj.get("errorReason"),
-            "effective_at": obj.get("effectiveAt")
+            "effective_date": obj.get("effectiveDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

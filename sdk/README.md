@@ -940,6 +940,7 @@ Class | Method | HTTP request | Description
  - [DeleteRelationshipRequest](docs/DeleteRelationshipRequest.md)
  - [DeletedEntityResponse](docs/DeletedEntityResponse.md)
  - [DependencySourceFilter](docs/DependencySourceFilter.md)
+ - [DepositCloseEvent](docs/DepositCloseEvent.md)
  - [DepositInterestPaymentEvent](docs/DepositInterestPaymentEvent.md)
  - [DescribedAddressKey](docs/DescribedAddressKey.md)
  - [Dialect](docs/Dialect.md)
