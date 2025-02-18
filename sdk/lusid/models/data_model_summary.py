@@ -18,21 +18,21 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr
 from lusid.models.resource_id import ResourceId
 
 class DataModelSummary(BaseModel):
     """
     DataModelSummary
     """
-    id: Optional[ResourceId] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the Custom Data Model.")
-    description: Optional[StrictStr] = Field(None, description="A description for the Custom Data Model.")
+    id: ResourceId = Field(...)
+    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the Custom Data Model.")
+    description: constr(strict=True, min_length=1) = Field(..., description="A description for the Custom Data Model.")
     entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The entity type that the Custom Data Model binds to.")
-    type: Optional[StrictStr] = Field(None, description="Either Root or Leaf or Intermediate.")
-    precedence: Optional[StrictInt] = Field(None, description="Where in the hierarchy this model sits.")
-    children: Optional[conlist(DataModelSummary)] = Field(None, description="Child Custom Data Models that will inherit from this data model.")
+    type: constr(strict=True, min_length=1) = Field(..., description="Either Root or Leaf or Intermediate.")
+    precedence: StrictInt = Field(..., description="Where in the hierarchy this model sits.")
+    children: conlist(DataModelSummary) = Field(..., description="Child Custom Data Models that will inherit from this data model.")
     __properties = ["id", "displayName", "description", "entityType", "type", "precedence", "children"]
 
     class Config:
@@ -77,26 +77,6 @@ class DataModelSummary(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['children'] = _items
-        # set to None if display_name (nullable) is None
-        # and __fields_set__ contains the field
-        if self.display_name is None and "display_name" in self.__fields_set__:
-            _dict['displayName'] = None
-
-        # set to None if description (nullable) is None
-        # and __fields_set__ contains the field
-        if self.description is None and "description" in self.__fields_set__:
-            _dict['description'] = None
-
-        # set to None if type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.type is None and "type" in self.__fields_set__:
-            _dict['type'] = None
-
-        # set to None if children (nullable) is None
-        # and __fields_set__ contains the field
-        if self.children is None and "children" in self.__fields_set__:
-            _dict['children'] = None
-
         return _dict
 
     @classmethod
