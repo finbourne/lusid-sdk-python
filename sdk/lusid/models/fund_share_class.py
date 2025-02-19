@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.simple_rounding_convention import SimpleRoundingConvention
 
@@ -27,13 +27,13 @@ class FundShareClass(LusidInstrument):
     """
     LUSID representation of a FundShareClass.  A ShareClass represents a pool of shares, held by investors, within a fund.   A ShareClass can represent a differing investment approach by either Fees,   Income, Currency Risk and Investor type.  # noqa: E501
     """
-    short_code: constr(strict=True, min_length=1) = Field(..., alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".")
-    fund_share_class_type: constr(strict=True, min_length=1) = Field(..., alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income.    Supported string (enumeration) values are: [Income, Accumulation].")
-    distribution_payment_type: constr(strict=True, min_length=1) = Field(..., alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax).    Supported string (enumeration) values are: [Gross, Net].")
-    hedging: constr(strict=True, min_length=1) = Field(..., description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of it's investment strategy.    Supported string (enumeration) values are: [Invalid, None, ApplyHedging].")
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
+    short_code:  StrictStr = Field(...,alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".") 
+    fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income.    Supported string (enumeration) values are: [Income, Accumulation].") 
+    distribution_payment_type:  StrictStr = Field(...,alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax).    Supported string (enumeration) values are: [Gross, Net].") 
+    hedging:  StrictStr = Field(...,alias="hedging", description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of it's investment strategy.    Supported string (enumeration) values are: [Invalid, None, ApplyHedging].") 
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     rounding_conventions: Optional[conlist(SimpleRoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding Convention used for the FundShareClass quotes")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "shortCode", "fundShareClassType", "distributionPaymentType", "hedging", "domCcy", "roundingConventions"]
 

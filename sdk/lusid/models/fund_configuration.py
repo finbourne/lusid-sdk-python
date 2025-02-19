@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.component_filter import ComponentFilter
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.link import Link
@@ -31,10 +31,10 @@ class FundConfiguration(BaseModel):
     """
     FundConfiguration
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the FundConfiguration.")
-    description: Optional[StrictStr] = Field(None, description="A description for the FundConfiguration.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the FundConfiguration.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the FundConfiguration.") 
     dealing_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="dealingFilters", description="The set of filters used to decide which JE lines are included in the dealing.")
     pnl_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="pnlFilters", description="The set of filters used to decide which JE lines are included in the PnL.")
     back_out_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="backOutFilters", description="The set of filters used to decide which JE lines are included in the back outs.")

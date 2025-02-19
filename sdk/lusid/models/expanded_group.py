@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -29,10 +29,10 @@ class ExpandedGroup(BaseModel):
     """
     ExpandedGroup
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the portfolio group.")
-    description: Optional[StrictStr] = Field(None, description="The long form description of the portfolio group.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio group.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio group.") 
     values: Optional[conlist(CompletePortfolio)] = Field(None, description="The collection of resource identifiers for the portfolios contained in the portfolio group.")
     sub_groups: Optional[conlist(ExpandedGroup)] = Field(None, alias="subGroups", description="The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.")
     version: Optional[Version] = None

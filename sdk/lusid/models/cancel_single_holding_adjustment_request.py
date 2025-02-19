@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.perpetual_property import PerpetualProperty
 
 class CancelSingleHoldingAdjustmentRequest(BaseModel):
@@ -28,7 +28,7 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property must be from the 'Transaction' domain.")
-    currency: Optional[StrictStr] = Field(None, description="The Holding currency.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency.") 
     __properties = ["instrumentIdentifiers", "subHoldingKeys", "currency"]
 
     class Config:

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.weekend_mask import WeekendMask
@@ -29,25 +29,11 @@ class CreateCalendarRequest(BaseModel):
     CreateCalendarRequest
     """
     calendar_id: ResourceId = Field(..., alias="calendarId")
-    calendar_type: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="calendarType")
+    calendar_type:  StrictStr = Field(...,alias="calendarType") 
     weekend_mask: WeekendMask = Field(..., alias="weekendMask")
-    source_provider: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="sourceProvider")
+    source_provider:  StrictStr = Field(...,alias="sourceProvider") 
     properties: Optional[conlist(ModelProperty)] = None
     __properties = ["calendarId", "calendarType", "weekendMask", "sourceProvider", "properties"]
-
-    @validator('calendar_type')
-    def calendar_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('source_provider')
-    def source_provider_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

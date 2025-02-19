@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -30,9 +30,9 @@ class PlacementUpdateRequest(BaseModel):
     id: ResourceId = Field(...)
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this placement.")
-    counterparty: Optional[StrictStr] = Field(None, description="Optionally specifies the market entity this placement is placed with.")
-    execution_system: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="executionSystem", description="Optionally specifies the execution system in use.")
-    entry_type: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="entryType", description="Optionally specifies the entry type of this placement.")
+    counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
+    execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
+    entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement.") 
     __properties = ["id", "quantity", "properties", "counterparty", "executionSystem", "entryType"]
 
     class Config:

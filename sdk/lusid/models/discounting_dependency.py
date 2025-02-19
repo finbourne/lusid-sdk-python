@@ -19,16 +19,16 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class DiscountingDependency(EconomicDependency):
     """
     For indicating a dependency on discounting for a given currency.  E.g Valuing a Bond with the Discounting model will declare a DiscountingDependency  for the domestic currency of the bond to account for the time-value of the future cashFlows of the bond.  # noqa: E501
     """
-    currency: StrictStr = Field(..., description="The currency that needs to be discounted.")
+    currency:  StrictStr = Field(...,alias="currency", description="The currency that needs to be discounted.") 
     var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "currency", "date"]
 

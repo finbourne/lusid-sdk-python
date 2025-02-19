@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class IrVolDependency(EconomicDependency):
     """
     Economic dependency required to price interest rate products that contain optionality, for example swaptions.  For example, can indicate a dependency on an IrVolCubeData.  # noqa: E501
     """
-    currency: StrictStr = Field(..., description="The domestic currency of the instrument declaring this dependency.")
-    vol_type: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.")
+    currency:  StrictStr = Field(...,alias="currency", description="The domestic currency of the instrument declaring this dependency.") 
+    vol_type:  StrictStr = Field(...,alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.") 
     var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "currency", "volType", "date"]
 

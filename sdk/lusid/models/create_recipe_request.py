@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.configuration_recipe import ConfigurationRecipe
 from lusid.models.resource_id import ResourceId
 
@@ -31,7 +31,7 @@ class CreateRecipeRequest(BaseModel):
     recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
     inline_recipe: Optional[ConfigurationRecipe] = Field(None, alias="inlineRecipe")
     as_at: Optional[datetime] = Field(None, alias="asAt", description="The asAt date to use")
-    effective_at: constr(strict=True, min_length=1) = Field(..., alias="effectiveAt", description="The market data time, i.e. the recipe generated will look for rules with this effectiveAt.")
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The market data time, i.e. the recipe generated will look for rules with this effectiveAt.") 
     __properties = ["recipeCreationMarketDataScopes", "recipeId", "inlineRecipe", "asAt", "effectiveAt"]
 
     class Config:

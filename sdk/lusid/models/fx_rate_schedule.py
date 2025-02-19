@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, validator 
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.schedule import Schedule
 
@@ -30,8 +30,8 @@ class FxRateSchedule(Schedule):
     flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
     fx_conversion_types: Optional[conlist(StrictStr)] = Field(None, alias="fxConversionTypes", description="List of flags to indicate if coupon payments, principal payments or both are converted")
     rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="FxRate used to convert payments. Assumed to be in units of the ToCurrency so conversion is paymentAmount x fxRate")
-    to_currency: Optional[StrictStr] = Field(None, alias="toCurrency", description="Currency that payments are converted to")
-    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid")
+    to_currency:  Optional[StrictStr] = Field(None,alias="toCurrency", description="Currency that payments are converted to") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "flowConventions", "fxConversionTypes", "rate", "toCurrency"]
 

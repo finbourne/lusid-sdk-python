@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 
 class ErrorDetail(BaseModel):
     """
     ErrorDetail
     """
-    id: Optional[StrictStr] = Field(None, description="The id of the failed item that this error relates to.")
-    type: Optional[StrictStr] = Field(None, description="The type of failure that occurred.")
-    detail: Optional[StrictStr] = Field(None, description="Description of the failure that occurred.")
+    id:  Optional[StrictStr] = Field(None,alias="id", description="The id of the failed item that this error relates to.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of failure that occurred.") 
+    detail:  Optional[StrictStr] = Field(None,alias="detail", description="Description of the failure that occurred.") 
     error_details: Optional[conlist(Dict[str, StrictStr])] = Field(None, alias="errorDetails", description="Information about the particular instance of the failure (supplied information depends on the type of failure).")
     __properties = ["id", "type", "detail", "errorDetails"]
 

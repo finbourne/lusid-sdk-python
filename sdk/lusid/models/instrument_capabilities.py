@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.described_address_key import DescribedAddressKey
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.link import Link
@@ -28,8 +28,8 @@ class InstrumentCapabilities(BaseModel):
     """
     Instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument i.e. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) i.e. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) i.e. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS  # noqa: E501
     """
-    instrument_id: Optional[StrictStr] = Field(None, alias="instrumentId", description="The Lusid instrument id for the instrument e.g. 'LUID_00003D4X'.")
-    model: Optional[StrictStr] = Field(None, description="The pricing model e.g. 'Discounting'.")
+    instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The Lusid instrument id for the instrument e.g. 'LUID_00003D4X'.") 
+    model:  Optional[StrictStr] = Field(None,alias="model", description="The pricing model e.g. 'Discounting'.") 
     features: Optional[Dict[str, StrictStr]] = Field(None, description="Features of the instrument describing its optionality, payoff type and more e.g. 'Instrument/Features/Exercise: American', 'Instrument/Features/Product: Option'")
     supported_addresses: Optional[conlist(DescribedAddressKey)] = Field(None, alias="supportedAddresses", description="Queryable addresses supported by the model, e.g. 'Valuation/Pv', 'Valuation/Accrued'.")
     economic_dependencies: Optional[conlist(EconomicDependency)] = Field(None, alias="economicDependencies", description="Economic dependencies for the model, e.g. 'Fx:GBP.USD', 'Cash:GBP', 'Rates:GBP.GBPOIS'.")

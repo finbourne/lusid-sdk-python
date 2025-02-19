@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 
@@ -27,13 +27,13 @@ class CreatePortfolioGroupRequest(BaseModel):
     """
     CreatePortfolioGroupRequest
     """
-    code: StrictStr = Field(..., description="The code that the portfolio group will be created with. Together with the scope this uniquely identifies the portfolio group.")
+    code:  StrictStr = Field(...,alias="code", description="The code that the portfolio group will be created with. Together with the scope this uniquely identifies the portfolio group.") 
     created: Optional[datetime] = Field(None, description="The effective datetime at which the portfolio group was created. Defaults to the current LUSID system datetime if not specified.")
     values: Optional[conlist(ResourceId)] = Field(None, description="The resource identifiers of the portfolios to be contained within the portfolio group.")
     sub_groups: Optional[conlist(ResourceId)] = Field(None, alias="subGroups", description="The resource identifiers of the portfolio groups to be contained within the portfolio group as sub groups.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of unique group properties to add to the portfolio group. Each property must be from the 'PortfolioGroup' domain and should be identified by its key which has the format {domain}/{scope}/{code}, e.g. 'PortfolioGroup/Manager/Id'. These properties must be pre-defined.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the portfolio group.")
-    description: Optional[StrictStr] = Field(None, description="A long form description of the portfolio group.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio group.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A long form description of the portfolio group.") 
     __properties = ["code", "created", "values", "subGroups", "properties", "displayName", "description"]
 
     class Config:

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -28,13 +28,13 @@ class DataTypeSummary(BaseModel):
     """
     DataTypeSummary
     """
-    type_value_range: StrictStr = Field(..., alias="typeValueRange", description="Indicates the range of data acceptable by a data type. The available values are: Open, Closed")
+    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="Indicates the range of data acceptable by a data type. The available values are: Open, Closed") 
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the data type.")
-    description: constr(strict=True, min_length=1) = Field(..., description="The description of the data type.")
-    value_type: StrictStr = Field(..., alias="valueType", description="The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the data type.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the data type.") 
+    value_type:  StrictStr = Field(...,alias="valueType", description="The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
     acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues", description="The acceptable set of values for this data type. Only applies to 'open' value type range.")
-    unit_schema: Optional[StrictStr] = Field(None, alias="unitSchema", description="The schema of the data type's units. The available values are: NoUnits, Basic, Iso4217Currency")
+    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The schema of the data type's units. The available values are: NoUnits, Basic, Iso4217Currency") 
     acceptable_units: Optional[conlist(IUnitDefinitionDto)] = Field(None, alias="acceptableUnits", description="The definitions of the acceptable units.")
     version: Optional[Version] = None
     __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "version"]

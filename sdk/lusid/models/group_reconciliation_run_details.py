@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class GroupReconciliationRunDetails(BaseModel):
     """
     GroupReconciliationRunDetails
     """
-    completion_status: constr(strict=True, min_length=1) = Field(..., alias="completionStatus", description="Provides the reconciliation completion status \"Completed\" | \"FailedToComplete\"")
-    error_detail: Optional[StrictStr] = Field(None, alias="errorDetail", description="Error information if the reconciliation failed to complete")
+    completion_status:  StrictStr = Field(...,alias="completionStatus", description="Provides the reconciliation completion status \"Completed\" | \"FailedToComplete\"") 
+    error_detail:  Optional[StrictStr] = Field(None,alias="errorDetail", description="Error information if the reconciliation failed to complete") 
     __properties = ["completionStatus", "errorDetail"]
 
     class Config:

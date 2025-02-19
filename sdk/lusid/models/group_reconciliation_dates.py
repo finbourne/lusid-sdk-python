@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel
+from pydantic.v1 import StrictStr, Field, BaseModel 
 from lusid.models.group_reconciliation_date_pair import GroupReconciliationDatePair
 
 class GroupReconciliationDates(BaseModel):

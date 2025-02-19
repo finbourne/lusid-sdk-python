@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class ComplianceTemplateParameter(BaseModel):
     """
     ComplianceTemplateParameter
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="The name for the required Compliance Template Parameter")
-    description: constr(strict=True, min_length=1) = Field(..., description="The description for the required Compliance Template Parameter")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type for the required Compliance Template Parameter")
+    name:  StrictStr = Field(...,alias="name", description="The name for the required Compliance Template Parameter") 
+    description:  StrictStr = Field(...,alias="description", description="The description for the required Compliance Template Parameter") 
+    type:  StrictStr = Field(...,alias="type", description="The type for the required Compliance Template Parameter") 
     __properties = ["name", "description", "type"]
 
     class Config:

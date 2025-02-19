@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class StagedModificationDecision(BaseModel):
     """
     StagedModificationDecision
     """
     as_at: Optional[datetime] = Field(None, alias="asAt", description="Time the decision request is made.")
-    user_id: Optional[StrictStr] = Field(None, alias="userId", description="ID of user that approved the request.")
-    request_id: Optional[StrictStr] = Field(None, alias="requestId", description="ID of user that made the request.")
-    decision: Optional[StrictStr] = Field(None, description="The decision on the requested staged modification, can be 'Approve' or 'Reject'.")
-    comment: Optional[StrictStr] = Field(None, description="Comment on decision.")
+    user_id:  Optional[StrictStr] = Field(None,alias="userId", description="ID of user that approved the request.") 
+    request_id:  Optional[StrictStr] = Field(None,alias="requestId", description="ID of user that made the request.") 
+    decision:  Optional[StrictStr] = Field(None,alias="decision", description="The decision on the requested staged modification, can be 'Approve' or 'Reject'.") 
+    comment:  Optional[StrictStr] = Field(None,alias="comment", description="Comment on decision.") 
     __properties = ["asAt", "userId", "requestId", "decision", "comment"]
 
     class Config:

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -28,19 +28,19 @@ class CreateTransactionPortfolioRequest(BaseModel):
     """
     CreateTransactionPortfolioRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the transaction portfolio.")
-    description: Optional[StrictStr] = Field(None, description="A description for the transaction portfolio.")
-    code: StrictStr = Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the transaction portfolio.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the transaction portfolio.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.") 
     created: Optional[datetime] = Field(None, description="The effective datetime at which to create the transaction portfolio. No transactions can be added to the transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified.")
-    base_currency: StrictStr = Field(..., alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.")
+    base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.") 
     corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
-    accounting_method: Optional[StrictStr] = Field(None, alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency")
+    accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency") 
     sub_holding_keys: Optional[conlist(StrictStr, max_items=100)] = Field(None, alias="subHoldingKeys", description="A set of unique transaction properties to group the transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of unique portfolio properties to add custom data to the transaction portfolio. Each property must be from the 'Portfolio' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Note these properties must be pre-defined.")
     instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to this portfolio.")
-    amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
-    transaction_type_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
-    cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
+    amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
+    transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope", description="The scope of the transaction types.") 
+    cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId"]
@@ -53,16 +53,6 @@ class CreateTransactionPortfolioRequest(BaseModel):
 
         if value not in ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency'):
             raise ValueError("must be one of enum values ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency')")
-        return value
-
-    @validator('transaction_type_scope')
-    def transaction_type_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
 
     class Config:

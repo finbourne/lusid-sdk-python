@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.compliance_summary_rule_result_request import ComplianceSummaryRuleResultRequest
 from lusid.models.resource_id import ResourceId
 
@@ -30,7 +30,7 @@ class UpsertComplianceRunSummaryRequest(BaseModel):
     run_id: ResourceId = Field(..., alias="runId")
     instigated_at: datetime = Field(..., alias="instigatedAt")
     completed_at: datetime = Field(..., alias="completedAt")
-    schedule: constr(strict=True, min_length=1) = Field(...)
+    schedule:  StrictStr = Field(...,alias="schedule") 
     results: conlist(ComplianceSummaryRuleResultRequest) = Field(...)
     __properties = ["runId", "instigatedAt", "completedAt", "schedule", "results"]
 

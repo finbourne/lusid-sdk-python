@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class InflationFixingDependency(EconomicDependency):
     """
     For indicating a dependency upon an inflation fixing  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The Type of fixing (index, ratio or assumption)")
-    code: constr(strict=True, min_length=1) = Field(..., description="The Code of the fixing, typically the index name")
+    type:  StrictStr = Field(...,alias="type", description="The Type of fixing (index, ratio or assumption)") 
+    code:  StrictStr = Field(...,alias="code", description="The Code of the fixing, typically the index name") 
     var_date: datetime = Field(..., alias="date", description="The effectiveAt of the inflation fixing")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "type", "code", "date"]
 

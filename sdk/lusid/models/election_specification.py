@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class ElectionSpecification(BaseModel):
     """
     ElectionSpecification
     """
-    election_type: constr(strict=True, min_length=1) = Field(..., alias="electionType")
+    election_type:  StrictStr = Field(...,alias="electionType") 
     cardinality: Dict[str, StrictStr] = Field(...)
     referenced_as: conlist(StrictStr) = Field(..., alias="referencedAs")
     __properties = ["electionType", "cardinality", "referencedAs"]

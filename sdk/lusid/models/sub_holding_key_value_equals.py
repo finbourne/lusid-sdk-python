@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.match_criterion import MatchCriterion
 
 class SubHoldingKeyValueEquals(MatchCriterion):
     """
     A criterion that checks whether a SubHoldingKey Value is equal to the given string value  # noqa: E501
     """
-    sub_holding_key: StrictStr = Field(..., alias="subHoldingKey", description="The sub holding key whose value will form the left-hand side of the operation")
-    value: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The value to be compared against")
-    criterion_type: StrictStr = Field(..., alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals")
+    sub_holding_key:  StrictStr = Field(...,alias="subHoldingKey", description="The sub holding key whose value will form the left-hand side of the operation") 
+    value:  StrictStr = Field(...,alias="value", description="The value to be compared against") 
+    criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["criterionType", "subHoldingKey", "value"]
 

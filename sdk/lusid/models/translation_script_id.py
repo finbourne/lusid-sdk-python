@@ -19,37 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class TranslationScriptId(BaseModel):
     """
     Id of the Translation Script.  # noqa: E501
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="Scope of the translation script.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="Code of the translation script.")
-    version: constr(strict=True, max_length=30, min_length=1) = Field(..., description="Semantic Version of the translation script of the form MAJOR.MINOR.PATCH.")
+    scope:  StrictStr = Field(...,alias="scope", description="Scope of the translation script.") 
+    code:  StrictStr = Field(...,alias="code", description="Code of the translation script.") 
+    version:  StrictStr = Field(...,alias="version", description="Semantic Version of the translation script of the form MAJOR.MINOR.PATCH.") 
     __properties = ["scope", "code", "version"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('version')
-    def version_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$", value):
-            raise ValueError(r"must validate the regular expression /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.aggregation_context import AggregationContext
 from lusid.models.holding_context import HoldingContext
 from lusid.models.market_context import MarketContext
@@ -30,39 +30,15 @@ class ConfigurationRecipe(BaseModel):
     """
     The Configuration or Calculation Recipe controls how LUSID processes a given request.  This can be used to change where market data used in pricing is loaded from and in what order, or which model is used to  price a given instrument as well as how aggregation will process the produced results.  # noqa: E501
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope used when updating or inserting the Configuration Recipe.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="User given string name (code) to identify the recipe.")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope used when updating or inserting the Configuration Recipe.") 
+    code:  StrictStr = Field(...,alias="code", description="User given string name (code) to identify the recipe.") 
     market: Optional[MarketContext] = None
     pricing: Optional[PricingContext] = None
     aggregation: Optional[AggregationContext] = None
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="User can assign a description to understand more humanly the recipe.")
+    description:  Optional[StrictStr] = Field(None,alias="description", description="User can assign a description to understand more humanly the recipe.") 
     holding: Optional[HoldingContext] = None
     translation: Optional[TranslationContext] = None
     __properties = ["scope", "code", "market", "pricing", "aggregation", "description", "holding", "translation"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

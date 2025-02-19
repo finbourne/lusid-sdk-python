@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictBool, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.bond_conversion_entry import BondConversionEntry
 from lusid.models.schedule import Schedule
 
@@ -29,14 +29,14 @@ class BondConversionSchedule(Schedule):
     """
     identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The market identifier(s) of the share that the bond converts to. The instrument  will not fail validation if no identifier is supplied.")
     bond_conversion_entries: Optional[conlist(BondConversionEntry)] = Field(None, alias="bondConversionEntries", description="The dates at which the bond may be converted and associated information required about the conversion.")
-    conversion_trigger: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="conversionTrigger", description="Corporate event that triggers a conversion    Supported string (enumeration) values are: [NextEquityFinancing, IpoConversion, KnownDates, SoftCall].")
-    delivery_type: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="deliveryType", description="Is a conversion made into cash or into shares?    Supported string (enumeration) values are: [Cash, Physical].")
-    exercise_type: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="exerciseType", description="The exercise type of the conversion schedule (American or European).  For American type, the bond is convertible from a given exercise date until the next date in the schedule, or until it matures.  For European type, the bond is only convertible on the given exercise date.    Supported string (enumeration) values are: [European, Bermudan, American].")
+    conversion_trigger:  StrictStr = Field(...,alias="conversionTrigger", description="Corporate event that triggers a conversion    Supported string (enumeration) values are: [NextEquityFinancing, IpoConversion, KnownDates, SoftCall].") 
+    delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Is a conversion made into cash or into shares?    Supported string (enumeration) values are: [Cash, Physical].") 
+    exercise_type:  StrictStr = Field(...,alias="exerciseType", description="The exercise type of the conversion schedule (American or European).  For American type, the bond is convertible from a given exercise date until the next date in the schedule, or until it matures.  For European type, the bond is only convertible on the given exercise date.    Supported string (enumeration) values are: [European, Bermudan, American].") 
     includes_accrued: Optional[StrictBool] = Field(None, alias="includesAccrued", description="Set this to true if a accrued interest is included in the conversion. Defaults to true.")
     mandatory_conversion: Optional[StrictBool] = Field(None, alias="mandatoryConversion", description="Set this to true if a conversion is mandatory if the trigger occurs. Defaults to false.")
     notification_period_end: Optional[datetime] = Field(None, alias="notificationPeriodEnd", description="The last day in the notification period for the conversion of the bond")
     notification_period_start: Optional[datetime] = Field(None, alias="notificationPeriodStart", description="The first day in the notification period for the conversion of the bond")
-    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid")
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "identifiers", "bondConversionEntries", "conversionTrigger", "deliveryType", "exerciseType", "includesAccrued", "mandatoryConversion", "notificationPeriodEnd", "notificationPeriodStart"]
 

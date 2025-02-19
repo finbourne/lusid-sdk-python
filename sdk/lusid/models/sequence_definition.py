@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 
@@ -34,7 +34,7 @@ class SequenceDefinition(BaseModel):
     start: StrictInt = Field(..., description="The start value of the sequence")
     value: Optional[StrictInt] = Field(None, description="The last used value of the sequence")
     cycle: StrictBool = Field(..., description="Indicates if the sequence would start from minimun value once it reaches maximum value. If set to false, a failure would return if the sequence reaches maximum value.")
-    pattern: Optional[StrictStr] = Field(None, description="The pattern to be used to generate next values in the sequence.")
+    pattern:  Optional[StrictStr] = Field(None,alias="pattern", description="The pattern to be used to generate next values in the sequence.") 
     links: Optional[conlist(Link)] = None
     __properties = ["id", "increment", "minValue", "maxValue", "start", "value", "cycle", "pattern", "links"]
 

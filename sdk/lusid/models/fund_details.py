@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class FundDetails(BaseModel):
     """
     The details of a Fund.  # noqa: E501
     """
-    currency: Optional[StrictStr] = Field(None, description="The currency of the fund which is the same as the base currency of all the portfolios of the fund's Abor.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency of the fund which is the same as the base currency of all the portfolios of the fund's Abor.") 
     __properties = ["currency"]
 
     class Config:

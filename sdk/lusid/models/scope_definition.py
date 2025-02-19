@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class ScopeDefinition(BaseModel):
     """
     A list of scopes.  # noqa: E501
     """
-    scope: constr(strict=True, min_length=1) = Field(..., description="The unique identifier for the scope.")
+    scope:  StrictStr = Field(...,alias="scope", description="The unique identifier for the scope.") 
     __properties = ["scope"]
 
     class Config:

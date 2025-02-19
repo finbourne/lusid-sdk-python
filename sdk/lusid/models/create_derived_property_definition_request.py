@@ -19,20 +19,20 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 from lusid.models.resource_id import ResourceId
 
 class CreateDerivedPropertyDefinitionRequest(BaseModel):
     """
     CreateDerivedPropertyDefinitionRequest
     """
-    domain: StrictStr = Field(..., description="The domain that the property exists in. Not all available values are currently supported, please check the documentation: https://support.lusid.com/knowledgebase/article/KA-01719/. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, StagingRuleSet, IdentifierDefinition")
-    scope: StrictStr = Field(..., description="The scope that the property exists in.")
-    code: StrictStr = Field(..., description="The code of the property. Together with the domain and scope this uniquely identifies the property.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the property.")
+    domain:  StrictStr = Field(...,alias="domain", description="The domain that the property exists in. Not all available values are currently supported, please check the documentation: https://support.lusid.com/knowledgebase/article/KA-01719/. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, StagingRuleSet, IdentifierDefinition") 
+    scope:  StrictStr = Field(...,alias="scope", description="The scope that the property exists in.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the property. Together with the domain and scope this uniquely identifies the property.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
-    property_description: Optional[constr(strict=True, max_length=512)] = Field(None, alias="propertyDescription", description="Describes the property")
-    derivation_formula: constr(strict=True, min_length=1) = Field(..., alias="derivationFormula", description="The rule that defines how data is composed for a derived property.")
+    property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
+    derivation_formula:  StrictStr = Field(...,alias="derivationFormula", description="The rule that defines how data is composed for a derived property.") 
     is_filterable: StrictBool = Field(..., alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
     __properties = ["domain", "scope", "code", "displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable"]
 

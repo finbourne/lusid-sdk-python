@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
@@ -28,8 +28,8 @@ class ReconciliationBreak(BaseModel):
     """
     A reconciliation break  # noqa: E501
     """
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies.")
-    instrument_uid: constr(strict=True, min_length=1) = Field(..., alias="instrumentUid", description="Unique instrument identifier")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
+    instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="Unique instrument identifier") 
     sub_holding_keys: Dict[str, PerpetualProperty] = Field(..., alias="subHoldingKeys", description="Any other properties that comprise the Sub-Holding Key")
     left_units: Union[StrictFloat, StrictInt] = Field(..., alias="leftUnits", description="Units from the left hand side")
     right_units: Union[StrictFloat, StrictInt] = Field(..., alias="rightUnits", description="Units from the right hand side")

@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class CustomDataModelPropertySpecification(BaseModel):
     """
     CustomDataModelPropertySpecification
     """
-    property_key: StrictStr = Field(..., alias="propertyKey", description="The property key that is required/allowed on the bound entity.")
+    property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key that is required/allowed on the bound entity.") 
     required: Optional[StrictBool] = Field(None, description="Whether property is required or allowed.")
     __properties = ["propertyKey", "required"]
 

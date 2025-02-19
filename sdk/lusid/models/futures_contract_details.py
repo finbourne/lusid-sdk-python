@@ -19,27 +19,27 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 
 class FuturesContractDetails(BaseModel):
     """
     Most, if not all, information about contracts is standardized. See, e.g. https://www.cmegroup.com/ for  common codes and similar data. This appears to be in common use by well known market information providers, e.g. Bloomberg and Refinitiv.  # noqa: E501
     """
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="Currency in which the contract is paid.")
-    fgn_ccy: Optional[StrictStr] = Field(None, alias="fgnCcy", description="Currency of the underlying, for use with FX Futures")
-    asset_class: Optional[StrictStr] = Field(None, alias="assetClass", description="The asset class of the underlying. Optional and will default to Unknown if not set.    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].")
-    contract_code: constr(strict=True, min_length=1) = Field(..., alias="contractCode", description="The contract code used by the exchange, e.g. “CL” for Crude Oil, “ES” for E-mini SP 500, “FGBL” for Bund Futures, etc.")
-    contract_month: Optional[StrictStr] = Field(None, alias="contractMonth", description="Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Currency in which the contract is paid.") 
+    fgn_ccy:  Optional[StrictStr] = Field(None,alias="fgnCcy", description="Currency of the underlying, for use with FX Futures") 
+    asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="The asset class of the underlying. Optional and will default to Unknown if not set.    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].") 
+    contract_code:  StrictStr = Field(...,alias="contractCode", description="The contract code used by the exchange, e.g. “CL” for Crude Oil, “ES” for E-mini SP 500, “FGBL” for Bund Futures, etc.") 
+    contract_month:  Optional[StrictStr] = Field(None,alias="contractMonth", description="Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].") 
     contract_size: Union[StrictFloat, StrictInt] = Field(..., alias="contractSize", description="Size of a single contract.")
-    convention: Optional[StrictStr] = Field(None, description="If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].")
-    country: Optional[StrictStr] = Field(None, description="Country (code) for the exchange.")
-    description: Optional[StrictStr] = Field(None, description="Description of contract.")
-    exchange_code: constr(strict=True, min_length=1) = Field(..., alias="exchangeCode", description="Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code).")
-    exchange_name: Optional[StrictStr] = Field(None, alias="exchangeName", description="Exchange name (for when code is not automatically recognised).")
+    convention:  Optional[StrictStr] = Field(None,alias="convention", description="If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].") 
+    country:  Optional[StrictStr] = Field(None,alias="country", description="Country (code) for the exchange.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description of contract.") 
+    exchange_code:  StrictStr = Field(...,alias="exchangeCode", description="Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code).") 
+    exchange_name:  Optional[StrictStr] = Field(None,alias="exchangeName", description="Exchange name (for when code is not automatically recognised).") 
     ticker_step: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="tickerStep", description="Minimal step size change in ticker.")
     unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unitValue", description="The value in the currency of a 1 unit change in the contract price.")
     calendars: Optional[conlist(StrictStr)] = Field(None, description="Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).")
-    delivery_type: Optional[StrictStr] = Field(None, alias="deliveryType", description="Delivery type to be used on settling the contract.  Optional: Defaults to DeliveryType.Physical if not provided.    Supported string (enumeration) values are: [Cash, Physical].")
+    delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Delivery type to be used on settling the contract.  Optional: Defaults to DeliveryType.Physical if not provided.    Supported string (enumeration) values are: [Cash, Physical].") 
     __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType"]
 
     class Config:

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -33,12 +33,12 @@ class BlockedOrderRequest(BaseModel):
     order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     id: ResourceId = Field(...)
-    state: Optional[StrictStr] = Field(None, description="The order's state (examples: New, PartiallyFilled, ...)")
+    state:  Optional[StrictStr] = Field(None,alias="state", description="The order's state (examples: New, PartiallyFilled, ...)") 
     var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the order was made")
     price: Optional[CurrencyAndAmount] = None
     order_instruction: Optional[ResourceId] = Field(None, alias="orderInstruction")
     package: Optional[ResourceId] = None
-    side: Optional[StrictStr] = Field(None, description="The client's representation of the order's side (buy, sell, short, etc)")
+    side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
     __properties = ["properties", "quantity", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side"]
 
     class Config:

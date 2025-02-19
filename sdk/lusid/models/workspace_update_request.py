@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class WorkspaceUpdateRequest(BaseModel):
     """
     A request to update a workspace.  # noqa: E501
     """
-    description: constr(strict=True, max_length=256, min_length=1) = Field(..., description="A friendly description for the workspace.")
+    description:  StrictStr = Field(...,alias="description", description="A friendly description for the workspace.") 
     __properties = ["description"]
 
     class Config:

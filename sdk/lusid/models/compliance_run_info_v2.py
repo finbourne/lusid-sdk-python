@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRunInfoV2(BaseModel):
@@ -29,8 +29,8 @@ class ComplianceRunInfoV2(BaseModel):
     run_id: ResourceId = Field(..., alias="runId")
     instigated_at: datetime = Field(..., alias="instigatedAt")
     completed_at: datetime = Field(..., alias="completedAt")
-    schedule: constr(strict=True, min_length=1) = Field(...)
-    instigated_by: constr(strict=True, min_length=1) = Field(..., alias="instigatedBy")
+    schedule:  StrictStr = Field(...,alias="schedule") 
+    instigated_by:  StrictStr = Field(...,alias="instigatedBy") 
     __properties = ["runId", "instigatedAt", "completedAt", "schedule", "instigatedBy"]
 
     class Config:

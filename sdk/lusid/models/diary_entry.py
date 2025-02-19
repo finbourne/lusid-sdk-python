@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -29,12 +29,12 @@ class DiaryEntry(BaseModel):
     """
     DiaryEntry
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     abor_id: Optional[ResourceId] = Field(None, alias="aborId")
-    diary_entry_code: Optional[StrictStr] = Field(None, alias="diaryEntryCode", description="The code of the diary entry.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the diary entry.")
-    name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The name of the diary entry.")
-    status: constr(strict=True, min_length=1) = Field(..., description="The status of the diary entry. Statuses are constrained and defaulted by 'Type' specified.   Type 'Other' defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.  Type 'PeriodBoundary' defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.  Type 'ValuationPoint' defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised.")
+    diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="The code of the diary entry.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the diary entry.") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the diary entry.") 
+    status:  StrictStr = Field(...,alias="status", description="The status of the diary entry. Statuses are constrained and defaulted by 'Type' specified.   Type 'Other' defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.  Type 'PeriodBoundary' defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.  Type 'ValuationPoint' defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised.") 
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     previous_entry_time: Optional[datetime] = Field(None, alias="previousEntryTime", description="The entry time of the previous diary entry.")
@@ -42,16 +42,6 @@ class DiaryEntry(BaseModel):
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["href", "aborId", "diaryEntryCode", "type", "name", "status", "effectiveAt", "queryAsAt", "previousEntryTime", "properties", "version", "links"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
 from lusid.models.resource_id import ResourceId
 
@@ -29,8 +29,8 @@ class ComplianceSummaryRuleResult(BaseModel):
     """
     rule_id: ResourceId = Field(..., alias="ruleId")
     template_id: ResourceId = Field(..., alias="templateId")
-    variation: constr(strict=True, min_length=1) = Field(...)
-    rule_status: constr(strict=True, min_length=1) = Field(..., alias="ruleStatus")
+    variation:  StrictStr = Field(...,alias="variation") 
+    rule_status:  StrictStr = Field(...,alias="ruleStatus") 
     affected_portfolios: conlist(ResourceId) = Field(..., alias="affectedPortfolios")
     affected_orders: conlist(ResourceId) = Field(..., alias="affectedOrders")
     parameters_used: Dict[str, StrictStr] = Field(..., alias="parametersUsed")

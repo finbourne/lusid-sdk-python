@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class TransactionTypeCalculation(BaseModel):
     """
     TransactionTypeCalculation
     """
-    type: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The type of calculation to perform")
-    side: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, description="The side to which the calculation is applied")
-    formula: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The formula used to derive the total consideration amount when it is not provided on the transaction")
+    type:  StrictStr = Field(...,alias="type", description="The type of calculation to perform") 
+    side:  Optional[StrictStr] = Field(None,alias="side", description="The side to which the calculation is applied") 
+    formula:  Optional[StrictStr] = Field(None,alias="formula", description="The formula used to derive the total consideration amount when it is not provided on the transaction") 
     __properties = ["type", "side", "formula"]
 
     class Config:

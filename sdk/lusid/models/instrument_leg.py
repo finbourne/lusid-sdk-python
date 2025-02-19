@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 import lusid.models
 
@@ -27,7 +27,7 @@ class InstrumentLeg(LusidInstrument):
     """
     Base class for representing instrument legs in LUSID.  An instrument leg describes a set of cashflows that are paid at a set of points in time according to some set of conventions.  This base class should not be directly instantiated; only its inheritors should be used.  # noqa: E501
     """
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType"]
 

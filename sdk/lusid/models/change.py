@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 
@@ -27,7 +27,7 @@ class Change(BaseModel):
     """
     The time an entity was modified (amendment and/or historical correction).  # noqa: E501
     """
-    href: Optional[StrictStr] = None
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     entity_id: ResourceId = Field(..., alias="entityId")
     corrected: StrictBool = Field(...)
     correction_effective_at: Optional[datetime] = Field(None, alias="correctionEffectiveAt")

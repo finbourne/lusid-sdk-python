@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 
 class Cash(LusidInstrument):
     """
     LUSID representation of Cash which is the sum of one or more cashflows from the past.  # noqa: E501
     """
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     amount: Union[StrictFloat, StrictInt] = Field(..., description="Cash amount.")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "domCcy", "amount"]
 

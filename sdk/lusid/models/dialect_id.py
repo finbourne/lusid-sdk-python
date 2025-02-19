@@ -19,47 +19,19 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class DialectId(BaseModel):
     """
     Unique identifier of a given Dialect  # noqa: E501
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The Scope of the dialect.")
-    vendor: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The vendor of the dialect, the entity that created it. e.g. ISDA, FINBOURNE.")
-    source_system: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="sourceSystem", description="The source system of the dialect, the system that understands it. e.g. LUSID, QuantLib.")
-    version: constr(strict=True, max_length=30, min_length=1) = Field(..., description="The semantic version of the dialect: MAJOR.MINOR.PATCH.")
-    serialisation_format: constr(strict=True, min_length=1) = Field(..., alias="serialisationFormat", description="The serialisation format of a document in this dialect. e.g. JSON, XML.")
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The type of entity this dialect describes e.g. Instrument.")
+    scope:  StrictStr = Field(...,alias="scope", description="The Scope of the dialect.") 
+    vendor:  StrictStr = Field(...,alias="vendor", description="The vendor of the dialect, the entity that created it. e.g. ISDA, FINBOURNE.") 
+    source_system:  StrictStr = Field(...,alias="sourceSystem", description="The source system of the dialect, the system that understands it. e.g. LUSID, QuantLib.") 
+    version:  StrictStr = Field(...,alias="version", description="The semantic version of the dialect: MAJOR.MINOR.PATCH.") 
+    serialisation_format:  StrictStr = Field(...,alias="serialisationFormat", description="The serialisation format of a document in this dialect. e.g. JSON, XML.") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The type of entity this dialect describes e.g. Instrument.") 
     __properties = ["scope", "vendor", "sourceSystem", "version", "serialisationFormat", "entityType"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('vendor')
-    def vendor_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('source_system')
-    def source_system_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('version')
-    def version_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$", value):
-            raise ValueError(r"must validate the regular expression /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

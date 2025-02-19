@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.instrument_event_instruction import InstrumentEventInstruction
 from lusid.models.link import Link
 
@@ -27,10 +27,10 @@ class PagedResourceListOfInstrumentEventInstruction(BaseModel):
     """
     PagedResourceListOfInstrumentEventInstruction
     """
-    next_page: Optional[StrictStr] = Field(None, alias="nextPage")
-    previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
+    next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
+    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
     values: conlist(InstrumentEventInstruction) = Field(...)
-    href: Optional[StrictStr] = None
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     links: Optional[conlist(Link)] = None
     __properties = ["nextPage", "previousPage", "values", "href", "links"]
 

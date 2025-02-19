@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 
@@ -31,7 +31,7 @@ class AdjustHoldingRequest(BaseModel):
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="Set of unique transaction properties and associated values to store with the holding adjustment transaction automatically created by LUSID. Each property must be from the 'Transaction' domain.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Set of unique holding properties and associated values to store with the target holding. Each property must be from the 'Holding' domain.")
     tax_lots: conlist(TargetTaxLotRequest) = Field(..., alias="taxLots", description="The tax-lots that together make up the target holding.")
-    currency: Optional[StrictStr] = Field(None, description="The Holding currency. This needs to be equal with the one on the TaxLot -> cost if one is specified")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency. This needs to be equal with the one on the TaxLot -> cost if one is specified") 
     __properties = ["instrumentIdentifiers", "subHoldingKeys", "properties", "taxLots", "currency"]
 
     class Config:

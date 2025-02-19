@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -33,15 +33,15 @@ class ExecutionRequest(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
     quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
-    state: constr(strict=True, min_length=1) = Field(..., description="The state of this execution (typically a FIX state; Open, Filled, etc).")
-    side: constr(strict=True, min_length=1) = Field(..., description="The side (Buy, Sell, ...) of this execution.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of this execution (Market, Limit, etc).")
+    state:  StrictStr = Field(...,alias="state", description="The state of this execution (typically a FIX state; Open, Filled, etc).") 
+    side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this execution.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of this execution (Market, Limit, etc).") 
     created_date: datetime = Field(..., alias="createdDate", description="The active date of this execution.")
     settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The (optional) settlement date for this execution")
     price: CurrencyAndAmount = Field(...)
-    settlement_currency: StrictStr = Field(..., alias="settlementCurrency", description="The execution's settlement currency.")
+    settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="The execution's settlement currency.") 
     settlement_currency_fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="settlementCurrencyFxRate", description="The exectuion's settlement currency rate.")
-    counterparty: constr(strict=True, min_length=1) = Field(..., description="The market entity this placement is placed with.")
+    counterparty:  StrictStr = Field(...,alias="counterparty", description="The market entity this placement is placed with.") 
     average_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="averagePrice", description="The average price of all executions for a given placement at the time of upsert")
     __properties = ["id", "placementId", "properties", "instrumentIdentifiers", "quantity", "state", "side", "type", "createdDate", "settlementDate", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "averagePrice"]
 

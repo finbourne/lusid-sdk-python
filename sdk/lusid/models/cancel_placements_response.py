@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -29,7 +29,7 @@ class CancelPlacementsResponse(BaseModel):
     """
     CancelPlacementsResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: Optional[Dict[str, CancelledPlacementResult]] = Field(None, description="The placements which have been successfully cancelled.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The placements that could not be cancelled, along with a reason for their failure.")
     metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = Field(None, description="Meta data associated with the cancellation event.")

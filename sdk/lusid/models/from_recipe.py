@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
 
 class FromRecipe(BaseModel):
     """
     FromRecipe
     """
-    scope: Optional[StrictStr] = None
-    code: Optional[StrictStr] = None
+    scope:  Optional[StrictStr] = Field(None,alias="scope") 
+    code:  Optional[StrictStr] = Field(None,alias="code") 
     __properties = ["scope", "code"]
 
     class Config:

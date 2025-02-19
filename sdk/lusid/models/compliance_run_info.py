@@ -19,16 +19,16 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 
 class ComplianceRunInfo(BaseModel):
     """
     ComplianceRunInfo
     """
-    run_id: constr(strict=True, min_length=1) = Field(..., alias="runId", description="The unique identifier of a compliance run")
+    run_id:  StrictStr = Field(...,alias="runId", description="The unique identifier of a compliance run") 
     instigated_at: datetime = Field(..., alias="instigatedAt", description="The time the compliance run was launched (e.g. button pressed). Currently it is also both the as at and effective at time in whichthe rule set and portfolio data (including any pending trades if the run is pretrade) is taken for the caluation, although it may be possible to run compliance for historical effective at and as at dates in the future.")
     completed_at: datetime = Field(..., alias="completedAt", description="The time the compliance run calculation was completed")
-    schedule: constr(strict=True, min_length=1) = Field(..., description="Whether the compliance run was pre or post trade")
+    schedule:  StrictStr = Field(...,alias="schedule", description="Whether the compliance run was pre or post trade") 
     all_rules_passed: StrictBool = Field(..., alias="allRulesPassed", description="True if all rules passed, for all the portfolios they were assigned to")
     has_results: StrictBool = Field(..., alias="hasResults", description="False when no results have been returned eg. when no rules exist")
     as_at: datetime = Field(..., alias="asAt", description="Legacy AsAt time for backwards compatibility")

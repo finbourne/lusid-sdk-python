@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 
@@ -27,9 +27,9 @@ class BranchStep(ComplianceStep):
     """
     BranchStep
     """
-    label: constr(strict=True, min_length=1) = Field(..., description="The label of the compliance step")
+    label:  StrictStr = Field(...,alias="label", description="The label of the compliance step") 
     parameters: conlist(ComplianceTemplateParameter) = Field(..., description="Parameters required for the step")
-    compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep")
+    compliance_step_type:  StrictStr = Field(...,alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceStepType", "label", "parameters"]
 

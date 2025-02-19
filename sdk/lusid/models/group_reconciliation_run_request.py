@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.group_reconciliation_dates import GroupReconciliationDates
 
 class GroupReconciliationRunRequest(BaseModel):
     """
     GroupReconciliationRunRequest
     """
-    instance_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="instanceId", description="Reconciliation run Id. Consists of run type (manual or workflow) and identifier.")
+    instance_id:  StrictStr = Field(...,alias="instanceId", description="Reconciliation run Id. Consists of run type (manual or workflow) and identifier.") 
     dates_to_reconcile: Optional[GroupReconciliationDates] = Field(None, alias="datesToReconcile")
     __properties = ["instanceId", "datesToReconcile"]
 

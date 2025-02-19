@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class GroupReconciliationDatePair(BaseModel):
     """

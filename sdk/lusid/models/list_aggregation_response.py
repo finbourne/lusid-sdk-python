@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.aggregation_measure_failure_detail import AggregationMeasureFailureDetail
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -31,9 +31,9 @@ class ListAggregationResponse(BaseModel):
     """
     aggregation_effective_at: Optional[datetime] = Field(None, alias="aggregationEffectiveAt")
     aggregation_as_at: Optional[datetime] = Field(None, alias="aggregationAsAt")
-    href: Optional[StrictStr] = None
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     data: Optional[conlist(Dict[str, Any])] = None
-    aggregation_currency: Optional[StrictStr] = Field(None, alias="aggregationCurrency")
+    aggregation_currency:  Optional[StrictStr] = Field(None,alias="aggregationCurrency") 
     data_schema: Optional[ResultDataSchema] = Field(None, alias="dataSchema")
     aggregation_failures: Optional[conlist(AggregationMeasureFailureDetail)] = Field(None, alias="aggregationFailures")
     recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")

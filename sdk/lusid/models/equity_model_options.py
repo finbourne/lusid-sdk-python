@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.model_options import ModelOptions
 
 class EquityModelOptions(ModelOptions):
     """
     Model options for equity related pricing.  # noqa: E501
     """
-    equity_forward_projection_type: constr(strict=True, min_length=1) = Field(..., alias="equityForwardProjectionType", description="Determines how forward equity prices should be projected.                Supported string (enumeration) values are: [FlatForwardCurveFromSpot, EquityCurveByPrices, ForwardProjectedFromRatesCurve].")
-    model_options_type: StrictStr = Field(..., alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions")
+    equity_forward_projection_type:  StrictStr = Field(...,alias="equityForwardProjectionType", description="Determines how forward equity prices should be projected.                Supported string (enumeration) values are: [FlatForwardCurveFromSpot, EquityCurveByPrices, ForwardProjectedFromRatesCurve].") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "equityForwardProjectionType"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.property_value import PropertyValue
 from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
@@ -28,11 +28,11 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
     """
     StagedModificationsRequestedChangeInterval
     """
-    attribute_name: Optional[StrictStr] = Field(None, alias="attributeName", description="Name of the property the change applies to.")
+    attribute_name:  Optional[StrictStr] = Field(None,alias="attributeName", description="Name of the property the change applies to.") 
     effective_range: Optional[StagedModificationEffectiveRange] = Field(None, alias="effectiveRange")
     previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
     new_value: Optional[PropertyValue] = Field(None, alias="newValue")
-    as_at_basis: Optional[StrictStr] = Field(None, alias="asAtBasis", description="Whether the change represents the modification when the request was made or the modification as it would be at the latest time.")
+    as_at_basis:  Optional[StrictStr] = Field(None,alias="asAtBasis", description="Whether the change represents the modification when the request was made or the modification as it would be at the latest time.") 
     links: Optional[conlist(Link)] = None
     __properties = ["attributeName", "effectiveRange", "previousValue", "newValue", "asAtBasis", "links"]
 

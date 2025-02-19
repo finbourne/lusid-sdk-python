@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -29,7 +29,7 @@ class ComplianceTemplate(BaseModel):
     ComplianceTemplate
     """
     id: ResourceId = Field(...)
-    description: constr(strict=True, min_length=1) = Field(..., description="The description of the Compliance Template")
+    description:  StrictStr = Field(...,alias="description", description="The description of the Compliance Template") 
     tags: Optional[conlist(StrictStr)] = Field(None, description="Tags for a Compliance Template")
     variations: conlist(ComplianceTemplateVariation) = Field(..., description="Variation details of a Compliance Template")
     links: Optional[conlist(Link)] = None

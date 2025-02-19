@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr 
 from lusid.models.group_reconciliation_dates import GroupReconciliationDates
 from lusid.models.group_reconciliation_instance_id import GroupReconciliationInstanceId
 from lusid.models.group_reconciliation_result_statuses import GroupReconciliationResultStatuses
@@ -35,7 +35,7 @@ class GroupReconciliationSummary(BaseModel):
     """
     run_details: Optional[GroupReconciliationRunDetails] = Field(None, alias="runDetails")
     group_reconciliation_definition_id: Optional[ResourceId] = Field(None, alias="groupReconciliationDefinitionId")
-    reconciliation_type: constr(strict=True, min_length=1) = Field(..., alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"")
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
     instance_id: GroupReconciliationInstanceId = Field(..., alias="instanceId")
     dates_reconciled: GroupReconciliationDates = Field(..., alias="datesReconciled")
     reconciliation_run_as_at: datetime = Field(..., alias="reconciliationRunAsAt", description="The date and time the reconciliation was run")

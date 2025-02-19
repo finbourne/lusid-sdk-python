@@ -19,30 +19,20 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 
 class TransactionConfigurationTypeAlias(BaseModel):
     """
     TransactionConfigurationTypeAlias
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The transaction type")
-    description: constr(strict=True, min_length=1) = Field(..., description="Brief description of the transaction")
-    transaction_class: constr(strict=True, min_length=1) = Field(..., alias="transactionClass", description="Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut")
-    transaction_group: Optional[StrictStr] = Field(None, alias="transactionGroup", description="Group is a set of codes related to a source, or sync. DEPRECATED: This field will be removed, use `Source` instead")
-    source: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, description="Used to group a set of transaction types")
-    transaction_roles: StrictStr = Field(..., alias="transactionRoles", description=". The available values are: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles")
+    type:  StrictStr = Field(...,alias="type", description="The transaction type") 
+    description:  StrictStr = Field(...,alias="description", description="Brief description of the transaction") 
+    transaction_class:  StrictStr = Field(...,alias="transactionClass", description="Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut") 
+    transaction_group:  Optional[StrictStr] = Field(None,alias="transactionGroup", description="Group is a set of codes related to a source, or sync. DEPRECATED: This field will be removed, use `Source` instead") 
+    source:  Optional[StrictStr] = Field(None,alias="source", description="Used to group a set of transaction types") 
+    transaction_roles:  StrictStr = Field(...,alias="transactionRoles", description=". The available values are: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles") 
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.")
     __properties = ["type", "description", "transactionClass", "transactionGroup", "source", "transactionRoles", "isDefault"]
-
-    @validator('source')
-    def source_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     @validator('transaction_roles')
     def transaction_roles_validate_enum(cls, value):

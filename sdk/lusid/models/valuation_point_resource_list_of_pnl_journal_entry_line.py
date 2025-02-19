@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.diary_entry import DiaryEntry
 from lusid.models.link import Link
 from lusid.models.pnl_journal_entry_line import PnlJournalEntryLine
@@ -32,9 +32,9 @@ class ValuationPointResourceListOfPnlJournalEntryLine(BaseModel):
     start_valuation_point: Optional[DiaryEntry] = Field(None, alias="startValuationPoint")
     version: Version = Field(...)
     values: conlist(PnlJournalEntryLine) = Field(...)
-    href: Optional[StrictStr] = None
-    next_page: Optional[StrictStr] = Field(None, alias="nextPage")
-    previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
+    href:  Optional[StrictStr] = Field(None,alias="href") 
+    next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
+    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
     links: Optional[conlist(Link)] = None
     __properties = ["startValuationPoint", "version", "values", "href", "nextPage", "previousPage", "links"]
 

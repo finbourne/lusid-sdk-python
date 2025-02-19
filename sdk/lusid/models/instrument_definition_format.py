@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class InstrumentDefinitionFormat(BaseModel):
     """
     What is the provenance of an instrument. This defines who creates/owns it, what format it is in (e.g. a proprietary format or a common and known one)              and what the version of that is.  # noqa: E501
     """
-    source_system: constr(strict=True, min_length=1) = Field(..., alias="sourceSystem", description="which source system does the format originate from")
-    vendor: constr(strict=True, min_length=1) = Field(..., description="An instrument will potentially have been created by any number of different organisations. Some will be understood completely (e.g. LUSID's), some won't.              The provenance of an instrument indicates who \"owns\" the associated format.")
-    version: constr(strict=True, min_length=1) = Field(..., description="Version of the document. Would be preferable to avoid the need, but LUSID will not control other organisations' trade formats.")
+    source_system:  StrictStr = Field(...,alias="sourceSystem", description="which source system does the format originate from") 
+    vendor:  StrictStr = Field(...,alias="vendor", description="An instrument will potentially have been created by any number of different organisations. Some will be understood completely (e.g. LUSID's), some won't.              The provenance of an instrument indicates who \"owns\" the associated format.") 
+    version:  StrictStr = Field(...,alias="version", description="Version of the document. Would be preferable to avoid the need, but LUSID will not control other organisations' trade formats.") 
     __properties = ["sourceSystem", "vendor", "version"]
 
     class Config:

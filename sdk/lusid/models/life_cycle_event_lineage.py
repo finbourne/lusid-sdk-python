@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class LifeCycleEventLineage(BaseModel):
     """
     The lineage of the event value  # noqa: E501
     """
-    event_type: Optional[StrictStr] = Field(None, alias="eventType", description="The type of the event")
-    instrument_type: Optional[StrictStr] = Field(None, alias="instrumentType", description="The instrument type of the instrument for the event.")
-    instrument_id: Optional[StrictStr] = Field(None, alias="instrumentId", description="The LUID of the instrument for the event.")
-    leg_id: Optional[StrictStr] = Field(None, alias="legId", description="Leg id for the event.")
-    source_transaction_id: Optional[StrictStr] = Field(None, alias="sourceTransactionId", description="The source transaction of the instrument for the event.")
+    event_type:  Optional[StrictStr] = Field(None,alias="eventType", description="The type of the event") 
+    instrument_type:  Optional[StrictStr] = Field(None,alias="instrumentType", description="The instrument type of the instrument for the event.") 
+    instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The LUID of the instrument for the event.") 
+    leg_id:  Optional[StrictStr] = Field(None,alias="legId", description="Leg id for the event.") 
+    source_transaction_id:  Optional[StrictStr] = Field(None,alias="sourceTransactionId", description="The source transaction of the instrument for the event.") 
     __properties = ["eventType", "instrumentType", "instrumentId", "legId", "sourceTransactionId"]
 
     class Config:

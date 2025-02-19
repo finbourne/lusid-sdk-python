@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.component_filter import ComponentFilter
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.model_property import ModelProperty
@@ -28,32 +28,15 @@ class FundConfigurationRequest(BaseModel):
     """
     FundConfigurationRequest
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
+    code:  StrictStr = Field(...,alias="code", description="") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     dealing_filters: conlist(ComponentFilter) = Field(..., alias="dealingFilters", description="The set of filters used to decide which JE lines are included in the dealing.")
     pnl_filters: conlist(ComponentFilter) = Field(..., alias="pnlFilters", description="The set of filters used to decide which JE lines are included in the PnL.")
     back_out_filters: conlist(ComponentFilter) = Field(..., alias="backOutFilters", description="The set of filters used to decide which JE lines are included in the back outs.")
     external_fee_filters: Optional[conlist(ExternalFeeComponentFilter)] = Field(None, alias="externalFeeFilters", description="The set of filters used to decide which JE lines are used for inputting fees from an external source.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
     __properties = ["code", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "externalFeeFilters", "properties"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

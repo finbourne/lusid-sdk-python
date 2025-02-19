@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.instrument_event_instruction import InstrumentEventInstruction
 

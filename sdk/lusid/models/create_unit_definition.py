@@ -19,38 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class CreateUnitDefinition(BaseModel):
     """
     CreateUnitDefinition
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(...)
+    code:  StrictStr = Field(...,alias="code") 
+    display_name:  StrictStr = Field(...,alias="displayName") 
+    description:  StrictStr = Field(...,alias="description") 
     details: Optional[Dict[str, StrictStr]] = None
     __properties = ["code", "displayName", "description", "details"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

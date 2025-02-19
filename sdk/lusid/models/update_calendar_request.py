@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.weekend_mask import WeekendMask
 
@@ -28,16 +28,9 @@ class UpdateCalendarRequest(BaseModel):
     UpdateCalendarRequest
     """
     weekend_mask: WeekendMask = Field(..., alias="weekendMask")
-    source_provider: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="sourceProvider")
+    source_provider:  StrictStr = Field(...,alias="sourceProvider") 
     properties: conlist(ModelProperty) = Field(...)
     __properties = ["weekendMask", "sourceProvider", "properties"]
-
-    @validator('source_provider')
-    def source_provider_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

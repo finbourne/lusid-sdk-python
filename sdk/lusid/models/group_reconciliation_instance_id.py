@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class GroupReconciliationInstanceId(BaseModel):
     """
     GroupReconciliationInstanceId
     """
-    run_id_type: constr(strict=True, min_length=1) = Field(..., alias="runIdType", description="Type of the reconciliation run, manual or automatic (via the workflow). \"Manual\" | \"WorkflowServiceTaskId\"")
-    run_id_value: constr(strict=True, min_length=1) = Field(..., alias="runIdValue", description="Reconciliation run identifier: a manually-provided key or taskId.")
+    run_id_type:  StrictStr = Field(...,alias="runIdType", description="Type of the reconciliation run, manual or automatic (via the workflow). \"Manual\" | \"WorkflowServiceTaskId\"") 
+    run_id_value:  StrictStr = Field(...,alias="runIdValue", description="Reconciliation run identifier: a manually-provided key or taskId.") 
     __properties = ["runIdType", "runIdValue"]
 
     class Config:

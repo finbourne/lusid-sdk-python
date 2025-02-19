@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class TransactionPropertyMap(BaseModel):
     """
     TransactionPropertyMap
     """
-    property_key: Optional[StrictStr] = Field(None, alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}.")
-    value: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}.") 
+    value:  Optional[StrictStr] = Field(None,alias="value") 
     __properties = ["propertyKey", "value"]
 
     class Config:

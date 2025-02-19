@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.typed_resource_id import TypedResourceId
 
 class CounterpartySignatory(BaseModel):
     """
     The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user.  The CounterpartySignatory represents the 'other side' of the agreement.  It comprises a name and identifier for a Legal Entity in LUSID.  # noqa: E501
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="A user-defined name or label for the counterparty signatory.  There is no requirement for this to match the \"displayName\" of the legal entity.")
+    name:  StrictStr = Field(...,alias="name", description="A user-defined name or label for the counterparty signatory.  There is no requirement for this to match the \"displayName\" of the legal entity.") 
     legal_entity_identifier: TypedResourceId = Field(..., alias="legalEntityIdentifier")
     __properties = ["name", "legalEntityIdentifier"]
 

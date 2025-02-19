@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class TradeTicket(BaseModel):
     """
     The base class for representing a Trade Ticket in LUSID.  # noqa: E501
     """
-    trade_ticket_type: StrictStr = Field(..., alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket")
+    trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket") 
     __properties = ["tradeTicketType"]
 
     @validator('trade_ticket_type')

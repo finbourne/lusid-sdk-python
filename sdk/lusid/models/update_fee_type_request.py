@@ -19,27 +19,17 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.component_transaction import ComponentTransaction
 
 class UpdateFeeTypeRequest(BaseModel):
     """
     UpdateFeeTypeRequest
     """
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the fee type.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description of the fee type.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the fee type.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the fee type.") 
     component_transactions: conlist(ComponentTransaction, max_items=1000) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
     __properties = ["displayName", "description", "componentTransactions"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.order_by_spec import OrderBySpec
 from lusid.models.property_filter import PropertyFilter

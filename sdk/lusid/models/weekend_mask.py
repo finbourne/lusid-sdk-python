@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.day_of_week import DayOfWeek
 
 class WeekendMask(BaseModel):
@@ -27,15 +27,8 @@ class WeekendMask(BaseModel):
     WeekendMask
     """
     days: conlist(DayOfWeek) = Field(...)
-    time_zone: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="timeZone")
+    time_zone:  StrictStr = Field(...,alias="timeZone") 
     __properties = ["days", "timeZone"]
-
-    @validator('time_zone')
-    def time_zone_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

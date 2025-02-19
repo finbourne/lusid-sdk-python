@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, conlist, constr 
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_property_map import TransactionPropertyMap
 
@@ -27,8 +27,8 @@ class ComponentTransaction(BaseModel):
     """
     ComponentTransaction
     """
-    display_name: constr(strict=True, max_length=100, min_length=0) = Field(..., alias="displayName")
-    condition: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    display_name:  StrictStr = Field(...,alias="displayName") 
+    condition:  Optional[StrictStr] = Field(None,alias="condition") 
     transaction_field_map: TransactionFieldMap = Field(..., alias="transactionFieldMap")
     transaction_property_map: conlist(TransactionPropertyMap) = Field(..., alias="transactionPropertyMap")
     preserve_tax_lot_structure: Optional[StrictBool] = Field(None, alias="preserveTaxLotStructure", description="Controls if tax lot structure should be preserved when cost base is transferred to a new holding. For example in Spin Off instrument events.")

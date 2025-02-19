@@ -19,38 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 
 class TransactionTypePropertyMapping(BaseModel):
     """
     TransactionTypePropertyMapping
     """
-    property_key: StrictStr = Field(..., alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}")
-    map_from: Optional[StrictStr] = Field(None, alias="mapFrom", description="The Property Key of the Property to map from")
-    set_to: Optional[constr(strict=True, max_length=512, min_length=0)] = Field(None, alias="setTo", description="A pointer to the Property being mapped from")
-    template_from: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="templateFrom", description="The template that defines how the property value is constructed from transaction, instrument and portfolio details.")
+    property_key:  StrictStr = Field(...,alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}") 
+    map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The Property Key of the Property to map from") 
+    set_to:  Optional[StrictStr] = Field(None,alias="setTo", description="A pointer to the Property being mapped from") 
+    template_from:  Optional[StrictStr] = Field(None,alias="templateFrom", description="The template that defines how the property value is constructed from transaction, instrument and portfolio details.") 
     nullify: Optional[StrictBool] = Field(None, description="Flag to unset the Property Key for the mapping")
     __properties = ["propertyKey", "mapFrom", "setTo", "templateFrom", "nullify"]
-
-    @validator('set_to')
-    def set_to_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('template_from')
-    def template_from_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

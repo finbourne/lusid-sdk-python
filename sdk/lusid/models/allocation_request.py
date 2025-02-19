@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -35,15 +35,15 @@ class AllocationRequest(BaseModel):
     allocated_order_id: ResourceId = Field(..., alias="allocatedOrderId")
     id: ResourceId = Field(...)
     placement_ids: Optional[conlist(ResourceId)] = Field(None, alias="placementIds", description="A placement - also known as an order placed in the market - associated with this allocation.")
-    state: Optional[StrictStr] = Field(None, description="The state of this allocation.")
-    side: Optional[StrictStr] = Field(None, description="The side of this allocation (examples: Buy, Sell, ...).")
-    type: Optional[StrictStr] = Field(None, description="The type of order associated with this allocation (examples: Limit, Market, ...).")
+    state:  Optional[StrictStr] = Field(None,alias="state", description="The state of this allocation.") 
+    side:  Optional[StrictStr] = Field(None,alias="side", description="The side of this allocation (examples: Buy, Sell, ...).") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of order associated with this allocation (examples: Limit, Market, ...).") 
     settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The settlement date for this allocation.")
     var_date: Optional[datetime] = Field(None, alias="date", description="The date of this allocation.")
     price: Optional[CurrencyAndAmount] = None
-    settlement_currency: Optional[StrictStr] = Field(None, alias="settlementCurrency", description="The settlement currency of this allocation.")
+    settlement_currency:  Optional[StrictStr] = Field(None,alias="settlementCurrency", description="The settlement currency of this allocation.") 
     settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="settlementCurrencyFxRate", description="The settlement currency to allocation currency FX rate.")
-    counterparty: Optional[StrictStr] = Field(None, description="The counterparty for this allocation.")
+    counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="The counterparty for this allocation.") 
     execution_ids: Optional[conlist(ResourceId)] = Field(None, alias="executionIds", description="The executions associated with this allocation")
     __properties = ["properties", "instrumentIdentifiers", "quantity", "portfolioId", "allocatedOrderId", "id", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
@@ -29,10 +29,10 @@ class Person(BaseModel):
     """
     Person
     """
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the Person")
-    description: Optional[StrictStr] = Field(None, description="The description of the Person")
-    href: Optional[StrictStr] = Field(None, description="The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    lusid_person_id: Optional[StrictStr] = Field(None, alias="lusidPersonId", description="The unique LUSID Person Identifier of the Person.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the Person") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Person") 
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    lusid_person_id:  Optional[StrictStr] = Field(None,alias="lusidPersonId", description="The unique LUSID Person Identifier of the Person.") 
     identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Person.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Person.")

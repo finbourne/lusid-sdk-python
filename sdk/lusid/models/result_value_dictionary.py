@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.result_value import ResultValue
 
 class ResultValueDictionary(ResultValue):
@@ -27,7 +27,7 @@ class ResultValueDictionary(ResultValue):
     Result value for a collection of key-value pairs. Used for diagnostics associated to a cash flow, etc.  # noqa: E501
     """
     elements: Optional[Dict[str, ResultValue]] = Field(None, description="The dictionary elements")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "elements"]
 

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class Alias(BaseModel):
     """
     Alias
     """
-    attribute_name: constr(strict=True, max_length=576, min_length=0) = Field(..., alias="attributeName", description="The property key, identifier type, or field to be replaced by an alias.")
-    attribute_alias: constr(strict=True, max_length=128, min_length=0) = Field(..., alias="attributeAlias", description="The alias to replace the property key, identifier type, or field on the bound entity.")
+    attribute_name:  StrictStr = Field(...,alias="attributeName", description="The property key, identifier type, or field to be replaced by an alias.") 
+    attribute_alias:  StrictStr = Field(...,alias="attributeAlias", description="The alias to replace the property key, identifier type, or field on the bound entity.") 
     __properties = ["attributeName", "attributeAlias"]
 
     class Config:

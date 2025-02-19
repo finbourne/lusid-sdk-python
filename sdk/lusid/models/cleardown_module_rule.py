@@ -19,37 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class CleardownModuleRule(BaseModel):
     """
     A Cleardown rule  # noqa: E501
     """
-    rule_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="ruleId", description="The identifier for the Cleardown Rule.")
-    general_ledger_account_code: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The account to post the residual P&L to.")
-    rule_filter: constr(strict=True, max_length=16384, min_length=1) = Field(..., alias="ruleFilter", description="The filter syntax for the Cleardown Rule. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax.")
+    rule_id:  StrictStr = Field(...,alias="ruleId", description="The identifier for the Cleardown Rule.") 
+    general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The account to post the residual P&L to.") 
+    rule_filter:  StrictStr = Field(...,alias="ruleFilter", description="The filter syntax for the Cleardown Rule. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax.") 
     __properties = ["ruleId", "generalLedgerAccountCode", "ruleFilter"]
-
-    @validator('rule_id')
-    def rule_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('general_ledger_account_code')
-    def general_ledger_account_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('rule_filter')
-    def rule_filter_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

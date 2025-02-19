@@ -19,14 +19,14 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from lusid.models.link import Link
 
 class PeriodDiaryEntriesReopenedResponse(BaseModel):
     """
     PeriodDiaryEntriesReopenedResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.")
     as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the deletion was committed to LUSID.")
     period_diary_entries_removed: StrictInt = Field(..., alias="periodDiaryEntriesRemoved", description="Number of Diary Entries removed as a result of reopening periods")

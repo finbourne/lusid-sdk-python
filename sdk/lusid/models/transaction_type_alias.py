@@ -19,32 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 
 class TransactionTypeAlias(BaseModel):
     """
     TransactionTypeAlias
     """
-    type: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The transaction type")
-    description: constr(strict=True, max_length=512, min_length=1) = Field(..., description="Brief description of the transaction")
-    transaction_class: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="transactionClass", description="Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut")
-    transaction_roles: constr(strict=True, min_length=1) = Field(..., alias="transactionRoles", description="Transactions role within a class. E.g. Increase a long position")
+    type:  StrictStr = Field(...,alias="type", description="The transaction type") 
+    description:  StrictStr = Field(...,alias="description", description="Brief description of the transaction") 
+    transaction_class:  StrictStr = Field(...,alias="transactionClass", description="Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut") 
+    transaction_roles:  StrictStr = Field(...,alias="transactionRoles", description="Transactions role within a class. E.g. Increase a long position") 
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.")
     __properties = ["type", "description", "transactionClass", "transactionRoles", "isDefault"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('transaction_class')
-    def transaction_class_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

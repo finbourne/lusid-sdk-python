@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class CalendarDependency(EconomicDependency):
@@ -27,7 +27,7 @@ class CalendarDependency(EconomicDependency):
     For indicating a dependency upon calendar codes  # noqa: E501
     """
     calendars: conlist(StrictStr) = Field(..., description="The Codes of the calendars that are depended upon.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "calendars"]
 

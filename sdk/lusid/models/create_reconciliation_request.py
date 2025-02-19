@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.reconciliation_configuration import ReconciliationConfiguration
 from lusid.models.reconciliation_transactions import ReconciliationTransactions
@@ -29,9 +29,9 @@ class CreateReconciliationRequest(BaseModel):
     """
     CreateReconciliationRequest
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The unique identifier associated with the reconciliation")
-    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The name of the scheduled reconciliation")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description of the scheduled reconciliation")
+    code:  StrictStr = Field(...,alias="code", description="The unique identifier associated with the reconciliation") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the scheduled reconciliation") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the scheduled reconciliation") 
     is_portfolio_group: Optional[StrictBool] = Field(None, alias="isPortfolioGroup", description="Specifies whether reconciliation is between portfolios or portfolio groups")
     left: Optional[ResourceId] = None
     right: Optional[ResourceId] = None
@@ -40,13 +40,6 @@ class CreateReconciliationRequest(BaseModel):
     valuations: Optional[ReconciliationConfiguration] = None
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Reconciliation properties")
     __properties = ["code", "name", "description", "isPortfolioGroup", "left", "right", "transactions", "positions", "valuations", "properties"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

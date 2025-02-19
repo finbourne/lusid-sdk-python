@@ -19,15 +19,15 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 
 class RealisedGainLoss(BaseModel):
     """
     RealisedGainLoss
     """
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies.")
-    instrument_uid: constr(strict=True, min_length=1) = Field(..., alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with.")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
+    instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with.") 
     units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units of the associated instrument against which the gain or loss has been realised.")
     purchase_trade_date: Optional[datetime] = Field(None, alias="purchaseTradeDate", description="The effective datetime at which the units associated with this gain or loss were originally purchased.")
     purchase_settlement_date: Optional[datetime] = Field(None, alias="purchaseSettlementDate", description="The effective datetime at which the units associated with this gain or loss were originally settled.")

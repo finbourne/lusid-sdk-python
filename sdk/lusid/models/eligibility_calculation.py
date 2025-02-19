@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 
 class EligibilityCalculation(BaseModel):
     """
     EligibilityCalculation
     """
-    entitlement_date: constr(strict=True, min_length=1) = Field(..., alias="entitlementDate")
-    eligible_units: constr(strict=True, min_length=1) = Field(..., alias="eligibleUnits")
+    entitlement_date:  StrictStr = Field(...,alias="entitlementDate") 
+    eligible_units:  StrictStr = Field(...,alias="eligibleUnits") 
     date_modifiable_by_instruction: Optional[StrictBool] = Field(None, alias="dateModifiableByInstruction")
     __properties = ["entitlementDate", "eligibleUnits", "dateModifiableByInstruction"]
 

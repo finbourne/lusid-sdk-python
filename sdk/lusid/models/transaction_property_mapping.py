@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class TransactionPropertyMapping(BaseModel):
     """
     TransactionPropertyMapping
     """
-    property_key: StrictStr = Field(..., alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}")
-    map_from: Optional[StrictStr] = Field(None, alias="mapFrom", description="The Property Key of the Property to map from")
+    property_key:  StrictStr = Field(...,alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}") 
+    map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The Property Key of the Property to map from") 
     set_to: Optional[Any] = Field(None, alias="setTo", description="A pointer to the Property being mapped from")
     __properties = ["propertyKey", "mapFrom", "setTo"]
 

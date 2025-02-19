@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class ActionId(BaseModel):
     """
     ActionId
     """
-    scope: constr(strict=True, max_length=100, min_length=3) = Field(...)
-    activity: constr(strict=True, max_length=25, min_length=3) = Field(...)
-    entity: constr(strict=True, max_length=40, min_length=3) = Field(...)
+    scope:  StrictStr = Field(...,alias="scope") 
+    activity:  StrictStr = Field(...,alias="activity") 
+    entity:  StrictStr = Field(...,alias="entity") 
     __properties = ["scope", "activity", "entity"]
 
     class Config:

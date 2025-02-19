@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.version import Version
@@ -28,13 +28,13 @@ class ClosedPeriod(BaseModel):
     """
     ClosedPeriod
     """
-    closed_period_id: Optional[StrictStr] = Field(None, alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period")
+    closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
     effective_start: Optional[datetime] = Field(None, alias="effectiveStart", description="The effective start of the Closed Period")
     effective_end: Optional[datetime] = Field(None, alias="effectiveEnd", description="The effective end of the Closed Period")
     as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt datetime the Closed Period was created")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
     version: Optional[Version] = None
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[conlist(Link)] = None
     __properties = ["closedPeriodId", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "href", "links"]
 

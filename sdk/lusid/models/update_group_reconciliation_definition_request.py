@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import GroupReconciliationDefinitionComparisonRulesetIds
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
@@ -31,8 +31,8 @@ class UpdateGroupReconciliationDefinitionRequest(BaseModel):
     """
     UpdateGroupReconciliationDefinitionRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the Group Reconciliation Definition")
-    description: constr(strict=True, min_length=1) = Field(..., description="The description of the Group Reconciliation Definition")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Group Reconciliation Definition") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the Group Reconciliation Definition") 
     portfolio_entity_ids: GroupReconciliationDefinitionPortfolioEntityIds = Field(..., alias="portfolioEntityIds")
     recipe_ids: Optional[GroupReconciliationDefinitionRecipeIds] = Field(None, alias="recipeIds")
     currencies: Optional[GroupReconciliationDefinitionCurrencies] = None

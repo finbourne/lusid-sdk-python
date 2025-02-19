@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.perpetual_property import PerpetualProperty
 
 class ReferencePortfolioConstituentRequest(BaseModel):
@@ -29,7 +29,7 @@ class ReferencePortfolioConstituentRequest(BaseModel):
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
     properties: Optional[Dict[str, PerpetualProperty]] = None
     weight: Union[StrictFloat, StrictInt] = Field(...)
-    currency: Optional[StrictStr] = None
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="") 
     __properties = ["instrumentIdentifiers", "properties", "weight", "currency"]
 
     class Config:

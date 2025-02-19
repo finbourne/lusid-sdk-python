@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.resource_id import ResourceId
 
 class PortfolioReturnBreakdown(BaseModel):
@@ -33,7 +33,7 @@ class PortfolioReturnBreakdown(BaseModel):
     weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The weight of the constituent into the composite.")
     constituents_in_the_composite: Optional[StrictInt] = Field(None, alias="constituentsInTheComposite", description="The number of members in the Composite on the given day.")
     constituents_missing: Optional[StrictInt] = Field(None, alias="constituentsMissing", description="The number of the constituents which have a missing return on that day.")
-    currency: Optional[StrictStr] = Field(None, description="The currency of the portfolio.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency of the portfolio.") 
     open_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openFxRate", description="The opening fxRate which is used in calculation.")
     close_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closeFxRate", description="The closing fxRate which is used in calculation.")
     local_rate_of_return: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="localRateOfReturn", description="The rate of return in the local currency.")

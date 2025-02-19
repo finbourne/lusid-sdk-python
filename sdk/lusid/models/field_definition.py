@@ -19,24 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 
 class FieldDefinition(BaseModel):
     """
     FieldDefinition
     """
-    key: constr(strict=True, max_length=512, min_length=1) = Field(...)
+    key:  StrictStr = Field(...,alias="key") 
     is_required: StrictBool = Field(..., alias="isRequired")
     is_unique: StrictBool = Field(..., alias="isUnique")
-    value_type: Optional[StrictStr] = Field(None, alias="valueType")
+    value_type:  Optional[StrictStr] = Field(None,alias="valueType") 
     __properties = ["key", "isRequired", "isUnique", "valueType"]
-
-    @validator('key')
-    def key_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.result_value import ResultValue
 
 class ResultValueString(ResultValue):
     """
     A simple result value holding a string  # noqa: E501
     """
-    value: Optional[StrictStr] = Field(None, description="the value itself")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    value:  Optional[StrictStr] = Field(None,alias="value", description="the value itself") 
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "value"]
 

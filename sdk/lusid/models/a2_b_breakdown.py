@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class A2BBreakdown(BaseModel):
     """
     A2B Breakdown - Shows the total, and each sub-element within an A2B Category  # noqa: E501
     """
     total: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The total value of all the components within this category.")
-    currency: Optional[StrictStr] = Field(None, description="The currency. Applies to the Total, as well as all the componenents.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency. Applies to the Total, as well as all the componenents.") 
     components: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(None, description="The individual components that make up the category. For example, the Start category may have Cost, Unrealised gains and accrued interest components.")
     __properties = ["total", "currency", "components"]
 

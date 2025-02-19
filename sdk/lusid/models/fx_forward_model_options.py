@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictBool, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, validator 
 from lusid.models.model_options import ModelOptions
 
 class FxForwardModelOptions(ModelOptions):
     """
     FxForwardModelOptions
     """
-    forward_rate_observable_type: StrictStr = Field(..., alias="forwardRateObservableType", description="The available values are: ForwardPoints, ForwardRate, RatesCurve, FxForwardCurve, Invalid")
-    discounting_method: StrictStr = Field(..., alias="discountingMethod", description="The available values are: Standard, ConstantTimeValueOfMoney, Invalid")
+    forward_rate_observable_type:  StrictStr = Field(...,alias="forwardRateObservableType", description="The available values are: ForwardPoints, ForwardRate, RatesCurve, FxForwardCurve, Invalid") 
+    discounting_method:  StrictStr = Field(...,alias="discountingMethod", description="The available values are: Standard, ConstantTimeValueOfMoney, Invalid") 
     convert_to_report_ccy: StrictBool = Field(..., alias="convertToReportCcy", description="Convert all FX flows to the report currency  By setting this all FX forwards will be priced using Forward Curves that have Report Currency as the base.")
-    model_options_type: StrictStr = Field(..., alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions")
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "forwardRateObservableType", "discountingMethod", "convertToReportCcy"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.counterparty_agreement import CounterpartyAgreement
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -28,7 +28,7 @@ class GetCounterpartyAgreementResponse(BaseModel):
     """
     GetCounterpartyAgreementResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     value: Optional[CounterpartyAgreement] = None
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The counterparty agreement that could not be retrieved along with a reason for failure.")
     links: Optional[conlist(Link)] = None

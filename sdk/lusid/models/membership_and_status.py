@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class MembershipAndStatus(BaseModel):
     """
     MembershipAndStatus
     """
-    status: constr(strict=True, min_length=1) = Field(..., description="Describes whether the entity is still a valid member of the data model.")
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope of the unique identifier associated with the Custom Data Model.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the unique identifier associated with the Custom Data Model.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the Custom Data Model.")
+    status:  StrictStr = Field(...,alias="status", description="Describes whether the entity is still a valid member of the data model.") 
+    scope:  StrictStr = Field(...,alias="scope", description="The scope of the unique identifier associated with the Custom Data Model.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the unique identifier associated with the Custom Data Model.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
     __properties = ["status", "scope", "code", "displayName"]
 
     class Config:

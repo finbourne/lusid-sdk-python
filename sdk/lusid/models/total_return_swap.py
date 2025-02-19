@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.asset_leg import AssetLeg
 from lusid.models.instrument_leg import InstrumentLeg
@@ -34,7 +34,7 @@ class TotalReturnSwap(LusidInstrument):
     asset_leg: AssetLeg = Field(..., alias="assetLeg")
     funding_leg: InstrumentLeg = Field(..., alias="fundingLeg")
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven total return swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "maturityDate", "assetLeg", "fundingLeg", "additionalPayments"]
 

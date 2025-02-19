@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, validator 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -30,16 +30,16 @@ class CompletePortfolio(BaseModel):
     CompletePortfolio
     """
     id: ResourceId = Field(...)
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    description: Optional[StrictStr] = Field(None, description="The long form description of the portfolio.")
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the portfolio.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the portfolio.") 
     created: Optional[datetime] = Field(None, description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     parent_portfolio_id: Optional[ResourceId] = Field(None, alias="parentPortfolioId")
     is_derived: Optional[StrictBool] = Field(None, alias="isDerived", description="Whether or not this is a derived portfolio.")
-    type: Optional[StrictStr] = Field(None, description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
     version: Version = Field(...)
     properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
-    base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.")
+    base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.") 
     sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="The sub holding key properties configured for the portfolio")
     links: Optional[conlist(Link)] = None
     __properties = ["id", "href", "description", "displayName", "created", "parentPortfolioId", "isDerived", "type", "version", "properties", "baseCurrency", "subHoldingKeys", "links"]

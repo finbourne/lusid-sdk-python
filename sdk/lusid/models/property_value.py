@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.label_value_set import LabelValueSet
 from lusid.models.metric_value import MetricValue
 
@@ -27,7 +27,7 @@ class PropertyValue(BaseModel):
     """
     The value of the property.  # noqa: E501
     """
-    label_value: Optional[StrictStr] = Field(None, alias="labelValue", description="The text value of a property defined as having the 'Label' type.")
+    label_value:  Optional[StrictStr] = Field(None,alias="labelValue", description="The text value of a property defined as having the 'Label' type.") 
     metric_value: Optional[MetricValue] = Field(None, alias="metricValue")
     label_value_set: Optional[LabelValueSet] = Field(None, alias="labelValueSet")
     __properties = ["labelValue", "metricValue", "labelValueSet"]

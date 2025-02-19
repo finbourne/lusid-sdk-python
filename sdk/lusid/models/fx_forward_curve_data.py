@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.market_data_options import MarketDataOptions
 
@@ -28,13 +28,13 @@ class FxForwardCurveData(ComplexMarketData):
     Contains data (i.e. dates and rates + metadata) for building fx forward curves  # noqa: E501
     """
     base_date: datetime = Field(..., alias="baseDate", description="EffectiveAt date of the quoted rates")
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the fx forward")
-    fgn_ccy: StrictStr = Field(..., alias="fgnCcy", description="Foreign currency of the fx forward")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
+    fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
     dates: conlist(datetime) = Field(..., description="Dates for which the forward rates apply")
     rates: conlist(Union[StrictFloat, StrictInt]) = Field(..., description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy)")
-    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.")
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
-    market_data_type: StrictStr = Field(..., alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface")
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "dates", "rates", "lineage", "marketDataOptions"]
 

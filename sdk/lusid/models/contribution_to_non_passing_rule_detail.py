@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from lusid.models.resource_id import ResourceId
 
 class ContributionToNonPassingRuleDetail(BaseModel):
@@ -27,7 +27,7 @@ class ContributionToNonPassingRuleDetail(BaseModel):
     ContributionToNonPassingRuleDetail
     """
     rule_id: Optional[ResourceId] = Field(None, alias="ruleId")
-    rule_status: Optional[StrictStr] = Field(None, alias="ruleStatus", description="The status of the non-passing rule.")
+    rule_status:  Optional[StrictStr] = Field(None,alias="ruleStatus", description="The status of the non-passing rule.") 
     breach_task_ids: Optional[conlist(StrictStr)] = Field(None, alias="breachTaskIds", description="The task ids associated with the compliance breach for this order's groups (if failing).")
     likely_responsible_for_status: Optional[StrictBool] = Field(None, alias="likelyResponsibleForStatus", description="Whether this order is deemed as a likely contributor to the non-passing rule for this group.")
     __properties = ["ruleId", "ruleStatus", "breachTaskIds", "likelyResponsibleForStatus"]

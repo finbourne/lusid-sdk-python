@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,7 +28,7 @@ class CustodianAccountsUpsertResponse(BaseModel):
     """
     The upsert accounts response  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     custodian_accounts: Optional[conlist(CustodianAccount)] = Field(None, alias="custodianAccounts", description="The Custodian Accounts which have been upserted.")
     links: Optional[conlist(Link)] = None

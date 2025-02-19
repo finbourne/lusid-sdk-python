@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.portfolio_id import PortfolioId
 
@@ -28,7 +28,7 @@ class AccountedTransaction(BaseModel):
     The Valuation Point Data Response for the Fund and specified date.  # noqa: E501
     """
     accounting_date: Optional[datetime] = Field(None, alias="accountingDate", description="The transaction's accounting date.")
-    journal_entry_action: Optional[StrictStr] = Field(None, alias="journalEntryAction", description="The journal entry line action associated with this transaction.")
+    journal_entry_action:  Optional[StrictStr] = Field(None,alias="journalEntryAction", description="The journal entry line action associated with this transaction.") 
     transaction: Optional[OutputTransaction] = None
     portfolio_id: Optional[PortfolioId] = Field(None, alias="portfolioId")
     __properties = ["accountingDate", "journalEntryAction", "transaction", "portfolioId"]

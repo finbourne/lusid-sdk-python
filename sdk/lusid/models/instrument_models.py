@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 
 class InstrumentModels(BaseModel):
     """
     Supported pricing models for an instrument.  # noqa: E501
     """
-    instrument_id: Optional[StrictStr] = Field(None, alias="instrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.")
+    instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.") 
     supported_models: Optional[conlist(StrictStr)] = Field(None, alias="supportedModels", description="The pricing models supported by the instrument e.g. 'Discounting'.")
     links: Optional[conlist(Link)] = None
     __properties = ["instrumentId", "supportedModels", "links"]

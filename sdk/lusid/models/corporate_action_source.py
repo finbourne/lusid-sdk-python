@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -28,11 +28,11 @@ class CorporateActionSource(BaseModel):
     """
     A corporate action source  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: Optional[ResourceId] = None
     version: Optional[Version] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the corporate action source")
-    description: Optional[StrictStr] = Field(None, description="The description of the corporate action source")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the corporate action source") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action source") 
     instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.")
     links: Optional[conlist(Link)] = None
     __properties = ["href", "id", "version", "displayName", "description", "instrumentScopes", "links"]

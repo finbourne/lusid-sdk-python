@@ -19,18 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
 
 class CustomEntityFieldDefinition(BaseModel):
     """
     CustomEntityFieldDefinition
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="The name of the field.")
-    lifetime: constr(strict=True, min_length=1) = Field(..., description="Describes how the field’s values can change over time. The available values are: “Perpetual”, “TimeVariant”.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The value type for the field. Available values are: “String”, “Boolean”, “DateTime”, “Decimal”.")
-    collection_type: Optional[StrictStr] = Field(None, alias="collectionType", description="The collection type for the field. Available values are: “Single”, “Array”. Null value defaults to “Single”")
+    name:  StrictStr = Field(...,alias="name", description="The name of the field.") 
+    lifetime:  StrictStr = Field(...,alias="lifetime", description="Describes how the field’s values can change over time. The available values are: “Perpetual”, “TimeVariant”.") 
+    type:  StrictStr = Field(...,alias="type", description="The value type for the field. Available values are: “String”, “Boolean”, “DateTime”, “Decimal”.") 
+    collection_type:  Optional[StrictStr] = Field(None,alias="collectionType", description="The collection type for the field. Available values are: “Single”, “Array”. Null value defaults to “Single”") 
     required: StrictBool = Field(..., description="Whether the field is required or not.")
-    description: Optional[constr(strict=True, max_length=512)] = Field(None, description="An optional description for the field.")
+    description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the field.") 
     __properties = ["name", "lifetime", "type", "collectionType", "required", "description"]
 
     class Config:

@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class VendorDependency(EconomicDependency):
     """
     For indicating a dependency on some opaque market data requested by an outside vendor  # noqa: E501
     """
-    vendor_name: constr(strict=True, min_length=1) = Field(..., alias="vendorName", description="The name of the outside vendor")
+    vendor_name:  StrictStr = Field(...,alias="vendorName", description="The name of the outside vendor") 
     vendor_path: conlist(StrictStr) = Field(..., alias="vendorPath", description="The specific dependency path")
     var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "vendorName", "vendorPath", "date"]
 

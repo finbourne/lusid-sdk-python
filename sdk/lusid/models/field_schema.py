@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, validator 
 from lusid.models.resource_id import ResourceId
 
 class FieldSchema(BaseModel):
@@ -27,9 +27,9 @@ class FieldSchema(BaseModel):
     FieldSchema
     """
     id: Optional[ResourceId] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName")
-    description: Optional[StrictStr] = None
-    type: Optional[StrictStr] = Field(None, description="The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
     display_order: Optional[StrictInt] = Field(None, alias="displayOrder")
     __properties = ["id", "displayName", "description", "type", "displayOrder"]
 

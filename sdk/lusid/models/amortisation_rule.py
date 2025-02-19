@@ -19,41 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class AmortisationRule(BaseModel):
     """
     AmortisationRule
     """
-    name: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The name of the rule.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description of the rule.")
-    filter: constr(strict=True, max_length=16384, min_length=0) = Field(..., description="The filter for this rule.")
-    amortisation_method: constr(strict=True, min_length=1) = Field(..., alias="amortisationMethod", description="The filter for this rule.")
+    name:  StrictStr = Field(...,alias="name", description="The name of the rule.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the rule.") 
+    filter:  StrictStr = Field(...,alias="filter", description="The filter for this rule.") 
+    amortisation_method:  StrictStr = Field(...,alias="amortisationMethod", description="The filter for this rule.") 
     __properties = ["name", "description", "filter", "amortisationMethod"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('filter')
-    def filter_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

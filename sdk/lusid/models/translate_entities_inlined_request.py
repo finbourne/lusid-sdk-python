@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.dialect_schema import DialectSchema
 from lusid.models.translation_input import TranslationInput
 
@@ -28,7 +28,7 @@ class TranslateEntitiesInlinedRequest(BaseModel):
     Request to translate financial entities with a given script body.  The output of the translation is validated against a schema specified in the request.  # noqa: E501
     """
     entity_payloads: Dict[str, TranslationInput] = Field(..., alias="entityPayloads", description="Entity payloads to be translated indexed by (ephemeral) unique correlation ids.")
-    script_body: constr(strict=True, max_length=500000, min_length=0) = Field(..., alias="scriptBody", description="The body of the translation script to use for translating the entities.")
+    script_body:  StrictStr = Field(...,alias="scriptBody", description="The body of the translation script to use for translating the entities.") 
     var_schema: Optional[DialectSchema] = Field(None, alias="schema")
     __properties = ["entityPayloads", "scriptBody", "schema"]
 

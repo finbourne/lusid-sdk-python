@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.version import Version
@@ -28,7 +28,7 @@ class UpsertReferencePortfolioConstituentPropertiesResponse(BaseModel):
     """
     UpsertReferencePortfolioConstituentPropertiesResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The updated collection of properties of the constituent.")
     links: Optional[conlist(Link)] = None

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.create_unit_definition import CreateUnitDefinition
 from lusid.models.reference_data import ReferenceData
 
@@ -27,51 +27,23 @@ class CreateDataTypeRequest(BaseModel):
     """
     CreateDataTypeRequest
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope that the data type will be created in.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the data type. Together with the scope this uniquely defines the data type.")
-    type_value_range: StrictStr = Field(..., alias="typeValueRange", description="Indicates the range of data acceptable by a data type. The available values are: Open, Closed")
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the data type.")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of the data type.")
-    value_type: StrictStr = Field(..., alias="valueType", description="The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope that the data type will be created in.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the data type. Together with the scope this uniquely defines the data type.") 
+    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="Indicates the range of data acceptable by a data type. The available values are: Open, Closed") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the data type.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the data type.") 
+    value_type:  StrictStr = Field(...,alias="valueType", description="The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
     acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues", description="The acceptable set of values for this data type. Only applies to 'open' value type range.")
-    unit_schema: Optional[StrictStr] = Field(None, alias="unitSchema", description="The schema of the data type's units. The available values are: NoUnits, Basic, Iso4217Currency")
+    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The schema of the data type's units. The available values are: NoUnits, Basic, Iso4217Currency") 
     acceptable_units: Optional[conlist(CreateUnitDefinition)] = Field(None, alias="acceptableUnits", description="The definitions of the acceptable units.")
     reference_data: Optional[ReferenceData] = Field(None, alias="referenceData")
     __properties = ["scope", "code", "typeValueRange", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     @validator('type_value_range')
     def type_value_range_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('Open', 'Closed'):
             raise ValueError("must be one of enum values ('Open', 'Closed')")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
         return value
 
     @validator('value_type')

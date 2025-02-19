@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, validator 
 from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -30,7 +30,7 @@ class HoldingsAdjustment(BaseModel):
     """
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective datetime from which the adjustment is valid. There can only be one holdings adjustment for a transaction portfolio at a specific effective datetime, so this uniquely identifies the adjustment.")
     version: Version = Field(...)
-    unmatched_holding_method: StrictStr = Field(..., alias="unmatchedHoldingMethod", description="Describes how the holdings were adjusted. If 'PositionToZero' the entire transaction portfolio's holdings were set via a call to 'Set holdings'. If 'KeepTheSame' only the specified holdings were adjusted via a call to 'Adjust holdings'. The available values are: PositionToZero, KeepTheSame")
+    unmatched_holding_method:  StrictStr = Field(...,alias="unmatchedHoldingMethod", description="Describes how the holdings were adjusted. If 'PositionToZero' the entire transaction portfolio's holdings were set via a call to 'Set holdings'. If 'KeepTheSame' only the specified holdings were adjusted via a call to 'Adjust holdings'. The available values are: PositionToZero, KeepTheSame") 
     adjustments: conlist(HoldingAdjustment) = Field(..., description="The holding adjustments.")
     links: Optional[conlist(Link)] = None
     __properties = ["effectiveAt", "version", "unmatchedHoldingMethod", "adjustments", "links"]

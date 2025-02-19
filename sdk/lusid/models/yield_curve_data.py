@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.market_data_options import MarketDataOptions
@@ -32,9 +32,9 @@ class YieldCurveData(ComplexMarketData):
     base_date: datetime = Field(..., alias="baseDate", description="Base date")
     instruments: conlist(LusidInstrument) = Field(..., description="The set of instruments that define the curve.")
     quotes: conlist(MarketQuote) = Field(..., description="The market quotes corresponding to the the instruments used to define the curve")
-    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.")
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
-    market_data_type: StrictStr = Field(..., alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface")
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "marketDataOptions"]
 

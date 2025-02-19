@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class AccessMetadataValue(BaseModel):
     """
     An access control value. Provider should only be used if you are a service provider licensing data. In that case  the provider value must match your domain.  # noqa: E501
     """
-    value: constr(strict=True, max_length=2048, min_length=0) = Field(...)
-    provider: Optional[constr(strict=True, max_length=50, min_length=0)] = None
+    value:  StrictStr = Field(...,alias="value") 
+    provider:  Optional[StrictStr] = Field(None,alias="provider") 
     __properties = ["value", "provider"]
 
     class Config:

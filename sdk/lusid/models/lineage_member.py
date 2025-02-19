@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr 
 
 class LineageMember(BaseModel):
     """
     LineageMember
     """
     index: StrictInt = Field(..., description="Index to demonstrate position of lineage member in overall lineage")
-    label: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="Label of the step corresponding to this lineage member")
-    sub_label: constr(strict=True, max_length=6000, min_length=0) = Field(..., alias="subLabel", description="SubLabel of the step corresponding to this lineage member")
-    info_type: Optional[constr(strict=True, max_length=6000, min_length=0)] = Field(None, alias="infoType", description="Optional. Type of Information")
-    information: Optional[constr(strict=True, max_length=6000, min_length=0)] = Field(None, description="Optional. Information for the step corresponding to this lineage member, of type InfoType")
+    label:  StrictStr = Field(...,alias="label", description="Label of the step corresponding to this lineage member") 
+    sub_label:  StrictStr = Field(...,alias="subLabel", description="SubLabel of the step corresponding to this lineage member") 
+    info_type:  Optional[StrictStr] = Field(None,alias="infoType", description="Optional. Type of Information") 
+    information:  Optional[StrictStr] = Field(None,alias="information", description="Optional. Information for the step corresponding to this lineage member, of type InfoType") 
     __properties = ["index", "label", "subLabel", "infoType", "information"]
 
     class Config:

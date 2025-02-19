@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class FlowConventionName(BaseModel):
     """
     Representation of an abstract definition of a flow convention set consisting of currency, tenor and an index name (arbitrary string but likely something like \"IBOR\").  # noqa: E501
     """
-    currency: StrictStr = Field(..., description="Currency of the flow convention name.")
-    index_name: Optional[StrictStr] = Field(None, alias="indexName", description="The index, if present, that is required. e.g. \"IBOR\", \"OIS\" or \"SONIA\".")
-    tenor: constr(strict=True, min_length=1) = Field(..., description="Tenor for the convention name.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
+    currency:  StrictStr = Field(...,alias="currency", description="Currency of the flow convention name.") 
+    index_name:  Optional[StrictStr] = Field(None,alias="indexName", description="The index, if present, that is required. e.g. \"IBOR\", \"OIS\" or \"SONIA\".") 
+    tenor:  StrictStr = Field(...,alias="tenor", description="Tenor for the convention name.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
     __properties = ["currency", "indexName", "tenor"]
 
     class Config:

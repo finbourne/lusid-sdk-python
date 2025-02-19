@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.legal_entity import LegalEntity
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -29,14 +29,14 @@ class CustodianAccount(BaseModel):
     CustodianAccount
     """
     custodian_account_id: ResourceId = Field(..., alias="custodianAccountId")
-    status: constr(strict=True, min_length=1) = Field(..., description="The Account status. Can be Active, Inactive or Deleted.")
-    account_number: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="accountNumber", description="The Custodian Account Number")
-    account_name: constr(strict=True, min_length=1) = Field(..., alias="accountName", description="The identifiable name given to the Custodian Account")
-    accounting_method: constr(strict=True, min_length=1) = Field(..., alias="accountingMethod", description="The Accounting method to be used")
-    currency: StrictStr = Field(..., description="The Currency for the Account")
+    status:  StrictStr = Field(...,alias="status", description="The Account status. Can be Active, Inactive or Deleted.") 
+    account_number:  StrictStr = Field(...,alias="accountNumber", description="The Custodian Account Number") 
+    account_name:  StrictStr = Field(...,alias="accountName", description="The identifiable name given to the Custodian Account") 
+    accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="The Accounting method to be used") 
+    currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian: LegalEntity = Field(...)
-    account_type: constr(strict=True, min_length=1) = Field(..., alias="accountType", description="The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin.")
+    account_type:  StrictStr = Field(...,alias="accountType", description="The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin.") 
     __properties = ["custodianAccountId", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodian", "accountType"]
 
     class Config:

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.resource_id import ResourceId
@@ -29,14 +29,14 @@ class InstrumentEventInstruction(BaseModel):
     """
     An instruction for an instrument event  # noqa: E501
     """
-    instrument_event_instruction_id: Optional[StrictStr] = Field(None, alias="instrumentEventInstructionId", description="The unique identifier for this instruction")
+    instrument_event_instruction_id:  Optional[StrictStr] = Field(None,alias="instrumentEventInstructionId", description="The unique identifier for this instruction") 
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    instrument_event_id: Optional[StrictStr] = Field(None, alias="instrumentEventId", description="The identifier of the instrument event being instructed")
-    instruction_type: Optional[StrictStr] = Field(None, alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)")
-    election_key: Optional[StrictStr] = Field(None, alias="electionKey", description="For elected instructions, the key to be chosen")
+    instrument_event_id:  Optional[StrictStr] = Field(None,alias="instrumentEventId", description="The identifier of the instrument event being instructed") 
+    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)") 
+    election_key:  Optional[StrictStr] = Field(None,alias="electionKey", description="For elected instructions, the key to be chosen") 
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     version: Optional[Version] = None
-    href: Optional[StrictStr] = Field(None, description="The uri for this version of this instruction")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The uri for this version of this instruction") 
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
     quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
     links: Optional[conlist(Link)] = None

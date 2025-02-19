@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.side_definition_request import SideDefinitionRequest
 
 class SidesDefinitionRequest(BaseModel):
     """
     SidesDefinitionRequest
     """
-    side: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A unique label identifying the side definition.")
+    side:  StrictStr = Field(...,alias="side", description="A unique label identifying the side definition.") 
     side_request: SideDefinitionRequest = Field(..., alias="sideRequest")
     __properties = ["side", "sideRequest"]
 

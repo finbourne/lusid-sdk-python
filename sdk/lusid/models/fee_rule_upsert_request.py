@@ -19,49 +19,29 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.calculation_info import CalculationInfo
 
 class FeeRuleUpsertRequest(BaseModel):
     """
     FeeRuleUpsertRequest
     """
-    code: Optional[constr(strict=True, max_length=64, min_length=1)] = None
-    transaction_property_key: StrictStr = Field(..., alias="transactionPropertyKey")
-    transaction_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="transactionType")
-    country: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    counterparty: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    transaction_currency: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="transactionCurrency")
-    settlement_currency: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="settlementCurrency")
-    execution_broker: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="executionBroker")
-    custodian: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    exchange: constr(strict=True, max_length=64, min_length=1) = Field(...)
+    code:  Optional[StrictStr] = Field(None,alias="code", description="") 
+    transaction_property_key:  StrictStr = Field(...,alias="transactionPropertyKey", description="") 
+    transaction_type:  StrictStr = Field(...,alias="transactionType", description="") 
+    country:  StrictStr = Field(...,alias="country", description="") 
+    counterparty:  StrictStr = Field(...,alias="counterparty", description="") 
+    transaction_currency:  StrictStr = Field(...,alias="transactionCurrency", description="") 
+    settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="") 
+    execution_broker:  StrictStr = Field(...,alias="executionBroker", description="") 
+    custodian:  StrictStr = Field(...,alias="custodian", description="") 
+    exchange:  StrictStr = Field(...,alias="exchange", description="") 
     fee: CalculationInfo = Field(...)
     min_fee: Optional[CalculationInfo] = Field(None, alias="minFee")
     max_fee: Optional[CalculationInfo] = Field(None, alias="maxFee")
     additional_keys: Optional[Dict[str, StrictStr]] = Field(None, alias="additionalKeys")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     __properties = ["code", "transactionPropertyKey", "transactionType", "country", "counterparty", "transactionCurrency", "settlementCurrency", "executionBroker", "custodian", "exchange", "fee", "minFee", "maxFee", "additionalKeys", "description"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

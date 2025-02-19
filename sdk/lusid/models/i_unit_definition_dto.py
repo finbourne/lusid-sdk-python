@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class IUnitDefinitionDto(BaseModel):
     """
     IUnitDefinitionDto
     """
-    var_schema: Optional[StrictStr] = Field(None, alias="schema", description="The available values are: NoUnits, Basic, Iso4217Currency")
-    code: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName")
-    description: Optional[StrictStr] = None
+    var_schema:  Optional[StrictStr] = Field(None,alias="schema", description="The available values are: NoUnits, Basic, Iso4217Currency") 
+    code:  Optional[StrictStr] = Field(None,alias="code") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     __properties = ["schema", "code", "displayName", "description"]
 
     @validator('var_schema')

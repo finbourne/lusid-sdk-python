@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.resource_id import ResourceId
 
@@ -28,11 +28,11 @@ class OrderGraphBlockOrderDetail(BaseModel):
     OrderGraphBlockOrderDetail
     """
     id: ResourceId = Field(...)
-    compliance_state: constr(strict=True, min_length=1) = Field(..., alias="complianceState", description="The compliance state of this order. Possible values are 'Pending', 'Failed', 'Manually approved', 'Passed' and 'Warning'.")
-    approval_state: constr(strict=True, min_length=1) = Field(..., alias="approvalState", description="The approval state of this order. Possible values are 'Pending', 'Rejected' and 'Approved'.")
+    compliance_state:  StrictStr = Field(...,alias="complianceState", description="The compliance state of this order. Possible values are 'Pending', 'Failed', 'Manually approved', 'Passed' and 'Warning'.") 
+    approval_state:  StrictStr = Field(...,alias="approvalState", description="The approval state of this order. Possible values are 'Pending', 'Rejected' and 'Approved'.") 
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    portfolio_name: Optional[StrictStr] = Field(None, alias="portfolioName", description="The name of the order's referenced Portfolio.")
-    order_approval_task_id: Optional[StrictStr] = Field(None, alias="orderApprovalTaskId", description="The task id associated with the approval state of the order.")
+    portfolio_name:  Optional[StrictStr] = Field(None,alias="portfolioName", description="The name of the order's referenced Portfolio.") 
+    order_approval_task_id:  Optional[StrictStr] = Field(None,alias="orderApprovalTaskId", description="The task id associated with the approval state of the order.") 
     order_approval_task_definition_id: Optional[ResourceId] = Field(None, alias="orderApprovalTaskDefinitionId")
     non_passing_compliance_rule_results: Optional[conlist(ContributionToNonPassingRuleDetail)] = Field(None, alias="nonPassingComplianceRuleResults", description="The details of compliance rules in non-passing states.")
     __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName", "orderApprovalTaskId", "orderApprovalTaskDefinitionId", "nonPassingComplianceRuleResults"]

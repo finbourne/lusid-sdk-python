@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_property_mapping import TransactionPropertyMapping
 
@@ -27,12 +27,12 @@ class TransactionConfigurationMovementData(BaseModel):
     """
     TransactionConfigurationMovementData
     """
-    movement_types: StrictStr = Field(..., alias="movementTypes", description="Movement types determine the impact of the movement on the holdings. The available values are: Settlement, Traded, StockMovement, FutureCash,  Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee. The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment")
-    side: constr(strict=True, min_length=1) = Field(..., description="The Side determines which of the fields from our transaction are used to generate the Movement. Side1 means the 'security' side of the transaction, ie the Instrument and Units; Side2 means the 'cash' side, ie the Total Consideration")
+    movement_types:  StrictStr = Field(...,alias="movementTypes", description="Movement types determine the impact of the movement on the holdings. The available values are: Settlement, Traded, StockMovement, FutureCash,  Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee. The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment") 
+    side:  StrictStr = Field(...,alias="side", description="The Side determines which of the fields from our transaction are used to generate the Movement. Side1 means the 'security' side of the transaction, ie the Instrument and Units; Side2 means the 'cash' side, ie the Total Consideration") 
     direction: StrictInt = Field(..., description=" A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement")
     mappings: Optional[conlist(TransactionPropertyMapping)] = Field(None, description="This allows you to map a transaction property to a property on the underlying holding")
-    name: Optional[StrictStr] = Field(None, description="The movement name (optional)")
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The movement name (optional)") 
     movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest' and 'Virtual' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
     __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions"]
 

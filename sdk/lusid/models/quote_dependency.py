@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class QuoteDependency(EconomicDependency):
     """
     For indicating a dependency on the value of an asset at a point in time.  If the time is omitted, then the dependency is interpreted as the latest value with respect to anything observing it.  E.g. An EquitySwap will declare a dependency on the current price of the underlying equity.  # noqa: E501
     """
-    market_identifier: constr(strict=True, min_length=1) = Field(..., alias="marketIdentifier", description="Type of the code identifying the asset, e.g. ISIN or CUSIP")
-    code: constr(strict=True, max_length=50, min_length=0) = Field(..., description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN")
+    market_identifier:  StrictStr = Field(...,alias="marketIdentifier", description="Type of the code identifying the asset, e.g. ISIN or CUSIP") 
+    code:  StrictStr = Field(...,alias="code", description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN") 
     var_date: datetime = Field(..., alias="date", description="The effectiveAt of the quote for the identified entity.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "marketIdentifier", "code", "date"]
 

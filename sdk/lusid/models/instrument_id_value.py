@@ -19,13 +19,13 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class InstrumentIdValue(BaseModel):
     """
     InstrumentIdValue
     """
-    value: constr(strict=True, min_length=1) = Field(..., description="The value of the identifier.")
+    value:  StrictStr = Field(...,alias="value", description="The value of the identifier.") 
     effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective datetime from which the identifier will be valid. If left unspecified the default value is the beginning of time.")
     __properties = ["value", "effectiveAt"]
 

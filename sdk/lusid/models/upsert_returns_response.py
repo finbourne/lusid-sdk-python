@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -29,7 +29,7 @@ class UpsertReturnsResponse(BaseModel):
     Response from upserting Returns  # noqa: E501
     """
     version: Version = Field(...)
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: Optional[conlist(Dict[str, datetime])] = Field(None, description="The set of values that were successfully retrieved.")
     failed: Optional[conlist(Dict[str, ErrorDetail])] = Field(None, description="The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.")
     links: Optional[conlist(Link)] = None

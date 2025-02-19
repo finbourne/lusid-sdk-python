@@ -19,38 +19,18 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.update_unit_request import UpdateUnitRequest
 
 class UpdateDataTypeRequest(BaseModel):
     """
     UpdateDataTypeRequest
     """
-    display_name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="displayName", description="The display name of the data type.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description of the data type.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the data type.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the data type.") 
     acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues", description="The acceptable set of values for this data type. Only applies to 'open' value type range.")
     acceptable_units: Optional[conlist(UpdateUnitRequest)] = Field(None, alias="acceptableUnits", description="The definitions of the acceptable units.")
     __properties = ["displayName", "description", "acceptableValues", "acceptableUnits"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

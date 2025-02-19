@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.change_item import ChangeItem
 from lusid.models.link import Link
 
@@ -27,10 +27,10 @@ class ChangeHistory(BaseModel):
     """
     A group of changes made by the same person at the same time.  # noqa: E501
     """
-    user_id: constr(strict=True, min_length=1) = Field(..., alias="userId", description="The unique identifier of the user that made the change.")
+    user_id:  StrictStr = Field(...,alias="userId", description="The unique identifier of the user that made the change.") 
     modified_as_at: datetime = Field(..., alias="modifiedAsAt", description="The date/time of the change.")
-    request_id: constr(strict=True, min_length=1) = Field(..., alias="requestId", description="The unique identifier of the request that the changes were part of.")
-    action: StrictStr = Field(..., description="The action performed on the transaction, either created, updated, or deleted. The available values are: Create, Update, Delete")
+    request_id:  StrictStr = Field(...,alias="requestId", description="The unique identifier of the request that the changes were part of.") 
+    action:  StrictStr = Field(...,alias="action", description="The action performed on the transaction, either created, updated, or deleted. The available values are: Create, Update, Delete") 
     changes: conlist(ChangeItem) = Field(..., description="The collection of changes that were made.")
     links: Optional[conlist(Link)] = None
     __properties = ["userId", "modifiedAsAt", "requestId", "action", "changes", "links"]

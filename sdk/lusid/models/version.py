@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 
 class Version(BaseModel):
     """
@@ -28,14 +28,14 @@ class Version(BaseModel):
     effective_from: datetime = Field(..., alias="effectiveFrom", description="The effective datetime at which this version became valid. Only applies when a single entity is being interacted with.")
     as_at_date: datetime = Field(..., alias="asAtDate", description="The asAt datetime at which the data was committed to LUSID.")
     as_at_created: Optional[datetime] = Field(None, alias="asAtCreated", description="The asAt datetime at which the entity was first created in LUSID.")
-    user_id_created: Optional[StrictStr] = Field(None, alias="userIdCreated", description="The unique id of the user who created the entity.")
-    request_id_created: Optional[StrictStr] = Field(None, alias="requestIdCreated", description="The unique request id of the command that created the entity.")
+    user_id_created:  Optional[StrictStr] = Field(None,alias="userIdCreated", description="The unique id of the user who created the entity.") 
+    request_id_created:  Optional[StrictStr] = Field(None,alias="requestIdCreated", description="The unique request id of the command that created the entity.") 
     as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The asAt datetime at which the entity (including its properties) was last updated in LUSID.")
-    user_id_modified: Optional[StrictStr] = Field(None, alias="userIdModified", description="The unique id of the user who last updated the entity (including its properties) in LUSID.")
-    request_id_modified: Optional[StrictStr] = Field(None, alias="requestIdModified", description="The unique request id of the command that last updated the entity (including its properties) in LUSID.")
+    user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique id of the user who last updated the entity (including its properties) in LUSID.") 
+    request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique request id of the command that last updated the entity (including its properties) in LUSID.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
-    entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique id of the entity")
-    staged_modification_id_modified: Optional[StrictStr] = Field(None, alias="stagedModificationIdModified", description="The ID of the staged change that resulted in the most recent modification.")
+    entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique id of the entity") 
+    staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The ID of the staged change that resulted in the most recent modification.") 
     __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "entityUniqueId", "stagedModificationIdModified"]
 
     class Config:

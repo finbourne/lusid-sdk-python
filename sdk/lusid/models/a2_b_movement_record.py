@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.a2_b_category import A2BCategory
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
@@ -31,13 +31,13 @@ class A2BMovementRecord(BaseModel):
     A2B Movement Record - shows A2B category based changes relating to a specific movement  # noqa: E501
     """
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    holding_type: Optional[StrictStr] = Field(None, alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.")
-    instrument_uid: Optional[StrictStr] = Field(None, alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.")
+    holding_type:  Optional[StrictStr] = Field(None,alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
+    instrument_uid:  Optional[StrictStr] = Field(None,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
-    currency: Optional[StrictStr] = Field(None, description="The holding currency.")
-    transaction_id: Optional[StrictStr] = Field(None, alias="transactionId", description="The unique identifier for the transaction.")
-    movement_name: Optional[StrictStr] = Field(None, alias="movementName", description="The name of the movement.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The holding currency.") 
+    transaction_id:  Optional[StrictStr] = Field(None,alias="transactionId", description="The unique identifier for the transaction.") 
+    movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="The name of the movement.") 
     effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="The date of the movement.")
     units: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The number of units of the instrument that are affected by the movement.")
     start: Optional[A2BCategory] = None
@@ -46,7 +46,7 @@ class A2BMovementRecord(BaseModel):
     carry: Optional[A2BCategory] = None
     end: Optional[A2BCategory] = None
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' domain.")
-    group_id: Optional[StrictStr] = Field(None, alias="groupId", description="Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.")
+    group_id:  Optional[StrictStr] = Field(None,alias="groupId", description="Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.") 
     errors: Optional[conlist(ResponseMetaData)] = Field(None, description="Any errors with the record are reported here.")
     __properties = ["portfolioId", "holdingType", "instrumentScope", "instrumentUid", "subHoldingKeys", "currency", "transactionId", "movementName", "effectiveDate", "units", "start", "flows", "gains", "carry", "end", "properties", "groupId", "errors"]
 

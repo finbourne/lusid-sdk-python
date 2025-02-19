@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class TransactionDiagnostics(BaseModel):
     """
     Represents a set of diagnostics per transaction, where applicable.  # noqa: E501
     """
-    transaction_display_name: constr(strict=True, min_length=1) = Field(..., alias="transactionDisplayName")
+    transaction_display_name:  StrictStr = Field(...,alias="transactionDisplayName") 
     error_details: conlist(StrictStr) = Field(..., alias="errorDetails")
     __properties = ["transactionDisplayName", "errorDetails"]
 

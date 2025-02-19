@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class InstrumentSearchProperty(BaseModel):
     """
     InstrumentSearchProperty
     """
-    key: StrictStr = Field(..., description="The property key of instrument property to search for. This will be from the 'Instrument' domain and will take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Isin' or 'Instrument/MyScope/AssetClass'.")
-    value: constr(strict=True, min_length=1) = Field(..., description="The value of the property e.g. 'US0378331005' or 'Equity'.")
+    key:  StrictStr = Field(...,alias="key", description="The property key of instrument property to search for. This will be from the 'Instrument' domain and will take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Isin' or 'Instrument/MyScope/AssetClass'.") 
+    value:  StrictStr = Field(...,alias="value", description="The value of the property e.g. 'US0378331005' or 'Equity'.") 
     __properties = ["key", "value"]
 
     class Config:

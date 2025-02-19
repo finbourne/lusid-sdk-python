@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
 

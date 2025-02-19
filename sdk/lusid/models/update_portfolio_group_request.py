@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class UpdatePortfolioGroupRequest(BaseModel):
     """
     UpdatePortfolioGroupRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the portfolio group.")
-    description: Optional[StrictStr] = Field(None, description="A long form description of the portfolio group.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio group.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A long form description of the portfolio group.") 
     __properties = ["displayName", "description"]
 
     class Config:

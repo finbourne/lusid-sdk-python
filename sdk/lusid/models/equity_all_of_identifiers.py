@@ -19,23 +19,23 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class EquityAllOfIdentifiers(BaseModel):
     """
     External market codes and identifiers for the equity, e.g. IBM  # noqa: E501
     """
-    lusid_instrument_id: Optional[StrictStr] = Field(None, alias="LusidInstrumentId")
-    isin: Optional[StrictStr] = Field(None, alias="Isin")
-    sedol: Optional[StrictStr] = Field(None, alias="Sedol")
-    cusip: Optional[StrictStr] = Field(None, alias="Cusip")
-    client_internal: Optional[StrictStr] = Field(None, alias="ClientInternal")
-    figi: Optional[StrictStr] = Field(None, alias="Figi")
-    ric: Optional[StrictStr] = Field(None, alias="RIC")
-    quote_perm_id: Optional[StrictStr] = Field(None, alias="QuotePermId")
-    red_code: Optional[StrictStr] = Field(None, alias="REDCode")
-    bbgid: Optional[StrictStr] = Field(None, alias="BBGId")
-    ice_code: Optional[StrictStr] = Field(None, alias="ICECode")
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="LusidInstrumentId") 
+    isin:  Optional[StrictStr] = Field(None,alias="Isin") 
+    sedol:  Optional[StrictStr] = Field(None,alias="Sedol") 
+    cusip:  Optional[StrictStr] = Field(None,alias="Cusip") 
+    client_internal:  Optional[StrictStr] = Field(None,alias="ClientInternal") 
+    figi:  Optional[StrictStr] = Field(None,alias="Figi") 
+    ric:  Optional[StrictStr] = Field(None,alias="RIC") 
+    quote_perm_id:  Optional[StrictStr] = Field(None,alias="QuotePermId") 
+    red_code:  Optional[StrictStr] = Field(None,alias="REDCode") 
+    bbgid:  Optional[StrictStr] = Field(None,alias="BBGId") 
+    ice_code:  Optional[StrictStr] = Field(None,alias="ICECode") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["LusidInstrumentId", "Isin", "Sedol", "Cusip", "ClientInternal", "Figi", "RIC", "QuotePermId", "REDCode", "BBGId", "ICECode"]
 

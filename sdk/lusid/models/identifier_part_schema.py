@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, conlist, constr 
 from lusid.models.link import Link
 
 class IdentifierPartSchema(BaseModel):
@@ -27,9 +27,9 @@ class IdentifierPartSchema(BaseModel):
     IdentifierPartSchema
     """
     index: StrictInt = Field(...)
-    name: constr(strict=True, min_length=1) = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName")
-    description: constr(strict=True, min_length=1) = Field(...)
+    name:  StrictStr = Field(...,alias="name") 
+    display_name:  StrictStr = Field(...,alias="displayName") 
+    description:  StrictStr = Field(...,alias="description") 
     required: StrictBool = Field(...)
     links: Optional[conlist(Link)] = None
     __properties = ["index", "name", "displayName", "description", "required", "links"]

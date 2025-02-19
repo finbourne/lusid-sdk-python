@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 
 class CalculationInfo(BaseModel):
     """
     CalculationInfo
     """
-    calculation_method: constr(strict=True, min_length=1) = Field(..., alias="calculationMethod", description="Method of calculating the fees or commission among: BasisPoints, Percentage, Rate, Flat etc.")
-    multiplier: constr(strict=True, min_length=1) = Field(..., description="Field by which to multiply the numerical amount. Eg: Quantity, Value")
+    calculation_method:  StrictStr = Field(...,alias="calculationMethod", description="Method of calculating the fees or commission among: BasisPoints, Percentage, Rate, Flat etc.") 
+    multiplier:  StrictStr = Field(...,alias="multiplier", description="Field by which to multiply the numerical amount. Eg: Quantity, Value") 
     calculation_amount: Union[StrictFloat, StrictInt] = Field(..., alias="calculationAmount", description="Numerical fee amount")
     __properties = ["calculationMethod", "multiplier", "calculationAmount"]
 

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.template_field import TemplateField
 
 class FeeTransactionTemplateSpecification(BaseModel):
     """
     FeeTransactionTemplateSpecification
     """
-    specification_type_name: constr(strict=True, min_length=1) = Field(..., alias="specificationTypeName")
+    specification_type_name:  StrictStr = Field(...,alias="specificationTypeName") 
     supported_template_fields: conlist(TemplateField) = Field(..., alias="supportedTemplateFields")
     __properties = ["specificationTypeName", "supportedTemplateFields"]
 

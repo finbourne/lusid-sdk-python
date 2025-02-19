@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.access_metadata_value import AccessMetadataValue
 
 class AccessMetadataOperation(BaseModel):
@@ -27,17 +27,10 @@ class AccessMetadataOperation(BaseModel):
     AccessMetadataOperation
     """
     value: conlist(AccessMetadataValue, min_items=1) = Field(...)
-    path: constr(strict=True, max_length=1025, min_length=1) = Field(...)
-    op: StrictStr = Field(..., description="The available values are: add, remove")
-    var_from: Optional[StrictStr] = Field(None, alias="from")
+    path:  StrictStr = Field(...,alias="path") 
+    op:  StrictStr = Field(...,alias="op", description="The available values are: add, remove") 
+    var_from:  Optional[StrictStr] = Field(None,alias="from") 
     __properties = ["value", "path", "op", "from"]
-
-    @validator('path')
-    def path_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^\/.+", value):
-            raise ValueError(r"must validate the regular expression /^\/.+/")
-        return value
 
     @validator('op')
     def op_validate_enum(cls, value):

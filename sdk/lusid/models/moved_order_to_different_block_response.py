@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.block import Block
 from lusid.models.order import Order
 from lusid.models.resource_id import ResourceId

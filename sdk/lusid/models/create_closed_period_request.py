@@ -19,14 +19,14 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.model_property import ModelProperty
 
 class CreateClosedPeriodRequest(BaseModel):
     """
     CreateClosedPeriodRequest
     """
-    closed_period_id: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period")
+    closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
     effective_end: Optional[datetime] = Field(None, alias="effectiveEnd", description="The effective end of the Closed Period")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
     __properties = ["closedPeriodId", "effectiveEnd", "properties"]

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 
 class BasketIdentifier(BaseModel):
     """
     Descriptive information that describes a particular basket of instruments. Most commonly required with a CDS Index or similarly defined instrument.  # noqa: E501
     """
-    index: StrictStr = Field(..., description="Index set, e.g. iTraxx or CDX.")
-    name: StrictStr = Field(..., description="The index name within the set, e.g. \"MAIN\" or \"Crossover\".")
-    region: StrictStr = Field(..., description="Applicable geographic country or region. Typically something like \"Europe\", \"Asia ex-Japan\", \"Japan\" or \"Australia\".")
+    index:  StrictStr = Field(...,alias="index", description="Index set, e.g. iTraxx or CDX.") 
+    name:  StrictStr = Field(...,alias="name", description="The index name within the set, e.g. \"MAIN\" or \"Crossover\".") 
+    region:  StrictStr = Field(...,alias="region", description="Applicable geographic country or region. Typically something like \"Europe\", \"Asia ex-Japan\", \"Japan\" or \"Australia\".") 
     series_id: StrictInt = Field(..., alias="seriesId", description="The series identifier.")
     __properties = ["index", "name", "region", "seriesId"]
 

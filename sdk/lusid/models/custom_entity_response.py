@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.link import Link
@@ -31,12 +31,12 @@ class CustomEntityResponse(BaseModel):
     """
     CustomEntityResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The type of custom entity this is.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The type of custom entity this is.") 
     version: Version = Field(...)
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="A display label for the custom entity.")
-    description: Optional[StrictStr] = Field(None, description="A description of the custom entity.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the custom entity.") 
     identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
     fields: conlist(CustomEntityField) = Field(..., description="The fields that decorate the custom entity.")
     relationships: conlist(Relationship) = Field(..., description="A set of relationships associated to the custom entity.")

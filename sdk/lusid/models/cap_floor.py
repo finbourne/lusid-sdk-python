@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.floating_leg import FloatingLeg
 from lusid.models.lusid_instrument import LusidInstrument
@@ -28,13 +28,13 @@ class CapFloor(LusidInstrument):
     """
     LUSID representation of Cap, Floor, or Collar.  # noqa: E501
     """
-    cap_floor_type: constr(strict=True, min_length=1) = Field(..., alias="capFloorType", description="Determine if it's CAP, FLOOR, or COLLAR.    Supported string (enumeration) values are: [Cap, Floor, Collar].")
+    cap_floor_type:  StrictStr = Field(...,alias="capFloorType", description="Determine if it's CAP, FLOOR, or COLLAR.    Supported string (enumeration) values are: [Cap, Floor, Collar].") 
     cap_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="capStrike", description="Strike rate of the Cap.")
     floor_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floorStrike", description="Strike rate of the Floor.")
     include_first_caplet: StrictBool = Field(..., alias="includeFirstCaplet", description="Include first caplet flag.")
     underlying_floating_leg: FloatingLeg = Field(..., alias="underlyingFloatingLeg")
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "capFloorType", "capStrike", "floorStrike", "includeFirstCaplet", "underlyingFloatingLeg", "additionalPayments"]
 

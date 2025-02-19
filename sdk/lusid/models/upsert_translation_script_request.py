@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.translation_script_id import TranslationScriptId
 
 class UpsertTranslationScriptRequest(BaseModel):
@@ -27,7 +27,7 @@ class UpsertTranslationScriptRequest(BaseModel):
     UpsertTranslationScriptRequest
     """
     id: TranslationScriptId = Field(...)
-    body: constr(strict=True, max_length=500000, min_length=0) = Field(..., description="Body of the translation script, i.e. the actual translation code.")
+    body:  StrictStr = Field(...,alias="body", description="Body of the translation script, i.e. the actual translation code.") 
     __properties = ["id", "body"]
 
     class Config:

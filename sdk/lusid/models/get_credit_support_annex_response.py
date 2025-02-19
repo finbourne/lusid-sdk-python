@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.credit_support_annex import CreditSupportAnnex
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -28,7 +28,7 @@ class GetCreditSupportAnnexResponse(BaseModel):
     """
     GetCreditSupportAnnexResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     value: Optional[CreditSupportAnnex] = None
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The credit support annex that could not be updated or inserted along with a reason for failure.")
     links: Optional[conlist(Link)] = None

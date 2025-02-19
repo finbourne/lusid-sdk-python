@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.model_property import ModelProperty
 
 class TranslationResult(BaseModel):
     """
     The result of invoking a translation script.  # noqa: E501
     """
-    entity: constr(strict=True, min_length=1) = Field(..., description="The serialised entity the translation script produced.")
+    entity:  StrictStr = Field(...,alias="entity", description="The serialised entity the translation script produced.") 
     properties: Dict[str, ModelProperty] = Field(..., description="Any properties the translation script produced.")
     __properties = ["entity", "properties"]
 

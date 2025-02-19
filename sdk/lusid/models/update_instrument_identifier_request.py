@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class UpdateInstrumentIdentifierRequest(BaseModel):
     """
     UpdateInstrumentIdentifierRequest
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The allowable instrument identifier to update, insert or remove e.g. 'Figi'.")
-    value: Optional[StrictStr] = Field(None, description="The new value of the allowable instrument identifier. If unspecified the identifier will be removed from the instrument.")
-    effective_at: Optional[StrictStr] = Field(None, alias="effectiveAt", description="The effective datetime from which the identifier should be updated, inserted or removed. Defaults to the current LUSID system datetime if not specified.")
+    type:  StrictStr = Field(...,alias="type", description="The allowable instrument identifier to update, insert or remove e.g. 'Figi'.") 
+    value:  Optional[StrictStr] = Field(None,alias="value", description="The new value of the allowable instrument identifier. If unspecified the identifier will be removed from the instrument.") 
+    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The effective datetime from which the identifier should be updated, inserted or removed. Defaults to the current LUSID system datetime if not specified.") 
     __properties = ["type", "value", "effectiveAt"]
 
     class Config:

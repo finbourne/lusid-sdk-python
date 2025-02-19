@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.instrument_payment_diary_leg import InstrumentPaymentDiaryLeg
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,12 +28,12 @@ class InstrumentPaymentDiary(BaseModel):
     """
     A payment diary containing all the cashflows on a single instrument.  # noqa: E501
     """
-    instrument_id_type: Optional[StrictStr] = Field(None, alias="instrumentIdType", description="The identifier type of the instrument.")
-    instrument_id: Optional[StrictStr] = Field(None, alias="instrumentId", description="The identifier for the instrument.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope of the instrument.")
+    instrument_id_type:  Optional[StrictStr] = Field(None,alias="instrumentIdType", description="The identifier type of the instrument.") 
+    instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The identifier for the instrument.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope of the instrument.") 
     version: Optional[Version] = None
     legs: Optional[conlist(InstrumentPaymentDiaryLeg)] = Field(None, description="Aggregated sets of Cashflows.")
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     links: Optional[conlist(Link)] = None
     __properties = ["instrumentIdType", "instrumentId", "instrumentScope", "version", "legs", "href", "links"]
 

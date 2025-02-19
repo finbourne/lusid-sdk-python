@@ -19,41 +19,21 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class ClosePeriodDiaryEntryRequest(BaseModel):
     """
     A definition for the period you wish to close  # noqa: E501
     """
-    diary_entry_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="diaryEntryCode", description="Unique code assigned to a period. When left blank a code will be created by the system in the format 'yyyyMMDD'.")
-    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="Identifiable Name assigned to the period. Where left blank, the system will generate a name in the format 'yyyyMMDD'.")
+    diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="Unique code assigned to a period. When left blank a code will be created by the system in the format 'yyyyMMDD'.") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="Identifiable Name assigned to the period. Where left blank, the system will generate a name in the format 'yyyyMMDD'.") 
     effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
-    status: Optional[StrictStr] = Field(None, description="The status of a Diary Entry of Type 'PeriodBoundary'. Defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.")
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of a Diary Entry of Type 'PeriodBoundary'. Defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
     closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
     __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "status", "properties", "closingOptions"]
-
-    @validator('diary_entry_code')
-    def diary_entry_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class AggregationMeasureFailureDetail(BaseModel):
     """
     AggregationMeasureFailureDetail
     """
-    id: Optional[StrictStr] = None
+    id:  Optional[StrictStr] = Field(None,alias="id") 
     effective_at: Optional[datetime] = Field(None, alias="effectiveAt")
-    measure: Optional[StrictStr] = None
-    reason: Optional[StrictStr] = None
-    detail: Optional[StrictStr] = None
+    measure:  Optional[StrictStr] = Field(None,alias="measure") 
+    reason:  Optional[StrictStr] = Field(None,alias="reason") 
+    detail:  Optional[StrictStr] = Field(None,alias="detail") 
     __properties = ["id", "effectiveAt", "measure", "reason", "detail"]
 
     class Config:

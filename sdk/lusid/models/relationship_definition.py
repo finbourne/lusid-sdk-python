@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -30,36 +30,15 @@ class RelationshipDefinition(BaseModel):
     """
     version: Optional[Version] = None
     relationship_definition_id: ResourceId = Field(..., alias="relationshipDefinitionId")
-    source_entity_type: constr(strict=True, min_length=1) = Field(..., alias="sourceEntityType", description="The entity type of the source entity object.")
-    target_entity_type: constr(strict=True, min_length=1) = Field(..., alias="targetEntityType", description="The entity type of the target entity object.")
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the relationship.")
-    outward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="outwardDescription", description="The description to relate source entity object and target entity object")
-    inward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="inwardDescription", description="The description to relate target entity object and source entity object")
-    life_time: constr(strict=True, min_length=1) = Field(..., alias="lifeTime", description="Describes how the relationships can change over time.")
-    relationship_cardinality: constr(strict=True, min_length=1) = Field(..., alias="relationshipCardinality", description="Describes the cardinality of the relationship between source entity and target entity.")
+    source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object.") 
+    target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relationship.") 
+    outward_description:  StrictStr = Field(...,alias="outwardDescription", description="The description to relate source entity object and target entity object") 
+    inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object") 
+    life_time:  StrictStr = Field(...,alias="lifeTime", description="Describes how the relationships can change over time.") 
+    relationship_cardinality:  StrictStr = Field(...,alias="relationshipCardinality", description="Describes the cardinality of the relationship between source entity and target entity.") 
     links: Optional[conlist(Link)] = None
     __properties = ["version", "relationshipDefinitionId", "sourceEntityType", "targetEntityType", "displayName", "outwardDescription", "inwardDescription", "lifeTime", "relationshipCardinality", "links"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('outward_description')
-    def outward_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('inward_description')
-    def inward_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

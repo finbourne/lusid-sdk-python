@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCriteria
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
 
@@ -27,9 +27,9 @@ class StagingRule(BaseModel):
     """
     StagingRule
     """
-    rule_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="ruleId", description="The ID of the staging rule.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the staging rule.")
-    status: constr(strict=True, min_length=1) = Field(..., description="Whether the rule is 'Active' or 'Inactive'.")
+    rule_id:  StrictStr = Field(...,alias="ruleId", description="The ID of the staging rule.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule.") 
+    status:  StrictStr = Field(...,alias="status", description="Whether the rule is 'Active' or 'Inactive'.") 
     match_criteria: StagingRuleMatchCriteria = Field(..., alias="matchCriteria")
     approval_criteria: StagingRuleApprovalCriteria = Field(..., alias="approvalCriteria")
     __properties = ["ruleId", "description", "status", "matchCriteria", "approvalCriteria"]

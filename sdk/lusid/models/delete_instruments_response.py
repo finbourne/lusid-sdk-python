@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 
@@ -27,7 +27,7 @@ class DeleteInstrumentsResponse(BaseModel):
     """
     DeleteInstrumentsResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     as_at: datetime = Field(..., alias="asAt", description="The as-at datetime at which the instrument was deleted.")
     staged: Optional[Dict[str, StagedModificationsInfo]] = Field(None, description="Information about the pending staged modifications for the current entity.")
     links: Optional[conlist(Link)] = None

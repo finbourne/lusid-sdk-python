@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_property_mapping_request import TransactionPropertyMappingRequest
 
@@ -27,12 +27,12 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
     """
     TransactionConfigurationMovementDataRequest
     """
-    movement_types: StrictStr = Field(..., alias="movementTypes", description=". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment")
-    side: constr(strict=True, min_length=1) = Field(..., description="The movement side")
+    movement_types:  StrictStr = Field(...,alias="movementTypes", description=". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment") 
+    side:  StrictStr = Field(...,alias="side", description="The movement side") 
     direction: StrictInt = Field(..., description="The movement direction")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement.")
     mappings: Optional[conlist(TransactionPropertyMappingRequest)] = Field(None, description="This allows you to map a transaction property to a property on the underlying holding.")
-    name: Optional[StrictStr] = Field(None, description="The movement name (optional)")
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The movement name (optional)") 
     movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest' and 'Virtual' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
     __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions"]
 

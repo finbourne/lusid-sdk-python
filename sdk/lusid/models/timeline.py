@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -30,11 +30,11 @@ class Timeline(BaseModel):
     Timeline
     """
     id: Optional[ResourceId] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the Timeline.")
-    description: Optional[StrictStr] = Field(None, description="A description for the Timeline.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Timeline.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Timeline.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Timelines properties. These will be from the 'Timeline' domain.")
     version: Optional[Version] = None
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[conlist(Link)] = None
     __properties = ["id", "displayName", "description", "properties", "version", "href", "links"]
 

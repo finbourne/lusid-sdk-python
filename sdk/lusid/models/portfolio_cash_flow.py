@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -33,8 +33,8 @@ class PortfolioCashFlow(BaseModel):
     sequence_number: StrictInt = Field(..., alias="sequenceNumber", description="Sequence number determining the order of the cash flow records.")
     effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="Indicates the date when the cash-flow settles.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
-    type: constr(strict=True, min_length=1) = Field(..., description="Indicates the record type (Closed, Open, Activity).")
-    movement_name: constr(strict=True, min_length=1) = Field(..., alias="movementName", description="Indicates the specific movement of the transaction that generated this cash flow.")
+    type:  StrictStr = Field(...,alias="type", description="Indicates the record type (Closed, Open, Activity).") 
+    movement_name:  StrictStr = Field(...,alias="movementName", description="Indicates the specific movement of the transaction that generated this cash flow.") 
     cashflow: CurrencyAndAmount = Field(...)
     balance: CurrencyAndAmount = Field(...)
     fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="fxRate", description="Exchange rate between the currency of this cash flow and the reporting currency.")

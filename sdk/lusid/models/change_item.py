@@ -19,15 +19,15 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class ChangeItem(BaseModel):
     """
     Information about a change to a field / property.  At least one of 'PreviousValue' or 'NewValue' will be set.  # noqa: E501
     """
-    field_name: constr(strict=True, min_length=1) = Field(..., alias="fieldName", description="The name of the field or property that has been changed.")
-    previous_value: Optional[StrictStr] = Field(None, alias="previousValue", description="The previous value for this field / property.")
-    new_value: Optional[StrictStr] = Field(None, alias="newValue", description="The new value for this field / property.")
+    field_name:  StrictStr = Field(...,alias="fieldName", description="The name of the field or property that has been changed.") 
+    previous_value:  Optional[StrictStr] = Field(None,alias="previousValue", description="The previous value for this field / property.") 
+    new_value:  Optional[StrictStr] = Field(None,alias="newValue", description="The new value for this field / property.") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The market data time, i.e. the time to run the change from.")
     effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The market data time, i.e. the time to run the change until.")
     __properties = ["fieldName", "previousValue", "newValue", "effectiveFrom", "effectiveUntil"]

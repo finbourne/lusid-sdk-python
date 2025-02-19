@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 
 class ReferencePortfolioConstituent(BaseModel):
@@ -27,12 +27,12 @@ class ReferencePortfolioConstituent(BaseModel):
     ReferencePortfolioConstituent
     """
     instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="Unique instrument identifiers")
-    instrument_uid: constr(strict=True, min_length=1) = Field(..., alias="instrumentUid", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers")
-    currency: StrictStr = Field(...)
+    instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
+    currency:  StrictStr = Field(...,alias="currency", description="") 
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Properties associated with the constituent")
     weight: Union[StrictFloat, StrictInt] = Field(...)
     floating_weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floatingWeight")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="") 
     __properties = ["instrumentIdentifiers", "instrumentUid", "currency", "properties", "weight", "floatingWeight", "instrumentScope"]
 
     class Config:

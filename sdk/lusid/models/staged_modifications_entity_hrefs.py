@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 
 class StagedModificationsEntityHrefs(BaseModel):
     """
     StagedModificationsEntityHrefs
     """
-    when_staged: Optional[StrictStr] = Field(None, alias="whenStaged", description="The specific Uniform Resource Identifier (URI) for the staged modification change at the time when the change was requested.")
-    preview: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for the preview of staged modification change once applied.")
-    latest: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for the staged modification at latest time.")
+    when_staged:  Optional[StrictStr] = Field(None,alias="whenStaged", description="The specific Uniform Resource Identifier (URI) for the staged modification change at the time when the change was requested.") 
+    preview:  Optional[StrictStr] = Field(None,alias="preview", description="The specific Uniform Resource Identifier (URI) for the preview of staged modification change once applied.") 
+    latest:  Optional[StrictStr] = Field(None,alias="latest", description="The specific Uniform Resource Identifier (URI) for the staged modification at latest time.") 
     links: Optional[conlist(Link)] = None
     __properties = ["whenStaged", "preview", "latest", "links"]
 

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, validator 
 
 class TransactionPrice(BaseModel):
     """
     TransactionPrice
     """
     price: Optional[Union[StrictFloat, StrictInt]] = None
-    type: Optional[StrictStr] = Field(None, description="The available values are: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice") 
     __properties = ["price", "type"]
 
     @validator('type')

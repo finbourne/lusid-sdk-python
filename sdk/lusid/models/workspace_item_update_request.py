@@ -19,24 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr, validator 
 
 class WorkspaceItemUpdateRequest(BaseModel):
     """
     A request to update a workspace item.  # noqa: E501
     """
     format: StrictInt = Field(..., description="A simple integer format identifier.")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of a workspace item.")
+    description:  StrictStr = Field(...,alias="description", description="The description of a workspace item.") 
     content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
-    type: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="The type of the workspace item.")
+    type:  StrictStr = Field(...,alias="type", description="The type of the workspace item.") 
     __properties = ["format", "description", "content", "type"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

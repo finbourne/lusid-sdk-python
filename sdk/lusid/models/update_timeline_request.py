@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.model_property import ModelProperty
 
 class UpdateTimelineRequest(BaseModel):
     """
     UpdateTimelineRequest
     """
-    display_name: constr(strict=True, max_length=512, min_length=0) = Field(..., alias="displayName", description="The name of the Timeline.")
-    description: Optional[constr(strict=True, max_length=512, min_length=0)] = Field(None, description="A description for the Timeline.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Timeline.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Timeline.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Timelines properties. These will be from the 'Timeline' domain.")
     __properties = ["displayName", "description", "properties"]
 

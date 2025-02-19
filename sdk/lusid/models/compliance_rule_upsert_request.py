@@ -19,74 +19,27 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleUpsertRequest(BaseModel):
     """
     ComplianceRuleUpsertRequest
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    code: Optional[constr(strict=True, max_length=64, min_length=1)] = None
-    display_name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="displayName")
-    type: constr(strict=True, min_length=1) = Field(...)
-    property_key: Optional[StrictStr] = Field(None, alias="propertyKey")
-    value: Optional[constr(strict=True, max_length=512, min_length=1)] = None
+    scope:  StrictStr = Field(...,alias="scope", description="") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="") 
+    type:  StrictStr = Field(...,alias="type", description="") 
+    property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="") 
+    value:  Optional[StrictStr] = Field(None,alias="value", description="") 
     lower_bound: Union[StrictFloat, StrictInt] = Field(..., alias="lowerBound")
     upper_bound: Union[StrictFloat, StrictInt] = Field(..., alias="upperBound")
-    schedule: constr(strict=True, min_length=1) = Field(...)
+    schedule:  StrictStr = Field(...,alias="schedule", description="") 
     hard_requirement: StrictBool = Field(..., alias="hardRequirement")
     target_portfolio_ids: conlist(ResourceId) = Field(..., alias="targetPortfolioIds")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
-    address_key: Optional[StrictStr] = Field(None, alias="addressKey")
+    description:  Optional[StrictStr] = Field(None,alias="description", description="") 
+    address_key:  Optional[StrictStr] = Field(None,alias="addressKey", description="") 
     __properties = ["scope", "code", "displayName", "type", "propertyKey", "value", "lowerBound", "upperBound", "schedule", "hardRequirement", "targetPortfolioIds", "description", "addressKey"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('value')
-    def value_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

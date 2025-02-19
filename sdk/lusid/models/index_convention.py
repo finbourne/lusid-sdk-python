@@ -19,41 +19,21 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, constr, validator 
 
 class IndexConvention(BaseModel):
     """
     A set of conventions that describe the conventions for calculation of payments made on rates interbank lending and similar.  Based on ISDA 2006 conventions and similar documentation. Please see the knowledge base for further documentation.  # noqa: E501
     """
-    fixing_reference: constr(strict=True, max_length=64, min_length=0) = Field(..., alias="fixingReference", description="The reference rate name for fixings.")
+    fixing_reference:  StrictStr = Field(...,alias="fixingReference", description="The reference rate name for fixings.") 
     publication_day_lag: StrictInt = Field(..., alias="publicationDayLag", description="Number of days between spot and publication of the rate.")
-    payment_tenor: constr(strict=True, max_length=32, min_length=0) = Field(..., alias="paymentTenor", description="The tenor of the payment. For an OIS index this is always 1 day. For other indices, e.g. LIBOR it will have a variable tenor typically between 1 day and 1 year.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
-    day_count_convention: constr(strict=True, max_length=32, min_length=0) = Field(..., alias="dayCountConvention", description="when calculating the fraction of a year between two dates, what convention is used to represent the number of days in a year  and difference between them.  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365].")
-    currency: StrictStr = Field(..., description="Currency of the index convention.")
-    index_name: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, alias="indexName", description="The name of the index for which this represents the conventions of.  For instance, \"SOFR\", \"LIBOR\", \"EURIBOR\", etc.  Defaults to \"INDEX\" if not specified.")
-    scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The scope used when updating or inserting the convention.")
-    code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The code of the convention.")
+    payment_tenor:  StrictStr = Field(...,alias="paymentTenor", description="The tenor of the payment. For an OIS index this is always 1 day. For other indices, e.g. LIBOR it will have a variable tenor typically between 1 day and 1 year.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
+    day_count_convention:  StrictStr = Field(...,alias="dayCountConvention", description="when calculating the fraction of a year between two dates, what convention is used to represent the number of days in a year  and difference between them.  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365].") 
+    currency:  StrictStr = Field(...,alias="currency", description="Currency of the index convention.") 
+    index_name:  Optional[StrictStr] = Field(None,alias="indexName", description="The name of the index for which this represents the conventions of.  For instance, \"SOFR\", \"LIBOR\", \"EURIBOR\", etc.  Defaults to \"INDEX\" if not specified.") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope used when updating or inserting the convention.") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the convention.") 
     __properties = ["fixingReference", "publicationDayLag", "paymentTenor", "dayCountConvention", "currency", "indexName", "scope", "code"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

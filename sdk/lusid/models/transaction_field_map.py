@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
 
@@ -27,16 +27,16 @@ class TransactionFieldMap(BaseModel):
     """
     TransactionFieldMap
     """
-    transaction_id: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionId")
-    type: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    source: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    instrument: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    transaction_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionDate")
-    settlement_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="settlementDate")
-    units: constr(strict=True, max_length=1024, min_length=0) = Field(...)
+    transaction_id:  StrictStr = Field(...,alias="transactionId") 
+    type:  StrictStr = Field(...,alias="type") 
+    source:  StrictStr = Field(...,alias="source") 
+    instrument:  StrictStr = Field(...,alias="instrument") 
+    transaction_date:  StrictStr = Field(...,alias="transactionDate") 
+    settlement_date:  StrictStr = Field(...,alias="settlementDate") 
+    units:  StrictStr = Field(...,alias="units") 
     transaction_price: Optional[TransactionPriceAndType] = Field(None, alias="transactionPrice")
-    transaction_currency: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionCurrency")
-    exchange_rate: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="exchangeRate")
+    transaction_currency:  StrictStr = Field(...,alias="transactionCurrency") 
+    exchange_rate:  Optional[StrictStr] = Field(None,alias="exchangeRate") 
     total_consideration: TransactionCurrencyAndAmount = Field(..., alias="totalConsideration")
     __properties = ["transactionId", "type", "source", "instrument", "transactionDate", "settlementDate", "units", "transactionPrice", "transactionCurrency", "exchangeRate", "totalConsideration"]
 

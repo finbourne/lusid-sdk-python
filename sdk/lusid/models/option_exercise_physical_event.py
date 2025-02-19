@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.option_exercise_election import OptionExerciseElection
@@ -31,18 +31,18 @@ class OptionExercisePhysicalEvent(InstrumentEvent):
     """
     exercise_date: Optional[datetime] = Field(None, alias="exerciseDate", description="The exercise date of the option.")
     delivery_date: Optional[datetime] = Field(None, alias="deliveryDate", description="The delivery date of the option.")
-    exercise_type: constr(strict=True, min_length=1) = Field(..., alias="exerciseType", description="The optionality type of the underlying option e.g. American, European.    Supported string (enumeration) values are: [European, Bermudan, American].")
+    exercise_type:  StrictStr = Field(...,alias="exerciseType", description="The optionality type of the underlying option e.g. American, European.    Supported string (enumeration) values are: [European, Bermudan, American].") 
     maturity_date: datetime = Field(..., alias="maturityDate", description="The maturity date of the option.")
-    moneyness: Optional[StrictStr] = Field(None, description="The moneyness of the option e.g. InTheMoney, OutOfTheMoney.    Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney].")
+    moneyness:  Optional[StrictStr] = Field(None,alias="moneyness", description="The moneyness of the option e.g. InTheMoney, OutOfTheMoney.    Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney].") 
     new_instrument: NewInstrument = Field(..., alias="newInstrument")
     option_exercise_elections: Optional[conlist(OptionExerciseElection)] = Field(None, alias="optionExerciseElections", description="Option exercise election for this OptionExercisePhysicalEvent.")
-    option_type: constr(strict=True, min_length=1) = Field(..., alias="optionType", description="Type of optionality that is present e.g. call, put.    Supported string (enumeration) values are: [Call, Put].")
+    option_type:  StrictStr = Field(...,alias="optionType", description="Type of optionality that is present e.g. call, put.    Supported string (enumeration) values are: [Call, Put].") 
     start_date: datetime = Field(..., alias="startDate", description="The trade date of the option.")
-    strike_currency: StrictStr = Field(..., alias="strikeCurrency", description="The strike currency of the equity option.")
+    strike_currency:  StrictStr = Field(...,alias="strikeCurrency", description="The strike currency of the equity option.") 
     strike_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="strikePerUnit", description="The strike of the equity option times the number of shares to exchange if exercised.")
     underlying_value_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="underlyingValuePerUnit", description="The underlying price times the number of shares to exchange if exercised.")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
-    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent")
+    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentEventType", "exerciseDate", "deliveryDate", "exerciseType", "maturityDate", "moneyness", "newInstrument", "optionExerciseElections", "optionType", "startDate", "strikeCurrency", "strikePerUnit", "underlyingValuePerUnit", "unitsRatio"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 
@@ -27,8 +27,8 @@ class CustomEntityRequest(BaseModel):
     """
     CustomEntityRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="A display label for the custom entity.")
-    description: constr(strict=True, min_length=1) = Field(..., description="A description of the custom entity.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity.") 
+    description:  StrictStr = Field(...,alias="description", description="A description of the custom entity.") 
     identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
     fields: Optional[conlist(CustomEntityField)] = Field(None, description="The fields that decorate the custom entity.")
     __properties = ["displayName", "description", "identifiers", "fields"]

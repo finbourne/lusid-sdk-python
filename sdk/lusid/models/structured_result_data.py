@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.data_map_key import DataMapKey
 
 class StructuredResultData(BaseModel):
     """
     An item of structured result data that is to be inserted into Lusid. This will typically be a Json or Xml document that  contains a set of result data appropriate to a specific entity such as an instrument or potentially an index.  # noqa: E501
     """
-    document_format: constr(strict=True, max_length=128, min_length=0) = Field(..., alias="documentFormat", description="The format of the accompanying document.")
-    version: Optional[StrictStr] = Field(None, description="The semantic version of the document format; MAJOR.MINOR.PATCH")
-    name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The name or description for the document")
-    document: constr(strict=True, max_length=1000000, min_length=0) = Field(..., description="The document that will be stored (or retrieved) and which describes a unit result data entity such as a set of prices or yields")
+    document_format:  StrictStr = Field(...,alias="documentFormat", description="The format of the accompanying document.") 
+    version:  Optional[StrictStr] = Field(None,alias="version", description="The semantic version of the document format; MAJOR.MINOR.PATCH") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The name or description for the document") 
+    document:  StrictStr = Field(...,alias="document", description="The document that will be stored (or retrieved) and which describes a unit result data entity such as a set of prices or yields") 
     data_map_key: Optional[DataMapKey] = Field(None, alias="dataMapKey")
     __properties = ["documentFormat", "version", "name", "document", "dataMapKey"]
 

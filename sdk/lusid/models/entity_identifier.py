@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class EntityIdentifier(BaseModel):
     """
     Dto to expose mapped keys to new standardised format  # noqa: E501
     """
-    identifier_scope: Optional[StrictStr] = Field(None, alias="identifierScope", description="The scope of the identifier")
-    identifier_type: StrictStr = Field(..., alias="identifierType", description="The type of the identifier")
-    identifier_value: StrictStr = Field(..., alias="identifierValue", description="The value of the identifier")
+    identifier_scope:  Optional[StrictStr] = Field(None,alias="identifierScope", description="The scope of the identifier") 
+    identifier_type:  StrictStr = Field(...,alias="identifierType", description="The type of the identifier") 
+    identifier_value:  StrictStr = Field(...,alias="identifierValue", description="The value of the identifier") 
     __properties = ["identifierScope", "identifierType", "identifierValue"]
 
     class Config:

@@ -19,14 +19,14 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 
 class AnnulSingleStructuredDataResponse(BaseModel):
     """
     The response to a request to annul (delete) a set of structured data from Lusid. This might have been for market data or some other structured entity.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     value: Optional[datetime] = Field(None, description="The time at which the identifier was annulled")
     links: Optional[conlist(Link)] = None
     __properties = ["href", "value", "links"]

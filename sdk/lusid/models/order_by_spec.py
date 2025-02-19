@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class OrderBySpec(BaseModel):
     """
     OrderBySpec
     """
-    key: StrictStr = Field(..., description="The key that uniquely identifies a queryable address in Lusid.")
-    sort_order: StrictStr = Field(..., alias="sortOrder", description="The available values are: Ascending, Descending")
+    key:  StrictStr = Field(...,alias="key", description="The key that uniquely identifies a queryable address in Lusid.") 
+    sort_order:  StrictStr = Field(...,alias="sortOrder", description="The available values are: Ascending, Descending") 
     __properties = ["key", "sortOrder"]
 
     @validator('sort_order')

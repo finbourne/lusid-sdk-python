@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.market_data_options import MarketDataOptions
 
 class CurveOptions(MarketDataOptions):
     """
     Options for configuring how ComplexMarketData representing a 'curve' is interpreted.  # noqa: E501
     """
-    day_count_convention: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="dayCountConvention", description="Day count convention of the curve. Defaults to \"Act360\".")
-    front_extrapolation_type: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="frontExtrapolationType", description="What type of extrapolation is used to build the curve  Imagine that the curve is facing the observer(you), then the \"front\" direction is the closest point on the curve onward.    example: 0D tenor to past  Defaults to \"Flat\". Supported string (enumeration) values are: [None, Flat, Linear].")
-    back_extrapolation_type: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="backExtrapolationType", description="What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \"back\" direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Defaults to \"Flat\". Supported string (enumeration) values are: [None, Flat, Linear].")
-    market_data_options_type: StrictStr = Field(..., alias="marketDataOptionsType", description="The available values are: CurveOptions")
+    day_count_convention:  Optional[StrictStr] = Field(None,alias="dayCountConvention", description="Day count convention of the curve. Defaults to \"Act360\".") 
+    front_extrapolation_type:  Optional[StrictStr] = Field(None,alias="frontExtrapolationType", description="What type of extrapolation is used to build the curve  Imagine that the curve is facing the observer(you), then the \"front\" direction is the closest point on the curve onward.    example: 0D tenor to past  Defaults to \"Flat\". Supported string (enumeration) values are: [None, Flat, Linear].") 
+    back_extrapolation_type:  Optional[StrictStr] = Field(None,alias="backExtrapolationType", description="What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \"back\" direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Defaults to \"Flat\". Supported string (enumeration) values are: [None, Flat, Linear].") 
+    market_data_options_type:  StrictStr = Field(...,alias="marketDataOptionsType", description="The available values are: CurveOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataOptionsType", "dayCountConvention", "frontExtrapolationType", "backExtrapolationType"]
 

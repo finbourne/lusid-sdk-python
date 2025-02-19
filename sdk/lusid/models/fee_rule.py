@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.calculation_info import CalculationInfo
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,21 +28,21 @@ class FeeRule(BaseModel):
     """
     FeeRule
     """
-    code: constr(strict=True, min_length=1) = Field(...)
-    transaction_property_key: StrictStr = Field(..., alias="transactionPropertyKey")
-    transaction_type: constr(strict=True, min_length=1) = Field(..., alias="transactionType")
-    country: constr(strict=True, min_length=1) = Field(...)
-    counterparty: constr(strict=True, min_length=1) = Field(...)
-    transaction_currency: constr(strict=True, min_length=1) = Field(..., alias="transactionCurrency")
-    settlement_currency: constr(strict=True, min_length=1) = Field(..., alias="settlementCurrency")
-    execution_broker: constr(strict=True, min_length=1) = Field(..., alias="executionBroker")
-    custodian: constr(strict=True, min_length=1) = Field(...)
-    exchange: constr(strict=True, min_length=1) = Field(...)
+    code:  StrictStr = Field(...,alias="code", description="") 
+    transaction_property_key:  StrictStr = Field(...,alias="transactionPropertyKey", description="") 
+    transaction_type:  StrictStr = Field(...,alias="transactionType", description="") 
+    country:  StrictStr = Field(...,alias="country", description="") 
+    counterparty:  StrictStr = Field(...,alias="counterparty", description="") 
+    transaction_currency:  StrictStr = Field(...,alias="transactionCurrency", description="") 
+    settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="") 
+    execution_broker:  StrictStr = Field(...,alias="executionBroker", description="") 
+    custodian:  StrictStr = Field(...,alias="custodian", description="") 
+    exchange:  StrictStr = Field(...,alias="exchange", description="") 
     fee: CalculationInfo = Field(...)
     min_fee: Optional[CalculationInfo] = Field(None, alias="minFee")
     max_fee: Optional[CalculationInfo] = Field(None, alias="maxFee")
     additional_keys: Optional[Dict[str, StrictStr]] = Field(None, alias="additionalKeys")
-    description: Optional[StrictStr] = None
+    description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["code", "transactionPropertyKey", "transactionType", "country", "counterparty", "transactionCurrency", "settlementCurrency", "executionBroker", "custodian", "exchange", "fee", "minFee", "maxFee", "additionalKeys", "description", "version", "links"]

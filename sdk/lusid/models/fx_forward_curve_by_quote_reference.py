@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.fx_tenor_convention import FxTenorConvention
 from lusid.models.market_data_options import MarketDataOptions
@@ -28,15 +28,15 @@ class FxForwardCurveByQuoteReference(ComplexMarketData):
     """
     Contains data (i.e. tenors and rates + metadata) for building fx forward curves (when combined with a date to build on)  # noqa: E501
     """
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the fx forward")
-    fgn_ccy: StrictStr = Field(..., alias="fgnCcy", description="Foreign currency of the fx forward")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
+    fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
     tenors: conlist(StrictStr) = Field(..., description="Tenors for which the forward rates apply.  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
     quote_references: conlist(Dict[str, StrictStr]) = Field(..., alias="quoteReferences", description="For each tenor, a collection of identifiers. These will be looked up in the LUSID Quote Store to resolve the actual rates.  Accepts an array of Dictionary<string, string>. The keys of each dictionary must be chosen from the following enumeration:  [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].  For example:    \"quoteReferences\": [{\"ClientInternal\": \"SomeIdentifierForFirstTenor\"},{\"ClientInternal\": \"SomeIdentifierForSecondTenor\"}")
-    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.")
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
     calendars: Optional[conlist(FxTenorConvention)] = Field(None, description="The list of conventions that should be used when interpreting tenors as dates.")
-    spot_days_calculation_type: Optional[StrictStr] = Field(None, alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ]")
-    market_data_type: StrictStr = Field(..., alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface")
+    spot_days_calculation_type:  Optional[StrictStr] = Field(None,alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ]") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "domCcy", "fgnCcy", "tenors", "quoteReferences", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType"]
 

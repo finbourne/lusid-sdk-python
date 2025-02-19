@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.metric_value import MetricValue
 from lusid.models.quote_id import QuoteId
 
@@ -29,7 +29,7 @@ class UpsertQuoteRequest(BaseModel):
     """
     quote_id: QuoteId = Field(..., alias="quoteId")
     metric_value: Optional[MetricValue] = Field(None, alias="metricValue")
-    lineage: Optional[StrictStr] = Field(None, description="Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.")
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.") 
     scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="scaleFactor", description="An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.")
     __properties = ["quoteId", "metricValue", "lineage", "scaleFactor"]
 

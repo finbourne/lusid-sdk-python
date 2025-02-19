@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 
 class ReferenceInstrument(LusidInstrument):
     """
     LUSID representation of a reference to another instrument that has already been loaded (e.g. a lookthrough to a portfolio).  # noqa: E501
     """
-    instrument_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentId", description="The Identifier code")
-    instrument_id_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentIdType", description="The type of the instrument id e.g. LusidInstrument Id")
-    scope: constr(strict=True, min_length=1) = Field(..., description="Scope for the instrument (optional)")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The Identifier code") 
+    instrument_id_type:  StrictStr = Field(...,alias="instrumentIdType", description="The type of the instrument id e.g. LusidInstrument Id") 
+    scope:  StrictStr = Field(...,alias="scope", description="Scope for the instrument (optional)") 
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "instrumentId", "instrumentIdType", "scope"]
 

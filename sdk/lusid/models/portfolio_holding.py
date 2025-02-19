@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
@@ -30,18 +30,18 @@ class PortfolioHolding(BaseModel):
     """
     A list of holdings.  # noqa: E501
     """
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the holding's instrument is in.")
-    instrument_uid: constr(strict=True, min_length=1) = Field(..., alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the holding's instrument is in.") 
+    instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' or 'Holding' domain.")
-    holding_type: constr(strict=True, min_length=1) = Field(..., alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.")
+    holding_type:  StrictStr = Field(...,alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.") 
     units: Union[StrictFloat, StrictInt] = Field(..., description="The total number of units of the holding.")
     settled_units: Union[StrictFloat, StrictInt] = Field(..., alias="settledUnits", description="The total number of settled units of the holding.")
     cost: CurrencyAndAmount = Field(...)
     cost_portfolio_ccy: CurrencyAndAmount = Field(..., alias="costPortfolioCcy")
     transaction: Optional[Transaction] = None
-    currency: Optional[StrictStr] = Field(None, description="The holding currency.")
-    holding_type_name: Optional[StrictStr] = Field(None, alias="holdingTypeName", description="The decoded type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The holding currency.") 
+    holding_type_name:  Optional[StrictStr] = Field(None,alias="holdingTypeName", description="The decoded type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc.") 
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="A single identifier for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.")
     notional_cost: Optional[CurrencyAndAmount] = Field(None, alias="notionalCost")
     amortised_cost: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCost")

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, validator 
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -30,17 +30,17 @@ class PortfolioDetails(BaseModel):
     """
     PortfolioDetails
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     origin_portfolio_id: ResourceId = Field(..., alias="originPortfolioId")
     version: Version = Field(...)
-    base_currency: StrictStr = Field(..., alias="baseCurrency", description="The base currency of the transaction portfolio.")
+    base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the transaction portfolio.") 
     corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
     sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys")
     instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to the transaction portfolio.")
-    accounting_method: Optional[StrictStr] = Field(None, alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency")
-    amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
-    transaction_type_scope: Optional[StrictStr] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
-    cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
+    accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency") 
+    amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
+    transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope", description="The scope of the transaction types.") 
+    cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")

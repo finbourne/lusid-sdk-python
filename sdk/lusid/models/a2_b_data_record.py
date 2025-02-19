@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.a2_b_category import A2BCategory
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
@@ -31,19 +31,19 @@ class A2BDataRecord(BaseModel):
     A2B Record - shows values on, and changes between two dates: A and B  # noqa: E501
     """
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    holding_type: Optional[StrictStr] = Field(None, alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.")
-    instrument_uid: Optional[StrictStr] = Field(None, alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.")
+    holding_type:  Optional[StrictStr] = Field(None,alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
+    instrument_uid:  Optional[StrictStr] = Field(None,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
-    currency: Optional[StrictStr] = Field(None, description="The holding currency.")
-    transaction_id: Optional[StrictStr] = Field(None, alias="transactionId", description="The unique identifier for the transaction.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The holding currency.") 
+    transaction_id:  Optional[StrictStr] = Field(None,alias="transactionId", description="The unique identifier for the transaction.") 
     start: Optional[A2BCategory] = None
     flows: Optional[A2BCategory] = None
     gains: Optional[A2BCategory] = None
     carry: Optional[A2BCategory] = None
     end: Optional[A2BCategory] = None
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' domain.")
-    group_id: Optional[StrictStr] = Field(None, alias="groupId", description="Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.")
+    group_id:  Optional[StrictStr] = Field(None,alias="groupId", description="Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.") 
     errors: Optional[conlist(ResponseMetaData)] = Field(None, description="Any errors with the record are reported here.")
     __properties = ["portfolioId", "holdingType", "instrumentScope", "instrumentUid", "subHoldingKeys", "currency", "transactionId", "start", "flows", "gains", "carry", "end", "properties", "groupId", "errors"]
 

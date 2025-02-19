@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
 from lusid.models.cash_flow_value import CashFlowValue
 from lusid.models.result_value import ResultValue
 
@@ -28,7 +28,7 @@ class CashFlowValueSet(ResultValue):
     Result value for a collection of cash flow values  # noqa: E501
     """
     cashflows: Optional[conlist(CashFlowValue)] = Field(None, description="The set of cash flows in the result")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "cashflows"]
 

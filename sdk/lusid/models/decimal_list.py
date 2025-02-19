@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, validator 
 from lusid.models.reference_list import ReferenceList
 
 class DecimalList(ReferenceList):
@@ -27,7 +27,7 @@ class DecimalList(ReferenceList):
     DecimalList
     """
     values: conlist(Union[StrictFloat, StrictInt], max_items=10000, min_items=0) = Field(...)
-    reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList")
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
 

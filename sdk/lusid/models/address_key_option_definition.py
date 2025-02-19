@@ -19,18 +19,18 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
 
 class AddressKeyOptionDefinition(BaseModel):
     """
     The definition of an Address Key Option  # noqa: E501
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="The name of the option")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the option")
-    description: constr(strict=True, min_length=1) = Field(..., description="The description of the option")
+    name:  StrictStr = Field(...,alias="name", description="The name of the option") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the option") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the option") 
     optional: StrictBool = Field(..., description="Is this option required or optional?")
     allowed_value_set: Optional[conlist(StrictStr)] = Field(None, alias="allowedValueSet", description="If the option is a string or enum, the allowed set of values it can take.")
-    default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="If the option is not required, what is the default value?")
+    default_value:  Optional[StrictStr] = Field(None,alias="defaultValue", description="If the option is not required, what is the default value?") 
     __properties = ["name", "type", "description", "optional", "allowedValueSet", "defaultValue"]
 
     class Config:

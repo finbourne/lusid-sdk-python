@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.instrument import Instrument
 from lusid.models.link import Link
@@ -29,7 +29,7 @@ class UpsertInstrumentsResponse(BaseModel):
     """
     UpsertInstrumentsResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: Optional[Dict[str, Instrument]] = Field(None, description="The instruments which have been successfully updated or created.")
     staged: Optional[Dict[str, Instrument]] = Field(None, description="The instruments that have been staged for updation or creation.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The instruments that could not be updated or created or were left unchanged without error along with a reason for their failure.")

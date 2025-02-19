@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
@@ -29,33 +29,23 @@ class LusidTradeTicket(BaseModel):
     """
     A LUSID Trade Ticket comprising an instrument, a transaction, and a counterparty.  # noqa: E501
     """
-    transaction_id: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="transactionId", description="Transaction ID. Must be unique.")
-    transaction_type: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="transactionType", description="Type of transaction for processing. Referenced by Transaction Configuration.")
-    source: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, description="Transaction Source. Referenced by Transaction Configuration.")
-    transaction_date: constr(strict=True, min_length=1) = Field(..., alias="transactionDate", description="Transaction Date. Date at which transaction is known.")
-    settlement_date: constr(strict=True, min_length=1) = Field(..., alias="settlementDate", description="Transaction settlement. Date at which transaction is finalised and realised into the system.")
+    transaction_id:  StrictStr = Field(...,alias="transactionId", description="Transaction ID. Must be unique.") 
+    transaction_type:  StrictStr = Field(...,alias="transactionType", description="Type of transaction for processing. Referenced by Transaction Configuration.") 
+    source:  Optional[StrictStr] = Field(None,alias="source", description="Transaction Source. Referenced by Transaction Configuration.") 
+    transaction_date:  StrictStr = Field(...,alias="transactionDate", description="Transaction Date. Date at which transaction is known.") 
+    settlement_date:  StrictStr = Field(...,alias="settlementDate", description="Transaction settlement. Date at which transaction is finalised and realised into the system.") 
     total_consideration: CurrencyAndAmount = Field(..., alias="totalConsideration")
     units: Union[StrictFloat, StrictInt] = Field(..., description="Number of units in the transaction. For an OTC this is somewhat interchangeable with the quantity booked in the  instrument. As M x N or N x M are equivalent it is advised a client chooses one approach and sticks to it.  Arguably either the unit or holding is best unitised.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Identifiers for the instrument.")
-    instrument_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="instrumentScope", description="Scope of instrument")
-    instrument_name: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="instrumentName", description="Name of instrument")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="Scope of instrument") 
+    instrument_name:  Optional[StrictStr] = Field(None,alias="instrumentName", description="Name of instrument") 
     instrument_definition: Optional[LusidInstrument] = Field(None, alias="instrumentDefinition")
     counterparty_agreement_id: Optional[ResourceId] = Field(None, alias="counterpartyAgreementId")
-    counterparty: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, description="Counterparty")
+    counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Counterparty") 
     instrument_properties: Optional[conlist(ModelProperty)] = Field(None, alias="instrumentProperties", description="Set of instrument properties (as defined by client/user).")
     transaction_properties: Optional[conlist(ModelProperty)] = Field(None, alias="transactionProperties", description="Set of transaction properties (as defined by client/user).")
-    trade_ticket_type: StrictStr = Field(..., alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket")
+    trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket") 
     __properties = ["transactionId", "transactionType", "source", "transactionDate", "settlementDate", "totalConsideration", "units", "instrumentIdentifiers", "instrumentScope", "instrumentName", "instrumentDefinition", "counterpartyAgreementId", "counterparty", "instrumentProperties", "transactionProperties", "tradeTicketType"]
-
-    @validator('instrument_scope')
-    def instrument_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     @validator('trade_ticket_type')
     def trade_ticket_type_validate_enum(cls, value):

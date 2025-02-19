@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class GeneratedEventDiagnostics(BaseModel):
     """
     Represents a set of diagnostics per generatedEvent, where applicable.  # noqa: E501
     """
-    instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId")
-    type: constr(strict=True, min_length=1) = Field(...)
-    detail: constr(strict=True, min_length=1) = Field(...)
+    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId") 
+    type:  StrictStr = Field(...,alias="type") 
+    detail:  StrictStr = Field(...,alias="detail") 
     error_details: conlist(StrictStr) = Field(..., alias="errorDetails")
     __properties = ["instrumentEventId", "type", "detail", "errorDetails"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.staged_modifications_info import StagedModificationsInfo
@@ -29,7 +29,7 @@ class PortfolioProperties(BaseModel):
     """
     PortfolioProperties
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The portfolio properties. These will be from the 'Portfolio' domain.")
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")

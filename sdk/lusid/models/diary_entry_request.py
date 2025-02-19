@@ -19,37 +19,20 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class DiaryEntryRequest(BaseModel):
     """
     The request to add a diary entry  # noqa: E501
     """
-    diary_entry_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="diaryEntryCode", description="The code of the diary entry.")
-    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The name of the diary entry.")
-    status: Optional[StrictStr] = Field(None, description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.")
+    diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="The code of the diary entry.") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the diary entry.") 
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.") 
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
     __properties = ["diaryEntryCode", "name", "status", "effectiveAt", "queryAsAt", "properties"]
-
-    @validator('diary_entry_code')
-    def diary_entry_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

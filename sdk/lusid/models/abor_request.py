@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
@@ -28,30 +28,13 @@ class AborRequest(BaseModel):
     """
     The request used to create an Abor.  # noqa: E501
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Abor.")
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the Abor.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description for the Abor.")
+    code:  StrictStr = Field(...,alias="code", description="The code given for the Abor.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Abor.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description for the Abor.") 
     portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.")
     abor_configuration_id: ResourceId = Field(..., alias="aborConfigurationId")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
     __properties = ["code", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

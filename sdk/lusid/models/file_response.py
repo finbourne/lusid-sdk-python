@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBytes, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBytes, StrictStr 
 
 class FileResponse(BaseModel):
     """
     Allows a file (represented as a stream) to be returned from an Api call  # noqa: E501
     """
     file_stream: Optional[Union[StrictBytes, StrictStr]] = Field(None, alias="fileStream")
-    content_type: Optional[StrictStr] = Field(None, alias="contentType")
-    downloaded_filename: Optional[StrictStr] = Field(None, alias="downloadedFilename")
+    content_type:  Optional[StrictStr] = Field(None,alias="contentType") 
+    downloaded_filename:  Optional[StrictStr] = Field(None,alias="downloadedFilename") 
     __properties = ["fileStream", "contentType", "downloadedFilename"]
 
     class Config:

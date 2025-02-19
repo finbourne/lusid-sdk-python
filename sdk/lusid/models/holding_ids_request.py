@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist 
 
 class HoldingIdsRequest(BaseModel):
     """

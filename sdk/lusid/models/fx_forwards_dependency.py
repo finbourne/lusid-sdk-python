@@ -19,18 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class FxForwardsDependency(EconomicDependency):
     """
     Indicates a dependency on an FxForwardCurve.  Identical to Fx dependencies in the meaning of domestic and foreign currencies, but describes a *set* of fx rates.  These rates are quoted rates for fx forwards, which can be used to interpolate the forward rate at a specific time in the future.  In the case of pips, the absolute rates can be expressed as rate = spotFx + pips / pipsPerUnit  # noqa: E501
     """
-    domestic_currency: StrictStr = Field(..., alias="domesticCurrency", description="DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency.")
-    foreign_currency: StrictStr = Field(..., alias="foreignCurrency", description="ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency.")
-    curve_type: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="curveType", description="Used to describe the format in which the curve is expressed  e.g. FxFwdCurve (general term to describe any representation), TenorFxFwdCurve, PipsFxFwdCurve.")
+    domestic_currency:  StrictStr = Field(...,alias="domesticCurrency", description="DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency.") 
+    foreign_currency:  StrictStr = Field(...,alias="foreignCurrency", description="ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency.") 
+    curve_type:  StrictStr = Field(...,alias="curveType", description="Used to describe the format in which the curve is expressed  e.g. FxFwdCurve (general term to describe any representation), TenorFxFwdCurve, PipsFxFwdCurve.") 
     var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "domesticCurrency", "foreignCurrency", "curveType", "date"]
 

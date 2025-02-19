@@ -19,25 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 
 class LockPeriodDiaryEntryRequest(BaseModel):
     """
     A definition for the period you wish to lock  # noqa: E501
     """
-    diary_entry_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="diaryEntryCode", description="Unique code assigned to a period. When left blank last closed period will be located.")
+    diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="Unique code assigned to a period. When left blank last closed period will be located.") 
     closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
     __properties = ["diaryEntryCode", "closingOptions"]
-
-    @validator('diary_entry_code')
-    def diary_entry_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

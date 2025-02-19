@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class DialectSchema(BaseModel):
     """
     A schema that a given document must obey. A representation of the validation of a particular Dialect,  in a given language.  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of schema this represents")
-    body: Optional[constr(strict=True, max_length=128000, min_length=0)] = Field(None, description="The body of the schema")
+    type:  StrictStr = Field(...,alias="type", description="The type of schema this represents") 
+    body:  Optional[StrictStr] = Field(None,alias="body", description="The body of the schema") 
     __properties = ["type", "body"]
 
     class Config:

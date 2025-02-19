@@ -19,39 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class CustomEntityId(BaseModel):
     """
     CustomEntityId
     """
-    identifier_scope: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="identifierScope", description="The scope the identifier resides in (the scope of the identifier property definition).")
-    identifier_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="identifierType", description="What the identifier represents (the code of the identifier property definition).")
-    identifier_value: constr(strict=True, max_length=1024, min_length=1) = Field(..., alias="identifierValue", description="The value of the identifier for this entity.")
+    identifier_scope:  StrictStr = Field(...,alias="identifierScope", description="The scope the identifier resides in (the scope of the identifier property definition).") 
+    identifier_type:  StrictStr = Field(...,alias="identifierType", description="What the identifier represents (the code of the identifier property definition).") 
+    identifier_value:  StrictStr = Field(...,alias="identifierValue", description="The value of the identifier for this entity.") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the identifier is valid.")
     effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the identifier is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the identifier.")
     __properties = ["identifierScope", "identifierType", "identifierValue", "effectiveFrom", "effectiveUntil"]
-
-    @validator('identifier_scope')
-    def identifier_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('identifier_type')
-    def identifier_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('identifier_value')
-    def identifier_value_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 
 class DateAttributes(BaseModel):
     """
@@ -28,62 +28,12 @@ class DateAttributes(BaseModel):
     irregular: StrictBool = Field(...)
     irregular_session: StrictBool = Field(..., alias="irregularSession")
     new_hours: StrictBool = Field(..., alias="newHours")
-    activity: Optional[constr(strict=True, max_length=100, min_length=0)] = None
-    first_open: Optional[constr(strict=True, max_length=100, min_length=0)] = Field(None, alias="firstOpen")
-    last_open: Optional[constr(strict=True, max_length=100, min_length=0)] = Field(None, alias="lastOpen")
-    first_close: Optional[constr(strict=True, max_length=100, min_length=0)] = Field(None, alias="firstClose")
-    last_close: Optional[constr(strict=True, max_length=100, min_length=0)] = Field(None, alias="lastClose")
+    activity:  Optional[StrictStr] = Field(None,alias="activity") 
+    first_open:  Optional[StrictStr] = Field(None,alias="firstOpen") 
+    last_open:  Optional[StrictStr] = Field(None,alias="lastOpen") 
+    first_close:  Optional[StrictStr] = Field(None,alias="firstClose") 
+    last_close:  Optional[StrictStr] = Field(None,alias="lastClose") 
     __properties = ["irregular", "irregularSession", "newHours", "activity", "firstOpen", "lastOpen", "firstClose", "lastClose"]
-
-    @validator('activity')
-    def activity_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('first_open')
-    def first_open_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('last_open')
-    def last_open_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('first_close')
-    def first_close_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('last_close')
-    def last_close_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

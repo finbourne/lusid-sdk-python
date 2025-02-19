@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.result_value import ResultValue
 from lusid.models.structured_result_data_id import StructuredResultDataId
 
@@ -29,7 +29,7 @@ class UpsertResultValuesDataRequest(BaseModel):
     """
     document_id: StructuredResultDataId = Field(..., alias="documentId")
     key: Optional[Dict[str, StrictStr]] = Field(None, description="The structured unit result data key.")
-    data_address: Optional[StrictStr] = Field(None, alias="dataAddress", description="The address of the piece of unit result data")
+    data_address:  Optional[StrictStr] = Field(None,alias="dataAddress", description="The address of the piece of unit result data") 
     result_value: Optional[ResultValue] = Field(None, alias="resultValue")
     __properties = ["documentId", "key", "dataAddress", "resultValue"]
 

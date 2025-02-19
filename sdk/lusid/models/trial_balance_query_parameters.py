@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class TrialBalanceQueryParameters(BaseModel):
@@ -28,21 +28,11 @@ class TrialBalanceQueryParameters(BaseModel):
     """
     start: Optional[DateOrDiaryEntry] = None
     end: Optional[DateOrDiaryEntry] = None
-    date_mode: Optional[StrictStr] = Field(None, alias="dateMode", description="The mode of calculation of the trial balance. The available values are: ActivityDate, AccountingDate.")
-    general_ledger_profile_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate trial balance with levels.")
+    date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the trial balance. The available values are: ActivityDate, AccountingDate.") 
+    general_ledger_profile_code:  Optional[StrictStr] = Field(None,alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate trial balance with levels.") 
     property_keys: Optional[conlist(StrictStr)] = Field(None, alias="propertyKeys", description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the trial balance.")
     exclude_cleardown_module: Optional[StrictBool] = Field(None, alias="excludeCleardownModule", description="By deafult this flag is set to false, if this is set to true, no cleardown module will be applied to the trial balance.")
     __properties = ["start", "end", "dateMode", "generalLedgerProfileCode", "propertyKeys", "excludeCleardownModule"]
-
-    @validator('general_ledger_profile_code')
-    def general_ledger_profile_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

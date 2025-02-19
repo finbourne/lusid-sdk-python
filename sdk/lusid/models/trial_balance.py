@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
@@ -28,11 +28,11 @@ class TrialBalance(BaseModel):
     """
     A TrialBalance entity.  # noqa: E501
     """
-    general_ledger_account_code: constr(strict=True, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The Account code that the trial balance results have been grouped against.")
-    description: Optional[StrictStr] = Field(None, description="The description of the record.")
+    general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The Account code that the trial balance results have been grouped against.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the record.") 
     levels: conlist(StrictStr) = Field(..., description="The levels that have been derived from the specified General Ledger Profile.")
-    account_type: constr(strict=True, min_length=1) = Field(..., alias="accountType", description="The account type attributed to the record.")
-    local_currency: constr(strict=True, min_length=1) = Field(..., alias="localCurrency", description="The local currency for the amounts specified. Defaults to base currency if multiple different currencies present in the grouped line.")
+    account_type:  StrictStr = Field(...,alias="accountType", description="The account type attributed to the record.") 
+    local_currency:  StrictStr = Field(...,alias="localCurrency", description="The local currency for the amounts specified. Defaults to base currency if multiple different currencies present in the grouped line.") 
     opening: MultiCurrencyAmounts = Field(...)
     closing: MultiCurrencyAmounts = Field(...)
     debit: MultiCurrencyAmounts = Field(...)

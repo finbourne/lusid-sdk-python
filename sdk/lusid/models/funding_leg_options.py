@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.model_options import ModelOptions
 
 class FundingLegOptions(ModelOptions):
     """
     FundingLegOptions
     """
-    expected_funding_leg_notional: constr(strict=True, min_length=1) = Field(..., alias="expectedFundingLegNotional", description="Assumption made on future expected notional of the funding leg.")
-    model_options_type: StrictStr = Field(..., alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions")
+    expected_funding_leg_notional:  StrictStr = Field(...,alias="expectedFundingLegNotional", description="Assumption made on future expected notional of the funding leg.") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "expectedFundingLegNotional"]
 

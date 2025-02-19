@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator 
 from lusid.models.link import Link
 
 class FeeAccrual(BaseModel):
@@ -27,8 +27,8 @@ class FeeAccrual(BaseModel):
     FeeAccrual
     """
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date for which the fee accrual has been calculated.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the fee for which the accrual has been calculated.")
-    name: constr(strict=True, max_length=50, min_length=0) = Field(..., description="The name of the fee for which the accrual has been calculated.")
+    code:  StrictStr = Field(...,alias="code", description="The code of the fee for which the accrual has been calculated.") 
+    name:  StrictStr = Field(...,alias="name", description="The name of the fee for which the accrual has been calculated.") 
     calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculationBase", description="The result of the evaluating the fee's calculation base expression.")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The result of applying the fee to the calculation base, and scaled down to a day.")
     previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousAccrual", description="The previous valuation point's total accrual.")
@@ -36,13 +36,6 @@ class FeeAccrual(BaseModel):
     total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAccrual", description="The sum of the PreviousAccrual and Amount.")
     links: Optional[conlist(Link)] = None
     __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "links"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

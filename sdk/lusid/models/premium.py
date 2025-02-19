@@ -19,14 +19,14 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class Premium(BaseModel):
     """
     A class containing information for a given premium payment.  # noqa: E501
     """
     amount: Union[StrictFloat, StrictInt] = Field(..., description="Premium amount.")
-    currency: StrictStr = Field(..., description="Premium currency.")
+    currency:  StrictStr = Field(...,alias="currency", description="Premium currency.") 
     var_date: datetime = Field(..., alias="date", description="Date when premium paid.")
     __properties = ["amount", "currency", "date"]
 

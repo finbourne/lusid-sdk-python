@@ -19,21 +19,21 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class CreateRelationDefinitionRequest(BaseModel):
     """
     CreateRelationDefinitionRequest
     """
-    scope: StrictStr = Field(..., description="The scope that the relation exists in.")
-    code: StrictStr = Field(..., description="The code of the relation. Together with the scope this uniquely defines the relation.")
-    source_entity_domain: constr(strict=True, min_length=1) = Field(..., alias="sourceEntityDomain", description="The entity domain of the source entity object must be, allowed values are \"Portfolio\" and \"Person\"")
-    target_entity_domain: constr(strict=True, min_length=1) = Field(..., alias="targetEntityDomain", description="The entity domain of the target entity object must be, allowed values are \"Portfolio\" and \"Person\"")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the relation.")
-    outward_description: constr(strict=True, min_length=1) = Field(..., alias="outwardDescription", description="The description to relate source entity object and target entity object.")
-    inward_description: constr(strict=True, min_length=1) = Field(..., alias="inwardDescription", description="The description to relate target entity object and source entity object.")
-    life_time: Optional[StrictStr] = Field(None, alias="lifeTime", description="Describes how the relations can change over time, allowed values are \"Perpetual\" and \"TimeVariant\"")
-    constraint_style: Optional[StrictStr] = Field(None, alias="constraintStyle", description="Describes the uniqueness and cardinality for relations with a specific source entity object and relations under this definition. Allowed values are \"Property\" and \"Collection\", defaults to \"Collection\" if not specified.")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope that the relation exists in.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the relation. Together with the scope this uniquely defines the relation.") 
+    source_entity_domain:  StrictStr = Field(...,alias="sourceEntityDomain", description="The entity domain of the source entity object must be, allowed values are \"Portfolio\" and \"Person\"") 
+    target_entity_domain:  StrictStr = Field(...,alias="targetEntityDomain", description="The entity domain of the target entity object must be, allowed values are \"Portfolio\" and \"Person\"") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relation.") 
+    outward_description:  StrictStr = Field(...,alias="outwardDescription", description="The description to relate source entity object and target entity object.") 
+    inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object.") 
+    life_time:  Optional[StrictStr] = Field(None,alias="lifeTime", description="Describes how the relations can change over time, allowed values are \"Perpetual\" and \"TimeVariant\"") 
+    constraint_style:  Optional[StrictStr] = Field(None,alias="constraintStyle", description="Describes the uniqueness and cardinality for relations with a specific source entity object and relations under this definition. Allowed values are \"Property\" and \"Collection\", defaults to \"Collection\" if not specified.") 
     __properties = ["scope", "code", "sourceEntityDomain", "targetEntityDomain", "displayName", "outwardDescription", "inwardDescription", "lifeTime", "constraintStyle"]
 
     class Config:

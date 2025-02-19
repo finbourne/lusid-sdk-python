@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,11 +28,11 @@ class CustomEntityType(BaseModel):
     """
     Representation of a Custom Entity Type on the LUSID API  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    entity_type_name: constr(strict=True, min_length=1) = Field(..., alias="entityTypeName", description="The name provided when the custom entity type was created. This has been prefixed with “~” and returned as “entityType”, which is the identifier for the custom entity type.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="A display label for the custom entity type.")
-    description: Optional[StrictStr] = Field(None, description="A description for the custom entity type.")
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The identifier for the custom entity type, derived from the “entityTypeName” provided on creation.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    entity_type_name:  StrictStr = Field(...,alias="entityTypeName", description="The name provided when the custom entity type was created. This has been prefixed with “~” and returned as “entityType”, which is the identifier for the custom entity type.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity type.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the custom entity type.") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The identifier for the custom entity type, derived from the “entityTypeName” provided on creation.") 
     field_schema: conlist(CustomEntityFieldDefinition) = Field(..., alias="fieldSchema", description="The description of the fields on the custom entity type.")
     version: Version = Field(...)
     links: Optional[conlist(Link)] = None

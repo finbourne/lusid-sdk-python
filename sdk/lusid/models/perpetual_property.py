@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.property_value import PropertyValue
 
 class PerpetualProperty(BaseModel):
     """
     PerpetualProperty
     """
-    key: StrictStr = Field(..., description="The key of the property. This takes the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or 'Transaction/strategy/quantsignal'.")
+    key:  StrictStr = Field(...,alias="key", description="The key of the property. This takes the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or 'Transaction/strategy/quantsignal'.") 
     value: Optional[PropertyValue] = None
     __properties = ["key", "value"]
 

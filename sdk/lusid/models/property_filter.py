@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class PropertyFilter(BaseModel):
     """
     PropertyFilter
     """
-    left: Optional[StrictStr] = Field(None, description="The key that uniquely identifies a queryable address in Lusid.")
-    operator: Optional[StrictStr] = Field(None, description="The available values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, In")
+    left:  Optional[StrictStr] = Field(None,alias="left", description="The key that uniquely identifies a queryable address in Lusid.") 
+    operator:  Optional[StrictStr] = Field(None,alias="operator", description="The available values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, In") 
     right: Optional[Any] = None
-    right_operand_type: Optional[StrictStr] = Field(None, alias="rightOperandType", description="The available values are: Absolute, Property")
+    right_operand_type:  Optional[StrictStr] = Field(None,alias="rightOperandType", description="The available values are: Absolute, Property") 
     __properties = ["left", "operator", "right", "rightOperandType"]
 
     @validator('operator')

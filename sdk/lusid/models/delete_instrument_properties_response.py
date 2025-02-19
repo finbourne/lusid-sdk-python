@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.link import Link
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 

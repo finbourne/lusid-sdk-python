@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 
 class ResponseMetaData(BaseModel):
     """
     Metadata related to an api response  # noqa: E501
     """
-    type: Optional[StrictStr] = Field(None, description="The type of meta data information being provided")
-    description: Optional[StrictStr] = Field(None, description="The description of what occured for this specific piece of meta data")
-    identifier_type: Optional[StrictStr] = Field(None, alias="identifierType", description="The type of the listed identifiers")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of meta data information being provided") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of what occured for this specific piece of meta data") 
+    identifier_type:  Optional[StrictStr] = Field(None,alias="identifierType", description="The type of the listed identifiers") 
     identifiers: Optional[conlist(StrictStr)] = Field(None, description="The related identifiers that were impacted by this event")
     __properties = ["type", "description", "identifierType", "identifiers"]
 

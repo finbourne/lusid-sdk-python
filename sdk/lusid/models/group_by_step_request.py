@@ -19,24 +19,17 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.compliance_step_request import ComplianceStepRequest
 
 class GroupByStepRequest(ComplianceStepRequest):
     """
     GroupByStepRequest
     """
-    label: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The label of the compliance step")
-    compliance_step_type_request: StrictStr = Field(..., alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest")
+    label:  StrictStr = Field(...,alias="label", description="The label of the compliance step") 
+    compliance_step_type_request:  StrictStr = Field(...,alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceStepTypeRequest", "label"]
-
-    @validator('label')
-    def label_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     @validator('compliance_step_type_request')
     def compliance_step_type_request_validate_enum(cls, value):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictBool, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, validator 
 from lusid.models.compliance_parameter import ComplianceParameter
 
 class BoolComplianceParameter(ComplianceParameter):
@@ -27,7 +27,7 @@ class BoolComplianceParameter(ComplianceParameter):
     BoolComplianceParameter
     """
     value: StrictBool = Field(...)
-    compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, GroupBySelectorComplianceParameter, PropertyListComplianceParameter, GroupCalculationComplianceParameter")
+    compliance_parameter_type:  StrictStr = Field(...,alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, GroupBySelectorComplianceParameter, PropertyListComplianceParameter, GroupCalculationComplianceParameter") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceParameterType", "value"]
 

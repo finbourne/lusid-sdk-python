@@ -19,13 +19,13 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class CustomEntityField(BaseModel):
     """
     CustomEntityField
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="The name of the field in the custom entity type definition.")
+    name:  StrictStr = Field(...,alias="name", description="The name of the field in the custom entity type definition.") 
     value: Optional[Any] = Field(None, description="The value for the field.")
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the field's value is valid. For timeVariant fields, this defaults to the beginning of time.")
     effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the field's value is valid. If not supplied, the value will be valid indefinitely or until the next “effectiveFrom” date of the field.")

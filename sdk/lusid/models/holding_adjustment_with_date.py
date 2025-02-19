@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.target_tax_lot import TargetTaxLot
 
@@ -29,12 +29,12 @@ class HoldingAdjustmentWithDate(BaseModel):
     """
     effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective date of the holding adjustment")
     instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope of the instrument that the holding adjustment is in.")
-    instrument_uid: constr(strict=True, min_length=1) = Field(..., alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in.")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope of the instrument that the holding adjustment is in.") 
+    instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in.") 
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The set of unique transaction properties and associated values stored with the holding adjustment transactions automatically created by LUSID. Each property will be from the 'Transaction' domain.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The set of unique holding properties and associated values stored with the target holding. Each property will be from the 'Holding' domain.")
     tax_lots: conlist(TargetTaxLot) = Field(..., alias="taxLots", description="The tax-lots that together make up the target holding.")
-    currency: Optional[StrictStr] = Field(None, description="The Holding currency.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency.") 
     __properties = ["effectiveAt", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "taxLots", "currency"]
 
     class Config:

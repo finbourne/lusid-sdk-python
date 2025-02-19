@@ -19,32 +19,18 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 
 class CustomEntityDefinitionRequest(BaseModel):
     """
     CustomEntityDefinitionRequest
     """
-    entity_type_name: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="entityTypeName", description="A name for the custom entity type. This will be prefixed with “~” and returned as “entityType”, which is the identifier for the custom entity type.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="A display label for the custom entity type.")
-    description: constr(strict=True, min_length=1) = Field(..., description="A description for the custom entity type.")
+    entity_type_name:  StrictStr = Field(...,alias="entityTypeName", description="A name for the custom entity type. This will be prefixed with “~” and returned as “entityType”, which is the identifier for the custom entity type.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity type.") 
+    description:  StrictStr = Field(...,alias="description", description="A description for the custom entity type.") 
     field_schema: conlist(CustomEntityFieldDefinition) = Field(..., alias="fieldSchema", description="The description of the fields on the custom entity type.")
     __properties = ["entityTypeName", "displayName", "description", "fieldSchema"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

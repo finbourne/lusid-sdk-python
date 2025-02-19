@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class GroupReconciliationDefinitionCurrencies(BaseModel):
     """
     GroupReconciliationDefinitionCurrencies
     """
-    left: constr(strict=True, max_length=3, min_length=0) = Field(..., description="Currency for the left side of a reconciliation")
-    right: constr(strict=True, max_length=3, min_length=0) = Field(..., description="Currency for the right side of a reconciliation")
+    left:  StrictStr = Field(...,alias="left", description="Currency for the left side of a reconciliation") 
+    right:  StrictStr = Field(...,alias="right", description="Currency for the right side of a reconciliation") 
     __properties = ["left", "right"]
 
     class Config:

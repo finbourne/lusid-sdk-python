@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
 
 class InstrumentIdTypeDescriptor(BaseModel):
     """
     The description of an allowable instrument identifier.  # noqa: E501
     """
-    identifier_type: constr(strict=True, min_length=1) = Field(..., alias="identifierType", description="The name of the identifier type.")
-    property_key: StrictStr = Field(..., alias="propertyKey", description="The property key that corresponds to the identifier type.")
+    identifier_type:  StrictStr = Field(...,alias="identifierType", description="The name of the identifier type.") 
+    property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key that corresponds to the identifier type.") 
     is_unique_identifier_type: StrictBool = Field(..., alias="isUniqueIdentifierType", description="Whether or not the identifier type is enforced to be unique.")
     __properties = ["identifierType", "propertyKey", "isUniqueIdentifierType"]
 

@@ -19,36 +19,19 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.compliance_step import ComplianceStep
 
 class ComplianceTemplateVariationDto(BaseModel):
     """
     ComplianceTemplateVariationDto
     """
-    label: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    outcome_description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="outcomeDescription")
-    referenced_group_label: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="referencedGroupLabel")
+    label:  StrictStr = Field(...,alias="label") 
+    description:  StrictStr = Field(...,alias="description") 
+    outcome_description:  Optional[StrictStr] = Field(None,alias="outcomeDescription") 
+    referenced_group_label:  Optional[StrictStr] = Field(None,alias="referencedGroupLabel") 
     steps: conlist(ComplianceStep) = Field(...)
     __properties = ["label", "description", "outcomeDescription", "referencedGroupLabel", "steps"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('outcome_description')
-    def outcome_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

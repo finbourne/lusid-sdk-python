@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 import lusid.models
 
 class ComplianceStepRequest(BaseModel):
     """
     ComplianceStepRequest
     """
-    compliance_step_type_request: StrictStr = Field(..., alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest")
+    compliance_step_type_request:  StrictStr = Field(...,alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest") 
     __properties = ["complianceStepTypeRequest"]
 
     @validator('compliance_step_type_request')

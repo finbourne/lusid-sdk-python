@@ -19,35 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.cut_local_time import CutLocalTime
 
 class UpdateCutLabelDefinitionRequest(BaseModel):
     """
     This request specifies a new Cut Label Definition  # noqa: E501
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName")
-    description: Optional[constr(strict=True)] = None
+    display_name:  StrictStr = Field(...,alias="displayName") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     cut_local_time: CutLocalTime = Field(..., alias="cutLocalTime")
-    time_zone: constr(strict=True, min_length=1) = Field(..., alias="timeZone")
+    time_zone:  StrictStr = Field(...,alias="timeZone") 
     __properties = ["displayName", "description", "cutLocalTime", "timeZone"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

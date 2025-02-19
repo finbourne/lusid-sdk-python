@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr, conlist 
 from lusid.models.field_schema import FieldSchema
 from lusid.models.link import Link
 
@@ -27,8 +27,8 @@ class ModelSchema(BaseModel):
     """
     ModelSchema
     """
-    entity: Optional[StrictStr] = None
-    href: Optional[StrictStr] = None
+    entity:  Optional[StrictStr] = Field(None,alias="entity") 
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     values: Optional[Dict[str, FieldSchema]] = None
     links: Optional[conlist(Link)] = None
     __properties = ["entity", "href", "values", "links"]

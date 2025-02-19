@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.bucketing_schedule import BucketingSchedule
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
@@ -34,28 +34,18 @@ class QueryBucketedCashFlowsRequest(BaseModel):
     portfolio_entity_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioEntityIds", description="The set of portfolios and portfolio groups to which the instrument events must belong.")
     effective_at: datetime = Field(..., alias="effectiveAt", description="The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today.")
     recipe_id: ResourceId = Field(..., alias="recipeId")
-    rounding_method: constr(strict=True, min_length=1) = Field(..., alias="roundingMethod", description="When bucketing, there is not a unique way to allocate the bucket points.  RoundingMethod Supported string (enumeration) values are: [RoundDown, RoundUp].")
+    rounding_method:  StrictStr = Field(...,alias="roundingMethod", description="When bucketing, there is not a unique way to allocate the bucket points.  RoundingMethod Supported string (enumeration) values are: [RoundDown, RoundUp].") 
     bucketing_dates: Optional[conlist(datetime)] = Field(None, alias="bucketingDates", description="A list of dates to perform cashflow bucketing upon.  If this is provided, the list of tenors for bucketing should be empty.")
     bucketing_tenors: Optional[conlist(StrictStr)] = Field(None, alias="bucketingTenors", description="A list of tenors to perform cashflow bucketing upon.  If this is provided, the list of dates for bucketing should be empty.")
-    report_currency: constr(strict=True, max_length=3, min_length=0) = Field(..., alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.")
+    report_currency:  StrictStr = Field(...,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.") 
     group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy", description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.")
     addresses: Optional[conlist(StrictStr)] = Field(None, description="The set of items that the user wishes to see in the results. If empty, will be defaulted to standard ones.")
     equip_with_subtotals: Optional[StrictBool] = Field(None, alias="equipWithSubtotals", description="Flag directing the Valuation call to populate the results with subtotals of aggregates.")
     exclude_unsettled_trades: Optional[StrictBool] = Field(None, alias="excludeUnsettledTrades", description="Flag directing the Valuation call to exclude cashflows from unsettled trades.  If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set.")
-    cash_flow_type: Optional[StrictStr] = Field(None, alias="cashFlowType", description="Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow]")
+    cash_flow_type:  Optional[StrictStr] = Field(None,alias="cashFlowType", description="Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow]") 
     bucketing_schedule: Optional[BucketingSchedule] = Field(None, alias="bucketingSchedule")
-    filter: Optional[constr(strict=True, max_length=16384, min_length=0)] = None
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="") 
     __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "roundingMethod", "bucketingDates", "bucketingTenors", "reportCurrency", "groupBy", "addresses", "equipWithSubtotals", "excludeUnsettledTrades", "cashFlowType", "bucketingSchedule", "filter"]
-
-    @validator('filter')
-    def filter_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

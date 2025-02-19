@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import GroupReconciliationDefinitionComparisonRulesetIds
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
@@ -34,15 +34,15 @@ class GroupReconciliationDefinition(BaseModel):
     GroupReconciliationDefinition
     """
     id: Optional[ResourceId] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the Group Reconciliation Definition")
-    description: Optional[StrictStr] = Field(None, description="The description of the Group Reconciliation Definition")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Group Reconciliation Definition") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Group Reconciliation Definition") 
     portfolio_entity_ids: Optional[GroupReconciliationDefinitionPortfolioEntityIds] = Field(None, alias="portfolioEntityIds")
     recipe_ids: Optional[GroupReconciliationDefinitionRecipeIds] = Field(None, alias="recipeIds")
     currencies: Optional[GroupReconciliationDefinitionCurrencies] = None
     transaction_date_windows: Optional[TransactionDateWindows] = Field(None, alias="transactionDateWindows")
     comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = Field(None, alias="comparisonRulesetIds")
     break_code_source: Optional[BreakCodeSource] = Field(None, alias="breakCodeSource")
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     __properties = ["id", "displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource", "href", "version"]
 

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -30,8 +30,8 @@ class Relation(BaseModel):
     version: Optional[Version] = None
     relation_definition_id: ResourceId = Field(..., alias="relationDefinitionId")
     related_entity_id: Dict[str, StrictStr] = Field(..., alias="relatedEntityId")
-    traversal_direction: constr(strict=True, min_length=1) = Field(..., alias="traversalDirection")
-    traversal_description: constr(strict=True, min_length=1) = Field(..., alias="traversalDescription")
+    traversal_direction:  StrictStr = Field(...,alias="traversalDirection") 
+    traversal_description:  StrictStr = Field(...,alias="traversalDescription") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom")
     __properties = ["version", "relationDefinitionId", "relatedEntityId", "traversalDirection", "traversalDescription", "effectiveFrom"]
 

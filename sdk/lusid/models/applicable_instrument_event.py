@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr 
 from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.resource_id import ResourceId
@@ -32,15 +32,15 @@ class ApplicableInstrumentEvent(BaseModel):
     """
     portfolio_id: ResourceId = Field(..., alias="portfolioId")
     holding_id: StrictInt = Field(..., alias="holdingId")
-    lusid_instrument_id: constr(strict=True, min_length=1) = Field(..., alias="lusidInstrumentId")
-    instrument_scope: constr(strict=True, min_length=1) = Field(..., alias="instrumentScope")
-    instrument_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentType")
-    instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType")
-    instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId")
+    lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId") 
+    instrument_scope:  StrictStr = Field(...,alias="instrumentScope") 
+    instrument_type:  StrictStr = Field(...,alias="instrumentType") 
+    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType") 
+    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId") 
     generated_event: Optional[InstrumentEventHolder] = Field(None, alias="generatedEvent")
     generated_event_diagnostics: Optional[GeneratedEventDiagnostics] = Field(None, alias="generatedEventDiagnostics")
     loaded_event: Optional[InstrumentEventHolder] = Field(None, alias="loadedEvent")
-    applied_instrument_event_instruction_id: Optional[StrictStr] = Field(None, alias="appliedInstrumentEventInstructionId")
+    applied_instrument_event_instruction_id:  Optional[StrictStr] = Field(None,alias="appliedInstrumentEventInstructionId") 
     transactions: Optional[conlist(Transaction)] = None
     transaction_diagnostics: Optional[TransactionDiagnostics] = Field(None, alias="transactionDiagnostics")
     __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics"]

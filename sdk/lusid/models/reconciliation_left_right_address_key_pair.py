@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class ReconciliationLeftRightAddressKeyPair(BaseModel):
     """
     ReconciliationLeftRightAddressKeyPair
     """
-    left: StrictStr = Field(..., description="Address key defined by the lhs aggregation")
-    right: StrictStr = Field(..., description="Address key defined by the rhs aggregation")
+    left:  StrictStr = Field(...,alias="left", description="Address key defined by the lhs aggregation") 
+    right:  StrictStr = Field(...,alias="right", description="Address key defined by the rhs aggregation") 
     __properties = ["left", "right"]
 
     class Config:

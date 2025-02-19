@@ -19,29 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class TransactionDateWindows(BaseModel):
     """
     TransactionDateWindows
     """
-    left: constr(strict=True, max_length=30, min_length=2) = Field(..., description="Transaction Date Window for the left side of a reconciliation")
-    right: constr(strict=True, max_length=30, min_length=2) = Field(..., description="Transaction Date Window for the right side of a reconciliation")
+    left:  StrictStr = Field(...,alias="left", description="Transaction Date Window for the left side of a reconciliation") 
+    right:  StrictStr = Field(...,alias="right", description="Transaction Date Window for the right side of a reconciliation") 
     __properties = ["left", "right"]
-
-    @validator('left')
-    def left_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^P(?!$)((\d+Y)|(\d+\.\d+Y$))?((\d+M)|(\d+\.\d+M$))?((\d+W)|(\d+\.\d+W$))?((\d+D)|(\d+\.\d+D$))?(T(?=\d)((\d+H)|(\d+\.\d+H$))?((\d+M)|(\d+\.\d+M$))?(\d+(\.\d+)?S)?)??$", value):
-            raise ValueError(r"must validate the regular expression /^P(?!$)((\d+Y)|(\d+\.\d+Y$))?((\d+M)|(\d+\.\d+M$))?((\d+W)|(\d+\.\d+W$))?((\d+D)|(\d+\.\d+D$))?(T(?=\d)((\d+H)|(\d+\.\d+H$))?((\d+M)|(\d+\.\d+M$))?(\d+(\.\d+)?S)?)??$/")
-        return value
-
-    @validator('right')
-    def right_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^P(?!$)((\d+Y)|(\d+\.\d+Y$))?((\d+M)|(\d+\.\d+M$))?((\d+W)|(\d+\.\d+W$))?((\d+D)|(\d+\.\d+D$))?(T(?=\d)((\d+H)|(\d+\.\d+H$))?((\d+M)|(\d+\.\d+M$))?(\d+(\.\d+)?S)?)??$", value):
-            raise ValueError(r"must validate the regular expression /^P(?!$)((\d+Y)|(\d+\.\d+Y$))?((\d+M)|(\d+\.\d+M$))?((\d+W)|(\d+\.\d+W$))?((\d+D)|(\d+\.\d+D$))?(T(?=\d)((\d+H)|(\d+\.\d+H$))?((\d+M)|(\d+\.\d+M$))?(\d+(\.\d+)?S)?)??$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

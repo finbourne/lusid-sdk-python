@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 import lusid.models
 
 class MatchCriterion(BaseModel):
     """
     A condition to be evaluated.  Each supported CriterionType has a corresponding schema.  # noqa: E501
     """
-    criterion_type: StrictStr = Field(..., alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals")
+    criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
     __properties = ["criterionType"]
 
     @validator('criterion_type')

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class LusidUniqueId(BaseModel):
     """
     LusidUniqueId
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type for the LUSID unique id, this will depend on the type of entity found, for instance 'Instrument' would have a value of 'LusidInstrumentId'")
-    value: constr(strict=True, min_length=1) = Field(..., description="The value for the LUSID unique id")
+    type:  StrictStr = Field(...,alias="type", description="The type for the LUSID unique id, this will depend on the type of entity found, for instance 'Instrument' would have a value of 'LusidInstrumentId'") 
+    value:  StrictStr = Field(...,alias="value", description="The value for the LUSID unique id") 
     __properties = ["type", "value"]
 
     class Config:

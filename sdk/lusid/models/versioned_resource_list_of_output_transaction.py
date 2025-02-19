@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.version import Version
@@ -30,9 +30,9 @@ class VersionedResourceListOfOutputTransaction(BaseModel):
     """
     version: Version = Field(...)
     values: conlist(OutputTransaction) = Field(...)
-    href: Optional[StrictStr] = None
-    next_page: Optional[StrictStr] = Field(None, alias="nextPage")
-    previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
+    href:  Optional[StrictStr] = Field(None,alias="href") 
+    next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
+    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
     links: Optional[conlist(Link)] = None
     __properties = ["version", "values", "href", "nextPage", "previousPage", "links"]
 

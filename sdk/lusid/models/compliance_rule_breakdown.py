@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.lineage_member import LineageMember
 from lusid.models.model_property import ModelProperty
 
@@ -27,7 +27,7 @@ class ComplianceRuleBreakdown(BaseModel):
     """
     ComplianceRuleBreakdown
     """
-    group_status: constr(strict=True, min_length=1) = Field(..., alias="groupStatus", description="The status of this subset of results.")
+    group_status:  StrictStr = Field(...,alias="groupStatus", description="The status of this subset of results.") 
     results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="resultsUsed", description="Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule.")
     properties_used: Dict[str, conlist(ModelProperty)] = Field(..., alias="propertiesUsed", description="Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule")
     missing_data_information: conlist(StrictStr) = Field(..., alias="missingDataInformation", description="List of string information detailing data that was missing from contributions processed in this rule")

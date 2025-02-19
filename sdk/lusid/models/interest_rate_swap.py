@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictBool, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, conlist, validator 
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.lusid_instrument import LusidInstrument
@@ -32,9 +32,9 @@ class InterestRateSwap(LusidInstrument):
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     is_non_deliverable: Optional[StrictBool] = Field(None, alias="isNonDeliverable", description="Is the contract an IRS of \"Non-Deliverable\" type, meaning a single payment in the settlement currency based on the difference between  the fixed and floating rates.")
     legs: conlist(InstrumentLeg) = Field(..., description="The set of instrument legs that define the swap instrument, these should be FloatingLeg or FixedLeg.")
-    settlement_ccy: Optional[StrictStr] = Field(None, alias="settlementCcy", description="Settlement currency if IRS is non-deliverable.")
+    settlement_ccy:  Optional[StrictStr] = Field(None,alias="settlementCcy", description="Settlement currency if IRS is non-deliverable.") 
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven fixed-floating swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "maturityDate", "isNonDeliverable", "legs", "settlementCcy", "additionalPayments"]
 

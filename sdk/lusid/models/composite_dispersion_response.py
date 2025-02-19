@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.composite_dispersion import CompositeDispersion
 from lusid.models.link import Link
 
@@ -27,7 +27,7 @@ class CompositeDispersionResponse(BaseModel):
     """
     CompositeDispersionResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     results: Optional[Dict[str, conlist(CompositeDispersion)]] = Field(None, description="Dispersion returns calculation grouped by ReturnId")
     links: Optional[conlist(Link)] = None
     __properties = ["href", "results", "links"]

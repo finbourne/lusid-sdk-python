@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.resource_id import ResourceId
 
@@ -27,45 +27,21 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
     """
     CreateDerivedTransactionPortfolioRequest
     """
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The name of the derived transaction portfolio.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the derived transaction portfolio.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies the derived transaction portfolio.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the derived transaction portfolio.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the derived transaction portfolio.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies the derived transaction portfolio.") 
     parent_portfolio_id: ResourceId = Field(..., alias="parentPortfolioId")
     created: Optional[datetime] = Field(None, description="This will be auto-populated to be the parent portfolio creation date.")
     corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
-    accounting_method: Optional[StrictStr] = Field(None, alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency")
+    accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency") 
     sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="A set of unique transaction properties to group the derived transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.")
     instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to this derived portfolio.")
-    amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
-    transaction_type_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
-    cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
+    amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
+    transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope", description="The scope of the transaction types.") 
+    cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.") 
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "instrumentEventConfiguration"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -75,16 +51,6 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
 
         if value not in ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency'):
             raise ValueError("must be one of enum values ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency')")
-        return value
-
-    @validator('transaction_type_scope')
-    def transaction_type_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
 
     class Config:

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.result_value import ResultValue
 
 class AddressKeyFilter(BaseModel):
     """
     Class specifying a filtering operation  # noqa: E501
     """
-    left: Optional[StrictStr] = Field(None, description="Address for the value in the row")
-    operator: Optional[constr(strict=True, max_length=3, min_length=0)] = Field(None, description="What sort of comparison is the filter performing. Can be either \"eq\" for equals or \"neq\" for not equals.")
+    left:  Optional[StrictStr] = Field(None,alias="left", description="Address for the value in the row") 
+    operator:  Optional[StrictStr] = Field(None,alias="operator", description="What sort of comparison is the filter performing. Can be either \"eq\" for equals or \"neq\" for not equals.") 
     right: Optional[ResultValue] = None
     __properties = ["left", "operator", "right"]
 

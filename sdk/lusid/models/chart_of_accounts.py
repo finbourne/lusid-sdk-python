@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -29,10 +29,10 @@ class ChartOfAccounts(BaseModel):
     """
     A chart of account.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the Chart of Account.")
-    description: Optional[StrictStr] = Field(None, description="A description of the Chart of Accounts.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Chart of Account.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the Chart of Accounts.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Chart of Accounts.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None

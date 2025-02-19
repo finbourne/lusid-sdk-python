@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.structured_result_data_id import StructuredResultDataId
 from lusid.models.virtual_document_row import VirtualDocumentRow
 

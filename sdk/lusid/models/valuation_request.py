@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.market_data_overrides import MarketDataOverrides
 from lusid.models.order_by_spec import OrderBySpec
@@ -39,7 +39,7 @@ class ValuationRequest(BaseModel):
     group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy", description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.")
     filters: Optional[conlist(PropertyFilter)] = Field(None, description="A set of filters to use to reduce the data found in a request. Equivalent to the 'where ...' part of a Sql select statement.  For example, filter a set of values within a given range or matching a particular value.")
     sort: Optional[conlist(OrderBySpec)] = Field(None, description="A (possibly empty/null) set of specifications for how to order the results.")
-    report_currency: Optional[constr(strict=True, max_length=3, min_length=0)] = Field(None, alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.  If not present, then the currency of the relevant portfolio will be used in its place.")
+    report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.  If not present, then the currency of the relevant portfolio will be used in its place.") 
     equip_with_subtotals: Optional[StrictBool] = Field(None, alias="equipWithSubtotals", description="Flag directing the Valuation call to populate the results with subtotals of aggregates.")
     return_result_as_expanded_types: Optional[StrictBool] = Field(None, alias="returnResultAsExpandedTypes", description="Financially meaningful results can be presented as either simple flat types or more complex expanded types.  For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)  or as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,  the returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false.")
     include_order_flow: Optional[OrderFlowConfiguration] = Field(None, alias="includeOrderFlow")

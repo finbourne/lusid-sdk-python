@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.day_month import DayMonth
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -28,18 +28,18 @@ class FeeRequest(BaseModel):
     """
     FeeRequest
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the Fee.")
+    code:  StrictStr = Field(...,alias="code", description="The code of the Fee.") 
     fee_type_id: ResourceId = Field(..., alias="feeTypeId")
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the Fee.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fee.")
-    origin: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The origin or source of the Fee accrual.")
-    calculation_base: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="calculationBase", description="The calculation base for a Fee that is calculated using a percentage (TotalAnnualAccrualAmount and CalculationBase cannot both be present). When the Fee is a ShareClass Fee (i.e: when ShareClasses contains at least one value), each of the following would be a valid CalculationBase: \"10000.00\", \"ShareClass.GAV\", \"ShareClass.GAV - ShareClass.Fees[ShareClassFeeCode1].Amount\", \"ShareClass.Fees[ShareClassFeeCode1].CalculationBase\". When the Fee is a NonShareClassSpecific Fee (i.e: when ShareClasses contains no values), each of the following would be a valid CalculationBase: \"10000.00\", \"GAV\", \"GAV - Fees[NonClassSpecificFeeCode1].Amount\", \"Fees[NonClassSpecificFeeCode1].CalculationBase\". ")
-    accrual_currency: constr(strict=True, max_length=3, min_length=0) = Field(..., alias="accrualCurrency", description="The accrual currency.")
-    treatment: constr(strict=True, min_length=1) = Field(..., description="The accrual period of the Fee; 'Monthly' or 'Daily'.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fee.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fee.") 
+    origin:  Optional[StrictStr] = Field(None,alias="origin", description="The origin or source of the Fee accrual.") 
+    calculation_base:  Optional[StrictStr] = Field(None,alias="calculationBase", description="The calculation base for a Fee that is calculated using a percentage (TotalAnnualAccrualAmount and CalculationBase cannot both be present). When the Fee is a ShareClass Fee (i.e: when ShareClasses contains at least one value), each of the following would be a valid CalculationBase: \"10000.00\", \"ShareClass.GAV\", \"ShareClass.GAV - ShareClass.Fees[ShareClassFeeCode1].Amount\", \"ShareClass.Fees[ShareClassFeeCode1].CalculationBase\". When the Fee is a NonShareClassSpecific Fee (i.e: when ShareClasses contains no values), each of the following would be a valid CalculationBase: \"10000.00\", \"GAV\", \"GAV - Fees[NonClassSpecificFeeCode1].Amount\", \"Fees[NonClassSpecificFeeCode1].CalculationBase\". ") 
+    accrual_currency:  StrictStr = Field(...,alias="accrualCurrency", description="The accrual currency.") 
+    treatment:  StrictStr = Field(...,alias="treatment", description="The accrual period of the Fee; 'Monthly' or 'Daily'.") 
     total_annual_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAnnualAccrualAmount", description="The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)")
     fee_rate_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="feeRatePercentage", description="The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount)")
-    payable_frequency: constr(strict=True, min_length=1) = Field(..., alias="payableFrequency", description="The payable frequency for the Fee; 'Annually', 'Quarterly' or 'Monthly'.")
-    business_day_convention: constr(strict=True, min_length=1) = Field(..., alias="businessDayConvention", description="The business day convention to use for Fee calculations on weekends or holidays. Supported string values are: [Previous, P, Following, F, None].")
+    payable_frequency:  StrictStr = Field(...,alias="payableFrequency", description="The payable frequency for the Fee; 'Annually', 'Quarterly' or 'Monthly'.") 
+    business_day_convention:  StrictStr = Field(...,alias="businessDayConvention", description="The business day convention to use for Fee calculations on weekends or holidays. Supported string values are: [Previous, P, Following, F, None].") 
     start_date: datetime = Field(..., alias="startDate", description="The start date of the Fee.")
     end_date: Optional[datetime] = Field(None, alias="endDate", description="The end date of the Fee.")
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")
@@ -47,23 +47,6 @@ class FeeRequest(BaseModel):
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     share_classes: Optional[conlist(StrictStr)] = Field(None, alias="shareClasses", description="The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio.")
     __properties = ["code", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId", "shareClasses"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

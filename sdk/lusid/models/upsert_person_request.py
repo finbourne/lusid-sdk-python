@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.model_property import ModelProperty
 
 class UpsertPersonRequest(BaseModel):
@@ -28,8 +28,8 @@ class UpsertPersonRequest(BaseModel):
     """
     identifiers: Dict[str, ModelProperty] = Field(..., description="The identifiers the person will be upserted with.The provided keys should be idTypeScope, idTypeCode, code")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the Person")
-    description: Optional[constr(strict=True, max_length=512, min_length=0)] = Field(None, description="The description of the Person")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Person") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Person") 
     __properties = ["identifiers", "properties", "displayName", "description"]
 
     class Config:

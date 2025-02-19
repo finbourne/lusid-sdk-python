@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 from lusid.models.effective_range import EffectiveRange
 from lusid.models.property_value import PropertyValue
 
@@ -28,12 +28,12 @@ class ChangeInterval(BaseModel):
     Defines a change that occured for an entity  # noqa: E501
     """
     as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The date/time of the change.")
-    user_id_modified: Optional[StrictStr] = Field(None, alias="userIdModified", description="The unique identifier of the user that made the change.")
-    request_id_modified: Optional[StrictStr] = Field(None, alias="requestIdModified", description="The unique identifier of the request that the changes were part of.")
+    user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique identifier of the user that made the change.") 
+    request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique identifier of the request that the changes were part of.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The version number for the entity (the entity was created at version 1). This may refer to the version number of a changed related entity, not a change for the entity itself.")
-    staged_modification_id_modified: Optional[StrictStr] = Field(None, alias="stagedModificationIdModified", description="The id of the staged modification that was approved. Will be null if the change didn't come from a staged modification.")
-    action: Optional[StrictStr] = Field(None, description="The action performed on the entity.")
-    attribute_name: Optional[StrictStr] = Field(None, alias="attributeName", description="The name of the field or property that has been changed.")
+    staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The id of the staged modification that was approved. Will be null if the change didn't come from a staged modification.") 
+    action:  Optional[StrictStr] = Field(None,alias="action", description="The action performed on the entity.") 
+    attribute_name:  Optional[StrictStr] = Field(None,alias="attributeName", description="The name of the field or property that has been changed.") 
     previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
     new_value: Optional[PropertyValue] = Field(None, alias="newValue")
     effective_range: Optional[EffectiveRange] = Field(None, alias="effectiveRange")

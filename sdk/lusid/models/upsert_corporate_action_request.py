@@ -19,38 +19,21 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.corporate_action_transition_request import CorporateActionTransitionRequest
 
 class UpsertCorporateActionRequest(BaseModel):
     """
     UpsertCorporateActionRequest
     """
-    corporate_action_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="corporateActionCode", description="The unique identifier of this corporate action")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description of the corporate action.")
+    corporate_action_code:  StrictStr = Field(...,alias="corporateActionCode", description="The unique identifier of this corporate action") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action.") 
     announcement_date: datetime = Field(..., alias="announcementDate", description="The announcement date of the corporate action")
     ex_date: datetime = Field(..., alias="exDate", description="The ex date of the corporate action")
     record_date: datetime = Field(..., alias="recordDate", description="The record date of the corporate action")
     payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the corporate action")
     transitions: conlist(CorporateActionTransitionRequest) = Field(..., description="The transitions that result from this corporate action")
     __properties = ["corporateActionCode", "description", "announcementDate", "exDate", "recordDate", "paymentDate", "transitions"]
-
-    @validator('corporate_action_code')
-    def corporate_action_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

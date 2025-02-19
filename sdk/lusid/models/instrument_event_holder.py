@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
@@ -29,33 +29,19 @@ class InstrumentEventHolder(BaseModel):
     """
     An instrument event equipped with additional metadata.  # noqa: E501
     """
-    instrument_event_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="instrumentEventId", description="The unique identifier of this corporate action.")
+    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The unique identifier of this corporate action.") 
     corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The set of identifiers which determine the instrument this event relates to.")
-    lusid_instrument_id: constr(strict=True, min_length=1) = Field(..., alias="lusidInstrumentId", description="The LUID for the instrument.")
-    instrument_scope: constr(strict=True, min_length=1) = Field(..., alias="instrumentScope", description="The scope of the instrument.")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of the instrument event.")
+    lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUID for the instrument.") 
+    instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The scope of the instrument.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the instrument event.") 
     event_date_range: EventDateRange = Field(..., alias="eventDateRange")
-    completeness: Optional[StrictStr] = Field(None, description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete).")
+    completeness:  Optional[StrictStr] = Field(None,alias="completeness", description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete).") 
     instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
-    participation_type: Optional[StrictStr] = Field('Mandatory', alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.")
+    participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
     __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
-
-    @validator('instrument_event_id')
-    def instrument_event_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

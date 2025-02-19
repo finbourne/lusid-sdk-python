@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 
@@ -27,12 +27,12 @@ class AdjustHoldingForDateRequest(BaseModel):
     """
     This request specifies target holdings. i.e. holding data that the  system should match. When processed by the movement  engine, it will create 'true-up' adjustments on the fly.  # noqa: E501
     """
-    effective_at: constr(strict=True, min_length=1) = Field(..., alias="effectiveAt", description="The Effective date that the target holding will be adjusted at.")
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The Effective date that the target holding will be adjusted at.") 
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="Set of unique transaction properties and associated values to store with the holding adjustment transaction automatically created by LUSID. Each property must be from the 'Transaction' domain.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Set of unique holding properties and associated values to store with the target holding. Each property must be from the 'Holding' domain.")
     tax_lots: conlist(TargetTaxLotRequest) = Field(..., alias="taxLots", description="The tax-lots that together make up the target holding.")
-    currency: Optional[StrictStr] = Field(None, description="The Holding currency. This needs to be equal with the one on the TaxLot -> cost if one is specified")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency. This needs to be equal with the one on the TaxLot -> cost if one is specified") 
     __properties = ["effectiveAt", "instrumentIdentifiers", "subHoldingKeys", "properties", "taxLots", "currency"]
 
     class Config:

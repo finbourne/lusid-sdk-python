@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class DescribedAddressKey(BaseModel):
     """
     An address key with additional data describing what this key is for.  # noqa: E501
     """
-    address_key: Optional[StrictStr] = Field(None, alias="addressKey", description="Address key of some underlying object e.g. Valuation/PV, Instrument/Features")
-    description: Optional[StrictStr] = Field(None, description="Description of the address key.")
+    address_key:  Optional[StrictStr] = Field(None,alias="addressKey", description="Address key of some underlying object e.g. Valuation/PV, Instrument/Features") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description of the address key.") 
     __properties = ["addressKey", "description"]
 
     class Config:

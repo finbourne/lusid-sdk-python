@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class ContractDetails(BaseModel):
     """
     Set of identifiers of an existing FlexibleLoan contract.  # noqa: E501
     """
     identifiers: Dict[str, StrictStr] = Field(..., description="Unique instrument identifiers.")
-    lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier - readonly field, resolved from the instrument identifiers.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the FlexibleLoan instrument lies - readonly field, resolved from the instrument identifiers.")
-    instrument_name: Optional[StrictStr] = Field(None, alias="instrumentName", description="The name of the FlexibleLoan instrument - readonly field, resolved from the instrument identifiers.")
-    dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency of the instrument - readonly field, resolved from the instrument identifiers.")
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier - readonly field, resolved from the instrument identifiers.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the FlexibleLoan instrument lies - readonly field, resolved from the instrument identifiers.") 
+    instrument_name:  Optional[StrictStr] = Field(None,alias="instrumentName", description="The name of the FlexibleLoan instrument - readonly field, resolved from the instrument identifiers.") 
+    dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="The domestic currency of the instrument - readonly field, resolved from the instrument identifiers.") 
     __properties = ["identifiers", "lusidInstrumentId", "instrumentScope", "instrumentName", "domCcy"]
 
     class Config:

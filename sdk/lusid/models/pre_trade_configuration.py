@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class PreTradeConfiguration(BaseModel):
     """
     Specification object for the pre trade configuration parameters of a compliance run  # noqa: E501
     """
-    include_entity_types: constr(strict=True, min_length=1) = Field(..., alias="includeEntityTypes", description="Controls whether Orders and Allocations orders are included in the Portfolio valuation done for this compliance run.  Valid values are:  None (to account for Transactions only), Allocations (to include Allocations and Transactions) and  OrdersAndAllocations (to include Orders, Allocations and Transactions).")
+    include_entity_types:  StrictStr = Field(...,alias="includeEntityTypes", description="Controls whether Orders and Allocations orders are included in the Portfolio valuation done for this compliance run.  Valid values are:  None (to account for Transactions only), Allocations (to include Allocations and Transactions) and  OrdersAndAllocations (to include Orders, Allocations and Transactions).") 
     __properties = ["includeEntityTypes"]
 
     class Config:

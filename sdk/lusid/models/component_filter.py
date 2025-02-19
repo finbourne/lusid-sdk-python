@@ -19,29 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class ComponentFilter(BaseModel):
     """
     ComponentFilter
     """
-    filter_id: constr(strict=True, max_length=16384, min_length=1) = Field(..., alias="filterId")
-    filter: constr(strict=True, max_length=16384, min_length=1) = Field(...)
+    filter_id:  StrictStr = Field(...,alias="filterId") 
+    filter:  StrictStr = Field(...,alias="filter") 
     __properties = ["filterId", "filter"]
-
-    @validator('filter_id')
-    def filter_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('filter')
-    def filter_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

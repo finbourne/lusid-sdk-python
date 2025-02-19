@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -28,13 +28,13 @@ class CompleteRelationship(BaseModel):
     """
     Representation of a relationship containing details of source and target entities, and both outward and inward descriptions.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     relationship_definition_id: ResourceId = Field(..., alias="relationshipDefinitionId")
     source_entity: RelatedEntity = Field(..., alias="sourceEntity")
     target_entity: RelatedEntity = Field(..., alias="targetEntity")
-    outward_description: constr(strict=True, min_length=1) = Field(..., alias="outwardDescription", description="Description of the relationship based on relationship definition's outward description.")
-    inward_description: constr(strict=True, min_length=1) = Field(..., alias="inwardDescription", description="Description of the relationship based on relationship definition's inward description.")
+    outward_description:  StrictStr = Field(...,alias="outwardDescription", description="Description of the relationship based on relationship definition's outward description.") 
+    inward_description:  StrictStr = Field(...,alias="inwardDescription", description="Description of the relationship based on relationship definition's inward description.") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the relationship is valid.")
     effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime to which the relationship is valid until.")
     __properties = ["href", "version", "relationshipDefinitionId", "sourceEntity", "targetEntity", "outwardDescription", "inwardDescription", "effectiveFrom", "effectiveUntil"]

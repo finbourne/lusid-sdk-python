@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
 
 class HoldingContext(BaseModel):
     """

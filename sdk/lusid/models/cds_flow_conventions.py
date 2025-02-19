@@ -19,45 +19,25 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 
 class CdsFlowConventions(BaseModel):
     """
     CdsFlowConventions
     """
-    roll_frequency: Optional[constr(strict=True, max_length=16, min_length=0)] = Field(None, alias="rollFrequency", description="The frequency at which the reference bonds are updated, this defaults to 6M, but can be 3M, exp for historically issued products.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
-    currency: StrictStr = Field(..., description="Currency of the flow convention.")
-    payment_frequency: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="paymentFrequency", description="When generating a multiperiod flow, or when the maturity of the flow is not given but the start date is,  the tenor is the time-step from the anchor-date to the nominal maturity of the flow prior to any adjustment.")
-    day_count_convention: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="dayCountConvention", description="when calculating the fraction of a year between two dates, what convention is used to represent the number of days in a year  and difference between them.  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].")
-    roll_convention: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="rollConvention", description="For backward compatibility, this can either specify a business day convention or a roll convention. If the business  day convention is provided using the BusinessDayConvention property, this must be a valid roll convention.                When used as a roll convention:  The conventions specifying the rule used to generate dates in a schedule.    Supported string (enumeration) values are: [None, EndOfMonth, IMM, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].                When in backward compatible mode:  Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing].")
+    roll_frequency:  Optional[StrictStr] = Field(None,alias="rollFrequency", description="The frequency at which the reference bonds are updated, this defaults to 6M, but can be 3M, exp for historically issued products.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
+    currency:  StrictStr = Field(...,alias="currency", description="Currency of the flow convention.") 
+    payment_frequency:  StrictStr = Field(...,alias="paymentFrequency", description="When generating a multiperiod flow, or when the maturity of the flow is not given but the start date is,  the tenor is the time-step from the anchor-date to the nominal maturity of the flow prior to any adjustment.") 
+    day_count_convention:  StrictStr = Field(...,alias="dayCountConvention", description="when calculating the fraction of a year between two dates, what convention is used to represent the number of days in a year  and difference between them.  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].") 
+    roll_convention:  StrictStr = Field(...,alias="rollConvention", description="For backward compatibility, this can either specify a business day convention or a roll convention. If the business  day convention is provided using the BusinessDayConvention property, this must be a valid roll convention.                When used as a roll convention:  The conventions specifying the rule used to generate dates in a schedule.    Supported string (enumeration) values are: [None, EndOfMonth, IMM, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].                When in backward compatible mode:  Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing].") 
     payment_calendars: conlist(StrictStr) = Field(..., alias="paymentCalendars", description="An array of strings denoting holiday calendars that apply to generation of payment schedules.")
     reset_calendars: conlist(StrictStr) = Field(..., alias="resetCalendars", description="An array of strings denoting holiday calendars that apply to generation of reset schedules.")
     settle_days: StrictInt = Field(..., alias="settleDays", description="Number of Good Business Days between the trade date and the effective or settlement date of the instrument.")
     reset_days: StrictInt = Field(..., alias="resetDays", description="The number of Good Business Days between determination and payment of reset.")
-    business_day_convention: Optional[StrictStr] = Field(None, alias="businessDayConvention", description="When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].")
-    scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The scope used when updating or inserting the convention.")
-    code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The code of the convention.")
+    business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope used when updating or inserting the convention.") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the convention.") 
     __properties = ["rollFrequency", "currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "businessDayConvention", "scope", "code"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

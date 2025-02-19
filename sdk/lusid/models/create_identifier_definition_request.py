@@ -19,21 +19,21 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class CreateIdentifierDefinitionRequest(BaseModel):
     """
     CreateIdentifierDefinitionRequest
     """
-    domain: StrictStr = Field(..., description="The type of entity to which the identifier can be attached. Supported values are \"Instrument\", \"Person\", \"LegalEntity\"and \"CustomEntity\". The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, StagingRuleSet, IdentifierDefinition")
-    identifier_scope: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="identifierScope", description="The scope that the identifier definition exists in.")
-    identifier_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="identifierType", description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the identifier definition.")
-    life_time: StrictStr = Field(..., alias="lifeTime", description="Describes whether an identifier value is associated with an entity for all effective dates (“Perpetual”) or applies within a specified effective date range (“TimeVariant”). The available values are: Perpetual, TimeVariant")
-    hierarchy_usage: Optional[StrictStr] = Field(None, alias="hierarchyUsage", description="Nullable, defaults to \"MasterIdentifier\" if no value provided. \"MasterIdentifier\" (aka unique) An entity can have one value for this identifier definition on a given effective date. A value for this identifier definition can only be associated with one entity (in a given scope) on a given effective date. \"ParentIdentifier\" (aka non-unique) An entity can have one value for this identifier definition on a given effective date. A value for this identifier definition can be associated with many entities (in a given scope) on a given effective date.")
-    hierarchy_level: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="hierarchyLevel", description="Optional metadata associated with the identifier definition.")
-    display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="A display name for the identifier. E.g. Figi.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="An optional description for the identifier.")
+    domain:  StrictStr = Field(...,alias="domain", description="The type of entity to which the identifier can be attached. Supported values are \"Instrument\", \"Person\", \"LegalEntity\"and \"CustomEntity\". The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, StagingRuleSet, IdentifierDefinition") 
+    identifier_scope:  StrictStr = Field(...,alias="identifierScope", description="The scope that the identifier definition exists in.") 
+    identifier_type:  StrictStr = Field(...,alias="identifierType", description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the identifier definition.") 
+    life_time:  StrictStr = Field(...,alias="lifeTime", description="Describes whether an identifier value is associated with an entity for all effective dates (“Perpetual”) or applies within a specified effective date range (“TimeVariant”). The available values are: Perpetual, TimeVariant") 
+    hierarchy_usage:  Optional[StrictStr] = Field(None,alias="hierarchyUsage", description="Nullable, defaults to \"MasterIdentifier\" if no value provided. \"MasterIdentifier\" (aka unique) An entity can have one value for this identifier definition on a given effective date. A value for this identifier definition can only be associated with one entity (in a given scope) on a given effective date. \"ParentIdentifier\" (aka non-unique) An entity can have one value for this identifier definition on a given effective date. A value for this identifier definition can be associated with many entities (in a given scope) on a given effective date.") 
+    hierarchy_level:  Optional[StrictStr] = Field(None,alias="hierarchyLevel", description="Optional metadata associated with the identifier definition.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="A display name for the identifier. E.g. Figi.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the identifier.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the identifier definition.")
     __properties = ["domain", "identifierScope", "identifierType", "lifeTime", "hierarchyUsage", "hierarchyLevel", "displayName", "description", "properties"]
 
@@ -44,55 +44,11 @@ class CreateIdentifierDefinitionRequest(BaseModel):
             raise ValueError("must be one of enum values ('NotDefined', 'Transaction', 'Portfolio', 'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument', 'CutLabelDefinition', 'Analytic', 'PortfolioGroup', 'Person', 'AccessMetadata', 'Order', 'UnitResult', 'MarketData', 'ConfigurationRecipe', 'Allocation', 'Calendar', 'LegalEntity', 'Placement', 'Execution', 'Block', 'Participation', 'Package', 'OrderInstruction', 'NextBestAction', 'CustomEntity', 'InstrumentEvent', 'Account', 'ChartOfAccounts', 'CustodianAccount', 'Abor', 'AborConfiguration', 'Fund', 'FundConfiguration', 'Fee', 'Reconciliation', 'PropertyDefinition', 'Compliance', 'DiaryEntry', 'Leg', 'DerivedValuation', 'Timeline', 'ClosedPeriod', 'AddressKeyDefinition', 'AmortisationRuleSet', 'AnalyticsSetInventory', 'AtomUnitResult', 'CleardownModule', 'ComplexMarketData', 'ComplianceRunSummary', 'ComplianceRule', 'ComplianceRunInfo', 'CorporateActionSource', 'CounterpartyAgreement', 'CustomEntityDefinition', 'DataType', 'Dialect', 'EventHandler', 'GeneralLedgerProfile', 'PostingModule', 'Quote', 'RecipeComposer', 'ReconciliationRunBreak', 'ReferenceList', 'RelationDefinition', 'ReturnBlockIndex', 'SRSDocument', 'SRSIndex', 'TransactionTemplate', 'TransactionTemplateScope', 'TransactionType', 'TransactionTypeConfig', 'TranslationScript', 'TaskDefinition', 'TaskInstance', 'Worker', 'StagingRuleSet', 'IdentifierDefinition')")
         return value
 
-    @validator('identifier_scope')
-    def identifier_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('identifier_type')
-    def identifier_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
     @validator('life_time')
     def life_time_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('Perpetual', 'TimeVariant'):
             raise ValueError("must be one of enum values ('Perpetual', 'TimeVariant')")
-        return value
-
-    @validator('hierarchy_level')
-    def hierarchy_level_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
         return value
 
     class Config:

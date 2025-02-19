@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 import lusid.models
 
 class ReferenceList(BaseModel):
     """
     ReferenceList
     """
-    reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList")
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList") 
     __properties = ["referenceListType"]
 
     @validator('reference_list_type')

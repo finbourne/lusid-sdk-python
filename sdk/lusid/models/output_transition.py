@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.rounding_configuration import RoundingConfiguration
 
 class OutputTransition(BaseModel):
@@ -29,8 +29,8 @@ class OutputTransition(BaseModel):
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
     units_factor: Union[StrictFloat, StrictInt] = Field(..., alias="unitsFactor", description="The factor to scale units by")
     cost_factor: Union[StrictFloat, StrictInt] = Field(..., alias="costFactor", description="The factor to scale cost by")
-    lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies.")
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
     rounding: Optional[RoundingConfiguration] = None
     __properties = ["instrumentIdentifiers", "unitsFactor", "costFactor", "lusidInstrumentId", "instrumentScope", "rounding"]
 

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class MappedString(BaseModel):
     """
     MappedString
     """
-    left_value: Optional[StrictStr] = Field(None, alias="leftValue")
-    right_value: Optional[StrictStr] = Field(None, alias="rightValue")
-    mapping_direction: Optional[StrictStr] = Field(None, alias="mappingDirection")
+    left_value:  Optional[StrictStr] = Field(None,alias="leftValue") 
+    right_value:  Optional[StrictStr] = Field(None,alias="rightValue") 
+    mapping_direction:  Optional[StrictStr] = Field(None,alias="mappingDirection") 
     is_case_sensitive: Optional[StrictBool] = Field(None, alias="isCaseSensitive")
     __properties = ["leftValue", "rightValue", "mappingDirection", "isCaseSensitive"]
 

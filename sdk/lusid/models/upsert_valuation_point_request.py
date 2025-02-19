@@ -19,36 +19,19 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class UpsertValuationPointRequest(BaseModel):
     """
     A definition for the period you wish to close  # noqa: E501
     """
-    diary_entry_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="diaryEntryCode", description="Unique code for the Valuation Point.")
-    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="Identifiable Name assigned to the Valuation Point.")
+    diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="Unique code for the Valuation Point.") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="Identifiable Name assigned to the Valuation Point.") 
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
     __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "properties"]
-
-    @validator('diary_entry_code')
-    def diary_entry_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

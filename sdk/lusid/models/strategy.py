@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 
 class Strategy(BaseModel):
@@ -27,7 +27,7 @@ class Strategy(BaseModel):
     Strategy
     """
     keys: conlist(PerpetualProperty, min_items=1) = Field(...)
-    value_type: constr(strict=True, min_length=1) = Field(..., alias="valueType")
+    value_type:  StrictStr = Field(...,alias="valueType") 
     value: Union[StrictFloat, StrictInt] = Field(...)
     __properties = ["keys", "valueType", "value"]
 

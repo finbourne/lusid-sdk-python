@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.counterparty_signatory import CounterpartySignatory
 from lusid.models.resource_id import ResourceId
 
@@ -27,8 +27,8 @@ class CounterpartyAgreement(BaseModel):
     """
     Represents the legal agreement between two parties engaged in an OTC transaction.  A typical example would be a 2002 ISDA Master Agreement, signed by two legal entities on a given date.  # noqa: E501
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="A user-defined display label for the Counterparty Agreement.")
-    agreement_type: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="agreementType", description="A user-defined field to capture the type of agreement this represents. Examples might be \"ISDA 2002 Master Agreement\" or \"ISDA 1992 Master Agreement\".")
+    display_name:  StrictStr = Field(...,alias="displayName", description="A user-defined display label for the Counterparty Agreement.") 
+    agreement_type:  StrictStr = Field(...,alias="agreementType", description="A user-defined field to capture the type of agreement this represents. Examples might be \"ISDA 2002 Master Agreement\" or \"ISDA 1992 Master Agreement\".") 
     counterparty_signatory: CounterpartySignatory = Field(..., alias="counterpartySignatory")
     dated_as_of: datetime = Field(..., alias="datedAsOf", description="The date on which the CounterpartyAgreement was signed by both parties.")
     credit_support_annex_id: ResourceId = Field(..., alias="creditSupportAnnexId")

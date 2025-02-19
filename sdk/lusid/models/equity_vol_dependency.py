@@ -19,18 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class EquityVolDependency(EconomicDependency):
     """
     Economic dependency required to price Equity derivative products that contain optionality.  Equity Vol surface is a grid of implied volatilities for an array of strikes and tenors,  derived from vanilla option prices in the market.  # noqa: E501
     """
-    code: constr(strict=True, max_length=50, min_length=0) = Field(..., description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN")
-    domestic_currency: StrictStr = Field(..., alias="domesticCurrency", description="The domestic currency of the instrument declaring this dependency.")
-    vol_type: constr(strict=True, max_length=50, min_length=0) = Field(..., alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.")
+    code:  StrictStr = Field(...,alias="code", description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN") 
+    domestic_currency:  StrictStr = Field(...,alias="domesticCurrency", description="The domestic currency of the instrument declaring this dependency.") 
+    vol_type:  StrictStr = Field(...,alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.") 
     var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
-    dependency_type: StrictStr = Field(..., alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency")
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "code", "domesticCurrency", "volType", "date"]
 

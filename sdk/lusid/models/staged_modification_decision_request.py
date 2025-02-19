@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class StagedModificationDecisionRequest(BaseModel):
     """
     StagedModificationDecisionRequest
     """
-    decision: constr(strict=True, min_length=1) = Field(..., description="The decision on the requested staged modification, can be 'Approve' or 'Reject'.")
-    comment: constr(strict=True, max_length=256, min_length=1) = Field(..., description="Comment on decision.")
+    decision:  StrictStr = Field(...,alias="decision", description="The decision on the requested staged modification, can be 'Approve' or 'Reject'.") 
+    comment:  StrictStr = Field(...,alias="comment", description="Comment on decision.") 
     __properties = ["decision", "comment"]
 
     class Config:

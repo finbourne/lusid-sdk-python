@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -31,11 +31,11 @@ class ComplianceRuleResponse(BaseModel):
     ComplianceRuleResponse
     """
     id: Optional[ResourceId] = None
-    name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
+    name:  Optional[StrictStr] = Field(None,alias="name") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     active: Optional[StrictBool] = None
     template_id: Optional[ResourceId] = Field(None, alias="templateId")
-    variation: Optional[StrictStr] = None
+    variation:  Optional[StrictStr] = Field(None,alias="variation") 
     portfolio_group_id: Optional[ResourceId] = Field(None, alias="portfolioGroupId")
     parameters: Optional[Dict[str, ComplianceParameter]] = None
     properties: Optional[Dict[str, PerpetualProperty]] = None

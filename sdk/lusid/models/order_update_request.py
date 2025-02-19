@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId

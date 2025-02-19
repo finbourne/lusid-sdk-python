@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.market_data_options import MarketDataOptions
 
@@ -28,15 +28,15 @@ class CreditSpreadCurveData(ComplexMarketData):
     A credit spread curve matching tenors against par spread quotes  # noqa: E501
     """
     base_date: datetime = Field(..., alias="baseDate", description="EffectiveAt date of the quoted rates")
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the curve")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the curve") 
     tenors: conlist(StrictStr) = Field(..., description="The tenors for which the rates apply  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
     spreads: conlist(Union[StrictFloat, StrictInt]) = Field(..., description="Par spread quotes corresponding to the tenors.")
     recovery_rate: Union[StrictFloat, StrictInt] = Field(..., alias="recoveryRate", description="The recovery rate in default.")
     reference_date: Optional[datetime] = Field(None, alias="referenceDate", description="If tenors are provided, this is the date against which the tenors will be resolved.  This is of importance to CDX spread quotes, which are usually quoted in tenors relative to the CDX start date.  In this case, the ReferenceDate would be equal to the CDX start date, and the BaseDate would be the date for which the spreads are valid.  If not provided, this defaults to the BaseDate of the curve.")
     maturities: Optional[conlist(datetime)] = Field(None, description="The maturity dates for which the rates apply.  Either tenors or maturities should be provided, not both.")
-    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.")
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
-    market_data_type: StrictStr = Field(..., alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface")
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "domCcy", "tenors", "spreads", "recoveryRate", "referenceDate", "maturities", "lineage", "marketDataOptions"]
 

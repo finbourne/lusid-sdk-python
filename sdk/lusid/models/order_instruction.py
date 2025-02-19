@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -38,8 +38,8 @@ class OrderInstruction(BaseModel):
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
     weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The weight of given instrument ordered.")
     price: Optional[CurrencyAndAmount] = None
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies")
-    lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies") 
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["id", "createdDate", "properties", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "instrumentScope", "lusidInstrumentId", "version", "links"]

@@ -19,20 +19,20 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.model_property import ModelProperty
 
 class CreateReferencePortfolioRequest(BaseModel):
     """
     CreateReferencePortfolioRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the reference portfolio.")
-    description: Optional[StrictStr] = Field(None, description="A long form text description of the portfolio.")
-    code: StrictStr = Field(..., description="Unique identifier for the portfolio.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the reference portfolio.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A long form text description of the portfolio.") 
+    code:  StrictStr = Field(...,alias="code", description="Unique identifier for the portfolio.") 
     created: Optional[datetime] = Field(None, description="The original creation date, defaults to today if not specified when creating a portfolio.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Portfolio properties to add to the portfolio.")
     instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="Instrument Scopes.")
-    base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.")
+    base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.") 
     __properties = ["displayName", "description", "code", "created", "properties", "instrumentScopes", "baseCurrency"]
 
     class Config:

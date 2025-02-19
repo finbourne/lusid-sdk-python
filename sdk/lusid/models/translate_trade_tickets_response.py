@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.trade_ticket import TradeTicket
@@ -28,7 +28,7 @@ class TranslateTradeTicketsResponse(BaseModel):
     """
     A response from a request to translate a collection of instruments to a given target dialect.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: Optional[Dict[str, TradeTicket]] = Field(None, description="The instruments which have been successfully translated.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The instruments that could not be translated along with a reason for their failure.")
     links: Optional[conlist(Link)] = None

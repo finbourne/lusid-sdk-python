@@ -19,42 +19,18 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapping
 
 class GeneralLedgerProfileRequest(BaseModel):
     """
     A General Ledger Profile Definition.  # noqa: E501
     """
-    general_ledger_profile_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="generalLedgerProfileCode", description="The unique code for the General Ledger Profile")
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The name of the General Ledger Profile")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the General Ledger Profile")
+    general_ledger_profile_code:  StrictStr = Field(...,alias="generalLedgerProfileCode", description="The unique code for the General Ledger Profile") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the General Ledger Profile") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the General Ledger Profile") 
     general_ledger_profile_mappings: conlist(GeneralLedgerProfileMapping, max_items=1000) = Field(..., alias="generalLedgerProfileMappings", description="Rules for mapping Account or property values to aggregation pattern definitions")
     __properties = ["generalLedgerProfileCode", "displayName", "description", "generalLedgerProfileMappings"]
-
-    @validator('general_ledger_profile_code')
-    def general_ledger_profile_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

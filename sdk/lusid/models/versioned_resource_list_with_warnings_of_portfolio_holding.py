@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.portfolio_holding import PortfolioHolding
 from lusid.models.version import Version
@@ -31,9 +31,9 @@ class VersionedResourceListWithWarningsOfPortfolioHolding(BaseModel):
     """
     version: Version = Field(...)
     values: conlist(PortfolioHolding) = Field(..., description="The resources to list.")
-    href: Optional[StrictStr] = Field(None, description="The URI of the resource list.")
-    next_page: Optional[StrictStr] = Field(None, alias="nextPage", description="The next page of results.")
-    previous_page: Optional[StrictStr] = Field(None, alias="previousPage", description="The previous page of results.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The URI of the resource list.") 
+    next_page:  Optional[StrictStr] = Field(None,alias="nextPage", description="The next page of results.") 
+    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage", description="The previous page of results.") 
     warnings: Optional[conlist(Warning)] = None
     links: Optional[conlist(Link)] = None
     __properties = ["version", "values", "href", "nextPage", "previousPage", "warnings", "links"]

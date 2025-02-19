@@ -19,37 +19,20 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, constr, validator 
 
 class CreateSequenceRequest(BaseModel):
     """
     CreateSequenceRequest
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the sequence definition to create")
+    code:  StrictStr = Field(...,alias="code", description="The code of the sequence definition to create") 
     increment: Optional[StrictInt] = Field(None, description="The value to increment between each value in the sequence")
     min_value: Optional[StrictInt] = Field(None, alias="minValue", description="The minimum value of the sequence")
     max_value: Optional[StrictInt] = Field(None, alias="maxValue", description="The maximum value of the sequence")
     start: Optional[StrictInt] = Field(None, description="The start value of the sequence")
     cycle: Optional[StrictBool] = Field(None, description="Set to true to start the sequence over again when it reaches the end. Defaults to false if not provided.")
-    pattern: Optional[constr(strict=True, max_length=44, min_length=1)] = Field(None, description="The pattern to be used to generate next values in the sequence. Defaults to null if not provided.")
+    pattern:  Optional[StrictStr] = Field(None,alias="pattern", description="The pattern to be used to generate next values in the sequence. Defaults to null if not provided.") 
     __properties = ["code", "increment", "minValue", "maxValue", "start", "cycle", "pattern"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('pattern')
-    def pattern_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[A-Za-z0-9_-]*\{\{seqValue\}\}[A-Za-z0-9_-]*$", value):
-            raise ValueError(r"must validate the regular expression /^[A-Za-z0-9_-]*\{\{seqValue\}\}[A-Za-z0-9_-]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

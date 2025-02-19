@@ -19,31 +19,17 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.recipe_block import RecipeBlock
 
 class RecipeComposer(BaseModel):
     """
     Recipe composer is an object used to dynamically compose Configuration Recipe from atomic operations.  # noqa: E501
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope used when updating or inserting the Recipe Composer.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="User given string name (code) to identify the recipe.")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope used when updating or inserting the Recipe Composer.") 
+    code:  StrictStr = Field(...,alias="code", description="User given string name (code) to identify the recipe.") 
     operations: Optional[conlist(RecipeBlock)] = Field(None, description="Atomic operations used to compose a Configuration Recipe.")
     __properties = ["scope", "code", "operations"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

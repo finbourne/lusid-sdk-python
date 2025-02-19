@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.reference_list import ReferenceList
 from lusid.models.resource_id import ResourceId
@@ -30,8 +30,8 @@ class ReferenceListResponse(BaseModel):
     ReferenceListResponse
     """
     id: ResourceId = Field(...)
-    name: constr(strict=True, min_length=1) = Field(..., description="The name of the reference list.")
-    description: Optional[StrictStr] = Field(None, description="The description of the reference list.")
+    name:  StrictStr = Field(...,alias="name", description="The name of the reference list.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the reference list.") 
     tags: Optional[conlist(StrictStr)] = Field(None, description="The tags associated with the reference list.")
     reference_list: ReferenceList = Field(..., alias="referenceList")
     version: Version = Field(...)

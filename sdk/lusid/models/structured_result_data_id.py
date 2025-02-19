@@ -19,34 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class StructuredResultDataId(BaseModel):
     """
     An identifier that uniquely describes an item of structured result data such as the risk to an interest curve or a set of yields or analytics on an index.  # noqa: E501
     """
-    source: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The platform or vendor that provided the structured result data, e.g. 'client'. This is primarily of interest when data could have been sourced from multiple sources")
-    code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The identifier for the entity that this id describes. It could be an index, instrument or other form of structured data")
-    effective_at: Optional[StrictStr] = Field(None, alias="effectiveAt", description="The effectiveAt or cut label that this item of structured result data is/was updated/inserted with.")
-    result_type: Optional[StrictStr] = Field(None, alias="resultType", description="An identifier that denotes the class of data that the id points to. This is not the same as the format, but a more generic identifier such as 'risk result', 'cashflow', 'index' or similar.")
+    source:  StrictStr = Field(...,alias="source", description="The platform or vendor that provided the structured result data, e.g. 'client'. This is primarily of interest when data could have been sourced from multiple sources") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="The identifier for the entity that this id describes. It could be an index, instrument or other form of structured data") 
+    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The effectiveAt or cut label that this item of structured result data is/was updated/inserted with.") 
+    result_type:  Optional[StrictStr] = Field(None,alias="resultType", description="An identifier that denotes the class of data that the id points to. This is not the same as the format, but a more generic identifier such as 'risk result', 'cashflow', 'index' or similar.") 
     __properties = ["source", "code", "effectiveAt", "resultType"]
-
-    @validator('source')
-    def source_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

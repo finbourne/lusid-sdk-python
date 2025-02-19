@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class TemplateField(BaseModel):
     """
     TemplateField
     """
-    field_name: constr(strict=True, min_length=1) = Field(..., alias="fieldName")
-    specificity: constr(strict=True, min_length=1) = Field(...)
-    description: constr(strict=True, min_length=1) = Field(...)
-    type: constr(strict=True, min_length=1) = Field(...)
-    availability: constr(strict=True, min_length=1) = Field(...)
+    field_name:  StrictStr = Field(...,alias="fieldName") 
+    specificity:  StrictStr = Field(...,alias="specificity") 
+    description:  StrictStr = Field(...,alias="description") 
+    type:  StrictStr = Field(...,alias="type") 
+    availability:  StrictStr = Field(...,alias="availability") 
     usage: conlist(StrictStr) = Field(...)
     __properties = ["fieldName", "specificity", "description", "type", "availability", "usage"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.group_reconciliation_user_review_add import GroupReconciliationUserReviewAdd
 from lusid.models.group_reconciliation_user_review_remove import GroupReconciliationUserReviewRemove
 
@@ -27,7 +27,7 @@ class BatchUpdateUserReviewForComparisonResultRequest(BaseModel):
     """
     BatchUpdateUserReviewForComparisonResultRequest
     """
-    comparison_result_id: constr(strict=True, min_length=1) = Field(..., alias="comparisonResultId", description="Comparison result identifier, encoded value for core attribute results, aggregate attribute results, reconciliation type and run instanceId.")
+    comparison_result_id:  StrictStr = Field(...,alias="comparisonResultId", description="Comparison result identifier, encoded value for core attribute results, aggregate attribute results, reconciliation type and run instanceId.") 
     user_review_add: Optional[GroupReconciliationUserReviewAdd] = Field(None, alias="userReviewAdd")
     user_review_remove: Optional[GroupReconciliationUserReviewRemove] = Field(None, alias="userReviewRemove")
     __properties = ["comparisonResultId", "userReviewAdd", "userReviewRemove"]

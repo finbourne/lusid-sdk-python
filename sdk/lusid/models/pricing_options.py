@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 from lusid.models.model_selection import ModelSelection
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 
@@ -37,7 +37,7 @@ class PricingOptions(BaseModel):
     remove_contingent_cashflows_in_payment_diary: Optional[StrictBool] = Field(None, alias="removeContingentCashflowsInPaymentDiary", description="When creating a payment diary, should contingent cash payments (e.g. from exercise of a swaption into a swap) be included or not.  i.e. Is exercise or default being assumed to happen or not.")
     use_child_sub_holding_keys_for_portfolio_expansion: Optional[StrictBool] = Field(None, alias="useChildSubHoldingKeysForPortfolioExpansion", description="Should fund constituents inherit subholding keys from the parent subholding keyb")
     validate_domestic_and_quote_currencies_are_consistent: Optional[StrictBool] = Field(None, alias="validateDomesticAndQuoteCurrenciesAreConsistent", description="Do we validate that the instrument domestic currency matches the quote currency (unless unknown/zzz) when using lookup pricing.")
-    conserved_quantity_for_lookthrough_expansion: Optional[StrictStr] = Field(None, alias="conservedQuantityForLookthroughExpansion", description="When performing lookthrough portfolio expansion with ScalingMethodology set to \"Sum\" or \"AbsoluteSum\",  the quantity specified here will be conserved and apportioned to lookthrough constituents.  For example, an equal-weighting index with 100 constituents can be modelled as a reference portfolio with 1% weights on each equity.  When expanding a $9000 holding of that index into its constituents while conserving PV, we end up with $90 of each equity.  The number of units of each equity held is then implied.  Note that conservation of one quantity may imply non-conservation of others, especially when some constituents are OTCs.                Allowed values are: \"PV\" (default), \"Exposure\".")
+    conserved_quantity_for_lookthrough_expansion:  Optional[StrictStr] = Field(None,alias="conservedQuantityForLookthroughExpansion", description="When performing lookthrough portfolio expansion with ScalingMethodology set to \"Sum\" or \"AbsoluteSum\",  the quantity specified here will be conserved and apportioned to lookthrough constituents.  For example, an equal-weighting index with 100 constituents can be modelled as a reference portfolio with 1% weights on each equity.  When expanding a $9000 holding of that index into its constituents while conserving PV, we end up with $90 of each equity.  The number of units of each equity held is then implied.  Note that conservation of one quantity may imply non-conservation of others, especially when some constituents are OTCs.                Allowed values are: \"PV\" (default), \"Exposure\".") 
     return_zero_pv: Optional[ReturnZeroPvOptions] = Field(None, alias="returnZeroPv")
     __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "produceSeparateResultForLinearOtcLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "conservedQuantityForLookthroughExpansion", "returnZeroPv"]
 

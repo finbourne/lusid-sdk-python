@@ -19,13 +19,13 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class SettlementSchedule(BaseModel):
     """
     SettlementSchedule
     """
-    trade_id: Optional[StrictStr] = Field(None, alias="tradeId")
+    trade_id:  Optional[StrictStr] = Field(None,alias="tradeId") 
     settlement_date: Optional[datetime] = Field(None, alias="settlementDate")
     units: Optional[Union[StrictFloat, StrictInt]] = None
     __properties = ["tradeId", "settlementDate", "units"]

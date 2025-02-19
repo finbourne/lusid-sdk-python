@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class RoundingConfigurationComponent(BaseModel):
     """
     RoundingConfigurationComponent
     """
-    rounding_type: constr(strict=True, min_length=1) = Field(..., alias="roundingType", description="The type of rounding that should be used, eg: Up, Down, NearestRoundHalfAwayFromZero")
+    rounding_type:  StrictStr = Field(...,alias="roundingType", description="The type of rounding that should be used, eg: Up, Down, NearestRoundHalfAwayFromZero") 
     __properties = ["roundingType"]
 
     class Config:

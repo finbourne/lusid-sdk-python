@@ -19,15 +19,15 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.user import User
 
 class ProcessedCommand(BaseModel):
     """
     The list of commands.  # noqa: E501
     """
-    description: constr(strict=True, min_length=1) = Field(..., description="The description of the command issued.")
-    path: Optional[StrictStr] = Field(None, description="The unique identifier for the command including the request id.")
+    description:  StrictStr = Field(...,alias="description", description="The description of the command issued.") 
+    path:  Optional[StrictStr] = Field(None,alias="path", description="The unique identifier for the command including the request id.") 
     user_id: User = Field(..., alias="userId")
     processed_time: datetime = Field(..., alias="processedTime", description="The asAt datetime that the events published by the processing of this command were committed to LUSID.")
     __properties = ["description", "path", "userId", "processedTime"]

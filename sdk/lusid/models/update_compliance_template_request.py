@@ -19,31 +19,17 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.compliance_template_variation_request import ComplianceTemplateVariationRequest
 
 class UpdateComplianceTemplateRequest(BaseModel):
     """
     UpdateComplianceTemplateRequest
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Compliance Template")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of the Compliance Template")
+    code:  StrictStr = Field(...,alias="code", description="The code given for the Compliance Template") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the Compliance Template") 
     variations: conlist(ComplianceTemplateVariationRequest) = Field(..., description="Variation details of a Compliance Template")
     __properties = ["code", "description", "variations"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,21 +19,21 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.date_attributes import DateAttributes
 
 class CalendarDate(BaseModel):
     """
     CalendarDate
     """
-    href: Optional[StrictStr] = None
-    date_identifier: constr(strict=True, min_length=1) = Field(..., alias="dateIdentifier")
+    href:  Optional[StrictStr] = Field(None,alias="href") 
+    date_identifier:  StrictStr = Field(...,alias="dateIdentifier") 
     from_utc: datetime = Field(..., alias="fromUtc")
     to_utc: datetime = Field(..., alias="toUtc")
-    local_date: constr(strict=True, min_length=1) = Field(..., alias="localDate")
-    timezone: constr(strict=True, min_length=1) = Field(...)
-    description: constr(strict=True, min_length=1) = Field(...)
-    type: constr(strict=True, min_length=1) = Field(...)
+    local_date:  StrictStr = Field(...,alias="localDate") 
+    timezone:  StrictStr = Field(...,alias="timezone") 
+    description:  StrictStr = Field(...,alias="description") 
+    type:  StrictStr = Field(...,alias="type") 
     attributes: Optional[DateAttributes] = None
     source_data: Optional[Dict[str, StrictStr]] = Field(None, alias="sourceData")
     __properties = ["href", "dateIdentifier", "fromUtc", "toUtc", "localDate", "timezone", "description", "type", "attributes", "sourceData"]

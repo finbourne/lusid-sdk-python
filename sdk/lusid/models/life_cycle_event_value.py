@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.life_cycle_event_lineage import LifeCycleEventLineage
 from lusid.models.result_value import ResultValue
 from lusid.models.result_value_dictionary import ResultValueDictionary
@@ -31,7 +31,7 @@ class LifeCycleEventValue(ResultValue):
     effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="The effective date of the event")
     event_values: Optional[ResultValueDictionary] = Field(None, alias="eventValues")
     event_lineage: Optional[LifeCycleEventLineage] = Field(None, alias="eventLineage")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "effectiveDate", "eventValues", "eventLineage"]
 

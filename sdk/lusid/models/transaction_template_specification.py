@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.template_field import TemplateField
@@ -28,7 +28,7 @@ class TransactionTemplateSpecification(BaseModel):
     """
     TransactionTemplateSpecification
     """
-    instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType")
+    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType") 
     supported_instrument_types: conlist(StrictStr) = Field(..., alias="supportedInstrumentTypes")
     supported_participation_types: conlist(StrictStr) = Field(..., alias="supportedParticipationTypes")
     supported_election_types: conlist(ElectionSpecification) = Field(..., alias="supportedElectionTypes")

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 
 class TransactionQueryParameters(BaseModel):
     """
     TransactionQueryParameters
     """
-    start_date: constr(strict=True, min_length=1) = Field(..., alias="startDate", description="The lower bound effective datetime or cut label (inclusive) from which to build the transactions.")
-    end_date: constr(strict=True, min_length=1) = Field(..., alias="endDate", description="The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.")
-    query_mode: Optional[StrictStr] = Field(None, alias="queryMode", description="The date to compare against the upper and lower bounds for the effective datetime or cut label. Defaults to 'TradeDate' if not specified. The available values are: TradeDate, SettleDate")
+    start_date:  StrictStr = Field(...,alias="startDate", description="The lower bound effective datetime or cut label (inclusive) from which to build the transactions.") 
+    end_date:  StrictStr = Field(...,alias="endDate", description="The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.") 
+    query_mode:  Optional[StrictStr] = Field(None,alias="queryMode", description="The date to compare against the upper and lower bounds for the effective datetime or cut label. Defaults to 'TradeDate' if not specified. The available values are: TradeDate, SettleDate") 
     show_cancelled_transactions: Optional[StrictBool] = Field(None, alias="showCancelledTransactions", description="Option to specify whether or not to include cancelled transactions in the output. Defaults to False if not specified.")
     __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
 from lusid.models.resource_id import ResourceId
 
@@ -31,12 +31,12 @@ class ComplianceRuleResultDetail(BaseModel):
     affected_portfolios_details: conlist(ComplianceRuleResultPortfolioDetail) = Field(..., alias="affectedPortfoliosDetails")
     affected_orders: conlist(ResourceId) = Field(..., alias="affectedOrders")
     template_id: ResourceId = Field(..., alias="templateId")
-    template_description: constr(strict=True, min_length=1) = Field(..., alias="templateDescription")
-    template_variation: constr(strict=True, min_length=1) = Field(..., alias="templateVariation")
-    status: constr(strict=True, min_length=1) = Field(...)
-    rule_name: constr(strict=True, min_length=1) = Field(..., alias="ruleName")
-    rule_description: constr(strict=True, min_length=1) = Field(..., alias="ruleDescription")
-    outcome: constr(strict=True, min_length=1) = Field(...)
+    template_description:  StrictStr = Field(...,alias="templateDescription") 
+    template_variation:  StrictStr = Field(...,alias="templateVariation") 
+    status:  StrictStr = Field(...,alias="status") 
+    rule_name:  StrictStr = Field(...,alias="ruleName") 
+    rule_description:  StrictStr = Field(...,alias="ruleDescription") 
+    outcome:  StrictStr = Field(...,alias="outcome") 
     __properties = ["ruleId", "affectedPortfoliosDetails", "affectedOrders", "templateId", "templateDescription", "templateVariation", "status", "ruleName", "ruleDescription", "outcome"]
 
     class Config:

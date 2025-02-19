@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.index_convention import IndexConvention
 from lusid.models.lusid_instrument import LusidInstrument
 
@@ -29,12 +29,12 @@ class ForwardRateAgreement(LusidInstrument):
     """
     start_date: datetime = Field(..., alias="startDate", description="The settlement date of the FRA")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates beyond their last payment date.")
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     fixing_date: datetime = Field(..., alias="fixingDate", description="The date at which the rate to be paid, the reference rate, is confirmed/observed.")
     fra_rate: Union[StrictFloat, StrictInt] = Field(..., alias="fraRate", description="The rate at which the FRA is traded.")
     notional: Union[StrictFloat, StrictInt] = Field(..., description="The amount for which the FRA is traded.")
     index_convention: Optional[IndexConvention] = Field(None, alias="indexConvention")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "fixingDate", "fraRate", "notional", "indexConvention"]
 

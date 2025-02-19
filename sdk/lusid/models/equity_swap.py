@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.instrument_leg import InstrumentLeg
@@ -31,17 +31,17 @@ class EquitySwap(LusidInstrument):
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the EquitySwap.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
-    code: constr(strict=True, min_length=1) = Field(..., description="The code of the underlying.")
+    code:  StrictStr = Field(...,alias="code", description="The code of the underlying.") 
     equity_flow_conventions: FlowConventions = Field(..., alias="equityFlowConventions")
     funding_leg: InstrumentLeg = Field(..., alias="fundingLeg")
     include_dividends: StrictBool = Field(..., alias="includeDividends", description="Dividend inclusion flag, if true dividends are included in the equity leg (total return).")
     initial_price: Union[StrictFloat, StrictInt] = Field(..., alias="initialPrice", description="The initial equity price of the Equity Swap.")
     notional_reset: StrictBool = Field(..., alias="notionalReset", description="Notional reset flag, if true the notional of the funding leg is reset at the start of every  coupon to match the value of the equity leg (equity price at start of coupon times quantity).")
     quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity or number of shares in the Equity Swap.")
-    underlying_identifier: constr(strict=True, min_length=1) = Field(..., alias="underlyingIdentifier", description="External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].")
-    equity_swap_dividend_payment_timing: Optional[StrictStr] = Field(None, alias="equitySwapDividendPaymentTiming", description="Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent].")
+    underlying_identifier:  StrictStr = Field(...,alias="underlyingIdentifier", description="External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].") 
+    equity_swap_dividend_payment_timing:  Optional[StrictStr] = Field(None,alias="equitySwapDividendPaymentTiming", description="Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent].") 
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "maturityDate", "code", "equityFlowConventions", "fundingLeg", "includeDividends", "initialPrice", "notionalReset", "quantity", "underlyingIdentifier", "equitySwapDividendPaymentTiming", "additionalPayments"]
 

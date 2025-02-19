@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class OrderGraphBlockTransactionDetail(BaseModel):
     """
     OrderGraphBlockTransactionDetail
     """
-    id: constr(strict=True, min_length=1) = Field(..., description="The id of this transaction.")
+    id:  StrictStr = Field(...,alias="id", description="The id of this transaction.") 
     __properties = ["id"]
 
     class Config:

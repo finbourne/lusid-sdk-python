@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 
 class Barrier(BaseModel):
     """
     Barrier class for exotic FxOption  # noqa: E501
     """
-    direction: constr(strict=True, min_length=1) = Field(..., description="Supported string (enumeration) values are: [Down, Up].")
+    direction:  StrictStr = Field(...,alias="direction", description="Supported string (enumeration) values are: [Down, Up].") 
     level: Union[StrictFloat, StrictInt] = Field(..., description="Trigger level, which the underlying should (or should not) cross/touch.")
-    monitoring: Optional[StrictStr] = Field(None, description="Supported string (enumeration) values are: [European, Bermudan, American].")
-    type: constr(strict=True, min_length=1) = Field(..., description="Supported string (enumeration) values are: [Knockin, Knockout].")
+    monitoring:  Optional[StrictStr] = Field(None,alias="monitoring", description="Supported string (enumeration) values are: [European, Bermudan, American].") 
+    type:  StrictStr = Field(...,alias="type", description="Supported string (enumeration) values are: [Knockin, Knockout].") 
     __properties = ["direction", "level", "monitoring", "type"]
 
     class Config:

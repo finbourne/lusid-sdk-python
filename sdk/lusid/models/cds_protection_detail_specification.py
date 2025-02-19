@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 
 class CdsProtectionDetailSpecification(BaseModel):
     """
     CDSs generally conform to fairly standard definitions, but can be tweaked in a number of different ways.  This class gathers a number of common features which may deviate. These will default to the market standard when  no overrides are provided.  # noqa: E501
     """
-    seniority: constr(strict=True, min_length=1) = Field(..., description="The seniority level of the CDS.    Supported string (enumeration) values are: [SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2].")
-    restructuring_type: constr(strict=True, min_length=1) = Field(..., alias="restructuringType", description="The restructuring clause.  Supported string (enumeration) values are: [CR, MR, MM, XR].")
+    seniority:  StrictStr = Field(...,alias="seniority", description="The seniority level of the CDS.    Supported string (enumeration) values are: [SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2].") 
+    restructuring_type:  StrictStr = Field(...,alias="restructuringType", description="The restructuring clause.  Supported string (enumeration) values are: [CR, MR, MM, XR].") 
     protect_start_day: StrictBool = Field(..., alias="protectStartDay", description="Does the protection leg pay out in the case of default on the start date.")
     pay_accrued_interest_on_default: StrictBool = Field(..., alias="payAccruedInterestOnDefault", description="Should accrued interest on the premium leg be paid if a credit event occurs.")
     __properties = ["seniority", "restructuringType", "protectStartDay", "payAccruedInterestOnDefault"]

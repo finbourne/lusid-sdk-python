@@ -19,57 +19,22 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class CreateRelationshipDefinitionRequest(BaseModel):
     """
     CreateRelationshipDefinitionRequest
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope that the relationship definition exists in.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the relationship definition. Together with the scope this uniquely defines the relationship definition.")
-    source_entity_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="sourceEntityType", description="The entity type of the source entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity', 'Instrument' or a custom entity type prefixed with '~'.")
-    target_entity_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="targetEntityType", description="The entity type of the target entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity', 'Instrument' or a custom entity type prefixed with '~'.")
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the relationship definition.")
-    outward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="outwardDescription", description="The description to relate source entity object and target entity object.")
-    inward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="inwardDescription", description="The description to relate target entity object and source entity object.")
-    life_time: Optional[StrictStr] = Field(None, alias="lifeTime", description="Describes how the relationships can change over time. Allowed values are 'Perpetual' and 'TimeVariant', defaults to 'Perpetual' if not specified.")
-    relationship_cardinality: Optional[StrictStr] = Field(None, alias="relationshipCardinality", description="Describes the cardinality of the relationship with a specific source entity object and relationships under this definition. Allowed values are 'ManyToMany' and 'ManyToOne', defaults to 'ManyToMany' if not specified.")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope that the relationship definition exists in.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the relationship definition. Together with the scope this uniquely defines the relationship definition.") 
+    source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity', 'Instrument' or a custom entity type prefixed with '~'.") 
+    target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity', 'Instrument' or a custom entity type prefixed with '~'.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relationship definition.") 
+    outward_description:  StrictStr = Field(...,alias="outwardDescription", description="The description to relate source entity object and target entity object.") 
+    inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object.") 
+    life_time:  Optional[StrictStr] = Field(None,alias="lifeTime", description="Describes how the relationships can change over time. Allowed values are 'Perpetual' and 'TimeVariant', defaults to 'Perpetual' if not specified.") 
+    relationship_cardinality:  Optional[StrictStr] = Field(None,alias="relationshipCardinality", description="Describes the cardinality of the relationship with a specific source entity object and relationships under this definition. Allowed values are 'ManyToMany' and 'ManyToOne', defaults to 'ManyToMany' if not specified.") 
     __properties = ["scope", "code", "sourceEntityType", "targetEntityType", "displayName", "outwardDescription", "inwardDescription", "lifeTime", "relationshipCardinality"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('outward_description')
-    def outward_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('inward_description')
-    def inward_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

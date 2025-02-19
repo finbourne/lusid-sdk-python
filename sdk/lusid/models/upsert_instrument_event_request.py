@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
 
@@ -27,31 +27,14 @@ class UpsertInstrumentEventRequest(BaseModel):
     """
     UpsertInstrumentEventRequest
     """
-    instrument_event_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="instrumentEventId", description="Free string that uniquely identifies the event within the corporate action source")
+    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="Free string that uniquely identifies the event within the corporate action source") 
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The set of identifiers which determine the instrument this event relates to.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description of the instrument event.")
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the instrument event.") 
     instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
-    participation_type: Optional[StrictStr] = Field('Mandatory', alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.")
+    participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
     __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
-
-    @validator('instrument_event_id')
-    def instrument_event_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

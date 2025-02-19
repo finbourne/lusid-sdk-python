@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 
 class VersionSummaryDto(BaseModel):
     """
     VersionSummaryDto
     """
-    api_version: Optional[StrictStr] = Field(None, alias="apiVersion")
-    build_version: Optional[StrictStr] = Field(None, alias="buildVersion")
-    excel_version: Optional[StrictStr] = Field(None, alias="excelVersion")
+    api_version:  Optional[StrictStr] = Field(None,alias="apiVersion") 
+    build_version:  Optional[StrictStr] = Field(None,alias="buildVersion") 
+    excel_version:  Optional[StrictStr] = Field(None,alias="excelVersion") 
     links: Optional[conlist(Link)] = None
     __properties = ["apiVersion", "buildVersion", "excelVersion", "links"]
 

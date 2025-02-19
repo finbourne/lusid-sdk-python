@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
 from lusid.models.client import Client
 
 class DataScope(BaseModel):
@@ -27,7 +27,7 @@ class DataScope(BaseModel):
     DataScope
     """
     client: Optional[Client] = None
-    scope: Optional[StrictStr] = None
+    scope:  Optional[StrictStr] = Field(None,alias="scope") 
     __properties = ["client", "scope"]
 
     class Config:

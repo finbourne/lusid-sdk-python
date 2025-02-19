@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.mapped_string import MappedString
 
 class MappingRule(BaseModel):
     """
     An individual mapping rule, for mapping between a left and right field/property.  # noqa: E501
     """
-    left: Optional[StrictStr] = Field(None, description="The name of the field/property in the left resource (e.g. a transaction)")
-    right: Optional[StrictStr] = Field(None, description="The name of the field/property in the right resource (e.g. a transaction)")
-    comparison_type: Optional[StrictStr] = Field(None, alias="comparisonType", description="The type of comparison to be performed")
+    left:  Optional[StrictStr] = Field(None,alias="left", description="The name of the field/property in the left resource (e.g. a transaction)") 
+    right:  Optional[StrictStr] = Field(None,alias="right", description="The name of the field/property in the right resource (e.g. a transaction)") 
+    comparison_type:  Optional[StrictStr] = Field(None,alias="comparisonType", description="The type of comparison to be performed") 
     comparison_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="comparisonValue", description="The (optional) value used with Finbourne.WebApi.Interface.Dto.Mappings.MappingRule.ComparisonType")
     weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="A factor used to influence the importance of this item.")
     mapped_strings: Optional[conlist(MappedString)] = Field(None, alias="mappedStrings", description="The (optional) value used to map string values.")

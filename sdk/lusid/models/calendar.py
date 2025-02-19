@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -30,11 +30,11 @@ class Calendar(BaseModel):
     """
     Calendar
     """
-    href: Optional[StrictStr] = None
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     id: ResourceId = Field(...)
-    type: constr(strict=True, min_length=1) = Field(...)
+    type:  StrictStr = Field(...,alias="type") 
     weekend_mask: WeekendMask = Field(..., alias="weekendMask")
-    source_provider: constr(strict=True, min_length=1) = Field(..., alias="sourceProvider")
+    source_provider:  StrictStr = Field(...,alias="sourceProvider") 
     properties: conlist(ModelProperty) = Field(...)
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None

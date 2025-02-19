@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.journal_entry_line import JournalEntryLine
 from lusid.models.link import Link
 
@@ -27,7 +27,7 @@ class PnlJournalEntryLine(BaseModel):
     """
     PnlJournalEntryLine
     """
-    pnl_bucket: Optional[StrictStr] = Field(None, alias="pnlBucket", description="The Filter ID of the grouping used from the Fund Configuration PnL filters")
+    pnl_bucket:  Optional[StrictStr] = Field(None,alias="pnlBucket", description="The Filter ID of the grouping used from the Fund Configuration PnL filters") 
     journal_entry_line: Optional[JournalEntryLine] = Field(None, alias="journalEntryLine")
     links: Optional[conlist(Link)] = None
     __properties = ["pnlBucket", "journalEntryLine", "links"]

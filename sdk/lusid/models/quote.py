@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.metric_value import MetricValue
 from lusid.models.quote_id import QuoteId
 
@@ -29,9 +29,9 @@ class Quote(BaseModel):
     """
     quote_id: QuoteId = Field(..., alias="quoteId")
     metric_value: Optional[MetricValue] = Field(None, alias="metricValue")
-    lineage: Optional[StrictStr] = Field(None, description="Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.")
-    cut_label: Optional[StrictStr] = Field(None, alias="cutLabel", description="The cut label that this quote was updated or inserted with.")
-    uploaded_by: constr(strict=True, min_length=1) = Field(..., alias="uploadedBy", description="The unique id of the user that updated or inserted the quote.")
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.") 
+    cut_label:  Optional[StrictStr] = Field(None,alias="cutLabel", description="The cut label that this quote was updated or inserted with.") 
+    uploaded_by:  StrictStr = Field(...,alias="uploadedBy", description="The unique id of the user that updated or inserted the quote.") 
     as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the quote was committed to LUSID.")
     scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="scaleFactor", description="An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.")
     __properties = ["quoteId", "metricValue", "lineage", "cutLabel", "uploadedBy", "asAt", "scaleFactor"]

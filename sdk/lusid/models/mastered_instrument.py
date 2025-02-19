@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 
 class MasteredInstrument(LusidInstrument):
@@ -27,13 +27,13 @@ class MasteredInstrument(LusidInstrument):
     LUSID representation of a reference to another instrument that has already been upserted (Mastered)  # noqa: E501
     """
     identifiers: Dict[str, StrictStr] = Field(..., description="Dictionary of identifiers of the mastered instrument")
-    mastered_dom_ccy: Optional[StrictStr] = Field(None, alias="masteredDomCcy", description="DomCcy of the Instrument that Mastered Instrument points to - read only field")
-    mastered_instrument_type: Optional[StrictStr] = Field(None, alias="masteredInstrumentType", description="Type of the Instrument that Mastered Instrument points to - read only field")
-    mastered_lusid_instrument_id: Optional[StrictStr] = Field(None, alias="masteredLusidInstrumentId", description="Luid of the Instrument that Mastered Instrument points to - read only field")
-    mastered_name: Optional[StrictStr] = Field(None, alias="masteredName", description="Name of the Instrument that Mastered Instrument points to - read only field")
-    mastered_scope: Optional[StrictStr] = Field(None, alias="masteredScope", description="Scope of the Instrument that Mastered Instrument points to - read only field")
-    mastered_asset_class: Optional[StrictStr] = Field(None, alias="masteredAssetClass", description="Asset class of the underlying mastered instrument - read only field    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].")
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    mastered_dom_ccy:  Optional[StrictStr] = Field(None,alias="masteredDomCcy", description="DomCcy of the Instrument that Mastered Instrument points to - read only field") 
+    mastered_instrument_type:  Optional[StrictStr] = Field(None,alias="masteredInstrumentType", description="Type of the Instrument that Mastered Instrument points to - read only field") 
+    mastered_lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="masteredLusidInstrumentId", description="Luid of the Instrument that Mastered Instrument points to - read only field") 
+    mastered_name:  Optional[StrictStr] = Field(None,alias="masteredName", description="Name of the Instrument that Mastered Instrument points to - read only field") 
+    mastered_scope:  Optional[StrictStr] = Field(None,alias="masteredScope", description="Scope of the Instrument that Mastered Instrument points to - read only field") 
+    mastered_asset_class:  Optional[StrictStr] = Field(None,alias="masteredAssetClass", description="Asset class of the underlying mastered instrument - read only field    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].") 
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "identifiers", "masteredDomCcy", "masteredInstrumentType", "masteredLusidInstrumentId", "masteredName", "masteredScope", "masteredAssetClass"]
 

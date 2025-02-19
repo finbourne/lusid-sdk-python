@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.rules_interval import RulesInterval
@@ -29,31 +29,14 @@ class AmortisationRuleSet(BaseModel):
     """
     AmortisationRuleSet
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="A user-friendly name.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description of what this rule set is for.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="A user-friendly name.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of what this rule set is for.") 
     rules_interval: RulesInterval = Field(..., alias="rulesInterval")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["href", "id", "displayName", "description", "rulesInterval", "version", "links"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

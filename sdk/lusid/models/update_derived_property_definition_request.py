@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 from lusid.models.resource_id import ResourceId
 
 class UpdateDerivedPropertyDefinitionRequest(BaseModel):
     """
     UpdateDerivedPropertyDefinitionRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the property.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
-    property_description: Optional[constr(strict=True, max_length=512)] = Field(None, alias="propertyDescription", description="Describes the property")
-    derivation_formula: constr(strict=True, min_length=1) = Field(..., alias="derivationFormula", description="The rule that defines how data is composed for a derived property.")
+    property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
+    derivation_formula:  StrictStr = Field(...,alias="derivationFormula", description="The rule that defines how data is composed for a derived property.") 
     is_filterable: StrictBool = Field(..., alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
     __properties = ["displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable"]
 

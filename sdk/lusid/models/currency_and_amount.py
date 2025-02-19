@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class CurrencyAndAmount(BaseModel):
     """
     An amount of a specific currency, specifying a value and an associated unit  # noqa: E501
     """
     amount: Optional[Union[StrictFloat, StrictInt]] = None
-    currency: StrictStr = Field(...)
+    currency:  StrictStr = Field(...,alias="currency") 
     __properties = ["amount", "currency"]
 
     class Config:

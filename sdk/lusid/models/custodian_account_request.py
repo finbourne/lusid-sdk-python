@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.typed_resource_id import TypedResourceId
 
@@ -27,41 +27,17 @@ class CustodianAccountRequest(BaseModel):
     """
     CustodianAccountRequest
     """
-    scope: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, description="The Scope assigned to the Custodian Account, where left blank the parent Portfolio Scope will be used")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="Unique Code representing the Custodian Account")
-    status: Optional[StrictStr] = Field(None, description="The Account status. Can be Active, Inactive or Deleted.")
-    account_number: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="accountNumber", description="The Custodian Account Number")
-    account_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="accountName", description="The identifiable name given to the Custodian Account")
-    accounting_method: constr(strict=True, min_length=1) = Field(..., alias="accountingMethod", description="The Accounting method to be used")
-    currency: StrictStr = Field(..., description="The Currency for the Account")
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The Scope assigned to the Custodian Account, where left blank the parent Portfolio Scope will be used") 
+    code:  StrictStr = Field(...,alias="code", description="Unique Code representing the Custodian Account") 
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The Account status. Can be Active, Inactive or Deleted.") 
+    account_number:  StrictStr = Field(...,alias="accountNumber", description="The Custodian Account Number") 
+    account_name:  StrictStr = Field(...,alias="accountName", description="The identifiable name given to the Custodian Account") 
+    accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="The Accounting method to be used") 
+    currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian_identifier: TypedResourceId = Field(..., alias="custodianIdentifier")
-    account_type: Optional[StrictStr] = Field(None, alias="accountType", description="The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin.")
+    account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin.") 
     __properties = ["scope", "code", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodianIdentifier", "accountType"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('account_name')
-    def account_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.alias import Alias
 from lusid.models.custom_data_model_identifier_type_specification import CustomDataModelIdentifierTypeSpecification
 from lusid.models.custom_data_model_property_specification import CustomDataModelPropertySpecification
@@ -31,39 +31,15 @@ class CreateCustomDataModelRequest(BaseModel):
     CreateCustomDataModelRequest
     """
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, max_length=512, min_length=0) = Field(..., alias="displayName", description="The name of the Custom Data Model.")
-    description: constr(strict=True, max_length=512, min_length=0) = Field(..., description="A description for the Custom Data Model.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
+    description:  StrictStr = Field(...,alias="description", description="A description for the Custom Data Model.") 
     parent_data_model: Optional[ResourceId] = Field(None, alias="parentDataModel")
-    conditions: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, description="The conditions that the bound entity must meet to be valid.")
+    conditions:  Optional[StrictStr] = Field(None,alias="conditions", description="The conditions that the bound entity must meet to be valid.") 
     properties: Optional[conlist(CustomDataModelPropertySpecification)] = Field(None, description="The properties that are required or allowed on the bound entity.")
     identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecification)] = Field(None, alias="identifierTypes", description="The identifier types that are required or allowed on the bound entity.")
     attribute_aliases: Optional[conlist(Alias)] = Field(None, alias="attributeAliases", description="The aliases for property keys, identifier types, and fields on the bound entity.")
     recommended_sort_by: Optional[conlist(RecommendedSortBy)] = Field(None, alias="recommendedSortBy", description="The preferred default sorting instructions.")
     __properties = ["id", "displayName", "description", "parentDataModel", "conditions", "properties", "identifierTypes", "attributeAliases", "recommendedSortBy"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('conditions')
-    def conditions_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

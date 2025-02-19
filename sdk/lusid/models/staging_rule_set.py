@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.staging_rule import StagingRule
 from lusid.models.version import Version
@@ -28,12 +28,12 @@ class StagingRuleSet(BaseModel):
     """
     StagingRuleSet
     """
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The entity type the staging rule set applies to.")
-    staging_rule_set_id: constr(strict=True, min_length=1) = Field(..., alias="stagingRuleSetId", description="System generated unique id for the staging rule set.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the staging rule set.")
-    description: Optional[StrictStr] = Field(None, description="A description for the staging rule set.")
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The entity type the staging rule set applies to.") 
+    staging_rule_set_id:  StrictStr = Field(...,alias="stagingRuleSetId", description="System generated unique id for the staging rule set.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the staging rule set.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule set.") 
     rules: conlist(StagingRule) = Field(..., description="The list of staging rules that apply to a specific entity type.")
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["entityType", "stagingRuleSetId", "displayName", "description", "rules", "href", "version", "links"]

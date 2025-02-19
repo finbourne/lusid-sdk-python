@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 
 class GroupReconciliationAggregateAttributeValues(BaseModel):

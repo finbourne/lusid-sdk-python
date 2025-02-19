@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr 
 from lusid.models.custom_entity_response import CustomEntityResponse
 from lusid.models.link import Link
 
@@ -27,17 +27,17 @@ class CustomEntityEntity(BaseModel):
     """
     CustomEntityEntity
     """
-    href: StrictStr = Field(..., description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    entity_unique_id: constr(strict=True, min_length=1) = Field(..., alias="entityUniqueId", description="The unique id of the entity.")
+    href:  StrictStr = Field(...,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The unique id of the entity.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
-    status: constr(strict=True, min_length=1) = Field(..., description="The status of the entity at the current time.")
+    status:  StrictStr = Field(...,alias="status", description="The status of the entity at the current time.") 
     as_at_deleted: Optional[datetime] = Field(None, alias="asAtDeleted", description="The asAt datetime at which the entity was deleted.")
-    user_id_deleted: Optional[StrictStr] = Field(None, alias="userIdDeleted", description="The unique id of the user who deleted the entity.")
-    request_id_deleted: Optional[StrictStr] = Field(None, alias="requestIdDeleted", description="The unique request id of the command that deleted the entity.")
+    user_id_deleted:  Optional[StrictStr] = Field(None,alias="userIdDeleted", description="The unique id of the user who deleted the entity.") 
+    request_id_deleted:  Optional[StrictStr] = Field(None,alias="requestIdDeleted", description="The unique request id of the command that deleted the entity.") 
     effective_at_created: Optional[datetime] = Field(None, alias="effectiveAtCreated", description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt.")
     prevailing_custom_entity: Optional[CustomEntityResponse] = Field(None, alias="prevailingCustomEntity")
     deleted_custom_entity: Optional[CustomEntityResponse] = Field(None, alias="deletedCustomEntity")
-    previewed_status: Optional[StrictStr] = Field(None, alias="previewedStatus", description="The status of the previewed entity.")
+    previewed_status:  Optional[StrictStr] = Field(None,alias="previewedStatus", description="The status of the previewed entity.") 
     previewed_custom_entity: Optional[CustomEntityResponse] = Field(None, alias="previewedCustomEntity")
     links: Optional[conlist(Link)] = None
     __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingCustomEntity", "deletedCustomEntity", "previewedStatus", "previewedCustomEntity", "links"]

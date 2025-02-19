@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 
 class StagedModificationsInfo(BaseModel):
     """
     The staged modifications metadata.  # noqa: E501
     """
     count_pending: StrictInt = Field(..., alias="countPending", description="The number of staged modifications for the entity with a status of Pending for the requested asAt.")
-    href_pending: StrictStr = Field(..., alias="hrefPending", description="Link to the list staged modifications endpoint, filtered by entityType, entityUniqueId and status (= Pending).")
+    href_pending:  StrictStr = Field(...,alias="hrefPending", description="Link to the list staged modifications endpoint, filtered by entityType, entityUniqueId and status (= Pending).") 
     ids_previewed: Optional[conlist(StrictStr)] = Field(None, alias="idsPreviewed", description="An array of the ids of any StagedModifications being previewed.")
     __properties = ["countPending", "hrefPending", "idsPreviewed"]
 

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
 
@@ -33,18 +33,8 @@ class QueryInstrumentEventsRequest(BaseModel):
     portfolio_entity_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioEntityIds", description="The set of portfolios and portfolio groups to which the instrument events must belong.")
     effective_at: datetime = Field(..., alias="effectiveAt", description="The Effective date used in the valuation of the cashflows.")
     recipe_id: ResourceId = Field(..., alias="recipeId")
-    filter_instrument_events: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, alias="filterInstrumentEvents", description="Expression to filter the result set.")
+    filter_instrument_events:  Optional[StrictStr] = Field(None,alias="filterInstrumentEvents", description="Expression to filter the result set.") 
     __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "filterInstrumentEvents"]
-
-    @validator('filter_instrument_events')
-    def filter_instrument_events_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

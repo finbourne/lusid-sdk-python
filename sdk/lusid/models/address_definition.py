@@ -19,18 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class AddressDefinition(BaseModel):
     """
     AddressDefinition
     """
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the address key.")
-    type: Optional[StrictStr] = Field(None, description="The available values are: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json")
-    description: Optional[StrictStr] = Field(None, description="The description for this result.")
-    life_cycle_status: Optional[StrictStr] = Field(None, alias="lifeCycleStatus", description="What is the status of the address path. If it is not Production then it might be removed at some point in the future.  See the removal date for the likely timing of that if any.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the address key.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description for this result.") 
+    life_cycle_status:  Optional[StrictStr] = Field(None,alias="lifeCycleStatus", description="What is the status of the address path. If it is not Production then it might be removed at some point in the future.  See the removal date for the likely timing of that if any.") 
     removal_date: Optional[datetime] = Field(None, alias="removalDate", description="If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.  After that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.")
-    documentation_link: Optional[StrictStr] = Field(None, alias="documentationLink", description="Contains a link to the documentation for this AddressDefinition in KnowledgeBase.")
+    documentation_link:  Optional[StrictStr] = Field(None,alias="documentationLink", description="Contains a link to the documentation for this AddressDefinition in KnowledgeBase.") 
     __properties = ["displayName", "type", "description", "lifeCycleStatus", "removalDate", "documentationLink"]
 
     @validator('type')

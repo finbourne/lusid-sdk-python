@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.address_key_filter import AddressKeyFilter
 from lusid.models.model_options import ModelOptions
 
@@ -27,12 +27,12 @@ class VendorModelRule(BaseModel):
     """
     A rule that identifies the set of preferences to be used for a given library, model and instrument type.  There can be many such rules, though only the first found for a given combination would be used.  # noqa: E501
     """
-    supplier: StrictStr = Field(..., description="The available values are: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc")
-    model_name: constr(strict=True, max_length=128, min_length=0) = Field(..., alias="modelName", description="The vendor library model name")
-    instrument_type: constr(strict=True, max_length=32, min_length=0) = Field(..., alias="instrumentType", description="The vendor library instrument type")
-    parameters: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, description="THIS FIELD IS DEPRECATED - use ModelOptions  The set of opaque model parameters, provided as a Json object, that is a string object which will internally be converted to a dictionary of string to object.  Note that this is not intended as the final form of this object. It will be replaced with a more structured object as the set of parameters that are possible is  better understood.")
+    supplier:  StrictStr = Field(...,alias="supplier", description="The available values are: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc") 
+    model_name:  StrictStr = Field(...,alias="modelName", description="The vendor library model name") 
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The vendor library instrument type") 
+    parameters:  Optional[StrictStr] = Field(None,alias="parameters", description="THIS FIELD IS DEPRECATED - use ModelOptions  The set of opaque model parameters, provided as a Json object, that is a string object which will internally be converted to a dictionary of string to object.  Note that this is not intended as the final form of this object. It will be replaced with a more structured object as the set of parameters that are possible is  better understood.") 
     model_options: Optional[ModelOptions] = Field(None, alias="modelOptions")
-    instrument_id: Optional[StrictStr] = Field(None, alias="instrumentId", description="This field should generally not be required. It indicates a specific case where there is a particular need to make a rule apply to only a single instrument  specified by an identifier on that instrument such as its LUID. One particular example would be to control the behaviour of a look-through portfolio scaling  methodology, such as where there is a mixture of indices and credit-debit portfolios where scaling on the sum of valuation would be deemed incorrectly for one  set but desired in general.")
+    instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="This field should generally not be required. It indicates a specific case where there is a particular need to make a rule apply to only a single instrument  specified by an identifier on that instrument such as its LUID. One particular example would be to control the behaviour of a look-through portfolio scaling  methodology, such as where there is a mixture of indices and credit-debit portfolios where scaling on the sum of valuation would be deemed incorrectly for one  set but desired in general.") 
     address_key_filters: Optional[conlist(AddressKeyFilter)] = Field(None, alias="addressKeyFilters", description="Condition for model selection. If a condition is satisfied the default model for valuation is overridden (for that instrument).")
     __properties = ["supplier", "modelName", "instrumentType", "parameters", "modelOptions", "instrumentId", "addressKeyFilters"]
 

@@ -19,48 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 
 class ShareClassDetails(BaseModel):
     """
     ShareClassDetails
     """
-    lusid_instrument_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the share class' instrument identifiers")
-    instrument_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="instrumentScope", description="The scope in which the share class instrument lies.")
-    short_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="shortCode", description="The unique code within the fund for the share class instrument.")
-    dom_currency: Optional[StrictStr] = Field(None, alias="domCurrency", description="The domestic currency of the share class instrument")
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the share class' instrument identifiers") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the share class instrument lies.") 
+    short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="The unique code within the fund for the share class instrument.") 
+    dom_currency:  Optional[StrictStr] = Field(None,alias="domCurrency", description="The domestic currency of the share class instrument") 
     instrument_active: Optional[StrictBool] = Field(None, alias="instrumentActive", description="If the instrument of the share class is active.")
     __properties = ["lusidInstrumentId", "instrumentScope", "shortCode", "domCurrency", "instrumentActive"]
-
-    @validator('lusid_instrument_id')
-    def lusid_instrument_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('instrument_scope')
-    def instrument_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('short_code')
-    def short_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,25 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 
 class SetTransactionConfigurationAlias(BaseModel):
     """
     SetTransactionConfigurationAlias
     """
-    type: constr(strict=True, max_length=64, min_length=1) = Field(...)
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    transaction_class: constr(strict=True, min_length=1) = Field(..., alias="transactionClass")
-    transaction_role: constr(strict=True, min_length=1) = Field(..., alias="transactionRole")
+    type:  StrictStr = Field(...,alias="type") 
+    description:  StrictStr = Field(...,alias="description") 
+    transaction_class:  StrictStr = Field(...,alias="transactionClass") 
+    transaction_role:  StrictStr = Field(...,alias="transactionRole") 
     is_default: Optional[StrictBool] = Field(None, alias="isDefault")
     __properties = ["type", "description", "transactionClass", "transactionRole", "isDefault"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

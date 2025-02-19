@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.component_transaction import ComponentTransaction
 
 class TransactionTemplateRequest(BaseModel):
     """
     TransactionTemplateRequest
     """
-    description: constr(strict=True, max_length=100, min_length=0) = Field(..., description="The description of the transaction template.")
+    description:  StrictStr = Field(...,alias="description", description="The description of the transaction template.") 
     component_transactions: conlist(ComponentTransaction) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the template to be created.")
     __properties = ["description", "componentTransactions"]
 

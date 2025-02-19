@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.dependency_source_filter import DependencySourceFilter
 
 class SpecificHoldingPricingInfo(BaseModel):
@@ -27,7 +27,7 @@ class SpecificHoldingPricingInfo(BaseModel):
     Allows a user to specify fallbacks/overrides using Holding fields for sources that match a particular DependencySourceFilter.  # noqa: E501
     """
     dependency_source_filter: DependencySourceFilter = Field(..., alias="dependencySourceFilter")
-    field: constr(strict=True, min_length=1) = Field(..., description="The Holding field which the fallback/override should use to create a price quote.")
+    field:  StrictStr = Field(...,alias="field", description="The Holding field which the fallback/override should use to create a price quote.") 
     __properties = ["dependencySourceFilter", "field"]
 
     class Config:

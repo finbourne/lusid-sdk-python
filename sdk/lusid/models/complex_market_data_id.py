@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class ComplexMarketDataId(BaseModel):
     """
     An identifier that uniquely describes an item of complex market data such as an interest rate curve or volatility surface.  # noqa: E501
     """
-    provider: constr(strict=True, max_length=32, min_length=0) = Field(..., description="The platform or vendor that provided the complex market data, e.g. 'DataScope', 'LUSID', etc.")
-    price_source: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="priceSource", description="The source or originator of the complex market data, e.g. a bank or financial institution.")
-    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="This is obsolete. It is not used, it will not be stored, and has no effects.  If you wish to attach a Lineage to your ComplexMarketData,  you should provide it in the optional Lineage field in the ComplexMarketData class.")
-    effective_at: Optional[StrictStr] = Field(None, alias="effectiveAt", description="The effectiveAt or cut label that this item of complex market data is/was updated/inserted with.")
-    market_asset: constr(strict=True, max_length=256, min_length=0) = Field(..., alias="marketAsset", description="The name of the market entity that the document represents")
+    provider:  StrictStr = Field(...,alias="provider", description="The platform or vendor that provided the complex market data, e.g. 'DataScope', 'LUSID', etc.") 
+    price_source:  Optional[StrictStr] = Field(None,alias="priceSource", description="The source or originator of the complex market data, e.g. a bank or financial institution.") 
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="This is obsolete. It is not used, it will not be stored, and has no effects.  If you wish to attach a Lineage to your ComplexMarketData,  you should provide it in the optional Lineage field in the ComplexMarketData class.") 
+    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The effectiveAt or cut label that this item of complex market data is/was updated/inserted with.") 
+    market_asset:  StrictStr = Field(...,alias="marketAsset", description="The name of the market entity that the document represents") 
     __properties = ["provider", "priceSource", "lineage", "effectiveAt", "marketAsset"]
 
     class Config:

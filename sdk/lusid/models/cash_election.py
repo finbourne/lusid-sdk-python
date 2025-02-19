@@ -19,19 +19,19 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr 
 
 class CashElection(BaseModel):
     """
     Cash election for Events that result in a cash payment.  # noqa: E501
     """
-    election_key: constr(strict=True, min_length=1) = Field(..., alias="electionKey", description="Unique key used to identify this election.")
+    election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key used to identify this election.") 
     exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="exchangeRate", description="The exchange rate if this is not the declared CashElection.  Defaults to 1 if Election is Declared.")
     dividend_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="dividendRate", description="The payment rate for this CashElection.")
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Has this election been chosen.  Only one Election may be Chosen per Event.")
     is_declared: Optional[StrictBool] = Field(None, alias="isDeclared", description="Is this the declared CashElection.  Only one Election may be Declared per Event.")
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election the default.  Only one Election may be Default per Event")
-    dividend_currency: StrictStr = Field(..., alias="dividendCurrency", description="The payment currency for this CashElection.")
+    dividend_currency:  StrictStr = Field(...,alias="dividendCurrency", description="The payment currency for this CashElection.") 
     __properties = ["electionKey", "exchangeRate", "dividendRate", "isChosen", "isDeclared", "isDefault", "dividendCurrency"]
 
     class Config:

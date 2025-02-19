@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.performance_returns_metric import PerformanceReturnsMetric
 from lusid.models.resource_id import ResourceId
 
@@ -30,13 +30,13 @@ class AggregatedReturnsRequest(BaseModel):
     metrics: conlist(PerformanceReturnsMetric) = Field(..., description="A list of metrics to calculate in the AggregatedReturns.")
     return_ids: Optional[conlist(ResourceId)] = Field(None, alias="returnIds", description="The Scope and code of the returns.")
     recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    composite_method: Optional[StrictStr] = Field(None, alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.")
-    period: Optional[StrictStr] = Field(None, description="The type of the returns used to calculate the aggregation result: Daily/Monthly.")
-    output_frequency: Optional[StrictStr] = Field(None, alias="outputFrequency", description="The type of calculated output: Daily/Weekly/Monthly/Quarterly/Half-Yearly/Yearly.")
-    alternative_inception_date: Optional[StrictStr] = Field(None, alias="alternativeInceptionDate", description="Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.")
+    composite_method:  Optional[StrictStr] = Field(None,alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.") 
+    period:  Optional[StrictStr] = Field(None,alias="period", description="The type of the returns used to calculate the aggregation result: Daily/Monthly.") 
+    output_frequency:  Optional[StrictStr] = Field(None,alias="outputFrequency", description="The type of calculated output: Daily/Weekly/Monthly/Quarterly/Half-Yearly/Yearly.") 
+    alternative_inception_date:  Optional[StrictStr] = Field(None,alias="alternativeInceptionDate", description="Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.") 
     holiday_calendars: Optional[conlist(StrictStr)] = Field(None, alias="holidayCalendars", description="The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.")
-    currency: Optional[constr(strict=True, max_length=6000, min_length=0)] = Field(None, description="Optional - either a string or a property. If provided, the results will be converted to the specified currency")
-    run_mode: Optional[StrictStr] = Field(None, alias="runMode", description="The dates the AggregatedReturns output will be calculated: ReturnData/WeekDays/AllDays/MonthEnd. Defaults to ReturnData.")
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="Optional - either a string or a property. If provided, the results will be converted to the specified currency") 
+    run_mode:  Optional[StrictStr] = Field(None,alias="runMode", description="The dates the AggregatedReturns output will be calculated: ReturnData/WeekDays/AllDays/MonthEnd. Defaults to ReturnData.") 
     __properties = ["metrics", "returnIds", "recipeId", "compositeMethod", "period", "outputFrequency", "alternativeInceptionDate", "holidayCalendars", "currency", "runMode"]
 
     class Config:

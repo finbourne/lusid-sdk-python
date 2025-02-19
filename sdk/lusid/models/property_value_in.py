@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
 from lusid.models.match_criterion import MatchCriterion
 
 class PropertyValueIn(MatchCriterion):
     """
     A criterion that checks whether a Property Value is equal to one of the given string values  # noqa: E501
     """
-    property_key: StrictStr = Field(..., alias="propertyKey", description="The property key whose value will form the left-hand side of the operation")
+    property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key whose value will form the left-hand side of the operation") 
     value: conlist(StrictStr) = Field(..., description="The value to be compared against")
-    criterion_type: StrictStr = Field(..., alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals")
+    criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["criterionType", "propertyKey", "value"]
 

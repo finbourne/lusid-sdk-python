@@ -19,32 +19,18 @@ import json
 
 
 from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator 
 from lusid.models.match_criterion import MatchCriterion
 
 class TaxRule(BaseModel):
     """
     TaxRule
     """
-    name: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A user-friendly name")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="A description for this rule")
+    name:  StrictStr = Field(...,alias="name", description="A user-friendly name") 
+    description:  StrictStr = Field(...,alias="description", description="A description for this rule") 
     rate: Union[StrictFloat, StrictInt] = Field(..., description="The rate to be applied if all criteria are met")
     match_criteria: conlist(MatchCriterion, max_items=20) = Field(..., alias="matchCriteria", description="A set of criteria to be met for this rule to be applied")
     __properties = ["name", "description", "rate", "matchCriteria"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

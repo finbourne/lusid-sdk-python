@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 from lusid.models.order_graph_placement_allocation_synopsis import OrderGraphPlacementAllocationSynopsis
 from lusid.models.order_graph_placement_execution_synopsis import OrderGraphPlacementExecutionSynopsis
 from lusid.models.order_graph_placement_order_synopsis import OrderGraphPlacementOrderSynopsis
@@ -37,7 +37,7 @@ class OrderGraphPlacement(BaseModel):
     placed: OrderGraphPlacementPlacementSynopsis = Field(...)
     executed: OrderGraphPlacementExecutionSynopsis = Field(...)
     allocated: OrderGraphPlacementAllocationSynopsis = Field(...)
-    derived_state: constr(strict=True, min_length=1) = Field(..., alias="derivedState", description="A simple description of the overall state of a placement.")
+    derived_state:  StrictStr = Field(...,alias="derivedState", description="A simple description of the overall state of a placement.") 
     calculated_average_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculatedAveragePrice", description="Average price realised on executions for a given placement")
     __properties = ["placement", "blockId", "ordered", "placed", "executed", "allocated", "derivedState", "calculatedAveragePrice"]
 

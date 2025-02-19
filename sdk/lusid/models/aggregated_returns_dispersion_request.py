@@ -19,30 +19,20 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.resource_id import ResourceId
 
 class AggregatedReturnsDispersionRequest(BaseModel):
     """
     The request used in the AggregatedReturnsDispersionMetric.  # noqa: E501
     """
-    to_effective_at: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="toEffectiveAt", description="The end date for when the you want the dispersion to be calculated.")
+    to_effective_at:  Optional[StrictStr] = Field(None,alias="toEffectiveAt", description="The end date for when the you want the dispersion to be calculated.") 
     years_count: Optional[StrictInt] = Field(None, alias="yearsCount", description="For how many years to calculate the dispersion. Default to 10.")
     return_ids: Optional[conlist(ResourceId)] = Field(None, alias="returnIds", description="The Scope and code of the returns.")
     recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    composite_method: Optional[StrictStr] = Field(None, alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.")
-    alternative_inception_date: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="alternativeInceptionDate", description="Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.")
+    composite_method:  Optional[StrictStr] = Field(None,alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.") 
+    alternative_inception_date:  Optional[StrictStr] = Field(None,alias="alternativeInceptionDate", description="Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.") 
     __properties = ["toEffectiveAt", "yearsCount", "returnIds", "recipeId", "compositeMethod", "alternativeInceptionDate"]
-
-    @validator('to_effective_at')
-    def to_effective_at_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_\+:\.]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_\+:\.]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

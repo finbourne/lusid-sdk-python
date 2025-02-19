@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist, constr 
 from lusid.models.resource_id import ResourceId
 
 class DataModelSummary(BaseModel):
@@ -27,10 +27,10 @@ class DataModelSummary(BaseModel):
     DataModelSummary
     """
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the Custom Data Model.")
-    description: constr(strict=True, min_length=1) = Field(..., description="A description for the Custom Data Model.")
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The entity type that the Custom Data Model binds to.")
-    type: constr(strict=True, min_length=1) = Field(..., description="Either Root or Leaf or Intermediate.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
+    description:  StrictStr = Field(...,alias="description", description="A description for the Custom Data Model.") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The entity type that the Custom Data Model binds to.") 
+    type:  StrictStr = Field(...,alias="type", description="Either Root or Leaf or Intermediate.") 
     precedence: StrictInt = Field(..., description="Where in the hierarchy this model sits.")
     children: conlist(DataModelSummary) = Field(..., description="Child Custom Data Models that will inherit from this data model.")
     __properties = ["id", "displayName", "description", "entityType", "type", "precedence", "children"]

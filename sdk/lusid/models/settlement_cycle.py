@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conint, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conint, conlist 
 from lusid.models.resource_id import ResourceId
 
 class SettlementCycle(BaseModel):

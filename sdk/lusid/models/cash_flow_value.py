@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.result_value import ResultValue
 from lusid.models.result_value_dictionary import ResultValueDictionary
@@ -32,8 +32,8 @@ class CashFlowValue(ResultValue):
     diagnostics: Optional[ResultValueDictionary] = None
     cash_flow_lineage: Optional[CashFlowLineage] = Field(None, alias="cashFlowLineage")
     payment_amount: Union[StrictFloat, StrictInt] = Field(..., alias="paymentAmount", description="The amount paid or received")
-    payment_ccy: StrictStr = Field(..., alias="paymentCcy", description="The currency of the transaction")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    payment_ccy:  StrictStr = Field(...,alias="paymentCcy", description="The currency of the transaction") 
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "paymentDate", "diagnostics", "cashFlowLineage", "paymentAmount", "paymentCcy"]
 

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class CreateAddressKeyDefinitionRequest(BaseModel):
     """
     CreateAddressKeyDefinitionRequest
     """
-    address_key: StrictStr = Field(..., alias="addressKey", description="The address key of the address key definition.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the address key definition")
+    address_key:  StrictStr = Field(...,alias="addressKey", description="The address key of the address key definition.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the address key definition") 
     __properties = ["addressKey", "type"]
 
     class Config:

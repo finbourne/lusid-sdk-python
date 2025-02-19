@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.model_options import ModelOptions
 
 class OpaqueModelOptions(ModelOptions):
@@ -27,7 +27,7 @@ class OpaqueModelOptions(ModelOptions):
     OpaqueModelOptions
     """
     data: Dict[str, Dict[str, Any]] = Field(...)
-    model_options_type: StrictStr = Field(..., alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions")
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "data"]
 

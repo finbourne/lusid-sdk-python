@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
 from lusid.models.resource_id import ResourceId
@@ -29,8 +29,8 @@ class CreateGroupReconciliationComparisonRulesetRequest(BaseModel):
     CreateGroupReconciliationComparisonRulesetRequest
     """
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the ruleset")
-    reconciliation_type: constr(strict=True, min_length=1) = Field(..., alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the ruleset") 
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
     core_attribute_rules: conlist(GroupReconciliationCoreAttributeRule, min_items=1) = Field(..., alias="coreAttributeRules", description="The core comparison rules")
     aggregate_attribute_rules: conlist(GroupReconciliationAggregateAttributeRule, min_items=1) = Field(..., alias="aggregateAttributeRules", description="The aggregate comparison rules")
     __properties = ["id", "displayName", "reconciliationType", "coreAttributeRules", "aggregateAttributeRules"]

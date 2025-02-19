@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class NewInstrument(BaseModel):
     """
     Set of identifiers of an existing instrument that will be the subject or distribution of a corporate action.  # noqa: E501
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers.")
-    lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies, resolved from the instrument identifiers.")
-    dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency of the instrument, resolved from the instrument identifiers.")
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies, resolved from the instrument identifiers.") 
+    dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="The domestic currency of the instrument, resolved from the instrument identifiers.") 
     __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "domCcy"]
 
     class Config:

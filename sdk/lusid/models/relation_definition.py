@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -30,13 +30,13 @@ class RelationDefinition(BaseModel):
     """
     version: Optional[Version] = None
     relation_definition_id: Optional[ResourceId] = Field(None, alias="relationDefinitionId")
-    source_entity_domain: Optional[StrictStr] = Field(None, alias="sourceEntityDomain", description="The entity domain of the source entity object.")
-    target_entity_domain: Optional[StrictStr] = Field(None, alias="targetEntityDomain", description="The entity domain of the target entity object.")
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the relation.")
-    outward_description: Optional[StrictStr] = Field(None, alias="outwardDescription", description="The description to relate source entity object and target entity object")
-    inward_description: Optional[StrictStr] = Field(None, alias="inwardDescription", description="The description to relate target entity object and source entity object")
-    life_time: Optional[StrictStr] = Field(None, alias="lifeTime", description="Describes how the relations can change over time, allowed values are \"Perpetual\" and \"TimeVariant\"")
-    constraint_style: Optional[StrictStr] = Field(None, alias="constraintStyle", description="Describes the uniqueness and cardinality for relations with a specific source entity object and relations under this definition. Allowed values are \"Property\" and \"Collection\", defaults to \"Collection\" if not specified.")
+    source_entity_domain:  Optional[StrictStr] = Field(None,alias="sourceEntityDomain", description="The entity domain of the source entity object.") 
+    target_entity_domain:  Optional[StrictStr] = Field(None,alias="targetEntityDomain", description="The entity domain of the target entity object.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the relation.") 
+    outward_description:  Optional[StrictStr] = Field(None,alias="outwardDescription", description="The description to relate source entity object and target entity object") 
+    inward_description:  Optional[StrictStr] = Field(None,alias="inwardDescription", description="The description to relate target entity object and source entity object") 
+    life_time:  Optional[StrictStr] = Field(None,alias="lifeTime", description="Describes how the relations can change over time, allowed values are \"Perpetual\" and \"TimeVariant\"") 
+    constraint_style:  Optional[StrictStr] = Field(None,alias="constraintStyle", description="Describes the uniqueness and cardinality for relations with a specific source entity object and relations under this definition. Allowed values are \"Property\" and \"Collection\", defaults to \"Collection\" if not specified.") 
     links: Optional[conlist(Link)] = None
     __properties = ["version", "relationDefinitionId", "sourceEntityDomain", "targetEntityDomain", "displayName", "outwardDescription", "inwardDescription", "lifeTime", "constraintStyle", "links"]
 

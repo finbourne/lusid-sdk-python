@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -30,10 +30,10 @@ class LegalEntity(BaseModel):
     """
     Representation of Legal Entity on LUSID API  # noqa: E501
     """
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the Legal Entity")
-    description: Optional[StrictStr] = Field(None, description="The description of the Legal Entity")
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    lusid_legal_entity_id: Optional[StrictStr] = Field(None, alias="lusidLegalEntityId", description="The unique LUSID Legal Entity Identifier of the Legal Entity.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the Legal Entity") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Legal Entity") 
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    lusid_legal_entity_id:  Optional[StrictStr] = Field(None,alias="lusidLegalEntityId", description="The unique LUSID Legal Entity Identifier of the Legal Entity.") 
     identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Legal Entity.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Legal Entity.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Legal Entity.")

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class ComparisonAttributeValuePair(BaseModel):
     """
     ComparisonAttributeValuePair
     """
-    attribute_name: constr(strict=True, min_length=1) = Field(..., alias="attributeName", description="Comparison rule attribute name.")
-    value: Optional[StrictStr] = Field(None, description="Computed value for the comparison rule attribute.")
+    attribute_name:  StrictStr = Field(...,alias="attributeName", description="Comparison rule attribute name.") 
+    value:  Optional[StrictStr] = Field(None,alias="value", description="Computed value for the comparison rule attribute.") 
     __properties = ["attributeName", "value"]
 
     class Config:

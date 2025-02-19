@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.lusid_instrument import LusidInstrument
@@ -34,19 +34,19 @@ class Instrument(BaseModel):
     """
     A list of instruments.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    scope: Optional[StrictStr] = Field(None, description="The scope in which the instrument lies.")
-    lusid_instrument_id: constr(strict=True, min_length=1) = Field(..., alias="lusidInstrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the instrument lies.") 
+    lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.") 
     version: Version = Field(...)
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    name: constr(strict=True, min_length=1) = Field(..., description="The name of the instrument.")
+    name:  StrictStr = Field(...,alias="name", description="The name of the instrument.") 
     identifiers: Dict[str, StrictStr] = Field(..., description="The set of identifiers that can be used to identify the instrument.")
     properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested instrument properties. These will be from the 'Instrument' domain.")
     lookthrough_portfolio: Optional[ResourceId] = Field(None, alias="lookthroughPortfolio")
     instrument_definition: Optional[LusidInstrument] = Field(None, alias="instrumentDefinition")
-    state: StrictStr = Field(..., description="The state of of the instrument at the asAt datetime of this version of the instrument definition. The available values are: Active, Inactive, Deleted")
-    asset_class: Optional[StrictStr] = Field(None, alias="assetClass", description="The nominal asset class of the instrument, e.g. InterestRates, FX, Inflation, Equities, Credit, Commodities, etc. The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown")
-    dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.")
+    state:  StrictStr = Field(...,alias="state", description="The state of of the instrument at the asAt datetime of this version of the instrument definition. The available values are: Active, Inactive, Deleted") 
+    asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="The nominal asset class of the instrument, e.g. InterestRates, FX, Inflation, Equities, Credit, Commodities, etc. The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown") 
+    dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.") 
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the instrument.")
     settlement_cycle: Optional[SettlementCycle] = Field(None, alias="settlementCycle")
     data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")

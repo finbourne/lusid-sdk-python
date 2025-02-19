@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.posting_module_rule import PostingModuleRule
 from lusid.models.version import Version
@@ -30,7 +30,7 @@ class PostingModuleRulesUpdatedResponse(BaseModel):
     """
     rules: Optional[conlist(PostingModuleRule)] = Field(None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
     version: Optional[Version] = None
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     links: Optional[conlist(Link)] = None
     __properties = ["rules", "version", "href", "links"]
 

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conint, conlist, constr, validator 
 from lusid.models.day_month import DayMonth
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.link import Link
@@ -31,14 +31,14 @@ class Fund(BaseModel):
     """
     A Fund entity.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     fund_configuration_id: Optional[ResourceId] = Field(None, alias="fundConfigurationId")
     abor_id: ResourceId = Field(..., alias="aborId")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of fund; 'Standalone', 'Master' or 'Feeder'")
+    type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
     decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
     year_end_date: DayMonth = Field(..., alias="yearEndDate")
@@ -46,16 +46,6 @@ class Fund(BaseModel):
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["href", "id", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties", "version", "links"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,25 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class DateOrDiaryEntry(BaseModel):
     """
     DateOrDiaryEntry
     """
-    var_date: Optional[StrictStr] = Field(None, alias="date", description="A date. If specified, DiaryEntry must not be specified.")
-    diary_entry: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="diaryEntry", description="The code of a diary entry. If specified, Date must not be specified.")
+    var_date:  Optional[StrictStr] = Field(None,alias="date", description="A date. If specified, DiaryEntry must not be specified.") 
+    diary_entry:  Optional[StrictStr] = Field(None,alias="diaryEntry", description="The code of a diary entry. If specified, Date must not be specified.") 
     __properties = ["date", "diaryEntry"]
-
-    @validator('diary_entry')
-    def diary_entry_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

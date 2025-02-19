@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -29,10 +29,10 @@ class FeeType(BaseModel):
     """
     FeeType
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name of the fee type.")
-    description: constr(strict=True, min_length=1) = Field(..., description="The description of the fee type.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the fee type.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the fee type.") 
     component_transactions: conlist(ComponentTransaction) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None

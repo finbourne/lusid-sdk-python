@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
 
 class Client(BaseModel):
     """
     Client
     """
-    name: Optional[StrictStr] = None
+    name:  Optional[StrictStr] = Field(None,alias="name") 
     __properties = ["name"]
 
     class Config:

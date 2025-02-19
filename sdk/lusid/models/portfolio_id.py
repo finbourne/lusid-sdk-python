@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
 from lusid.models.data_scope import DataScope
 
 class PortfolioId(BaseModel):
@@ -27,7 +27,7 @@ class PortfolioId(BaseModel):
     PortfolioId
     """
     scope: Optional[DataScope] = None
-    identifier: Optional[StrictStr] = None
+    identifier:  Optional[StrictStr] = Field(None,alias="identifier") 
     __properties = ["scope", "identifier"]
 
     class Config:

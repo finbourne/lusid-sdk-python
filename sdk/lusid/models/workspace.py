@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -27,8 +27,8 @@ class Workspace(BaseModel):
     """
     A workspace.  # noqa: E501
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="A workspace's name.")
-    description: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="A friendly description for the workspace.")
+    name:  StrictStr = Field(...,alias="name", description="A workspace's name.") 
+    description:  StrictStr = Field(...,alias="description", description="A friendly description for the workspace.") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["name", "description", "version", "links"]

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.trade_ticket import TradeTicket
 
 class TranslateTradeTicketRequest(BaseModel):
@@ -27,15 +27,8 @@ class TranslateTradeTicketRequest(BaseModel):
     A collection of instruments to translate, along with the target dialect to translate into.  # noqa: E501
     """
     tickets: Dict[str, TradeTicket] = Field(..., description="The collection of trade tickets to translate.                Each trade ticket should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.")
-    dialect: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The target dialect that the given instruments should be translated to.")
+    dialect:  StrictStr = Field(...,alias="dialect", description="The target dialect that the given instruments should be translated to.") 
     __properties = ["tickets", "dialect"]
-
-    @validator('dialect')
-    def dialect_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

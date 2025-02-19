@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.get_cds_flow_conventions_response import GetCdsFlowConventionsResponse
 from lusid.models.link import Link
 
@@ -28,10 +28,10 @@ class ResourceListOfGetCdsFlowConventionsResponse(BaseModel):
     ResourceListOfGetCdsFlowConventionsResponse
     """
     values: conlist(GetCdsFlowConventionsResponse) = Field(...)
-    href: Optional[StrictStr] = None
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     links: Optional[conlist(Link)] = None
-    next_page: Optional[StrictStr] = Field(None, alias="nextPage")
-    previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
+    next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
+    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
     __properties = ["values", "href", "links", "nextPage", "previousPage"]
 
     class Config:

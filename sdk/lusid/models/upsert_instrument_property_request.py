@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.model_property import ModelProperty
 
 class UpsertInstrumentPropertyRequest(BaseModel):
     """
     UpsertInstrumentPropertyRequest
     """
-    identifier_type: constr(strict=True, min_length=1) = Field(..., alias="identifierType", description="The unique identifier type to search for the instrument, for example 'Figi'.")
-    identifier: constr(strict=True, min_length=1) = Field(..., description="A value of that type to identify the instrument to upsert properties for, for example 'BBG000BLNNV0'.")
+    identifier_type:  StrictStr = Field(...,alias="identifierType", description="The unique identifier type to search for the instrument, for example 'Figi'.") 
+    identifier:  StrictStr = Field(...,alias="identifier", description="A value of that type to identify the instrument to upsert properties for, for example 'BBG000BLNNV0'.") 
     properties: Optional[conlist(ModelProperty)] = Field(None, description="A set of instrument properties and associated values to store for the instrument. Each property must be from the 'Instrument' domain.")
     __properties = ["identifierType", "identifier", "properties"]
 

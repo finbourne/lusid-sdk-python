@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, constr 
 
 class TransactionPriceAndType(BaseModel):
     """
     TransactionPriceAndType
     """
-    price: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
-    type: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    price:  Optional[StrictStr] = Field(None,alias="price") 
+    type:  Optional[StrictStr] = Field(None,alias="type") 
     __properties = ["price", "type"]
 
     class Config:

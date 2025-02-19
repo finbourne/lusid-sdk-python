@@ -19,37 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class UpdateRelationshipDefinitionRequest(BaseModel):
     """
     UpdateRelationshipDefinitionRequest
     """
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the relation.")
-    outward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="outwardDescription", description="The description to relate source entity object and target entity object.")
-    inward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="inwardDescription", description="The description to relate target entity object and source entity object.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relation.") 
+    outward_description:  StrictStr = Field(...,alias="outwardDescription", description="The description to relate source entity object and target entity object.") 
+    inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object.") 
     __properties = ["displayName", "outwardDescription", "inwardDescription"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('outward_description')
-    def outward_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('inward_description')
-    def inward_description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

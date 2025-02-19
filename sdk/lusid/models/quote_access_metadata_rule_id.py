@@ -19,39 +19,19 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class QuoteAccessMetadataRuleId(BaseModel):
     """
     An identifier that uniquely identifies a set of Quote access control metadata.  # noqa: E501
     """
-    provider: Optional[constr(strict=True, max_length=100, min_length=0)] = Field(None, description="The platform or vendor that provided the quote. The available values are: Client, DataScope, Lusid, Edi, TraderMade, FactSet, SIX, Bloomberg, Rimes, ICE, LSEG")
-    price_source: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="priceSource", description="The source or originator of the quote, e.g. a bank or financial institution.")
-    instrument_id: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="instrumentId", description="The value of the instrument identifier that uniquely identifies the instrument that the quote is for, e.g. 'BBG00JX0P539'.")
-    instrument_id_type: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="instrumentIdType", description="The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'.")
-    quote_type: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="quoteType", description="The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used.")
-    field: Optional[constr(strict=True, max_length=2048, min_length=0)] = Field(None, description="The field of the quote e.g. bid, mid, ask etc. This should be consistent across a time series of quotes. The allowed values depend on the provider according to the following rules: Client : *Any value is accepted*; DataScope : 'bid', 'mid', 'ask'; Lusid : *Any value is accepted*; Edi : 'bid', 'mid', 'ask', 'open', 'close', 'last'; TraderMade : 'bid', 'mid', 'ask', 'open', 'close', 'high', 'low'; FactSet : 'bid', 'mid', 'ask', 'open', 'close'; SIX : 'bid', 'mid', 'ask', 'open', 'close', 'last', 'referencePrice', 'highPrice', 'lowPrice', 'maxRedemptionPrice', 'maxSubscriptionPrice', 'openPrice', 'bestBidPrice', 'lastBidPrice', 'bestAskPrice', 'lastAskPrice', 'finalSettlementOptions', 'finalSettlementFutures'; Bloomberg : 'bid', 'mid', 'ask', 'open', 'close', 'last'; Rimes : 'bid', 'mid', 'ask', 'open', 'close', 'last'; ICE : 'ask', 'bid'; LSEG : 'ASK', 'BID', 'MID_PRICE'")
+    provider:  Optional[StrictStr] = Field(None,alias="provider", description="The platform or vendor that provided the quote. The available values are: Client, DataScope, Lusid, Edi, TraderMade, FactSet, SIX, Bloomberg, Rimes, ICE, LSEG") 
+    price_source:  Optional[StrictStr] = Field(None,alias="priceSource", description="The source or originator of the quote, e.g. a bank or financial institution.") 
+    instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The value of the instrument identifier that uniquely identifies the instrument that the quote is for, e.g. 'BBG00JX0P539'.") 
+    instrument_id_type:  Optional[StrictStr] = Field(None,alias="instrumentIdType", description="The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'.") 
+    quote_type:  Optional[StrictStr] = Field(None,alias="quoteType", description="The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used.") 
+    field:  Optional[StrictStr] = Field(None,alias="field", description="The field of the quote e.g. bid, mid, ask etc. This should be consistent across a time series of quotes. The allowed values depend on the provider according to the following rules: Client : *Any value is accepted*; DataScope : 'bid', 'mid', 'ask'; Lusid : *Any value is accepted*; Edi : 'bid', 'mid', 'ask', 'open', 'close', 'last'; TraderMade : 'bid', 'mid', 'ask', 'open', 'close', 'high', 'low'; FactSet : 'bid', 'mid', 'ask', 'open', 'close'; SIX : 'bid', 'mid', 'ask', 'open', 'close', 'last', 'referencePrice', 'highPrice', 'lowPrice', 'maxRedemptionPrice', 'maxSubscriptionPrice', 'openPrice', 'bestBidPrice', 'lastBidPrice', 'bestAskPrice', 'lastAskPrice', 'finalSettlementOptions', 'finalSettlementFutures'; Bloomberg : 'bid', 'mid', 'ask', 'open', 'close', 'last'; Rimes : 'bid', 'mid', 'ask', 'open', 'close', 'last'; ICE : 'ask', 'bid'; LSEG : 'ASK', 'BID', 'MID_PRICE'") 
     __properties = ["provider", "priceSource", "instrumentId", "instrumentIdType", "quoteType", "field"]
-
-    @validator('instrument_id_type')
-    def instrument_id_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z]*$/")
-        return value
-
-    @validator('quote_type')
-    def quote_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,29 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class CreditRating(BaseModel):
     """
     Object describing a credit rating,  which assesses the stability and credit worthiness of a legal entity  and hence its likelihood of defaulting on its outstanding obligations (typically debt).  # noqa: E501
     """
-    rating_source: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="ratingSource", description="The provider of the credit rating, which will typically be an agency such as Moody's or Standard and Poor.")
-    rating: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The credit rating provided by the rating source. This would expected to be consistent with the rating scheme of that agency/source.")
+    rating_source:  StrictStr = Field(...,alias="ratingSource", description="The provider of the credit rating, which will typically be an agency such as Moody's or Standard and Poor.") 
+    rating:  StrictStr = Field(...,alias="rating", description="The credit rating provided by the rating source. This would expected to be consistent with the rating scheme of that agency/source.") 
     __properties = ["ratingSource", "rating"]
-
-    @validator('rating_source')
-    def rating_source_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('rating')
-    def rating_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-+\/]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-+\/]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

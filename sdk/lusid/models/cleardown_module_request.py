@@ -19,42 +19,18 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.cleardown_module_rule import CleardownModuleRule
 
 class CleardownModuleRequest(BaseModel):
     """
     A Cleardown Module request definition  # noqa: E501
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the Cleardown Module.")
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the Cleardown Module.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Cleardown Module.")
+    code:  StrictStr = Field(...,alias="code", description="The code of the Cleardown Module.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Cleardown Module.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Cleardown Module.") 
     rules: Optional[conlist(CleardownModuleRule)] = Field(None, description="The Cleardown Rules that apply for the Cleardown Module. Rules are evaluated in the order they occur in this collection.")
     __properties = ["code", "displayName", "description", "rules"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

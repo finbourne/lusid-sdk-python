@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 
@@ -27,32 +27,15 @@ class AborConfigurationRequest(BaseModel):
     """
     The request used to create an AborConfiguration.  # noqa: E501
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Abor Configuration.")
-    display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Abor Configuration.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Abor Configuration.")
+    code:  StrictStr = Field(...,alias="code", description="The code given for the Abor Configuration.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Abor Configuration.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Abor Configuration.") 
     recipe_id: ResourceId = Field(..., alias="recipeId")
     chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
     posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes", description="The Posting Module Codes from which the rules to be applied are retrieved.")
     cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes", description="The Cleardown Module Codes from which the rules to be applied are retrieved.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor Configuration.")
     __properties = ["code", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "properties"]
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

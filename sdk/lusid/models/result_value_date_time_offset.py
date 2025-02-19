@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictInt, StrictStr, validator 
 from lusid.models.result_value import ResultValue
 
 class ResultValueDateTimeOffset(ResultValue):
@@ -28,7 +28,7 @@ class ResultValueDateTimeOffset(ResultValue):
     """
     value: Optional[datetime] = Field(None, description="The value itself")
     dimension: Optional[StrictInt] = Field(None, description="The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be  populate by the user on upsertion.")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "value", "dimension"]
 

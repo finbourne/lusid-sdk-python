@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.lusid_unique_id import LusidUniqueId
 from lusid.models.model_property import ModelProperty
@@ -28,14 +28,14 @@ class RelatedEntity(BaseModel):
     """
     Information about the other related entity in the relationship  # noqa: E501
     """
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The type of the entity.")
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity.") 
     entity_id: Dict[str, StrictStr] = Field(..., alias="entityId", description="The identifier of the other related entity in the relationship. It contains 'scope' and 'code' as keys for identifiers of a Portfolio or Portfolio Group, or 'idTypeScope', 'idTypeCode', 'code' as keys for identifiers of a Person or Legal entity, or 'scope', 'identifierType', 'identifierValue' as keys for identifiers of an Instrument")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the entity.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the entity.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties of the entity. This field is empty until further notice.")
-    scope: Optional[StrictStr] = Field(None, description="The scope of the identifier")
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the identifier") 
     lusid_unique_id: Optional[LusidUniqueId] = Field(None, alias="lusidUniqueId")
     identifiers: conlist(EntityIdentifier) = Field(..., description="The identifiers of the related entity in the relationship.")
-    href: Optional[StrictStr] = Field(None, description="The link to the entity.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The link to the entity.") 
     __properties = ["entityType", "entityId", "displayName", "properties", "scope", "lusidUniqueId", "identifiers", "href"]
 
     class Config:

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class StagingRuleMatchCriteria(BaseModel):
     """
     StagingRuleMatchCriteria
     """
     action_in: Optional[conlist(StrictStr)] = Field(None, alias="actionIn")
-    requesting_user: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, alias="requestingUser")
-    entity_attributes: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, alias="entityAttributes")
+    requesting_user:  Optional[StrictStr] = Field(None,alias="requestingUser") 
+    entity_attributes:  Optional[StrictStr] = Field(None,alias="entityAttributes") 
     changed_attribute_name_in: Optional[conlist(StrictStr)] = Field(None, alias="changedAttributeNameIn")
     __properties = ["actionIn", "requestingUser", "entityAttributes", "changedAttributeNameIn"]
 

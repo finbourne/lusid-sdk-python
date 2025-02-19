@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.recipe_value import RecipeValue
 
 class RecipeBlock(BaseModel):
@@ -27,8 +27,8 @@ class RecipeBlock(BaseModel):
     An atomic operation used in Recipe composer to compose a Configuration Recipe  # noqa: E501
     """
     value: Optional[RecipeValue] = None
-    path: Optional[StrictStr] = Field(None, description="Path of the Value that the operation is to be performed on.")
-    op: Optional[StrictStr] = Field(None, description="Operation to be performed on the part of the value.")
+    path:  Optional[StrictStr] = Field(None,alias="path", description="Path of the Value that the operation is to be performed on.") 
+    op:  Optional[StrictStr] = Field(None,alias="op", description="Operation to be performed on the part of the value.") 
     __properties = ["value", "path", "op"]
 
     class Config:

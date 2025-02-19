@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 
@@ -27,13 +27,13 @@ class ValuationPointOverview(BaseModel):
     """
     ValuationPointOverview
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    diary_entry_code: StrictStr = Field(..., alias="diaryEntryCode", description="The code for the Valuation Point.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="The code for the Valuation Point.") 
     effective_from: datetime = Field(..., alias="effectiveFrom", description="The effective time of the last Valuation Point.")
     effective_to: datetime = Field(..., alias="effectiveTo", description="The effective time of the current Valuation Point.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the Valuation Point. Defaults to latest.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the diary entry. This is 'ValuationPoint'.")
-    status: constr(strict=True, min_length=1) = Field(..., description="The status of the Valuation Point. Can be 'Estimate', 'Candidate' or 'Final'.")
+    type:  StrictStr = Field(...,alias="type", description="The type of the diary entry. This is 'ValuationPoint'.") 
+    status:  StrictStr = Field(...,alias="status", description="The status of the Valuation Point. Can be 'Estimate', 'Candidate' or 'Final'.") 
     gav: Union[StrictFloat, StrictInt] = Field(..., description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
     nav: Union[StrictFloat, StrictInt] = Field(..., description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")

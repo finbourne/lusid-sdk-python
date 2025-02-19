@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -29,11 +29,11 @@ class UpsertComplianceRuleRequest(BaseModel):
     UpsertComplianceRuleRequest
     """
     id: ResourceId = Field(...)
-    name: Optional[constr(strict=True, max_length=6000, min_length=0)] = None
-    description: Optional[constr(strict=True, max_length=6000, min_length=0)] = None
+    name:  Optional[StrictStr] = Field(None,alias="name") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     active: StrictBool = Field(...)
     template_id: ResourceId = Field(..., alias="templateId")
-    variation: constr(strict=True, max_length=256, min_length=1) = Field(...)
+    variation:  StrictStr = Field(...,alias="variation") 
     portfolio_group_id: ResourceId = Field(..., alias="portfolioGroupId")
     parameters: Dict[str, ComplianceParameter] = Field(...)
     properties: Dict[str, PerpetualProperty] = Field(...)

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class PerformanceReturn(BaseModel):
     """
@@ -29,7 +29,7 @@ class PerformanceReturn(BaseModel):
     rate_of_return: Union[StrictFloat, StrictInt] = Field(..., alias="rateOfReturn", description="The return number.")
     opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openingMarketValue", description="The opening market value.")
     closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closingMarketValue", description="The closing market value.")
-    period: Optional[StrictStr] = Field(None, description="Upsert the returns on a Daily or Monthly period. Defaults to Daily.")
+    period:  Optional[StrictStr] = Field(None,alias="period", description="Upsert the returns on a Daily or Monthly period. Defaults to Daily.") 
     __properties = ["effectiveAt", "rateOfReturn", "openingMarketValue", "closingMarketValue", "period"]
 
     class Config:

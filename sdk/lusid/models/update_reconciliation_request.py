@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 from lusid.models.model_property import ModelProperty
 from lusid.models.reconciliation_configuration import ReconciliationConfiguration
 from lusid.models.reconciliation_transactions import ReconciliationTransactions
@@ -29,8 +29,8 @@ class UpdateReconciliationRequest(BaseModel):
     """
     UpdateReconciliationRequest
     """
-    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The name of the scheduled reconciliation")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description of the scheduled reconciliation")
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the scheduled reconciliation") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the scheduled reconciliation") 
     is_portfolio_group: Optional[StrictBool] = Field(None, alias="isPortfolioGroup", description="Specifies whether reconciliation is between portfolios or portfolio groups")
     left: Optional[ResourceId] = None
     right: Optional[ResourceId] = None

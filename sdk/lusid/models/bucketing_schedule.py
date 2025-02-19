@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class BucketingSchedule(BaseModel):
     """
     A schedule for dates  # noqa: E501
     """
-    tenor: Optional[StrictStr] = Field(None, description="Rolling tenor")
+    tenor:  Optional[StrictStr] = Field(None,alias="tenor", description="Rolling tenor") 
     __properties = ["tenor"]
 
     class Config:

@@ -19,38 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator 
 
 class InstrumentResolutionDetail(BaseModel):
     """
     InstrumentResolutionDetail
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
-    lusid_instrument_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers")
-    instrument_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies.")
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
     launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="launchPrice", description="The launch price set when a shareclass is added to the fund. Defaults to 1.")
     launch_date: Optional[datetime] = Field(None, alias="launchDate", description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.")
     __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "launchPrice", "launchDate"]
-
-    @validator('lusid_instrument_id')
-    def lusid_instrument_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('instrument_scope')
-    def instrument_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

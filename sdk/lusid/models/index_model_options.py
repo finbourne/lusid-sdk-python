@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.model_options import ModelOptions
 
 class IndexModelOptions(ModelOptions):
     """
     IndexModelOptions
     """
-    portfolio_scaling: StrictStr = Field(..., alias="portfolioScaling", description="The available values are: Sum, AbsoluteSum, Unity")
-    model_options_type: StrictStr = Field(..., alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions")
+    portfolio_scaling:  StrictStr = Field(...,alias="portfolioScaling", description="The available values are: Sum, AbsoluteSum, Unity") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "portfolioScaling"]
 

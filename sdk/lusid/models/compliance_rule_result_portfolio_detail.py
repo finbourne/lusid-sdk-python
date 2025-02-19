@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleResultPortfolioDetail(BaseModel):
@@ -27,7 +27,7 @@ class ComplianceRuleResultPortfolioDetail(BaseModel):
     ComplianceRuleResultPortfolioDetail
     """
     id: ResourceId = Field(...)
-    name: constr(strict=True, min_length=1) = Field(...)
+    name:  StrictStr = Field(...,alias="name") 
     __properties = ["id", "name"]
 
     class Config:

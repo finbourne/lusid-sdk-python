@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.model_selection import ModelSelection
 from lusid.models.pricing_options import PricingOptions
@@ -35,7 +35,7 @@ class PricingContext(BaseModel):
     options: Optional[PricingOptions] = None
     result_data_rules: Optional[conlist(ResultKeyRule)] = Field(None, alias="resultDataRules", description="Set of rules that control querying of unit results either for direct queries into aggregation or for  overriding intermediate calculations. For example, a dirty price is made up from a clean price and the accrued interest.  One might consider overriding the accrued interest calculated by a model (perhaps one wants to match an external value or simply disagrees with the  calculated result) and use that in calculation of the dirty price.")
     holding_pricing_info: Optional[HoldingPricingInfo] = Field(None, alias="holdingPricingInfo")
-    accrual_definition: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="accrualDefinition", description="Determines which method to use for the calculation of accrued interest. Defaults to SOD.")
+    accrual_definition:  Optional[StrictStr] = Field(None,alias="accrualDefinition", description="Determines which method to use for the calculation of accrued interest. Defaults to SOD.") 
     __properties = ["modelRules", "modelChoice", "options", "resultDataRules", "holdingPricingInfo", "accrualDefinition"]
 
     class Config:

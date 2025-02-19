@@ -19,48 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class UpdateIdentifierDefinitionRequest(BaseModel):
     """
     UpdateIdentifierDefinitionRequest
     """
-    hierarchy_level: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="hierarchyLevel", description="Optional metadata associated with the identifier definition.")
-    display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="A display name for the identifier. E.g. Figi.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="An optional description for the identifier.")
+    hierarchy_level:  Optional[StrictStr] = Field(None,alias="hierarchyLevel", description="Optional metadata associated with the identifier definition.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="A display name for the identifier. E.g. Figi.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the identifier.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the identifier definition.")
     __properties = ["hierarchyLevel", "displayName", "description", "properties"]
-
-    @validator('hierarchy_level')
-    def hierarchy_level_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

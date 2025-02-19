@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.resource_id import ResourceId
 
 class AggregatedReturn(BaseModel):
@@ -31,7 +31,7 @@ class AggregatedReturn(BaseModel):
     opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openingMarketValue", description="The opening market value.")
     closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closingMarketValue", description="The closing market value.")
     metrics_value: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="metricsValue", description="The value for the specified metric.")
-    frequency: Optional[StrictStr] = Field(None, description="Show the aggregated output returns on a Daily or Monthly period.")
+    frequency:  Optional[StrictStr] = Field(None,alias="frequency", description="Show the aggregated output returns on a Daily or Monthly period.") 
     composite_members: Optional[StrictInt] = Field(None, alias="compositeMembers", description="The number of members in the Composite on the given day.")
     composite_members_without_return: Optional[conlist(ResourceId)] = Field(None, alias="compositeMembersWithoutReturn", description="List containing Composite members which post no return on the given day.")
     warnings: Optional[conlist(StrictStr)] = Field(None, description="List of the warnings about the calculation of the aggregated return.")

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.link import Link
 from lusid.models.reference_data import ReferenceData
@@ -31,17 +31,17 @@ class DataType(BaseModel):
     """
     DataType
     """
-    type_value_range: StrictStr = Field(..., alias="typeValueRange", description="The available values are: Open, Closed")
+    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="The available values are: Open, Closed") 
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName")
-    description: constr(strict=True, min_length=1) = Field(...)
-    value_type: StrictStr = Field(..., alias="valueType", description="The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText")
+    display_name:  StrictStr = Field(...,alias="displayName") 
+    description:  StrictStr = Field(...,alias="description") 
+    value_type:  StrictStr = Field(...,alias="valueType", description="The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
     acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues")
-    unit_schema: Optional[StrictStr] = Field(None, alias="unitSchema", description="The available values are: NoUnits, Basic, Iso4217Currency")
+    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The available values are: NoUnits, Basic, Iso4217Currency") 
     acceptable_units: Optional[conlist(IUnitDefinitionDto)] = Field(None, alias="acceptableUnits")
     reference_data: Optional[ReferenceData] = Field(None, alias="referenceData")
     version: Optional[Version] = None
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
     __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "href", "stagedModifications", "links"]

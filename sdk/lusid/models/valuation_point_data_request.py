@@ -19,21 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class ValuationPointDataRequest(BaseModel):
     """
     The ValuationPointDataRequest.  # noqa: E501
     """
-    diary_entry_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="diaryEntryCode", description="Unique code for the Valuation Point.")
+    diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="Unique code for the Valuation Point.") 
     __properties = ["diaryEntryCode"]
-
-    @validator('diary_entry_code')
-    def diary_entry_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

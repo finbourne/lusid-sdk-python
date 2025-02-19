@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.quote_series_id import QuoteSeriesId
 
 class QuoteId(BaseModel):
@@ -27,7 +27,7 @@ class QuoteId(BaseModel):
     The unique identifier of the quote.  # noqa: E501
     """
     quote_series_id: QuoteSeriesId = Field(..., alias="quoteSeriesId")
-    effective_at: constr(strict=True, min_length=1) = Field(..., alias="effectiveAt", description="The effective datetime or cut label at which the quote is valid from.")
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effective datetime or cut label at which the quote is valid from.") 
     __properties = ["quoteSeriesId", "effectiveAt"]
 
     class Config:

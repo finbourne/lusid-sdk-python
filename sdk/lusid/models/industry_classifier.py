@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class IndustryClassifier(BaseModel):
     """
     Object describing a particular industry classifier,  which comprises a classification code and the name of the classification system to which the code belongs.  # noqa: E501
     """
-    classification_system_name: constr(strict=True, min_length=1) = Field(..., alias="classificationSystemName", description="The name of the classification system to which the classification code belongs (e.g. GICS).")
-    classification_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="classificationCode", description="The specific industry classification code assigned to the legal entity.")
+    classification_system_name:  StrictStr = Field(...,alias="classificationSystemName", description="The name of the classification system to which the classification code belongs (e.g. GICS).") 
+    classification_code:  StrictStr = Field(...,alias="classificationCode", description="The specific industry classification code assigned to the legal entity.") 
     __properties = ["classificationSystemName", "classificationCode"]
-
-    @validator('classification_code')
-    def classification_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

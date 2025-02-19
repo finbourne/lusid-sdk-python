@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -27,13 +27,13 @@ class CompleteRelation(BaseModel):
     """
     Representation of a relation containing details of source and target entities, and both outward and inward descriptions.  # noqa: E501
     """
-    href: Optional[StrictStr] = None
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     version: Optional[Version] = None
     relation_definition_id: ResourceId = Field(..., alias="relationDefinitionId")
     source_entity_id: Dict[str, StrictStr] = Field(..., alias="sourceEntityId")
     target_entity_id: Dict[str, StrictStr] = Field(..., alias="targetEntityId")
-    outward_description: constr(strict=True, min_length=1) = Field(..., alias="outwardDescription")
-    inward_description: constr(strict=True, min_length=1) = Field(..., alias="inwardDescription")
+    outward_description:  StrictStr = Field(...,alias="outwardDescription") 
+    inward_description:  StrictStr = Field(...,alias="inwardDescription") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom")
     __properties = ["href", "version", "relationDefinitionId", "sourceEntityId", "targetEntityId", "outwardDescription", "inwardDescription", "effectiveFrom"]
 

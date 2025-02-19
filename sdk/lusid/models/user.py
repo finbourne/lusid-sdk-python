@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class User(BaseModel):
     """
     The unique id of the user that issued the command.  # noqa: E501
     """
-    id: Optional[StrictStr] = Field(None, description="The unique id of the user.")
+    id:  Optional[StrictStr] = Field(None,alias="id", description="The unique id of the user.") 
     __properties = ["id"]
 
     class Config:

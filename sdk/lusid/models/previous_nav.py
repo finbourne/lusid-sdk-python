@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel
+from pydantic.v1 import StrictStr, Field, BaseModel 
 from lusid.models.share_class_amount import ShareClassAmount
 
 class PreviousNAV(BaseModel):

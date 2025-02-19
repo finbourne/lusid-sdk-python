@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium
@@ -29,11 +29,11 @@ class InterestRateSwaption(LusidInstrument):
     LUSID representation of an Interest Rate Swaption.  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
-    pay_or_receive_fixed: constr(strict=True, min_length=1) = Field(..., alias="payOrReceiveFixed", description="Pay or Receive the fixed leg of the underlying swap.    Supported string (enumeration) values are: [Pay, Receive].")
+    pay_or_receive_fixed:  StrictStr = Field(...,alias="payOrReceiveFixed", description="Pay or Receive the fixed leg of the underlying swap.    Supported string (enumeration) values are: [Pay, Receive].") 
     premium: Optional[Premium] = None
-    delivery_method: constr(strict=True, min_length=1) = Field(..., alias="deliveryMethod", description="How does the option settle    Supported string (enumeration) values are: [Cash, Physical].")
+    delivery_method:  StrictStr = Field(...,alias="deliveryMethod", description="How does the option settle    Supported string (enumeration) values are: [Cash, Physical].") 
     swap: InterestRateSwap = Field(...)
-    instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit")
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "payOrReceiveFixed", "premium", "deliveryMethod", "swap"]
 

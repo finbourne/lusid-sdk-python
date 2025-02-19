@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 
 class QuantityInstructed(BaseModel):
     """
     QuantityInstructed
     """
-    type: constr(strict=True, min_length=1) = Field(...)
+    type:  StrictStr = Field(...,alias="type", description="") 
     amount: Union[StrictFloat, StrictInt] = Field(...)
     __properties = ["type", "amount"]
 

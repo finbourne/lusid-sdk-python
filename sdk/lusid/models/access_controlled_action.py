@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.action_id import ActionId
 from lusid.models.id_selector_definition import IdSelectorDefinition
 from lusid.models.link import Link
@@ -28,7 +28,7 @@ class AccessControlledAction(BaseModel):
     """
     AccessControlledAction
     """
-    description: constr(strict=True, min_length=1) = Field(...)
+    description:  StrictStr = Field(...,alias="description") 
     action: ActionId = Field(...)
     limited_set: Optional[conlist(IdSelectorDefinition)] = Field(None, alias="limitedSet")
     links: Optional[conlist(Link)] = None

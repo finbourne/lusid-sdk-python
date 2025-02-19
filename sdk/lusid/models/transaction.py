@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.otc_confirmation import OtcConfirmation
@@ -33,29 +33,29 @@ class Transaction(BaseModel):
     """
     A list of transactions.  # noqa: E501
     """
-    transaction_id: constr(strict=True, min_length=1) = Field(..., alias="transactionId", description="The unique identifier for the transaction.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the transaction e.g. 'Buy', 'Sell'. The transaction type should have been pre-configured via the System Configuration API endpoint.")
+    transaction_id:  StrictStr = Field(...,alias="transactionId", description="The unique identifier for the transaction.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the transaction e.g. 'Buy', 'Sell'. The transaction type should have been pre-configured via the System Configuration API endpoint.") 
     instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the transaction to a unique instrument.")
-    instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the transaction's instrument lies.")
-    instrument_uid: constr(strict=True, min_length=1) = Field(..., alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in.")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the transaction's instrument lies.") 
+    instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in.") 
     transaction_date: datetime = Field(..., alias="transactionDate", description="The date of the transaction.")
     settlement_date: datetime = Field(..., alias="settlementDate", description="The settlement date of the transaction.")
     units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units transacted in the associated instrument.")
     transaction_price: Optional[TransactionPrice] = Field(None, alias="transactionPrice")
     total_consideration: CurrencyAndAmount = Field(..., alias="totalConsideration")
     exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="exchangeRate", description="The exchange rate between the transaction and settlement currency (settlement currency being represented by the TotalConsideration.Currency). For example if the transaction currency is in USD and the settlement currency is in GBP this this the USD/GBP rate.")
-    transaction_currency: Optional[StrictStr] = Field(None, alias="transactionCurrency", description="The transaction currency.")
+    transaction_currency:  Optional[StrictStr] = Field(None,alias="transactionCurrency", description="The transaction currency.") 
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the 'Transaction' domain.")
-    counterparty_id: Optional[StrictStr] = Field(None, alias="counterpartyId", description="The identifier for the counterparty of the transaction.")
-    source: Optional[StrictStr] = Field(None, description="The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.")
+    counterparty_id:  Optional[StrictStr] = Field(None,alias="counterpartyId", description="The identifier for the counterparty of the transaction.") 
+    source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.") 
     entry_date_time: Optional[datetime] = Field(None, alias="entryDateTime", description="The asAt datetime that the transaction was added to LUSID.")
     otc_confirmation: Optional[OtcConfirmation] = Field(None, alias="otcConfirmation")
-    transaction_status: Optional[StrictStr] = Field(None, alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled")
+    transaction_status:  Optional[StrictStr] = Field(None,alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled") 
     cancel_date_time: Optional[datetime] = Field(None, alias="cancelDateTime", description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.")
     order_id: Optional[ResourceId] = Field(None, alias="orderId")
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     custodian_account: Optional[CustodianAccount] = Field(None, alias="custodianAccount")
-    transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
+    transaction_group_id:  Optional[StrictStr] = Field(None,alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions") 
     strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A list of strategies representing the allocation of units across multiple sub-holding keys")
     resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
     __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails"]

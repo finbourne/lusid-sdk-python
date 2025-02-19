@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 
 class UpsertReferencePortfolioConstituentsRequest(BaseModel):
     """
     UpsertReferencePortfolioConstituentsRequest
     """
-    effective_from: constr(strict=True, min_length=1) = Field(..., alias="effectiveFrom", description="The first date from which the weights will apply")
-    weight_type: StrictStr = Field(..., alias="weightType", description="The available values are: Static, Floating, Periodical")
-    period_type: Optional[StrictStr] = Field(None, alias="periodType", description="The available values are: Daily, Weekly, Monthly, Quarterly, Annually")
+    effective_from:  StrictStr = Field(...,alias="effectiveFrom", description="The first date from which the weights will apply") 
+    weight_type:  StrictStr = Field(...,alias="weightType", description="The available values are: Static, Floating, Periodical") 
+    period_type:  Optional[StrictStr] = Field(None,alias="periodType", description="The available values are: Daily, Weekly, Monthly, Quarterly, Annually") 
     period_count: Optional[StrictInt] = Field(None, alias="periodCount")
     constituents: conlist(ReferencePortfolioConstituentRequest) = Field(..., description="Set of constituents (instrument/weight pairings)")
     __properties = ["effectiveFrom", "weightType", "periodType", "periodCount", "constituents"]

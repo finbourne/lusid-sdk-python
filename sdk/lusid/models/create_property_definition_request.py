@@ -19,23 +19,23 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 from lusid.models.resource_id import ResourceId
 
 class CreatePropertyDefinitionRequest(BaseModel):
     """
     CreatePropertyDefinitionRequest
     """
-    domain: StrictStr = Field(..., description="The domain that the property exists in. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, StagingRuleSet, IdentifierDefinition")
-    scope: StrictStr = Field(..., description="The scope that the property exists in.")
-    code: StrictStr = Field(..., description="The code of the property. Together with the domain and scope this uniquely identifies the property.")
+    domain:  StrictStr = Field(...,alias="domain", description="The domain that the property exists in. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Fund, FundConfiguration, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, AddressKeyDefinition, AmortisationRuleSet, AnalyticsSetInventory, AtomUnitResult, CleardownModule, ComplexMarketData, ComplianceRunSummary, ComplianceRule, ComplianceRunInfo, CorporateActionSource, CounterpartyAgreement, CustomEntityDefinition, DataType, Dialect, EventHandler, GeneralLedgerProfile, PostingModule, Quote, RecipeComposer, ReconciliationRunBreak, ReferenceList, RelationDefinition, ReturnBlockIndex, SRSDocument, SRSIndex, TransactionTemplate, TransactionTemplateScope, TransactionType, TransactionTypeConfig, TranslationScript, TaskDefinition, TaskInstance, Worker, StagingRuleSet, IdentifierDefinition") 
+    scope:  StrictStr = Field(...,alias="scope", description="The scope that the property exists in.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the property. Together with the domain and scope this uniquely identifies the property.") 
     value_required: Optional[StrictBool] = Field(None, alias="valueRequired", description="This field is not implemented and should be disregarded.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the property.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
-    life_time: Optional[StrictStr] = Field(None, alias="lifeTime", description="Describes how the property's values can change over time. The available values are: Perpetual, TimeVariant")
-    constraint_style: Optional[StrictStr] = Field(None, alias="constraintStyle", description="Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. Defaults to \"Property\" if not specified. Valid values for this field are: Property, Collection or Identifier.")
-    property_description: Optional[constr(strict=True, max_length=512)] = Field(None, alias="propertyDescription", description="Describes the property")
-    collection_type: Optional[StrictStr] = Field(None, alias="collectionType", description="Describes whether a collection property should behave as a set or as an array.")
+    life_time:  Optional[StrictStr] = Field(None,alias="lifeTime", description="Describes how the property's values can change over time. The available values are: Perpetual, TimeVariant") 
+    constraint_style:  Optional[StrictStr] = Field(None,alias="constraintStyle", description="Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. Defaults to \"Property\" if not specified. Valid values for this field are: Property, Collection or Identifier.") 
+    property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
+    collection_type:  Optional[StrictStr] = Field(None,alias="collectionType", description="Describes whether a collection property should behave as a set or as an array.") 
     __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription", "collectionType"]
 
     @validator('domain')

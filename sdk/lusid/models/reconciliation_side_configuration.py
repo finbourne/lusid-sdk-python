@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.resource_id import ResourceId
 
 class ReconciliationSideConfiguration(BaseModel):
@@ -29,7 +29,7 @@ class ReconciliationSideConfiguration(BaseModel):
     recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
     effective_at: Optional[datetime] = Field(None, alias="effectiveAt")
     as_at: Optional[datetime] = Field(None, alias="asAt")
-    currency: Optional[StrictStr] = None
+    currency:  Optional[StrictStr] = Field(None,alias="currency") 
     __properties = ["recipeId", "effectiveAt", "asAt", "currency"]
 
     class Config:

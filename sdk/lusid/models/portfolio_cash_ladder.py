@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.cash_ladder_record import CashLadderRecord
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -29,7 +29,7 @@ class PortfolioCashLadder(BaseModel):
     """
     PortfolioCashLadder
     """
-    currency: StrictStr = Field(..., description="The currency of the cash-flows.")
+    currency:  StrictStr = Field(...,alias="currency", description="The currency of the cash-flows.") 
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
     records: conlist(CashLadderRecord) = Field(..., description="A record of cash flows on a specific date.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The records that could not be returned along with a reason for their failure.")

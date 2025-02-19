@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.staging_rule import StagingRule
 
 class CreateStagingRuleSetRequest(BaseModel):
     """
     CreateStagingRuleSetRequest
     """
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the staging rule set.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the staging rule set.")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the staging rule set.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule set.") 
     rules: conlist(StagingRule) = Field(..., description="The list of staging rules that apply to a specific entity type.")
     __properties = ["displayName", "description", "rules"]
 

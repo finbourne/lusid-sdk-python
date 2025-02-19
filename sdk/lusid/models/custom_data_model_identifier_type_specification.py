@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class CustomDataModelIdentifierTypeSpecification(BaseModel):
     """
     CustomDataModelIdentifierTypeSpecification
     """
-    identifier_key: StrictStr = Field(..., alias="identifierKey", description="The identifier type that is required/allowed on the bound entity.")
+    identifier_key:  StrictStr = Field(...,alias="identifierKey", description="The identifier type that is required/allowed on the bound entity.") 
     required: Optional[StrictBool] = Field(None, description="Whether identifier type is required or allowed.")
     __properties = ["identifierKey", "required"]
 

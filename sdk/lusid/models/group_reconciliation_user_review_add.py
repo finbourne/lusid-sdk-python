@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class GroupReconciliationUserReviewAdd(BaseModel):
     """
     GroupReconciliationUserReviewAdd
     """
-    break_code: Optional[StrictStr] = Field(None, alias="breakCode", description="The break code of the reconciliation result.")
-    match_key: Optional[StrictStr] = Field(None, alias="matchKey", description="The match key of the reconciliation result.")
-    comment_text: Optional[StrictStr] = Field(None, alias="commentText", description="User's comment regarding the reconciliation result.")
+    break_code:  Optional[StrictStr] = Field(None,alias="breakCode", description="The break code of the reconciliation result.") 
+    match_key:  Optional[StrictStr] = Field(None,alias="matchKey", description="The match key of the reconciliation result.") 
+    comment_text:  Optional[StrictStr] = Field(None,alias="commentText", description="User's comment regarding the reconciliation result.") 
     __properties = ["breakCode", "matchKey", "commentText"]
 
     class Config:

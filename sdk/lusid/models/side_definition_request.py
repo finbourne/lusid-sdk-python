@@ -19,19 +19,19 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class SideDefinitionRequest(BaseModel):
     """
     SideDefinitionRequest
     """
-    security: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The field or property key defining the side's security, or instrument.")
-    currency: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The field or property key defining the side's currency.")
-    rate: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The field or property key defining the side's rate.")
-    units: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The value, field or property key defining the side's units.")
-    amount: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The value, field or property key defining the side's amount")
-    notional_amount: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="notionalAmount", description="The value, field or property key defining the side's notional amount")
-    current_face: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="currentFace", description="The value, field or property key defining the side's current face / outstanding notional.")
+    security:  StrictStr = Field(...,alias="security", description="The field or property key defining the side's security, or instrument.") 
+    currency:  StrictStr = Field(...,alias="currency", description="The field or property key defining the side's currency.") 
+    rate:  StrictStr = Field(...,alias="rate", description="The field or property key defining the side's rate.") 
+    units:  StrictStr = Field(...,alias="units", description="The value, field or property key defining the side's units.") 
+    amount:  StrictStr = Field(...,alias="amount", description="The value, field or property key defining the side's amount") 
+    notional_amount:  Optional[StrictStr] = Field(None,alias="notionalAmount", description="The value, field or property key defining the side's notional amount") 
+    current_face:  Optional[StrictStr] = Field(None,alias="currentFace", description="The value, field or property key defining the side's current face / outstanding notional.") 
     __properties = ["security", "currency", "rate", "units", "amount", "notionalAmount", "currentFace"]
 
     class Config:

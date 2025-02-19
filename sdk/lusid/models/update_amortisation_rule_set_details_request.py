@@ -19,32 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class UpdateAmortisationRuleSetDetailsRequest(BaseModel):
     """
     UpdateAmortisationRuleSetDetailsRequest
     """
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    display_name:  StrictStr = Field(...,alias="displayName", description="") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     __properties = ["displayName", "description"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

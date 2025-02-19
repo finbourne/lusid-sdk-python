@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, StrictFloat, StrictInt
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictFloat, StrictInt 
 
 class CutLocalTime(BaseModel):
     """

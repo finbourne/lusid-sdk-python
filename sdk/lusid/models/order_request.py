@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -31,13 +31,13 @@ class OrderRequest(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
     quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
-    side: constr(strict=True, min_length=1) = Field(..., description="The client's representation of the order's side (buy, sell, short, etc)")
+    side:  StrictStr = Field(...,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
     order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     id: ResourceId = Field(...)
-    state: Optional[StrictStr] = Field(None, description="The order's state (examples: New, PartiallyFilled, ...)")
-    type: Optional[StrictStr] = Field(None, description="The order's type (examples: Limit, Market, ...)")
-    time_in_force: Optional[StrictStr] = Field(None, alias="timeInForce", description="The order's time in force (examples: Day, GoodTilCancel, ...)")
+    state:  Optional[StrictStr] = Field(None,alias="state", description="The order's state (examples: New, PartiallyFilled, ...)") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The order's type (examples: Limit, Market, ...)") 
+    time_in_force:  Optional[StrictStr] = Field(None,alias="timeInForce", description="The order's time in force (examples: Day, GoodTilCancel, ...)") 
     var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the order was made")
     price: Optional[CurrencyAndAmount] = None
     limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")

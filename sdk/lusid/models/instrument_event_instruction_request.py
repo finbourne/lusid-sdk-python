@@ -19,17 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, constr 
 from lusid.models.quantity_instructed import QuantityInstructed
 
 class InstrumentEventInstructionRequest(BaseModel):
     """
     The request to create an instruction for an instrument event  # noqa: E501
     """
-    instrument_event_instruction_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventInstructionId", description="The unique identifier for this instruction")
-    instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId", description="The identifier of the instrument event being instructed")
-    instruction_type: constr(strict=True, min_length=1) = Field(..., alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)")
-    election_key: Optional[StrictStr] = Field(None, alias="electionKey", description="For elected instructions, the key to be chosen")
+    instrument_event_instruction_id:  StrictStr = Field(...,alias="instrumentEventInstructionId", description="The unique identifier for this instruction") 
+    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The identifier of the instrument event being instructed") 
+    instruction_type:  StrictStr = Field(...,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)") 
+    election_key:  Optional[StrictStr] = Field(None,alias="electionKey", description="For elected instructions, the key to be chosen") 
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
     quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")

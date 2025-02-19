@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.data_mapping import DataMapping
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -28,7 +28,7 @@ class GetDataMapResponse(BaseModel):
     """
     GetDataMapResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: Optional[Dict[str, DataMapping]] = Field(None, description="The set of values that were successfully retrieved.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The set of values that could not be retrieved along with a reason for this, e.g. badly formed request.")
     links: Optional[conlist(Link)] = None

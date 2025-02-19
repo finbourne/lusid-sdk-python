@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 
@@ -27,7 +27,7 @@ class ListComplexMarketDataWithMetaDataResponse(BaseModel):
     """
     Wraps a Finbourne.WebApi.Interface.Dto.ComplexMarketData.ComplexMarketData object with information that was retrieved from storage with it.  In particular,  the scope that the data was stored in,  and a <seealso cref=\"T:Finbourne.WebApi.Interface.Dto.ComplexMarketData.ComplexMarketDataId\" /> object identifying the market data in that scope.  # noqa: E501
     """
-    scope: Optional[StrictStr] = Field(None, description="The scope that the listed ComplexMarketData entity is stored in.")
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope that the listed ComplexMarketData entity is stored in.") 
     market_data_id: Optional[ComplexMarketDataId] = Field(None, alias="marketDataId")
     market_data: Optional[ComplexMarketData] = Field(None, alias="marketData")
     __properties = ["scope", "marketDataId", "marketData"]

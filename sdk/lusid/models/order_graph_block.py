@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.block import Block
 from lusid.models.order_graph_block_allocation_synopsis import OrderGraphBlockAllocationSynopsis
 from lusid.models.order_graph_block_execution_synopsis import OrderGraphBlockExecutionSynopsis
@@ -37,9 +37,9 @@ class OrderGraphBlock(BaseModel):
     executed: OrderGraphBlockExecutionSynopsis = Field(...)
     allocated: OrderGraphBlockAllocationSynopsis = Field(...)
     booked: OrderGraphBlockTransactionSynopsis = Field(...)
-    derived_state: constr(strict=True, min_length=1) = Field(..., alias="derivedState", description="A simple description of the overall state of a block.")
-    derived_compliance_state: constr(strict=True, min_length=1) = Field(..., alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'.")
-    derived_approval_state: constr(strict=True, min_length=1) = Field(..., alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Possible values are 'Pending', 'Approved' and 'Rejected'.")
+    derived_state:  StrictStr = Field(...,alias="derivedState", description="A simple description of the overall state of a block.") 
+    derived_compliance_state:  StrictStr = Field(...,alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'.") 
+    derived_approval_state:  StrictStr = Field(...,alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Possible values are 'Pending', 'Approved' and 'Rejected'.") 
     __properties = ["block", "ordered", "placed", "executed", "allocated", "booked", "derivedState", "derivedComplianceState", "derivedApprovalState"]
 
     class Config:

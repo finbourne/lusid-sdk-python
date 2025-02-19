@@ -19,40 +19,19 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr, validator 
 
 class WorkspaceItemCreationRequest(BaseModel):
     """
     A request to create an item in a workspace.  # noqa: E501
     """
     format: StrictInt = Field(..., description="A simple integer format identifier.")
-    name: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A workspace item's name.")
-    group: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The group containing a workspace item.")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of a workspace item.")
+    name:  StrictStr = Field(...,alias="name", description="A workspace item's name.") 
+    group:  StrictStr = Field(...,alias="group", description="The group containing a workspace item.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of a workspace item.") 
     content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
-    type: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="The type of the workspace item.")
+    type:  StrictStr = Field(...,alias="type", description="The type of the workspace item.") 
     __properties = ["format", "name", "group", "description", "content", "type"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('group')
-    def group_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

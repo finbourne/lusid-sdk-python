@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 
 class GeneralLedgerProfileMapping(BaseModel):
     """
     GeneralLedgerProfileMapping
     """
-    mapping_filter: constr(strict=True, max_length=16384, min_length=1) = Field(..., alias="mappingFilter", description="The filter syntax for the Mapping filter. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax")
+    mapping_filter:  StrictStr = Field(...,alias="mappingFilter", description="The filter syntax for the Mapping filter. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax") 
     levels: conlist(StrictStr, max_items=5) = Field(..., description="References fields and properties on the associated Journal Entry Line and graph of associated objects.")
     __properties = ["mappingFilter", "levels"]
-
-    @validator('mapping_filter')
-    def mapping_filter_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

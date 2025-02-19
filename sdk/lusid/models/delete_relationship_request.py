@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class DeleteRelationshipRequest(BaseModel):
     """
@@ -27,29 +27,9 @@ class DeleteRelationshipRequest(BaseModel):
     """
     source_entity_id: Dict[str, StrictStr] = Field(..., alias="sourceEntityId", description="The identifier of the source entity of the relationship to be deleted.")
     target_entity_id: Dict[str, StrictStr] = Field(..., alias="targetEntityId", description="The identifier of the target entity of the relationship to be deleted.")
-    effective_from: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="effectiveFrom", description="The effective date of the relationship to be deleted")
-    effective_until: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="effectiveUntil", description="The effective datetime until which the relationship will be deleted. If not supplied the deletion will be permanent.")
+    effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="The effective date of the relationship to be deleted") 
+    effective_until:  Optional[StrictStr] = Field(None,alias="effectiveUntil", description="The effective datetime until which the relationship will be deleted. If not supplied the deletion will be permanent.") 
     __properties = ["sourceEntityId", "targetEntityId", "effectiveFrom", "effectiveUntil"]
-
-    @validator('effective_from')
-    def effective_from_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_\+:\.]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_\+:\.]+$/")
-        return value
-
-    @validator('effective_until')
-    def effective_until_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_\+:\.]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_\+:\.]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,30 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class PortfolioEntityId(BaseModel):
     """
     Specification of a portfolio or portfolio group id, its scope and which it is.  # noqa: E501
     """
-    scope: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The scope within which the portfolio or portfolio group lives.")
-    code: constr(strict=True, max_length=256, min_length=1) = Field(..., description="Portfolio name or code.")
-    portfolio_entity_type: Optional[constr(strict=True, max_length=128, min_length=0)] = Field(None, alias="portfolioEntityType", description="String identifier for portfolio e.g. \"SinglePortfolio\" and \"GroupPortfolio\". If not specified, it is assumed to be a single portfolio.")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope within which the portfolio or portfolio group lives.") 
+    code:  StrictStr = Field(...,alias="code", description="Portfolio name or code.") 
+    portfolio_entity_type:  Optional[StrictStr] = Field(None,alias="portfolioEntityType", description="String identifier for portfolio e.g. \"SinglePortfolio\" and \"GroupPortfolio\". If not specified, it is assumed to be a single portfolio.") 
     __properties = ["scope", "code", "portfolioEntityType"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
 from lusid.models.model_property import ModelProperty
 
@@ -29,27 +29,10 @@ class UpsertLegalEntityRequest(BaseModel):
     """
     identifiers: Dict[str, ModelProperty] = Field(..., description="The identifiers the legal entity will be upserted with.The provided keys should be idTypeScope, idTypeCode, code")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Legal Entity.")
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the Legal Entity")
-    description: Optional[constr(strict=True, max_length=512, min_length=0)] = Field(None, description="The description of the Legal Entity")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Legal Entity") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Legal Entity") 
     counterparty_risk_information: Optional[CounterpartyRiskInformation] = Field(None, alias="counterpartyRiskInformation")
     __properties = ["identifiers", "properties", "displayName", "description", "counterpartyRiskInformation"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

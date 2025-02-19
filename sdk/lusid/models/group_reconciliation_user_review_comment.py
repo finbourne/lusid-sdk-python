@@ -19,14 +19,14 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class GroupReconciliationUserReviewComment(BaseModel):
     """
     GroupReconciliationUserReviewComment
     """
-    comment_text: constr(strict=True, min_length=1) = Field(..., alias="commentText", description="User's comment regarding the reconciliation result.")
-    user_id: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, alias="userId", description="Id of the user who made a User Review input.")
+    comment_text:  StrictStr = Field(...,alias="commentText", description="User's comment regarding the reconciliation result.") 
+    user_id:  Optional[StrictStr] = Field(None,alias="userId", description="Id of the user who made a User Review input.") 
     as_at_added: Optional[datetime] = Field(None, alias="asAtAdded", description="The timestamp of the added User Review input.")
     as_at_invalid: Optional[datetime] = Field(None, alias="asAtInvalid", description="The timestamp when User Review input became invalid e.g. because of the different attribute values within the new run.")
     __properties = ["commentText", "userId", "asAtAdded", "asAtInvalid"]

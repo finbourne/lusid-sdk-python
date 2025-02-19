@@ -19,37 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class ScriptMapReference(BaseModel):
     """
     Provides information about the location of a script map within the configuration store  # noqa: E501
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope of the configuration store entry where the translation map is located.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the configuration store entry where the translation map is located.")
-    key: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The key of the configuration store entry where the translation map is located.")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope of the configuration store entry where the translation map is located.") 
+    code:  StrictStr = Field(...,alias="code", description="The code of the configuration store entry where the translation map is located.") 
+    key:  StrictStr = Field(...,alias="key", description="The key of the configuration store entry where the translation map is located.") 
     __properties = ["scope", "code", "key"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('key')
-    def key_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

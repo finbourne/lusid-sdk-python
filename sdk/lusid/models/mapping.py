@@ -19,40 +19,19 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.mapping_rule import MappingRule
 
 class Mapping(BaseModel):
     """
     Defines the rule set to be used to determine if entries should be considered as a match.  # noqa: E501
     """
-    scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope for this mapping.")
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code for this mapping.")
-    name: constr(strict=True, min_length=1) = Field(..., description="The mapping name")
-    reconciliation_type: constr(strict=True, min_length=1) = Field(..., alias="reconciliationType", description="What type of reconciliation this mapping is for")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope for this mapping.") 
+    code:  StrictStr = Field(...,alias="code", description="The code for this mapping.") 
+    name:  StrictStr = Field(...,alias="name", description="The mapping name") 
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="What type of reconciliation this mapping is for") 
     rules: Optional[conlist(MappingRule)] = Field(None, description="The rules in this mapping, keyed by the left field/property name")
     __properties = ["scope", "code", "name", "reconciliationType", "rules"]
-
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

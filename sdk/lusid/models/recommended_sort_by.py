@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class RecommendedSortBy(BaseModel):
     """
     RecommendedSortBy
     """
-    attribute_name: constr(strict=True, max_length=16384, min_length=1) = Field(..., alias="attributeName", description="The property key, identifier type, or field to be sorted by.")
-    sort_order: Optional[constr(strict=True, max_length=4, min_length=0)] = Field(None, alias="sortOrder", description="The sorting direction. Either ascending (ASC) or descending (DESC).")
+    attribute_name:  StrictStr = Field(...,alias="attributeName", description="The property key, identifier type, or field to be sorted by.") 
+    sort_order:  Optional[StrictStr] = Field(None,alias="sortOrder", description="The sorting direction. Either ascending (ASC) or descending (DESC).") 
     __properties = ["attributeName", "sortOrder"]
 
     class Config:

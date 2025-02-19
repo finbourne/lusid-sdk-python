@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_valuation_point_data import FundValuationPointData
@@ -30,9 +30,9 @@ class ValuationPointDataResponse(BaseModel):
     """
     The Valuation Point Data Response for the Fund and specified date.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).")
-    status: constr(strict=True, min_length=1) = Field(..., description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    type:  StrictStr = Field(...,alias="type", description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).") 
+    status:  StrictStr = Field(...,alias="status", description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used.") 
     backout: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for the Valuation Point, where data points have been 'backed out'.")
     dealing: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for any 'Dealing' that has occured inside the queried period.")
     pn_l: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="pnL", description="DEPRECATED. Bucket of detail for 'PnL' that has occured inside the queried period.")
@@ -43,8 +43,8 @@ class ValuationPointDataResponse(BaseModel):
     fund_details: FundDetails = Field(..., alias="fundDetails")
     fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
     share_class_data: conlist(ShareClassData) = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
-    valuation_point_code: Optional[StrictStr] = Field(None, alias="valuationPointCode", description="The code of the valuation point.")
-    previous_valuation_point_code: Optional[StrictStr] = Field(None, alias="previousValuationPointCode", description="The code of the previous valuation point.")
+    valuation_point_code:  Optional[StrictStr] = Field(None,alias="valuationPointCode", description="The code of the valuation point.") 
+    previous_valuation_point_code:  Optional[StrictStr] = Field(None,alias="previousValuationPointCode", description="The code of the previous valuation point.") 
     links: Optional[conlist(Link)] = None
     __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
 

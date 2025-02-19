@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.access_controlled_action import AccessControlledAction
 from lusid.models.identifier_part_schema import IdentifierPartSchema
 from lusid.models.link import Link
@@ -28,9 +28,9 @@ class AccessControlledResource(BaseModel):
     """
     AccessControlledResource
     """
-    application: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    description: constr(strict=True, min_length=1) = Field(...)
+    application:  Optional[StrictStr] = Field(None,alias="application") 
+    name:  Optional[StrictStr] = Field(None,alias="name") 
+    description:  StrictStr = Field(...,alias="description") 
     actions: conlist(AccessControlledAction) = Field(...)
     identifier_parts: Optional[conlist(IdentifierPartSchema)] = Field(None, alias="identifierParts")
     links: Optional[conlist(Link)] = None

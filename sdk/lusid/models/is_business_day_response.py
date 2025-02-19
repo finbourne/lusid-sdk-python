@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
 
 class IsBusinessDayResponse(BaseModel):
     """

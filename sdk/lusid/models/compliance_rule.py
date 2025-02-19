@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -27,31 +27,21 @@ class ComplianceRule(BaseModel):
     """
     ComplianceRule
     """
-    scope: constr(strict=True, min_length=1) = Field(...)
-    code: constr(strict=True, min_length=1) = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName")
-    type: constr(strict=True, min_length=1) = Field(...)
-    property_key: Optional[StrictStr] = Field(None, alias="propertyKey")
-    value: Optional[constr(strict=True, max_length=512, min_length=1)] = None
-    address_key: Optional[StrictStr] = Field(None, alias="addressKey")
+    scope:  StrictStr = Field(...,alias="scope", description="") 
+    code:  StrictStr = Field(...,alias="code", description="") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="") 
+    type:  StrictStr = Field(...,alias="type", description="") 
+    property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="") 
+    value:  Optional[StrictStr] = Field(None,alias="value", description="") 
+    address_key:  Optional[StrictStr] = Field(None,alias="addressKey", description="") 
     lower_bound: Union[StrictFloat, StrictInt] = Field(..., alias="lowerBound")
     upper_bound: Union[StrictFloat, StrictInt] = Field(..., alias="upperBound")
-    schedule: constr(strict=True, min_length=1) = Field(...)
+    schedule:  StrictStr = Field(...,alias="schedule", description="") 
     hard_requirement: StrictBool = Field(..., alias="hardRequirement")
     target_portfolio_ids: conlist(ResourceId) = Field(..., alias="targetPortfolioIds")
-    description: Optional[StrictStr] = None
+    description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     version: Optional[Version] = None
     __properties = ["scope", "code", "displayName", "type", "propertyKey", "value", "addressKey", "lowerBound", "upperBound", "schedule", "hardRequirement", "targetPortfolioIds", "description", "version"]
-
-    @validator('value')
-    def value_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

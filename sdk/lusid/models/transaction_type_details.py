@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class TransactionTypeDetails(BaseModel):
     """
     TransactionTypeDetails
     """
-    scope: constr(strict=True, min_length=1) = Field(..., description="The scope in which the TransactionType was resolved. If the portfolio has a TransactionTypeScope, this will have been used. Otherwise the default scope will have been used.")
-    source: constr(strict=True, min_length=1) = Field(..., description="The source in which the TransactionType was resolved.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The resolved TransactionType. More information on TransactionType resolution can be found at https://support.lusid.com/docs/how-does-lusid-resolve-transactions-to-transaction-types")
+    scope:  StrictStr = Field(...,alias="scope", description="The scope in which the TransactionType was resolved. If the portfolio has a TransactionTypeScope, this will have been used. Otherwise the default scope will have been used.") 
+    source:  StrictStr = Field(...,alias="source", description="The source in which the TransactionType was resolved.") 
+    type:  StrictStr = Field(...,alias="type", description="The resolved TransactionType. More information on TransactionType resolution can be found at https://support.lusid.com/docs/how-does-lusid-resolve-transactions-to-transaction-types") 
     __properties = ["scope", "source", "type"]
 
     class Config:

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.custom_entity_response import CustomEntityResponse
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -28,7 +28,7 @@ class UpsertCustomEntitiesResponse(BaseModel):
     """
     UpsertCustomEntitiesResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: Optional[Dict[str, CustomEntityResponse]] = Field(None, description="The custom-entities which have been successfully updated or created.")
     staged: Optional[Dict[str, CustomEntityResponse]] = Field(None, description="The custom-entities that have been staged for update or creation.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The custom-entities that could not be updated or created or were left unchanged without error along with a reason for their failure.")

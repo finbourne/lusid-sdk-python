@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 
 class GroupReconciliationComparisonRuleTolerance(BaseModel):
     """
     GroupReconciliationComparisonRuleTolerance
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of tolerance to allow. \"Relative\" | \"Absolute\"")
+    type:  StrictStr = Field(...,alias="type", description="The type of tolerance to allow. \"Relative\" | \"Absolute\"") 
     value: Union[StrictFloat, StrictInt] = Field(..., description="The decimal value of how much tolerance to allow when comparing in relative (i.e percentage) or absolute terms depending on the ToleranceType specified")
     __properties = ["type", "value"]
 

@@ -19,53 +19,22 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.date_attributes import DateAttributes
 
 class CreateDateRequest(BaseModel):
     """
     CreateDateRequest
     """
-    date_id: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="dateId")
+    date_id:  StrictStr = Field(...,alias="dateId") 
     from_utc: datetime = Field(..., alias="fromUtc")
     to_utc: datetime = Field(..., alias="toUtc")
-    time_zone: constr(strict=True, max_length=5, min_length=0) = Field(..., alias="timeZone")
-    description: constr(strict=True, max_length=100, min_length=0) = Field(...)
-    type: Optional[constr(strict=True, max_length=10, min_length=0)] = None
+    time_zone:  StrictStr = Field(...,alias="timeZone") 
+    description:  StrictStr = Field(...,alias="description") 
+    type:  Optional[StrictStr] = Field(None,alias="type") 
     attributes: Optional[DateAttributes] = None
     source_data: Optional[Dict[str, StrictStr]] = Field(None, alias="sourceData")
     __properties = ["dateId", "fromUtc", "toUtc", "timeZone", "description", "type", "attributes", "sourceData"]
-
-    @validator('date_id')
-    def date_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('time_zone')
-    def time_zone_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('type')
-    def type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

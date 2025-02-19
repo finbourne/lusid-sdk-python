@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class Warning(BaseModel):
     """
     Warning
     """
-    entity_id: StrictStr = Field(..., alias="entityId")
-    message: StrictStr = Field(...)
+    entity_id:  StrictStr = Field(...,alias="entityId") 
+    message:  StrictStr = Field(...,alias="message") 
     __properties = ["entityId", "message"]
 
     class Config:

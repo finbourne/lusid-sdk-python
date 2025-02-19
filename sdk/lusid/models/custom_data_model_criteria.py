@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.alias import Alias
 from lusid.models.custom_data_model_identifier_type_specification_with_display_name import CustomDataModelIdentifierTypeSpecificationWithDisplayName
 from lusid.models.custom_data_model_property_specification_with_display_name import CustomDataModelPropertySpecificationWithDisplayName
@@ -29,7 +29,7 @@ class CustomDataModelCriteria(BaseModel):
     """
     CustomDataModelCriteria
     """
-    conditions: Optional[StrictStr] = Field(None, description="The conditions that the bound entity must meet to be valid.")
+    conditions:  Optional[StrictStr] = Field(None,alias="conditions", description="The conditions that the bound entity must meet to be valid.") 
     properties: Optional[conlist(CustomDataModelPropertySpecificationWithDisplayName)] = Field(None, description="The properties that are required or allowed on the bound entity.")
     identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecificationWithDisplayName)] = Field(None, alias="identifierTypes", description="The identifier types that are required or allowed on the bound entity.")
     attribute_aliases: Optional[conlist(Alias)] = Field(None, alias="attributeAliases", description="The aliases for property keys, identifier types, and fields on the bound entity.")

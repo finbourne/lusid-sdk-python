@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class GroupReconciliationComparisonRuleStringValueMap(BaseModel):
     """
     GroupReconciliationComparisonRuleStringValueMap
     """
-    left_value: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="leftValue", description="The left string to map")
-    right_value: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="rightValue", description="The right string to map")
-    direction: constr(strict=True, min_length=1) = Field(..., description="The direction to map. \"UniDirectional\" | \"BiDirectional\"")
+    left_value:  StrictStr = Field(...,alias="leftValue", description="The left string to map") 
+    right_value:  StrictStr = Field(...,alias="rightValue", description="The right string to map") 
+    direction:  StrictStr = Field(...,alias="direction", description="The direction to map. \"UniDirectional\" | \"BiDirectional\"") 
     __properties = ["leftValue", "rightValue", "direction"]
 
     class Config:

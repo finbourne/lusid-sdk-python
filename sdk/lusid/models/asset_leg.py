@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.lusid_instrument import LusidInstrument
 
 class AssetLeg(BaseModel):
@@ -27,7 +27,7 @@ class AssetLeg(BaseModel):
     The underlying instrument representing one side of the TRS and its pay-receive direction.                Note that TRS currently only supports an asset of Bond or ComplexBond, no other instruments are allowed.  Support for additional instrument types will be added in the future.  # noqa: E501
     """
     asset: LusidInstrument = Field(...)
-    pay_receive: constr(strict=True, min_length=1) = Field(..., alias="payReceive", description="Either Pay or Receive stating direction of the asset in the swap.    Supported string (enumeration) values are: [Pay, Receive].")
+    pay_receive:  StrictStr = Field(...,alias="payReceive", description="Either Pay or Receive stating direction of the asset in the swap.    Supported string (enumeration) values are: [Pay, Receive].") 
     __properties = ["asset", "payReceive"]
 
     class Config:

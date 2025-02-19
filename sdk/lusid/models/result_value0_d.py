@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.result_value import ResultValue
 
 class ResultValue0D(ResultValue):
     """
     Result value representing a 0D result. These results can be equipped with a unit  # noqa: E501
     """
-    units: Optional[StrictStr] = Field(None, description="Unit of the result")
+    units:  Optional[StrictStr] = Field(None,alias="units", description="Unit of the result") 
     value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The value of the result")
     dimension: Optional[StrictInt] = Field(None, description="The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be  populate by the user on upsertion.")
-    result_value_type: StrictStr = Field(..., alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset")
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "units", "value", "dimension"]
 

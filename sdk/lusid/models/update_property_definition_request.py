@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class UpdatePropertyDefinitionRequest(BaseModel):
     """
     UpdatePropertyDefinitionRequest
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the property.")
-    property_description: Optional[constr(strict=True, max_length=512)] = Field(None, alias="propertyDescription", description="Describes the property")
+    display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
+    property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     __properties = ["displayName", "propertyDescription"]
 
     class Config:

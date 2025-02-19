@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class WorkspaceCreationRequest(BaseModel):
     """
     A request to create an empty workspace.  # noqa: E501
     """
-    name: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A workspace's name.")
-    description: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="A friendly description for the workspace.")
+    name:  StrictStr = Field(...,alias="name", description="A workspace's name.") 
+    description:  StrictStr = Field(...,alias="description", description="A friendly description for the workspace.") 
     __properties = ["name", "description"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

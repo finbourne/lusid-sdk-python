@@ -19,31 +19,17 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.tax_rule import TaxRule
 
 class UpdateTaxRuleSetRequest(BaseModel):
     """
     UpdateTaxRuleSetRequest
     """
-    display_name: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="displayName")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(...)
+    display_name:  StrictStr = Field(...,alias="displayName", description="") 
+    description:  StrictStr = Field(...,alias="description", description="") 
     rules: conlist(TaxRule, max_items=100) = Field(...)
     __properties = ["displayName", "description", "rules"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

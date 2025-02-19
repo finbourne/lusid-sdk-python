@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.cut_local_time import CutLocalTime
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,12 +28,12 @@ class CutLabelDefinition(BaseModel):
     """
     CutLabelDefinition
     """
-    code: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName")
-    description: Optional[StrictStr] = None
+    code:  Optional[StrictStr] = Field(None,alias="code", description="") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     cut_local_time: Optional[CutLocalTime] = Field(None, alias="cutLocalTime")
-    time_zone: Optional[StrictStr] = Field(None, alias="timeZone")
-    href: Optional[StrictStr] = None
+    time_zone:  Optional[StrictStr] = Field(None,alias="timeZone", description="") 
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["code", "displayName", "description", "cutLocalTime", "timeZone", "href", "version", "links"]

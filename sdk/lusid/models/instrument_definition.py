@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 from lusid.models.instrument_id_value import InstrumentIdValue
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
@@ -30,7 +30,7 @@ class InstrumentDefinition(BaseModel):
     """
     InstrumentDefinition
     """
-    name: constr(strict=True, min_length=1) = Field(..., description="The name of the instrument.")
+    name:  StrictStr = Field(...,alias="name", description="The name of the instrument.") 
     identifiers: Dict[str, InstrumentIdValue] = Field(..., description="A set of identifiers that can be used to identify the instrument. At least one of these must be configured to be a unique identifier.")
     properties: Optional[conlist(ModelProperty)] = Field(None, description="Set of unique instrument properties and associated values to store with the instrument. Each property must be from the 'Instrument' domain.")
     look_through_portfolio_id: Optional[ResourceId] = Field(None, alias="lookThroughPortfolioId")

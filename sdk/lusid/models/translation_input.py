@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class TranslationInput(BaseModel):
     """
     The input to a translation script.  # noqa: E501
     """
-    entity: constr(strict=True, max_length=50000, min_length=0) = Field(..., description="The serialised entity to be passed to the translation script. This could represent e.g. an instrument in any  dialect.")
+    entity:  StrictStr = Field(...,alias="entity", description="The serialised entity to be passed to the translation script. This could represent e.g. an instrument in any  dialect.") 
     __properties = ["entity"]
 
     class Config:

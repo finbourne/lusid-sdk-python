@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.resource_id import ResourceId
 
 class PortfolioReconciliationRequest(BaseModel):
@@ -27,7 +27,7 @@ class PortfolioReconciliationRequest(BaseModel):
     PortfolioReconciliationRequest
     """
     portfolio_id: ResourceId = Field(..., alias="portfolioId")
-    effective_at: constr(strict=True, min_length=1) = Field(..., alias="effectiveAt", description="The effective date of the portfolio")
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effective date of the portfolio") 
     as_at: Optional[datetime] = Field(None, alias="asAt", description="Optional. The AsAt date of the portfolio")
     __properties = ["portfolioId", "effectiveAt", "asAt"]
 

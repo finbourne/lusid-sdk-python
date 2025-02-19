@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -27,8 +27,8 @@ class AddressKeyDefinition(BaseModel):
     """
     AddressKeyDefinition
     """
-    address_key: StrictStr = Field(..., alias="addressKey", description="The address key of the address key definition.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the address key definition")
+    address_key:  StrictStr = Field(...,alias="addressKey", description="The address key of the address key definition.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the address key definition") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["addressKey", "type", "version", "links"]

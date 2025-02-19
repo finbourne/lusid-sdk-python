@@ -19,35 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class DataMapKey(BaseModel):
     """
     DataMapKey
     """
-    version: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, description="The version of the mappings. It is possible that a client will wish to update mappings over time. The version identifies the MAJOR.MINOR.PATCH version  of the mappings that the client assigns it.")
-    code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="A unique name to semantically identify the mapping set.")
+    version:  Optional[StrictStr] = Field(None,alias="version", description="The version of the mappings. It is possible that a client will wish to update mappings over time. The version identifies the MAJOR.MINOR.PATCH version  of the mappings that the client assigns it.") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="A unique name to semantically identify the mapping set.") 
     __properties = ["version", "code"]
-
-    @validator('version')
-    def version_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^\d+\.\d+(\.\d+)?(-[a-zA-Z0-9\.-]{1,30})?$", value):
-            raise ValueError(r"must validate the regular expression /^\d+\.\d+(\.\d+)?(-[a-zA-Z0-9\.-]{1,30})?$/")
-        return value
-
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

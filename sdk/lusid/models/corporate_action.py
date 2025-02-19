@@ -19,15 +19,15 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.corporate_action_transition import CorporateActionTransition
 
 class CorporateAction(BaseModel):
     """
     A corporate action  # noqa: E501
     """
-    corporate_action_code: StrictStr = Field(..., alias="corporateActionCode", description="The unique identifier of this corporate action")
-    description: Optional[StrictStr] = Field(None, description="The description of the corporate action.")
+    corporate_action_code:  StrictStr = Field(...,alias="corporateActionCode", description="The unique identifier of this corporate action") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action.") 
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="The announcement date of the corporate action")
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date of the corporate action")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="The record date of the corporate action")

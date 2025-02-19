@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -35,18 +35,18 @@ class Placement(BaseModel):
     block_ids: conlist(ResourceId) = Field(..., alias="blockIds", description="The IDs of the Blocks associated with this placement.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this placement.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    lusid_instrument_id: constr(strict=True, min_length=1) = Field(..., alias="lusidInstrumentId", description="The LUSID instrument id for the instrument placement.")
+    lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument placement.") 
     quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
-    state: constr(strict=True, min_length=1) = Field(..., description="The state of this placement (typically a FIX state; Open, Filled, etc).")
-    side: constr(strict=True, min_length=1) = Field(..., description="The side (Buy, Sell, ...) of this placement.")
-    time_in_force: constr(strict=True, min_length=1) = Field(..., alias="timeInForce", description="The time in force applicable to this placement (GTC, FOK, Day, etc)")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of this placement (Market, Limit, etc).")
+    state:  StrictStr = Field(...,alias="state", description="The state of this placement (typically a FIX state; Open, Filled, etc).") 
+    side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this placement.") 
+    time_in_force:  StrictStr = Field(...,alias="timeInForce", description="The time in force applicable to this placement (GTC, FOK, Day, etc)") 
+    type:  StrictStr = Field(...,alias="type", description="The type of this placement (Market, Limit, etc).") 
     created_date: datetime = Field(..., alias="createdDate", description="The active date of this placement.")
     limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
     stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
-    counterparty: Optional[StrictStr] = Field(None, description="Optionally specifies the market entity this placement is placed with.")
-    execution_system: Optional[StrictStr] = Field(None, alias="executionSystem", description="Optionally specifies the execution system in use.")
-    entry_type: Optional[StrictStr] = Field(None, alias="entryType", description="Optionally specifies the entry type of this placement.")
+    counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
+    execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
+    entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement.") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["id", "parentPlacementId", "blockIds", "properties", "instrumentIdentifiers", "lusidInstrumentId", "quantity", "state", "side", "timeInForce", "type", "createdDate", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType", "version", "links"]

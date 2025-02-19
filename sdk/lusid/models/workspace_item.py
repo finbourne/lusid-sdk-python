@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist, constr, validator 
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -27,22 +27,15 @@ class WorkspaceItem(BaseModel):
     """
     An item stored in a workspace.  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of the workspace item.")
+    type:  StrictStr = Field(...,alias="type", description="The type of the workspace item.") 
     format: StrictInt = Field(..., description="A simple integer format identifier.")
-    name: constr(strict=True, min_length=1) = Field(..., description="A workspace item's name.")
-    group: constr(strict=True, min_length=1) = Field(..., description="The group containing a workspace item.")
-    description: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The description of a workspace item.")
+    name:  StrictStr = Field(...,alias="name", description="A workspace item's name.") 
+    group:  StrictStr = Field(...,alias="group", description="The group containing a workspace item.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of a workspace item.") 
     content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["type", "format", "name", "group", "description", "content", "version", "links"]
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

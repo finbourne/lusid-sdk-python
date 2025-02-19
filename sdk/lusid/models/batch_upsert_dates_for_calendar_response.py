@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, constr 
 
 class StagingRuleApprovalCriteria(BaseModel):
     """
     StagingRuleApprovalCriteria
     """
     required_approvals: Optional[StrictInt] = Field(None, alias="requiredApprovals")
-    deciding_user: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, alias="decidingUser")
+    deciding_user:  Optional[StrictStr] = Field(None,alias="decidingUser") 
     staging_user_can_decide: Optional[StrictBool] = Field(None, alias="stagingUserCanDecide")
     __properties = ["requiredApprovals", "decidingUser", "stagingUserCanDecide"]
 

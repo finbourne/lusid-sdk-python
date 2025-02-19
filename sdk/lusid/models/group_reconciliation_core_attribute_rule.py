@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, conlist 
 from lusid.models.group_reconciliation_comparison_rule_string_value_map import GroupReconciliationComparisonRuleStringValueMap
 from lusid.models.group_reconciliation_core_comparison_rule_operand import GroupReconciliationCoreComparisonRuleOperand
 

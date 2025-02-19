@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class ValuationPointDataQueryParameters(BaseModel):

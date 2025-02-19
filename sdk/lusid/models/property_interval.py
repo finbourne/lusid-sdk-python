@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.date_range import DateRange
 from lusid.models.property_value import PropertyValue
 
@@ -30,7 +30,7 @@ class PropertyInterval(BaseModel):
     value: PropertyValue = Field(...)
     effective_range: DateRange = Field(..., alias="effectiveRange")
     as_at_range: DateRange = Field(..., alias="asAtRange")
-    status: constr(strict=True, min_length=1) = Field(..., description="Indicates whether the value is part of the prevailing effective date timeline for the requested asAt date, or whether it has been superseded by correctional activity")
+    status:  StrictStr = Field(...,alias="status", description="Indicates whether the value is part of the prevailing effective date timeline for the requested asAt date, or whether it has been superseded by correctional activity") 
     __properties = ["value", "effectiveRange", "asAtRange", "status"]
 
     class Config:

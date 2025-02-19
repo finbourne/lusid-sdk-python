@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.portfolio_entity_id import PortfolioEntityId
@@ -30,15 +30,15 @@ class Abor(BaseModel):
     """
     An Abor entity.  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the Abor.")
-    description: Optional[StrictStr] = Field(None, description="The description for the Abor.")
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Abor.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description for the Abor.") 
     portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.")
     abor_configuration_id: Optional[ResourceId] = Field(None, alias="aborConfigurationId")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
     version: Optional[Version] = None
-    base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="The base currency of the abor based on contained portfolio base currencies.")
+    base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the abor based on contained portfolio base currencies.") 
     links: Optional[conlist(Link)] = None
     __properties = ["href", "id", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties", "version", "baseCurrency", "links"]
 

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class MetricValue(BaseModel):
     """
     MetricValue
     """
     value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The numerical value of the property.")
-    unit: Optional[StrictStr] = None
+    unit:  Optional[StrictStr] = Field(None,alias="unit") 
     __properties = ["value", "unit"]
 
     class Config:

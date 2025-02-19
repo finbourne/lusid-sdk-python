@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from lusid.models.instrument_payment_diary_row import InstrumentPaymentDiaryRow
 
 class InstrumentPaymentDiaryLeg(BaseModel):
@@ -27,7 +27,7 @@ class InstrumentPaymentDiaryLeg(BaseModel):
     A leg containing a set of cashflows.  # noqa: E501
     """
     leg_index: Optional[StrictInt] = Field(None, alias="legIndex", description="Index (integer) for the leg of a payment diary.")
-    leg_id: Optional[StrictStr] = Field(None, alias="legId", description="Identifier string for the leg of a payment diary.")
+    leg_id:  Optional[StrictStr] = Field(None,alias="legId", description="Identifier string for the leg of a payment diary.") 
     rows: Optional[conlist(InstrumentPaymentDiaryRow)] = Field(None, description="List of individual cashflows within the payment diary.")
     __properties = ["legIndex", "legId", "rows"]
 

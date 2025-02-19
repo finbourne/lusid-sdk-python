@@ -19,18 +19,18 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class SideConfigurationDataRequest(BaseModel):
     """
     Configuration needed to define a side. Sides are referenced by Label. Beyond that, other properties  can be used to reference either transaction fields, or transaction properties.  # noqa: E501
     """
-    side: constr(strict=True, min_length=1) = Field(..., description="The side's label.")
-    security: constr(strict=True, min_length=1) = Field(..., description="The security, or instrument.")
-    currency: constr(strict=True, min_length=1) = Field(..., description="The currency.")
-    rate: constr(strict=True, min_length=1) = Field(..., description="The rate.")
-    units: constr(strict=True, min_length=1) = Field(..., description="The units.")
-    amount: constr(strict=True, min_length=1) = Field(..., description="The amount.")
+    side:  StrictStr = Field(...,alias="side", description="The side's label.") 
+    security:  StrictStr = Field(...,alias="security", description="The security, or instrument.") 
+    currency:  StrictStr = Field(...,alias="currency", description="The currency.") 
+    rate:  StrictStr = Field(...,alias="rate", description="The rate.") 
+    units:  StrictStr = Field(...,alias="units", description="The units.") 
+    amount:  StrictStr = Field(...,alias="amount", description="The amount.") 
     __properties = ["side", "security", "currency", "rate", "units", "amount"]
 
     class Config:

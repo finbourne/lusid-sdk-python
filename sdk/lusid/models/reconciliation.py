@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.reconciliation_configuration import ReconciliationConfiguration
@@ -33,9 +33,9 @@ class Reconciliation(BaseModel):
     Representation of Reconciliation in LUSID Api  # noqa: E501
     """
     id: Optional[ReconciliationId] = None
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    name: Optional[StrictStr] = Field(None, description="The name of the scheduled reconciliation")
-    description: Optional[StrictStr] = Field(None, description="A description of the scheduled reconciliation")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the scheduled reconciliation") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the scheduled reconciliation") 
     is_portfolio_group: Optional[StrictBool] = Field(None, alias="isPortfolioGroup", description="Specifies whether reconciliation is between portfolios or portfolio groups")
     left: Optional[ResourceId] = None
     right: Optional[ResourceId] = None

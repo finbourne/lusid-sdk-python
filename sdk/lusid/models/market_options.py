@@ -19,46 +19,19 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 
 class MarketOptions(BaseModel):
     """
     The set of options that control miscellaneous and default market resolution behaviour.  These are aimed at a 'crude' level of control for those who do not wish to fine tune the way that data is resolved.  For clients who wish to simply match instruments to prices this is quite possibly sufficient. For those wishing to control market data sources  according to requirements based on accuracy or timeliness it is not. In more advanced cases the options should largely be ignored and rules specified  per source. Be aware that where no specified rule matches the final fallback is on to the logic implied here.  # noqa: E501
     """
-    default_supplier: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="defaultSupplier", description="The default supplier of data. This controls which 'dialect' is used to find particular market data. e.g. one supplier might address data by RIC, another by PermId")
-    default_instrument_code_type: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="defaultInstrumentCodeType", description="When instrument quotes are searched for, what identifier should be used by default")
-    default_scope: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="defaultScope", description="For default rules, which scope should data be searched for in")
+    default_supplier:  Optional[StrictStr] = Field(None,alias="defaultSupplier", description="The default supplier of data. This controls which 'dialect' is used to find particular market data. e.g. one supplier might address data by RIC, another by PermId") 
+    default_instrument_code_type:  Optional[StrictStr] = Field(None,alias="defaultInstrumentCodeType", description="When instrument quotes are searched for, what identifier should be used by default") 
+    default_scope:  StrictStr = Field(...,alias="defaultScope", description="For default rules, which scope should data be searched for in") 
     attempt_to_infer_missing_fx: Optional[StrictBool] = Field(None, alias="attemptToInferMissingFx", description="if true will calculate a missing Fx pair (e.g. THBJPY) from the inverse JPYTHB or from standardised pairs against USD, e.g. THBUSD and JPYUSD")
-    calendar_scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="calendarScope", description="The scope in which holiday calendars stored")
-    convention_scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="conventionScope", description="The scope in which conventions stored")
+    calendar_scope:  Optional[StrictStr] = Field(None,alias="calendarScope", description="The scope in which holiday calendars stored") 
+    convention_scope:  Optional[StrictStr] = Field(None,alias="conventionScope", description="The scope in which conventions stored") 
     __properties = ["defaultSupplier", "defaultInstrumentCodeType", "defaultScope", "attemptToInferMissingFx", "calendarScope", "conventionScope"]
-
-    @validator('default_scope')
-    def default_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('calendar_scope')
-    def calendar_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('convention_scope')
-    def convention_scope_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class MarketContextSuppliers(BaseModel):
     """
     It is possible to control which supplier is used for a given asset class.  This field is deprecated in favour of market data rules, which subsumes its functionality.  # noqa: E501
     """
-    commodity: Optional[StrictStr] = Field(None, alias="Commodity")
-    credit: Optional[StrictStr] = Field(None, alias="Credit")
-    equity: Optional[StrictStr] = Field(None, alias="Equity")
-    fx: Optional[StrictStr] = Field(None, alias="Fx")
-    rates: Optional[StrictStr] = Field(None, alias="Rates")
+    commodity:  Optional[StrictStr] = Field(None,alias="Commodity") 
+    credit:  Optional[StrictStr] = Field(None,alias="Credit") 
+    equity:  Optional[StrictStr] = Field(None,alias="Equity") 
+    fx:  Optional[StrictStr] = Field(None,alias="Fx") 
+    rates:  Optional[StrictStr] = Field(None,alias="Rates") 
     __properties = ["Commodity", "Credit", "Equity", "Fx", "Rates"]
 
     class Config:

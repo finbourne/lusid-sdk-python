@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, StrictStr 
 
 class StagedModificationStagingRule(BaseModel):
     """
     StagedModificationStagingRule
     """
-    staging_rule_set_id: Optional[StrictStr] = Field(None, alias="stagingRuleSetId", description="System generated unique id for the staging rule set.")
-    rule_id: Optional[StrictStr] = Field(None, alias="ruleId", description="The ID of the staging rule.")
+    staging_rule_set_id:  Optional[StrictStr] = Field(None,alias="stagingRuleSetId", description="System generated unique id for the staging rule set.") 
+    rule_id:  Optional[StrictStr] = Field(None,alias="ruleId", description="The ID of the staging rule.") 
     required_approvals: Optional[StrictInt] = Field(None, alias="requiredApprovals", description="The number of approvals required. If left blank, one approval is needed.")
     current_user_can_decide: Optional[StrictBool] = Field(None, alias="currentUserCanDecide", description="True or False indicating whether the current user can make a decision on the staged modification.")
     __properties = ["stagingRuleSetId", "ruleId", "requiredApprovals", "currentUserCanDecide"]
