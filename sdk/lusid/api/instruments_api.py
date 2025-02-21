@@ -76,22 +76,22 @@ class InstrumentsApi:
 
 
     @overload
-    async def batch_upsert_instrument_properties(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, **kwargs) -> BatchUpsertInstrumentPropertiesResponse:  # noqa: E501
+    async def batch_upsert_instrument_properties(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> BatchUpsertInstrumentPropertiesResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_upsert_instrument_properties(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertInstrumentPropertiesResponse:  # noqa: E501
+    def batch_upsert_instrument_properties(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertInstrumentPropertiesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_upsert_instrument_properties(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertInstrumentPropertiesResponse, Awaitable[BatchUpsertInstrumentPropertiesResponse]]:  # noqa: E501
+    def batch_upsert_instrument_properties(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertInstrumentPropertiesResponse, Awaitable[BatchUpsertInstrumentPropertiesResponse]]:  # noqa: E501
         """BatchUpsertInstrumentProperties: Batch upsert instruments properties  # noqa: E501
 
         Create or update one or more properties for particular instruments.    Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.    Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_instrument_properties(request_body, scope, identifier_effective_at, success_mode, async_req=True)
+        >>> thread = api.batch_upsert_instrument_properties(request_body, scope, identifier_effective_at, success_mode, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param request_body: A list of instruments and associated instrument properties to create or update. (required)
@@ -102,6 +102,10 @@ class InstrumentsApi:
         :type identifier_effective_at: str
         :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.
         :type success_mode: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -118,17 +122,17 @@ class InstrumentsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_upsert_instrument_properties_with_http_info(request_body, scope, identifier_effective_at, success_mode, **kwargs)  # noqa: E501
+        return self.batch_upsert_instrument_properties_with_http_info(request_body, scope, identifier_effective_at, success_mode, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_upsert_instrument_properties_with_http_info(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_upsert_instrument_properties_with_http_info(self, request_body : Annotated[Dict[str, UpsertInstrumentPropertyRequest], Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, identifier_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified.")] = None, success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """BatchUpsertInstrumentProperties: Batch upsert instruments properties  # noqa: E501
 
         Create or update one or more properties for particular instruments.    Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.    Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_instrument_properties_with_http_info(request_body, scope, identifier_effective_at, success_mode, async_req=True)
+        >>> thread = api.batch_upsert_instrument_properties_with_http_info(request_body, scope, identifier_effective_at, success_mode, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param request_body: A list of instruments and associated instrument properties to create or update. (required)
@@ -139,6 +143,10 @@ class InstrumentsApi:
         :type identifier_effective_at: str
         :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.
         :type success_mode: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -169,7 +177,9 @@ class InstrumentsApi:
             'request_body',
             'scope',
             'identifier_effective_at',
-            'success_mode'
+            'success_mode',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -209,6 +219,12 @@ class InstrumentsApi:
 
         if _params.get('success_mode') is not None:  # noqa: E501
             _query_params.append(('successMode', _params['success_mode']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -614,22 +630,22 @@ class InstrumentsApi:
 
 
     @overload
-    async def delete_instrument_properties(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> DeleteInstrumentPropertiesResponse:  # noqa: E501
+    async def delete_instrument_properties(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> DeleteInstrumentPropertiesResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_instrument_properties(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeleteInstrumentPropertiesResponse:  # noqa: E501
+    def delete_instrument_properties(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> DeleteInstrumentPropertiesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_instrument_properties(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteInstrumentPropertiesResponse, Awaitable[DeleteInstrumentPropertiesResponse]]:  # noqa: E501
+    def delete_instrument_properties(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteInstrumentPropertiesResponse, Awaitable[DeleteInstrumentPropertiesResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties  # noqa: E501
 
         Delete one or more properties from a particular instrument. If the properties are time-variant then an effective datetime from which  to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_instrument_properties(identifier_type, identifier, request_body, effective_at, scope, async_req=True)
+        >>> thread = api.delete_instrument_properties(identifier_type, identifier, request_body, effective_at, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param identifier_type: The unique identifier type to search, for example 'Figi'. (required)
@@ -642,6 +658,10 @@ class InstrumentsApi:
         :type effective_at: str
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -658,17 +678,17 @@ class InstrumentsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_instrument_properties_with_http_info(identifier_type, identifier, request_body, effective_at, scope, **kwargs)  # noqa: E501
+        return self.delete_instrument_properties_with_http_info(identifier_type, identifier, request_body, effective_at, scope, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_instrument_properties_with_http_info(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_instrument_properties_with_http_info(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], request_body : Annotated[conlist(StrictStr), Field(..., description="A list of property keys from the 'Instruments' domain whose properties to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties  # noqa: E501
 
         Delete one or more properties from a particular instrument. If the properties are time-variant then an effective datetime from which  to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_instrument_properties_with_http_info(identifier_type, identifier, request_body, effective_at, scope, async_req=True)
+        >>> thread = api.delete_instrument_properties_with_http_info(identifier_type, identifier, request_body, effective_at, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param identifier_type: The unique identifier type to search, for example 'Figi'. (required)
@@ -681,6 +701,10 @@ class InstrumentsApi:
         :type effective_at: str
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -712,7 +736,9 @@ class InstrumentsApi:
             'identifier',
             'request_body',
             'effective_at',
-            'scope'
+            'scope',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -755,6 +781,12 @@ class InstrumentsApi:
 
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -3511,22 +3543,22 @@ class InstrumentsApi:
 
 
     @overload
-    async def update_instrument_identifier(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> Instrument:  # noqa: E501
+    async def update_instrument_identifier(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> Instrument:  # noqa: E501
         ...
 
     @overload
-    def update_instrument_identifier(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Instrument:  # noqa: E501
+    def update_instrument_identifier(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> Instrument:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_instrument_identifier(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Instrument, Awaitable[Instrument]]:  # noqa: E501
+    def update_instrument_identifier(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Instrument, Awaitable[Instrument]]:  # noqa: E501
         """UpdateInstrumentIdentifier: Update instrument identifier  # noqa: E501
 
         Create, update or delete a particular instrument identifier for an instrument.                To delete the identifier, leave the value unspecified in the request. If not being deleted, the  identifier is updated if it exists and created if it does not.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope, async_req=True)
+        >>> thread = api.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param identifier_type: The unique identifier type to search, for example 'Figi'. (required)
@@ -3537,6 +3569,10 @@ class InstrumentsApi:
         :type update_instrument_identifier_request: UpdateInstrumentIdentifierRequest
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -3553,17 +3589,17 @@ class InstrumentsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.update_instrument_identifier_with_http_info(identifier_type, identifier, update_instrument_identifier_request, scope, **kwargs)  # noqa: E501
+        return self.update_instrument_identifier_with_http_info(identifier_type, identifier, update_instrument_identifier_request, scope, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_instrument_identifier_with_http_info(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_instrument_identifier_with_http_info(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], update_instrument_identifier_request : Annotated[UpdateInstrumentIdentifierRequest, Field(..., description="The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """UpdateInstrumentIdentifier: Update instrument identifier  # noqa: E501
 
         Create, update or delete a particular instrument identifier for an instrument.                To delete the identifier, leave the value unspecified in the request. If not being deleted, the  identifier is updated if it exists and created if it does not.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_instrument_identifier_with_http_info(identifier_type, identifier, update_instrument_identifier_request, scope, async_req=True)
+        >>> thread = api.update_instrument_identifier_with_http_info(identifier_type, identifier, update_instrument_identifier_request, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param identifier_type: The unique identifier type to search, for example 'Figi'. (required)
@@ -3574,6 +3610,10 @@ class InstrumentsApi:
         :type update_instrument_identifier_request: UpdateInstrumentIdentifierRequest
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -3604,7 +3644,9 @@ class InstrumentsApi:
             'identifier_type',
             'identifier',
             'update_instrument_identifier_request',
-            'scope'
+            'scope',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -3644,6 +3686,12 @@ class InstrumentsApi:
         _query_params = []
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -3877,28 +3925,32 @@ class InstrumentsApi:
 
 
     @overload
-    async def upsert_instruments_properties(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> UpsertInstrumentPropertiesResponse:  # noqa: E501
+    async def upsert_instruments_properties(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> UpsertInstrumentPropertiesResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_instruments_properties(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertInstrumentPropertiesResponse:  # noqa: E501
+    def upsert_instruments_properties(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertInstrumentPropertiesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_instruments_properties(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertInstrumentPropertiesResponse, Awaitable[UpsertInstrumentPropertiesResponse]]:  # noqa: E501
+    def upsert_instruments_properties(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertInstrumentPropertiesResponse, Awaitable[UpsertInstrumentPropertiesResponse]]:  # noqa: E501
         """UpsertInstrumentsProperties: Upsert instruments properties  # noqa: E501
 
         Create or update one or more properties for particular instruments.                Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.                Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_instruments_properties(upsert_instrument_property_request, scope, async_req=True)
+        >>> thread = api.upsert_instruments_properties(upsert_instrument_property_request, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param upsert_instrument_property_request: A list of instruments and associated instrument properties to create or update. (required)
         :type upsert_instrument_property_request: List[UpsertInstrumentPropertyRequest]
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -3915,23 +3967,27 @@ class InstrumentsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_instruments_properties_with_http_info(upsert_instrument_property_request, scope, **kwargs)  # noqa: E501
+        return self.upsert_instruments_properties_with_http_info(upsert_instrument_property_request, scope, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_instruments_properties_with_http_info(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_instruments_properties_with_http_info(self, upsert_instrument_property_request : Annotated[conlist(UpsertInstrumentPropertyRequest), Field(..., description="A list of instruments and associated instrument properties to create or update.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Hierarchical Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Hierarchical Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertInstrumentsProperties: Upsert instruments properties  # noqa: E501
 
         Create or update one or more properties for particular instruments.                Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.                Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_instruments_properties_with_http_info(upsert_instrument_property_request, scope, async_req=True)
+        >>> thread = api.upsert_instruments_properties_with_http_info(upsert_instrument_property_request, scope, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param upsert_instrument_property_request: A list of instruments and associated instrument properties to create or update. (required)
         :type upsert_instrument_property_request: List[UpsertInstrumentPropertyRequest]
         :param scope: The scope in which the instrument lies. When not supplied the scope is 'default'.
         :type scope: str
+        :param data_model_scope: The optional scope of a Hierarchical Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Hierarchical Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -3960,7 +4016,9 @@ class InstrumentsApi:
 
         _all_params = [
             'upsert_instrument_property_request',
-            'scope'
+            'scope',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -3994,6 +4052,12 @@ class InstrumentsApi:
         _query_params = []
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

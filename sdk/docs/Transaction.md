@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 **strategy_tag** | [**List[Strategy]**](Strategy.md) | A list of strategies representing the allocation of units across multiple sub-holding keys | [optional] 
 **resolved_transaction_type_details** | [**TransactionTypeDetails**](TransactionTypeDetails.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 
 ## Example
 

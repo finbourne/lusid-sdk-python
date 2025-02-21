@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -58,7 +59,8 @@ class Transaction(BaseModel):
     transaction_group_id:  Optional[StrictStr] = Field(None,alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions") 
     strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A list of strategies representing the allocation of units across multiple sub-holding keys")
     resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails"]
+    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -137,6 +139,9 @@ class Transaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of resolved_transaction_type_details
         if self.resolved_transaction_type_details:
             _dict['resolvedTransactionTypeDetails'] = self.resolved_transaction_type_details.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of data_model_membership
+        if self.data_model_membership:
+            _dict['dataModelMembership'] = self.data_model_membership.to_dict()
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
@@ -228,6 +233,7 @@ class Transaction(BaseModel):
             "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
             "transaction_group_id": obj.get("transactionGroupId"),
             "strategy_tag": [Strategy.from_dict(_item) for _item in obj.get("strategyTag")] if obj.get("strategyTag") is not None else None,
-            "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None
+            "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None,
+            "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None
         })
         return _obj

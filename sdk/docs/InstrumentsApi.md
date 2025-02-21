@@ -28,7 +28,7 @@ Method | HTTP request | Description
 
 
 # **batch_upsert_instrument_properties**
-> BatchUpsertInstrumentPropertiesResponse batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode)
+> BatchUpsertInstrumentPropertiesResponse batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 BatchUpsertInstrumentProperties: Batch upsert instruments properties
 
@@ -83,13 +83,15 @@ def main():
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     identifier_effective_at = 'identifier_effective_at_example' # str | The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified. (optional)
     success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode, opts=opts)
+        # api_response =  api_instance.batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # BatchUpsertInstrumentProperties: Batch upsert instruments properties
-        api_response = api_instance.batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode)
+        api_response = api_instance.batch_upsert_instrument_properties(request_body, scope=scope, identifier_effective_at=identifier_effective_at, success_mode=success_mode, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -106,6 +108,8 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **identifier_effective_at** | **str**| The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
+ **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
 
 ### Return type
 
@@ -322,7 +326,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_instrument_properties**
-> DeleteInstrumentPropertiesResponse delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope)
+> DeleteInstrumentPropertiesResponse delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
 
@@ -378,13 +382,15 @@ def main():
     request_body = ["Instrument/scope/market-sector","Instrument/scope/tenor"] # List[str] | A list of property keys from the 'Instruments' domain whose properties to delete.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, opts=opts)
+        # api_response =  api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
-        api_response = api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope)
+        api_response = api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -402,6 +408,8 @@ Name | Type | Description  | Notes
  **request_body** | [**List[str]**](str.md)| A list of property keys from the &#39;Instruments&#39; domain whose properties to delete. | 
  **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
 
 ### Return type
 
@@ -1842,7 +1850,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_instrument_identifier**
-> Instrument update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope)
+> Instrument update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 UpdateInstrumentIdentifier: Update instrument identifier
 
@@ -1902,13 +1910,15 @@ def main():
     # update_instrument_identifier_request = UpdateInstrumentIdentifierRequest.from_dict({})
     update_instrument_identifier_request = UpdateInstrumentIdentifierRequest()
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope, opts=opts)
+        # api_response =  api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # UpdateInstrumentIdentifier: Update instrument identifier
-        api_response = api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope)
+        api_response = api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1925,6 +1935,8 @@ Name | Type | Description  | Notes
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
  **update_instrument_identifier_request** | [**UpdateInstrumentIdentifierRequest**](UpdateInstrumentIdentifierRequest.md)| The identifier to update or delete. This need not be the same value as the               &#39;identifier&#39; parameter used to retrieve the instrument. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
 
 ### Return type
 
@@ -2043,7 +2055,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_instruments_properties**
-> UpsertInstrumentPropertiesResponse upsert_instruments_properties(upsert_instrument_property_request, scope=scope)
+> UpsertInstrumentPropertiesResponse upsert_instruments_properties(upsert_instrument_property_request, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 UpsertInstrumentsProperties: Upsert instruments properties
 
@@ -2096,13 +2108,15 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     upsert_instrument_property_request = [{"identifierType":"LusidInstrumentId","identifier":"LUID_00000000","properties":[{"key":"Instrument/MyScope/SomePropertyName","value":{"labelValue":"SomeValue1"},"effectiveFrom":"2016-09-15T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/SomePropertyName","value":{"labelValue":"SomeValue2"},"effectiveFrom":"2017-08-10T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/AnotherPropertyName","value":{"labelValue":"AnotherValue1"},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00","effectiveUntil":"2019-06-01T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/AnotherPropertyName","value":{"labelValue":"AnotherValue2"},"effectiveFrom":"2020-03-15T12:00:00.0000000+00:00","effectiveUntil":"2021-01-15T12:00:00.0000000+00:00"}]}] # List[UpsertInstrumentPropertyRequest] | A list of instruments and associated instrument properties to create or update.
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_instruments_properties(upsert_instrument_property_request, scope=scope, opts=opts)
+        # api_response =  api_instance.upsert_instruments_properties(upsert_instrument_property_request, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # UpsertInstrumentsProperties: Upsert instruments properties
-        api_response = api_instance.upsert_instruments_properties(upsert_instrument_property_request, scope=scope)
+        api_response = api_instance.upsert_instruments_properties(upsert_instrument_property_request, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -2117,6 +2131,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **upsert_instrument_property_request** | [**List[UpsertInstrumentPropertyRequest]**](UpsertInstrumentPropertyRequest.md)| A list of instruments and associated instrument properties to create or update. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
 
 ### Return type
 
