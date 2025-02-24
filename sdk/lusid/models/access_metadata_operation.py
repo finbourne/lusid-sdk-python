@@ -26,7 +26,7 @@ class AccessMetadataOperation(BaseModel):
     """
     AccessMetadataOperation
     """
-    value: conlist(AccessMetadataValue, min_items=1) = Field(...)
+    value: conlist(AccessMetadataValue) = Field(...)
     path:  StrictStr = Field(...,alias="path") 
     op:  StrictStr = Field(...,alias="op", description="The available values are: add, remove") 
     var_from:  Optional[StrictStr] = Field(None,alias="from") 

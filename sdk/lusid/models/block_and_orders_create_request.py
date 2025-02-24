@@ -26,7 +26,7 @@ class BlockAndOrdersCreateRequest(BaseModel):
     """
     BlockAndOrdersCreateRequest
     """
-    requests: conlist(BlockAndOrdersRequest, max_items=100, min_items=1) = Field(..., description="A collection of BlockAndOrdersRequest.")
+    requests: conlist(BlockAndOrdersRequest) = Field(..., description="A collection of BlockAndOrdersRequest.")
     __properties = ["requests"]
 
     class Config:

@@ -26,7 +26,7 @@ class GeneralLedgerProfileMapping(BaseModel):
     GeneralLedgerProfileMapping
     """
     mapping_filter:  StrictStr = Field(...,alias="mappingFilter", description="The filter syntax for the Mapping filter. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax") 
-    levels: conlist(StrictStr, max_items=5) = Field(..., description="References fields and properties on the associated Journal Entry Line and graph of associated objects.")
+    levels: conlist(StrictStr) = Field(..., description="References fields and properties on the associated Journal Entry Line and graph of associated objects.")
     __properties = ["mappingFilter", "levels"]
 
     class Config:

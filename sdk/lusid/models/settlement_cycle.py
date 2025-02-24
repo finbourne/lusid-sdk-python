@@ -26,7 +26,7 @@ class SettlementCycle(BaseModel):
     """
     The settlement cycle for an instrument  # noqa: E501
     """
-    business_day_offset: conint(strict=True, le=2147483647, ge=0) = Field(..., alias="businessDayOffset")
+    business_day_offset: conint(strict=True) = Field(..., alias="businessDayOffset")
     calendars: conlist(ResourceId) = Field(...)
     __properties = ["businessDayOffset", "calendars"]
 

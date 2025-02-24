@@ -26,7 +26,7 @@ class SetShareClassInstrumentsRequest(BaseModel):
     """
     The request used to create a Fund.  # noqa: E501
     """
-    share_class_instrument_scopes: conlist(StrictStr, max_items=1) = Field(..., alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
+    share_class_instrument_scopes: conlist(StrictStr) = Field(..., alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: conlist(InstrumentResolutionDetail) = Field(..., alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
     __properties = ["shareClassInstrumentScopes", "shareClassInstruments"]
 

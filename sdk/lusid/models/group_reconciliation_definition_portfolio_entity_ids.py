@@ -26,8 +26,8 @@ class GroupReconciliationDefinitionPortfolioEntityIds(BaseModel):
     """
     GroupReconciliationDefinitionPortfolioEntityIds
     """
-    left: conlist(PortfolioEntityId, min_items=1) = Field(..., description="Portfolio Entity Id of the left side of a reconciliation")
-    right: conlist(PortfolioEntityId, min_items=1) = Field(..., description="Portfolio Entity Id of the right side of a reconciliation")
+    left: conlist(PortfolioEntityId) = Field(..., description="Portfolio Entity Id of the left side of a reconciliation")
+    right: conlist(PortfolioEntityId) = Field(..., description="Portfolio Entity Id of the right side of a reconciliation")
     __properties = ["left", "right"]
 
     class Config:

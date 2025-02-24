@@ -29,7 +29,7 @@ class TaxRule(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="A user-friendly name") 
     description:  StrictStr = Field(...,alias="description", description="A description for this rule") 
     rate: Union[StrictFloat, StrictInt] = Field(..., description="The rate to be applied if all criteria are met")
-    match_criteria: conlist(MatchCriterion, max_items=20) = Field(..., alias="matchCriteria", description="A set of criteria to be met for this rule to be applied")
+    match_criteria: conlist(MatchCriterion) = Field(..., alias="matchCriteria", description="A set of criteria to be met for this rule to be applied")
     __properties = ["name", "description", "rate", "matchCriteria"]
 
     class Config:

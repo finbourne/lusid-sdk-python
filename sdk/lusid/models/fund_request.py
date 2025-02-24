@@ -34,11 +34,11 @@ class FundRequest(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     fund_configuration_id: ResourceId = Field(..., alias="fundConfigurationId")
     abor_id: ResourceId = Field(..., alias="aborId")
-    share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
+    share_class_instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
     type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
-    decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+    decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
     year_end_date: DayMonth = Field(..., alias="yearEndDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
     __properties = ["code", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties"]

@@ -26,7 +26,7 @@ class InstrumentEventConfiguration(BaseModel):
     """
     InstrumentEventConfiguration
     """
-    transaction_template_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="transactionTemplateScopes")
+    transaction_template_scopes: Optional[conlist(StrictStr)] = Field(None, alias="transactionTemplateScopes")
     recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
     __properties = ["transactionTemplateScopes", "recipeId"]
 

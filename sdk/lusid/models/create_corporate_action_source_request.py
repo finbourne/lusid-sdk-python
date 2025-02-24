@@ -29,7 +29,7 @@ class CreateCorporateActionSourceRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code of the corporate action source") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the corporate action source") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action source") 
-    instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.")
+    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.")
     __properties = ["scope", "code", "displayName", "description", "instrumentScopes"]
 
     class Config:

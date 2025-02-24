@@ -31,7 +31,7 @@ class CreateReferencePortfolioRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="Unique identifier for the portfolio.") 
     created: Optional[datetime] = Field(None, description="The original creation date, defaults to today if not specified when creating a portfolio.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Portfolio properties to add to the portfolio.")
-    instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="Instrument Scopes.")
+    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="Instrument Scopes.")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.") 
     __properties = ["displayName", "description", "code", "created", "properties", "instrumentScopes", "baseCurrency"]
 

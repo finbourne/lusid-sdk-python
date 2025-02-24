@@ -28,7 +28,7 @@ class UpdateFeeTypeRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the fee type.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the fee type.") 
-    component_transactions: conlist(ComponentTransaction, max_items=1000) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
+    component_transactions: conlist(ComponentTransaction) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
     __properties = ["displayName", "description", "componentTransactions"]
 
     class Config:

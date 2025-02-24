@@ -31,8 +31,8 @@ class CreateGroupReconciliationComparisonRulesetRequest(BaseModel):
     id: ResourceId = Field(...)
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the ruleset") 
     reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
-    core_attribute_rules: conlist(GroupReconciliationCoreAttributeRule, min_items=1) = Field(..., alias="coreAttributeRules", description="The core comparison rules")
-    aggregate_attribute_rules: conlist(GroupReconciliationAggregateAttributeRule, min_items=1) = Field(..., alias="aggregateAttributeRules", description="The aggregate comparison rules")
+    core_attribute_rules: conlist(GroupReconciliationCoreAttributeRule) = Field(..., alias="coreAttributeRules", description="The core comparison rules")
+    aggregate_attribute_rules: conlist(GroupReconciliationAggregateAttributeRule) = Field(..., alias="aggregateAttributeRules", description="The aggregate comparison rules")
     __properties = ["id", "displayName", "reconciliationType", "coreAttributeRules", "aggregateAttributeRules"]
 
     class Config:

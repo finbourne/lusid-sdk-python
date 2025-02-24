@@ -26,7 +26,7 @@ class DecimalList(ReferenceList):
     """
     DecimalList
     """
-    values: conlist(Union[StrictFloat, StrictInt], max_items=10000, min_items=0) = Field(...)
+    values: conlist(Union[StrictFloat, StrictInt]) = Field(...)
     reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]

@@ -26,7 +26,7 @@ class PlaceBlocksRequest(BaseModel):
     """
     PlaceBlocksRequest
     """
-    requests: conlist(PlacementRequest, max_items=100, min_items=1) = Field(..., description="A collection of PlacementRequest.")
+    requests: conlist(PlacementRequest) = Field(..., description="A collection of PlacementRequest.")
     __properties = ["requests"]
 
     class Config:

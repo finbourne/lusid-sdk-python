@@ -27,7 +27,7 @@ class BookTransactionsRequest(BaseModel):
     """
     BookTransactionsRequest
     """
-    allocation_ids: conlist(ResourceId, max_items=5000, min_items=1) = Field(..., alias="allocationIds", description="A collection of Allocation IDs")
+    allocation_ids: conlist(ResourceId) = Field(..., alias="allocationIds", description="A collection of Allocation IDs")
     transaction_properties: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="transactionProperties", description="A collection of properties")
     __properties = ["allocationIds", "transactionProperties"]
 

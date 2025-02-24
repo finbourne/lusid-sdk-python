@@ -25,8 +25,8 @@ class DayMonth(BaseModel):
     """
     DayMonth
     """
-    day: conint(strict=True, le=31, ge=1) = Field(..., description="Day part of Day, Month for Year End date specification.")
-    month: conint(strict=True, le=12, ge=1) = Field(..., description="Month part of Day, Month for Year End date specification.")
+    day: conint(strict=True) = Field(..., description="Day part of Day, Month for Year End date specification.")
+    month: conint(strict=True) = Field(..., description="Month part of Day, Month for Year End date specification.")
     __properties = ["day", "month"]
 
     class Config:

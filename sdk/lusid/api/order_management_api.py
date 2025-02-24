@@ -1382,15 +1382,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId, max_items=100), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId, max_items=100), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId, max_items=100), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         This will allocate executions for a given list of placements back to their originating orders.  # noqa: E501
@@ -1423,7 +1423,7 @@ class OrderManagementApi:
         return self.run_allocation_service_with_http_info(resource_id, allocation_algorithm, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId, max_items=100), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         This will allocate executions for a given list of placements back to their originating orders.  # noqa: E501

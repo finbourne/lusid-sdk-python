@@ -29,7 +29,7 @@ class GeneralLedgerProfileRequest(BaseModel):
     general_ledger_profile_code:  StrictStr = Field(...,alias="generalLedgerProfileCode", description="The unique code for the General Ledger Profile") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the General Ledger Profile") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the General Ledger Profile") 
-    general_ledger_profile_mappings: conlist(GeneralLedgerProfileMapping, max_items=1000) = Field(..., alias="generalLedgerProfileMappings", description="Rules for mapping Account or property values to aggregation pattern definitions")
+    general_ledger_profile_mappings: conlist(GeneralLedgerProfileMapping) = Field(..., alias="generalLedgerProfileMappings", description="Rules for mapping Account or property values to aggregation pattern definitions")
     __properties = ["generalLedgerProfileCode", "displayName", "description", "generalLedgerProfileMappings"]
 
     class Config:

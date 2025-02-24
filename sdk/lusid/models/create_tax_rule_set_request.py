@@ -31,7 +31,7 @@ class CreateTaxRuleSetRequest(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="") 
     description:  StrictStr = Field(...,alias="description", description="") 
     output_property_key:  StrictStr = Field(...,alias="outputPropertyKey", description="") 
-    rules: conlist(TaxRule, max_items=100) = Field(...)
+    rules: conlist(TaxRule) = Field(...)
     __properties = ["id", "displayName", "description", "outputPropertyKey", "rules"]
 
     class Config:

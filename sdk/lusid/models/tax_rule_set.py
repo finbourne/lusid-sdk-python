@@ -33,7 +33,7 @@ class TaxRuleSet(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-friendly name") 
     description:  StrictStr = Field(...,alias="description", description="A description of what this rule set is for") 
     output_property_key:  StrictStr = Field(...,alias="outputPropertyKey", description="The property key that this rule set will write to") 
-    rules: conlist(TaxRule, max_items=100) = Field(..., description="The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions")
+    rules: conlist(TaxRule) = Field(..., description="The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["id", "displayName", "description", "outputPropertyKey", "rules", "version", "links"]

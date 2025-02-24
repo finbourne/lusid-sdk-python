@@ -28,7 +28,7 @@ class RulesInterval(BaseModel):
     RulesInterval
     """
     effective_range: DateRange = Field(..., alias="effectiveRange")
-    rules: conlist(AmortisationRule, max_items=100) = Field(..., description="The rules of this rule set.")
+    rules: conlist(AmortisationRule) = Field(..., description="The rules of this rule set.")
     __properties = ["effectiveRange", "rules"]
 
     class Config:

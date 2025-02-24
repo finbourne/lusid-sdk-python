@@ -25,7 +25,7 @@ class HoldingIdsRequest(BaseModel):
     """
     HoldingIdsRequest
     """
-    holding_ids: conlist(StrictInt, min_items=1) = Field(..., alias="holdingIds", description="The array of unique holding identifiers")
+    holding_ids: conlist(StrictInt) = Field(..., alias="holdingIds", description="The array of unique holding identifiers")
     __properties = ["holdingIds"]
 
     class Config:

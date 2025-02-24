@@ -28,7 +28,7 @@ class UpdateTaxRuleSetRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="") 
     description:  StrictStr = Field(...,alias="description", description="") 
-    rules: conlist(TaxRule, max_items=100) = Field(...)
+    rules: conlist(TaxRule) = Field(...)
     __properties = ["displayName", "description", "rules"]
 
     class Config:

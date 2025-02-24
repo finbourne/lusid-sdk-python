@@ -40,7 +40,7 @@ class Fund(BaseModel):
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
     type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
-    decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+    decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
     year_end_date: DayMonth = Field(..., alias="yearEndDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
     version: Optional[Version] = None

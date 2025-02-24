@@ -26,7 +26,7 @@ class MoveOrdersToDifferentBlocksRequest(BaseModel):
     """
     MoveOrdersToDifferentBlocksRequest
     """
-    requests: conlist(BlockAndOrderIdRequest, max_items=100, min_items=1) = Field(..., description="A collection of BlockAndOrderId.")
+    requests: conlist(BlockAndOrderIdRequest) = Field(..., description="A collection of BlockAndOrderId.")
     __properties = ["requests"]
 
     class Config:

@@ -27,7 +27,7 @@ class PortfolioIdList(ReferenceList):
     """
     PortfolioIdList
     """
-    values: conlist(ResourceId, max_items=10000) = Field(...)
+    values: conlist(ResourceId) = Field(...)
     reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]

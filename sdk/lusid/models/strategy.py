@@ -26,7 +26,7 @@ class Strategy(BaseModel):
     """
     Strategy
     """
-    keys: conlist(PerpetualProperty, min_items=1) = Field(...)
+    keys: conlist(PerpetualProperty) = Field(...)
     value_type:  StrictStr = Field(...,alias="valueType") 
     value: Union[StrictFloat, StrictInt] = Field(...)
     __properties = ["keys", "valueType", "value"]
