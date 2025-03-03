@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
+from typing import Any, Dict, List, Union
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.schedule import Schedule
 
@@ -30,11 +30,12 @@ class LoanFacility(LusidInstrument):
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
+    initial_commitment: Union[StrictFloat, StrictInt] = Field(..., alias="initialCommitment", description="The initial commitment for the loan facility.")
     loan_type:  StrictStr = Field(...,alias="loanType", description="LoanType for this facility. The facility can either be a revolving or a  term loan.    Supported string (enumeration) values are: [Revolver, TermLoan].") 
     schedules: conlist(Schedule) = Field(..., description="Repayment schedules for the loan.")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "loanType", "schedules"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "initialCommitment", "loanType", "schedules"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -104,6 +105,7 @@ class LoanFacility(LusidInstrument):
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "dom_ccy": obj.get("domCcy"),
+            "initial_commitment": obj.get("initialCommitment"),
             "loan_type": obj.get("loanType"),
             "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None
         })
