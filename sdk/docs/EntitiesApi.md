@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_custom_entity_by_entity_unique_id**](EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | [EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 [**get_data_type_by_entity_unique_id**](EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | [EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
-[**get_entity_history**](EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | [EXPERIMENTAL] GetEntityHistory: List an entity&#39;s history information
+[**get_entity_history**](EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | [EARLY ACCESS] GetEntityHistory: List an entity&#39;s history information
 [**get_instrument_by_entity_unique_id**](EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | [EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 [**get_portfolio_by_entity_unique_id**](EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 [**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 # **get_entity_history**
 > ResourceListOfChangeInterval get_entity_history(entity_type, entity_unique_id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] GetEntityHistory: List an entity's history information
+[EARLY ACCESS] GetEntityHistory: List an entity's history information
 
 Retrieve a page of an entity's change history up to a particular point in AsAt time.
 
@@ -271,7 +271,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_entity_history(entity_type, entity_unique_id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] GetEntityHistory: List an entity's history information
+        # [EARLY ACCESS] GetEntityHistory: List an entity's history information
         api_response = api_instance.get_entity_history(entity_type, entity_unique_id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 

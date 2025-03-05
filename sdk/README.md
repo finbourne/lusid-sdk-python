@@ -199,7 +199,7 @@ Class | Method | HTTP request | Description
 *DerivedTransactionPortfoliosApi* | [**delete_derived_portfolio_details**](docs/DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
 *EntitiesApi* | [**get_custom_entity_by_entity_unique_id**](docs/EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | [EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | [EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
-*EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | [EXPERIMENTAL] GetEntityHistory: List an entity's history information
+*EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | [EARLY ACCESS] GetEntityHistory: List an entity's history information
 *EntitiesApi* | [**get_instrument_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | [EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_by_entity_unique_id**](docs/EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_changes**](docs/EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
@@ -548,6 +548,7 @@ Class | Method | HTTP request | Description
 *TimelinesApi* | [**get_closed_period**](docs/TimelinesApi.md#get_closed_period) | **GET** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId} | [EXPERIMENTAL] GetClosedPeriod: Gets a Closed Period entity.
 *TimelinesApi* | [**get_timeline**](docs/TimelinesApi.md#get_timeline) | **GET** /api/timelines/{scope}/{code} | [EXPERIMENTAL] GetTimeline: Get a single Timeline by scope and code.
 *TimelinesApi* | [**list_closed_periods**](docs/TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
+*TimelinesApi* | [**list_timelines**](docs/TimelinesApi.md#list_timelines) | **GET** /api/timelines | [EXPERIMENTAL] ListTimelines: List Timelines
 *TimelinesApi* | [**update_timeline**](docs/TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 *TransactionConfigurationApi* | [**delete_side_definition**](docs/TransactionConfigurationApi.md#delete_side_definition) | **DELETE** /api/transactionconfiguration/sides/{side}/$delete | DeleteSideDefinition: Delete the given side definition
 *TransactionConfigurationApi* | [**delete_transaction_type**](docs/TransactionConfigurationApi.md#delete_transaction_type) | **DELETE** /api/transactionconfiguration/types/{source}/{type} | DeleteTransactionType: Delete a transaction type
@@ -1345,6 +1346,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfStagedModification](docs/PagedResourceListOfStagedModification.md)
  - [PagedResourceListOfStagedModificationsRequestedChangeInterval](docs/PagedResourceListOfStagedModificationsRequestedChangeInterval.md)
  - [PagedResourceListOfStagingRuleSet](docs/PagedResourceListOfStagingRuleSet.md)
+ - [PagedResourceListOfTimeline](docs/PagedResourceListOfTimeline.md)
  - [PagedResourceListOfTransactionTemplate](docs/PagedResourceListOfTransactionTemplate.md)
  - [PagedResourceListOfTransactionTemplateSpecification](docs/PagedResourceListOfTransactionTemplateSpecification.md)
  - [PagedResourceListOfTranslationScriptId](docs/PagedResourceListOfTranslationScriptId.md)

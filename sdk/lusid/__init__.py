@@ -812,6 +812,7 @@ from lusid.models.paged_resource_list_of_sequence_definition import PagedResourc
 from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
 from lusid.models.paged_resource_list_of_staged_modifications_requested_change_interval import PagedResourceListOfStagedModificationsRequestedChangeInterval
 from lusid.models.paged_resource_list_of_staging_rule_set import PagedResourceListOfStagingRuleSet
+from lusid.models.paged_resource_list_of_timeline import PagedResourceListOfTimeline
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
@@ -2090,6 +2091,7 @@ __all__ = [
     "PagedResourceListOfStagedModification",
     "PagedResourceListOfStagedModificationsRequestedChangeInterval",
     "PagedResourceListOfStagingRuleSet",
+    "PagedResourceListOfTimeline",
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
     "PagedResourceListOfTranslationScriptId",

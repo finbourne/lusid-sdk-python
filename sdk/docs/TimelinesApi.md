@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**get_closed_period**](TimelinesApi.md#get_closed_period) | **GET** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId} | [EXPERIMENTAL] GetClosedPeriod: Gets a Closed Period entity.
 [**get_timeline**](TimelinesApi.md#get_timeline) | **GET** /api/timelines/{scope}/{code} | [EXPERIMENTAL] GetTimeline: Get a single Timeline by scope and code.
 [**list_closed_periods**](TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
+[**list_timelines**](TimelinesApi.md#list_timelines) | **GET** /api/timelines | [EXPERIMENTAL] ListTimelines: List Timelines
 [**update_timeline**](TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 
 
@@ -606,6 +607,110 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested ClosedPeriods. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_timelines**
+> PagedResourceListOfTimeline list_timelines(as_at=as_at, effective_at=effective_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+
+[EXPERIMENTAL] ListTimelines: List Timelines
+
+List all the Timelines matching a particular criteria.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TimelinesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TimelinesApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Timelines. Defaults to returning the latest version of each Timeline if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Timelines.              Note that Timelines are monotemporal, the effectiveAt is for Timevariant Properties on the Timeline only.              Defaults to the current LUSID system datetime if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Timelines; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the displayName, specify \"displayName eq 'AccountingTimeline'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Timeline' domain to decorate onto each Timeline.              These must take the format {domain}/{scope}/{code}, for example 'Timeline/Account/id'. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_timelines(as_at=as_at, effective_at=effective_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
+        # [EXPERIMENTAL] ListTimelines: List Timelines
+        api_response = api_instance.list_timelines(as_at=as_at, effective_at=effective_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TimelinesApi->list_timelines: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| The asAt datetime at which to list the Timelines. Defaults to returning the latest version of each Timeline if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the Timelines.              Note that Timelines are monotemporal, the effectiveAt is for Timevariant Properties on the Timeline only.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Timelines; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results.              For example, to filter on the displayName, specify \&quot;displayName eq &#39;AccountingTimeline&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto each Timeline.              These must take the format {domain}/{scope}/{code}, for example &#39;Timeline/Account/id&#39;. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfTimeline**](PagedResourceListOfTimeline.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested Timelines. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
