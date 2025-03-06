@@ -242,7 +242,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def delete_structured_result_data(self, scope : Annotated[StrictStr, Field(..., description="The scope from which to delete data items.")], request_body : Annotated[Dict[str, StructuredResultDataId], Field(..., description="The data IDs to delete, each keyed by a unique, ephemeral correlation ID.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulStructuredDataResponse, Awaitable[AnnulStructuredDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data  # noqa: E501
+        """DeleteStructuredResultData: Delete structured result data  # noqa: E501
 
         Delete one or more structured result data items from a particular scope. Each item is identified by a unique ID which includes  information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully deleted data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -275,7 +275,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def delete_structured_result_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope from which to delete data items.")], request_body : Annotated[Dict[str, StructuredResultDataId], Field(..., description="The data IDs to delete, each keyed by a unique, ephemeral correlation ID.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data  # noqa: E501
+        """DeleteStructuredResultData: Delete structured result data  # noqa: E501
 
         Delete one or more structured result data items from a particular scope. Each item is identified by a unique ID which includes  information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully deleted data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -409,7 +409,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_address_key_definitions_for_document(self, scope : Annotated[StrictStr, Field(..., description="The scope of the document for which address key definitions are retrieved.")], code : Annotated[StrictStr, Field(..., description="The code of the document for which address key definitions are retrieved.")], source : Annotated[StrictStr, Field(..., description="The source of the document for which address key definitions are retrieved.")], result_type : Annotated[StrictStr, Field(..., description="The result type of the document for which address key definitions are retrieved.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAddressKeyDefinition, Awaitable[ResourceListOfAddressKeyDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.  # noqa: E501
+        """GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.  # noqa: E501
 
         For a given virtual document retrieve all the address key definitions that are in use.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -450,7 +450,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_address_key_definitions_for_document_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the document for which address key definitions are retrieved.")], code : Annotated[StrictStr, Field(..., description="The code of the document for which address key definitions are retrieved.")], source : Annotated[StrictStr, Field(..., description="The source of the document for which address key definitions are retrieved.")], result_type : Annotated[StrictStr, Field(..., description="The result type of the document for which address key definitions are retrieved.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.  # noqa: E501
+        """GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.  # noqa: E501
 
         For a given virtual document retrieve all the address key definitions that are in use.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -604,7 +604,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_data_map(self, scope : Annotated[StrictStr, Field(..., description="The scope from which to retrieve data maps.")], request_body : Annotated[Dict[str, DataMapKey], Field(..., description="The data map keys to look up, each keyed by a unique, ephemeral correlation ID.")], async_req: Optional[bool]=None, **kwargs) -> Union[GetDataMapResponse, Awaitable[GetDataMapResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetDataMap: Get data map  # noqa: E501
+        """GetDataMap: Get data map  # noqa: E501
 
         Retrieve one or more structured result store address definition data maps from a particular scope.                Each data map can be identified by its invariant key, which can be thought of as a permanent URL.  For each ID, LUSID returns the most recently matched item.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map in the response.                The response returns three collections. The first contains successfully retrieved data maps. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -637,7 +637,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_data_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope from which to retrieve data maps.")], request_body : Annotated[Dict[str, DataMapKey], Field(..., description="The data map keys to look up, each keyed by a unique, ephemeral correlation ID.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetDataMap: Get data map  # noqa: E501
+        """GetDataMap: Get data map  # noqa: E501
 
         Retrieve one or more structured result store address definition data maps from a particular scope.                Each data map can be identified by its invariant key, which can be thought of as a permanent URL.  For each ID, LUSID returns the most recently matched item.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map in the response.                The response returns three collections. The first contains successfully retrieved data maps. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -957,7 +957,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_virtual_document(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to construct the virtual documents.")], request_body : Annotated[Dict[str, StructuredResultDataId], Field(..., description="The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetVirtualDocumentResponse, Awaitable[GetVirtualDocumentResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents  # noqa: E501
+        """GetVirtualDocument: Get Virtual Documents  # noqa: E501
 
         Retrieve one or more virtual documents from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided effective datetime.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns two collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found, or those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -992,7 +992,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_virtual_document_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to construct the virtual documents.")], request_body : Annotated[Dict[str, StructuredResultDataId], Field(..., description="The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents  # noqa: E501
+        """GetVirtualDocument: Get Virtual Documents  # noqa: E501
 
         Retrieve one or more virtual documents from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided effective datetime.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns two collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found, or those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1135,7 +1135,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_virtual_document_rows(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to retrieve the virtual document.")], code : Annotated[StrictStr, Field(..., description="The code of the virtual document to retrieve.")], source : Annotated[StrictStr, Field(..., description="The source of the virtual document to retrieve.")], result_type : Annotated[StrictStr, Field(..., description="The result type of the virtual document to retrieve.")], effective_at : Annotated[StrictStr, Field(..., description="The effectiveAt datetime at which to retrieve the virtual document.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the virtual document. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing virtual document rows from a previous               call to list virtual document rows. This value is returned from the previous call. If a pagination token is               provided the filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:               https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfVirtualRow, Awaitable[PagedResourceListOfVirtualRow]]:  # noqa: E501
-        """[EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows  # noqa: E501
+        """GetVirtualDocumentRows: Get Virtual Document Rows  # noqa: E501
 
         Retrieve the rows of the virtual document with the specified identifiers and the given effectiveAt date time.    Get virtual document rows merges multiple StructuredResultData items upserted with UpsertStructuredResultData  for a single StructuredResultDataId.                Since an item of StructuredResultData is always upserted with a StructuredResultDataId, of which  effectiveAt is a part, then merging across the asAt dimension is supported but not merging across the  effectiveAt dimension.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1182,7 +1182,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_virtual_document_rows_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to retrieve the virtual document.")], code : Annotated[StrictStr, Field(..., description="The code of the virtual document to retrieve.")], source : Annotated[StrictStr, Field(..., description="The source of the virtual document to retrieve.")], result_type : Annotated[StrictStr, Field(..., description="The result type of the virtual document to retrieve.")], effective_at : Annotated[StrictStr, Field(..., description="The effectiveAt datetime at which to retrieve the virtual document.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the virtual document. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing virtual document rows from a previous               call to list virtual document rows. This value is returned from the previous call. If a pagination token is               provided the filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:               https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows  # noqa: E501
+        """GetVirtualDocumentRows: Get Virtual Document Rows  # noqa: E501
 
         Retrieve the rows of the virtual document with the specified identifiers and the given effectiveAt date time.    Get virtual document rows merges multiple StructuredResultData items upserted with UpsertStructuredResultData  for a single StructuredResultDataId.                Since an item of StructuredResultData is always upserted with a StructuredResultDataId, of which  effectiveAt is a part, then merging across the asAt dimension is supported but not merging across the  effectiveAt dimension.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1354,7 +1354,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def upsert_result_value(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to construct the virtual documents.")], request_body : Annotated[Dict[str, UpsertResultValuesDataRequest], Field(..., description="The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertStructuredDataResponse, Awaitable[UpsertStructuredDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertResultValue: Upsert result value  # noqa: E501
+        """UpsertResultValue: Upsert result value  # noqa: E501
 
         Create or update one or more Upsert one or more result values in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1387,7 +1387,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def upsert_result_value_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to construct the virtual documents.")], request_body : Annotated[Dict[str, UpsertResultValuesDataRequest], Field(..., description="The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertResultValue: Upsert result value  # noqa: E501
+        """UpsertResultValue: Upsert result value  # noqa: E501
 
         Create or update one or more Upsert one or more result values in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -5,13 +5,13 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_data_map**](StructuredResultDataApi.md#create_data_map) | **POST** /api/unitresults/datamap/{scope} | CreateDataMap: Create data map
-[**delete_structured_result_data**](StructuredResultDataApi.md#delete_structured_result_data) | **POST** /api/unitresults/{scope}/$delete | [EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data
-[**get_address_key_definitions_for_document**](StructuredResultDataApi.md#get_address_key_definitions_for_document) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType}/addresskeydefinitions | [EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
-[**get_data_map**](StructuredResultDataApi.md#get_data_map) | **POST** /api/unitresults/datamap/{scope}/$get | [EXPERIMENTAL] GetDataMap: Get data map
+[**delete_structured_result_data**](StructuredResultDataApi.md#delete_structured_result_data) | **POST** /api/unitresults/{scope}/$delete | DeleteStructuredResultData: Delete structured result data
+[**get_address_key_definitions_for_document**](StructuredResultDataApi.md#get_address_key_definitions_for_document) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType}/addresskeydefinitions | GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
+[**get_data_map**](StructuredResultDataApi.md#get_data_map) | **POST** /api/unitresults/datamap/{scope}/$get | GetDataMap: Get data map
 [**get_structured_result_data**](StructuredResultDataApi.md#get_structured_result_data) | **POST** /api/unitresults/{scope}/$get | GetStructuredResultData: Get structured result data
-[**get_virtual_document**](StructuredResultDataApi.md#get_virtual_document) | **POST** /api/unitresults/virtualdocument/{scope}/$get | [EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents
-[**get_virtual_document_rows**](StructuredResultDataApi.md#get_virtual_document_rows) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType} | [EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows
-[**upsert_result_value**](StructuredResultDataApi.md#upsert_result_value) | **POST** /api/unitresults/resultvalue/{scope} | [EXPERIMENTAL] UpsertResultValue: Upsert result value
+[**get_virtual_document**](StructuredResultDataApi.md#get_virtual_document) | **POST** /api/unitresults/virtualdocument/{scope}/$get | GetVirtualDocument: Get Virtual Documents
+[**get_virtual_document_rows**](StructuredResultDataApi.md#get_virtual_document_rows) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType} | GetVirtualDocumentRows: Get Virtual Document Rows
+[**upsert_result_value**](StructuredResultDataApi.md#upsert_result_value) | **POST** /api/unitresults/resultvalue/{scope} | UpsertResultValue: Upsert result value
 [**upsert_structured_result_data**](StructuredResultDataApi.md#upsert_structured_result_data) | **POST** /api/unitresults/{scope} | UpsertStructuredResultData: Upsert structured result data
 
 
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 # **delete_structured_result_data**
 > AnnulStructuredDataResponse delete_structured_result_data(scope, request_body)
 
-[EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data
+DeleteStructuredResultData: Delete structured result data
 
 Delete one or more structured result data items from a particular scope. Each item is identified by a unique ID which includes  information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully deleted data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
 
@@ -168,7 +168,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_structured_result_data(scope, request_body, opts=opts)
 
-        # [EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data
+        # DeleteStructuredResultData: Delete structured result data
         api_response = api_instance.delete_structured_result_data(scope, request_body)
         pprint(api_response)
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 # **get_address_key_definitions_for_document**
 > ResourceListOfAddressKeyDefinition get_address_key_definitions_for_document(scope, code, source, result_type, effective_at=effective_at, as_at=as_at)
 
-[EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
+GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
 
 For a given virtual document retrieve all the address key definitions that are in use.
 
@@ -266,7 +266,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_address_key_definitions_for_document(scope, code, source, result_type, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
+        # GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
         api_response = api_instance.get_address_key_definitions_for_document(scope, code, source, result_type, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 # **get_data_map**
 > GetDataMapResponse get_data_map(scope, request_body)
 
-[EXPERIMENTAL] GetDataMap: Get data map
+GetDataMap: Get data map
 
 Retrieve one or more structured result store address definition data maps from a particular scope.                Each data map can be identified by its invariant key, which can be thought of as a permanent URL.  For each ID, LUSID returns the most recently matched item.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map in the response.                The response returns three collections. The first contains successfully retrieved data maps. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.
 
@@ -364,7 +364,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_data_map(scope, request_body, opts=opts)
 
-        # [EXPERIMENTAL] GetDataMap: Get data map
+        # GetDataMap: Get data map
         api_response = api_instance.get_data_map(scope, request_body)
         pprint(api_response)
 
@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 # **get_virtual_document**
 > GetVirtualDocumentResponse get_virtual_document(scope, request_body, as_at=as_at)
 
-[EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents
+GetVirtualDocument: Get Virtual Documents
 
 Retrieve one or more virtual documents from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided effective datetime.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns two collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found, or those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.
 
@@ -557,7 +557,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_virtual_document(scope, request_body, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents
+        # GetVirtualDocument: Get Virtual Documents
         api_response = api_instance.get_virtual_document(scope, request_body, as_at=as_at)
         pprint(api_response)
 
@@ -596,7 +596,7 @@ Name | Type | Description  | Notes
 # **get_virtual_document_rows**
 > PagedResourceListOfVirtualRow get_virtual_document_rows(scope, code, source, result_type, effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
 
-[EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows
+GetVirtualDocumentRows: Get Virtual Document Rows
 
 Retrieve the rows of the virtual document with the specified identifiers and the given effectiveAt date time.    Get virtual document rows merges multiple StructuredResultData items upserted with UpsertStructuredResultData  for a single StructuredResultDataId.                Since an item of StructuredResultData is always upserted with a StructuredResultDataId, of which  effectiveAt is a part, then merging across the asAt dimension is supported but not merging across the  effectiveAt dimension.
 
@@ -659,7 +659,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_virtual_document_rows(scope, code, source, result_type, effective_at, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
 
-        # [EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows
+        # GetVirtualDocumentRows: Get Virtual Document Rows
         api_response = api_instance.get_virtual_document_rows(scope, code, source, result_type, effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
         pprint(api_response)
 
@@ -704,7 +704,7 @@ Name | Type | Description  | Notes
 # **upsert_result_value**
 > UpsertStructuredDataResponse upsert_result_value(scope, request_body)
 
-[EXPERIMENTAL] UpsertResultValue: Upsert result value
+UpsertResultValue: Upsert result value
 
 Create or update one or more Upsert one or more result values in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
 
@@ -760,7 +760,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_result_value(scope, request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertResultValue: Upsert result value
+        # UpsertResultValue: Upsert result value
         api_response = api_instance.upsert_result_value(scope, request_body)
         pprint(api_response)
 

@@ -67,7 +67,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def add_decision(self, id : Annotated[StrictStr, Field(..., description="Unique Id for a staged modification..")], staged_modification_decision_request : Annotated[StagedModificationDecisionRequest, Field(..., description="The decision on the requested staged modification, \"Approve\" or \"Reject\".")], async_req: Optional[bool]=None, **kwargs) -> Union[StagedModification, Awaitable[StagedModification]]:  # noqa: E501
-        """[EXPERIMENTAL] AddDecision: AddDecision  # noqa: E501
+        """AddDecision: AddDecision  # noqa: E501
 
         Add decision to staged modification, Approve or Reject.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -100,7 +100,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def add_decision_with_http_info(self, id : Annotated[StrictStr, Field(..., description="Unique Id for a staged modification..")], staged_modification_decision_request : Annotated[StagedModificationDecisionRequest, Field(..., description="The decision on the requested staged modification, \"Approve\" or \"Reject\".")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] AddDecision: AddDecision  # noqa: E501
+        """AddDecision: AddDecision  # noqa: E501
 
         Add decision to staged modification, Approve or Reject.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -234,7 +234,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def get_staged_modification(self, id : Annotated[StrictStr, Field(..., description="The unique identifier for a staged modification.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staged modification. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[StagedModification, Awaitable[StagedModification]]:  # noqa: E501
-        """[EXPERIMENTAL] GetStagedModification: GetStagedModification  # noqa: E501
+        """GetStagedModification: GetStagedModification  # noqa: E501
 
         Retrieve the details of a staged modification.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -267,7 +267,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def get_staged_modification_with_http_info(self, id : Annotated[StrictStr, Field(..., description="The unique identifier for a staged modification.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staged modification. Defaults to latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetStagedModification: GetStagedModification  # noqa: E501
+        """GetStagedModification: GetStagedModification  # noqa: E501
 
         Retrieve the details of a staged modification.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -397,7 +397,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def list_requested_changes(self, id : Annotated[StrictStr, Field(..., description="Unique Id for a staged modification..")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list changes. Defaults to return the latest version              of each staged change if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing requested staged modification changes from a previous call to list requested              staged modifications. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfStagedModificationsRequestedChangeInterval, Awaitable[PagedResourceListOfStagedModificationsRequestedChangeInterval]]:  # noqa: E501
-        """[EXPERIMENTAL] ListRequestedChanges: ListRequestedChanges  # noqa: E501
+        """ListRequestedChanges: ListRequestedChanges  # noqa: E501
 
         List the requested changes for a staged modification.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -438,7 +438,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def list_requested_changes_with_http_info(self, id : Annotated[StrictStr, Field(..., description="Unique Id for a staged modification..")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list changes. Defaults to return the latest version              of each staged change if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing requested staged modification changes from a previous call to list requested              staged modifications. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListRequestedChanges: ListRequestedChanges  # noqa: E501
+        """ListRequestedChanges: ListRequestedChanges  # noqa: E501
 
         List the requested changes for a staged modification.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -593,7 +593,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def list_staged_modifications(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list staged modifications. Defaults to return the latest version              of each staged modification if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staged modifications from a previous call to list staged modifications. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfStagedModification, Awaitable[PagedResourceListOfStagedModification]]:  # noqa: E501
-        """[EXPERIMENTAL] ListStagedModifications: ListStagedModifications  # noqa: E501
+        """ListStagedModifications: ListStagedModifications  # noqa: E501
 
         List summaries of the staged modifications.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -632,7 +632,7 @@ class StagedModificationsApi:
 
     @validate_arguments
     def list_staged_modifications_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list staged modifications. Defaults to return the latest version              of each staged modification if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staged modifications from a previous call to list staged modifications. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListStagedModifications: ListStagedModifications  # noqa: E501
+        """ListStagedModifications: ListStagedModifications  # noqa: E501
 
         List summaries of the staged modifications.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

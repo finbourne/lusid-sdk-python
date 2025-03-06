@@ -5,23 +5,23 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_upsert_instrument_properties**](InstrumentsApi.md#batch_upsert_instrument_properties) | **POST** /api/instruments/$batchupsertproperties | BatchUpsertInstrumentProperties: Batch upsert instruments properties
-[**calculate_settlement_date**](InstrumentsApi.md#calculate_settlement_date) | **GET** /api/instruments/{identifierType}/{identifier}/settlementdate | [EARLY ACCESS] CalculateSettlementDate: Get the settlement date for an instrument.
+[**calculate_settlement_date**](InstrumentsApi.md#calculate_settlement_date) | **GET** /api/instruments/{identifierType}/{identifier}/settlementdate | CalculateSettlementDate: Get the settlement date for an instrument.
 [**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | DeleteInstrument: Soft delete a single instrument
-[**delete_instrument_properties**](InstrumentsApi.md#delete_instrument_properties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
+[**delete_instrument_properties**](InstrumentsApi.md#delete_instrument_properties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | DeleteInstrumentProperties: Delete instrument properties
 [**delete_instruments**](InstrumentsApi.md#delete_instruments) | **POST** /api/instruments/$delete | DeleteInstruments: Soft or hard delete multiple instruments
-[**get_all_possible_features**](InstrumentsApi.md#get_all_possible_features) | **GET** /api/instruments/{instrumentType}/allfeatures | [EXPERIMENTAL] GetAllPossibleFeatures: Provides list of all possible features for instrument type.
-[**get_existing_instrument_capabilities**](InstrumentsApi.md#get_existing_instrument_capabilities) | **GET** /api/instruments/{identifier}/capabilities | [EXPERIMENTAL] GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
+[**get_all_possible_features**](InstrumentsApi.md#get_all_possible_features) | **GET** /api/instruments/{instrumentType}/allfeatures | GetAllPossibleFeatures: Provides list of all possible features for instrument type.
+[**get_existing_instrument_capabilities**](InstrumentsApi.md#get_existing_instrument_capabilities) | **GET** /api/instruments/{identifier}/capabilities | GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
 [**get_existing_instrument_models**](InstrumentsApi.md#get_existing_instrument_models) | **GET** /api/instruments/{identifier}/models | GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | GetInstrument: Get instrument
 [**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | GetInstrumentIdentifierTypes: Get instrument identifier types
-[**get_instrument_payment_diary**](InstrumentsApi.md#get_instrument_payment_diary) | **GET** /api/instruments/{identifierType}/{identifier}/paymentdiary | [EXPERIMENTAL] GetInstrumentPaymentDiary: Get instrument payment diary
+[**get_instrument_payment_diary**](InstrumentsApi.md#get_instrument_payment_diary) | **GET** /api/instruments/{identifierType}/{identifier}/paymentdiary | GetInstrumentPaymentDiary: Get instrument payment diary
 [**get_instrument_properties**](InstrumentsApi.md#get_instrument_properties) | **GET** /api/instruments/{identifierType}/{identifier}/properties | GetInstrumentProperties: Get instrument properties
 [**get_instrument_property_time_series**](InstrumentsApi.md#get_instrument_property_time_series) | **GET** /api/instruments/{identifierType}/{identifier}/properties/time-series | GetInstrumentPropertyTimeSeries: Get instrument property time series
-[**get_instrument_relationships**](InstrumentsApi.md#get_instrument_relationships) | **GET** /api/instruments/{identifierType}/{identifier}/relationships | [EARLY ACCESS] GetInstrumentRelationships: Get Instrument relationships
+[**get_instrument_relationships**](InstrumentsApi.md#get_instrument_relationships) | **GET** /api/instruments/{identifierType}/{identifier}/relationships | GetInstrumentRelationships: Get Instrument relationships
 [**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | GetInstruments: Get instruments
-[**list_instrument_properties**](InstrumentsApi.md#list_instrument_properties) | **GET** /api/instruments/{identifierType}/{identifier}/properties/list | [EARLY ACCESS] ListInstrumentProperties: Get instrument properties (with Pagination)
+[**list_instrument_properties**](InstrumentsApi.md#list_instrument_properties) | **GET** /api/instruments/{identifierType}/{identifier}/properties/list | ListInstrumentProperties: Get instrument properties (with Pagination)
 [**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | ListInstruments: List instruments
-[**query_instrument_capabilities**](InstrumentsApi.md#query_instrument_capabilities) | **POST** /api/instruments/capabilities | [EXPERIMENTAL] QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
+[**query_instrument_capabilities**](InstrumentsApi.md#query_instrument_capabilities) | **POST** /api/instruments/capabilities | QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
 [**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | UpdateInstrumentIdentifier: Update instrument identifier
 [**upsert_instruments**](InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | UpsertInstruments: Upsert instruments
 [**upsert_instruments_properties**](InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | UpsertInstrumentsProperties: Upsert instruments properties
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 # **calculate_settlement_date**
 > AddBusinessDaysToDateResponse calculate_settlement_date(identifier_type, identifier, transaction_date=transaction_date, scope=scope, as_at=as_at)
 
-[EARLY ACCESS] CalculateSettlementDate: Get the settlement date for an instrument.
+CalculateSettlementDate: Get the settlement date for an instrument.
 
 Get the settlement date for a given trade date and instrument. The calculated settlement date will be in UTC.  If a cut label transaction date is provided, the settlement date will be calculated relative to the absolute UTC datetime.
 
@@ -191,7 +191,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.calculate_settlement_date(identifier_type, identifier, transaction_date=transaction_date, scope=scope, as_at=as_at, opts=opts)
 
-        # [EARLY ACCESS] CalculateSettlementDate: Get the settlement date for an instrument.
+        # CalculateSettlementDate: Get the settlement date for an instrument.
         api_response = api_instance.calculate_settlement_date(identifier_type, identifier, transaction_date=transaction_date, scope=scope, as_at=as_at)
         pprint(api_response)
 
@@ -328,7 +328,7 @@ Name | Type | Description  | Notes
 # **delete_instrument_properties**
 > DeleteInstrumentPropertiesResponse delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
-[EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
+DeleteInstrumentProperties: Delete instrument properties
 
 Delete one or more properties from a particular instrument. If the properties are time-variant then an effective datetime from which  to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.
 
@@ -389,7 +389,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
-        # [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
+        # DeleteInstrumentProperties: Delete instrument properties
         api_response = api_instance.delete_instrument_properties(identifier_type, identifier, request_body, effective_at=effective_at, scope=scope, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
@@ -528,7 +528,7 @@ Name | Type | Description  | Notes
 # **get_all_possible_features**
 > Dict[str, List[str]] get_all_possible_features(instrument_type)
 
-[EXPERIMENTAL] GetAllPossibleFeatures: Provides list of all possible features for instrument type.
+GetAllPossibleFeatures: Provides list of all possible features for instrument type.
 
 Provides all possible instrument features an instrument of a given type can provide.
 
@@ -583,7 +583,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_all_possible_features(instrument_type, opts=opts)
 
-        # [EXPERIMENTAL] GetAllPossibleFeatures: Provides list of all possible features for instrument type.
+        # GetAllPossibleFeatures: Provides list of all possible features for instrument type.
         api_response = api_instance.get_all_possible_features(instrument_type)
         pprint(api_response)
 
@@ -620,7 +620,7 @@ Name | Type | Description  | Notes
 # **get_existing_instrument_capabilities**
 > InstrumentCapabilities get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
 
-[EXPERIMENTAL] GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
+GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
 
 Returns instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument e.g. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) e.g. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) e.g. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
 
@@ -681,7 +681,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code, opts=opts)
 
-        # [EXPERIMENTAL] GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
+        # GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
         api_response = api_instance.get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
         pprint(api_response)
 
@@ -1017,7 +1017,7 @@ This endpoint does not need any parameter.
 # **get_instrument_payment_diary**
 > InstrumentPaymentDiary get_instrument_payment_diary(identifier_type, identifier, recipe_scope, recipe_code, effective_at=effective_at, as_at=as_at, scope=scope)
 
-[EXPERIMENTAL] GetInstrumentPaymentDiary: Get instrument payment diary
+GetInstrumentPaymentDiary: Get instrument payment diary
 
 Get the payment diary of a single instrument.
 
@@ -1078,7 +1078,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_instrument_payment_diary(identifier_type, identifier, recipe_scope, recipe_code, effective_at=effective_at, as_at=as_at, scope=scope, opts=opts)
 
-        # [EXPERIMENTAL] GetInstrumentPaymentDiary: Get instrument payment diary
+        # GetInstrumentPaymentDiary: Get instrument payment diary
         api_response = api_instance.get_instrument_payment_diary(identifier_type, identifier, recipe_scope, recipe_code, effective_at=effective_at, as_at=as_at, scope=scope)
         pprint(api_response)
 
@@ -1329,7 +1329,7 @@ Name | Type | Description  | Notes
 # **get_instrument_relationships**
 > ResourceListOfRelationship get_instrument_relationships(identifier_type, identifier, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types, scope=scope)
 
-[EARLY ACCESS] GetInstrumentRelationships: Get Instrument relationships
+GetInstrumentRelationships: Get Instrument relationships
 
 Get relationships for a particular Instrument.
 
@@ -1390,7 +1390,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_instrument_relationships(identifier_type, identifier, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types, scope=scope, opts=opts)
 
-        # [EARLY ACCESS] GetInstrumentRelationships: Get Instrument relationships
+        # GetInstrumentRelationships: Get Instrument relationships
         api_response = api_instance.get_instrument_relationships(identifier_type, identifier, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types, scope=scope)
         pprint(api_response)
 
@@ -1537,7 +1537,7 @@ Name | Type | Description  | Notes
 # **list_instrument_properties**
 > ResourceListOfProperty list_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, page=page, limit=limit, scope=scope)
 
-[EARLY ACCESS] ListInstrumentProperties: Get instrument properties (with Pagination)
+ListInstrumentProperties: Get instrument properties (with Pagination)
 
 List all the properties of a particular instrument, as identified by a particular unique identifier.
 
@@ -1598,7 +1598,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, page=page, limit=limit, scope=scope, opts=opts)
 
-        # [EARLY ACCESS] ListInstrumentProperties: Get instrument properties (with Pagination)
+        # ListInstrumentProperties: Get instrument properties (with Pagination)
         api_response = api_instance.list_instrument_properties(identifier_type, identifier, effective_at=effective_at, as_at=as_at, page=page, limit=limit, scope=scope)
         pprint(api_response)
 
@@ -1753,7 +1753,7 @@ Name | Type | Description  | Notes
 # **query_instrument_capabilities**
 > InstrumentCapabilities query_instrument_capabilities(lusid_instrument, model=model)
 
-[EXPERIMENTAL] QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
+QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
 
 Returns instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument e.g. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) e.g. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) e.g. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
 
@@ -1814,7 +1814,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.query_instrument_capabilities(lusid_instrument, model=model, opts=opts)
 
-        # [EXPERIMENTAL] QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
+        # QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
         api_response = api_instance.query_instrument_capabilities(lusid_instrument, model=model)
         pprint(api_response)
 

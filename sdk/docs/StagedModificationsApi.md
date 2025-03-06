@@ -4,16 +4,16 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_decision**](StagedModificationsApi.md#add_decision) | **POST** /api/stagedmodifications/{id}/decision | [EXPERIMENTAL] AddDecision: AddDecision
-[**get_staged_modification**](StagedModificationsApi.md#get_staged_modification) | **GET** /api/stagedmodifications/{id} | [EXPERIMENTAL] GetStagedModification: GetStagedModification
-[**list_requested_changes**](StagedModificationsApi.md#list_requested_changes) | **GET** /api/stagedmodifications/{id}/requestedChanges | [EXPERIMENTAL] ListRequestedChanges: ListRequestedChanges
-[**list_staged_modifications**](StagedModificationsApi.md#list_staged_modifications) | **GET** /api/stagedmodifications | [EXPERIMENTAL] ListStagedModifications: ListStagedModifications
+[**add_decision**](StagedModificationsApi.md#add_decision) | **POST** /api/stagedmodifications/{id}/decision | AddDecision: AddDecision
+[**get_staged_modification**](StagedModificationsApi.md#get_staged_modification) | **GET** /api/stagedmodifications/{id} | GetStagedModification: GetStagedModification
+[**list_requested_changes**](StagedModificationsApi.md#list_requested_changes) | **GET** /api/stagedmodifications/{id}/requestedChanges | ListRequestedChanges: ListRequestedChanges
+[**list_staged_modifications**](StagedModificationsApi.md#list_staged_modifications) | **GET** /api/stagedmodifications | ListStagedModifications: ListStagedModifications
 
 
 # **add_decision**
 > StagedModification add_decision(id, staged_modification_decision_request)
 
-[EXPERIMENTAL] AddDecision: AddDecision
+AddDecision: AddDecision
 
 Add decision to staged modification, Approve or Reject.
 
@@ -74,7 +74,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.add_decision(id, staged_modification_decision_request, opts=opts)
 
-        # [EXPERIMENTAL] AddDecision: AddDecision
+        # AddDecision: AddDecision
         api_response = api_instance.add_decision(id, staged_modification_decision_request)
         pprint(api_response)
 
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 # **get_staged_modification**
 > StagedModification get_staged_modification(id, as_at=as_at)
 
-[EXPERIMENTAL] GetStagedModification: GetStagedModification
+GetStagedModification: GetStagedModification
 
 Retrieve the details of a staged modification.
 
@@ -168,7 +168,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_staged_modification(id, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetStagedModification: GetStagedModification
+        # GetStagedModification: GetStagedModification
         api_response = api_instance.get_staged_modification(id, as_at=as_at)
         pprint(api_response)
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 # **list_requested_changes**
 > PagedResourceListOfStagedModificationsRequestedChangeInterval list_requested_changes(id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListRequestedChanges: ListRequestedChanges
+ListRequestedChanges: ListRequestedChanges
 
 List the requested changes for a staged modification.
 
@@ -266,7 +266,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_requested_changes(id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListRequestedChanges: ListRequestedChanges
+        # ListRequestedChanges: ListRequestedChanges
         api_response = api_instance.list_requested_changes(id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 # **list_staged_modifications**
 > PagedResourceListOfStagedModification list_staged_modifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListStagedModifications: ListStagedModifications
+ListStagedModifications: ListStagedModifications
 
 List summaries of the staged modifications.
 
@@ -367,7 +367,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_staged_modifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListStagedModifications: ListStagedModifications
+        # ListStagedModifications: ListStagedModifications
         api_response = api_instance.list_staged_modifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 

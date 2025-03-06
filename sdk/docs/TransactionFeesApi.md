@@ -4,17 +4,17 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_transaction_fee_rule**](TransactionFeesApi.md#delete_transaction_fee_rule) | **DELETE** /api/transactions/fees/rules/{code} | [EXPERIMENTAL] DeleteTransactionFeeRule: Deletes a fee rule.
-[**get_applicable_transaction_fees**](TransactionFeesApi.md#get_applicable_transaction_fees) | **POST** /api/transactions/fees/$GetApplicableFees | [EXPERIMENTAL] GetApplicableTransactionFees: Get the Fees and Commissions that may be applicable to a transaction.
-[**get_transaction_fee_rule**](TransactionFeesApi.md#get_transaction_fee_rule) | **GET** /api/transactions/fees/rules/{code} | [EXPERIMENTAL] GetTransactionFeeRule: Retrieve the definition of single fee rule.
-[**list_transaction_fee_rules**](TransactionFeesApi.md#list_transaction_fee_rules) | **GET** /api/transactions/fees/rules | [EXPERIMENTAL] ListTransactionFeeRules: List fee rules, with optional filtering.
-[**upsert_transaction_fee_rules**](TransactionFeesApi.md#upsert_transaction_fee_rules) | **POST** /api/transactions/fees/rules | [EXPERIMENTAL] UpsertTransactionFeeRules: Upsert fee rules.
+[**delete_transaction_fee_rule**](TransactionFeesApi.md#delete_transaction_fee_rule) | **DELETE** /api/transactions/fees/rules/{code} | DeleteTransactionFeeRule: Deletes a fee rule.
+[**get_applicable_transaction_fees**](TransactionFeesApi.md#get_applicable_transaction_fees) | **POST** /api/transactions/fees/$GetApplicableFees | GetApplicableTransactionFees: Get the Fees and Commissions that may be applicable to a transaction.
+[**get_transaction_fee_rule**](TransactionFeesApi.md#get_transaction_fee_rule) | **GET** /api/transactions/fees/rules/{code} | GetTransactionFeeRule: Retrieve the definition of single fee rule.
+[**list_transaction_fee_rules**](TransactionFeesApi.md#list_transaction_fee_rules) | **GET** /api/transactions/fees/rules | ListTransactionFeeRules: List fee rules, with optional filtering.
+[**upsert_transaction_fee_rules**](TransactionFeesApi.md#upsert_transaction_fee_rules) | **POST** /api/transactions/fees/rules | UpsertTransactionFeeRules: Upsert fee rules.
 
 
 # **delete_transaction_fee_rule**
 > DeletedEntityResponse delete_transaction_fee_rule(code)
 
-[EXPERIMENTAL] DeleteTransactionFeeRule: Deletes a fee rule.
+DeleteTransactionFeeRule: Deletes a fee rule.
 
 Deletes the rule for all effective time.    The rule will remain viewable at previous as at times, but it will no longer be considered by  GetApplicableFees.    This cannot be undone.
 
@@ -69,7 +69,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_transaction_fee_rule(code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteTransactionFeeRule: Deletes a fee rule.
+        # DeleteTransactionFeeRule: Deletes a fee rule.
         api_response = api_instance.delete_transaction_fee_rule(code)
         pprint(api_response)
 
@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 # **get_applicable_transaction_fees**
 > ResourceListOfFeeRule get_applicable_transaction_fees(effective_at=effective_at, as_at=as_at, instrument_identifier_type=instrument_identifier_type, instrument_identifier=instrument_identifier, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, request_body=request_body)
 
-[EXPERIMENTAL] GetApplicableTransactionFees: Get the Fees and Commissions that may be applicable to a transaction.
+GetApplicableTransactionFees: Get the Fees and Commissions that may be applicable to a transaction.
 
 Additionally, matching can be based on the instrument's properties, its portfolio properties, and any additional property keys present in the data file.
 
@@ -167,7 +167,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_applicable_transaction_fees(effective_at=effective_at, as_at=as_at, instrument_identifier_type=instrument_identifier_type, instrument_identifier=instrument_identifier, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] GetApplicableTransactionFees: Get the Fees and Commissions that may be applicable to a transaction.
+        # GetApplicableTransactionFees: Get the Fees and Commissions that may be applicable to a transaction.
         api_response = api_instance.get_applicable_transaction_fees(effective_at=effective_at, as_at=as_at, instrument_identifier_type=instrument_identifier_type, instrument_identifier=instrument_identifier, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, request_body=request_body)
         pprint(api_response)
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 # **get_transaction_fee_rule**
 > FeeRule get_transaction_fee_rule(code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetTransactionFeeRule: Retrieve the definition of single fee rule.
+GetTransactionFeeRule: Retrieve the definition of single fee rule.
 
 Retrieves the fee rule definition at the given effective and as at times.
 
@@ -267,7 +267,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_transaction_fee_rule(code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetTransactionFeeRule: Retrieve the definition of single fee rule.
+        # GetTransactionFeeRule: Retrieve the definition of single fee rule.
         api_response = api_instance.get_transaction_fee_rule(code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 # **list_transaction_fee_rules**
 > ResourceListOfFeeRule list_transaction_fee_rules(effective_at=effective_at, as_at=as_at, limit=limit, filter=filter, page=page)
 
-[EXPERIMENTAL] ListTransactionFeeRules: List fee rules, with optional filtering.
+ListTransactionFeeRules: List fee rules, with optional filtering.
 
 For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.
 
@@ -365,7 +365,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_transaction_fee_rules(effective_at=effective_at, as_at=as_at, limit=limit, filter=filter, page=page, opts=opts)
 
-        # [EXPERIMENTAL] ListTransactionFeeRules: List fee rules, with optional filtering.
+        # ListTransactionFeeRules: List fee rules, with optional filtering.
         api_response = api_instance.list_transaction_fee_rules(effective_at=effective_at, as_at=as_at, limit=limit, filter=filter, page=page)
         pprint(api_response)
 
@@ -406,7 +406,7 @@ Name | Type | Description  | Notes
 # **upsert_transaction_fee_rules**
 > FeeRuleUpsertResponse upsert_transaction_fee_rules(request_body, effective_at=effective_at)
 
-[EXPERIMENTAL] UpsertTransactionFeeRules: Upsert fee rules.
+UpsertTransactionFeeRules: Upsert fee rules.
 
 To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part  of the response. To update an existing rule, include the fee code. It is possible to both create and update  fee rules in the same request.    The upsert is transactional - either all create/update operations will succeed or none of them will.
 
@@ -462,7 +462,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_transaction_fee_rules(request_body, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] UpsertTransactionFeeRules: Upsert fee rules.
+        # UpsertTransactionFeeRules: Upsert fee rules.
         api_response = api_instance.upsert_transaction_fee_rules(request_body, effective_at=effective_at)
         pprint(api_response)
 

@@ -4,16 +4,16 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_complex_market_data**](ComplexMarketDataApi.md#delete_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$delete | [EARLY ACCESS] DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
-[**get_complex_market_data**](ComplexMarketDataApi.md#get_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$get | [EARLY ACCESS] GetComplexMarketData: Get complex market data
-[**list_complex_market_data**](ComplexMarketDataApi.md#list_complex_market_data) | **GET** /api/complexmarketdata | [EXPERIMENTAL] ListComplexMarketData: List the set of ComplexMarketData
+[**delete_complex_market_data**](ComplexMarketDataApi.md#delete_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$delete | DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
+[**get_complex_market_data**](ComplexMarketDataApi.md#get_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$get | GetComplexMarketData: Get complex market data
+[**list_complex_market_data**](ComplexMarketDataApi.md#list_complex_market_data) | **GET** /api/complexmarketdata | ListComplexMarketData: List the set of ComplexMarketData
 [**upsert_complex_market_data**](ComplexMarketDataApi.md#upsert_complex_market_data) | **POST** /api/complexmarketdata/{scope} | UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
 
 
 # **delete_complex_market_data**
 > AnnulStructuredDataResponse delete_complex_market_data(scope, request_body)
 
-[EARLY ACCESS] DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
+DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
 
 Delete one or more specified complex market data items from a single scope. Each item is identified by a unique id which includes  information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).                In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each quote in the response.                The response will return both the collection of successfully deleted  complex market data items, as well as those that failed.  For the failures a reason will be provided explaining why the it could not be deleted.                It is important to always check the failed set for any unsuccessful results.
 
@@ -69,7 +69,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_complex_market_data(scope, request_body, opts=opts)
 
-        # [EARLY ACCESS] DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
+        # DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
         api_response = api_instance.delete_complex_market_data(scope, request_body)
         pprint(api_response)
 
@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 # **get_complex_market_data**
 > GetComplexMarketDataResponse get_complex_market_data(scope, request_body, effective_at=effective_at, as_at=as_at, max_age=max_age)
 
-[EARLY ACCESS] GetComplexMarketData: Get complex market data
+GetComplexMarketData: Get complex market data
 
 Get one or more items of complex market data from a single scope.                Each item can be identified by its time invariant complex market data identifier.                For each id LUSID will return the most recent matched item with respect to the provided (or default) effective datetime.                An optional maximum age range window can be specified which defines how far back to look back for data from the specified effective datetime.  LUSID will return the most recent item within this window.                In the request each complex market data id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each item in the response.                The response will return three collections. One, the successfully retrieved complex market data. Two, those that had a  valid identifier but could not be found. Three, those that failed because LUSID could not construct a valid identifier from the request.                For the ids that failed to resolve or could not be found a reason will be provided explaining why that is the case.                It is important to always check the failed and not found sets for any unsuccessful results.
 
@@ -166,7 +166,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_complex_market_data(scope, request_body, effective_at=effective_at, as_at=as_at, max_age=max_age, opts=opts)
 
-        # [EARLY ACCESS] GetComplexMarketData: Get complex market data
+        # GetComplexMarketData: Get complex market data
         api_response = api_instance.get_complex_market_data(scope, request_body, effective_at=effective_at, as_at=as_at, max_age=max_age)
         pprint(api_response)
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 # **list_complex_market_data**
 > ResourceListOfListComplexMarketDataWithMetaDataResponse list_complex_market_data(as_at=as_at)
 
-[EXPERIMENTAL] ListComplexMarketData: List the set of ComplexMarketData
+ListComplexMarketData: List the set of ComplexMarketData
 
 List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.
 
@@ -262,7 +262,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_complex_market_data(as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] ListComplexMarketData: List the set of ComplexMarketData
+        # ListComplexMarketData: List the set of ComplexMarketData
         api_response = api_instance.list_complex_market_data(as_at=as_at)
         pprint(api_response)
 

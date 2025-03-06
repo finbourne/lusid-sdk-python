@@ -5,42 +5,42 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | AdjustHoldings: Adjust holdings
-[**batch_adjust_holdings**](TransactionPortfoliosApi.md#batch_adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchAdjust | [EARLY ACCESS] BatchAdjustHoldings: Batch adjust holdings
-[**batch_create_trade_tickets**](TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | [EARLY ACCESS] BatchCreateTradeTickets: Batch Create Trade Tickets
-[**batch_set_holdings**](TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | [EARLY ACCESS] BatchSetHoldings: Batch set holdings
-[**batch_upsert_transactions**](TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | [EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions
+[**batch_adjust_holdings**](TransactionPortfoliosApi.md#batch_adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchAdjust | BatchAdjustHoldings: Batch adjust holdings
+[**batch_create_trade_tickets**](TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | BatchCreateTradeTickets: Batch Create Trade Tickets
+[**batch_set_holdings**](TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | BatchSetHoldings: Batch set holdings
+[**batch_upsert_transactions**](TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | BatchUpsertTransactions: Batch upsert transactions
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
 [**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
-[**cancel_single_adjust_holding**](TransactionPortfoliosApi.md#cancel_single_adjust_holding) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$cancelAdjustment | [EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
+[**cancel_single_adjust_holding**](TransactionPortfoliosApi.md#cancel_single_adjust_holding) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$cancelAdjustment | CancelSingleAdjustHolding: Cancel single holding adjustment.
 [**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | CancelTransactions: Cancel transactions
 [**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | CreatePortfolio: Create portfolio
-[**create_trade_ticket**](TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | [EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
-[**delete_custodian_accounts**](TransactionPortfoliosApi.md#delete_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/$delete | [EXPERIMENTAL] DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
+[**create_trade_ticket**](TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | CreateTradeTicket: Create Trade Ticket
+[**delete_custodian_accounts**](TransactionPortfoliosApi.md#delete_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/$delete | DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
 [**delete_properties_from_transaction**](TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | DeletePropertiesFromTransaction: Delete properties from transaction
 [**get_a2_b_data**](TransactionPortfoliosApi.md#get_a2_b_data) | **GET** /api/transactionportfolios/{scope}/{code}/a2b | GetA2BData: Get A2B data
 [**get_a2_b_movements**](TransactionPortfoliosApi.md#get_a2_b_movements) | **GET** /api/transactionportfolios/{scope}/{code}/a2bmovements | GetA2BMovements: Get an A2B report at the movement level for the given portfolio.
-[**get_bucketed_cash_flows**](TransactionPortfoliosApi.md#get_bucketed_cash_flows) | **POST** /api/transactionportfolios/{scope}/{code}/bucketedCashFlows | [EXPERIMENTAL] GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
-[**get_custodian_account**](TransactionPortfoliosApi.md#get_custodian_account) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode} | [EXPERIMENTAL] GetCustodianAccount: Get Custodian Account
+[**get_bucketed_cash_flows**](TransactionPortfoliosApi.md#get_bucketed_cash_flows) | **POST** /api/transactionportfolios/{scope}/{code}/bucketedCashFlows | GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
+[**get_custodian_account**](TransactionPortfoliosApi.md#get_custodian_account) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode} | GetCustodianAccount: Get Custodian Account
 [**get_details**](TransactionPortfoliosApi.md#get_details) | **GET** /api/transactionportfolios/{scope}/{code}/details | GetDetails: Get details
-[**get_holding_contributors**](TransactionPortfoliosApi.md#get_holding_contributors) | **GET** /api/transactionportfolios/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributors: Get Holdings Contributors
+[**get_holding_contributors**](TransactionPortfoliosApi.md#get_holding_contributors) | **GET** /api/transactionportfolios/{scope}/{code}/holdings/{holdingId}/contributors | GetHoldingContributors: Get Holdings Contributors
 [**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | GetHoldings: Get holdings
 [**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | GetHoldingsAdjustment: Get holdings adjustment
-[**get_holdings_with_orders**](TransactionPortfoliosApi.md#get_holdings_with_orders) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsWithOrders | [EXPERIMENTAL] GetHoldingsWithOrders: Get holdings with orders
-[**get_multiple_holding_contributors**](TransactionPortfoliosApi.md#get_multiple_holding_contributors) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/contributors/$get | [EARLY ACCESS] GetMultipleHoldingContributors: Get Multiple Holding Contributors
+[**get_holdings_with_orders**](TransactionPortfoliosApi.md#get_holdings_with_orders) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsWithOrders | GetHoldingsWithOrders: Get holdings with orders
+[**get_multiple_holding_contributors**](TransactionPortfoliosApi.md#get_multiple_holding_contributors) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/contributors/$get | GetMultipleHoldingContributors: Get Multiple Holding Contributors
 [**get_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 [**get_portfolio_cash_ladder**](TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 [**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
 [**get_transaction_history**](TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | GetTransactionHistory: Get the history of a transaction
 [**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
 [**get_upsertable_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_upsertable_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/upsertablecashflows | GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
-[**list_custodian_accounts**](TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
+[**list_custodian_accounts**](TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | ListCustodianAccounts: List Custodian Accounts
 [**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
 [**patch_portfolio_details**](TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
-[**preview_transaction**](TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | [EARLY ACCESS] PreviewTransaction: Preview a transaction
+[**preview_transaction**](TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | PreviewTransaction: Preview a transaction
 [**resolve_instrument**](TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
 [**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | SetHoldings: Set holdings
-[**upsert_custodian_accounts**](TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
-[**upsert_custodian_accounts_properties**](TransactionPortfoliosApi.md#upsert_custodian_accounts_properties) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode}/properties/$upsert | [EXPERIMENTAL] UpsertCustodianAccountsProperties: Upsert custodian accounts properties
+[**upsert_custodian_accounts**](TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | UpsertCustodianAccounts: Upsert Custodian Accounts
+[**upsert_custodian_accounts_properties**](TransactionPortfoliosApi.md#upsert_custodian_accounts_properties) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode}/properties/$upsert | UpsertCustodianAccountsProperties: Upsert custodian accounts properties
 [**upsert_portfolio_details**](TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | UpsertPortfolioDetails: Upsert portfolio details
 [**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | UpsertTransactionProperties: Upsert transaction properties
 [**upsert_transactions**](TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 # **batch_adjust_holdings**
 > BatchAdjustHoldingsResponse batch_adjust_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods)
 
-[EARLY ACCESS] BatchAdjustHoldings: Batch adjust holdings
+BatchAdjustHoldings: Batch adjust holdings
 
 Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime in each request.                Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each adjustment in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
 
@@ -208,7 +208,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_adjust_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods, opts=opts)
 
-        # [EARLY ACCESS] BatchAdjustHoldings: Batch adjust holdings
+        # BatchAdjustHoldings: Batch adjust holdings
         api_response = api_instance.batch_adjust_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods)
         pprint(api_response)
 
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 # **batch_create_trade_tickets**
 > CreateTradeTicketsResponse batch_create_trade_tickets(scope, code, lusid_trade_ticket)
 
-[EARLY ACCESS] BatchCreateTradeTickets: Batch Create Trade Tickets
+BatchCreateTradeTickets: Batch Create Trade Tickets
 
 Batch create trade tickets. Each ticket is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two.
 
@@ -306,7 +306,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_create_trade_tickets(scope, code, lusid_trade_ticket, opts=opts)
 
-        # [EARLY ACCESS] BatchCreateTradeTickets: Batch Create Trade Tickets
+        # BatchCreateTradeTickets: Batch Create Trade Tickets
         api_response = api_instance.batch_create_trade_tickets(scope, code, lusid_trade_ticket)
         pprint(api_response)
 
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 # **batch_set_holdings**
 > BatchAdjustHoldingsResponse batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods)
 
-[EARLY ACCESS] BatchSetHoldings: Batch set holdings
+BatchSetHoldings: Batch set holdings
 
 Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.                Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each adjustment in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
 
@@ -404,7 +404,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods, opts=opts)
 
-        # [EARLY ACCESS] BatchSetHoldings: Batch set holdings
+        # BatchSetHoldings: Batch set holdings
         api_response = api_instance.batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods)
         pprint(api_response)
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 # **batch_upsert_transactions**
 > BatchUpsertPortfolioTransactionsResponse batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties=preserve_properties)
 
-[EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions
+BatchUpsertTransactions: Batch upsert transactions
 
 Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.    Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each transaction in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
 
@@ -504,7 +504,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties=preserve_properties, opts=opts)
 
-        # [EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions
+        # BatchUpsertTransactions: Batch upsert transactions
         api_response = api_instance.batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties=preserve_properties)
         pprint(api_response)
 
@@ -752,7 +752,7 @@ Name | Type | Description  | Notes
 # **cancel_single_adjust_holding**
 > DeletedEntityResponse cancel_single_adjust_holding(scope, code, effective_at, cancel_single_holding_adjustment_request)
 
-[EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
+CancelSingleAdjustHolding: Cancel single holding adjustment.
 
 Cancel one previously sent holding adjustment without affecting the rest of the adjustment in the previous request on the specified effective datetime.
 
@@ -815,7 +815,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.cancel_single_adjust_holding(scope, code, effective_at, cancel_single_holding_adjustment_request, opts=opts)
 
-        # [EARLY ACCESS] CancelSingleAdjustHolding: Cancel single holding adjustment.
+        # CancelSingleAdjustHolding: Cancel single holding adjustment.
         api_response = api_instance.cancel_single_adjust_holding(scope, code, effective_at, cancel_single_holding_adjustment_request)
         pprint(api_response)
 
@@ -1050,7 +1050,7 @@ Name | Type | Description  | Notes
 # **create_trade_ticket**
 > LusidTradeTicket create_trade_ticket(scope, code, lusid_trade_ticket=lusid_trade_ticket)
 
-[EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
+CreateTradeTicket: Create Trade Ticket
 
 Upsert a trade ticket. Broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.
 
@@ -1112,7 +1112,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_trade_ticket(scope, code, lusid_trade_ticket=lusid_trade_ticket, opts=opts)
 
-        # [EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
+        # CreateTradeTicket: Create Trade Ticket
         api_response = api_instance.create_trade_ticket(scope, code, lusid_trade_ticket=lusid_trade_ticket)
         pprint(api_response)
 
@@ -1151,7 +1151,7 @@ Name | Type | Description  | Notes
 # **delete_custodian_accounts**
 > DeleteCustodianAccountsResponse delete_custodian_accounts(scope, code, resource_id, delete_mode=delete_mode)
 
-[EXPERIMENTAL] DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
+DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
 
 Delete one or more custodian accounts from the Transaction Portfolios. Soft deletion marks the custodian account as inactive  While the Hard deletion is deleting the custodian account.  The batch limit per request is 2,000.
 
@@ -1209,7 +1209,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_custodian_accounts(scope, code, resource_id, delete_mode=delete_mode, opts=opts)
 
-        # [EXPERIMENTAL] DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
+        # DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
         api_response = api_instance.delete_custodian_accounts(scope, code, resource_id, delete_mode=delete_mode)
         pprint(api_response)
 
@@ -1563,7 +1563,7 @@ Name | Type | Description  | Notes
 # **get_bucketed_cash_flows**
 > BucketedCashFlowResponse get_bucketed_cash_flows(scope, code, bucketed_cash_flow_request=bucketed_cash_flow_request)
 
-[EXPERIMENTAL] GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
+GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
 
 We bucket/aggregate a transaction portfolio's instruments by date or tenor specified in the request.  The cashflows are grouped by both instrumentId and currency.                If you want transactional level cashflow, please use the 'GetUpsertableCashFlows' endpoint.  If you want instrument cashflow, please use the 'GetPortfolioCashFlows' endpoint.  Note that these endpoints do not apply bucketing.
 
@@ -1625,7 +1625,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_bucketed_cash_flows(scope, code, bucketed_cash_flow_request=bucketed_cash_flow_request, opts=opts)
 
-        # [EXPERIMENTAL] GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
+        # GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
         api_response = api_instance.get_bucketed_cash_flows(scope, code, bucketed_cash_flow_request=bucketed_cash_flow_request)
         pprint(api_response)
 
@@ -1664,7 +1664,7 @@ Name | Type | Description  | Notes
 # **get_custodian_account**
 > CustodianAccount get_custodian_account(scope, code, custodian_account_scope, custodian_account_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetCustodianAccount: Get Custodian Account
+GetCustodianAccount: Get Custodian Account
 
 Retrieve the definition of a particular Custodian Account which is part of a Transaction Portfolios.
 
@@ -1725,7 +1725,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_custodian_account(scope, code, custodian_account_scope, custodian_account_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetCustodianAccount: Get Custodian Account
+        # GetCustodianAccount: Get Custodian Account
         api_response = api_instance.get_custodian_account(scope, code, custodian_account_scope, custodian_account_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -1866,7 +1866,7 @@ Name | Type | Description  | Notes
 # **get_holding_contributors**
 > VersionedResourceListOfHoldingContributor get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
 
-[EARLY ACCESS] GetHoldingContributors: Get Holdings Contributors
+GetHoldingContributors: Get Holdings Contributors
 
 Lists all transactions that affect the holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.
 
@@ -1931,7 +1931,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page, opts=opts)
 
-        # [EARLY ACCESS] GetHoldingContributors: Get Holdings Contributors
+        # GetHoldingContributors: Get Holdings Contributors
         api_response = api_instance.get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
         pprint(api_response)
 
@@ -2184,7 +2184,7 @@ Name | Type | Description  | Notes
 # **get_holdings_with_orders**
 > VersionedResourceListWithWarningsOfPortfolioHolding get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days)
 
-[EXPERIMENTAL] GetHoldingsWithOrders: Get holdings with orders
+GetHoldingsWithOrders: Get holdings with orders
 
 Get the holdings of a transaction portfolio. Create virtual holdings for any outstanding orders,  and account for order state/fulfillment; that is, treat outstanding orders (and related records) as  if they had been realised at moment of query.
 
@@ -2248,7 +2248,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days, opts=opts)
 
-        # [EXPERIMENTAL] GetHoldingsWithOrders: Get holdings with orders
+        # GetHoldingsWithOrders: Get holdings with orders
         api_response = api_instance.get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days)
         pprint(api_response)
 
@@ -2294,7 +2294,7 @@ Name | Type | Description  | Notes
 # **get_multiple_holding_contributors**
 > VersionedResourceListOfHoldingContributor get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
 
-[EARLY ACCESS] GetMultipleHoldingContributors: Get Multiple Holding Contributors
+GetMultipleHoldingContributors: Get Multiple Holding Contributors
 
 Lists all transactions that affect multiple specified holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.
 
@@ -2364,7 +2364,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page, opts=opts)
 
-        # [EARLY ACCESS] GetMultipleHoldingContributors: Get Multiple Holding Contributors
+        # GetMultipleHoldingContributors: Get Multiple Holding Contributors
         api_response = api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
         pprint(api_response)
 
@@ -3057,7 +3057,7 @@ Name | Type | Description  | Notes
 # **list_custodian_accounts**
 > PagedResourceListOfCustodianAccount list_custodian_accounts(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
 
-[EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
+ListCustodianAccounts: List Custodian Accounts
 
 List the custodian accounts in a Transaction Portfolios
 
@@ -3119,7 +3119,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_custodian_accounts(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
+        # ListCustodianAccounts: List Custodian Accounts
         api_response = api_instance.list_custodian_accounts(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
         pprint(api_response)
 
@@ -3361,7 +3361,7 @@ Name | Type | Description  | Notes
 # **preview_transaction**
 > ResourceListOfOutputTransaction preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties)
 
-[EARLY ACCESS] PreviewTransaction: Preview a transaction
+PreviewTransaction: Preview a transaction
 
 Returns the output-transaction(s) - e.g. as returned by BuildTransactions  that would come out of LUSID if the provided TransactionRequest was booked.
 
@@ -3426,7 +3426,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties, opts=opts)
 
-        # [EARLY ACCESS] PreviewTransaction: Preview a transaction
+        # PreviewTransaction: Preview a transaction
         api_response = api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties)
         pprint(api_response)
 
@@ -3672,7 +3672,7 @@ Name | Type | Description  | Notes
 # **upsert_custodian_accounts**
 > CustodianAccountsUpsertResponse upsert_custodian_accounts(scope, code, custodian_account_request)
 
-[EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
+UpsertCustodianAccounts: Upsert Custodian Accounts
 
 Create or update Custodian Accounts in the Transaction Portfolios. A Custodian Account will be updated  if it already exists and created if it does not.  The batch limit per request is 2,000.
 
@@ -3729,7 +3729,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_custodian_accounts(scope, code, custodian_account_request, opts=opts)
 
-        # [EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
+        # UpsertCustodianAccounts: Upsert Custodian Accounts
         api_response = api_instance.upsert_custodian_accounts(scope, code, custodian_account_request)
         pprint(api_response)
 
@@ -3768,7 +3768,7 @@ Name | Type | Description  | Notes
 # **upsert_custodian_accounts_properties**
 > CustodianAccountProperties upsert_custodian_accounts_properties(scope, code, custodian_account_scope, custodian_account_code, request_body=request_body)
 
-[EXPERIMENTAL] UpsertCustodianAccountsProperties: Upsert custodian accounts properties
+UpsertCustodianAccountsProperties: Upsert custodian accounts properties
 
 Update or insert one or more properties onto a single custodian account. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'CustodianAccount'.                Upserting a property that exists for a Transaction Portfolios, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -3827,7 +3827,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_custodian_accounts_properties(scope, code, custodian_account_scope, custodian_account_code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertCustodianAccountsProperties: Upsert custodian accounts properties
+        # UpsertCustodianAccountsProperties: Upsert custodian accounts properties
         api_response = api_instance.upsert_custodian_accounts_properties(scope, code, custodian_account_scope, custodian_account_code, request_body=request_body)
         pprint(api_response)
 

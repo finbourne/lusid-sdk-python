@@ -68,7 +68,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def delete_order_instruction(self, scope : Annotated[StrictStr, Field(..., description="The orderInstruction scope.")], code : Annotated[StrictStr, Field(..., description="The orderInstruction's code. This, together with the scope uniquely identifies the orderInstruction to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteOrderInstruction: Delete orderInstruction  # noqa: E501
+        """DeleteOrderInstruction: Delete orderInstruction  # noqa: E501
 
         Delete an orderInstruction. Deletion will be valid from the orderInstruction's creation datetime.  This means that the orderInstruction will no longer exist at any effective datetime from the asAt datetime of deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -101,7 +101,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def delete_order_instruction_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The orderInstruction scope.")], code : Annotated[StrictStr, Field(..., description="The orderInstruction's code. This, together with the scope uniquely identifies the orderInstruction to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteOrderInstruction: Delete orderInstruction  # noqa: E501
+        """DeleteOrderInstruction: Delete orderInstruction  # noqa: E501
 
         Delete an orderInstruction. Deletion will be valid from the orderInstruction's creation datetime.  This means that the orderInstruction will no longer exist at any effective datetime from the asAt datetime of deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -228,7 +228,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def get_order_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the orderInstruction belongs.")], code : Annotated[StrictStr, Field(..., description="The orderInstruction's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the orderInstruction. Defaults to return the latest version of the orderInstruction if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"OrderInstruction\" domain to decorate onto the orderInstruction.              These take the format {domain}/{scope}/{code} e.g. \"OrderInstruction/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[OrderInstruction, Awaitable[OrderInstruction]]:  # noqa: E501
-        """[EXPERIMENTAL] GetOrderInstruction: Get OrderInstruction  # noqa: E501
+        """GetOrderInstruction: Get OrderInstruction  # noqa: E501
 
         Fetch a OrderInstruction that matches the specified identifier  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -265,7 +265,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def get_order_instruction_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the orderInstruction belongs.")], code : Annotated[StrictStr, Field(..., description="The orderInstruction's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the orderInstruction. Defaults to return the latest version of the orderInstruction if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"OrderInstruction\" domain to decorate onto the orderInstruction.              These take the format {domain}/{scope}/{code} e.g. \"OrderInstruction/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetOrderInstruction: Get OrderInstruction  # noqa: E501
+        """GetOrderInstruction: Get OrderInstruction  # noqa: E501
 
         Fetch a OrderInstruction that matches the specified identifier  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -408,7 +408,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def list_order_instructions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the orderInstruction. Defaults to return the latest version of the orderInstruction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orderInstructions from a previous call to list orderInstructions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"OrderInstruction\" domain to decorate onto each orderInstruction.                  These take the format {domain}/{scope}/{code} e.g. \"OrderInstruction/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrderInstruction, Awaitable[PagedResourceListOfOrderInstruction]]:  # noqa: E501
-        """[EXPERIMENTAL] ListOrderInstructions: List OrderInstructions  # noqa: E501
+        """ListOrderInstructions: List OrderInstructions  # noqa: E501
 
         Fetch the last pre-AsAt date version of each orderInstruction in scope (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -449,7 +449,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def list_order_instructions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the orderInstruction. Defaults to return the latest version of the orderInstruction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orderInstructions from a previous call to list orderInstructions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"OrderInstruction\" domain to decorate onto each orderInstruction.                  These take the format {domain}/{scope}/{code} e.g. \"OrderInstruction/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListOrderInstructions: List OrderInstructions  # noqa: E501
+        """ListOrderInstructions: List OrderInstructions  # noqa: E501
 
         Fetch the last pre-AsAt date version of each orderInstruction in scope (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -605,7 +605,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def upsert_order_instructions(self, order_instruction_set_request : Annotated[Optional[OrderInstructionSetRequest], Field(description="The collection of orderInstruction requests.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfOrderInstruction, Awaitable[ResourceListOfOrderInstruction]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertOrderInstructions: Upsert OrderInstruction  # noqa: E501
+        """UpsertOrderInstructions: Upsert OrderInstruction  # noqa: E501
 
         Upsert; update existing orderInstructions with given ids, or create new orderInstructions otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -636,7 +636,7 @@ class OrderInstructionsApi:
 
     @validate_arguments
     def upsert_order_instructions_with_http_info(self, order_instruction_set_request : Annotated[Optional[OrderInstructionSetRequest], Field(description="The collection of orderInstruction requests.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertOrderInstructions: Upsert OrderInstruction  # noqa: E501
+        """UpsertOrderInstructions: Upsert OrderInstruction  # noqa: E501
 
         Upsert; update existing orderInstructions with given ids, or create new orderInstructions otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

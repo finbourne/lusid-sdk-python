@@ -4,17 +4,17 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_staging_rule_set**](StagingRuleSetApi.md#create_staging_rule_set) | **POST** /api/stagingrulesets/{entityType} | [EXPERIMENTAL] CreateStagingRuleSet: Create a StagingRuleSet
-[**delete_staging_rule_set**](StagingRuleSetApi.md#delete_staging_rule_set) | **DELETE** /api/stagingrulesets/{entityType} | [EXPERIMENTAL] DeleteStagingRuleSet: Delete a StagingRuleSet
-[**get_staging_rule_set**](StagingRuleSetApi.md#get_staging_rule_set) | **GET** /api/stagingrulesets/{entityType} | [EXPERIMENTAL] GetStagingRuleSet: Get a StagingRuleSet
-[**list_staging_rule_sets**](StagingRuleSetApi.md#list_staging_rule_sets) | **GET** /api/stagingrulesets | [EXPERIMENTAL] ListStagingRuleSets: List StagingRuleSets
-[**update_staging_rule_set**](StagingRuleSetApi.md#update_staging_rule_set) | **PUT** /api/stagingrulesets/{entityType} | [EXPERIMENTAL] UpdateStagingRuleSet: Update a StagingRuleSet
+[**create_staging_rule_set**](StagingRuleSetApi.md#create_staging_rule_set) | **POST** /api/stagingrulesets/{entityType} | CreateStagingRuleSet: Create a StagingRuleSet
+[**delete_staging_rule_set**](StagingRuleSetApi.md#delete_staging_rule_set) | **DELETE** /api/stagingrulesets/{entityType} | DeleteStagingRuleSet: Delete a StagingRuleSet
+[**get_staging_rule_set**](StagingRuleSetApi.md#get_staging_rule_set) | **GET** /api/stagingrulesets/{entityType} | GetStagingRuleSet: Get a StagingRuleSet
+[**list_staging_rule_sets**](StagingRuleSetApi.md#list_staging_rule_sets) | **GET** /api/stagingrulesets | ListStagingRuleSets: List StagingRuleSets
+[**update_staging_rule_set**](StagingRuleSetApi.md#update_staging_rule_set) | **PUT** /api/stagingrulesets/{entityType} | UpdateStagingRuleSet: Update a StagingRuleSet
 
 
 # **create_staging_rule_set**
 > StagingRuleSet create_staging_rule_set(entity_type, create_staging_rule_set_request)
 
-[EXPERIMENTAL] CreateStagingRuleSet: Create a StagingRuleSet
+CreateStagingRuleSet: Create a StagingRuleSet
 
 Create a new staging rule set.
 
@@ -75,7 +75,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_staging_rule_set(entity_type, create_staging_rule_set_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateStagingRuleSet: Create a StagingRuleSet
+        # CreateStagingRuleSet: Create a StagingRuleSet
         api_response = api_instance.create_staging_rule_set(entity_type, create_staging_rule_set_request)
         pprint(api_response)
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 # **delete_staging_rule_set**
 > DeletedEntityResponse delete_staging_rule_set(entity_type)
 
-[EXPERIMENTAL] DeleteStagingRuleSet: Delete a StagingRuleSet
+DeleteStagingRuleSet: Delete a StagingRuleSet
 
 Delete a staging rule set of a specific entity type. Deletion will be valid from the staging rule set's creation datetime.  This means that the staging rule set will no longer exist at any effective datetime from the asAt datetime of deletion.
 
@@ -168,7 +168,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_staging_rule_set(entity_type, opts=opts)
 
-        # [EXPERIMENTAL] DeleteStagingRuleSet: Delete a StagingRuleSet
+        # DeleteStagingRuleSet: Delete a StagingRuleSet
         api_response = api_instance.delete_staging_rule_set(entity_type)
         pprint(api_response)
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 # **get_staging_rule_set**
 > StagingRuleSet get_staging_rule_set(entity_type, as_at=as_at)
 
-[EXPERIMENTAL] GetStagingRuleSet: Get a StagingRuleSet
+GetStagingRuleSet: Get a StagingRuleSet
 
 Get the staging rule set for the given entity type at the specific asAt time.
 
@@ -261,7 +261,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_staging_rule_set(entity_type, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetStagingRuleSet: Get a StagingRuleSet
+        # GetStagingRuleSet: Get a StagingRuleSet
         api_response = api_instance.get_staging_rule_set(entity_type, as_at=as_at)
         pprint(api_response)
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 # **list_staging_rule_sets**
 > PagedResourceListOfStagingRuleSet list_staging_rule_sets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
 
-[EXPERIMENTAL] ListStagingRuleSets: List StagingRuleSets
+ListStagingRuleSets: List StagingRuleSets
 
 List all the staging rule sets matching particular criteria.
 
@@ -358,7 +358,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_staging_rule_sets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-        # [EXPERIMENTAL] ListStagingRuleSets: List StagingRuleSets
+        # ListStagingRuleSets: List StagingRuleSets
         api_response = api_instance.list_staging_rule_sets(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
         pprint(api_response)
 
@@ -399,7 +399,7 @@ Name | Type | Description  | Notes
 # **update_staging_rule_set**
 > StagingRuleSet update_staging_rule_set(entity_type, update_staging_rule_set_request)
 
-[EXPERIMENTAL] UpdateStagingRuleSet: Update a StagingRuleSet
+UpdateStagingRuleSet: Update a StagingRuleSet
 
 Update an existing staging rule set.
 
@@ -460,7 +460,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_staging_rule_set(entity_type, update_staging_rule_set_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateStagingRuleSet: Update a StagingRuleSet
+        # UpdateStagingRuleSet: Update a StagingRuleSet
         api_response = api_instance.update_staging_rule_set(entity_type, update_staging_rule_set_request)
         pprint(api_response)
 
