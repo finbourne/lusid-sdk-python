@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class SimpleInstrument(LusidInstrument):
     """
@@ -31,9 +32,10 @@ class SimpleInstrument(LusidInstrument):
     asset_class:  StrictStr = Field(...,alias="assetClass", description="The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown") 
     fgn_ccys: Optional[conlist(StrictStr)] = Field(None, alias="fgnCcys", description="The set of foreign currencies, if any (optional).")
     simple_instrument_type:  StrictStr = Field(...,alias="simpleInstrumentType", description="The Instrument type of the simple instrument.") 
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "maturityDate", "domCcy", "assetClass", "fgnCcys", "simpleInstrumentType"]
+    __properties = ["instrumentType", "maturityDate", "domCcy", "assetClass", "fgnCcys", "simpleInstrumentType", "timeZoneConventions"]
 
     @validator('asset_class')
     def asset_class_validate_enum(cls, value):
@@ -82,6 +84,9 @@ class SimpleInstrument(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -109,7 +114,8 @@ class SimpleInstrument(LusidInstrument):
             "dom_ccy": obj.get("domCcy"),
             "asset_class": obj.get("assetClass"),
             "fgn_ccys": obj.get("fgnCcys"),
-            "simple_instrument_type": obj.get("simpleInstrumentType")
+            "simple_instrument_type": obj.get("simpleInstrumentType"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

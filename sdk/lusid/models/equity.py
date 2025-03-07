@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, Field, StrictInt, StrictStr, validator 
 from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class Equity(LusidInstrument):
     """
@@ -30,9 +31,10 @@ class Equity(LusidInstrument):
     identifiers: Optional[EquityAllOfIdentifiers] = None
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     lot_size: Optional[StrictInt] = Field(None, alias="lotSize", description="Equity LotSize, the minimum number of shares that can be bought at once.  Optional, if set must be non-negative, if not set defaults to 1.    Note this property does not impact valuation. From a LUSID analytics perspective, it is purely informational.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "identifiers", "domCcy", "lotSize"]
+    __properties = ["instrumentType", "identifiers", "domCcy", "lotSize", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -77,6 +79,9 @@ class Equity(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of identifiers
         if self.identifiers:
             _dict['identifiers'] = self.identifiers.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -102,7 +107,8 @@ class Equity(LusidInstrument):
             "instrument_type": obj.get("instrumentType"),
             "identifiers": EquityAllOfIdentifiers.from_dict(obj.get("identifiers")) if obj.get("identifiers") is not None else None,
             "dom_ccy": obj.get("domCcy"),
-            "lot_size": obj.get("lotSize")
+            "lot_size": obj.get("lotSize"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

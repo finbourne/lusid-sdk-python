@@ -1114,6 +1114,7 @@ from lusid.models.tender_event import TenderEvent
 from lusid.models.term_deposit import TermDeposit
 from lusid.models.term_deposit_interest_event import TermDepositInterestEvent
 from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
+from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.timeline import Timeline
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
@@ -2393,6 +2394,7 @@ __all__ = [
     "TermDeposit",
     "TermDepositInterestEvent",
     "TermDepositPrincipalEvent",
+    "TimeZoneConventions",
     "Timeline",
     "TotalReturnSwap",
     "Touch",
