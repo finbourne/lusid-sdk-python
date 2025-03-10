@@ -5,16 +5,16 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_configuration_recipe**](ConfigurationRecipeApi.md#delete_configuration_recipe) | **DELETE** /api/recipes/{scope}/{code} | DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.
-[**delete_recipe_composer**](ConfigurationRecipeApi.md#delete_recipe_composer) | **DELETE** /api/recipes/composer/{scope}/{code} | [EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
+[**delete_recipe_composer**](ConfigurationRecipeApi.md#delete_recipe_composer) | **DELETE** /api/recipes/composer/{scope}/{code} | DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
 [**get_configuration_recipe**](ConfigurationRecipeApi.md#get_configuration_recipe) | **GET** /api/recipes/{scope}/{code} | GetConfigurationRecipe: Get Configuration Recipe
-[**get_derived_recipe**](ConfigurationRecipeApi.md#get_derived_recipe) | **GET** /api/recipes/derived/{scope}/{code} | [EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
-[**get_recipe_composer**](ConfigurationRecipeApi.md#get_recipe_composer) | **GET** /api/recipes/composer/{scope}/{code} | [EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer
-[**get_recipe_composer_resolved_inline**](ConfigurationRecipeApi.md#get_recipe_composer_resolved_inline) | **POST** /api/recipes/composer/resolvedinline$ | [EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
+[**get_derived_recipe**](ConfigurationRecipeApi.md#get_derived_recipe) | **GET** /api/recipes/derived/{scope}/{code} | GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
+[**get_recipe_composer**](ConfigurationRecipeApi.md#get_recipe_composer) | **GET** /api/recipes/composer/{scope}/{code} | GetRecipeComposer: Get Recipe Composer
+[**get_recipe_composer_resolved_inline**](ConfigurationRecipeApi.md#get_recipe_composer_resolved_inline) | **POST** /api/recipes/composer/resolvedinline$ | GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
 [**list_configuration_recipes**](ConfigurationRecipeApi.md#list_configuration_recipes) | **GET** /api/recipes | ListConfigurationRecipes: List the set of Configuration Recipes
-[**list_derived_recipes**](ConfigurationRecipeApi.md#list_derived_recipes) | **GET** /api/recipes/derived | [EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
-[**list_recipe_composers**](ConfigurationRecipeApi.md#list_recipe_composers) | **GET** /api/recipes/composer | [EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers
+[**list_derived_recipes**](ConfigurationRecipeApi.md#list_derived_recipes) | **GET** /api/recipes/derived | ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
+[**list_recipe_composers**](ConfigurationRecipeApi.md#list_recipe_composers) | **GET** /api/recipes/composer | ListRecipeComposers: List the set of Recipe Composers
 [**upsert_configuration_recipe**](ConfigurationRecipeApi.md#upsert_configuration_recipe) | **POST** /api/recipes | UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.
-[**upsert_recipe_composer**](ConfigurationRecipeApi.md#upsert_recipe_composer) | **POST** /api/recipes/composer | [EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
+[**upsert_recipe_composer**](ConfigurationRecipeApi.md#upsert_recipe_composer) | **POST** /api/recipes/composer | UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
 
 
 # **delete_configuration_recipe**
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 # **delete_recipe_composer**
 > AnnulSingleStructuredDataResponse delete_recipe_composer(scope, code)
 
-[EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
+DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
 
 Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.
 
@@ -170,7 +170,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_recipe_composer(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
+        # DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
         api_response = api_instance.delete_recipe_composer(scope, code)
         pprint(api_response)
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 # **get_derived_recipe**
 > GetRecipeResponse get_derived_recipe(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
+GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
 
 If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.
 
@@ -361,7 +361,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_derived_recipe(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
+        # GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
         api_response = api_instance.get_derived_recipe(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -400,7 +400,7 @@ Name | Type | Description  | Notes
 # **get_recipe_composer**
 > GetRecipeComposerResponse get_recipe_composer(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer
+GetRecipeComposer: Get Recipe Composer
 
 Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).
 
@@ -457,7 +457,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_recipe_composer(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer
+        # GetRecipeComposer: Get Recipe Composer
         api_response = api_instance.get_recipe_composer(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -496,7 +496,7 @@ Name | Type | Description  | Notes
 # **get_recipe_composer_resolved_inline**
 > GetRecipeResponse get_recipe_composer_resolved_inline(upsert_recipe_composer_request)
 
-[EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
+GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
 
 Resolves an inline recipe composer into a ConfigurationRecipe.
 
@@ -556,7 +556,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request, opts=opts)
 
-        # [EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
+        # GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.
         api_response = api_instance.get_recipe_composer_resolved_inline(upsert_recipe_composer_request)
         pprint(api_response)
 
@@ -687,7 +687,7 @@ Name | Type | Description  | Notes
 # **list_derived_recipes**
 > ResourceListOfGetRecipeResponse list_derived_recipes(as_at=as_at, filter=filter)
 
-[EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
+ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
 
 This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.
 
@@ -743,7 +743,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_derived_recipes(as_at=as_at, filter=filter, opts=opts)
 
-        # [EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
+        # ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
         api_response = api_instance.list_derived_recipes(as_at=as_at, filter=filter)
         pprint(api_response)
 
@@ -781,7 +781,7 @@ Name | Type | Description  | Notes
 # **list_recipe_composers**
 > ResourceListOfGetRecipeComposerResponse list_recipe_composers(as_at=as_at, filter=filter)
 
-[EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers
+ListRecipeComposers: List the set of Recipe Composers
 
 List the set of Recipe Composers at the specified date/time and scope
 
@@ -837,7 +837,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_recipe_composers(as_at=as_at, filter=filter, opts=opts)
 
-        # [EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers
+        # ListRecipeComposers: List the set of Recipe Composers
         api_response = api_instance.list_recipe_composers(as_at=as_at, filter=filter)
         pprint(api_response)
 
@@ -972,7 +972,7 @@ Name | Type | Description  | Notes
 # **upsert_recipe_composer**
 > UpsertSingleStructuredDataResponse upsert_recipe_composer(upsert_recipe_composer_request)
 
-[EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
+UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
 
 Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).
 
@@ -1032,7 +1032,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_recipe_composer(upsert_recipe_composer_request, opts=opts)
 
-        # [EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
+        # UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.
         api_response = api_instance.upsert_recipe_composer(upsert_recipe_composer_request)
         pprint(api_response)
 

@@ -231,7 +231,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def delete_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[StrictStr, Field(..., description="The Recipe Composer to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
+        """DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
 
         Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -264,7 +264,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def delete_recipe_composer_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[StrictStr, Field(..., description="The Recipe Composer to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
+        """DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
 
         Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -562,7 +562,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
+        """GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
 
         If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -597,7 +597,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def get_derived_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
+        """GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
 
         If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -733,7 +733,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeComposerResponse, Awaitable[GetRecipeComposerResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer  # noqa: E501
+        """GetRecipeComposer: Get Recipe Composer  # noqa: E501
 
         Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -768,7 +768,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def get_recipe_composer_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer  # noqa: E501
+        """GetRecipeComposer: Get Recipe Composer  # noqa: E501
 
         Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -904,7 +904,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
+        """GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
 
         Resolves an inline recipe composer into a ConfigurationRecipe.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -935,7 +935,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def get_recipe_composer_resolved_inline_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
+        """GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
 
         Resolves an inline recipe composer into a ConfigurationRecipe.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1226,7 +1226,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
+        """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
         This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1259,7 +1259,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
+        """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
         This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1389,7 +1389,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeComposerResponse, Awaitable[ResourceListOfGetRecipeComposerResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
+        """ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
 
         List the set of Recipe Composers at the specified date/time and scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1422,7 +1422,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def list_recipe_composers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
+        """ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
 
         List the set of Recipe Composers at the specified date/time and scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1711,7 +1711,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
+        """UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1742,7 +1742,7 @@ class ConfigurationRecipeApi:
 
     @validate_arguments
     def upsert_recipe_composer_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
+        """UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
