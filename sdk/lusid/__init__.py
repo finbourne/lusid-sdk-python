@@ -159,6 +159,14 @@ from lusid.models.amount import Amount
 from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.annul_structured_data_response import AnnulStructuredDataResponse
+from lusid.models.append_complex_market_data_request import AppendComplexMarketDataRequest
+from lusid.models.append_fx_forward_curve_by_quote_reference import AppendFxForwardCurveByQuoteReference
+from lusid.models.append_fx_forward_curve_data import AppendFxForwardCurveData
+from lusid.models.append_fx_forward_pips_curve_data import AppendFxForwardPipsCurveData
+from lusid.models.append_fx_forward_tenor_curve_data import AppendFxForwardTenorCurveData
+from lusid.models.append_fx_forward_tenor_pips_curve_data import AppendFxForwardTenorPipsCurveData
+from lusid.models.append_market_data import AppendMarketData
+from lusid.models.append_market_data_type import AppendMarketDataType
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
 from lusid.models.asset_class import AssetClass
 from lusid.models.asset_leg import AssetLeg
@@ -1439,6 +1447,14 @@ __all__ = [
     "AnnulQuotesResponse",
     "AnnulSingleStructuredDataResponse",
     "AnnulStructuredDataResponse",
+    "AppendComplexMarketDataRequest",
+    "AppendFxForwardCurveByQuoteReference",
+    "AppendFxForwardCurveData",
+    "AppendFxForwardPipsCurveData",
+    "AppendFxForwardTenorCurveData",
+    "AppendFxForwardTenorPipsCurveData",
+    "AppendMarketData",
+    "AppendMarketDataType",
     "ApplicableInstrumentEvent",
     "AssetClass",
     "AssetLeg",

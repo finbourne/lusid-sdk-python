@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
 *ComplexMarketDataApi* | [**delete_complex_market_data**](docs/ComplexMarketDataApi.md#delete_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$delete | DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
 *ComplexMarketDataApi* | [**get_complex_market_data**](docs/ComplexMarketDataApi.md#get_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$get | GetComplexMarketData: Get complex market data
 *ComplexMarketDataApi* | [**list_complex_market_data**](docs/ComplexMarketDataApi.md#list_complex_market_data) | **GET** /api/complexmarketdata | ListComplexMarketData: List the set of ComplexMarketData
+*ComplexMarketDataApi* | [**upsert_append_complex_market_data**](docs/ComplexMarketDataApi.md#upsert_append_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$append | [EARLY ACCESS] UpsertAppendComplexMarketData: Appends a new point to the end of a ComplexMarketData definition.
 *ComplexMarketDataApi* | [**upsert_complex_market_data**](docs/ComplexMarketDataApi.md#upsert_complex_market_data) | **POST** /api/complexmarketdata/{scope} | UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
 *ComplianceApi* | [**create_compliance_template**](docs/ComplianceApi.md#create_compliance_template) | **POST** /api/compliance/templates/{scope} | [EARLY ACCESS] CreateComplianceTemplate: Create a Compliance Rule Template
 *ComplianceApi* | [**delete_compliance_rule**](docs/ComplianceApi.md#delete_compliance_rule) | **DELETE** /api/compliance/rules/{scope}/{code} | [EARLY ACCESS] DeleteComplianceRule: Delete compliance rule.
@@ -693,6 +694,14 @@ Class | Method | HTTP request | Description
  - [AnnulQuotesResponse](docs/AnnulQuotesResponse.md)
  - [AnnulSingleStructuredDataResponse](docs/AnnulSingleStructuredDataResponse.md)
  - [AnnulStructuredDataResponse](docs/AnnulStructuredDataResponse.md)
+ - [AppendComplexMarketDataRequest](docs/AppendComplexMarketDataRequest.md)
+ - [AppendFxForwardCurveByQuoteReference](docs/AppendFxForwardCurveByQuoteReference.md)
+ - [AppendFxForwardCurveData](docs/AppendFxForwardCurveData.md)
+ - [AppendFxForwardPipsCurveData](docs/AppendFxForwardPipsCurveData.md)
+ - [AppendFxForwardTenorCurveData](docs/AppendFxForwardTenorCurveData.md)
+ - [AppendFxForwardTenorPipsCurveData](docs/AppendFxForwardTenorPipsCurveData.md)
+ - [AppendMarketData](docs/AppendMarketData.md)
+ - [AppendMarketDataType](docs/AppendMarketDataType.md)
  - [ApplicableInstrumentEvent](docs/ApplicableInstrumentEvent.md)
  - [AssetClass](docs/AssetClass.md)
  - [AssetLeg](docs/AssetLeg.md)
