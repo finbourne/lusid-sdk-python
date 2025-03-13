@@ -70,7 +70,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_custom_entity_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the Custom Entity.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Custom Entity. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Custom Entity. Defaults to returning the latest version of the Custom Entity if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomEntityEntity, Awaitable[CustomEntityEntity]]:  # noqa: E501
-        """[EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId  # noqa: E501
+        """GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId  # noqa: E501
 
         Retrieve a particular Custom Entity instance.  If the Custom Entity is deleted, this will return the state of the Custom Entity immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -107,7 +107,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_custom_entity_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the Custom Entity.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Custom Entity. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Custom Entity. Defaults to returning the latest version of the Custom Entity if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId  # noqa: E501
+        """GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId  # noqa: E501
 
         Retrieve a particular Custom Entity instance.  If the Custom Entity is deleted, this will return the state of the Custom Entity immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -250,7 +250,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_data_type_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the DataType definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the DataType definition. Defaults to returning the latest version of the DataType definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DataTypeEntity, Awaitable[DataTypeEntity]]:  # noqa: E501
-        """[EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId  # noqa: E501
+        """GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular DataType.  If the DataType is deleted, this will return the state of the DataType immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -285,7 +285,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_data_type_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the DataType definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the DataType definition. Defaults to returning the latest version of the DataType definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId  # noqa: E501
+        """GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular DataType.  If the DataType is deleted, this will return the state of the DataType immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -422,7 +422,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_entity_history(self, entity_type : Annotated[StrictStr, Field(..., description="The type of the entity to list the change history for.")], entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the entity.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list change history information. Defaults to return the change history at the latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing change history information from a previous call to list change              history information. This value is returned from the previous call. If a pagination token is provided the filter, sortBy              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeInterval, Awaitable[ResourceListOfChangeInterval]]:  # noqa: E501
-        """[EARLY ACCESS] GetEntityHistory: List an entity's history information  # noqa: E501
+        """GetEntityHistory: List an entity's history information  # noqa: E501
 
         Retrieve a page of an entity's change history up to a particular point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -465,7 +465,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_entity_history_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The type of the entity to list the change history for.")], entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the entity.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list change history information. Defaults to return the change history at the latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing change history information from a previous call to list change              history information. This value is returned from the previous call. If a pagination token is provided the filter, sortBy              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetEntityHistory: List an entity's history information  # noqa: E501
+        """GetEntityHistory: List an entity's history information  # noqa: E501
 
         Retrieve a page of an entity's change history up to a particular point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -626,7 +626,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEntity, Awaitable[InstrumentEntity]]:  # noqa: E501
-        """[EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId  # noqa: E501
+        """GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular instrument.  If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -663,7 +663,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_instrument_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId  # noqa: E501
+        """GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular instrument.  If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -806,7 +806,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PortfolioEntity, Awaitable[PortfolioEntity]]:  # noqa: E501
-        """[EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId  # noqa: E501
+        """GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular portfolio.  If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -843,7 +843,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_portfolio_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId  # noqa: E501
+        """GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular portfolio.  If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1157,7 +1157,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_property_definition_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the property definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PropertyDefinitionEntity, Awaitable[PropertyDefinitionEntity]]:  # noqa: E501
-        """[EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId  # noqa: E501
+        """GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId  # noqa: E501
 
         Retrieve a particular property definition.  If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1194,7 +1194,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_property_definition_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the property definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId  # noqa: E501
+        """GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId  # noqa: E501
 
         Retrieve a particular property definition.  If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

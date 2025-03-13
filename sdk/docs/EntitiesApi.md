@@ -4,19 +4,19 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_custom_entity_by_entity_unique_id**](EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | [EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
-[**get_data_type_by_entity_unique_id**](EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | [EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
-[**get_entity_history**](EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | [EARLY ACCESS] GetEntityHistory: List an entity&#39;s history information
-[**get_instrument_by_entity_unique_id**](EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | [EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
-[**get_portfolio_by_entity_unique_id**](EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
+[**get_custom_entity_by_entity_unique_id**](EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
+[**get_data_type_by_entity_unique_id**](EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
+[**get_entity_history**](EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity&#39;s history information
+[**get_instrument_by_entity_unique_id**](EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
+[**get_portfolio_by_entity_unique_id**](EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 [**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
-[**get_property_definition_by_entity_unique_id**](EntitiesApi.md#get_property_definition_by_entity_unique_id) | **GET** /api/entities/propertydefinitions/{entityUniqueId} | [EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
+[**get_property_definition_by_entity_unique_id**](EntitiesApi.md#get_property_definition_by_entity_unique_id) | **GET** /api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
 
 
 # **get_custom_entity_by_entity_unique_id**
 > CustomEntityEntity get_custom_entity_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
 
-[EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
+GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 
 Retrieve a particular Custom Entity instance.  If the Custom Entity is deleted, this will return the state of the Custom Entity immediately prior to deletion.
 
@@ -74,7 +74,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_custom_entity_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, opts=opts)
 
-        # [EXPERIMENTAL] GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
+        # GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
         api_response = api_instance.get_custom_entity_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
         pprint(api_response)
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 # **get_data_type_by_entity_unique_id**
 > DataTypeEntity get_data_type_by_entity_unique_id(entity_unique_id, as_at=as_at, previews=previews)
 
-[EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
+GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 
 Retrieve the definition of a particular DataType.  If the DataType is deleted, this will return the state of the DataType immediately prior to deletion.
 
@@ -171,7 +171,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_data_type_by_entity_unique_id(entity_unique_id, as_at=as_at, previews=previews, opts=opts)
 
-        # [EXPERIMENTAL] GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
+        # GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
         api_response = api_instance.get_data_type_by_entity_unique_id(entity_unique_id, as_at=as_at, previews=previews)
         pprint(api_response)
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 # **get_entity_history**
 > ResourceListOfChangeInterval get_entity_history(entity_type, entity_unique_id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EARLY ACCESS] GetEntityHistory: List an entity's history information
+GetEntityHistory: List an entity's history information
 
 Retrieve a page of an entity's change history up to a particular point in AsAt time.
 
@@ -271,7 +271,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_entity_history(entity_type, entity_unique_id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EARLY ACCESS] GetEntityHistory: List an entity's history information
+        # GetEntityHistory: List an entity's history information
         api_response = api_instance.get_entity_history(entity_type, entity_unique_id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 # **get_instrument_by_entity_unique_id**
 > InstrumentEntity get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
 
-[EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
+GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 
 Retrieve the definition of a particular instrument.  If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.
 
@@ -372,7 +372,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, opts=opts)
 
-        # [EXPERIMENTAL] GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
+        # GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
         api_response = api_instance.get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
         pprint(api_response)
 
@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_by_entity_unique_id**
 > PortfolioEntity get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
 
-[EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
+GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 
 Retrieve the definition of a particular portfolio.  If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.
 
@@ -470,7 +470,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, opts=opts)
 
-        # [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
+        # GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
         api_response = api_instance.get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
         pprint(api_response)
 
@@ -606,7 +606,7 @@ Name | Type | Description  | Notes
 # **get_property_definition_by_entity_unique_id**
 > PropertyDefinitionEntity get_property_definition_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
 
-[EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
+GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
 
 Retrieve a particular property definition.  If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.
 
@@ -664,7 +664,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_property_definition_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, opts=opts)
 
-        # [EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
+        # GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
         api_response = api_instance.get_property_definition_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
         pprint(api_response)
 
