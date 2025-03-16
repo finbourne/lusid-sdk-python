@@ -57,6 +57,58 @@ class PropertyDefinition(BaseModel):
     @validator('value_type')
     def value_type_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PropertyDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "value_type" != "type":
+            return value
+
         if value is None:
             return value
 
@@ -67,6 +119,58 @@ class PropertyDefinition(BaseModel):
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PropertyDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "type" != "type":
+            return value
+
         if value is None:
             return value
 
@@ -77,6 +181,58 @@ class PropertyDefinition(BaseModel):
     @validator('unit_schema')
     def unit_schema_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PropertyDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "unit_schema" != "type":
+            return value
+
         if value is None:
             return value
 
@@ -87,6 +243,58 @@ class PropertyDefinition(BaseModel):
     @validator('domain')
     def domain_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PropertyDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "domain" != "type":
+            return value
+
         if value is None:
             return value
 
@@ -97,6 +305,58 @@ class PropertyDefinition(BaseModel):
     @validator('life_time')
     def life_time_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PropertyDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "life_time" != "type":
+            return value
+
         if value is None:
             return value
 
@@ -107,6 +367,58 @@ class PropertyDefinition(BaseModel):
     @validator('property_definition_type')
     def property_definition_type_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PropertyDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "property_definition_type" != "type":
+            return value
+
         if value is None:
             return value
 

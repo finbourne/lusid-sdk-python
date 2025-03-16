@@ -41,6 +41,58 @@ class ReverseStockSplitEvent(InstrumentEvent):
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'ReverseStockSplitEvent' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "instrument_event_type" != "type":
+            return value
+
         if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent'):
             raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent')")
         return value

@@ -39,6 +39,58 @@ class CreateDerivedPropertyDefinitionRequest(BaseModel):
     @validator('domain')
     def domain_validate_enum(cls, value):
         """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'CreateDerivedPropertyDefinitionRequest' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "domain" != "type":
+            return value
+
         if value not in ('NotDefined', 'Transaction', 'Portfolio', 'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument', 'CutLabelDefinition', 'Analytic', 'PortfolioGroup', 'Person', 'AccessMetadata', 'Order', 'UnitResult', 'MarketData', 'ConfigurationRecipe', 'Allocation', 'Calendar', 'LegalEntity', 'Placement', 'Execution', 'Block', 'Participation', 'Package', 'OrderInstruction', 'NextBestAction', 'CustomEntity', 'InstrumentEvent', 'Account', 'ChartOfAccounts', 'CustodianAccount', 'Abor', 'AborConfiguration', 'Fund', 'FundConfiguration', 'Fee', 'Reconciliation', 'PropertyDefinition', 'Compliance', 'DiaryEntry', 'Leg', 'DerivedValuation', 'Timeline', 'ClosedPeriod', 'AddressKeyDefinition', 'AmortisationRuleSet', 'AnalyticsSetInventory', 'AtomUnitResult', 'CleardownModule', 'ComplexMarketData', 'ComplianceRunSummary', 'ComplianceRule', 'ComplianceRunInfo', 'CorporateActionSource', 'CounterpartyAgreement', 'CustomEntityDefinition', 'DataType', 'Dialect', 'EventHandler', 'GeneralLedgerProfile', 'PostingModule', 'Quote', 'RecipeComposer', 'ReconciliationRunBreak', 'ReferenceList', 'RelationDefinition', 'ReturnBlockIndex', 'SRSDocument', 'SRSIndex', 'TransactionTemplate', 'TransactionTemplateScope', 'TransactionType', 'TransactionTypeConfig', 'TranslationScript', 'TaskDefinition', 'TaskInstance', 'Worker', 'StagingRuleSet', 'IdentifierDefinition'):
             raise ValueError("must be one of enum values ('NotDefined', 'Transaction', 'Portfolio', 'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument', 'CutLabelDefinition', 'Analytic', 'PortfolioGroup', 'Person', 'AccessMetadata', 'Order', 'UnitResult', 'MarketData', 'ConfigurationRecipe', 'Allocation', 'Calendar', 'LegalEntity', 'Placement', 'Execution', 'Block', 'Participation', 'Package', 'OrderInstruction', 'NextBestAction', 'CustomEntity', 'InstrumentEvent', 'Account', 'ChartOfAccounts', 'CustodianAccount', 'Abor', 'AborConfiguration', 'Fund', 'FundConfiguration', 'Fee', 'Reconciliation', 'PropertyDefinition', 'Compliance', 'DiaryEntry', 'Leg', 'DerivedValuation', 'Timeline', 'ClosedPeriod', 'AddressKeyDefinition', 'AmortisationRuleSet', 'AnalyticsSetInventory', 'AtomUnitResult', 'CleardownModule', 'ComplexMarketData', 'ComplianceRunSummary', 'ComplianceRule', 'ComplianceRunInfo', 'CorporateActionSource', 'CounterpartyAgreement', 'CustomEntityDefinition', 'DataType', 'Dialect', 'EventHandler', 'GeneralLedgerProfile', 'PostingModule', 'Quote', 'RecipeComposer', 'ReconciliationRunBreak', 'ReferenceList', 'RelationDefinition', 'ReturnBlockIndex', 'SRSDocument', 'SRSIndex', 'TransactionTemplate', 'TransactionTemplateScope', 'TransactionType', 'TransactionTypeConfig', 'TranslationScript', 'TaskDefinition', 'TaskInstance', 'Worker', 'StagingRuleSet', 'IdentifierDefinition')")
         return value
