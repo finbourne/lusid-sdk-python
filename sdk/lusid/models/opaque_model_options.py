@@ -26,7 +26,7 @@ class OpaqueModelOptions(ModelOptions):
     """
     OpaqueModelOptions
     """
-    data: Dict[str, Dict[str, Any]] = Field(...)
+    data: Dict[str, Any] = Field(...)
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "data"]
