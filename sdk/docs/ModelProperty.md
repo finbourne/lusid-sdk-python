@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **effective_from** | **datetime** | The effective datetime from which the property is valid. | [optional] 
 **effective_until** | **datetime** | The effective datetime until which the property is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveFrom&#39; datetime of the property. | [optional] 
+**reference_data** | [**Dict[str, PropertyReferenceDataValue]**](PropertyReferenceDataValue.md) | The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property. | [optional] [readonly] 
 
 ## Example
 

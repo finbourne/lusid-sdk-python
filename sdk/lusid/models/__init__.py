@@ -813,6 +813,7 @@ from lusid.models.property_key_list_compliance_parameter import PropertyKeyListC
 from lusid.models.property_life_time import PropertyLifeTime
 from lusid.models.property_list import PropertyList
 from lusid.models.property_list_compliance_parameter import PropertyListComplianceParameter
+from lusid.models.property_reference_data_value import PropertyReferenceDataValue
 from lusid.models.property_schema import PropertySchema
 from lusid.models.property_type import PropertyType
 from lusid.models.property_value import PropertyValue
@@ -2017,6 +2018,7 @@ __all__ = [
     "PropertyLifeTime",
     "PropertyList",
     "PropertyListComplianceParameter",
+    "PropertyReferenceDataValue",
     "PropertySchema",
     "PropertyType",
     "PropertyValue",

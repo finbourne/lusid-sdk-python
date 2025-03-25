@@ -18,9 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
-from lusid.models.fee_accrual import FeeAccrual
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.link import Link
@@ -33,20 +32,13 @@ class ValuationPointDataResponse(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     type:  StrictStr = Field(...,alias="type", description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).") 
     status:  StrictStr = Field(...,alias="status", description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used.") 
-    backout: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for the Valuation Point, where data points have been 'backed out'.")
-    dealing: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for any 'Dealing' that has occured inside the queried period.")
-    pn_l: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="pnL", description="DEPRECATED. Bucket of detail for 'PnL' that has occured inside the queried period.")
-    gav: Union[StrictFloat, StrictInt] = Field(..., description="DEPRECATED. The Gross Asset Value of the Fund at the Period end. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
-    fees: Dict[str, FeeAccrual] = Field(..., description="DEPRECATED. Bucket of detail for any 'Fees' that have been charged in the selected period.")
-    nav: Union[StrictFloat, StrictInt] = Field(..., description="DEPRECATED. The Net Asset Value of the Fund at the Period end. This represents the GAV with any fees applied in the period.")
-    previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="DEPRECATED. The Net Asset Value of the Fund at the End of the last Period.")
     fund_details: FundDetails = Field(..., alias="fundDetails")
     fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
     share_class_data: conlist(ShareClassData) = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
     valuation_point_code:  Optional[StrictStr] = Field(None,alias="valuationPointCode", description="The code of the valuation point.") 
     previous_valuation_point_code:  Optional[StrictStr] = Field(None,alias="previousValuationPointCode", description="The code of the previous valuation point.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
+    __properties = ["href", "type", "status", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,13 +72,6 @@ class ValuationPointDataResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in fees (dict)
-        _field_dict = {}
-        if self.fees:
-            for _key in self.fees:
-                if self.fees[_key]:
-                    _field_dict[_key] = self.fees[_key].to_dict()
-            _dict['fees'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of fund_details
         if self.fund_details:
             _dict['fundDetails'] = self.fund_details.to_dict()
@@ -142,18 +127,6 @@ class ValuationPointDataResponse(BaseModel):
             "href": obj.get("href"),
             "type": obj.get("type"),
             "status": obj.get("status"),
-            "backout": obj.get("backout"),
-            "dealing": obj.get("dealing"),
-            "pn_l": obj.get("pnL"),
-            "gav": obj.get("gav"),
-            "fees": dict(
-                (_k, FeeAccrual.from_dict(_v))
-                for _k, _v in obj.get("fees").items()
-            )
-            if obj.get("fees") is not None
-            else None,
-            "nav": obj.get("nav"),
-            "previous_nav": obj.get("previousNav"),
             "fund_details": FundDetails.from_dict(obj.get("fundDetails")) if obj.get("fundDetails") is not None else None,
             "fund_valuation_point_data": FundValuationPointData.from_dict(obj.get("fundValuationPointData")) if obj.get("fundValuationPointData") is not None else None,
             "share_class_data": [ShareClassData.from_dict(_item) for _item in obj.get("shareClassData")] if obj.get("shareClassData") is not None else None,

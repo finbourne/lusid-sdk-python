@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from lusid.models.property_reference_data_value import PropertyReferenceDataValue
 from lusid.models.property_value import PropertyValue
 
 class ModelProperty(BaseModel):
@@ -30,7 +31,8 @@ class ModelProperty(BaseModel):
     value: Optional[PropertyValue] = None
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the property is valid.")
     effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the property is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the property.")
-    __properties = ["key", "value", "effectiveFrom", "effectiveUntil"]
+    reference_data: Optional[Dict[str, PropertyReferenceDataValue]] = Field(None, alias="referenceData", description="The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property.")
+    __properties = ["key", "value", "effectiveFrom", "effectiveUntil", "referenceData"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,11 +64,19 @@ class ModelProperty(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "reference_data",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of value
         if self.value:
             _dict['value'] = self.value.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in reference_data (dict)
+        _field_dict = {}
+        if self.reference_data:
+            for _key in self.reference_data:
+                if self.reference_data[_key]:
+                    _field_dict[_key] = self.reference_data[_key].to_dict()
+            _dict['referenceData'] = _field_dict
         # set to None if effective_from (nullable) is None
         # and __fields_set__ contains the field
         if self.effective_from is None and "effective_from" in self.__fields_set__:
@@ -76,6 +86,11 @@ class ModelProperty(BaseModel):
         # and __fields_set__ contains the field
         if self.effective_until is None and "effective_until" in self.__fields_set__:
             _dict['effectiveUntil'] = None
+
+        # set to None if reference_data (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reference_data is None and "reference_data" in self.__fields_set__:
+            _dict['referenceData'] = None
 
         return _dict
 
@@ -92,6 +107,12 @@ class ModelProperty(BaseModel):
             "key": obj.get("key"),
             "value": PropertyValue.from_dict(obj.get("value")) if obj.get("value") is not None else None,
             "effective_from": obj.get("effectiveFrom"),
-            "effective_until": obj.get("effectiveUntil")
+            "effective_until": obj.get("effectiveUntil"),
+            "reference_data": dict(
+                (_k, PropertyReferenceDataValue.from_dict(_v))
+                for _k, _v in obj.get("referenceData").items()
+            )
+            if obj.get("referenceData") is not None
+            else None
         })
         return _obj

@@ -1433,6 +1433,7 @@ Class | Method | HTTP request | Description
  - [PropertyLifeTime](docs/PropertyLifeTime.md)
  - [PropertyList](docs/PropertyList.md)
  - [PropertyListComplianceParameter](docs/PropertyListComplianceParameter.md)
+ - [PropertyReferenceDataValue](docs/PropertyReferenceDataValue.md)
  - [PropertySchema](docs/PropertySchema.md)
  - [PropertyType](docs/PropertyType.md)
  - [PropertyValue](docs/PropertyValue.md)

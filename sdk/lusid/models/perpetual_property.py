@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from lusid.models.property_reference_data_value import PropertyReferenceDataValue
 from lusid.models.property_value import PropertyValue
 
 class PerpetualProperty(BaseModel):
@@ -28,7 +29,8 @@ class PerpetualProperty(BaseModel):
     """
     key:  StrictStr = Field(...,alias="key", description="The key of the property. This takes the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or 'Transaction/strategy/quantsignal'.") 
     value: Optional[PropertyValue] = None
-    __properties = ["key", "value"]
+    reference_data: Optional[Dict[str, PropertyReferenceDataValue]] = Field(None, alias="referenceData", description="The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property.")
+    __properties = ["key", "value", "referenceData"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,11 +62,24 @@ class PerpetualProperty(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "reference_data",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of value
         if self.value:
             _dict['value'] = self.value.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in reference_data (dict)
+        _field_dict = {}
+        if self.reference_data:
+            for _key in self.reference_data:
+                if self.reference_data[_key]:
+                    _field_dict[_key] = self.reference_data[_key].to_dict()
+            _dict['referenceData'] = _field_dict
+        # set to None if reference_data (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reference_data is None and "reference_data" in self.__fields_set__:
+            _dict['referenceData'] = None
+
         return _dict
 
     @classmethod
@@ -78,6 +93,12 @@ class PerpetualProperty(BaseModel):
 
         _obj = PerpetualProperty.parse_obj({
             "key": obj.get("key"),
-            "value": PropertyValue.from_dict(obj.get("value")) if obj.get("value") is not None else None
+            "value": PropertyValue.from_dict(obj.get("value")) if obj.get("value") is not None else None,
+            "reference_data": dict(
+                (_k, PropertyReferenceDataValue.from_dict(_v))
+                for _k, _v in obj.get("referenceData").items()
+            )
+            if obj.get("referenceData") is not None
+            else None
         })
         return _obj
