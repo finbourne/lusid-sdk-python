@@ -579,6 +579,7 @@ from lusid.models.list_aggregation_reconciliation import ListAggregationReconcil
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
 from lusid.models.loan_facility import LoanFacility
+from lusid.models.loan_facility_contract_rollover_event import LoanFacilityContractRolloverEvent
 from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEvent
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
@@ -964,6 +965,7 @@ from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
+from lusid.models.rollover_constituent import RolloverConstituent
 from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
 from lusid.models.rounding_convention import RoundingConvention
@@ -1215,6 +1217,7 @@ from lusid.models.workspace_item import WorkspaceItem
 from lusid.models.workspace_item_creation_request import WorkspaceItemCreationRequest
 from lusid.models.workspace_item_update_request import WorkspaceItemUpdateRequest
 from lusid.models.workspace_update_request import WorkspaceUpdateRequest
+from lusid.models.workspace_visibility import WorkspaceVisibility
 from lusid.models.yield_curve_data import YieldCurveData
 
 
@@ -1784,6 +1787,7 @@ __all__ = [
     "ListAggregationResponse",
     "ListComplexMarketDataWithMetaDataResponse",
     "LoanFacility",
+    "LoanFacilityContractRolloverEvent",
     "LoanInterestRepaymentEvent",
     "LoanPeriod",
     "LoanPrincipalRepaymentEvent",
@@ -2169,6 +2173,7 @@ __all__ = [
     "ResultValueType",
     "ReturnZeroPvOptions",
     "ReverseStockSplitEvent",
+    "RolloverConstituent",
     "RoundingConfiguration",
     "RoundingConfigurationComponent",
     "RoundingConvention",
@@ -2420,5 +2425,6 @@ __all__ = [
     "WorkspaceItemCreationRequest",
     "WorkspaceItemUpdateRequest",
     "WorkspaceUpdateRequest",
+    "WorkspaceVisibility",
     "YieldCurveData"
 ]

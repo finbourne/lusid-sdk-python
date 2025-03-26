@@ -18,21 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
+from typing import Any, Dict, List
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, conlist, validator 
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.rollover_constituent import RolloverConstituent
 
-class MbsInterestDeferralEvent(InstrumentEvent):
+class LoanFacilityContractRolloverEvent(InstrumentEvent):
     """
-    Definition of an MBS Interest Deferral Event  This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and  capitalised into the outstanding principal balance of a mortgage-backed security.  # noqa: E501
+    Event for rolling over one or more FlexibleLoan contracts into one or more different FlexibleLoan contracts against the same facility.  # noqa: E501
     """
-    ex_date: datetime = Field(..., alias="exDate", description="The ex date (entitlement date) of the interest payment, usually several weeks prior to the payment date")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the interest that is deferred and capitalised")
-    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the interest amount is notated") 
-    interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="interestPerUnit", description="The interest amount to be deferred and capitalised for each unit of the instrument held on the ex date")
+    var_date: datetime = Field(..., alias="date", description="Effective date of the event.")
+    rollover_constituents: conlist(RolloverConstituent) = Field(..., alias="rolloverConstituents", description="Source and target contracts of the rollover. That is, a set of contracts and their respective changes to balance  Expect at least one contract to as the source of the rollover and at least one target contract.")
+    with_interest: StrictBool = Field(..., alias="withInterest", description="If set to true, then active contracts whose balance is reduced by the rollover will have their accrued interest  repaid pro rata to the balance reduction.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "interestPerUnit"]
+    __properties = ["instrumentEventType", "date", "rolloverConstituents", "withInterest"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -45,7 +45,7 @@ class MbsInterestDeferralEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'MbsInterestDeferralEvent' not in [ 
+        if 'LoanFacilityContractRolloverEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -115,8 +115,8 @@ class MbsInterestDeferralEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> MbsInterestDeferralEvent:
-        """Create an instance of MbsInterestDeferralEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> LoanFacilityContractRolloverEvent:
+        """Create an instance of LoanFacilityContractRolloverEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -126,33 +126,34 @@ class MbsInterestDeferralEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in rollover_constituents (list)
+        _items = []
+        if self.rollover_constituents:
+            for _item in self.rollover_constituents:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['rolloverConstituents'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if interest_per_unit (nullable) is None
-        # and __fields_set__ contains the field
-        if self.interest_per_unit is None and "interest_per_unit" in self.__fields_set__:
-            _dict['interestPerUnit'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> MbsInterestDeferralEvent:
-        """Create an instance of MbsInterestDeferralEvent from a dict"""
+    def from_dict(cls, obj: dict) -> LoanFacilityContractRolloverEvent:
+        """Create an instance of LoanFacilityContractRolloverEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return MbsInterestDeferralEvent.parse_obj(obj)
+            return LoanFacilityContractRolloverEvent.parse_obj(obj)
 
-        _obj = MbsInterestDeferralEvent.parse_obj({
+        _obj = LoanFacilityContractRolloverEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate"),
-            "currency": obj.get("currency"),
-            "interest_per_unit": obj.get("interestPerUnit")
+            "var_date": obj.get("date"),
+            "rollover_constituents": [RolloverConstituent.from_dict(_item) for _item in obj.get("rolloverConstituents")] if obj.get("rolloverConstituents") is not None else None,
+            "with_interest": obj.get("withInterest")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
