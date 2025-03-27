@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, confloat, conint, constr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 
 class PropertyReferenceDataValue(BaseModel):
     """
     The ReferenceData relevant to the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the Property.  Only ReferenceData where the ReferenceData value matches the Property value is included.  # noqa: E501
     """
     string_value:  Optional[StrictStr] = Field(None,alias="stringValue") 
-    numeric_value: Optional[Union[confloat(strict=True), conint(strict=True)]] = Field(None, alias="numericValue")
+    numeric_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="numericValue")
     __properties = ["stringValue", "numericValue"]
 
     class Config:
