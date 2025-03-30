@@ -33,7 +33,7 @@ class Future(LusidInstrument):
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     identifiers: Dict[str, StrictStr] = Field(..., description="External market codes and identifiers for the bond, e.g. ISIN.")
     contract_details: FuturesContractDetails = Field(..., alias="contractDetails")
-    contracts: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The number of contracts held. This is optional and will default to 1 if not set.  Instrument events will only work when this field is 1.  We recommend not using this field and instead relying on the number of holdings to   represent the number of futures contracts.")
+    contracts: Optional[Union[StrictFloat, StrictInt]] = Field(1, description="The number of contracts held. This is optional and will default to 1 if not set.  Instrument events will only work when this field is 1.  We recommend not using this field and instead relying on the number of holdings to   represent the number of futures contracts.")
     mark_to_market_conventions: Optional[MarkToMarketConventions] = Field(None, alias="markToMarketConventions")
     ref_spot_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="refSpotPrice", description="The reference spot price for the future at which the contract was entered into.")
     underlying: Optional[LusidInstrument] = None
@@ -174,7 +174,7 @@ class Future(LusidInstrument):
             "maturity_date": obj.get("maturityDate"),
             "identifiers": obj.get("identifiers"),
             "contract_details": FuturesContractDetails.from_dict(obj.get("contractDetails")) if obj.get("contractDetails") is not None else None,
-            "contracts": obj.get("contracts"),
+            "contracts": obj.get("contracts") if obj.get("contracts") is not None else 1,
             "mark_to_market_conventions": MarkToMarketConventions.from_dict(obj.get("markToMarketConventions")) if obj.get("markToMarketConventions") is not None else None,
             "ref_spot_price": obj.get("refSpotPrice"),
             "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
