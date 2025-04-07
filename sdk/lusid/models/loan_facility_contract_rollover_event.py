@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, conlist, validator 
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.rollover_constituent import RolloverConstituent
@@ -27,7 +27,7 @@ class LoanFacilityContractRolloverEvent(InstrumentEvent):
     """
     Event for rolling over one or more FlexibleLoan contracts into one or more different FlexibleLoan contracts against the same facility.  # noqa: E501
     """
-    var_date: datetime = Field(..., alias="date", description="Effective date of the event.")
+    var_date: Optional[datetime] = Field(None, alias="date", description="Effective date of the event.")
     rollover_constituents: conlist(RolloverConstituent) = Field(..., alias="rolloverConstituents", description="Source and target contracts of the rollover. That is, a set of contracts and their respective changes to balance  Expect at least one contract to as the source of the rollover and at least one target contract.")
     with_interest: StrictBool = Field(..., alias="withInterest", description="If set to true, then active contracts whose balance is reduced by the rollover will have their accrued interest  repaid pro rata to the balance reduction.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent") 

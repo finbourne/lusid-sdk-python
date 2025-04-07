@@ -29,9 +29,9 @@ class SpinOffEvent(InstrumentEvent):
     Spin-off event (SOFF), representing the distribution of securities issued by another company.  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Optional.  The date the spin-off is announced.")
-    ex_date: datetime = Field(..., alias="exDate", description="The first date on which the holder of record has entitled ownership of the new shares.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first date on which the holder of record has entitled ownership of the new shares.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Optional.  Date you have to be the holder of record in order to receive the additional shares.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="Date on which the distribution of shares takes place.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Date on which the distribution of shares takes place.")
     new_instrument: NewInstrument = Field(..., alias="newInstrument")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="costFactor", description="Optional. The fraction of cost that is transferred from the existing shares to the new shares.")

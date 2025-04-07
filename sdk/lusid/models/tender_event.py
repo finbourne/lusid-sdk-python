@@ -31,9 +31,9 @@ class TenderEvent(InstrumentEvent):
     Tender Event (TEND).  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="The date the tender is announced.")
-    ex_date: datetime = Field(..., alias="exDate", description="The ex date (entitlement date) of the event.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date (entitlement date) of the event.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the event.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the event.")
     new_instrument: NewInstrument = Field(..., alias="newInstrument")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price paid in lieu of fractionalUnits.")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractionalUnits.") 

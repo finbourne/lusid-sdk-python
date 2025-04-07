@@ -27,8 +27,8 @@ class LoanInterestRepaymentEvent(InstrumentEvent):
     """
     Event to signify the repayment of interest accrued against a loan holding.  # noqa: E501
     """
-    payment_date: datetime = Field(..., alias="paymentDate", description="Date that the interest is due to be paid.")
-    ex_date: datetime = Field(..., alias="exDate", description="Date that the accrued interest is calculated up until.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Date that the interest is due to be paid.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="Date that the accrued interest is calculated up until.")
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the repayment.") 
     fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Fraction of the accrued on the holding to be repaid.  Must be between 0 and 1, inclusive.  Defaults to 1 if not set.")
     lapse_elections: Optional[conlist(LapseElection)] = Field(None, alias="lapseElections", description="Election for controlling whether the interest is paid automatically or not.  Exactly one election must be provided.")

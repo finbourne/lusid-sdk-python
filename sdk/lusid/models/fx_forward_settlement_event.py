@@ -26,7 +26,7 @@ class FxForwardSettlementEvent(InstrumentEvent):
     """
     Settlement for FX Forward, including NDF and deliverable.  # noqa: E501
     """
-    maturity_date: datetime = Field(..., alias="maturityDate", description="Maturity date of the forward")
+    maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="Maturity date of the forward")
     dom_amount_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="domAmountPerUnit", description="Amount per unit in the DomCcy (domestic currency)")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the forward") 
     fgn_amount_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="fgnAmountPerUnit", description="Amount per unit in the FgnCcy (foreign currency)")

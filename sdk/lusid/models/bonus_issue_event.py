@@ -30,9 +30,9 @@ class BonusIssueEvent(InstrumentEvent):
     Representation of a Bonus Issue corporate action.  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="The date the Bonus Issue is announced.")
-    ex_date: datetime = Field(..., alias="exDate", description="The ex-date of the Bonus Issue.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex-date of the Bonus Issue.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="The record date of the Bonus Issue.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the Bonus Issue is executed.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The date the Bonus Issue is executed.")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="Optional. Used in calculating cash-in-lieu of fractional shares.")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.") 
     security_offer_elections: Optional[conlist(SecurityOfferElection)] = Field(None, alias="securityOfferElections", description="Possible SecurityElections for this Bonus Issue event, if any.")

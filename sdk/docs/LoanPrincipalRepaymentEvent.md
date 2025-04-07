@@ -5,7 +5,7 @@ Event to signify the repayment of some or all of the principal balance of a loan
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_date** | **datetime** | Date that the Principal is due to be paid. | 
+**payment_date** | **datetime** | Date that the Principal is due to be paid. | [optional] 
 **currency** | **str** | Currency of the repayment. | 
 **lapse_elections** | [**List[LapseElection]**](LapseElection.md) | Election for controlling whether the Principal is paid automatically or not.  Exactly one election must be provided. | [optional] 
 **fraction** | **float** | Fraction of the principal balance to be repaid.  Must be between 0 and 1, inclusive.  Defaults to 1 if not set. | [optional] 

@@ -27,8 +27,8 @@ class ReverseStockSplitEvent(InstrumentEvent):
     """
     A reverse split in the company's shares. Shareholders have their number of shares reduced based on the terms of the stock split.  # noqa: E501
     """
-    payment_date: datetime = Field(..., alias="paymentDate", description="Date on which the stock split takes effect.")
-    ex_date: datetime = Field(..., alias="exDate", description="The first date on which the shares will trade at the post-split price.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Date on which the stock split takes effect.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first date on which the shares will trade at the post-split price.")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to have their shares merged.")
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date the reverse stock split was announced.")

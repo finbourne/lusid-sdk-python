@@ -5,8 +5,8 @@ A cash distribution paid out to shareholders.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_date** | **datetime** | The date the company begins distributing the dividend. | 
-**ex_date** | **datetime** | The first business day on which the dividend is not owed to the buying party. | 
+**payment_date** | **datetime** | The date the company begins distributing the dividend. | [optional] 
+**ex_date** | **datetime** | The first business day on which the dividend is not owed to the buying party. | [optional] 
 **cash_elections** | [**List[CashElection]**](CashElection.md) | Possible elections for this event, each keyed with a unique identifier. | 
 **announcement_date** | **datetime** | Date on which the dividend is announced by the company. | [optional] 
 **record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 

@@ -30,8 +30,8 @@ class CallOnIntermediateSecuritiesEvent(InstrumentEvent):
     """
     CallOnIntermediateSecuritiesEvent event (EXRI), representing an exercise on intermediate securities resulting from an intermediate securities distribution.  # noqa: E501
     """
-    expiry_date: datetime = Field(..., alias="expiryDate", description="The date on which the issue ends.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the event.")
+    expiry_date: Optional[datetime] = Field(None, alias="expiryDate", description="The date on which the issue ends.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the event.")
     new_instrument: NewInstrument = Field(..., alias="newInstrument")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     price: Union[StrictFloat, StrictInt] = Field(..., description="The price at which new units are purchased.")

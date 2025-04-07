@@ -26,7 +26,7 @@ class CdxCreditEvent(InstrumentEvent):
     """
     Definition of a credit event for credit default swap index (CDX) instruments.  # noqa: E501
     """
-    effective_date: datetime = Field(..., alias="effectiveDate", description="The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation.")
+    effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation.")
     auction_date: Optional[datetime] = Field(None, alias="auctionDate", description="The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined.")
     recovery_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="recoveryRate", description="The fraction of the defaulted debt that can be recovered.")
     constituent_weight: Union[StrictFloat, StrictInt] = Field(..., alias="constituentWeight", description="The relative weight of the CDX constituent.")

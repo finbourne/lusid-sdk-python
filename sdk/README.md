@@ -1828,5 +1828,6 @@ Class | Method | HTTP request | Description
  - [WorkspaceItemUpdateRequest](docs/WorkspaceItemUpdateRequest.md)
  - [WorkspaceUpdateRequest](docs/WorkspaceUpdateRequest.md)
  - [WorkspaceVisibility](docs/WorkspaceVisibility.md)
+ - [YearMonthDay](docs/YearMonthDay.md)
  - [YieldCurveData](docs/YieldCurveData.md)
 

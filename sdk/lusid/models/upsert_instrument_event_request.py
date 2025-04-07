@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.year_month_day import YearMonthDay
 
 class UpsertInstrumentEventRequest(BaseModel):
     """
@@ -34,7 +35,8 @@ class UpsertInstrumentEventRequest(BaseModel):
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
     participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
-    __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
+    event_date_stamps: Optional[Dict[str, YearMonthDay]] = Field(None, alias="eventDateStamps", description="The date stamps corresponding to the relevant date-time fields for the instrument event. The key for each provided date stamp must match the field name of a valid datetime field from the InstrumentEvent DTO.")
+    __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber", "participationType", "eventDateStamps"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,6 +80,13 @@ class UpsertInstrumentEventRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['properties'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in event_date_stamps (dict)
+        _field_dict = {}
+        if self.event_date_stamps:
+            for _key in self.event_date_stamps:
+                if self.event_date_stamps[_key]:
+                    _field_dict[_key] = self.event_date_stamps[_key].to_dict()
+            _dict['eventDateStamps'] = _field_dict
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -92,6 +101,11 @@ class UpsertInstrumentEventRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.participation_type is None and "participation_type" in self.__fields_set__:
             _dict['participationType'] = None
+
+        # set to None if event_date_stamps (nullable) is None
+        # and __fields_set__ contains the field
+        if self.event_date_stamps is None and "event_date_stamps" in self.__fields_set__:
+            _dict['eventDateStamps'] = None
 
         return _dict
 
@@ -111,6 +125,12 @@ class UpsertInstrumentEventRequest(BaseModel):
             "instrument_event": InstrumentEvent.from_dict(obj.get("instrumentEvent")) if obj.get("instrumentEvent") is not None else None,
             "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
             "sequence_number": obj.get("sequenceNumber"),
-            "participation_type": obj.get("participationType") if obj.get("participationType") is not None else 'Mandatory'
+            "participation_type": obj.get("participationType") if obj.get("participationType") is not None else 'Mandatory',
+            "event_date_stamps": dict(
+                (_k, YearMonthDay.from_dict(_v))
+                for _k, _v in obj.get("eventDateStamps").items()
+            )
+            if obj.get("eventDateStamps") is not None
+            else None
         })
         return _obj

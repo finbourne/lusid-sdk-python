@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 
@@ -27,7 +27,7 @@ class AdjustGlobalCommitmentEvent(InstrumentEvent):
     Event to adjust the limit/balance of a LoanFacility.  Used to initially set up the facility, but also used to increase/reduce the associated limit and balance.  # noqa: E501
     """
     amount: Union[StrictFloat, StrictInt] = Field(..., description="Amount that the limit and balance are changed by.  A positive number signifies an increase, and a negative number here signifies a decrease.")
-    var_date: datetime = Field(..., alias="date", description="Date of the adjustment.  Signifies when the facility begins to accrue interest.")
+    var_date: Optional[datetime] = Field(None, alias="date", description="Date of the adjustment.  Signifies when the facility begins to accrue interest.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentEventType", "amount", "date"]

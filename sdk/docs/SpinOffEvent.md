@@ -6,9 +6,9 @@ Spin-off event (SOFF), representing the distribution of securities issued by ano
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | Optional.  The date the spin-off is announced. | [optional] 
-**ex_date** | **datetime** | The first date on which the holder of record has entitled ownership of the new shares. | 
+**ex_date** | **datetime** | The first date on which the holder of record has entitled ownership of the new shares. | [optional] 
 **record_date** | **datetime** | Optional.  Date you have to be the holder of record in order to receive the additional shares. | [optional] 
-**payment_date** | **datetime** | Date on which the distribution of shares takes place. | 
+**payment_date** | **datetime** | Date on which the distribution of shares takes place. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
 **cost_factor** | **float** | Optional. The fraction of cost that is transferred from the existing shares to the new shares. | [optional] 

@@ -5,8 +5,8 @@ CallOnIntermediateSecuritiesEvent event (EXRI), representing an exercise on inte
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**expiry_date** | **datetime** | The date on which the issue ends. | 
-**payment_date** | **datetime** | The payment date of the event. | 
+**expiry_date** | **datetime** | The date on which the issue ends. | [optional] 
+**payment_date** | **datetime** | The payment date of the event. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
 **price** | **float** | The price at which new units are purchased. | 

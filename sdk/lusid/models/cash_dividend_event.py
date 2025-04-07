@@ -27,8 +27,8 @@ class CashDividendEvent(InstrumentEvent):
     """
     A cash distribution paid out to shareholders.  # noqa: E501
     """
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company begins distributing the dividend.")
-    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The date the company begins distributing the dividend.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first business day on which the dividend is not owed to the buying party.")
     cash_elections: conlist(CashElection) = Field(..., alias="cashElections", description="Possible elections for this event, each keyed with a unique identifier.")
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend is announced by the company.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")

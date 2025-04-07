@@ -1303,6 +1303,7 @@ from lusid.models.workspace_item_creation_request import WorkspaceItemCreationRe
 from lusid.models.workspace_item_update_request import WorkspaceItemUpdateRequest
 from lusid.models.workspace_update_request import WorkspaceUpdateRequest
 from lusid.models.workspace_visibility import WorkspaceVisibility
+from lusid.models.year_month_day import YearMonthDay
 from lusid.models.yield_curve_data import YieldCurveData
 
 # import extensions into sdk package
@@ -2595,6 +2596,7 @@ __all__ = [
     "WorkspaceItemUpdateRequest",
     "WorkspaceUpdateRequest",
     "WorkspaceVisibility",
+    "YearMonthDay",
     "YieldCurveData",
     "ApiClient",
     "Configuration",

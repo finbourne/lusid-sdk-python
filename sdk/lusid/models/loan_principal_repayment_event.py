@@ -27,7 +27,7 @@ class LoanPrincipalRepaymentEvent(InstrumentEvent):
     """
     Event to signify the repayment of some or all of the principal balance of a loan contract.  # noqa: E501
     """
-    payment_date: datetime = Field(..., alias="paymentDate", description="Date that the Principal is due to be paid.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Date that the Principal is due to be paid.")
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the repayment.") 
     lapse_elections: Optional[conlist(LapseElection)] = Field(None, alias="lapseElections", description="Election for controlling whether the Principal is paid automatically or not.  Exactly one election must be provided.")
     fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Fraction of the principal balance to be repaid.  Must be between 0 and 1, inclusive.  Defaults to 1 if not set.")

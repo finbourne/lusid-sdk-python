@@ -6,9 +6,9 @@ Tender Event (TEND).
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | The date the tender is announced. | [optional] 
-**ex_date** | **datetime** | The ex date (entitlement date) of the event. | 
+**ex_date** | **datetime** | The ex date (entitlement date) of the event. | [optional] 
 **record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 
-**payment_date** | **datetime** | The payment date of the event. | 
+**payment_date** | **datetime** | The payment date of the event. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | 
 **fractional_units_cash_price** | **float** | The cash price paid in lieu of fractionalUnits. | [optional] 
 **fractional_units_cash_currency** | **str** | The currency of the cash paid in lieu of fractionalUnits. | [optional] 

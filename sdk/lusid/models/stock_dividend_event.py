@@ -28,8 +28,8 @@ class StockDividendEvent(InstrumentEvent):
     A payment to shareholders that consists of additional shares rather than cash.  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
-    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The date the company pays out dividends to shareholders.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price paid in lieu of fractionalUnits.")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractionalUnits.") 

@@ -6,9 +6,9 @@ Representation of a Bonus Issue corporate action.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | The date the Bonus Issue is announced. | [optional] 
-**ex_date** | **datetime** | The ex-date of the Bonus Issue. | 
+**ex_date** | **datetime** | The ex-date of the Bonus Issue. | [optional] 
 **record_date** | **datetime** | The record date of the Bonus Issue. | [optional] 
-**payment_date** | **datetime** | The date the Bonus Issue is executed. | 
+**payment_date** | **datetime** | The date the Bonus Issue is executed. | [optional] 
 **fractional_units_cash_price** | **float** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
 **fractional_units_cash_currency** | **str** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
 **security_offer_elections** | [**List[SecurityOfferElection]**](SecurityOfferElection.md) | Possible SecurityElections for this Bonus Issue event, if any. | [optional] 

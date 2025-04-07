@@ -5,8 +5,8 @@ Event to signify the repayment of interest accrued against a loan holding.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_date** | **datetime** | Date that the interest is due to be paid. | 
-**ex_date** | **datetime** | Date that the accrued interest is calculated up until. | 
+**payment_date** | **datetime** | Date that the interest is due to be paid. | [optional] 
+**ex_date** | **datetime** | Date that the accrued interest is calculated up until. | [optional] 
 **currency** | **str** | Currency of the repayment. | 
 **fraction** | **float** | Fraction of the accrued on the holding to be repaid.  Must be between 0 and 1, inclusive.  Defaults to 1 if not set. | [optional] 
 **lapse_elections** | [**List[LapseElection]**](LapseElection.md) | Election for controlling whether the interest is paid automatically or not.  Exactly one election must be provided. | [optional] 

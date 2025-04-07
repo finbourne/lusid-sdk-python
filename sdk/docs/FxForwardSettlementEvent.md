@@ -5,7 +5,7 @@ Settlement for FX Forward, including NDF and deliverable.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**maturity_date** | **datetime** | Maturity date of the forward | 
+**maturity_date** | **datetime** | Maturity date of the forward | [optional] 
 **dom_amount_per_unit** | **float** | Amount per unit in the DomCcy (domestic currency) | 
 **dom_ccy** | **str** | The domestic currency of the forward | 
 **fgn_amount_per_unit** | **float** | Amount per unit in the FgnCcy (foreign currency) | 

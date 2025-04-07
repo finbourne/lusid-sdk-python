@@ -5,8 +5,8 @@ A reverse split in the company's shares. Shareholders have their number of share
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_date** | **datetime** | Date on which the stock split takes effect. | 
-**ex_date** | **datetime** | The first date on which the shares will trade at the post-split price. | 
+**payment_date** | **datetime** | Date on which the stock split takes effect. | [optional] 
+**ex_date** | **datetime** | The first date on which the shares will trade at the post-split price. | [optional] 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
 **record_date** | **datetime** | Date you have to be the holder of record in order to have their shares merged. | [optional] 
 **announcement_date** | **datetime** | Date the reverse stock split was announced. | [optional] 
