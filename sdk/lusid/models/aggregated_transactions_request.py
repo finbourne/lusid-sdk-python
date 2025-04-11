@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.order_by_spec import OrderBySpec
+from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.property_filter import PropertyFilter
 from lusid.models.resource_id import ResourceId
 
@@ -31,13 +32,14 @@ class AggregatedTransactionsRequest(BaseModel):
     """
     from_transaction_date: datetime = Field(..., alias="fromTransactionDate")
     to_transaction_date: datetime = Field(..., alias="toTransactionDate")
-    portfolio_id: ResourceId = Field(..., alias="portfolioId")
+    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
+    portfolio_entity_ids: Optional[conlist(PortfolioEntityId)] = Field(None, alias="portfolioEntityIds", description="The set of portfolio or portfolio group identifiers containing the relevant transactions.")
     as_at: Optional[datetime] = Field(None, alias="asAt")
     metrics: conlist(AggregateSpec) = Field(...)
     group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy")
     filters: Optional[conlist(PropertyFilter)] = None
     sort: Optional[conlist(OrderBySpec)] = None
-    __properties = ["fromTransactionDate", "toTransactionDate", "portfolioId", "asAt", "metrics", "groupBy", "filters", "sort"]
+    __properties = ["fromTransactionDate", "toTransactionDate", "portfolioId", "portfolioEntityIds", "asAt", "metrics", "groupBy", "filters", "sort"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,6 +76,13 @@ class AggregatedTransactionsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in portfolio_entity_ids (list)
+        _items = []
+        if self.portfolio_entity_ids:
+            for _item in self.portfolio_entity_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['portfolioEntityIds'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in metrics (list)
         _items = []
         if self.metrics:
@@ -95,6 +104,11 @@ class AggregatedTransactionsRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['sort'] = _items
+        # set to None if portfolio_entity_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.portfolio_entity_ids is None and "portfolio_entity_ids" in self.__fields_set__:
+            _dict['portfolioEntityIds'] = None
+
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -130,6 +144,7 @@ class AggregatedTransactionsRequest(BaseModel):
             "from_transaction_date": obj.get("fromTransactionDate"),
             "to_transaction_date": obj.get("toTransactionDate"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
+            "portfolio_entity_ids": [PortfolioEntityId.from_dict(_item) for _item in obj.get("portfolioEntityIds")] if obj.get("portfolioEntityIds") is not None else None,
             "as_at": obj.get("asAt"),
             "metrics": [AggregateSpec.from_dict(_item) for _item in obj.get("metrics")] if obj.get("metrics") is not None else None,
             "group_by": obj.get("groupBy"),

@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **from_transaction_date** | **datetime** |  | 
 **to_transaction_date** | **datetime** |  | 
-**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**portfolio_entity_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | The set of portfolio or portfolio group identifiers containing the relevant transactions. | [optional] 
 **as_at** | **datetime** |  | [optional] 
 **metrics** | [**List[AggregateSpec]**](AggregateSpec.md) |  | 
 **group_by** | **List[str]** |  | [optional] 
