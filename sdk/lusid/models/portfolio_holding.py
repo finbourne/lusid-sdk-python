@@ -49,7 +49,8 @@ class PortfolioHolding(BaseModel):
     variation_margin: Optional[CurrencyAndAmount] = Field(None, alias="variationMargin")
     variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="variationMarginPortfolioCcy")
     settlement_schedule: Optional[conlist(SettlementSchedule)] = Field(None, alias="settlementSchedule", description="Where no. of days ahead has been specified, future dated settlements will be captured here.")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule"]
+    current_face: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="currentFace", description="Current face value of the holding.")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace"]
 
     class Config:
         """Pydantic configuration"""
@@ -163,6 +164,11 @@ class PortfolioHolding(BaseModel):
         if self.settlement_schedule is None and "settlement_schedule" in self.__fields_set__:
             _dict['settlementSchedule'] = None
 
+        # set to None if current_face (nullable) is None
+        # and __fields_set__ contains the field
+        if self.current_face is None and "current_face" in self.__fields_set__:
+            _dict['currentFace'] = None
+
         return _dict
 
     @classmethod
@@ -203,6 +209,7 @@ class PortfolioHolding(BaseModel):
             "amortised_cost_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("amortisedCostPortfolioCcy")) if obj.get("amortisedCostPortfolioCcy") is not None else None,
             "variation_margin": CurrencyAndAmount.from_dict(obj.get("variationMargin")) if obj.get("variationMargin") is not None else None,
             "variation_margin_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("variationMarginPortfolioCcy")) if obj.get("variationMarginPortfolioCcy") is not None else None,
-            "settlement_schedule": [SettlementSchedule.from_dict(_item) for _item in obj.get("settlementSchedule")] if obj.get("settlementSchedule") is not None else None
+            "settlement_schedule": [SettlementSchedule.from_dict(_item) for _item in obj.get("settlementSchedule")] if obj.get("settlementSchedule") is not None else None,
+            "current_face": obj.get("currentFace")
         })
         return _obj

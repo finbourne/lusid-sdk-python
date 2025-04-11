@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **variation_margin** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **variation_margin_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **settlement_schedule** | [**List[SettlementSchedule]**](SettlementSchedule.md) | Where no. of days ahead has been specified, future dated settlements will be captured here. | [optional] 
+**current_face** | **float** | Current face value of the holding. | [optional] 
 
 ## Example
 
