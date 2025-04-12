@@ -493,7 +493,7 @@ Name | Type | Description  | Notes
  **domain** | **str**| The type of entity to which the identifier relates | 
  **identifier_scope** | **str**| The scope that the identifier exists in | 
  **identifier_type** | **str**| What the identifier represents. Together with \&quot;domain\&quot; and \&quot;identifierScope\&quot; this uniquely identifies the Identifier Definition | 
- **update_identifier_definition_request** | [**UpdateIdentifierDefinitionRequest**](UpdateIdentifierDefinitionRequest.md)| The request containing the updated details of the ruleset | [optional] 
+ **update_identifier_definition_request** | [**UpdateIdentifierDefinitionRequest**](UpdateIdentifierDefinitionRequest.md)| The request containing the updated details of the Identifier Definition. | [optional] 
 
 ### Return type
 

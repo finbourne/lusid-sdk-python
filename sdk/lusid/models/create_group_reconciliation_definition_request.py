@@ -34,7 +34,7 @@ class CreateGroupReconciliationDefinitionRequest(BaseModel):
     """
     id: Optional[ResourceId] = None
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Group Reconciliation Definition") 
-    description:  StrictStr = Field(...,alias="description", description="The description of the Group Reconciliation Definition") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Group Reconciliation Definition") 
     portfolio_entity_ids: GroupReconciliationDefinitionPortfolioEntityIds = Field(..., alias="portfolioEntityIds")
     recipe_ids: Optional[GroupReconciliationDefinitionRecipeIds] = Field(None, alias="recipeIds")
     currencies: Optional[GroupReconciliationDefinitionCurrencies] = None
@@ -96,6 +96,11 @@ class CreateGroupReconciliationDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of break_code_source
         if self.break_code_source:
             _dict['breakCodeSource'] = self.break_code_source.to_dict()
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
