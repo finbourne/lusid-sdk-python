@@ -787,15 +787,15 @@ class IdentifierDefinitionsApi:
 
 
     @overload
-    async def update_identifier_definition(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the Identifier Definition.")] = None, **kwargs) -> IdentifierDefinition:  # noqa: E501
+    async def update_identifier_definition(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the ruleset")] = None, **kwargs) -> IdentifierDefinition:  # noqa: E501
         ...
 
     @overload
-    def update_identifier_definition(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the Identifier Definition.")] = None, async_req: Optional[bool]=True, **kwargs) -> IdentifierDefinition:  # noqa: E501
+    def update_identifier_definition(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the ruleset")] = None, async_req: Optional[bool]=True, **kwargs) -> IdentifierDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_identifier_definition(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the Identifier Definition.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[IdentifierDefinition, Awaitable[IdentifierDefinition]]:  # noqa: E501
+    def update_identifier_definition(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the ruleset")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[IdentifierDefinition, Awaitable[IdentifierDefinition]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateIdentifierDefinition: Update Identifier Definition defined by domain, identifierScope, and identifierType  # noqa: E501
 
         Overwrites an existing Identifier Definition.  # noqa: E501
@@ -811,7 +811,7 @@ class IdentifierDefinitionsApi:
         :type identifier_scope: str
         :param identifier_type: What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition (required)
         :type identifier_type: str
-        :param update_identifier_definition_request: The request containing the updated details of the Identifier Definition.
+        :param update_identifier_definition_request: The request containing the updated details of the ruleset
         :type update_identifier_definition_request: UpdateIdentifierDefinitionRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -832,7 +832,7 @@ class IdentifierDefinitionsApi:
         return self.update_identifier_definition_with_http_info(domain, identifier_scope, identifier_type, update_identifier_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_identifier_definition_with_http_info(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the Identifier Definition.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_identifier_definition_with_http_info(self, domain : Annotated[StrictStr, Field(..., description="The type of entity to which the identifier relates")], identifier_scope : Annotated[StrictStr, Field(..., description="The scope that the identifier exists in")], identifier_type : Annotated[StrictStr, Field(..., description="What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition")], update_identifier_definition_request : Annotated[Optional[UpdateIdentifierDefinitionRequest], Field(description="The request containing the updated details of the ruleset")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateIdentifierDefinition: Update Identifier Definition defined by domain, identifierScope, and identifierType  # noqa: E501
 
         Overwrites an existing Identifier Definition.  # noqa: E501
@@ -848,7 +848,7 @@ class IdentifierDefinitionsApi:
         :type identifier_scope: str
         :param identifier_type: What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the Identifier Definition (required)
         :type identifier_type: str
-        :param update_identifier_definition_request: The request containing the updated details of the Identifier Definition.
+        :param update_identifier_definition_request: The request containing the updated details of the ruleset
         :type update_identifier_definition_request: UpdateIdentifierDefinitionRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
