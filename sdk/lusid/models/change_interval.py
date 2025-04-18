@@ -32,7 +32,7 @@ class ChangeInterval(BaseModel):
     request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique identifier of the request that the changes were part of.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The version number for the entity (the entity was created at version 1). This may refer to the version number of a changed related entity, not a change for the entity itself.")
     staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The id of the staged modification that was approved. Will be null if the change didn't come from a staged modification.") 
-    action:  Optional[StrictStr] = Field(None,alias="action", description="The action performed on the entity.") 
+    action:  Optional[StrictStr] = Field(None,alias="action", description="The action performed on the field.") 
     attribute_name:  Optional[StrictStr] = Field(None,alias="attributeName", description="The name of the field or property that has been changed.") 
     previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
     new_value: Optional[PropertyValue] = Field(None, alias="newValue")

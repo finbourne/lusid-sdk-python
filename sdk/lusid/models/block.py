@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -42,9 +42,10 @@ class Block(BaseModel):
     created_date: datetime = Field(..., alias="createdDate", description="The date on which the block was made")
     limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
     stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
+    is_swept: StrictBool = Field(..., alias="isSwept", description="Swept blocks are considered no longer of active interest, and no longer take part in various order management processes")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "orderIds", "properties", "instrumentIdentifiers", "lusidInstrumentId", "quantity", "side", "type", "timeInForce", "createdDate", "limitPrice", "stopPrice", "version", "links"]
+    __properties = ["id", "orderIds", "properties", "instrumentIdentifiers", "lusidInstrumentId", "quantity", "side", "type", "timeInForce", "createdDate", "limitPrice", "stopPrice", "isSwept", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -150,6 +151,7 @@ class Block(BaseModel):
             "created_date": obj.get("createdDate"),
             "limit_price": CurrencyAndAmount.from_dict(obj.get("limitPrice")) if obj.get("limitPrice") is not None else None,
             "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None,
+            "is_swept": obj.get("isSwept"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

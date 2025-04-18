@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **created_date** | **datetime** | The date on which the block was made | 
 **limit_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**is_swept** | **bool** | Swept blocks are considered no longer of active interest, and no longer take part in various order management processes | [optional] 
 
 ## Example
 

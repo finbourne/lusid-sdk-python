@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -39,7 +39,8 @@ class BlockRequest(BaseModel):
     created_date: datetime = Field(..., alias="createdDate", description="The date on which the block was made")
     limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
     stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
-    __properties = ["id", "orderIds", "properties", "instrumentIdentifiers", "quantity", "side", "type", "timeInForce", "createdDate", "limitPrice", "stopPrice"]
+    is_swept: Optional[StrictBool] = Field(None, alias="isSwept", description="Swept blocks are considered no longer of active interest, and no longer take part in various order management processes")
+    __properties = ["id", "orderIds", "properties", "instrumentIdentifiers", "quantity", "side", "type", "timeInForce", "createdDate", "limitPrice", "stopPrice", "isSwept"]
 
     class Config:
         """Pydantic configuration"""
@@ -128,6 +129,7 @@ class BlockRequest(BaseModel):
             "time_in_force": obj.get("timeInForce"),
             "created_date": obj.get("createdDate"),
             "limit_price": CurrencyAndAmount.from_dict(obj.get("limitPrice")) if obj.get("limitPrice") is not None else None,
-            "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None
+            "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None,
+            "is_swept": obj.get("isSwept")
         })
         return _obj

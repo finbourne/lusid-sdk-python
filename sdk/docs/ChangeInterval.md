@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **request_id_modified** | **str** | The unique identifier of the request that the changes were part of. | [optional] 
 **as_at_version_number** | **int** | The version number for the entity (the entity was created at version 1). This may refer to the version number of a changed related entity, not a change for the entity itself. | [optional] 
 **staged_modification_id_modified** | **str** | The id of the staged modification that was approved. Will be null if the change didn&#39;t come from a staged modification. | [optional] 
-**action** | **str** | The action performed on the entity. | [optional] 
+**action** | **str** | The action performed on the field. | [optional] 
 **attribute_name** | **str** | The name of the field or property that has been changed. | [optional] 
 **previous_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **new_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
