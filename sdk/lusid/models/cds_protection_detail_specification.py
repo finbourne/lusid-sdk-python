@@ -18,17 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import Any, Dict, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class CdsProtectionDetailSpecification(BaseModel):
     """
     CDSs generally conform to fairly standard definitions, but can be tweaked in a number of different ways.  This class gathers a number of common features which may deviate. These will default to the market standard when  no overrides are provided.  # noqa: E501
     """
-    seniority:  StrictStr = Field(...,alias="seniority", description="The seniority level of the CDS.    Supported string (enumeration) values are: [SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2].") 
-    restructuring_type:  StrictStr = Field(...,alias="restructuringType", description="The restructuring clause.  Supported string (enumeration) values are: [CR, MR, MM, XR].") 
-    protect_start_day: StrictBool = Field(..., alias="protectStartDay", description="Does the protection leg pay out in the case of default on the start date.")
-    pay_accrued_interest_on_default: StrictBool = Field(..., alias="payAccruedInterestOnDefault", description="Should accrued interest on the premium leg be paid if a credit event occurs.")
+    seniority:  Optional[StrictStr] = Field(None,alias="seniority", description="The seniority level of the CDS.  Supported string (enumeration) values are: [SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2].  Defaults to \"SUB\" if not set.") 
+    restructuring_type:  Optional[StrictStr] = Field(None,alias="restructuringType", description="The restructuring clause.  Supported string (enumeration) values are: [CR, MR, MM, XR]. Defaults to \"MM\" if not set.") 
+    protect_start_day: Optional[StrictBool] = Field(True, alias="protectStartDay", description="Does the protection leg pay out in the case of default on the start date. Defaults to true if not set.")
+    pay_accrued_interest_on_default: Optional[StrictBool] = Field(True, alias="payAccruedInterestOnDefault", description="Should accrued interest on the premium leg be paid if a credit event occurs. Defaults to true if not set.")
     __properties = ["seniority", "restructuringType", "protectStartDay", "payAccruedInterestOnDefault"]
 
     class Config:
@@ -63,6 +63,16 @@ class CdsProtectionDetailSpecification(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if seniority (nullable) is None
+        # and __fields_set__ contains the field
+        if self.seniority is None and "seniority" in self.__fields_set__:
+            _dict['seniority'] = None
+
+        # set to None if restructuring_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.restructuring_type is None and "restructuring_type" in self.__fields_set__:
+            _dict['restructuringType'] = None
+
         return _dict
 
     @classmethod
@@ -75,9 +85,9 @@ class CdsProtectionDetailSpecification(BaseModel):
             return CdsProtectionDetailSpecification.parse_obj(obj)
 
         _obj = CdsProtectionDetailSpecification.parse_obj({
-            "seniority": obj.get("seniority"),
-            "restructuring_type": obj.get("restructuringType"),
-            "protect_start_day": obj.get("protectStartDay"),
-            "pay_accrued_interest_on_default": obj.get("payAccruedInterestOnDefault")
+            "seniority": obj.get("seniority") if obj.get("seniority") is not None else 'SUB',
+            "restructuring_type": obj.get("restructuringType") if obj.get("restructuringType") is not None else 'MM',
+            "protect_start_day": obj.get("protectStartDay") if obj.get("protectStartDay") is not None else True,
+            "pay_accrued_interest_on_default": obj.get("payAccruedInterestOnDefault") if obj.get("payAccruedInterestOnDefault") is not None else True
         })
         return _obj

@@ -876,6 +876,7 @@ from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
 from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.repo import Repo
+from lusid.models.repurchase_offer_event import RepurchaseOfferEvent
 from lusid.models.requested_changes import RequestedChanges
 from lusid.models.reset_event import ResetEvent
 from lusid.models.resource_id import ResourceId
@@ -1037,6 +1038,7 @@ from lusid.models.tax_rule import TaxRule
 from lusid.models.tax_rule_set import TaxRuleSet
 from lusid.models.template_field import TemplateField
 from lusid.models.tender_event import TenderEvent
+from lusid.models.tender_offer_election import TenderOfferElection
 from lusid.models.term_deposit import TermDeposit
 from lusid.models.term_deposit_interest_event import TermDepositInterestEvent
 from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
@@ -2085,6 +2087,7 @@ __all__ = [
     "RelationshipDefinition",
     "RelativeDateOffset",
     "Repo",
+    "RepurchaseOfferEvent",
     "RequestedChanges",
     "ResetEvent",
     "ResourceId",
@@ -2246,6 +2249,7 @@ __all__ = [
     "TaxRuleSet",
     "TemplateField",
     "TenderEvent",
+    "TenderOfferElection",
     "TermDeposit",
     "TermDepositInterestEvent",
     "TermDepositPrincipalEvent",

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, validator 
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
@@ -30,14 +30,14 @@ class CreditDefaultSwap(LusidInstrument):
     """
     LUSID representation of a Credit Default Swap (CDS).                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | ProtectionLeg | Cash flows occurring in the case of default. |  | 2 | PremiumLeg | The premium payments made by the protection buyer. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |  # noqa: E501
     """
-    ticker:  StrictStr = Field(...,alias="ticker", description="A ticker to uniquely specify the entity against which the CDS is written.") 
+    ticker:  Optional[StrictStr] = Field(None,alias="ticker", description="A ticker to uniquely specify the entity against which the CDS is written. Defaults to \"DefaultCDSTicker\".") 
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     flow_conventions: Optional[CdsFlowConventions] = Field(None, alias="flowConventions")
     coupon_rate: Union[StrictFloat, StrictInt] = Field(..., alias="couponRate", description="The coupon rate paid on each payment date of the premium leg as a fraction of 100 percent, e.g. \"0.05\" meaning 500 basis points or 5%.  For a standard corporate CDS (North American) this must be either 100bps or 500bps.")
     convention_name: Optional[FlowConventionName] = Field(None, alias="conventionName")
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The notional protected by the Credit Default Swap")
-    protection_detail_specification: CdsProtectionDetailSpecification = Field(..., alias="protectionDetailSpecification")
+    protection_detail_specification: Optional[CdsProtectionDetailSpecification] = Field(None, alias="protectionDetailSpecification")
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
@@ -156,6 +156,11 @@ class CreditDefaultSwap(LusidInstrument):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if ticker (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ticker is None and "ticker" in self.__fields_set__:
+            _dict['ticker'] = None
+
         # set to None if notional (nullable) is None
         # and __fields_set__ contains the field
         if self.notional is None and "notional" in self.__fields_set__:
@@ -179,7 +184,7 @@ class CreditDefaultSwap(LusidInstrument):
 
         _obj = CreditDefaultSwap.parse_obj({
             "instrument_type": obj.get("instrumentType"),
-            "ticker": obj.get("ticker"),
+            "ticker": obj.get("ticker") if obj.get("ticker") is not None else 'DefaultCDSTicker',
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "flow_conventions": CdsFlowConventions.from_dict(obj.get("flowConventions")) if obj.get("flowConventions") is not None else None,

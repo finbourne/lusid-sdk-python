@@ -25,7 +25,7 @@ class Compounding(BaseModel):
     """
     The compounding settings used on interest rate.  # noqa: E501
     """
-    averaging_method:  Optional[StrictStr] = Field(None,alias="averagingMethod", description="Defines whether a weighted or unweighted average is used when calculating the average rate.  It applies only when CompoundingMethod = ‘Averaging‘.    Supported string (enumeration) values are: [Unweighted, Weighted].") 
+    averaging_method:  Optional[StrictStr] = Field(None,alias="averagingMethod", description="Defines whether a weighted or unweighted average is used when calculating the average rate.  It applies only when CompoundingMethod = ‘Averaging‘.    Supported string (enumeration) values are: [Unweighted, UnweightedIncludingWeekends, Weighted].") 
     calculation_shift_method:  Optional[StrictStr] = Field(None,alias="calculationShiftMethod", description="Defines which resets and day counts are used for the rate calculation    Supported string (enumeration) values are: [Lookback, NoShift, ObservationPeriodShift, Lockout].") 
     compounding_method:  StrictStr = Field(...,alias="compoundingMethod", description="If the interest rate is simple, compounded or using a pre-computed compounded index.    Supported string (enumeration) values are: [Averaging, Compounding, CompoundedIndex, NonCumulativeCompounding].") 
     reset_frequency:  StrictStr = Field(...,alias="resetFrequency", description="The interest payment frequency.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
