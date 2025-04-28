@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_complex_market_data**
-> ResourceListOfListComplexMarketDataWithMetaDataResponse list_complex_market_data(as_at=as_at)
+> ResourceListOfListComplexMarketDataWithMetaDataResponse list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit)
 
 ListComplexMarketData: List the set of ComplexMarketData
 
@@ -258,13 +258,16 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplexMarketDataApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_complex_market_data(as_at=as_at, opts=opts)
+        # api_response =  api_instance.list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, opts=opts)
 
         # ListComplexMarketData: List the set of ComplexMarketData
-        api_response = api_instance.list_complex_market_data(as_at=as_at)
+        api_response = api_instance.list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit)
         pprint(api_response)
 
     except ApiException as e:
@@ -278,6 +281,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. | [optional] 
 
 ### Return type
 

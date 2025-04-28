@@ -53,6 +53,7 @@ class FundJournalEntryLine(BaseModel):
     holding_type:  StrictStr = Field(...,alias="holdingType", description="Defines the broad category holding within the portfolio.") 
     economic_bucket:  StrictStr = Field(...,alias="economicBucket", description="Raw Journal Entry Line details of the economic bucket for the Journal Entry Line.") 
     economic_bucket_component:  Optional[StrictStr] = Field(None,alias="economicBucketComponent", description="Sub bucket of the economic bucket.") 
+    economic_bucket_variant:  Optional[StrictStr] = Field(None,alias="economicBucketVariant", description="Categorisation of a Mark-to-market journal entry line into LongTerm or ShortTerm based on whether the ActivityDate is more than a year after the purchase trade date or not.") 
     levels: Optional[conlist(StrictStr)] = Field(None, description="Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
     source_levels: Optional[conlist(StrictStr)] = Field(None, alias="sourceLevels", description="Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
     movement_sign:  Optional[StrictStr] = Field(None,alias="movementSign", description="Indicates if the Journal Entry Line corresponds to a Long or Short movement.") 
@@ -61,7 +62,7 @@ class FundJournalEntryLine(BaseModel):
     journal_entry_line_type:  Optional[StrictStr] = Field(None,alias="journalEntryLineType", description="Indicates the Journal Entry Line type") 
     share_class_breakdowns: Optional[conlist(JournalEntryLineShareClassBreakdown)] = Field(None, alias="shareClassBreakdowns", description="Share Class breakdown data for this Journal Entry Line.")
     links: Optional[conlist(Link)] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -167,6 +168,11 @@ class FundJournalEntryLine(BaseModel):
         if self.economic_bucket_component is None and "economic_bucket_component" in self.__fields_set__:
             _dict['economicBucketComponent'] = None
 
+        # set to None if economic_bucket_variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.economic_bucket_variant is None and "economic_bucket_variant" in self.__fields_set__:
+            _dict['economicBucketVariant'] = None
+
         # set to None if levels (nullable) is None
         # and __fields_set__ contains the field
         if self.levels is None and "levels" in self.__fields_set__:
@@ -251,6 +257,7 @@ class FundJournalEntryLine(BaseModel):
             "holding_type": obj.get("holdingType"),
             "economic_bucket": obj.get("economicBucket"),
             "economic_bucket_component": obj.get("economicBucketComponent"),
+            "economic_bucket_variant": obj.get("economicBucketVariant"),
             "levels": obj.get("levels"),
             "source_levels": obj.get("sourceLevels"),
             "movement_sign": obj.get("movementSign"),

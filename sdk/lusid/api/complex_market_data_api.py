@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, conint, constr, validator
 
 from typing import Dict, Optional
 
@@ -423,26 +423,32 @@ class ComplexMarketDataApi:
 
 
     @overload
-    async def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
+    async def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
         ...
 
     @overload
-    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
+    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfListComplexMarketDataWithMetaDataResponse, Awaitable[ResourceListOfListComplexMarketDataWithMetaDataResponse]]:  # noqa: E501
+    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfListComplexMarketDataWithMetaDataResponse, Awaitable[ResourceListOfListComplexMarketDataWithMetaDataResponse]]:  # noqa: E501
         """ListComplexMarketData: List the set of ComplexMarketData  # noqa: E501
 
         List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_complex_market_data(as_at, async_req=True)
+        >>> thread = api.list_complex_market_data(as_at, effective_at, page, limit, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.
         :type as_at: datetime
+        :param effective_at: The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.
+        :type effective_at: str
+        :param page: The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.
+        :type limit: int
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -459,21 +465,27 @@ class ComplexMarketDataApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_complex_market_data_with_http_info(as_at, **kwargs)  # noqa: E501
+        return self.list_complex_market_data_with_http_info(as_at, effective_at, page, limit, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_complex_market_data_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_complex_market_data_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListComplexMarketData: List the set of ComplexMarketData  # noqa: E501
 
         List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_complex_market_data_with_http_info(as_at, async_req=True)
+        >>> thread = api.list_complex_market_data_with_http_info(as_at, effective_at, page, limit, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.
         :type as_at: datetime
+        :param effective_at: The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.
+        :type effective_at: str
+        :param page: The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.
+        :type limit: int
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -501,7 +513,10 @@ class ComplexMarketDataApi:
         _params = locals()
 
         _all_params = [
-            'as_at'
+            'as_at',
+            'effective_at',
+            'page',
+            'limit'
         ]
         _all_params.extend(
             [
@@ -538,6 +553,15 @@ class ComplexMarketDataApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

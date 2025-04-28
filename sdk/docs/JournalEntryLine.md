@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **holding_type** | **str** | Defines the broad category holding within the portfolio. | 
 **economic_bucket** | **str** | Raw Journal Entry Line details of the economic bucket for the Journal Entry Line. | 
 **economic_bucket_component** | **str** | Sub bucket of the economic bucket. | [optional] 
+**economic_bucket_variant** | **str** | Categorisation of a Mark-to-market journal entry line into LongTerm or ShortTerm based on whether the ActivityDate is more than a year after the purchase trade date or not. | [optional] 
 **levels** | **List[str]** | Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body. | [optional] 
 **source_levels** | **List[str]** | Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body. | [optional] 
 **movement_sign** | **str** | Indicates if the Journal Entry Line corresponds to a Long or Short movement. | [optional] 
