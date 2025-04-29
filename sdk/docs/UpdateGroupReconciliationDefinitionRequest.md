@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **currencies** | [**GroupReconciliationDefinitionCurrencies**](GroupReconciliationDefinitionCurrencies.md) |  | [optional] 
 **transaction_date_windows** | [**TransactionDateWindows**](TransactionDateWindows.md) |  | [optional] 
 **comparison_ruleset_ids** | [**GroupReconciliationDefinitionComparisonRulesetIds**](GroupReconciliationDefinitionComparisonRulesetIds.md) |  | [optional] 
-**break_code_source** | [**BreakCodeSource**](BreakCodeSource.md) |  | 
+**break_code_source** | [**BreakCodeSource**](BreakCodeSource.md) |  | [optional] 
 
 ## Example
 

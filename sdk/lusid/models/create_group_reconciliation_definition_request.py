@@ -40,7 +40,7 @@ class CreateGroupReconciliationDefinitionRequest(BaseModel):
     currencies: Optional[GroupReconciliationDefinitionCurrencies] = None
     transaction_date_windows: Optional[TransactionDateWindows] = Field(None, alias="transactionDateWindows")
     comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = Field(None, alias="comparisonRulesetIds")
-    break_code_source: BreakCodeSource = Field(..., alias="breakCodeSource")
+    break_code_source: Optional[BreakCodeSource] = Field(None, alias="breakCodeSource")
     __properties = ["id", "displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource"]
 
     class Config:
