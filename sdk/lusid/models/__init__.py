@@ -560,6 +560,8 @@ from lusid.models.interest_rate_swaption import InterestRateSwaption
 from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
 from lusid.models.intermediate_compliance_step_request import IntermediateComplianceStepRequest
 from lusid.models.intermediate_securities_distribution_event import IntermediateSecuritiesDistributionEvent
+from lusid.models.investor import Investor
+from lusid.models.investor_record import InvestorRecord
 from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
@@ -1152,6 +1154,9 @@ from lusid.models.upsert_instrument_events_response import UpsertInstrumentEvent
 from lusid.models.upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
 from lusid.models.upsert_instrument_property_request import UpsertInstrumentPropertyRequest
 from lusid.models.upsert_instruments_response import UpsertInstrumentsResponse
+from lusid.models.upsert_investor import UpsertInvestor
+from lusid.models.upsert_investor_record_request import UpsertInvestorRecordRequest
+from lusid.models.upsert_investor_records_response import UpsertInvestorRecordsResponse
 from lusid.models.upsert_legal_entities_response import UpsertLegalEntitiesResponse
 from lusid.models.upsert_legal_entity_access_metadata_request import UpsertLegalEntityAccessMetadataRequest
 from lusid.models.upsert_legal_entity_request import UpsertLegalEntityRequest
@@ -1771,6 +1776,8 @@ __all__ = [
     "IntermediateComplianceStep",
     "IntermediateComplianceStepRequest",
     "IntermediateSecuritiesDistributionEvent",
+    "Investor",
+    "InvestorRecord",
     "IrVolCubeData",
     "IrVolDependency",
     "IsBusinessDayResponse",
@@ -2363,6 +2370,9 @@ __all__ = [
     "UpsertInstrumentPropertiesResponse",
     "UpsertInstrumentPropertyRequest",
     "UpsertInstrumentsResponse",
+    "UpsertInvestor",
+    "UpsertInvestorRecordRequest",
+    "UpsertInvestorRecordsResponse",
     "UpsertLegalEntitiesResponse",
     "UpsertLegalEntityAccessMetadataRequest",
     "UpsertLegalEntityRequest",

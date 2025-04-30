@@ -298,6 +298,7 @@ Class | Method | HTTP request | Description
 *InstrumentsApi* | [**update_instrument_identifier**](docs/InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | UpdateInstrumentIdentifier: Update instrument identifier
 *InstrumentsApi* | [**upsert_instruments**](docs/InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | UpsertInstruments: Upsert instruments
 *InstrumentsApi* | [**upsert_instruments_properties**](docs/InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | UpsertInstrumentsProperties: Upsert instruments properties
+*InvestorRecordsApi* | [**upsert_investor_records**](docs/InvestorRecordsApi.md#upsert_investor_records) | **POST** /api/investorrecords/$batchUpsert | [EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records
 *LegacyComplianceApi* | [**delete_legacy_compliance_rule**](docs/LegacyComplianceApi.md#delete_legacy_compliance_rule) | **DELETE** /api/legacy/compliance/rules/{scope}/{code} | [EXPERIMENTAL] DeleteLegacyComplianceRule: Deletes a compliance rule.
 *LegacyComplianceApi* | [**get_legacy_breached_orders_info**](docs/LegacyComplianceApi.md#get_legacy_breached_orders_info) | **GET** /api/legacy/compliance/runs/breached/{runId} | [EXPERIMENTAL] GetLegacyBreachedOrdersInfo: Get the Ids of Breached orders in a given compliance run and the corresponding list of rules that could have caused it.
 *LegacyComplianceApi* | [**get_legacy_compliance_rule**](docs/LegacyComplianceApi.md#get_legacy_compliance_rule) | **GET** /api/legacy/compliance/rules/{scope}/{code} | [EXPERIMENTAL] GetLegacyComplianceRule: Retrieve the definition of single compliance rule.
@@ -1170,6 +1171,8 @@ Class | Method | HTTP request | Description
  - [IntermediateComplianceStep](docs/IntermediateComplianceStep.md)
  - [IntermediateComplianceStepRequest](docs/IntermediateComplianceStepRequest.md)
  - [IntermediateSecuritiesDistributionEvent](docs/IntermediateSecuritiesDistributionEvent.md)
+ - [Investor](docs/Investor.md)
+ - [InvestorRecord](docs/InvestorRecord.md)
  - [IrVolCubeData](docs/IrVolCubeData.md)
  - [IrVolDependency](docs/IrVolDependency.md)
  - [IsBusinessDayResponse](docs/IsBusinessDayResponse.md)
@@ -1762,6 +1765,9 @@ Class | Method | HTTP request | Description
  - [UpsertInstrumentPropertiesResponse](docs/UpsertInstrumentPropertiesResponse.md)
  - [UpsertInstrumentPropertyRequest](docs/UpsertInstrumentPropertyRequest.md)
  - [UpsertInstrumentsResponse](docs/UpsertInstrumentsResponse.md)
+ - [UpsertInvestor](docs/UpsertInvestor.md)
+ - [UpsertInvestorRecordRequest](docs/UpsertInvestorRecordRequest.md)
+ - [UpsertInvestorRecordsResponse](docs/UpsertInvestorRecordsResponse.md)
  - [UpsertLegalEntitiesResponse](docs/UpsertLegalEntitiesResponse.md)
  - [UpsertLegalEntityAccessMetadataRequest](docs/UpsertLegalEntityAccessMetadataRequest.md)
  - [UpsertLegalEntityRequest](docs/UpsertLegalEntityRequest.md)

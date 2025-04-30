@@ -34,6 +34,7 @@ from lusid.api.identifier_definitions_api import IdentifierDefinitionsApi
 from lusid.api.instrument_event_types_api import InstrumentEventTypesApi
 from lusid.api.instrument_events_api import InstrumentEventsApi
 from lusid.api.instruments_api import InstrumentsApi
+from lusid.api.investor_records_api import InvestorRecordsApi
 from lusid.api.legacy_compliance_api import LegacyComplianceApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
 from lusid.api.order_graph_api import OrderGraphApi
@@ -109,6 +110,7 @@ __all__ = [
     "InstrumentEventTypesApi",
     "InstrumentEventsApi",
     "InstrumentsApi",
+    "InvestorRecordsApi",
     "LegacyComplianceApi",
     "LegalEntitiesApi",
     "OrderGraphApi",
