@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.schedule import Schedule
+from lusid.models.trading_conventions import TradingConventions
 
 class FlexibleDeposit(LusidInstrument):
     """
@@ -31,9 +32,10 @@ class FlexibleDeposit(LusidInstrument):
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     schedules: conlist(Schedule) = Field(..., description="Repayment schedules for the deposit instrument.")
+    trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "schedules"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "schedules", "tradingConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -134,6 +136,9 @@ class FlexibleDeposit(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['schedules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of trading_conventions
+        if self.trading_conventions:
+            _dict['tradingConventions'] = self.trading_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -155,7 +160,8 @@ class FlexibleDeposit(LusidInstrument):
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "dom_ccy": obj.get("domCcy"),
-            "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None
+            "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None,
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

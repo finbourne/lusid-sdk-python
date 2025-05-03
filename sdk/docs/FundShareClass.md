@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **hedging** | **str** | A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of it&#39;s investment strategy.    Supported string (enumeration) values are: [Invalid, None, ApplyHedging]. | 
 **dom_ccy** | **str** | The domestic currency of the instrument. | 
 **rounding_conventions** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding Convention used for the FundShareClass quotes | [optional] 
+**trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 
 ## Example

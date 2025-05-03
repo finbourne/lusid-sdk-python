@@ -160,6 +160,11 @@ class DividendOptionEvent(InstrumentEvent):
         if self.record_date is None and "record_date" in self.__fields_set__:
             _dict['recordDate'] = None
 
+        # set to None if security_settlement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.security_settlement_date is None and "security_settlement_date" in self.__fields_set__:
+            _dict['securitySettlementDate'] = None
+
         return _dict
 
     @classmethod
