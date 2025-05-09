@@ -26,7 +26,7 @@ class WeekendMask(BaseModel):
     """
     WeekendMask
     """
-    days: conlist[Str] = Field(...,alias="days")
+    days: conlist(str) = Field(...,alias="days")
     time_zone:  StrictStr = Field(...,alias="timeZone") 
     __properties = ["days", "timeZone"]
 

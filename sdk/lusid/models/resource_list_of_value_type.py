@@ -27,7 +27,7 @@ class ResourceListOfValueType(BaseModel):
     """
     ResourceListOfValueType
     """
-    values: conlist[Str] = Field(...,alias="values")
+    values: conlist(str) = Field(...,alias="values")
     href:  Optional[StrictStr] = Field(None,alias="href") 
     links: Optional[conlist(Link)] = None
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
