@@ -27,6 +27,7 @@ from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
 from typing import Optional
 
 from lusid.models.deleted_entity_response import DeletedEntityResponse
+from lusid.models.paged_resource_list_of_item_and_workspace import PagedResourceListOfItemAndWorkspace
 from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
 from lusid.models.paged_resource_list_of_workspace_item import PagedResourceListOfWorkspaceItem
 from lusid.models.workspace import Workspace
@@ -1481,6 +1482,202 @@ class WorkspaceApi:
 
         return self.api_client.call_api(
             '/api/workspaces/{visibility}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def search_items(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the containing workspace. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfItemAndWorkspace:  # noqa: E501
+        ...
+
+    @overload
+    def search_items(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the containing workspace. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfItemAndWorkspace:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def search_items(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the containing workspace. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfItemAndWorkspace, Awaitable[PagedResourceListOfItemAndWorkspace]]:  # noqa: E501
+        """[EXPERIMENTAL] SearchItems: List items across all workspaces.  # noqa: E501
+
+        List items across all workspaces.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.search_items(visibility, as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param visibility: The visibility for the containing workspace. Must be `shared` or `personal`; case is important. (required)
+        :type visibility: str
+        :param as_at: The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfItemAndWorkspace
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the search_items_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.search_items_with_http_info(visibility, as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def search_items_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the containing workspace. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] SearchItems: List items across all workspaces.  # noqa: E501
+
+        List items across all workspaces.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.search_items_with_http_info(visibility, as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param visibility: The visibility for the containing workspace. Must be `shared` or `personal`; case is important. (required)
+        :type visibility: str
+        :param as_at: The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfItemAndWorkspace, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'visibility',
+            'as_at',
+            'page',
+            'sort_by',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method search_items" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['visibility']:
+            _path_params['visibility'] = _params['visibility']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfItemAndWorkspace",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/workspaces/{visibility}/items', 'GET',
             _path_params,
             _query_params,
             _header_params,

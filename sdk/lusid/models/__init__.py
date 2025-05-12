@@ -565,6 +565,7 @@ from lusid.models.investor_record import InvestorRecord
 from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
+from lusid.models.item_and_workspace import ItemAndWorkspace
 from lusid.models.journal_entry_line import JournalEntryLine
 from lusid.models.journal_entry_line_share_class_breakdown import JournalEntryLineShareClassBreakdown
 from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQueryParameters
@@ -715,6 +716,7 @@ from lusid.models.paged_resource_list_of_identifier_definition import PagedResou
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
 from lusid.models.paged_resource_list_of_instrument_event_instruction import PagedResourceListOfInstrumentEventInstruction
+from lusid.models.paged_resource_list_of_item_and_workspace import PagedResourceListOfItemAndWorkspace
 from lusid.models.paged_resource_list_of_legal_entity import PagedResourceListOfLegalEntity
 from lusid.models.paged_resource_list_of_order import PagedResourceListOfOrder
 from lusid.models.paged_resource_list_of_order_graph_block import PagedResourceListOfOrderGraphBlock
@@ -1785,6 +1787,7 @@ __all__ = [
     "IrVolCubeData",
     "IrVolDependency",
     "IsBusinessDayResponse",
+    "ItemAndWorkspace",
     "JournalEntryLine",
     "JournalEntryLineShareClassBreakdown",
     "JournalEntryLinesQueryParameters",
@@ -1935,6 +1938,7 @@ __all__ = [
     "PagedResourceListOfInstrument",
     "PagedResourceListOfInstrumentEventHolder",
     "PagedResourceListOfInstrumentEventInstruction",
+    "PagedResourceListOfItemAndWorkspace",
     "PagedResourceListOfLegalEntity",
     "PagedResourceListOfOrder",
     "PagedResourceListOfOrderGraphBlock",

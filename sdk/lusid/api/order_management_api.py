@@ -75,22 +75,22 @@ class OrderManagementApi:
 
 
     @overload
-    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
+        """BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.book_transactions(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, use_preview_transactions_for_pricing, async_req=True)
+        >>> thread = api.book_transactions(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, async_req=True)
         >>> result = thread.get()
 
         :param book_transactions_request: The allocations to create transactions for (required)
@@ -99,8 +99,6 @@ class OrderManagementApi:
         :type apply_fees_and_commission: bool
         :param mark_orders_and_allocations_as_booked: Whether to mark allocations and fully-booked orders with state Booked
         :type mark_orders_and_allocations_as_booked: bool
-        :param use_preview_transactions_for_pricing: Whether to use calculators for the transaction type to work out pricing fields on the booked transactions
-        :type use_preview_transactions_for_pricing: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -117,17 +115,17 @@ class OrderManagementApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, use_preview_transactions_for_pricing, **kwargs)  # noqa: E501
+        return self.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, use_preview_transactions_for_pricing : Annotated[Optional[StrictBool], Field(description="Whether to use calculators for the transaction type to work out pricing fields on the booked transactions")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
+    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, use_preview_transactions_for_pricing, async_req=True)
+        >>> thread = api.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, async_req=True)
         >>> result = thread.get()
 
         :param book_transactions_request: The allocations to create transactions for (required)
@@ -136,8 +134,6 @@ class OrderManagementApi:
         :type apply_fees_and_commission: bool
         :param mark_orders_and_allocations_as_booked: Whether to mark allocations and fully-booked orders with state Booked
         :type mark_orders_and_allocations_as_booked: bool
-        :param use_preview_transactions_for_pricing: Whether to use calculators for the transaction type to work out pricing fields on the booked transactions
-        :type use_preview_transactions_for_pricing: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -167,8 +163,7 @@ class OrderManagementApi:
         _all_params = [
             'book_transactions_request',
             'apply_fees_and_commission',
-            'mark_orders_and_allocations_as_booked',
-            'use_preview_transactions_for_pricing'
+            'mark_orders_and_allocations_as_booked'
         ]
         _all_params.extend(
             [
@@ -205,9 +200,6 @@ class OrderManagementApi:
 
         if _params.get('mark_orders_and_allocations_as_booked') is not None:  # noqa: E501
             _query_params.append(('markOrdersAndAllocationsAsBooked', _params['mark_orders_and_allocations_as_booked']))
-
-        if _params.get('use_preview_transactions_for_pricing') is not None:  # noqa: E501
-            _query_params.append(('usePreviewTransactionsForPricing', _params['use_preview_transactions_for_pricing']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -744,9 +736,9 @@ class OrderManagementApi:
 
     @validate_arguments
     def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfBlockAndOrders, Awaitable[ResourceListOfBlockAndOrders]]:  # noqa: E501
-        """[EARLY ACCESS] CreateOrders: Upsert a Block and associated orders  # noqa: E501
+        """CreateOrders: Upsert a Block and associated orders  # noqa: E501
 
-        Upsert a Block and create associated orders.  This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
+        Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -775,9 +767,9 @@ class OrderManagementApi:
 
     @validate_arguments
     def create_orders_with_http_info(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreateOrders: Upsert a Block and associated orders  # noqa: E501
+        """CreateOrders: Upsert a Block and associated orders  # noqa: E501
 
-        Upsert a Block and create associated orders.  This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
+        Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -903,7 +895,7 @@ class OrderManagementApi:
 
     @validate_arguments
     def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeIntervalWithOrderManagementDetail, Awaitable[ResourceListOfChangeIntervalWithOrderManagementDetail]]:  # noqa: E501
-        """[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
+        """GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
 
         Get the changes that have happened to an order and related entities.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -938,7 +930,7 @@ class OrderManagementApi:
 
     @validate_arguments
     def get_order_history_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
+        """GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
 
         Get the changes that have happened to an order and related entities.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1384,25 +1376,25 @@ class OrderManagementApi:
 
 
     @overload
-    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] RunAllocationService: Runs the Allocation Service  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
+        """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
-        This will allocate executions for a given list of placements back to their originating orders.  # noqa: E501
+        Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.run_allocation_service(resource_id, allocation_algorithm, async_req=True)
         >>> result = thread.get()
 
-        :param resource_id: The List of Placement IDs for which you wish to allocate executions. (required)
+        :param resource_id: The List of Placement IDs for which you wish to allocate Executions. (required)
         :type resource_id: List[ResourceId]
         :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
         :type allocation_algorithm: str
@@ -1425,17 +1417,17 @@ class OrderManagementApi:
         return self.run_allocation_service_with_http_info(resource_id, allocation_algorithm, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RunAllocationService: Runs the Allocation Service  # noqa: E501
+    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
-        This will allocate executions for a given list of placements back to their originating orders.  # noqa: E501
+        Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.run_allocation_service_with_http_info(resource_id, allocation_algorithm, async_req=True)
         >>> result = thread.get()
 
-        :param resource_id: The List of Placement IDs for which you wish to allocate executions. (required)
+        :param resource_id: The List of Placement IDs for which you wish to allocate Executions. (required)
         :type resource_id: List[ResourceId]
         :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
         :type allocation_algorithm: str
