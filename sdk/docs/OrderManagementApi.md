@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**move_orders**](OrderManagementApi.md#move_orders) | **POST** /api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block
 [**place_blocks**](OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
 [**run_allocation_service**](OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | [EXPERIMENTAL] RunAllocationService: Runs the Allocation Service
+[**sweep_blocks**](OrderManagementApi.md#sweep_blocks) | **POST** /api/ordermanagement/SweepBlocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
 [**update_orders**](OrderManagementApi.md#update_orders) | **POST** /api/ordermanagement/updateorders | [EARLY ACCESS] UpdateOrders: Update existing orders
 [**update_placements**](OrderManagementApi.md#update_placements) | **POST** /api/ordermanagement/$updateplacements | [EARLY ACCESS] UpdatePlacements: Update existing placements
 
@@ -873,6 +874,103 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The results from a run of the Allocation Service |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **sweep_blocks**
+> SweepBlocksResponse sweep_blocks(sweep_blocks_request)
+
+[EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
+
+The requirements are:  <list type=\"bullet\"><term>The block exists.</term><term>All orders have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>All placements have state \"Allocated\" or \"Over-allocated\".</term><term>All allocations have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>No execution or allocation has been modified since the passed LatestAllowableModificationTime.</term></list>
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    OrderManagementApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(OrderManagementApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # sweep_blocks_request = SweepBlocksRequest.from_json("")
+    # sweep_blocks_request = SweepBlocksRequest.from_dict({})
+    sweep_blocks_request = SweepBlocksRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.sweep_blocks(sweep_blocks_request, opts=opts)
+
+        # [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
+        api_response = api_instance.sweep_blocks(sweep_blocks_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling OrderManagementApi->sweep_blocks: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sweep_blocks_request** | [**SweepBlocksRequest**](SweepBlocksRequest.md)|  | 
+
+### Return type
+
+[**SweepBlocksResponse**](SweepBlocksResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The results from sweeping blocks. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

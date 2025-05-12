@@ -944,6 +944,7 @@ from lusid.models.resource_list_of_quote_access_metadata_rule import ResourceLis
 from lusid.models.resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
 from lusid.models.resource_list_of_relation import ResourceListOfRelation
 from lusid.models.resource_list_of_relationship import ResourceListOfRelationship
+from lusid.models.resource_list_of_returns_entity import ResourceListOfReturnsEntity
 from lusid.models.resource_list_of_scope_definition import ResourceListOfScopeDefinition
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from lusid.models.resource_list_of_string import ResourceListOfString
@@ -967,6 +968,7 @@ from lusid.models.result_value_int import ResultValueInt
 from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
+from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.rollover_constituent import RolloverConstituent
 from lusid.models.rounding_configuration import RoundingConfiguration
@@ -1034,6 +1036,8 @@ from lusid.models.structured_result_data_id import StructuredResultDataId
 from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
 from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
+from lusid.models.sweep_blocks_request import SweepBlocksRequest
+from lusid.models.sweep_blocks_response import SweepBlocksResponse
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 from lusid.models.tax_rule import TaxRule
@@ -2160,6 +2164,7 @@ __all__ = [
     "ResourceListOfReconciliationBreak",
     "ResourceListOfRelation",
     "ResourceListOfRelationship",
+    "ResourceListOfReturnsEntity",
     "ResourceListOfScopeDefinition",
     "ResourceListOfSideDefinition",
     "ResourceListOfString",
@@ -2183,6 +2188,7 @@ __all__ = [
     "ResultValueString",
     "ResultValueType",
     "ReturnZeroPvOptions",
+    "ReturnsEntity",
     "ReverseStockSplitEvent",
     "RolloverConstituent",
     "RoundingConfiguration",
@@ -2250,6 +2256,8 @@ __all__ = [
     "SubHoldingKeyValueEquals",
     "SwapCashFlowEvent",
     "SwapPrincipalEvent",
+    "SweepBlocksRequest",
+    "SweepBlocksResponse",
     "TargetTaxLot",
     "TargetTaxLotRequest",
     "TaxRule",
