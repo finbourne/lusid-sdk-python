@@ -32,6 +32,9 @@ class TransactionStatus(str, Enum):
     ACTIVE = 'Active'
     AMENDED = 'Amended'
     CANCELLED = 'Cancelled'
+    ACTIVEREVERSAL = 'ActiveReversal'
+    ACTIVETRUEUP = 'ActiveTrueUp'
+    CANCELLEDTRUEUP = 'CancelledTrueUp'
 
     @classmethod
     def from_json(cls, json_str: str) -> TransactionStatus:

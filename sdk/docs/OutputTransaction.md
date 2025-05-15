@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the &#39;Transaction&#39; domain. | [optional] 
 **counterparty_id** | **str** | The identifier for the counterparty of the transaction. | [optional] 
 **source** | **str** | The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | [optional] 
-**transaction_status** | **str** | The status of the transaction. The available values are: Active, Amended, Cancelled | [optional] 
+**transaction_status** | **str** | The status of the transaction. The available values are: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp | [optional] 
 **entry_date_time** | **datetime** | The asAt datetime that the transaction was added to LUSID. | [optional] 
 **cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
 **realised_gain_loss** | [**List[RealisedGainLoss]**](RealisedGainLoss.md) | The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created. | [optional] 
@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **otc_confirmation** | [**OtcConfirmation**](OtcConfirmation.md) |  | [optional] 
 **order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**accounting_date** | **datetime** | The accounting date of the transaction. | [optional] 
 
 ## Example
 

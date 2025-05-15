@@ -51,7 +51,7 @@ class Transaction(BaseModel):
     source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.") 
     entry_date_time: Optional[datetime] = Field(None, alias="entryDateTime", description="The asAt datetime that the transaction was added to LUSID.")
     otc_confirmation: Optional[OtcConfirmation] = Field(None, alias="otcConfirmation")
-    transaction_status:  Optional[StrictStr] = Field(None,alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled") 
+    transaction_status:  Optional[StrictStr] = Field(None,alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp") 
     cancel_date_time: Optional[datetime] = Field(None, alias="cancelDateTime", description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.")
     order_id: Optional[ResourceId] = Field(None, alias="orderId")
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
@@ -120,8 +120,8 @@ class Transaction(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Active', 'Amended', 'Cancelled'):
-            raise ValueError("must be one of enum values ('Active', 'Amended', 'Cancelled')")
+        if value not in ('Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp'):
+            raise ValueError("must be one of enum values ('Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp')")
         return value
 
     class Config:

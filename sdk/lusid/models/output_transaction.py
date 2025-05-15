@@ -51,7 +51,7 @@ class OutputTransaction(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the 'Transaction' domain.")
     counterparty_id:  Optional[StrictStr] = Field(None,alias="counterpartyId", description="The identifier for the counterparty of the transaction.") 
     source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.") 
-    transaction_status:  Optional[StrictStr] = Field(None,alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled") 
+    transaction_status:  Optional[StrictStr] = Field(None,alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp") 
     entry_date_time: Optional[datetime] = Field(None, alias="entryDateTime", description="The asAt datetime that the transaction was added to LUSID.")
     cancel_date_time: Optional[datetime] = Field(None, alias="cancelDateTime", description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.")
     realised_gain_loss: Optional[conlist(RealisedGainLoss)] = Field(None, alias="realisedGainLoss", description="The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created.")
@@ -65,7 +65,8 @@ class OutputTransaction(BaseModel):
     otc_confirmation: Optional[OtcConfirmation] = Field(None, alias="otcConfirmation")
     order_id: Optional[ResourceId] = Field(None, alias="orderId")
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId"]
+    accounting_date: Optional[datetime] = Field(None, alias="accountingDate", description="The accounting date of the transaction.")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -125,8 +126,8 @@ class OutputTransaction(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Active', 'Amended', 'Cancelled'):
-            raise ValueError("must be one of enum values ('Active', 'Amended', 'Cancelled')")
+        if value not in ('Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp'):
+            raise ValueError("must be one of enum values ('Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp')")
         return value
 
     class Config:
@@ -266,6 +267,11 @@ class OutputTransaction(BaseModel):
         if self.transaction_group_id is None and "transaction_group_id" in self.__fields_set__:
             _dict['transactionGroupId'] = None
 
+        # set to None if accounting_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accounting_date is None and "accounting_date" in self.__fields_set__:
+            _dict['accountingDate'] = None
+
         return _dict
 
     @classmethod
@@ -314,6 +320,7 @@ class OutputTransaction(BaseModel):
             "gross_transaction_amount": obj.get("grossTransactionAmount"),
             "otc_confirmation": OtcConfirmation.from_dict(obj.get("otcConfirmation")) if obj.get("otcConfirmation") is not None else None,
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
-            "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None
+            "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
+            "accounting_date": obj.get("accountingDate")
         })
         return _obj

@@ -29,7 +29,9 @@ class TransactionQueryParameters(BaseModel):
     end_date:  StrictStr = Field(...,alias="endDate", description="The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.") 
     query_mode:  Optional[StrictStr] = Field(None,alias="queryMode", description="The date to compare against the upper and lower bounds for the effective datetime or cut label. Defaults to 'TradeDate' if not specified. The available values are: TradeDate, SettleDate") 
     show_cancelled_transactions: Optional[StrictBool] = Field(None, alias="showCancelledTransactions", description="Option to specify whether or not to include cancelled transactions in the output. Defaults to False if not specified.")
-    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions"]
+    timeline_scope:  Optional[StrictStr] = Field(None,alias="timelineScope", description="Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
+    timeline_code:  Optional[StrictStr] = Field(None,alias="timelineCode", description="Code of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
+    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode"]
 
     @validator('query_mode')
     def query_mode_validate_enum(cls, value):
@@ -125,6 +127,16 @@ class TransactionQueryParameters(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if timeline_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.timeline_scope is None and "timeline_scope" in self.__fields_set__:
+            _dict['timelineScope'] = None
+
+        # set to None if timeline_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.timeline_code is None and "timeline_code" in self.__fields_set__:
+            _dict['timelineCode'] = None
+
         return _dict
 
     @classmethod
@@ -140,6 +152,8 @@ class TransactionQueryParameters(BaseModel):
             "start_date": obj.get("startDate"),
             "end_date": obj.get("endDate"),
             "query_mode": obj.get("queryMode"),
-            "show_cancelled_transactions": obj.get("showCancelledTransactions")
+            "show_cancelled_transactions": obj.get("showCancelledTransactions"),
+            "timeline_scope": obj.get("timelineScope"),
+            "timeline_code": obj.get("timelineCode")
         })
         return _obj

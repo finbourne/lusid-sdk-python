@@ -4,9 +4,106 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete_investor_record**](InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | DeleteInvestorRecord: Delete Investor Record
 [**get_investor_record**](InvestorRecordsApi.md#get_investor_record) | **GET** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetInvestorRecord: Get Investor Record
 [**upsert_investor_records**](InvestorRecordsApi.md#upsert_investor_records) | **POST** /api/investorrecords/$batchUpsert | [EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records
 
+
+# **delete_investor_record**
+> DeletedEntityResponse delete_investor_record(id_type_scope, id_type_code, code)
+
+DeleteInvestorRecord: Delete Investor Record
+
+Delete an investor record. Deletion will be valid from the investor record's creation datetime.  This means that the investor record will no longer exist at any effective datetime from the asAt datetime of deletion.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    InvestorRecordsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InvestorRecordsApi)
+    id_type_scope = 'id_type_scope_example' # str | The scope of the investor record identifier type.
+    id_type_code = 'id_type_code_example' # str | The code of the investor record identifier type.
+    code = 'code_example' # str | Code of the investor record under specified identifier type's scope and code. This together with defined              identifier type uniquely identifies the investor record to delete.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_investor_record(id_type_scope, id_type_code, code, opts=opts)
+
+        # DeleteInvestorRecord: Delete Investor Record
+        api_response = api_instance.delete_investor_record(id_type_scope, id_type_code, code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling InvestorRecordsApi->delete_investor_record: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id_type_scope** | **str**| The scope of the investor record identifier type. | 
+ **id_type_code** | **str**| The code of the investor record identifier type. | 
+ **code** | **str**| Code of the investor record under specified identifier type&#39;s scope and code. This together with defined              identifier type uniquely identifies the investor record to delete. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The response from deleting investor record. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_investor_record**
 > InvestorRecord get_investor_record(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
