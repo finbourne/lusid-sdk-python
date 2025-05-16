@@ -30,13 +30,15 @@ class Version(BaseModel):
     as_at_created: Optional[datetime] = Field(None, alias="asAtCreated", description="The asAt datetime at which the entity was first created in LUSID.")
     user_id_created:  Optional[StrictStr] = Field(None,alias="userIdCreated", description="The unique id of the user who created the entity.") 
     request_id_created:  Optional[StrictStr] = Field(None,alias="requestIdCreated", description="The unique request id of the command that created the entity.") 
+    reason_created:  Optional[StrictStr] = Field(None,alias="reasonCreated", description="The reason for an entity creation.") 
     as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The asAt datetime at which the entity (including its properties) was last updated in LUSID.")
     user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique id of the user who last updated the entity (including its properties) in LUSID.") 
     request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique request id of the command that last updated the entity (including its properties) in LUSID.") 
+    reason_modified:  Optional[StrictStr] = Field(None,alias="reasonModified", description="The reason for an entity modification.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique id of the entity") 
     staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The ID of the staged change that resulted in the most recent modification.") 
-    __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "entityUniqueId", "stagedModificationIdModified"]
+    __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "reasonCreated", "asAtModified", "userIdModified", "requestIdModified", "reasonModified", "asAtVersionNumber", "entityUniqueId", "stagedModificationIdModified"]
 
     class Config:
         """Pydantic configuration"""
@@ -85,6 +87,11 @@ class Version(BaseModel):
         if self.request_id_created is None and "request_id_created" in self.__fields_set__:
             _dict['requestIdCreated'] = None
 
+        # set to None if reason_created (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reason_created is None and "reason_created" in self.__fields_set__:
+            _dict['reasonCreated'] = None
+
         # set to None if as_at_modified (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at_modified is None and "as_at_modified" in self.__fields_set__:
@@ -99,6 +106,11 @@ class Version(BaseModel):
         # and __fields_set__ contains the field
         if self.request_id_modified is None and "request_id_modified" in self.__fields_set__:
             _dict['requestIdModified'] = None
+
+        # set to None if reason_modified (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reason_modified is None and "reason_modified" in self.__fields_set__:
+            _dict['reasonModified'] = None
 
         # set to None if as_at_version_number (nullable) is None
         # and __fields_set__ contains the field
@@ -132,9 +144,11 @@ class Version(BaseModel):
             "as_at_created": obj.get("asAtCreated"),
             "user_id_created": obj.get("userIdCreated"),
             "request_id_created": obj.get("requestIdCreated"),
+            "reason_created": obj.get("reasonCreated"),
             "as_at_modified": obj.get("asAtModified"),
             "user_id_modified": obj.get("userIdModified"),
             "request_id_modified": obj.get("requestIdModified"),
+            "reason_modified": obj.get("reasonModified"),
             "as_at_version_number": obj.get("asAtVersionNumber"),
             "entity_unique_id": obj.get("entityUniqueId"),
             "staged_modification_id_modified": obj.get("stagedModificationIdModified")

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **as_at_staged** | **datetime** | Time at which the modification was staged. | [optional] 
 **user_id_staged** | **str** | Id of the user who created the stage modification request. | [optional] 
 **requested_id_staged** | **str** | The Request Id that initiated this staged modification. | [optional] 
+**request_reason** | **str** | Reason staged change request made. | [optional] 
 **action** | **str** | Type of action of the staged modification, either create, update or delete. | [optional] 
 **staging_rule** | [**StagedModificationStagingRule**](StagedModificationStagingRule.md) |  | [optional] 
 **decisions** | [**List[StagedModificationDecision]**](StagedModificationDecision.md) | Object containing information relating to the decision on the staged modification. | [optional] 

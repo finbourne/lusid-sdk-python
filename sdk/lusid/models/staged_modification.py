@@ -34,6 +34,7 @@ class StagedModification(BaseModel):
     as_at_staged: Optional[datetime] = Field(None, alias="asAtStaged", description="Time at which the modification was staged.")
     user_id_staged:  Optional[StrictStr] = Field(None,alias="userIdStaged", description="Id of the user who created the stage modification request.") 
     requested_id_staged:  Optional[StrictStr] = Field(None,alias="requestedIdStaged", description="The Request Id that initiated this staged modification.") 
+    request_reason:  Optional[StrictStr] = Field(None,alias="requestReason", description="Reason staged change request made.") 
     action:  Optional[StrictStr] = Field(None,alias="action", description="Type of action of the staged modification, either create, update or delete.") 
     staging_rule: Optional[StagedModificationStagingRule] = Field(None, alias="stagingRule")
     decisions: Optional[conlist(StagedModificationDecision)] = Field(None, description="Object containing information relating to the decision on the staged modification.")
@@ -47,7 +48,7 @@ class StagedModification(BaseModel):
     entity_hrefs: Optional[StagedModificationsEntityHrefs] = Field(None, alias="entityHrefs")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the entity the staged modification applies to.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "asAtClosed", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "displayName", "links"]
+    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "requestReason", "action", "stagingRule", "decisions", "decisionsCount", "status", "asAtClosed", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "displayName", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -119,6 +120,11 @@ class StagedModification(BaseModel):
         if self.requested_id_staged is None and "requested_id_staged" in self.__fields_set__:
             _dict['requestedIdStaged'] = None
 
+        # set to None if request_reason (nullable) is None
+        # and __fields_set__ contains the field
+        if self.request_reason is None and "request_reason" in self.__fields_set__:
+            _dict['requestReason'] = None
+
         # set to None if action (nullable) is None
         # and __fields_set__ contains the field
         if self.action is None and "action" in self.__fields_set__:
@@ -180,6 +186,7 @@ class StagedModification(BaseModel):
             "as_at_staged": obj.get("asAtStaged"),
             "user_id_staged": obj.get("userIdStaged"),
             "requested_id_staged": obj.get("requestedIdStaged"),
+            "request_reason": obj.get("requestReason"),
             "action": obj.get("action"),
             "staging_rule": StagedModificationStagingRule.from_dict(obj.get("stagingRule")) if obj.get("stagingRule") is not None else None,
             "decisions": [StagedModificationDecision.from_dict(_item) for _item in obj.get("decisions")] if obj.get("decisions") is not None else None,
