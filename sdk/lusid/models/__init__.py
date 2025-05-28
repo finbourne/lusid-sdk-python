@@ -124,6 +124,8 @@ from lusid.models.bucket import Bucket
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.bucketing_schedule import BucketingSchedule
+from lusid.models.calculate_order_dates_request import CalculateOrderDatesRequest
+from lusid.models.calculate_order_dates_response import CalculateOrderDatesResponse
 from lusid.models.calculation_info import CalculationInfo
 from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
@@ -1096,6 +1098,7 @@ from lusid.models.transaction_type_movement import TransactionTypeMovement
 from lusid.models.transaction_type_property_mapping import TransactionTypePropertyMapping
 from lusid.models.transaction_type_request import TransactionTypeRequest
 from lusid.models.transactions_reconciliations_response import TransactionsReconciliationsResponse
+from lusid.models.transfer_agency_dates import TransferAgencyDates
 from lusid.models.transition_event import TransitionEvent
 from lusid.models.translate_entities_inlined_request import TranslateEntitiesInlinedRequest
 from lusid.models.translate_entities_request import TranslateEntitiesRequest
@@ -1349,6 +1352,8 @@ __all__ = [
     "BucketedCashFlowRequest",
     "BucketedCashFlowResponse",
     "BucketingSchedule",
+    "CalculateOrderDatesRequest",
+    "CalculateOrderDatesResponse",
     "CalculationInfo",
     "Calendar",
     "CalendarDate",
@@ -2321,6 +2326,7 @@ __all__ = [
     "TransactionTypePropertyMapping",
     "TransactionTypeRequest",
     "TransactionsReconciliationsResponse",
+    "TransferAgencyDates",
     "TransitionEvent",
     "TranslateEntitiesInlinedRequest",
     "TranslateEntitiesRequest",

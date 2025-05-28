@@ -616,6 +616,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**upsert_portfolio_details**](docs/TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | UpsertPortfolioDetails: Upsert portfolio details
 *TransactionPortfoliosApi* | [**upsert_transaction_properties**](docs/TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | UpsertTransactionProperties: Upsert transaction properties
 *TransactionPortfoliosApi* | [**upsert_transactions**](docs/TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
+*TransferAgencyApi* | [**calculate_order_dates**](docs/TransferAgencyApi.md#calculate_order_dates) | **POST** /api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
 *TranslationApi* | [**translate_instrument_definitions**](docs/TranslationApi.md#translate_instrument_definitions) | **POST** /api/translation/instrumentdefinitions | [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
 *TranslationApi* | [**translate_trade_tickets**](docs/TranslationApi.md#translate_trade_tickets) | **POST** /api/translation/tradetickets | [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
 *WorkspaceApi* | [**create_item**](docs/WorkspaceApi.md#create_item) | **POST** /api/workspaces/{visibility}/{workspaceName}/items | [EXPERIMENTAL] CreateItem: Create a new item in a workspace.
@@ -744,6 +745,8 @@ Class | Method | HTTP request | Description
  - [BucketedCashFlowRequest](docs/BucketedCashFlowRequest.md)
  - [BucketedCashFlowResponse](docs/BucketedCashFlowResponse.md)
  - [BucketingSchedule](docs/BucketingSchedule.md)
+ - [CalculateOrderDatesRequest](docs/CalculateOrderDatesRequest.md)
+ - [CalculateOrderDatesResponse](docs/CalculateOrderDatesResponse.md)
  - [CalculationInfo](docs/CalculationInfo.md)
  - [Calendar](docs/Calendar.md)
  - [CalendarDate](docs/CalendarDate.md)
@@ -1716,6 +1719,7 @@ Class | Method | HTTP request | Description
  - [TransactionTypePropertyMapping](docs/TransactionTypePropertyMapping.md)
  - [TransactionTypeRequest](docs/TransactionTypeRequest.md)
  - [TransactionsReconciliationsResponse](docs/TransactionsReconciliationsResponse.md)
+ - [TransferAgencyDates](docs/TransferAgencyDates.md)
  - [TransitionEvent](docs/TransitionEvent.md)
  - [TranslateEntitiesInlinedRequest](docs/TranslateEntitiesInlinedRequest.md)
  - [TranslateEntitiesRequest](docs/TranslateEntitiesRequest.md)
