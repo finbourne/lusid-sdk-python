@@ -302,8 +302,9 @@ Class | Method | HTTP request | Description
 *InstrumentsApi* | [**update_instrument_identifier**](docs/InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | UpdateInstrumentIdentifier: Update instrument identifier
 *InstrumentsApi* | [**upsert_instruments**](docs/InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | UpsertInstruments: Upsert instruments
 *InstrumentsApi* | [**upsert_instruments_properties**](docs/InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | UpsertInstrumentsProperties: Upsert instruments properties
-*InvestorRecordsApi* | [**delete_investor_record**](docs/InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | DeleteInvestorRecord: Delete Investor Record
+*InvestorRecordsApi* | [**delete_investor_record**](docs/InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
 *InvestorRecordsApi* | [**get_investor_record**](docs/InvestorRecordsApi.md#get_investor_record) | **GET** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetInvestorRecord: Get Investor Record
+*InvestorRecordsApi* | [**list_all_investor_records**](docs/InvestorRecordsApi.md#list_all_investor_records) | **GET** /api/investorrecords | [EARLY ACCESS] ListAllInvestorRecords: List Investor Records
 *InvestorRecordsApi* | [**upsert_investor_records**](docs/InvestorRecordsApi.md#upsert_investor_records) | **POST** /api/investorrecords/$batchUpsert | [EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records
 *LegacyComplianceApi* | [**delete_legacy_compliance_rule**](docs/LegacyComplianceApi.md#delete_legacy_compliance_rule) | **DELETE** /api/legacy/compliance/rules/{scope}/{code} | [EXPERIMENTAL] DeleteLegacyComplianceRule: Deletes a compliance rule.
 *LegacyComplianceApi* | [**get_legacy_breached_orders_info**](docs/LegacyComplianceApi.md#get_legacy_breached_orders_info) | **GET** /api/legacy/compliance/runs/breached/{runId} | [EXPERIMENTAL] GetLegacyBreachedOrdersInfo: Get the Ids of Breached orders in a given compliance run and the corresponding list of rules that could have caused it.
@@ -739,6 +740,7 @@ Class | Method | HTTP request | Description
  - [BranchStep](docs/BranchStep.md)
  - [BranchStepRequest](docs/BranchStepRequest.md)
  - [BreakCodeSource](docs/BreakCodeSource.md)
+ - [Bucket](docs/Bucket.md)
  - [BucketedCashFlowRequest](docs/BucketedCashFlowRequest.md)
  - [BucketedCashFlowResponse](docs/BucketedCashFlowResponse.md)
  - [BucketingSchedule](docs/BucketingSchedule.md)
@@ -969,6 +971,7 @@ Class | Method | HTTP request | Description
  - [EconomicDependencyType](docs/EconomicDependencyType.md)
  - [EconomicDependencyWithComplexMarketData](docs/EconomicDependencyWithComplexMarketData.md)
  - [EconomicDependencyWithQuote](docs/EconomicDependencyWithQuote.md)
+ - [Economics](docs/Economics.md)
  - [EffectiveRange](docs/EffectiveRange.md)
  - [ElectionSpecification](docs/ElectionSpecification.md)
  - [EligibilityCalculation](docs/EligibilityCalculation.md)
@@ -1539,6 +1542,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfInstrumentCashFlow](docs/ResourceListOfInstrumentCashFlow.md)
  - [ResourceListOfInstrumentEventHolder](docs/ResourceListOfInstrumentEventHolder.md)
  - [ResourceListOfInstrumentIdTypeDescriptor](docs/ResourceListOfInstrumentIdTypeDescriptor.md)
+ - [ResourceListOfInvestorRecord](docs/ResourceListOfInvestorRecord.md)
  - [ResourceListOfLegalEntity](docs/ResourceListOfLegalEntity.md)
  - [ResourceListOfListComplexMarketDataWithMetaDataResponse](docs/ResourceListOfListComplexMarketDataWithMetaDataResponse.md)
  - [ResourceListOfMapping](docs/ResourceListOfMapping.md)

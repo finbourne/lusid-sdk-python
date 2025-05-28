@@ -46,6 +46,7 @@ class QuoteType(str, Enum):
     PRINCIPALWRITEOFF = 'PrincipalWriteOff'
     INTERESTDEFERRED = 'InterestDeferred'
     INTERESTSHORTFALL = 'InterestShortfall'
+    CONSTITUENTWEIGHTFACTOR = 'ConstituentWeightFactor'
 
     @classmethod
     def from_json(cls, json_str: str) -> QuoteType:

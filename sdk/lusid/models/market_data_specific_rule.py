@@ -29,7 +29,7 @@ class MarketDataSpecificRule(BaseModel):
     key:  StrictStr = Field(...,alias="key", description="The market data key pattern which this is a rule for. A dot separated string (A.B.C.D.*)") 
     supplier:  StrictStr = Field(...,alias="supplier", description="The market data supplier (where the data comes from)") 
     data_scope:  StrictStr = Field(...,alias="dataScope", description="The scope in which the data should be found when using this rule.") 
-    quote_type:  StrictStr = Field(...,alias="quoteType", description="The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall") 
+    quote_type:  StrictStr = Field(...,alias="quoteType", description="The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor") 
     field:  StrictStr = Field(...,alias="field", description="The conceptual qualification for the field, such as bid, mid, or ask.  The field must be one of a defined set for the given supplier, in the same way as it  is for the Finbourne.WebApi.Interface.Dto.Quotes.QuoteSeriesId") 
     quote_interval:  Optional[StrictStr] = Field(None,alias="quoteInterval", description="Shorthand for the time interval used to select market data. This must be a dot-separated string              nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax              is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of D(ay), W(eek), M(onth) or Y(ear).") 
     as_at: Optional[datetime] = Field(None, alias="asAt", description="Deprecated field which no longer has any effect on market data resolution.")
@@ -95,8 +95,8 @@ class MarketDataSpecificRule(BaseModel):
         if "quote_type" != "type":
             return value
 
-        if value not in ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall'):
-            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall')")
+        if value not in ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor'):
+            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor')")
         return value
 
     class Config:

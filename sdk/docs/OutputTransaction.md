@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **accounting_date** | **datetime** | The accounting date of the transaction. | [optional] 
+**economics** | [**List[Economics]**](Economics.md) | Set of economic data related with the transaction impacts. | [optional] 
 
 ## Example
 

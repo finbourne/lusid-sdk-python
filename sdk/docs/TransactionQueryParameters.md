@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **show_cancelled_transactions** | **bool** | Option to specify whether or not to include cancelled transactions in the output. Defaults to False if not specified. | [optional] 
 **timeline_scope** | **str** | Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions | [optional] 
 **timeline_code** | **str** | Code of the Timeline for the Portfolio. The Timeline to be used while building transactions | [optional] 
+**include_economics** | **bool** | By default is false. When set to true the Economics data would be populated in the response. | [optional] 
 
 ## Example
 

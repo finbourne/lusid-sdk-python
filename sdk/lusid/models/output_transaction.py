@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
+from lusid.models.economics import Economics
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
@@ -66,7 +67,8 @@ class OutputTransaction(BaseModel):
     order_id: Optional[ResourceId] = Field(None, alias="orderId")
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     accounting_date: Optional[datetime] = Field(None, alias="accountingDate", description="The accounting date of the transaction.")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate"]
+    economics: Optional[conlist(Economics)] = Field(None, description="Set of economic data related with the transaction impacts.")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -197,6 +199,13 @@ class OutputTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of allocation_id
         if self.allocation_id:
             _dict['allocationId'] = self.allocation_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in economics (list)
+        _items = []
+        if self.economics:
+            for _item in self.economics:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['economics'] = _items
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -272,6 +281,11 @@ class OutputTransaction(BaseModel):
         if self.accounting_date is None and "accounting_date" in self.__fields_set__:
             _dict['accountingDate'] = None
 
+        # set to None if economics (nullable) is None
+        # and __fields_set__ contains the field
+        if self.economics is None and "economics" in self.__fields_set__:
+            _dict['economics'] = None
+
         return _dict
 
     @classmethod
@@ -321,6 +335,7 @@ class OutputTransaction(BaseModel):
             "otc_confirmation": OtcConfirmation.from_dict(obj.get("otcConfirmation")) if obj.get("otcConfirmation") is not None else None,
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
-            "accounting_date": obj.get("accountingDate")
+            "accounting_date": obj.get("accountingDate"),
+            "economics": [Economics.from_dict(_item) for _item in obj.get("economics")] if obj.get("economics") is not None else None
         })
         return _obj

@@ -30,6 +30,7 @@ class ChangeInterval(BaseModel):
     as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The date/time of the change.")
     user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique identifier of the user that made the change.") 
     request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique identifier of the request that the changes were part of.") 
+    reason_modified:  Optional[StrictStr] = Field(None,alias="reasonModified", description="The reason for an entity modification.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The version number for the entity (the entity was created at version 1). This may refer to the version number of a changed related entity, not a change for the entity itself.")
     staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The id of the staged modification that was approved. Will be null if the change didn't come from a staged modification.") 
     action:  Optional[StrictStr] = Field(None,alias="action", description="The action performed on the field.") 
@@ -37,7 +38,7 @@ class ChangeInterval(BaseModel):
     previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
     new_value: Optional[PropertyValue] = Field(None, alias="newValue")
     effective_range: Optional[EffectiveRange] = Field(None, alias="effectiveRange")
-    __properties = ["asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "stagedModificationIdModified", "action", "attributeName", "previousValue", "newValue", "effectiveRange"]
+    __properties = ["asAtModified", "userIdModified", "requestIdModified", "reasonModified", "asAtVersionNumber", "stagedModificationIdModified", "action", "attributeName", "previousValue", "newValue", "effectiveRange"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +91,11 @@ class ChangeInterval(BaseModel):
         if self.request_id_modified is None and "request_id_modified" in self.__fields_set__:
             _dict['requestIdModified'] = None
 
+        # set to None if reason_modified (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reason_modified is None and "reason_modified" in self.__fields_set__:
+            _dict['reasonModified'] = None
+
         # set to None if staged_modification_id_modified (nullable) is None
         # and __fields_set__ contains the field
         if self.staged_modification_id_modified is None and "staged_modification_id_modified" in self.__fields_set__:
@@ -120,6 +126,7 @@ class ChangeInterval(BaseModel):
             "as_at_modified": obj.get("asAtModified"),
             "user_id_modified": obj.get("userIdModified"),
             "request_id_modified": obj.get("requestIdModified"),
+            "reason_modified": obj.get("reasonModified"),
             "as_at_version_number": obj.get("asAtVersionNumber"),
             "staged_modification_id_modified": obj.get("stagedModificationIdModified"),
             "action": obj.get("action"),
