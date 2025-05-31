@@ -83,8 +83,8 @@ def main():
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     identifier_effective_at = 'identifier_effective_at_example' # str | The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified. (optional)
     success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
-    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
-    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -108,8 +108,8 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **identifier_effective_at** | **str**| The effective datetime used to resolve each instrument from the provided identifiers. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
- **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
- **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
@@ -382,8 +382,8 @@ def main():
     request_body = ["Instrument/scope/market-sector","Instrument/scope/tenor"] # List[str] | A list of property keys from the 'Instruments' domain whose properties to delete.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
-    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -408,8 +408,8 @@ Name | Type | Description  | Notes
  **request_body** | [**List[str]**](str.md)| A list of property keys from the &#39;Instruments&#39; domain whose properties to delete. | 
  **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
- **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
@@ -1699,8 +1699,8 @@ def main():
     instrument_property_keys = ['instrument_property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
-    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use. (optional)
-    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use. (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1729,8 +1729,8 @@ Name | Type | Description  | Notes
  **instrument_property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
- **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use. | [optional] 
- **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use. | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
 
 ### Return type
 
@@ -1910,8 +1910,8 @@ def main():
     # update_instrument_identifier_request = UpdateInstrumentIdentifierRequest.from_dict({})
     update_instrument_identifier_request = UpdateInstrumentIdentifierRequest()
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
-    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1935,8 +1935,8 @@ Name | Type | Description  | Notes
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
  **update_instrument_identifier_request** | [**UpdateInstrumentIdentifierRequest**](UpdateInstrumentIdentifierRequest.md)| The identifier to update or delete. This need not be the same value as the               &#39;identifier&#39; parameter used to retrieve the instrument. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
- **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
@@ -2010,8 +2010,8 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     request_body = {"request_id_1":{"name":"Instrument name","identifiers":{"ClientInternal":{"value":"some-identifier","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"Figi":{"value":"some-figi-code","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"Isin":{"value":"some-isin-code","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"}},"properties":[{"key":"Instrument/someScope/somePropertyName","value":{"labelValue":"some-property-value"},"effectiveFrom":"2018-06-18T09:00:00.0000000+00:00"}],"lookThroughPortfolioId":{"scope":"MyScope","code":"portfolio-code"},"definition":{"instrumentFormat":{"sourceSystem":"systemA","vendor":"Unknown","version":"1.0.0"},"content":"{\"some-key\": \"some-value\"}","instrumentType":"ExoticInstrument"},"settlementCycle":{"businessDayOffset":2,"calendars":[{"scope":"Holidays","code":"UK"}]}},"request_id_2":{"name":"Instrument name","identifiers":{"ClientInternal":{"value":"some-identifier-2","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"Figi":{"value":"some-figi-code-2","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"}},"properties":[],"lookThroughPortfolioId":{"scope":"MyScope","code":"portfolio-code"},"definition":{"instrumentFormat":{"sourceSystem":"systemA","vendor":"Unknown","version":"1.0.0"},"content":"{\"some-key\": \"some-value\"}","instrumentType":"ExoticInstrument"}}} # Dict[str, InstrumentDefinition] | The definitions of the instruments to create or update.
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
-    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2033,8 +2033,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **request_body** | [**Dict[str, InstrumentDefinition]**](InstrumentDefinition.md)| The definitions of the instruments to create or update. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
- **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
@@ -2108,8 +2108,8 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     upsert_instrument_property_request = [{"identifierType":"LusidInstrumentId","identifier":"LUID_00000000","properties":[{"key":"Instrument/MyScope/SomePropertyName","value":{"labelValue":"SomeValue1"},"effectiveFrom":"2016-09-15T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/SomePropertyName","value":{"labelValue":"SomeValue2"},"effectiveFrom":"2017-08-10T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/AnotherPropertyName","value":{"labelValue":"AnotherValue1"},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00","effectiveUntil":"2019-06-01T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/AnotherPropertyName","value":{"labelValue":"AnotherValue2"},"effectiveFrom":"2020-03-15T12:00:00.0000000+00:00","effectiveUntil":"2021-01-15T12:00:00.0000000+00:00"}]}] # List[UpsertInstrumentPropertyRequest] | A list of instruments and associated instrument properties to create or update.
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Hierarchical Data Model to use (optional)
-    data_model_code = 'data_model_code_example' # str | The optional code of a Hierarchical Data Model to use (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2131,8 +2131,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **upsert_instrument_property_request** | [**List[UpsertInstrumentPropertyRequest]**](UpsertInstrumentPropertyRequest.md)| A list of instruments and associated instrument properties to create or update. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **data_model_scope** | **str**| The optional scope of a Hierarchical Data Model to use | [optional] 
- **data_model_code** | **str**| The optional code of a Hierarchical Data Model to use | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
