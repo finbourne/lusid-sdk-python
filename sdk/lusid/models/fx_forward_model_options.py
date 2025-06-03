@@ -29,7 +29,7 @@ class FxForwardModelOptions(ModelOptions):
     forward_rate_observable_type:  StrictStr = Field(...,alias="forwardRateObservableType", description="The available values are: ForwardPoints, ForwardRate, RatesCurve, FxForwardCurve, Invalid") 
     discounting_method:  StrictStr = Field(...,alias="discountingMethod", description="The available values are: Standard, ConstantTimeValueOfMoney, Invalid") 
     convert_to_report_ccy: StrictBool = Field(..., alias="convertToReportCcy", description="Convert all FX flows to the report currency  By setting this all FX forwards will be priced using Forward Curves that have Report Currency as the base.")
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "forwardRateObservableType", "discountingMethod", "convertToReportCcy"]
 
@@ -206,8 +206,8 @@ class FxForwardModelOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions'):
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions')")
+        if value not in ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions'):
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions')")
         return value
 
     class Config:

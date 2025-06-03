@@ -777,6 +777,7 @@ Class | Method | HTTP request | Description
  - [CdsCreditEvent](docs/CdsCreditEvent.md)
  - [CdsFlowConventions](docs/CdsFlowConventions.md)
  - [CdsIndex](docs/CdsIndex.md)
+ - [CdsModelOptions](docs/CdsModelOptions.md)
  - [CdsProtectionDetailSpecification](docs/CdsProtectionDetailSpecification.md)
  - [CdxCreditEvent](docs/CdxCreditEvent.md)
  - [Change](docs/Change.md)

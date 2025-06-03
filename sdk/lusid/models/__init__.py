@@ -156,6 +156,7 @@ from lusid.models.cash_perpetual import CashPerpetual
 from lusid.models.cds_credit_event import CdsCreditEvent
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_index import CdsIndex
+from lusid.models.cds_model_options import CdsModelOptions
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
 from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
@@ -1384,6 +1385,7 @@ __all__ = [
     "CdsCreditEvent",
     "CdsFlowConventions",
     "CdsIndex",
+    "CdsModelOptions",
     "CdsProtectionDetailSpecification",
     "CdxCreditEvent",
     "Change",

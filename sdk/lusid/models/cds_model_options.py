@@ -19,76 +19,17 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, validator 
 from lusid.models.model_options import ModelOptions
 
-class IndexModelOptions(ModelOptions):
+class CdsModelOptions(ModelOptions):
     """
-    IndexModelOptions
+    Model options for credit default instrument.  # noqa: E501
     """
-    portfolio_scaling:  StrictStr = Field(...,alias="portfolioScaling", description="The available values are: Sum, AbsoluteSum, Unity") 
+    use_factors_for_current_notional: StrictBool = Field(..., alias="useFactorsForCurrentNotional", description="Determines if calculations that use current notional apply use a constituent weight factor from a quote representing a default.")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "portfolioScaling"]
-
-    @validator('portfolio_scaling')
-    def portfolio_scaling_validate_enum(cls, value):
-        """Validates the enum"""
-
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'IndexModelOptions' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "portfolio_scaling" != "type":
-            return value
-
-        if value not in ('Sum', 'AbsoluteSum', 'Unity'):
-            raise ValueError("must be one of enum values ('Sum', 'AbsoluteSum', 'Unity')")
-        return value
+    __properties = ["modelOptionsType", "useFactorsForCurrentNotional"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -101,7 +42,7 @@ class IndexModelOptions(ModelOptions):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'IndexModelOptions' not in [ 
+        if 'CdsModelOptions' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -171,8 +112,8 @@ class IndexModelOptions(ModelOptions):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> IndexModelOptions:
-        """Create an instance of IndexModelOptions from a JSON string"""
+    def from_json(cls, json_str: str) -> CdsModelOptions:
+        """Create an instance of CdsModelOptions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -190,17 +131,17 @@ class IndexModelOptions(ModelOptions):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> IndexModelOptions:
-        """Create an instance of IndexModelOptions from a dict"""
+    def from_dict(cls, obj: dict) -> CdsModelOptions:
+        """Create an instance of CdsModelOptions from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return IndexModelOptions.parse_obj(obj)
+            return CdsModelOptions.parse_obj(obj)
 
-        _obj = IndexModelOptions.parse_obj({
+        _obj = CdsModelOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
-            "portfolio_scaling": obj.get("portfolioScaling")
+            "use_factors_for_current_notional": obj.get("useFactorsForCurrentNotional")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
