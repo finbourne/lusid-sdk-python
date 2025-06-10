@@ -809,7 +809,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested portfolios |  -  |
+**200** | The requested property definitions |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

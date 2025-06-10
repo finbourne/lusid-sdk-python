@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_abor_configuration**](AborConfigurationApi.md#get_abor_configuration) | **GET** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
 [**get_abor_configuration_properties**](AborConfigurationApi.md#get_abor_configuration_properties) | **GET** /api/aborconfiguration/{scope}/{code}/properties | [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
 [**list_abor_configurations**](AborConfigurationApi.md#list_abor_configurations) | **GET** /api/aborconfiguration | [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+[**patch_abor_configuration**](AborConfigurationApi.md#patch_abor_configuration) | **PATCH** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
 [**upsert_abor_configuration_properties**](AborConfigurationApi.md#upsert_abor_configuration_properties) | **POST** /api/aborconfiguration/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
 
 
@@ -502,6 +503,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested abor configurations. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **patch_abor_configuration**
+> AborConfiguration patch_abor_configuration(scope, code, operation)
+
+[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+
+Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AborConfigurationApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AborConfigurationApi)
+    scope = 'scope_example' # str | The scope of the AborConfiguration.
+    code = 'code_example' # str | The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration.
+    operation = [{"value":"new name","path":"/displayName","op":"add"},{"value":"newModule","path":"postingModuleCodes/-","op":"add"},{"path":"cleardownModuleCodes/1","op":"remove"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.patch_abor_configuration(scope, code, operation, opts=opts)
+
+        # [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+        api_response = api_instance.patch_abor_configuration(scope, code, operation)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AborConfigurationApi->patch_abor_configuration: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the AborConfiguration. | 
+ **code** | **str**| The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration. | 
+ **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | 
+
+### Return type
+
+[**AborConfiguration**](AborConfiguration.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The newly patched AborConfiguration |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
