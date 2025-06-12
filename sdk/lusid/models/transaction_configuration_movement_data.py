@@ -33,7 +33,7 @@ class TransactionConfigurationMovementData(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement")
     mappings: Optional[conlist(TransactionPropertyMapping)] = Field(None, description="This allows you to map a transaction property to a property on the underlying holding")
     name:  Optional[StrictStr] = Field(None,alias="name", description="The movement name (optional)") 
-    movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest' and 'Virtual' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
+    movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest', 'Virtual' and 'Income' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
     __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions"]
 
     @validator('movement_types')
