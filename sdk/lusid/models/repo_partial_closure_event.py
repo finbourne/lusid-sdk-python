@@ -22,15 +22,17 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 
-class UpdateDepositAmountEvent(InstrumentEvent):
+class RepoPartialClosureEvent(InstrumentEvent):
     """
-    Event to update the deposit be a given amount.  # noqa: E501
+    Event representing the partial closure of a repurchase   agreement. Each event reduces the outstanding notional   and generates a corresponding receive-leg cashflow. The   final maturity cashflow is adjusted accordingly.    If multiple events are created, their effects compound.   Once the total repaid amount reaches the original purchase   price, no further receive-leg cashflows are generated. Any   event exceeding the remaining notional is marked with a   diagnostic to indicate it is invalid due to excessive repayment.    For example, for a repo with a 5% rate, 1% haircut and   collateral value of 100 (purchase price = 99), a partial   closure of cash amount 10 followed by one of 100 results in   only the first event producing a cashflow. The second,   exceeding the remaining balance, is ignored and flagged   with a diagnostic. The remaining balance is settled at   maturity of the repurchase agreement.  # noqa: E501
     """
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date of the adjustment to the deposit.")
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="The signed amount of the adjustment to make to the deposit. Positive implies an increase, and negative implies a decrease.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="The date on which the counterparties become entitled   to exchange cash as part of a partial closure of the   repurchase agreement. The date must be before or on   the settlement date, and on or before the maturity   date of the repo. This is a required field.")
+    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The date on which the exchange of cash is settled.   The date must be on or after the entitlement date,  and on or before the maturity date of the repo.   This is a required field.")
+    cash_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashAmount", description="The amount of cash to be exchanged as part of   a partial closure of the repurchase agreement.  It cannot be more than the initial amount of   cash at the start of the repo.")
+    cash_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashPercentage", description="Represents the proportion of cash exchanged, as   a value between 0 and 1, relative to the total   cash involved in the repurchase agreement.  This value adjusts with each partial closure,   because the total cash amount is reduced.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "date", "amount"]
+    __properties = ["instrumentEventType", "entitlementDate", "settlementDate", "cashAmount", "cashPercentage"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -43,7 +45,7 @@ class UpdateDepositAmountEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'UpdateDepositAmountEvent' not in [ 
+        if 'RepoPartialClosureEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -113,8 +115,8 @@ class UpdateDepositAmountEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpdateDepositAmountEvent:
-        """Create an instance of UpdateDepositAmountEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> RepoPartialClosureEvent:
+        """Create an instance of RepoPartialClosureEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -129,21 +131,33 @@ class UpdateDepositAmountEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if cash_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_amount is None and "cash_amount" in self.__fields_set__:
+            _dict['cashAmount'] = None
+
+        # set to None if cash_percentage (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_percentage is None and "cash_percentage" in self.__fields_set__:
+            _dict['cashPercentage'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpdateDepositAmountEvent:
-        """Create an instance of UpdateDepositAmountEvent from a dict"""
+    def from_dict(cls, obj: dict) -> RepoPartialClosureEvent:
+        """Create an instance of RepoPartialClosureEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpdateDepositAmountEvent.parse_obj(obj)
+            return RepoPartialClosureEvent.parse_obj(obj)
 
-        _obj = UpdateDepositAmountEvent.parse_obj({
+        _obj = RepoPartialClosureEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "var_date": obj.get("date"),
-            "amount": obj.get("amount")
+            "entitlement_date": obj.get("entitlementDate"),
+            "settlement_date": obj.get("settlementDate"),
+            "cash_amount": obj.get("cashAmount"),
+            "cash_percentage": obj.get("cashPercentage")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

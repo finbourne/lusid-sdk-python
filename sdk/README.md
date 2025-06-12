@@ -1507,6 +1507,8 @@ Class | Method | HTTP request | Description
  - [RelationshipDefinition](docs/RelationshipDefinition.md)
  - [RelativeDateOffset](docs/RelativeDateOffset.md)
  - [Repo](docs/Repo.md)
+ - [RepoCashFlowEvent](docs/RepoCashFlowEvent.md)
+ - [RepoPartialClosureEvent](docs/RepoPartialClosureEvent.md)
  - [RepurchaseOfferEvent](docs/RepurchaseOfferEvent.md)
  - [RequestedChanges](docs/RequestedChanges.md)
  - [ResetEvent](docs/ResetEvent.md)

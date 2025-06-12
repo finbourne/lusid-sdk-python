@@ -22,15 +22,17 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 
-class UpdateDepositAmountEvent(InstrumentEvent):
+class RepoCashFlowEvent(InstrumentEvent):
     """
-    Event to update the deposit be a given amount.  # noqa: E501
+    Event representing a repurchase agreement cashflow.   For example, cashflow for a partial closure of the   repurchase agreement.  # noqa: E501
     """
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date of the adjustment to the deposit.")
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="The signed amount of the adjustment to make to the deposit. Positive implies an increase, and negative implies a decrease.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="The date on which the counterparties become entitled   to exchange cash as part of a partial closure of the   repurchase agreement. The date must be before or on   the settlement date, and on or before the maturity   date of the repo. This is a required field.")
+    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The date on which the exchange of cash is settled.   The date must be on or after the entitlement date,  and on or before the maturity date of the repo.   This is a required field.")
+    cash_flow_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="cashFlowPerUnit", description="The amount of cash to be exchanged for each unit   of the instrument held on the entitlement date.")
+    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the cashflow is paid.") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "date", "amount"]
+    __properties = ["instrumentEventType", "entitlementDate", "settlementDate", "cashFlowPerUnit", "currency"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -43,7 +45,7 @@ class UpdateDepositAmountEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'UpdateDepositAmountEvent' not in [ 
+        if 'RepoCashFlowEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -113,8 +115,8 @@ class UpdateDepositAmountEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpdateDepositAmountEvent:
-        """Create an instance of UpdateDepositAmountEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> RepoCashFlowEvent:
+        """Create an instance of RepoCashFlowEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -132,18 +134,20 @@ class UpdateDepositAmountEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpdateDepositAmountEvent:
-        """Create an instance of UpdateDepositAmountEvent from a dict"""
+    def from_dict(cls, obj: dict) -> RepoCashFlowEvent:
+        """Create an instance of RepoCashFlowEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpdateDepositAmountEvent.parse_obj(obj)
+            return RepoCashFlowEvent.parse_obj(obj)
 
-        _obj = UpdateDepositAmountEvent.parse_obj({
+        _obj = RepoCashFlowEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "var_date": obj.get("date"),
-            "amount": obj.get("amount")
+            "entitlement_date": obj.get("entitlementDate"),
+            "settlement_date": obj.get("settlementDate"),
+            "cash_flow_per_unit": obj.get("cashFlowPerUnit"),
+            "currency": obj.get("currency")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

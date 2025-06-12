@@ -885,6 +885,8 @@ from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
 from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.repo import Repo
+from lusid.models.repo_cash_flow_event import RepoCashFlowEvent
+from lusid.models.repo_partial_closure_event import RepoPartialClosureEvent
 from lusid.models.repurchase_offer_event import RepurchaseOfferEvent
 from lusid.models.requested_changes import RequestedChanges
 from lusid.models.reset_event import ResetEvent
@@ -2114,6 +2116,8 @@ __all__ = [
     "RelationshipDefinition",
     "RelativeDateOffset",
     "Repo",
+    "RepoCashFlowEvent",
+    "RepoPartialClosureEvent",
     "RepurchaseOfferEvent",
     "RequestedChanges",
     "ResetEvent",
