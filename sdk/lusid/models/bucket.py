@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
@@ -36,7 +36,8 @@ class Bucket(BaseModel):
     local: Optional[CurrencyAndAmount] = None
     base: Optional[CurrencyAndAmount] = None
     units: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The units.")
-    __properties = ["taxLotId", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "holdingSign", "local", "base", "units"]
+    activity_date: Optional[datetime] = Field(None, alias="activityDate", description="The activity date of the bucket.")
+    __properties = ["taxLotId", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "holdingSign", "local", "base", "units", "activityDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -132,6 +133,7 @@ class Bucket(BaseModel):
             "holding_sign": obj.get("holdingSign"),
             "local": CurrencyAndAmount.from_dict(obj.get("local")) if obj.get("local") is not None else None,
             "base": CurrencyAndAmount.from_dict(obj.get("base")) if obj.get("base") is not None else None,
-            "units": obj.get("units")
+            "units": obj.get("units"),
+            "activity_date": obj.get("activityDate")
         })
         return _obj

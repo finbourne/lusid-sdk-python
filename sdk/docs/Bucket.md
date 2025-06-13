@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **local** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **base** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **units** | **float** | The units. | [optional] 
+**activity_date** | **datetime** | The activity date of the bucket. | [optional] 
 
 ## Example
 
