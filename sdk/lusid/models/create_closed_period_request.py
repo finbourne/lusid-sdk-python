@@ -29,7 +29,8 @@ class CreateClosedPeriodRequest(BaseModel):
     closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
     effective_end: Optional[datetime] = Field(None, alias="effectiveEnd", description="The effective end of the Closed Period")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
-    __properties = ["closedPeriodId", "effectiveEnd", "properties"]
+    as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt closed datetime for the Closed Period")
+    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +81,11 @@ class CreateClosedPeriodRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if as_at_closed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.as_at_closed is None and "as_at_closed" in self.__fields_set__:
+            _dict['asAtClosed'] = None
+
         return _dict
 
     @classmethod
@@ -99,6 +105,7 @@ class CreateClosedPeriodRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "as_at_closed": obj.get("asAtClosed")
         })
         return _obj

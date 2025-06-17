@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **closed_period_id** | **str** | The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period | [optional] 
 **effective_start** | **datetime** | The effective start of the Closed Period | [optional] 
 **effective_end** | **datetime** | The effective end of the Closed Period | [optional] 
-**as_at_closed** | **datetime** | The asAt datetime the Closed Period was created | [optional] 
+**as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Closed Periods properties. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
