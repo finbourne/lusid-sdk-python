@@ -6317,18 +6317,18 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, **kwargs) -> PortfolioDetails:  # noqa: E501
+    async def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, **kwargs) -> PortfolioDetails:  # noqa: E501
         ...
 
     @overload
-    def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, async_req: Optional[bool]=True, **kwargs) -> PortfolioDetails:  # noqa: E501
+    def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, async_req: Optional[bool]=True, **kwargs) -> PortfolioDetails:  # noqa: E501
         ...
 
     @validate_arguments
-    def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PortfolioDetails, Awaitable[PortfolioDetails]]:  # noqa: E501
+    def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PortfolioDetails, Awaitable[PortfolioDetails]]:  # noqa: E501
         """PatchPortfolioDetails: Patch portfolio details  # noqa: E501
 
-        Create or update certain details for a particular transaction portfolio.  The behaviour is defined by the JSON Patch specification.                Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  Currently supported properties are: SubHoldingKeys, BaseCurrency, AmortisationMethod  # noqa: E501
+        Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -6337,11 +6337,11 @@ class TransactionPortfoliosApi:
 
         :param scope: The scope of the transaction portfolio. (required)
         :type scope: str
-        :param code: The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio. (required)
+        :param code: The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
         :type code: str
         :param operation: The patch document. (required)
         :type operation: List[Operation]
-        :param effective_at: The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.
+        :param effective_at: The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -6362,10 +6362,10 @@ class TransactionPortfoliosApi:
         return self.patch_portfolio_details_with_http_info(scope, code, operation, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def patch_portfolio_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def patch_portfolio_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """PatchPortfolioDetails: Patch portfolio details  # noqa: E501
 
-        Create or update certain details for a particular transaction portfolio.  The behaviour is defined by the JSON Patch specification.                Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  Currently supported properties are: SubHoldingKeys, BaseCurrency, AmortisationMethod  # noqa: E501
+        Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -6374,11 +6374,11 @@ class TransactionPortfoliosApi:
 
         :param scope: The scope of the transaction portfolio. (required)
         :type scope: str
-        :param code: The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio. (required)
+        :param code: The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. (required)
         :type code: str
         :param operation: The patch document. (required)
         :type operation: List[Operation]
-        :param effective_at: The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.
+        :param effective_at: The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

@@ -2509,7 +2509,7 @@ Name | Type | Description  | Notes
 
 PatchPortfolio: Patch portfolio.
 
-Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes, Type.
+Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Created, InstrumentScopes, Type.
 
 ### Example
 
@@ -2557,7 +2557,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
-    code = 'code_example' # str | The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the              scope this uniquely identifies the portfolio.
     operation = [{"value":"2020-01-01","path":"/creationDate","op":"add"}] # List[Operation] | The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
@@ -2579,7 +2579,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio. | 
- **code** | **str**| The code of the portfolio. Together with the               scope this uniquely identifies the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the              scope this uniquely identifies the portfolio. | 
  **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902. | 
 
 ### Return type

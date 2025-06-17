@@ -4811,18 +4811,18 @@ class PortfoliosApi:
 
 
     @overload
-    async def patch_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> Portfolio:  # noqa: E501
+    async def patch_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the              scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> Portfolio:  # noqa: E501
         ...
 
     @overload
-    def patch_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> Portfolio:  # noqa: E501
+    def patch_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the              scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> Portfolio:  # noqa: E501
         ...
 
     @validate_arguments
-    def patch_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
+    def patch_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the              scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
         """PatchPortfolio: Patch portfolio.  # noqa: E501
 
-        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes, Type.  # noqa: E501
+        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Created, InstrumentScopes, Type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4831,7 +4831,7 @@ class PortfoliosApi:
 
         :param scope: The scope of the portfolio. (required)
         :type scope: str
-        :param code: The code of the portfolio. Together with the               scope this uniquely identifies the portfolio. (required)
+        :param code: The code of the portfolio. Together with the              scope this uniquely identifies the portfolio. (required)
         :type code: str
         :param operation: The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]
@@ -4854,10 +4854,10 @@ class PortfoliosApi:
         return self.patch_portfolio_with_http_info(scope, code, operation, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def patch_portfolio_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def patch_portfolio_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the              scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """PatchPortfolio: Patch portfolio.  # noqa: E501
 
-        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: Created, InstrumentScopes, Type.  # noqa: E501
+        Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: Created, InstrumentScopes, Type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4866,7 +4866,7 @@ class PortfoliosApi:
 
         :param scope: The scope of the portfolio. (required)
         :type scope: str
-        :param code: The code of the portfolio. Together with the               scope this uniquely identifies the portfolio. (required)
+        :param code: The code of the portfolio. Together with the              scope this uniquely identifies the portfolio. (required)
         :type code: str
         :param operation: The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]

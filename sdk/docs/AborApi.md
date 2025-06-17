@@ -1149,7 +1149,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] PatchAbor: Patch Abor.
 
-Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: PortfolioIds.
+Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.
 
 ### Example
 
@@ -1197,7 +1197,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(AborApi)
     scope = 'scope_example' # str | The scope of the Abor.
-    code = 'code_example' # str | The code of the Abor. Together with the               scope this uniquely identifies the Abor.
+    code = 'code_example' # str | The code of the Abor. Together with the              scope this uniquely identifies the Abor.
     operation = [{"value":[{"scope":"UKScope","code":"Portfolio1","portfolioEntityType":"SinglePortfolio"},{"scope":"UKScope","code":"Portfolio2","portfolioEntityType":"SinglePortfolio"}],"path":"/portfolioids","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
@@ -1219,7 +1219,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Abor. | 
- **code** | **str**| The code of the Abor. Together with the               scope this uniquely identifies the Abor. | 
+ **code** | **str**| The code of the Abor. Together with the              scope this uniquely identifies the Abor. | 
  **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | 
 
 ### Return type

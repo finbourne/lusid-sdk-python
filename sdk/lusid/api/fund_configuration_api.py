@@ -781,18 +781,18 @@ class FundConfigurationApi:
 
 
     @overload
-    async def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> FundConfiguration:  # noqa: E501
+    async def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> FundConfiguration:  # noqa: E501
         ...
 
     @overload
-    def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> FundConfiguration:  # noqa: E501
+    def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> FundConfiguration:  # noqa: E501
         ...
 
     @validate_arguments
-    def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundConfiguration, Awaitable[FundConfiguration]]:  # noqa: E501
+    def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundConfiguration, Awaitable[FundConfiguration]]:  # noqa: E501
         """[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
 
-        Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: displayName, description, dealingFilters, pnlFilters, backOutFilters.  # noqa: E501
+        Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, DealingFilters, PnlFilters, BackOutFilters, ExternalFeeFilters.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -801,7 +801,7 @@ class FundConfigurationApi:
 
         :param scope: The scope of the FundConfiguration. (required)
         :type scope: str
-        :param code: The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration. (required)
+        :param code: The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration. (required)
         :type code: str
         :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]
@@ -824,10 +824,10 @@ class FundConfigurationApi:
         return self.patch_fund_configuration_with_http_info(scope, code, operation, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def patch_fund_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def patch_fund_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
 
-        Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: displayName, description, dealingFilters, pnlFilters, backOutFilters.  # noqa: E501
+        Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, DealingFilters, PnlFilters, BackOutFilters, ExternalFeeFilters.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -836,7 +836,7 @@ class FundConfigurationApi:
 
         :param scope: The scope of the FundConfiguration. (required)
         :type scope: str
-        :param code: The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration. (required)
+        :param code: The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration. (required)
         :type code: str
         :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]

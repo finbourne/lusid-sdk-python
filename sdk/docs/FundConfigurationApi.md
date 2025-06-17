@@ -414,7 +414,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
 
-Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: displayName, description, dealingFilters, pnlFilters, backOutFilters.
+Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, DealingFilters, PnlFilters, BackOutFilters, ExternalFeeFilters.
 
 ### Example
 
@@ -462,7 +462,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundConfigurationApi)
     scope = 'scope_example' # str | The scope of the FundConfiguration.
-    code = 'code_example' # str | The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration.
+    code = 'code_example' # str | The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.
     operation = [{"value":[{"filterId":"SUB","filter":"GeneralLedgerAccountCode eq '3001'"},{"filterId":"RED","filter":"GeneralLedgerAccountCode eq '3002'"}],"path":"/dealingFilters","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
@@ -484,7 +484,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the FundConfiguration. | 
- **code** | **str**| The code of the FundConfiguration. Together with the               scope this uniquely identifies the FundConfiguration. | 
+ **code** | **str**| The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration. | 
  **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | 
 
 ### Return type

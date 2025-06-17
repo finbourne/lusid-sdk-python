@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
 
-Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
+Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
 
 ### Example
 
@@ -561,7 +561,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(AborConfigurationApi)
     scope = 'scope_example' # str | The scope of the AborConfiguration.
-    code = 'code_example' # str | The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration.
+    code = 'code_example' # str | The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.
     operation = [{"value":"new name","path":"/displayName","op":"add"},{"value":"newModule","path":"postingModuleCodes/-","op":"add"},{"path":"cleardownModuleCodes/1","op":"remove"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
@@ -583,7 +583,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the AborConfiguration. | 
- **code** | **str**| The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration. | 
+ **code** | **str**| The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. | 
  **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | 
 
 ### Return type

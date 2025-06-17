@@ -960,18 +960,18 @@ class AborConfigurationApi:
 
 
     @overload
-    async def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> AborConfiguration:  # noqa: E501
+    async def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> AborConfiguration:  # noqa: E501
         ...
 
     @overload
-    def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> AborConfiguration:  # noqa: E501
+    def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> AborConfiguration:  # noqa: E501
         ...
 
     @validate_arguments
-    def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[AborConfiguration, Awaitable[AborConfiguration]]:  # noqa: E501
+    def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[AborConfiguration, Awaitable[AborConfiguration]]:  # noqa: E501
         """[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.  # noqa: E501
 
-        Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.  # noqa: E501
+        Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -980,7 +980,7 @@ class AborConfigurationApi:
 
         :param scope: The scope of the AborConfiguration. (required)
         :type scope: str
-        :param code: The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration. (required)
+        :param code: The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
         :type code: str
         :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]
@@ -1003,10 +1003,10 @@ class AborConfigurationApi:
         return self.patch_abor_configuration_with_http_info(scope, code, operation, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def patch_abor_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def patch_abor_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.  # noqa: E501
 
-        Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.  # noqa: E501
+        Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1015,7 +1015,7 @@ class AborConfigurationApi:
 
         :param scope: The scope of the AborConfiguration. (required)
         :type scope: str
-        :param code: The code of the AborConfiguration.               Together with the scope this uniquely identifies the AborConfiguration. (required)
+        :param code: The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration. (required)
         :type code: str
         :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]

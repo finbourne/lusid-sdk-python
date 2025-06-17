@@ -73,6 +73,16 @@ class CalculateOrderDatesRequest(BaseModel):
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
             _dict['instrumentScope'] = None
 
+        # set to None if received_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.received_date is None and "received_date" in self.__fields_set__:
+            _dict['receivedDate'] = None
+
+        # set to None if price_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_date is None and "price_date" in self.__fields_set__:
+            _dict['priceDate'] = None
+
         # set to None if transaction_category (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_category is None and "transaction_category" in self.__fields_set__:

@@ -59,7 +59,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransferAgencyApi)
-    request_body = {"calculation1":{"instrumentIdentifierType":"LusidInstrumentId","instrumentIdentifier":"LUID_00000000","instrumentScope":"MyScope","receivedDate":"2024-10-01T00:00:00.0000000+00:00","priceDate":"0001-01-01T00:00:00.0000000+00:00","transactionCategory":"Subscription"}} # Dict[str, CalculateOrderDatesRequest] | The request containing the dates used for calculation
+    request_body = {"calculation1":{"instrumentIdentifierType":"LusidInstrumentId","instrumentIdentifier":"LUID_00000000","instrumentScope":"MyScope","receivedDate":"2024-10-01T00:00:00.0000000+00:00","transactionCategory":"Subscription"}} # Dict[str, CalculateOrderDatesRequest] | The request containing the dates used for calculation
 
     try:
         # uncomment the below to set overrides at the request level

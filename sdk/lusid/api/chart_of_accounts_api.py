@@ -4356,7 +4356,7 @@ class ChartOfAccountsApi:
     def patch_chart_of_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[ChartOfAccounts, Awaitable[ChartOfAccounts]]:  # noqa: E501
         """[EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.  # noqa: E501
 
-        Update fields on a Chart of Accounts. The behaviour is defined by the JSON Patch specification.  Currently supported fields are: DisplayName, Description.  # noqa: E501
+        Update fields on a Chart of Accounts.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4391,7 +4391,7 @@ class ChartOfAccountsApi:
     def patch_chart_of_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.  # noqa: E501
 
-        Update fields on a Chart of Accounts. The behaviour is defined by the JSON Patch specification.  Currently supported fields are: DisplayName, Description.  # noqa: E501
+        Update fields on a Chart of Accounts.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4531,7 +4531,7 @@ class ChartOfAccountsApi:
     def patch_cleardown_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
         """[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
 
-        Update fields on a Cleardown Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        Update fields on a Cleardown Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4568,7 +4568,7 @@ class ChartOfAccountsApi:
     def patch_cleardown_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
 
-        Update fields on a Cleardown Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        Update fields on a Cleardown Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4714,7 +4714,7 @@ class ChartOfAccountsApi:
     def patch_posting_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
         """[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module  # noqa: E501
 
-        Update fields on a Posting Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        Update fields on a Posting Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -4751,7 +4751,7 @@ class ChartOfAccountsApi:
     def patch_posting_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module  # noqa: E501
 
-        Update fields on a Posting Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        Update fields on a Posting Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

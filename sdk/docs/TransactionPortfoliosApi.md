@@ -3271,7 +3271,7 @@ Name | Type | Description  | Notes
 
 PatchPortfolioDetails: Patch portfolio details
 
-Create or update certain details for a particular transaction portfolio.  The behaviour is defined by the JSON Patch specification.                Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  Currently supported properties are: SubHoldingKeys, BaseCurrency, AmortisationMethod
+Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId.
 
 ### Example
 
@@ -3319,9 +3319,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.
     operation = [{"value":["Transaction/Client/AccountType"],"path":"/subHoldingKeys","op":"add"},{"value":"GBP","path":"/baseCurrency","op":"add"},{"value":"newscope","path":"/transactiontypescope","op":"add"},{"value":"TransactionDate","path":"/cashGainLossCalculationDate","op":"add"},{"value":["NewTransactionTemplateScope"],"path":"/instrumentEventConfiguration/transactionTemplateScopes","op":"add"},{"value":{"scope":"myRecipeScope","code":"myRecipeCode"},"path":"/instrumentEventConfiguration/recipeId","op":"add"}] # List[Operation] | The patch document.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3342,9 +3342,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. | 
  **operation** | [**List[Operation]**](Operation.md)| The patch document. | 
- **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. | [optional] 
 
 ### Return type
 
