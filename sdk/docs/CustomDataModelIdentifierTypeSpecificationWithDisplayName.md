@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The display name of the property definition. | [optional] 
 **identifier_key** | **str** | The identifier type that is required/allowed on the bound entity. | 
 **required** | **bool** | Whether identifier type is required or allowed. | [optional] 
+**identifier_type** | **str** | The name of the identifier type. | [optional] 
 
 ## Example
 

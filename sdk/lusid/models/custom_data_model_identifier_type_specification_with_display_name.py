@@ -28,7 +28,8 @@ class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the property definition.") 
     identifier_key:  StrictStr = Field(...,alias="identifierKey", description="The identifier type that is required/allowed on the bound entity.") 
     required: Optional[StrictBool] = Field(None, description="Whether identifier type is required or allowed.")
-    __properties = ["displayName", "identifierKey", "required"]
+    identifier_type:  Optional[StrictStr] = Field(None,alias="identifierType", description="The name of the identifier type.") 
+    __properties = ["displayName", "identifierKey", "required", "identifierType"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +68,11 @@ class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
         if self.display_name is None and "display_name" in self.__fields_set__:
             _dict['displayName'] = None
 
+        # set to None if identifier_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.identifier_type is None and "identifier_type" in self.__fields_set__:
+            _dict['identifierType'] = None
+
         return _dict
 
     @classmethod
@@ -81,6 +87,7 @@ class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
         _obj = CustomDataModelIdentifierTypeSpecificationWithDisplayName.parse_obj({
             "display_name": obj.get("displayName"),
             "identifier_key": obj.get("identifierKey"),
-            "required": obj.get("required")
+            "required": obj.get("required"),
+            "identifier_type": obj.get("identifierType")
         })
         return _obj
