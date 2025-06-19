@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.custom_data_model_criteria import CustomDataModelCriteria
 from lusid.models.data_model_summary import DataModelSummary
+from lusid.models.version import Version
 
 class CustomDataModel(BaseModel):
     """
@@ -31,7 +32,8 @@ class CustomDataModel(BaseModel):
     inherited: Optional[CustomDataModelCriteria] = None
     incremental: Optional[CustomDataModelCriteria] = None
     applied: Optional[CustomDataModelCriteria] = None
-    __properties = ["dataModelSummary", "inherited", "incremental", "applied"]
+    version: Optional[Version] = None
+    __properties = ["dataModelSummary", "inherited", "incremental", "applied", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +79,9 @@ class CustomDataModel(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of applied
         if self.applied:
             _dict['applied'] = self.applied.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         return _dict
 
     @classmethod
@@ -92,6 +97,7 @@ class CustomDataModel(BaseModel):
             "data_model_summary": DataModelSummary.from_dict(obj.get("dataModelSummary")) if obj.get("dataModelSummary") is not None else None,
             "inherited": CustomDataModelCriteria.from_dict(obj.get("inherited")) if obj.get("inherited") is not None else None,
             "incremental": CustomDataModelCriteria.from_dict(obj.get("incremental")) if obj.get("incremental") is not None else None,
-            "applied": CustomDataModelCriteria.from_dict(obj.get("applied")) if obj.get("applied") is not None else None
+            "applied": CustomDataModelCriteria.from_dict(obj.get("applied")) if obj.get("applied") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj

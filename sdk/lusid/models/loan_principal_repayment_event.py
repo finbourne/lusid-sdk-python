@@ -30,10 +30,11 @@ class LoanPrincipalRepaymentEvent(InstrumentEvent):
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Date that the Principal is due to be paid.")
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the repayment.") 
     lapse_elections: Optional[conlist(LapseElection)] = Field(None, alias="lapseElections", description="Election for controlling whether the Principal is paid automatically or not.  Exactly one election must be provided.")
-    fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Fraction of the principal balance to be repaid.  Must be between 0 and 1, inclusive.  Defaults to 1 if not set.")
+    fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Fraction of the outstanding settled principal balance to be repaid. Must be between 0 and 1, inclusive.  Defaults to 1 if not set. Ignored if the field Amount is set to a value different than zero.  Note that if there is a repayment on an unsettled trade and the repayment is specified as a fraction,  this repayment will not be applied to the unsettled position, as the fraction is always applied to  the settled balance only.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Amount to be repaid (independent of the fraction).  This field is not used at all if not set or set to 0, in this case the fraction field will be used instead.  Otherwise, the fraction field is ignored.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "paymentDate", "currency", "lapseElections", "fraction"]
+    __properties = ["instrumentEventType", "paymentDate", "currency", "lapseElections", "fraction", "amount"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -144,6 +145,16 @@ class LoanPrincipalRepaymentEvent(InstrumentEvent):
         if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
             _dict['lapseElections'] = None
 
+        # set to None if fraction (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fraction is None and "fraction" in self.__fields_set__:
+            _dict['fraction'] = None
+
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
+
         return _dict
 
     @classmethod
@@ -160,7 +171,8 @@ class LoanPrincipalRepaymentEvent(InstrumentEvent):
             "payment_date": obj.get("paymentDate"),
             "currency": obj.get("currency"),
             "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None,
-            "fraction": obj.get("fraction")
+            "fraction": obj.get("fraction"),
+            "amount": obj.get("amount")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
