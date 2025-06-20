@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
+from lusid.models.post_close_activity import PostCloseActivity
 from lusid.models.version import Version
 
 class ClosedPeriod(BaseModel):
@@ -34,9 +35,10 @@ class ClosedPeriod(BaseModel):
     as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt closed datetime for the Closed Period")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
     version: Optional[Version] = None
+    post_close_activities: Optional[conlist(PostCloseActivity)] = Field(None, alias="postCloseActivities", description="All the post close activities for the closed period.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["closedPeriodId", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "href", "links"]
+    __properties = ["closedPeriodId", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "href", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +82,13 @@ class ClosedPeriod(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in post_close_activities (list)
+        _items = []
+        if self.post_close_activities:
+            for _item in self.post_close_activities:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['postCloseActivities'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -96,6 +105,11 @@ class ClosedPeriod(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if post_close_activities (nullable) is None
+        # and __fields_set__ contains the field
+        if self.post_close_activities is None and "post_close_activities" in self.__fields_set__:
+            _dict['postCloseActivities'] = None
 
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
@@ -130,6 +144,7 @@ class ClosedPeriod(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "post_close_activities": [PostCloseActivity.from_dict(_item) for _item in obj.get("postCloseActivities")] if obj.get("postCloseActivities") is not None else None,
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

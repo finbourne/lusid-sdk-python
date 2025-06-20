@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Closed Periods properties. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**post_close_activities** | [**List[PostCloseActivity]**](PostCloseActivity.md) | All the post close activities for the closed period. | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 

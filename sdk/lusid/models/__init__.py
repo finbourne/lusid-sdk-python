@@ -800,6 +800,8 @@ from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_type import PortfolioType
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
+from lusid.models.post_close_activities_request import PostCloseActivitiesRequest
+from lusid.models.post_close_activity import PostCloseActivity
 from lusid.models.posting_module_details import PostingModuleDetails
 from lusid.models.posting_module_request import PostingModuleRequest
 from lusid.models.posting_module_response import PostingModuleResponse
@@ -2034,6 +2036,8 @@ __all__ = [
     "PortfolioType",
     "PortfolioWithoutHref",
     "PortfoliosReconciliationRequest",
+    "PostCloseActivitiesRequest",
+    "PostCloseActivity",
     "PostingModuleDetails",
     "PostingModuleRequest",
     "PostingModuleResponse",
