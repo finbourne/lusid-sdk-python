@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**run_id_type** | **str** | Type of the reconciliation run, manual or automatic (via the workflow). \&quot;Manual\&quot; | \&quot;WorkflowServiceTaskId\&quot; | 
-**run_id_value** | **str** | Reconciliation run identifier: a manually-provided key or taskId. | 
+**instance_id_type** | **str** | Type of the reconciliation run, manual or automatic (via the workflow). \&quot;Manual\&quot; | \&quot;WorkflowServiceTaskId\&quot; | 
+**instance_id_value** | **str** | Reconciliation run identifier: a manually-provided key or taskId. | 
 
 ## Example
 

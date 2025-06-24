@@ -25,9 +25,9 @@ class GroupReconciliationInstanceId(BaseModel):
     """
     GroupReconciliationInstanceId
     """
-    run_id_type:  StrictStr = Field(...,alias="runIdType", description="Type of the reconciliation run, manual or automatic (via the workflow). \"Manual\" | \"WorkflowServiceTaskId\"") 
-    run_id_value:  StrictStr = Field(...,alias="runIdValue", description="Reconciliation run identifier: a manually-provided key or taskId.") 
-    __properties = ["runIdType", "runIdValue"]
+    instance_id_type:  StrictStr = Field(...,alias="instanceIdType", description="Type of the reconciliation run, manual or automatic (via the workflow). \"Manual\" | \"WorkflowServiceTaskId\"") 
+    instance_id_value:  StrictStr = Field(...,alias="instanceIdValue", description="Reconciliation run identifier: a manually-provided key or taskId.") 
+    __properties = ["instanceIdType", "instanceIdValue"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,7 +73,7 @@ class GroupReconciliationInstanceId(BaseModel):
             return GroupReconciliationInstanceId.parse_obj(obj)
 
         _obj = GroupReconciliationInstanceId.parse_obj({
-            "run_id_type": obj.get("runIdType"),
-            "run_id_value": obj.get("runIdValue")
+            "instance_id_type": obj.get("instanceIdType"),
+            "instance_id_value": obj.get("instanceIdValue")
         })
         return _obj

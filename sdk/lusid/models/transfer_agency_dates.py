@@ -26,7 +26,7 @@ class TransferAgencyDates(BaseModel):
     """
     TransferAgencyDates
     """
-    price_date: Optional[datetime] = Field(None, alias="priceDate", description="The date at which the fund is priced, for the order received on ReceivedDate. Can be passed into the request instead of the ReceivedDate to calculate the TransactionDate and ExpectedPaymentDate. If both the received date and price date are given, the price date is used.")
+    price_date: Optional[datetime] = Field(None, alias="priceDate", description="The date at which the fund is priced, for the order received on ReceivedDate. Can be passed into the request instead of the ReceivedDate to calculate the TransactionDate and ExpectedPaymentDate. If both the received date and price date are given, a failure is returned.")
     transaction_date: Optional[datetime] = Field(None, alias="transactionDate", description="The date at which the transaction into or out of the fund is made.")
     expected_payment_date: Optional[datetime] = Field(None, alias="expectedPaymentDate", description="The date by which the cash is expected to be paid to or from the fund.")
     links: Optional[conlist(Link)] = None
