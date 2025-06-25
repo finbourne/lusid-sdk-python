@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 **link_partial_matches** | [**Link**](Link.md) |  | 
 **count_break** | **int** | The number of comparison results of resultType \&quot;Break\&quot; with this instanceId and reconciliationType | 
 **link_breaks** | [**Link**](Link.md) |  | 
-**count_not_found** | **int** | The number of comparison results of resultType \&quot;NotFound\&quot; with this instanceId and reconciliationType | 
-**link_not_found** | [**Link**](Link.md) |  | 
+**count_not_found** | **int** | The number of comparison results of resultType \&quot;Resolved\&quot; with this instanceId and reconciliationType | [optional] [readonly] 
+**link_not_found** | [**Link**](Link.md) |  | [optional] 
+**count_resolved** | **int** | The number of comparison results of resultType \&quot;Resolved\&quot; with this instanceId and reconciliationType | [optional] 
+**link_resolved** | [**Link**](Link.md) |  | [optional] 
 
 ## Example
 

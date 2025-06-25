@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt 
 from lusid.models.link import Link
 
@@ -32,9 +32,11 @@ class GroupReconciliationResultTypes(BaseModel):
     link_partial_matches: Link = Field(..., alias="linkPartialMatches")
     count_break: StrictInt = Field(..., alias="countBreak", description="The number of comparison results of resultType \"Break\" with this instanceId and reconciliationType")
     link_breaks: Link = Field(..., alias="linkBreaks")
-    count_not_found: StrictInt = Field(..., alias="countNotFound", description="The number of comparison results of resultType \"NotFound\" with this instanceId and reconciliationType")
-    link_not_found: Link = Field(..., alias="linkNotFound")
-    __properties = ["countMatch", "linkMatches", "countPartialMatch", "linkPartialMatches", "countBreak", "linkBreaks", "countNotFound", "linkNotFound"]
+    count_not_found: Optional[StrictInt] = Field(None, alias="countNotFound", description="The number of comparison results of resultType \"Resolved\" with this instanceId and reconciliationType")
+    link_not_found: Optional[Link] = Field(None, alias="linkNotFound")
+    count_resolved: Optional[StrictInt] = Field(None, alias="countResolved", description="The number of comparison results of resultType \"Resolved\" with this instanceId and reconciliationType")
+    link_resolved: Optional[Link] = Field(None, alias="linkResolved")
+    __properties = ["countMatch", "linkMatches", "countPartialMatch", "linkPartialMatches", "countBreak", "linkBreaks", "countNotFound", "linkNotFound", "countResolved", "linkResolved"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +68,7 @@ class GroupReconciliationResultTypes(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "count_not_found",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of link_matches
@@ -80,6 +83,9 @@ class GroupReconciliationResultTypes(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of link_not_found
         if self.link_not_found:
             _dict['linkNotFound'] = self.link_not_found.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of link_resolved
+        if self.link_resolved:
+            _dict['linkResolved'] = self.link_resolved.to_dict()
         return _dict
 
     @classmethod
@@ -99,6 +105,8 @@ class GroupReconciliationResultTypes(BaseModel):
             "count_break": obj.get("countBreak"),
             "link_breaks": Link.from_dict(obj.get("linkBreaks")) if obj.get("linkBreaks") is not None else None,
             "count_not_found": obj.get("countNotFound"),
-            "link_not_found": Link.from_dict(obj.get("linkNotFound")) if obj.get("linkNotFound") is not None else None
+            "link_not_found": Link.from_dict(obj.get("linkNotFound")) if obj.get("linkNotFound") is not None else None,
+            "count_resolved": obj.get("countResolved"),
+            "link_resolved": Link.from_dict(obj.get("linkResolved")) if obj.get("linkResolved") is not None else None
         })
         return _obj
