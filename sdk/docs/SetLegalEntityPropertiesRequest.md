@@ -1,28 +1,20 @@
 # SetLegalEntityPropertiesRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Properties to set for a Legal Entity. All time-variant properties must have same EffectiveFrom date. Properties not included in the request will not be amended. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.set_legal_entity_properties_request import SetLegalEntityPropertiesRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SetLegalEntityPropertiesRequest from a JSON string
-set_legal_entity_properties_request_instance = SetLegalEntityPropertiesRequest.from_json(json)
-# print the JSON string representation of the object
-print SetLegalEntityPropertiesRequest.to_json()
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+set_legal_entity_properties_request_instance = SetLegalEntityPropertiesRequest(properties=properties)
 
-# convert the object into a dict
-set_legal_entity_properties_request_dict = set_legal_entity_properties_request_instance.to_dict()
-# create an instance of SetLegalEntityPropertiesRequest from a dict
-set_legal_entity_properties_request_form_dict = set_legal_entity_properties_request.from_dict(set_legal_entity_properties_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

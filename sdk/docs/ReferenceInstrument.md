@@ -1,7 +1,6 @@
 # ReferenceInstrument
 
 LUSID representation of a reference to another instrument that has already been loaded (e.g. a lookthrough to a portfolio).
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **instrument_id_type** | **str** | The type of the instrument id e.g. LusidInstrument Id | 
 **scope** | **str** | Scope for the instrument (optional) | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.reference_instrument import ReferenceInstrument
+from typing import Any, Dict
+from pydantic.v1 import Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReferenceInstrument from a JSON string
-reference_instrument_instance = ReferenceInstrument.from_json(json)
-# print the JSON string representation of the object
-print ReferenceInstrument.to_json()
+instrument_id: StrictStr = "example_instrument_id"
+instrument_id_type: StrictStr = "example_instrument_id_type"
+scope: StrictStr = "example_scope"
+instrument_type: StrictStr = "example_instrument_type"
+reference_instrument_instance = ReferenceInstrument(instrument_id=instrument_id, instrument_id_type=instrument_id_type, scope=scope, instrument_type=instrument_type)
 
-# convert the object into a dict
-reference_instrument_dict = reference_instrument_instance.to_dict()
-# create an instance of ReferenceInstrument from a dict
-reference_instrument_form_dict = reference_instrument.from_dict(reference_instrument_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

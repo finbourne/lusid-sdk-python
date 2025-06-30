@@ -1,6 +1,5 @@
 # AccessMetadataOperation
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **path** | **str** |  | 
 **op** | **str** | The available values are: add, remove | 
 **var_from** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.access_metadata_operation import AccessMetadataOperation
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AccessMetadataOperation from a JSON string
-access_metadata_operation_instance = AccessMetadataOperation.from_json(json)
-# print the JSON string representation of the object
-print AccessMetadataOperation.to_json()
+value: conlist(AccessMetadataValue, min_items=1) = Field(...)
+path: StrictStr = "example_path"
+op: StrictStr = "example_op"
+var_from: Optional[StrictStr] = "example_var_from"
+access_metadata_operation_instance = AccessMetadataOperation(value=value, path=path, op=op, var_from=var_from)
 
-# convert the object into a dict
-access_metadata_operation_dict = access_metadata_operation_instance.to_dict()
-# create an instance of AccessMetadataOperation from a dict
-access_metadata_operation_form_dict = access_metadata_operation.from_dict(access_metadata_operation_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

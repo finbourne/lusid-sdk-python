@@ -1,7 +1,6 @@
 # PropertyDefinition
 
 A list of property definitions.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -27,24 +26,40 @@ Name | Type | Description | Notes
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.property_definition import PropertyDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PropertyDefinition from a JSON string
-property_definition_instance = PropertyDefinition.from_json(json)
-# print the JSON string representation of the object
-print PropertyDefinition.to_json()
+href: Optional[StrictStr] = "example_href"
+key: Optional[StrictStr] = "example_key"
+value_type: Optional[StrictStr] = "example_value_type"
+display_name: Optional[StrictStr] = "example_display_name"
+data_type_id: Optional[ResourceId] = # Replace with your value
+type: Optional[StrictStr] = "example_type"
+unit_schema: Optional[StrictStr] = "example_unit_schema"
+domain: Optional[StrictStr] = "example_domain"
+scope: Optional[StrictStr] = "example_scope"
+code: Optional[StrictStr] = "example_code"
+value_required: Optional[StrictBool] = # Replace with your value
+value_required:Optional[StrictBool] = None
+life_time: Optional[StrictStr] = "example_life_time"
+constraint_style: Optional[StrictStr] = "example_constraint_style"
+property_definition_type: Optional[StrictStr] = "example_property_definition_type"
+property_description: Optional[StrictStr] = "example_property_description"
+derivation_formula: Optional[StrictStr] = "example_derivation_formula"
+collection_type: Optional[StrictStr] = "example_collection_type"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+is_filterable: Optional[StrictBool] = # Replace with your value
+is_filterable:Optional[StrictBool] = None
+links: Optional[conlist(Link)] = None
+property_definition_instance = PropertyDefinition(href=href, key=key, value_type=value_type, display_name=display_name, data_type_id=data_type_id, type=type, unit_schema=unit_schema, domain=domain, scope=scope, code=code, value_required=value_required, life_time=life_time, constraint_style=constraint_style, property_definition_type=property_definition_type, property_description=property_description, derivation_formula=derivation_formula, collection_type=collection_type, properties=properties, version=version, staged_modifications=staged_modifications, is_filterable=is_filterable, links=links)
 
-# convert the object into a dict
-property_definition_dict = property_definition_instance.to_dict()
-# create an instance of PropertyDefinition from a dict
-property_definition_form_dict = property_definition.from_dict(property_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

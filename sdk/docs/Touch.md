@@ -1,7 +1,6 @@
 # Touch
 
 Touch class for exotic FxOption
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **level** | **float** | Trigger level, which the underlying should (or should not) cross/touch. | 
 **monitoring** | **str** | Supported string (enumeration) values are: [European, Bermudan, American]. | [optional] 
 **type** | **str** | Supported string (enumeration) values are: [Touch, Notouch]. | 
-
 ## Example
 
 ```python
 from lusid.models.touch import Touch
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Touch from a JSON string
-touch_instance = Touch.from_json(json)
-# print the JSON string representation of the object
-print Touch.to_json()
+direction: StrictStr = "example_direction"
+level: Union[StrictFloat, StrictInt] = # Replace with your value
+monitoring: Optional[StrictStr] = "example_monitoring"
+type: StrictStr = "example_type"
+touch_instance = Touch(direction=direction, level=level, monitoring=monitoring, type=type)
 
-# convert the object into a dict
-touch_dict = touch_instance.to_dict()
-# create an instance of Touch from a dict
-touch_form_dict = touch.from_dict(touch_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

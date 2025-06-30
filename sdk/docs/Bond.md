@@ -1,7 +1,6 @@
 # Bond
 
 LUSID representation of a Vanilla Fixed Rate Bond.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -21,24 +20,33 @@ Name | Type | Description | Notes
 **original_issue_price** | **float** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.bond import Bond
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+flow_conventions: FlowConventions = # Replace with your value
+principal: Union[StrictFloat, StrictInt] = # Replace with your value
+coupon_rate: Union[StrictFloat, StrictInt] = # Replace with your value
+identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+ex_dividend_days: Optional[StrictInt] = # Replace with your value
+ex_dividend_days: Optional[StrictInt] = None
+initial_coupon_date: Optional[datetime] = # Replace with your value
+first_coupon_pay_date: Optional[datetime] = # Replace with your value
+calculation_type: Optional[StrictStr] = "example_calculation_type"
+rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
+ex_dividend_configuration: Optional[ExDividendConfiguration] = # Replace with your value
+original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+trading_conventions: Optional[TradingConventions] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+bond_instance = Bond(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, flow_conventions=flow_conventions, principal=principal, coupon_rate=coupon_rate, identifiers=identifiers, ex_dividend_days=ex_dividend_days, initial_coupon_date=initial_coupon_date, first_coupon_pay_date=first_coupon_pay_date, calculation_type=calculation_type, rounding_conventions=rounding_conventions, ex_dividend_configuration=ex_dividend_configuration, original_issue_price=original_issue_price, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Bond from a JSON string
-bond_instance = Bond.from_json(json)
-# print the JSON string representation of the object
-print Bond.to_json()
-
-# convert the object into a dict
-bond_dict = bond_instance.to_dict()
-# create an instance of Bond from a dict
-bond_form_dict = bond.from_dict(bond_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

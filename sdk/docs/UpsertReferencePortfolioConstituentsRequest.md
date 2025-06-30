@@ -1,6 +1,5 @@
 # UpsertReferencePortfolioConstituentsRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,22 @@ Name | Type | Description | Notes
 **period_type** | **str** | The available values are: Daily, Weekly, Monthly, Quarterly, Annually | [optional] 
 **period_count** | **int** |  | [optional] 
 **constituents** | [**List[ReferencePortfolioConstituentRequest]**](ReferencePortfolioConstituentRequest.md) | Set of constituents (instrument/weight pairings) | 
-
 ## Example
 
 ```python
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertReferencePortfolioConstituentsRequest from a JSON string
-upsert_reference_portfolio_constituents_request_instance = UpsertReferencePortfolioConstituentsRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertReferencePortfolioConstituentsRequest.to_json()
+effective_from: StrictStr = "example_effective_from"
+weight_type: StrictStr = "example_weight_type"
+period_type: Optional[StrictStr] = "example_period_type"
+period_count: Optional[StrictInt] = # Replace with your value
+period_count: Optional[StrictInt] = None
+constituents: conlist(ReferencePortfolioConstituentRequest) = # Replace with your value
+upsert_reference_portfolio_constituents_request_instance = UpsertReferencePortfolioConstituentsRequest(effective_from=effective_from, weight_type=weight_type, period_type=period_type, period_count=period_count, constituents=constituents)
 
-# convert the object into a dict
-upsert_reference_portfolio_constituents_request_dict = upsert_reference_portfolio_constituents_request_instance.to_dict()
-# create an instance of UpsertReferencePortfolioConstituentsRequest from a dict
-upsert_reference_portfolio_constituents_request_form_dict = upsert_reference_portfolio_constituents_request.from_dict(upsert_reference_portfolio_constituents_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

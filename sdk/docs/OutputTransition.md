@@ -1,7 +1,6 @@
 # OutputTransition
 
 A 'transition' within a corporate action, representing an output transition.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **lusid_instrument_id** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the instrument identifiers | [optional] [readonly] 
 **instrument_scope** | **str** | The scope in which the instrument lies. | [optional] [readonly] 
 **rounding** | [**RoundingConfiguration**](RoundingConfiguration.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.output_transition import OutputTransition
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of OutputTransition from a JSON string
-output_transition_instance = OutputTransition.from_json(json)
-# print the JSON string representation of the object
-print OutputTransition.to_json()
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+units_factor: Union[StrictFloat, StrictInt] = # Replace with your value
+cost_factor: Union[StrictFloat, StrictInt] = # Replace with your value
+lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+rounding: Optional[RoundingConfiguration] = None
+output_transition_instance = OutputTransition(instrument_identifiers=instrument_identifiers, units_factor=units_factor, cost_factor=cost_factor, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, rounding=rounding)
 
-# convert the object into a dict
-output_transition_dict = output_transition_instance.to_dict()
-# create an instance of OutputTransition from a dict
-output_transition_form_dict = output_transition.from_dict(output_transition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

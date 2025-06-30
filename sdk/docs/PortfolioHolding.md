@@ -1,7 +1,6 @@
 # PortfolioHolding
 
 A list of holdings.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -25,24 +24,36 @@ Name | Type | Description | Notes
 **variation_margin_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **settlement_schedule** | [**List[SettlementSchedule]**](SettlementSchedule.md) | Where no. of days ahead has been specified, future dated settlements will be captured here. | [optional] 
 **current_face** | **float** | Current face value of the holding. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_holding import PortfolioHolding
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioHolding from a JSON string
-portfolio_holding_instance = PortfolioHolding.from_json(json)
-# print the JSON string representation of the object
-print PortfolioHolding.to_json()
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+instrument_uid: StrictStr = "example_instrument_uid"
+sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+holding_type: StrictStr = "example_holding_type"
+units: Union[StrictFloat, StrictInt] = # Replace with your value
+settled_units: Union[StrictFloat, StrictInt] = # Replace with your value
+cost: CurrencyAndAmount = # Replace with your value
+cost_portfolio_ccy: CurrencyAndAmount = # Replace with your value
+transaction: Optional[Transaction] = None
+currency: Optional[StrictStr] = "example_currency"
+holding_type_name: Optional[StrictStr] = "example_holding_type_name"
+holding_id: Optional[StrictInt] = # Replace with your value
+notional_cost: Optional[CurrencyAndAmount] = # Replace with your value
+amortised_cost: Optional[CurrencyAndAmount] = # Replace with your value
+amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = # Replace with your value
+variation_margin: Optional[CurrencyAndAmount] = # Replace with your value
+variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = # Replace with your value
+settlement_schedule: Optional[conlist(SettlementSchedule)] = # Replace with your value
+current_face: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+portfolio_holding_instance = PortfolioHolding(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, holding_type=holding_type, units=units, settled_units=settled_units, cost=cost, cost_portfolio_ccy=cost_portfolio_ccy, transaction=transaction, currency=currency, holding_type_name=holding_type_name, holding_id=holding_id, notional_cost=notional_cost, amortised_cost=amortised_cost, amortised_cost_portfolio_ccy=amortised_cost_portfolio_ccy, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy, settlement_schedule=settlement_schedule, current_face=current_face)
 
-# convert the object into a dict
-portfolio_holding_dict = portfolio_holding_instance.to_dict()
-# create an instance of PortfolioHolding from a dict
-portfolio_holding_form_dict = portfolio_holding.from_dict(portfolio_holding_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

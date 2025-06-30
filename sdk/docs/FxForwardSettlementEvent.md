@@ -1,7 +1,6 @@
 # FxForwardSettlementEvent
 
 Settlement for FX Forward, including NDF and deliverable.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,30 @@ Name | Type | Description | Notes
 **domestic_to_settlement_rate** | **float** | Domestic currency to settlement currency FX rate  Not required, only used to override quotes. | [optional] 
 **foreign_to_settlement_rate** | **float** | Foreign currency to settlement currency FX rate  Not required, only used to override quotes. | [optional] [readonly] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent | 
-
 ## Example
 
 ```python
 from lusid.models.fx_forward_settlement_event import FxForwardSettlementEvent
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, validator
+from datetime import datetime
+maturity_date: Optional[datetime] = # Replace with your value
+dom_amount_per_unit: Union[StrictFloat, StrictInt] = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+fgn_amount_per_unit: Union[StrictFloat, StrictInt] = # Replace with your value
+fgn_ccy: StrictStr = "example_fgn_ccy"
+is_ndf: StrictBool = # Replace with your value
+is_ndf:StrictBool = True
+fixing_date: Optional[datetime] = # Replace with your value
+settlement_ccy: Optional[StrictStr] = "example_settlement_ccy"
+cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+domestic_to_foreign_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+domestic_to_settlement_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+foreign_to_settlement_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+instrument_event_type: StrictStr = "example_instrument_event_type"
+fx_forward_settlement_event_instance = FxForwardSettlementEvent(maturity_date=maturity_date, dom_amount_per_unit=dom_amount_per_unit, dom_ccy=dom_ccy, fgn_amount_per_unit=fgn_amount_per_unit, fgn_ccy=fgn_ccy, is_ndf=is_ndf, fixing_date=fixing_date, settlement_ccy=settlement_ccy, cash_flow_per_unit=cash_flow_per_unit, domestic_to_foreign_rate=domestic_to_foreign_rate, domestic_to_settlement_rate=domestic_to_settlement_rate, foreign_to_settlement_rate=foreign_to_settlement_rate, instrument_event_type=instrument_event_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FxForwardSettlementEvent from a JSON string
-fx_forward_settlement_event_instance = FxForwardSettlementEvent.from_json(json)
-# print the JSON string representation of the object
-print FxForwardSettlementEvent.to_json()
-
-# convert the object into a dict
-fx_forward_settlement_event_dict = fx_forward_settlement_event_instance.to_dict()
-# create an instance of FxForwardSettlementEvent from a dict
-fx_forward_settlement_event_form_dict = fx_forward_settlement_event.from_dict(fx_forward_settlement_event_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

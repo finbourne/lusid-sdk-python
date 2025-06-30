@@ -1,6 +1,5 @@
 # RelationDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **life_time** | **str** | Describes how the relations can change over time, allowed values are \&quot;Perpetual\&quot; and \&quot;TimeVariant\&quot; | [optional] 
 **constraint_style** | **str** | Describes the uniqueness and cardinality for relations with a specific source entity object and relations under this definition. Allowed values are \&quot;Property\&quot; and \&quot;Collection\&quot;, defaults to \&quot;Collection\&quot; if not specified. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.relation_definition import RelationDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of RelationDefinition from a JSON string
-relation_definition_instance = RelationDefinition.from_json(json)
-# print the JSON string representation of the object
-print RelationDefinition.to_json()
+version: Optional[Version] = None
+relation_definition_id: Optional[ResourceId] = # Replace with your value
+source_entity_domain: Optional[StrictStr] = "example_source_entity_domain"
+target_entity_domain: Optional[StrictStr] = "example_target_entity_domain"
+display_name: Optional[StrictStr] = "example_display_name"
+outward_description: Optional[StrictStr] = "example_outward_description"
+inward_description: Optional[StrictStr] = "example_inward_description"
+life_time: Optional[StrictStr] = "example_life_time"
+constraint_style: Optional[StrictStr] = "example_constraint_style"
+links: Optional[conlist(Link)] = None
+relation_definition_instance = RelationDefinition(version=version, relation_definition_id=relation_definition_id, source_entity_domain=source_entity_domain, target_entity_domain=target_entity_domain, display_name=display_name, outward_description=outward_description, inward_description=inward_description, life_time=life_time, constraint_style=constraint_style, links=links)
 
-# convert the object into a dict
-relation_definition_dict = relation_definition_instance.to_dict()
-# create an instance of RelationDefinition from a dict
-relation_definition_form_dict = relation_definition.from_dict(relation_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

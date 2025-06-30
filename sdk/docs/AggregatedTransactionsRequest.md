@@ -1,6 +1,5 @@
 # AggregatedTransactionsRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **group_by** | **List[str]** |  | [optional] 
 **filters** | [**List[PropertyFilter]**](PropertyFilter.md) |  | [optional] 
 **sort** | [**List[OrderBySpec]**](OrderBySpec.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.aggregated_transactions_request import AggregatedTransactionsRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from datetime import datetime
+from_transaction_date: datetime = # Replace with your value
+to_transaction_date: datetime = # Replace with your value
+portfolio_id: Optional[ResourceId] = # Replace with your value
+portfolio_entity_ids: Optional[conlist(PortfolioEntityId)] = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+metrics: conlist(AggregateSpec) = # Replace with your value
+group_by: Optional[conlist(StrictStr)] = # Replace with your value
+filters: Optional[conlist(PropertyFilter)] = None
+sort: Optional[conlist(OrderBySpec)] = None
+aggregated_transactions_request_instance = AggregatedTransactionsRequest(from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, portfolio_id=portfolio_id, portfolio_entity_ids=portfolio_entity_ids, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AggregatedTransactionsRequest from a JSON string
-aggregated_transactions_request_instance = AggregatedTransactionsRequest.from_json(json)
-# print the JSON string representation of the object
-print AggregatedTransactionsRequest.to_json()
-
-# convert the object into a dict
-aggregated_transactions_request_dict = aggregated_transactions_request_instance.to_dict()
-# create an instance of AggregatedTransactionsRequest from a dict
-aggregated_transactions_request_form_dict = aggregated_transactions_request.from_dict(aggregated_transactions_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

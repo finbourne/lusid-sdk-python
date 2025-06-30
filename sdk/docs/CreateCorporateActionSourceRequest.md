@@ -1,6 +1,5 @@
 # CreateCorporateActionSourceRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the corporate action source | 
 **description** | **str** | The description of the corporate action source | [optional] 
 **instrument_scopes** | **List[str]** | The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateCorporateActionSourceRequest from a JSON string
-create_corporate_action_source_request_instance = CreateCorporateActionSourceRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateCorporateActionSourceRequest.to_json()
+scope: StrictStr = "example_scope"
+code: StrictStr = "example_code"
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.")
+create_corporate_action_source_request_instance = CreateCorporateActionSourceRequest(scope=scope, code=code, display_name=display_name, description=description, instrument_scopes=instrument_scopes)
 
-# convert the object into a dict
-create_corporate_action_source_request_dict = create_corporate_action_source_request_instance.to_dict()
-# create an instance of CreateCorporateActionSourceRequest from a dict
-create_corporate_action_source_request_form_dict = create_corporate_action_source_request.from_dict(create_corporate_action_source_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,29 +1,21 @@
 # UpsertRecipeRequest
 
 A recipe that is to be stored in the recipe structured data store.  Only one of these must be present.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **configuration_recipe** | [**ConfigurationRecipe**](ConfigurationRecipe.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.upsert_recipe_request import UpsertRecipeRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertRecipeRequest from a JSON string
-upsert_recipe_request_instance = UpsertRecipeRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertRecipeRequest.to_json()
+configuration_recipe: Optional[ConfigurationRecipe] = # Replace with your value
+upsert_recipe_request_instance = UpsertRecipeRequest(configuration_recipe=configuration_recipe)
 
-# convert the object into a dict
-upsert_recipe_request_dict = upsert_recipe_request_instance.to_dict()
-# create an instance of UpsertRecipeRequest from a dict
-upsert_recipe_request_form_dict = upsert_recipe_request.from_dict(upsert_recipe_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

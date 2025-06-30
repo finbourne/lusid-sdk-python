@@ -1,7 +1,6 @@
 # ReconciliationBreak
 
 A reconciliation break
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,26 @@ Name | Type | Description | Notes
 **right_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **difference_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **instrument_properties** | [**List[ModelProperty]**](ModelProperty.md) | Additional features relating to the instrument | 
-
 ## Example
 
 ```python
 from lusid.models.reconciliation_break import ReconciliationBreak
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReconciliationBreak from a JSON string
-reconciliation_break_instance = ReconciliationBreak.from_json(json)
-# print the JSON string representation of the object
-print ReconciliationBreak.to_json()
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+instrument_uid: StrictStr = "example_instrument_uid"
+sub_holding_keys: Dict[str, PerpetualProperty] = # Replace with your value
+left_units: Union[StrictFloat, StrictInt] = # Replace with your value
+right_units: Union[StrictFloat, StrictInt] = # Replace with your value
+difference_units: Union[StrictFloat, StrictInt] = # Replace with your value
+left_cost: CurrencyAndAmount = # Replace with your value
+right_cost: CurrencyAndAmount = # Replace with your value
+difference_cost: CurrencyAndAmount = # Replace with your value
+instrument_properties: conlist(ModelProperty) = # Replace with your value
+reconciliation_break_instance = ReconciliationBreak(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, left_units=left_units, right_units=right_units, difference_units=difference_units, left_cost=left_cost, right_cost=right_cost, difference_cost=difference_cost, instrument_properties=instrument_properties)
 
-# convert the object into a dict
-reconciliation_break_dict = reconciliation_break_instance.to_dict()
-# create an instance of ReconciliationBreak from a dict
-reconciliation_break_form_dict = reconciliation_break.from_dict(reconciliation_break_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

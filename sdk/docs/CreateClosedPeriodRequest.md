@@ -1,6 +1,5 @@
 # CreateClosedPeriodRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **effective_end** | **datetime** | The effective end of the Closed Period | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Closed Periods properties. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
 **as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_closed_period_request import CreateClosedPeriodRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr
+from datetime import datetime
+closed_period_id: Optional[StrictStr] = "example_closed_period_id"
+effective_end: Optional[datetime] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+as_at_closed: Optional[datetime] = # Replace with your value
+create_closed_period_request_instance = CreateClosedPeriodRequest(closed_period_id=closed_period_id, effective_end=effective_end, properties=properties, as_at_closed=as_at_closed)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateClosedPeriodRequest from a JSON string
-create_closed_period_request_instance = CreateClosedPeriodRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateClosedPeriodRequest.to_json()
-
-# convert the object into a dict
-create_closed_period_request_dict = create_closed_period_request_instance.to_dict()
-# create an instance of CreateClosedPeriodRequest from a dict
-create_closed_period_request_form_dict = create_closed_period_request.from_dict(create_closed_period_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

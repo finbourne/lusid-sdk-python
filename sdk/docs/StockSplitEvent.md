@@ -1,7 +1,6 @@
 # StockSplitEvent
 
 A split in the company's shares. Shareholders are given additional company shares based on the terms of the stock split.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **fractional_units_cash_price** | **float** | The cash price per unit paid in lieu when fractional units can not be distributed. | [optional] 
 **fractional_units_cash_currency** | **str** | The currency of the cash paid in lieu of fractional units. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent | 
-
 ## Example
 
 ```python
 from lusid.models.stock_split_event import StockSplitEvent
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from datetime import datetime
+payment_date: Optional[datetime] = # Replace with your value
+ex_date: Optional[datetime] = # Replace with your value
+units_ratio: UnitsRatio = # Replace with your value
+record_date: Optional[datetime] = # Replace with your value
+announcement_date: Optional[datetime] = # Replace with your value
+fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
+instrument_event_type: StrictStr = "example_instrument_event_type"
+stock_split_event_instance = StockSplitEvent(payment_date=payment_date, ex_date=ex_date, units_ratio=units_ratio, record_date=record_date, announcement_date=announcement_date, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, instrument_event_type=instrument_event_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of StockSplitEvent from a JSON string
-stock_split_event_instance = StockSplitEvent.from_json(json)
-# print the JSON string representation of the object
-print StockSplitEvent.to_json()
-
-# convert the object into a dict
-stock_split_event_dict = stock_split_event_instance.to_dict()
-# create an instance of StockSplitEvent from a dict
-stock_split_event_form_dict = stock_split_event.from_dict(stock_split_event_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

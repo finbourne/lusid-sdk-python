@@ -1,7 +1,6 @@
 # MarketDataSpecificRule
 
 Extends market data key rules to be able to catch dependencies depending on where the dependency comes from, as opposed to what the dependency is asking for.  For example, a market data rule might instruct all rates curves to be retrieved from a particular scope.  This class gives the ability to set different behaviour depending on what is requesting the rates curve.  Using two specific rules, one could instruct rates curves requested by bonds to be retrieved from a different scope than rates curves requested by swaps.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,29 @@ Name | Type | Description | Notes
 **dependency_source_filter** | [**DependencySourceFilter**](DependencySourceFilter.md) |  | 
 **source_system** | **str** | Determines from where LUSID should attempt to find the data. Optional and, if omitted, will default to \&quot;Lusid\&quot;.  This means that data will be retrieved from the Quotes store and the ComplexMarketData store.  These can be populated using the Quotes and ComplexMarketData endpoints. | [optional] 
 **fall_through_on_access_denied** | **bool** | When a user attempts to use a rule to access data to which they are not entitled,  the rule will fail to resolve any market data.  By default, such an access denied failure will stop any further attempts to resolve market data.  This is so that differently entitled users always receive the same market data from market data resolution,  if they have sufficient entitlements to retrieve the required data.  If set to true, then an access denied failure will not stop further market data resolution,  and resolution will continue with the next specified MarketDataKeyRule.  Optional, and defaults to false. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.market_data_specific_rule import MarketDataSpecificRule
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from datetime import datetime
+key: StrictStr = "example_key"
+supplier: StrictStr = "example_supplier"
+data_scope: StrictStr = "example_data_scope"
+quote_type: StrictStr = "example_quote_type"
+field: StrictStr = "example_field"
+quote_interval: Optional[StrictStr] = "example_quote_interval"
+as_at: Optional[datetime] = # Replace with your value
+price_source: Optional[StrictStr] = "example_price_source"
+mask: Optional[StrictStr] = "example_mask"
+dependency_source_filter: DependencySourceFilter = # Replace with your value
+source_system: Optional[StrictStr] = "example_source_system"
+fall_through_on_access_denied: Optional[StrictBool] = # Replace with your value
+fall_through_on_access_denied:Optional[StrictBool] = None
+market_data_specific_rule_instance = MarketDataSpecificRule(key=key, supplier=supplier, data_scope=data_scope, quote_type=quote_type, field=field, quote_interval=quote_interval, as_at=as_at, price_source=price_source, mask=mask, dependency_source_filter=dependency_source_filter, source_system=source_system, fall_through_on_access_denied=fall_through_on_access_denied)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MarketDataSpecificRule from a JSON string
-market_data_specific_rule_instance = MarketDataSpecificRule.from_json(json)
-# print the JSON string representation of the object
-print MarketDataSpecificRule.to_json()
-
-# convert the object into a dict
-market_data_specific_rule_dict = market_data_specific_rule_instance.to_dict()
-# create an instance of MarketDataSpecificRule from a dict
-market_data_specific_rule_form_dict = market_data_specific_rule.from_dict(market_data_specific_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

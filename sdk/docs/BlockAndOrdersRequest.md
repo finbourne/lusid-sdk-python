@@ -1,6 +1,5 @@
 # BlockAndOrdersRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **var_date** | **datetime** | The date on which the block was made | [optional] 
 **limit_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.block_and_orders_request import BlockAndOrdersRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from datetime import datetime
+block_id: ResourceId = # Replace with your value
+orders: conlist(BlockedOrderRequest) = # Replace with your value
+block_properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+side: Optional[StrictStr] = "example_side"
+type: Optional[StrictStr] = "example_type"
+time_in_force: Optional[StrictStr] = "example_time_in_force"
+var_date: Optional[datetime] = # Replace with your value
+limit_price: Optional[CurrencyAndAmount] = # Replace with your value
+stop_price: Optional[CurrencyAndAmount] = # Replace with your value
+block_and_orders_request_instance = BlockAndOrdersRequest(block_id=block_id, orders=orders, block_properties=block_properties, instrument_identifiers=instrument_identifiers, side=side, type=type, time_in_force=time_in_force, var_date=var_date, limit_price=limit_price, stop_price=stop_price)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BlockAndOrdersRequest from a JSON string
-block_and_orders_request_instance = BlockAndOrdersRequest.from_json(json)
-# print the JSON string representation of the object
-print BlockAndOrdersRequest.to_json()
-
-# convert the object into a dict
-block_and_orders_request_dict = block_and_orders_request_instance.to_dict()
-# create an instance of BlockAndOrdersRequest from a dict
-block_and_orders_request_form_dict = block_and_orders_request.from_dict(block_and_orders_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

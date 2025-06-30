@@ -1,6 +1,5 @@
 # ComplianceRuleResultDetail
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **rule_name** | **str** |  | 
 **rule_description** | **str** |  | 
 **outcome** | **str** |  | 
-
 ## Example
 
 ```python
 from lusid.models.compliance_rule_result_detail import ComplianceRuleResultDetail
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceRuleResultDetail from a JSON string
-compliance_rule_result_detail_instance = ComplianceRuleResultDetail.from_json(json)
-# print the JSON string representation of the object
-print ComplianceRuleResultDetail.to_json()
+rule_id: ResourceId = # Replace with your value
+affected_portfolios_details: conlist(ComplianceRuleResultPortfolioDetail) = # Replace with your value
+affected_orders: conlist(ResourceId) = # Replace with your value
+template_id: ResourceId = # Replace with your value
+template_description: StrictStr = "example_template_description"
+template_variation: StrictStr = "example_template_variation"
+status: StrictStr = "example_status"
+rule_name: StrictStr = "example_rule_name"
+rule_description: StrictStr = "example_rule_description"
+outcome: StrictStr = "example_outcome"
+compliance_rule_result_detail_instance = ComplianceRuleResultDetail(rule_id=rule_id, affected_portfolios_details=affected_portfolios_details, affected_orders=affected_orders, template_id=template_id, template_description=template_description, template_variation=template_variation, status=status, rule_name=rule_name, rule_description=rule_description, outcome=outcome)
 
-# convert the object into a dict
-compliance_rule_result_detail_dict = compliance_rule_result_detail_instance.to_dict()
-# create an instance of ComplianceRuleResultDetail from a dict
-compliance_rule_result_detail_form_dict = compliance_rule_result_detail.from_dict(compliance_rule_result_detail_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # ValuationPointDataResponse
 
 The Valuation Point Data Response for the Fund and specified date.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **valuation_point_code** | **str** | The code of the valuation point. | [optional] 
 **previous_valuation_point_code** | **str** | The code of the previous valuation point. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ValuationPointDataResponse from a JSON string
-valuation_point_data_response_instance = ValuationPointDataResponse.from_json(json)
-# print the JSON string representation of the object
-print ValuationPointDataResponse.to_json()
+href: Optional[StrictStr] = "example_href"
+type: StrictStr = "example_type"
+status: StrictStr = "example_status"
+fund_details: FundDetails = # Replace with your value
+fund_valuation_point_data: FundValuationPointData = # Replace with your value
+share_class_data: conlist(ShareClassData) = # Replace with your value
+valuation_point_code: Optional[StrictStr] = "example_valuation_point_code"
+previous_valuation_point_code: Optional[StrictStr] = "example_previous_valuation_point_code"
+links: Optional[conlist(Link)] = None
+valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, links=links)
 
-# convert the object into a dict
-valuation_point_data_response_dict = valuation_point_data_response_instance.to_dict()
-# create an instance of ValuationPointDataResponse from a dict
-valuation_point_data_response_form_dict = valuation_point_data_response.from_dict(valuation_point_data_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

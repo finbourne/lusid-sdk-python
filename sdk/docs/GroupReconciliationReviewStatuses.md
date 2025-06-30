@@ -1,6 +1,5 @@
 # GroupReconciliationReviewStatuses
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,28 @@ Name | Type | Description | Notes
 **link_matched** | [**Link**](Link.md) |  | 
 **count_invalid** | **int** | The number of comparison results of reviewStatus \&quot;Invalid\&quot; with this instanceId and reconciliationType | 
 **link_invalid** | [**Link**](Link.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.group_reconciliation_review_statuses import GroupReconciliationReviewStatuses
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, StrictInt
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GroupReconciliationReviewStatuses from a JSON string
-group_reconciliation_review_statuses_instance = GroupReconciliationReviewStatuses.from_json(json)
-# print the JSON string representation of the object
-print GroupReconciliationReviewStatuses.to_json()
+count_pending: StrictInt = # Replace with your value
+count_pending: StrictInt = 42
+link_pending: Link = # Replace with your value
+count_reviewed: StrictInt = # Replace with your value
+count_reviewed: StrictInt = 42
+link_reviewed: Link = # Replace with your value
+count_matched: StrictInt = # Replace with your value
+count_matched: StrictInt = 42
+link_matched: Link = # Replace with your value
+count_invalid: StrictInt = # Replace with your value
+count_invalid: StrictInt = 42
+link_invalid: Link = # Replace with your value
+group_reconciliation_review_statuses_instance = GroupReconciliationReviewStatuses(count_pending=count_pending, link_pending=link_pending, count_reviewed=count_reviewed, link_reviewed=link_reviewed, count_matched=count_matched, link_matched=link_matched, count_invalid=count_invalid, link_invalid=link_invalid)
 
-# convert the object into a dict
-group_reconciliation_review_statuses_dict = group_reconciliation_review_statuses_instance.to_dict()
-# create an instance of GroupReconciliationReviewStatuses from a dict
-group_reconciliation_review_statuses_form_dict = group_reconciliation_review_statuses.from_dict(group_reconciliation_review_statuses_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

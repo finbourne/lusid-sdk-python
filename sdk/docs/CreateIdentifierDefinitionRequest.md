@@ -1,6 +1,5 @@
 # CreateIdentifierDefinitionRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **display_name** | **str** | A display name for the identifier. E.g. Figi. | [optional] 
 **description** | **str** | An optional description for the identifier. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the identifier definition. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_identifier_definition_request import CreateIdentifierDefinitionRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateIdentifierDefinitionRequest from a JSON string
-create_identifier_definition_request_instance = CreateIdentifierDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateIdentifierDefinitionRequest.to_json()
+domain: StrictStr = "example_domain"
+identifier_scope: StrictStr = "example_identifier_scope"
+identifier_type: StrictStr = "example_identifier_type"
+life_time: StrictStr = "example_life_time"
+hierarchy_usage: Optional[StrictStr] = "example_hierarchy_usage"
+hierarchy_level: Optional[StrictStr] = "example_hierarchy_level"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+create_identifier_definition_request_instance = CreateIdentifierDefinitionRequest(domain=domain, identifier_scope=identifier_scope, identifier_type=identifier_type, life_time=life_time, hierarchy_usage=hierarchy_usage, hierarchy_level=hierarchy_level, display_name=display_name, description=description, properties=properties)
 
-# convert the object into a dict
-create_identifier_definition_request_dict = create_identifier_definition_request_instance.to_dict()
-# create an instance of CreateIdentifierDefinitionRequest from a dict
-create_identifier_definition_request_form_dict = create_identifier_definition_request.from_dict(create_identifier_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

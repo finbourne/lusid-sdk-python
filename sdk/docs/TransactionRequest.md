@@ -1,6 +1,5 @@
 # TransactionRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -23,24 +22,35 @@ Name | Type | Description | Notes
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 **strategy_tag** | [**List[Strategy]**](Strategy.md) | A list of strategies representing the allocation of units across multiple sub-holding keys | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.transaction_request import TransactionRequest
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TransactionRequest from a JSON string
-transaction_request_instance = TransactionRequest.from_json(json)
-# print the JSON string representation of the object
-print TransactionRequest.to_json()
+transaction_id: StrictStr = "example_transaction_id"
+type: StrictStr = "example_type"
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+transaction_date: StrictStr = "example_transaction_date"
+settlement_date: StrictStr = "example_settlement_date"
+units: Union[StrictFloat, StrictInt] = # Replace with your value
+transaction_price: Optional[TransactionPrice] = # Replace with your value
+total_consideration: CurrencyAndAmount = # Replace with your value
+exchange_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+transaction_currency: Optional[StrictStr] = "example_transaction_currency"
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+counterparty_id: Optional[StrictStr] = "example_counterparty_id"
+source: Optional[StrictStr] = "example_source"
+otc_confirmation: Optional[OtcConfirmation] = # Replace with your value
+order_id: Optional[ResourceId] = # Replace with your value
+allocation_id: Optional[ResourceId] = # Replace with your value
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+transaction_group_id: Optional[StrictStr] = "example_transaction_group_id"
+strategy_tag: Optional[conlist(Strategy)] = # Replace with your value
+transaction_request_instance = TransactionRequest(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, custodian_account_id=custodian_account_id, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag)
 
-# convert the object into a dict
-transaction_request_dict = transaction_request_instance.to_dict()
-# create an instance of TransactionRequest from a dict
-transaction_request_form_dict = transaction_request.from_dict(transaction_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

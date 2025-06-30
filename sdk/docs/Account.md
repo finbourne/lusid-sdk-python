@@ -1,7 +1,6 @@
 # Account
 
 An account
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **status** | **str** | The Account status. Can be Active, Inactive or Deleted. The available values are: Active, Inactive, Deleted | 
 **control** | **str** | This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Account. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.account import Account
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Account from a JSON string
-account_instance = Account.from_json(json)
-# print the JSON string representation of the object
-print Account.to_json()
+code: StrictStr = "example_code"
+description: Optional[StrictStr] = "example_description"
+type: StrictStr = "example_type"
+status: StrictStr = "example_status"
+control: Optional[StrictStr] = "example_control"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+account_instance = Account(code=code, description=description, type=type, status=status, control=control, properties=properties)
 
-# convert the object into a dict
-account_dict = account_instance.to_dict()
-# create an instance of Account from a dict
-account_form_dict = account.from_dict(account_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

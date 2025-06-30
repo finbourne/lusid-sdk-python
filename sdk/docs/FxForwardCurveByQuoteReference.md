@@ -1,7 +1,6 @@
 # FxForwardCurveByQuoteReference
 
 Contains data (i.e. tenors and rates + metadata) for building fx forward curves (when combined with a date to build on)
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **calendars** | [**List[FxTenorConvention]**](FxTenorConvention.md) | The list of conventions that should be used when interpreting tenors as dates. | [optional] 
 **spot_days_calculation_type** | **str** | Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ] | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
-
 ## Example
 
 ```python
 from lusid.models.fx_forward_curve_by_quote_reference import FxForwardCurveByQuoteReference
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FxForwardCurveByQuoteReference from a JSON string
-fx_forward_curve_by_quote_reference_instance = FxForwardCurveByQuoteReference.from_json(json)
-# print the JSON string representation of the object
-print FxForwardCurveByQuoteReference.to_json()
+dom_ccy: StrictStr = "example_dom_ccy"
+fgn_ccy: StrictStr = "example_fgn_ccy"
+tenors: conlist(StrictStr) = # Replace with your value
+quote_references: conlist(Dict[str, StrictStr]) = # Replace with your value
+lineage: Optional[StrictStr] = "example_lineage"
+market_data_options: Optional[MarketDataOptions] = # Replace with your value
+calendars: Optional[conlist(FxTenorConvention)] = # Replace with your value
+spot_days_calculation_type: Optional[StrictStr] = "example_spot_days_calculation_type"
+market_data_type: StrictStr = "example_market_data_type"
+fx_forward_curve_by_quote_reference_instance = FxForwardCurveByQuoteReference(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, tenors=tenors, quote_references=quote_references, lineage=lineage, market_data_options=market_data_options, calendars=calendars, spot_days_calculation_type=spot_days_calculation_type, market_data_type=market_data_type)
 
-# convert the object into a dict
-fx_forward_curve_by_quote_reference_dict = fx_forward_curve_by_quote_reference_instance.to_dict()
-# create an instance of FxForwardCurveByQuoteReference from a dict
-fx_forward_curve_by_quote_reference_form_dict = fx_forward_curve_by_quote_reference.from_dict(fx_forward_curve_by_quote_reference_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

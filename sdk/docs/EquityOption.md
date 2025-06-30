@@ -1,7 +1,6 @@
 # EquityOption
 
 LUSID representation of a plain vanilla OTC Equity Option.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -23,24 +22,35 @@ Name | Type | Description | Notes
 **business_day_convention** | **str** | Business day convention for option exercise date to settlement date calculation.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest]. | [optional] 
 **settlement_calendars** | **List[str]** | Holiday calendars for option exercise date to settlement date calculation. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.equity_option import EquityOption
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+option_maturity_date: datetime = # Replace with your value
+option_settlement_date: Optional[datetime] = # Replace with your value
+delivery_type: StrictStr = "example_delivery_type"
+option_type: StrictStr = "example_option_type"
+strike: Union[StrictFloat, StrictInt] = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+underlying_identifier: Optional[StrictStr] = "example_underlying_identifier"
+code: Optional[StrictStr] = "example_code"
+equity_option_type: Optional[StrictStr] = "example_equity_option_type"
+number_of_shares: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+premium: Optional[Premium] = None
+exercise_type: Optional[StrictStr] = "example_exercise_type"
+underlying: Optional[LusidInstrument] = None
+delivery_days: Optional[StrictInt] = # Replace with your value
+delivery_days: Optional[StrictInt] = None
+business_day_convention: Optional[StrictStr] = "example_business_day_convention"
+settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+equity_option_instance = EquityOption(start_date=start_date, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, delivery_type=delivery_type, option_type=option_type, strike=strike, dom_ccy=dom_ccy, underlying_identifier=underlying_identifier, code=code, equity_option_type=equity_option_type, number_of_shares=number_of_shares, premium=premium, exercise_type=exercise_type, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of EquityOption from a JSON string
-equity_option_instance = EquityOption.from_json(json)
-# print the JSON string representation of the object
-print EquityOption.to_json()
-
-# convert the object into a dict
-equity_option_dict = equity_option_instance.to_dict()
-# create an instance of EquityOption from a dict
-equity_option_form_dict = equity_option.from_dict(equity_option_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

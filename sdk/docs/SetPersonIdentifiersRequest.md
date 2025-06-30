@@ -1,28 +1,20 @@
 # SetPersonIdentifiersRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **identifiers** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Identifiers to set for a Person. Identifiers not included in the request will not be amended. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.set_person_identifiers_request import SetPersonIdentifiersRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SetPersonIdentifiersRequest from a JSON string
-set_person_identifiers_request_instance = SetPersonIdentifiersRequest.from_json(json)
-# print the JSON string representation of the object
-print SetPersonIdentifiersRequest.to_json()
+identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
+set_person_identifiers_request_instance = SetPersonIdentifiersRequest(identifiers=identifiers)
 
-# convert the object into a dict
-set_person_identifiers_request_dict = set_person_identifiers_request_instance.to_dict()
-# create an instance of SetPersonIdentifiersRequest from a dict
-set_person_identifiers_request_form_dict = set_person_identifiers_request.from_dict(set_person_identifiers_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # InstrumentDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,22 @@ Name | Type | Description | Notes
 **look_through_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **definition** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
 **settlement_cycle** | [**SettlementCycle**](SettlementCycle.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument_definition import InstrumentDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentDefinition from a JSON string
-instrument_definition_instance = InstrumentDefinition.from_json(json)
-# print the JSON string representation of the object
-print InstrumentDefinition.to_json()
+name: StrictStr = "example_name"
+identifiers: Dict[str, InstrumentIdValue] = # Replace with your value
+properties: Optional[conlist(ModelProperty)] = # Replace with your value
+look_through_portfolio_id: Optional[ResourceId] = # Replace with your value
+definition: Optional[LusidInstrument] = None
+settlement_cycle: Optional[SettlementCycle] = # Replace with your value
+instrument_definition_instance = InstrumentDefinition(name=name, identifiers=identifiers, properties=properties, look_through_portfolio_id=look_through_portfolio_id, definition=definition, settlement_cycle=settlement_cycle)
 
-# convert the object into a dict
-instrument_definition_dict = instrument_definition_instance.to_dict()
-# create an instance of InstrumentDefinition from a dict
-instrument_definition_form_dict = instrument_definition.from_dict(instrument_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # BondConversionSchedule
 
 A BondConversionSchedule object represents a class containing the  information required for the creation of convertible features in a ComplexBond
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,28 @@ Name | Type | Description | Notes
 **notification_period_end** | **datetime** | The last day in the notification period for the conversion of the bond | [optional] 
 **notification_period_start** | **datetime** | The first day in the notification period for the conversion of the bond | [optional] 
 **schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
-
 ## Example
 
 ```python
 from lusid.models.bond_conversion_schedule import BondConversionSchedule
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictBool, StrictStr, conlist, constr, validator
+from datetime import datetime
+identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+bond_conversion_entries: Optional[conlist(BondConversionEntry)] = # Replace with your value
+conversion_trigger: StrictStr = "example_conversion_trigger"
+delivery_type: Optional[StrictStr] = "example_delivery_type"
+exercise_type: StrictStr = "example_exercise_type"
+includes_accrued: Optional[StrictBool] = # Replace with your value
+includes_accrued:Optional[StrictBool] = None
+mandatory_conversion: Optional[StrictBool] = # Replace with your value
+mandatory_conversion:Optional[StrictBool] = None
+notification_period_end: Optional[datetime] = # Replace with your value
+notification_period_start: Optional[datetime] = # Replace with your value
+schedule_type: StrictStr = "example_schedule_type"
+bond_conversion_schedule_instance = BondConversionSchedule(identifiers=identifiers, bond_conversion_entries=bond_conversion_entries, conversion_trigger=conversion_trigger, delivery_type=delivery_type, exercise_type=exercise_type, includes_accrued=includes_accrued, mandatory_conversion=mandatory_conversion, notification_period_end=notification_period_end, notification_period_start=notification_period_start, schedule_type=schedule_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BondConversionSchedule from a JSON string
-bond_conversion_schedule_instance = BondConversionSchedule.from_json(json)
-# print the JSON string representation of the object
-print BondConversionSchedule.to_json()
-
-# convert the object into a dict
-bond_conversion_schedule_dict = bond_conversion_schedule_instance.to_dict()
-# create an instance of BondConversionSchedule from a dict
-bond_conversion_schedule_form_dict = bond_conversion_schedule.from_dict(bond_conversion_schedule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

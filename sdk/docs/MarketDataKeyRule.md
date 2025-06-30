@@ -1,7 +1,6 @@
 # MarketDataKeyRule
 
 When performing analytics, instruments and models have dependencies on market data.  A market data key rule essentially tells lusid to \"resolve dependencies matching the pattern 'X' using data of the form 'Y'\".  The parameter 'X' is defined by the key of the key rule, and might specify \"all USD rates curves\" or \"all RIC-based prices\".  The parameter 'Y' is defined by the remaining fields of the key rule, and allows the user to configure things such as  where to look for data, what sort of data should be looked for (e.g. bid/mid/ask), and how old the data is allowed to be.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,28 @@ Name | Type | Description | Notes
 **mask** | **str** | Allows for partial or complete override of the market asset resolved for a dependency  Either a named override or a dot separated string (A.B.C.D.*).  e.g. for Rates curve &#39;EUR.*&#39; will replace the resolve MarketAsset &#39;GBP/12M&#39;, &#39;GBP/3M&#39; with the EUR equivalent, if there  are no wildcards in the mask, the mask is taken as the MarketAsset for any dependency matching the rule. | [optional] 
 **source_system** | **str** | If set, this parameter will seek an external source of market data.  Optional and, if omitted, will default to \&quot;Lusid\&quot;.  This means that data will be retrieved from the LUSID Quote Store and LUSID Complex Market Data Store.                This can be set to \&quot;MarketDataOverrides\&quot; if Supplier is set to \&quot;Client\&quot;. | [optional] 
 **fall_through_on_access_denied** | **bool** | When a user attempts to use a rule to access data to which they are not entitled,  the rule will fail to resolve any market data.  By default, such an access denied failure will stop any further attempts to resolve market data.  This is so that differently entitled users always receive the same market data from market data resolution,  if they have sufficient entitlements to retrieve the required data.  If set to true, then an access denied failure will not stop further market data resolution,  and resolution will continue with the next specified MarketDataKeyRule.  Optional, and defaults to false. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.market_data_key_rule import MarketDataKeyRule
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from datetime import datetime
+key: StrictStr = "example_key"
+supplier: StrictStr = "example_supplier"
+data_scope: StrictStr = "example_data_scope"
+quote_type: StrictStr = "example_quote_type"
+field: Optional[StrictStr] = "example_field"
+quote_interval: Optional[StrictStr] = "example_quote_interval"
+as_at: Optional[datetime] = # Replace with your value
+price_source: Optional[StrictStr] = "example_price_source"
+mask: Optional[StrictStr] = "example_mask"
+source_system: Optional[StrictStr] = "example_source_system"
+fall_through_on_access_denied: Optional[StrictBool] = # Replace with your value
+fall_through_on_access_denied:Optional[StrictBool] = None
+market_data_key_rule_instance = MarketDataKeyRule(key=key, supplier=supplier, data_scope=data_scope, quote_type=quote_type, field=field, quote_interval=quote_interval, as_at=as_at, price_source=price_source, mask=mask, source_system=source_system, fall_through_on_access_denied=fall_through_on_access_denied)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MarketDataKeyRule from a JSON string
-market_data_key_rule_instance = MarketDataKeyRule.from_json(json)
-# print the JSON string representation of the object
-print MarketDataKeyRule.to_json()
-
-# convert the object into a dict
-market_data_key_rule_dict = market_data_key_rule_instance.to_dict()
-# create an instance of MarketDataKeyRule from a dict
-market_data_key_rule_form_dict = market_data_key_rule.from_dict(market_data_key_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

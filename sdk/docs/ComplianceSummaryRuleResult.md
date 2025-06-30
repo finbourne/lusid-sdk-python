@@ -1,6 +1,5 @@
 # ComplianceSummaryRuleResult
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **affected_orders** | [**List[ResourceId]**](ResourceId.md) |  | 
 **parameters_used** | **Dict[str, str]** |  | 
 **rule_breakdown** | [**List[ComplianceRuleBreakdown]**](ComplianceRuleBreakdown.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.compliance_summary_rule_result import ComplianceSummaryRuleResult
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceSummaryRuleResult from a JSON string
-compliance_summary_rule_result_instance = ComplianceSummaryRuleResult.from_json(json)
-# print the JSON string representation of the object
-print ComplianceSummaryRuleResult.to_json()
+rule_id: ResourceId = # Replace with your value
+template_id: ResourceId = # Replace with your value
+variation: StrictStr = "example_variation"
+rule_status: StrictStr = "example_rule_status"
+affected_portfolios: conlist(ResourceId) = # Replace with your value
+affected_orders: conlist(ResourceId) = # Replace with your value
+parameters_used: Dict[str, StrictStr] = # Replace with your value
+rule_breakdown: conlist(ComplianceRuleBreakdown) = # Replace with your value
+compliance_summary_rule_result_instance = ComplianceSummaryRuleResult(rule_id=rule_id, template_id=template_id, variation=variation, rule_status=rule_status, affected_portfolios=affected_portfolios, affected_orders=affected_orders, parameters_used=parameters_used, rule_breakdown=rule_breakdown)
 
-# convert the object into a dict
-compliance_summary_rule_result_dict = compliance_summary_rule_result_instance.to_dict()
-# create an instance of ComplianceSummaryRuleResult from a dict
-compliance_summary_rule_result_form_dict = compliance_summary_rule_result.from_dict(compliance_summary_rule_result_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

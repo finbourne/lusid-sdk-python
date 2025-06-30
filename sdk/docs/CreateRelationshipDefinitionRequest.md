@@ -1,6 +1,5 @@
 # CreateRelationshipDefinitionRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **inward_description** | **str** | The description to relate target entity object and source entity object. | 
 **life_time** | **str** | Describes how the relationships can change over time. Allowed values are &#39;Perpetual&#39; and &#39;TimeVariant&#39;, defaults to &#39;Perpetual&#39; if not specified. | [optional] 
 **relationship_cardinality** | **str** | Describes the cardinality of the relationship with a specific source entity object and relationships under this definition. Allowed values are &#39;ManyToMany&#39; and &#39;ManyToOne&#39;, defaults to &#39;ManyToMany&#39; if not specified. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateRelationshipDefinitionRequest from a JSON string
-create_relationship_definition_request_instance = CreateRelationshipDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateRelationshipDefinitionRequest.to_json()
+scope: StrictStr = "example_scope"
+code: StrictStr = "example_code"
+source_entity_type: StrictStr = "example_source_entity_type"
+target_entity_type: StrictStr = "example_target_entity_type"
+display_name: StrictStr = "example_display_name"
+outward_description: StrictStr = "example_outward_description"
+inward_description: StrictStr = "example_inward_description"
+life_time: Optional[StrictStr] = "example_life_time"
+relationship_cardinality: Optional[StrictStr] = "example_relationship_cardinality"
+create_relationship_definition_request_instance = CreateRelationshipDefinitionRequest(scope=scope, code=code, source_entity_type=source_entity_type, target_entity_type=target_entity_type, display_name=display_name, outward_description=outward_description, inward_description=inward_description, life_time=life_time, relationship_cardinality=relationship_cardinality)
 
-# convert the object into a dict
-create_relationship_definition_request_dict = create_relationship_definition_request_instance.to_dict()
-# create an instance of CreateRelationshipDefinitionRequest from a dict
-create_relationship_definition_request_form_dict = create_relationship_definition_request.from_dict(create_relationship_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # TaxRuleSet
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **rules** | [**List[TaxRule]**](TaxRule.md) | The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.tax_rule_set import TaxRuleSet
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TaxRuleSet from a JSON string
-tax_rule_set_instance = TaxRuleSet.from_json(json)
-# print the JSON string representation of the object
-print TaxRuleSet.to_json()
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+output_property_key: StrictStr = "example_output_property_key"
+rules: conlist(TaxRule, max_items=100) = Field(..., description="The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions")
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+tax_rule_set_instance = TaxRuleSet(id=id, display_name=display_name, description=description, output_property_key=output_property_key, rules=rules, version=version, links=links)
 
-# convert the object into a dict
-tax_rule_set_dict = tax_rule_set_instance.to_dict()
-# create an instance of TaxRuleSet from a dict
-tax_rule_set_form_dict = tax_rule_set.from_dict(tax_rule_set_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

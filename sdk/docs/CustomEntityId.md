@@ -1,6 +1,5 @@
 # CustomEntityId
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **identifier_value** | **str** | The value of the identifier for this entity. | 
 **effective_from** | **datetime** | The effective datetime from which the identifier is valid. | [optional] 
 **effective_until** | **datetime** | The effective datetime until which the identifier is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveFrom&#39; datetime of the identifier. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.custom_entity_id import CustomEntityId
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr, validator
+from datetime import datetime
+identifier_scope: StrictStr = "example_identifier_scope"
+identifier_type: StrictStr = "example_identifier_type"
+identifier_value: StrictStr = "example_identifier_value"
+effective_from: Optional[datetime] = # Replace with your value
+effective_until: Optional[datetime] = # Replace with your value
+custom_entity_id_instance = CustomEntityId(identifier_scope=identifier_scope, identifier_type=identifier_type, identifier_value=identifier_value, effective_from=effective_from, effective_until=effective_until)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CustomEntityId from a JSON string
-custom_entity_id_instance = CustomEntityId.from_json(json)
-# print the JSON string representation of the object
-print CustomEntityId.to_json()
-
-# convert the object into a dict
-custom_entity_id_dict = custom_entity_id_instance.to_dict()
-# create an instance of CustomEntityId from a dict
-custom_entity_id_form_dict = custom_entity_id.from_dict(custom_entity_id_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # DataType
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,29 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.data_type import DataType
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DataType from a JSON string
-data_type_instance = DataType.from_json(json)
-# print the JSON string representation of the object
-print DataType.to_json()
+type_value_range: StrictStr = "example_type_value_range"
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+value_type: StrictStr = "example_value_type"
+acceptable_values: Optional[conlist(StrictStr)] = # Replace with your value
+unit_schema: Optional[StrictStr] = "example_unit_schema"
+acceptable_units: Optional[conlist(IUnitDefinitionDto)] = # Replace with your value
+reference_data: Optional[ReferenceData] = # Replace with your value
+version: Optional[Version] = None
+href: Optional[StrictStr] = "example_href"
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+links: Optional[conlist(Link)] = None
+data_type_instance = DataType(type_value_range=type_value_range, id=id, display_name=display_name, description=description, value_type=value_type, acceptable_values=acceptable_values, unit_schema=unit_schema, acceptable_units=acceptable_units, reference_data=reference_data, version=version, href=href, staged_modifications=staged_modifications, links=links)
 
-# convert the object into a dict
-data_type_dict = data_type_instance.to_dict()
-# create an instance of DataType from a dict
-data_type_form_dict = data_type.from_dict(data_type_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

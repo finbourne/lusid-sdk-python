@@ -1,7 +1,6 @@
 # Instrument
 
 A list of instruments.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -22,24 +21,33 @@ Name | Type | Description | Notes
 **settlement_cycle** | [**SettlementCycle**](SettlementCycle.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument import Instrument
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Instrument from a JSON string
-instrument_instance = Instrument.from_json(json)
-# print the JSON string representation of the object
-print Instrument.to_json()
+href: Optional[StrictStr] = "example_href"
+scope: Optional[StrictStr] = "example_scope"
+lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
+version: Version = # Replace with your value
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+name: StrictStr = "example_name"
+identifiers: Dict[str, StrictStr] = # Replace with your value
+properties: Optional[conlist(ModelProperty)] = # Replace with your value
+lookthrough_portfolio: Optional[ResourceId] = # Replace with your value
+instrument_definition: Optional[LusidInstrument] = # Replace with your value
+state: StrictStr = "example_state"
+asset_class: Optional[StrictStr] = "example_asset_class"
+dom_ccy: Optional[StrictStr] = "example_dom_ccy"
+relationships: Optional[conlist(Relationship)] = # Replace with your value
+settlement_cycle: Optional[SettlementCycle] = # Replace with your value
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
+links: Optional[conlist(Link)] = None
+instrument_instance = Instrument(href=href, scope=scope, lusid_instrument_id=lusid_instrument_id, version=version, staged_modifications=staged_modifications, name=name, identifiers=identifiers, properties=properties, lookthrough_portfolio=lookthrough_portfolio, instrument_definition=instrument_definition, state=state, asset_class=asset_class, dom_ccy=dom_ccy, relationships=relationships, settlement_cycle=settlement_cycle, data_model_membership=data_model_membership, links=links)
 
-# convert the object into a dict
-instrument_dict = instrument_instance.to_dict()
-# create an instance of Instrument from a dict
-instrument_form_dict = instrument.from_dict(instrument_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

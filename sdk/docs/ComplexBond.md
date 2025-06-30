@@ -1,7 +1,6 @@
 # ComplexBond
 
 LUSID representation of a Complex Bond.  Including Floating, Fixed-to-float, Sinkable, Callable, Puttable, and Mortgage Backed Securities.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **asset_pool_identifier** | **str** | Identifier used to retrieve pool factor information about this bond from the quote store. This is typically  the bond&#39;s ISIN, but can also be ClientInternal. Please ensure you align the MarketDataKeyRule with the  correct Quote (Quote.ClientInternal.* or Quote.Isin.*) | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.complex_bond import ComplexBond
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplexBond from a JSON string
-complex_bond_instance = ComplexBond.from_json(json)
-# print the JSON string representation of the object
-print ComplexBond.to_json()
+identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+calculation_type: Optional[StrictStr] = "example_calculation_type"
+schedules: Optional[conlist(Schedule)] = # Replace with your value
+original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
+asset_backed: Optional[StrictBool] = # Replace with your value
+asset_backed:Optional[StrictBool] = None
+asset_pool_identifier: Optional[StrictStr] = "example_asset_pool_identifier"
+trading_conventions: Optional[TradingConventions] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+complex_bond_instance = ComplexBond(identifiers=identifiers, calculation_type=calculation_type, schedules=schedules, original_issue_price=original_issue_price, rounding_conventions=rounding_conventions, asset_backed=asset_backed, asset_pool_identifier=asset_pool_identifier, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
-# convert the object into a dict
-complex_bond_dict = complex_bond_instance.to_dict()
-# create an instance of ComplexBond from a dict
-complex_bond_form_dict = complex_bond.from_dict(complex_bond_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

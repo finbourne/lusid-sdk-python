@@ -1,31 +1,25 @@
 # PostingModuleRule
 
 A Posting rule
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_id** | **str** | The identifier for the Posting Rule. | 
 **general_ledger_account_code** | **str** | The general ledger account to post the Activity credit or debit to. | 
 **rule_filter** | **str** | The filter syntax for the Posting Rule. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax. | 
-
 ## Example
 
 ```python
 from lusid.models.posting_module_rule import PostingModuleRule
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PostingModuleRule from a JSON string
-posting_module_rule_instance = PostingModuleRule.from_json(json)
-# print the JSON string representation of the object
-print PostingModuleRule.to_json()
+rule_id: StrictStr = "example_rule_id"
+general_ledger_account_code: StrictStr = "example_general_ledger_account_code"
+rule_filter: StrictStr = "example_rule_filter"
+posting_module_rule_instance = PostingModuleRule(rule_id=rule_id, general_ledger_account_code=general_ledger_account_code, rule_filter=rule_filter)
 
-# convert the object into a dict
-posting_module_rule_dict = posting_module_rule_instance.to_dict()
-# create an instance of PostingModuleRule from a dict
-posting_module_rule_form_dict = posting_module_rule.from_dict(posting_module_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

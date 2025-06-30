@@ -1,6 +1,5 @@
 # CustodianAccountRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian_identifier** | [**TypedResourceId**](TypedResourceId.md) |  | 
 **account_type** | **str** | The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.custodian_account_request import CustodianAccountRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CustodianAccountRequest from a JSON string
-custodian_account_request_instance = CustodianAccountRequest.from_json(json)
-# print the JSON string representation of the object
-print CustodianAccountRequest.to_json()
+scope: Optional[StrictStr] = "example_scope"
+code: StrictStr = "example_code"
+status: Optional[StrictStr] = "example_status"
+account_number: StrictStr = "example_account_number"
+account_name: StrictStr = "example_account_name"
+accounting_method: StrictStr = "example_accounting_method"
+currency: StrictStr = "example_currency"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+custodian_identifier: TypedResourceId = # Replace with your value
+account_type: Optional[StrictStr] = "example_account_type"
+custodian_account_request_instance = CustodianAccountRequest(scope=scope, code=code, status=status, account_number=account_number, account_name=account_name, accounting_method=accounting_method, currency=currency, properties=properties, custodian_identifier=custodian_identifier, account_type=account_type)
 
-# convert the object into a dict
-custodian_account_request_dict = custodian_account_request_instance.to_dict()
-# create an instance of CustodianAccountRequest from a dict
-custodian_account_request_form_dict = custodian_account_request.from_dict(custodian_account_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

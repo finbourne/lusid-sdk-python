@@ -1,6 +1,5 @@
 # ComplianceRuleResult
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,27 @@ Name | Type | Description | Notes
 **rule_information_key** | **str** | The property key matched by the rule | 
 **rule_lower_limit** | **float** | The lower limit of the rule | 
 **rule_upper_limit** | **float** | The upper limit of the rule | 
-
 ## Example
 
 ```python
 from lusid.models.compliance_rule_result import ComplianceRuleResult
+from typing import Any, Dict, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceRuleResult from a JSON string
-compliance_rule_result_instance = ComplianceRuleResult.from_json(json)
-# print the JSON string representation of the object
-print ComplianceRuleResult.to_json()
+rule_id: StrictStr = "example_rule_id"
+rule_name: StrictStr = "example_rule_name"
+rule_description: StrictStr = "example_rule_description"
+portfolio: ResourceId = # Replace with your value
+passed: StrictBool = # Replace with your value
+passed:StrictBool = True
+result_value: Union[StrictFloat, StrictInt] = # Replace with your value
+rule_information_match: StrictStr = "example_rule_information_match"
+rule_information_key: StrictStr = "example_rule_information_key"
+rule_lower_limit: Union[StrictFloat, StrictInt] = # Replace with your value
+rule_upper_limit: Union[StrictFloat, StrictInt] = # Replace with your value
+compliance_rule_result_instance = ComplianceRuleResult(rule_id=rule_id, rule_name=rule_name, rule_description=rule_description, portfolio=portfolio, passed=passed, result_value=result_value, rule_information_match=rule_information_match, rule_information_key=rule_information_key, rule_lower_limit=rule_lower_limit, rule_upper_limit=rule_upper_limit)
 
-# convert the object into a dict
-compliance_rule_result_dict = compliance_rule_result_instance.to_dict()
-# create an instance of ComplianceRuleResult from a dict
-compliance_rule_result_form_dict = compliance_rule_result.from_dict(compliance_rule_result_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

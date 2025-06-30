@@ -1,7 +1,6 @@
 # PlacementUpdateRequest
 
 A request to create or update a Placement.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **counterparty** | **str** | Optionally specifies the market entity this placement is placed with. | [optional] 
 **execution_system** | **str** | Optionally specifies the execution system in use. | [optional] 
 **entry_type** | **str** | Optionally specifies the entry type of this placement. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.placement_update_request import PlacementUpdateRequest
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PlacementUpdateRequest from a JSON string
-placement_update_request_instance = PlacementUpdateRequest.from_json(json)
-# print the JSON string representation of the object
-print PlacementUpdateRequest.to_json()
+id: ResourceId = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+counterparty: Optional[StrictStr] = "example_counterparty"
+execution_system: Optional[StrictStr] = "example_execution_system"
+entry_type: Optional[StrictStr] = "example_entry_type"
+placement_update_request_instance = PlacementUpdateRequest(id=id, quantity=quantity, properties=properties, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type)
 
-# convert the object into a dict
-placement_update_request_dict = placement_update_request_instance.to_dict()
-# create an instance of PlacementUpdateRequest from a dict
-placement_update_request_form_dict = placement_update_request.from_dict(placement_update_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

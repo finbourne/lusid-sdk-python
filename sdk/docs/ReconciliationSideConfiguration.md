@@ -1,7 +1,6 @@
 # ReconciliationSideConfiguration
 
 Specification for one side of a valuations/positions scheduled reconciliation
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **effective_at** | **datetime** |  | [optional] 
 **as_at** | **datetime** |  | [optional] 
 **currency** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.reconciliation_side_configuration import ReconciliationSideConfiguration
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
+from datetime import datetime
+recipe_id: Optional[ResourceId] = # Replace with your value
+effective_at: Optional[datetime] = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+currency: Optional[StrictStr] = "example_currency"
+reconciliation_side_configuration_instance = ReconciliationSideConfiguration(recipe_id=recipe_id, effective_at=effective_at, as_at=as_at, currency=currency)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReconciliationSideConfiguration from a JSON string
-reconciliation_side_configuration_instance = ReconciliationSideConfiguration.from_json(json)
-# print the JSON string representation of the object
-print ReconciliationSideConfiguration.to_json()
-
-# convert the object into a dict
-reconciliation_side_configuration_dict = reconciliation_side_configuration_instance.to_dict()
-# create an instance of ReconciliationSideConfiguration from a dict
-reconciliation_side_configuration_form_dict = reconciliation_side_configuration.from_dict(reconciliation_side_configuration_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

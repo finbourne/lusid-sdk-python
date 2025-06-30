@@ -1,6 +1,5 @@
 # AmortisationRule
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **description** | **str** | A description of the rule. | [optional] 
 **filter** | **str** | The filter for this rule. | 
 **amortisation_method** | **str** | The filter for this rule. | 
-
 ## Example
 
 ```python
 from lusid.models.amortisation_rule import AmortisationRule
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AmortisationRule from a JSON string
-amortisation_rule_instance = AmortisationRule.from_json(json)
-# print the JSON string representation of the object
-print AmortisationRule.to_json()
+name: StrictStr = "example_name"
+description: Optional[StrictStr] = "example_description"
+filter: StrictStr = "example_filter"
+amortisation_method: StrictStr = "example_amortisation_method"
+amortisation_rule_instance = AmortisationRule(name=name, description=description, filter=filter, amortisation_method=amortisation_method)
 
-# convert the object into a dict
-amortisation_rule_dict = amortisation_rule_instance.to_dict()
-# create an instance of AmortisationRule from a dict
-amortisation_rule_form_dict = amortisation_rule.from_dict(amortisation_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

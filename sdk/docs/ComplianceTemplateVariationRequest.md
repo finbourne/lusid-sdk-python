@@ -1,6 +1,5 @@
 # ComplianceTemplateVariationRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **outcome_description** | **str** |  | [optional] 
 **referenced_group_label** | **str** |  | [optional] 
 **steps** | [**List[ComplianceStepRequest]**](ComplianceStepRequest.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.compliance_template_variation_request import ComplianceTemplateVariationRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceTemplateVariationRequest from a JSON string
-compliance_template_variation_request_instance = ComplianceTemplateVariationRequest.from_json(json)
-# print the JSON string representation of the object
-print ComplianceTemplateVariationRequest.to_json()
+label: StrictStr = "example_label"
+description: StrictStr = "example_description"
+outcome_description: Optional[StrictStr] = "example_outcome_description"
+referenced_group_label: Optional[StrictStr] = "example_referenced_group_label"
+steps: conlist(ComplianceStepRequest) = # Replace with your value
+compliance_template_variation_request_instance = ComplianceTemplateVariationRequest(label=label, description=description, outcome_description=outcome_description, referenced_group_label=referenced_group_label, steps=steps)
 
-# convert the object into a dict
-compliance_template_variation_request_dict = compliance_template_variation_request_instance.to_dict()
-# create an instance of ComplianceTemplateVariationRequest from a dict
-compliance_template_variation_request_form_dict = compliance_template_variation_request.from_dict(compliance_template_variation_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

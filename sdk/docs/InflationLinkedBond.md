@@ -1,7 +1,6 @@
 # InflationLinkedBond
 
 Inflation Linked Bond.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -23,24 +22,37 @@ Name | Type | Description | Notes
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **original_issue_price** | **float** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.inflation_linked_bond import InflationLinkedBond
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+flow_conventions: FlowConventions = # Replace with your value
+inflation_index_conventions: InflationIndexConventions = # Replace with your value
+coupon_rate: Union[StrictFloat, StrictInt] = # Replace with your value
+identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+base_cpi: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+base_cpi_date: Optional[datetime] = # Replace with your value
+calculation_type: Optional[StrictStr] = "example_calculation_type"
+ex_dividend_days: Optional[StrictInt] = # Replace with your value
+ex_dividend_days: Optional[StrictInt] = None
+index_precision: Optional[StrictInt] = # Replace with your value
+index_precision: Optional[StrictInt] = None
+principal: Union[StrictFloat, StrictInt] = # Replace with your value
+principal_protection: Optional[StrictBool] = # Replace with your value
+principal_protection:Optional[StrictBool] = None
+stub_type: Optional[StrictStr] = "example_stub_type"
+rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
+trading_conventions: Optional[TradingConventions] = # Replace with your value
+original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+inflation_linked_bond_instance = InflationLinkedBond(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, inflation_index_conventions=inflation_index_conventions, coupon_rate=coupon_rate, identifiers=identifiers, base_cpi=base_cpi, base_cpi_date=base_cpi_date, calculation_type=calculation_type, ex_dividend_days=ex_dividend_days, index_precision=index_precision, principal=principal, principal_protection=principal_protection, stub_type=stub_type, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, original_issue_price=original_issue_price, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InflationLinkedBond from a JSON string
-inflation_linked_bond_instance = InflationLinkedBond.from_json(json)
-# print the JSON string representation of the object
-print InflationLinkedBond.to_json()
-
-# convert the object into a dict
-inflation_linked_bond_dict = inflation_linked_bond_instance.to_dict()
-# create an instance of InflationLinkedBond from a dict
-inflation_linked_bond_form_dict = inflation_linked_bond.from_dict(inflation_linked_bond_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

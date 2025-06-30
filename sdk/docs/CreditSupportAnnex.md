@@ -1,7 +1,6 @@
 # CreditSupportAnnex
 
 Entity to capture the calculable and queryable methods and practices of determining and transferring collateral  to a counterparty as part of margining of transactions. These typically come from a particular ISDA agreement  that is in place between the two counterparties.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,27 @@ Name | Type | Description | Notes
 **initial_margin_amount** | **float** | The initial margin that is required. In the reference currency | 
 **minimum_transfer_amount** | **float** | The minimum amount, in the reference currency, that must be transferred when required. | 
 **id** | [**ResourceId**](ResourceId.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.credit_support_annex import CreditSupportAnnex
+from typing import Any, Dict, List, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreditSupportAnnex from a JSON string
-credit_support_annex_instance = CreditSupportAnnex.from_json(json)
-# print the JSON string representation of the object
-print CreditSupportAnnex.to_json()
+reference_currency: StrictStr = "example_reference_currency"
+collateral_currencies: conlist(StrictStr) = # Replace with your value
+isda_agreement_version: StrictStr = "example_isda_agreement_version"
+margin_call_frequency: StrictStr = "example_margin_call_frequency"
+valuation_agent: StrictStr = "example_valuation_agent"
+threshold_amount: Union[StrictFloat, StrictInt] = # Replace with your value
+rounding_decimal_places: StrictInt = # Replace with your value
+rounding_decimal_places: StrictInt = 42
+initial_margin_amount: Union[StrictFloat, StrictInt] = # Replace with your value
+minimum_transfer_amount: Union[StrictFloat, StrictInt] = # Replace with your value
+id: ResourceId = # Replace with your value
+credit_support_annex_instance = CreditSupportAnnex(reference_currency=reference_currency, collateral_currencies=collateral_currencies, isda_agreement_version=isda_agreement_version, margin_call_frequency=margin_call_frequency, valuation_agent=valuation_agent, threshold_amount=threshold_amount, rounding_decimal_places=rounding_decimal_places, initial_margin_amount=initial_margin_amount, minimum_transfer_amount=minimum_transfer_amount, id=id)
 
-# convert the object into a dict
-credit_support_annex_dict = credit_support_annex_instance.to_dict()
-# create an instance of CreditSupportAnnex from a dict
-credit_support_annex_form_dict = credit_support_annex.from_dict(credit_support_annex_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

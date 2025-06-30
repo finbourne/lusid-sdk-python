@@ -1,7 +1,6 @@
 # InvestorRecord
 
 Representation of an Investor Record on the LUSID API
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,26 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.investor_record import InvestorRecord
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InvestorRecord from a JSON string
-investor_record_instance = InvestorRecord.from_json(json)
-# print the JSON string representation of the object
-print InvestorRecord.to_json()
+lusid_investor_record_id: Optional[StrictStr] = "example_lusid_investor_record_id"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+investor: Optional[Investor] = None
+identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+relationships: Optional[conlist(Relationship)] = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+investor_record_instance = InvestorRecord(lusid_investor_record_id=lusid_investor_record_id, display_name=display_name, description=description, investor=investor, identifiers=identifiers, properties=properties, relationships=relationships, href=href, version=version, links=links)
 
-# convert the object into a dict
-investor_record_dict = investor_record_instance.to_dict()
-# create an instance of InvestorRecord from a dict
-investor_record_form_dict = investor_record.from_dict(investor_record_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

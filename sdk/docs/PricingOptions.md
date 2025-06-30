@@ -1,7 +1,6 @@
 # PricingOptions
 
 Options for controlling the default aspects and behaviour of the pricing engine.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -19,24 +18,41 @@ Name | Type | Description | Notes
 **convert_srs_cash_flows_to_portfolio_currency** | **bool** | In the case upserted structured result store (SRS) cashflows are not   in the portfolio currency, set this parameter to True to convert said  cashflows into the portfolio currency. By default, this flag is set   to False and Lusid will not do any FX conversion.    Please note that FX conversion is dependent on the data available in  the quote store - ensure that all relevant FX quotes have been loaded  for cashflow currency conversion. | [optional] 
 **conserved_quantity_for_lookthrough_expansion** | **str** | When performing lookthrough portfolio expansion with ScalingMethodology set to \&quot;Sum\&quot; or \&quot;AbsoluteSum\&quot;,  the quantity specified here will be conserved and apportioned to lookthrough constituents.  For example, an equal-weighting index with 100 constituents can be modelled as a reference portfolio with 1% weights on each equity.  When expanding a $9000 holding of that index into its constituents while conserving PV, we end up with $90 of each equity.  The number of units of each equity held is then implied.  Note that conservation of one quantity may imply non-conservation of others, especially when some constituents are OTCs.                Allowed values are: \&quot;PV\&quot; (default), \&quot;Exposure\&quot;. | [optional] 
 **return_zero_pv** | [**ReturnZeroPvOptions**](ReturnZeroPvOptions.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.pricing_options import PricingOptions
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PricingOptions from a JSON string
-pricing_options_instance = PricingOptions.from_json(json)
-# print the JSON string representation of the object
-print PricingOptions.to_json()
+model_selection: Optional[ModelSelection] = # Replace with your value
+use_instrument_type_to_determine_pricer: Optional[StrictBool] = # Replace with your value
+use_instrument_type_to_determine_pricer:Optional[StrictBool] = None
+allow_any_instruments_with_sec_uid_to_price_off_lookup: Optional[StrictBool] = # Replace with your value
+allow_any_instruments_with_sec_uid_to_price_off_lookup:Optional[StrictBool] = None
+allow_partially_successful_evaluation: Optional[StrictBool] = # Replace with your value
+allow_partially_successful_evaluation:Optional[StrictBool] = None
+produce_separate_result_for_linear_otc_legs: Optional[StrictBool] = # Replace with your value
+produce_separate_result_for_linear_otc_legs:Optional[StrictBool] = None
+enable_use_of_cached_unit_results: Optional[StrictBool] = # Replace with your value
+enable_use_of_cached_unit_results:Optional[StrictBool] = None
+window_valuation_on_instrument_start_end: Optional[StrictBool] = # Replace with your value
+window_valuation_on_instrument_start_end:Optional[StrictBool] = None
+remove_contingent_cashflows_in_payment_diary: Optional[StrictBool] = # Replace with your value
+remove_contingent_cashflows_in_payment_diary:Optional[StrictBool] = None
+use_child_sub_holding_keys_for_portfolio_expansion: Optional[StrictBool] = # Replace with your value
+use_child_sub_holding_keys_for_portfolio_expansion:Optional[StrictBool] = None
+validate_domestic_and_quote_currencies_are_consistent: Optional[StrictBool] = # Replace with your value
+validate_domestic_and_quote_currencies_are_consistent:Optional[StrictBool] = None
+mbs_valuation_using_holding_current_face: Optional[StrictBool] = # Replace with your value
+mbs_valuation_using_holding_current_face:Optional[StrictBool] = None
+convert_srs_cash_flows_to_portfolio_currency: Optional[StrictBool] = # Replace with your value
+convert_srs_cash_flows_to_portfolio_currency:Optional[StrictBool] = None
+conserved_quantity_for_lookthrough_expansion: Optional[StrictStr] = "example_conserved_quantity_for_lookthrough_expansion"
+return_zero_pv: Optional[ReturnZeroPvOptions] = # Replace with your value
+pricing_options_instance = PricingOptions(model_selection=model_selection, use_instrument_type_to_determine_pricer=use_instrument_type_to_determine_pricer, allow_any_instruments_with_sec_uid_to_price_off_lookup=allow_any_instruments_with_sec_uid_to_price_off_lookup, allow_partially_successful_evaluation=allow_partially_successful_evaluation, produce_separate_result_for_linear_otc_legs=produce_separate_result_for_linear_otc_legs, enable_use_of_cached_unit_results=enable_use_of_cached_unit_results, window_valuation_on_instrument_start_end=window_valuation_on_instrument_start_end, remove_contingent_cashflows_in_payment_diary=remove_contingent_cashflows_in_payment_diary, use_child_sub_holding_keys_for_portfolio_expansion=use_child_sub_holding_keys_for_portfolio_expansion, validate_domestic_and_quote_currencies_are_consistent=validate_domestic_and_quote_currencies_are_consistent, mbs_valuation_using_holding_current_face=mbs_valuation_using_holding_current_face, convert_srs_cash_flows_to_portfolio_currency=convert_srs_cash_flows_to_portfolio_currency, conserved_quantity_for_lookthrough_expansion=conserved_quantity_for_lookthrough_expansion, return_zero_pv=return_zero_pv)
 
-# convert the object into a dict
-pricing_options_dict = pricing_options_instance.to_dict()
-# create an instance of PricingOptions from a dict
-pricing_options_form_dict = pricing_options.from_dict(pricing_options_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

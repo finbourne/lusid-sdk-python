@@ -1,6 +1,5 @@
 # StagingRuleSet
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.staging_rule_set import StagingRuleSet
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of StagingRuleSet from a JSON string
-staging_rule_set_instance = StagingRuleSet.from_json(json)
-# print the JSON string representation of the object
-print StagingRuleSet.to_json()
+entity_type: StrictStr = "example_entity_type"
+staging_rule_set_id: StrictStr = "example_staging_rule_set_id"
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+rules: conlist(StagingRule) = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+staging_rule_set_instance = StagingRuleSet(entity_type=entity_type, staging_rule_set_id=staging_rule_set_id, display_name=display_name, description=description, rules=rules, href=href, version=version, links=links)
 
-# convert the object into a dict
-staging_rule_set_dict = staging_rule_set_instance.to_dict()
-# create an instance of StagingRuleSet from a dict
-staging_rule_set_form_dict = staging_rule_set.from_dict(staging_rule_set_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

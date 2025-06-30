@@ -1,6 +1,5 @@
 # UpdateIdentifierDefinitionRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **display_name** | **str** | A display name for the identifier. E.g. Figi. | [optional] 
 **description** | **str** | An optional description for the identifier. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the identifier definition. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.update_identifier_definition_request import UpdateIdentifierDefinitionRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpdateIdentifierDefinitionRequest from a JSON string
-update_identifier_definition_request_instance = UpdateIdentifierDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print UpdateIdentifierDefinitionRequest.to_json()
+hierarchy_level: Optional[StrictStr] = "example_hierarchy_level"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+update_identifier_definition_request_instance = UpdateIdentifierDefinitionRequest(hierarchy_level=hierarchy_level, display_name=display_name, description=description, properties=properties)
 
-# convert the object into a dict
-update_identifier_definition_request_dict = update_identifier_definition_request_instance.to_dict()
-# create an instance of UpdateIdentifierDefinitionRequest from a dict
-update_identifier_definition_request_form_dict = update_identifier_definition_request.from_dict(update_identifier_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

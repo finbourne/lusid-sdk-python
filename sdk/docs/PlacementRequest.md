@@ -1,7 +1,6 @@
 # PlacementRequest
 
 A request to create or update a Placement.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -21,24 +20,32 @@ Name | Type | Description | Notes
 **counterparty** | **str** | Optionally specifies the market entity this placement is placed with. | [optional] 
 **execution_system** | **str** | Optionally specifies the execution system in use. | [optional] 
 **entry_type** | **str** | Optionally specifies the entry type of this placement. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.placement_request import PlacementRequest
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+id: ResourceId = # Replace with your value
+parent_placement_id: Optional[ResourceId] = # Replace with your value
+block_ids: conlist(ResourceId) = # Replace with your value
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+state: StrictStr = "example_state"
+side: StrictStr = "example_side"
+time_in_force: StrictStr = "example_time_in_force"
+type: StrictStr = "example_type"
+created_date: datetime = # Replace with your value
+limit_price: Optional[CurrencyAndAmount] = # Replace with your value
+stop_price: Optional[CurrencyAndAmount] = # Replace with your value
+counterparty: Optional[StrictStr] = "example_counterparty"
+execution_system: Optional[StrictStr] = "example_execution_system"
+entry_type: Optional[StrictStr] = "example_entry_type"
+placement_request_instance = PlacementRequest(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PlacementRequest from a JSON string
-placement_request_instance = PlacementRequest.from_json(json)
-# print the JSON string representation of the object
-print PlacementRequest.to_json()
-
-# convert the object into a dict
-placement_request_dict = placement_request_instance.to_dict()
-# create an instance of PlacementRequest from a dict
-placement_request_form_dict = placement_request.from_dict(placement_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,30 +1,24 @@
 # RecombineStep
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **label** | **str** | The label of the compliance step | 
 **parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | Parameters required for the step | 
 **compliance_step_type** | **str** | . The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep | 
-
 ## Example
 
 ```python
 from lusid.models.recombine_step import RecombineStep
+from typing import Any, Dict, List
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of RecombineStep from a JSON string
-recombine_step_instance = RecombineStep.from_json(json)
-# print the JSON string representation of the object
-print RecombineStep.to_json()
+label: StrictStr = "example_label"
+parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+compliance_step_type: StrictStr = "example_compliance_step_type"
+recombine_step_instance = RecombineStep(label=label, parameters=parameters, compliance_step_type=compliance_step_type)
 
-# convert the object into a dict
-recombine_step_dict = recombine_step_instance.to_dict()
-# create an instance of RecombineStep from a dict
-recombine_step_form_dict = recombine_step.from_dict(recombine_step_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

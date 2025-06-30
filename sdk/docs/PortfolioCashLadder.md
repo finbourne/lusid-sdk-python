@@ -1,6 +1,5 @@
 # PortfolioCashLadder
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **records** | [**List[CashLadderRecord]**](CashLadderRecord.md) | A record of cash flows on a specific date. | 
 **failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) | The records that could not be returned along with a reason for their failure. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioCashLadder from a JSON string
-portfolio_cash_ladder_instance = PortfolioCashLadder.from_json(json)
-# print the JSON string representation of the object
-print PortfolioCashLadder.to_json()
+currency: StrictStr = "example_currency"
+sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+records: conlist(CashLadderRecord) = # Replace with your value
+failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
+links: Optional[conlist(Link)] = None
+portfolio_cash_ladder_instance = PortfolioCashLadder(currency=currency, sub_holding_keys=sub_holding_keys, records=records, failed=failed, links=links)
 
-# convert the object into a dict
-portfolio_cash_ladder_dict = portfolio_cash_ladder_instance.to_dict()
-# create an instance of PortfolioCashLadder from a dict
-portfolio_cash_ladder_form_dict = portfolio_cash_ladder.from_dict(portfolio_cash_ladder_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

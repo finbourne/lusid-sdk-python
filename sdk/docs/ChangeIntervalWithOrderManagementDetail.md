@@ -1,7 +1,6 @@
 # ChangeIntervalWithOrderManagementDetail
 
 Defines a change that occured for an entity, with extra detail about the change
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,30 @@ Name | Type | Description | Notes
 **previous_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **new_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **effective_range** | [**EffectiveRange**](EffectiveRange.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from datetime import datetime
+detail: Optional[Dict[str, StrictStr]] = # Replace with your value
+action_description: Optional[StrictStr] = "example_action_description"
+as_at_modified: Optional[datetime] = # Replace with your value
+user_id_modified: Optional[StrictStr] = "example_user_id_modified"
+request_id_modified: Optional[StrictStr] = "example_request_id_modified"
+reason_modified: Optional[StrictStr] = "example_reason_modified"
+as_at_version_number: Optional[StrictInt] = # Replace with your value
+as_at_version_number: Optional[StrictInt] = None
+staged_modification_id_modified: Optional[StrictStr] = "example_staged_modification_id_modified"
+action: Optional[StrictStr] = "example_action"
+attribute_name: Optional[StrictStr] = "example_attribute_name"
+previous_value: Optional[PropertyValue] = # Replace with your value
+new_value: Optional[PropertyValue] = # Replace with your value
+effective_range: Optional[EffectiveRange] = # Replace with your value
+change_interval_with_order_management_detail_instance = ChangeIntervalWithOrderManagementDetail(detail=detail, action_description=action_description, as_at_modified=as_at_modified, user_id_modified=user_id_modified, request_id_modified=request_id_modified, reason_modified=reason_modified, as_at_version_number=as_at_version_number, staged_modification_id_modified=staged_modification_id_modified, action=action, attribute_name=attribute_name, previous_value=previous_value, new_value=new_value, effective_range=effective_range)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ChangeIntervalWithOrderManagementDetail from a JSON string
-change_interval_with_order_management_detail_instance = ChangeIntervalWithOrderManagementDetail.from_json(json)
-# print the JSON string representation of the object
-print ChangeIntervalWithOrderManagementDetail.to_json()
-
-# convert the object into a dict
-change_interval_with_order_management_detail_dict = change_interval_with_order_management_detail_instance.to_dict()
-# create an instance of ChangeIntervalWithOrderManagementDetail from a dict
-change_interval_with_order_management_detail_form_dict = change_interval_with_order_management_detail.from_dict(change_interval_with_order_management_detail_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

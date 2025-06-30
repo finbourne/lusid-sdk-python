@@ -1,7 +1,6 @@
 # VendorModelRule
 
 A rule that identifies the set of preferences to be used for a given library, model and instrument type.  There can be many such rules, though only the first found for a given combination would be used.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **model_options** | [**ModelOptions**](ModelOptions.md) |  | [optional] 
 **instrument_id** | **str** | This field should generally not be required. It indicates a specific case where there is a particular need to make a rule apply to only a single instrument  specified by an identifier on that instrument such as its LUID. One particular example would be to control the behaviour of a look-through portfolio scaling  methodology, such as where there is a mixture of indices and credit-debit portfolios where scaling on the sum of valuation would be deemed incorrectly for one  set but desired in general. | [optional] 
 **address_key_filters** | [**List[AddressKeyFilter]**](AddressKeyFilter.md) | Condition for model selection. If a condition is satisfied the default model for valuation is overridden (for that instrument). | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.vendor_model_rule import VendorModelRule
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of VendorModelRule from a JSON string
-vendor_model_rule_instance = VendorModelRule.from_json(json)
-# print the JSON string representation of the object
-print VendorModelRule.to_json()
+supplier: StrictStr = "example_supplier"
+model_name: StrictStr = "example_model_name"
+instrument_type: StrictStr = "example_instrument_type"
+parameters: Optional[StrictStr] = "example_parameters"
+model_options: Optional[ModelOptions] = # Replace with your value
+instrument_id: Optional[StrictStr] = "example_instrument_id"
+address_key_filters: Optional[conlist(AddressKeyFilter)] = # Replace with your value
+vendor_model_rule_instance = VendorModelRule(supplier=supplier, model_name=model_name, instrument_type=instrument_type, parameters=parameters, model_options=model_options, instrument_id=instrument_id, address_key_filters=address_key_filters)
 
-# convert the object into a dict
-vendor_model_rule_dict = vendor_model_rule_instance.to_dict()
-# create an instance of VendorModelRule from a dict
-vendor_model_rule_form_dict = vendor_model_rule.from_dict(vendor_model_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

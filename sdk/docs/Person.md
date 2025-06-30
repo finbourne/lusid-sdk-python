@@ -1,6 +1,5 @@
 # Person
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the Person. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.person import Person
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Person from a JSON string
-person_instance = Person.from_json(json)
-# print the JSON string representation of the object
-print Person.to_json()
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+href: Optional[StrictStr] = "example_href"
+lusid_person_id: Optional[StrictStr] = "example_lusid_person_id"
+identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+relationships: Optional[conlist(Relationship)] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+person_instance = Person(display_name=display_name, description=description, href=href, lusid_person_id=lusid_person_id, identifiers=identifiers, properties=properties, relationships=relationships, version=version, links=links)
 
-# convert the object into a dict
-person_dict = person_instance.to_dict()
-# create an instance of Person from a dict
-person_form_dict = person.from_dict(person_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

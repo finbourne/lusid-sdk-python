@@ -1,7 +1,6 @@
 # InstrumentEventHolder
 
 An instrument event equipped with additional metadata.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,29 @@ Name | Type | Description | Notes
 **properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | The properties attached to this instrument event. | [optional] 
 **sequence_number** | **int** | The order of the instrument event relative others on the same date (0 being processed first). Must be non negative. | [optional] 
 **participation_type** | **str** | Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary. | [optional] [default to 'Mandatory']
-
 ## Example
 
 ```python
 from lusid.models.instrument_event_holder import InstrumentEventHolder
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentEventHolder from a JSON string
-instrument_event_holder_instance = InstrumentEventHolder.from_json(json)
-# print the JSON string representation of the object
-print InstrumentEventHolder.to_json()
+instrument_event_id: StrictStr = "example_instrument_event_id"
+corporate_action_source_id: Optional[ResourceId] = # Replace with your value
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
+instrument_scope: StrictStr = "example_instrument_scope"
+description: StrictStr = "example_description"
+event_date_range: EventDateRange = # Replace with your value
+completeness: Optional[StrictStr] = "example_completeness"
+instrument_event: InstrumentEvent = # Replace with your value
+properties: Optional[conlist(PerpetualProperty)] = # Replace with your value
+sequence_number: Optional[StrictInt] = # Replace with your value
+sequence_number: Optional[StrictInt] = None
+participation_type: Optional[StrictStr] = "example_participation_type"
+instrument_event_holder_instance = InstrumentEventHolder(instrument_event_id=instrument_event_id, corporate_action_source_id=corporate_action_source_id, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, description=description, event_date_range=event_date_range, completeness=completeness, instrument_event=instrument_event, properties=properties, sequence_number=sequence_number, participation_type=participation_type)
 
-# convert the object into a dict
-instrument_event_holder_dict = instrument_event_holder_instance.to_dict()
-# create an instance of InstrumentEventHolder from a dict
-instrument_event_holder_form_dict = instrument_event_holder.from_dict(instrument_event_holder_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

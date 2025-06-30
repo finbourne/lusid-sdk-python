@@ -1,7 +1,6 @@
 # FxLinkedNotionalSchedule
 
 Schedule for notional changes based on the change in FX rate.  Used in the representation of a resettable cross currency interest rate swap.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **varying_notional_fixing_dates** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | 
 **varying_notional_interim_exchange_payment_dates** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
 **schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
-
 ## Example
 
 ```python
 from lusid.models.fx_linked_notional_schedule import FxLinkedNotionalSchedule
+from typing import Any, Dict, Optional
+from pydantic.v1 import Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FxLinkedNotionalSchedule from a JSON string
-fx_linked_notional_schedule_instance = FxLinkedNotionalSchedule.from_json(json)
-# print the JSON string representation of the object
-print FxLinkedNotionalSchedule.to_json()
+fx_conventions: FxConventions = # Replace with your value
+varying_notional_currency: StrictStr = "example_varying_notional_currency"
+varying_notional_fixing_dates: RelativeDateOffset = # Replace with your value
+varying_notional_interim_exchange_payment_dates: Optional[RelativeDateOffset] = # Replace with your value
+schedule_type: StrictStr = "example_schedule_type"
+fx_linked_notional_schedule_instance = FxLinkedNotionalSchedule(fx_conventions=fx_conventions, varying_notional_currency=varying_notional_currency, varying_notional_fixing_dates=varying_notional_fixing_dates, varying_notional_interim_exchange_payment_dates=varying_notional_interim_exchange_payment_dates, schedule_type=schedule_type)
 
-# convert the object into a dict
-fx_linked_notional_schedule_dict = fx_linked_notional_schedule_instance.to_dict()
-# create an instance of FxLinkedNotionalSchedule from a dict
-fx_linked_notional_schedule_form_dict = fx_linked_notional_schedule.from_dict(fx_linked_notional_schedule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

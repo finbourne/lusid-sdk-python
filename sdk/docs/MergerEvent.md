@@ -1,7 +1,6 @@
 # MergerEvent
 
 Merger Event (MRGR).
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,27 @@ Name | Type | Description | Notes
 **record_date** | **datetime** | Optional. Date you have to be the holder of record of the original shares in order to receive the new shares. | [optional] 
 **security_offer_elections** | [**List[SecurityOfferElection]**](SecurityOfferElection.md) | List of possible SecurityOfferElections for this merger event | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent | 
-
 ## Example
 
 ```python
 from lusid.models.merger_event import MergerEvent
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from datetime import datetime
+announcement_date: Optional[datetime] = # Replace with your value
+cash_and_security_offer_elections: Optional[conlist(CashAndSecurityOfferElection)] = # Replace with your value
+cash_offer_elections: Optional[conlist(CashOfferElection)] = # Replace with your value
+ex_date: Optional[datetime] = # Replace with your value
+fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
+fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+new_instrument: NewInstrument = # Replace with your value
+payment_date: Optional[datetime] = # Replace with your value
+record_date: Optional[datetime] = # Replace with your value
+security_offer_elections: Optional[conlist(SecurityOfferElection)] = # Replace with your value
+instrument_event_type: StrictStr = "example_instrument_event_type"
+merger_event_instance = MergerEvent(announcement_date=announcement_date, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, ex_date=ex_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, new_instrument=new_instrument, payment_date=payment_date, record_date=record_date, security_offer_elections=security_offer_elections, instrument_event_type=instrument_event_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MergerEvent from a JSON string
-merger_event_instance = MergerEvent.from_json(json)
-# print the JSON string representation of the object
-print MergerEvent.to_json()
-
-# convert the object into a dict
-merger_event_dict = merger_event_instance.to_dict()
-# create an instance of MergerEvent from a dict
-merger_event_form_dict = merger_event.from_dict(merger_event_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

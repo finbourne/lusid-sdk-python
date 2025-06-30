@@ -1,7 +1,6 @@
 # FlowConventions
 
 A flow convention defines the specification for generation of the date schedule for a leg or set of cashflows.  It determines the tenor of these and, how to map the unadjusted set of dates to dates which are 'good business  days'. For example, if an unadjusted date falls on a Saturday or a bank holiday, should it be rolled forward  or backward to obtain the adjusted date.  For more information, see https://support.lusid.com/knowledgebase/article/KA-02055/
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -20,24 +19,34 @@ Name | Type | Description | Notes
 **coupon_payment_lag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.flow_conventions import FlowConventions
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FlowConventions from a JSON string
-flow_conventions_instance = FlowConventions.from_json(json)
-# print the JSON string representation of the object
-print FlowConventions.to_json()
+currency: StrictStr = "example_currency"
+payment_frequency: StrictStr = "example_payment_frequency"
+day_count_convention: StrictStr = "example_day_count_convention"
+roll_convention: StrictStr = "example_roll_convention"
+payment_calendars: conlist(StrictStr) = # Replace with your value
+reset_calendars: conlist(StrictStr) = # Replace with your value
+settle_days: Optional[StrictInt] = # Replace with your value
+settle_days: Optional[StrictInt] = None
+reset_days: Optional[StrictInt] = # Replace with your value
+reset_days: Optional[StrictInt] = None
+leap_days_included: Optional[StrictBool] = # Replace with your value
+leap_days_included:Optional[StrictBool] = None
+accrual_date_adjustment: Optional[StrictStr] = "example_accrual_date_adjustment"
+business_day_convention: Optional[StrictStr] = "example_business_day_convention"
+accrual_day_count_convention: Optional[StrictStr] = "example_accrual_day_count_convention"
+coupon_payment_lag: Optional[RelativeDateOffset] = # Replace with your value
+scope: Optional[StrictStr] = "example_scope"
+code: Optional[StrictStr] = "example_code"
+flow_conventions_instance = FlowConventions(currency=currency, payment_frequency=payment_frequency, day_count_convention=day_count_convention, roll_convention=roll_convention, payment_calendars=payment_calendars, reset_calendars=reset_calendars, settle_days=settle_days, reset_days=reset_days, leap_days_included=leap_days_included, accrual_date_adjustment=accrual_date_adjustment, business_day_convention=business_day_convention, accrual_day_count_convention=accrual_day_count_convention, coupon_payment_lag=coupon_payment_lag, scope=scope, code=code)
 
-# convert the object into a dict
-flow_conventions_dict = flow_conventions_instance.to_dict()
-# create an instance of FlowConventions from a dict
-flow_conventions_form_dict = flow_conventions.from_dict(flow_conventions_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

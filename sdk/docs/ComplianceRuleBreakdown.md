@@ -1,6 +1,5 @@
 # ComplianceRuleBreakdown
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **properties_used** | **Dict[str, List[ModelProperty]]** | Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule | 
 **missing_data_information** | **List[str]** | List of string information detailing data that was missing from contributions processed in this rule | 
 **lineage** | [**List[LineageMember]**](LineageMember.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
+from typing import Any, Dict, List, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceRuleBreakdown from a JSON string
-compliance_rule_breakdown_instance = ComplianceRuleBreakdown.from_json(json)
-# print the JSON string representation of the object
-print ComplianceRuleBreakdown.to_json()
+group_status: StrictStr = "example_group_status"
+results_used: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your value
+properties_used: Dict[str, conlist(ModelProperty)] = # Replace with your value
+missing_data_information: conlist(StrictStr) = # Replace with your value
+lineage: conlist(LineageMember) = # Replace with your value
+compliance_rule_breakdown_instance = ComplianceRuleBreakdown(group_status=group_status, results_used=results_used, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
 
-# convert the object into a dict
-compliance_rule_breakdown_dict = compliance_rule_breakdown_instance.to_dict()
-# create an instance of ComplianceRuleBreakdown from a dict
-compliance_rule_breakdown_form_dict = compliance_rule_breakdown.from_dict(compliance_rule_breakdown_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

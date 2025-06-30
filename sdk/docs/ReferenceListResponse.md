@@ -1,6 +1,5 @@
 # ReferenceListResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **reference_list** | [**ReferenceList**](ReferenceList.md) |  | 
 **version** | [**Version**](Version.md) |  | 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.reference_list_response import ReferenceListResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReferenceListResponse from a JSON string
-reference_list_response_instance = ReferenceListResponse.from_json(json)
-# print the JSON string representation of the object
-print ReferenceListResponse.to_json()
+id: ResourceId = # Replace with your value
+name: StrictStr = "example_name"
+description: Optional[StrictStr] = "example_description"
+tags: Optional[conlist(StrictStr)] = # Replace with your value
+reference_list: ReferenceList = # Replace with your value
+version: Version = # Replace with your value
+links: Optional[conlist(Link)] = None
+reference_list_response_instance = ReferenceListResponse(id=id, name=name, description=description, tags=tags, reference_list=reference_list, version=version, links=links)
 
-# convert the object into a dict
-reference_list_response_dict = reference_list_response_instance.to_dict()
-# create an instance of ReferenceListResponse from a dict
-reference_list_response_form_dict = reference_list_response.from_dict(reference_list_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

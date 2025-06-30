@@ -1,7 +1,6 @@
 # GeneralLedgerProfileResponse
 
 A General Ledger Profile Definition.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **general_ledger_profile_mappings** | [**List[GeneralLedgerProfileMapping]**](GeneralLedgerProfileMapping.md) | Rules for mapping Account or property values to aggregation pattern definitions | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.general_ledger_profile_response import GeneralLedgerProfileResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GeneralLedgerProfileResponse from a JSON string
-general_ledger_profile_response_instance = GeneralLedgerProfileResponse.from_json(json)
-# print the JSON string representation of the object
-print GeneralLedgerProfileResponse.to_json()
+href: Optional[StrictStr] = "example_href"
+chart_of_accounts_id: ResourceId = # Replace with your value
+general_ledger_profile_code: StrictStr = "example_general_ledger_profile_code"
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+general_ledger_profile_mappings: conlist(GeneralLedgerProfileMapping, max_items=1000) = Field(..., alias="generalLedgerProfileMappings", description="Rules for mapping Account or property values to aggregation pattern definitions")
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+general_ledger_profile_response_instance = GeneralLedgerProfileResponse(href=href, chart_of_accounts_id=chart_of_accounts_id, general_ledger_profile_code=general_ledger_profile_code, display_name=display_name, description=description, general_ledger_profile_mappings=general_ledger_profile_mappings, version=version, links=links)
 
-# convert the object into a dict
-general_ledger_profile_response_dict = general_ledger_profile_response_instance.to_dict()
-# create an instance of GeneralLedgerProfileResponse from a dict
-general_ledger_profile_response_form_dict = general_ledger_profile_response.from_dict(general_ledger_profile_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

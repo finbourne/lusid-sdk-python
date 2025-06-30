@@ -1,7 +1,6 @@
 # CompleteRelationship
 
 Representation of a relationship containing details of source and target entities, and both outward and inward descriptions.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **inward_description** | **str** | Description of the relationship based on relationship definition&#39;s inward description. | 
 **effective_from** | **datetime** | The effective datetime from which the relationship is valid. | [optional] 
 **effective_until** | **datetime** | The effective datetime to which the relationship is valid until. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.complete_relationship import CompleteRelationship
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+version: Optional[Version] = None
+relationship_definition_id: ResourceId = # Replace with your value
+source_entity: RelatedEntity = # Replace with your value
+target_entity: RelatedEntity = # Replace with your value
+outward_description: StrictStr = "example_outward_description"
+inward_description: StrictStr = "example_inward_description"
+effective_from: Optional[datetime] = # Replace with your value
+effective_until: Optional[datetime] = # Replace with your value
+complete_relationship_instance = CompleteRelationship(href=href, version=version, relationship_definition_id=relationship_definition_id, source_entity=source_entity, target_entity=target_entity, outward_description=outward_description, inward_description=inward_description, effective_from=effective_from, effective_until=effective_until)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CompleteRelationship from a JSON string
-complete_relationship_instance = CompleteRelationship.from_json(json)
-# print the JSON string representation of the object
-print CompleteRelationship.to_json()
-
-# convert the object into a dict
-complete_relationship_dict = complete_relationship_instance.to_dict()
-# create an instance of CompleteRelationship from a dict
-complete_relationship_form_dict = complete_relationship.from_dict(complete_relationship_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

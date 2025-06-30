@@ -1,31 +1,25 @@
 # CorporateActionTransitionComponentRequest
 
 A single transition component request, when grouped with other transition component requests a corporate action  transition request is formed.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_identifiers** | **Dict[str, str]** | Unique instrument identifiers | 
 **units_factor** | **float** | The factor to scale units by | 
 **cost_factor** | **float** | The factor to scale cost by | 
-
 ## Example
 
 ```python
 from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
+from typing import Any, Dict, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CorporateActionTransitionComponentRequest from a JSON string
-corporate_action_transition_component_request_instance = CorporateActionTransitionComponentRequest.from_json(json)
-# print the JSON string representation of the object
-print CorporateActionTransitionComponentRequest.to_json()
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+units_factor: Union[StrictFloat, StrictInt] = # Replace with your value
+cost_factor: Union[StrictFloat, StrictInt] = # Replace with your value
+corporate_action_transition_component_request_instance = CorporateActionTransitionComponentRequest(instrument_identifiers=instrument_identifiers, units_factor=units_factor, cost_factor=cost_factor)
 
-# convert the object into a dict
-corporate_action_transition_component_request_dict = corporate_action_transition_component_request_instance.to_dict()
-# create an instance of CorporateActionTransitionComponentRequest from a dict
-corporate_action_transition_component_request_form_dict = corporate_action_transition_component_request.from_dict(corporate_action_transition_component_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

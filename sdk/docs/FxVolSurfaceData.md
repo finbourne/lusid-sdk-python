@@ -1,7 +1,6 @@
 # FxVolSurfaceData
 
 Market Data for an fx vol surface, represented by a list of fx options and corresponding market quotes
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **quotes** | [**List[MarketQuote]**](MarketQuote.md) | The set of market quotes that define the surface, in NormalVol or LogNormalVol terms. | 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
-
 ## Example
 
 ```python
 from lusid.models.fx_vol_surface_data import FxVolSurfaceData
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from datetime import datetime
+base_date: datetime = # Replace with your value
+instruments: conlist(LusidInstrument) = # Replace with your value
+quotes: conlist(MarketQuote) = # Replace with your value
+lineage: Optional[StrictStr] = "example_lineage"
+market_data_type: StrictStr = "example_market_data_type"
+fx_vol_surface_data_instance = FxVolSurfaceData(base_date=base_date, instruments=instruments, quotes=quotes, lineage=lineage, market_data_type=market_data_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FxVolSurfaceData from a JSON string
-fx_vol_surface_data_instance = FxVolSurfaceData.from_json(json)
-# print the JSON string representation of the object
-print FxVolSurfaceData.to_json()
-
-# convert the object into a dict
-fx_vol_surface_data_dict = fx_vol_surface_data_instance.to_dict()
-# create an instance of FxVolSurfaceData from a dict
-fx_vol_surface_data_form_dict = fx_vol_surface_data.from_dict(fx_vol_surface_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

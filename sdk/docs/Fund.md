@@ -1,7 +1,6 @@
 # Fund
 
 A Fund entity.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -19,24 +18,31 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fund import Fund
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+id: ResourceId = # Replace with your value
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+fund_configuration_id: Optional[ResourceId] = # Replace with your value
+abor_id: ResourceId = # Replace with your value
+share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = # Replace with your value
+type: StrictStr = "example_type"
+inception_date: datetime = # Replace with your value
+decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+decimal_places: Optional[StrictInt] = None
+year_end_date: DayMonth = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+fund_instance = Fund(href=href, id=id, display_name=display_name, description=description, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, properties=properties, version=version, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Fund from a JSON string
-fund_instance = Fund.from_json(json)
-# print the JSON string representation of the object
-print Fund.to_json()
-
-# convert the object into a dict
-fund_dict = fund_instance.to_dict()
-# create an instance of Fund from a dict
-fund_form_dict = fund.from_dict(fund_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

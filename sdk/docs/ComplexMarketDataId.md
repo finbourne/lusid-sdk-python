@@ -1,7 +1,6 @@
 # ComplexMarketDataId
 
 An identifier that uniquely describes an item of complex market data such as an interest rate curve or volatility surface.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **lineage** | **str** | This is obsolete. It is not used, it will not be stored, and has no effects.  If you wish to attach a Lineage to your ComplexMarketData,  you should provide it in the optional Lineage field in the ComplexMarketData class. | [optional] 
 **effective_at** | **str** | The effectiveAt or cut label that this item of complex market data is/was updated/inserted with. | [optional] 
 **market_asset** | **str** | The name of the market entity that the document represents | 
-
 ## Example
 
 ```python
 from lusid.models.complex_market_data_id import ComplexMarketDataId
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplexMarketDataId from a JSON string
-complex_market_data_id_instance = ComplexMarketDataId.from_json(json)
-# print the JSON string representation of the object
-print ComplexMarketDataId.to_json()
+provider: StrictStr = "example_provider"
+price_source: Optional[StrictStr] = "example_price_source"
+lineage: Optional[StrictStr] = "example_lineage"
+effective_at: Optional[StrictStr] = "example_effective_at"
+market_asset: StrictStr = "example_market_asset"
+complex_market_data_id_instance = ComplexMarketDataId(provider=provider, price_source=price_source, lineage=lineage, effective_at=effective_at, market_asset=market_asset)
 
-# convert the object into a dict
-complex_market_data_id_dict = complex_market_data_id_instance.to_dict()
-# create an instance of ComplexMarketDataId from a dict
-complex_market_data_id_form_dict = complex_market_data_id.from_dict(complex_market_data_id_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

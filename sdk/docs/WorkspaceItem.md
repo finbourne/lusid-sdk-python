@@ -1,7 +1,6 @@
 # WorkspaceItem
 
 An item stored in a workspace.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **content** | **object** | The content associated with a workspace item. | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.workspace_item import WorkspaceItem
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of WorkspaceItem from a JSON string
-workspace_item_instance = WorkspaceItem.from_json(json)
-# print the JSON string representation of the object
-print WorkspaceItem.to_json()
+type: StrictStr = "example_type"
+format: StrictInt = # Replace with your value
+format: StrictInt = 42
+name: StrictStr = "example_name"
+group: StrictStr = "example_group"
+description: StrictStr = "example_description"
+content: Optional[Any] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+workspace_item_instance = WorkspaceItem(type=type, format=format, name=name, group=group, description=description, content=content, version=version, links=links)
 
-# convert the object into a dict
-workspace_item_dict = workspace_item_instance.to_dict()
-# create an instance of WorkspaceItem from a dict
-workspace_item_form_dict = workspace_item.from_dict(workspace_item_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

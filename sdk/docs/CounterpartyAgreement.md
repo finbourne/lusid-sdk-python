@@ -1,7 +1,6 @@
 # CounterpartyAgreement
 
 Represents the legal agreement between two parties engaged in an OTC transaction.  A typical example would be a 2002 ISDA Master Agreement, signed by two legal entities on a given date.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **dated_as_of** | **datetime** | The date on which the CounterpartyAgreement was signed by both parties. | 
 **credit_support_annex_id** | [**ResourceId**](ResourceId.md) |  | 
 **id** | [**ResourceId**](ResourceId.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.counterparty_agreement import CounterpartyAgreement
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr
+from datetime import datetime
+display_name: StrictStr = "example_display_name"
+agreement_type: StrictStr = "example_agreement_type"
+counterparty_signatory: CounterpartySignatory = # Replace with your value
+dated_as_of: datetime = # Replace with your value
+credit_support_annex_id: ResourceId = # Replace with your value
+id: ResourceId = # Replace with your value
+counterparty_agreement_instance = CounterpartyAgreement(display_name=display_name, agreement_type=agreement_type, counterparty_signatory=counterparty_signatory, dated_as_of=dated_as_of, credit_support_annex_id=credit_support_annex_id, id=id)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CounterpartyAgreement from a JSON string
-counterparty_agreement_instance = CounterpartyAgreement.from_json(json)
-# print the JSON string representation of the object
-print CounterpartyAgreement.to_json()
-
-# convert the object into a dict
-counterparty_agreement_dict = counterparty_agreement_instance.to_dict()
-# create an instance of CounterpartyAgreement from a dict
-counterparty_agreement_form_dict = counterparty_agreement.from_dict(counterparty_agreement_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

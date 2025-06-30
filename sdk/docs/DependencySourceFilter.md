@@ -1,7 +1,6 @@
 # DependencySourceFilter
 
 Encapsulates parts of a market data rule relating not to the nature of the market data requested, but rather the nature of the thing (instrument/model) that is requesting it.  In the first instance, this includes the instrument type, asset class, and the currency of the underlying instrument.  This can be used to differentiate requests for market data according to the source of the request. See MarketDataSpecificRule.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **dom_ccy** | **str** | Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied. | [optional] 
 **long_or_short_indicator** | **str** | Specify that a rule should apply if the market data is requested by a model with a given long or short indicator.  If none, then no filtering on LongOrShortIndicator is applied. | [optional] 
 **address_key_filters** | [**List[AddressKeyFilter]**](AddressKeyFilter.md) | Specify that a rule should apply if the market data is requested by an instrument with features or properties  satisfying all the given address key filters. If an empty list is given, no additional filtering is done. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.dependency_source_filter import DependencySourceFilter
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DependencySourceFilter from a JSON string
-dependency_source_filter_instance = DependencySourceFilter.from_json(json)
-# print the JSON string representation of the object
-print DependencySourceFilter.to_json()
+instrument_type: Optional[StrictStr] = "example_instrument_type"
+asset_class: Optional[StrictStr] = "example_asset_class"
+dom_ccy: Optional[StrictStr] = "example_dom_ccy"
+long_or_short_indicator: Optional[StrictStr] = "example_long_or_short_indicator"
+address_key_filters: Optional[conlist(AddressKeyFilter)] = # Replace with your value
+dependency_source_filter_instance = DependencySourceFilter(instrument_type=instrument_type, asset_class=asset_class, dom_ccy=dom_ccy, long_or_short_indicator=long_or_short_indicator, address_key_filters=address_key_filters)
 
-# convert the object into a dict
-dependency_source_filter_dict = dependency_source_filter_instance.to_dict()
-# create an instance of DependencySourceFilter from a dict
-dependency_source_filter_form_dict = dependency_source_filter.from_dict(dependency_source_filter_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # EquityAllOfIdentifiers
 
 External market codes and identifiers for the equity, e.g. IBM
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,27 @@ Name | Type | Description | Notes
 **red_code** | **str** |  | [optional] 
 **bbgid** | **str** |  | [optional] 
 **ice_code** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of EquityAllOfIdentifiers from a JSON string
-equity_all_of_identifiers_instance = EquityAllOfIdentifiers.from_json(json)
-# print the JSON string representation of the object
-print EquityAllOfIdentifiers.to_json()
+lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
+isin: Optional[StrictStr] = "example_isin"
+sedol: Optional[StrictStr] = "example_sedol"
+cusip: Optional[StrictStr] = "example_cusip"
+client_internal: Optional[StrictStr] = "example_client_internal"
+figi: Optional[StrictStr] = "example_figi"
+ric: Optional[StrictStr] = "example_ric"
+quote_perm_id: Optional[StrictStr] = "example_quote_perm_id"
+red_code: Optional[StrictStr] = "example_red_code"
+bbgid: Optional[StrictStr] = "example_bbgid"
+ice_code: Optional[StrictStr] = "example_ice_code"
+equity_all_of_identifiers_instance = EquityAllOfIdentifiers(lusid_instrument_id=lusid_instrument_id, isin=isin, sedol=sedol, cusip=cusip, client_internal=client_internal, figi=figi, ric=ric, quote_perm_id=quote_perm_id, red_code=red_code, bbgid=bbgid, ice_code=ice_code)
 
-# convert the object into a dict
-equity_all_of_identifiers_dict = equity_all_of_identifiers_instance.to_dict()
-# create an instance of EquityAllOfIdentifiers from a dict
-equity_all_of_identifiers_form_dict = equity_all_of_identifiers.from_dict(equity_all_of_identifiers_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

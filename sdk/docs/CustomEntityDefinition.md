@@ -1,7 +1,6 @@
 # CustomEntityDefinition
 
 Representation of Custom Entity Definition on LUSID API
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **field_schema** | [**List[CustomEntityFieldDefinition]**](CustomEntityFieldDefinition.md) | The description of the fields on the custom entity type. | 
 **version** | [**Version**](Version.md) |  | 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.custom_entity_definition import CustomEntityDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CustomEntityDefinition from a JSON string
-custom_entity_definition_instance = CustomEntityDefinition.from_json(json)
-# print the JSON string representation of the object
-print CustomEntityDefinition.to_json()
+href: Optional[StrictStr] = "example_href"
+entity_type_name: StrictStr = "example_entity_type_name"
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+entity_type: StrictStr = "example_entity_type"
+field_schema: conlist(CustomEntityFieldDefinition) = # Replace with your value
+version: Version = # Replace with your value
+links: Optional[conlist(Link)] = None
+custom_entity_definition_instance = CustomEntityDefinition(href=href, entity_type_name=entity_type_name, display_name=display_name, description=description, entity_type=entity_type, field_schema=field_schema, version=version, links=links)
 
-# convert the object into a dict
-custom_entity_definition_dict = custom_entity_definition_instance.to_dict()
-# create an instance of CustomEntityDefinition from a dict
-custom_entity_definition_form_dict = custom_entity_definition.from_dict(custom_entity_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

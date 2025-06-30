@@ -1,6 +1,5 @@
 # StagingRuleMatchCriteria
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **requesting_user** | **str** |  | [optional] 
 **entity_attributes** | **str** |  | [optional] 
 **changed_attribute_name_in** | **List[str]** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of StagingRuleMatchCriteria from a JSON string
-staging_rule_match_criteria_instance = StagingRuleMatchCriteria.from_json(json)
-# print the JSON string representation of the object
-print StagingRuleMatchCriteria.to_json()
+action_in: Optional[conlist(StrictStr)] = # Replace with your value
+requesting_user: Optional[StrictStr] = "example_requesting_user"
+entity_attributes: Optional[StrictStr] = "example_entity_attributes"
+changed_attribute_name_in: Optional[conlist(StrictStr)] = # Replace with your value
+staging_rule_match_criteria_instance = StagingRuleMatchCriteria(action_in=action_in, requesting_user=requesting_user, entity_attributes=entity_attributes, changed_attribute_name_in=changed_attribute_name_in)
 
-# convert the object into a dict
-staging_rule_match_criteria_dict = staging_rule_match_criteria_instance.to_dict()
-# create an instance of StagingRuleMatchCriteria from a dict
-staging_rule_match_criteria_form_dict = staging_rule_match_criteria.from_dict(staging_rule_match_criteria_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

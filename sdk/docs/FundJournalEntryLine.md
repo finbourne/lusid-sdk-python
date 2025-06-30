@@ -1,7 +1,6 @@
 # FundJournalEntryLine
 
 A Journal Entry line entity specifically for fund valuation point lines.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -36,24 +35,47 @@ Name | Type | Description | Notes
 **journal_entry_line_type** | **str** | Indicates the Journal Entry Line type | [optional] 
 **share_class_breakdowns** | [**List[JournalEntryLineShareClassBreakdown]**](JournalEntryLineShareClassBreakdown.md) | Share Class breakdown data for this Journal Entry Line. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+accounting_date: datetime = # Replace with your value
+activity_date: datetime = # Replace with your value
+portfolio_id: ResourceId = # Replace with your value
+instrument_id: StrictStr = "example_instrument_id"
+instrument_scope: StrictStr = "example_instrument_scope"
+sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
+general_ledger_account_code: StrictStr = "example_general_ledger_account_code"
+local: CurrencyAndAmount = # Replace with your value
+base: CurrencyAndAmount = # Replace with your value
+units: Union[StrictFloat, StrictInt] = # Replace with your value
+posting_module_code: Optional[StrictStr] = "example_posting_module_code"
+posting_rule: StrictStr = "example_posting_rule"
+as_at_date: datetime = # Replace with your value
+activities_description: Optional[StrictStr] = "example_activities_description"
+source_type: StrictStr = "example_source_type"
+source_id: StrictStr = "example_source_id"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+movement_name: Optional[StrictStr] = "example_movement_name"
+holding_type: StrictStr = "example_holding_type"
+economic_bucket: StrictStr = "example_economic_bucket"
+economic_bucket_component: Optional[StrictStr] = "example_economic_bucket_component"
+economic_bucket_variant: Optional[StrictStr] = "example_economic_bucket_variant"
+levels: Optional[conlist(StrictStr)] = # Replace with your value
+source_levels: Optional[conlist(StrictStr)] = # Replace with your value
+movement_sign: Optional[StrictStr] = "example_movement_sign"
+holding_sign: Optional[StrictStr] = "example_holding_sign"
+ledger_column: Optional[StrictStr] = "example_ledger_column"
+journal_entry_line_type: Optional[StrictStr] = "example_journal_entry_line_type"
+share_class_breakdowns: Optional[conlist(JournalEntryLineShareClassBreakdown)] = # Replace with your value
+links: Optional[conlist(Link)] = None
+fund_journal_entry_line_instance = FundJournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, share_class_breakdowns=share_class_breakdowns, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FundJournalEntryLine from a JSON string
-fund_journal_entry_line_instance = FundJournalEntryLine.from_json(json)
-# print the JSON string representation of the object
-print FundJournalEntryLine.to_json()
-
-# convert the object into a dict
-fund_journal_entry_line_dict = fund_journal_entry_line_instance.to_dict()
-# create an instance of FundJournalEntryLine from a dict
-fund_journal_entry_line_form_dict = fund_journal_entry_line.from_dict(fund_journal_entry_line_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

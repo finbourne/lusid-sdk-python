@@ -1,7 +1,6 @@
 # DiscountFactorCurveData
 
 A curve containing discount factors and dates to which they apply
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
-
 ## Example
 
 ```python
 from lusid.models.discount_factor_curve_data import DiscountFactorCurveData
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+base_date: datetime = # Replace with your value
+dates: conlist(datetime) = # Replace with your value
+discount_factors: conlist(Union[StrictFloat, StrictInt]) = # Replace with your value
+lineage: Optional[StrictStr] = "example_lineage"
+market_data_options: Optional[MarketDataOptions] = # Replace with your value
+market_data_type: StrictStr = "example_market_data_type"
+discount_factor_curve_data_instance = DiscountFactorCurveData(base_date=base_date, dates=dates, discount_factors=discount_factors, lineage=lineage, market_data_options=market_data_options, market_data_type=market_data_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DiscountFactorCurveData from a JSON string
-discount_factor_curve_data_instance = DiscountFactorCurveData.from_json(json)
-# print the JSON string representation of the object
-print DiscountFactorCurveData.to_json()
-
-# convert the object into a dict
-discount_factor_curve_data_dict = discount_factor_curve_data_instance.to_dict()
-# create an instance of DiscountFactorCurveData from a dict
-discount_factor_curve_data_form_dict = discount_factor_curve_data.from_dict(discount_factor_curve_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

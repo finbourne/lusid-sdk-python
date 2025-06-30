@@ -1,6 +1,5 @@
 # TaxRule
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **description** | **str** | A description for this rule | 
 **rate** | **float** | The rate to be applied if all criteria are met | 
 **match_criteria** | [**List[MatchCriterion]**](MatchCriterion.md) | A set of criteria to be met for this rule to be applied | 
-
 ## Example
 
 ```python
 from lusid.models.tax_rule import TaxRule
+from typing import Any, Dict, List, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TaxRule from a JSON string
-tax_rule_instance = TaxRule.from_json(json)
-# print the JSON string representation of the object
-print TaxRule.to_json()
+name: StrictStr = "example_name"
+description: StrictStr = "example_description"
+rate: Union[StrictFloat, StrictInt] = # Replace with your value
+match_criteria: conlist(MatchCriterion, max_items=20) = Field(..., alias="matchCriteria", description="A set of criteria to be met for this rule to be applied")
+tax_rule_instance = TaxRule(name=name, description=description, rate=rate, match_criteria=match_criteria)
 
-# convert the object into a dict
-tax_rule_dict = tax_rule_instance.to_dict()
-# create an instance of TaxRule from a dict
-tax_rule_form_dict = tax_rule.from_dict(tax_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

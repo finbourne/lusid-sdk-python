@@ -1,6 +1,5 @@
 # GroupReconciliationComparisonResult
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -20,24 +19,32 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.group_reconciliation_comparison_result import GroupReconciliationComparisonResult
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from datetime import datetime
+id: ResourceId = # Replace with your value
+reconciliation_type: StrictStr = "example_reconciliation_type"
+group_reconciliation_definition_id: ResourceId = # Replace with your value
+instance_id: GroupReconciliationInstanceId = # Replace with your value
+comparison_result_id: StrictStr = "example_comparison_result_id"
+reconciliation_run_as_at: datetime = # Replace with your value
+result_type: StrictStr = "example_result_type"
+result_status: StrictStr = "example_result_status"
+review_status: StrictStr = "example_review_status"
+dates_reconciled: GroupReconciliationDates = # Replace with your value
+core_attributes: GroupReconciliationCoreAttributeValues = # Replace with your value
+aggregate_attributes: GroupReconciliationAggregateAttributeValues = # Replace with your value
+user_review: Optional[GroupReconciliationUserReview] = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+group_reconciliation_comparison_result_instance = GroupReconciliationComparisonResult(id=id, reconciliation_type=reconciliation_type, group_reconciliation_definition_id=group_reconciliation_definition_id, instance_id=instance_id, comparison_result_id=comparison_result_id, reconciliation_run_as_at=reconciliation_run_as_at, result_type=result_type, result_status=result_status, review_status=review_status, dates_reconciled=dates_reconciled, core_attributes=core_attributes, aggregate_attributes=aggregate_attributes, user_review=user_review, href=href, version=version, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GroupReconciliationComparisonResult from a JSON string
-group_reconciliation_comparison_result_instance = GroupReconciliationComparisonResult.from_json(json)
-# print the JSON string representation of the object
-print GroupReconciliationComparisonResult.to_json()
-
-# convert the object into a dict
-group_reconciliation_comparison_result_dict = group_reconciliation_comparison_result_instance.to_dict()
-# create an instance of GroupReconciliationComparisonResult from a dict
-group_reconciliation_comparison_result_form_dict = group_reconciliation_comparison_result.from_dict(group_reconciliation_comparison_result_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

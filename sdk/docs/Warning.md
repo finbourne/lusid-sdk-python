@@ -1,29 +1,22 @@
 # Warning
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entity_id** | **str** |  | 
 **message** | **str** |  | 
-
 ## Example
 
 ```python
 from lusid.models.warning import Warning
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Warning from a JSON string
-warning_instance = Warning.from_json(json)
-# print the JSON string representation of the object
-print Warning.to_json()
+entity_id: StrictStr = "example_entity_id"
+message: StrictStr = "example_message"
+warning_instance = Warning(entity_id=entity_id, message=message)
 
-# convert the object into a dict
-warning_dict = warning_instance.to_dict()
-# create an instance of Warning from a dict
-warning_form_dict = warning.from_dict(warning_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

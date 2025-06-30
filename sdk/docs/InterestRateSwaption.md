@@ -1,7 +1,6 @@
 # InterestRateSwaption
 
 LUSID representation of an Interest Rate Swaption.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **delivery_method** | **str** | How does the option settle    Supported string (enumeration) values are: [Cash, Physical]. | 
 **swap** | [**InterestRateSwap**](InterestRateSwap.md) |  | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.interest_rate_swaption import InterestRateSwaption
+from typing import Any, Dict, Optional
+from pydantic.v1 import Field, StrictStr, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+pay_or_receive_fixed: StrictStr = "example_pay_or_receive_fixed"
+premium: Optional[Premium] = None
+delivery_method: StrictStr = "example_delivery_method"
+swap: InterestRateSwap = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+interest_rate_swaption_instance = InterestRateSwaption(start_date=start_date, pay_or_receive_fixed=pay_or_receive_fixed, premium=premium, delivery_method=delivery_method, swap=swap, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InterestRateSwaption from a JSON string
-interest_rate_swaption_instance = InterestRateSwaption.from_json(json)
-# print the JSON string representation of the object
-print InterestRateSwaption.to_json()
-
-# convert the object into a dict
-interest_rate_swaption_dict = interest_rate_swaption_instance.to_dict()
-# create an instance of InterestRateSwaption from a dict
-interest_rate_swaption_form_dict = interest_rate_swaption.from_dict(interest_rate_swaption_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

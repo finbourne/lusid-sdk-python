@@ -1,6 +1,5 @@
 # Fee
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -25,24 +24,37 @@ Name | Type | Description | Notes
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **share_classes** | **List[str]** | The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fee import Fee
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+fee_code: Optional[StrictStr] = "example_fee_code"
+fee_type_id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+origin: Optional[StrictStr] = "example_origin"
+calculation_base: Optional[StrictStr] = "example_calculation_base"
+accrual_currency: StrictStr = "example_accrual_currency"
+treatment: StrictStr = "example_treatment"
+total_annual_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fee_rate_percentage: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+payable_frequency: StrictStr = "example_payable_frequency"
+business_day_convention: StrictStr = "example_business_day_convention"
+start_date: datetime = # Replace with your value
+end_date: Optional[datetime] = # Replace with your value
+anchor_date: Optional[DayMonth] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+portfolio_id: Optional[ResourceId] = # Replace with your value
+share_classes: Optional[conlist(StrictStr)] = # Replace with your value
+links: Optional[conlist(Link)] = None
+fee_instance = Fee(href=href, fee_code=fee_code, fee_type_id=fee_type_id, display_name=display_name, description=description, origin=origin, calculation_base=calculation_base, accrual_currency=accrual_currency, treatment=treatment, total_annual_accrual_amount=total_annual_accrual_amount, fee_rate_percentage=fee_rate_percentage, payable_frequency=payable_frequency, business_day_convention=business_day_convention, start_date=start_date, end_date=end_date, anchor_date=anchor_date, properties=properties, version=version, portfolio_id=portfolio_id, share_classes=share_classes, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Fee from a JSON string
-fee_instance = Fee.from_json(json)
-# print the JSON string representation of the object
-print Fee.to_json()
-
-# convert the object into a dict
-fee_dict = fee_instance.to_dict()
-# create an instance of Fee from a dict
-fee_form_dict = fee.from_dict(fee_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

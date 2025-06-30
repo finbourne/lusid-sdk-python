@@ -1,6 +1,5 @@
 # GroupReconciliationDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,27 @@ Name | Type | Description | Notes
 **break_code_source** | [**BreakCodeSource**](BreakCodeSource.md) |  | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.group_reconciliation_definition import GroupReconciliationDefinition
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GroupReconciliationDefinition from a JSON string
-group_reconciliation_definition_instance = GroupReconciliationDefinition.from_json(json)
-# print the JSON string representation of the object
-print GroupReconciliationDefinition.to_json()
+id: Optional[ResourceId] = None
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+portfolio_entity_ids: Optional[GroupReconciliationDefinitionPortfolioEntityIds] = # Replace with your value
+recipe_ids: Optional[GroupReconciliationDefinitionRecipeIds] = # Replace with your value
+currencies: Optional[GroupReconciliationDefinitionCurrencies] = None
+transaction_date_windows: Optional[TransactionDateWindows] = # Replace with your value
+comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = # Replace with your value
+break_code_source: Optional[BreakCodeSource] = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+version: Optional[Version] = None
+group_reconciliation_definition_instance = GroupReconciliationDefinition(id=id, display_name=display_name, description=description, portfolio_entity_ids=portfolio_entity_ids, recipe_ids=recipe_ids, currencies=currencies, transaction_date_windows=transaction_date_windows, comparison_ruleset_ids=comparison_ruleset_ids, break_code_source=break_code_source, href=href, version=version)
 
-# convert the object into a dict
-group_reconciliation_definition_dict = group_reconciliation_definition_instance.to_dict()
-# create an instance of GroupReconciliationDefinition from a dict
-group_reconciliation_definition_form_dict = group_reconciliation_definition.from_dict(group_reconciliation_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

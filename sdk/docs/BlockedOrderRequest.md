@@ -1,6 +1,5 @@
 # BlockedOrderRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,27 @@ Name | Type | Description | Notes
 **order_instruction** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **package** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.blocked_order_request import BlockedOrderRequest
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from datetime import datetime
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+order_book_id: Optional[ResourceId] = # Replace with your value
+portfolio_id: Optional[ResourceId] = # Replace with your value
+id: ResourceId = # Replace with your value
+state: Optional[StrictStr] = "example_state"
+var_date: Optional[datetime] = # Replace with your value
+price: Optional[CurrencyAndAmount] = None
+order_instruction: Optional[ResourceId] = # Replace with your value
+package: Optional[ResourceId] = None
+side: Optional[StrictStr] = "example_side"
+blocked_order_request_instance = BlockedOrderRequest(properties=properties, quantity=quantity, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, var_date=var_date, price=price, order_instruction=order_instruction, package=package, side=side)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BlockedOrderRequest from a JSON string
-blocked_order_request_instance = BlockedOrderRequest.from_json(json)
-# print the JSON string representation of the object
-print BlockedOrderRequest.to_json()
-
-# convert the object into a dict
-blocked_order_request_dict = blocked_order_request_instance.to_dict()
-# create an instance of BlockedOrderRequest from a dict
-blocked_order_request_form_dict = blocked_order_request.from_dict(blocked_order_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

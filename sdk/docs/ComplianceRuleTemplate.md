@@ -1,6 +1,5 @@
 # ComplianceRuleTemplate
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceRuleTemplate from a JSON string
-compliance_rule_template_instance = ComplianceRuleTemplate.from_json(json)
-# print the JSON string representation of the object
-print ComplianceRuleTemplate.to_json()
+id: Optional[ResourceId] = None
+description: Optional[StrictStr] = "example_description"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+variations: Optional[conlist(ComplianceTemplateVariationDto)] = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+compliance_rule_template_instance = ComplianceRuleTemplate(id=id, description=description, properties=properties, variations=variations, href=href, version=version, links=links)
 
-# convert the object into a dict
-compliance_rule_template_dict = compliance_rule_template_instance.to_dict()
-# create an instance of ComplianceRuleTemplate from a dict
-compliance_rule_template_form_dict = compliance_rule_template.from_dict(compliance_rule_template_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

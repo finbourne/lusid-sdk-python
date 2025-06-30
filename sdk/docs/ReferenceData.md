@@ -1,29 +1,22 @@
 # ReferenceData
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **field_definitions** | [**List[FieldDefinition]**](FieldDefinition.md) |  | 
 **values** | [**List[FieldValue]**](FieldValue.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.reference_data import ReferenceData
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReferenceData from a JSON string
-reference_data_instance = ReferenceData.from_json(json)
-# print the JSON string representation of the object
-print ReferenceData.to_json()
+field_definitions: conlist(FieldDefinition) = # Replace with your value
+values: conlist(FieldValue) = # Replace with your value
+reference_data_instance = ReferenceData(field_definitions=field_definitions, values=values)
 
-# convert the object into a dict
-reference_data_dict = reference_data_instance.to_dict()
-# create an instance of ReferenceData from a dict
-reference_data_form_dict = reference_data.from_dict(reference_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

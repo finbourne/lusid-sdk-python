@@ -1,29 +1,22 @@
 # MultiCurrencyAmounts
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **local_amount** | **float** |  | 
 **base_amount** | **float** |  | 
-
 ## Example
 
 ```python
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
+from typing import Any, Dict, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MultiCurrencyAmounts from a JSON string
-multi_currency_amounts_instance = MultiCurrencyAmounts.from_json(json)
-# print the JSON string representation of the object
-print MultiCurrencyAmounts.to_json()
+local_amount: Union[StrictFloat, StrictInt] = # Replace with your value
+base_amount: Union[StrictFloat, StrictInt] = # Replace with your value
+multi_currency_amounts_instance = MultiCurrencyAmounts(local_amount=local_amount, base_amount=base_amount)
 
-# convert the object into a dict
-multi_currency_amounts_dict = multi_currency_amounts_instance.to_dict()
-# create an instance of MultiCurrencyAmounts from a dict
-multi_currency_amounts_form_dict = multi_currency_amounts.from_dict(multi_currency_amounts_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

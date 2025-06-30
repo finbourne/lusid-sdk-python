@@ -1,6 +1,5 @@
 # AddBusinessDaysToDateRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,21 @@ Name | Type | Description | Notes
 **holiday_codes** | **List[str]** |  | 
 **start_date** | **datetime** |  | [optional] 
 **as_at** | **datetime** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.add_business_days_to_date_request import AddBusinessDaysToDateRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from datetime import datetime
+business_day_offset: StrictInt = # Replace with your value
+business_day_offset: StrictInt = 42
+holiday_codes: conlist(StrictStr) = # Replace with your value
+start_date: Optional[datetime] = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+add_business_days_to_date_request_instance = AddBusinessDaysToDateRequest(business_day_offset=business_day_offset, holiday_codes=holiday_codes, start_date=start_date, as_at=as_at)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AddBusinessDaysToDateRequest from a JSON string
-add_business_days_to_date_request_instance = AddBusinessDaysToDateRequest.from_json(json)
-# print the JSON string representation of the object
-print AddBusinessDaysToDateRequest.to_json()
-
-# convert the object into a dict
-add_business_days_to_date_request_dict = add_business_days_to_date_request_instance.to_dict()
-# create an instance of AddBusinessDaysToDateRequest from a dict
-add_business_days_to_date_request_form_dict = add_business_days_to_date_request.from_dict(add_business_days_to_date_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

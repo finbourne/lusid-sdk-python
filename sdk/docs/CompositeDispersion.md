@@ -1,7 +1,6 @@
 # CompositeDispersion
 
 A list of Dispersion calculations for the given years.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **range** | **float** | Highest return - Lowest return. | [optional] 
 **constituents_in_scope** | [**List[ResourceId]**](ResourceId.md) | List containing Composite members which are part of the dispersion calcualtion. | [optional] 
 **constituents_excluded** | [**List[ResourceId]**](ResourceId.md) | List containing the Composite members which are not part of the dispersion calculation | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.composite_dispersion import CompositeDispersion
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
+from datetime import datetime
+effective_at: datetime = # Replace with your value
+dispersion_calculation: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+variance: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+first_quartile: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+third_quartile: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+range: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+constituents_in_scope: Optional[conlist(ResourceId)] = # Replace with your value
+constituents_excluded: Optional[conlist(ResourceId)] = # Replace with your value
+composite_dispersion_instance = CompositeDispersion(effective_at=effective_at, dispersion_calculation=dispersion_calculation, variance=variance, first_quartile=first_quartile, third_quartile=third_quartile, range=range, constituents_in_scope=constituents_in_scope, constituents_excluded=constituents_excluded)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CompositeDispersion from a JSON string
-composite_dispersion_instance = CompositeDispersion.from_json(json)
-# print the JSON string representation of the object
-print CompositeDispersion.to_json()
-
-# convert the object into a dict
-composite_dispersion_dict = composite_dispersion_instance.to_dict()
-# create an instance of CompositeDispersion from a dict
-composite_dispersion_form_dict = composite_dispersion.from_dict(composite_dispersion_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

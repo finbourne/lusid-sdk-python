@@ -1,7 +1,6 @@
 # FundValuationPointData
 
 The Valuation Point Data for a Fund on a specified date.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **nav** | **float** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | 
 **miscellaneous** | [**Dict[str, FundAmount]**](FundAmount.md) | Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations). | [optional] 
 **previous_valuation_point_data** | [**PreviousFundValuationPointData**](PreviousFundValuationPointData.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fund_valuation_point_data import FundValuationPointData
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FundValuationPointData from a JSON string
-fund_valuation_point_data_instance = FundValuationPointData.from_json(json)
-# print the JSON string representation of the object
-print FundValuationPointData.to_json()
+back_out: Dict[str, FundAmount] = # Replace with your value
+dealing: Dict[str, FundAmount] = # Replace with your value
+pn_l: FundPnlBreakdown = # Replace with your value
+gav: Union[StrictFloat, StrictInt] = # Replace with your value
+fees: Dict[str, FeeAccrual] = # Replace with your value
+nav: Union[StrictFloat, StrictInt] = # Replace with your value
+miscellaneous: Optional[Dict[str, FundAmount]] = # Replace with your value
+previous_valuation_point_data: Optional[PreviousFundValuationPointData] = # Replace with your value
+fund_valuation_point_data_instance = FundValuationPointData(back_out=back_out, dealing=dealing, pn_l=pn_l, gav=gav, fees=fees, nav=nav, miscellaneous=miscellaneous, previous_valuation_point_data=previous_valuation_point_data)
 
-# convert the object into a dict
-fund_valuation_point_data_dict = fund_valuation_point_data_instance.to_dict()
-# create an instance of FundValuationPointData from a dict
-fund_valuation_point_data_form_dict = fund_valuation_point_data.from_dict(fund_valuation_point_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

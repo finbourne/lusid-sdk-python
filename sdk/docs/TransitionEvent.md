@@ -1,7 +1,6 @@
 # TransitionEvent
 
 A 'transition' within a corporate action, representing a set of output movements paired to a single input position
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **input_transition** | [**InputTransition**](InputTransition.md) |  | [optional] 
 **output_transitions** | [**List[OutputTransition]**](OutputTransition.md) | The resulting transitions from this event | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent | 
-
 ## Example
 
 ```python
 from lusid.models.transition_event import TransitionEvent
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, validator
+from datetime import datetime
+announcement_date: Optional[datetime] = # Replace with your value
+ex_date: Optional[datetime] = # Replace with your value
+record_date: Optional[datetime] = # Replace with your value
+payment_date: Optional[datetime] = # Replace with your value
+input_transition: Optional[InputTransition] = # Replace with your value
+output_transitions: Optional[conlist(OutputTransition)] = # Replace with your value
+instrument_event_type: StrictStr = "example_instrument_event_type"
+transition_event_instance = TransitionEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, input_transition=input_transition, output_transitions=output_transitions, instrument_event_type=instrument_event_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TransitionEvent from a JSON string
-transition_event_instance = TransitionEvent.from_json(json)
-# print the JSON string representation of the object
-print TransitionEvent.to_json()
-
-# convert the object into a dict
-transition_event_dict = transition_event_instance.to_dict()
-# create an instance of TransitionEvent from a dict
-transition_event_form_dict = transition_event.from_dict(transition_event_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

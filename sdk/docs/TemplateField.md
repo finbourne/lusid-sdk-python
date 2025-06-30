@@ -1,6 +1,5 @@
 # TemplateField
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,22 @@ Name | Type | Description | Notes
 **type** | **str** |  | 
 **availability** | **str** |  | 
 **usage** | **List[str]** |  | 
-
 ## Example
 
 ```python
 from lusid.models.template_field import TemplateField
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TemplateField from a JSON string
-template_field_instance = TemplateField.from_json(json)
-# print the JSON string representation of the object
-print TemplateField.to_json()
+field_name: StrictStr = "example_field_name"
+specificity: StrictStr = "example_specificity"
+description: StrictStr = "example_description"
+type: StrictStr = "example_type"
+availability: StrictStr = "example_availability"
+usage: conlist(StrictStr) = # Replace with your value
+template_field_instance = TemplateField(field_name=field_name, specificity=specificity, description=description, type=type, availability=availability, usage=usage)
 
-# convert the object into a dict
-template_field_dict = template_field_instance.to_dict()
-# create an instance of TemplateField from a dict
-template_field_form_dict = template_field.from_dict(template_field_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

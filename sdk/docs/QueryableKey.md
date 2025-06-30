@@ -1,6 +1,5 @@
 # QueryableKey
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,28 @@ Name | Type | Description | Notes
 **removal_date** | **datetime** | If the life cycle status is set to deprecated then this will be populated with the date on or after which removal of the address query will happen | [optional] 
 **applicable_options** | [**Dict[str, AddressKeyOptionDefinition]**](AddressKeyOptionDefinition.md) | A mapping from option names to the definition that the corresponding option value must match. | [optional] 
 **derivation_formula** | **str** | Derivation formula for when the for when the query key represents a DerivedValuation property. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.queryable_key import QueryableKey
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from datetime import datetime
+address_key: StrictStr = "example_address_key"
+description: Optional[StrictStr] = "example_description"
+display_name: StrictStr = "example_display_name"
+type: StrictStr = "example_type"
+flattened_type: StrictStr = "example_flattened_type"
+holding_quantity_scaling: StrictStr = "example_holding_quantity_scaling"
+supported_usages: conlist(StrictStr) = # Replace with your value
+supported_operations: conlist(StrictStr) = # Replace with your value
+life_cycle_status: StrictStr = "example_life_cycle_status"
+removal_date: Optional[datetime] = # Replace with your value
+applicable_options: Optional[Dict[str, AddressKeyOptionDefinition]] = # Replace with your value
+derivation_formula: Optional[StrictStr] = "example_derivation_formula"
+queryable_key_instance = QueryableKey(address_key=address_key, description=description, display_name=display_name, type=type, flattened_type=flattened_type, holding_quantity_scaling=holding_quantity_scaling, supported_usages=supported_usages, supported_operations=supported_operations, life_cycle_status=life_cycle_status, removal_date=removal_date, applicable_options=applicable_options, derivation_formula=derivation_formula)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of QueryableKey from a JSON string
-queryable_key_instance = QueryableKey.from_json(json)
-# print the JSON string representation of the object
-print QueryableKey.to_json()
-
-# convert the object into a dict
-queryable_key_dict = queryable_key_instance.to_dict()
-# create an instance of QueryableKey from a dict
-queryable_key_form_dict = queryable_key.from_dict(queryable_key_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

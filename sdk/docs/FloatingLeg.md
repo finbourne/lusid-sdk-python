@@ -1,7 +1,6 @@
 # FloatingLeg
 
 LUSID representation of a Floating Rate Leg.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **cap_rate** | **float** | The maximum floating rate which a cashflow can accrue. | [optional] 
 **floor_rate** | **float** | The minimum floating rate which a cashflow can accrue. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.floating_leg import FloatingLeg
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+leg_definition: LegDefinition = # Replace with your value
+notional: Union[StrictFloat, StrictInt] = # Replace with your value
+overrides: Optional[FixedLegAllOfOverrides] = None
+cap_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+floor_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+floating_leg_instance = FloatingLeg(start_date=start_date, maturity_date=maturity_date, leg_definition=leg_definition, notional=notional, overrides=overrides, cap_rate=cap_rate, floor_rate=floor_rate, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FloatingLeg from a JSON string
-floating_leg_instance = FloatingLeg.from_json(json)
-# print the JSON string representation of the object
-print FloatingLeg.to_json()
-
-# convert the object into a dict
-floating_leg_dict = floating_leg_instance.to_dict()
-# create an instance of FloatingLeg from a dict
-floating_leg_form_dict = floating_leg.from_dict(floating_leg_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

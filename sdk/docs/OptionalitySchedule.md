@@ -1,7 +1,6 @@
 # OptionalitySchedule
 
 Optionality Schedule represents a class for creation of schedules for optionality (call, put)
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **option_entries** | [**List[OptionEntry]**](OptionEntry.md) | The dates at which the bond call/put may be actioned, and associated strikes. | [optional] 
 **option_type** | **str** | Type of optionality for the schedule.    Supported string (enumeration) values are: [Call, Put]. | [optional] 
 **schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
-
 ## Example
 
 ```python
 from lusid.models.optionality_schedule import OptionalitySchedule
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of OptionalitySchedule from a JSON string
-optionality_schedule_instance = OptionalitySchedule.from_json(json)
-# print the JSON string representation of the object
-print OptionalitySchedule.to_json()
+exercise_type: Optional[StrictStr] = "example_exercise_type"
+option_entries: Optional[conlist(OptionEntry)] = # Replace with your value
+option_type: Optional[StrictStr] = "example_option_type"
+schedule_type: StrictStr = "example_schedule_type"
+optionality_schedule_instance = OptionalitySchedule(exercise_type=exercise_type, option_entries=option_entries, option_type=option_type, schedule_type=schedule_type)
 
-# convert the object into a dict
-optionality_schedule_dict = optionality_schedule_instance.to_dict()
-# create an instance of OptionalitySchedule from a dict
-optionality_schedule_form_dict = optionality_schedule.from_dict(optionality_schedule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

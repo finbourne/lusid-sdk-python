@@ -1,29 +1,22 @@
 # FromRecipe
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **scope** | **str** |  | [optional] 
 **code** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.from_recipe import FromRecipe
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FromRecipe from a JSON string
-from_recipe_instance = FromRecipe.from_json(json)
-# print the JSON string representation of the object
-print FromRecipe.to_json()
+scope: Optional[StrictStr] = "example_scope"
+code: Optional[StrictStr] = "example_code"
+from_recipe_instance = FromRecipe(scope=scope, code=code)
 
-# convert the object into a dict
-from_recipe_dict = from_recipe_instance.to_dict()
-# create an instance of FromRecipe from a dict
-from_recipe_form_dict = from_recipe.from_dict(from_recipe_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

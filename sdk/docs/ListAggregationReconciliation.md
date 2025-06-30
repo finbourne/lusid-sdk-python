@@ -1,6 +1,5 @@
 # ListAggregationReconciliation
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **right** | [**ListAggregationResponse**](ListAggregationResponse.md) |  | [optional] 
 **diff** | **List[Dict[str, object]]** |  | [optional] 
 **data_schema** | [**ResultDataSchema**](ResultDataSchema.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ListAggregationReconciliation from a JSON string
-list_aggregation_reconciliation_instance = ListAggregationReconciliation.from_json(json)
-# print the JSON string representation of the object
-print ListAggregationReconciliation.to_json()
+left: Optional[ListAggregationResponse] = None
+right: Optional[ListAggregationResponse] = None
+diff: Optional[conlist(Dict[str, Any])] = None
+data_schema: Optional[ResultDataSchema] = # Replace with your value
+list_aggregation_reconciliation_instance = ListAggregationReconciliation(left=left, right=right, diff=diff, data_schema=data_schema)
 
-# convert the object into a dict
-list_aggregation_reconciliation_dict = list_aggregation_reconciliation_instance.to_dict()
-# create an instance of ListAggregationReconciliation from a dict
-list_aggregation_reconciliation_form_dict = list_aggregation_reconciliation.from_dict(list_aggregation_reconciliation_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

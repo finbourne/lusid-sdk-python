@@ -1,7 +1,6 @@
 # InstrumentPaymentDiaryRow
 
 An individual row containing details of a single cashflow in the diary.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -20,24 +19,33 @@ Name | Type | Description | Notes
 **forward_rate** | **float** | Forward rate for cash flow if appropriate. (as in for a rates fixed or floating leg) | [optional] 
 **reset_rate** | **float** | The value of the reset, if any. | [optional] 
 **spread** | **float** | The spread that exists on the payoff. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument_payment_diary_row import InstrumentPaymentDiaryRow
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from datetime import datetime
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+currency: Optional[StrictStr] = "example_currency"
+payment_date: Optional[datetime] = # Replace with your value
+pay_or_receive: Optional[StrictStr] = "example_pay_or_receive"
+accrual_start: Optional[datetime] = # Replace with your value
+accrual_end: Optional[datetime] = # Replace with your value
+cash_flow_type: Optional[StrictStr] = "example_cash_flow_type"
+is_cash_flow_determined: Optional[StrictBool] = # Replace with your value
+is_cash_flow_determined:Optional[StrictBool] = None
+is_cash_flow_historic: Optional[StrictBool] = # Replace with your value
+is_cash_flow_historic:Optional[StrictBool] = None
+discount_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+discounted_expected_cash_flow_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+day_count_fraction: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+forward_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+reset_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+spread: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+instrument_payment_diary_row_instance = InstrumentPaymentDiaryRow(quantity=quantity, currency=currency, payment_date=payment_date, pay_or_receive=pay_or_receive, accrual_start=accrual_start, accrual_end=accrual_end, cash_flow_type=cash_flow_type, is_cash_flow_determined=is_cash_flow_determined, is_cash_flow_historic=is_cash_flow_historic, discount_factor=discount_factor, discounted_expected_cash_flow_amount=discounted_expected_cash_flow_amount, day_count_fraction=day_count_fraction, forward_rate=forward_rate, reset_rate=reset_rate, spread=spread)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentPaymentDiaryRow from a JSON string
-instrument_payment_diary_row_instance = InstrumentPaymentDiaryRow.from_json(json)
-# print the JSON string representation of the object
-print InstrumentPaymentDiaryRow.to_json()
-
-# convert the object into a dict
-instrument_payment_diary_row_dict = instrument_payment_diary_row_instance.to_dict()
-# create an instance of InstrumentPaymentDiaryRow from a dict
-instrument_payment_diary_row_form_dict = instrument_payment_diary_row.from_dict(instrument_payment_diary_row_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

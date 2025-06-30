@@ -1,7 +1,6 @@
 # PostingModuleRulesUpdatedResponse
 
 A Posting Module rules update response
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.posting_module_rules_updated_response import PostingModuleRulesUpdatedResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PostingModuleRulesUpdatedResponse from a JSON string
-posting_module_rules_updated_response_instance = PostingModuleRulesUpdatedResponse.from_json(json)
-# print the JSON string representation of the object
-print PostingModuleRulesUpdatedResponse.to_json()
+rules: Optional[conlist(PostingModuleRule)] = # Replace with your value
+version: Optional[Version] = None
+href: Optional[StrictStr] = "example_href"
+links: Optional[conlist(Link)] = None
+posting_module_rules_updated_response_instance = PostingModuleRulesUpdatedResponse(rules=rules, version=version, href=href, links=links)
 
-# convert the object into a dict
-posting_module_rules_updated_response_dict = posting_module_rules_updated_response_instance.to_dict()
-# create an instance of PostingModuleRulesUpdatedResponse from a dict
-posting_module_rules_updated_response_form_dict = posting_module_rules_updated_response.from_dict(posting_module_rules_updated_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

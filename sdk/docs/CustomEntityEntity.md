@@ -1,6 +1,5 @@
 # CustomEntityEntity
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,30 @@ Name | Type | Description | Notes
 **previewed_status** | **str** | The status of the previewed entity. | [optional] 
 **previewed_custom_entity** | [**CustomEntityResponse**](CustomEntityResponse.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.custom_entity_entity import CustomEntityEntity
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+href: StrictStr = "example_href"
+entity_unique_id: StrictStr = "example_entity_unique_id"
+as_at_version_number: Optional[StrictInt] = # Replace with your value
+as_at_version_number: Optional[StrictInt] = None
+status: StrictStr = "example_status"
+as_at_deleted: Optional[datetime] = # Replace with your value
+user_id_deleted: Optional[StrictStr] = "example_user_id_deleted"
+request_id_deleted: Optional[StrictStr] = "example_request_id_deleted"
+effective_at_created: Optional[datetime] = # Replace with your value
+prevailing_custom_entity: Optional[CustomEntityResponse] = # Replace with your value
+deleted_custom_entity: Optional[CustomEntityResponse] = # Replace with your value
+previewed_status: Optional[StrictStr] = "example_previewed_status"
+previewed_custom_entity: Optional[CustomEntityResponse] = # Replace with your value
+links: Optional[conlist(Link)] = None
+custom_entity_entity_instance = CustomEntityEntity(href=href, entity_unique_id=entity_unique_id, as_at_version_number=as_at_version_number, status=status, as_at_deleted=as_at_deleted, user_id_deleted=user_id_deleted, request_id_deleted=request_id_deleted, effective_at_created=effective_at_created, prevailing_custom_entity=prevailing_custom_entity, deleted_custom_entity=deleted_custom_entity, previewed_status=previewed_status, previewed_custom_entity=previewed_custom_entity, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CustomEntityEntity from a JSON string
-custom_entity_entity_instance = CustomEntityEntity.from_json(json)
-# print the JSON string representation of the object
-print CustomEntityEntity.to_json()
-
-# convert the object into a dict
-custom_entity_entity_dict = custom_entity_entity_instance.to_dict()
-# create an instance of CustomEntityEntity from a dict
-custom_entity_entity_form_dict = custom_entity_entity.from_dict(custom_entity_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

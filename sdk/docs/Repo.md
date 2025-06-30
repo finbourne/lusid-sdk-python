@@ -1,7 +1,6 @@
 # Repo
 
 LUSID representation of a sale and repurchase agreement, supporting haircut, margin or repo rate methods.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,28 @@ Name | Type | Description | Notes
 **repo_rate** | **float** | The rate at which interest is to be accrue and be paid upon redemption of the collateral at maturity.  This field is used to calculate the Repurchase price.  While this property is optional, one, and only one, of the RepoRate and RepurchasePrice must be specified. | [optional] 
 **repurchase_price** | **float** | The price at which the collateral is repurchased, this field is optional and can be explicitly set here or will be calculated  from the PurchasePrice and RepoRate.  One, and only one, of the RepoRate and RepurchasePrice must be specified. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.repo import Repo
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+accrual_basis: StrictStr = "example_accrual_basis"
+collateral: Optional[conlist(LusidInstrument)] = # Replace with your value
+collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+haircut: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+purchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+repo_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+repurchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+repo_instance = Repo(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, accrual_basis=accrual_basis, collateral=collateral, collateral_value=collateral_value, haircut=haircut, margin=margin, purchase_price=purchase_price, repo_rate=repo_rate, repurchase_price=repurchase_price, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Repo from a JSON string
-repo_instance = Repo.from_json(json)
-# print the JSON string representation of the object
-print Repo.to_json()
-
-# convert the object into a dict
-repo_dict = repo_instance.to_dict()
-# create an instance of Repo from a dict
-repo_form_dict = repo.from_dict(repo_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

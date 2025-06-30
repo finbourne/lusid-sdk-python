@@ -1,7 +1,6 @@
 # InlineValuationRequest
 
 Specification object for the parameters of an inline valuation
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,31 @@ Name | Type | Description | Notes
 **instruments** | [**List[WeightedInstrument]**](WeightedInstrument.md) | The set of instruments, weighted by the quantities held that are required.  It is identified by an identifier tag that can be used to identify it externally.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case. | 
 **market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.inline_valuation_request import InlineValuationRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from datetime import datetime
+recipe_id: Optional[ResourceId] = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+metrics: conlist(AggregateSpec) = # Replace with your value
+group_by: Optional[conlist(StrictStr)] = # Replace with your value
+filters: Optional[conlist(PropertyFilter)] = # Replace with your value
+sort: Optional[conlist(OrderBySpec)] = # Replace with your value
+report_currency: Optional[StrictStr] = "example_report_currency"
+equip_with_subtotals: Optional[StrictBool] = # Replace with your value
+equip_with_subtotals:Optional[StrictBool] = None
+return_result_as_expanded_types: Optional[StrictBool] = # Replace with your value
+return_result_as_expanded_types:Optional[StrictBool] = None
+valuation_schedule: Optional[ValuationSchedule] = # Replace with your value
+instruments: conlist(WeightedInstrument) = # Replace with your value
+market_data_overrides: Optional[MarketDataOverrides] = # Replace with your value
+corporate_action_source_id: Optional[ResourceId] = # Replace with your value
+inline_valuation_request_instance = InlineValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, valuation_schedule=valuation_schedule, instruments=instruments, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InlineValuationRequest from a JSON string
-inline_valuation_request_instance = InlineValuationRequest.from_json(json)
-# print the JSON string representation of the object
-print InlineValuationRequest.to_json()
-
-# convert the object into a dict
-inline_valuation_request_dict = inline_valuation_request_instance.to_dict()
-# create an instance of InlineValuationRequest from a dict
-inline_valuation_request_form_dict = inline_valuation_request.from_dict(inline_valuation_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

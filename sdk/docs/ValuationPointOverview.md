@@ -1,6 +1,5 @@
 # ValuationPointOverview
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,27 @@ Name | Type | Description | Notes
 **nav** | **float** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.valuation_point_overview import ValuationPointOverview
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+diary_entry_code: StrictStr = "example_diary_entry_code"
+effective_from: datetime = # Replace with your value
+effective_to: datetime = # Replace with your value
+query_as_at: Optional[datetime] = # Replace with your value
+type: StrictStr = "example_type"
+status: StrictStr = "example_status"
+gav: Union[StrictFloat, StrictInt] = # Replace with your value
+nav: Union[StrictFloat, StrictInt] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+links: Optional[conlist(Link)] = None
+valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, properties=properties, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ValuationPointOverview from a JSON string
-valuation_point_overview_instance = ValuationPointOverview.from_json(json)
-# print the JSON string representation of the object
-print ValuationPointOverview.to_json()
-
-# convert the object into a dict
-valuation_point_overview_dict = valuation_point_overview_instance.to_dict()
-# create an instance of ValuationPointOverview from a dict
-valuation_point_overview_form_dict = valuation_point_overview.from_dict(valuation_point_overview_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

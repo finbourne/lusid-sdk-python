@@ -1,6 +1,5 @@
 # UpsertInstrumentEventRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,25 @@ Name | Type | Description | Notes
 **sequence_number** | **int** | The order of the instrument event relative others on the same date (0 being processed first). Must be non negative. | [optional] 
 **participation_type** | **str** | Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary. | [optional] [default to 'Mandatory']
 **event_date_stamps** | [**Dict[str, YearMonthDay]**](YearMonthDay.md) | The date stamps corresponding to the relevant date-time fields for the instrument event. The key for each provided date stamp must match the field name of a valid datetime field from the InstrumentEvent DTO. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.upsert_instrument_event_request import UpsertInstrumentEventRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertInstrumentEventRequest from a JSON string
-upsert_instrument_event_request_instance = UpsertInstrumentEventRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertInstrumentEventRequest.to_json()
+instrument_event_id: StrictStr = "example_instrument_event_id"
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+description: Optional[StrictStr] = "example_description"
+instrument_event: InstrumentEvent = # Replace with your value
+properties: Optional[conlist(PerpetualProperty)] = # Replace with your value
+sequence_number: Optional[StrictInt] = # Replace with your value
+sequence_number: Optional[StrictInt] = None
+participation_type: Optional[StrictStr] = "example_participation_type"
+event_date_stamps: Optional[Dict[str, YearMonthDay]] = # Replace with your value
+upsert_instrument_event_request_instance = UpsertInstrumentEventRequest(instrument_event_id=instrument_event_id, instrument_identifiers=instrument_identifiers, description=description, instrument_event=instrument_event, properties=properties, sequence_number=sequence_number, participation_type=participation_type, event_date_stamps=event_date_stamps)
 
-# convert the object into a dict
-upsert_instrument_event_request_dict = upsert_instrument_event_request_instance.to_dict()
-# create an instance of UpsertInstrumentEventRequest from a dict
-upsert_instrument_event_request_form_dict = upsert_instrument_event_request.from_dict(upsert_instrument_event_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

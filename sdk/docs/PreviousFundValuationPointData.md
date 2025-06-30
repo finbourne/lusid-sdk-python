@@ -1,29 +1,21 @@
 # PreviousFundValuationPointData
 
 The data for a Fund at the previous valuation point.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nav** | [**FundPreviousNAV**](FundPreviousNAV.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PreviousFundValuationPointData from a JSON string
-previous_fund_valuation_point_data_instance = PreviousFundValuationPointData.from_json(json)
-# print the JSON string representation of the object
-print PreviousFundValuationPointData.to_json()
+nav: FundPreviousNAV = # Replace with your value
+previous_fund_valuation_point_data_instance = PreviousFundValuationPointData(nav=nav)
 
-# convert the object into a dict
-previous_fund_valuation_point_data_dict = previous_fund_valuation_point_data_instance.to_dict()
-# create an instance of PreviousFundValuationPointData from a dict
-previous_fund_valuation_point_data_form_dict = previous_fund_valuation_point_data.from_dict(previous_fund_valuation_point_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

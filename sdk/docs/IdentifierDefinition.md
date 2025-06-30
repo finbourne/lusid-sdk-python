@@ -1,6 +1,5 @@
 # IdentifierDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,27 @@ Name | Type | Description | Notes
 **description** | **str** | An optional description for the identifier. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the identifier definition. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.identifier_definition import IdentifierDefinition
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of IdentifierDefinition from a JSON string
-identifier_definition_instance = IdentifierDefinition.from_json(json)
-# print the JSON string representation of the object
-print IdentifierDefinition.to_json()
+href: Optional[StrictStr] = "example_href"
+domain: StrictStr = "example_domain"
+identifier_scope: StrictStr = "example_identifier_scope"
+identifier_type: StrictStr = "example_identifier_type"
+life_time: StrictStr = "example_life_time"
+hierarchy_usage: Optional[StrictStr] = "example_hierarchy_usage"
+hierarchy_level: Optional[StrictStr] = "example_hierarchy_level"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+identifier_definition_instance = IdentifierDefinition(href=href, domain=domain, identifier_scope=identifier_scope, identifier_type=identifier_type, life_time=life_time, hierarchy_usage=hierarchy_usage, hierarchy_level=hierarchy_level, display_name=display_name, description=description, properties=properties, version=version)
 
-# convert the object into a dict
-identifier_definition_dict = identifier_definition_instance.to_dict()
-# create an instance of IdentifierDefinition from a dict
-identifier_definition_form_dict = identifier_definition.from_dict(identifier_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # A2BDataRecord
 
 A2B Record - shows values on, and changes between two dates: A and B
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -20,24 +19,31 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties which have been requested to be decorated onto the holding. These will be from the &#39;Instrument&#39; domain. | [optional] 
 **group_id** | **str** | Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon. | [optional] 
 **errors** | [**List[ResponseMetaData]**](ResponseMetaData.md) | Any errors with the record are reported here. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.a2_b_data_record import A2BDataRecord
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of A2BDataRecord from a JSON string
-a2_b_data_record_instance = A2BDataRecord.from_json(json)
-# print the JSON string representation of the object
-print A2BDataRecord.to_json()
+portfolio_id: Optional[ResourceId] = # Replace with your value
+holding_type: Optional[StrictStr] = "example_holding_type"
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+instrument_uid: Optional[StrictStr] = "example_instrument_uid"
+sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+currency: Optional[StrictStr] = "example_currency"
+transaction_id: Optional[StrictStr] = "example_transaction_id"
+start: Optional[A2BCategory] = None
+flows: Optional[A2BCategory] = None
+gains: Optional[A2BCategory] = None
+carry: Optional[A2BCategory] = None
+end: Optional[A2BCategory] = None
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+group_id: Optional[StrictStr] = "example_group_id"
+errors: Optional[conlist(ResponseMetaData)] = # Replace with your value
+a2_b_data_record_instance = A2BDataRecord(portfolio_id=portfolio_id, holding_type=holding_type, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, currency=currency, transaction_id=transaction_id, start=start, flows=flows, gains=gains, carry=carry, end=end, properties=properties, group_id=group_id, errors=errors)
 
-# convert the object into a dict
-a2_b_data_record_dict = a2_b_data_record_instance.to_dict()
-# create an instance of A2BDataRecord from a dict
-a2_b_data_record_form_dict = a2_b_data_record.from_dict(a2_b_data_record_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

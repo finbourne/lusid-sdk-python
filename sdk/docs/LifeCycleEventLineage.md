@@ -1,7 +1,6 @@
 # LifeCycleEventLineage
 
 The lineage of the event value
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **instrument_id** | **str** | The LUID of the instrument for the event. | [optional] 
 **leg_id** | **str** | Leg id for the event. | [optional] 
 **source_transaction_id** | **str** | The source transaction of the instrument for the event. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.life_cycle_event_lineage import LifeCycleEventLineage
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LifeCycleEventLineage from a JSON string
-life_cycle_event_lineage_instance = LifeCycleEventLineage.from_json(json)
-# print the JSON string representation of the object
-print LifeCycleEventLineage.to_json()
+event_type: Optional[StrictStr] = "example_event_type"
+instrument_type: Optional[StrictStr] = "example_instrument_type"
+instrument_id: Optional[StrictStr] = "example_instrument_id"
+leg_id: Optional[StrictStr] = "example_leg_id"
+source_transaction_id: Optional[StrictStr] = "example_source_transaction_id"
+life_cycle_event_lineage_instance = LifeCycleEventLineage(event_type=event_type, instrument_type=instrument_type, instrument_id=instrument_id, leg_id=leg_id, source_transaction_id=source_transaction_id)
 
-# convert the object into a dict
-life_cycle_event_lineage_dict = life_cycle_event_lineage_instance.to_dict()
-# create an instance of LifeCycleEventLineage from a dict
-life_cycle_event_lineage_form_dict = life_cycle_event_lineage.from_dict(life_cycle_event_lineage_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

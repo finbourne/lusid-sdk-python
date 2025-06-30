@@ -1,7 +1,6 @@
 # CreateRecipeRequest
 
 Specification class to request for the creation/supplementing of a configuration recipe
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **inline_recipe** | [**ConfigurationRecipe**](ConfigurationRecipe.md) |  | [optional] 
 **as_at** | **datetime** | The asAt date to use | [optional] 
 **effective_at** | **str** | The market data time, i.e. the recipe generated will look for rules with this effectiveAt. | 
-
 ## Example
 
 ```python
 from lusid.models.create_recipe_request import CreateRecipeRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from datetime import datetime
+recipe_creation_market_data_scopes: conlist(StrictStr) = # Replace with your value
+recipe_id: Optional[ResourceId] = # Replace with your value
+inline_recipe: Optional[ConfigurationRecipe] = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+effective_at: StrictStr = "example_effective_at"
+create_recipe_request_instance = CreateRecipeRequest(recipe_creation_market_data_scopes=recipe_creation_market_data_scopes, recipe_id=recipe_id, inline_recipe=inline_recipe, as_at=as_at, effective_at=effective_at)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateRecipeRequest from a JSON string
-create_recipe_request_instance = CreateRecipeRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateRecipeRequest.to_json()
-
-# convert the object into a dict
-create_recipe_request_dict = create_recipe_request_instance.to_dict()
-# create an instance of CreateRecipeRequest from a dict
-create_recipe_request_form_dict = create_recipe_request.from_dict(create_recipe_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

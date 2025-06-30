@@ -1,7 +1,6 @@
 # MasteredInstrument
 
 LUSID representation of a reference to another instrument that has already been upserted (Mastered)
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **mastered_scope** | **str** | Scope of the Instrument that Mastered Instrument points to - read only field | [optional] [readonly] 
 **mastered_asset_class** | **str** | Asset class of the underlying mastered instrument - read only field    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money]. | [optional] [readonly] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.mastered_instrument import MasteredInstrument
+from typing import Any, Dict, Optional
+from pydantic.v1 import Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MasteredInstrument from a JSON string
-mastered_instrument_instance = MasteredInstrument.from_json(json)
-# print the JSON string representation of the object
-print MasteredInstrument.to_json()
+identifiers: Dict[str, StrictStr] = # Replace with your value
+mastered_dom_ccy: Optional[StrictStr] = "example_mastered_dom_ccy"
+mastered_instrument_type: Optional[StrictStr] = "example_mastered_instrument_type"
+mastered_lusid_instrument_id: Optional[StrictStr] = "example_mastered_lusid_instrument_id"
+mastered_name: Optional[StrictStr] = "example_mastered_name"
+mastered_scope: Optional[StrictStr] = "example_mastered_scope"
+mastered_asset_class: Optional[StrictStr] = "example_mastered_asset_class"
+instrument_type: StrictStr = "example_instrument_type"
+mastered_instrument_instance = MasteredInstrument(identifiers=identifiers, mastered_dom_ccy=mastered_dom_ccy, mastered_instrument_type=mastered_instrument_type, mastered_lusid_instrument_id=mastered_lusid_instrument_id, mastered_name=mastered_name, mastered_scope=mastered_scope, mastered_asset_class=mastered_asset_class, instrument_type=instrument_type)
 
-# convert the object into a dict
-mastered_instrument_dict = mastered_instrument_instance.to_dict()
-# create an instance of MasteredInstrument from a dict
-mastered_instrument_form_dict = mastered_instrument.from_dict(mastered_instrument_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

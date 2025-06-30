@@ -1,6 +1,5 @@
 # CreateReferencePortfolioRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Portfolio properties to add to the portfolio. | [optional] 
 **instrument_scopes** | **List[str]** | Instrument Scopes. | [optional] 
 **base_currency** | **str** | The base currency of the transaction portfolio in ISO 4217 currency code format. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_reference_portfolio_request import CreateReferencePortfolioRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from datetime import datetime
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+code: StrictStr = "example_code"
+created: Optional[datetime] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="Instrument Scopes.")
+base_currency: Optional[StrictStr] = "example_base_currency"
+create_reference_portfolio_request_instance = CreateReferencePortfolioRequest(display_name=display_name, description=description, code=code, created=created, properties=properties, instrument_scopes=instrument_scopes, base_currency=base_currency)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateReferencePortfolioRequest from a JSON string
-create_reference_portfolio_request_instance = CreateReferencePortfolioRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateReferencePortfolioRequest.to_json()
-
-# convert the object into a dict
-create_reference_portfolio_request_dict = create_reference_portfolio_request_instance.to_dict()
-# create an instance of CreateReferencePortfolioRequest from a dict
-create_reference_portfolio_request_form_dict = create_reference_portfolio_request.from_dict(create_reference_portfolio_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # ResourceListOfQueryableKey
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 **next_page** | **str** |  | [optional] 
 **previous_page** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.resource_list_of_queryable_key import ResourceListOfQueryableKey
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ResourceListOfQueryableKey from a JSON string
-resource_list_of_queryable_key_instance = ResourceListOfQueryableKey.from_json(json)
-# print the JSON string representation of the object
-print ResourceListOfQueryableKey.to_json()
+values: conlist(QueryableKey) = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+links: Optional[conlist(Link)] = None
+next_page: Optional[StrictStr] = "example_next_page"
+previous_page: Optional[StrictStr] = "example_previous_page"
+resource_list_of_queryable_key_instance = ResourceListOfQueryableKey(values=values, href=href, links=links, next_page=next_page, previous_page=previous_page)
 
-# convert the object into a dict
-resource_list_of_queryable_key_dict = resource_list_of_queryable_key_instance.to_dict()
-# create an instance of ResourceListOfQueryableKey from a dict
-resource_list_of_queryable_key_form_dict = resource_list_of_queryable_key.from_dict(resource_list_of_queryable_key_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

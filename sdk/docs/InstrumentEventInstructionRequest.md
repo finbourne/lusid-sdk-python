@@ -1,7 +1,6 @@
 # InstrumentEventInstructionRequest
 
 The request to create an instruction for an instrument event
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **holding_id** | **int** | For holding instructions, the id of the holding for which the instruction will apply | [optional] 
 **entitlement_date_instructed** | **datetime** | The instructed entitlement date for the event (where none is set on the event itself) | [optional] 
 **quantity_instructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument_event_instruction_request import InstrumentEventInstructionRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr
+from datetime import datetime
+instrument_event_instruction_id: StrictStr = "example_instrument_event_instruction_id"
+instrument_event_id: StrictStr = "example_instrument_event_id"
+instruction_type: StrictStr = "example_instruction_type"
+election_key: Optional[StrictStr] = "example_election_key"
+holding_id: Optional[StrictInt] = # Replace with your value
+entitlement_date_instructed: Optional[datetime] = # Replace with your value
+quantity_instructed: Optional[QuantityInstructed] = # Replace with your value
+instrument_event_instruction_request_instance = InstrumentEventInstructionRequest(instrument_event_instruction_id=instrument_event_instruction_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentEventInstructionRequest from a JSON string
-instrument_event_instruction_request_instance = InstrumentEventInstructionRequest.from_json(json)
-# print the JSON string representation of the object
-print InstrumentEventInstructionRequest.to_json()
-
-# convert the object into a dict
-instrument_event_instruction_request_dict = instrument_event_instruction_request_instance.to_dict()
-# create an instance of InstrumentEventInstructionRequest from a dict
-instrument_event_instruction_request_form_dict = instrument_event_instruction_request.from_dict(instrument_event_instruction_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

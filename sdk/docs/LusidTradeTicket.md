@@ -1,7 +1,6 @@
 # LusidTradeTicket
 
 A LUSID Trade Ticket comprising an instrument, a transaction, and a counterparty.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -21,24 +20,32 @@ Name | Type | Description | Notes
 **instrument_properties** | [**List[ModelProperty]**](ModelProperty.md) | Set of instrument properties (as defined by client/user). | [optional] 
 **transaction_properties** | [**List[ModelProperty]**](ModelProperty.md) | Set of transaction properties (as defined by client/user). | [optional] 
 **trade_ticket_type** | **str** | The available values are: LusidTradeTicket, ExternalTradeTicket | 
-
 ## Example
 
 ```python
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LusidTradeTicket from a JSON string
-lusid_trade_ticket_instance = LusidTradeTicket.from_json(json)
-# print the JSON string representation of the object
-print LusidTradeTicket.to_json()
+transaction_id: StrictStr = "example_transaction_id"
+transaction_type: StrictStr = "example_transaction_type"
+source: Optional[StrictStr] = "example_source"
+transaction_date: StrictStr = "example_transaction_date"
+settlement_date: StrictStr = "example_settlement_date"
+total_consideration: CurrencyAndAmount = # Replace with your value
+units: Union[StrictFloat, StrictInt] = # Replace with your value
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+instrument_name: Optional[StrictStr] = "example_instrument_name"
+instrument_definition: Optional[LusidInstrument] = # Replace with your value
+counterparty_agreement_id: Optional[ResourceId] = # Replace with your value
+counterparty: Optional[StrictStr] = "example_counterparty"
+instrument_properties: Optional[conlist(ModelProperty)] = # Replace with your value
+transaction_properties: Optional[conlist(ModelProperty)] = # Replace with your value
+trade_ticket_type: StrictStr = "example_trade_ticket_type"
+lusid_trade_ticket_instance = LusidTradeTicket(transaction_id=transaction_id, transaction_type=transaction_type, source=source, transaction_date=transaction_date, settlement_date=settlement_date, total_consideration=total_consideration, units=units, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_name=instrument_name, instrument_definition=instrument_definition, counterparty_agreement_id=counterparty_agreement_id, counterparty=counterparty, instrument_properties=instrument_properties, transaction_properties=transaction_properties, trade_ticket_type=trade_ticket_type)
 
-# convert the object into a dict
-lusid_trade_ticket_dict = lusid_trade_ticket_instance.to_dict()
-# create an instance of LusidTradeTicket from a dict
-lusid_trade_ticket_form_dict = lusid_trade_ticket.from_dict(lusid_trade_ticket_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

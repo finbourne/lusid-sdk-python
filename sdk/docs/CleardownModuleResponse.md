@@ -1,7 +1,6 @@
 # CleardownModuleResponse
 
 A Cleardown Module definition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **status** | **str** | The Cleardown Module status. Can be Active, Inactive or Deleted. Defaults to Active. | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.cleardown_module_response import CleardownModuleResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CleardownModuleResponse from a JSON string
-cleardown_module_response_instance = CleardownModuleResponse.from_json(json)
-# print the JSON string representation of the object
-print CleardownModuleResponse.to_json()
+href: Optional[StrictStr] = "example_href"
+cleardown_module_code: StrictStr = "example_cleardown_module_code"
+chart_of_accounts_id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+rules: Optional[conlist(CleardownModuleRule)] = # Replace with your value
+status: StrictStr = "example_status"
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+cleardown_module_response_instance = CleardownModuleResponse(href=href, cleardown_module_code=cleardown_module_code, chart_of_accounts_id=chart_of_accounts_id, display_name=display_name, description=description, rules=rules, status=status, version=version, links=links)
 
-# convert the object into a dict
-cleardown_module_response_dict = cleardown_module_response_instance.to_dict()
-# create an instance of CleardownModuleResponse from a dict
-cleardown_module_response_form_dict = cleardown_module_response.from_dict(cleardown_module_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

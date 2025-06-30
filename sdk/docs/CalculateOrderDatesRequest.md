@@ -1,6 +1,5 @@
 # CalculateOrderDatesRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **liquidating_share_class_identifier** | **str** |  | [optional] 
 **liquidating_share_class_identifier_type** | **str** |  | [optional] 
 **liquidating_share_class_instrument_scope** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.calculate_order_dates_request import CalculateOrderDatesRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from datetime import datetime
+instrument_identifier_type: StrictStr = "example_instrument_identifier_type"
+instrument_identifier: StrictStr = "example_instrument_identifier"
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+received_date: Optional[datetime] = # Replace with your value
+price_date: Optional[datetime] = # Replace with your value
+transaction_category: Optional[StrictStr] = "example_transaction_category"
+liquidating_share_class_identifier: Optional[StrictStr] = "example_liquidating_share_class_identifier"
+liquidating_share_class_identifier_type: Optional[StrictStr] = "example_liquidating_share_class_identifier_type"
+liquidating_share_class_instrument_scope: Optional[StrictStr] = "example_liquidating_share_class_instrument_scope"
+calculate_order_dates_request_instance = CalculateOrderDatesRequest(instrument_identifier_type=instrument_identifier_type, instrument_identifier=instrument_identifier, instrument_scope=instrument_scope, received_date=received_date, price_date=price_date, transaction_category=transaction_category, liquidating_share_class_identifier=liquidating_share_class_identifier, liquidating_share_class_identifier_type=liquidating_share_class_identifier_type, liquidating_share_class_instrument_scope=liquidating_share_class_instrument_scope)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CalculateOrderDatesRequest from a JSON string
-calculate_order_dates_request_instance = CalculateOrderDatesRequest.from_json(json)
-# print the JSON string representation of the object
-print CalculateOrderDatesRequest.to_json()
-
-# convert the object into a dict
-calculate_order_dates_request_dict = calculate_order_dates_request_instance.to_dict()
-# create an instance of CalculateOrderDatesRequest from a dict
-calculate_order_dates_request_form_dict = calculate_order_dates_request.from_dict(calculate_order_dates_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

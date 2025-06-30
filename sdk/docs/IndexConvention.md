@@ -1,7 +1,6 @@
 # IndexConvention
 
 A set of conventions that describe the conventions for calculation of payments made on rates interbank lending and similar.  Based on ISDA 2006 conventions and similar documentation. Please see the knowledge base for further documentation.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **index_name** | **str** | The name of the index for which this represents the conventions of.  For instance, \&quot;SOFR\&quot;, \&quot;LIBOR\&quot;, \&quot;EURIBOR\&quot;, etc.  Defaults to \&quot;INDEX\&quot; if not specified. | [optional] 
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.index_convention import IndexConvention
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of IndexConvention from a JSON string
-index_convention_instance = IndexConvention.from_json(json)
-# print the JSON string representation of the object
-print IndexConvention.to_json()
+fixing_reference: StrictStr = "example_fixing_reference"
+publication_day_lag: StrictInt = # Replace with your value
+publication_day_lag: StrictInt = 42
+payment_tenor: StrictStr = "example_payment_tenor"
+day_count_convention: StrictStr = "example_day_count_convention"
+currency: StrictStr = "example_currency"
+index_name: Optional[StrictStr] = "example_index_name"
+scope: Optional[StrictStr] = "example_scope"
+code: Optional[StrictStr] = "example_code"
+index_convention_instance = IndexConvention(fixing_reference=fixing_reference, publication_day_lag=publication_day_lag, payment_tenor=payment_tenor, day_count_convention=day_count_convention, currency=currency, index_name=index_name, scope=scope, code=code)
 
-# convert the object into a dict
-index_convention_dict = index_convention_instance.to_dict()
-# create an instance of IndexConvention from a dict
-index_convention_form_dict = index_convention.from_dict(index_convention_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # CreateDerivedPropertyDefinitionRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,25 @@ Name | Type | Description | Notes
 **property_description** | **str** | Describes the property | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | 
 **is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | 
-
 ## Example
 
 ```python
 from lusid.models.create_derived_property_definition_request import CreateDerivedPropertyDefinitionRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateDerivedPropertyDefinitionRequest from a JSON string
-create_derived_property_definition_request_instance = CreateDerivedPropertyDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateDerivedPropertyDefinitionRequest.to_json()
+domain: StrictStr = "example_domain"
+scope: StrictStr = "example_scope"
+code: StrictStr = "example_code"
+display_name: StrictStr = "example_display_name"
+data_type_id: ResourceId = # Replace with your value
+property_description: Optional[StrictStr] = "example_property_description"
+derivation_formula: StrictStr = "example_derivation_formula"
+is_filterable: StrictBool = # Replace with your value
+is_filterable:StrictBool = True
+create_derived_property_definition_request_instance = CreateDerivedPropertyDefinitionRequest(domain=domain, scope=scope, code=code, display_name=display_name, data_type_id=data_type_id, property_description=property_description, derivation_formula=derivation_formula, is_filterable=is_filterable)
 
-# convert the object into a dict
-create_derived_property_definition_request_dict = create_derived_property_definition_request_instance.to_dict()
-# create an instance of CreateDerivedPropertyDefinitionRequest from a dict
-create_derived_property_definition_request_form_dict = create_derived_property_definition_request.from_dict(create_derived_property_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

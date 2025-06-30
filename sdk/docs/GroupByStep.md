@@ -1,30 +1,24 @@
 # GroupByStep
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **label** | **str** | The label of the compliance step | 
 **parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | Parameters required for the step | 
 **compliance_step_type** | **str** | . The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep | 
-
 ## Example
 
 ```python
 from lusid.models.group_by_step import GroupByStep
+from typing import Any, Dict, List
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GroupByStep from a JSON string
-group_by_step_instance = GroupByStep.from_json(json)
-# print the JSON string representation of the object
-print GroupByStep.to_json()
+label: StrictStr = "example_label"
+parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+compliance_step_type: StrictStr = "example_compliance_step_type"
+group_by_step_instance = GroupByStep(label=label, parameters=parameters, compliance_step_type=compliance_step_type)
 
-# convert the object into a dict
-group_by_step_dict = group_by_step_instance.to_dict()
-# create an instance of GroupByStep from a dict
-group_by_step_form_dict = group_by_step.from_dict(group_by_step_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

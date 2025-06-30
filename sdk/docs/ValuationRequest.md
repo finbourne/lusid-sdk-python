@@ -1,7 +1,6 @@
 # ValuationRequest
 
 Specification object for the parameters of a valuation
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -19,24 +18,32 @@ Name | Type | Description | Notes
 **valuation_schedule** | [**ValuationSchedule**](ValuationSchedule.md) |  | 
 **market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.valuation_request import ValuationRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from datetime import datetime
+recipe_id: ResourceId = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+metrics: conlist(AggregateSpec) = # Replace with your value
+group_by: Optional[conlist(StrictStr)] = # Replace with your value
+filters: Optional[conlist(PropertyFilter)] = # Replace with your value
+sort: Optional[conlist(OrderBySpec)] = # Replace with your value
+report_currency: Optional[StrictStr] = "example_report_currency"
+equip_with_subtotals: Optional[StrictBool] = # Replace with your value
+equip_with_subtotals:Optional[StrictBool] = None
+return_result_as_expanded_types: Optional[StrictBool] = # Replace with your value
+return_result_as_expanded_types:Optional[StrictBool] = None
+include_order_flow: Optional[OrderFlowConfiguration] = # Replace with your value
+portfolio_entity_ids: conlist(PortfolioEntityId) = # Replace with your value
+valuation_schedule: ValuationSchedule = # Replace with your value
+market_data_overrides: Optional[MarketDataOverrides] = # Replace with your value
+corporate_action_source_id: Optional[ResourceId] = # Replace with your value
+valuation_request_instance = ValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, include_order_flow=include_order_flow, portfolio_entity_ids=portfolio_entity_ids, valuation_schedule=valuation_schedule, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ValuationRequest from a JSON string
-valuation_request_instance = ValuationRequest.from_json(json)
-# print the JSON string representation of the object
-print ValuationRequest.to_json()
-
-# convert the object into a dict
-valuation_request_dict = valuation_request_instance.to_dict()
-# create an instance of ValuationRequest from a dict
-valuation_request_form_dict = valuation_request.from_dict(valuation_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

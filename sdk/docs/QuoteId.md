@@ -1,30 +1,23 @@
 # QuoteId
 
 The unique identifier of the quote.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quote_series_id** | [**QuoteSeriesId**](QuoteSeriesId.md) |  | 
 **effective_at** | **str** | The effective datetime or cut label at which the quote is valid from. | 
-
 ## Example
 
 ```python
 from lusid.models.quote_id import QuoteId
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of QuoteId from a JSON string
-quote_id_instance = QuoteId.from_json(json)
-# print the JSON string representation of the object
-print QuoteId.to_json()
+quote_series_id: QuoteSeriesId = # Replace with your value
+effective_at: StrictStr = "example_effective_at"
+quote_id_instance = QuoteId(quote_series_id=quote_series_id, effective_at=effective_at)
 
-# convert the object into a dict
-quote_id_dict = quote_id_instance.to_dict()
-# create an instance of QuoteId from a dict
-quote_id_form_dict = quote_id.from_dict(quote_id_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

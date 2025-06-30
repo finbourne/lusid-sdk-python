@@ -1,28 +1,20 @@
 # BlockAndOrdersCreateRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **requests** | [**List[BlockAndOrdersRequest]**](BlockAndOrdersRequest.md) | A collection of BlockAndOrdersRequest. | 
-
 ## Example
 
 ```python
 from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BlockAndOrdersCreateRequest from a JSON string
-block_and_orders_create_request_instance = BlockAndOrdersCreateRequest.from_json(json)
-# print the JSON string representation of the object
-print BlockAndOrdersCreateRequest.to_json()
+requests: conlist(BlockAndOrdersRequest, max_items=100, min_items=1) = Field(..., description="A collection of BlockAndOrdersRequest.")
+block_and_orders_create_request_instance = BlockAndOrdersCreateRequest(requests=requests)
 
-# convert the object into a dict
-block_and_orders_create_request_dict = block_and_orders_create_request_instance.to_dict()
-# create an instance of BlockAndOrdersCreateRequest from a dict
-block_and_orders_create_request_form_dict = block_and_orders_create_request.from_dict(block_and_orders_create_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

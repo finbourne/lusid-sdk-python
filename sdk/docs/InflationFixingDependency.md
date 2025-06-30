@@ -1,7 +1,6 @@
 # InflationFixingDependency
 
 For indicating a dependency upon an inflation fixing
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **code** | **str** | The Code of the fixing, typically the index name | 
 **var_date** | **datetime** | The effectiveAt of the inflation fixing | 
 **dependency_type** | **str** | The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency | 
-
 ## Example
 
 ```python
 from lusid.models.inflation_fixing_dependency import InflationFixingDependency
+from typing import Any, Dict
+from pydantic.v1 import Field, StrictStr, constr, validator
+from datetime import datetime
+type: StrictStr = "example_type"
+code: StrictStr = "example_code"
+var_date: datetime = # Replace with your value
+dependency_type: StrictStr = "example_dependency_type"
+inflation_fixing_dependency_instance = InflationFixingDependency(type=type, code=code, var_date=var_date, dependency_type=dependency_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InflationFixingDependency from a JSON string
-inflation_fixing_dependency_instance = InflationFixingDependency.from_json(json)
-# print the JSON string representation of the object
-print InflationFixingDependency.to_json()
-
-# convert the object into a dict
-inflation_fixing_dependency_dict = inflation_fixing_dependency_instance.to_dict()
-# create an instance of InflationFixingDependency from a dict
-inflation_fixing_dependency_form_dict = inflation_fixing_dependency.from_dict(inflation_fixing_dependency_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

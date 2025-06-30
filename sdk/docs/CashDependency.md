@@ -1,31 +1,25 @@
 # CashDependency
 
 For indicating a dependency upon a currency.  E.g. A Bond will declare a CashDependency for its domestic currency.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currency** | **str** | The Currency that is depended upon. | 
 **var_date** | **datetime** | The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date. | 
 **dependency_type** | **str** | The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency | 
-
 ## Example
 
 ```python
 from lusid.models.cash_dependency import CashDependency
+from typing import Any, Dict
+from pydantic.v1 import Field, StrictStr, validator
+from datetime import datetime
+currency: StrictStr = "example_currency"
+var_date: datetime = # Replace with your value
+dependency_type: StrictStr = "example_dependency_type"
+cash_dependency_instance = CashDependency(currency=currency, var_date=var_date, dependency_type=dependency_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CashDependency from a JSON string
-cash_dependency_instance = CashDependency.from_json(json)
-# print the JSON string representation of the object
-print CashDependency.to_json()
-
-# convert the object into a dict
-cash_dependency_dict = cash_dependency_instance.to_dict()
-# create an instance of CashDependency from a dict
-cash_dependency_form_dict = cash_dependency.from_dict(cash_dependency_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

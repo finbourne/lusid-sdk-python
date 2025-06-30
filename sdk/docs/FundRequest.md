@@ -1,7 +1,6 @@
 # FundRequest
 
 The request used to create a Fund.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,29 @@ Name | Type | Description | Notes
 **decimal_places** | **int** | Number of decimal places for reporting | [optional] 
 **year_end_date** | [**DayMonth**](DayMonth.md) |  | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fund_request import FundRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from datetime import datetime
+code: StrictStr = "example_code"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+fund_configuration_id: ResourceId = # Replace with your value
+abor_id: ResourceId = # Replace with your value
+share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
+share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = # Replace with your value
+type: StrictStr = "example_type"
+inception_date: datetime = # Replace with your value
+decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+decimal_places: Optional[StrictInt] = None
+year_end_date: DayMonth = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+fund_request_instance = FundRequest(code=code, display_name=display_name, description=description, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, properties=properties)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FundRequest from a JSON string
-fund_request_instance = FundRequest.from_json(json)
-# print the JSON string representation of the object
-print FundRequest.to_json()
-
-# convert the object into a dict
-fund_request_dict = fund_request_instance.to_dict()
-# create an instance of FundRequest from a dict
-fund_request_form_dict = fund_request.from_dict(fund_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

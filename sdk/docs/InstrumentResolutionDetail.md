@@ -1,6 +1,5 @@
 # InstrumentResolutionDetail
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **instrument_scope** | **str** | The scope in which the instrument lies. | [optional] [readonly] 
 **launch_price** | **float** | The launch price set when a shareclass is added to the fund. Defaults to 1. | [optional] 
 **launch_date** | **datetime** | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from datetime import datetime
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+launch_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+launch_date: Optional[datetime] = # Replace with your value
+instrument_resolution_detail_instance = InstrumentResolutionDetail(instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, launch_price=launch_price, launch_date=launch_date)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentResolutionDetail from a JSON string
-instrument_resolution_detail_instance = InstrumentResolutionDetail.from_json(json)
-# print the JSON string representation of the object
-print InstrumentResolutionDetail.to_json()
-
-# convert the object into a dict
-instrument_resolution_detail_dict = instrument_resolution_detail_instance.to_dict()
-# create an instance of InstrumentResolutionDetail from a dict
-instrument_resolution_detail_form_dict = instrument_resolution_detail.from_dict(instrument_resolution_detail_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

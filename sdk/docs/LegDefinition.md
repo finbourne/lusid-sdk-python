@@ -1,7 +1,6 @@
 # LegDefinition
 
 Definition of the set of flow and index conventions along with other miscellaneous information required to generate an instrument leg.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -22,24 +21,34 @@ Name | Type | Description | Notes
 **last_coupon_type** | **str** | Optional coupon type setting for the last coupon, can be used with Stub coupons.  If set to \&quot;ProRata\&quot; (the default), the coupon year fraction is calculated as normal,  however if set to \&quot;Full\&quot; the year fraction is overwritten with the standard year fraction  for a regular ful\&quot; coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full]. | [optional] 
 **fx_linked_notional_schedule** | [**FxLinkedNotionalSchedule**](FxLinkedNotionalSchedule.md) |  | [optional] 
 **intermediate_notional_exchange** | **bool** | Indicates whether there are intermediate notional exchanges. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.leg_definition import LegDefinition
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr
+from datetime import datetime
+convention_name: Optional[FlowConventionName] = # Replace with your value
+conventions: Optional[FlowConventions] = None
+index_convention: Optional[IndexConvention] = # Replace with your value
+index_convention_name: Optional[FlowConventionName] = # Replace with your value
+notional_exchange_type: StrictStr = "example_notional_exchange_type"
+pay_receive: StrictStr = "example_pay_receive"
+rate_or_spread: Union[StrictFloat, StrictInt] = # Replace with your value
+reset_convention: Optional[StrictStr] = "example_reset_convention"
+stub_type: StrictStr = "example_stub_type"
+compounding: Optional[Compounding] = None
+amortisation: Optional[StepSchedule] = None
+first_regular_payment_date: Optional[datetime] = # Replace with your value
+first_coupon_type: Optional[StrictStr] = "example_first_coupon_type"
+last_regular_payment_date: Optional[datetime] = # Replace with your value
+last_coupon_type: Optional[StrictStr] = "example_last_coupon_type"
+fx_linked_notional_schedule: Optional[FxLinkedNotionalSchedule] = # Replace with your value
+intermediate_notional_exchange: Optional[StrictBool] = # Replace with your value
+intermediate_notional_exchange:Optional[StrictBool] = None
+leg_definition_instance = LegDefinition(convention_name=convention_name, conventions=conventions, index_convention=index_convention, index_convention_name=index_convention_name, notional_exchange_type=notional_exchange_type, pay_receive=pay_receive, rate_or_spread=rate_or_spread, reset_convention=reset_convention, stub_type=stub_type, compounding=compounding, amortisation=amortisation, first_regular_payment_date=first_regular_payment_date, first_coupon_type=first_coupon_type, last_regular_payment_date=last_regular_payment_date, last_coupon_type=last_coupon_type, fx_linked_notional_schedule=fx_linked_notional_schedule, intermediate_notional_exchange=intermediate_notional_exchange)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LegDefinition from a JSON string
-leg_definition_instance = LegDefinition.from_json(json)
-# print the JSON string representation of the object
-print LegDefinition.to_json()
-
-# convert the object into a dict
-leg_definition_dict = leg_definition_instance.to_dict()
-# create an instance of LegDefinition from a dict
-leg_definition_form_dict = leg_definition.from_dict(leg_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # AggregatedReturnsDispersionRequest
 
 The request used in the AggregatedReturnsDispersionMetric.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **composite_method** | **str** | The method used to calculate the Portfolio performance: Equal/Asset. | [optional] 
 **alternative_inception_date** | **str** | Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.aggregated_returns_dispersion_request import AggregatedReturnsDispersionRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AggregatedReturnsDispersionRequest from a JSON string
-aggregated_returns_dispersion_request_instance = AggregatedReturnsDispersionRequest.from_json(json)
-# print the JSON string representation of the object
-print AggregatedReturnsDispersionRequest.to_json()
+to_effective_at: Optional[StrictStr] = "example_to_effective_at"
+years_count: Optional[StrictInt] = # Replace with your value
+years_count: Optional[StrictInt] = None
+return_ids: Optional[conlist(ResourceId)] = # Replace with your value
+recipe_id: Optional[ResourceId] = # Replace with your value
+composite_method: Optional[StrictStr] = "example_composite_method"
+alternative_inception_date: Optional[StrictStr] = "example_alternative_inception_date"
+aggregated_returns_dispersion_request_instance = AggregatedReturnsDispersionRequest(to_effective_at=to_effective_at, years_count=years_count, return_ids=return_ids, recipe_id=recipe_id, composite_method=composite_method, alternative_inception_date=alternative_inception_date)
 
-# convert the object into a dict
-aggregated_returns_dispersion_request_dict = aggregated_returns_dispersion_request_instance.to_dict()
-# create an instance of AggregatedReturnsDispersionRequest from a dict
-aggregated_returns_dispersion_request_form_dict = aggregated_returns_dispersion_request.from_dict(aggregated_returns_dispersion_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

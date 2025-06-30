@@ -1,7 +1,6 @@
 # CashAndSecurityOfferElection
 
 Election for events that result in both cash and equity via a merger or acquisition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,25 @@ Name | Type | Description | Notes
 **is_chosen** | **bool** | Is this the election that has been explicitly chosen from multiple options. | [optional] 
 **is_default** | **bool** | Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided. | [optional] 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CashAndSecurityOfferElection from a JSON string
-cash_and_security_offer_election_instance = CashAndSecurityOfferElection.from_json(json)
-# print the JSON string representation of the object
-print CashAndSecurityOfferElection.to_json()
+cash_offer_currency: StrictStr = "example_cash_offer_currency"
+cash_offer_price: Union[StrictFloat, StrictInt] = # Replace with your value
+cost_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+election_key: StrictStr = "example_election_key"
+is_chosen: Optional[StrictBool] = # Replace with your value
+is_chosen:Optional[StrictBool] = None
+is_default: Optional[StrictBool] = # Replace with your value
+is_default:Optional[StrictBool] = None
+units_ratio: UnitsRatio = # Replace with your value
+cash_and_security_offer_election_instance = CashAndSecurityOfferElection(cash_offer_currency=cash_offer_currency, cash_offer_price=cash_offer_price, cost_factor=cost_factor, election_key=election_key, is_chosen=is_chosen, is_default=is_default, units_ratio=units_ratio)
 
-# convert the object into a dict
-cash_and_security_offer_election_dict = cash_and_security_offer_election_instance.to_dict()
-# create an instance of CashAndSecurityOfferElection from a dict
-cash_and_security_offer_election_form_dict = cash_and_security_offer_election.from_dict(cash_and_security_offer_election_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

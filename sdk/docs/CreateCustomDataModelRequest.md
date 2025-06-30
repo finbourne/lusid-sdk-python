@@ -1,6 +1,5 @@
 # CreateCustomDataModelRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **identifier_types** | [**List[CustomDataModelIdentifierTypeSpecification]**](CustomDataModelIdentifierTypeSpecification.md) | The identifier types that are required or allowed on the bound entity. | [optional] 
 **attribute_aliases** | [**List[Alias]**](Alias.md) | The aliases for property keys, identifier types, and fields on the bound entity. | [optional] 
 **recommended_sort_by** | [**List[RecommendedSortBy]**](RecommendedSortBy.md) | The preferred default sorting instructions. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_custom_data_model_request import CreateCustomDataModelRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateCustomDataModelRequest from a JSON string
-create_custom_data_model_request_instance = CreateCustomDataModelRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateCustomDataModelRequest.to_json()
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+parent_data_model: Optional[ResourceId] = # Replace with your value
+conditions: Optional[StrictStr] = "example_conditions"
+properties: Optional[conlist(CustomDataModelPropertySpecification)] = # Replace with your value
+identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecification)] = # Replace with your value
+attribute_aliases: Optional[conlist(Alias)] = # Replace with your value
+recommended_sort_by: Optional[conlist(RecommendedSortBy)] = # Replace with your value
+create_custom_data_model_request_instance = CreateCustomDataModelRequest(id=id, display_name=display_name, description=description, parent_data_model=parent_data_model, conditions=conditions, properties=properties, identifier_types=identifier_types, attribute_aliases=attribute_aliases, recommended_sort_by=recommended_sort_by)
 
-# convert the object into a dict
-create_custom_data_model_request_dict = create_custom_data_model_request_instance.to_dict()
-# create an instance of CreateCustomDataModelRequest from a dict
-create_custom_data_model_request_form_dict = create_custom_data_model_request.from_dict(create_custom_data_model_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

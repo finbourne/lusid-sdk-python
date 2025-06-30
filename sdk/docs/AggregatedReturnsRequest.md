@@ -1,7 +1,6 @@
 # AggregatedReturnsRequest
 
 The request used in the AggregatedReturns.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,26 @@ Name | Type | Description | Notes
 **holiday_calendars** | **List[str]** | The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, &#39;CoppClark&#39;. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored. | [optional] 
 **currency** | **str** | Optional - either a string or a property. If provided, the results will be converted to the specified currency | [optional] 
 **run_mode** | **str** | The dates the AggregatedReturns output will be calculated: ReturnData/WeekDays/AllDays/MonthEnd. Defaults to ReturnData. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.aggregated_returns_request import AggregatedReturnsRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AggregatedReturnsRequest from a JSON string
-aggregated_returns_request_instance = AggregatedReturnsRequest.from_json(json)
-# print the JSON string representation of the object
-print AggregatedReturnsRequest.to_json()
+metrics: conlist(PerformanceReturnsMetric) = # Replace with your value
+return_ids: Optional[conlist(ResourceId)] = # Replace with your value
+recipe_id: Optional[ResourceId] = # Replace with your value
+composite_method: Optional[StrictStr] = "example_composite_method"
+period: Optional[StrictStr] = "example_period"
+output_frequency: Optional[StrictStr] = "example_output_frequency"
+alternative_inception_date: Optional[StrictStr] = "example_alternative_inception_date"
+holiday_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+currency: Optional[StrictStr] = "example_currency"
+run_mode: Optional[StrictStr] = "example_run_mode"
+aggregated_returns_request_instance = AggregatedReturnsRequest(metrics=metrics, return_ids=return_ids, recipe_id=recipe_id, composite_method=composite_method, period=period, output_frequency=output_frequency, alternative_inception_date=alternative_inception_date, holiday_calendars=holiday_calendars, currency=currency, run_mode=run_mode)
 
-# convert the object into a dict
-aggregated_returns_request_dict = aggregated_returns_request_instance.to_dict()
-# create an instance of AggregatedReturnsRequest from a dict
-aggregated_returns_request_form_dict = aggregated_returns_request.from_dict(aggregated_returns_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

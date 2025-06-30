@@ -1,6 +1,5 @@
 # CreateDataTypeRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **unit_schema** | **str** | The schema of the data type&#39;s units. The available values are: NoUnits, Basic, Iso4217Currency | [optional] 
 **acceptable_units** | [**List[CreateUnitDefinition]**](CreateUnitDefinition.md) | The definitions of the acceptable units. | [optional] 
 **reference_data** | [**ReferenceData**](ReferenceData.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_data_type_request import CreateDataTypeRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateDataTypeRequest from a JSON string
-create_data_type_request_instance = CreateDataTypeRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateDataTypeRequest.to_json()
+scope: StrictStr = "example_scope"
+code: StrictStr = "example_code"
+type_value_range: StrictStr = "example_type_value_range"
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+value_type: StrictStr = "example_value_type"
+acceptable_values: Optional[conlist(StrictStr)] = # Replace with your value
+unit_schema: Optional[StrictStr] = "example_unit_schema"
+acceptable_units: Optional[conlist(CreateUnitDefinition)] = # Replace with your value
+reference_data: Optional[ReferenceData] = # Replace with your value
+create_data_type_request_instance = CreateDataTypeRequest(scope=scope, code=code, type_value_range=type_value_range, display_name=display_name, description=description, value_type=value_type, acceptable_values=acceptable_values, unit_schema=unit_schema, acceptable_units=acceptable_units, reference_data=reference_data)
 
-# convert the object into a dict
-create_data_type_request_dict = create_data_type_request_instance.to_dict()
-# create an instance of CreateDataTypeRequest from a dict
-create_data_type_request_form_dict = create_data_type_request.from_dict(create_data_type_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # FloatSchedule
 
 Schedule for floating rate coupon payments.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -21,24 +20,34 @@ Name | Type | Description | Notes
 **reset_convention** | **str** | Control how resets are generated relative to payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears]. | [optional] 
 **use_annualised_direct_rates** | **bool** | Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false. | [optional] 
 **schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
-
 ## Example
 
 ```python
 from lusid.models.float_schedule import FloatSchedule
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
+from datetime import datetime
+start_date: Optional[datetime] = # Replace with your value
+maturity_date: Optional[datetime] = # Replace with your value
+flow_conventions: Optional[FlowConventions] = # Replace with your value
+convention_name: Optional[FlowConventionName] = # Replace with your value
+ex_dividend_days: Optional[StrictInt] = # Replace with your value
+ex_dividend_days: Optional[StrictInt] = None
+index_convention_name: Optional[FlowConventionName] = # Replace with your value
+index_conventions: Optional[IndexConvention] = # Replace with your value
+notional: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+payment_currency: StrictStr = "example_payment_currency"
+spread: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+stub_type: Optional[StrictStr] = "example_stub_type"
+ex_dividend_configuration: Optional[ExDividendConfiguration] = # Replace with your value
+compounding: Optional[Compounding] = None
+reset_convention: Optional[StrictStr] = "example_reset_convention"
+use_annualised_direct_rates: Optional[StrictBool] = # Replace with your value
+use_annualised_direct_rates:Optional[StrictBool] = None
+schedule_type: StrictStr = "example_schedule_type"
+float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, schedule_type=schedule_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FloatSchedule from a JSON string
-float_schedule_instance = FloatSchedule.from_json(json)
-# print the JSON string representation of the object
-print FloatSchedule.to_json()
-
-# convert the object into a dict
-float_schedule_dict = float_schedule_instance.to_dict()
-# create an instance of FloatSchedule from a dict
-float_schedule_form_dict = float_schedule.from_dict(float_schedule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

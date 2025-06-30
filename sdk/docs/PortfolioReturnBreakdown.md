@@ -1,7 +1,6 @@
 # PortfolioReturnBreakdown
 
 A list of Composite Breakdowns.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,31 @@ Name | Type | Description | Notes
 **local_rate_of_return** | **float** | The rate of return in the local currency. | [optional] 
 **local_opening_market_value** | **float** | The opening market value in the local currency. | [optional] 
 **local_closing_market_value** | **float** | The closing market value in the local currency. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioReturnBreakdown from a JSON string
-portfolio_return_breakdown_instance = PortfolioReturnBreakdown.from_json(json)
-# print the JSON string representation of the object
-print PortfolioReturnBreakdown.to_json()
+portfolio_id: ResourceId = # Replace with your value
+rate_of_return: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+opening_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+closing_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+constituents_in_the_composite: Optional[StrictInt] = # Replace with your value
+constituents_in_the_composite: Optional[StrictInt] = None
+constituents_missing: Optional[StrictInt] = # Replace with your value
+constituents_missing: Optional[StrictInt] = None
+currency: Optional[StrictStr] = "example_currency"
+open_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+close_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+local_rate_of_return: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+local_opening_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+local_closing_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+portfolio_return_breakdown_instance = PortfolioReturnBreakdown(portfolio_id=portfolio_id, rate_of_return=rate_of_return, opening_market_value=opening_market_value, closing_market_value=closing_market_value, weight=weight, constituents_in_the_composite=constituents_in_the_composite, constituents_missing=constituents_missing, currency=currency, open_fx_rate=open_fx_rate, close_fx_rate=close_fx_rate, local_rate_of_return=local_rate_of_return, local_opening_market_value=local_opening_market_value, local_closing_market_value=local_closing_market_value)
 
-# convert the object into a dict
-portfolio_return_breakdown_dict = portfolio_return_breakdown_instance.to_dict()
-# create an instance of PortfolioReturnBreakdown from a dict
-portfolio_return_breakdown_form_dict = portfolio_return_breakdown.from_dict(portfolio_return_breakdown_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

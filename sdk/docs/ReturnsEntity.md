@@ -1,7 +1,6 @@
 # ReturnsEntity
 
 Returns entity, used for configuring the calculation of aggregated returns.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **flow_handling** | **str** | Configures how flows are handled in the aggregated returns calculation. | [optional] 
 **business_calendar** | **str** | Calendar used in the aggregated returns calculation. | [optional] 
 **handle_flow_discrepancy** | **str** | Configures handling for the case where net flows do not match the sum of tagged flows. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.returns_entity import ReturnsEntity
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReturnsEntity from a JSON string
-returns_entity_instance = ReturnsEntity.from_json(json)
-# print the JSON string representation of the object
-print ReturnsEntity.to_json()
+id: ResourceId = # Replace with your value
+recipe_id: Optional[ResourceId] = # Replace with your value
+recipe_entity: Optional[StrictStr] = "example_recipe_entity"
+fee_handling: Optional[StrictStr] = "example_fee_handling"
+flow_handling: Optional[StrictStr] = "example_flow_handling"
+business_calendar: Optional[StrictStr] = "example_business_calendar"
+handle_flow_discrepancy: Optional[StrictStr] = "example_handle_flow_discrepancy"
+returns_entity_instance = ReturnsEntity(id=id, recipe_id=recipe_id, recipe_entity=recipe_entity, fee_handling=fee_handling, flow_handling=flow_handling, business_calendar=business_calendar, handle_flow_discrepancy=handle_flow_discrepancy)
 
-# convert the object into a dict
-returns_entity_dict = returns_entity_instance.to_dict()
-# create an instance of ReturnsEntity from a dict
-returns_entity_form_dict = returns_entity.from_dict(returns_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

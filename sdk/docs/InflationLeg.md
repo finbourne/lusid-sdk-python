@@ -1,7 +1,6 @@
 # InflationLeg
 
 LUSID representation of an Inflation Leg.  This leg instrument is part of the InflationSwap instrument, but can also be used as a standalone instrument.  The implementation supports the following inflation leg types:  * Zero Coupon inflation leg (CPI Leg), with a single payment at maturity.  * Year on Year inflation leg  * LPI Swap Leg (capped and floored YoY)
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,27 @@ Name | Type | Description | Notes
 **notional** | **float** | The notional | 
 **pay_receive** | **str** | PayReceive flag for the inflation leg.  This field is optional and defaults to Pay.    Supported string (enumeration) values are: [Pay, Receive]. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.inflation_leg import InflationLeg
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+flow_conventions: FlowConventions = # Replace with your value
+base_cpi: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+calculation_type: StrictStr = "example_calculation_type"
+cap_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+floor_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+inflation_index_conventions: InflationIndexConventions = # Replace with your value
+notional: Union[StrictFloat, StrictInt] = # Replace with your value
+pay_receive: Optional[StrictStr] = "example_pay_receive"
+instrument_type: StrictStr = "example_instrument_type"
+inflation_leg_instance = InflationLeg(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, base_cpi=base_cpi, calculation_type=calculation_type, cap_rate=cap_rate, floor_rate=floor_rate, inflation_index_conventions=inflation_index_conventions, notional=notional, pay_receive=pay_receive, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InflationLeg from a JSON string
-inflation_leg_instance = InflationLeg.from_json(json)
-# print the JSON string representation of the object
-print InflationLeg.to_json()
-
-# convert the object into a dict
-inflation_leg_dict = inflation_leg_instance.to_dict()
-# create an instance of InflationLeg from a dict
-inflation_leg_form_dict = inflation_leg.from_dict(inflation_leg_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

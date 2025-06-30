@@ -1,7 +1,6 @@
 # InstrumentPaymentDiary
 
 A payment diary containing all the cashflows on a single instrument.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **legs** | [**List[InstrumentPaymentDiaryLeg]**](InstrumentPaymentDiaryLeg.md) | Aggregated sets of Cashflows. | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument_payment_diary import InstrumentPaymentDiary
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentPaymentDiary from a JSON string
-instrument_payment_diary_instance = InstrumentPaymentDiary.from_json(json)
-# print the JSON string representation of the object
-print InstrumentPaymentDiary.to_json()
+instrument_id_type: Optional[StrictStr] = "example_instrument_id_type"
+instrument_id: Optional[StrictStr] = "example_instrument_id"
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+version: Optional[Version] = None
+legs: Optional[conlist(InstrumentPaymentDiaryLeg)] = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+links: Optional[conlist(Link)] = None
+instrument_payment_diary_instance = InstrumentPaymentDiary(instrument_id_type=instrument_id_type, instrument_id=instrument_id, instrument_scope=instrument_scope, version=version, legs=legs, href=href, links=links)
 
-# convert the object into a dict
-instrument_payment_diary_dict = instrument_payment_diary_instance.to_dict()
-# create an instance of InstrumentPaymentDiary from a dict
-instrument_payment_diary_form_dict = instrument_payment_diary.from_dict(instrument_payment_diary_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

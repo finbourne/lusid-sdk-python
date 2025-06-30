@@ -1,29 +1,22 @@
 # OrderGraphPlacementPlacementSynopsis
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **details** | [**List[OrderGraphPlacementChildPlacementDetail]**](OrderGraphPlacementChildPlacementDetail.md) | Identifiers for each child placement for this placement. | 
 **quantity** | **float** | Total number of units placed. | 
-
 ## Example
 
 ```python
 from lusid.models.order_graph_placement_placement_synopsis import OrderGraphPlacementPlacementSynopsis
+from typing import Any, Dict, List, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of OrderGraphPlacementPlacementSynopsis from a JSON string
-order_graph_placement_placement_synopsis_instance = OrderGraphPlacementPlacementSynopsis.from_json(json)
-# print the JSON string representation of the object
-print OrderGraphPlacementPlacementSynopsis.to_json()
+details: conlist(OrderGraphPlacementChildPlacementDetail) = # Replace with your value
+quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+order_graph_placement_placement_synopsis_instance = OrderGraphPlacementPlacementSynopsis(details=details, quantity=quantity)
 
-# convert the object into a dict
-order_graph_placement_placement_synopsis_dict = order_graph_placement_placement_synopsis_instance.to_dict()
-# create an instance of OrderGraphPlacementPlacementSynopsis from a dict
-order_graph_placement_placement_synopsis_form_dict = order_graph_placement_placement_synopsis.from_dict(order_graph_placement_placement_synopsis_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

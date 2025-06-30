@@ -1,7 +1,6 @@
 # ForwardRateAgreement
 
 LUSID representation of a Forward Rate Agreement.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **notional** | **float** | The amount for which the FRA is traded. | 
 **index_convention** | [**IndexConvention**](IndexConvention.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+fixing_date: datetime = # Replace with your value
+fra_rate: Union[StrictFloat, StrictInt] = # Replace with your value
+notional: Union[StrictFloat, StrictInt] = # Replace with your value
+index_convention: Optional[IndexConvention] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+forward_rate_agreement_instance = ForwardRateAgreement(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, fixing_date=fixing_date, fra_rate=fra_rate, notional=notional, index_convention=index_convention, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ForwardRateAgreement from a JSON string
-forward_rate_agreement_instance = ForwardRateAgreement.from_json(json)
-# print the JSON string representation of the object
-print ForwardRateAgreement.to_json()
-
-# convert the object into a dict
-forward_rate_agreement_dict = forward_rate_agreement_instance.to_dict()
-# create an instance of ForwardRateAgreement from a dict
-forward_rate_agreement_form_dict = forward_rate_agreement.from_dict(forward_rate_agreement_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

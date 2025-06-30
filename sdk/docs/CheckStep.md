@@ -1,6 +1,5 @@
 # CheckStep
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **limit_check_parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | Parameters required for an absolute limit check | 
 **warning_check_parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | Parameters required for a warning limit check | 
 **compliance_step_type** | **str** | . The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep | 
-
 ## Example
 
 ```python
 from lusid.models.check_step import CheckStep
+from typing import Any, Dict, List
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CheckStep from a JSON string
-check_step_instance = CheckStep.from_json(json)
-# print the JSON string representation of the object
-print CheckStep.to_json()
+label: StrictStr = "example_label"
+limit_check_parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+warning_check_parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+compliance_step_type: StrictStr = "example_compliance_step_type"
+check_step_instance = CheckStep(label=label, limit_check_parameters=limit_check_parameters, warning_check_parameters=warning_check_parameters, compliance_step_type=compliance_step_type)
 
-# convert the object into a dict
-check_step_dict = check_step_instance.to_dict()
-# create an instance of CheckStep from a dict
-check_step_form_dict = check_step.from_dict(check_step_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

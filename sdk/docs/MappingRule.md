@@ -1,7 +1,6 @@
 # MappingRule
 
 An individual mapping rule, for mapping between a left and right field/property.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **weight** | **float** | A factor used to influence the importance of this item. | [optional] 
 **mapped_strings** | [**List[MappedString]**](MappedString.md) | The (optional) value used to map string values. | [optional] 
 **is_case_sensitive** | **bool** | Should string comparisons take case into account, defaults to &#x60;false&#x60;. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.mapping_rule import MappingRule
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MappingRule from a JSON string
-mapping_rule_instance = MappingRule.from_json(json)
-# print the JSON string representation of the object
-print MappingRule.to_json()
+left: Optional[StrictStr] = "example_left"
+right: Optional[StrictStr] = "example_right"
+comparison_type: Optional[StrictStr] = "example_comparison_type"
+comparison_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+mapped_strings: Optional[conlist(MappedString)] = # Replace with your value
+is_case_sensitive: Optional[StrictBool] = # Replace with your value
+is_case_sensitive:Optional[StrictBool] = None
+mapping_rule_instance = MappingRule(left=left, right=right, comparison_type=comparison_type, comparison_value=comparison_value, weight=weight, mapped_strings=mapped_strings, is_case_sensitive=is_case_sensitive)
 
-# convert the object into a dict
-mapping_rule_dict = mapping_rule_instance.to_dict()
-# create an instance of MappingRule from a dict
-mapping_rule_form_dict = mapping_rule.from_dict(mapping_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

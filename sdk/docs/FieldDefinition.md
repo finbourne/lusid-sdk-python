@@ -1,6 +1,5 @@
 # FieldDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,22 @@ Name | Type | Description | Notes
 **is_required** | **bool** |  | 
 **is_unique** | **bool** |  | 
 **value_type** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.field_definition import FieldDefinition
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FieldDefinition from a JSON string
-field_definition_instance = FieldDefinition.from_json(json)
-# print the JSON string representation of the object
-print FieldDefinition.to_json()
+key: StrictStr = "example_key"
+is_required: StrictBool = # Replace with your value
+is_required:StrictBool = True
+is_unique: StrictBool = # Replace with your value
+is_unique:StrictBool = True
+value_type: Optional[StrictStr] = "example_value_type"
+field_definition_instance = FieldDefinition(key=key, is_required=is_required, is_unique=is_unique, value_type=value_type)
 
-# convert the object into a dict
-field_definition_dict = field_definition_instance.to_dict()
-# create an instance of FieldDefinition from a dict
-field_definition_form_dict = field_definition.from_dict(field_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

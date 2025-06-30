@@ -1,6 +1,5 @@
 # GroupReconciliationSummary
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,28 @@ Name | Type | Description | Notes
 **result_types** | [**GroupReconciliationResultTypes**](GroupReconciliationResultTypes.md) |  | [optional] 
 **result_statuses** | [**GroupReconciliationResultStatuses**](GroupReconciliationResultStatuses.md) |  | [optional] 
 **review_statuses** | [**GroupReconciliationReviewStatuses**](GroupReconciliationReviewStatuses.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.group_reconciliation_summary import GroupReconciliationSummary
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from datetime import datetime
+run_details: Optional[GroupReconciliationRunDetails] = # Replace with your value
+group_reconciliation_definition_id: Optional[ResourceId] = # Replace with your value
+reconciliation_type: StrictStr = "example_reconciliation_type"
+instance_id: GroupReconciliationInstanceId = # Replace with your value
+dates_reconciled: GroupReconciliationDates = # Replace with your value
+reconciliation_run_as_at: datetime = # Replace with your value
+count_comparison_results: StrictInt = # Replace with your value
+count_comparison_results: StrictInt = 42
+link_comparison_results: Optional[Link] = # Replace with your value
+result_types: Optional[GroupReconciliationResultTypes] = # Replace with your value
+result_statuses: Optional[GroupReconciliationResultStatuses] = # Replace with your value
+review_statuses: Optional[GroupReconciliationReviewStatuses] = # Replace with your value
+group_reconciliation_summary_instance = GroupReconciliationSummary(run_details=run_details, group_reconciliation_definition_id=group_reconciliation_definition_id, reconciliation_type=reconciliation_type, instance_id=instance_id, dates_reconciled=dates_reconciled, reconciliation_run_as_at=reconciliation_run_as_at, count_comparison_results=count_comparison_results, link_comparison_results=link_comparison_results, result_types=result_types, result_statuses=result_statuses, review_statuses=review_statuses)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GroupReconciliationSummary from a JSON string
-group_reconciliation_summary_instance = GroupReconciliationSummary.from_json(json)
-# print the JSON string representation of the object
-print GroupReconciliationSummary.to_json()
-
-# convert the object into a dict
-group_reconciliation_summary_dict = group_reconciliation_summary_instance.to_dict()
-# create an instance of GroupReconciliationSummary from a dict
-group_reconciliation_summary_form_dict = group_reconciliation_summary.from_dict(group_reconciliation_summary_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

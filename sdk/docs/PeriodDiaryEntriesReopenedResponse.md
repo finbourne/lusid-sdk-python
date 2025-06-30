@@ -1,6 +1,5 @@
 # PeriodDiaryEntriesReopenedResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,24 @@ Name | Type | Description | Notes
 **period_diary_entries_from** | **datetime** | The start point where periods were removed from | 
 **period_diary_entries_to** | **datetime** | The end point where periods were removed to | 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.period_diary_entries_reopened_response import PeriodDiaryEntriesReopenedResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+effective_from: Optional[datetime] = # Replace with your value
+as_at: datetime = # Replace with your value
+period_diary_entries_removed: StrictInt = # Replace with your value
+period_diary_entries_removed: StrictInt = 42
+period_diary_entries_from: datetime = # Replace with your value
+period_diary_entries_to: datetime = # Replace with your value
+links: Optional[conlist(Link)] = None
+period_diary_entries_reopened_response_instance = PeriodDiaryEntriesReopenedResponse(href=href, effective_from=effective_from, as_at=as_at, period_diary_entries_removed=period_diary_entries_removed, period_diary_entries_from=period_diary_entries_from, period_diary_entries_to=period_diary_entries_to, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PeriodDiaryEntriesReopenedResponse from a JSON string
-period_diary_entries_reopened_response_instance = PeriodDiaryEntriesReopenedResponse.from_json(json)
-# print the JSON string representation of the object
-print PeriodDiaryEntriesReopenedResponse.to_json()
-
-# convert the object into a dict
-period_diary_entries_reopened_response_dict = period_diary_entries_reopened_response_instance.to_dict()
-# create an instance of PeriodDiaryEntriesReopenedResponse from a dict
-period_diary_entries_reopened_response_form_dict = period_diary_entries_reopened_response.from_dict(period_diary_entries_reopened_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

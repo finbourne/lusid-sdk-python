@@ -1,7 +1,6 @@
 # ConstantVolatilitySurface
 
 Market Data required to build a volatility surface for pricing.  Single constant volatility point.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **lineage** | **str** |  | [optional] 
 **volatility** | **float** | Volatility value. | 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
-
 ## Example
 
 ```python
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from datetime import datetime
+base_date: datetime = # Replace with your value
+asset_type: StrictStr = "example_asset_type"
+lineage: Optional[StrictStr] = "example_lineage"
+volatility: Union[StrictFloat, StrictInt] = # Replace with your value
+market_data_type: StrictStr = "example_market_data_type"
+constant_volatility_surface_instance = ConstantVolatilitySurface(base_date=base_date, asset_type=asset_type, lineage=lineage, volatility=volatility, market_data_type=market_data_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ConstantVolatilitySurface from a JSON string
-constant_volatility_surface_instance = ConstantVolatilitySurface.from_json(json)
-# print the JSON string representation of the object
-print ConstantVolatilitySurface.to_json()
-
-# convert the object into a dict
-constant_volatility_surface_dict = constant_volatility_surface_instance.to_dict()
-# create an instance of ConstantVolatilitySurface from a dict
-constant_volatility_surface_form_dict = constant_volatility_surface.from_dict(constant_volatility_surface_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

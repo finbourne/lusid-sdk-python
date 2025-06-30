@@ -1,29 +1,22 @@
 # BlockAndOrderIdRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_block_id** | [**ResourceId**](ResourceId.md) |  | 
 **order_id** | [**ResourceId**](ResourceId.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BlockAndOrderIdRequest from a JSON string
-block_and_order_id_request_instance = BlockAndOrderIdRequest.from_json(json)
-# print the JSON string representation of the object
-print BlockAndOrderIdRequest.to_json()
+destination_block_id: ResourceId = # Replace with your value
+order_id: ResourceId = # Replace with your value
+block_and_order_id_request_instance = BlockAndOrderIdRequest(destination_block_id=destination_block_id, order_id=order_id)
 
-# convert the object into a dict
-block_and_order_id_request_dict = block_and_order_id_request_instance.to_dict()
-# create an instance of BlockAndOrderIdRequest from a dict
-block_and_order_id_request_form_dict = block_and_order_id_request.from_dict(block_and_order_id_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

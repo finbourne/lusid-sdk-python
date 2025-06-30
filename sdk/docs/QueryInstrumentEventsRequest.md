@@ -1,7 +1,6 @@
 # QueryInstrumentEventsRequest
 
 Instrument event query.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **effective_at** | **datetime** | The Effective date used in the valuation of the cashflows. | 
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **filter_instrument_events** | **str** | Expression to filter the result set. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.query_instrument_events_request import QueryInstrumentEventsRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from datetime import datetime
+as_at: Optional[datetime] = # Replace with your value
+window_start: datetime = # Replace with your value
+window_end: datetime = # Replace with your value
+portfolio_entity_ids: conlist(PortfolioEntityId) = # Replace with your value
+effective_at: datetime = # Replace with your value
+recipe_id: ResourceId = # Replace with your value
+filter_instrument_events: Optional[StrictStr] = "example_filter_instrument_events"
+query_instrument_events_request_instance = QueryInstrumentEventsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, effective_at=effective_at, recipe_id=recipe_id, filter_instrument_events=filter_instrument_events)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of QueryInstrumentEventsRequest from a JSON string
-query_instrument_events_request_instance = QueryInstrumentEventsRequest.from_json(json)
-# print the JSON string representation of the object
-print QueryInstrumentEventsRequest.to_json()
-
-# convert the object into a dict
-query_instrument_events_request_dict = query_instrument_events_request_instance.to_dict()
-# create an instance of QueryInstrumentEventsRequest from a dict
-query_instrument_events_request_form_dict = query_instrument_events_request.from_dict(query_instrument_events_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

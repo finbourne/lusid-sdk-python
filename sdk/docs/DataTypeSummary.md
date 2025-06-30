@@ -1,6 +1,5 @@
 # DataTypeSummary
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **unit_schema** | **str** | The schema of the data type&#39;s units. The available values are: NoUnits, Basic, Iso4217Currency | [optional] 
 **acceptable_units** | [**List[IUnitDefinitionDto]**](IUnitDefinitionDto.md) | The definitions of the acceptable units. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.data_type_summary import DataTypeSummary
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DataTypeSummary from a JSON string
-data_type_summary_instance = DataTypeSummary.from_json(json)
-# print the JSON string representation of the object
-print DataTypeSummary.to_json()
+type_value_range: StrictStr = "example_type_value_range"
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+value_type: StrictStr = "example_value_type"
+acceptable_values: Optional[conlist(StrictStr)] = # Replace with your value
+unit_schema: Optional[StrictStr] = "example_unit_schema"
+acceptable_units: Optional[conlist(IUnitDefinitionDto)] = # Replace with your value
+version: Optional[Version] = None
+data_type_summary_instance = DataTypeSummary(type_value_range=type_value_range, id=id, display_name=display_name, description=description, value_type=value_type, acceptable_values=acceptable_values, unit_schema=unit_schema, acceptable_units=acceptable_units, version=version)
 
-# convert the object into a dict
-data_type_summary_dict = data_type_summary_instance.to_dict()
-# create an instance of DataTypeSummary from a dict
-data_type_summary_form_dict = data_type_summary.from_dict(data_type_summary_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

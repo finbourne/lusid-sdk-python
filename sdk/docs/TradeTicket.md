@@ -1,29 +1,21 @@
 # TradeTicket
 
 The base class for representing a Trade Ticket in LUSID.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **trade_ticket_type** | **str** | The available values are: LusidTradeTicket, ExternalTradeTicket | 
-
 ## Example
 
 ```python
 from lusid.models.trade_ticket import TradeTicket
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TradeTicket from a JSON string
-trade_ticket_instance = TradeTicket.from_json(json)
-# print the JSON string representation of the object
-print TradeTicket.to_json()
+trade_ticket_type: StrictStr = "example_trade_ticket_type"
+trade_ticket_instance = TradeTicket(trade_ticket_type=trade_ticket_type)
 
-# convert the object into a dict
-trade_ticket_dict = trade_ticket_instance.to_dict()
-# create an instance of TradeTicket from a dict
-trade_ticket_form_dict = trade_ticket.from_dict(trade_ticket_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

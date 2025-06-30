@@ -1,7 +1,6 @@
 # TransactionReconciliationRequest
 
 Specifies the parameter to be use when performing a Transaction Reconciliation.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **to_transaction_date** | **datetime** |  | 
 **as_at** | **datetime** |  | [optional] 
 **property_keys** | **List[str]** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.transaction_reconciliation_request import TransactionReconciliationRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from datetime import datetime
+left_portfolio_id: ResourceId = # Replace with your value
+right_portfolio_id: ResourceId = # Replace with your value
+mapping_id: Optional[ResourceId] = # Replace with your value
+from_transaction_date: datetime = # Replace with your value
+to_transaction_date: datetime = # Replace with your value
+as_at: Optional[datetime] = # Replace with your value
+property_keys: Optional[conlist(StrictStr)] = # Replace with your value
+transaction_reconciliation_request_instance = TransactionReconciliationRequest(left_portfolio_id=left_portfolio_id, right_portfolio_id=right_portfolio_id, mapping_id=mapping_id, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, property_keys=property_keys)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TransactionReconciliationRequest from a JSON string
-transaction_reconciliation_request_instance = TransactionReconciliationRequest.from_json(json)
-# print the JSON string representation of the object
-print TransactionReconciliationRequest.to_json()
-
-# convert the object into a dict
-transaction_reconciliation_request_dict = transaction_reconciliation_request_instance.to_dict()
-# create an instance of TransactionReconciliationRequest from a dict
-transaction_reconciliation_request_form_dict = transaction_reconciliation_request.from_dict(transaction_reconciliation_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

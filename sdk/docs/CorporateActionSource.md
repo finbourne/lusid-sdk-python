@@ -1,7 +1,6 @@
 # CorporateActionSource
 
 A corporate action source
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the corporate action source | [optional] 
 **instrument_scopes** | **List[str]** | The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.corporate_action_source import CorporateActionSource
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CorporateActionSource from a JSON string
-corporate_action_source_instance = CorporateActionSource.from_json(json)
-# print the JSON string representation of the object
-print CorporateActionSource.to_json()
+href: Optional[StrictStr] = "example_href"
+id: Optional[ResourceId] = None
+version: Optional[Version] = None
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+instrument_scopes: Optional[conlist(StrictStr)] = # Replace with your value
+links: Optional[conlist(Link)] = None
+corporate_action_source_instance = CorporateActionSource(href=href, id=id, version=version, display_name=display_name, description=description, instrument_scopes=instrument_scopes, links=links)
 
-# convert the object into a dict
-corporate_action_source_dict = corporate_action_source_instance.to_dict()
-# create an instance of CorporateActionSource from a dict
-corporate_action_source_form_dict = corporate_action_source.from_dict(corporate_action_source_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

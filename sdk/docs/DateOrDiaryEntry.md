@@ -1,29 +1,22 @@
 # DateOrDiaryEntry
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | **str** | A date. If specified, DiaryEntry must not be specified. | [optional] 
 **diary_entry** | **str** | The code of a diary entry. If specified, Date must not be specified. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DateOrDiaryEntry from a JSON string
-date_or_diary_entry_instance = DateOrDiaryEntry.from_json(json)
-# print the JSON string representation of the object
-print DateOrDiaryEntry.to_json()
+var_date: Optional[StrictStr] = "example_var_date"
+diary_entry: Optional[StrictStr] = "example_diary_entry"
+date_or_diary_entry_instance = DateOrDiaryEntry(var_date=var_date, diary_entry=diary_entry)
 
-# convert the object into a dict
-date_or_diary_entry_dict = date_or_diary_entry_instance.to_dict()
-# create an instance of DateOrDiaryEntry from a dict
-date_or_diary_entry_form_dict = date_or_diary_entry.from_dict(date_or_diary_entry_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

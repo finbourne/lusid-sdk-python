@@ -1,6 +1,5 @@
 # ExpandedGroup
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **sub_groups** | [**List[ExpandedGroup]**](ExpandedGroup.md) | The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.expanded_group import ExpandedGroup
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ExpandedGroup from a JSON string
-expanded_group_instance = ExpandedGroup.from_json(json)
-# print the JSON string representation of the object
-print ExpandedGroup.to_json()
+href: Optional[StrictStr] = "example_href"
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+values: Optional[conlist(CompletePortfolio)] = # Replace with your value
+sub_groups: Optional[conlist(ExpandedGroup)] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+expanded_group_instance = ExpandedGroup(href=href, id=id, display_name=display_name, description=description, values=values, sub_groups=sub_groups, version=version, links=links)
 
-# convert the object into a dict
-expanded_group_dict = expanded_group_instance.to_dict()
-# create an instance of ExpandedGroup from a dict
-expanded_group_form_dict = expanded_group.from_dict(expanded_group_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

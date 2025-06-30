@@ -1,7 +1,6 @@
 # HoldingsAdjustment
 
 Full content of a holdings adjustment for a single portfolio and effective date.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **unmatched_holding_method** | **str** | Describes how the holdings were adjusted. If &#39;PositionToZero&#39; the entire transaction portfolio&#39;s holdings were set via a call to &#39;Set holdings&#39;. If &#39;KeepTheSame&#39; only the specified holdings were adjusted via a call to &#39;Adjust holdings&#39;. The available values are: PositionToZero, KeepTheSame | 
 **adjustments** | [**List[HoldingAdjustment]**](HoldingAdjustment.md) | The holding adjustments. | 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.holdings_adjustment import HoldingsAdjustment
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from datetime import datetime
+effective_at: datetime = # Replace with your value
+version: Version = # Replace with your value
+unmatched_holding_method: StrictStr = "example_unmatched_holding_method"
+adjustments: conlist(HoldingAdjustment) = # Replace with your value
+links: Optional[conlist(Link)] = None
+holdings_adjustment_instance = HoldingsAdjustment(effective_at=effective_at, version=version, unmatched_holding_method=unmatched_holding_method, adjustments=adjustments, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of HoldingsAdjustment from a JSON string
-holdings_adjustment_instance = HoldingsAdjustment.from_json(json)
-# print the JSON string representation of the object
-print HoldingsAdjustment.to_json()
-
-# convert the object into a dict
-holdings_adjustment_dict = holdings_adjustment_instance.to_dict()
-# create an instance of HoldingsAdjustment from a dict
-holdings_adjustment_form_dict = holdings_adjustment.from_dict(holdings_adjustment_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

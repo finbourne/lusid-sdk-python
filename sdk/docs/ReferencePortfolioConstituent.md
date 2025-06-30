@@ -1,6 +1,5 @@
 # ReferencePortfolioConstituent
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **weight** | **float** |  | 
 **floating_weight** | **float** |  | [optional] 
 **instrument_scope** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.reference_portfolio_constituent import ReferencePortfolioConstituent
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ReferencePortfolioConstituent from a JSON string
-reference_portfolio_constituent_instance = ReferencePortfolioConstituent.from_json(json)
-# print the JSON string representation of the object
-print ReferencePortfolioConstituent.to_json()
+instrument_identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+instrument_uid: StrictStr = "example_instrument_uid"
+currency: StrictStr = "example_currency"
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+weight: Union[StrictFloat, StrictInt] = # Replace with your value
+floating_weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+reference_portfolio_constituent_instance = ReferencePortfolioConstituent(instrument_identifiers=instrument_identifiers, instrument_uid=instrument_uid, currency=currency, properties=properties, weight=weight, floating_weight=floating_weight, instrument_scope=instrument_scope)
 
-# convert the object into a dict
-reference_portfolio_constituent_dict = reference_portfolio_constituent_instance.to_dict()
-# create an instance of ReferencePortfolioConstituent from a dict
-reference_portfolio_constituent_form_dict = reference_portfolio_constituent.from_dict(reference_portfolio_constituent_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # GroupReconciliationResultTypes
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,31 @@ Name | Type | Description | Notes
 **link_not_found** | [**Link**](Link.md) |  | [optional] 
 **count_resolved** | **int** | The number of comparison results of resultType \&quot;Resolved\&quot; with this instanceId and reconciliationType | [optional] 
 **link_resolved** | [**Link**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.group_reconciliation_result_types import GroupReconciliationResultTypes
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GroupReconciliationResultTypes from a JSON string
-group_reconciliation_result_types_instance = GroupReconciliationResultTypes.from_json(json)
-# print the JSON string representation of the object
-print GroupReconciliationResultTypes.to_json()
+count_match: StrictInt = # Replace with your value
+count_match: StrictInt = 42
+link_matches: Link = # Replace with your value
+count_partial_match: StrictInt = # Replace with your value
+count_partial_match: StrictInt = 42
+link_partial_matches: Link = # Replace with your value
+count_break: StrictInt = # Replace with your value
+count_break: StrictInt = 42
+link_breaks: Link = # Replace with your value
+count_not_found: Optional[StrictInt] = # Replace with your value
+count_not_found: Optional[StrictInt] = None
+link_not_found: Optional[Link] = # Replace with your value
+count_resolved: Optional[StrictInt] = # Replace with your value
+count_resolved: Optional[StrictInt] = None
+link_resolved: Optional[Link] = # Replace with your value
+group_reconciliation_result_types_instance = GroupReconciliationResultTypes(count_match=count_match, link_matches=link_matches, count_partial_match=count_partial_match, link_partial_matches=link_partial_matches, count_break=count_break, link_breaks=link_breaks, count_not_found=count_not_found, link_not_found=link_not_found, count_resolved=count_resolved, link_resolved=link_resolved)
 
-# convert the object into a dict
-group_reconciliation_result_types_dict = group_reconciliation_result_types_instance.to_dict()
-# create an instance of GroupReconciliationResultTypes from a dict
-group_reconciliation_result_types_form_dict = group_reconciliation_result_types.from_dict(group_reconciliation_result_types_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

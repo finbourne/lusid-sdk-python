@@ -1,6 +1,5 @@
 # Operation
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **path** | **str** |  | 
 **op** | **str** |  | 
 **var_from** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.operation import Operation
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Operation from a JSON string
-operation_instance = Operation.from_json(json)
-# print the JSON string representation of the object
-print Operation.to_json()
+value: Optional[Any] = None
+path: StrictStr = "example_path"
+op: StrictStr = "example_op"
+var_from: Optional[StrictStr] = "example_var_from"
+operation_instance = Operation(value=value, path=path, op=op, var_from=var_from)
 
-# convert the object into a dict
-operation_dict = operation_instance.to_dict()
-# create an instance of Operation from a dict
-operation_form_dict = operation.from_dict(operation_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

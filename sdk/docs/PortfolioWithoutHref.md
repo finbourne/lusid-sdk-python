@@ -1,7 +1,6 @@
 # PortfolioWithoutHref
 
 A list of portfolios.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -25,24 +24,37 @@ Name | Type | Description | Notes
 **instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from datetime import datetime
+id: ResourceId = # Replace with your value
+type: StrictStr = "example_type"
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+created: datetime = # Replace with your value
+parent_portfolio_id: Optional[ResourceId] = # Replace with your value
+version: Optional[Version] = None
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+is_derived: Optional[StrictBool] = # Replace with your value
+is_derived:Optional[StrictBool] = None
+base_currency: Optional[StrictStr] = "example_base_currency"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+relationships: Optional[conlist(Relationship)] = # Replace with your value
+instrument_scopes: Optional[conlist(StrictStr)] = # Replace with your value
+accounting_method: Optional[StrictStr] = "example_accounting_method"
+amortisation_method: Optional[StrictStr] = "example_amortisation_method"
+transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
+cash_gain_loss_calculation_date: Optional[StrictStr] = "example_cash_gain_loss_calculation_date"
+instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Replace with your value
+amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
+links: Optional[conlist(Link)] = None
+portfolio_without_href_instance = PortfolioWithoutHref(id=id, type=type, display_name=display_name, description=description, created=created, parent_portfolio_id=parent_portfolio_id, version=version, staged_modifications=staged_modifications, is_derived=is_derived, base_currency=base_currency, properties=properties, relationships=relationships, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioWithoutHref from a JSON string
-portfolio_without_href_instance = PortfolioWithoutHref.from_json(json)
-# print the JSON string representation of the object
-print PortfolioWithoutHref.to_json()
-
-# convert the object into a dict
-portfolio_without_href_dict = portfolio_without_href_instance.to_dict()
-# create an instance of PortfolioWithoutHref from a dict
-portfolio_without_href_form_dict = portfolio_without_href.from_dict(portfolio_without_href_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

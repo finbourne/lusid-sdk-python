@@ -1,7 +1,6 @@
 # Reconciliation
 
 Representation of Reconciliation in LUSID Api
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,30 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Reconciliation properties | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.reconciliation import Reconciliation
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Reconciliation from a JSON string
-reconciliation_instance = Reconciliation.from_json(json)
-# print the JSON string representation of the object
-print Reconciliation.to_json()
+id: Optional[ReconciliationId] = None
+href: Optional[StrictStr] = "example_href"
+name: Optional[StrictStr] = "example_name"
+description: Optional[StrictStr] = "example_description"
+is_portfolio_group: Optional[StrictBool] = # Replace with your value
+is_portfolio_group:Optional[StrictBool] = None
+left: Optional[ResourceId] = None
+right: Optional[ResourceId] = None
+transactions: Optional[ReconciliationTransactions] = None
+positions: Optional[ReconciliationConfiguration] = None
+valuations: Optional[ReconciliationConfiguration] = None
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+reconciliation_instance = Reconciliation(id=id, href=href, name=name, description=description, is_portfolio_group=is_portfolio_group, left=left, right=right, transactions=transactions, positions=positions, valuations=valuations, properties=properties, version=version, links=links)
 
-# convert the object into a dict
-reconciliation_dict = reconciliation_instance.to_dict()
-# create an instance of Reconciliation from a dict
-reconciliation_form_dict = reconciliation.from_dict(reconciliation_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

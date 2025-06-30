@@ -1,7 +1,6 @@
 # RepoCashFlowEvent
 
 Event representing a repurchase agreement cashflow.   For example, cashflow for a partial closure of the   repurchase agreement.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **cash_flow_per_unit** | **float** | The amount of cash to be exchanged for each unit   of the instrument held on the entitlement date. | 
 **currency** | **str** | The currency in which the cashflow is paid. | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent | 
-
 ## Example
 
 ```python
 from lusid.models.repo_cash_flow_event import RepoCashFlowEvent
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from datetime import datetime
+entitlement_date: Optional[datetime] = # Replace with your value
+settlement_date: Optional[datetime] = # Replace with your value
+cash_flow_per_unit: Union[StrictFloat, StrictInt] = # Replace with your value
+currency: StrictStr = "example_currency"
+instrument_event_type: StrictStr = "example_instrument_event_type"
+repo_cash_flow_event_instance = RepoCashFlowEvent(entitlement_date=entitlement_date, settlement_date=settlement_date, cash_flow_per_unit=cash_flow_per_unit, currency=currency, instrument_event_type=instrument_event_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of RepoCashFlowEvent from a JSON string
-repo_cash_flow_event_instance = RepoCashFlowEvent.from_json(json)
-# print the JSON string representation of the object
-print RepoCashFlowEvent.to_json()
-
-# convert the object into a dict
-repo_cash_flow_event_dict = repo_cash_flow_event_instance.to_dict()
-# create an instance of RepoCashFlowEvent from a dict
-repo_cash_flow_event_form_dict = repo_cash_flow_event.from_dict(repo_cash_flow_event_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

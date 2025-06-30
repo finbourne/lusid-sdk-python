@@ -1,7 +1,6 @@
 # CreditSpreadCurveData
 
 A credit spread curve matching tenors against par spread quotes
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,26 @@ Name | Type | Description | Notes
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
-
 ## Example
 
 ```python
 from lusid.models.credit_spread_curve_data import CreditSpreadCurveData
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+base_date: datetime = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+tenors: conlist(StrictStr) = # Replace with your value
+spreads: conlist(Union[StrictFloat, StrictInt]) = # Replace with your value
+recovery_rate: Union[StrictFloat, StrictInt] = # Replace with your value
+reference_date: Optional[datetime] = # Replace with your value
+maturities: Optional[conlist(datetime)] = # Replace with your value
+lineage: Optional[StrictStr] = "example_lineage"
+market_data_options: Optional[MarketDataOptions] = # Replace with your value
+market_data_type: StrictStr = "example_market_data_type"
+credit_spread_curve_data_instance = CreditSpreadCurveData(base_date=base_date, dom_ccy=dom_ccy, tenors=tenors, spreads=spreads, recovery_rate=recovery_rate, reference_date=reference_date, maturities=maturities, lineage=lineage, market_data_options=market_data_options, market_data_type=market_data_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreditSpreadCurveData from a JSON string
-credit_spread_curve_data_instance = CreditSpreadCurveData.from_json(json)
-# print the JSON string representation of the object
-print CreditSpreadCurveData.to_json()
-
-# convert the object into a dict
-credit_spread_curve_data_dict = credit_spread_curve_data_instance.to_dict()
-# create an instance of CreditSpreadCurveData from a dict
-credit_spread_curve_data_form_dict = credit_spread_curve_data.from_dict(credit_spread_curve_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

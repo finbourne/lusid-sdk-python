@@ -1,7 +1,6 @@
 # CashElection
 
 Cash election for Events that result in a cash payment.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,26 @@ Name | Type | Description | Notes
 **is_declared** | **bool** | Is this the declared CashElection.  Only one Election may be Declared per Event. | [optional] 
 **is_default** | **bool** | Is this election the default.  Only one Election may be Default per Event | [optional] 
 **dividend_currency** | **str** | The payment currency for this CashElection. | 
-
 ## Example
 
 ```python
 from lusid.models.cash_election import CashElection
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CashElection from a JSON string
-cash_election_instance = CashElection.from_json(json)
-# print the JSON string representation of the object
-print CashElection.to_json()
+election_key: StrictStr = "example_election_key"
+exchange_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+dividend_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+is_chosen: Optional[StrictBool] = # Replace with your value
+is_chosen:Optional[StrictBool] = None
+is_declared: Optional[StrictBool] = # Replace with your value
+is_declared:Optional[StrictBool] = None
+is_default: Optional[StrictBool] = # Replace with your value
+is_default:Optional[StrictBool] = None
+dividend_currency: StrictStr = "example_dividend_currency"
+cash_election_instance = CashElection(election_key=election_key, exchange_rate=exchange_rate, dividend_rate=dividend_rate, is_chosen=is_chosen, is_declared=is_declared, is_default=is_default, dividend_currency=dividend_currency)
 
-# convert the object into a dict
-cash_election_dict = cash_election_instance.to_dict()
-# create an instance of CashElection from a dict
-cash_election_form_dict = cash_election.from_dict(cash_election_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # Timeline
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.timeline import Timeline
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Timeline from a JSON string
-timeline_instance = Timeline.from_json(json)
-# print the JSON string representation of the object
-print Timeline.to_json()
+id: Optional[ResourceId] = None
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+href: Optional[StrictStr] = "example_href"
+links: Optional[conlist(Link)] = None
+timeline_instance = Timeline(id=id, display_name=display_name, description=description, properties=properties, version=version, href=href, links=links)
 
-# convert the object into a dict
-timeline_dict = timeline_instance.to_dict()
-# create an instance of Timeline from a dict
-timeline_form_dict = timeline.from_dict(timeline_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

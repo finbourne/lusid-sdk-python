@@ -1,7 +1,6 @@
 # FundShareClass
 
 LUSID representation of a FundShareClass.  A ShareClass represents a pool of shares, held by investors, within a fund.   A ShareClass can represent a differing investment approach by either Fees,   Income, Currency Risk and Investor type.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **rounding_conventions** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding Convention used for the FundShareClass quotes | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.fund_share_class import FundShareClass
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FundShareClass from a JSON string
-fund_share_class_instance = FundShareClass.from_json(json)
-# print the JSON string representation of the object
-print FundShareClass.to_json()
+short_code: StrictStr = "example_short_code"
+fund_share_class_type: StrictStr = "example_fund_share_class_type"
+distribution_payment_type: StrictStr = "example_distribution_payment_type"
+hedging: StrictStr = "example_hedging"
+dom_ccy: StrictStr = "example_dom_ccy"
+rounding_conventions: Optional[conlist(SimpleRoundingConvention)] = # Replace with your value
+trading_conventions: Optional[TradingConventions] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+fund_share_class_instance = FundShareClass(short_code=short_code, fund_share_class_type=fund_share_class_type, distribution_payment_type=distribution_payment_type, hedging=hedging, dom_ccy=dom_ccy, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
-# convert the object into a dict
-fund_share_class_dict = fund_share_class_instance.to_dict()
-# create an instance of FundShareClass from a dict
-fund_share_class_form_dict = fund_share_class.from_dict(fund_share_class_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # OrderGraphBlockOrderDetail
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **order_approval_task_id** | **str** | The task id associated with the approval state of the order. | [optional] 
 **order_approval_task_definition_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **non_passing_compliance_rule_results** | [**List[ContributionToNonPassingRuleDetail]**](ContributionToNonPassingRuleDetail.md) | The details of compliance rules in non-passing states. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.order_graph_block_order_detail import OrderGraphBlockOrderDetail
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of OrderGraphBlockOrderDetail from a JSON string
-order_graph_block_order_detail_instance = OrderGraphBlockOrderDetail.from_json(json)
-# print the JSON string representation of the object
-print OrderGraphBlockOrderDetail.to_json()
+id: ResourceId = # Replace with your value
+compliance_state: StrictStr = "example_compliance_state"
+approval_state: StrictStr = "example_approval_state"
+portfolio_id: Optional[ResourceId] = # Replace with your value
+portfolio_name: Optional[StrictStr] = "example_portfolio_name"
+order_approval_task_id: Optional[StrictStr] = "example_order_approval_task_id"
+order_approval_task_definition_id: Optional[ResourceId] = # Replace with your value
+non_passing_compliance_rule_results: Optional[conlist(ContributionToNonPassingRuleDetail)] = # Replace with your value
+order_graph_block_order_detail_instance = OrderGraphBlockOrderDetail(id=id, compliance_state=compliance_state, approval_state=approval_state, portfolio_id=portfolio_id, portfolio_name=portfolio_name, order_approval_task_id=order_approval_task_id, order_approval_task_definition_id=order_approval_task_definition_id, non_passing_compliance_rule_results=non_passing_compliance_rule_results)
 
-# convert the object into a dict
-order_graph_block_order_detail_dict = order_graph_block_order_detail_instance.to_dict()
-# create an instance of OrderGraphBlockOrderDetail from a dict
-order_graph_block_order_detail_form_dict = order_graph_block_order_detail.from_dict(order_graph_block_order_detail_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

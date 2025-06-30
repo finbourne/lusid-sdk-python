@@ -1,6 +1,5 @@
 # FeeAccrual
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **previous_total_accrual** | **float** | The previous valuation point&#39;s total accrual. | [optional] 
 **total_accrual** | **float** | The sum of the PreviousAccrual and Amount. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fee_accrual import FeeAccrual
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from datetime import datetime
+effective_at: datetime = # Replace with your value
+code: StrictStr = "example_code"
+name: StrictStr = "example_name"
+calculation_base: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+previous_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+total_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+links: Optional[conlist(Link)] = None
+fee_accrual_instance = FeeAccrual(effective_at=effective_at, code=code, name=name, calculation_base=calculation_base, amount=amount, previous_accrual=previous_accrual, previous_total_accrual=previous_total_accrual, total_accrual=total_accrual, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FeeAccrual from a JSON string
-fee_accrual_instance = FeeAccrual.from_json(json)
-# print the JSON string representation of the object
-print FeeAccrual.to_json()
-
-# convert the object into a dict
-fee_accrual_dict = fee_accrual_instance.to_dict()
-# create an instance of FeeAccrual from a dict
-fee_accrual_form_dict = fee_accrual.from_dict(fee_accrual_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

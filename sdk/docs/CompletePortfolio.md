@@ -1,6 +1,5 @@
 # CompletePortfolio
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,30 @@ Name | Type | Description | Notes
 **base_currency** | **str** | If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio. | [optional] 
 **sub_holding_keys** | **List[str]** | The sub holding key properties configured for the portfolio | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.complete_portfolio import CompletePortfolio
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, validator
+from datetime import datetime
+id: ResourceId = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+description: Optional[StrictStr] = "example_description"
+display_name: Optional[StrictStr] = "example_display_name"
+created: Optional[datetime] = # Replace with your value
+parent_portfolio_id: Optional[ResourceId] = # Replace with your value
+is_derived: Optional[StrictBool] = # Replace with your value
+is_derived:Optional[StrictBool] = None
+type: Optional[StrictStr] = "example_type"
+version: Version = # Replace with your value
+properties: Optional[conlist(ModelProperty)] = # Replace with your value
+base_currency: Optional[StrictStr] = "example_base_currency"
+sub_holding_keys: Optional[conlist(StrictStr)] = # Replace with your value
+links: Optional[conlist(Link)] = None
+complete_portfolio_instance = CompletePortfolio(id=id, href=href, description=description, display_name=display_name, created=created, parent_portfolio_id=parent_portfolio_id, is_derived=is_derived, type=type, version=version, properties=properties, base_currency=base_currency, sub_holding_keys=sub_holding_keys, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CompletePortfolio from a JSON string
-complete_portfolio_instance = CompletePortfolio.from_json(json)
-# print the JSON string representation of the object
-print CompletePortfolio.to_json()
-
-# convert the object into a dict
-complete_portfolio_dict = complete_portfolio_instance.to_dict()
-# create an instance of CompletePortfolio from a dict
-complete_portfolio_form_dict = complete_portfolio.from_dict(complete_portfolio_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

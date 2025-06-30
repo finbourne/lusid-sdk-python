@@ -1,7 +1,6 @@
 # FuturesContractDetails
 
 Most, if not all, information about contracts is standardized. See, e.g. https://www.cmegroup.com/ for  common codes and similar data. This appears to be in common use by well known market information providers, e.g. Bloomberg and Refinitiv.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -20,24 +19,31 @@ Name | Type | Description | Notes
 **unit_value** | **float** | The value in the currency of a 1 unit change in the contract price. | [optional] 
 **calendars** | **List[str]** | Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures). | [optional] 
 **delivery_type** | **str** | Delivery type to be used on settling the contract.  Optional: Defaults to DeliveryType.Physical if not provided.    Supported string (enumeration) values are: [Cash, Physical]. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.futures_contract_details import FuturesContractDetails
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FuturesContractDetails from a JSON string
-futures_contract_details_instance = FuturesContractDetails.from_json(json)
-# print the JSON string representation of the object
-print FuturesContractDetails.to_json()
+dom_ccy: StrictStr = "example_dom_ccy"
+fgn_ccy: Optional[StrictStr] = "example_fgn_ccy"
+asset_class: Optional[StrictStr] = "example_asset_class"
+contract_code: StrictStr = "example_contract_code"
+contract_month: Optional[StrictStr] = "example_contract_month"
+contract_size: Union[StrictFloat, StrictInt] = # Replace with your value
+convention: Optional[StrictStr] = "example_convention"
+country: Optional[StrictStr] = "example_country"
+description: Optional[StrictStr] = "example_description"
+exchange_code: StrictStr = "example_exchange_code"
+exchange_name: Optional[StrictStr] = "example_exchange_name"
+ticker_step: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+calendars: Optional[conlist(StrictStr)] = # Replace with your value
+delivery_type: Optional[StrictStr] = "example_delivery_type"
+futures_contract_details_instance = FuturesContractDetails(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, asset_class=asset_class, contract_code=contract_code, contract_month=contract_month, contract_size=contract_size, convention=convention, country=country, description=description, exchange_code=exchange_code, exchange_name=exchange_name, ticker_step=ticker_step, unit_value=unit_value, calendars=calendars, delivery_type=delivery_type)
 
-# convert the object into a dict
-futures_contract_details_dict = futures_contract_details_instance.to_dict()
-# create an instance of FuturesContractDetails from a dict
-futures_contract_details_form_dict = futures_contract_details.from_dict(futures_contract_details_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

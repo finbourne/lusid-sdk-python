@@ -1,6 +1,5 @@
 # PropertyFilter
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **operator** | **str** | The available values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, In | [optional] 
 **right** | **object** |  | [optional] 
 **right_operand_type** | **str** | The available values are: Absolute, Property | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.property_filter import PropertyFilter
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PropertyFilter from a JSON string
-property_filter_instance = PropertyFilter.from_json(json)
-# print the JSON string representation of the object
-print PropertyFilter.to_json()
+left: Optional[StrictStr] = "example_left"
+operator: Optional[StrictStr] = "example_operator"
+right: Optional[Any] = None
+right_operand_type: Optional[StrictStr] = "example_right_operand_type"
+property_filter_instance = PropertyFilter(left=left, operator=operator, right=right, right_operand_type=right_operand_type)
 
-# convert the object into a dict
-property_filter_dict = property_filter_instance.to_dict()
-# create an instance of PropertyFilter from a dict
-property_filter_form_dict = property_filter.from_dict(property_filter_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

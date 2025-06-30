@@ -1,7 +1,6 @@
 # FxOption
 
 LUSID representation of an FX Option.  Including Vanilla, American, European, and Digital (Binary) options.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -22,24 +21,36 @@ Name | Type | Description | Notes
 **premium** | [**Premium**](Premium.md) |  | [optional] 
 **touches** | [**List[Touch]**](Touch.md) | For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.fx_option import FxOption
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+dom_ccy: StrictStr = "example_dom_ccy"
+dom_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fgn_ccy: StrictStr = "example_fgn_ccy"
+fgn_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+barriers: Optional[conlist(Barrier)] = # Replace with your value
+exercise_type: Optional[StrictStr] = "example_exercise_type"
+is_call_not_put: StrictBool = # Replace with your value
+is_call_not_put:StrictBool = True
+is_delivery_not_cash: StrictBool = # Replace with your value
+is_delivery_not_cash:StrictBool = True
+is_payoff_digital: Optional[StrictBool] = # Replace with your value
+is_payoff_digital:Optional[StrictBool] = None
+option_maturity_date: datetime = # Replace with your value
+option_settlement_date: datetime = # Replace with your value
+payout_style: Optional[StrictStr] = "example_payout_style"
+premium: Optional[Premium] = None
+touches: Optional[conlist(Touch)] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+fx_option_instance = FxOption(start_date=start_date, dom_ccy=dom_ccy, dom_amount=dom_amount, fgn_ccy=fgn_ccy, fgn_amount=fgn_amount, strike=strike, barriers=barriers, exercise_type=exercise_type, is_call_not_put=is_call_not_put, is_delivery_not_cash=is_delivery_not_cash, is_payoff_digital=is_payoff_digital, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, payout_style=payout_style, premium=premium, touches=touches, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FxOption from a JSON string
-fx_option_instance = FxOption.from_json(json)
-# print the JSON string representation of the object
-print FxOption.to_json()
-
-# convert the object into a dict
-fx_option_dict = fx_option_instance.to_dict()
-# create an instance of FxOption from a dict
-fx_option_form_dict = fx_option.from_dict(fx_option_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

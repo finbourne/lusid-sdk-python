@@ -1,29 +1,21 @@
 # UpsertCdsFlowConventionsRequest
 
 CDS Flow convention that is to be stored in the convention data store.  Only one of these must be present.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cds_flow_conventions** | [**CdsFlowConventions**](CdsFlowConventions.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertCdsFlowConventionsRequest from a JSON string
-upsert_cds_flow_conventions_request_instance = UpsertCdsFlowConventionsRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertCdsFlowConventionsRequest.to_json()
+cds_flow_conventions: Optional[CdsFlowConventions] = # Replace with your value
+upsert_cds_flow_conventions_request_instance = UpsertCdsFlowConventionsRequest(cds_flow_conventions=cds_flow_conventions)
 
-# convert the object into a dict
-upsert_cds_flow_conventions_request_dict = upsert_cds_flow_conventions_request_instance.to_dict()
-# create an instance of UpsertCdsFlowConventionsRequest from a dict
-upsert_cds_flow_conventions_request_form_dict = upsert_cds_flow_conventions_request.from_dict(upsert_cds_flow_conventions_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

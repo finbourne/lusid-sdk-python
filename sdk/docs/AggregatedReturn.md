@@ -1,7 +1,6 @@
 # AggregatedReturn
 
 A list of Aggregated Returns.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **composite_members** | **int** | The number of members in the Composite on the given day. | [optional] 
 **composite_members_without_return** | [**List[ResourceId]**](ResourceId.md) | List containing Composite members which post no return on the given day. | [optional] 
 **warnings** | **List[str]** | List of the warnings about the calculation of the aggregated return. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.aggregated_return import AggregatedReturn
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from datetime import datetime
+effective_at: datetime = # Replace with your value
+end_of_period: datetime = # Replace with your value
+opening_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+closing_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+metrics_value: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your value
+frequency: Optional[StrictStr] = "example_frequency"
+composite_members: Optional[StrictInt] = # Replace with your value
+composite_members: Optional[StrictInt] = None
+composite_members_without_return: Optional[conlist(ResourceId)] = # Replace with your value
+warnings: Optional[conlist(StrictStr)] = # Replace with your value
+aggregated_return_instance = AggregatedReturn(effective_at=effective_at, end_of_period=end_of_period, opening_market_value=opening_market_value, closing_market_value=closing_market_value, metrics_value=metrics_value, frequency=frequency, composite_members=composite_members, composite_members_without_return=composite_members_without_return, warnings=warnings)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AggregatedReturn from a JSON string
-aggregated_return_instance = AggregatedReturn.from_json(json)
-# print the JSON string representation of the object
-print AggregatedReturn.to_json()
-
-# convert the object into a dict
-aggregated_return_dict = aggregated_return_instance.to_dict()
-# create an instance of AggregatedReturn from a dict
-aggregated_return_form_dict = aggregated_return.from_dict(aggregated_return_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # PropertyDefinitionEntity
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,30 @@ Name | Type | Description | Notes
 **previewed_status** | **str** | The status of the previewed entity. | [optional] 
 **previewed_property_definition** | [**PropertyDefinition**](PropertyDefinition.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.property_definition_entity import PropertyDefinitionEntity
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+href: StrictStr = "example_href"
+entity_unique_id: StrictStr = "example_entity_unique_id"
+as_at_version_number: Optional[StrictInt] = # Replace with your value
+as_at_version_number: Optional[StrictInt] = None
+status: StrictStr = "example_status"
+as_at_deleted: Optional[datetime] = # Replace with your value
+user_id_deleted: Optional[StrictStr] = "example_user_id_deleted"
+request_id_deleted: Optional[StrictStr] = "example_request_id_deleted"
+effective_at_created: Optional[datetime] = # Replace with your value
+prevailing_property_definition: Optional[PropertyDefinition] = # Replace with your value
+deleted_property_definition: Optional[PropertyDefinition] = # Replace with your value
+previewed_status: Optional[StrictStr] = "example_previewed_status"
+previewed_property_definition: Optional[PropertyDefinition] = # Replace with your value
+links: Optional[conlist(Link)] = None
+property_definition_entity_instance = PropertyDefinitionEntity(href=href, entity_unique_id=entity_unique_id, as_at_version_number=as_at_version_number, status=status, as_at_deleted=as_at_deleted, user_id_deleted=user_id_deleted, request_id_deleted=request_id_deleted, effective_at_created=effective_at_created, prevailing_property_definition=prevailing_property_definition, deleted_property_definition=deleted_property_definition, previewed_status=previewed_status, previewed_property_definition=previewed_property_definition, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PropertyDefinitionEntity from a JSON string
-property_definition_entity_instance = PropertyDefinitionEntity.from_json(json)
-# print the JSON string representation of the object
-print PropertyDefinitionEntity.to_json()
-
-# convert the object into a dict
-property_definition_entity_dict = property_definition_entity_instance.to_dict()
-# create an instance of PropertyDefinitionEntity from a dict
-property_definition_entity_form_dict = property_definition_entity.from_dict(property_definition_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

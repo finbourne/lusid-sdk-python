@@ -1,7 +1,6 @@
 # WeightedInstrument
 
 Specification for a holding or quantity of (weight for) an instrument on a given date.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **instrument** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
 **in_line_lookup_identifiers** | [**WeightedInstrumentInLineLookupIdentifiers**](WeightedInstrumentInLineLookupIdentifiers.md) |  | [optional] 
 **instrument_scope** | **str** | The scope in which to resolve the instrument, if no inlined definition is provided.  If left empty, the default scope will be used. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.weighted_instrument import WeightedInstrument
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of WeightedInstrument from a JSON string
-weighted_instrument_instance = WeightedInstrument.from_json(json)
-# print the JSON string representation of the object
-print WeightedInstrument.to_json()
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+holding_identifier: Optional[StrictStr] = "example_holding_identifier"
+instrument: Optional[LusidInstrument] = None
+in_line_lookup_identifiers: Optional[WeightedInstrumentInLineLookupIdentifiers] = # Replace with your value
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+weighted_instrument_instance = WeightedInstrument(quantity=quantity, holding_identifier=holding_identifier, instrument=instrument, in_line_lookup_identifiers=in_line_lookup_identifiers, instrument_scope=instrument_scope)
 
-# convert the object into a dict
-weighted_instrument_dict = weighted_instrument_instance.to_dict()
-# create an instance of WeightedInstrument from a dict
-weighted_instrument_form_dict = weighted_instrument.from_dict(weighted_instrument_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

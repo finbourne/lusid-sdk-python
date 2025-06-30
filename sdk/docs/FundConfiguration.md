@@ -1,6 +1,5 @@
 # FundConfiguration
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,27 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund Configuration. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.fund_configuration import FundConfiguration
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of FundConfiguration from a JSON string
-fund_configuration_instance = FundConfiguration.from_json(json)
-# print the JSON string representation of the object
-print FundConfiguration.to_json()
+href: Optional[StrictStr] = "example_href"
+id: ResourceId = # Replace with your value
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+dealing_filters: Optional[conlist(ComponentFilter)] = # Replace with your value
+pnl_filters: Optional[conlist(ComponentFilter)] = # Replace with your value
+back_out_filters: Optional[conlist(ComponentFilter)] = # Replace with your value
+external_fee_filters: Optional[conlist(ExternalFeeComponentFilter)] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+fund_configuration_instance = FundConfiguration(href=href, id=id, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties, version=version, links=links)
 
-# convert the object into a dict
-fund_configuration_dict = fund_configuration_instance.to_dict()
-# create an instance of FundConfiguration from a dict
-fund_configuration_form_dict = fund_configuration.from_dict(fund_configuration_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

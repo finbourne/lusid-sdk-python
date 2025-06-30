@@ -1,6 +1,5 @@
 # PortfolioResultDataKeyRule
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **portfolio_code** | **str** |  | [optional] 
 **portfolio_scope** | **str** |  | [optional] 
 **result_key_rule_type** | **str** | The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule | 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_result_data_key_rule import PortfolioResultDataKeyRule
+from typing import Any, Dict, Optional
+from pydantic.v1 import Field, StrictStr, constr, validator
+from datetime import datetime
+supplier: StrictStr = "example_supplier"
+data_scope: StrictStr = "example_data_scope"
+document_code: StrictStr = "example_document_code"
+quote_interval: Optional[StrictStr] = "example_quote_interval"
+as_at: Optional[datetime] = # Replace with your value
+portfolio_code: Optional[StrictStr] = "example_portfolio_code"
+portfolio_scope: Optional[StrictStr] = "example_portfolio_scope"
+result_key_rule_type: StrictStr = "example_result_key_rule_type"
+portfolio_result_data_key_rule_instance = PortfolioResultDataKeyRule(supplier=supplier, data_scope=data_scope, document_code=document_code, quote_interval=quote_interval, as_at=as_at, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, result_key_rule_type=result_key_rule_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioResultDataKeyRule from a JSON string
-portfolio_result_data_key_rule_instance = PortfolioResultDataKeyRule.from_json(json)
-# print the JSON string representation of the object
-print PortfolioResultDataKeyRule.to_json()
-
-# convert the object into a dict
-portfolio_result_data_key_rule_dict = portfolio_result_data_key_rule_instance.to_dict()
-# create an instance of PortfolioResultDataKeyRule from a dict
-portfolio_result_data_key_rule_form_dict = portfolio_result_data_key_rule.from_dict(portfolio_result_data_key_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

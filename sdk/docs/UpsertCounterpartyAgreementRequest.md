@@ -1,29 +1,21 @@
 # UpsertCounterpartyAgreementRequest
 
 Counterparty Agreement that is to be stored in the convention data store.  There must be only one of these present.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **counterparty_agreement** | [**CounterpartyAgreement**](CounterpartyAgreement.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.upsert_counterparty_agreement_request import UpsertCounterpartyAgreementRequest
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertCounterpartyAgreementRequest from a JSON string
-upsert_counterparty_agreement_request_instance = UpsertCounterpartyAgreementRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertCounterpartyAgreementRequest.to_json()
+counterparty_agreement: CounterpartyAgreement = # Replace with your value
+upsert_counterparty_agreement_request_instance = UpsertCounterpartyAgreementRequest(counterparty_agreement=counterparty_agreement)
 
-# convert the object into a dict
-upsert_counterparty_agreement_request_dict = upsert_counterparty_agreement_request_instance.to_dict()
-# create an instance of UpsertCounterpartyAgreementRequest from a dict
-upsert_counterparty_agreement_request_form_dict = upsert_counterparty_agreement_request.from_dict(upsert_counterparty_agreement_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

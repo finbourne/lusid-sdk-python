@@ -1,6 +1,5 @@
 # PortfolioGroup
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the portfolio group. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_group import PortfolioGroup
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+created: Optional[datetime] = # Replace with your value
+portfolios: Optional[conlist(ResourceId)] = # Replace with your value
+sub_groups: Optional[conlist(ResourceId)] = # Replace with your value
+relationships: Optional[conlist(Relationship)] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+portfolio_group_instance = PortfolioGroup(href=href, id=id, display_name=display_name, description=description, created=created, portfolios=portfolios, sub_groups=sub_groups, relationships=relationships, version=version, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioGroup from a JSON string
-portfolio_group_instance = PortfolioGroup.from_json(json)
-# print the JSON string representation of the object
-print PortfolioGroup.to_json()
-
-# convert the object into a dict
-portfolio_group_dict = portfolio_group_instance.to_dict()
-# create an instance of PortfolioGroup from a dict
-portfolio_group_form_dict = portfolio_group.from_dict(portfolio_group_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

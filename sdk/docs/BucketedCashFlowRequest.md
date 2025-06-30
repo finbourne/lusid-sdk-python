@@ -1,7 +1,6 @@
 # BucketedCashFlowRequest
 
 Specification class consisting of parameters for BucketedCashFlow endpoint.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -21,24 +20,34 @@ Name | Type | Description | Notes
 **cash_flow_type** | **str** | Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow] | [optional] 
 **bucketing_schedule** | [**BucketingSchedule**](BucketingSchedule.md) |  | [optional] 
 **filter** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from datetime import datetime
+rounding_method: StrictStr = "example_rounding_method"
+bucketing_dates: Optional[conlist(datetime)] = # Replace with your value
+bucket_tenors: Optional[conlist(StrictStr)] = # Replace with your value
+effective_at: Optional[StrictStr] = "example_effective_at"
+window_start: Optional[StrictStr] = "example_window_start"
+window_end: Optional[StrictStr] = "example_window_end"
+recipe_id: Optional[ResourceId] = # Replace with your value
+report_currency: Optional[StrictStr] = "example_report_currency"
+group_by: Optional[conlist(StrictStr)] = # Replace with your value
+addresses: Optional[conlist(StrictStr)] = # Replace with your value
+equip_with_subtotals: Optional[StrictBool] = # Replace with your value
+equip_with_subtotals:Optional[StrictBool] = None
+as_at: Optional[datetime] = # Replace with your value
+exclude_unsettled_trades: Optional[StrictBool] = # Replace with your value
+exclude_unsettled_trades:Optional[StrictBool] = None
+cash_flow_type: Optional[StrictStr] = "example_cash_flow_type"
+bucketing_schedule: Optional[BucketingSchedule] = # Replace with your value
+filter: Optional[StrictStr] = "example_filter"
+bucketed_cash_flow_request_instance = BucketedCashFlowRequest(rounding_method=rounding_method, bucketing_dates=bucketing_dates, bucket_tenors=bucket_tenors, effective_at=effective_at, window_start=window_start, window_end=window_end, recipe_id=recipe_id, report_currency=report_currency, group_by=group_by, addresses=addresses, equip_with_subtotals=equip_with_subtotals, as_at=as_at, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_type=cash_flow_type, bucketing_schedule=bucketing_schedule, filter=filter)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BucketedCashFlowRequest from a JSON string
-bucketed_cash_flow_request_instance = BucketedCashFlowRequest.from_json(json)
-# print the JSON string representation of the object
-print BucketedCashFlowRequest.to_json()
-
-# convert the object into a dict
-bucketed_cash_flow_request_dict = bucketed_cash_flow_request_instance.to_dict()
-# create an instance of BucketedCashFlowRequest from a dict
-bucketed_cash_flow_request_form_dict = bucketed_cash_flow_request.from_dict(bucketed_cash_flow_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

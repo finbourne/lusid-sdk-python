@@ -1,28 +1,20 @@
 # SetAmortisationRulesRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rules_interval** | [**RulesInterval**](RulesInterval.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SetAmortisationRulesRequest from a JSON string
-set_amortisation_rules_request_instance = SetAmortisationRulesRequest.from_json(json)
-# print the JSON string representation of the object
-print SetAmortisationRulesRequest.to_json()
+rules_interval: RulesInterval = # Replace with your value
+set_amortisation_rules_request_instance = SetAmortisationRulesRequest(rules_interval=rules_interval)
 
-# convert the object into a dict
-set_amortisation_rules_request_dict = set_amortisation_rules_request_instance.to_dict()
-# create an instance of SetAmortisationRulesRequest from a dict
-set_amortisation_rules_request_form_dict = set_amortisation_rules_request.from_dict(set_amortisation_rules_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

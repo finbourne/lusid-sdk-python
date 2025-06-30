@@ -1,7 +1,6 @@
 # CapFloor
 
 LUSID representation of Cap, Floor, or Collar.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **underlying_floating_leg** | [**FloatingLeg**](FloatingLeg.md) |  | 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.cap_floor import CapFloor
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CapFloor from a JSON string
-cap_floor_instance = CapFloor.from_json(json)
-# print the JSON string representation of the object
-print CapFloor.to_json()
+cap_floor_type: StrictStr = "example_cap_floor_type"
+cap_strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+floor_strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+include_first_caplet: StrictBool = # Replace with your value
+include_first_caplet:StrictBool = True
+underlying_floating_leg: FloatingLeg = # Replace with your value
+additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+cap_floor_instance = CapFloor(cap_floor_type=cap_floor_type, cap_strike=cap_strike, floor_strike=floor_strike, include_first_caplet=include_first_caplet, underlying_floating_leg=underlying_floating_leg, additional_payments=additional_payments, instrument_type=instrument_type)
 
-# convert the object into a dict
-cap_floor_dict = cap_floor_instance.to_dict()
-# create an instance of CapFloor from a dict
-cap_floor_form_dict = cap_floor.from_dict(cap_floor_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

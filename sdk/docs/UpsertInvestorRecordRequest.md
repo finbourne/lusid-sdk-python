@@ -1,7 +1,6 @@
 # UpsertInvestorRecordRequest
 
 Request to create or update an investor record
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **display_name** | **str** | The display name of the Investor Record | 
 **description** | **str** | The description of the Investor Record | [optional] 
 **investor** | [**UpsertInvestor**](UpsertInvestor.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.upsert_investor_record_request import UpsertInvestorRecordRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertInvestorRecordRequest from a JSON string
-upsert_investor_record_request_instance = UpsertInvestorRecordRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertInvestorRecordRequest.to_json()
+identifiers: Dict[str, ModelProperty] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+investor: Optional[UpsertInvestor] = None
+upsert_investor_record_request_instance = UpsertInvestorRecordRequest(identifiers=identifiers, properties=properties, display_name=display_name, description=description, investor=investor)
 
-# convert the object into a dict
-upsert_investor_record_request_dict = upsert_investor_record_request_instance.to_dict()
-# create an instance of UpsertInvestorRecordRequest from a dict
-upsert_investor_record_request_form_dict = upsert_investor_record_request.from_dict(upsert_investor_record_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

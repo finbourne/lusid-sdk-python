@@ -1,6 +1,5 @@
 # IdSelectorDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **actions** | [**List[ActionId]**](ActionId.md) |  | 
 **name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.id_selector_definition import IdSelectorDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of IdSelectorDefinition from a JSON string
-id_selector_definition_instance = IdSelectorDefinition.from_json(json)
-# print the JSON string representation of the object
-print IdSelectorDefinition.to_json()
+identifier: Dict[str, StrictStr] = # Replace with your value
+actions: conlist(ActionId, min_items=1) = Field(...)
+name: Optional[StrictStr] = "example_name"
+description: Optional[StrictStr] = "example_description"
+id_selector_definition_instance = IdSelectorDefinition(identifier=identifier, actions=actions, name=name, description=description)
 
-# convert the object into a dict
-id_selector_definition_dict = id_selector_definition_instance.to_dict()
-# create an instance of IdSelectorDefinition from a dict
-id_selector_definition_form_dict = id_selector_definition.from_dict(id_selector_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

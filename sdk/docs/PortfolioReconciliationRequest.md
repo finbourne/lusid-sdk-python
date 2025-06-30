@@ -1,30 +1,24 @@
 # PortfolioReconciliationRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
 **effective_at** | **str** | The effective date of the portfolio | 
 **as_at** | **datetime** | Optional. The AsAt date of the portfolio | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.portfolio_reconciliation_request import PortfolioReconciliationRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr
+from datetime import datetime
+portfolio_id: ResourceId = # Replace with your value
+effective_at: StrictStr = "example_effective_at"
+as_at: Optional[datetime] = # Replace with your value
+portfolio_reconciliation_request_instance = PortfolioReconciliationRequest(portfolio_id=portfolio_id, effective_at=effective_at, as_at=as_at)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PortfolioReconciliationRequest from a JSON string
-portfolio_reconciliation_request_instance = PortfolioReconciliationRequest.from_json(json)
-# print the JSON string representation of the object
-print PortfolioReconciliationRequest.to_json()
-
-# convert the object into a dict
-portfolio_reconciliation_request_dict = portfolio_reconciliation_request_instance.to_dict()
-# create an instance of PortfolioReconciliationRequest from a dict
-portfolio_reconciliation_request_form_dict = portfolio_reconciliation_request.from_dict(portfolio_reconciliation_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

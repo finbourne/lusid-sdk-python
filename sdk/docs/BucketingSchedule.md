@@ -1,29 +1,21 @@
 # BucketingSchedule
 
 A schedule for dates
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tenor** | **str** | Rolling tenor | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.bucketing_schedule import BucketingSchedule
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of BucketingSchedule from a JSON string
-bucketing_schedule_instance = BucketingSchedule.from_json(json)
-# print the JSON string representation of the object
-print BucketingSchedule.to_json()
+tenor: Optional[StrictStr] = "example_tenor"
+bucketing_schedule_instance = BucketingSchedule(tenor=tenor)
 
-# convert the object into a dict
-bucketing_schedule_dict = bucketing_schedule_instance.to_dict()
-# create an instance of BucketingSchedule from a dict
-bucketing_schedule_form_dict = bucketing_schedule.from_dict(bucketing_schedule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # CreateSimplePositionPortfolioRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -19,24 +18,31 @@ Name | Type | Description | Notes
 **cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate. | [optional] 
 **instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_simple_position_portfolio_request import CreateSimplePositionPortfolioRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from datetime import datetime
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+code: StrictStr = "example_code"
+created: Optional[datetime] = # Replace with your value
+base_currency: StrictStr = "example_base_currency"
+corporate_action_source_id: Optional[ResourceId] = # Replace with your value
+accounting_method: Optional[StrictStr] = "example_accounting_method"
+sub_holding_keys: Optional[conlist(StrictStr, max_items=100)] = Field(None, alias="subHoldingKeys", description="A set of unique transaction properties to group the simple position portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.")
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of holdings upserted to this portfolio.")
+amortisation_method: Optional[StrictStr] = "example_amortisation_method"
+transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
+cash_gain_loss_calculation_date: Optional[StrictStr] = "example_cash_gain_loss_calculation_date"
+instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Replace with your value
+amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
+create_simple_position_portfolio_request_instance = CreateSimplePositionPortfolioRequest(display_name=display_name, description=description, code=code, created=created, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, properties=properties, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateSimplePositionPortfolioRequest from a JSON string
-create_simple_position_portfolio_request_instance = CreateSimplePositionPortfolioRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateSimplePositionPortfolioRequest.to_json()
-
-# convert the object into a dict
-create_simple_position_portfolio_request_dict = create_simple_position_portfolio_request_instance.to_dict()
-# create an instance of CreateSimplePositionPortfolioRequest from a dict
-create_simple_position_portfolio_request_form_dict = create_simple_position_portfolio_request.from_dict(create_simple_position_portfolio_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

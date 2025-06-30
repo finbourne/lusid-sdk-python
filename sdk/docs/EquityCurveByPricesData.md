@@ -1,7 +1,6 @@
 # EquityCurveByPricesData
 
 Contains data (i.e. dates and prices + metadata) for building Equity curves
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **prices** | **List[float]** | Prices provided for the forward price of the Equity at the corresponding date in Dates. | 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
-
 ## Example
 
 ```python
 from lusid.models.equity_curve_by_prices_data import EquityCurveByPricesData
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+base_date: datetime = # Replace with your value
+dates: conlist(datetime) = # Replace with your value
+lineage: Optional[StrictStr] = "example_lineage"
+prices: conlist(Union[StrictFloat, StrictInt]) = # Replace with your value
+market_data_options: Optional[MarketDataOptions] = # Replace with your value
+market_data_type: StrictStr = "example_market_data_type"
+equity_curve_by_prices_data_instance = EquityCurveByPricesData(base_date=base_date, dates=dates, lineage=lineage, prices=prices, market_data_options=market_data_options, market_data_type=market_data_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of EquityCurveByPricesData from a JSON string
-equity_curve_by_prices_data_instance = EquityCurveByPricesData.from_json(json)
-# print the JSON string representation of the object
-print EquityCurveByPricesData.to_json()
-
-# convert the object into a dict
-equity_curve_by_prices_data_dict = equity_curve_by_prices_data_instance.to_dict()
-# create an instance of EquityCurveByPricesData from a dict
-equity_curve_by_prices_data_form_dict = equity_curve_by_prices_data.from_dict(equity_curve_by_prices_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

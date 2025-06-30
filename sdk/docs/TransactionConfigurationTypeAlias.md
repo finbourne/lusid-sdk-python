@@ -1,6 +1,5 @@
 # TransactionConfigurationTypeAlias
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,24 @@ Name | Type | Description | Notes
 **source** | **str** | Used to group a set of transaction types | [optional] 
 **transaction_roles** | **str** | . The available values are: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles | 
 **is_default** | **bool** | IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TransactionConfigurationTypeAlias from a JSON string
-transaction_configuration_type_alias_instance = TransactionConfigurationTypeAlias.from_json(json)
-# print the JSON string representation of the object
-print TransactionConfigurationTypeAlias.to_json()
+type: StrictStr = "example_type"
+description: StrictStr = "example_description"
+transaction_class: StrictStr = "example_transaction_class"
+transaction_group: Optional[StrictStr] = "example_transaction_group"
+source: Optional[StrictStr] = "example_source"
+transaction_roles: StrictStr = "example_transaction_roles"
+is_default: Optional[StrictBool] = # Replace with your value
+is_default:Optional[StrictBool] = None
+transaction_configuration_type_alias_instance = TransactionConfigurationTypeAlias(type=type, description=description, transaction_class=transaction_class, transaction_group=transaction_group, source=source, transaction_roles=transaction_roles, is_default=is_default)
 
-# convert the object into a dict
-transaction_configuration_type_alias_dict = transaction_configuration_type_alias_instance.to_dict()
-# create an instance of TransactionConfigurationTypeAlias from a dict
-transaction_configuration_type_alias_form_dict = transaction_configuration_type_alias.from_dict(transaction_configuration_type_alias_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

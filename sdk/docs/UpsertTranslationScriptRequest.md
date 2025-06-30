@@ -1,29 +1,22 @@
 # UpsertTranslationScriptRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**TranslationScriptId**](TranslationScriptId.md) |  | 
 **body** | **str** | Body of the translation script, i.e. the actual translation code. | 
-
 ## Example
 
 ```python
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpsertTranslationScriptRequest from a JSON string
-upsert_translation_script_request_instance = UpsertTranslationScriptRequest.from_json(json)
-# print the JSON string representation of the object
-print UpsertTranslationScriptRequest.to_json()
+id: TranslationScriptId = # Replace with your value
+body: StrictStr = "example_body"
+upsert_translation_script_request_instance = UpsertTranslationScriptRequest(id=id, body=body)
 
-# convert the object into a dict
-upsert_translation_script_request_dict = upsert_translation_script_request_instance.to_dict()
-# create an instance of UpsertTranslationScriptRequest from a dict
-upsert_translation_script_request_form_dict = upsert_translation_script_request.from_dict(upsert_translation_script_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # TransactionQueryParameters
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,25 @@ Name | Type | Description | Notes
 **timeline_scope** | **str** | Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions | [optional] 
 **timeline_code** | **str** | Code of the Timeline for the Portfolio. The Timeline to be used while building transactions | [optional] 
 **include_economics** | **bool** | By default is false. When set to true the Economics data would be populated in the response. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.transaction_query_parameters import TransactionQueryParameters
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TransactionQueryParameters from a JSON string
-transaction_query_parameters_instance = TransactionQueryParameters.from_json(json)
-# print the JSON string representation of the object
-print TransactionQueryParameters.to_json()
+start_date: StrictStr = "example_start_date"
+end_date: StrictStr = "example_end_date"
+query_mode: Optional[StrictStr] = "example_query_mode"
+show_cancelled_transactions: Optional[StrictBool] = # Replace with your value
+show_cancelled_transactions:Optional[StrictBool] = None
+timeline_scope: Optional[StrictStr] = "example_timeline_scope"
+timeline_code: Optional[StrictStr] = "example_timeline_code"
+include_economics: Optional[StrictBool] = # Replace with your value
+include_economics:Optional[StrictBool] = None
+transaction_query_parameters_instance = TransactionQueryParameters(start_date=start_date, end_date=end_date, query_mode=query_mode, show_cancelled_transactions=show_cancelled_transactions, timeline_scope=timeline_scope, timeline_code=timeline_code, include_economics=include_economics)
 
-# convert the object into a dict
-transaction_query_parameters_dict = transaction_query_parameters_instance.to_dict()
-# create an instance of TransactionQueryParameters from a dict
-transaction_query_parameters_form_dict = transaction_query_parameters.from_dict(transaction_query_parameters_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

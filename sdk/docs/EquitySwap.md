@@ -1,7 +1,6 @@
 # EquitySwap
 
 LUSID representation of an Equity Swap.                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | EquityLeg | Cash flows relating to the performance of the underlying equity. |  | 2 | FundingLeg | The funding leg of the swap. |  | 3 | EquityDividendLeg | Cash flows relating to dividend payments on the underlying equity (optional). |  | 4 | AdditionalPayments | Cash flows relating to any additional payments (optional). |
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,31 @@ Name | Type | Description | Notes
 **equity_swap_dividend_payment_timing** | **str** | Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent]. | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.equity_swap import EquitySwap
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+code: StrictStr = "example_code"
+equity_flow_conventions: FlowConventions = # Replace with your value
+funding_leg: InstrumentLeg = # Replace with your value
+include_dividends: StrictBool = # Replace with your value
+include_dividends:StrictBool = True
+initial_price: Union[StrictFloat, StrictInt] = # Replace with your value
+notional_reset: StrictBool = # Replace with your value
+notional_reset:StrictBool = True
+quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+underlying_identifier: StrictStr = "example_underlying_identifier"
+equity_swap_dividend_payment_timing: Optional[StrictStr] = "example_equity_swap_dividend_payment_timing"
+additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+equity_swap_instance = EquitySwap(start_date=start_date, maturity_date=maturity_date, code=code, equity_flow_conventions=equity_flow_conventions, funding_leg=funding_leg, include_dividends=include_dividends, initial_price=initial_price, notional_reset=notional_reset, quantity=quantity, underlying_identifier=underlying_identifier, equity_swap_dividend_payment_timing=equity_swap_dividend_payment_timing, additional_payments=additional_payments, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of EquitySwap from a JSON string
-equity_swap_instance = EquitySwap.from_json(json)
-# print the JSON string representation of the object
-print EquitySwap.to_json()
-
-# convert the object into a dict
-equity_swap_dict = equity_swap_instance.to_dict()
-# create an instance of EquitySwap from a dict
-equity_swap_form_dict = equity_swap.from_dict(equity_swap_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

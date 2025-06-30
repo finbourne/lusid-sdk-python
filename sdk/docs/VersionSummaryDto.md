@@ -1,6 +1,5 @@
 # VersionSummaryDto
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **build_version** | **str** |  | [optional] 
 **excel_version** | **str** |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.version_summary_dto import VersionSummaryDto
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of VersionSummaryDto from a JSON string
-version_summary_dto_instance = VersionSummaryDto.from_json(json)
-# print the JSON string representation of the object
-print VersionSummaryDto.to_json()
+api_version: Optional[StrictStr] = "example_api_version"
+build_version: Optional[StrictStr] = "example_build_version"
+excel_version: Optional[StrictStr] = "example_excel_version"
+links: Optional[conlist(Link)] = None
+version_summary_dto_instance = VersionSummaryDto(api_version=api_version, build_version=build_version, excel_version=excel_version, links=links)
 
-# convert the object into a dict
-version_summary_dto_dict = version_summary_dto_instance.to_dict()
-# create an instance of VersionSummaryDto from a dict
-version_summary_dto_form_dict = version_summary_dto.from_dict(version_summary_dto_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

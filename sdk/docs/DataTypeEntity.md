@@ -1,6 +1,5 @@
 # DataTypeEntity
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,29 @@ Name | Type | Description | Notes
 **deleted_data_type** | [**DataType**](DataType.md) |  | [optional] 
 **previewed_status** | **str** | The status of the previewed entity. | [optional] 
 **previewed_data_type** | [**DataType**](DataType.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.data_type_entity import DataTypeEntity
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr
+from datetime import datetime
+href: StrictStr = "example_href"
+entity_unique_id: StrictStr = "example_entity_unique_id"
+as_at_version_number: Optional[StrictInt] = # Replace with your value
+as_at_version_number: Optional[StrictInt] = None
+status: StrictStr = "example_status"
+as_at_deleted: Optional[datetime] = # Replace with your value
+user_id_deleted: Optional[StrictStr] = "example_user_id_deleted"
+request_id_deleted: Optional[StrictStr] = "example_request_id_deleted"
+effective_at_created: Optional[datetime] = # Replace with your value
+prevailing_data_type: Optional[DataType] = # Replace with your value
+deleted_data_type: Optional[DataType] = # Replace with your value
+previewed_status: Optional[StrictStr] = "example_previewed_status"
+previewed_data_type: Optional[DataType] = # Replace with your value
+data_type_entity_instance = DataTypeEntity(href=href, entity_unique_id=entity_unique_id, as_at_version_number=as_at_version_number, status=status, as_at_deleted=as_at_deleted, user_id_deleted=user_id_deleted, request_id_deleted=request_id_deleted, effective_at_created=effective_at_created, prevailing_data_type=prevailing_data_type, deleted_data_type=deleted_data_type, previewed_status=previewed_status, previewed_data_type=previewed_data_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DataTypeEntity from a JSON string
-data_type_entity_instance = DataTypeEntity.from_json(json)
-# print the JSON string representation of the object
-print DataTypeEntity.to_json()
-
-# convert the object into a dict
-data_type_entity_dict = data_type_entity_instance.to_dict()
-# create an instance of DataTypeEntity from a dict
-data_type_entity_form_dict = data_type_entity.from_dict(data_type_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

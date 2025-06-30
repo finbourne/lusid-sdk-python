@@ -1,7 +1,6 @@
 # InterestRateSwap
 
 LUSID representation of an Interest Rate Swap, including:      * Vanilla (single currency fixed-float non-amortising)    * CrossCurrency (>1 currency is used by the swap legs)    * Basis (single currency, floating-floating legs of different tenors)    * Amortising (the swap has 1+ leg with amortised notional)                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | Pay/Receive | Cash flows representing the pay/receive leg. |  | 2 | Receive/Pay | Cash flows representing the receive/pay leg. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **settlement_ccy** | **str** | Settlement currency if IRS is non-deliverable. | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven fixed-floating swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.interest_rate_swap import InterestRateSwap
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictBool, StrictStr, conlist, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+is_non_deliverable: Optional[StrictBool] = # Replace with your value
+is_non_deliverable:Optional[StrictBool] = None
+legs: conlist(InstrumentLeg) = # Replace with your value
+settlement_ccy: Optional[StrictStr] = "example_settlement_ccy"
+additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+interest_rate_swap_instance = InterestRateSwap(start_date=start_date, maturity_date=maturity_date, is_non_deliverable=is_non_deliverable, legs=legs, settlement_ccy=settlement_ccy, additional_payments=additional_payments, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InterestRateSwap from a JSON string
-interest_rate_swap_instance = InterestRateSwap.from_json(json)
-# print the JSON string representation of the object
-print InterestRateSwap.to_json()
-
-# convert the object into a dict
-interest_rate_swap_dict = interest_rate_swap_instance.to_dict()
-# create an instance of InterestRateSwap from a dict
-interest_rate_swap_form_dict = interest_rate_swap.from_dict(interest_rate_swap_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

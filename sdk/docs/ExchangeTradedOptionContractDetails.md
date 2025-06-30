@@ -1,7 +1,6 @@
 # ExchangeTradedOptionContractDetails
 
 Most, if not all, information about contracts is standardised. See, e.g. https://www.cmegroup.com/ for  common codes and similar data. This appears to be in common use by well known market information providers, e.g. Bloomberg and Refinitiv.  There is a lot of overlap with this and FuturesContractDetails but as that is an established DTO we must duplicate a number of fields here
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -21,24 +20,33 @@ Name | Type | Description | Notes
 **delivery_days** | **int** | Number of business days between exercise date and settlement of the option payoff or underlying. | [optional] 
 **business_day_convention** | **str** | The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest]. | [optional] 
 **settlement_calendars** | **List[str]** | An array of strings denoting calendars used in calculating the option settlement date. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.exchange_traded_option_contract_details import ExchangeTradedOptionContractDetails
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+dom_ccy: StrictStr = "example_dom_ccy"
+strike: Union[StrictFloat, StrictInt] = # Replace with your value
+contract_size: Union[StrictFloat, StrictInt] = # Replace with your value
+country: StrictStr = "example_country"
+delivery_type: StrictStr = "example_delivery_type"
+description: StrictStr = "example_description"
+exchange_code: StrictStr = "example_exchange_code"
+exercise_date: datetime = # Replace with your value
+exercise_type: StrictStr = "example_exercise_type"
+option_code: StrictStr = "example_option_code"
+option_type: StrictStr = "example_option_type"
+underlying: LusidInstrument = # Replace with your value
+underlying_code: StrictStr = "example_underlying_code"
+delivery_days: Optional[StrictInt] = # Replace with your value
+delivery_days: Optional[StrictInt] = None
+business_day_convention: Optional[StrictStr] = "example_business_day_convention"
+settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+exchange_traded_option_contract_details_instance = ExchangeTradedOptionContractDetails(dom_ccy=dom_ccy, strike=strike, contract_size=contract_size, country=country, delivery_type=delivery_type, description=description, exchange_code=exchange_code, exercise_date=exercise_date, exercise_type=exercise_type, option_code=option_code, option_type=option_type, underlying=underlying, underlying_code=underlying_code, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ExchangeTradedOptionContractDetails from a JSON string
-exchange_traded_option_contract_details_instance = ExchangeTradedOptionContractDetails.from_json(json)
-# print the JSON string representation of the object
-print ExchangeTradedOptionContractDetails.to_json()
-
-# convert the object into a dict
-exchange_traded_option_contract_details_dict = exchange_traded_option_contract_details_instance.to_dict()
-# create an instance of ExchangeTradedOptionContractDetails from a dict
-exchange_traded_option_contract_details_form_dict = exchange_traded_option_contract_details.from_dict(exchange_traded_option_contract_details_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # RoundingConvention
 
 Certain bonds will follow certain rounding conventions.  For example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for  French government bonds, the rounding is to 7dp.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **precision** | **int** | The precision of the rounding.  The decimal places to which the rounding takes place. | [optional] 
 **rounding_target** | **str** | The target of the rounding convention.  Accepted values are &#39;AccruedInterest&#39;, &#39;Cashflows&#39;, or &#39;All&#39;    Supported string (enumeration) values are: [All, AccruedInterest, Cashflows]. | [optional] 
 **rounding_type** | **str** | The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Floor, Ceiling, Nearest]. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.rounding_convention import RoundingConvention
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of RoundingConvention from a JSON string
-rounding_convention_instance = RoundingConvention.from_json(json)
-# print the JSON string representation of the object
-print RoundingConvention.to_json()
+face_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+precision: Optional[StrictInt] = # Replace with your value
+precision: Optional[StrictInt] = None
+rounding_target: Optional[StrictStr] = "example_rounding_target"
+rounding_type: Optional[StrictStr] = "example_rounding_type"
+rounding_convention_instance = RoundingConvention(face_value=face_value, precision=precision, rounding_target=rounding_target, rounding_type=rounding_type)
 
-# convert the object into a dict
-rounding_convention_dict = rounding_convention_instance.to_dict()
-# create an instance of RoundingConvention from a dict
-rounding_convention_form_dict = rounding_convention.from_dict(rounding_convention_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

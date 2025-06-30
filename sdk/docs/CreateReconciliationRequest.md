@@ -1,6 +1,5 @@
 # CreateReconciliationRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,27 @@ Name | Type | Description | Notes
 **positions** | [**ReconciliationConfiguration**](ReconciliationConfiguration.md) |  | [optional] 
 **valuations** | [**ReconciliationConfiguration**](ReconciliationConfiguration.md) |  | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Reconciliation properties | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.create_reconciliation_request import CreateReconciliationRequest
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateReconciliationRequest from a JSON string
-create_reconciliation_request_instance = CreateReconciliationRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateReconciliationRequest.to_json()
+code: StrictStr = "example_code"
+name: Optional[StrictStr] = "example_name"
+description: Optional[StrictStr] = "example_description"
+is_portfolio_group: Optional[StrictBool] = # Replace with your value
+is_portfolio_group:Optional[StrictBool] = None
+left: Optional[ResourceId] = None
+right: Optional[ResourceId] = None
+transactions: Optional[ReconciliationTransactions] = None
+positions: Optional[ReconciliationConfiguration] = None
+valuations: Optional[ReconciliationConfiguration] = None
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+create_reconciliation_request_instance = CreateReconciliationRequest(code=code, name=name, description=description, is_portfolio_group=is_portfolio_group, left=left, right=right, transactions=transactions, positions=positions, valuations=valuations, properties=properties)
 
-# convert the object into a dict
-create_reconciliation_request_dict = create_reconciliation_request_instance.to_dict()
-# create an instance of CreateReconciliationRequest from a dict
-create_reconciliation_request_form_dict = create_reconciliation_request.from_dict(create_reconciliation_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

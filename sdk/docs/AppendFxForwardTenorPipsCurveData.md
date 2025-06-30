@@ -1,31 +1,25 @@
 # AppendFxForwardTenorPipsCurveData
 
 Used to append a new point to an FX curve defined using `FxForwardTenorPipsCurveData`.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tenor** | **str** | Tenor for which the forward rate applies. | 
 **pip_rate** | **float** | Rate provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips. | 
 **market_data_type** | **str** | The available values are: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData | 
-
 ## Example
 
 ```python
 from lusid.models.append_fx_forward_tenor_pips_curve_data import AppendFxForwardTenorPipsCurveData
+from typing import Any, Dict, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AppendFxForwardTenorPipsCurveData from a JSON string
-append_fx_forward_tenor_pips_curve_data_instance = AppendFxForwardTenorPipsCurveData.from_json(json)
-# print the JSON string representation of the object
-print AppendFxForwardTenorPipsCurveData.to_json()
+tenor: StrictStr = "example_tenor"
+pip_rate: Union[StrictFloat, StrictInt] = # Replace with your value
+market_data_type: StrictStr = "example_market_data_type"
+append_fx_forward_tenor_pips_curve_data_instance = AppendFxForwardTenorPipsCurveData(tenor=tenor, pip_rate=pip_rate, market_data_type=market_data_type)
 
-# convert the object into a dict
-append_fx_forward_tenor_pips_curve_data_dict = append_fx_forward_tenor_pips_curve_data_instance.to_dict()
-# create an instance of AppendFxForwardTenorPipsCurveData from a dict
-append_fx_forward_tenor_pips_curve_data_form_dict = append_fx_forward_tenor_pips_curve_data.from_dict(append_fx_forward_tenor_pips_curve_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

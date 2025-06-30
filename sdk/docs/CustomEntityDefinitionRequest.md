@@ -1,6 +1,5 @@
 # CustomEntityDefinitionRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **display_name** | **str** | A display label for the custom entity type. | 
 **description** | **str** | A description for the custom entity type. | 
 **field_schema** | [**List[CustomEntityFieldDefinition]**](CustomEntityFieldDefinition.md) | The description of the fields on the custom entity type. | 
-
 ## Example
 
 ```python
 from lusid.models.custom_entity_definition_request import CustomEntityDefinitionRequest
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CustomEntityDefinitionRequest from a JSON string
-custom_entity_definition_request_instance = CustomEntityDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print CustomEntityDefinitionRequest.to_json()
+entity_type_name: StrictStr = "example_entity_type_name"
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+field_schema: conlist(CustomEntityFieldDefinition) = # Replace with your value
+custom_entity_definition_request_instance = CustomEntityDefinitionRequest(entity_type_name=entity_type_name, display_name=display_name, description=description, field_schema=field_schema)
 
-# convert the object into a dict
-custom_entity_definition_request_dict = custom_entity_definition_request_instance.to_dict()
-# create an instance of CustomEntityDefinitionRequest from a dict
-custom_entity_definition_request_form_dict = custom_entity_definition_request.from_dict(custom_entity_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

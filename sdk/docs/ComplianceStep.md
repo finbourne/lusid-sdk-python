@@ -1,28 +1,20 @@
 # ComplianceStep
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **compliance_step_type** | **str** | . The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep | 
-
 ## Example
 
 ```python
 from lusid.models.compliance_step import ComplianceStep
+from typing import Any, Dict, Union
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceStep from a JSON string
-compliance_step_instance = ComplianceStep.from_json(json)
-# print the JSON string representation of the object
-print ComplianceStep.to_json()
+compliance_step_type: StrictStr = "example_compliance_step_type"
+compliance_step_instance = ComplianceStep(compliance_step_type=compliance_step_type)
 
-# convert the object into a dict
-compliance_step_dict = compliance_step_instance.to_dict()
-# create an instance of ComplianceStep from a dict
-compliance_step_form_dict = compliance_step.from_dict(compliance_step_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

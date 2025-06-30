@@ -1,7 +1,6 @@
 # InflationSwap
 
 LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **fixed_leg** | [**FixedLeg**](FixedLeg.md) |  | 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven inflation swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.inflation_swap import InflationSwap
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictStr, conlist, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: datetime = # Replace with your value
+inflation_leg: InflationLeg = # Replace with your value
+fixed_leg: FixedLeg = # Replace with your value
+additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+instrument_type: StrictStr = "example_instrument_type"
+inflation_swap_instance = InflationSwap(start_date=start_date, maturity_date=maturity_date, inflation_leg=inflation_leg, fixed_leg=fixed_leg, additional_payments=additional_payments, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InflationSwap from a JSON string
-inflation_swap_instance = InflationSwap.from_json(json)
-# print the JSON string representation of the object
-print InflationSwap.to_json()
-
-# convert the object into a dict
-inflation_swap_dict = inflation_swap_instance.to_dict()
-# create an instance of InflationSwap from a dict
-inflation_swap_form_dict = inflation_swap.from_dict(inflation_swap_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

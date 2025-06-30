@@ -1,6 +1,5 @@
 # StagedModificationsRequestedChangeInterval
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,22 @@ Name | Type | Description | Notes
 **new_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **as_at_basis** | **str** | Whether the change represents the modification when the request was made or the modification as it would be at the latest time. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.staged_modifications_requested_change_interval import StagedModificationsRequestedChangeInterval
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of StagedModificationsRequestedChangeInterval from a JSON string
-staged_modifications_requested_change_interval_instance = StagedModificationsRequestedChangeInterval.from_json(json)
-# print the JSON string representation of the object
-print StagedModificationsRequestedChangeInterval.to_json()
+attribute_name: Optional[StrictStr] = "example_attribute_name"
+effective_range: Optional[StagedModificationEffectiveRange] = # Replace with your value
+previous_value: Optional[PropertyValue] = # Replace with your value
+new_value: Optional[PropertyValue] = # Replace with your value
+as_at_basis: Optional[StrictStr] = "example_as_at_basis"
+links: Optional[conlist(Link)] = None
+staged_modifications_requested_change_interval_instance = StagedModificationsRequestedChangeInterval(attribute_name=attribute_name, effective_range=effective_range, previous_value=previous_value, new_value=new_value, as_at_basis=as_at_basis, links=links)
 
-# convert the object into a dict
-staged_modifications_requested_change_interval_dict = staged_modifications_requested_change_interval_instance.to_dict()
-# create an instance of StagedModificationsRequestedChangeInterval from a dict
-staged_modifications_requested_change_interval_form_dict = staged_modifications_requested_change_interval.from_dict(staged_modifications_requested_change_interval_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

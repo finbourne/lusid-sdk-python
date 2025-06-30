@@ -1,30 +1,24 @@
 # UnitisationData
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **shares_in_issue** | **float** | The number of shares in issue at a valuation point. | 
 **unit_price** | **float** | The price of one unit of the share class at a valuation point. | 
 **net_dealing_units** | **float** | The net dealing in units for the share class at a valuation point. This could be the sum of negative redemptions (in units) and positive subscriptions (in units). | 
-
 ## Example
 
 ```python
 from lusid.models.unitisation_data import UnitisationData
+from typing import Any, Dict, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UnitisationData from a JSON string
-unitisation_data_instance = UnitisationData.from_json(json)
-# print the JSON string representation of the object
-print UnitisationData.to_json()
+shares_in_issue: Union[StrictFloat, StrictInt] = # Replace with your value
+unit_price: Union[StrictFloat, StrictInt] = # Replace with your value
+net_dealing_units: Union[StrictFloat, StrictInt] = # Replace with your value
+unitisation_data_instance = UnitisationData(shares_in_issue=shares_in_issue, unit_price=unit_price, net_dealing_units=net_dealing_units)
 
-# convert the object into a dict
-unitisation_data_dict = unitisation_data_instance.to_dict()
-# create an instance of UnitisationData from a dict
-unitisation_data_form_dict = unitisation_data.from_dict(unitisation_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

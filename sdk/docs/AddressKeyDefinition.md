@@ -1,6 +1,5 @@
 # AddressKeyDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **type** | **str** | The type of the address key definition | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.address_key_definition import AddressKeyDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AddressKeyDefinition from a JSON string
-address_key_definition_instance = AddressKeyDefinition.from_json(json)
-# print the JSON string representation of the object
-print AddressKeyDefinition.to_json()
+address_key: StrictStr = "example_address_key"
+type: StrictStr = "example_type"
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+address_key_definition_instance = AddressKeyDefinition(address_key=address_key, type=type, version=version, links=links)
 
-# convert the object into a dict
-address_key_definition_dict = address_key_definition_instance.to_dict()
-# create an instance of AddressKeyDefinition from a dict
-address_key_definition_form_dict = address_key_definition.from_dict(address_key_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

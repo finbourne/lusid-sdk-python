@@ -1,29 +1,21 @@
 # AllocationSetRequest
 
 A request to create or update multiple Allocations.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **allocation_requests** | [**List[AllocationRequest]**](AllocationRequest.md) | A collection of AllocationRequests. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.allocation_set_request import AllocationSetRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AllocationSetRequest from a JSON string
-allocation_set_request_instance = AllocationSetRequest.from_json(json)
-# print the JSON string representation of the object
-print AllocationSetRequest.to_json()
+allocation_requests: Optional[conlist(AllocationRequest)] = # Replace with your value
+allocation_set_request_instance = AllocationSetRequest(allocation_requests=allocation_requests)
 
-# convert the object into a dict
-allocation_set_request_dict = allocation_set_request_instance.to_dict()
-# create an instance of AllocationSetRequest from a dict
-allocation_set_request_form_dict = allocation_set_request.from_dict(allocation_set_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # SideDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **notional_amount** | **str** | The value, field or property key defining the side&#39;s notional amount | [optional] 
 **current_face** | **str** | The value, field or property key defining the side&#39;s current face / outstanding notional. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.side_definition import SideDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SideDefinition from a JSON string
-side_definition_instance = SideDefinition.from_json(json)
-# print the JSON string representation of the object
-print SideDefinition.to_json()
+side: StrictStr = "example_side"
+security: StrictStr = "example_security"
+currency: StrictStr = "example_currency"
+rate: StrictStr = "example_rate"
+units: StrictStr = "example_units"
+amount: StrictStr = "example_amount"
+notional_amount: Optional[StrictStr] = "example_notional_amount"
+current_face: Optional[StrictStr] = "example_current_face"
+links: Optional[conlist(Link)] = None
+side_definition_instance = SideDefinition(side=side, security=security, currency=currency, rate=rate, units=units, amount=amount, notional_amount=notional_amount, current_face=current_face, links=links)
 
-# convert the object into a dict
-side_definition_dict = side_definition_instance.to_dict()
-# create an instance of SideDefinition from a dict
-side_definition_form_dict = side_definition.from_dict(side_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

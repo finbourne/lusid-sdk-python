@@ -1,6 +1,5 @@
 # OrderGraphBlock
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,25 @@ Name | Type | Description | Notes
 **derived_state** | **str** | A simple description of the overall state of a block. | 
 **derived_compliance_state** | **str** | The overall compliance state of a block, derived from the block&#39;s orders. Possible values are &#39;Pending&#39;, &#39;Failed&#39;, &#39;Manually approved&#39; and &#39;Passed&#39;. | 
 **derived_approval_state** | **str** | The overall approval state of a block, derived from approval of the block&#39;s orders. Possible values are &#39;Pending&#39;, &#39;Approved&#39; and &#39;Rejected&#39;. | 
-
 ## Example
 
 ```python
 from lusid.models.order_graph_block import OrderGraphBlock
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of OrderGraphBlock from a JSON string
-order_graph_block_instance = OrderGraphBlock.from_json(json)
-# print the JSON string representation of the object
-print OrderGraphBlock.to_json()
+block: Block = # Replace with your value
+ordered: OrderGraphBlockOrderSynopsis = # Replace with your value
+placed: OrderGraphBlockPlacementSynopsis = # Replace with your value
+executed: OrderGraphBlockExecutionSynopsis = # Replace with your value
+allocated: OrderGraphBlockAllocationSynopsis = # Replace with your value
+booked: OrderGraphBlockTransactionSynopsis = # Replace with your value
+derived_state: StrictStr = "example_derived_state"
+derived_compliance_state: StrictStr = "example_derived_compliance_state"
+derived_approval_state: StrictStr = "example_derived_approval_state"
+order_graph_block_instance = OrderGraphBlock(block=block, ordered=ordered, placed=placed, executed=executed, allocated=allocated, booked=booked, derived_state=derived_state, derived_compliance_state=derived_compliance_state, derived_approval_state=derived_approval_state)
 
-# convert the object into a dict
-order_graph_block_dict = order_graph_block_instance.to_dict()
-# create an instance of OrderGraphBlock from a dict
-order_graph_block_form_dict = order_graph_block.from_dict(order_graph_block_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

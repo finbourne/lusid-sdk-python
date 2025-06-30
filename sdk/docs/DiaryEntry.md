@@ -1,6 +1,5 @@
 # DiaryEntry
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,28 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.diary_entry import DiaryEntry
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from datetime import datetime
+href: Optional[StrictStr] = "example_href"
+abor_id: Optional[ResourceId] = # Replace with your value
+diary_entry_code: Optional[StrictStr] = "example_diary_entry_code"
+type: StrictStr = "example_type"
+name: Optional[StrictStr] = "example_name"
+status: StrictStr = "example_status"
+effective_at: datetime = # Replace with your value
+query_as_at: Optional[datetime] = # Replace with your value
+previous_entry_time: Optional[datetime] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+diary_entry_instance = DiaryEntry(href=href, abor_id=abor_id, diary_entry_code=diary_entry_code, type=type, name=name, status=status, effective_at=effective_at, query_as_at=query_as_at, previous_entry_time=previous_entry_time, properties=properties, version=version, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DiaryEntry from a JSON string
-diary_entry_instance = DiaryEntry.from_json(json)
-# print the JSON string representation of the object
-print DiaryEntry.to_json()
-
-# convert the object into a dict
-diary_entry_dict = diary_entry_instance.to_dict()
-# create an instance of DiaryEntry from a dict
-diary_entry_form_dict = diary_entry.from_dict(diary_entry_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

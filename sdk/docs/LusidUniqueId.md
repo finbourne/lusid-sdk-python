@@ -1,29 +1,22 @@
 # LusidUniqueId
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type for the LUSID unique id, this will depend on the type of entity found, for instance &#39;Instrument&#39; would have a value of &#39;LusidInstrumentId&#39; | 
 **value** | **str** | The value for the LUSID unique id | 
-
 ## Example
 
 ```python
 from lusid.models.lusid_unique_id import LusidUniqueId
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LusidUniqueId from a JSON string
-lusid_unique_id_instance = LusidUniqueId.from_json(json)
-# print the JSON string representation of the object
-print LusidUniqueId.to_json()
+type: StrictStr = "example_type"
+value: StrictStr = "example_value"
+lusid_unique_id_instance = LusidUniqueId(type=type, value=value)
 
-# convert the object into a dict
-lusid_unique_id_dict = lusid_unique_id_instance.to_dict()
-# create an instance of LusidUniqueId from a dict
-lusid_unique_id_form_dict = lusid_unique_id.from_dict(lusid_unique_id_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

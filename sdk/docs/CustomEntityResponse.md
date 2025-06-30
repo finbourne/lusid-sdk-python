@@ -1,6 +1,5 @@
 # CustomEntityResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **fields** | [**List[CustomEntityField]**](CustomEntityField.md) | The fields that decorate the custom entity. | 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the custom entity. | 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.custom_entity_response import CustomEntityResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CustomEntityResponse from a JSON string
-custom_entity_response_instance = CustomEntityResponse.from_json(json)
-# print the JSON string representation of the object
-print CustomEntityResponse.to_json()
+href: Optional[StrictStr] = "example_href"
+entity_type: StrictStr = "example_entity_type"
+version: Version = # Replace with your value
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+identifiers: conlist(CustomEntityId) = # Replace with your value
+fields: conlist(CustomEntityField) = # Replace with your value
+relationships: conlist(Relationship) = # Replace with your value
+links: Optional[conlist(Link)] = None
+custom_entity_response_instance = CustomEntityResponse(href=href, entity_type=entity_type, version=version, staged_modifications=staged_modifications, display_name=display_name, description=description, identifiers=identifiers, fields=fields, relationships=relationships, links=links)
 
-# convert the object into a dict
-custom_entity_response_dict = custom_entity_response_instance.to_dict()
-# create an instance of CustomEntityResponse from a dict
-custom_entity_response_form_dict = custom_entity_response.from_dict(custom_entity_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

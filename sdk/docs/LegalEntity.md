@@ -1,7 +1,6 @@
 # LegalEntity
 
 Representation of Legal Entity on LUSID API
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,26 @@ Name | Type | Description | Notes
 **counterparty_risk_information** | [**CounterpartyRiskInformation**](CounterpartyRiskInformation.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.legal_entity import LegalEntity
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LegalEntity from a JSON string
-legal_entity_instance = LegalEntity.from_json(json)
-# print the JSON string representation of the object
-print LegalEntity.to_json()
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+href: Optional[StrictStr] = "example_href"
+lusid_legal_entity_id: Optional[StrictStr] = "example_lusid_legal_entity_id"
+identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+relationships: Optional[conlist(Relationship)] = # Replace with your value
+counterparty_risk_information: Optional[CounterpartyRiskInformation] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+legal_entity_instance = LegalEntity(display_name=display_name, description=description, href=href, lusid_legal_entity_id=lusid_legal_entity_id, identifiers=identifiers, properties=properties, relationships=relationships, counterparty_risk_information=counterparty_risk_information, version=version, links=links)
 
-# convert the object into a dict
-legal_entity_dict = legal_entity_instance.to_dict()
-# create an instance of LegalEntity from a dict
-legal_entity_form_dict = legal_entity.from_dict(legal_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

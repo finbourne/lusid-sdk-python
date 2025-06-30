@@ -1,7 +1,6 @@
 # TargetTaxLot
 
 Used to specify holdings target amounts at the tax-lot level
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **notional_cost** | **float** | The notional cost of the tax-lot&#39;s opening transaction. | [optional] 
 **variation_margin** | **float** | The variation margin of the tax-lot&#39;s opening transaction. | [optional] 
 **variation_margin_portfolio_ccy** | **float** | The variation margin in portfolio currency of the tax-lot&#39;s opening transaction. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.target_tax_lot import TargetTaxLot
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from datetime import datetime
+units: Union[StrictFloat, StrictInt] = # Replace with your value
+cost: Optional[CurrencyAndAmount] = None
+portfolio_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+purchase_date: Optional[datetime] = # Replace with your value
+settlement_date: Optional[datetime] = # Replace with your value
+notional_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+variation_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+variation_margin_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+target_tax_lot_instance = TargetTaxLot(units=units, cost=cost, portfolio_cost=portfolio_cost, price=price, purchase_date=purchase_date, settlement_date=settlement_date, notional_cost=notional_cost, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TargetTaxLot from a JSON string
-target_tax_lot_instance = TargetTaxLot.from_json(json)
-# print the JSON string representation of the object
-print TargetTaxLot.to_json()
-
-# convert the object into a dict
-target_tax_lot_dict = target_tax_lot_instance.to_dict()
-# create an instance of TargetTaxLot from a dict
-target_tax_lot_form_dict = target_tax_lot.from_dict(target_tax_lot_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

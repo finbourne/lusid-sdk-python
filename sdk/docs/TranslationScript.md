@@ -1,30 +1,24 @@
 # TranslationScript
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**TranslationScriptId**](TranslationScriptId.md) |  | 
 **body** | **str** | Body of the translation script, i.e. the actual translation code. | 
 **version** | [**Version**](Version.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.translation_script import TranslationScript
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TranslationScript from a JSON string
-translation_script_instance = TranslationScript.from_json(json)
-# print the JSON string representation of the object
-print TranslationScript.to_json()
+id: TranslationScriptId = # Replace with your value
+body: StrictStr = "example_body"
+version: Optional[Version] = None
+translation_script_instance = TranslationScript(id=id, body=body, version=version)
 
-# convert the object into a dict
-translation_script_dict = translation_script_instance.to_dict()
-# create an instance of TranslationScript from a dict
-translation_script_form_dict = translation_script.from_dict(translation_script_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

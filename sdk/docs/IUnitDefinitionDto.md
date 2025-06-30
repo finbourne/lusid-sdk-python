@@ -1,6 +1,5 @@
 # IUnitDefinitionDto
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **code** | **str** |  | [optional] [readonly] 
 **display_name** | **str** |  | [optional] [readonly] 
 **description** | **str** |  | [optional] [readonly] 
-
 ## Example
 
 ```python
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of IUnitDefinitionDto from a JSON string
-i_unit_definition_dto_instance = IUnitDefinitionDto.from_json(json)
-# print the JSON string representation of the object
-print IUnitDefinitionDto.to_json()
+var_schema: Optional[StrictStr] = "example_var_schema"
+code: Optional[StrictStr] = "example_code"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+i_unit_definition_dto_instance = IUnitDefinitionDto(var_schema=var_schema, code=code, display_name=display_name, description=description)
 
-# convert the object into a dict
-i_unit_definition_dto_dict = i_unit_definition_dto_instance.to_dict()
-# create an instance of IUnitDefinitionDto from a dict
-i_unit_definition_dto_form_dict = i_unit_definition_dto.from_dict(i_unit_definition_dto_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

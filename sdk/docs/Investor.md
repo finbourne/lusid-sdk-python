@@ -1,7 +1,6 @@
 # Investor
 
 Inner dto of an Investor Record on the LUSID API
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **entity_unique_id** | **str** | The unique Investor entity identifier | [optional] 
 **person** | [**Person**](Person.md) |  | [optional] 
 **legal_entity** | [**LegalEntity**](LegalEntity.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.investor import Investor
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Investor from a JSON string
-investor_instance = Investor.from_json(json)
-# print the JSON string representation of the object
-print Investor.to_json()
+investor_type: Optional[StrictStr] = "example_investor_type"
+investor_identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
+entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
+person: Optional[Person] = None
+legal_entity: Optional[LegalEntity] = # Replace with your value
+investor_instance = Investor(investor_type=investor_type, investor_identifiers=investor_identifiers, entity_unique_id=entity_unique_id, person=person, legal_entity=legal_entity)
 
-# convert the object into a dict
-investor_dict = investor_instance.to_dict()
-# create an instance of Investor from a dict
-investor_form_dict = investor.from_dict(investor_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # AggregationQuery
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,27 @@ Name | Type | Description | Notes
 **life_cycle_status** | **str** | Within an API where an item can be accessed through an address or property, there is an associated status that determines whether the item is stable or likely to change. This status is one of [Experimental, Beta, EAP, Prod,  Deprecated]. If the item is deprecated it will be removed on or after the associated DateTime RemovalDate field. That field will not otherwise be set. | 
 **removal_date** | **datetime** | If the life cycle status is set to deprecated then this will be populated with the date on or after which removal of the address query will happen | [optional] 
 **applicable_options** | [**Dict[str, AddressKeyOptionDefinition]**](AddressKeyOptionDefinition.md) | A mapping from option names to the definition that the corresponding option value must match. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.aggregation_query import AggregationQuery
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from datetime import datetime
+address_key: StrictStr = "example_address_key"
+description: StrictStr = "example_description"
+display_name: StrictStr = "example_display_name"
+type: StrictStr = "example_type"
+flattened_type: StrictStr = "example_flattened_type"
+scales_with_holding_quantity: StrictBool = # Replace with your value
+scales_with_holding_quantity:StrictBool = True
+supported_operations: StrictStr = "example_supported_operations"
+life_cycle_status: StrictStr = "example_life_cycle_status"
+removal_date: Optional[datetime] = # Replace with your value
+applicable_options: Optional[Dict[str, AddressKeyOptionDefinition]] = # Replace with your value
+aggregation_query_instance = AggregationQuery(address_key=address_key, description=description, display_name=display_name, type=type, flattened_type=flattened_type, scales_with_holding_quantity=scales_with_holding_quantity, supported_operations=supported_operations, life_cycle_status=life_cycle_status, removal_date=removal_date, applicable_options=applicable_options)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AggregationQuery from a JSON string
-aggregation_query_instance = AggregationQuery.from_json(json)
-# print the JSON string representation of the object
-print AggregationQuery.to_json()
-
-# convert the object into a dict
-aggregation_query_dict = aggregation_query_instance.to_dict()
-# create an instance of AggregationQuery from a dict
-aggregation_query_form_dict = aggregation_query.from_dict(aggregation_query_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

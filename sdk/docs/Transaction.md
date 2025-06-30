@@ -1,7 +1,6 @@
 # Transaction
 
 A list of transactions.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -31,24 +30,42 @@ Name | Type | Description | Notes
 **strategy_tag** | [**List[Strategy]**](Strategy.md) | A list of strategies representing the allocation of units across multiple sub-holding keys | [optional] 
 **resolved_transaction_type_details** | [**TransactionTypeDetails**](TransactionTypeDetails.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.transaction import Transaction
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from datetime import datetime
+transaction_id: StrictStr = "example_transaction_id"
+type: StrictStr = "example_type"
+instrument_identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+instrument_uid: StrictStr = "example_instrument_uid"
+transaction_date: datetime = # Replace with your value
+settlement_date: datetime = # Replace with your value
+units: Union[StrictFloat, StrictInt] = # Replace with your value
+transaction_price: Optional[TransactionPrice] = # Replace with your value
+total_consideration: CurrencyAndAmount = # Replace with your value
+exchange_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+transaction_currency: Optional[StrictStr] = "example_transaction_currency"
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+counterparty_id: Optional[StrictStr] = "example_counterparty_id"
+source: Optional[StrictStr] = "example_source"
+entry_date_time: Optional[datetime] = # Replace with your value
+otc_confirmation: Optional[OtcConfirmation] = # Replace with your value
+transaction_status: Optional[StrictStr] = "example_transaction_status"
+cancel_date_time: Optional[datetime] = # Replace with your value
+order_id: Optional[ResourceId] = # Replace with your value
+allocation_id: Optional[ResourceId] = # Replace with your value
+custodian_account: Optional[CustodianAccount] = # Replace with your value
+transaction_group_id: Optional[StrictStr] = "example_transaction_group_id"
+strategy_tag: Optional[conlist(Strategy)] = # Replace with your value
+resolved_transaction_type_details: Optional[TransactionTypeDetails] = # Replace with your value
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
+transaction_instance = Transaction(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, entry_date_time=entry_date_time, otc_confirmation=otc_confirmation, transaction_status=transaction_status, cancel_date_time=cancel_date_time, order_id=order_id, allocation_id=allocation_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, resolved_transaction_type_details=resolved_transaction_type_details, data_model_membership=data_model_membership)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Transaction from a JSON string
-transaction_instance = Transaction.from_json(json)
-# print the JSON string representation of the object
-print Transaction.to_json()
-
-# convert the object into a dict
-transaction_dict = transaction_instance.to_dict()
-# create an instance of Transaction from a dict
-transaction_form_dict = transaction.from_dict(transaction_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

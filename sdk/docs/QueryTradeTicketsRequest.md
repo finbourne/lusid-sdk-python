@@ -1,7 +1,6 @@
 # QueryTradeTicketsRequest
 
 Query for tradetickets resulting from events on instrument that are taken from one or more portfolios
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **portfolio_entity_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | The set of portfolios and portfolio groups to which the instrument events must belong. | 
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **effective_at** | **datetime** | The Effective date used in the valuation of the tradetickets. | 
-
 ## Example
 
 ```python
 from lusid.models.query_trade_tickets_request import QueryTradeTicketsRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist
+from datetime import datetime
+as_at: Optional[datetime] = # Replace with your value
+window_start: datetime = # Replace with your value
+window_end: datetime = # Replace with your value
+portfolio_entity_ids: conlist(PortfolioEntityId) = # Replace with your value
+recipe_id: ResourceId = # Replace with your value
+effective_at: datetime = # Replace with your value
+query_trade_tickets_request_instance = QueryTradeTicketsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, recipe_id=recipe_id, effective_at=effective_at)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of QueryTradeTicketsRequest from a JSON string
-query_trade_tickets_request_instance = QueryTradeTicketsRequest.from_json(json)
-# print the JSON string representation of the object
-print QueryTradeTicketsRequest.to_json()
-
-# convert the object into a dict
-query_trade_tickets_request_dict = query_trade_tickets_request_instance.to_dict()
-# create an instance of QueryTradeTicketsRequest from a dict
-query_trade_tickets_request_form_dict = query_trade_tickets_request.from_dict(query_trade_tickets_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

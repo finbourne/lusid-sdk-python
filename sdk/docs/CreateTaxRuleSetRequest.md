@@ -1,6 +1,5 @@
 # CreateTaxRuleSetRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **description** | **str** |  | 
 **output_property_key** | **str** |  | 
 **rules** | [**List[TaxRule]**](TaxRule.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateTaxRuleSetRequest from a JSON string
-create_tax_rule_set_request_instance = CreateTaxRuleSetRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateTaxRuleSetRequest.to_json()
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+output_property_key: StrictStr = "example_output_property_key"
+rules: conlist(TaxRule, max_items=100) = Field(...)
+create_tax_rule_set_request_instance = CreateTaxRuleSetRequest(id=id, display_name=display_name, description=description, output_property_key=output_property_key, rules=rules)
 
-# convert the object into a dict
-create_tax_rule_set_request_dict = create_tax_rule_set_request_instance.to_dict()
-# create an instance of CreateTaxRuleSetRequest from a dict
-create_tax_rule_set_request_form_dict = create_tax_rule_set_request.from_dict(create_tax_rule_set_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

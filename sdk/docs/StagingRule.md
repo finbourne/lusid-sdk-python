@@ -1,6 +1,5 @@
 # StagingRule
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **status** | **str** | Whether the rule is &#39;Active&#39; or &#39;Inactive&#39;. | 
 **match_criteria** | [**StagingRuleMatchCriteria**](StagingRuleMatchCriteria.md) |  | 
 **approval_criteria** | [**StagingRuleApprovalCriteria**](StagingRuleApprovalCriteria.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.staging_rule import StagingRule
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of StagingRule from a JSON string
-staging_rule_instance = StagingRule.from_json(json)
-# print the JSON string representation of the object
-print StagingRule.to_json()
+rule_id: StrictStr = "example_rule_id"
+description: Optional[StrictStr] = "example_description"
+status: StrictStr = "example_status"
+match_criteria: StagingRuleMatchCriteria = # Replace with your value
+approval_criteria: StagingRuleApprovalCriteria = # Replace with your value
+staging_rule_instance = StagingRule(rule_id=rule_id, description=description, status=status, match_criteria=match_criteria, approval_criteria=approval_criteria)
 
-# convert the object into a dict
-staging_rule_dict = staging_rule_instance.to_dict()
-# create an instance of StagingRule from a dict
-staging_rule_form_dict = staging_rule.from_dict(staging_rule_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

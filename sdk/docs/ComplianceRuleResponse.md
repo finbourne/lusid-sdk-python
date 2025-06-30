@@ -1,6 +1,5 @@
 # ComplianceRuleResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,28 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ComplianceRuleResponse from a JSON string
-compliance_rule_response_instance = ComplianceRuleResponse.from_json(json)
-# print the JSON string representation of the object
-print ComplianceRuleResponse.to_json()
+id: Optional[ResourceId] = None
+name: Optional[StrictStr] = "example_name"
+description: Optional[StrictStr] = "example_description"
+active: Optional[StrictBool] = None
+active:Optional[StrictBool] = None
+template_id: Optional[ResourceId] = # Replace with your value
+variation: Optional[StrictStr] = "example_variation"
+portfolio_group_id: Optional[ResourceId] = # Replace with your value
+parameters: Optional[Dict[str, ComplianceParameter]] = None
+properties: Optional[Dict[str, PerpetualProperty]] = None
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+compliance_rule_response_instance = ComplianceRuleResponse(id=id, name=name, description=description, active=active, template_id=template_id, variation=variation, portfolio_group_id=portfolio_group_id, parameters=parameters, properties=properties, version=version, links=links)
 
-# convert the object into a dict
-compliance_rule_response_dict = compliance_rule_response_instance.to_dict()
-# create an instance of ComplianceRuleResponse from a dict
-compliance_rule_response_form_dict = compliance_rule_response.from_dict(compliance_rule_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

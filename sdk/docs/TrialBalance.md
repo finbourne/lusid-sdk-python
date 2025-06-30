@@ -1,7 +1,6 @@
 # TrialBalance
 
 A TrialBalance entity.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,27 @@ Name | Type | Description | Notes
 **credit** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Properties found on the mapped &#39;Account&#39;, as specified in request. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.trial_balance import TrialBalance
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TrialBalance from a JSON string
-trial_balance_instance = TrialBalance.from_json(json)
-# print the JSON string representation of the object
-print TrialBalance.to_json()
+general_ledger_account_code: StrictStr = "example_general_ledger_account_code"
+description: Optional[StrictStr] = "example_description"
+levels: conlist(StrictStr) = # Replace with your value
+account_type: StrictStr = "example_account_type"
+local_currency: StrictStr = "example_local_currency"
+opening: MultiCurrencyAmounts = # Replace with your value
+closing: MultiCurrencyAmounts = # Replace with your value
+debit: MultiCurrencyAmounts = # Replace with your value
+credit: MultiCurrencyAmounts = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+links: Optional[conlist(Link)] = None
+trial_balance_instance = TrialBalance(general_ledger_account_code=general_ledger_account_code, description=description, levels=levels, account_type=account_type, local_currency=local_currency, opening=opening, closing=closing, debit=debit, credit=credit, properties=properties, links=links)
 
-# convert the object into a dict
-trial_balance_dict = trial_balance_instance.to_dict()
-# create an instance of TrialBalance from a dict
-trial_balance_form_dict = trial_balance.from_dict(trial_balance_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

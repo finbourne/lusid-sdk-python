@@ -1,7 +1,6 @@
 # InstrumentCapabilities
 
 Instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument i.e. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) i.e. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) i.e. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **supported_addresses** | [**List[DescribedAddressKey]**](DescribedAddressKey.md) | Queryable addresses supported by the model, e.g. &#39;Valuation/Pv&#39;, &#39;Valuation/Accrued&#39;. | [optional] 
 **economic_dependencies** | [**List[EconomicDependency]**](EconomicDependency.md) | Economic dependencies for the model, e.g. &#39;Fx:GBP.USD&#39;, &#39;Cash:GBP&#39;, &#39;Rates:GBP.GBPOIS&#39;. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.instrument_capabilities import InstrumentCapabilities
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of InstrumentCapabilities from a JSON string
-instrument_capabilities_instance = InstrumentCapabilities.from_json(json)
-# print the JSON string representation of the object
-print InstrumentCapabilities.to_json()
+instrument_id: Optional[StrictStr] = "example_instrument_id"
+model: Optional[StrictStr] = "example_model"
+features: Optional[Dict[str, StrictStr]] = # Replace with your value
+supported_addresses: Optional[conlist(DescribedAddressKey)] = # Replace with your value
+economic_dependencies: Optional[conlist(EconomicDependency)] = # Replace with your value
+links: Optional[conlist(Link)] = None
+instrument_capabilities_instance = InstrumentCapabilities(instrument_id=instrument_id, model=model, features=features, supported_addresses=supported_addresses, economic_dependencies=economic_dependencies, links=links)
 
-# convert the object into a dict
-instrument_capabilities_dict = instrument_capabilities_instance.to_dict()
-# create an instance of InstrumentCapabilities from a dict
-instrument_capabilities_form_dict = instrument_capabilities.from_dict(instrument_capabilities_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

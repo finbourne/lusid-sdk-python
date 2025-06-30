@@ -1,7 +1,6 @@
 # RelatedEntity
 
 Information about the other related entity in the relationship
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **lusid_unique_id** | [**LusidUniqueId**](LusidUniqueId.md) |  | [optional] 
 **identifiers** | [**List[EntityIdentifier]**](EntityIdentifier.md) | The identifiers of the related entity in the relationship. | 
 **href** | **str** | The link to the entity. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.related_entity import RelatedEntity
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of RelatedEntity from a JSON string
-related_entity_instance = RelatedEntity.from_json(json)
-# print the JSON string representation of the object
-print RelatedEntity.to_json()
+entity_type: StrictStr = "example_entity_type"
+entity_id: Dict[str, StrictStr] = # Replace with your value
+display_name: StrictStr = "example_display_name"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+scope: Optional[StrictStr] = "example_scope"
+lusid_unique_id: Optional[LusidUniqueId] = # Replace with your value
+identifiers: conlist(EntityIdentifier) = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+related_entity_instance = RelatedEntity(entity_type=entity_type, entity_id=entity_id, display_name=display_name, properties=properties, scope=scope, lusid_unique_id=lusid_unique_id, identifiers=identifiers, href=href)
 
-# convert the object into a dict
-related_entity_dict = related_entity_instance.to_dict()
-# create an instance of RelatedEntity from a dict
-related_entity_form_dict = related_entity.from_dict(related_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,30 +1,24 @@
 # UpdateCustomEntityTypeRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | A display label for the custom entity type. | 
 **description** | **str** | A description for the custom entity type. | 
 **field_schema** | [**List[CustomEntityFieldDefinition]**](CustomEntityFieldDefinition.md) | The description of the fields on the custom entity type. | 
-
 ## Example
 
 ```python
 from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTypeRequest
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpdateCustomEntityTypeRequest from a JSON string
-update_custom_entity_type_request_instance = UpdateCustomEntityTypeRequest.from_json(json)
-# print the JSON string representation of the object
-print UpdateCustomEntityTypeRequest.to_json()
+display_name: StrictStr = "example_display_name"
+description: StrictStr = "example_description"
+field_schema: conlist(CustomEntityFieldDefinition) = # Replace with your value
+update_custom_entity_type_request_instance = UpdateCustomEntityTypeRequest(display_name=display_name, description=description, field_schema=field_schema)
 
-# convert the object into a dict
-update_custom_entity_type_request_dict = update_custom_entity_type_request_instance.to_dict()
-# create an instance of UpdateCustomEntityTypeRequest from a dict
-update_custom_entity_type_request_form_dict = update_custom_entity_type_request.from_dict(update_custom_entity_type_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

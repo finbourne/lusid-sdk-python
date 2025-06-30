@@ -43,7 +43,6 @@ class MovementType(str, Enum):
     CASHACCRUAL = 'CashAccrual'
     FORWARDFX = 'ForwardFx'
     CASHFXFORWARD = 'CashFxForward'
-    UNSETTLEDCASHTYPES = 'UnsettledCashTypes'
     CARRY = 'Carry'
     CARRYASPNL = 'CarryAsPnl'
     VARIATIONMARGIN = 'VariationMargin'
@@ -51,6 +50,9 @@ class MovementType(str, Enum):
     FEE = 'Fee'
     LIMITADJUSTMENT = 'LimitAdjustment'
     BALANCEADJUSTMENT = 'BalanceAdjustment'
+    DEFERRED = 'Deferred'
+    CASHDEFERRED = 'CashDeferred'
+    UNSETTLEDCASHTYPES = 'UnsettledCashTypes'
 
     @classmethod
     def from_json(cls, json_str: str) -> MovementType:

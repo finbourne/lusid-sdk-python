@@ -1,7 +1,6 @@
 # ChartOfAccounts
 
 A chart of account.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,23 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Chart of Accounts. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.chart_of_accounts import ChartOfAccounts
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ChartOfAccounts from a JSON string
-chart_of_accounts_instance = ChartOfAccounts.from_json(json)
-# print the JSON string representation of the object
-print ChartOfAccounts.to_json()
+href: Optional[StrictStr] = "example_href"
+id: ResourceId = # Replace with your value
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+chart_of_accounts_instance = ChartOfAccounts(href=href, id=id, display_name=display_name, description=description, properties=properties, version=version, links=links)
 
-# convert the object into a dict
-chart_of_accounts_dict = chart_of_accounts_instance.to_dict()
-# create an instance of ChartOfAccounts from a dict
-chart_of_accounts_form_dict = chart_of_accounts.from_dict(chart_of_accounts_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

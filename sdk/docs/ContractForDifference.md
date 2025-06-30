@@ -1,7 +1,6 @@
 # ContractForDifference
 
 LUSID representation of a Contract for Difference.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -17,24 +16,29 @@ Name | Type | Description | Notes
 **lot_size** | **int** | CFD LotSize, the minimum number of shares that can be bought or sold at once.  Optional, if set must be non-negative, if not set defaults to 1. | [optional] 
 **underlying** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
-
 ## Example
 
 ```python
 from lusid.models.contract_for_difference import ContractForDifference
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from datetime import datetime
+start_date: datetime = # Replace with your value
+maturity_date: Optional[datetime] = # Replace with your value
+code: Optional[StrictStr] = "example_code"
+contract_size: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+pay_ccy: StrictStr = "example_pay_ccy"
+reference_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+type: StrictStr = "example_type"
+underlying_ccy: Optional[StrictStr] = "example_underlying_ccy"
+underlying_identifier: Optional[StrictStr] = "example_underlying_identifier"
+lot_size: Optional[StrictInt] = # Replace with your value
+lot_size: Optional[StrictInt] = None
+underlying: Optional[LusidInstrument] = None
+instrument_type: StrictStr = "example_instrument_type"
+contract_for_difference_instance = ContractForDifference(start_date=start_date, maturity_date=maturity_date, code=code, contract_size=contract_size, pay_ccy=pay_ccy, reference_rate=reference_rate, type=type, underlying_ccy=underlying_ccy, underlying_identifier=underlying_identifier, lot_size=lot_size, underlying=underlying, instrument_type=instrument_type)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ContractForDifference from a JSON string
-contract_for_difference_instance = ContractForDifference.from_json(json)
-# print the JSON string representation of the object
-print ContractForDifference.to_json()
-
-# convert the object into a dict
-contract_for_difference_dict = contract_for_difference_instance.to_dict()
-# create an instance of ContractForDifference from a dict
-contract_for_difference_form_dict = contract_for_difference.from_dict(contract_for_difference_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

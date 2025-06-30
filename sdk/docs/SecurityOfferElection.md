@@ -1,7 +1,6 @@
 # SecurityOfferElection
 
 Election for events that result in cash via a merger or acquisition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,22 @@ Name | Type | Description | Notes
 **is_chosen** | **bool** | Is this the election that has been explicitly chosen from multiple options. | [optional] 
 **is_default** | **bool** | Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided. | [optional] 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
-
 ## Example
 
 ```python
 from lusid.models.security_offer_election import SecurityOfferElection
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SecurityOfferElection from a JSON string
-security_offer_election_instance = SecurityOfferElection.from_json(json)
-# print the JSON string representation of the object
-print SecurityOfferElection.to_json()
+election_key: StrictStr = "example_election_key"
+is_chosen: Optional[StrictBool] = # Replace with your value
+is_chosen:Optional[StrictBool] = None
+is_default: Optional[StrictBool] = # Replace with your value
+is_default:Optional[StrictBool] = None
+units_ratio: UnitsRatio = # Replace with your value
+security_offer_election_instance = SecurityOfferElection(election_key=election_key, is_chosen=is_chosen, is_default=is_default, units_ratio=units_ratio)
 
-# convert the object into a dict
-security_offer_election_dict = security_offer_election_instance.to_dict()
-# create an instance of SecurityOfferElection from a dict
-security_offer_election_form_dict = security_offer_election.from_dict(security_offer_election_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

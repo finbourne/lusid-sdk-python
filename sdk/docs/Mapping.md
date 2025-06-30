@@ -1,7 +1,6 @@
 # Mapping
 
 Defines the rule set to be used to determine if entries should be considered as a match.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **name** | **str** | The mapping name | 
 **reconciliation_type** | **str** | What type of reconciliation this mapping is for | 
 **rules** | [**List[MappingRule]**](MappingRule.md) | The rules in this mapping, keyed by the left field/property name | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.mapping import Mapping
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Mapping from a JSON string
-mapping_instance = Mapping.from_json(json)
-# print the JSON string representation of the object
-print Mapping.to_json()
+scope: StrictStr = "example_scope"
+code: StrictStr = "example_code"
+name: StrictStr = "example_name"
+reconciliation_type: StrictStr = "example_reconciliation_type"
+rules: Optional[conlist(MappingRule)] = # Replace with your value
+mapping_instance = Mapping(scope=scope, code=code, name=name, reconciliation_type=reconciliation_type, rules=rules)
 
-# convert the object into a dict
-mapping_dict = mapping_instance.to_dict()
-# create an instance of Mapping from a dict
-mapping_form_dict = mapping.from_dict(mapping_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

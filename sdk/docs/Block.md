@@ -1,7 +1,6 @@
 # Block
 
 A block of orders for the same instrument, intended to record for example a trader's aggregation  of outstanding orders at a given time.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -20,24 +19,32 @@ Name | Type | Description | Notes
 **is_swept** | **bool** | Swept blocks are considered no longer of active interest, and no longer take part in various order management processes | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.block import Block
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr
+from datetime import datetime
+id: ResourceId = # Replace with your value
+order_ids: conlist(ResourceId) = # Replace with your value
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
+quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+side: StrictStr = "example_side"
+type: StrictStr = "example_type"
+time_in_force: StrictStr = "example_time_in_force"
+created_date: datetime = # Replace with your value
+limit_price: Optional[CurrencyAndAmount] = # Replace with your value
+stop_price: Optional[CurrencyAndAmount] = # Replace with your value
+is_swept: StrictBool = # Replace with your value
+is_swept:StrictBool = True
+version: Optional[Version] = None
+links: Optional[conlist(Link)] = None
+block_instance = Block(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept, version=version, links=links)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Block from a JSON string
-block_instance = Block.from_json(json)
-# print the JSON string representation of the object
-print Block.to_json()
-
-# convert the object into a dict
-block_dict = block_instance.to_dict()
-# create an instance of Block from a dict
-block_form_dict = block.from_dict(block_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

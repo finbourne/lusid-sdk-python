@@ -1,6 +1,5 @@
 # CdsFlowConventions
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,24 +15,30 @@ Name | Type | Description | Notes
 **business_day_convention** | **str** | When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest]. | [optional] 
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.cds_flow_conventions import CdsFlowConventions
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CdsFlowConventions from a JSON string
-cds_flow_conventions_instance = CdsFlowConventions.from_json(json)
-# print the JSON string representation of the object
-print CdsFlowConventions.to_json()
+roll_frequency: Optional[StrictStr] = "example_roll_frequency"
+currency: StrictStr = "example_currency"
+payment_frequency: StrictStr = "example_payment_frequency"
+day_count_convention: StrictStr = "example_day_count_convention"
+roll_convention: StrictStr = "example_roll_convention"
+payment_calendars: conlist(StrictStr) = # Replace with your value
+reset_calendars: conlist(StrictStr) = # Replace with your value
+settle_days: Optional[StrictInt] = # Replace with your value
+settle_days: Optional[StrictInt] = None
+reset_days: Optional[StrictInt] = # Replace with your value
+reset_days: Optional[StrictInt] = None
+business_day_convention: Optional[StrictStr] = "example_business_day_convention"
+scope: Optional[StrictStr] = "example_scope"
+code: Optional[StrictStr] = "example_code"
+cds_flow_conventions_instance = CdsFlowConventions(roll_frequency=roll_frequency, currency=currency, payment_frequency=payment_frequency, day_count_convention=day_count_convention, roll_convention=roll_convention, payment_calendars=payment_calendars, reset_calendars=reset_calendars, settle_days=settle_days, reset_days=reset_days, business_day_convention=business_day_convention, scope=scope, code=code)
 
-# convert the object into a dict
-cds_flow_conventions_dict = cds_flow_conventions_instance.to_dict()
-# create an instance of CdsFlowConventions from a dict
-cds_flow_conventions_form_dict = cds_flow_conventions.from_dict(cds_flow_conventions_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

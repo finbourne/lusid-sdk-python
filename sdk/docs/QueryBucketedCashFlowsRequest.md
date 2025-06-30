@@ -1,7 +1,6 @@
 # QueryBucketedCashFlowsRequest
 
 Query for bucketed cashflows from one or more portfolios.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -22,24 +21,35 @@ Name | Type | Description | Notes
 **cash_flow_type** | **str** | Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow] | [optional] 
 **bucketing_schedule** | [**BucketingSchedule**](BucketingSchedule.md) |  | [optional] 
 **filter** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from datetime import datetime
+as_at: Optional[datetime] = # Replace with your value
+window_start: datetime = # Replace with your value
+window_end: datetime = # Replace with your value
+portfolio_entity_ids: conlist(PortfolioEntityId) = # Replace with your value
+effective_at: datetime = # Replace with your value
+recipe_id: ResourceId = # Replace with your value
+rounding_method: StrictStr = "example_rounding_method"
+bucketing_dates: Optional[conlist(datetime)] = # Replace with your value
+bucketing_tenors: Optional[conlist(StrictStr)] = # Replace with your value
+report_currency: StrictStr = "example_report_currency"
+group_by: Optional[conlist(StrictStr)] = # Replace with your value
+addresses: Optional[conlist(StrictStr)] = # Replace with your value
+equip_with_subtotals: Optional[StrictBool] = # Replace with your value
+equip_with_subtotals:Optional[StrictBool] = None
+exclude_unsettled_trades: Optional[StrictBool] = # Replace with your value
+exclude_unsettled_trades:Optional[StrictBool] = None
+cash_flow_type: Optional[StrictStr] = "example_cash_flow_type"
+bucketing_schedule: Optional[BucketingSchedule] = # Replace with your value
+filter: Optional[StrictStr] = "example_filter"
+query_bucketed_cash_flows_request_instance = QueryBucketedCashFlowsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, effective_at=effective_at, recipe_id=recipe_id, rounding_method=rounding_method, bucketing_dates=bucketing_dates, bucketing_tenors=bucketing_tenors, report_currency=report_currency, group_by=group_by, addresses=addresses, equip_with_subtotals=equip_with_subtotals, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_type=cash_flow_type, bucketing_schedule=bucketing_schedule, filter=filter)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of QueryBucketedCashFlowsRequest from a JSON string
-query_bucketed_cash_flows_request_instance = QueryBucketedCashFlowsRequest.from_json(json)
-# print the JSON string representation of the object
-print QueryBucketedCashFlowsRequest.to_json()
-
-# convert the object into a dict
-query_bucketed_cash_flows_request_dict = query_bucketed_cash_flows_request_instance.to_dict()
-# create an instance of QueryBucketedCashFlowsRequest from a dict
-query_bucketed_cash_flows_request_form_dict = query_bucketed_cash_flows_request.from_dict(query_bucketed_cash_flows_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
