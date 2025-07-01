@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**delete_investor_record**](InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
 [**get_investor_record**](InvestorRecordsApi.md#get_investor_record) | **GET** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetInvestorRecord: Get Investor Record
 [**list_all_investor_records**](InvestorRecordsApi.md#list_all_investor_records) | **GET** /api/investorrecords | [EARLY ACCESS] ListAllInvestorRecords: List Investor Records
-[**upsert_investor_records**](InvestorRecordsApi.md#upsert_investor_records) | **POST** /api/investorrecords/$batchUpsert | [EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records
+[**upsert_investor_records**](InvestorRecordsApi.md#upsert_investor_records) | **POST** /api/investorrecords/$batchUpsert | [EARLY ACCESS] UpsertInvestorRecords: Upsert investor records
 
 
 # **delete_investor_record**
@@ -319,7 +319,7 @@ Name | Type | Description  | Notes
 # **upsert_investor_records**
 > UpsertInvestorRecordsResponse upsert_investor_records(success_mode, request_body)
 
-[EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records
+[EARLY ACCESS] UpsertInvestorRecords: Upsert investor records
 
 Creates or updates a collection of Investor Records
 
@@ -369,13 +369,13 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestorRecordsApi)
     success_mode = 'success_mode_example' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
-    request_body = {"firstExampleRequest":{"identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"John Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord1DisplayName","description":"InvestorRecord1Description","investor":{"investorType":"Person","investorIdentifiers":{"Person/HrSystem1/InternalId":{"key":"Person/HrSystem1/InternalId","value":{"labelValue":"XY10001111"}}}}},"secondExampleRequest":{"identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_22345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2039"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"Jane Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"Germany"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord2DisplayName","description":"InvestorRecord2Description","investor":{"investorType":"LegalEntity","investorIdentifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}}}}}} # Dict[str, UpsertInvestorRecordRequest] | A collection of requests to create or update Investor Records.
+    request_body = {"firstExampleRequest":{"identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"John Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord1DisplayName","description":"InvestorRecord1Description","investorIdentifier":{"investorType":"Person","investorIdentifiers":{"Person/HrSystem1/InternalId":{"key":"Person/HrSystem1/InternalId","value":{"labelValue":"XY10001111"}}}}},"secondExampleRequest":{"identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_22345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2039"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"Jane Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"Germany"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord2DisplayName","description":"InvestorRecord2Description","investorIdentifier":{"investorType":"LegalEntity","investorIdentifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}}}}}} # Dict[str, UpsertInvestorRecordRequest] | A collection of requests to create or update Investor Records.
 
     try:
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_investor_records(success_mode, request_body, opts=opts)
 
-        # [EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records
+        # [EARLY ACCESS] UpsertInvestorRecords: Upsert investor records
         api_response = api_instance.upsert_investor_records(success_mode, request_body)
         pprint(api_response)
 

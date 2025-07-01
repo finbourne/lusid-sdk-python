@@ -3380,7 +3380,7 @@ class PersonsApi:
 
     @validate_arguments
     def upsert_persons(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertPersonRequest], Field(..., description="A collection of requests to create or update Person(s).")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertPersonsResponse, Awaitable[UpsertPersonsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons  # noqa: E501
+        """[EARLY ACCESS] UpsertPersons: Batch upsert Persons  # noqa: E501
 
         Create or updates a collection of person(s).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3413,7 +3413,7 @@ class PersonsApi:
 
     @validate_arguments
     def upsert_persons_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertPersonRequest], Field(..., description="A collection of requests to create or update Person(s).")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons  # noqa: E501
+        """[EARLY ACCESS] UpsertPersons: Batch upsert Persons  # noqa: E501
 
         Create or updates a collection of person(s).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

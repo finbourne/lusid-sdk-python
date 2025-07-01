@@ -1,6 +1,6 @@
 # Investor
 
-Inner dto of an Investor Record on the LUSID API
+Representation of an Investor on the LUSID API
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

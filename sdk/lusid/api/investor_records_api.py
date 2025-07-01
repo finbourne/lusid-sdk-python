@@ -655,7 +655,7 @@ class InvestorRecordsApi:
 
     @validate_arguments
     def upsert_investor_records(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertInvestorRecordRequest], Field(..., description="A collection of requests to create or update Investor Records.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertInvestorRecordsResponse, Awaitable[UpsertInvestorRecordsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records  # noqa: E501
+        """[EARLY ACCESS] UpsertInvestorRecords: Upsert investor records  # noqa: E501
 
         Creates or updates a collection of Investor Records  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -688,7 +688,7 @@ class InvestorRecordsApi:
 
     @validate_arguments
     def upsert_investor_records_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertInvestorRecordRequest], Field(..., description="A collection of requests to create or update Investor Records.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertInvestorRecords: Pluralised upsert of Investor Records  # noqa: E501
+        """[EARLY ACCESS] UpsertInvestorRecords: Upsert investor records  # noqa: E501
 
         Creates or updates a collection of Investor Records  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -21,7 +21,7 @@ Method | HTTP request | Description
 [**set_person_properties**](PersonsApi.md#set_person_properties) | **POST** /api/persons/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] SetPersonProperties: Set Person Properties
 [**upsert_person**](PersonsApi.md#upsert_person) | **POST** /api/persons | UpsertPerson: Upsert Person
 [**upsert_person_access_metadata**](PersonsApi.md#upsert_person_access_metadata) | **PUT** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPersonAccessMetadata: Upsert a Person Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
-[**upsert_persons**](PersonsApi.md#upsert_persons) | **POST** /api/persons/$batchUpsert | [EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons
+[**upsert_persons**](PersonsApi.md#upsert_persons) | **POST** /api/persons/$batchUpsert | [EARLY ACCESS] UpsertPersons: Batch upsert Persons
 
 
 # **delete_person**
@@ -1771,7 +1771,7 @@ Name | Type | Description  | Notes
 # **upsert_persons**
 > UpsertPersonsResponse upsert_persons(success_mode, request_body)
 
-[EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons
+[EARLY ACCESS] UpsertPersons: Batch upsert Persons
 
 Create or updates a collection of person(s).
 
@@ -1827,7 +1827,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_persons(success_mode, request_body, opts=opts)
 
-        # [EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons
+        # [EARLY ACCESS] UpsertPersons: Batch upsert Persons
         api_response = api_instance.upsert_persons(success_mode, request_body)
         pprint(api_response)
 

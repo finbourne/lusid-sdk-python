@@ -3029,7 +3029,7 @@ class LegalEntitiesApi:
 
     @validate_arguments
     def upsert_legal_entities(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertLegalEntityRequest], Field(..., description="A collection of requests to create or update Legal Entities.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertLegalEntitiesResponse, Awaitable[UpsertLegalEntitiesResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertLegalEntities: Pluralised upsert of Legal Entities  # noqa: E501
+        """[EARLY ACCESS] UpsertLegalEntities: Batch upsert Legal Entities  # noqa: E501
 
         Creates or updates a collection of Legal Entities  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3062,7 +3062,7 @@ class LegalEntitiesApi:
 
     @validate_arguments
     def upsert_legal_entities_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertLegalEntityRequest], Field(..., description="A collection of requests to create or update Legal Entities.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertLegalEntities: Pluralised upsert of Legal Entities  # noqa: E501
+        """[EARLY ACCESS] UpsertLegalEntities: Batch upsert Legal Entities  # noqa: E501
 
         Creates or updates a collection of Legal Entities  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

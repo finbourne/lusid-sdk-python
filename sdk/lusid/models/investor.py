@@ -26,7 +26,7 @@ from lusid.models.person import Person
 
 class Investor(BaseModel):
     """
-    Inner dto of an Investor Record on the LUSID API  # noqa: E501
+    Representation of an Investor on the LUSID API  # noqa: E501
     """
     investor_type:  Optional[StrictStr] = Field(None,alias="investorType", description="The type of the Investor") 
     investor_identifiers: Optional[Dict[str, ModelProperty]] = Field(None, alias="investorIdentifiers", description="The identifiers of the Investor")

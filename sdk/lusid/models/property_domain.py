@@ -49,6 +49,7 @@ class PropertyDomain(str, Enum):
     CALENDAR = 'Calendar'
     LEGALENTITY = 'LegalEntity'
     INVESTORRECORD = 'InvestorRecord'
+    INVESTMENTACCOUNT = 'InvestmentAccount'
     PLACEMENT = 'Placement'
     EXECUTION = 'Execution'
     BLOCK = 'Block'

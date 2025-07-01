@@ -19,7 +19,7 @@ Method | HTTP request | Description
 [**patch_legal_entity_access_metadata**](LegalEntitiesApi.md#patch_legal_entity_access_metadata) | **PATCH** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata | [EARLY ACCESS] PatchLegalEntityAccessMetadata: Patch Access Metadata rules for a Legal Entity.
 [**set_legal_entity_identifiers**](LegalEntitiesApi.md#set_legal_entity_identifiers) | **POST** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] SetLegalEntityIdentifiers: Set Legal Entity Identifiers
 [**set_legal_entity_properties**](LegalEntitiesApi.md#set_legal_entity_properties) | **POST** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties | SetLegalEntityProperties: Set Legal Entity Properties
-[**upsert_legal_entities**](LegalEntitiesApi.md#upsert_legal_entities) | **POST** /api/legalentities/$batchUpsert | [EARLY ACCESS] UpsertLegalEntities: Pluralised upsert of Legal Entities
+[**upsert_legal_entities**](LegalEntitiesApi.md#upsert_legal_entities) | **POST** /api/legalentities/$batchUpsert | [EARLY ACCESS] UpsertLegalEntities: Batch upsert Legal Entities
 [**upsert_legal_entity**](LegalEntitiesApi.md#upsert_legal_entity) | **POST** /api/legalentities | UpsertLegalEntity: Upsert Legal Entity
 [**upsert_legal_entity_access_metadata**](LegalEntitiesApi.md#upsert_legal_entity_access_metadata) | **PUT** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | UpsertLegalEntityAccessMetadata: Upsert a Legal Entity Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
@@ -1569,7 +1569,7 @@ Name | Type | Description  | Notes
 # **upsert_legal_entities**
 > UpsertLegalEntitiesResponse upsert_legal_entities(success_mode, request_body)
 
-[EARLY ACCESS] UpsertLegalEntities: Pluralised upsert of Legal Entities
+[EARLY ACCESS] UpsertLegalEntities: Batch upsert Legal Entities
 
 Creates or updates a collection of Legal Entities
 
@@ -1625,7 +1625,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_legal_entities(success_mode, request_body, opts=opts)
 
-        # [EARLY ACCESS] UpsertLegalEntities: Pluralised upsert of Legal Entities
+        # [EARLY ACCESS] UpsertLegalEntities: Batch upsert Legal Entities
         api_response = api_instance.upsert_legal_entities(success_mode, request_body)
         pprint(api_response)
 

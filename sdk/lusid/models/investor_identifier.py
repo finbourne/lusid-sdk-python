@@ -22,12 +22,12 @@ from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.model_property import ModelProperty
 
-class UpsertInvestor(BaseModel):
+class InvestorIdentifier(BaseModel):
     """
-    Inner dto of an Investor Record on the LUSID API  # noqa: E501
+    Identification of an Investor on the LUSID API.  # noqa: E501
     """
-    investor_type:  Optional[StrictStr] = Field(None,alias="investorType", description="The type of the Investor") 
-    investor_identifiers: Optional[Dict[str, ModelProperty]] = Field(None, alias="investorIdentifiers", description="The identifiers of the Investor")
+    investor_type:  Optional[StrictStr] = Field(None,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person or a LegalEntity") 
+    investor_identifiers: Optional[Dict[str, ModelProperty]] = Field(None, alias="investorIdentifiers", description="Single identifier that should target the desired person or legal entity")
     __properties = ["investorType", "investorIdentifiers"]
 
     class Config:
@@ -52,8 +52,8 @@ class UpsertInvestor(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertInvestor:
-        """Create an instance of UpsertInvestor from a JSON string"""
+    def from_json(cls, json_str: str) -> InvestorIdentifier:
+        """Create an instance of InvestorIdentifier from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -82,15 +82,15 @@ class UpsertInvestor(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertInvestor:
-        """Create an instance of UpsertInvestor from a dict"""
+    def from_dict(cls, obj: dict) -> InvestorIdentifier:
+        """Create an instance of InvestorIdentifier from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertInvestor.parse_obj(obj)
+            return InvestorIdentifier.parse_obj(obj)
 
-        _obj = UpsertInvestor.parse_obj({
+        _obj = InvestorIdentifier.parse_obj({
             "investor_type": obj.get("investorType"),
             "investor_identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
