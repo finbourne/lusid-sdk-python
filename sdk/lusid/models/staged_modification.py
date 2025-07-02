@@ -34,7 +34,7 @@ class StagedModification(BaseModel):
     as_at_staged: Optional[datetime] = Field(None, alias="asAtStaged", description="Time at which the modification was staged.")
     user_id_staged:  Optional[StrictStr] = Field(None,alias="userIdStaged", description="Id of the user who created the stage modification request.") 
     requested_id_staged:  Optional[StrictStr] = Field(None,alias="requestedIdStaged", description="The Request Id that initiated this staged modification.") 
-    request_reason:  Optional[StrictStr] = Field(None,alias="requestReason", description="Reason staged change request made.") 
+    request_reason:  Optional[StrictStr] = Field(None,alias="requestReason", description="The Request Reason from the context that initiated this staged modification.") 
     action:  Optional[StrictStr] = Field(None,alias="action", description="Type of action of the staged modification, either create, update or delete.") 
     staging_rule: Optional[StagedModificationStagingRule] = Field(None, alias="stagingRule")
     decisions: Optional[conlist(StagedModificationDecision)] = Field(None, description="Object containing information relating to the decision on the staged modification.")
