@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, conlist,
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class InterestRateSwap(LusidInstrument):
     """
@@ -34,9 +35,10 @@ class InterestRateSwap(LusidInstrument):
     legs: conlist(InstrumentLeg) = Field(..., description="The set of instrument legs that define the swap instrument, these should be FloatingLeg or FixedLeg.")
     settlement_ccy:  Optional[StrictStr] = Field(None,alias="settlementCcy", description="Settlement currency if IRS is non-deliverable.") 
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven fixed-floating swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "isNonDeliverable", "legs", "settlementCcy", "additionalPayments"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "isNonDeliverable", "legs", "settlementCcy", "additionalPayments", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -144,6 +146,9 @@ class InterestRateSwap(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['additionalPayments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -177,7 +182,8 @@ class InterestRateSwap(LusidInstrument):
             "is_non_deliverable": obj.get("isNonDeliverable"),
             "legs": [InstrumentLeg.from_dict(_item) for _item in obj.get("legs")] if obj.get("legs") is not None else None,
             "settlement_ccy": obj.get("settlementCcy"),
-            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None
+            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

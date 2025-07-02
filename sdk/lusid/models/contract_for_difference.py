@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class ContractForDifference(LusidInstrument):
     """
@@ -37,9 +38,10 @@ class ContractForDifference(LusidInstrument):
     underlying_identifier:  Optional[StrictStr] = Field(None,alias="underlyingIdentifier", description="External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].") 
     lot_size: Optional[StrictInt] = Field(None, alias="lotSize", description="CFD LotSize, the minimum number of shares that can be bought or sold at once.  Optional, if set must be non-negative, if not set defaults to 1.")
     underlying: Optional[LusidInstrument] = None
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "code", "contractSize", "payCcy", "referenceRate", "type", "underlyingCcy", "underlyingIdentifier", "lotSize", "underlying"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "code", "contractSize", "payCcy", "referenceRate", "type", "underlyingCcy", "underlyingIdentifier", "lotSize", "underlying", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -136,6 +138,9 @@ class ContractForDifference(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of underlying
         if self.underlying:
             _dict['underlying'] = self.underlying.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -179,7 +184,8 @@ class ContractForDifference(LusidInstrument):
             "underlying_ccy": obj.get("underlyingCcy"),
             "underlying_identifier": obj.get("underlyingIdentifier"),
             "lot_size": obj.get("lotSize"),
-            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

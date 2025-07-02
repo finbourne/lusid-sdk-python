@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **payout_style** | **str** | PayoutStyle for touch options.                For options without touch optionality, payoutStyle should not be set.  For options with touch optionality (where the touches data has been set), payoutStyle must be defined and cannot be None.    Supported string (enumeration) values are: [Deferred, Immediate]. | [optional] 
 **premium** | [**Premium**](Premium.md) |  | [optional] 
 **touches** | [**List[Touch]**](Touch.md) | For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -47,8 +48,9 @@ option_settlement_date: datetime = # Replace with your value
 payout_style: Optional[StrictStr] = "example_payout_style"
 premium: Optional[Premium] = None
 touches: Optional[conlist(Touch)] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-fx_option_instance = FxOption(start_date=start_date, dom_ccy=dom_ccy, dom_amount=dom_amount, fgn_ccy=fgn_ccy, fgn_amount=fgn_amount, strike=strike, barriers=barriers, exercise_type=exercise_type, is_call_not_put=is_call_not_put, is_delivery_not_cash=is_delivery_not_cash, is_payoff_digital=is_payoff_digital, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, payout_style=payout_style, premium=premium, touches=touches, instrument_type=instrument_type)
+fx_option_instance = FxOption(start_date=start_date, dom_ccy=dom_ccy, dom_amount=dom_amount, fgn_ccy=fgn_ccy, fgn_amount=fgn_amount, strike=strike, barriers=barriers, exercise_type=exercise_type, is_call_not_put=is_call_not_put, is_delivery_not_cash=is_delivery_not_cash, is_payoff_digital=is_payoff_digital, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, payout_style=payout_style, premium=premium, touches=touches, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

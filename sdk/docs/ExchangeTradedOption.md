@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **contracts** | **float** | The number of contracts held. | 
 **ref_spot_price** | **float** | The reference spot price for the option at which the contract was entered into. | 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -22,8 +23,9 @@ contract_details: ExchangeTradedOptionContractDetails = # Replace with your valu
 contracts: Union[StrictFloat, StrictInt] = # Replace with your value
 ref_spot_price: Union[StrictFloat, StrictInt] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-exchange_traded_option_instance = ExchangeTradedOption(start_date=start_date, contract_details=contract_details, contracts=contracts, ref_spot_price=ref_spot_price, trading_conventions=trading_conventions, instrument_type=instrument_type)
+exchange_traded_option_instance = ExchangeTradedOption(start_date=start_date, contract_details=contract_details, contracts=contracts, ref_spot_price=ref_spot_price, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

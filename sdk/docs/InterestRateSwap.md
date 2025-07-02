@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **legs** | [**List[InstrumentLeg]**](InstrumentLeg.md) | The set of instrument legs that define the swap instrument, these should be FloatingLeg or FixedLeg. | 
 **settlement_ccy** | **str** | Settlement currency if IRS is non-deliverable. | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven fixed-floating swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -25,8 +26,9 @@ is_non_deliverable:Optional[StrictBool] = None
 legs: conlist(InstrumentLeg) = # Replace with your value
 settlement_ccy: Optional[StrictStr] = "example_settlement_ccy"
 additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-interest_rate_swap_instance = InterestRateSwap(start_date=start_date, maturity_date=maturity_date, is_non_deliverable=is_non_deliverable, legs=legs, settlement_ccy=settlement_ccy, additional_payments=additional_payments, instrument_type=instrument_type)
+interest_rate_swap_instance = InterestRateSwap(start_date=start_date, maturity_date=maturity_date, is_non_deliverable=is_non_deliverable, legs=legs, settlement_ccy=settlement_ccy, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

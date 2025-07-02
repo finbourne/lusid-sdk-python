@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **purchase_price** | **float** | The price the collateral is initially purchased for, this property can be used to explicitly set the purchase price and not require  collateral value and a margin or haircut.  While this property is optional, one, and only one, of PurchasePrice, Margin and Haircut must be specified. | [optional] 
 **repo_rate** | **float** | The rate at which interest is to be accrue and be paid upon redemption of the collateral at maturity.  This field is used to calculate the Repurchase price.  While this property is optional, one, and only one, of the RepoRate and RepurchasePrice must be specified. | [optional] 
 **repurchase_price** | **float** | The price at which the collateral is repurchased, this field is optional and can be explicitly set here or will be calculated  from the PurchasePrice and RepoRate.  One, and only one, of the RepoRate and RepurchasePrice must be specified. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -34,8 +35,9 @@ margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 purchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 repo_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 repurchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-repo_instance = Repo(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, accrual_basis=accrual_basis, collateral=collateral, collateral_value=collateral_value, haircut=haircut, margin=margin, purchase_price=purchase_price, repo_rate=repo_rate, repurchase_price=repurchase_price, instrument_type=instrument_type)
+repo_instance = Repo(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, accrual_basis=accrual_basis, collateral=collateral, collateral_value=collateral_value, haircut=haircut, margin=margin, purchase_price=purchase_price, repo_rate=repo_rate, repurchase_price=repurchase_price, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

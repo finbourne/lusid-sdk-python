@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, Strict
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.rounding_convention import RoundingConvention
 from lusid.models.schedule import Schedule
+from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.trading_conventions import TradingConventions
 
 class ComplexBond(LusidInstrument):
@@ -37,9 +38,10 @@ class ComplexBond(LusidInstrument):
     asset_backed: Optional[StrictBool] = Field(None, alias="assetBacked", description="If this flag is set to true, then the outstanding notional and principal repayments will be calculated based  on pool factors in the quote store. Usually AssetBacked bonds also require a RollConvention setting of   within the FlowConventions any given rates schedule (to ensure payment dates always happen on the same day  of the month) and US Agency MBSs with Pay Delay features also require their rates schedules to include an  ExDividendConfiguration to drive the lag between interest accrual and payment.")
     asset_pool_identifier:  Optional[StrictStr] = Field(None,alias="assetPoolIdentifier", description="Identifier used to retrieve pool factor information about this bond from the quote store. This is typically  the bond's ISIN, but can also be ClientInternal. Please ensure you align the MarketDataKeyRule with the  correct Quote (Quote.ClientInternal.* or Quote.Isin.*)") 
     trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "identifiers", "calculationType", "schedules", "originalIssuePrice", "roundingConventions", "assetBacked", "assetPoolIdentifier", "tradingConventions"]
+    __properties = ["instrumentType", "identifiers", "calculationType", "schedules", "originalIssuePrice", "roundingConventions", "assetBacked", "assetPoolIdentifier", "tradingConventions", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -150,6 +152,9 @@ class ComplexBond(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of trading_conventions
         if self.trading_conventions:
             _dict['tradingConventions'] = self.trading_conventions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -210,7 +215,8 @@ class ComplexBond(LusidInstrument):
             "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
             "asset_backed": obj.get("assetBacked"),
             "asset_pool_identifier": obj.get("assetPoolIdentifier"),
-            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

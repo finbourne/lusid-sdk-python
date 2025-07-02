@@ -25,6 +25,7 @@ from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class CreditDefaultSwap(LusidInstrument):
     """
@@ -39,9 +40,10 @@ class CreditDefaultSwap(LusidInstrument):
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The notional protected by the Credit Default Swap")
     protection_detail_specification: Optional[CdsProtectionDetailSpecification] = Field(None, alias="protectionDetailSpecification")
     additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "ticker", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "notional", "protectionDetailSpecification", "additionalPayments"]
+    __properties = ["instrumentType", "ticker", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "notional", "protectionDetailSpecification", "additionalPayments", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -151,6 +153,9 @@ class CreditDefaultSwap(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['additionalPayments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -192,7 +197,8 @@ class CreditDefaultSwap(LusidInstrument):
             "convention_name": FlowConventionName.from_dict(obj.get("conventionName")) if obj.get("conventionName") is not None else None,
             "notional": obj.get("notional"),
             "protection_detail_specification": CdsProtectionDetailSpecification.from_dict(obj.get("protectionDetailSpecification")) if obj.get("protectionDetailSpecification") is not None else None,
-            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None
+            "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

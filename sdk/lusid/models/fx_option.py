@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, Strict
 from lusid.models.barrier import Barrier
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium
+from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.touch import Touch
 
 class FxOption(LusidInstrument):
@@ -45,9 +46,10 @@ class FxOption(LusidInstrument):
     payout_style:  Optional[StrictStr] = Field(None,alias="payoutStyle", description="PayoutStyle for touch options.                For options without touch optionality, payoutStyle should not be set.  For options with touch optionality (where the touches data has been set), payoutStyle must be defined and cannot be None.    Supported string (enumeration) values are: [Deferred, Immediate].") 
     premium: Optional[Premium] = None
     touches: Optional[conlist(Touch)] = Field(None, description="For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "domCcy", "domAmount", "fgnCcy", "fgnAmount", "strike", "barriers", "exerciseType", "isCallNotPut", "isDeliveryNotCash", "isPayoffDigital", "optionMaturityDate", "optionSettlementDate", "payoutStyle", "premium", "touches"]
+    __properties = ["instrumentType", "startDate", "domCcy", "domAmount", "fgnCcy", "fgnAmount", "strike", "barriers", "exerciseType", "isCallNotPut", "isDeliveryNotCash", "isPayoffDigital", "optionMaturityDate", "optionSettlementDate", "payoutStyle", "premium", "touches", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -158,6 +160,9 @@ class FxOption(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['touches'] = _items
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -226,7 +231,8 @@ class FxOption(LusidInstrument):
             "option_settlement_date": obj.get("optionSettlementDate"),
             "payout_style": obj.get("payoutStyle"),
             "premium": Premium.from_dict(obj.get("premium")) if obj.get("premium") is not None else None,
-            "touches": [Touch.from_dict(_item) for _item in obj.get("touches")] if obj.get("touches") is not None else None
+            "touches": [Touch.from_dict(_item) for _item in obj.get("touches")] if obj.get("touches") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

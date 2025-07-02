@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictS
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.leg_definition import LegDefinition
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class FloatingLeg(InstrumentLeg):
     """
@@ -35,9 +36,10 @@ class FloatingLeg(InstrumentLeg):
     overrides: Optional[FixedLegAllOfOverrides] = None
     cap_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="capRate", description="The maximum floating rate which a cashflow can accrue.")
     floor_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floorRate", description="The minimum floating rate which a cashflow can accrue.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "legDefinition", "notional", "overrides", "capRate", "floorRate"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "legDefinition", "notional", "overrides", "capRate", "floorRate", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -137,6 +139,9 @@ class FloatingLeg(InstrumentLeg):
         # override the default output from pydantic by calling `to_dict()` of overrides
         if self.overrides:
             _dict['overrides'] = self.overrides.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -176,7 +181,8 @@ class FloatingLeg(InstrumentLeg):
             "notional": obj.get("notional"),
             "overrides": FixedLegAllOfOverrides.from_dict(obj.get("overrides")) if obj.get("overrides") is not None else None,
             "cap_rate": obj.get("capRate"),
-            "floor_rate": obj.get("floorRate")
+            "floor_rate": obj.get("floorRate"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

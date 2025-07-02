@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **fixing_date** | **datetime** | The fixing date. | [optional] 
 **settlement_ccy** | **str** | The settlement currency.  If provided, present value will be calculated in settlement currency, otherwise the domestic currency. Applies only to non-deliverable FX Forwards. | [optional] 
 **booked_as_spot** | **bool** | Boolean flag for FX Forward transactions booked with Spot settlement. This will default to False if not provided.  For information purposes only, this does not impact LUSID valuation, analytics, cashflows or events, but may be used by third party vendors. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -36,8 +37,9 @@ fixing_date: Optional[datetime] = # Replace with your value
 settlement_ccy: Optional[StrictStr] = "example_settlement_ccy"
 booked_as_spot: Optional[StrictBool] = # Replace with your value
 booked_as_spot:Optional[StrictBool] = None
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-fx_forward_instance = FxForward(start_date=start_date, maturity_date=maturity_date, dom_amount=dom_amount, dom_ccy=dom_ccy, fgn_amount=fgn_amount, fgn_ccy=fgn_ccy, ref_spot_rate=ref_spot_rate, is_ndf=is_ndf, fixing_date=fixing_date, settlement_ccy=settlement_ccy, booked_as_spot=booked_as_spot, instrument_type=instrument_type)
+fx_forward_instance = FxForward(start_date=start_date, maturity_date=maturity_date, dom_amount=dom_amount, dom_ccy=dom_ccy, fgn_amount=fgn_amount, fgn_ccy=fgn_ccy, ref_spot_rate=ref_spot_rate, is_ndf=is_ndf, fixing_date=fixing_date, settlement_ccy=settlement_ccy, booked_as_spot=booked_as_spot, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

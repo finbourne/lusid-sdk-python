@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.leg_definition import LegDefinition
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class FundingLeg(InstrumentLeg):
     """
@@ -31,9 +32,10 @@ class FundingLeg(InstrumentLeg):
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates beyond their last payment date.")
     leg_definition: LegDefinition = Field(..., alias="legDefinition")
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The initial notional of the Funding Leg instrument.  When \"RequiresFundingLegHistory\" property key is present in transaction key, during a GetValuation endpoint call (for instance),  this field would overriden by the Funding Leg history's notional and this notional field would not be used in the pricing and accrual calculations.  As such, we recommend setting this to 0 or not setting it at all.  Please see the following Notebook example and Knowledge Base article:  Notebook: https://github.com/finbourne/sample-notebooks/blob/master/examples/use-cases/instruments/Funding%20Leg%20Swap.ipynb  Knowledge Base article: https://support.lusid.com/knowledgebase/article/KA-01764/")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "legDefinition", "notional"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "legDefinition", "notional", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -130,6 +132,9 @@ class FundingLeg(InstrumentLeg):
         # override the default output from pydantic by calling `to_dict()` of leg_definition
         if self.leg_definition:
             _dict['legDefinition'] = self.leg_definition.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -156,7 +161,8 @@ class FundingLeg(InstrumentLeg):
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "leg_definition": LegDefinition.from_dict(obj.get("legDefinition")) if obj.get("legDefinition") is not None else None,
-            "notional": obj.get("notional")
+            "notional": obj.get("notional"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

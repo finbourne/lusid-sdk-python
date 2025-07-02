@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **convention_name** | [**FlowConventionName**](FlowConventionName.md) |  | [optional] 
 **notional** | **float** | The notional quantity that applies to both the premium and protection legs. | 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -30,8 +31,9 @@ basket: Optional[Basket] = None
 convention_name: Optional[FlowConventionName] = # Replace with your value
 notional: Union[StrictFloat, StrictInt] = # Replace with your value
 additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-cds_index_instance = CdsIndex(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, identifiers=identifiers, basket=basket, convention_name=convention_name, notional=notional, additional_payments=additional_payments, instrument_type=instrument_type)
+cds_index_instance = CdsIndex(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, identifiers=identifiers, basket=basket, convention_name=convention_name, notional=notional, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

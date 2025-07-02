@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **inflation_index_conventions** | [**InflationIndexConventions**](InflationIndexConventions.md) |  | 
 **notional** | **float** | The notional | 
 **pay_receive** | **str** | PayReceive flag for the inflation leg.  This field is optional and defaults to Pay.    Supported string (enumeration) values are: [Pay, Receive]. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -32,8 +33,9 @@ floor_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 inflation_index_conventions: InflationIndexConventions = # Replace with your value
 notional: Union[StrictFloat, StrictInt] = # Replace with your value
 pay_receive: Optional[StrictStr] = "example_pay_receive"
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-inflation_leg_instance = InflationLeg(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, base_cpi=base_cpi, calculation_type=calculation_type, cap_rate=cap_rate, floor_rate=floor_rate, inflation_index_conventions=inflation_index_conventions, notional=notional, pay_receive=pay_receive, instrument_type=instrument_type)
+inflation_leg_instance = InflationLeg(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, base_cpi=base_cpi, calculation_type=calculation_type, cap_rate=cap_rate, floor_rate=floor_rate, inflation_index_conventions=inflation_index_conventions, notional=notional, pay_receive=pay_receive, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

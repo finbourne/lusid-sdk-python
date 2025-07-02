@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.index_convention import IndexConvention
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class ForwardRateAgreement(LusidInstrument):
     """
@@ -34,9 +35,10 @@ class ForwardRateAgreement(LusidInstrument):
     fra_rate: Union[StrictFloat, StrictInt] = Field(..., alias="fraRate", description="The rate at which the FRA is traded.")
     notional: Union[StrictFloat, StrictInt] = Field(..., description="The amount for which the FRA is traded.")
     index_convention: Optional[IndexConvention] = Field(None, alias="indexConvention")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "fixingDate", "fraRate", "notional", "indexConvention"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "fixingDate", "fraRate", "notional", "indexConvention", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -133,6 +135,9 @@ class ForwardRateAgreement(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of index_convention
         if self.index_convention:
             _dict['indexConvention'] = self.index_convention.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -157,7 +162,8 @@ class ForwardRateAgreement(LusidInstrument):
             "fixing_date": obj.get("fixingDate"),
             "fra_rate": obj.get("fraRate"),
             "notional": obj.get("notional"),
-            "index_convention": IndexConvention.from_dict(obj.get("indexConvention")) if obj.get("indexConvention") is not None else None
+            "index_convention": IndexConvention.from_dict(obj.get("indexConvention")) if obj.get("indexConvention") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

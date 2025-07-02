@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **delivery_days** | **int** | Number of business days between exercise date and settlement of the option payoff or underlying. | [optional] 
 **business_day_convention** | **str** | Business day convention for option exercise date to settlement date calculation.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest]. | [optional] 
 **settlement_calendars** | **List[str]** | Holiday calendars for option exercise date to settlement date calculation. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -47,8 +48,9 @@ delivery_days: Optional[StrictInt] = # Replace with your value
 delivery_days: Optional[StrictInt] = None
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
 settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-equity_option_instance = EquityOption(start_date=start_date, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, delivery_type=delivery_type, option_type=option_type, strike=strike, dom_ccy=dom_ccy, underlying_identifier=underlying_identifier, code=code, equity_option_type=equity_option_type, number_of_shares=number_of_shares, premium=premium, exercise_type=exercise_type, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, instrument_type=instrument_type)
+equity_option_instance = EquityOption(start_date=start_date, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, delivery_type=delivery_type, option_type=option_type, strike=strike, dom_ccy=dom_ccy, underlying_identifier=underlying_identifier, code=code, equity_option_type=equity_option_type, number_of_shares=number_of_shares, premium=premium, exercise_type=exercise_type, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **underlying_identifier** | **str** | External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | [optional] 
 **lot_size** | **int** | CFD LotSize, the minimum number of shares that can be bought or sold at once.  Optional, if set must be non-negative, if not set defaults to 1. | [optional] 
 **underlying** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -35,8 +36,9 @@ underlying_identifier: Optional[StrictStr] = "example_underlying_identifier"
 lot_size: Optional[StrictInt] = # Replace with your value
 lot_size: Optional[StrictInt] = None
 underlying: Optional[LusidInstrument] = None
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-contract_for_difference_instance = ContractForDifference(start_date=start_date, maturity_date=maturity_date, code=code, contract_size=contract_size, pay_ccy=pay_ccy, reference_rate=reference_rate, type=type, underlying_ccy=underlying_ccy, underlying_identifier=underlying_identifier, lot_size=lot_size, underlying=underlying, instrument_type=instrument_type)
+contract_for_difference_instance = ContractForDifference(start_date=start_date, maturity_date=maturity_date, code=code, contract_size=contract_size, pay_ccy=pay_ccy, reference_rate=reference_rate, type=type, underlying_ccy=underlying_ccy, underlying_identifier=underlying_identifier, lot_size=lot_size, underlying=underlying, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

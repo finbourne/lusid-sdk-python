@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **asset_backed** | **bool** | If this flag is set to true, then the outstanding notional and principal repayments will be calculated based  on pool factors in the quote store. Usually AssetBacked bonds also require a RollConvention setting of   within the FlowConventions any given rates schedule (to ensure payment dates always happen on the same day  of the month) and US Agency MBSs with Pay Delay features also require their rates schedules to include an  ExDividendConfiguration to drive the lag between interest accrual and payment. | [optional] 
 **asset_pool_identifier** | **str** | Identifier used to retrieve pool factor information about this bond from the quote store. This is typically  the bond&#39;s ISIN, but can also be ClientInternal. Please ensure you align the MarketDataKeyRule with the  correct Quote (Quote.ClientInternal.* or Quote.Isin.*) | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -29,8 +30,9 @@ asset_backed: Optional[StrictBool] = # Replace with your value
 asset_backed:Optional[StrictBool] = None
 asset_pool_identifier: Optional[StrictStr] = "example_asset_pool_identifier"
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-complex_bond_instance = ComplexBond(identifiers=identifiers, calculation_type=calculation_type, schedules=schedules, original_issue_price=original_issue_price, rounding_conventions=rounding_conventions, asset_backed=asset_backed, asset_pool_identifier=asset_pool_identifier, trading_conventions=trading_conventions, instrument_type=instrument_type)
+complex_bond_instance = ComplexBond(identifiers=identifiers, calculation_type=calculation_type, schedules=schedules, original_issue_price=original_issue_price, rounding_conventions=rounding_conventions, asset_backed=asset_backed, asset_pool_identifier=asset_pool_identifier, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

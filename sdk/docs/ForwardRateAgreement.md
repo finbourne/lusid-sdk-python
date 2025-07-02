@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **fra_rate** | **float** | The rate at which the FRA is traded. | 
 **notional** | **float** | The amount for which the FRA is traded. | 
 **index_convention** | [**IndexConvention**](IndexConvention.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -26,8 +27,9 @@ fixing_date: datetime = # Replace with your value
 fra_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 notional: Union[StrictFloat, StrictInt] = # Replace with your value
 index_convention: Optional[IndexConvention] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-forward_rate_agreement_instance = ForwardRateAgreement(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, fixing_date=fixing_date, fra_rate=fra_rate, notional=notional, index_convention=index_convention, instrument_type=instrument_type)
+forward_rate_agreement_instance = ForwardRateAgreement(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, fixing_date=fixing_date, fra_rate=fra_rate, notional=notional, index_convention=index_convention, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

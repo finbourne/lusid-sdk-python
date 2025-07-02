@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class InterestRateSwaption(LusidInstrument):
     """
@@ -33,9 +34,10 @@ class InterestRateSwaption(LusidInstrument):
     premium: Optional[Premium] = None
     delivery_method:  StrictStr = Field(...,alias="deliveryMethod", description="How does the option settle    Supported string (enumeration) values are: [Cash, Physical].") 
     swap: InterestRateSwap = Field(...)
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "payOrReceiveFixed", "premium", "deliveryMethod", "swap"]
+    __properties = ["instrumentType", "startDate", "payOrReceiveFixed", "premium", "deliveryMethod", "swap", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -135,6 +137,9 @@ class InterestRateSwaption(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of swap
         if self.swap:
             _dict['swap'] = self.swap.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -157,7 +162,8 @@ class InterestRateSwaption(LusidInstrument):
             "pay_or_receive_fixed": obj.get("payOrReceiveFixed"),
             "premium": Premium.from_dict(obj.get("premium")) if obj.get("premium") is not None else None,
             "delivery_method": obj.get("deliveryMethod"),
-            "swap": InterestRateSwap.from_dict(obj.get("swap")) if obj.get("swap") is not None else None
+            "swap": InterestRateSwap.from_dict(obj.get("swap")) if obj.get("swap") is not None else None,
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

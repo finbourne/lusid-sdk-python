@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **dom_ccy** | **str** | The domestic currency of the instrument. | 
 **rounding_conventions** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding Convention used for the FundShareClass quotes | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -26,8 +27,9 @@ hedging: StrictStr = "example_hedging"
 dom_ccy: StrictStr = "example_dom_ccy"
 rounding_conventions: Optional[conlist(SimpleRoundingConvention)] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-fund_share_class_instance = FundShareClass(short_code=short_code, fund_share_class_type=fund_share_class_type, distribution_payment_type=distribution_payment_type, hedging=hedging, dom_ccy=dom_ccy, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
+fund_share_class_instance = FundShareClass(short_code=short_code, fund_share_class_type=fund_share_class_type, distribution_payment_type=distribution_payment_type, hedging=hedging, dom_ccy=dom_ccy, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

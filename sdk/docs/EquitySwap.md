@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **underlying_identifier** | **str** | External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | 
 **equity_swap_dividend_payment_timing** | **str** | Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent]. | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -38,8 +39,9 @@ quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 underlying_identifier: StrictStr = "example_underlying_identifier"
 equity_swap_dividend_payment_timing: Optional[StrictStr] = "example_equity_swap_dividend_payment_timing"
 additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-equity_swap_instance = EquitySwap(start_date=start_date, maturity_date=maturity_date, code=code, equity_flow_conventions=equity_flow_conventions, funding_leg=funding_leg, include_dividends=include_dividends, initial_price=initial_price, notional_reset=notional_reset, quantity=quantity, underlying_identifier=underlying_identifier, equity_swap_dividend_payment_timing=equity_swap_dividend_payment_timing, additional_payments=additional_payments, instrument_type=instrument_type)
+equity_swap_instance = EquitySwap(start_date=start_date, maturity_date=maturity_date, code=code, equity_flow_conventions=equity_flow_conventions, funding_leg=funding_leg, include_dividends=include_dividends, initial_price=initial_price, notional_reset=notional_reset, quantity=quantity, underlying_identifier=underlying_identifier, equity_swap_dividend_payment_timing=equity_swap_dividend_payment_timing, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

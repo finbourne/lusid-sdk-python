@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.fx_forward import FxForward
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class FxSwap(LusidInstrument):
     """
@@ -30,9 +31,10 @@ class FxSwap(LusidInstrument):
     near_fx_forward: FxForward = Field(..., alias="nearFxForward")
     far_fx_forward: FxForward = Field(..., alias="farFxForward")
     notional_symmetry:  Optional[StrictStr] = Field(None,alias="notionalSymmetry", description="The NotionalSymmetry allows for even and uneven FxSwaps to be supported.  An even FxSwap is one where the near and far fx forwards have the same notional value on at least one of the  legs. An uneven FxSwap is one where near and far fx forwards don't have the same notional on both the  domestic and foreign legs.  By default NotionalSymmetry will be set as even.    Supported string (enumeration) values are: [Even, Uneven].") 
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "nearFxForward", "farFxForward", "notionalSymmetry"]
+    __properties = ["instrumentType", "nearFxForward", "farFxForward", "notionalSymmetry", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -132,6 +134,9 @@ class FxSwap(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of far_fx_forward
         if self.far_fx_forward:
             _dict['farFxForward'] = self.far_fx_forward.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -157,7 +162,8 @@ class FxSwap(LusidInstrument):
             "instrument_type": obj.get("instrumentType"),
             "near_fx_forward": FxForward.from_dict(obj.get("nearFxForward")) if obj.get("nearFxForward") is not None else None,
             "far_fx_forward": FxForward.from_dict(obj.get("farFxForward")) if obj.get("farFxForward") is not None else None,
-            "notional_symmetry": obj.get("notionalSymmetry")
+            "notional_symmetry": obj.get("notionalSymmetry"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

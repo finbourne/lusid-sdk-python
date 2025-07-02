@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **ex_dividend_configuration** | [**ExDividendConfiguration**](ExDividendConfiguration.md) |  | [optional] 
 **original_issue_price** | **float** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -43,8 +44,9 @@ rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with you
 ex_dividend_configuration: Optional[ExDividendConfiguration] = # Replace with your value
 original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-bond_instance = Bond(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, flow_conventions=flow_conventions, principal=principal, coupon_rate=coupon_rate, identifiers=identifiers, ex_dividend_days=ex_dividend_days, initial_coupon_date=initial_coupon_date, first_coupon_pay_date=first_coupon_pay_date, calculation_type=calculation_type, rounding_conventions=rounding_conventions, ex_dividend_configuration=ex_dividend_configuration, original_issue_price=original_issue_price, trading_conventions=trading_conventions, instrument_type=instrument_type)
+bond_instance = Bond(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, flow_conventions=flow_conventions, principal=principal, coupon_rate=coupon_rate, identifiers=identifiers, ex_dividend_days=ex_dividend_days, initial_coupon_date=initial_coupon_date, first_coupon_pay_date=first_coupon_pay_date, calculation_type=calculation_type, rounding_conventions=rounding_conventions, ex_dividend_configuration=ex_dividend_configuration, original_issue_price=original_issue_price, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

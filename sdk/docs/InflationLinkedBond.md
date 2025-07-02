@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **rounding_conventions** | [**List[RoundingConvention]**](RoundingConvention.md) | Rounding conventions for analytics, if any. | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **original_issue_price** | **float** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -49,8 +50,9 @@ stub_type: Optional[StrictStr] = "example_stub_type"
 rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-inflation_linked_bond_instance = InflationLinkedBond(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, inflation_index_conventions=inflation_index_conventions, coupon_rate=coupon_rate, identifiers=identifiers, base_cpi=base_cpi, base_cpi_date=base_cpi_date, calculation_type=calculation_type, ex_dividend_days=ex_dividend_days, index_precision=index_precision, principal=principal, principal_protection=principal_protection, stub_type=stub_type, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, original_issue_price=original_issue_price, instrument_type=instrument_type)
+inflation_linked_bond_instance = InflationLinkedBond(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, inflation_index_conventions=inflation_index_conventions, coupon_rate=coupon_rate, identifiers=identifiers, base_cpi=base_cpi, base_cpi_date=base_cpi_date, calculation_type=calculation_type, ex_dividend_days=ex_dividend_days, index_precision=index_precision, principal=principal, principal_protection=principal_protection, stub_type=stub_type, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, original_issue_price=original_issue_price, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

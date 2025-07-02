@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictS
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.inflation_index_conventions import InflationIndexConventions
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class InflationLeg(LusidInstrument):
     """
@@ -38,9 +39,10 @@ class InflationLeg(LusidInstrument):
     inflation_index_conventions: InflationIndexConventions = Field(..., alias="inflationIndexConventions")
     notional: Union[StrictFloat, StrictInt] = Field(..., description="The notional")
     pay_receive:  Optional[StrictStr] = Field(None,alias="payReceive", description="PayReceive flag for the inflation leg.  This field is optional and defaults to Pay.    Supported string (enumeration) values are: [Pay, Receive].") 
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "baseCPI", "calculationType", "capRate", "floorRate", "inflationIndexConventions", "notional", "payReceive"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "baseCPI", "calculationType", "capRate", "floorRate", "inflationIndexConventions", "notional", "payReceive", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -140,6 +142,9 @@ class InflationLeg(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of inflation_index_conventions
         if self.inflation_index_conventions:
             _dict['inflationIndexConventions'] = self.inflation_index_conventions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -187,7 +192,8 @@ class InflationLeg(LusidInstrument):
             "floor_rate": obj.get("floorRate"),
             "inflation_index_conventions": InflationIndexConventions.from_dict(obj.get("inflationIndexConventions")) if obj.get("inflationIndexConventions") is not None else None,
             "notional": obj.get("notional"),
-            "pay_receive": obj.get("payReceive")
+            "pay_receive": obj.get("payReceive"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

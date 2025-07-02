@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **rate** | **float** | The fixed rate for the term deposit. Specified as a decimal, e.g 0.03 is meant to be 3% interest | 
 **dom_ccy** | **str** | The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions.  You do not need to populate this field for Term Deposits in LUSID as all functionality is driven by the Currency set on the FlowConventions.  LUSID will not store values saved on this field. | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
@@ -26,8 +27,9 @@ flow_convention: FlowConventions = # Replace with your value
 rate: Union[StrictFloat, StrictInt] = # Replace with your value
 dom_ccy: Optional[StrictStr] = "example_dom_ccy"
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-term_deposit_instance = TermDeposit(start_date=start_date, maturity_date=maturity_date, contract_size=contract_size, flow_convention=flow_convention, rate=rate, dom_ccy=dom_ccy, trading_conventions=trading_conventions, instrument_type=instrument_type)
+term_deposit_instance = TermDeposit(start_date=start_date, maturity_date=maturity_date, contract_size=contract_size, flow_convention=flow_convention, rate=rate, dom_ccy=dom_ccy, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

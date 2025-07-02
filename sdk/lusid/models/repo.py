@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class Repo(LusidInstrument):
     """
@@ -37,9 +38,10 @@ class Repo(LusidInstrument):
     purchase_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="purchasePrice", description="The price the collateral is initially purchased for, this property can be used to explicitly set the purchase price and not require  collateral value and a margin or haircut.  While this property is optional, one, and only one, of PurchasePrice, Margin and Haircut must be specified.")
     repo_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="repoRate", description="The rate at which interest is to be accrue and be paid upon redemption of the collateral at maturity.  This field is used to calculate the Repurchase price.  While this property is optional, one, and only one, of the RepoRate and RepurchasePrice must be specified.")
     repurchase_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="repurchasePrice", description="The price at which the collateral is repurchased, this field is optional and can be explicitly set here or will be calculated  from the PurchasePrice and RepoRate.  One, and only one, of the RepoRate and RepurchasePrice must be specified.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "accrualBasis", "collateral", "collateralValue", "haircut", "margin", "purchasePrice", "repoRate", "repurchasePrice"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "accrualBasis", "collateral", "collateralValue", "haircut", "margin", "purchasePrice", "repoRate", "repurchasePrice", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -140,6 +142,9 @@ class Repo(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['collateral'] = _items
+        # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
+        if self.time_zone_conventions:
+            _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -203,7 +208,8 @@ class Repo(LusidInstrument):
             "margin": obj.get("margin"),
             "purchase_price": obj.get("purchasePrice"),
             "repo_rate": obj.get("repoRate"),
-            "repurchase_price": obj.get("repurchasePrice")
+            "repurchase_price": obj.get("repurchasePrice"),
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

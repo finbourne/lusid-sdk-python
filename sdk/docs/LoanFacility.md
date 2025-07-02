@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **initial_commitment** | **float** | The initial commitment for the loan facility. | 
 **loan_type** | **str** | LoanType for this facility. The facility can either be a revolving or a  term loan.    Supported string (enumeration) values are: [Revolver, TermLoan]. | 
 **schedules** | [**List[Schedule]**](Schedule.md) | Repayment schedules for the loan. | 
+**time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit | 
 ## Example
 
 ```python
 from lusid.models.loan_facility import LoanFacility
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from datetime import datetime
 start_date: datetime = # Replace with your value
@@ -24,8 +25,9 @@ dom_ccy: StrictStr = "example_dom_ccy"
 initial_commitment: Union[StrictFloat, StrictInt] = # Replace with your value
 loan_type: StrictStr = "example_loan_type"
 schedules: conlist(Schedule) = # Replace with your value
+time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-loan_facility_instance = LoanFacility(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, initial_commitment=initial_commitment, loan_type=loan_type, schedules=schedules, instrument_type=instrument_type)
+loan_facility_instance = LoanFacility(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, initial_commitment=initial_commitment, loan_type=loan_type, schedules=schedules, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 
