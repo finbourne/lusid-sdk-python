@@ -33,6 +33,7 @@ from lusid.models.fee import Fee
 from lusid.models.fee_properties import FeeProperties
 from lusid.models.fee_request import FeeRequest
 from lusid.models.fund import Fund
+from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.model_property import ModelProperty
@@ -77,22 +78,22 @@ class FundsApi:
 
 
     @overload
-    async def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], **kwargs) -> AcceptEstimateValuationPointResponse:  # noqa: E501
+    async def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted.")] = None, **kwargs) -> AcceptEstimateValuationPointResponse:  # noqa: E501
         ...
 
     @overload
-    def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], async_req: Optional[bool]=True, **kwargs) -> AcceptEstimateValuationPointResponse:  # noqa: E501
+    def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted.")] = None, async_req: Optional[bool]=True, **kwargs) -> AcceptEstimateValuationPointResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], async_req: Optional[bool]=None, **kwargs) -> Union[AcceptEstimateValuationPointResponse, Awaitable[AcceptEstimateValuationPointResponse]]:  # noqa: E501
+    def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AcceptEstimateValuationPointResponse, Awaitable[AcceptEstimateValuationPointResponse]]:  # noqa: E501
         """[EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.  # noqa: E501
 
         Accepts the specified estimate Valuation Point.  Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate',  otherwise it will be marked as 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accept_estimate_valuation_point(scope, code, valuation_point_data_request, async_req=True)
+        >>> thread = api.accept_estimate_valuation_point(scope, code, valuation_point_data_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -101,6 +102,8 @@ class FundsApi:
         :type code: str
         :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. (required)
         :type valuation_point_data_request: ValuationPointDataRequest
+        :param nav_type_code: When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -117,17 +120,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.accept_estimate_valuation_point_with_http_info(scope, code, valuation_point_data_request, **kwargs)  # noqa: E501
+        return self.accept_estimate_valuation_point_with_http_info(scope, code, valuation_point_data_request, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def accept_estimate_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def accept_estimate_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.  # noqa: E501
 
         Accepts the specified estimate Valuation Point.  Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate',  otherwise it will be marked as 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accept_estimate_valuation_point_with_http_info(scope, code, valuation_point_data_request, async_req=True)
+        >>> thread = api.accept_estimate_valuation_point_with_http_info(scope, code, valuation_point_data_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -136,6 +139,8 @@ class FundsApi:
         :type code: str
         :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. (required)
         :type valuation_point_data_request: ValuationPointDataRequest
+        :param nav_type_code: When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -165,7 +170,8 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'valuation_point_data_request'
+            'valuation_point_data_request',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -203,6 +209,9 @@ class FundsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -594,6 +603,173 @@ class FundsApi:
 
 
     @overload
+    async def create_fund_v2(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_definition_request : Annotated[FundDefinitionRequest, Field(..., description="The definition of the Fund.")], **kwargs) -> Fund:  # noqa: E501
+        ...
+
+    @overload
+    def create_fund_v2(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_definition_request : Annotated[FundDefinitionRequest, Field(..., description="The definition of the Fund.")], async_req: Optional[bool]=True, **kwargs) -> Fund:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_fund_v2(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_definition_request : Annotated[FundDefinitionRequest, Field(..., description="The definition of the Fund.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).  # noqa: E501
+
+        Create the given V2 Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_fund_v2(scope, fund_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param fund_definition_request: The definition of the Fund. (required)
+        :type fund_definition_request: FundDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Fund
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_fund_v2_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_fund_v2_with_http_info(scope, fund_definition_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_fund_v2_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_definition_request : Annotated[FundDefinitionRequest, Field(..., description="The definition of the Fund.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).  # noqa: E501
+
+        Create the given V2 Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_fund_v2_with_http_info(scope, fund_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param fund_definition_request: The definition of the Fund. (required)
+        :type fund_definition_request: FundDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Fund, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'fund_definition_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_fund_v2" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['fund_definition_request'] is not None:
+            _body_params = _params['fund_definition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "Fund",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/v2/{scope}', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def delete_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to be deleted.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
@@ -922,22 +1098,22 @@ class FundsApi:
 
 
     @overload
-    async def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.  # noqa: E501
 
         Deletes the given Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_valuation_point(scope, code, diary_entry_code, async_req=True)
+        >>> thread = api.delete_valuation_point(scope, code, diary_entry_code, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund for the valuation point to be deleted. (required)
@@ -946,6 +1122,8 @@ class FundsApi:
         :type code: str
         :param diary_entry_code: The diary entry code for the valuation Point to be deleted. (required)
         :type diary_entry_code: str
+        :param nav_type_code: When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -962,17 +1140,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_valuation_point_with_http_info(scope, code, diary_entry_code, **kwargs)  # noqa: E501
+        return self.delete_valuation_point_with_http_info(scope, code, diary_entry_code, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund for the valuation point to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.  # noqa: E501
 
         Deletes the given Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_valuation_point_with_http_info(scope, code, diary_entry_code, async_req=True)
+        >>> thread = api.delete_valuation_point_with_http_info(scope, code, diary_entry_code, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund for the valuation point to be deleted. (required)
@@ -981,6 +1159,8 @@ class FundsApi:
         :type code: str
         :param diary_entry_code: The diary entry code for the valuation Point to be deleted. (required)
         :type diary_entry_code: str
+        :param nav_type_code: When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1010,7 +1190,8 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'diary_entry_code'
+            'diary_entry_code',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -1051,6 +1232,9 @@ class FundsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -1090,22 +1274,22 @@ class FundsApi:
 
 
     @overload
-    async def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    async def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised.")] = None, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @overload
-    def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
+    def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
         """[EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.  # noqa: E501
 
         Moves a 'Candidate' status Valuation Point to status 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, async_req=True)
+        >>> thread = api.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -1114,6 +1298,8 @@ class FundsApi:
         :type code: str
         :param valuation_point_data_request: The valuationPointDataRequest which contains the diary entry code to mark as final. (required)
         :type valuation_point_data_request: ValuationPointDataRequest
+        :param nav_type_code: When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1130,17 +1316,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.finalise_candidate_valuation_point_with_http_info(scope, code, valuation_point_data_request, **kwargs)  # noqa: E501
+        return self.finalise_candidate_valuation_point_with_http_info(scope, code, valuation_point_data_request, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def finalise_candidate_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def finalise_candidate_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the diary entry code to mark as final.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.  # noqa: E501
 
         Moves a 'Candidate' status Valuation Point to status 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.finalise_candidate_valuation_point_with_http_info(scope, code, valuation_point_data_request, async_req=True)
+        >>> thread = api.finalise_candidate_valuation_point_with_http_info(scope, code, valuation_point_data_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -1149,6 +1335,8 @@ class FundsApi:
         :type code: str
         :param valuation_point_data_request: The valuationPointDataRequest which contains the diary entry code to mark as final. (required)
         :type valuation_point_data_request: ValuationPointDataRequest
+        :param nav_type_code: When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1178,7 +1366,8 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'valuation_point_data_request'
+            'valuation_point_data_request',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -1216,6 +1405,9 @@ class FundsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2015,22 +2207,22 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    async def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
+    def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.  # noqa: E501
 
         Retrieves the Valuation Point data for a date or specified Diary Entry Id.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the related ABOR's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' DiaryEntry and EndDate will be as provided.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at, async_req=True)
+        >>> thread = api.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2041,6 +2233,8 @@ class FundsApi:
         :type valuation_point_data_query_parameters: ValuationPointDataQueryParameters
         :param as_at: The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.
         :type as_at: datetime
+        :param nav_type_code: When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2057,17 +2251,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_data_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, **kwargs)  # noqa: E501
+        return self.get_valuation_point_data_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Valuation Point data")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.  # noqa: E501
 
         Retrieves the Valuation Point data for a date or specified Diary Entry Id.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the related ABOR's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' DiaryEntry and EndDate will be as provided.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_data_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, async_req=True)
+        >>> thread = api.get_valuation_point_data_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2078,6 +2272,8 @@ class FundsApi:
         :type valuation_point_data_query_parameters: ValuationPointDataQueryParameters
         :param as_at: The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.
         :type as_at: datetime
+        :param nav_type_code: When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2108,7 +2304,8 @@ class FundsApi:
             'scope',
             'code',
             'valuation_point_data_query_parameters',
-            'as_at'
+            'as_at',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -2151,6 +2348,9 @@ class FundsApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -2201,22 +2401,22 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, **kwargs) -> ValuationPointResourceListOfFundJournalEntryLine:  # noqa: E501
+    async def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ValuationPointResourceListOfFundJournalEntryLine:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfFundJournalEntryLine:  # noqa: E501
+    def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfFundJournalEntryLine:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfFundJournalEntryLine, Awaitable[ValuationPointResourceListOfFundJournalEntryLine]]:  # noqa: E501
+    def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfFundJournalEntryLine, Awaitable[ValuationPointResourceListOfFundJournalEntryLine]]:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.  # noqa: E501
 
         Gets the Journal Entry lines for the given Valuation Point for a Fund                The Journal Entry lines have been generated from transactions, translated via posting rules and used in the valuation point  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, async_req=True)
+        >>> thread = api.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2237,6 +2437,8 @@ class FundsApi:
         :type page: str
         :param property_keys: A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2253,17 +2455,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_journal_entry_lines_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, **kwargs)  # noqa: E501
+        return self.get_valuation_point_journal_entry_lines_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_journal_entry_lines_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_journal_entry_lines_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the Journal Entry lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.  # noqa: E501
 
         Gets the Journal Entry lines for the given Valuation Point for a Fund                The Journal Entry lines have been generated from transactions, translated via posting rules and used in the valuation point  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_journal_entry_lines_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, async_req=True)
+        >>> thread = api.get_valuation_point_journal_entry_lines_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2284,6 +2486,8 @@ class FundsApi:
         :type page: str
         :param property_keys: A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2319,7 +2523,8 @@ class FundsApi:
             'filter',
             'limit',
             'page',
-            'property_keys'
+            'property_keys',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -2379,6 +2584,9 @@ class FundsApi:
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
 
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2428,22 +2636,22 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, **kwargs) -> ValuationPointResourceListOfPnlJournalEntryLine:  # noqa: E501
+    async def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ValuationPointResourceListOfPnlJournalEntryLine:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfPnlJournalEntryLine:  # noqa: E501
+    def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfPnlJournalEntryLine:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfPnlJournalEntryLine, Awaitable[ValuationPointResourceListOfPnlJournalEntryLine]]:  # noqa: E501
+    def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfPnlJournalEntryLine, Awaitable[ValuationPointResourceListOfPnlJournalEntryLine]]:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.  # noqa: E501
 
         Gets the PnL Summary lines from the journal entry lines produced when calculating the valuation point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, async_req=True)
+        >>> thread = api.get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2462,6 +2670,8 @@ class FundsApi:
         :type limit: int
         :param page: The pagination token to use to continue listing Trial balance from a previous call to Trial balance.
         :type page: str
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2478,17 +2688,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_pnl_summary_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, **kwargs)  # noqa: E501
+        return self.get_valuation_point_pnl_summary_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_pnl_summary_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_pnl_summary_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the PnL summary")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial balance from a previous call to Trial balance.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.  # noqa: E501
 
         Gets the PnL Summary lines from the journal entry lines produced when calculating the valuation point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_pnl_summary_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, async_req=True)
+        >>> thread = api.get_valuation_point_pnl_summary_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2507,6 +2717,8 @@ class FundsApi:
         :type limit: int
         :param page: The pagination token to use to continue listing Trial balance from a previous call to Trial balance.
         :type page: str
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2541,7 +2753,8 @@ class FundsApi:
             'as_at',
             'filter',
             'limit',
-            'page'
+            'page',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -2597,6 +2810,9 @@ class FundsApi:
         if _params.get('page') is not None:  # noqa: E501
             _query_params.append(('page', _params['page']))
 
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2646,22 +2862,22 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, **kwargs) -> ValuationPointResourceListOfAccountedTransaction:  # noqa: E501
+    async def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ValuationPointResourceListOfAccountedTransaction:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfAccountedTransaction:  # noqa: E501
+    def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfAccountedTransaction:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfAccountedTransaction, Awaitable[ValuationPointResourceListOfAccountedTransaction]]:  # noqa: E501
+    def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfAccountedTransaction, Awaitable[ValuationPointResourceListOfAccountedTransaction]]:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.  # noqa: E501
 
         Gets the Transactions for the given Valuation Point for a Fund  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at, filter, limit, page, property_keys, async_req=True)
+        >>> thread = api.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at, filter, limit, page, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2680,6 +2896,8 @@ class FundsApi:
         :type page: str
         :param property_keys: A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2696,17 +2914,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_transactions_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, filter, limit, page, property_keys, **kwargs)  # noqa: E501
+        return self.get_valuation_point_transactions_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, filter, limit, page, property_keys, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.  # noqa: E501
 
         Gets the Transactions for the given Valuation Point for a Fund  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_transactions_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, filter, limit, page, property_keys, async_req=True)
+        >>> thread = api.get_valuation_point_transactions_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, filter, limit, page, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2725,6 +2943,8 @@ class FundsApi:
         :type page: str
         :param property_keys: A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2759,7 +2979,8 @@ class FundsApi:
             'filter',
             'limit',
             'page',
-            'property_keys'
+            'property_keys',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -2816,6 +3037,9 @@ class FundsApi:
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
 
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2865,22 +3089,22 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, **kwargs) -> ValuationPointResourceListOfTrialBalance:  # noqa: E501
+    async def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ValuationPointResourceListOfTrialBalance:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfTrialBalance:  # noqa: E501
+    def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfTrialBalance:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfTrialBalance, Awaitable[ValuationPointResourceListOfTrialBalance]]:  # noqa: E501
+    def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfTrialBalance, Awaitable[ValuationPointResourceListOfTrialBalance]]:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.  # noqa: E501
 
         Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, async_req=True)
+        >>> thread = api.get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2901,6 +3125,8 @@ class FundsApi:
         :type page: str
         :param property_keys: A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2917,17 +3143,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_trial_balance_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, **kwargs)  # noqa: E501
+        return self.get_valuation_point_trial_balance_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_trial_balance_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_trial_balance_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(..., description="The query parameters used in running the generation of the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.  # noqa: E501
 
         Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_trial_balance_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, async_req=True)
+        >>> thread = api.get_valuation_point_trial_balance_with_http_info(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code, as_at, filter, limit, page, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -2948,6 +3174,8 @@ class FundsApi:
         :type page: str
         :param property_keys: A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2983,7 +3211,8 @@ class FundsApi:
             'filter',
             'limit',
             'page',
-            'property_keys'
+            'property_keys',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -3042,6 +3271,9 @@ class FundsApi:
         if _params.get('property_keys') is not None:  # noqa: E501
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -3518,22 +3750,22 @@ class FundsApi:
 
 
     @overload
-    async def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, **kwargs) -> PagedResourceListOfValuationPointOverview:  # noqa: E501
+    async def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> PagedResourceListOfValuationPointOverview:  # noqa: E501
         ...
 
     @overload
-    def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfValuationPointOverview:  # noqa: E501
+    def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfValuationPointOverview:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfValuationPointOverview, Awaitable[PagedResourceListOfValuationPointOverview]]:  # noqa: E501
+    def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfValuationPointOverview, Awaitable[PagedResourceListOfValuationPointOverview]]:  # noqa: E501
         """[EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.  # noqa: E501
 
         List all the Valuation Points that match the given criteria for a given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_valuation_point_overview(scope, code, effective_at, as_at, page, limit, filter, property_keys, async_req=True)
+        >>> thread = api.list_valuation_point_overview(scope, code, effective_at, as_at, page, limit, filter, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -3552,6 +3784,8 @@ class FundsApi:
         :type filter: str
         :param property_keys: A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -3568,17 +3802,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_valuation_point_overview_with_http_info(scope, code, effective_at, as_at, page, limit, filter, property_keys, **kwargs)  # noqa: E501
+        return self.list_valuation_point_overview_with_http_info(scope, code, effective_at, as_at, page, limit, filter, property_keys, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_valuation_point_overview_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_valuation_point_overview_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="May be provided to view a specific NAV type. When not provided, Primary NAV will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.  # noqa: E501
 
         List all the Valuation Points that match the given criteria for a given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_valuation_point_overview_with_http_info(scope, code, effective_at, as_at, page, limit, filter, property_keys, async_req=True)
+        >>> thread = api.list_valuation_point_overview_with_http_info(scope, code, effective_at, as_at, page, limit, filter, property_keys, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -3597,6 +3831,8 @@ class FundsApi:
         :type filter: str
         :param property_keys: A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.
         :type property_keys: List[str]
+        :param nav_type_code: May be provided to view a specific NAV type. When not provided, Primary NAV will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -3631,7 +3867,8 @@ class FundsApi:
             'page',
             'limit',
             'filter',
-            'property_keys'
+            'property_keys',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -3690,6 +3927,9 @@ class FundsApi:
         if _params.get('property_keys') is not None:  # noqa: E501
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -4263,22 +4503,22 @@ class FundsApi:
 
 
     @overload
-    async def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], **kwargs) -> DiaryEntry:  # noqa: E501
+    async def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used.")] = None, **kwargs) -> DiaryEntry:  # noqa: E501
         ...
 
     @overload
-    def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], async_req: Optional[bool]=True, **kwargs) -> DiaryEntry:  # noqa: E501
+    def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> DiaryEntry:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
+    def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.  # noqa: E501
 
         Update or insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, async_req=True)
+        >>> thread = api.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -4287,6 +4527,8 @@ class FundsApi:
         :type code: str
         :param upsert_valuation_point_request: The Valuation Point Estimate definition to Upsert (required)
         :type upsert_valuation_point_request: UpsertValuationPointRequest
+        :param nav_type_code: When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -4303,17 +4545,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_diary_entry_type_valuation_point_with_http_info(scope, code, upsert_valuation_point_request, **kwargs)  # noqa: E501
+        return self.upsert_diary_entry_type_valuation_point_with_http_info(scope, code, upsert_valuation_point_request, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_diary_entry_type_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_diary_entry_type_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(..., description="The Valuation Point Estimate definition to Upsert")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.  # noqa: E501
 
         Update or insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_diary_entry_type_valuation_point_with_http_info(scope, code, upsert_valuation_point_request, async_req=True)
+        >>> thread = api.upsert_diary_entry_type_valuation_point_with_http_info(scope, code, upsert_valuation_point_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -4322,6 +4564,8 @@ class FundsApi:
         :type code: str
         :param upsert_valuation_point_request: The Valuation Point Estimate definition to Upsert (required)
         :type upsert_valuation_point_request: UpsertValuationPointRequest
+        :param nav_type_code: When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -4351,7 +4595,8 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'upsert_valuation_point_request'
+            'upsert_valuation_point_request',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -4389,6 +4634,9 @@ class FundsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

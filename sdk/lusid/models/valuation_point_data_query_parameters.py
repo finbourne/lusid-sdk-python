@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
@@ -26,8 +26,9 @@ class ValuationPointDataQueryParameters(BaseModel):
     """
     The parameters used in getting the ValuationPointData.  # noqa: E501
     """
+    start: Optional[DateOrDiaryEntry] = None
     end: DateOrDiaryEntry = Field(...)
-    __properties = ["end"]
+    __properties = ["start", "end"]
 
     class Config:
         """Pydantic configuration"""
@@ -61,6 +62,9 @@ class ValuationPointDataQueryParameters(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of start
+        if self.start:
+            _dict['start'] = self.start.to_dict()
         # override the default output from pydantic by calling `to_dict()` of end
         if self.end:
             _dict['end'] = self.end.to_dict()
@@ -76,6 +80,7 @@ class ValuationPointDataQueryParameters(BaseModel):
             return ValuationPointDataQueryParameters.parse_obj(obj)
 
         _obj = ValuationPointDataQueryParameters.parse_obj({
+            "start": DateOrDiaryEntry.from_dict(obj.get("start")) if obj.get("start") is not None else None,
             "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None
         })
         return _obj

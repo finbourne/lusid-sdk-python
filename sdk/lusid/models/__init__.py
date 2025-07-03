@@ -415,6 +415,7 @@ from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
+from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
@@ -634,6 +635,7 @@ from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDif
 from lusid.models.moved_order_to_different_block_response import MovedOrderToDifferentBlockResponse
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
+from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
 from lusid.models.numeric_comparison_type import NumericComparisonType
@@ -781,6 +783,7 @@ from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
 from lusid.models.portfolio_details import PortfolioDetails
 from lusid.models.portfolio_entity import PortfolioEntity
 from lusid.models.portfolio_entity_id import PortfolioEntityId
+from lusid.models.portfolio_entity_id_with_details import PortfolioEntityIdWithDetails
 from lusid.models.portfolio_group import PortfolioGroup
 from lusid.models.portfolio_group_id_compliance_parameter import PortfolioGroupIdComplianceParameter
 from lusid.models.portfolio_group_id_list import PortfolioGroupIdList
@@ -1651,6 +1654,7 @@ __all__ = [
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
+    "FundDefinitionRequest",
     "FundDetails",
     "FundIdList",
     "FundJournalEntryLine",
@@ -1870,6 +1874,7 @@ __all__ = [
     "MovedOrderToDifferentBlockResponse",
     "MovementType",
     "MultiCurrencyAmounts",
+    "NavTypeDefinition",
     "NewInstrument",
     "NextValueInSequenceResponse",
     "NumericComparisonType",
@@ -2017,6 +2022,7 @@ __all__ = [
     "PortfolioDetails",
     "PortfolioEntity",
     "PortfolioEntityId",
+    "PortfolioEntityIdWithDetails",
     "PortfolioGroup",
     "PortfolioGroupIdComplianceParameter",
     "PortfolioGroupIdList",

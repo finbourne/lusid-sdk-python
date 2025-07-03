@@ -20,38 +20,31 @@ import json
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conint, conlist, constr, validator 
-from lusid.models.day_month import DayMonth
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
-from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.nav_type_definition import NavTypeDefinition
-from lusid.models.portfolio_entity_id_with_details import PortfolioEntityIdWithDetails
+from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
-from lusid.models.version import Version
 
-class Fund(BaseModel):
+class FundDefinitionRequest(BaseModel):
     """
-    A Fund entity.  # noqa: E501
+    The request used to create a Fund.  # noqa: E501
     """
-    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    code:  StrictStr = Field(...,alias="code", description="The code given for the Fund.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
-    base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
-    portfolio_ids: Optional[conlist(PortfolioEntityIdWithDetails)] = Field(None, alias="portfolioIds", description="A list of the portfolios on the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.")
-    fund_configuration_id: Optional[ResourceId] = Field(None, alias="fundConfigurationId")
-    abor_id: Optional[ResourceId] = Field(None, alias="aborId")
+    base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
+    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.")
+    fund_configuration_id: ResourceId = Field(..., alias="fundConfigurationId")
+    share_class_instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
     type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
     decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
-    year_end_date: Optional[DayMonth] = Field(None, alias="yearEndDate")
-    primary_nav_type: Optional[NavTypeDefinition] = Field(None, alias="primaryNavType")
+    primary_nav_type: NavTypeDefinition = Field(..., alias="primaryNavType")
     additional_nav_types: Optional[conlist(NavTypeDefinition)] = Field(None, alias="additionalNavTypes", description="The definitions for any additional NAVs on the Fund.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
-    version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "version", "links"]
+    __properties = ["code", "displayName", "description", "baseCurrency", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,8 +68,8 @@ class Fund(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Fund:
-        """Create an instance of Fund from a JSON string"""
+    def from_json(cls, json_str: str) -> FundDefinitionRequest:
+        """Create an instance of FundDefinitionRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -85,9 +78,6 @@ class Fund(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of id
-        if self.id:
-            _dict['id'] = self.id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in portfolio_ids (list)
         _items = []
         if self.portfolio_ids:
@@ -98,9 +88,6 @@ class Fund(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fund_configuration_id
         if self.fund_configuration_id:
             _dict['fundConfigurationId'] = self.fund_configuration_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of abor_id
-        if self.abor_id:
-            _dict['aborId'] = self.abor_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in share_class_instruments (list)
         _items = []
         if self.share_class_instruments:
@@ -108,9 +95,6 @@ class Fund(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['shareClassInstruments'] = _items
-        # override the default output from pydantic by calling `to_dict()` of year_end_date
-        if self.year_end_date:
-            _dict['yearEndDate'] = self.year_end_date.to_dict()
         # override the default output from pydantic by calling `to_dict()` of primary_nav_type
         if self.primary_nav_type:
             _dict['primaryNavType'] = self.primary_nav_type.to_dict()
@@ -128,21 +112,6 @@ class Fund(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of version
-        if self.version:
-            _dict['version'] = self.version.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
-        _items = []
-        if self.links:
-            for _item in self.links:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['links'] = _items
-        # set to None if href (nullable) is None
-        # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
-
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
@@ -153,15 +122,10 @@ class Fund(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
-        # set to None if base_currency (nullable) is None
+        # set to None if share_class_instrument_scopes (nullable) is None
         # and __fields_set__ contains the field
-        if self.base_currency is None and "base_currency" in self.__fields_set__:
-            _dict['baseCurrency'] = None
-
-        # set to None if portfolio_ids (nullable) is None
-        # and __fields_set__ contains the field
-        if self.portfolio_ids is None and "portfolio_ids" in self.__fields_set__:
-            _dict['portfolioIds'] = None
+        if self.share_class_instrument_scopes is None and "share_class_instrument_scopes" in self.__fields_set__:
+            _dict['shareClassInstrumentScopes'] = None
 
         # set to None if share_class_instruments (nullable) is None
         # and __fields_set__ contains the field
@@ -183,36 +147,29 @@ class Fund(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
-        # set to None if links (nullable) is None
-        # and __fields_set__ contains the field
-        if self.links is None and "links" in self.__fields_set__:
-            _dict['links'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Fund:
-        """Create an instance of Fund from a dict"""
+    def from_dict(cls, obj: dict) -> FundDefinitionRequest:
+        """Create an instance of FundDefinitionRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Fund.parse_obj(obj)
+            return FundDefinitionRequest.parse_obj(obj)
 
-        _obj = Fund.parse_obj({
-            "href": obj.get("href"),
-            "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
+        _obj = FundDefinitionRequest.parse_obj({
+            "code": obj.get("code"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "base_currency": obj.get("baseCurrency"),
-            "portfolio_ids": [PortfolioEntityIdWithDetails.from_dict(_item) for _item in obj.get("portfolioIds")] if obj.get("portfolioIds") is not None else None,
+            "portfolio_ids": [PortfolioEntityId.from_dict(_item) for _item in obj.get("portfolioIds")] if obj.get("portfolioIds") is not None else None,
             "fund_configuration_id": ResourceId.from_dict(obj.get("fundConfigurationId")) if obj.get("fundConfigurationId") is not None else None,
-            "abor_id": ResourceId.from_dict(obj.get("aborId")) if obj.get("aborId") is not None else None,
+            "share_class_instrument_scopes": obj.get("shareClassInstrumentScopes"),
             "share_class_instruments": [InstrumentResolutionDetail.from_dict(_item) for _item in obj.get("shareClassInstruments")] if obj.get("shareClassInstruments") is not None else None,
             "type": obj.get("type"),
             "inception_date": obj.get("inceptionDate"),
             "decimal_places": obj.get("decimalPlaces"),
-            "year_end_date": DayMonth.from_dict(obj.get("yearEndDate")) if obj.get("yearEndDate") is not None else None,
             "primary_nav_type": NavTypeDefinition.from_dict(obj.get("primaryNavType")) if obj.get("primaryNavType") is not None else None,
             "additional_nav_types": [NavTypeDefinition.from_dict(_item) for _item in obj.get("additionalNavTypes")] if obj.get("additionalNavTypes") is not None else None,
             "properties": dict(
@@ -220,8 +177,6 @@ class Fund(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
+            else None
         })
         return _obj

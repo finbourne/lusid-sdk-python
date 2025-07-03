@@ -230,6 +230,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
 *FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
+*FundsApi* | [**create_fund_v2**](docs/FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
 *FundsApi* | [**delete_fee**](docs/FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] DeleteFee: Delete a Fee.
 *FundsApi* | [**delete_fund**](docs/FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
 *FundsApi* | [**delete_valuation_point**](docs/FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
@@ -1039,6 +1040,7 @@ Class | Method | HTTP request | Description
  - [FundConfiguration](docs/FundConfiguration.md)
  - [FundConfigurationProperties](docs/FundConfigurationProperties.md)
  - [FundConfigurationRequest](docs/FundConfigurationRequest.md)
+ - [FundDefinitionRequest](docs/FundDefinitionRequest.md)
  - [FundDetails](docs/FundDetails.md)
  - [FundIdList](docs/FundIdList.md)
  - [FundJournalEntryLine](docs/FundJournalEntryLine.md)
@@ -1258,6 +1260,7 @@ Class | Method | HTTP request | Description
  - [MovedOrderToDifferentBlockResponse](docs/MovedOrderToDifferentBlockResponse.md)
  - [MovementType](docs/MovementType.md)
  - [MultiCurrencyAmounts](docs/MultiCurrencyAmounts.md)
+ - [NavTypeDefinition](docs/NavTypeDefinition.md)
  - [NewInstrument](docs/NewInstrument.md)
  - [NextValueInSequenceResponse](docs/NextValueInSequenceResponse.md)
  - [NumericComparisonType](docs/NumericComparisonType.md)
@@ -1405,6 +1408,7 @@ Class | Method | HTTP request | Description
  - [PortfolioDetails](docs/PortfolioDetails.md)
  - [PortfolioEntity](docs/PortfolioEntity.md)
  - [PortfolioEntityId](docs/PortfolioEntityId.md)
+ - [PortfolioEntityIdWithDetails](docs/PortfolioEntityIdWithDetails.md)
  - [PortfolioGroup](docs/PortfolioGroup.md)
  - [PortfolioGroupIdComplianceParameter](docs/PortfolioGroupIdComplianceParameter.md)
  - [PortfolioGroupIdList](docs/PortfolioGroupIdList.md)

@@ -4,16 +4,18 @@ The parameters used in getting the ValuationPointData.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**start** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | [optional] 
 **end** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | 
 ## Example
 
 ```python
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field
 
+start: Optional[DateOrDiaryEntry] = None
 end: DateOrDiaryEntry = # Replace with your value
-valuation_point_data_query_parameters_instance = ValuationPointDataQueryParameters(end=end)
+valuation_point_data_query_parameters_instance = ValuationPointDataQueryParameters(start=start, end=end)
 
 ```
 

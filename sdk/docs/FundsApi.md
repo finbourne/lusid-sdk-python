@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**accept_estimate_valuation_point**](FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 [**create_fee**](FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
 [**create_fund**](FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
+[**create_fund_v2**](FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
 [**delete_fee**](FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] DeleteFee: Delete a Fee.
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
 [**delete_valuation_point**](FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
@@ -32,7 +33,7 @@ Method | HTTP request | Description
 
 
 # **accept_estimate_valuation_point**
-> AcceptEstimateValuationPointResponse accept_estimate_valuation_point(scope, code, valuation_point_data_request)
+> AcceptEstimateValuationPointResponse accept_estimate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 
@@ -91,13 +92,14 @@ def main():
     # valuation_point_data_request = ValuationPointDataRequest.from_json("")
     # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
     valuation_point_data_request = ValuationPointDataRequest()
+    nav_type_code = 'nav_type_code_example' # str | When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request, opts=opts)
+        # api_response =  api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
-        api_response = api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request)
+        api_response = api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -113,6 +115,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_request** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. | 
+ **nav_type_code** | **str**| When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted. | [optional] 
 
 ### Return type
 
@@ -332,6 +335,105 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **create_fund_v2**
+> Fund create_fund_v2(scope, fund_definition_request)
+
+[EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
+
+Create the given V2 Fund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # fund_definition_request = FundDefinitionRequest.from_json("")
+    # fund_definition_request = FundDefinitionRequest.from_dict({})
+    fund_definition_request = FundDefinitionRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_fund_v2(scope, fund_definition_request, opts=opts)
+
+        # [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
+        api_response = api_instance.create_fund_v2(scope, fund_definition_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->create_fund_v2: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **fund_definition_request** | [**FundDefinitionRequest**](FundDefinitionRequest.md)| The definition of the Fund. | 
+
+### Return type
+
+[**Fund**](Fund.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The newly created Fund. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **delete_fee**
 > DeletedEntityResponse delete_fee(scope, code, fee_code)
 
@@ -523,7 +625,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_valuation_point**
-> DeletedEntityResponse delete_valuation_point(scope, code, diary_entry_code)
+> DeletedEntityResponse delete_valuation_point(scope, code, diary_entry_code, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
 
@@ -577,13 +679,14 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund for the valuation point to be deleted.
     code = 'code_example' # str | The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.
     diary_entry_code = 'diary_entry_code_example' # str | The diary entry code for the valuation Point to be deleted.
+    nav_type_code = 'nav_type_code_example' # str | When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_valuation_point(scope, code, diary_entry_code, opts=opts)
+        # api_response =  api_instance.delete_valuation_point(scope, code, diary_entry_code, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
-        api_response = api_instance.delete_valuation_point(scope, code, diary_entry_code)
+        api_response = api_instance.delete_valuation_point(scope, code, diary_entry_code, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -599,6 +702,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund for the valuation point to be deleted. | 
  **code** | **str**| The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund. | 
  **diary_entry_code** | **str**| The diary entry code for the valuation Point to be deleted. | 
+ **nav_type_code** | **str**| When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted. | [optional] 
 
 ### Return type
 
@@ -619,7 +723,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **finalise_candidate_valuation_point**
-> ValuationPointDataResponse finalise_candidate_valuation_point(scope, code, valuation_point_data_request)
+> ValuationPointDataResponse finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
 
@@ -678,13 +782,14 @@ def main():
     # valuation_point_data_request = ValuationPointDataRequest.from_json("")
     # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
     valuation_point_data_request = ValuationPointDataRequest()
+    nav_type_code = 'nav_type_code_example' # str | When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, opts=opts)
+        # api_response =  api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
-        api_response = api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request)
+        api_response = api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -700,6 +805,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_request** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the diary entry code to mark as final. | 
+ **nav_type_code** | **str**| When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised. | [optional] 
 
 ### Return type
 
@@ -1120,7 +1226,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_data**
-> ValuationPointDataResponse get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at)
+> ValuationPointDataResponse get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
 
@@ -1180,13 +1286,14 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
-        api_response = api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at)
+        api_response = api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1203,6 +1310,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Valuation Point data | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. | [optional] 
+ **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -1223,7 +1331,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_journal_entry_lines**
-> ValuationPointResourceListOfFundJournalEntryLine get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+> ValuationPointResourceListOfFundJournalEntryLine get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
 
@@ -1288,13 +1396,14 @@ def main():
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines. (optional)
+    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
-        api_response = api_instance.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+        api_response = api_instance.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1316,6 +1425,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the journal entry lines. | [optional] 
+ **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
 
@@ -1336,7 +1446,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_pnl_summary**
-> ValuationPointResourceListOfPnlJournalEntryLine get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page)
+> ValuationPointResourceListOfPnlJournalEntryLine get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
 
@@ -1400,13 +1510,14 @@ def main():
     filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Trial balance from a previous call to Trial balance. (optional)
+    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
+        # api_response =  api_instance.get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
-        api_response = api_instance.get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page)
+        api_response = api_instance.get_valuation_point_pnl_summary(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1427,6 +1538,7 @@ Name | Type | Description  | Notes
  **filter** | **str**| \&quot;Expression to filter the result set.\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Trial balance from a previous call to Trial balance. | [optional] 
+ **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
 
@@ -1447,7 +1559,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_transactions**
-> ValuationPointResourceListOfAccountedTransaction get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+> ValuationPointResourceListOfAccountedTransaction get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
 
@@ -1511,13 +1623,14 @@ def main():
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines. (optional)
+    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
-        api_response = api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+        api_response = api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1538,6 +1651,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the journal entry lines. | [optional] 
+ **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
 
@@ -1558,7 +1672,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_trial_balance**
-> ValuationPointResourceListOfTrialBalance get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+> ValuationPointResourceListOfTrialBalance get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
 
@@ -1623,13 +1737,14 @@ def main():
     limit = 56 # int | When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines. (optional)
+    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
-        api_response = api_instance.get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys)
+        api_response = api_instance.get_valuation_point_trial_balance(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1651,6 +1766,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the journal entry lines. | [optional] 
+ **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
 
@@ -1883,7 +1999,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_valuation_point_overview**
-> PagedResourceListOfValuationPointOverview list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
+> PagedResourceListOfValuationPointOverview list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 
@@ -1942,13 +2058,14 @@ def main():
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'. (optional)
+    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
-        api_response = api_instance.list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
+        api_response = api_instance.list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1969,6 +2086,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results by.              For example, to filter on the NAV, specify \&quot;NAV gt 300\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/ValuationPoint/Id&#39;. | [optional] 
+ **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
 
@@ -2284,7 +2402,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_diary_entry_type_valuation_point**
-> DiaryEntry upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request)
+> DiaryEntry upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
 
@@ -2343,13 +2461,14 @@ def main():
     # upsert_valuation_point_request = UpsertValuationPointRequest.from_json("")
     # upsert_valuation_point_request = UpsertValuationPointRequest.from_dict({})
     upsert_valuation_point_request = UpsertValuationPointRequest()
+    nav_type_code = 'nav_type_code_example' # str | When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, opts=opts)
+        # api_response =  api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
-        api_response = api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request)
+        api_response = api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -2365,6 +2484,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **upsert_valuation_point_request** | [**UpsertValuationPointRequest**](UpsertValuationPointRequest.md)| The Valuation Point Estimate definition to Upsert | 
+ **nav_type_code** | **str**| When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
