@@ -33,7 +33,7 @@ class Order(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
     version: Optional[Version] = None
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of the given instrument ordered.")
     side:  StrictStr = Field(...,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
     order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
@@ -49,8 +49,10 @@ class Order(BaseModel):
     stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
     order_instruction_id: Optional[ResourceId] = Field(None, alias="orderInstructionId")
     package_id: Optional[ResourceId] = Field(None, alias="packageId")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    amount: Optional[CurrencyAndAmount] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["properties", "version", "instrumentIdentifiers", "quantity", "side", "orderBookId", "portfolioId", "id", "instrumentScope", "lusidInstrumentId", "state", "type", "timeInForce", "date", "price", "limitPrice", "stopPrice", "orderInstructionId", "packageId", "links"]
+    __properties = ["properties", "version", "instrumentIdentifiers", "quantity", "side", "orderBookId", "portfolioId", "id", "instrumentScope", "lusidInstrumentId", "state", "type", "timeInForce", "date", "price", "limitPrice", "stopPrice", "orderInstructionId", "packageId", "weight", "amount", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -118,6 +120,9 @@ class Order(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of package_id
         if self.package_id:
             _dict['packageId'] = self.package_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -129,6 +134,11 @@ class Order(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
 
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
@@ -149,6 +159,11 @@ class Order(BaseModel):
         # and __fields_set__ contains the field
         if self.time_in_force is None and "time_in_force" in self.__fields_set__:
             _dict['timeInForce'] = None
+
+        # set to None if weight (nullable) is None
+        # and __fields_set__ contains the field
+        if self.weight is None and "weight" in self.__fields_set__:
+            _dict['weight'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -191,6 +206,8 @@ class Order(BaseModel):
             "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None,
             "order_instruction_id": ResourceId.from_dict(obj.get("orderInstructionId")) if obj.get("orderInstructionId") is not None else None,
             "package_id": ResourceId.from_dict(obj.get("packageId")) if obj.get("packageId") is not None else None,
+            "weight": obj.get("weight"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

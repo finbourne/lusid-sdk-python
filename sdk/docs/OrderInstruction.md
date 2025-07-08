@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
 **quantity** | **float** | The quantity of given instrument ordered. | [optional] 
-**weight** | **float** | The weight of given instrument ordered. | [optional] 
+**weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **instrument_scope** | **str** | The scope in which the instrument lies | [optional] 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | [optional] 

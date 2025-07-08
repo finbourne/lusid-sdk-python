@@ -31,8 +31,8 @@ class UpsertInvestorRecordRequest(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investor Record.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Investor Record") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investor Record") 
-    investor_identifier: Optional[InvestorIdentifier] = Field(None, alias="investorIdentifier")
-    __properties = ["identifiers", "properties", "displayName", "description", "investorIdentifier"]
+    investor: Optional[InvestorIdentifier] = None
+    __properties = ["identifiers", "properties", "displayName", "description", "investor"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,9 +80,9 @@ class UpsertInvestorRecordRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of investor_identifier
-        if self.investor_identifier:
-            _dict['investorIdentifier'] = self.investor_identifier.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of investor
+        if self.investor:
+            _dict['investor'] = self.investor.to_dict()
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -119,6 +119,6 @@ class UpsertInvestorRecordRequest(BaseModel):
             else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "investor_identifier": InvestorIdentifier.from_dict(obj.get("investorIdentifier")) if obj.get("investorIdentifier") is not None else None
+            "investor": InvestorIdentifier.from_dict(obj.get("investor")) if obj.get("investor") is not None else None
         })
         return _obj

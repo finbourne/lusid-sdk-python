@@ -29,7 +29,7 @@ class BlockedOrderRequest(BaseModel):
     BlockedOrderRequest
     """
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
+    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of the given instrument ordered.")
     order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     id: ResourceId = Field(...)

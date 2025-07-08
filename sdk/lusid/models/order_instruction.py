@@ -36,7 +36,7 @@ class OrderInstruction(BaseModel):
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The weight of given instrument ordered.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
     price: Optional[CurrencyAndAmount] = None
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies") 
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.") 

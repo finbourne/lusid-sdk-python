@@ -4479,7 +4479,7 @@ class FundsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '201': "Fund",
+            '200': "Fund",
             '400': "LusidValidationProblemDetails",
         }
 

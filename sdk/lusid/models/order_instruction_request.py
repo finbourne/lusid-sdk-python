@@ -33,7 +33,7 @@ class OrderInstructionRequest(BaseModel):
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="The instrument ordered.")
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The weight of given instrument ordered.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
     price: Optional[CurrencyAndAmount] = None
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
     __properties = ["id", "createdDate", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "properties"]

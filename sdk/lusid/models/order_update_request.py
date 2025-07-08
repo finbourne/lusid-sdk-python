@@ -29,7 +29,7 @@ class OrderUpdateRequest(BaseModel):
     A request to create or update a Order.  # noqa: E501
     """
     id: ResourceId = Field(...)
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of the given instrument ordered.")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
     price: Optional[CurrencyAndAmount] = None

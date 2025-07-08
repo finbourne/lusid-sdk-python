@@ -550,7 +550,7 @@ class CustomDataModelsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '201': "CustomDataModel",
+            '200': "CustomDataModel",
             '400': "LusidValidationProblemDetails",
         }
 

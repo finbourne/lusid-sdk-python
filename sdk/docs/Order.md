@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
-**quantity** | **float** | The quantity of given instrument ordered. | 
+**quantity** | **float** | The quantity of the given instrument ordered. | [optional] 
 **side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | 
 **order_book_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **order_instruction_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **package_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -34,7 +36,7 @@ from datetime import datetime
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 version: Optional[Version] = None
 instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 side: StrictStr = "example_side"
 order_book_id: Optional[ResourceId] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
@@ -50,8 +52,10 @@ limit_price: Optional[CurrencyAndAmount] = # Replace with your value
 stop_price: Optional[CurrencyAndAmount] = # Replace with your value
 order_instruction_id: Optional[ResourceId] = # Replace with your value
 package_id: Optional[ResourceId] = # Replace with your value
+weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 links: Optional[conlist(Link)] = None
-order_instance = Order(properties=properties, version=version, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction_id=order_instruction_id, package_id=package_id, links=links)
+order_instance = Order(properties=properties, version=version, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction_id=order_instruction_id, package_id=package_id, weight=weight, amount=amount, links=links)
 
 ```
 

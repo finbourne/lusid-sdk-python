@@ -30,7 +30,7 @@ class OrderRequest(BaseModel):
     """
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of the given instrument ordered.")
     side:  StrictStr = Field(...,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
     order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
@@ -44,7 +44,9 @@ class OrderRequest(BaseModel):
     stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
     order_instruction: Optional[ResourceId] = Field(None, alias="orderInstruction")
     package: Optional[ResourceId] = None
-    __properties = ["properties", "instrumentIdentifiers", "quantity", "side", "orderBookId", "portfolioId", "id", "state", "type", "timeInForce", "date", "price", "limitPrice", "stopPrice", "orderInstruction", "package"]
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    amount: Optional[CurrencyAndAmount] = None
+    __properties = ["properties", "instrumentIdentifiers", "quantity", "side", "orderBookId", "portfolioId", "id", "state", "type", "timeInForce", "date", "price", "limitPrice", "stopPrice", "orderInstruction", "package", "weight", "amount"]
 
     class Config:
         """Pydantic configuration"""
@@ -109,10 +111,18 @@ class OrderRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of package
         if self.package:
             _dict['package'] = self.package.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
 
         # set to None if state (nullable) is None
         # and __fields_set__ contains the field
@@ -128,6 +138,11 @@ class OrderRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.time_in_force is None and "time_in_force" in self.__fields_set__:
             _dict['timeInForce'] = None
+
+        # set to None if weight (nullable) is None
+        # and __fields_set__ contains the field
+        if self.weight is None and "weight" in self.__fields_set__:
+            _dict['weight'] = None
 
         return _dict
 
@@ -161,6 +176,8 @@ class OrderRequest(BaseModel):
             "limit_price": CurrencyAndAmount.from_dict(obj.get("limitPrice")) if obj.get("limitPrice") is not None else None,
             "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None,
             "order_instruction": ResourceId.from_dict(obj.get("orderInstruction")) if obj.get("orderInstruction") is not None else None,
-            "package": ResourceId.from_dict(obj.get("package")) if obj.get("package") is not None else None
+            "package": ResourceId.from_dict(obj.get("package")) if obj.get("package") is not None else None,
+            "weight": obj.get("weight"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None
         })
         return _obj

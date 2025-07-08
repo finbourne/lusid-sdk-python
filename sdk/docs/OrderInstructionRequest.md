@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | [optional] 
 **quantity** | **float** | The quantity of given instrument ordered. | [optional] 
-**weight** | **float** | The weight of given instrument ordered. | [optional] 
+**weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
 ## Example

@@ -492,6 +492,8 @@ from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
 from lusid.models.flexible_deposit import FlexibleDeposit
 from lusid.models.flexible_loan import FlexibleLoan
+from lusid.models.flexible_repo_cash_flow_event import FlexibleRepoCashFlowEvent
+from lusid.models.flexible_repo_interest_payment_event import FlexibleRepoInterestPaymentEvent
 from lusid.models.float_schedule import FloatSchedule
 from lusid.models.floating_leg import FloatingLeg
 from lusid.models.flow_convention_name import FlowConventionName
@@ -1818,6 +1820,8 @@ __all__ = [
     "FixedSchedule",
     "FlexibleDeposit",
     "FlexibleLoan",
+    "FlexibleRepoCashFlowEvent",
+    "FlexibleRepoInterestPaymentEvent",
     "FloatSchedule",
     "FloatingLeg",
     "FlowConventionName",

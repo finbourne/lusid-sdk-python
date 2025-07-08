@@ -20,19 +20,19 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
-from lusid.models.contract_details import ContractDetails
 from lusid.models.instrument_event import InstrumentEvent
 
-class DrawdownEvent(InstrumentEvent):
+class FlexibleRepoInterestPaymentEvent(InstrumentEvent):
     """
-    Event to draw down balance from a LoanFacility to a FlexLoan contract holding.  # noqa: E501
+    Definition of FlexibleRepoInterestPaymentEvent, which represents the regular interest payments associated with an  open repo contract modelled as a FlexibleRepo.  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="Amount to be drawn down.  Must be positive.")
-    var_date: Optional[datetime] = Field(None, alias="date", description="Initialisation date of the contract.")
-    contract_details: ContractDetails = Field(..., alias="contractDetails")
+    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="Settlement date of the interest payment. This is a required field.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="EntitlementDate of the interest payment. This is a required field.")
+    currency:  StrictStr = Field(...,alias="currency", description="Currency of the interest payment. This is a required field.") 
+    interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="interestPerUnit", description="Interest payment per unit held of the FlexibleRepo. This field is optional. If not specified, the system  will not generate a virtual transaction for this event")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "amount", "date", "contractDetails"]
+    __properties = ["instrumentEventType", "settlementDate", "entitlementDate", "currency", "interestPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -45,7 +45,7 @@ class DrawdownEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'DrawdownEvent' not in [ 
+        if 'FlexibleRepoInterestPaymentEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -115,8 +115,8 @@ class DrawdownEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> DrawdownEvent:
-        """Create an instance of DrawdownEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> FlexibleRepoInterestPaymentEvent:
+        """Create an instance of FlexibleRepoInterestPaymentEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -126,30 +126,33 @@ class DrawdownEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of contract_details
-        if self.contract_details:
-            _dict['contractDetails'] = self.contract_details.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if interest_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.interest_per_unit is None and "interest_per_unit" in self.__fields_set__:
+            _dict['interestPerUnit'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> DrawdownEvent:
-        """Create an instance of DrawdownEvent from a dict"""
+    def from_dict(cls, obj: dict) -> FlexibleRepoInterestPaymentEvent:
+        """Create an instance of FlexibleRepoInterestPaymentEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return DrawdownEvent.parse_obj(obj)
+            return FlexibleRepoInterestPaymentEvent.parse_obj(obj)
 
-        _obj = DrawdownEvent.parse_obj({
+        _obj = FlexibleRepoInterestPaymentEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "amount": obj.get("amount"),
-            "var_date": obj.get("date"),
-            "contract_details": ContractDetails.from_dict(obj.get("contractDetails")) if obj.get("contractDetails") is not None else None
+            "settlement_date": obj.get("settlementDate"),
+            "entitlement_date": obj.get("entitlementDate"),
+            "currency": obj.get("currency"),
+            "interest_per_unit": obj.get("interestPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
