@@ -30,6 +30,8 @@ from lusid.models.access_controlled_resource import AccessControlledResource
 from lusid.models.access_metadata_operation import AccessMetadataOperation
 from lusid.models.access_metadata_value import AccessMetadataValue
 from lusid.models.account import Account
+from lusid.models.account_holder import AccountHolder
+from lusid.models.account_holder_identifier import AccountHolderIdentifier
 from lusid.models.account_properties import AccountProperties
 from lusid.models.accounted_transaction import AccountedTransaction
 from lusid.models.accounting_method import AccountingMethod
@@ -568,6 +570,9 @@ from lusid.models.interest_rate_swaption import InterestRateSwaption
 from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
 from lusid.models.intermediate_compliance_step_request import IntermediateComplianceStepRequest
 from lusid.models.intermediate_securities_distribution_event import IntermediateSecuritiesDistributionEvent
+from lusid.models.investment_account import InvestmentAccount
+from lusid.models.investment_portfolio import InvestmentPortfolio
+from lusid.models.investment_portfolio_identifier import InvestmentPortfolioIdentifier
 from lusid.models.investor import Investor
 from lusid.models.investor_identifier import InvestorIdentifier
 from lusid.models.investor_record import InvestorRecord
@@ -1180,6 +1185,8 @@ from lusid.models.upsert_instrument_events_response import UpsertInstrumentEvent
 from lusid.models.upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
 from lusid.models.upsert_instrument_property_request import UpsertInstrumentPropertyRequest
 from lusid.models.upsert_instruments_response import UpsertInstrumentsResponse
+from lusid.models.upsert_investment_account_request import UpsertInvestmentAccountRequest
+from lusid.models.upsert_investment_accounts_response import UpsertInvestmentAccountsResponse
 from lusid.models.upsert_investor_record_request import UpsertInvestorRecordRequest
 from lusid.models.upsert_investor_records_response import UpsertInvestorRecordsResponse
 from lusid.models.upsert_legal_entities_response import UpsertLegalEntitiesResponse
@@ -1271,6 +1278,8 @@ __all__ = [
     "AccessMetadataOperation",
     "AccessMetadataValue",
     "Account",
+    "AccountHolder",
+    "AccountHolderIdentifier",
     "AccountProperties",
     "AccountedTransaction",
     "AccountingMethod",
@@ -1809,6 +1818,9 @@ __all__ = [
     "IntermediateComplianceStep",
     "IntermediateComplianceStepRequest",
     "IntermediateSecuritiesDistributionEvent",
+    "InvestmentAccount",
+    "InvestmentPortfolio",
+    "InvestmentPortfolioIdentifier",
     "Investor",
     "InvestorIdentifier",
     "InvestorRecord",
@@ -2421,6 +2433,8 @@ __all__ = [
     "UpsertInstrumentPropertiesResponse",
     "UpsertInstrumentPropertyRequest",
     "UpsertInstrumentsResponse",
+    "UpsertInvestmentAccountRequest",
+    "UpsertInvestmentAccountsResponse",
     "UpsertInvestorRecordRequest",
     "UpsertInvestorRecordsResponse",
     "UpsertLegalEntitiesResponse",

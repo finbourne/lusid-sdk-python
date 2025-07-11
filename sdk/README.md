@@ -305,6 +305,7 @@ Class | Method | HTTP request | Description
 *InstrumentsApi* | [**update_instrument_identifier**](docs/InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | UpdateInstrumentIdentifier: Update instrument identifier
 *InstrumentsApi* | [**upsert_instruments**](docs/InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | UpsertInstruments: Upsert instruments
 *InstrumentsApi* | [**upsert_instruments_properties**](docs/InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | UpsertInstrumentsProperties: Upsert instruments properties
+*InvestmentAccountsApi* | [**upsert_investment_accounts**](docs/InvestmentAccountsApi.md#upsert_investment_accounts) | **POST** /api/investmentaccounts/$batchUpsert | [EARLY ACCESS] UpsertInvestmentAccounts: Upsert Investment Accounts
 *InvestorRecordsApi* | [**delete_investor_record**](docs/InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
 *InvestorRecordsApi* | [**get_investor_record**](docs/InvestorRecordsApi.md#get_investor_record) | **GET** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetInvestorRecord: Get Investor Record
 *InvestorRecordsApi* | [**list_all_investor_records**](docs/InvestorRecordsApi.md#list_all_investor_records) | **GET** /api/investorrecords | [EARLY ACCESS] ListAllInvestorRecords: List Investor Records
@@ -655,6 +656,8 @@ Class | Method | HTTP request | Description
  - [AccessMetadataOperation](docs/AccessMetadataOperation.md)
  - [AccessMetadataValue](docs/AccessMetadataValue.md)
  - [Account](docs/Account.md)
+ - [AccountHolder](docs/AccountHolder.md)
+ - [AccountHolderIdentifier](docs/AccountHolderIdentifier.md)
  - [AccountProperties](docs/AccountProperties.md)
  - [AccountedTransaction](docs/AccountedTransaction.md)
  - [AccountingMethod](docs/AccountingMethod.md)
@@ -1193,6 +1196,9 @@ Class | Method | HTTP request | Description
  - [IntermediateComplianceStep](docs/IntermediateComplianceStep.md)
  - [IntermediateComplianceStepRequest](docs/IntermediateComplianceStepRequest.md)
  - [IntermediateSecuritiesDistributionEvent](docs/IntermediateSecuritiesDistributionEvent.md)
+ - [InvestmentAccount](docs/InvestmentAccount.md)
+ - [InvestmentPortfolio](docs/InvestmentPortfolio.md)
+ - [InvestmentPortfolioIdentifier](docs/InvestmentPortfolioIdentifier.md)
  - [Investor](docs/Investor.md)
  - [InvestorIdentifier](docs/InvestorIdentifier.md)
  - [InvestorRecord](docs/InvestorRecord.md)
@@ -1805,6 +1811,8 @@ Class | Method | HTTP request | Description
  - [UpsertInstrumentPropertiesResponse](docs/UpsertInstrumentPropertiesResponse.md)
  - [UpsertInstrumentPropertyRequest](docs/UpsertInstrumentPropertyRequest.md)
  - [UpsertInstrumentsResponse](docs/UpsertInstrumentsResponse.md)
+ - [UpsertInvestmentAccountRequest](docs/UpsertInvestmentAccountRequest.md)
+ - [UpsertInvestmentAccountsResponse](docs/UpsertInvestmentAccountsResponse.md)
  - [UpsertInvestorRecordRequest](docs/UpsertInvestorRecordRequest.md)
  - [UpsertInvestorRecordsResponse](docs/UpsertInvestorRecordsResponse.md)
  - [UpsertLegalEntitiesResponse](docs/UpsertLegalEntitiesResponse.md)
