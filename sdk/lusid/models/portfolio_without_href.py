@@ -51,8 +51,9 @@ class PortfolioWithoutHref(BaseModel):
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The scope of the transaction types.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
+    tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "links"]
+    __properties = ["id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -286,6 +287,11 @@ class PortfolioWithoutHref(BaseModel):
         if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
             _dict['cashGainLossCalculationDate'] = None
 
+        # set to None if tax_rule_set_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_rule_set_scope is None and "tax_rule_set_scope" in self.__fields_set__:
+            _dict['taxRuleSetScope'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -327,6 +333,7 @@ class PortfolioWithoutHref(BaseModel):
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
+            "tax_rule_set_scope": obj.get("taxRuleSetScope"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

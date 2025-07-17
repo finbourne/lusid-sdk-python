@@ -1,27 +1,27 @@
-# BondCouponEvent
+# FlexibleRepoCollateralEvent
 
-Definition of a Bond Coupon Event  This is an event that describes the occurence of a cashflow due to a fixed rate bond coupon payment.
+Definition of FlexibleRepoCollateralEvent which represents a single collateral transfer as part of a repo contract  modelled as a FlexibleRepo, either as part of the purchase leg or repurchase leg, or any early closure.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ex_date** | **datetime** | Ex-Dividend date of the coupon payment | [optional] 
-**payment_date** | **datetime** | Payment date of the coupon payment | [optional] 
-**currency** | **str** | Currency of the coupon payment | 
-**coupon_per_unit** | **float** | CouponRate*Principal | [optional] 
+**settlement_date** | **datetime** | Date at which the transfer of units settles. This is a required field. | [optional] 
+**entitlement_date** | **datetime** | Date at which the recipient of the collateral is entitled to the units being transferred. This is a required field. | [optional] 
+**amount** | **float** | The total amount of collateral being transferred as part of the repo contract.  Signed to indicate direction of transfer. This is a required field. | 
+**collateral_instrument** | [**NewInstrument**](NewInstrument.md) |  | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent | 
 ## Example
 
 ```python
-from lusid.models.bond_coupon_event import BondCouponEvent
+from lusid.models.flexible_repo_collateral_event import FlexibleRepoCollateralEvent
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from datetime import datetime
-ex_date: Optional[datetime] = # Replace with your value
-payment_date: Optional[datetime] = # Replace with your value
-currency: StrictStr = "example_currency"
-coupon_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+settlement_date: Optional[datetime] = # Replace with your value
+entitlement_date: Optional[datetime] = # Replace with your value
+amount: Union[StrictFloat, StrictInt] = # Replace with your value
+collateral_instrument: NewInstrument = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-bond_coupon_event_instance = BondCouponEvent(ex_date=ex_date, payment_date=payment_date, currency=currency, coupon_per_unit=coupon_per_unit, instrument_event_type=instrument_event_type)
+flexible_repo_collateral_event_instance = FlexibleRepoCollateralEvent(settlement_date=settlement_date, entitlement_date=entitlement_date, amount=amount, collateral_instrument=collateral_instrument, instrument_event_type=instrument_event_type)
 
 ```
 

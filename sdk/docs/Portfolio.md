@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **cash_gain_loss_calculation_date** | **str** | The scope of the transaction types. | [optional] 
 **instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**tax_rule_set_scope** | **str** | The scope of the tax rule sets for this portfolio. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -53,8 +54,9 @@ transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
 cash_gain_loss_calculation_date: Optional[StrictStr] = "example_cash_gain_loss_calculation_date"
 instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Replace with your value
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
+tax_rule_set_scope: Optional[StrictStr] = "example_tax_rule_set_scope"
 links: Optional[conlist(Link)] = None
-portfolio_instance = Portfolio(href=href, id=id, type=type, display_name=display_name, description=description, created=created, parent_portfolio_id=parent_portfolio_id, version=version, staged_modifications=staged_modifications, is_derived=is_derived, base_currency=base_currency, properties=properties, relationships=relationships, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, links=links)
+portfolio_instance = Portfolio(href=href, id=id, type=type, display_name=display_name, description=description, created=created, parent_portfolio_id=parent_portfolio_id, version=version, staged_modifications=staged_modifications, is_derived=is_derived, base_currency=base_currency, properties=properties, relationships=relationships, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, links=links)
 
 ```
 

@@ -43,9 +43,10 @@ class PortfolioDetails(BaseModel):
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
+    tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "stagedModifications", "links"]
+    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "stagedModifications", "links"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -196,6 +197,11 @@ class PortfolioDetails(BaseModel):
         if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
             _dict['cashGainLossCalculationDate'] = None
 
+        # set to None if tax_rule_set_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_rule_set_scope is None and "tax_rule_set_scope" in self.__fields_set__:
+            _dict['taxRuleSetScope'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -226,6 +232,7 @@ class PortfolioDetails(BaseModel):
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
+            "tax_rule_set_scope": obj.get("taxRuleSetScope"),
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

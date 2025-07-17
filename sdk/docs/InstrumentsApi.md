@@ -1639,7 +1639,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_instruments**
-> PagedResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, data_model_scope=data_model_scope, data_model_code=data_model_code)
+> PagedResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type)
 
 ListInstruments: List instruments
 
@@ -1701,13 +1701,14 @@ def main():
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
+    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
+        # api_response =  api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type, opts=opts)
 
         # ListInstruments: List instruments
-        api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, data_model_scope=data_model_scope, data_model_code=data_model_code)
+        api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type)
         pprint(api_response)
 
     except ApiException as e:
@@ -1731,6 +1732,7 @@ Name | Type | Description  | Notes
  **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
+ **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. | [optional] 
 
 ### Return type
 

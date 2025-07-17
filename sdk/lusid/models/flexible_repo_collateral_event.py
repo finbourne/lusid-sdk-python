@@ -21,18 +21,19 @@ from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.new_instrument import NewInstrument
 
-class ProtectionPayoutCashFlowEvent(InstrumentEvent):
+class FlexibleRepoCollateralEvent(InstrumentEvent):
     """
-    Protection payout cashflow for credit default instruments (CDS or CDX).  # noqa: E501
+    Definition of FlexibleRepoCollateralEvent which represents a single collateral transfer as part of a repo contract  modelled as a FlexibleRepo, either as part of the purchase leg or repurchase leg, or any early closure.  # noqa: E501
     """
-    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex-dividend date of the cashflow.")
-    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the cashflow.")
-    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the cashflow is paid.") 
-    cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashFlowPerUnit", description="The cashflow amount received for each unit of the instrument held on the ex date.")
+    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="Date at which the transfer of units settles. This is a required field.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="Date at which the recipient of the collateral is entitled to the units being transferred. This is a required field.")
+    amount: Union[StrictFloat, StrictInt] = Field(..., description="The total amount of collateral being transferred as part of the repo contract.  Signed to indicate direction of transfer. This is a required field.")
+    collateral_instrument: NewInstrument = Field(..., alias="collateralInstrument")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "cashFlowPerUnit"]
+    __properties = ["instrumentEventType", "settlementDate", "entitlementDate", "amount", "collateralInstrument"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -45,7 +46,7 @@ class ProtectionPayoutCashFlowEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'ProtectionPayoutCashFlowEvent' not in [ 
+        if 'FlexibleRepoCollateralEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -115,8 +116,8 @@ class ProtectionPayoutCashFlowEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ProtectionPayoutCashFlowEvent:
-        """Create an instance of ProtectionPayoutCashFlowEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> FlexibleRepoCollateralEvent:
+        """Create an instance of FlexibleRepoCollateralEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -126,33 +127,31 @@ class ProtectionPayoutCashFlowEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of collateral_instrument
+        if self.collateral_instrument:
+            _dict['collateralInstrument'] = self.collateral_instrument.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if cash_flow_per_unit (nullable) is None
-        # and __fields_set__ contains the field
-        if self.cash_flow_per_unit is None and "cash_flow_per_unit" in self.__fields_set__:
-            _dict['cashFlowPerUnit'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ProtectionPayoutCashFlowEvent:
-        """Create an instance of ProtectionPayoutCashFlowEvent from a dict"""
+    def from_dict(cls, obj: dict) -> FlexibleRepoCollateralEvent:
+        """Create an instance of FlexibleRepoCollateralEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ProtectionPayoutCashFlowEvent.parse_obj(obj)
+            return FlexibleRepoCollateralEvent.parse_obj(obj)
 
-        _obj = ProtectionPayoutCashFlowEvent.parse_obj({
+        _obj = FlexibleRepoCollateralEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate"),
-            "currency": obj.get("currency"),
-            "cash_flow_per_unit": obj.get("cashFlowPerUnit")
+            "settlement_date": obj.get("settlementDate"),
+            "entitlement_date": obj.get("entitlementDate"),
+            "amount": obj.get("amount"),
+            "collateral_instrument": NewInstrument.from_dict(obj.get("collateralInstrument")) if obj.get("collateralInstrument") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
