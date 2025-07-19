@@ -52,7 +52,6 @@ class MovementType(str, Enum):
     BALANCEADJUSTMENT = 'BalanceAdjustment'
     DEFERRED = 'Deferred'
     CASHDEFERRED = 'CashDeferred'
-    UNSETTLEDCASHTYPES = 'UnsettledCashTypes'
 
     @classmethod
     def from_json(cls, json_str: str) -> MovementType:

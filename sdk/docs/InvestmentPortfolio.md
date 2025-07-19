@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **scope** | **str** | The scope of the Investment Portfolio | [optional] 
 **code** | **str** | The code of the Investment Portfolio | [optional] 
 **entity_unique_id** | **str** | The unique Portfolio entity identifier | [optional] 
-**portfolio** | [**PortfolioWithoutHref**](PortfolioWithoutHref.md) |  | [optional] 
+**portfolio** | [**Portfolio**](Portfolio.md) |  | [optional] 
 ## Example
 
 ```python
@@ -20,7 +20,7 @@ key: Optional[StrictStr] = "example_key"
 scope: Optional[StrictStr] = "example_scope"
 code: Optional[StrictStr] = "example_code"
 entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
-portfolio: Optional[PortfolioWithoutHref] = None
+portfolio: Optional[Portfolio] = None
 investment_portfolio_instance = InvestmentPortfolio(key=key, scope=scope, code=code, entity_unique_id=entity_unique_id, portfolio=portfolio)
 
 ```

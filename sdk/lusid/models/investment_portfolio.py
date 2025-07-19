@@ -20,7 +20,7 @@ import json
 
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
-from lusid.models.portfolio_without_href import PortfolioWithoutHref
+from lusid.models.portfolio import Portfolio
 
 class InvestmentPortfolio(BaseModel):
     """
@@ -30,7 +30,7 @@ class InvestmentPortfolio(BaseModel):
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the Investment Portfolio") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the Investment Portfolio") 
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Portfolio entity identifier") 
-    portfolio: Optional[PortfolioWithoutHref] = None
+    portfolio: Optional[Portfolio] = None
     __properties = ["key", "scope", "code", "entityUniqueId", "portfolio"]
 
     class Config:
@@ -104,6 +104,6 @@ class InvestmentPortfolio(BaseModel):
             "scope": obj.get("scope"),
             "code": obj.get("code"),
             "entity_unique_id": obj.get("entityUniqueId"),
-            "portfolio": PortfolioWithoutHref.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None
+            "portfolio": Portfolio.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None
         })
         return _obj

@@ -5,7 +5,7 @@ The request used to create a Fund.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** | The code given for the Fund. | 
-**display_name** | **str** | The name of the Fund. | [optional] 
+**display_name** | **str** | The name of the Fund. | 
 **description** | **str** | A description for the Fund. | [optional] 
 **base_currency** | **str** | The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency. | 
 **portfolio_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency. | 
@@ -26,7 +26,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
 from datetime import datetime
 code: StrictStr = "example_code"
-display_name: Optional[StrictStr] = "example_display_name"
+display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 base_currency: StrictStr = "example_base_currency"
 portfolio_ids: conlist(PortfolioEntityId) = # Replace with your value

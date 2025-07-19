@@ -270,6 +270,8 @@ from lusid.models.client import Client
 from lusid.models.close_event import CloseEvent
 from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryRequest
 from lusid.models.closed_period import ClosedPeriod
+from lusid.models.collateral import Collateral
+from lusid.models.collateral_instrument import CollateralInstrument
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
@@ -495,6 +497,7 @@ from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
 from lusid.models.flexible_deposit import FlexibleDeposit
 from lusid.models.flexible_loan import FlexibleLoan
+from lusid.models.flexible_repo import FlexibleRepo
 from lusid.models.flexible_repo_cash_flow_event import FlexibleRepoCashFlowEvent
 from lusid.models.flexible_repo_collateral_event import FlexibleRepoCollateralEvent
 from lusid.models.flexible_repo_interest_payment_event import FlexibleRepoInterestPaymentEvent
@@ -506,6 +509,8 @@ from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
 from lusid.models.fund import Fund
 from lusid.models.fund_amount import FundAmount
+from lusid.models.fund_calendar_entry import FundCalendarEntry
+from lusid.models.fund_calendar_entry_type import FundCalendarEntryType
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
@@ -814,6 +819,7 @@ from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExe
 from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeType
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
+from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
@@ -1607,6 +1613,8 @@ __all__ = [
     "CloseEvent",
     "ClosePeriodDiaryEntryRequest",
     "ClosedPeriod",
+    "Collateral",
+    "CollateralInstrument",
     "ComparisonAttributeValuePair",
     "CompletePortfolio",
     "CompleteRelation",
@@ -1832,6 +1840,7 @@ __all__ = [
     "FixedSchedule",
     "FlexibleDeposit",
     "FlexibleLoan",
+    "FlexibleRepo",
     "FlexibleRepoCashFlowEvent",
     "FlexibleRepoCollateralEvent",
     "FlexibleRepoInterestPaymentEvent",
@@ -1843,6 +1852,8 @@ __all__ = [
     "FromRecipe",
     "Fund",
     "FundAmount",
+    "FundCalendarEntry",
+    "FundCalendarEntryType",
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
@@ -2151,6 +2162,7 @@ __all__ = [
     "PagedResourceListOfFee",
     "PagedResourceListOfFeeType",
     "PagedResourceListOfFund",
+    "PagedResourceListOfFundCalendarEntry",
     "PagedResourceListOfFundConfiguration",
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfGroupReconciliationComparisonResult",

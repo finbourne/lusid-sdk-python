@@ -29,6 +29,9 @@ class NavTypeDefinition(BaseModel):
     code:  Optional[StrictStr] = Field(None,alias="code") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName") 
     description:  Optional[StrictStr] = Field(None,alias="description") 
+    chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
+    posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes")
+    cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes")
     valuation_recipe_id: ResourceId = Field(..., alias="valuationRecipeId")
     holding_recipe_id: ResourceId = Field(..., alias="holdingRecipeId")
     accounting_method:  StrictStr = Field(...,alias="accountingMethod") 
@@ -37,10 +40,7 @@ class NavTypeDefinition(BaseModel):
     amortisation_method:  StrictStr = Field(...,alias="amortisationMethod") 
     transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope") 
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate") 
-    chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
-    posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes")
-    cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes")
-    __properties = ["code", "displayName", "description", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes"]
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,15 +74,15 @@ class NavTypeDefinition(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of chart_of_accounts_id
+        if self.chart_of_accounts_id:
+            _dict['chartOfAccountsId'] = self.chart_of_accounts_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of valuation_recipe_id
         if self.valuation_recipe_id:
             _dict['valuationRecipeId'] = self.valuation_recipe_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of holding_recipe_id
         if self.holding_recipe_id:
             _dict['holdingRecipeId'] = self.holding_recipe_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of chart_of_accounts_id
-        if self.chart_of_accounts_id:
-            _dict['chartOfAccountsId'] = self.chart_of_accounts_id.to_dict()
         # set to None if code (nullable) is None
         # and __fields_set__ contains the field
         if self.code is None and "code" in self.__fields_set__:
@@ -97,6 +97,16 @@ class NavTypeDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if posting_module_codes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.posting_module_codes is None and "posting_module_codes" in self.__fields_set__:
+            _dict['postingModuleCodes'] = None
+
+        # set to None if cleardown_module_codes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cleardown_module_codes is None and "cleardown_module_codes" in self.__fields_set__:
+            _dict['cleardownModuleCodes'] = None
 
         # set to None if sub_holding_keys (nullable) is None
         # and __fields_set__ contains the field
@@ -118,16 +128,6 @@ class NavTypeDefinition(BaseModel):
         if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
             _dict['cashGainLossCalculationDate'] = None
 
-        # set to None if posting_module_codes (nullable) is None
-        # and __fields_set__ contains the field
-        if self.posting_module_codes is None and "posting_module_codes" in self.__fields_set__:
-            _dict['postingModuleCodes'] = None
-
-        # set to None if cleardown_module_codes (nullable) is None
-        # and __fields_set__ contains the field
-        if self.cleardown_module_codes is None and "cleardown_module_codes" in self.__fields_set__:
-            _dict['cleardownModuleCodes'] = None
-
         return _dict
 
     @classmethod
@@ -143,6 +143,9 @@ class NavTypeDefinition(BaseModel):
             "code": obj.get("code"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
+            "chart_of_accounts_id": ResourceId.from_dict(obj.get("chartOfAccountsId")) if obj.get("chartOfAccountsId") is not None else None,
+            "posting_module_codes": obj.get("postingModuleCodes"),
+            "cleardown_module_codes": obj.get("cleardownModuleCodes"),
             "valuation_recipe_id": ResourceId.from_dict(obj.get("valuationRecipeId")) if obj.get("valuationRecipeId") is not None else None,
             "holding_recipe_id": ResourceId.from_dict(obj.get("holdingRecipeId")) if obj.get("holdingRecipeId") is not None else None,
             "accounting_method": obj.get("accountingMethod"),
@@ -150,9 +153,6 @@ class NavTypeDefinition(BaseModel):
             "instrument_scopes": obj.get("instrumentScopes"),
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
-            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
-            "chart_of_accounts_id": ResourceId.from_dict(obj.get("chartOfAccountsId")) if obj.get("chartOfAccountsId") is not None else None,
-            "posting_module_codes": obj.get("postingModuleCodes"),
-            "cleardown_module_codes": obj.get("cleardownModuleCodes")
+            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")
         })
         return _obj

@@ -31,7 +31,7 @@ class FundDefinitionRequest(BaseModel):
     The request used to create a Fund.  # noqa: E501
     """
     code:  StrictStr = Field(...,alias="code", description="The code given for the Fund.") 
-    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
     portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.")
@@ -112,11 +112,6 @@ class FundDefinitionRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # set to None if display_name (nullable) is None
-        # and __fields_set__ contains the field
-        if self.display_name is None and "display_name" in self.__fields_set__:
-            _dict['displayName'] = None
-
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
