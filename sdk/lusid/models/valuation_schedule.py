@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from lusid.models.resource_id import ResourceId
 
 class ValuationSchedule(BaseModel):
     """
@@ -32,7 +33,8 @@ class ValuationSchedule(BaseModel):
     holiday_calendars: Optional[conlist(StrictStr)] = Field(None, alias="holidayCalendars", description="The holiday calendar(s) that should be used in determining the date schedule.  Holiday calendar(s) are supplied by their names, for example, \"CoppClark\".   Note that when the calendars are not available (e.g. when the user has insufficient permissions),   a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.")
     valuation_date_times: Optional[conlist(StrictStr)] = Field(None, alias="valuationDateTimes", description="If given, this is the exact set of dates on which to perform a valuation. This will replace/override all other specified values if given.")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.  In that case, the BusinessDayConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.") 
-    __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention"]
+    timeline_id: Optional[ResourceId] = Field(None, alias="timelineId")
+    __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention", "timelineId"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +68,9 @@ class ValuationSchedule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of timeline_id
+        if self.timeline_id:
+            _dict['timelineId'] = self.timeline_id.to_dict()
         # set to None if effective_from (nullable) is None
         # and __fields_set__ contains the field
         if self.effective_from is None and "effective_from" in self.__fields_set__:
@@ -114,6 +119,7 @@ class ValuationSchedule(BaseModel):
             "roll_convention": obj.get("rollConvention"),
             "holiday_calendars": obj.get("holidayCalendars"),
             "valuation_date_times": obj.get("valuationDateTimes"),
-            "business_day_convention": obj.get("businessDayConvention")
+            "business_day_convention": obj.get("businessDayConvention"),
+            "timeline_id": ResourceId.from_dict(obj.get("timelineId")) if obj.get("timelineId") is not None else None
         })
         return _obj

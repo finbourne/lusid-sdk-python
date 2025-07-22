@@ -4,6 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **closed_period_id** | **str** | The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period | [optional] 
+**display_name** | **str** | The name of the Closed Period. | [optional] 
+**description** | **str** | A description for the Closed Period. | [optional] 
 **effective_start** | **datetime** | The effective start of the Closed Period | [optional] 
 **effective_end** | **datetime** | The effective end of the Closed Period | [optional] 
 **as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period | [optional] 
@@ -20,6 +22,8 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from datetime import datetime
 closed_period_id: Optional[StrictStr] = "example_closed_period_id"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
 effective_start: Optional[datetime] = # Replace with your value
 effective_end: Optional[datetime] = # Replace with your value
 as_at_closed: Optional[datetime] = # Replace with your value
@@ -28,7 +32,7 @@ version: Optional[Version] = None
 post_close_activities: Optional[conlist(PostCloseActivity)] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 links: Optional[conlist(Link)] = None
-closed_period_instance = ClosedPeriod(closed_period_id=closed_period_id, effective_start=effective_start, effective_end=effective_end, as_at_closed=as_at_closed, properties=properties, version=version, post_close_activities=post_close_activities, href=href, links=links)
+closed_period_instance = ClosedPeriod(closed_period_id=closed_period_id, display_name=display_name, description=description, effective_start=effective_start, effective_end=effective_end, as_at_closed=as_at_closed, properties=properties, version=version, post_close_activities=post_close_activities, href=href, links=links)
 
 ```
 

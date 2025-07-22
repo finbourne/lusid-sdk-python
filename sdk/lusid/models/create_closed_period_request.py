@@ -26,11 +26,13 @@ class CreateClosedPeriodRequest(BaseModel):
     """
     CreateClosedPeriodRequest
     """
-    closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
+    closed_period_id:  StrictStr = Field(...,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
     effective_end: Optional[datetime] = Field(None, alias="effectiveEnd", description="The effective end of the Closed Period")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
     as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt closed datetime for the Closed Period")
-    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Closed Period.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Closed Period.") 
+    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,11 +73,6 @@ class CreateClosedPeriodRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # set to None if closed_period_id (nullable) is None
-        # and __fields_set__ contains the field
-        if self.closed_period_id is None and "closed_period_id" in self.__fields_set__:
-            _dict['closedPeriodId'] = None
-
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -85,6 +82,16 @@ class CreateClosedPeriodRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.as_at_closed is None and "as_at_closed" in self.__fields_set__:
             _dict['asAtClosed'] = None
+
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
 
         return _dict
 
@@ -106,6 +113,8 @@ class CreateClosedPeriodRequest(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "as_at_closed": obj.get("asAtClosed")
+            "as_at_closed": obj.get("asAtClosed"),
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description")
         })
         return _obj

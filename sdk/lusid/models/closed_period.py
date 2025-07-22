@@ -30,6 +30,8 @@ class ClosedPeriod(BaseModel):
     ClosedPeriod
     """
     closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Closed Period.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Closed Period.") 
     effective_start: Optional[datetime] = Field(None, alias="effectiveStart", description="The effective start of the Closed Period")
     effective_end: Optional[datetime] = Field(None, alias="effectiveEnd", description="The effective end of the Closed Period")
     as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt closed datetime for the Closed Period")
@@ -38,7 +40,7 @@ class ClosedPeriod(BaseModel):
     post_close_activities: Optional[conlist(PostCloseActivity)] = Field(None, alias="postCloseActivities", description="All the post close activities for the closed period.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["closedPeriodId", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "href", "links"]
+    __properties = ["closedPeriodId", "displayName", "description", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "href", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -101,6 +103,16 @@ class ClosedPeriod(BaseModel):
         if self.closed_period_id is None and "closed_period_id" in self.__fields_set__:
             _dict['closedPeriodId'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -134,6 +146,8 @@ class ClosedPeriod(BaseModel):
 
         _obj = ClosedPeriod.parse_obj({
             "closed_period_id": obj.get("closedPeriodId"),
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
             "effective_start": obj.get("effectiveStart"),
             "effective_end": obj.get("effectiveEnd"),
             "as_at_closed": obj.get("asAtClosed"),
