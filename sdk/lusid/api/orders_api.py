@@ -596,26 +596,30 @@ class OrdersApi:
 
 
     @overload
-    async def upsert_orders(self, order_set_request : Annotated[Optional[OrderSetRequest], Field(description="The collection of order requests.")] = None, **kwargs) -> ResourceListOfOrder:  # noqa: E501
+    async def upsert_orders(self, order_set_request : Annotated[OrderSetRequest, Field(..., description="The collection of order requests.")], data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> ResourceListOfOrder:  # noqa: E501
         ...
 
     @overload
-    def upsert_orders(self, order_set_request : Annotated[Optional[OrderSetRequest], Field(description="The collection of order requests.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfOrder:  # noqa: E501
+    def upsert_orders(self, order_set_request : Annotated[OrderSetRequest, Field(..., description="The collection of order requests.")], data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfOrder:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_orders(self, order_set_request : Annotated[Optional[OrderSetRequest], Field(description="The collection of order requests.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfOrder, Awaitable[ResourceListOfOrder]]:  # noqa: E501
+    def upsert_orders(self, order_set_request : Annotated[OrderSetRequest, Field(..., description="The collection of order requests.")], data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfOrder, Awaitable[ResourceListOfOrder]]:  # noqa: E501
         """UpsertOrders: Upsert Order  # noqa: E501
 
         Upsert; update existing orders with given ids, or create new orders otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_orders(order_set_request, async_req=True)
+        >>> thread = api.upsert_orders(order_set_request, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
-        :param order_set_request: The collection of order requests.
+        :param order_set_request: The collection of order requests. (required)
         :type order_set_request: OrderSetRequest
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -632,21 +636,25 @@ class OrdersApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_orders_with_http_info(order_set_request, **kwargs)  # noqa: E501
+        return self.upsert_orders_with_http_info(order_set_request, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_orders_with_http_info(self, order_set_request : Annotated[Optional[OrderSetRequest], Field(description="The collection of order requests.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_orders_with_http_info(self, order_set_request : Annotated[OrderSetRequest, Field(..., description="The collection of order requests.")], data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertOrders: Upsert Order  # noqa: E501
 
         Upsert; update existing orders with given ids, or create new orders otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_orders_with_http_info(order_set_request, async_req=True)
+        >>> thread = api.upsert_orders_with_http_info(order_set_request, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
-        :param order_set_request: The collection of order requests.
+        :param order_set_request: The collection of order requests. (required)
         :type order_set_request: OrderSetRequest
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -674,7 +682,9 @@ class OrdersApi:
         _params = locals()
 
         _all_params = [
-            'order_set_request'
+            'order_set_request',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -706,6 +716,12 @@ class OrdersApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

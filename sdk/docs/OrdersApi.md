@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_orders**
-> ResourceListOfOrder upsert_orders(order_set_request=order_set_request)
+> ResourceListOfOrder upsert_orders(order_set_request, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 UpsertOrders: Upsert Order
 
@@ -362,13 +362,15 @@ def main():
     # order_set_request = OrderSetRequest.from_json("")
     # order_set_request = OrderSetRequest.from_dict({})
     order_set_request = OrderSetRequest()
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_orders(order_set_request=order_set_request, opts=opts)
+        # api_response =  api_instance.upsert_orders(order_set_request, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # UpsertOrders: Upsert Order
-        api_response = api_instance.upsert_orders(order_set_request=order_set_request)
+        api_response = api_instance.upsert_orders(order_set_request, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -381,7 +383,9 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **order_set_request** | [**OrderSetRequest**](OrderSetRequest.md)| The collection of order requests. | [optional] 
+ **order_set_request** | [**OrderSetRequest**](OrderSetRequest.md)| The collection of order requests. | 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
