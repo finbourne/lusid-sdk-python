@@ -18,28 +18,33 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, validator 
+from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
+from lusid.models.cash_offer_election import CashOfferElection
+from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.new_instrument import NewInstrument
-from lusid.models.units_ratio import UnitsRatio
+from lusid.models.security_offer_election import SecurityOfferElection
 
-class SpinOffEvent(InstrumentEvent):
+class ConversionEvent(InstrumentEvent):
     """
-    Spin-off event (SOFF), representing the distribution of securities issued by another company.  # noqa: E501
+    Conversion Event (CONV) - Conversion of securities (generally convertible bonds or preferred shares) into  another form of securities (usually common shares) at a pre-stated price/ratio.  # noqa: E501
     """
-    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Optional.  The date the spin-off is announced.")
-    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first date on which the holder of record has entitled ownership of the new shares.")
-    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Optional.  Date you have to be the holder of record in order to receive the additional shares.")
-    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Date on which the distribution of shares takes place.")
+    record_date: Optional[datetime] = Field(None, alias="recordDate", description="<b>Required.</b>              Date at which positions are struck at the end of the day to              note which parties will receive the relevant amount of              entitlement, due to be distributed on the Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.PaymentDate.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="<b>Required.</b> Date on which the movement is due to take place (cash and/or securities).")
     new_instrument: NewInstrument = Field(..., alias="newInstrument")
-    units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
-    cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="costFactor", description="Optional. The fraction of cost that is transferred from the existing shares to the new shares.")
-    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="Optional. Used in calculating cash-in-lieu of fractional shares.")
-    fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.") 
+    response_deadline_date: Optional[datetime] = Field(None, alias="responseDeadlineDate", description="Date/time that the account servicer has set as the deadline to respond,  with instructions, to an outstanding event. Not required.")
+    market_deadline_date: Optional[datetime] = Field(None, alias="marketDeadlineDate", description="Date/time which the issuer or issuer's agent has set as the deadline to respond,  with an instruction, to an outstanding offer or privilege. Not required.")
+    period_of_action: Optional[EventDateRange] = Field(None, alias="periodOfAction")
+    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price paid in lieu of fractionalUnits. Not required.  If provided, must have Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.FractionalUnitsCashCurrency too.")
+    fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares. Not required.  If provided, must have Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.FractionalUnitsCashPrice too.") 
+    security_offer_elections: Optional[conlist(SecurityOfferElection)] = Field(None, alias="securityOfferElections", description="List of possible security offers for this conversion event. There must be at most one election of this type.     If the Finbourne.LusidInstruments.Events.ParticipationType is Finbourne.LusidInstruments.Events.ParticipationType.Mandatory:     This list must have exactly one election that is chosen and default.  Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.CashAndSecurityOfferElections and Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.CashOfferElections<b> must be null or empty</b>.     If the Finbourne.LusidInstruments.Events.ParticipationType is Finbourne.LusidInstruments.Events.ParticipationType.Voluntary:     This list can be empty,  so long as Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.CashAndSecurityOfferElections or Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.CashOfferElections  has at least one election. None of these elections have to be chosen or default.   ")
+    cash_and_security_offer_elections: Optional[conlist(CashAndSecurityOfferElection)] = Field(None, alias="cashAndSecurityOfferElections", description="List of possible cash and security offers for this conversion event. There must be at most one election of this type.     If the Finbourne.LusidInstruments.Events.ParticipationType is Finbourne.LusidInstruments.Events.ParticipationType.Mandatory:     This list <b> must be null or empty</b>.     If the Finbourne.LusidInstruments.Events.ParticipationType is Finbourne.LusidInstruments.Events.ParticipationType.Voluntary:     This list can be empty,  so long as Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.SecurityOfferElections or Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.CashOfferElections  has at least one election. None of these elections have to be chosen or default.   ")
+    cash_offer_elections: Optional[conlist(CashOfferElection)] = Field(None, alias="cashOfferElections", description="List of possible cash offers for this conversion event. There must be at most one election of this type.     If the Finbourne.LusidInstruments.Events.ParticipationType is Finbourne.LusidInstruments.Events.ParticipationType.Mandatory:     This list <b> must be null or empty</b>.     If the Finbourne.LusidInstruments.Events.ParticipationType is Finbourne.LusidInstruments.Events.ParticipationType.Voluntary:     This list can be empty,  so long as Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.SecurityOfferElections or Finbourne.WebApi.Interface.Dto.InstrumentEvents.ConversionEvent.CashAndSecurityOfferElections  has at least one election. None of these elections have to be chosen or default.   ")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "newInstrument", "unitsRatio", "costFactor", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "responseDeadlineDate", "marketDeadlineDate", "periodOfAction", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -52,7 +57,7 @@ class SpinOffEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'SpinOffEvent' not in [ 
+        if 'ConversionEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -122,8 +127,8 @@ class SpinOffEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> SpinOffEvent:
-        """Create an instance of SpinOffEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> ConversionEvent:
+        """Create an instance of ConversionEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -136,28 +141,44 @@ class SpinOffEvent(InstrumentEvent):
         # override the default output from pydantic by calling `to_dict()` of new_instrument
         if self.new_instrument:
             _dict['newInstrument'] = self.new_instrument.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of units_ratio
-        if self.units_ratio:
-            _dict['unitsRatio'] = self.units_ratio.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of period_of_action
+        if self.period_of_action:
+            _dict['periodOfAction'] = self.period_of_action.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in security_offer_elections (list)
+        _items = []
+        if self.security_offer_elections:
+            for _item in self.security_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['securityOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_and_security_offer_elections (list)
+        _items = []
+        if self.cash_and_security_offer_elections:
+            for _item in self.cash_and_security_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashAndSecurityOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_offer_elections (list)
+        _items = []
+        if self.cash_offer_elections:
+            for _item in self.cash_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashOfferElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if announcement_date (nullable) is None
+        # set to None if response_deadline_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
-            _dict['announcementDate'] = None
+        if self.response_deadline_date is None and "response_deadline_date" in self.__fields_set__:
+            _dict['responseDeadlineDate'] = None
 
-        # set to None if record_date (nullable) is None
+        # set to None if market_deadline_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.record_date is None and "record_date" in self.__fields_set__:
-            _dict['recordDate'] = None
-
-        # set to None if cost_factor (nullable) is None
-        # and __fields_set__ contains the field
-        if self.cost_factor is None and "cost_factor" in self.__fields_set__:
-            _dict['costFactor'] = None
+        if self.market_deadline_date is None and "market_deadline_date" in self.__fields_set__:
+            _dict['marketDeadlineDate'] = None
 
         # set to None if fractional_units_cash_price (nullable) is None
         # and __fields_set__ contains the field
@@ -169,28 +190,45 @@ class SpinOffEvent(InstrumentEvent):
         if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
             _dict['fractionalUnitsCashCurrency'] = None
 
+        # set to None if security_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.security_offer_elections is None and "security_offer_elections" in self.__fields_set__:
+            _dict['securityOfferElections'] = None
+
+        # set to None if cash_and_security_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_and_security_offer_elections is None and "cash_and_security_offer_elections" in self.__fields_set__:
+            _dict['cashAndSecurityOfferElections'] = None
+
+        # set to None if cash_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
+            _dict['cashOfferElections'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> SpinOffEvent:
-        """Create an instance of SpinOffEvent from a dict"""
+    def from_dict(cls, obj: dict) -> ConversionEvent:
+        """Create an instance of ConversionEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return SpinOffEvent.parse_obj(obj)
+            return ConversionEvent.parse_obj(obj)
 
-        _obj = SpinOffEvent.parse_obj({
+        _obj = ConversionEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "announcement_date": obj.get("announcementDate"),
-            "ex_date": obj.get("exDate"),
             "record_date": obj.get("recordDate"),
             "payment_date": obj.get("paymentDate"),
             "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
-            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
-            "cost_factor": obj.get("costFactor"),
+            "response_deadline_date": obj.get("responseDeadlineDate"),
+            "market_deadline_date": obj.get("marketDeadlineDate"),
+            "period_of_action": EventDateRange.from_dict(obj.get("periodOfAction")) if obj.get("periodOfAction") is not None else None,
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
-            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency")
+            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "security_offer_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityOfferElections")] if obj.get("securityOfferElections") is not None else None,
+            "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
+            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

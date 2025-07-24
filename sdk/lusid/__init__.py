@@ -322,6 +322,7 @@ from lusid.models.contract_details import ContractDetails
 from lusid.models.contract_for_difference import ContractForDifference
 from lusid.models.contract_initialisation_event import ContractInitialisationEvent
 from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
+from lusid.models.conversion_event import ConversionEvent
 from lusid.models.corporate_action import CorporateAction
 from lusid.models.corporate_action_source import CorporateActionSource
 from lusid.models.corporate_action_transition import CorporateActionTransition
@@ -1665,6 +1666,7 @@ __all__ = [
     "ContractForDifference",
     "ContractInitialisationEvent",
     "ContributionToNonPassingRuleDetail",
+    "ConversionEvent",
     "CorporateAction",
     "CorporateActionSource",
     "CorporateActionTransition",

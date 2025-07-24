@@ -861,6 +861,7 @@ Class | Method | HTTP request | Description
  - [ContractForDifference](docs/ContractForDifference.md)
  - [ContractInitialisationEvent](docs/ContractInitialisationEvent.md)
  - [ContributionToNonPassingRuleDetail](docs/ContributionToNonPassingRuleDetail.md)
+ - [ConversionEvent](docs/ConversionEvent.md)
  - [CorporateAction](docs/CorporateAction.md)
  - [CorporateActionSource](docs/CorporateActionSource.md)
  - [CorporateActionTransition](docs/CorporateActionTransition.md)
