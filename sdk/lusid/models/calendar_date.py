@@ -33,7 +33,7 @@ class CalendarDate(BaseModel):
     local_date:  StrictStr = Field(...,alias="localDate") 
     timezone:  StrictStr = Field(...,alias="timezone") 
     description:  StrictStr = Field(...,alias="description") 
-    type:  StrictStr = Field(...,alias="type") 
+    type:  Optional[StrictStr] = Field(None,alias="type") 
     attributes: Optional[DateAttributes] = None
     source_data: Optional[Dict[str, StrictStr]] = Field(None, alias="sourceData")
     __properties = ["href", "dateIdentifier", "fromUtc", "toUtc", "localDate", "timezone", "description", "type", "attributes", "sourceData"]
@@ -77,6 +77,11 @@ class CalendarDate(BaseModel):
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
+
+        # set to None if type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type is None and "type" in self.__fields_set__:
+            _dict['type'] = None
 
         # set to None if source_data (nullable) is None
         # and __fields_set__ contains the field

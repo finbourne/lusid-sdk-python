@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **local_date** | **str** |  | 
 **timezone** | **str** |  | 
 **description** | **str** |  | 
-**type** | **str** |  | 
+**type** | **str** |  | [optional] 
 **attributes** | [**DateAttributes**](DateAttributes.md) |  | [optional] 
 **source_data** | **Dict[str, str]** |  | [optional] 
 ## Example
@@ -27,7 +27,7 @@ to_utc: datetime = # Replace with your value
 local_date: StrictStr = "example_local_date"
 timezone: StrictStr = "example_timezone"
 description: StrictStr = "example_description"
-type: StrictStr = "example_type"
+type: Optional[StrictStr] = "example_type"
 attributes: Optional[DateAttributes] = None
 source_data: Optional[Dict[str, StrictStr]] = # Replace with your value
 calendar_date_instance = CalendarDate(href=href, date_identifier=date_identifier, from_utc=from_utc, to_utc=to_utc, local_date=local_date, timezone=timezone, description=description, type=type, attributes=attributes, source_data=source_data)
