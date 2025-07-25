@@ -496,6 +496,11 @@ Class | Method | HTTP request | Description
 *RelationDefinitionsApi* | [**create_relation_definition**](docs/RelationDefinitionsApi.md#create_relation_definition) | **POST** /api/relationdefinitions | [EXPERIMENTAL] CreateRelationDefinition: Create a relation definition
 *RelationDefinitionsApi* | [**delete_relation_definition**](docs/RelationDefinitionsApi.md#delete_relation_definition) | **DELETE** /api/relationdefinitions/{scope}/{code} | [EXPERIMENTAL] DeleteRelationDefinition: Delete relation definition
 *RelationDefinitionsApi* | [**get_relation_definition**](docs/RelationDefinitionsApi.md#get_relation_definition) | **GET** /api/relationdefinitions/{scope}/{code} | [EXPERIMENTAL] GetRelationDefinition: Get relation definition
+*RelationalDatasetDefinitionApi* | [**create_relational_dataset_definition**](docs/RelationalDatasetDefinitionApi.md#create_relational_dataset_definition) | **POST** /api/relationaldatasetdefinitions | [EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
+*RelationalDatasetDefinitionApi* | [**delete_relational_dataset_definition**](docs/RelationalDatasetDefinitionApi.md#delete_relational_dataset_definition) | **DELETE** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
+*RelationalDatasetDefinitionApi* | [**get_relational_dataset_definition**](docs/RelationalDatasetDefinitionApi.md#get_relational_dataset_definition) | **GET** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition
+*RelationalDatasetDefinitionApi* | [**list_relational_dataset_definitions**](docs/RelationalDatasetDefinitionApi.md#list_relational_dataset_definitions) | **GET** /api/relationaldatasetdefinitions | [EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions
+*RelationalDatasetDefinitionApi* | [**update_relational_dataset_definition**](docs/RelationalDatasetDefinitionApi.md#update_relational_dataset_definition) | **PUT** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
 *RelationsApi* | [**create_relation**](docs/RelationsApi.md#create_relation) | **POST** /api/relations/{scope}/{code} | [EXPERIMENTAL] CreateRelation: Create Relation
 *RelationsApi* | [**delete_relation**](docs/RelationsApi.md#delete_relation) | **POST** /api/relations/{scope}/{code}/$delete | [EXPERIMENTAL] DeleteRelation: Delete a relation
 *RelationshipDefinitionsApi* | [**create_relationship_definition**](docs/RelationshipDefinitionsApi.md#create_relationship_definition) | **POST** /api/relationshipdefinitions | [EARLY ACCESS] CreateRelationshipDefinition: Create Relationship Definition
@@ -896,6 +901,7 @@ Class | Method | HTTP request | Description
  - [CreateReferencePortfolioRequest](docs/CreateReferencePortfolioRequest.md)
  - [CreateRelationDefinitionRequest](docs/CreateRelationDefinitionRequest.md)
  - [CreateRelationRequest](docs/CreateRelationRequest.md)
+ - [CreateRelationalDatasetDefinitionRequest](docs/CreateRelationalDatasetDefinitionRequest.md)
  - [CreateRelationshipDefinitionRequest](docs/CreateRelationshipDefinitionRequest.md)
  - [CreateRelationshipRequest](docs/CreateRelationshipRequest.md)
  - [CreateSequenceRequest](docs/CreateSequenceRequest.md)
@@ -1389,6 +1395,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfPropertyDefinitionSearchResult](docs/PagedResourceListOfPropertyDefinitionSearchResult.md)
  - [PagedResourceListOfReconciliation](docs/PagedResourceListOfReconciliation.md)
  - [PagedResourceListOfReferenceListResponse](docs/PagedResourceListOfReferenceListResponse.md)
+ - [PagedResourceListOfRelationalDatasetDefinition](docs/PagedResourceListOfRelationalDatasetDefinition.md)
  - [PagedResourceListOfRelationshipDefinition](docs/PagedResourceListOfRelationshipDefinition.md)
  - [PagedResourceListOfSequenceDefinition](docs/PagedResourceListOfSequenceDefinition.md)
  - [PagedResourceListOfStagedModification](docs/PagedResourceListOfStagedModification.md)
@@ -1533,6 +1540,8 @@ Class | Method | HTTP request | Description
  - [RelatedEntity](docs/RelatedEntity.md)
  - [Relation](docs/Relation.md)
  - [RelationDefinition](docs/RelationDefinition.md)
+ - [RelationalDatasetDefinition](docs/RelationalDatasetDefinition.md)
+ - [RelationalDatasetFieldDefinition](docs/RelationalDatasetFieldDefinition.md)
  - [Relationship](docs/Relationship.md)
  - [RelationshipDefinition](docs/RelationshipDefinition.md)
  - [RelativeDateOffset](docs/RelativeDateOffset.md)
@@ -1797,6 +1806,7 @@ Class | Method | HTTP request | Description
  - [UpdatePropertyDefinitionRequest](docs/UpdatePropertyDefinitionRequest.md)
  - [UpdateReconciliationRequest](docs/UpdateReconciliationRequest.md)
  - [UpdateReferenceDataRequest](docs/UpdateReferenceDataRequest.md)
+ - [UpdateRelationalDatasetDefinitionRequest](docs/UpdateRelationalDatasetDefinitionRequest.md)
  - [UpdateRelationshipDefinitionRequest](docs/UpdateRelationshipDefinitionRequest.md)
  - [UpdateStagingRuleSetRequest](docs/UpdateStagingRuleSetRequest.md)
  - [UpdateTaxRuleSetRequest](docs/UpdateTaxRuleSetRequest.md)

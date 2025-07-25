@@ -28,7 +28,8 @@ class SettlementSchedule(BaseModel):
     trade_id:  Optional[StrictStr] = Field(None,alias="tradeId") 
     settlement_date: Optional[datetime] = Field(None, alias="settlementDate")
     units: Optional[Union[StrictFloat, StrictInt]] = None
-    __properties = ["tradeId", "settlementDate", "units"]
+    bond_interest: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="bondInterest")
+    __properties = ["tradeId", "settlementDate", "units", "bondInterest"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +82,7 @@ class SettlementSchedule(BaseModel):
         _obj = SettlementSchedule.parse_obj({
             "trade_id": obj.get("tradeId"),
             "settlement_date": obj.get("settlementDate"),
-            "units": obj.get("units")
+            "units": obj.get("units"),
+            "bond_interest": obj.get("bondInterest")
         })
         return _obj

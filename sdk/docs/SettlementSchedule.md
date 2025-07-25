@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **trade_id** | **str** |  | [optional] 
 **settlement_date** | **datetime** |  | [optional] 
 **units** | **float** |  | [optional] 
+**bond_interest** | **float** |  | [optional] 
 ## Example
 
 ```python
@@ -16,7 +17,8 @@ from datetime import datetime
 trade_id: Optional[StrictStr] = "example_trade_id"
 settlement_date: Optional[datetime] = # Replace with your value
 units: Optional[Union[StrictFloat, StrictInt]] = None
-settlement_schedule_instance = SettlementSchedule(trade_id=trade_id, settlement_date=settlement_date, units=units)
+bond_interest: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+settlement_schedule_instance = SettlementSchedule(trade_id=trade_id, settlement_date=settlement_date, units=units, bond_interest=bond_interest)
 
 ```
 

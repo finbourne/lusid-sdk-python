@@ -72,6 +72,7 @@ from lusid.api.reconciliations_api import ReconciliationsApi
 from lusid.api.reference_lists_api import ReferenceListsApi
 from lusid.api.reference_portfolio_api import ReferencePortfolioApi
 from lusid.api.relation_definitions_api import RelationDefinitionsApi
+from lusid.api.relational_dataset_definition_api import RelationalDatasetDefinitionApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
@@ -357,6 +358,7 @@ from lusid.models.create_reconciliation_request import CreateReconciliationReque
 from lusid.models.create_reference_portfolio_request import CreateReferencePortfolioRequest
 from lusid.models.create_relation_definition_request import CreateRelationDefinitionRequest
 from lusid.models.create_relation_request import CreateRelationRequest
+from lusid.models.create_relational_dataset_definition_request import CreateRelationalDatasetDefinitionRequest
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
@@ -850,6 +852,7 @@ from lusid.models.paged_resource_list_of_property_definition import PagedResourc
 from lusid.models.paged_resource_list_of_property_definition_search_result import PagedResourceListOfPropertyDefinitionSearchResult
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
+from lusid.models.paged_resource_list_of_relational_dataset_definition import PagedResourceListOfRelationalDatasetDefinition
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
 from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
@@ -994,6 +997,8 @@ from lusid.models.reference_portfolio_weight_type import ReferencePortfolioWeigh
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.relation import Relation
 from lusid.models.relation_definition import RelationDefinition
+from lusid.models.relational_dataset_definition import RelationalDatasetDefinition
+from lusid.models.relational_dataset_field_definition import RelationalDatasetFieldDefinition
 from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
 from lusid.models.relative_date_offset import RelativeDateOffset
@@ -1258,6 +1263,7 @@ from lusid.models.update_portfolio_request import UpdatePortfolioRequest
 from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
 from lusid.models.update_reference_data_request import UpdateReferenceDataRequest
+from lusid.models.update_relational_dataset_definition_request import UpdateRelationalDatasetDefinitionRequest
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
@@ -1426,6 +1432,7 @@ __all__ = [
     "ReferenceListsApi",
     "ReferencePortfolioApi",
     "RelationDefinitionsApi",
+    "RelationalDatasetDefinitionApi",
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
@@ -1701,6 +1708,7 @@ __all__ = [
     "CreateReferencePortfolioRequest",
     "CreateRelationDefinitionRequest",
     "CreateRelationRequest",
+    "CreateRelationalDatasetDefinitionRequest",
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
     "CreateSequenceRequest",
@@ -2194,6 +2202,7 @@ __all__ = [
     "PagedResourceListOfPropertyDefinitionSearchResult",
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
+    "PagedResourceListOfRelationalDatasetDefinition",
     "PagedResourceListOfRelationshipDefinition",
     "PagedResourceListOfSequenceDefinition",
     "PagedResourceListOfStagedModification",
@@ -2338,6 +2347,8 @@ __all__ = [
     "RelatedEntity",
     "Relation",
     "RelationDefinition",
+    "RelationalDatasetDefinition",
+    "RelationalDatasetFieldDefinition",
     "Relationship",
     "RelationshipDefinition",
     "RelativeDateOffset",
@@ -2602,6 +2613,7 @@ __all__ = [
     "UpdatePropertyDefinitionRequest",
     "UpdateReconciliationRequest",
     "UpdateReferenceDataRequest",
+    "UpdateRelationalDatasetDefinitionRequest",
     "UpdateRelationshipDefinitionRequest",
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
