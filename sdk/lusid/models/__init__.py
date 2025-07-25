@@ -91,6 +91,7 @@ from lusid.models.barrier import Barrier
 from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
+from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
 from lusid.models.batch_update_user_review_for_comparison_result_request import BatchUpdateUserReviewForComparisonResultRequest
 from lusid.models.batch_update_user_review_for_comparison_result_response import BatchUpdateUserReviewForComparisonResultResponse
 from lusid.models.batch_upsert_dates_for_calendar_response import BatchUpsertDatesForCalendarResponse
@@ -638,6 +639,8 @@ from lusid.models.mbs_interest_shortfall_event import MbsInterestShortfallEvent
 from lusid.models.mbs_principal_event import MbsPrincipalEvent
 from lusid.models.mbs_principal_write_off_event import MbsPrincipalWriteOffEvent
 from lusid.models.membership import Membership
+from lusid.models.membership_amendment_request import MembershipAmendmentRequest
+from lusid.models.membership_amendment_response import MembershipAmendmentResponse
 from lusid.models.membership_and_status import MembershipAndStatus
 from lusid.models.merger_event import MergerEvent
 from lusid.models.metric_value import MetricValue
@@ -1352,6 +1355,7 @@ __all__ = [
     "Basket",
     "BasketIdentifier",
     "BatchAdjustHoldingsResponse",
+    "BatchAmendCustomDataModelMembershipResponse",
     "BatchUpdateUserReviewForComparisonResultRequest",
     "BatchUpdateUserReviewForComparisonResultResponse",
     "BatchUpsertDatesForCalendarResponse",
@@ -1899,6 +1903,8 @@ __all__ = [
     "MbsPrincipalEvent",
     "MbsPrincipalWriteOffEvent",
     "Membership",
+    "MembershipAmendmentRequest",
+    "MembershipAmendmentResponse",
     "MembershipAndStatus",
     "MergerEvent",
     "MetricValue",

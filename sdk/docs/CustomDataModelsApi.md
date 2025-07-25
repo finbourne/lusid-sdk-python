@@ -4,6 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batch_amend**](CustomDataModelsApi.md#batch_amend) | **POST** /api/datamodel/$batchamend | [INTERNAL] BatchAmend: Batch amend Custom Data Models
 [**create_custom_data_model**](CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
 [**delete_custom_data_model**](CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
 [**get_custom_data_model**](CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
@@ -11,6 +12,100 @@ Method | HTTP request | Description
 [**list_supported_entity_types**](CustomDataModelsApi.md#list_supported_entity_types) | **GET** /api/datamodel/entitytype | [EXPERIMENTAL] ListSupportedEntityTypes: List the currently supported entity types for use in Custom Data Models.
 [**update_custom_data_model**](CustomDataModelsApi.md#update_custom_data_model) | **PUT** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model
 
+
+# **batch_amend**
+> BatchAmendCustomDataModelMembershipResponse batch_amend(success_mode, request_body)
+
+[INTERNAL] BatchAmend: Batch amend Custom Data Models
+
+Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CustomDataModelsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CustomDataModelsApi)
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (default to 'Partial')
+    request_body = {"ephemeral-id-1":{"customDataModelId":{"scope":"MyScope","code":"MyCDMCode"},"entityType":"Instrument","entityUniqueId":"41ad555a-7585-41b7-a057-af27c760e145","operation":"Add"},"ephemeral-id-2":{"customDataModelId":{"scope":"MyScope","code":"MyCDMCode"},"entityType":"Instrument","entityUniqueId":"87lr929k-2937-23j3-j293-ds94n726n204","operation":"Remove"},"ephemeral-id-3":{"customDataModelId":{"scope":"MyScope","code":"MyCDMCode2"},"entityType":"Instrument","entityUniqueId":"61apo865d-8019-41g7-a692-ad97j480c382","operation":"Add"}} # Dict[str, MembershipAmendmentRequest] | The payload describing the amendments to make for the given Custom Data Model.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_amend(success_mode, request_body, opts=opts)
+
+        # [INTERNAL] BatchAmend: Batch amend Custom Data Models
+        api_response = api_instance.batch_amend(success_mode, request_body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CustomDataModelsApi->batch_amend: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [default to &#39;Partial&#39;]
+ **request_body** | [**Dict[str, MembershipAmendmentRequest]**](MembershipAmendmentRequest.md)| The payload describing the amendments to make for the given Custom Data Model. | 
+
+### Return type
+
+[**BatchAmendCustomDataModelMembershipResponse**](BatchAmendCustomDataModelMembershipResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The batch amendment operation was successful |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_custom_data_model**
 > CustomDataModel create_custom_data_model(entity_type, create_custom_data_model_request=create_custom_data_model_request)

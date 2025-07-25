@@ -178,6 +178,7 @@ Class | Method | HTTP request | Description
 *CustomEntityDefinitionsApi* | [**get_definition**](docs/CustomEntityDefinitionsApi.md#get_definition) | **GET** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.
 *CustomEntityDefinitionsApi* | [**list_custom_entity_definitions**](docs/CustomEntityDefinitionsApi.md#list_custom_entity_definitions) | **GET** /api/customentities/entitytypes | [EARLY ACCESS] ListCustomEntityDefinitions: List the Custom Entity type definitions
 *CustomEntityDefinitionsApi* | [**update_custom_entity_definition**](docs/CustomEntityDefinitionsApi.md#update_custom_entity_definition) | **PUT** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] UpdateCustomEntityDefinition: Modify an existing Custom Entity type.
+*CustomDataModelsApi* | [**batch_amend**](docs/CustomDataModelsApi.md#batch_amend) | **POST** /api/datamodel/$batchamend | [INTERNAL] BatchAmend: Batch amend Custom Data Models
 *CustomDataModelsApi* | [**create_custom_data_model**](docs/CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
 *CustomDataModelsApi* | [**delete_custom_data_model**](docs/CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
 *CustomDataModelsApi* | [**get_custom_data_model**](docs/CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
@@ -724,6 +725,7 @@ Class | Method | HTTP request | Description
  - [Basket](docs/Basket.md)
  - [BasketIdentifier](docs/BasketIdentifier.md)
  - [BatchAdjustHoldingsResponse](docs/BatchAdjustHoldingsResponse.md)
+ - [BatchAmendCustomDataModelMembershipResponse](docs/BatchAmendCustomDataModelMembershipResponse.md)
  - [BatchUpdateUserReviewForComparisonResultRequest](docs/BatchUpdateUserReviewForComparisonResultRequest.md)
  - [BatchUpdateUserReviewForComparisonResultResponse](docs/BatchUpdateUserReviewForComparisonResultResponse.md)
  - [BatchUpsertDatesForCalendarResponse](docs/BatchUpsertDatesForCalendarResponse.md)
@@ -1271,6 +1273,8 @@ Class | Method | HTTP request | Description
  - [MbsPrincipalEvent](docs/MbsPrincipalEvent.md)
  - [MbsPrincipalWriteOffEvent](docs/MbsPrincipalWriteOffEvent.md)
  - [Membership](docs/Membership.md)
+ - [MembershipAmendmentRequest](docs/MembershipAmendmentRequest.md)
+ - [MembershipAmendmentResponse](docs/MembershipAmendmentResponse.md)
  - [MembershipAndStatus](docs/MembershipAndStatus.md)
  - [MergerEvent](docs/MergerEvent.md)
  - [MetricValue](docs/MetricValue.md)
