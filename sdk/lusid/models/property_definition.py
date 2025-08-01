@@ -51,8 +51,9 @@ class PropertyDefinition(BaseModel):
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     is_filterable: Optional[StrictBool] = Field(None, alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
+    custom_entity_types: Optional[conlist(StrictStr)] = Field(None, alias="customEntityTypes", description="The custom entity types that properties relating to this property definition can be applied to.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "collectionType", "properties", "version", "stagedModifications", "isFilterable", "links"]
+    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "collectionType", "properties", "version", "stagedModifications", "isFilterable", "customEntityTypes", "links"]
 
     @validator('value_type')
     def value_type_validate_enum(cls, value):
@@ -533,6 +534,11 @@ class PropertyDefinition(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if custom_entity_types (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custom_entity_types is None and "custom_entity_types" in self.__fields_set__:
+            _dict['customEntityTypes'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -576,6 +582,7 @@ class PropertyDefinition(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "is_filterable": obj.get("isFilterable"),
+            "custom_entity_types": obj.get("customEntityTypes"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

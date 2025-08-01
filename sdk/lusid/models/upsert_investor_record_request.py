@@ -31,7 +31,7 @@ class UpsertInvestorRecordRequest(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investor Record.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Investor Record") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investor Record") 
-    investor: Optional[InvestorIdentifier] = None
+    investor: InvestorIdentifier = Field(...)
     __properties = ["identifiers", "properties", "displayName", "description", "investor"]
 
     class Config:

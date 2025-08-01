@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class UpdatePropertyDefinitionRequest(BaseModel):
     """
@@ -27,7 +27,8 @@ class UpdatePropertyDefinitionRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
-    __properties = ["displayName", "propertyDescription"]
+    custom_entity_types: Optional[conlist(StrictStr)] = Field(None, alias="customEntityTypes", description="The custom entity types that properties relating to this property definition can be applied to.")
+    __properties = ["displayName", "propertyDescription", "customEntityTypes"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class UpdatePropertyDefinitionRequest(BaseModel):
         if self.property_description is None and "property_description" in self.__fields_set__:
             _dict['propertyDescription'] = None
 
+        # set to None if custom_entity_types (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custom_entity_types is None and "custom_entity_types" in self.__fields_set__:
+            _dict['customEntityTypes'] = None
+
         return _dict
 
     @classmethod
@@ -79,6 +85,7 @@ class UpdatePropertyDefinitionRequest(BaseModel):
 
         _obj = UpdatePropertyDefinitionRequest.parse_obj({
             "display_name": obj.get("displayName"),
-            "property_description": obj.get("propertyDescription")
+            "property_description": obj.get("propertyDescription"),
+            "custom_entity_types": obj.get("customEntityTypes")
         })
         return _obj

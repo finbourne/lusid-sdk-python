@@ -505,6 +505,7 @@ from lusid.models.flexible_repo import FlexibleRepo
 from lusid.models.flexible_repo_cash_flow_event import FlexibleRepoCashFlowEvent
 from lusid.models.flexible_repo_collateral_event import FlexibleRepoCollateralEvent
 from lusid.models.flexible_repo_interest_payment_event import FlexibleRepoInterestPaymentEvent
+from lusid.models.flexible_repo_partial_closure_event import FlexibleRepoPartialClosureEvent
 from lusid.models.float_schedule import FloatSchedule
 from lusid.models.floating_leg import FloatingLeg
 from lusid.models.flow_convention_name import FlowConventionName
@@ -869,6 +870,7 @@ from lusid.models.paged_resource_list_of_valuation_point_overview import PagedRe
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
 from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
 from lusid.models.paged_resource_list_of_workspace_item import PagedResourceListOfWorkspaceItem
+from lusid.models.partial_closure_constituent import PartialClosureConstituent
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
@@ -1048,6 +1050,7 @@ from lusid.models.resource_list_of_i_unit_definition_dto import ResourceListOfIU
 from lusid.models.resource_list_of_instrument_cash_flow import ResourceListOfInstrumentCashFlow
 from lusid.models.resource_list_of_instrument_event_holder import ResourceListOfInstrumentEventHolder
 from lusid.models.resource_list_of_instrument_id_type_descriptor import ResourceListOfInstrumentIdTypeDescriptor
+from lusid.models.resource_list_of_investment_account import ResourceListOfInvestmentAccount
 from lusid.models.resource_list_of_investor_record import ResourceListOfInvestorRecord
 from lusid.models.resource_list_of_legal_entity import ResourceListOfLegalEntity
 from lusid.models.resource_list_of_list_complex_market_data_with_meta_data_response import ResourceListOfListComplexMarketDataWithMetaDataResponse
@@ -1858,6 +1861,7 @@ __all__ = [
     "FlexibleRepoCashFlowEvent",
     "FlexibleRepoCollateralEvent",
     "FlexibleRepoInterestPaymentEvent",
+    "FlexibleRepoPartialClosureEvent",
     "FloatSchedule",
     "FloatingLeg",
     "FlowConventionName",
@@ -2222,6 +2226,7 @@ __all__ = [
     "PagedResourceListOfVirtualRow",
     "PagedResourceListOfWorkspace",
     "PagedResourceListOfWorkspaceItem",
+    "PartialClosureConstituent",
     "Participation",
     "ParticipationRequest",
     "ParticipationSetRequest",
@@ -2401,6 +2406,7 @@ __all__ = [
     "ResourceListOfInstrumentCashFlow",
     "ResourceListOfInstrumentEventHolder",
     "ResourceListOfInstrumentIdTypeDescriptor",
+    "ResourceListOfInvestmentAccount",
     "ResourceListOfInvestorRecord",
     "ResourceListOfLegalEntity",
     "ResourceListOfListComplexMarketDataWithMetaDataResponse",

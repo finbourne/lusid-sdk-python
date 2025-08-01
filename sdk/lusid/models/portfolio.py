@@ -30,7 +30,7 @@ from lusid.models.version import Version
 
 class Portfolio(BaseModel):
     """
-    A list of portfolios.  # noqa: E501
+    A portfolio of a particular type.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId = Field(...)

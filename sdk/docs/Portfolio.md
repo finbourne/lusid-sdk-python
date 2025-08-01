@@ -1,6 +1,6 @@
 # Portfolio
 
-A list of portfolios.
+A portfolio of a particular type.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

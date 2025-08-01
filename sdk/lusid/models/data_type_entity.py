@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, constr 
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr 
 from lusid.models.data_type import DataType
+from lusid.models.link import Link
 
 class DataTypeEntity(BaseModel):
     """
@@ -38,7 +39,8 @@ class DataTypeEntity(BaseModel):
     deleted_data_type: Optional[DataType] = Field(None, alias="deletedDataType")
     previewed_status:  Optional[StrictStr] = Field(None,alias="previewedStatus", description="The status of the previewed entity.") 
     previewed_data_type: Optional[DataType] = Field(None, alias="previewedDataType")
-    __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingDataType", "deletedDataType", "previewedStatus", "previewedDataType"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingDataType", "deletedDataType", "previewedStatus", "previewedDataType", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +83,13 @@ class DataTypeEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of previewed_data_type
         if self.previewed_data_type:
             _dict['previewedDataType'] = self.previewed_data_type.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if as_at_version_number (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at_version_number is None and "as_at_version_number" in self.__fields_set__:
@@ -111,6 +120,11 @@ class DataTypeEntity(BaseModel):
         if self.previewed_status is None and "previewed_status" in self.__fields_set__:
             _dict['previewedStatus'] = None
 
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -134,6 +148,7 @@ class DataTypeEntity(BaseModel):
             "prevailing_data_type": DataType.from_dict(obj.get("prevailingDataType")) if obj.get("prevailingDataType") is not None else None,
             "deleted_data_type": DataType.from_dict(obj.get("deletedDataType")) if obj.get("deletedDataType") is not None else None,
             "previewed_status": obj.get("previewedStatus"),
-            "previewed_data_type": DataType.from_dict(obj.get("previewedDataType")) if obj.get("previewedDataType") is not None else None
+            "previewed_data_type": DataType.from_dict(obj.get("previewedDataType")) if obj.get("previewedDataType") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

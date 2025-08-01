@@ -18,19 +18,23 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.partial_closure_constituent import PartialClosureConstituent
 
-class AdjustGlobalCommitmentEvent(InstrumentEvent):
+class FlexibleRepoPartialClosureEvent(InstrumentEvent):
     """
-    Event to adjust the limit/balance of a LoanFacility.  Used to initially set up the facility, but also used to increase/reduce the associated limit and balance.  # noqa: E501
+    Event representing the partial closure of a repurchase   agreement. Each event reduces the outstanding notional   and generates a corresponding receive-leg cashflow. The   final maturity cashflow is adjusted accordingly.  If multiple events are created, their effects compound.   Once the total repaid amount reaches the original purchase   price, no further receive-leg cashflows are generated. Any   event exceeding the remaining notional is marked with a   diagnostic to indicate it is invalid due to excessive repayment.  For example, for a repo with a 5% rate, 1% haircut and   collateral value of 100 (purchase price = 99), a partial   closure of cash amount 10 followed by one of 100 results in   only the first event producing a cashflow. The second,   exceeding the remaining balance, is ignored and flagged   with a diagnostic. The remaining balance is settled at   maturity of the repurchase agreement.  Specific to a  instrument.  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="Amount that the limit and balance are changed by.  A positive number signifies an increase, and a negative number here signifies a decrease.")
-    var_date: Optional[datetime] = Field(None, alias="date", description="Date of the adjustment.  Signifies when the facility begins to accrue interest.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="Required property.  The date on which the counterparties become entitled   to exchange cash as part of a partial closure of the   repurchase agreement. The date must be before or on   the settlement date, and on or before the maturity   date of the repo.")
+    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="Required property.  The date on which the exchange of cash is settled.   The date must be on or after the entitlement date,  and on or before the maturity date of the repo.")
+    amount: Union[StrictFloat, StrictInt] = Field(..., description="The amount of cash to be exchanged as part of a partial closure of the repurchase agreement.  Either the absolute cash amount or a percentage of the remaining amount,  depending on the AmountType.")
+    amount_type:  StrictStr = Field(...,alias="amountType", description="AmountType of the cash amount to be exchanged as part of a partial closure of the repurchase agreement.  Either percentage or absolute cash amount.    Supported string (enumeration) values are: [Percentage, Units].") 
+    partial_closure_constituents: conlist(PartialClosureConstituent) = Field(..., alias="partialClosureConstituents", description="List of the collateral instruments involved in this partial closure, along with how they are affected.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "amount", "date"]
+    __properties = ["instrumentEventType", "entitlementDate", "settlementDate", "amount", "amountType", "partialClosureConstituents"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -43,7 +47,7 @@ class AdjustGlobalCommitmentEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'AdjustGlobalCommitmentEvent' not in [ 
+        if 'FlexibleRepoPartialClosureEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -113,8 +117,8 @@ class AdjustGlobalCommitmentEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AdjustGlobalCommitmentEvent:
-        """Create an instance of AdjustGlobalCommitmentEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> FlexibleRepoPartialClosureEvent:
+        """Create an instance of FlexibleRepoPartialClosureEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -124,6 +128,13 @@ class AdjustGlobalCommitmentEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in partial_closure_constituents (list)
+        _items = []
+        if self.partial_closure_constituents:
+            for _item in self.partial_closure_constituents:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['partialClosureConstituents'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -132,18 +143,21 @@ class AdjustGlobalCommitmentEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AdjustGlobalCommitmentEvent:
-        """Create an instance of AdjustGlobalCommitmentEvent from a dict"""
+    def from_dict(cls, obj: dict) -> FlexibleRepoPartialClosureEvent:
+        """Create an instance of FlexibleRepoPartialClosureEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AdjustGlobalCommitmentEvent.parse_obj(obj)
+            return FlexibleRepoPartialClosureEvent.parse_obj(obj)
 
-        _obj = AdjustGlobalCommitmentEvent.parse_obj({
+        _obj = FlexibleRepoPartialClosureEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
+            "entitlement_date": obj.get("entitlementDate"),
+            "settlement_date": obj.get("settlementDate"),
             "amount": obj.get("amount"),
-            "var_date": obj.get("date")
+            "amount_type": obj.get("amountType"),
+            "partial_closure_constituents": [PartialClosureConstituent.from_dict(_item) for _item in obj.get("partialClosureConstituents")] if obj.get("partialClosureConstituents") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

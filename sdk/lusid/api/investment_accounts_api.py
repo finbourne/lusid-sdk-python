@@ -22,11 +22,12 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
 
 from typing import Dict, Optional
 
 from lusid.models.investment_account import InvestmentAccount
+from lusid.models.resource_list_of_investment_account import ResourceListOfInvestmentAccount
 from lusid.models.upsert_investment_account_request import UpsertInvestmentAccountRequest
 from lusid.models.upsert_investment_accounts_response import UpsertInvestmentAccountsResponse
 
@@ -66,7 +67,7 @@ class InvestmentAccountsApi:
 
     @validate_arguments
     def get_investment_account(self, id_type_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], id_type_code : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], code : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InvestmentAccount, Awaitable[InvestmentAccount]]:  # noqa: E501
-        """[EARLY ACCESS] GetInvestmentAccount: Get Investment Account  # noqa: E501
+        """[EXPERIMENTAL] GetInvestmentAccount: Get Investment Account  # noqa: E501
 
         Retrieve the definition of an investment account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -109,7 +110,7 @@ class InvestmentAccountsApi:
 
     @validate_arguments
     def get_investment_account_with_http_info(self, id_type_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], id_type_code : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], code : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetInvestmentAccount: Get Investment Account  # noqa: E501
+        """[EXPERIMENTAL] GetInvestmentAccount: Get Investment Account  # noqa: E501
 
         Retrieve the definition of an investment account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -262,6 +263,220 @@ class InvestmentAccountsApi:
 
 
     @overload
+    async def list_all_investment_accounts(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> ResourceListOfInvestmentAccount:  # noqa: E501
+        ...
+
+    @overload
+    def list_all_investment_accounts(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfInvestmentAccount:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_all_investment_accounts(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfInvestmentAccount, Awaitable[ResourceListOfInvestmentAccount]]:  # noqa: E501
+        """[EXPERIMENTAL] ListAllInvestmentAccounts: List Investment Accounts  # noqa: E501
+
+        List all investment accounts which the user is entitled to see.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_all_investment_accounts(effective_at, as_at, page, limit, filter, sort_by, property_keys, relationship_definition_ids, async_req=True)
+        >>> result = thread.get()
+
+        :param effective_at: The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param property_keys: A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".
+        :type property_keys: List[str]
+        :param relationship_definition_ids: A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.
+        :type relationship_definition_ids: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfInvestmentAccount
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_all_investment_accounts_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_all_investment_accounts_with_http_info(effective_at, as_at, page, limit, filter, sort_by, property_keys, relationship_definition_ids, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_all_investment_accounts_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListAllInvestmentAccounts: List Investment Accounts  # noqa: E501
+
+        List all investment accounts which the user is entitled to see.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_all_investment_accounts_with_http_info(effective_at, as_at, page, limit, filter, sort_by, property_keys, relationship_definition_ids, async_req=True)
+        >>> result = thread.get()
+
+        :param effective_at: The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param property_keys: A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".
+        :type property_keys: List[str]
+        :param relationship_definition_ids: A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.
+        :type relationship_definition_ids: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfInvestmentAccount, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'effective_at',
+            'as_at',
+            'page',
+            'limit',
+            'filter',
+            'sort_by',
+            'property_keys',
+            'relationship_definition_ids'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_all_investment_accounts" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('relationship_definition_ids') is not None:  # noqa: E501
+            _query_params.append(('relationshipDefinitionIds', _params['relationship_definition_ids']))
+            _collection_formats['relationshipDefinitionIds'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfInvestmentAccount",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/investmentaccounts', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def upsert_investment_accounts(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertInvestmentAccountRequest], Field(..., description="A collection of requests to create or update Investment Accounts.")], **kwargs) -> UpsertInvestmentAccountsResponse:  # noqa: E501
         ...
 
@@ -271,7 +486,7 @@ class InvestmentAccountsApi:
 
     @validate_arguments
     def upsert_investment_accounts(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertInvestmentAccountRequest], Field(..., description="A collection of requests to create or update Investment Accounts.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertInvestmentAccountsResponse, Awaitable[UpsertInvestmentAccountsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertInvestmentAccounts: Upsert Investment Accounts  # noqa: E501
+        """[EXPERIMENTAL] UpsertInvestmentAccounts: Upsert Investment Accounts  # noqa: E501
 
         Creates or updates a collection of Investment Accounts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -304,7 +519,7 @@ class InvestmentAccountsApi:
 
     @validate_arguments
     def upsert_investment_accounts_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")], request_body : Annotated[Dict[str, UpsertInvestmentAccountRequest], Field(..., description="A collection of requests to create or update Investment Accounts.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertInvestmentAccounts: Upsert Investment Accounts  # noqa: E501
+        """[EXPERIMENTAL] UpsertInvestmentAccounts: Upsert Investment Accounts  # noqa: E501
 
         Creates or updates a collection of Investment Accounts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

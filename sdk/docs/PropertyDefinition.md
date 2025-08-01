@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | [optional] 
+**custom_entity_types** | **List[str]** | The custom entity types that properties relating to this property definition can be applied to. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -56,8 +57,9 @@ version: Optional[Version] = None
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 is_filterable: Optional[StrictBool] = # Replace with your value
 is_filterable:Optional[StrictBool] = None
+custom_entity_types: Optional[conlist(StrictStr)] = # Replace with your value
 links: Optional[conlist(Link)] = None
-property_definition_instance = PropertyDefinition(href=href, key=key, value_type=value_type, display_name=display_name, data_type_id=data_type_id, type=type, unit_schema=unit_schema, domain=domain, scope=scope, code=code, value_required=value_required, life_time=life_time, constraint_style=constraint_style, property_definition_type=property_definition_type, property_description=property_description, derivation_formula=derivation_formula, collection_type=collection_type, properties=properties, version=version, staged_modifications=staged_modifications, is_filterable=is_filterable, links=links)
+property_definition_instance = PropertyDefinition(href=href, key=key, value_type=value_type, display_name=display_name, data_type_id=data_type_id, type=type, unit_schema=unit_schema, domain=domain, scope=scope, code=code, value_required=value_required, life_time=life_time, constraint_style=constraint_style, property_definition_type=property_definition_type, property_description=property_description, derivation_formula=derivation_formula, collection_type=collection_type, properties=properties, version=version, staged_modifications=staged_modifications, is_filterable=is_filterable, custom_entity_types=custom_entity_types, links=links)
 
 ```
 

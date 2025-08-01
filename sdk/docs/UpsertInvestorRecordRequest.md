@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties associated to the Investor Record. | [optional] 
 **display_name** | **str** | The display name of the Investor Record | 
 **description** | **str** | The description of the Investor Record | [optional] 
-**investor** | [**InvestorIdentifier**](InvestorIdentifier.md) |  | [optional] 
+**investor** | [**InvestorIdentifier**](InvestorIdentifier.md) |  | 
 ## Example
 
 ```python
@@ -20,7 +20,7 @@ identifiers: Dict[str, ModelProperty] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-investor: Optional[InvestorIdentifier] = None
+investor: InvestorIdentifier = # Replace with your value
 upsert_investor_record_request_instance = UpsertInvestorRecordRequest(identifiers=identifiers, properties=properties, display_name=display_name, description=description, investor=investor)
 
 ```

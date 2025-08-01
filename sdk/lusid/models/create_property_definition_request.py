@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.resource_id import ResourceId
 
 class CreatePropertyDefinitionRequest(BaseModel):
@@ -36,7 +36,8 @@ class CreatePropertyDefinitionRequest(BaseModel):
     constraint_style:  Optional[StrictStr] = Field(None,alias="constraintStyle", description="Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. Defaults to \"Property\" if not specified. Valid values for this field are: Property, Collection or Identifier.") 
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     collection_type:  Optional[StrictStr] = Field(None,alias="collectionType", description="Describes whether a collection property should behave as a set or as an array.") 
-    __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription", "collectionType"]
+    custom_entity_types: Optional[conlist(StrictStr)] = Field(None, alias="customEntityTypes", description="The custom entity types that properties relating to this property definition can be applied to.")
+    __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription", "collectionType", "customEntityTypes"]
 
     @validator('domain')
     def domain_validate_enum(cls, value):
@@ -209,6 +210,11 @@ class CreatePropertyDefinitionRequest(BaseModel):
         if self.collection_type is None and "collection_type" in self.__fields_set__:
             _dict['collectionType'] = None
 
+        # set to None if custom_entity_types (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custom_entity_types is None and "custom_entity_types" in self.__fields_set__:
+            _dict['customEntityTypes'] = None
+
         return _dict
 
     @classmethod
@@ -230,6 +236,7 @@ class CreatePropertyDefinitionRequest(BaseModel):
             "life_time": obj.get("lifeTime"),
             "constraint_style": obj.get("constraintStyle"),
             "property_description": obj.get("propertyDescription"),
-            "collection_type": obj.get("collectionType")
+            "collection_type": obj.get("collectionType"),
+            "custom_entity_types": obj.get("customEntityTypes")
         })
         return _obj

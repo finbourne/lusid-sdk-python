@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.model_property import ModelProperty
 
 class InvestorIdentifier(BaseModel):
     """
     Identification of an Investor on the LUSID API.  # noqa: E501
     """
-    investor_type:  Optional[StrictStr] = Field(None,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person or a LegalEntity") 
-    investor_identifiers: Optional[Dict[str, ModelProperty]] = Field(None, alias="investorIdentifiers", description="Single identifier that should target the desired person or legal entity")
-    __properties = ["investorType", "investorIdentifiers"]
+    investor_type:  StrictStr = Field(...,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person or a LegalEntity") 
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Single identifier that should target the desired person or legal entity")
+    __properties = ["investorType", "identifiers"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,22 +62,17 @@ class InvestorIdentifier(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in investor_identifiers (dict)
+        # override the default output from pydantic by calling `to_dict()` of each value in identifiers (dict)
         _field_dict = {}
-        if self.investor_identifiers:
-            for _key in self.investor_identifiers:
-                if self.investor_identifiers[_key]:
-                    _field_dict[_key] = self.investor_identifiers[_key].to_dict()
-            _dict['investorIdentifiers'] = _field_dict
-        # set to None if investor_type (nullable) is None
+        if self.identifiers:
+            for _key in self.identifiers:
+                if self.identifiers[_key]:
+                    _field_dict[_key] = self.identifiers[_key].to_dict()
+            _dict['identifiers'] = _field_dict
+        # set to None if identifiers (nullable) is None
         # and __fields_set__ contains the field
-        if self.investor_type is None and "investor_type" in self.__fields_set__:
-            _dict['investorType'] = None
-
-        # set to None if investor_identifiers (nullable) is None
-        # and __fields_set__ contains the field
-        if self.investor_identifiers is None and "investor_identifiers" in self.__fields_set__:
-            _dict['investorIdentifiers'] = None
+        if self.identifiers is None and "identifiers" in self.__fields_set__:
+            _dict['identifiers'] = None
 
         return _dict
 
@@ -92,11 +87,11 @@ class InvestorIdentifier(BaseModel):
 
         _obj = InvestorIdentifier.parse_obj({
             "investor_type": obj.get("investorType"),
-            "investor_identifiers": dict(
+            "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
-                for _k, _v in obj.get("investorIdentifiers").items()
+                for _k, _v in obj.get("identifiers").items()
             )
-            if obj.get("investorIdentifiers") is not None
+            if obj.get("identifiers") is not None
             else None
         })
         return _obj

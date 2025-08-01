@@ -39,7 +39,7 @@ class NavTypeDefinition(BaseModel):
     instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to the portfolios.")
     amortisation_method:  StrictStr = Field(...,alias="amortisationMethod") 
     transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope") 
-    cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate") 
+    cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
     __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
 
     class Config:
@@ -122,11 +122,6 @@ class NavTypeDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.transaction_type_scope is None and "transaction_type_scope" in self.__fields_set__:
             _dict['transactionTypeScope'] = None
-
-        # set to None if cash_gain_loss_calculation_date (nullable) is None
-        # and __fields_set__ contains the field
-        if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
-            _dict['cashGainLossCalculationDate'] = None
 
         return _dict
 

@@ -29,11 +29,11 @@ class Investor(BaseModel):
     Representation of an Investor on the LUSID API  # noqa: E501
     """
     investor_type:  Optional[StrictStr] = Field(None,alias="investorType", description="The type of the Investor") 
-    investor_identifiers: Optional[Dict[str, ModelProperty]] = Field(None, alias="investorIdentifiers", description="The identifiers of the Investor")
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="The identifiers of the Investor")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Investor entity identifier") 
     person: Optional[Person] = None
     legal_entity: Optional[LegalEntity] = Field(None, alias="legalEntity")
-    __properties = ["investorType", "investorIdentifiers", "entityUniqueId", "person", "legalEntity"]
+    __properties = ["investorType", "identifiers", "entityUniqueId", "person", "legalEntity"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,13 +67,13 @@ class Investor(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in investor_identifiers (dict)
+        # override the default output from pydantic by calling `to_dict()` of each value in identifiers (dict)
         _field_dict = {}
-        if self.investor_identifiers:
-            for _key in self.investor_identifiers:
-                if self.investor_identifiers[_key]:
-                    _field_dict[_key] = self.investor_identifiers[_key].to_dict()
-            _dict['investorIdentifiers'] = _field_dict
+        if self.identifiers:
+            for _key in self.identifiers:
+                if self.identifiers[_key]:
+                    _field_dict[_key] = self.identifiers[_key].to_dict()
+            _dict['identifiers'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of person
         if self.person:
             _dict['person'] = self.person.to_dict()
@@ -85,10 +85,10 @@ class Investor(BaseModel):
         if self.investor_type is None and "investor_type" in self.__fields_set__:
             _dict['investorType'] = None
 
-        # set to None if investor_identifiers (nullable) is None
+        # set to None if identifiers (nullable) is None
         # and __fields_set__ contains the field
-        if self.investor_identifiers is None and "investor_identifiers" in self.__fields_set__:
-            _dict['investorIdentifiers'] = None
+        if self.identifiers is None and "identifiers" in self.__fields_set__:
+            _dict['identifiers'] = None
 
         # set to None if entity_unique_id (nullable) is None
         # and __fields_set__ contains the field
@@ -108,11 +108,11 @@ class Investor(BaseModel):
 
         _obj = Investor.parse_obj({
             "investor_type": obj.get("investorType"),
-            "investor_identifiers": dict(
+            "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
-                for _k, _v in obj.get("investorIdentifiers").items()
+                for _k, _v in obj.get("identifiers").items()
             )
-            if obj.get("investorIdentifiers") is not None
+            if obj.get("identifiers") is not None
             else None,
             "entity_unique_id": obj.get("entityUniqueId"),
             "person": Person.from_dict(obj.get("person")) if obj.get("person") is not None else None,
