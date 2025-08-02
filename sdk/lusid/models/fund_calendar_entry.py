@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.version import Version
@@ -30,10 +30,12 @@ class FundCalendarEntry(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with.") 
+    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective at of the Calendar Entry.")
+    as_at: Optional[datetime] = Field(None, alias="asAt", description="The asAt datetime for the Calendar Entry.")
     entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. Only 'ValuationPoint' currently supported. The available values are: ValuationPointFundCalendarEntry") 
     version: Version = Field(...)
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
-    __properties = ["code", "displayName", "description", "navTypeCode", "entryType", "version", "href"]
+    __properties = ["code", "displayName", "description", "navTypeCode", "effectiveAt", "asAt", "entryType", "version", "href"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -155,6 +157,8 @@ class FundCalendarEntry(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "nav_type_code": obj.get("navTypeCode"),
+            "effective_at": obj.get("effectiveAt"),
+            "as_at": obj.get("asAt"),
             "entry_type": obj.get("entryType"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href")
