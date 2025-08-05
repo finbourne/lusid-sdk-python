@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
 from lusid.models.resource_id import ResourceId
 
 class RelationalDatasetFieldDefinition(BaseModel):
@@ -31,7 +31,7 @@ class RelationalDatasetFieldDefinition(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A detailed description of the field and its purpose.") 
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
     required: Optional[StrictBool] = Field(None, description="Whether this field is mandatory in the dataset.")
-    usage:  Optional[StrictStr] = Field(None,alias="usage", description="The intended usage of the field (SeriesIdentifier, Value, or Metadata).") 
+    usage:  StrictStr = Field(...,alias="usage", description="The intended usage of the field (SeriesIdentifier, Value, or Metadata).") 
     __properties = ["fieldName", "displayName", "description", "dataTypeId", "required", "usage"]
 
     class Config:
@@ -78,11 +78,6 @@ class RelationalDatasetFieldDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
-
-        # set to None if usage (nullable) is None
-        # and __fields_set__ contains the field
-        if self.usage is None and "usage" in self.__fields_set__:
-            _dict['usage'] = None
 
         return _dict
 
