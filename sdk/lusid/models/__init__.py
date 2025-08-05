@@ -171,6 +171,10 @@ from lusid.models.change_item import ChangeItem
 from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
 from lusid.models.chart_of_accounts_request import ChartOfAccountsRequest
+from lusid.models.check_definition import CheckDefinition
+from lusid.models.check_definition_dataset_schema import CheckDefinitionDatasetSchema
+from lusid.models.check_definition_rule import CheckDefinitionRule
+from lusid.models.check_definition_rule_set import CheckDefinitionRuleSet
 from lusid.models.check_step import CheckStep
 from lusid.models.check_step_request import CheckStepRequest
 from lusid.models.cleardown_module_details import CleardownModuleDetails
@@ -247,6 +251,7 @@ from lusid.models.counterparty_signatory import CounterpartySignatory
 from lusid.models.create_address_key_definition_request import CreateAddressKeyDefinitionRequest
 from lusid.models.create_amortisation_rule_set_request import CreateAmortisationRuleSetRequest
 from lusid.models.create_calendar_request import CreateCalendarRequest
+from lusid.models.create_check_definition_request import CreateCheckDefinitionRequest
 from lusid.models.create_closed_period_request import CreateClosedPeriodRequest
 from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
@@ -717,6 +722,7 @@ from lusid.models.paged_resource_list_of_amortisation_rule_set import PagedResou
 from lusid.models.paged_resource_list_of_block import PagedResourceListOfBlock
 from lusid.models.paged_resource_list_of_calendar import PagedResourceListOfCalendar
 from lusid.models.paged_resource_list_of_chart_of_accounts import PagedResourceListOfChartOfAccounts
+from lusid.models.paged_resource_list_of_check_definition import PagedResourceListOfCheckDefinition
 from lusid.models.paged_resource_list_of_cleardown_module_response import PagedResourceListOfCleardownModuleResponse
 from lusid.models.paged_resource_list_of_cleardown_module_rule import PagedResourceListOfCleardownModuleRule
 from lusid.models.paged_resource_list_of_closed_period import PagedResourceListOfClosedPeriod
@@ -1159,6 +1165,7 @@ from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
+from lusid.models.update_check_definition_request import UpdateCheckDefinitionRequest
 from lusid.models.update_compliance_template_request import UpdateComplianceTemplateRequest
 from lusid.models.update_custom_data_model_request import UpdateCustomDataModelRequest
 from lusid.models.update_custom_entity_definition_request import UpdateCustomEntityDefinitionRequest
@@ -1438,6 +1445,10 @@ __all__ = [
     "ChartOfAccounts",
     "ChartOfAccountsProperties",
     "ChartOfAccountsRequest",
+    "CheckDefinition",
+    "CheckDefinitionDatasetSchema",
+    "CheckDefinitionRule",
+    "CheckDefinitionRuleSet",
     "CheckStep",
     "CheckStepRequest",
     "CleardownModuleDetails",
@@ -1514,6 +1525,7 @@ __all__ = [
     "CreateAddressKeyDefinitionRequest",
     "CreateAmortisationRuleSetRequest",
     "CreateCalendarRequest",
+    "CreateCheckDefinitionRequest",
     "CreateClosedPeriodRequest",
     "CreateComplianceTemplateRequest",
     "CreateCorporateActionSourceRequest",
@@ -1984,6 +1996,7 @@ __all__ = [
     "PagedResourceListOfBlock",
     "PagedResourceListOfCalendar",
     "PagedResourceListOfChartOfAccounts",
+    "PagedResourceListOfCheckDefinition",
     "PagedResourceListOfCleardownModuleResponse",
     "PagedResourceListOfCleardownModuleRule",
     "PagedResourceListOfClosedPeriod",
@@ -2426,6 +2439,7 @@ __all__ = [
     "UnmatchedHoldingMethod",
     "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
+    "UpdateCheckDefinitionRequest",
     "UpdateComplianceTemplateRequest",
     "UpdateCustomDataModelRequest",
     "UpdateCustomEntityDefinitionRequest",

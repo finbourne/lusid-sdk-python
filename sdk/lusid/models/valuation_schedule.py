@@ -27,14 +27,15 @@ class ValuationSchedule(BaseModel):
     Specification object for the valuation schedule, how do we determine which days we wish to perform a valuation upon.  # noqa: E501
     """
     effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="If present, the EffectiveFrom and EffectiveAt dates are interpreted as a range of dates for which to perform a valuation.  In this case, valuation is calculated for the portfolio(s) for each business day in the given range.") 
-    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The market data time, i.e. the time to run the valuation request effective of.") 
+    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The market data time, i.e. the time to run the valuation request effective of.") 
     tenor:  Optional[StrictStr] = Field(None,alias="tenor", description="Tenor, e.g \"1D\", \"1M\" to be used in generating the date schedule when effectiveFrom and effectiveAt are both given and are not the same.") 
     roll_convention:  Optional[StrictStr] = Field(None,alias="rollConvention", description="When Tenor is given and is \"1M\" or longer, this specifies the rule which should be used to generate the date schedule.    For example, \"EndOfMonth\" to generate end of month dates, or \"1\" to specify the first day of the applicable month.") 
     holiday_calendars: Optional[conlist(StrictStr)] = Field(None, alias="holidayCalendars", description="The holiday calendar(s) that should be used in determining the date schedule.  Holiday calendar(s) are supplied by their names, for example, \"CoppClark\".   Note that when the calendars are not available (e.g. when the user has insufficient permissions),   a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.")
     valuation_date_times: Optional[conlist(StrictStr)] = Field(None, alias="valuationDateTimes", description="If given, this is the exact set of dates on which to perform a valuation. This will replace/override all other specified values if given.")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.  In that case, the BusinessDayConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.") 
     timeline_id: Optional[ResourceId] = Field(None, alias="timelineId")
-    __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention", "timelineId"]
+    closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="Unique identifier for a closed period within a given timeline. If this field is specified, the TimelineId  field must also be specified. If given, this field defines the effective date of the request as the  EffectiveEnd of the given closed period.") 
+    __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention", "timelineId", "closedPeriodId"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +77,11 @@ class ValuationSchedule(BaseModel):
         if self.effective_from is None and "effective_from" in self.__fields_set__:
             _dict['effectiveFrom'] = None
 
+        # set to None if effective_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_at is None and "effective_at" in self.__fields_set__:
+            _dict['effectiveAt'] = None
+
         # set to None if tenor (nullable) is None
         # and __fields_set__ contains the field
         if self.tenor is None and "tenor" in self.__fields_set__:
@@ -101,6 +107,11 @@ class ValuationSchedule(BaseModel):
         if self.business_day_convention is None and "business_day_convention" in self.__fields_set__:
             _dict['businessDayConvention'] = None
 
+        # set to None if closed_period_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.closed_period_id is None and "closed_period_id" in self.__fields_set__:
+            _dict['closedPeriodId'] = None
+
         return _dict
 
     @classmethod
@@ -120,6 +131,7 @@ class ValuationSchedule(BaseModel):
             "holiday_calendars": obj.get("holidayCalendars"),
             "valuation_date_times": obj.get("valuationDateTimes"),
             "business_day_convention": obj.get("businessDayConvention"),
-            "timeline_id": ResourceId.from_dict(obj.get("timelineId")) if obj.get("timelineId") is not None else None
+            "timeline_id": ResourceId.from_dict(obj.get("timelineId")) if obj.get("timelineId") is not None else None,
+            "closed_period_id": obj.get("closedPeriodId")
         })
         return _obj

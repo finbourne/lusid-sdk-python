@@ -4,7 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batch_amend**](CustomDataModelsApi.md#batch_amend) | **POST** /api/datamodel/$batchamend | [INTERNAL] BatchAmend: Batch amend Custom Data Models
+[**batch_amend**](CustomDataModelsApi.md#batch_amend) | **POST** /api/datamodel/$batchamend | [EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.
 [**create_custom_data_model**](CustomDataModelsApi.md#create_custom_data_model) | **POST** /api/datamodel/{entityType} | [EXPERIMENTAL] CreateCustomDataModel: Create a Custom Data Model
 [**delete_custom_data_model**](CustomDataModelsApi.md#delete_custom_data_model) | **DELETE** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
 [**get_custom_data_model**](CustomDataModelsApi.md#get_custom_data_model) | **GET** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 # **batch_amend**
 > BatchAmendCustomDataModelMembershipResponse batch_amend(success_mode, request_body)
 
-[INTERNAL] BatchAmend: Batch amend Custom Data Models
+[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.
 
 Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.
 
@@ -72,7 +72,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_amend(success_mode, request_body, opts=opts)
 
-        # [INTERNAL] BatchAmend: Batch amend Custom Data Models
+        # [EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.
         api_response = api_instance.batch_amend(success_mode, request_body)
         pprint(api_response)
 

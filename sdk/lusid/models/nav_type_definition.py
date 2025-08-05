@@ -36,11 +36,10 @@ class NavTypeDefinition(BaseModel):
     holding_recipe_id: ResourceId = Field(..., alias="holdingRecipeId")
     accounting_method:  StrictStr = Field(...,alias="accountingMethod") 
     sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="Set of unique holding identifiers, e.g. trader, desk, strategy.")
-    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to the portfolios.")
     amortisation_method:  StrictStr = Field(...,alias="amortisationMethod") 
     transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope") 
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
-    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -113,11 +112,6 @@ class NavTypeDefinition(BaseModel):
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
             _dict['subHoldingKeys'] = None
 
-        # set to None if instrument_scopes (nullable) is None
-        # and __fields_set__ contains the field
-        if self.instrument_scopes is None and "instrument_scopes" in self.__fields_set__:
-            _dict['instrumentScopes'] = None
-
         # set to None if transaction_type_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_type_scope is None and "transaction_type_scope" in self.__fields_set__:
@@ -145,7 +139,6 @@ class NavTypeDefinition(BaseModel):
             "holding_recipe_id": ResourceId.from_dict(obj.get("holdingRecipeId")) if obj.get("holdingRecipeId") is not None else None,
             "accounting_method": obj.get("accountingMethod"),
             "sub_holding_keys": obj.get("subHoldingKeys"),
-            "instrument_scopes": obj.get("instrumentScopes"),
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")

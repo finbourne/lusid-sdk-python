@@ -12,6 +12,7 @@ from lusid.api.application_metadata_api import ApplicationMetadataApi
 from lusid.api.blocks_api import BlocksApi
 from lusid.api.calendars_api import CalendarsApi
 from lusid.api.chart_of_accounts_api import ChartOfAccountsApi
+from lusid.api.check_definitions_api import CheckDefinitionsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.compliance_api import ComplianceApi
 from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
@@ -92,6 +93,7 @@ __all__ = [
     "BlocksApi",
     "CalendarsApi",
     "ChartOfAccountsApi",
+    "CheckDefinitionsApi",
     "ComplexMarketDataApi",
     "ComplianceApi",
     "ConfigurationRecipeApi",

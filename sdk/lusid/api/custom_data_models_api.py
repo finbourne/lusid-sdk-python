@@ -71,7 +71,7 @@ class CustomDataModelsApi:
 
     @validate_arguments
     def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchAmendCustomDataModelMembershipResponse, Awaitable[BatchAmendCustomDataModelMembershipResponse]]:  # noqa: E501
-        """[INTERNAL] BatchAmend: Batch amend Custom Data Models  # noqa: E501
+        """[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.  # noqa: E501
 
         Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -104,7 +104,7 @@ class CustomDataModelsApi:
 
     @validate_arguments
     def batch_amend_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[INTERNAL] BatchAmend: Batch amend Custom Data Models  # noqa: E501
+        """[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.  # noqa: E501
 
         Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

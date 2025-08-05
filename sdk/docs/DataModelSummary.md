@@ -9,12 +9,13 @@ Name | Type | Description | Notes
 **entity_type** | **str** | The entity type that the Custom Data Model binds to. | 
 **type** | **str** | Either Root or Leaf or Intermediate. | 
 **precedence** | **int** | Where in the hierarchy this model sits. | 
+**parent** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **children** | [**List[DataModelSummary]**](DataModelSummary.md) | Child Custom Data Models that will inherit from this data model. | 
 ## Example
 
 ```python
 from lusid.models.data_model_summary import DataModelSummary
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr
 
 id: ResourceId = # Replace with your value
@@ -24,8 +25,9 @@ entity_type: StrictStr = "example_entity_type"
 type: StrictStr = "example_type"
 precedence: StrictInt = # Replace with your value
 precedence: StrictInt = 42
+parent: Optional[ResourceId] = None
 children: conlist(DataModelSummary) = # Replace with your value
-data_model_summary_instance = DataModelSummary(id=id, display_name=display_name, description=description, entity_type=entity_type, type=type, precedence=precedence, children=children)
+data_model_summary_instance = DataModelSummary(id=id, display_name=display_name, description=description, entity_type=entity_type, type=type, precedence=precedence, parent=parent, children=children)
 
 ```
 

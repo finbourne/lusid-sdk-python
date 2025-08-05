@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist, constr 
 from lusid.models.resource_id import ResourceId
 
@@ -32,8 +32,9 @@ class DataModelSummary(BaseModel):
     entity_type:  StrictStr = Field(...,alias="entityType", description="The entity type that the Custom Data Model binds to.") 
     type:  StrictStr = Field(...,alias="type", description="Either Root or Leaf or Intermediate.") 
     precedence: StrictInt = Field(..., description="Where in the hierarchy this model sits.")
+    parent: Optional[ResourceId] = None
     children: conlist(DataModelSummary) = Field(..., description="Child Custom Data Models that will inherit from this data model.")
-    __properties = ["id", "displayName", "description", "entityType", "type", "precedence", "children"]
+    __properties = ["id", "displayName", "description", "entityType", "type", "precedence", "parent", "children"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +71,9 @@ class DataModelSummary(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of parent
+        if self.parent:
+            _dict['parent'] = self.parent.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in children (list)
         _items = []
         if self.children:
@@ -95,6 +99,7 @@ class DataModelSummary(BaseModel):
             "entity_type": obj.get("entityType"),
             "type": obj.get("type"),
             "precedence": obj.get("precedence"),
+            "parent": ResourceId.from_dict(obj.get("parent")) if obj.get("parent") is not None else None,
             "children": [DataModelSummary.from_dict(_item) for _item in obj.get("children")] if obj.get("children") is not None else None
         })
         return _obj
