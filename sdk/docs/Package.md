@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **order_instruction_ids** | [**List[ResourceId]**](ResourceId.md) | Related order instruction ids. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -22,8 +23,9 @@ order_ids: conlist(ResourceId) = # Replace with your value
 order_instruction_ids: conlist(ResourceId) = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 version: Optional[Version] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-package_instance = Package(id=id, order_ids=order_ids, order_instruction_ids=order_instruction_ids, properties=properties, version=version, links=links)
+package_instance = Package(id=id, order_ids=order_ids, order_instruction_ids=order_instruction_ids, properties=properties, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

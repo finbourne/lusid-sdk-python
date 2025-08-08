@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **execution_system** | **str** | Optionally specifies the execution system in use. | [optional] 
 **entry_type** | **str** | Optionally specifies the entry type of this placement. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -48,8 +49,9 @@ counterparty: Optional[StrictStr] = "example_counterparty"
 execution_system: Optional[StrictStr] = "example_execution_system"
 entry_type: Optional[StrictStr] = "example_entry_type"
 version: Optional[Version] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, links=links)
+placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

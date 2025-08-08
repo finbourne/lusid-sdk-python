@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **instrument_scope** | **str** | The scope in which the instrument lies | [optional] 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -34,8 +35,9 @@ price: Optional[CurrencyAndAmount] = None
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 version: Optional[Version] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-order_instruction_instance = OrderInstruction(id=id, created_date=created_date, properties=properties, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, version=version, links=links)
+order_instruction_instance = OrderInstruction(id=id, created_date=created_date, properties=properties, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

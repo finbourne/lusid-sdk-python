@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **settlement_currency_fx_rate** | **float** | The settlement currency to allocation currency FX rate. | [optional] 
 **counterparty** | **str** | The counterparty for this allocation. | [optional] 
 **execution_ids** | [**List[ResourceId]**](ResourceId.md) | The executions associated with this allocation | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -52,8 +53,9 @@ settlement_currency: Optional[StrictStr] = "example_settlement_currency"
 settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 counterparty: Optional[StrictStr] = "example_counterparty"
 execution_ids: Optional[conlist(ResourceId)] = # Replace with your value
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-allocation_instance = Allocation(id=id, allocated_order_id=allocated_order_id, portfolio_id=portfolio_id, quantity=quantity, instrument_identifiers=instrument_identifiers, version=version, properties=properties, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids, links=links)
+allocation_instance = Allocation(id=id, allocated_order_id=allocated_order_id, portfolio_id=portfolio_id, quantity=quantity, instrument_identifiers=instrument_identifiers, version=version, properties=properties, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids, data_model_membership=data_model_membership, links=links)
 
 ```
 

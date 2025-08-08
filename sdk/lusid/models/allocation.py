@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -50,8 +51,9 @@ class Allocation(BaseModel):
     settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="settlementCurrencyFxRate", description="The settlement currency to allocation currency FX rate.")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="The counterparty for this allocation.") 
     execution_ids: Optional[conlist(ResourceId)] = Field(None, alias="executionIds", description="The executions associated with this allocation")
+    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "allocatedOrderId", "portfolioId", "quantity", "instrumentIdentifiers", "version", "properties", "instrumentScope", "lusidInstrumentId", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds", "links"]
+    __properties = ["id", "allocatedOrderId", "portfolioId", "quantity", "instrumentIdentifiers", "version", "properties", "instrumentScope", "lusidInstrumentId", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds", "dataModelMembership", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -121,6 +123,9 @@ class Allocation(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['executionIds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of data_model_membership
+        if self.data_model_membership:
+            _dict['dataModelMembership'] = self.data_model_membership.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -225,6 +230,7 @@ class Allocation(BaseModel):
             "settlement_currency_fx_rate": obj.get("settlementCurrencyFxRate"),
             "counterparty": obj.get("counterparty"),
             "execution_ids": [ResourceId.from_dict(_item) for _item in obj.get("executionIds")] if obj.get("executionIds") is not None else None,
+            "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

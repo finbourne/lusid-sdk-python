@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -32,8 +33,9 @@ class Participation(BaseModel):
     placement_id: ResourceId = Field(..., alias="placementId")
     order_id: ResourceId = Field(..., alias="orderId")
     version: Optional[Version] = None
+    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "placementId", "orderId", "version", "links"]
+    __properties = ["id", "placementId", "orderId", "version", "dataModelMembership", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,9 @@ class Participation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of data_model_membership
+        if self.data_model_membership:
+            _dict['dataModelMembership'] = self.data_model_membership.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -107,6 +112,7 @@ class Participation(BaseModel):
             "placement_id": ResourceId.from_dict(obj.get("placementId")) if obj.get("placementId") is not None else None,
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **package_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -54,8 +55,9 @@ order_instruction_id: Optional[ResourceId] = # Replace with your value
 package_id: Optional[ResourceId] = # Replace with your value
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 amount: Optional[CurrencyAndAmount] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-order_instance = Order(properties=properties, version=version, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction_id=order_instruction_id, package_id=package_id, weight=weight, amount=amount, links=links)
+order_instance = Order(properties=properties, version=version, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction_id=order_instruction_id, package_id=package_id, weight=weight, amount=amount, data_model_membership=data_model_membership, links=links)
 
 ```
 

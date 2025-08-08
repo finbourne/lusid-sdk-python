@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_fee**
-> Fee create_fee(scope, code, fee_request)
+> Fee create_fee(scope, code, fee_request, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] CreateFee: Create a Fee.
 
@@ -196,13 +196,14 @@ def main():
     # fee_request = FeeRequest.from_json("")
     # fee_request = FeeRequest.from_dict({})
     fee_request = FeeRequest()
+    nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.create_fee(scope, code, fee_request, opts=opts)
+        # api_response =  api_instance.create_fee(scope, code, fee_request, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] CreateFee: Create a Fee.
-        api_response = api_instance.create_fee(scope, code, fee_request)
+        api_response = api_instance.create_fee(scope, code, fee_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -218,6 +219,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **fee_request** | [**FeeRequest**](FeeRequest.md)| The Fee to create. | 
+ **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 

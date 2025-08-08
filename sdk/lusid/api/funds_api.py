@@ -262,22 +262,22 @@ class FundsApi:
 
 
     @overload
-    async def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> Fee:  # noqa: E501
+    async def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> Fee:  # noqa: E501
         ...
 
     @overload
-    def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
+    def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
+    def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
         """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
 
         Create the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_fee(scope, code, fee_request, async_req=True)
+        >>> thread = api.create_fee(scope, code, fee_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -286,6 +286,8 @@ class FundsApi:
         :type code: str
         :param fee_request: The Fee to create. (required)
         :type fee_request: FeeRequest
+        :param nav_type_code: When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -302,17 +304,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.create_fee_with_http_info(scope, code, fee_request, **kwargs)  # noqa: E501
+        return self.create_fee_with_http_info(scope, code, fee_request, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
 
         Create the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_fee_with_http_info(scope, code, fee_request, async_req=True)
+        >>> thread = api.create_fee_with_http_info(scope, code, fee_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -321,6 +323,8 @@ class FundsApi:
         :type code: str
         :param fee_request: The Fee to create. (required)
         :type fee_request: FeeRequest
+        :param nav_type_code: When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -350,7 +354,8 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'fee_request'
+            'fee_request',
+            'nav_type_code'
         ]
         _all_params.extend(
             [
@@ -388,6 +393,9 @@ class FundsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

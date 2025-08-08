@@ -399,22 +399,22 @@ class OrdersApi:
 
 
     @overload
-    async def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
+    async def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, membership_type : Annotated[Optional[StrictStr], Field( description="The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member.")] = None, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
         ...
 
     @overload
-    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
+    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, membership_type : Annotated[Optional[StrictStr], Field( description="The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrder, Awaitable[PagedResourceListOfOrder]]:  # noqa: E501
+    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, membership_type : Annotated[Optional[StrictStr], Field( description="The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrder, Awaitable[PagedResourceListOfOrder]]:  # noqa: E501
         """ListOrders: List Orders  # noqa: E501
 
         Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_orders(as_at, page, sort_by, limit, filter, property_keys, async_req=True)
+        >>> thread = api.list_orders(as_at, page, sort_by, limit, filter, property_keys, data_model_scope, data_model_code, membership_type, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.
@@ -429,6 +429,12 @@ class OrdersApi:
         :type filter: str
         :param property_keys: A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.
         :type property_keys: List[str]
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
+        :param membership_type: The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member.
+        :type membership_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -445,17 +451,17 @@ class OrdersApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_orders_with_http_info(as_at, page, sort_by, limit, filter, property_keys, **kwargs)  # noqa: E501
+        return self.list_orders_with_http_info(as_at, page, sort_by, limit, filter, property_keys, data_model_scope, data_model_code, membership_type, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_orders_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_orders_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, membership_type : Annotated[Optional[StrictStr], Field( description="The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListOrders: List Orders  # noqa: E501
 
         Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_orders_with_http_info(as_at, page, sort_by, limit, filter, property_keys, async_req=True)
+        >>> thread = api.list_orders_with_http_info(as_at, page, sort_by, limit, filter, property_keys, data_model_scope, data_model_code, membership_type, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.
@@ -470,6 +476,12 @@ class OrdersApi:
         :type filter: str
         :param property_keys: A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here.
         :type property_keys: List[str]
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
+        :param membership_type: The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member.
+        :type membership_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -502,7 +514,10 @@ class OrdersApi:
             'sort_by',
             'limit',
             'filter',
-            'property_keys'
+            'property_keys',
+            'data_model_scope',
+            'data_model_code',
+            'membership_type'
         ]
         _all_params.extend(
             [
@@ -556,6 +571,15 @@ class OrdersApi:
         if _params.get('property_keys') is not None:  # noqa: E501
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
+
+        if _params.get('membership_type') is not None:  # noqa: E501
+            _query_params.append(('membershipType', _params['membership_type']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

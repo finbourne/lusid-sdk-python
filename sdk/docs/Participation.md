@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **placement_id** | [**ResourceId**](ResourceId.md) |  | 
 **order_id** | [**ResourceId**](ResourceId.md) |  | 
 **version** | [**Version**](Version.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -20,8 +21,9 @@ id: ResourceId = # Replace with your value
 placement_id: ResourceId = # Replace with your value
 order_id: ResourceId = # Replace with your value
 version: Optional[Version] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-participation_instance = Participation(id=id, placement_id=placement_id, order_id=order_id, version=version, links=links)
+participation_instance = Participation(id=id, placement_id=placement_id, order_id=order_id, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

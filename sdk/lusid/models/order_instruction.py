@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.currency_and_amount import CurrencyAndAmount
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -41,8 +42,9 @@ class OrderInstruction(BaseModel):
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies") 
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.") 
     version: Optional[Version] = None
+    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "createdDate", "properties", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "instrumentScope", "lusidInstrumentId", "version", "links"]
+    __properties = ["id", "createdDate", "properties", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "instrumentScope", "lusidInstrumentId", "version", "dataModelMembership", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -95,6 +97,9 @@ class OrderInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of data_model_membership
+        if self.data_model_membership:
+            _dict['dataModelMembership'] = self.data_model_membership.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -160,6 +165,7 @@ class OrderInstruction(BaseModel):
             "instrument_scope": obj.get("instrumentScope"),
             "lusid_instrument_id": obj.get("lusidInstrumentId"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

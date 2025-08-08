@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **counterparty** | **str** | The market entity this placement is placed with. | 
 **average_price** | **float** | The average price of all executions for a given placement at the time of upsert | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -46,8 +47,9 @@ settlement_currency_fx_rate: Union[StrictFloat, StrictInt] = # Replace with your
 counterparty: StrictStr = "example_counterparty"
 average_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 version: Optional[Version] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-execution_instance = Execution(id=id, placement_id=placement_id, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, state=state, side=side, type=type, created_date=created_date, settlement_date=settlement_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, average_price=average_price, version=version, links=links)
+execution_instance = Execution(id=id, placement_id=placement_id, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, state=state, side=side, type=type, created_date=created_date, settlement_date=settlement_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, average_price=average_price, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

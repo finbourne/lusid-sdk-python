@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **is_swept** | **bool** | Swept blocks are considered no longer of active interest, and no longer take part in various order management processes | 
 **version** | [**Version**](Version.md) |  | [optional] 
+**data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -41,8 +42,9 @@ stop_price: Optional[CurrencyAndAmount] = # Replace with your value
 is_swept: StrictBool = # Replace with your value
 is_swept:StrictBool = True
 version: Optional[Version] = None
+data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[conlist(Link)] = None
-block_instance = Block(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept, version=version, links=links)
+block_instance = Block(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 
