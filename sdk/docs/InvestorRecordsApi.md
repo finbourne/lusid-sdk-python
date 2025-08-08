@@ -4,14 +4,14 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_investor_record**](InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
-[**get_investor_record**](InvestorRecordsApi.md#get_investor_record) | **GET** /api/investorrecords/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetInvestorRecord: Get Investor Record
+[**delete_investor_record**](InvestorRecordsApi.md#delete_investor_record) | **DELETE** /api/investorrecords/{identifierType}/{identifierValue} | [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
+[**get_investor_record**](InvestorRecordsApi.md#get_investor_record) | **GET** /api/investorrecords/{identifierType}/{identifierValue} | [EARLY ACCESS] GetInvestorRecord: Get Investor Record
 [**list_all_investor_records**](InvestorRecordsApi.md#list_all_investor_records) | **GET** /api/investorrecords | [EARLY ACCESS] ListAllInvestorRecords: List Investor Records
 [**upsert_investor_records**](InvestorRecordsApi.md#upsert_investor_records) | **POST** /api/investorrecords/$batchUpsert | [EARLY ACCESS] UpsertInvestorRecords: Upsert investor records
 
 
 # **delete_investor_record**
-> DeletedEntityResponse delete_investor_record(id_type_scope, id_type_code, code)
+> DeletedEntityResponse delete_investor_record(identifier_type, identifier_value, scope, identifier_scope)
 
 [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
 
@@ -62,16 +62,17 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestorRecordsApi)
-    id_type_scope = 'id_type_scope_example' # str | The scope of the investor record identifier type.
-    id_type_code = 'id_type_code_example' # str | The code of the investor record identifier type.
-    code = 'code_example' # str | Code of the investor record under specified identifier type's scope and code. This together with defined              identifier type uniquely identifies the investor record to delete.
+    identifier_type = 'identifier_type_example' # str | Code of the investor record identifier type.
+    identifier_value = 'identifier_value_example' # str | Code of the investor record under specified identifier type's scope and code.
+    scope = 'scope_example' # str | The scope of the investor record entity.
+    identifier_scope = 'identifier_scope_example' # str | Scope of the investor record identifier type.
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_investor_record(id_type_scope, id_type_code, code, opts=opts)
+        # api_response =  api_instance.delete_investor_record(identifier_type, identifier_value, scope, identifier_scope, opts=opts)
 
         # [EARLY ACCESS] DeleteInvestorRecord: Delete Investor Record
-        api_response = api_instance.delete_investor_record(id_type_scope, id_type_code, code)
+        api_response = api_instance.delete_investor_record(identifier_type, identifier_value, scope, identifier_scope)
         pprint(api_response)
 
     except ApiException as e:
@@ -84,9 +85,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id_type_scope** | **str**| The scope of the investor record identifier type. | 
- **id_type_code** | **str**| The code of the investor record identifier type. | 
- **code** | **str**| Code of the investor record under specified identifier type&#39;s scope and code. This together with defined              identifier type uniquely identifies the investor record to delete. | 
+ **identifier_type** | **str**| Code of the investor record identifier type. | 
+ **identifier_value** | **str**| Code of the investor record under specified identifier type&#39;s scope and code. | 
+ **scope** | **str**| The scope of the investor record entity. | 
+ **identifier_scope** | **str**| Scope of the investor record identifier type. | 
 
 ### Return type
 
@@ -107,7 +109,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_investor_record**
-> InvestorRecord get_investor_record(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
+> InvestorRecord get_investor_record(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
 
 [EARLY ACCESS] GetInvestorRecord: Get Investor Record
 
@@ -158,9 +160,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestorRecordsApi)
-    id_type_scope = 'id_type_scope_example' # str | Scope of the investor record identifier type.
-    id_type_code = 'id_type_code_example' # str | Code of the investor record identifier type.
-    code = 'code_example' # str | Code of the investor record under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investor record.
+    identifier_type = 'identifier_type_example' # str | Code of the investor record identifier type.
+    identifier_value = 'identifier_value_example' # str | Code of the investor record under specified identifier type's scope and code.
+    scope = 'scope_example' # str | The scope of the investor record entity.
+    identifier_scope = 'identifier_scope_example' # str | Scope of the investor record identifier type.
     property_keys = ['property_keys_example'] # List[str] | A list of property keys or identifier types (as property keys) from the \"InvestorRecord\" domain              to include for found investor record, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestorRecord/ContactDetails/Address\". (optional)
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the investor record. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the investor record. Defaults to return the latest version of the investor record if not specified. (optional)
@@ -168,10 +171,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_investor_record(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids, opts=opts)
+        # api_response =  api_instance.get_investor_record(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids, opts=opts)
 
         # [EARLY ACCESS] GetInvestorRecord: Get Investor Record
-        api_response = api_instance.get_investor_record(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
+        api_response = api_instance.get_investor_record(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
         pprint(api_response)
 
     except ApiException as e:
@@ -184,9 +187,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id_type_scope** | **str**| Scope of the investor record identifier type. | 
- **id_type_code** | **str**| Code of the investor record identifier type. | 
- **code** | **str**| Code of the investor record under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the investor record. | 
+ **identifier_type** | **str**| Code of the investor record identifier type. | 
+ **identifier_value** | **str**| Code of the investor record under specified identifier type&#39;s scope and code. | 
+ **scope** | **str**| The scope of the investor record entity. | 
+ **identifier_scope** | **str**| Scope of the investor record identifier type. | 
  **property_keys** | [**List[str]**](str.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestorRecord\&quot; domain              to include for found investor record, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestorRecord/ContactDetails/Address\&quot;. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the investor record. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the investor record. Defaults to return the latest version of the investor record if not specified. | [optional] 
@@ -369,7 +373,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestorRecordsApi)
     success_mode = 'success_mode_example' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
-    request_body = {"firstExampleRequest":{"identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"John Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord1DisplayName","description":"InvestorRecord1Description","investor":{"investorType":"Person","identifiers":{"Person/HrSystem1/InternalId":{"key":"Person/HrSystem1/InternalId","value":{"labelValue":"XY10001111"}}}}},"secondExampleRequest":{"identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_22345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2039"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"Jane Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"Germany"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord2DisplayName","description":"InvestorRecord2Description","investor":{"investorType":"LegalEntity","identifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}}}}}} # Dict[str, UpsertInvestorRecordRequest] | A collection of requests to create or update Investor Records.
+    request_body = {"firstExampleRequest":{"scope":"InvestorRecord1Scope","identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"John Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord1DisplayName","description":"InvestorRecord1Description","investor":{"investorType":"Person","identifiers":{"Person/HrSystem1/InternalId":{"key":"Person/HrSystem1/InternalId","value":{"labelValue":"XY10001111"}}}}},"secondExampleRequest":{"scope":"InvestorRecord2Scope","identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_22345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2039"}}},"properties":{"InvestorRecord/Details/Name":{"key":"InvestorRecord/Details/Name","value":{"labelValue":"Jane Doe"}},"InvestorRecord/Details/Country":{"key":"InvestorRecord/Details/Country","value":{"labelValue":"Germany"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestorRecord2DisplayName","description":"InvestorRecord2Description","investor":{"investorType":"LegalEntity","identifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}}}}}} # Dict[str, UpsertInvestorRecordRequest] | A collection of requests to create or update Investor Records.
 
     try:
         # uncomment the below to set overrides at the request level

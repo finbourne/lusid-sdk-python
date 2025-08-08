@@ -31,19 +31,20 @@ class InvestmentAccount(BaseModel):
     """
     Representation of an Investment Account on the LUSID API  # noqa: E501
     """
-    lusid_investment_account_id:  Optional[StrictStr] = Field(None,alias="lusidInvestmentAccountId", description="The unique LUSID Investment Account Identifier of the Investment Account.") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investment Account lies.") 
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Investment Account.")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the Investment Account") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investment Account") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Investment Account.")
     account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the of the Investment Account.") 
     account_holders: Optional[conlist(AccountHolder)] = Field(None, alias="accountHolders", description="The Account Holders of the Investment Account.")
     investment_portfolios: Optional[conlist(InvestmentPortfolio)] = Field(None, alias="investmentPortfolios", description="The Investment Portfolios of the Investment Account.")
+    lusid_investment_account_id:  Optional[StrictStr] = Field(None,alias="lusidInvestmentAccountId", description="The unique LUSID Investment Account Identifier of the Investment Account.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investment Account.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Investment Account.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["lusidInvestmentAccountId", "displayName", "description", "identifiers", "accountType", "accountHolders", "investmentPortfolios", "properties", "relationships", "href", "version", "links"]
+    __properties = ["scope", "identifiers", "displayName", "description", "accountType", "accountHolders", "investmentPortfolios", "lusidInvestmentAccountId", "properties", "relationships", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -122,10 +123,15 @@ class InvestmentAccount(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if lusid_investment_account_id (nullable) is None
+        # set to None if scope (nullable) is None
         # and __fields_set__ contains the field
-        if self.lusid_investment_account_id is None and "lusid_investment_account_id" in self.__fields_set__:
-            _dict['lusidInvestmentAccountId'] = None
+        if self.scope is None and "scope" in self.__fields_set__:
+            _dict['scope'] = None
+
+        # set to None if identifiers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.identifiers is None and "identifiers" in self.__fields_set__:
+            _dict['identifiers'] = None
 
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
@@ -136,11 +142,6 @@ class InvestmentAccount(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
-
-        # set to None if identifiers (nullable) is None
-        # and __fields_set__ contains the field
-        if self.identifiers is None and "identifiers" in self.__fields_set__:
-            _dict['identifiers'] = None
 
         # set to None if account_type (nullable) is None
         # and __fields_set__ contains the field
@@ -156,6 +157,11 @@ class InvestmentAccount(BaseModel):
         # and __fields_set__ contains the field
         if self.investment_portfolios is None and "investment_portfolios" in self.__fields_set__:
             _dict['investmentPortfolios'] = None
+
+        # set to None if lusid_investment_account_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lusid_investment_account_id is None and "lusid_investment_account_id" in self.__fields_set__:
+            _dict['lusidInvestmentAccountId'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -189,18 +195,19 @@ class InvestmentAccount(BaseModel):
             return InvestmentAccount.parse_obj(obj)
 
         _obj = InvestmentAccount.parse_obj({
-            "lusid_investment_account_id": obj.get("lusidInvestmentAccountId"),
-            "display_name": obj.get("displayName"),
-            "description": obj.get("description"),
+            "scope": obj.get("scope"),
             "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("identifiers").items()
             )
             if obj.get("identifiers") is not None
             else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
             "account_type": obj.get("accountType"),
             "account_holders": [AccountHolder.from_dict(_item) for _item in obj.get("accountHolders")] if obj.get("accountHolders") is not None else None,
             "investment_portfolios": [InvestmentPortfolio.from_dict(_item) for _item in obj.get("investmentPortfolios")] if obj.get("investmentPortfolios") is not None else None,
+            "lusid_investment_account_id": obj.get("lusidInvestmentAccountId"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

@@ -58,30 +58,32 @@ class InvestmentAccountsApi:
 
 
     @overload
-    async def get_investment_account(self, id_type_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], id_type_code : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], code : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> InvestmentAccount:  # noqa: E501
+    async def get_investment_account(self, identifier_type : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], identifier_value : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code.")], scope : Annotated[StrictStr, Field(..., description="The scope of the investment account entity.")], identifier_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> InvestmentAccount:  # noqa: E501
         ...
 
     @overload
-    def get_investment_account(self, id_type_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], id_type_code : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], code : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=True, **kwargs) -> InvestmentAccount:  # noqa: E501
+    def get_investment_account(self, identifier_type : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], identifier_value : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code.")], scope : Annotated[StrictStr, Field(..., description="The scope of the investment account entity.")], identifier_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=True, **kwargs) -> InvestmentAccount:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_investment_account(self, id_type_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], id_type_code : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], code : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InvestmentAccount, Awaitable[InvestmentAccount]]:  # noqa: E501
+    def get_investment_account(self, identifier_type : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], identifier_value : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code.")], scope : Annotated[StrictStr, Field(..., description="The scope of the investment account entity.")], identifier_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InvestmentAccount, Awaitable[InvestmentAccount]]:  # noqa: E501
         """[EXPERIMENTAL] GetInvestmentAccount: Get Investment Account  # noqa: E501
 
         Retrieve the definition of an investment account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_investment_account(id_type_scope, id_type_code, code, property_keys, effective_at, as_at, relationship_definition_ids, async_req=True)
+        >>> thread = api.get_investment_account(identifier_type, identifier_value, scope, identifier_scope, property_keys, effective_at, as_at, relationship_definition_ids, async_req=True)
         >>> result = thread.get()
 
-        :param id_type_scope: Scope of the investment account identifier type. (required)
-        :type id_type_scope: str
-        :param id_type_code: Code of the investment account identifier type. (required)
-        :type id_type_code: str
-        :param code: Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account. (required)
-        :type code: str
+        :param identifier_type: Code of the investment account identifier type. (required)
+        :type identifier_type: str
+        :param identifier_value: Code of the investment account under specified identifier type's scope and code. (required)
+        :type identifier_value: str
+        :param scope: The scope of the investment account entity. (required)
+        :type scope: str
+        :param identifier_scope: Scope of the investment account identifier type. (required)
+        :type identifier_scope: str
         :param property_keys: A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".
         :type property_keys: List[str]
         :param effective_at: The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.
@@ -106,25 +108,27 @@ class InvestmentAccountsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_investment_account_with_http_info(id_type_scope, id_type_code, code, property_keys, effective_at, as_at, relationship_definition_ids, **kwargs)  # noqa: E501
+        return self.get_investment_account_with_http_info(identifier_type, identifier_value, scope, identifier_scope, property_keys, effective_at, as_at, relationship_definition_ids, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_investment_account_with_http_info(self, id_type_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], id_type_code : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], code : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_investment_account_with_http_info(self, identifier_type : Annotated[StrictStr, Field(..., description="Code of the investment account identifier type.")], identifier_value : Annotated[StrictStr, Field(..., description="Code of the investment account under specified identifier type's scope and code.")], scope : Annotated[StrictStr, Field(..., description="The scope of the investment account entity.")], identifier_scope : Annotated[StrictStr, Field(..., description="Scope of the investment account identifier type.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified.")] = None, relationship_definition_ids : Annotated[Optional[conlist(StrictStr)], Field(description="A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetInvestmentAccount: Get Investment Account  # noqa: E501
 
         Retrieve the definition of an investment account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_investment_account_with_http_info(id_type_scope, id_type_code, code, property_keys, effective_at, as_at, relationship_definition_ids, async_req=True)
+        >>> thread = api.get_investment_account_with_http_info(identifier_type, identifier_value, scope, identifier_scope, property_keys, effective_at, as_at, relationship_definition_ids, async_req=True)
         >>> result = thread.get()
 
-        :param id_type_scope: Scope of the investment account identifier type. (required)
-        :type id_type_scope: str
-        :param id_type_code: Code of the investment account identifier type. (required)
-        :type id_type_code: str
-        :param code: Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account. (required)
-        :type code: str
+        :param identifier_type: Code of the investment account identifier type. (required)
+        :type identifier_type: str
+        :param identifier_value: Code of the investment account under specified identifier type's scope and code. (required)
+        :type identifier_value: str
+        :param scope: The scope of the investment account entity. (required)
+        :type scope: str
+        :param identifier_scope: Scope of the investment account identifier type. (required)
+        :type identifier_scope: str
         :param property_keys: A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\".
         :type property_keys: List[str]
         :param effective_at: The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified.
@@ -160,9 +164,10 @@ class InvestmentAccountsApi:
         _params = locals()
 
         _all_params = [
-            'id_type_scope',
-            'id_type_code',
-            'code',
+            'identifier_type',
+            'identifier_value',
+            'scope',
+            'identifier_scope',
             'property_keys',
             'effective_at',
             'as_at',
@@ -195,18 +200,21 @@ class InvestmentAccountsApi:
 
         # process the path parameters
         _path_params = {}
-        if _params['id_type_scope']:
-            _path_params['idTypeScope'] = _params['id_type_scope']
+        if _params['identifier_type']:
+            _path_params['identifierType'] = _params['identifier_type']
 
-        if _params['id_type_code']:
-            _path_params['idTypeCode'] = _params['id_type_code']
-
-        if _params['code']:
-            _path_params['code'] = _params['code']
+        if _params['identifier_value']:
+            _path_params['identifierValue'] = _params['identifier_value']
 
 
         # process the query parameters
         _query_params = []
+        if _params.get('scope') is not None:  # noqa: E501
+            _query_params.append(('scope', _params['scope']))
+
+        if _params.get('identifier_scope') is not None:  # noqa: E501
+            _query_params.append(('identifierScope', _params['identifier_scope']))
+
         if _params.get('property_keys') is not None:  # noqa: E501
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
@@ -244,7 +252,7 @@ class InvestmentAccountsApi:
         }
 
         return self.api_client.call_api(
-            '/api/investmentaccounts/{idTypeScope}/{idTypeCode}/{code}', 'GET',
+            '/api/investmentaccounts/{identifierType}/{identifierValue}', 'GET',
             _path_params,
             _query_params,
             _header_params,

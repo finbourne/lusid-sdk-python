@@ -28,10 +28,11 @@ class AccountHolder(BaseModel):
     An Account Holder of an Investment Account.  # noqa: E501
     """
     key:  Optional[StrictStr] = Field(None,alias="key", description="A client-defined key used to identify the Account Holder, unique within the Investment Account") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investor Record lies.") 
     identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Single Account Holder identifier that should target the desired Investor Record.")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique InvestorRecord entity identifier") 
     investor_record: Optional[InvestorRecord] = Field(None, alias="investorRecord")
-    __properties = ["key", "identifiers", "entityUniqueId", "investorRecord"]
+    __properties = ["key", "scope", "identifiers", "entityUniqueId", "investorRecord"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +81,11 @@ class AccountHolder(BaseModel):
         if self.key is None and "key" in self.__fields_set__:
             _dict['key'] = None
 
+        # set to None if scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.scope is None and "scope" in self.__fields_set__:
+            _dict['scope'] = None
+
         # set to None if identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.identifiers is None and "identifiers" in self.__fields_set__:
@@ -103,6 +109,7 @@ class AccountHolder(BaseModel):
 
         _obj = AccountHolder.parse_obj({
             "key": obj.get("key"),
+            "scope": obj.get("scope"),
             "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("identifiers").items()

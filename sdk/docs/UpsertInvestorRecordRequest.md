@@ -4,6 +4,7 @@ Request to create or update an investor record
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**scope** | **str** | The scope in which the Investor Record lies. | 
 **identifiers** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Unique client-defined identifiers of the Investor Record. | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties associated to the Investor Record. | [optional] 
 **display_name** | **str** | The display name of the Investor Record | 
@@ -16,12 +17,13 @@ from lusid.models.upsert_investor_record_request import UpsertInvestorRecordRequ
 from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, constr, validator
 
+scope: StrictStr = "example_scope"
 identifiers: Dict[str, ModelProperty] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 investor: InvestorIdentifier = # Replace with your value
-upsert_investor_record_request_instance = UpsertInvestorRecordRequest(identifiers=identifiers, properties=properties, display_name=display_name, description=description, investor=investor)
+upsert_investor_record_request_instance = UpsertInvestorRecordRequest(scope=scope, identifiers=identifiers, properties=properties, display_name=display_name, description=description, investor=investor)
 
 ```
 

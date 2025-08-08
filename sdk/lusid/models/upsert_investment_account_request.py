@@ -28,14 +28,15 @@ class UpsertInvestmentAccountRequest(BaseModel):
     """
     Request to create or update an investor record  # noqa: E501
     """
+    scope:  StrictStr = Field(...,alias="scope", description="The scope in which the Investment Account lies.") 
     identifiers: Dict[str, ModelProperty] = Field(..., description="Unique client-defined identifiers of the Investment Account.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investment Account.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Investment Account") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investment Account") 
     account_type:  StrictStr = Field(...,alias="accountType", description="The type of the of the Investment Account.") 
     account_holders: Optional[conlist(AccountHolderIdentifier)] = Field(None, alias="accountHolders", description="The identification of the account holders associated with this investment account")
     investment_portfolios: Optional[conlist(InvestmentPortfolioIdentifier)] = Field(None, alias="investmentPortfolios", description="The identification of the investment portfolios associated with this investment account")
-    __properties = ["identifiers", "properties", "displayName", "description", "accountType", "accountHolders", "investmentPortfolios"]
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investment Account.")
+    __properties = ["scope", "identifiers", "displayName", "description", "accountType", "accountHolders", "investmentPortfolios", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,13 +77,6 @@ class UpsertInvestmentAccountRequest(BaseModel):
                 if self.identifiers[_key]:
                     _field_dict[_key] = self.identifiers[_key].to_dict()
             _dict['identifiers'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
-        _field_dict = {}
-        if self.properties:
-            for _key in self.properties:
-                if self.properties[_key]:
-                    _field_dict[_key] = self.properties[_key].to_dict()
-            _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in account_holders (list)
         _items = []
         if self.account_holders:
@@ -97,11 +91,13 @@ class UpsertInvestmentAccountRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['investmentPortfolios'] = _items
-        # set to None if properties (nullable) is None
-        # and __fields_set__ contains the field
-        if self.properties is None and "properties" in self.__fields_set__:
-            _dict['properties'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -117,6 +113,11 @@ class UpsertInvestmentAccountRequest(BaseModel):
         if self.investment_portfolios is None and "investment_portfolios" in self.__fields_set__:
             _dict['investmentPortfolios'] = None
 
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         return _dict
 
     @classmethod
@@ -129,22 +130,23 @@ class UpsertInvestmentAccountRequest(BaseModel):
             return UpsertInvestmentAccountRequest.parse_obj(obj)
 
         _obj = UpsertInvestmentAccountRequest.parse_obj({
+            "scope": obj.get("scope"),
             "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("identifiers").items()
             )
             if obj.get("identifiers") is not None
             else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "account_type": obj.get("accountType"),
+            "account_holders": [AccountHolderIdentifier.from_dict(_item) for _item in obj.get("accountHolders")] if obj.get("accountHolders") is not None else None,
+            "investment_portfolios": [InvestmentPortfolioIdentifier.from_dict(_item) for _item in obj.get("investmentPortfolios")] if obj.get("investmentPortfolios") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None,
-            "display_name": obj.get("displayName"),
-            "description": obj.get("description"),
-            "account_type": obj.get("accountType"),
-            "account_holders": [AccountHolderIdentifier.from_dict(_item) for _item in obj.get("accountHolders")] if obj.get("accountHolders") is not None else None,
-            "investment_portfolios": [InvestmentPortfolioIdentifier.from_dict(_item) for _item in obj.get("investmentPortfolios")] if obj.get("investmentPortfolios") is not None else None
+            else None
         })
         return _obj

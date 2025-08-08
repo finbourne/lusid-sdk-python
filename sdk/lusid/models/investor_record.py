@@ -30,17 +30,18 @@ class InvestorRecord(BaseModel):
     """
     Representation of an Investor Record on the LUSID API  # noqa: E501
     """
-    lusid_investor_record_id:  Optional[StrictStr] = Field(None,alias="lusidInvestorRecordId", description="The unique LUSID Investor Record Identifier of the Investor Record.") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investor Record lies.") 
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Investor Record.")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the Investor Record") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investor Record") 
     investor: Optional[Investor] = None
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Investor Record.")
+    lusid_investor_record_id:  Optional[StrictStr] = Field(None,alias="lusidInvestorRecordId", description="The unique LUSID Investor Record Identifier of the Investor Record.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investor Record.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Investor Record.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["lusidInvestorRecordId", "displayName", "description", "investor", "identifiers", "properties", "relationships", "href", "version", "links"]
+    __properties = ["scope", "identifiers", "displayName", "description", "investor", "lusidInvestorRecordId", "properties", "relationships", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,9 +75,6 @@ class InvestorRecord(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of investor
-        if self.investor:
-            _dict['investor'] = self.investor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in identifiers (dict)
         _field_dict = {}
         if self.identifiers:
@@ -84,6 +82,9 @@ class InvestorRecord(BaseModel):
                 if self.identifiers[_key]:
                     _field_dict[_key] = self.identifiers[_key].to_dict()
             _dict['identifiers'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of investor
+        if self.investor:
+            _dict['investor'] = self.investor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -108,10 +109,15 @@ class InvestorRecord(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if lusid_investor_record_id (nullable) is None
+        # set to None if scope (nullable) is None
         # and __fields_set__ contains the field
-        if self.lusid_investor_record_id is None and "lusid_investor_record_id" in self.__fields_set__:
-            _dict['lusidInvestorRecordId'] = None
+        if self.scope is None and "scope" in self.__fields_set__:
+            _dict['scope'] = None
+
+        # set to None if identifiers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.identifiers is None and "identifiers" in self.__fields_set__:
+            _dict['identifiers'] = None
 
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
@@ -123,10 +129,10 @@ class InvestorRecord(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
-        # set to None if identifiers (nullable) is None
+        # set to None if lusid_investor_record_id (nullable) is None
         # and __fields_set__ contains the field
-        if self.identifiers is None and "identifiers" in self.__fields_set__:
-            _dict['identifiers'] = None
+        if self.lusid_investor_record_id is None and "lusid_investor_record_id" in self.__fields_set__:
+            _dict['lusidInvestorRecordId'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -160,16 +166,17 @@ class InvestorRecord(BaseModel):
             return InvestorRecord.parse_obj(obj)
 
         _obj = InvestorRecord.parse_obj({
-            "lusid_investor_record_id": obj.get("lusidInvestorRecordId"),
-            "display_name": obj.get("displayName"),
-            "description": obj.get("description"),
-            "investor": Investor.from_dict(obj.get("investor")) if obj.get("investor") is not None else None,
+            "scope": obj.get("scope"),
             "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("identifiers").items()
             )
             if obj.get("identifiers") is not None
             else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "investor": Investor.from_dict(obj.get("investor")) if obj.get("investor") is not None else None,
+            "lusid_investor_record_id": obj.get("lusidInvestorRecordId"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

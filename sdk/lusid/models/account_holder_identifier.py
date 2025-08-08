@@ -27,8 +27,9 @@ class AccountHolderIdentifier(BaseModel):
     AccountHolderIdentifier
     """
     key:  StrictStr = Field(...,alias="key", description="A client-defined key used to identify the Account Holder, unique within the Investment Account") 
+    scope:  StrictStr = Field(...,alias="scope", description="The scope in which the Investor Record lies.") 
     identifiers: Dict[str, ModelProperty] = Field(..., description="Single Account Holder identifier that should target the desired Investor Record.")
-    __properties = ["key", "identifiers"]
+    __properties = ["key", "scope", "identifiers"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +83,7 @@ class AccountHolderIdentifier(BaseModel):
 
         _obj = AccountHolderIdentifier.parse_obj({
             "key": obj.get("key"),
+            "scope": obj.get("scope"),
             "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("identifiers").items()

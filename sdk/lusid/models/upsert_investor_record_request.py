@@ -27,12 +27,13 @@ class UpsertInvestorRecordRequest(BaseModel):
     """
     Request to create or update an investor record  # noqa: E501
     """
+    scope:  StrictStr = Field(...,alias="scope", description="The scope in which the Investor Record lies.") 
     identifiers: Dict[str, ModelProperty] = Field(..., description="Unique client-defined identifiers of the Investor Record.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investor Record.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Investor Record") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investor Record") 
     investor: InvestorIdentifier = Field(...)
-    __properties = ["identifiers", "properties", "displayName", "description", "investor"]
+    __properties = ["scope", "identifiers", "properties", "displayName", "description", "investor"]
 
     class Config:
         """Pydantic configuration"""
@@ -105,6 +106,7 @@ class UpsertInvestorRecordRequest(BaseModel):
             return UpsertInvestorRecordRequest.parse_obj(obj)
 
         _obj = UpsertInvestorRecordRequest.parse_obj({
+            "scope": obj.get("scope"),
             "identifiers": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("identifiers").items()

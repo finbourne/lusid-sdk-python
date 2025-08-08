@@ -4,13 +4,13 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_investment_account**](InvestmentAccountsApi.md#get_investment_account) | **GET** /api/investmentaccounts/{idTypeScope}/{idTypeCode}/{code} | [EXPERIMENTAL] GetInvestmentAccount: Get Investment Account
+[**get_investment_account**](InvestmentAccountsApi.md#get_investment_account) | **GET** /api/investmentaccounts/{identifierType}/{identifierValue} | [EXPERIMENTAL] GetInvestmentAccount: Get Investment Account
 [**list_all_investment_accounts**](InvestmentAccountsApi.md#list_all_investment_accounts) | **GET** /api/investmentaccounts | [EXPERIMENTAL] ListAllInvestmentAccounts: List Investment Accounts
 [**upsert_investment_accounts**](InvestmentAccountsApi.md#upsert_investment_accounts) | **POST** /api/investmentaccounts/$batchUpsert | [EXPERIMENTAL] UpsertInvestmentAccounts: Upsert Investment Accounts
 
 
 # **get_investment_account**
-> InvestmentAccount get_investment_account(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
+> InvestmentAccount get_investment_account(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
 
 [EXPERIMENTAL] GetInvestmentAccount: Get Investment Account
 
@@ -61,9 +61,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestmentAccountsApi)
-    id_type_scope = 'id_type_scope_example' # str | Scope of the investment account identifier type.
-    id_type_code = 'id_type_code_example' # str | Code of the investment account identifier type.
-    code = 'code_example' # str | Code of the investment account under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the investment account.
+    identifier_type = 'identifier_type_example' # str | Code of the investment account identifier type.
+    identifier_value = 'identifier_value_example' # str | Code of the investment account under specified identifier type's scope and code.
+    scope = 'scope_example' # str | The scope of the investment account entity.
+    identifier_scope = 'identifier_scope_example' # str | Scope of the investment account identifier type.
     property_keys = ['property_keys_example'] # List[str] | A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\". (optional)
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified. (optional)
@@ -71,10 +72,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_investment_account(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids, opts=opts)
+        # api_response =  api_instance.get_investment_account(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids, opts=opts)
 
         # [EXPERIMENTAL] GetInvestmentAccount: Get Investment Account
-        api_response = api_instance.get_investment_account(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
+        api_response = api_instance.get_investment_account(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
         pprint(api_response)
 
     except ApiException as e:
@@ -87,9 +88,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id_type_scope** | **str**| Scope of the investment account identifier type. | 
- **id_type_code** | **str**| Code of the investment account identifier type. | 
- **code** | **str**| Code of the investment account under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the investment account. | 
+ **identifier_type** | **str**| Code of the investment account identifier type. | 
+ **identifier_value** | **str**| Code of the investment account under specified identifier type&#39;s scope and code. | 
+ **scope** | **str**| The scope of the investment account entity. | 
+ **identifier_scope** | **str**| Scope of the investment account identifier type. | 
  **property_keys** | [**List[str]**](str.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified. | [optional] 
@@ -272,7 +274,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestmentAccountsApi)
     success_mode = 'success_mode_example' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
-    request_body = {"firstExampleRequest":{"identifiers":{"InvestmentAccount/ExternalIdentifier/ExternalIAId":{"key":"InvestmentAccount/ExternalIdentifier/ExternalIAId","value":{"labelValue":"IA_12345678"}},"InvestmentAccount/InternalIdentifier/InternalIAId":{"key":"InvestmentAccount/InternalIdentifier/InternalIAId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"InvestmentAccount/Details/Name":{"key":"InvestmentAccount/Details/Name","value":{"labelValue":"John Doe"}},"InvestmentAccount/Details/Country":{"key":"InvestmentAccount/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestmentAccount1DisplayName","description":"InvestmentAccount1Description","accountType":"Personal","accountHolders":[{"key":"AccountHolder1","identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}}}],"investmentPortfolios":[]},"secondExampleRequest":{"identifiers":{"InvestmentAccount/ExternalIdentifier/ExternalIAId":{"key":"InvestmentAccount/ExternalIdentifier/ExternalIAId","value":{"labelValue":"IR_22345678"}},"InvestmentAccount/InternalIdentifier/InternalIAId":{"key":"InvestmentAccount/InternalIdentifier/InternalIAId","value":{"labelValue":"Internal_XHSP2039"}}},"properties":{"InvestmentAccount/Details/Name":{"key":"InvestmentAccount/Details/Name","value":{"labelValue":"Jane Doe"}},"InvestmentAccount/Details/Country":{"key":"InvestmentAccount/Details/Country","value":{"labelValue":"Germany"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}},"displayName":"InvestmentAccount2DisplayName","description":"InvestmentAccount2Description","accountType":"JointMixed","accountHolders":[{"key":"AccountHolder1","identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}}}],"investmentPortfolios":[]}} # Dict[str, UpsertInvestmentAccountRequest] | A collection of requests to create or update Investment Accounts.
+    request_body = {"firstExampleRequest":{"scope":"InvestmentAccount1Scope","identifiers":{"InvestmentAccount/ExternalIdentifier/ExternalIAId":{"key":"InvestmentAccount/ExternalIdentifier/ExternalIAId","value":{"labelValue":"IA_12345678"}},"InvestmentAccount/InternalIdentifier/InternalIAId":{"key":"InvestmentAccount/InternalIdentifier/InternalIAId","value":{"labelValue":"Internal_XHSP2038"}}},"displayName":"InvestmentAccount1DisplayName","description":"InvestmentAccount1Description","accountType":"Personal","accountHolders":[{"key":"AccountHolder1","identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}}}],"investmentPortfolios":[],"properties":{"InvestmentAccount/Details/Name":{"key":"InvestmentAccount/Details/Name","value":{"labelValue":"John Doe"}},"InvestmentAccount/Details/Country":{"key":"InvestmentAccount/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}}},"secondExampleRequest":{"scope":"InvestmentAccount2Scope","identifiers":{"InvestmentAccount/ExternalIdentifier/ExternalIAId":{"key":"InvestmentAccount/ExternalIdentifier/ExternalIAId","value":{"labelValue":"IR_22345678"}},"InvestmentAccount/InternalIdentifier/InternalIAId":{"key":"InvestmentAccount/InternalIdentifier/InternalIAId","value":{"labelValue":"Internal_XHSP2039"}}},"displayName":"InvestmentAccount2DisplayName","description":"InvestmentAccount2Description","accountType":"JointMixed","accountHolders":[{"key":"AccountHolder1","identifiers":{"InvestorRecord/ExternalIdentifier/ExternalIRId":{"key":"InvestorRecord/ExternalIdentifier/ExternalIRId","value":{"labelValue":"IR_12345678"}},"InvestorRecord/InternalIdentifier/InternalIRId":{"key":"InvestorRecord/InternalIdentifier/InternalIRId","value":{"labelValue":"Internal_XHSP2038"}}}}],"investmentPortfolios":[],"properties":{"InvestmentAccount/Details/Name":{"key":"InvestmentAccount/Details/Name","value":{"labelValue":"Jane Doe"}},"InvestmentAccount/Details/Country":{"key":"InvestmentAccount/Details/Country","value":{"labelValue":"Germany"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"}}}} # Dict[str, UpsertInvestmentAccountRequest] | A collection of requests to create or update Investment Accounts.
 
     try:
         # uncomment the below to set overrides at the request level
