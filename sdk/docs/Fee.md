@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **share_classes** | **List[str]** | The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio. | [optional] 
+**nav_type_code** | **str** | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -51,8 +52,9 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
 portfolio_id: Optional[ResourceId] = # Replace with your value
 share_classes: Optional[conlist(StrictStr)] = # Replace with your value
+nav_type_code: Optional[StrictStr] = "example_nav_type_code"
 links: Optional[conlist(Link)] = None
-fee_instance = Fee(href=href, fee_code=fee_code, fee_type_id=fee_type_id, display_name=display_name, description=description, origin=origin, calculation_base=calculation_base, accrual_currency=accrual_currency, treatment=treatment, total_annual_accrual_amount=total_annual_accrual_amount, fee_rate_percentage=fee_rate_percentage, payable_frequency=payable_frequency, business_day_convention=business_day_convention, start_date=start_date, end_date=end_date, anchor_date=anchor_date, properties=properties, version=version, portfolio_id=portfolio_id, share_classes=share_classes, links=links)
+fee_instance = Fee(href=href, fee_code=fee_code, fee_type_id=fee_type_id, display_name=display_name, description=description, origin=origin, calculation_base=calculation_base, accrual_currency=accrual_currency, treatment=treatment, total_annual_accrual_amount=total_annual_accrual_amount, fee_rate_percentage=fee_rate_percentage, payable_frequency=payable_frequency, business_day_convention=business_day_convention, start_date=start_date, end_date=end_date, anchor_date=anchor_date, properties=properties, version=version, portfolio_id=portfolio_id, share_classes=share_classes, nav_type_code=nav_type_code, links=links)
 
 ```
 

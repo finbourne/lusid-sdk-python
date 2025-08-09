@@ -50,8 +50,9 @@ class Fee(BaseModel):
     version: Optional[Version] = None
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     share_classes: Optional[conlist(StrictStr)] = Field(None, alias="shareClasses", description="The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio.")
+    nav_type_code:  Optional[StrictStr] = Field(None,alias="navTypeCode", description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "feeCode", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "shareClasses", "links"]
+    __properties = ["href", "feeCode", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "shareClasses", "navTypeCode", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -156,6 +157,11 @@ class Fee(BaseModel):
         if self.share_classes is None and "share_classes" in self.__fields_set__:
             _dict['shareClasses'] = None
 
+        # set to None if nav_type_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nav_type_code is None and "nav_type_code" in self.__fields_set__:
+            _dict['navTypeCode'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -198,6 +204,7 @@ class Fee(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "share_classes": obj.get("shareClasses"),
+            "nav_type_code": obj.get("navTypeCode"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
