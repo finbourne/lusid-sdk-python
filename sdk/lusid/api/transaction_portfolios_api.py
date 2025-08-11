@@ -60,6 +60,8 @@ from lusid.models.resource_list_of_output_transaction import ResourceListOfOutpu
 from lusid.models.resource_list_of_portfolio_cash_flow import ResourceListOfPortfolioCashFlow
 from lusid.models.resource_list_of_portfolio_cash_ladder import ResourceListOfPortfolioCashLadder
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
+from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
+from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.transaction_query_parameters import TransactionQueryParameters
 from lusid.models.transaction_request import TransactionRequest
 from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
@@ -2464,6 +2466,175 @@ class TransactionPortfoliosApi:
 
         return self.api_client.call_api(
             '/api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def delete_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies              the portfolio.")], settlement_instruction_ids : Annotated[conlist(StrictStr), Field(..., description="A list of Ids of settlement instructions to be deleted.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies              the portfolio.")], settlement_instruction_ids : Annotated[conlist(StrictStr), Field(..., description="A list of Ids of settlement instructions to be deleted.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies              the portfolio.")], settlement_instruction_ids : Annotated[conlist(StrictStr), Field(..., description="A list of Ids of settlement instructions to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EARLY ACCESS] DeleteSettlementInstructions: Delete Settlement Instructions.  # noqa: E501
+
+        Delete the specified settlement instructions  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_settlement_instructions(scope, code, settlement_instruction_ids, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies              the portfolio. (required)
+        :type code: str
+        :param settlement_instruction_ids: A list of Ids of settlement instructions to be deleted. (required)
+        :type settlement_instruction_ids: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_settlement_instructions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_settlement_instructions_with_http_info(scope, code, settlement_instruction_ids, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies              the portfolio.")], settlement_instruction_ids : Annotated[conlist(StrictStr), Field(..., description="A list of Ids of settlement instructions to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] DeleteSettlementInstructions: Delete Settlement Instructions.  # noqa: E501
+
+        Delete the specified settlement instructions  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_settlement_instructions_with_http_info(scope, code, settlement_instruction_ids, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies              the portfolio. (required)
+        :type code: str
+        :param settlement_instruction_ids: A list of Ids of settlement instructions to be deleted. (required)
+        :type settlement_instruction_ids: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'settlement_instruction_ids'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_settlement_instructions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('settlement_instruction_ids') is not None:  # noqa: E501
+            _query_params.append(('settlementInstructionIds', _params['settlement_instruction_ids']))
+            _collection_formats['settlementInstructionIds'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/settlementinstructions', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -6341,6 +6512,217 @@ class TransactionPortfoliosApi:
 
 
     @overload
+    async def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, **kwargs) -> ResourceListOfTransactionSettlementInstruction:  # noqa: E501
+        ...
+
+    @overload
+    def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionSettlementInstruction:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionSettlementInstruction, Awaitable[ResourceListOfTransactionSettlementInstruction]]:  # noqa: E501
+        """[EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.  # noqa: E501
+
+        Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_settlement_instructions(scope, code, from_date, to_date, page, limit, filter, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio to retrieve settlement instructions for. (required)
+        :type scope: str
+        :param code: The code of the portfolio to retrieve settlement instructions for. (required)
+        :type code: str
+        :param from_date: The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.
+        :type from_date: str
+        :param to_date: The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.
+        :type to_date: str
+        :param page: The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: The expression to filter out settlement instructions
+        :type filter: str
+        :param as_at: The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfTransactionSettlementInstruction
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_settlement_instructions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_settlement_instructions_with_http_info(scope, code, from_date, to_date, page, limit, filter, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.  # noqa: E501
+
+        Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_settlement_instructions_with_http_info(scope, code, from_date, to_date, page, limit, filter, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio to retrieve settlement instructions for. (required)
+        :type scope: str
+        :param code: The code of the portfolio to retrieve settlement instructions for. (required)
+        :type code: str
+        :param from_date: The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.
+        :type from_date: str
+        :param to_date: The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.
+        :type to_date: str
+        :param page: The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: The expression to filter out settlement instructions
+        :type filter: str
+        :param as_at: The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfTransactionSettlementInstruction, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'from_date',
+            'to_date',
+            'page',
+            'limit',
+            'filter',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_settlement_instructions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('from_date') is not None:  # noqa: E501
+            _query_params.append(('fromDate', _params['from_date']))
+
+        if _params.get('to_date') is not None:  # noqa: E501
+            _query_params.append(('toDate', _params['to_date']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfTransactionSettlementInstruction",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/settlementinstructions', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def patch_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The patch document.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities.")] = None, **kwargs) -> PortfolioDetails:  # noqa: E501
         ...
 
@@ -7654,6 +8036,181 @@ class TransactionPortfoliosApi:
 
         return self.api_client.call_api(
             '/api/transactionportfolios/{scope}/{code}/details', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], settlement_instruction_request : Annotated[conlist(SettlementInstructionRequest), Field(..., description="The definition of the settlement instruction.")], **kwargs) -> ResourceListOfTransactionSettlementInstruction:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], settlement_instruction_request : Annotated[conlist(SettlementInstructionRequest), Field(..., description="The definition of the settlement instruction.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionSettlementInstruction:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], settlement_instruction_request : Annotated[conlist(SettlementInstructionRequest), Field(..., description="The definition of the settlement instruction.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionSettlementInstruction, Awaitable[ResourceListOfTransactionSettlementInstruction]]:  # noqa: E501
+        """[EARLY ACCESS] UpsertSettlementInstructions: Upsert Settlement Instructions.  # noqa: E501
+
+        Create or update instructions to settle specific transactions.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_settlement_instructions(scope, code, settlement_instruction_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. (required)
+        :type code: str
+        :param settlement_instruction_request: The definition of the settlement instruction. (required)
+        :type settlement_instruction_request: List[SettlementInstructionRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfTransactionSettlementInstruction
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_settlement_instructions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_settlement_instructions_with_http_info(scope, code, settlement_instruction_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], settlement_instruction_request : Annotated[conlist(SettlementInstructionRequest), Field(..., description="The definition of the settlement instruction.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpsertSettlementInstructions: Upsert Settlement Instructions.  # noqa: E501
+
+        Create or update instructions to settle specific transactions.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_settlement_instructions_with_http_info(scope, code, settlement_instruction_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. (required)
+        :type code: str
+        :param settlement_instruction_request: The definition of the settlement instruction. (required)
+        :type settlement_instruction_request: List[SettlementInstructionRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfTransactionSettlementInstruction, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'settlement_instruction_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_settlement_instructions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['settlement_instruction_request'] is not None:
+            _body_params = _params['settlement_instruction_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "ResourceListOfTransactionSettlementInstruction",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/settlementinstructions', 'POST',
             _path_params,
             _query_params,
             _header_params,

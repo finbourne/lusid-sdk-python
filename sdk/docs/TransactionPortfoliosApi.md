@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**create_trade_ticket**](TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | CreateTradeTicket: Create Trade Ticket
 [**delete_custodian_accounts**](TransactionPortfoliosApi.md#delete_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/$delete | DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
 [**delete_properties_from_transaction**](TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | DeletePropertiesFromTransaction: Delete properties from transaction
+[**delete_settlement_instructions**](TransactionPortfoliosApi.md#delete_settlement_instructions) | **DELETE** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] DeleteSettlementInstructions: Delete Settlement Instructions.
 [**get_a2_b_data**](TransactionPortfoliosApi.md#get_a2_b_data) | **GET** /api/transactionportfolios/{scope}/{code}/a2b | GetA2BData: Get A2B data
 [**get_a2_b_movements**](TransactionPortfoliosApi.md#get_a2_b_movements) | **GET** /api/transactionportfolios/{scope}/{code}/a2bmovements | GetA2BMovements: Get an A2B report at the movement level for the given portfolio.
 [**get_bucketed_cash_flows**](TransactionPortfoliosApi.md#get_bucketed_cash_flows) | **POST** /api/transactionportfolios/{scope}/{code}/bucketedCashFlows | GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
@@ -35,6 +36,7 @@ Method | HTTP request | Description
 [**get_upsertable_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_upsertable_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/upsertablecashflows | GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 [**list_custodian_accounts**](TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | ListCustodianAccounts: List Custodian Accounts
 [**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
+[**list_settlement_instructions**](TransactionPortfoliosApi.md#list_settlement_instructions) | **GET** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
 [**patch_portfolio_details**](TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
 [**preview_transaction**](TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | PreviewTransaction: Preview a transaction
 [**resolve_instrument**](TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
@@ -42,6 +44,7 @@ Method | HTTP request | Description
 [**upsert_custodian_accounts**](TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | UpsertCustodianAccounts: Upsert Custodian Accounts
 [**upsert_custodian_accounts_properties**](TransactionPortfoliosApi.md#upsert_custodian_accounts_properties) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode}/properties/$upsert | UpsertCustodianAccountsProperties: Upsert custodian accounts properties
 [**upsert_portfolio_details**](TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | UpsertPortfolioDetails: Upsert portfolio details
+[**upsert_settlement_instructions**](TransactionPortfoliosApi.md#upsert_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] UpsertSettlementInstructions: Upsert Settlement Instructions.
 [**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | UpsertTransactionProperties: Upsert transaction properties
 [**upsert_transactions**](TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
 
@@ -1339,6 +1342,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the property was deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_settlement_instructions**
+> DeletedEntityResponse delete_settlement_instructions(scope, code, settlement_instruction_ids)
+
+[EARLY ACCESS] DeleteSettlementInstructions: Delete Settlement Instructions.
+
+Delete the specified settlement instructions
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies              the portfolio.
+    settlement_instruction_ids = ['settlement_instruction_ids_example'] # List[str] | A list of Ids of settlement instructions to be deleted.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_settlement_instructions(scope, code, settlement_instruction_ids, opts=opts)
+
+        # [EARLY ACCESS] DeleteSettlementInstructions: Delete Settlement Instructions.
+        api_response = api_instance.delete_settlement_instructions(scope, code, settlement_instruction_ids)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->delete_settlement_instructions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies              the portfolio. | 
+ **settlement_instruction_ids** | [**List[str]**](str.md)| A list of Ids of settlement instructions to be deleted. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The ids of the deleted settlement instructions |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -3272,6 +3371,112 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_settlement_instructions**
+> ResourceListOfTransactionSettlementInstruction list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at)
+
+[EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
+
+Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio to retrieve settlement instructions for.
+    code = 'code_example' # str | The code of the portfolio to retrieve settlement instructions for.
+    from_date = 'from_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. (optional)
+    to_date = 'to_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | The expression to filter out settlement instructions (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
+        api_response = api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->list_settlement_instructions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio to retrieve settlement instructions for. | 
+ **code** | **str**| The code of the portfolio to retrieve settlement instructions for. | 
+ **from_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. | [optional] 
+ **to_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| The expression to filter out settlement instructions | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. | [optional] 
+
+### Return type
+
+[**ResourceListOfTransactionSettlementInstruction**](ResourceListOfTransactionSettlementInstruction.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Requested settlement instructions from the specified portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **patch_portfolio_details**
 > PortfolioDetails patch_portfolio_details(scope, code, operation, effective_at=effective_at)
 
@@ -3975,6 +4180,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The newly updated or inserted details |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_settlement_instructions**
+> ResourceListOfTransactionSettlementInstruction upsert_settlement_instructions(scope, code, settlement_instruction_request)
+
+[EARLY ACCESS] UpsertSettlementInstructions: Upsert Settlement Instructions.
+
+Create or update instructions to settle specific transactions.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio.
+    settlement_instruction_request = {"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10} # List[SettlementInstructionRequest] | The definition of the settlement instruction.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_settlement_instructions(scope, code, settlement_instruction_request, opts=opts)
+
+        # [EARLY ACCESS] UpsertSettlementInstructions: Upsert Settlement Instructions.
+        api_response = api_instance.upsert_settlement_instructions(scope, code, settlement_instruction_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->upsert_settlement_instructions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. | 
+ **settlement_instruction_request** | [**List[SettlementInstructionRequest]**](SettlementInstructionRequest.md)| The definition of the settlement instruction. | 
+
+### Return type
+
+[**ResourceListOfTransactionSettlementInstruction**](ResourceListOfTransactionSettlementInstruction.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The newly created or undated Settlement Instructions. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

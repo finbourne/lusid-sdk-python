@@ -1000,6 +1000,7 @@ from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefi
 from lusid.models.resource_list_of_string import ResourceListOfString
 from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
+from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
 from lusid.models.response_meta_data import ResponseMetaData
@@ -1043,6 +1044,7 @@ from lusid.models.set_share_class_instruments_request import SetShareClassInstru
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.settlement_cycle import SettlementCycle
+from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
@@ -1058,6 +1060,7 @@ from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.simple_rounding_convention import SimpleRoundingConvention
+from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
 from lusid.models.sort_order import SortOrder
 from lusid.models.specific_holding_pricing_info import SpecificHoldingPricingInfo
 from lusid.models.spin_off_event import SpinOffEvent
@@ -1129,6 +1132,7 @@ from lusid.models.transaction_request import TransactionRequest
 from lusid.models.transaction_roles import TransactionRoles
 from lusid.models.transaction_set_configuration_data import TransactionSetConfigurationData
 from lusid.models.transaction_set_configuration_data_request import TransactionSetConfigurationDataRequest
+from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
 from lusid.models.transaction_status import TransactionStatus
 from lusid.models.transaction_template import TransactionTemplate
 from lusid.models.transaction_template_request import TransactionTemplateRequest
@@ -2274,6 +2278,7 @@ __all__ = [
     "ResourceListOfString",
     "ResourceListOfTaxRuleSet",
     "ResourceListOfTransaction",
+    "ResourceListOfTransactionSettlementInstruction",
     "ResourceListOfTransactionType",
     "ResourceListOfValueType",
     "ResponseMetaData",
@@ -2317,6 +2322,7 @@ __all__ = [
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
     "SettlementCycle",
+    "SettlementInstructionRequest",
     "SettlementSchedule",
     "ShareClassAmount",
     "ShareClassBreakdown",
@@ -2332,6 +2338,7 @@ __all__ = [
     "SimpleCashFlowLoan",
     "SimpleInstrument",
     "SimpleRoundingConvention",
+    "SingleValuationPointQueryParameters",
     "SortOrder",
     "SpecificHoldingPricingInfo",
     "SpinOffEvent",
@@ -2403,6 +2410,7 @@ __all__ = [
     "TransactionRoles",
     "TransactionSetConfigurationData",
     "TransactionSetConfigurationDataRequest",
+    "TransactionSettlementInstruction",
     "TransactionStatus",
     "TransactionTemplate",
     "TransactionTemplateRequest",

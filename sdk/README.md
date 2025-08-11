@@ -245,6 +245,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties
 *FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
 *FundsApi* | [**get_fund_properties**](docs/FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EXPERIMENTAL] GetFundProperties: Get Fund properties
+*FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
 *FundsApi* | [**get_valuation_point_data**](docs/FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
 *FundsApi* | [**get_valuation_point_journal_entry_lines**](docs/FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
 *FundsApi* | [**get_valuation_point_pnl_summary**](docs/FundsApi.md#get_valuation_point_pnl_summary) | **POST** /api/funds/{scope}/{code}/valuationpoints/pnlsummary/$query | [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
@@ -608,6 +609,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**create_trade_ticket**](docs/TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | CreateTradeTicket: Create Trade Ticket
 *TransactionPortfoliosApi* | [**delete_custodian_accounts**](docs/TransactionPortfoliosApi.md#delete_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/$delete | DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
 *TransactionPortfoliosApi* | [**delete_properties_from_transaction**](docs/TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | DeletePropertiesFromTransaction: Delete properties from transaction
+*TransactionPortfoliosApi* | [**delete_settlement_instructions**](docs/TransactionPortfoliosApi.md#delete_settlement_instructions) | **DELETE** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] DeleteSettlementInstructions: Delete Settlement Instructions.
 *TransactionPortfoliosApi* | [**get_a2_b_data**](docs/TransactionPortfoliosApi.md#get_a2_b_data) | **GET** /api/transactionportfolios/{scope}/{code}/a2b | GetA2BData: Get A2B data
 *TransactionPortfoliosApi* | [**get_a2_b_movements**](docs/TransactionPortfoliosApi.md#get_a2_b_movements) | **GET** /api/transactionportfolios/{scope}/{code}/a2bmovements | GetA2BMovements: Get an A2B report at the movement level for the given portfolio.
 *TransactionPortfoliosApi* | [**get_bucketed_cash_flows**](docs/TransactionPortfoliosApi.md#get_bucketed_cash_flows) | **POST** /api/transactionportfolios/{scope}/{code}/bucketedCashFlows | GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
@@ -626,6 +628,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**get_upsertable_portfolio_cash_flows**](docs/TransactionPortfoliosApi.md#get_upsertable_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/upsertablecashflows | GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 *TransactionPortfoliosApi* | [**list_custodian_accounts**](docs/TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | ListCustodianAccounts: List Custodian Accounts
 *TransactionPortfoliosApi* | [**list_holdings_adjustments**](docs/TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
+*TransactionPortfoliosApi* | [**list_settlement_instructions**](docs/TransactionPortfoliosApi.md#list_settlement_instructions) | **GET** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
 *TransactionPortfoliosApi* | [**patch_portfolio_details**](docs/TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
 *TransactionPortfoliosApi* | [**preview_transaction**](docs/TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | PreviewTransaction: Preview a transaction
 *TransactionPortfoliosApi* | [**resolve_instrument**](docs/TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
@@ -633,6 +636,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**upsert_custodian_accounts**](docs/TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | UpsertCustodianAccounts: Upsert Custodian Accounts
 *TransactionPortfoliosApi* | [**upsert_custodian_accounts_properties**](docs/TransactionPortfoliosApi.md#upsert_custodian_accounts_properties) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/{custodianAccountScope}/{custodianAccountCode}/properties/$upsert | UpsertCustodianAccountsProperties: Upsert custodian accounts properties
 *TransactionPortfoliosApi* | [**upsert_portfolio_details**](docs/TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | UpsertPortfolioDetails: Upsert portfolio details
+*TransactionPortfoliosApi* | [**upsert_settlement_instructions**](docs/TransactionPortfoliosApi.md#upsert_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] UpsertSettlementInstructions: Upsert Settlement Instructions.
 *TransactionPortfoliosApi* | [**upsert_transaction_properties**](docs/TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | UpsertTransactionProperties: Upsert transaction properties
 *TransactionPortfoliosApi* | [**upsert_transactions**](docs/TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
 *TransferAgencyApi* | [**calculate_order_dates**](docs/TransferAgencyApi.md#calculate_order_dates) | **POST** /api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
@@ -1640,6 +1644,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfString](docs/ResourceListOfString.md)
  - [ResourceListOfTaxRuleSet](docs/ResourceListOfTaxRuleSet.md)
  - [ResourceListOfTransaction](docs/ResourceListOfTransaction.md)
+ - [ResourceListOfTransactionSettlementInstruction](docs/ResourceListOfTransactionSettlementInstruction.md)
  - [ResourceListOfTransactionType](docs/ResourceListOfTransactionType.md)
  - [ResourceListOfValueType](docs/ResourceListOfValueType.md)
  - [ResponseMetaData](docs/ResponseMetaData.md)
@@ -1683,6 +1688,7 @@ Class | Method | HTTP request | Description
  - [SetTransactionConfigurationAlias](docs/SetTransactionConfigurationAlias.md)
  - [SetTransactionConfigurationSourceRequest](docs/SetTransactionConfigurationSourceRequest.md)
  - [SettlementCycle](docs/SettlementCycle.md)
+ - [SettlementInstructionRequest](docs/SettlementInstructionRequest.md)
  - [SettlementSchedule](docs/SettlementSchedule.md)
  - [ShareClassAmount](docs/ShareClassAmount.md)
  - [ShareClassBreakdown](docs/ShareClassBreakdown.md)
@@ -1698,6 +1704,7 @@ Class | Method | HTTP request | Description
  - [SimpleCashFlowLoan](docs/SimpleCashFlowLoan.md)
  - [SimpleInstrument](docs/SimpleInstrument.md)
  - [SimpleRoundingConvention](docs/SimpleRoundingConvention.md)
+ - [SingleValuationPointQueryParameters](docs/SingleValuationPointQueryParameters.md)
  - [SortOrder](docs/SortOrder.md)
  - [SpecificHoldingPricingInfo](docs/SpecificHoldingPricingInfo.md)
  - [SpinOffEvent](docs/SpinOffEvent.md)
@@ -1769,6 +1776,7 @@ Class | Method | HTTP request | Description
  - [TransactionRoles](docs/TransactionRoles.md)
  - [TransactionSetConfigurationData](docs/TransactionSetConfigurationData.md)
  - [TransactionSetConfigurationDataRequest](docs/TransactionSetConfigurationDataRequest.md)
+ - [TransactionSettlementInstruction](docs/TransactionSettlementInstruction.md)
  - [TransactionStatus](docs/TransactionStatus.md)
  - [TransactionTemplate](docs/TransactionTemplate.md)
  - [TransactionTemplateRequest](docs/TransactionTemplateRequest.md)

@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, StrictInt, StrictStr, conint, conlist, constr, validator
+from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr, conint, conlist, constr, validator
 
 from typing import Dict, Optional
 
@@ -43,6 +43,7 @@ from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
+from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
@@ -51,6 +52,7 @@ from lusid.models.valuation_point_resource_list_of_accounted_transaction import 
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
+from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -2198,6 +2200,233 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/properties', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_holdings_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(..., description="The query parameters used for diary entry or effective date of Holdings")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".")] = None, by_taxlots : Annotated[Optional[StrictBool], Field(description="Whether to expand the holdings to return the underlying tax-lots. Defaults to False.")] = None, include_settlement_events_after_days : Annotated[Optional[StrictInt], Field(description="Number of days ahead to bring back settlements from, in relation to the specified effectiveAt")] = None, **kwargs) -> VersionedResourceListOfPortfolioHolding:  # noqa: E501
+        ...
+
+    @overload
+    def get_holdings_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(..., description="The query parameters used for diary entry or effective date of Holdings")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".")] = None, by_taxlots : Annotated[Optional[StrictBool], Field(description="Whether to expand the holdings to return the underlying tax-lots. Defaults to False.")] = None, include_settlement_events_after_days : Annotated[Optional[StrictInt], Field(description="Number of days ahead to bring back settlements from, in relation to the specified effectiveAt")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListOfPortfolioHolding:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_holdings_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(..., description="The query parameters used for diary entry or effective date of Holdings")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".")] = None, by_taxlots : Annotated[Optional[StrictBool], Field(description="Whether to expand the holdings to return the underlying tax-lots. Defaults to False.")] = None, include_settlement_events_after_days : Annotated[Optional[StrictInt], Field(description="Number of days ahead to bring back settlements from, in relation to the specified effectiveAt")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfPortfolioHolding, Awaitable[VersionedResourceListOfPortfolioHolding]]:  # noqa: E501
+        """[EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.  # noqa: E501
+
+        Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holdings_for_fund(scope, code, single_valuation_point_query_parameters, nav_type_code, as_at, filter, property_keys, by_taxlots, include_settlement_events_after_days, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param single_valuation_point_query_parameters: The query parameters used for diary entry or effective date of Holdings (required)
+        :type single_valuation_point_query_parameters: SingleValuationPointQueryParameters
+        :param nav_type_code: When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param property_keys: A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".
+        :type property_keys: List[str]
+        :param by_taxlots: Whether to expand the holdings to return the underlying tax-lots. Defaults to False.
+        :type by_taxlots: bool
+        :param include_settlement_events_after_days: Number of days ahead to bring back settlements from, in relation to the specified effectiveAt
+        :type include_settlement_events_after_days: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VersionedResourceListOfPortfolioHolding
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_holdings_for_fund_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_holdings_for_fund_with_http_info(scope, code, single_valuation_point_query_parameters, nav_type_code, as_at, filter, property_keys, by_taxlots, include_settlement_events_after_days, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_holdings_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(..., description="The query parameters used for diary entry or effective date of Holdings")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".")] = None, by_taxlots : Annotated[Optional[StrictBool], Field(description="Whether to expand the holdings to return the underlying tax-lots. Defaults to False.")] = None, include_settlement_events_after_days : Annotated[Optional[StrictInt], Field(description="Number of days ahead to bring back settlements from, in relation to the specified effectiveAt")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.  # noqa: E501
+
+        Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holdings_for_fund_with_http_info(scope, code, single_valuation_point_query_parameters, nav_type_code, as_at, filter, property_keys, by_taxlots, include_settlement_events_after_days, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param single_valuation_point_query_parameters: The query parameters used for diary entry or effective date of Holdings (required)
+        :type single_valuation_point_query_parameters: SingleValuationPointQueryParameters
+        :param nav_type_code: When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param property_keys: A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".
+        :type property_keys: List[str]
+        :param by_taxlots: Whether to expand the holdings to return the underlying tax-lots. Defaults to False.
+        :type by_taxlots: bool
+        :param include_settlement_events_after_days: Number of days ahead to bring back settlements from, in relation to the specified effectiveAt
+        :type include_settlement_events_after_days: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VersionedResourceListOfPortfolioHolding, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'single_valuation_point_query_parameters',
+            'nav_type_code',
+            'as_at',
+            'filter',
+            'property_keys',
+            'by_taxlots',
+            'include_settlement_events_after_days'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_holdings_for_fund" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('by_taxlots') is not None:  # noqa: E501
+            _query_params.append(('byTaxlots', _params['by_taxlots']))
+
+        if _params.get('include_settlement_events_after_days') is not None:  # noqa: E501
+            _query_params.append(('includeSettlementEventsAfterDays', _params['include_settlement_events_after_days']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['single_valuation_point_query_parameters'] is not None:
+            _body_params = _params['single_valuation_point_query_parameters']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VersionedResourceListOfPortfolioHolding",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/$holdings', 'POST',
             _path_params,
             _query_params,
             _header_params,
