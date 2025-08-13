@@ -1,25 +1,23 @@
-# CdsCreditEvent
+# FlexibleRepoFullClosureEvent
 
-Definition of a credit event for credit default swap (CDS) instruments.
+Event to trigger the full closure of a repurchase agreement booked as a FlexibleRepo.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**effective_date** | **datetime** | The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation. | [optional] 
-**auction_date** | **datetime** | The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined. | [optional] 
-**recovery_rate** | **float** | The fraction of the defaulted debt that can be recovered. | [optional] 
+**entitlement_date** | **datetime** | Date on which the closure begins. | [optional] 
+**settlement_date** | **datetime** | Date on which closure takes place, i.e., when all repurchase trades settle. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent | 
 ## Example
 
 ```python
-from lusid.models.cds_credit_event import CdsCreditEvent
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from lusid.models.flexible_repo_full_closure_event import FlexibleRepoFullClosureEvent
+from typing import Any, Dict, Optional
+from pydantic.v1 import Field, StrictStr, validator
 from datetime import datetime
-effective_date: Optional[datetime] = # Replace with your value
-auction_date: Optional[datetime] = # Replace with your value
-recovery_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+entitlement_date: Optional[datetime] = # Replace with your value
+settlement_date: Optional[datetime] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-cds_credit_event_instance = CdsCreditEvent(effective_date=effective_date, auction_date=auction_date, recovery_rate=recovery_rate, instrument_event_type=instrument_event_type)
+flexible_repo_full_closure_event_instance = FlexibleRepoFullClosureEvent(entitlement_date=entitlement_date, settlement_date=settlement_date, instrument_event_type=instrument_event_type)
 
 ```
 

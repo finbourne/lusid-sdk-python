@@ -22,14 +22,15 @@ from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 
-class BondDefaultEvent(InstrumentEvent):
+class FlexibleRepoFullClosureEvent(InstrumentEvent):
     """
-    Indicates when an issuer has defaulted on an obligation due to technical default, missed payments, or bankruptcy filing.  # noqa: E501
+    Event to trigger the full closure of a repurchase agreement booked as a FlexibleRepo.  # noqa: E501
     """
-    effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="The date the bond default occurred.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="Date on which the closure begins.")
+    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="Date on which closure takes place, i.e., when all repurchase trades settle.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate"]
+    __properties = ["instrumentEventType", "entitlementDate", "settlementDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -42,7 +43,7 @@ class BondDefaultEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'BondDefaultEvent' not in [ 
+        if 'FlexibleRepoFullClosureEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -112,8 +113,8 @@ class BondDefaultEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> BondDefaultEvent:
-        """Create an instance of BondDefaultEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> FlexibleRepoFullClosureEvent:
+        """Create an instance of FlexibleRepoFullClosureEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -131,17 +132,18 @@ class BondDefaultEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> BondDefaultEvent:
-        """Create an instance of BondDefaultEvent from a dict"""
+    def from_dict(cls, obj: dict) -> FlexibleRepoFullClosureEvent:
+        """Create an instance of FlexibleRepoFullClosureEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return BondDefaultEvent.parse_obj(obj)
+            return FlexibleRepoFullClosureEvent.parse_obj(obj)
 
-        _obj = BondDefaultEvent.parse_obj({
+        _obj = FlexibleRepoFullClosureEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_date": obj.get("effectiveDate")
+            "entitlement_date": obj.get("entitlementDate"),
+            "settlement_date": obj.get("settlementDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **movement_options** | **List[str]** | Allows extra specifications for the movement. The options currently available are &#39;DirectAdjustment&#39;, &#39;IncludesTradedInterest&#39;, &#39;Virtual&#39; and &#39;Income&#39; (works only with the movement type &#39;StockMovement&#39;). A movement type of &#39;StockMovement&#39; with an option of &#39;DirectAdjusment&#39; will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction. | [optional] 
 **settlement_date_override** | **str** | Optional property key that must be in the Transaction domain when specified. When the movement is processed and the transaction has this property set to a valid date, then the property value will override the SettlementDate of the transaction. | [optional] 
 **condition** | **str** | The condition that the transaction must satisfy to generate the movement, such as: Portfolio.BaseCurrency eq &#39;GBP&#39;. The condition can contain fields and properties from transactions and portfolios. If no condition is provided, the movement will apply for all transactions of this type. | [optional] 
+**settlement_mode** | **str** | Configures how movements should settle. Allowed values: &#39;Internal&#39; and &#39;External&#39;. A movement with &#39;Internal&#39; settlement mode will settle automatically on the contractual settlement date regardlesss of portfolio configuration or settlement instruction. An &#39;External&#39; movement can be settled automatically or by a settlement instruction. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ name: Optional[StrictStr] = "example_name"
 movement_options: Optional[conlist(StrictStr)] = # Replace with your value
 settlement_date_override: Optional[StrictStr] = "example_settlement_date_override"
 condition: Optional[StrictStr] = "example_condition"
-transaction_type_movement_instance = TransactionTypeMovement(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options, settlement_date_override=settlement_date_override, condition=condition)
+settlement_mode: Optional[StrictStr] = "example_settlement_mode"
+transaction_type_movement_instance = TransactionTypeMovement(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options, settlement_date_override=settlement_date_override, condition=condition, settlement_mode=settlement_mode)
 
 ```
 

@@ -17,9 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -35,7 +35,9 @@ class OrderUpdateRequest(BaseModel):
     price: Optional[CurrencyAndAmount] = None
     limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
     stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
-    __properties = ["id", "quantity", "portfolioId", "properties", "price", "limitPrice", "stopPrice"]
+    var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the order was made")
+    side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
+    __properties = ["id", "quantity", "portfolioId", "properties", "price", "limitPrice", "stopPrice", "date", "side"]
 
     class Config:
         """Pydantic configuration"""
@@ -101,6 +103,16 @@ class OrderUpdateRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if var_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.var_date is None and "var_date" in self.__fields_set__:
+            _dict['date'] = None
+
+        # set to None if side (nullable) is None
+        # and __fields_set__ contains the field
+        if self.side is None and "side" in self.__fields_set__:
+            _dict['side'] = None
+
         return _dict
 
     @classmethod
@@ -124,6 +136,8 @@ class OrderUpdateRequest(BaseModel):
             else None,
             "price": CurrencyAndAmount.from_dict(obj.get("price")) if obj.get("price") is not None else None,
             "limit_price": CurrencyAndAmount.from_dict(obj.get("limitPrice")) if obj.get("limitPrice") is not None else None,
-            "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None
+            "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None,
+            "var_date": obj.get("date"),
+            "side": obj.get("side")
         })
         return _obj

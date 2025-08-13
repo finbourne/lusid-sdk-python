@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.model_property import ModelProperty
+from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
 from lusid.models.resource_id import ResourceId
 
 class CreateTransactionPortfolioRequest(BaseModel):
@@ -44,7 +45,8 @@ class CreateTransactionPortfolioRequest(BaseModel):
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
-    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope"]
+    settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(None, alias="settlementConfiguration")
+    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -156,6 +158,9 @@ class CreateTransactionPortfolioRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of amortisation_rule_set_id
         if self.amortisation_rule_set_id:
             _dict['amortisationRuleSetId'] = self.amortisation_rule_set_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of settlement_configuration
+        if self.settlement_configuration:
+            _dict['settlementConfiguration'] = self.settlement_configuration.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -233,6 +238,7 @@ class CreateTransactionPortfolioRequest(BaseModel):
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
-            "tax_rule_set_scope": obj.get("taxRuleSetScope")
+            "tax_rule_set_scope": obj.get("taxRuleSetScope"),
+            "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None
         })
         return _obj

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate. | [optional] 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
+**settlement_configuration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] 
 ## Example
 
 ```python
@@ -38,7 +39,8 @@ transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
 cash_gain_loss_calculation_date: Optional[StrictStr] = "example_cash_gain_loss_calculation_date"
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Replace with your value
-create_derived_transaction_portfolio_request_instance = CreateDerivedTransactionPortfolioRequest(display_name=display_name, description=description, code=code, parent_portfolio_id=parent_portfolio_id, created=created, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, instrument_event_configuration=instrument_event_configuration)
+settlement_configuration: Optional[PortfolioSettlementConfiguration] = # Replace with your value
+create_derived_transaction_portfolio_request_instance = CreateDerivedTransactionPortfolioRequest(display_name=display_name, description=description, code=code, parent_portfolio_id=parent_portfolio_id, created=created, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, instrument_event_configuration=instrument_event_configuration, settlement_configuration=settlement_configuration)
 
 ```
 

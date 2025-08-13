@@ -510,6 +510,7 @@ from lusid.models.flexible_loan import FlexibleLoan
 from lusid.models.flexible_repo import FlexibleRepo
 from lusid.models.flexible_repo_cash_flow_event import FlexibleRepoCashFlowEvent
 from lusid.models.flexible_repo_collateral_event import FlexibleRepoCollateralEvent
+from lusid.models.flexible_repo_full_closure_event import FlexibleRepoFullClosureEvent
 from lusid.models.flexible_repo_interest_payment_event import FlexibleRepoInterestPaymentEvent
 from lusid.models.flexible_repo_partial_closure_event import FlexibleRepoPartialClosureEvent
 from lusid.models.float_schedule import FloatSchedule
@@ -919,6 +920,7 @@ from lusid.models.portfolio_reconciliation_request import PortfolioReconciliatio
 from lusid.models.portfolio_result_data_key_rule import PortfolioResultDataKeyRule
 from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
 from lusid.models.portfolio_search_result import PortfolioSearchResult
+from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_type import PortfolioType
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
@@ -1134,6 +1136,7 @@ from lusid.models.set_person_properties_request import SetPersonPropertiesReques
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
+from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.settlement_cycle import SettlementCycle
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.settlement_schedule import SettlementSchedule
@@ -1878,6 +1881,7 @@ __all__ = [
     "FlexibleRepo",
     "FlexibleRepoCashFlowEvent",
     "FlexibleRepoCollateralEvent",
+    "FlexibleRepoFullClosureEvent",
     "FlexibleRepoInterestPaymentEvent",
     "FlexibleRepoPartialClosureEvent",
     "FloatSchedule",
@@ -2287,6 +2291,7 @@ __all__ = [
     "PortfolioResultDataKeyRule",
     "PortfolioReturnBreakdown",
     "PortfolioSearchResult",
+    "PortfolioSettlementConfiguration",
     "PortfolioTradeTicket",
     "PortfolioType",
     "PortfolioWithoutHref",
@@ -2502,6 +2507,7 @@ __all__ = [
     "SetShareClassInstrumentsRequest",
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
+    "SettlementConfigurationCategory",
     "SettlementCycle",
     "SettlementInstructionRequest",
     "SettlementSchedule",

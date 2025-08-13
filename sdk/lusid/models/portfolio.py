@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictSt
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
+from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
 from lusid.models.relationship import Relationship
 from lusid.models.resource_id import ResourceId
 from lusid.models.staged_modifications_info import StagedModificationsInfo
@@ -53,8 +54,9 @@ class Portfolio(BaseModel):
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
+    settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(None, alias="settlementConfiguration")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -241,6 +243,9 @@ class Portfolio(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of amortisation_rule_set_id
         if self.amortisation_rule_set_id:
             _dict['amortisationRuleSetId'] = self.amortisation_rule_set_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of settlement_configuration
+        if self.settlement_configuration:
+            _dict['settlementConfiguration'] = self.settlement_configuration.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -341,6 +346,7 @@ class Portfolio(BaseModel):
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
             "tax_rule_set_scope": obj.get("taxRuleSetScope"),
+            "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

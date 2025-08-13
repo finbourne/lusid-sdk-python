@@ -1026,7 +1026,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(OrderManagementApi)
-    request_body = {"update1":{"id":{"scope":"MyScope","code":"Code1"},"quantity":101},"update2":{"id":{"scope":"MyScope","code":"Code2"},"quantity":100,"portfolioId":{"scope":"MyScope","code":"NewPortfolio"},"properties":{"Order/MyScope/OrderProperty":{"key":"Order/MyScope/OrderProperty","value":{"labelValue":"NewValue"}}}}} # Dict[str, OrderUpdateRequest] | The request containing the orders to be updated.
+    request_body = {"update1":{"id":{"scope":"MyScope","code":"Code1"},"quantity":101},"update2":{"id":{"scope":"MyScope","code":"Code2"},"quantity":100,"portfolioId":{"scope":"MyScope","code":"NewPortfolio"},"properties":{"Order/MyScope/OrderProperty":{"key":"Order/MyScope/OrderProperty","value":{"labelValue":"NewValue"}}},"date":"2020-01-01T00:00:00.0000000+00:00","side":"Buy"}} # Dict[str, OrderUpdateRequest] | The request containing the orders to be updated.
 
     try:
         # uncomment the below to set overrides at the request level
