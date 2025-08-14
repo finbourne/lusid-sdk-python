@@ -445,6 +445,8 @@ from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.fund_share_class import FundShareClass
 from lusid.models.fund_valuation_point_data import FundValuationPointData
+from lusid.models.fund_valuation_request import FundValuationRequest
+from lusid.models.fund_valuation_schedule import FundValuationSchedule
 from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future
@@ -1252,6 +1254,7 @@ from lusid.models.user import User
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+from lusid.models.valuation_point_fund_calendar_entry import ValuationPointFundCalendarEntry
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
@@ -1726,6 +1729,8 @@ __all__ = [
     "FundRequest",
     "FundShareClass",
     "FundValuationPointData",
+    "FundValuationRequest",
+    "FundValuationSchedule",
     "FundingLeg",
     "FundingLegOptions",
     "Future",
@@ -2533,6 +2538,7 @@ __all__ = [
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
+    "ValuationPointFundCalendarEntry",
     "ValuationPointOverview",
     "ValuationPointResourceListOfAccountedTransaction",
     "ValuationPointResourceListOfFundJournalEntryLine",

@@ -1,6 +1,6 @@
 # lusid.TransactionPortfoliosApi
 
-All URIs are relative to *https://www.lusid.com/api*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -50,7 +50,7 @@ Method | HTTP request | Description
 
 
 # **adjust_holdings**
-> AdjustHolding adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
+> AdjustHolding adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name)
 
 AdjustHoldings: Adjust holdings
 
@@ -106,13 +106,15 @@ def main():
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
     adjust_holding_request = [{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/ibor/CurrentMarketValue":{"key":"Holding/ibor/CurrentMarketValue","value":{"metricValue":{"value":1000}}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"}] # List[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio.
     reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
+    override_movement_name = 'override_movement_name_example' # str | Optional parameter to override movement name for the set holdings. (optional)
+    override_offset_movement_name = 'override_offset_movement_name_example' # str | Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, opts=opts)
+        # api_response =  api_instance.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name, opts=opts)
 
         # AdjustHoldings: Adjust holdings
-        api_response = api_instance.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
+        api_response = api_instance.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name)
         pprint(api_response)
 
     except ApiException as e:
@@ -130,6 +132,8 @@ Name | Type | Description  | Notes
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
  **adjust_holding_request** | [**List[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | 
  **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
+ **override_movement_name** | **str**| Optional parameter to override movement name for the set holdings. | [optional] 
+ **override_offset_movement_name** | **str**| Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl | [optional] 
 
 ### Return type
 
@@ -3787,7 +3791,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **set_holdings**
-> AdjustHolding set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
+> AdjustHolding set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name)
 
 SetHoldings: Set holdings
 
@@ -3843,13 +3847,15 @@ def main():
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
     adjust_holding_request = [{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/ibor/CurrentMarketValue":{"key":"Holding/ibor/CurrentMarketValue","value":{"metricValue":{"value":1000}}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"}] # List[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio.
     reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
+    override_movement_name = 'override_movement_name_example' # str | Optional parameter to override movement name for the set holdings. (optional)
+    override_offset_movement_name = 'override_offset_movement_name_example' # str | Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, opts=opts)
+        # api_response =  api_instance.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name, opts=opts)
 
         # SetHoldings: Set holdings
-        api_response = api_instance.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
+        api_response = api_instance.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name)
         pprint(api_response)
 
     except ApiException as e:
@@ -3867,6 +3873,8 @@ Name | Type | Description  | Notes
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
  **adjust_holding_request** | [**List[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The complete set of target holdings for the transaction portfolio. | 
  **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
+ **override_movement_name** | **str**| Optional parameter to override movement name for the set holdings. | [optional] 
+ **override_offset_movement_name** | **str**| Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl | [optional] 
 
 ### Return type
 

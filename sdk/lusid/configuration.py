@@ -128,7 +128,7 @@ class Configuration:
                  rate_limit_retries=DEFAULT_RATE_LIMIT_RETRIES) -> None:
         """Constructor
         """
-        self._base_path = "https://www.lusid.com/api" if host is None else host
+        self._base_path = "https://fbn-prd.lusid.com/api" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -445,7 +445,7 @@ class Configuration:
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 0.11.8131\n"\
+               "Version of the API: 0.11.8138\n"\
                "SDK Package Version: {package_version}".\
                format(env=sys.platform, pyversion=sys.version, package_version=package_version)
 
@@ -456,7 +456,7 @@ class Configuration:
         """
         return [
             {
-                'url': "https://www.lusid.com/api",
+                'url': "https://fbn-prd.lusid.com/api",
                 'description': "No description provided",
             }
         ]

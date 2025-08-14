@@ -101,22 +101,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def adjust_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, **kwargs) -> AdjustHolding:  # noqa: E501
+    async def adjust_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, **kwargs) -> AdjustHolding:  # noqa: E501
         ...
 
     @overload
-    def adjust_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, async_req: Optional[bool]=True, **kwargs) -> AdjustHolding:  # noqa: E501
+    def adjust_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, async_req: Optional[bool]=True, **kwargs) -> AdjustHolding:  # noqa: E501
         ...
 
     @validate_arguments
-    def adjust_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AdjustHolding, Awaitable[AdjustHolding]]:  # noqa: E501
+    def adjust_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AdjustHolding, Awaitable[AdjustHolding]]:  # noqa: E501
         """AdjustHoldings: Adjust holdings  # noqa: E501
 
         Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods, async_req=True)
+        >>> thread = api.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods, override_movement_name, override_offset_movement_name, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -129,6 +129,10 @@ class TransactionPortfoliosApi:
         :type adjust_holding_request: List[AdjustHoldingRequest]
         :param reconciliation_methods: Optional parameter for specifying a reconciliation method: e.g. FxForward.
         :type reconciliation_methods: List[str]
+        :param override_movement_name: Optional parameter to override movement name for the set holdings.
+        :type override_movement_name: str
+        :param override_offset_movement_name: Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl
+        :type override_offset_movement_name: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -145,17 +149,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.adjust_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, **kwargs)  # noqa: E501
+        return self.adjust_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, override_movement_name, override_offset_movement_name, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def adjust_holdings_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def adjust_holdings_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The selected set of holdings to adjust to the provided targets for the              transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """AdjustHoldings: Adjust holdings  # noqa: E501
 
         Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.adjust_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, async_req=True)
+        >>> thread = api.adjust_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, override_movement_name, override_offset_movement_name, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -168,6 +172,10 @@ class TransactionPortfoliosApi:
         :type adjust_holding_request: List[AdjustHoldingRequest]
         :param reconciliation_methods: Optional parameter for specifying a reconciliation method: e.g. FxForward.
         :type reconciliation_methods: List[str]
+        :param override_movement_name: Optional parameter to override movement name for the set holdings.
+        :type override_movement_name: str
+        :param override_offset_movement_name: Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl
+        :type override_offset_movement_name: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -199,7 +207,9 @@ class TransactionPortfoliosApi:
             'code',
             'effective_at',
             'adjust_holding_request',
-            'reconciliation_methods'
+            'reconciliation_methods',
+            'override_movement_name',
+            'override_offset_movement_name'
         ]
         _all_params.extend(
             [
@@ -243,6 +253,12 @@ class TransactionPortfoliosApi:
         if _params.get('reconciliation_methods') is not None:  # noqa: E501
             _query_params.append(('reconciliationMethods', _params['reconciliation_methods']))
             _collection_formats['reconciliationMethods'] = 'multi'
+
+        if _params.get('override_movement_name') is not None:  # noqa: E501
+            _query_params.append(('overrideMovementName', _params['override_movement_name']))
+
+        if _params.get('override_offset_movement_name') is not None:  # noqa: E501
+            _query_params.append(('overrideOffsetMovementName', _params['override_offset_movement_name']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -7313,22 +7329,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def set_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, **kwargs) -> AdjustHolding:  # noqa: E501
+    async def set_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, **kwargs) -> AdjustHolding:  # noqa: E501
         ...
 
     @overload
-    def set_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, async_req: Optional[bool]=True, **kwargs) -> AdjustHolding:  # noqa: E501
+    def set_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, async_req: Optional[bool]=True, **kwargs) -> AdjustHolding:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AdjustHolding, Awaitable[AdjustHolding]]:  # noqa: E501
+    def set_holdings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AdjustHolding, Awaitable[AdjustHolding]]:  # noqa: E501
         """SetHoldings: Set holdings  # noqa: E501
 
         Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods, async_req=True)
+        >>> thread = api.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods, override_movement_name, override_offset_movement_name, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7341,6 +7357,10 @@ class TransactionPortfoliosApi:
         :type adjust_holding_request: List[AdjustHoldingRequest]
         :param reconciliation_methods: Optional parameter for specifying a reconciliation method: e.g. FxForward.
         :type reconciliation_methods: List[str]
+        :param override_movement_name: Optional parameter to override movement name for the set holdings.
+        :type override_movement_name: str
+        :param override_offset_movement_name: Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl
+        :type override_offset_movement_name: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -7357,17 +7377,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.set_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, **kwargs)  # noqa: E501
+        return self.set_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, override_movement_name, override_offset_movement_name, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_holdings_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def set_holdings_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label at which the holdings should be set to the provided targets.")], adjust_holding_request : Annotated[conlist(AdjustHoldingRequest), Field(..., description="The complete set of target holdings for the transaction portfolio.")], reconciliation_methods : Annotated[Optional[conlist(StrictStr)], Field(description="Optional parameter for specifying a reconciliation method: e.g. FxForward.")] = None, override_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter to override movement name for the set holdings.")] = None, override_offset_movement_name : Annotated[Optional[StrictStr], Field( description="Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetHoldings: Set holdings  # noqa: E501
 
         Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.set_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, async_req=True)
+        >>> thread = api.set_holdings_with_http_info(scope, code, effective_at, adjust_holding_request, reconciliation_methods, override_movement_name, override_offset_movement_name, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7380,6 +7400,10 @@ class TransactionPortfoliosApi:
         :type adjust_holding_request: List[AdjustHoldingRequest]
         :param reconciliation_methods: Optional parameter for specifying a reconciliation method: e.g. FxForward.
         :type reconciliation_methods: List[str]
+        :param override_movement_name: Optional parameter to override movement name for the set holdings.
+        :type override_movement_name: str
+        :param override_offset_movement_name: Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl
+        :type override_offset_movement_name: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -7411,7 +7435,9 @@ class TransactionPortfoliosApi:
             'code',
             'effective_at',
             'adjust_holding_request',
-            'reconciliation_methods'
+            'reconciliation_methods',
+            'override_movement_name',
+            'override_offset_movement_name'
         ]
         _all_params.extend(
             [
@@ -7455,6 +7481,12 @@ class TransactionPortfoliosApi:
         if _params.get('reconciliation_methods') is not None:  # noqa: E501
             _query_params.append(('reconciliationMethods', _params['reconciliation_methods']))
             _collection_formats['reconciliationMethods'] = 'multi'
+
+        if _params.get('override_movement_name') is not None:  # noqa: E501
+            _query_params.append(('overrideMovementName', _params['override_movement_name']))
+
+        if _params.get('override_offset_movement_name') is not None:  # noqa: E501
+            _query_params.append(('overrideOffsetMovementName', _params['override_offset_movement_name']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
