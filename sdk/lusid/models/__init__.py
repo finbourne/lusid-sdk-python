@@ -1254,7 +1254,6 @@ from lusid.models.user import User
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
-from lusid.models.valuation_point_fund_calendar_entry import ValuationPointFundCalendarEntry
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
@@ -2538,7 +2537,6 @@ __all__ = [
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
-    "ValuationPointFundCalendarEntry",
     "ValuationPointOverview",
     "ValuationPointResourceListOfAccountedTransaction",
     "ValuationPointResourceListOfFundJournalEntryLine",

@@ -4247,7 +4247,7 @@ def main():
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio.
-    settlement_instruction_request = {"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10} # List[SettlementInstructionRequest] | The definition of the settlement instruction.
+    settlement_instruction_request = {"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{}} # List[SettlementInstructionRequest] | The definition of the settlement instruction.
 
     try:
         # uncomment the below to set overrides at the request level

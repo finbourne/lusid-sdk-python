@@ -17,17 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
-import lusid.models
+from datetime import datetime
+from typing import Any, Dict, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from lusid.models.version import Version
 
 class FundCalendarEntry(BaseModel):
     """
     FundCalendarEntry
     """
+    code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
+    nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with.") 
+    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective at of the Calendar Entry.")
+    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime for the Calendar Entry.")
     entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. Only 'ValuationPoint' currently supported. The available values are: ValuationPointFundCalendarEntry") 
-    __properties = ["entryType"]
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the Fund Calendar Entry. Can be 'Estimate', 'Candidate' or 'Final'.") 
+    version: Version = Field(...)
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
+    __properties = ["code", "displayName", "description", "navTypeCode", "effectiveAt", "asAt", "entryType", "status", "version", "href"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -93,23 +102,6 @@ class FundCalendarEntry(BaseModel):
         allow_population_by_field_name = True
         validate_assignment = True
 
-    # JSON field name that stores the object type
-    __discriminator_property_name = 'entryType'
-
-    # discriminator mappings
-    __discriminator_value_class_map = {
-        'ValuationPointFundCalendarEntry': 'ValuationPointFundCalendarEntry'
-    }
-
-    @classmethod
-    def get_discriminator_value(cls, obj: dict) -> str:
-        """Returns the discriminator value (object type) of the data"""
-        discriminator_value = obj[cls.__discriminator_property_name]
-        if discriminator_value:
-            return cls.__discriminator_value_class_map.get(discriminator_value)
-        else:
-            return None
-
     def __str__(self):
         """For `print` and `pprint`"""
         return pprint.pformat(self.dict(by_alias=False))
@@ -127,7 +119,7 @@ class FundCalendarEntry(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(ValuationPointFundCalendarEntry):
+    def from_json(cls, json_str: str) -> FundCalendarEntry:
         """Create an instance of FundCalendarEntry from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -137,17 +129,45 @@ class FundCalendarEntry(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.status is None and "status" in self.__fields_set__:
+            _dict['status'] = None
+
+        # set to None if href (nullable) is None
+        # and __fields_set__ contains the field
+        if self.href is None and "href" in self.__fields_set__:
+            _dict['href'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(ValuationPointFundCalendarEntry):
+    def from_dict(cls, obj: dict) -> FundCalendarEntry:
         """Create an instance of FundCalendarEntry from a dict"""
-        # look up the object type based on discriminator mapping
-        object_type = cls.get_discriminator_value(obj)
-        if object_type:
-            klass = getattr(lusid.models, object_type)
-            return klass.from_dict(obj)
-        else:
-            raise ValueError("FundCalendarEntry failed to lookup discriminator value from " +
-                             json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                             ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        if obj is None:
+            return None
+
+        if not isinstance(obj, dict):
+            return FundCalendarEntry.parse_obj(obj)
+
+        _obj = FundCalendarEntry.parse_obj({
+            "code": obj.get("code"),
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "nav_type_code": obj.get("navTypeCode"),
+            "effective_at": obj.get("effectiveAt"),
+            "as_at": obj.get("asAt"),
+            "entry_type": obj.get("entryType"),
+            "status": obj.get("status"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "href": obj.get("href")
+        })
+        return _obj

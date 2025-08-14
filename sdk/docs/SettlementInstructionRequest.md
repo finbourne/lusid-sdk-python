@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **contractual_settlement_date** | **datetime** |  | [optional] 
 **actual_settlement_date** | **datetime** |  | 
 **units** | **float** |  | 
+**sub_holding_key_overrides** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 ## Example
 
 ```python
@@ -26,7 +27,8 @@ instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
 contractual_settlement_date: Optional[datetime] = # Replace with your value
 actual_settlement_date: datetime = # Replace with your value
 units: Union[StrictFloat, StrictInt] = # Replace with your value
-settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units)
+sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units, sub_holding_key_overrides=sub_holding_key_overrides)
 
 ```
 

@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
+from lusid.models.perpetual_property import PerpetualProperty
 
 class SettlementInstructionRequest(BaseModel):
     """
@@ -33,7 +34,8 @@ class SettlementInstructionRequest(BaseModel):
     contractual_settlement_date: Optional[datetime] = Field(None, alias="contractualSettlementDate")
     actual_settlement_date: datetime = Field(..., alias="actualSettlementDate")
     units: Union[StrictFloat, StrictInt] = Field(...)
-    __properties = ["settlementInstructionId", "transactionId", "settlementCategory", "instructionType", "instrumentIdentifiers", "contractualSettlementDate", "actualSettlementDate", "units"]
+    sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides")
+    __properties = ["settlementInstructionId", "transactionId", "settlementCategory", "instructionType", "instrumentIdentifiers", "contractualSettlementDate", "actualSettlementDate", "units", "subHoldingKeyOverrides"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +69,13 @@ class SettlementInstructionRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each value in sub_holding_key_overrides (dict)
+        _field_dict = {}
+        if self.sub_holding_key_overrides:
+            for _key in self.sub_holding_key_overrides:
+                if self.sub_holding_key_overrides[_key]:
+                    _field_dict[_key] = self.sub_holding_key_overrides[_key].to_dict()
+            _dict['subHoldingKeyOverrides'] = _field_dict
         # set to None if instruction_type (nullable) is None
         # and __fields_set__ contains the field
         if self.instruction_type is None and "instruction_type" in self.__fields_set__:
@@ -76,6 +85,11 @@ class SettlementInstructionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.contractual_settlement_date is None and "contractual_settlement_date" in self.__fields_set__:
             _dict['contractualSettlementDate'] = None
+
+        # set to None if sub_holding_key_overrides (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sub_holding_key_overrides is None and "sub_holding_key_overrides" in self.__fields_set__:
+            _dict['subHoldingKeyOverrides'] = None
 
         return _dict
 
@@ -96,6 +110,12 @@ class SettlementInstructionRequest(BaseModel):
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "contractual_settlement_date": obj.get("contractualSettlementDate"),
             "actual_settlement_date": obj.get("actualSettlementDate"),
-            "units": obj.get("units")
+            "units": obj.get("units"),
+            "sub_holding_key_overrides": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("subHoldingKeyOverrides").items()
+            )
+            if obj.get("subHoldingKeyOverrides") is not None
+            else None
         })
         return _obj

@@ -1899,7 +1899,6 @@ Class | Method | HTTP request | Description
  - [ValuationPointDataQueryParameters](docs/ValuationPointDataQueryParameters.md)
  - [ValuationPointDataRequest](docs/ValuationPointDataRequest.md)
  - [ValuationPointDataResponse](docs/ValuationPointDataResponse.md)
- - [ValuationPointFundCalendarEntry](docs/ValuationPointFundCalendarEntry.md)
  - [ValuationPointOverview](docs/ValuationPointOverview.md)
  - [ValuationPointResourceListOfAccountedTransaction](docs/ValuationPointResourceListOfAccountedTransaction.md)
  - [ValuationPointResourceListOfFundJournalEntryLine](docs/ValuationPointResourceListOfFundJournalEntryLine.md)
