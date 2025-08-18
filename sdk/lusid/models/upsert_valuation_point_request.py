@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class UpsertValuationPointRequest(BaseModel):
@@ -31,7 +31,8 @@ class UpsertValuationPointRequest(BaseModel):
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
-    __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "properties"]
+    apply_clear_down: Optional[StrictBool] = Field(None, alias="applyClearDown", description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.")
+    __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown"]
 
     class Config:
         """Pydantic configuration"""
@@ -108,6 +109,7 @@ class UpsertValuationPointRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "apply_clear_down": obj.get("applyClearDown")
         })
         return _obj

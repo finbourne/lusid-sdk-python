@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, 
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.link import Link
+from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
@@ -40,8 +41,9 @@ class CustomEntityResponse(BaseModel):
     identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
     fields: conlist(CustomEntityField) = Field(..., description="The fields that decorate the custom entity.")
     relationships: conlist(Relationship) = Field(..., description="A set of relationships associated to the custom entity.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties that decorate the custom entity.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "entityType", "version", "stagedModifications", "displayName", "description", "identifiers", "fields", "relationships", "links"]
+    __properties = ["href", "entityType", "version", "stagedModifications", "displayName", "description", "identifiers", "fields", "relationships", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -102,6 +104,13 @@ class CustomEntityResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['relationships'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -118,6 +127,11 @@ class CustomEntityResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -145,6 +159,12 @@ class CustomEntityResponse(BaseModel):
             "identifiers": [CustomEntityId.from_dict(_item) for _item in obj.get("identifiers")] if obj.get("identifiers") is not None else None,
             "fields": [CustomEntityField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None,
             "relationships": [Relationship.from_dict(_item) for _item in obj.get("relationships")] if obj.get("relationships") is not None else None,
+            "properties": dict(
+                (_k, ModelProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

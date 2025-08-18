@@ -30,6 +30,7 @@ class FundCalendarEntryType(str, Enum):
     allowed enum values
     """
     VALUATIONPOINTFUNDCALENDARENTRY = 'ValuationPointFundCalendarEntry'
+    BOOKMARKFUNDCALENDARENTRY = 'BookmarkFundCalendarEntry'
 
     @classmethod
     def from_json(cls, json_str: str) -> FundCalendarEntryType:

@@ -17,23 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
-from lusid.models.custom_entity_field import CustomEntityField
-from lusid.models.custom_entity_id import CustomEntityId
+from datetime import datetime
+from typing import Any, Dict, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.model_property import ModelProperty
 
-class CustomEntityRequest(BaseModel):
+class UpsertFundBookmarkRequest(BaseModel):
     """
-    CustomEntityRequest
+    A definition for the period you wish to close  # noqa: E501
     """
-    display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity.") 
-    description:  StrictStr = Field(...,alias="description", description="A description of the custom entity.") 
-    identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
-    fields: Optional[conlist(CustomEntityField)] = Field(None, description="The fields that decorate the custom entity.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties that decorate the custom entity.")
-    __properties = ["displayName", "description", "identifiers", "fields", "properties"]
+    bookmark_code:  StrictStr = Field(...,alias="bookmarkCode", description="Unique code for the Bookmark.") 
+    display_name:  StrictStr = Field(...,alias="displayName", description="Identifiable Name assigned to the Bookmark.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description assigned to the Bookmark.") 
+    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
+    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
+    __properties = ["bookmarkCode", "displayName", "description", "effectiveAt", "queryAsAt", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +56,8 @@ class CustomEntityRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CustomEntityRequest:
-        """Create an instance of CustomEntityRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> UpsertFundBookmarkRequest:
+        """Create an instance of UpsertFundBookmarkRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,20 +66,6 @@ class CustomEntityRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in identifiers (list)
-        _items = []
-        if self.identifiers:
-            for _item in self.identifiers:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['identifiers'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in fields (list)
-        _items = []
-        if self.fields:
-            for _item in self.fields:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['fields'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -88,10 +73,15 @@ class CustomEntityRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # set to None if fields (nullable) is None
+        # set to None if description (nullable) is None
         # and __fields_set__ contains the field
-        if self.fields is None and "fields" in self.__fields_set__:
-            _dict['fields'] = None
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if query_as_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.query_as_at is None and "query_as_at" in self.__fields_set__:
+            _dict['queryAsAt'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -101,19 +91,20 @@ class CustomEntityRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CustomEntityRequest:
-        """Create an instance of CustomEntityRequest from a dict"""
+    def from_dict(cls, obj: dict) -> UpsertFundBookmarkRequest:
+        """Create an instance of UpsertFundBookmarkRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CustomEntityRequest.parse_obj(obj)
+            return UpsertFundBookmarkRequest.parse_obj(obj)
 
-        _obj = CustomEntityRequest.parse_obj({
+        _obj = UpsertFundBookmarkRequest.parse_obj({
+            "bookmark_code": obj.get("bookmarkCode"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "identifiers": [CustomEntityId.from_dict(_item) for _item in obj.get("identifiers")] if obj.get("identifiers") is not None else None,
-            "fields": [CustomEntityField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None,
+            "effective_at": obj.get("effectiveAt"),
+            "query_as_at": obj.get("queryAsAt"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

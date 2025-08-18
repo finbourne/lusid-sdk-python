@@ -660,6 +660,7 @@ from lusid.models.model_schema import ModelSchema
 from lusid.models.model_selection import ModelSelection
 from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDifferentBlocksRequest
 from lusid.models.moved_order_to_different_block_response import MovedOrderToDifferentBlockResponse
+from lusid.models.movement_settlement_summary import MovementSettlementSummary
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.nav_type_definition import NavTypeDefinition
@@ -1214,6 +1215,7 @@ from lusid.models.upsert_custom_entities_response import UpsertCustomEntitiesRes
 from lusid.models.upsert_custom_entity_access_metadata_request import UpsertCustomEntityAccessMetadataRequest
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
 from lusid.models.upsert_flow_conventions_request import UpsertFlowConventionsRequest
+from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
 from lusid.models.upsert_index_convention_request import UpsertIndexConventionRequest
 from lusid.models.upsert_instrument_event_request import UpsertInstrumentEventRequest
 from lusid.models.upsert_instrument_events_response import UpsertInstrumentEventsResponse
@@ -1943,6 +1945,7 @@ __all__ = [
     "ModelSelection",
     "MoveOrdersToDifferentBlocksRequest",
     "MovedOrderToDifferentBlockResponse",
+    "MovementSettlementSummary",
     "MovementType",
     "MultiCurrencyAmounts",
     "NavTypeDefinition",
@@ -2497,6 +2500,7 @@ __all__ = [
     "UpsertCustomEntityAccessMetadataRequest",
     "UpsertDialectRequest",
     "UpsertFlowConventionsRequest",
+    "UpsertFundBookmarkRequest",
     "UpsertIndexConventionRequest",
     "UpsertInstrumentEventRequest",
     "UpsertInstrumentEventsResponse",

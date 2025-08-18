@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **description** | **str** | A description of the custom entity. | 
 **identifiers** | [**List[CustomEntityId]**](CustomEntityId.md) | The identifiers the custom entity will be upserted with. | 
 **fields** | [**List[CustomEntityField]**](CustomEntityField.md) | The fields that decorate the custom entity. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties that decorate the custom entity. | [optional] 
 ## Example
 
 ```python
@@ -18,7 +19,8 @@ display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 identifiers: conlist(CustomEntityId) = # Replace with your value
 fields: Optional[conlist(CustomEntityField)] = # Replace with your value
-custom_entity_request_instance = CustomEntityRequest(display_name=display_name, description=description, identifiers=identifiers, fields=fields)
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+custom_entity_request_instance = CustomEntityRequest(display_name=display_name, description=description, identifiers=identifiers, fields=fields, properties=properties)
 
 ```
 

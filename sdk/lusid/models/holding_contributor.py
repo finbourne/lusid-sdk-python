@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt 
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist 
+from lusid.models.movement_settlement_summary import MovementSettlementSummary
 from lusid.models.transaction import Transaction
 
 class HoldingContributor(BaseModel):
@@ -28,7 +29,8 @@ class HoldingContributor(BaseModel):
     """
     transaction: Transaction = Field(...)
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="The unique holding identifier")
-    __properties = ["transaction", "holdingId"]
+    movements: Optional[conlist(MovementSettlementSummary)] = Field(None, description="Movements contributed to holding")
+    __properties = ["transaction", "holdingId", "movements"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,10 +67,22 @@ class HoldingContributor(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transaction
         if self.transaction:
             _dict['transaction'] = self.transaction.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in movements (list)
+        _items = []
+        if self.movements:
+            for _item in self.movements:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['movements'] = _items
         # set to None if holding_id (nullable) is None
         # and __fields_set__ contains the field
         if self.holding_id is None and "holding_id" in self.__fields_set__:
             _dict['holdingId'] = None
+
+        # set to None if movements (nullable) is None
+        # and __fields_set__ contains the field
+        if self.movements is None and "movements" in self.__fields_set__:
+            _dict['movements'] = None
 
         return _dict
 
@@ -83,6 +97,7 @@ class HoldingContributor(BaseModel):
 
         _obj = HoldingContributor.parse_obj({
             "transaction": Transaction.from_dict(obj.get("transaction")) if obj.get("transaction") is not None else None,
-            "holding_id": obj.get("holdingId")
+            "holding_id": obj.get("holdingId"),
+            "movements": [MovementSettlementSummary.from_dict(_item) for _item in obj.get("movements")] if obj.get("movements") is not None else None
         })
         return _obj

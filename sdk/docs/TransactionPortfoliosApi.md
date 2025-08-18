@@ -1967,7 +1967,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_holding_contributors**
-> VersionedResourceListOfHoldingContributor get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
+> VersionedResourceListOfHoldingContributor get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page)
 
 GetHoldingContributors: Get Holdings Contributors
 
@@ -2026,16 +2026,17 @@ def main():
     to_trade_date = 'to_trade_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
     include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
     tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
+    include_unsettled_movements = False # bool | If true, contributing transaction which have not settled yet will also be returned. False by default (optional) (default to False)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page, opts=opts)
+        # api_response =  api_instance.get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page, opts=opts)
 
         # GetHoldingContributors: Get Holdings Contributors
-        api_response = api_instance.get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
+        api_response = api_instance.get_holding_contributors(scope, code, holding_id, effective_date=effective_date, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page)
         pprint(api_response)
 
     except ApiException as e:
@@ -2056,6 +2057,7 @@ Name | Type | Description  | Notes
  **to_trade_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
  **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
  **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
+ **include_unsettled_movements** | **bool**| If true, contributing transaction which have not settled yet will also be returned. False by default | [optional] [default to False]
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
@@ -2401,7 +2403,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_multiple_holding_contributors**
-> VersionedResourceListOfHoldingContributor get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
+> VersionedResourceListOfHoldingContributor get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page)
 
 GetMultipleHoldingContributors: Get Multiple Holding Contributors
 
@@ -2465,16 +2467,17 @@ def main():
     to_transaction_date = 'to_transaction_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
     include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
     tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
+    include_unsettled_movements = False # bool | If true, contributing transaction which have not settled yet will also be returned. False by default (optional) (default to False)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page, opts=opts)
+        # api_response =  api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page, opts=opts)
 
         # GetMultipleHoldingContributors: Get Multiple Holding Contributors
-        api_response = api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, limit=limit, as_at=as_at, page=page)
+        api_response = api_instance.get_multiple_holding_contributors(scope, code, holding_ids_request, effective_date=effective_date, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page)
         pprint(api_response)
 
     except ApiException as e:
@@ -2495,6 +2498,7 @@ Name | Type | Description  | Notes
  **to_transaction_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
  **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
  **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
+ **include_unsettled_movements** | **bool**| If true, contributing transaction which have not settled yet will also be returned. False by default | [optional] [default to False]
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 

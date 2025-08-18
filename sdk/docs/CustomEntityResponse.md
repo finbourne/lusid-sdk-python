@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **identifiers** | [**List[CustomEntityId]**](CustomEntityId.md) | The identifiers the custom entity will be upserted with. | 
 **fields** | [**List[CustomEntityField]**](CustomEntityField.md) | The fields that decorate the custom entity. | 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the custom entity. | 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties that decorate the custom entity. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -29,8 +30,9 @@ description: Optional[StrictStr] = "example_description"
 identifiers: conlist(CustomEntityId) = # Replace with your value
 fields: conlist(CustomEntityField) = # Replace with your value
 relationships: conlist(Relationship) = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 links: Optional[conlist(Link)] = None
-custom_entity_response_instance = CustomEntityResponse(href=href, entity_type=entity_type, version=version, staged_modifications=staged_modifications, display_name=display_name, description=description, identifiers=identifiers, fields=fields, relationships=relationships, links=links)
+custom_entity_response_instance = CustomEntityResponse(href=href, entity_type=entity_type, version=version, staged_modifications=staged_modifications, display_name=display_name, description=description, identifiers=identifiers, fields=fields, relationships=relationships, properties=properties, links=links)
 
 ```
 

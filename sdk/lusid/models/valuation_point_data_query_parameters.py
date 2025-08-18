@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class ValuationPointDataQueryParameters(BaseModel):
@@ -28,7 +28,8 @@ class ValuationPointDataQueryParameters(BaseModel):
     """
     start: Optional[DateOrDiaryEntry] = None
     end: DateOrDiaryEntry = Field(...)
-    __properties = ["start", "end"]
+    exclude_cleardown_module: Optional[StrictBool] = Field(None, alias="excludeCleardownModule", description="By deafult this flag is set to false, if this is set to true, no cleardown module will be applied to the trial balance.")
+    __properties = ["start", "end", "excludeCleardownModule"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +82,7 @@ class ValuationPointDataQueryParameters(BaseModel):
 
         _obj = ValuationPointDataQueryParameters.parse_obj({
             "start": DateOrDiaryEntry.from_dict(obj.get("start")) if obj.get("start") is not None else None,
-            "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None
+            "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None,
+            "exclude_cleardown_module": obj.get("excludeCleardownModule")
         })
         return _obj

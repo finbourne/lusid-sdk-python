@@ -6,16 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction** | [**Transaction**](Transaction.md) |  | 
 **holding_id** | **int** | The unique holding identifier | [optional] 
+**movements** | [**List[MovementSettlementSummary]**](MovementSettlementSummary.md) | Movements contributed to holding | [optional] 
 ## Example
 
 ```python
 from lusid.models.holding_contributor import HoldingContributor
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, conlist
 
 transaction: Transaction = # Replace with your value
 holding_id: Optional[StrictInt] = # Replace with your value
-holding_contributor_instance = HoldingContributor(transaction=transaction, holding_id=holding_id)
+movements: Optional[conlist(MovementSettlementSummary)] = # Replace with your value
+holding_contributor_instance = HoldingContributor(transaction=transaction, holding_id=holding_id, movements=movements)
 
 ```
 
