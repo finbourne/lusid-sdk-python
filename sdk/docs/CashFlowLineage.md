@@ -4,8 +4,8 @@ Lineage for cash flow value
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_type** | **str** | The instrument type of the instrument to which the cash flow belongs to. When upserting CashFlowValues, this  should be null. | [optional] 
-**cash_flow_type** | **str** | The cashflow type.When upserting CashFlowValues, this should be null, or one of [Unknown, Coupon, Notional,  Premium, Principal, Protection, Cash] | [optional] 
+**instrument_type** | **str** | The instrument type of the instrument to which the cash flow belongs to. When upserting CashFlowValues, this should be null. | [optional] 
+**cash_flow_type** | **str** | The cashflow type.When upserting CashFlowValues, this should be null, or one of [Unknown, Coupon, Notional, Premium, Principal, Protection, Cash] | [optional] 
 **instrument_id** | **str** | The LUID of the instrument to which the cash flow belongs to. When upserting this should be null. | [optional] 
 **leg_id** | **str** | The leg id to which the cash flow belongs to. | [optional] 
 **source_transaction_id** | **str** | The source transaction of the instrument to which the cash flow belongs to. When upserting this should be null | [optional] 

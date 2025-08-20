@@ -350,15 +350,15 @@ class ApplicationMetadataApi:
 
 
     @overload
-    async def list_access_controlled_resources(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfAccessControlledResource:  # noqa: E501
+    async def list_access_controlled_resources(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfAccessControlledResource:  # noqa: E501
         ...
 
     @overload
-    def list_access_controlled_resources(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfAccessControlledResource:  # noqa: E501
+    def list_access_controlled_resources(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfAccessControlledResource:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_access_controlled_resources(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAccessControlledResource, Awaitable[ResourceListOfAccessControlledResource]]:  # noqa: E501
+    def list_access_controlled_resources(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAccessControlledResource, Awaitable[ResourceListOfAccessControlledResource]]:  # noqa: E501
         """ListAccessControlledResources: Get resources available for access control  # noqa: E501
 
         Get the comprehensive set of resources that are available for access control  # noqa: E501
@@ -368,7 +368,7 @@ class ApplicationMetadataApi:
         >>> thread = api.list_access_controlled_resources(filter, async_req=True)
         >>> result = thread.get()
 
-        :param filter: Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -389,7 +389,7 @@ class ApplicationMetadataApi:
         return self.list_access_controlled_resources_with_http_info(filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_access_controlled_resources_with_http_info(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_access_controlled_resources_with_http_info(self, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListAccessControlledResources: Get resources available for access control  # noqa: E501
 
         Get the comprehensive set of resources that are available for access control  # noqa: E501
@@ -399,7 +399,7 @@ class ApplicationMetadataApi:
         >>> thread = api.list_access_controlled_resources_with_http_info(filter, async_req=True)
         >>> result = thread.get()
 
-        :param filter: Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

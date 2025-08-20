@@ -24,7 +24,7 @@ from lusid.models.counterparty_agreement import CounterpartyAgreement
 
 class UpsertCounterpartyAgreementRequest(BaseModel):
     """
-    Counterparty Agreement that is to be stored in the convention data store.  There must be only one of these present.  # noqa: E501
+    Counterparty Agreement that is to be stored in the convention data store. There must be only one of these present.  # noqa: E501
     """
     counterparty_agreement: CounterpartyAgreement = Field(..., alias="counterpartyAgreement")
     __properties = ["counterpartyAgreement"]

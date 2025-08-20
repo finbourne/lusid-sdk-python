@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] DeletePlacement: Delete placement
 
-Delete an placement. Deletion will be valid from the placement's creation datetime.  This means that the placement will no longer exist at any effective datetime from the asAt datetime of deletion.
+Delete an placement. Deletion will be valid from the placement's creation datetime. This means that the placement will no longer exist at any effective datetime from the asAt datetime of deletion.
 
 ### Example
 
@@ -159,7 +159,7 @@ def main():
     scope = 'scope_example' # str | The scope to which the placement belongs.
     code = 'code_example' # str | The placement's unique identifier.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the placement. Defaults to return the latest version of the placement if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Placement\" domain to decorate onto the placement.  If none are given, all applied properties are returned.              These take the format {domain}/{scope}/{code} e.g. \"Placement/system/Name\". Property keys from the instrument domain can also be decorated              onto the placement, e.g. \"Instrument/default/Isin\". These are only decorated if requested. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Placement\" domain to decorate onto the placement.  If none are given, all applied properties are returned.             These take the format {domain}/{scope}/{code} e.g. \"Placement/system/Name\". Property keys from the instrument domain can also be decorated             onto the placement, e.g. \"Instrument/default/Isin\". These are only decorated if requested. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope to which the placement belongs. | 
  **code** | **str**| The placement&#39;s unique identifier. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the placement. Defaults to return the latest version of the placement if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Placement\&quot; domain to decorate onto the placement.  If none are given, all applied properties are returned.              These take the format {domain}/{scope}/{code} e.g. \&quot;Placement/system/Name\&quot;. Property keys from the instrument domain can also be decorated              onto the placement, e.g. \&quot;Instrument/default/Isin\&quot;. These are only decorated if requested. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Placement\&quot; domain to decorate onto the placement.  If none are given, all applied properties are returned.             These take the format {domain}/{scope}/{code} e.g. \&quot;Placement/system/Name\&quot;. Property keys from the instrument domain can also be decorated             onto the placement, e.g. \&quot;Instrument/default/Isin\&quot;. These are only decorated if requested. | [optional] 
 
 ### Return type
 
@@ -255,11 +255,11 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PlacementsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the placement. Defaults to return the latest version of the placement if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing placements from a previous call to list placements.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing placements from a previous call to list placements.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields             must not have changed since the original request. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Placement\" domain to decorate onto each placement.                  These take the format {domain}/{scope}/{code} e.g. \"Placement/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Placement\" domain to decorate onto each placement.                 These take the format {domain}/{scope}/{code} e.g. \"Placement/system/Name\".                 All properties, except derived properties, are returned by default, without specifying here. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -280,11 +280,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the placement. Defaults to return the latest version of the placement if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing placements from a previous call to list placements.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing placements from a previous call to list placements.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields             must not have changed since the original request. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Placement\&quot; domain to decorate onto each placement.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Placement/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Placement\&quot; domain to decorate onto each placement.                 These take the format {domain}/{scope}/{code} e.g. \&quot;Placement/system/Name\&quot;.                 All properties, except derived properties, are returned by default, without specifying here. | [optional] 
 
 ### Return type
 

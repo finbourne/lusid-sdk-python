@@ -25,7 +25,7 @@ from lusid.models.lusid_instrument import LusidInstrument
 
 class ExerciseEvent(InstrumentEvent):
     """
-    Definition of an exercise event.  This is an event that occurs on transformation of an instrument owing to exercise. e.g. an option of  some type into its underlying.  # noqa: E501
+    Definition of an exercise event. This is an event that occurs on transformation of an instrument owing to exercise. e.g. an option of some type into its underlying.  # noqa: E501
     """
     instrument: LusidInstrument = Field(...)
     anchor_date: datetime = Field(..., alias="anchorDate", description="The date the exercise window starts, or point it takes effect on.")

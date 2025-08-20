@@ -24,9 +24,9 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class AmortisationEvent(InstrumentEvent):
     """
-    Definition of an Amortisation event.  This is an event that describes the occurence of amortisation.  # noqa: E501
+    Definition of an Amortisation event. This is an event that describes the occurence of amortisation.  # noqa: E501
     """
-    amount_reduced: Union[StrictFloat, StrictInt] = Field(..., alias="amountReduced", description="The amount reduced in this amortisation event.  That is, the difference between the previous notional amount and the current notional amount as set in this event.")
+    amount_reduced: Union[StrictFloat, StrictInt] = Field(..., alias="amountReduced", description="The amount reduced in this amortisation event. That is, the difference between the previous notional amount and the current notional amount as set in this event.")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the originating instrument") 
     pay_receive:  StrictStr = Field(...,alias="payReceive", description="Is this event in relation to the Pay or Receive leg") 
     payment_date: datetime = Field(..., alias="paymentDate", description="The date the principal payment is to be made.")

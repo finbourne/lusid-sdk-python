@@ -1,6 +1,6 @@
 # CashFlowEvent
 
-Definition of a CashFlow event.  This is an event that describes the occurence of a cashflow and associated information.
+Definition of a CashFlow event. This is an event that describes the occurence of a cashflow and associated information.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

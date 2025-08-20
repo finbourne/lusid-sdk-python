@@ -25,7 +25,7 @@ from lusid.models.resource_id import ResourceId
 
 class CancelSingleHoldingAdjustmentRequest(BaseModel):
     """
-    This request specifies single target holding. i.e. holding data that the  system should match. And deletes previous adjustment made to that holding  # noqa: E501
+    This request specifies single target holding. i.e. holding data that the system should match. And deletes previous adjustment made to that holding  # noqa: E501
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property must be from the 'Transaction' domain.")

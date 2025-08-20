@@ -256,10 +256,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(StagedModificationsApi)
     id = 'id_example' # str | Unique Id for a staged modification..
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list changes. Defaults to return the latest version              of each staged change if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing requested staged modification changes from a previous call to list requested              staged modifications. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list changes. Defaults to return the latest version             of each staged change if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing requested staged modification changes from a previous call to list requested             staged modifications. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -281,10 +281,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Unique Id for a staged modification.. | 
- **as_at** | **datetime**| The asAt datetime at which to list changes. Defaults to return the latest version              of each staged change if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing requested staged modification changes from a previous call to list requested              staged modifications. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list changes. Defaults to return the latest version             of each staged change if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing requested staged modification changes from a previous call to list requested             staged modifications. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -357,10 +357,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(StagedModificationsApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list staged modifications. Defaults to return the latest version              of each staged modification if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing staged modifications from a previous call to list staged modifications. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list staged modifications. Defaults to return the latest version             of each staged modification if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing staged modifications from a previous call to list staged modifications. This             value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -381,10 +381,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to list staged modifications. Defaults to return the latest version              of each staged modification if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing staged modifications from a previous call to list staged modifications. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list staged modifications. Defaults to return the latest version             of each staged modification if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing staged modifications from a previous call to list staged modifications. This             value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type

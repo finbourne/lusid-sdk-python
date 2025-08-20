@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**delete_instrument_properties**](InstrumentsApi.md#delete_instrument_properties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | DeleteInstrumentProperties: Delete instrument properties
 [**delete_instruments**](InstrumentsApi.md#delete_instruments) | **POST** /api/instruments/$delete | DeleteInstruments: Soft or hard delete multiple instruments
 [**get_all_possible_features**](InstrumentsApi.md#get_all_possible_features) | **GET** /api/instruments/{instrumentType}/allfeatures | GetAllPossibleFeatures: Provides list of all possible features for instrument type.
-[**get_existing_instrument_capabilities**](InstrumentsApi.md#get_existing_instrument_capabilities) | **GET** /api/instruments/{identifier}/capabilities | GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
+[**get_existing_instrument_capabilities**](InstrumentsApi.md#get_existing_instrument_capabilities) | **GET** /api/instruments/{identifier}/capabilities | GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies. Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
 [**get_existing_instrument_models**](InstrumentsApi.md#get_existing_instrument_models) | **GET** /api/instruments/{identifier}/models | GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | GetInstrument: Get instrument
 [**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | GetInstrumentIdentifierTypes: Get instrument identifier types
@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 BatchUpsertInstrumentProperties: Batch upsert instruments properties
 
-Create or update one or more properties for particular instruments.    Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.    Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Create or update one or more properties for particular instruments.  Each instrument property is updated if it exists and created if it does not. For any failures, a reason is provided.  Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i> datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 CalculateSettlementDate: Get the settlement date for an instrument.
 
-Get the settlement date for a given trade date and instrument. The calculated settlement date will be in UTC.  If a cut label transaction date is provided, the settlement date will be calculated relative to the absolute UTC datetime.
+Get the settlement date for a given trade date and instrument. The calculated settlement date will be in UTC. If a cut label transaction date is provided, the settlement date will be calculated relative to the absolute UTC datetime.
 
 ### Example
 
@@ -185,7 +185,7 @@ def main():
     identifier = 'identifier_example' # str | The identifier value.
     transaction_date = 'transaction_date_example' # str | The transaction date to calculate the settlement date from. This can be a UTC datetime offset or a cut label. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the related instrument and calendars for calculation. Defaults to              returning the latest version if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the related instrument and calendars for calculation. Defaults to             returning the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
  **identifier** | **str**| The identifier value. | 
  **transaction_date** | **str**| The transaction date to calculate the settlement date from. This can be a UTC datetime offset or a cut label. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **as_at** | **datetime**| The asAt datetime at which to retrieve the related instrument and calendars for calculation. Defaults to              returning the latest version if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the related instrument and calendars for calculation. Defaults to             returning the latest version if not specified. | [optional] 
 
 ### Return type
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 DeleteInstrument: Soft delete a single instrument
 
-Soft delete a particular instrument, as identified by a particular instrument identifier.                Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating  transactions or holdings. You can still query existing transactions and holdings related to the  deleted instrument.
+Soft delete a particular instrument, as identified by a particular instrument identifier.              Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating transactions or holdings. You can still query existing transactions and holdings related to the deleted instrument.
 
 ### Example
 
@@ -330,7 +330,7 @@ Name | Type | Description  | Notes
 
 DeleteInstrumentProperties: Delete instrument properties
 
-Delete one or more properties from a particular instrument. If the properties are time-variant then an effective datetime from which  to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.
+Delete one or more properties from a particular instrument. If the properties are time-variant then an effective datetime from which to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.
 
 ### Example
 
@@ -380,7 +380,7 @@ def main():
     identifier_type = 'identifier_type_example' # str | The unique identifier type to search, for example 'Figi'.
     identifier = 'identifier_example' # str | An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.
     request_body = ["Instrument/scope/market-sector","Instrument/scope/tenor"] # List[str] | A list of property keys from the 'Instruments' domain whose properties to delete.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
@@ -406,7 +406,7 @@ Name | Type | Description  | Notes
  **identifier_type** | **str**| The unique identifier type to search, for example &#39;Figi&#39;. | 
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
  **request_body** | [**List[str]**](str.md)| A list of property keys from the &#39;Instruments&#39; domain whose properties to delete. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 DeleteInstruments: Soft or hard delete multiple instruments
 
-Deletes a number of instruments identified by LusidInstrumentId.                Soft deletion marks the instrument as inactive so it can no longer be referenced when creating or updating transactions or holdings. You can still query existing transactions and holdings related to the inactive instrument.                In addition to the above behaviour, hard deletion: (i) completely removes all external identifiers from the instrument; (ii) marks the instrument as 'Deleted'; (iii) prepends the instrument's name with 'DELETED '; (iv) prevents the instrument from being returned in list instruments queries.                Following hard deletion, an instrument may only be retrieved by making a direct get instrument request for the LusidInstrumentId. Instrument deletion cannot be undone. Please note that currency instruments cannot currently be deleted.  The maximum number of instruments that this method can delete per request is 2,000.
+Deletes a number of instruments identified by LusidInstrumentId.              Soft deletion marks the instrument as inactive so it can no longer be referenced when creating or updating transactions or holdings. You can still query existing transactions and holdings related to the inactive instrument.              In addition to the above behaviour, hard deletion: (i) completely removes all external identifiers from the instrument; (ii) marks the instrument as 'Deleted'; (iii) prepends the instrument's name with 'DELETED '; (iv) prevents the instrument from being returned in list instruments queries.              Following hard deletion, an instrument may only be retrieved by making a direct get instrument request for the LusidInstrumentId. Instrument deletion cannot be undone. Please note that currency instruments cannot currently be deleted.  The maximum number of instruments that this method can delete per request is 2,000.
 
 ### Example
 
@@ -620,9 +620,9 @@ Name | Type | Description  | Notes
 # **get_existing_instrument_capabilities**
 > InstrumentCapabilities get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
 
-GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
+GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies. Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
 
-Returns instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument e.g. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) e.g. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) e.g. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
+Returns instrument capabilities containing useful information about the instrument and the model. This includes - features corresponding to the instrument e.g. Optionality:American, Other:InflationLinked - supported addresses (if model provided) e.g. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued - economic dependencies (if model provided) e.g. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
 
 ### Example
 
@@ -671,8 +671,8 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier = 'identifier_example' # str | A lusid instrument id identifying the instrument.
     model = 'model_example' # str | A pricing model for the instrument. Defaults to Unknown if not specified. If not specified the SupportedAddresses and EconomicDependencies are not provided. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.             Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. (optional)
     instrument_scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     recipe_scope = 'default' # str | The scope in which the recipe lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     recipe_code = 'recipe_code_example' # str | A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. (optional)
@@ -681,7 +681,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code, opts=opts)
 
-        # GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.  Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
+        # GetExistingInstrumentCapabilities: Retrieve capabilities of an existing instrument identified by LUID. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies. Given an lusid instrument id provides instrument capabilities, outlining features, and, given the model, the capabilities also include supported addresses as well as economic dependencies.
         api_response = api_instance.get_existing_instrument_capabilities(identifier, model=model, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
         pprint(api_response)
 
@@ -697,8 +697,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier** | **str**| A lusid instrument id identifying the instrument. | 
  **model** | **str**| A pricing model for the instrument. Defaults to Unknown if not specified. If not specified the SupportedAddresses and EconomicDependencies are not provided. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. | [optional] 
  **instrument_scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **recipe_scope** | **str**| The scope in which the recipe lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **recipe_code** | **str**| A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. | [optional] 
@@ -774,8 +774,8 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier = 'identifier_example' # str | A lusid instrument id identifying the instrument.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.             Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. (optional)
     instrument_scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     recipe_scope = 'default' # str | The scope in which the recipe lies. When not supplied the scope is 'default'. (optional) (default to 'default')
     recipe_code = 'recipe_code_example' # str | A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. (optional)
@@ -799,8 +799,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier** | **str**| A lusid instrument id identifying the instrument. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. | [optional] 
  **instrument_scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **recipe_scope** | **str**| The scope in which the recipe lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **recipe_code** | **str**| A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. | [optional] 
@@ -877,11 +877,11 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier_type = 'identifier_type_example' # str | The unique identifier type to use, for example 'Figi'.
     identifier = 'identifier_example' # str | An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto              the instrument, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.             Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto             the instrument, or from any domain that supports relationships to decorate onto related entities.             These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -903,11 +903,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The unique identifier type to use, for example &#39;Figi&#39;. | 
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto              the instrument, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto             the instrument, or from any domain that supports relationships to decorate onto related entities.             These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -932,7 +932,7 @@ Name | Type | Description  | Notes
 
 GetInstrumentIdentifierTypes: Get instrument identifier types
 
-Retrieve a list of all valid instrument identifier types and whether they are unique or not.                An instrument must have a value for at least one unique identifier type (it can have more than one unique type and value).  In addition, a value is automatically generated for a LUSID Instrument ID (LUID) unique type by the system.                An instrument can have values for multiple non-unique identifier types (or it can have zero non-unique types and values).
+Retrieve a list of all valid instrument identifier types and whether they are unique or not.              An instrument must have a value for at least one unique identifier type (it can have more than one unique type and value). In addition, a value is automatically generated for a LUSID Instrument ID (LUID) unique type by the system.              An instrument can have values for multiple non-unique identifier types (or it can have zero non-unique types and values).
 
 ### Example
 
@@ -1172,8 +1172,8 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier_type = 'identifier_type_example' # str | The unique identifier type to search, for example 'Figi'.
     identifier = 'identifier_example' # str | An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the instrument's properties.              Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instrument's properties. Defaults to returning              the latest version of each property if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the instrument's properties.             Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instrument's properties. Defaults to returning             the latest version of each property if not specified. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
@@ -1196,8 +1196,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The unique identifier type to search, for example &#39;Figi&#39;. | 
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the instrument&#39;s properties.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the instrument&#39;s properties. Defaults to returning              the latest version of each property if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the instrument&#39;s properties.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the instrument&#39;s properties. Defaults to returning             the latest version of each property if not specified. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
 
 ### Return type
@@ -1272,11 +1272,11 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier_type = 'identifier_type_example' # str | The unique identifier type to search, for example 'Figi'.
     identifier = 'identifier_example' # str | An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.
-    property_key = 'property_key_example' # str | The property key of a property from the 'Instrument' domain whose history to retrieve.              This must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.
-    identifier_effective_at = 'identifier_effective_at_example' # str | The effective datetime used to resolve the instrument from the identifier.              Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument's property history. Defaults to              returning the current datetime if not supplied. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the <i>filter</i>, <i>effectiveAt</i> and              <i>asAt</i> fields must not have changed since the original request. For more information, see              https://support.lusid.com/knowledgebase/article/KA-01915. (optional)
+    property_key = 'property_key_example' # str | The property key of a property from the 'Instrument' domain whose history to retrieve.             This must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.
+    identifier_effective_at = 'identifier_effective_at_example' # str | The effective datetime used to resolve the instrument from the identifier.             Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument's property history. Defaults to             returning the current datetime if not supplied. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering,             see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties; this value is returned from             the previous call. If a pagination token is provided, the <i>filter</i>, <i>effectiveAt</i> and             <i>asAt</i> fields must not have changed since the original request. For more information, see             https://support.lusid.com/knowledgebase/article/KA-01915. (optional)
     limit = 56 # int | When paginating, limit the results to this number. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
@@ -1300,11 +1300,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The unique identifier type to search, for example &#39;Figi&#39;. | 
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
- **property_key** | **str**| The property key of a property from the &#39;Instrument&#39; domain whose history to retrieve.              This must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | 
- **identifier_effective_at** | **str**| The effective datetime used to resolve the instrument from the identifier.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument&#39;s property history. Defaults to              returning the current datetime if not supplied. | [optional] 
- **filter** | **str**| Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **page** | **str**| The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;filter&lt;/i&gt;, &lt;i&gt;effectiveAt&lt;/i&gt; and              &lt;i&gt;asAt&lt;/i&gt; fields must not have changed since the original request. For more information, see              https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] 
+ **property_key** | **str**| The property key of a property from the &#39;Instrument&#39; domain whose history to retrieve.             This must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | 
+ **identifier_effective_at** | **str**| The effective datetime used to resolve the instrument from the identifier.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument&#39;s property history. Defaults to             returning the current datetime if not supplied. | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering,             see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing properties; this value is returned from             the previous call. If a pagination token is provided, the &lt;i&gt;filter&lt;/i&gt;, &lt;i&gt;effectiveAt&lt;/i&gt; and             &lt;i&gt;asAt&lt;/i&gt; fields must not have changed since the original request. For more information, see             https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
 
@@ -1383,7 +1383,7 @@ def main():
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter relationships. Users should provide null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example             'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
     scope = 'default' # str | The entity scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
@@ -1409,7 +1409,7 @@ Name | Type | Description  | Notes
  **effective_at** | **str**| The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter relationships. Users should provide null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example             &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
  **scope** | **str**| The entity scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
 
 ### Return type
@@ -1435,7 +1435,7 @@ Name | Type | Description  | Notes
 
 GetInstruments: Get instruments
 
-Retrieve the definition of one or more instruments, as identified by a collection of unique identifiers.                Note that to retrieve all the instruments in the instrument master, use the List instruments endpoint instead.
+Retrieve the definition of one or more instruments, as identified by a collection of unique identifiers.              Note that to retrieve all the instruments in the instrument master, use the List instruments endpoint instead.
 
 ### Example
 
@@ -1484,11 +1484,11 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier_type = 'identifier_type_example' # str | The unique identifier type to use, for example 'Figi'.
     request_body = ["instrument-identifier-1","instrument-identifier-2"] # List[str] | A list of one or more <i>identifierType</i> values to use to identify instruments.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument definitions.               Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definitions.               Defaults to returning the latest version of each instrument definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto               each instrument, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definitions.              Defaults to returning the latest version of each instrument definition if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto              each instrument, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1510,11 +1510,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The unique identifier type to use, for example &#39;Figi&#39;. | 
  **request_body** | [**List[str]**](str.md)| A list of one or more &lt;i&gt;identifierType&lt;/i&gt; values to use to identify instruments. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument definitions.               Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument definitions.               Defaults to returning the latest version of each instrument definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto               each instrument, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument definitions.              Defaults to returning the latest version of each instrument definition if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto              each instrument, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -1588,8 +1588,8 @@ def main():
     api_instance = api_client_factory.build(InstrumentsApi)
     identifier_type = 'identifier_type_example' # str | The unique identifier type to search, for example 'Figi'.
     identifier = 'identifier_example' # str | An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the instrument's properties.              Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instrument's properties. Defaults to returning              the latest version of each property if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the instrument's properties.             Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instrument's properties. Defaults to returning             the latest version of each property if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing commands; this value is returned from the previous call. (optional)
     limit = 56 # int | When paginating, limit the results per page to this number. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
@@ -1614,8 +1614,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The unique identifier type to search, for example &#39;Figi&#39;. | 
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the instrument&#39;s properties.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the instrument&#39;s properties. Defaults to returning              the latest version of each property if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the instrument&#39;s properties.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the instrument&#39;s properties. Defaults to returning             the latest version of each property if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing commands; this value is returned from the previous call. | [optional] 
  **limit** | **int**| When paginating, limit the results per page to this number. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
@@ -1643,7 +1643,7 @@ Name | Type | Description  | Notes
 
 ListInstruments: List instruments
 
-List all the instruments in the instrument master.                To retrieve a particular set of instruments instead, use the Get instruments endpoint.  The maximum number of instruments that this method can list per request is 2,000.
+List all the instruments in the instrument master.              To retrieve a particular set of instruments instead, use the Get instruments endpoint.  The maximum number of instruments that this method can list per request is 2,000.
 
 ### Example
 
@@ -1690,15 +1690,15 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentsApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list instruments. Defaults to returning the latest               version of each instrument if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list instruments.               Defaults to the current LUSID system datetime if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing instruments; this value is returned from               the previous call. If a pagination token is provided, the <i>sortBy</i>, <i>filter</i>, <i>effectiveAt</i> and               <i>asAt</i> fields must not have changed since the original request.               For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list instruments. Defaults to returning the latest              version of each instrument if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list instruments.              Defaults to the current LUSID system datetime if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing instruments; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i>, <i>filter</i>, <i>effectiveAt</i> and              <i>asAt</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     limit = 56 # int | When paginating, limit the results to this number. (optional)
-    filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaults to filtering out inactive instruments               (that is, those that have been deleted). For more information about filtering results,               see https://support.lusid.com/knowledgebase/article/KA-01914. (optional) (default to 'State eq 'Active'')
-    instrument_property_keys = ['instrument_property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
+    filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaults to filtering out inactive instruments              (that is, those that have been deleted). For more information about filtering results,              see https://support.lusid.com/knowledgebase/article/KA-01914. (optional) (default to 'State eq 'Active'')
+    instrument_property_keys = ['instrument_property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto              instruments, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
     scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
     membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. (optional)
@@ -1721,15 +1721,15 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to list instruments. Defaults to returning the latest               version of each instrument if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to list instruments.               Defaults to the current LUSID system datetime if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing instruments; this value is returned from               the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt;, &lt;i&gt;filter&lt;/i&gt;, &lt;i&gt;effectiveAt&lt;/i&gt; and               &lt;i&gt;asAt&lt;/i&gt; fields must not have changed since the original request.               For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list instruments. Defaults to returning the latest              version of each instrument if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list instruments.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing instruments; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt;, &lt;i&gt;filter&lt;/i&gt;, &lt;i&gt;effectiveAt&lt;/i&gt; and              &lt;i&gt;asAt&lt;/i&gt; fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. | [optional] 
- **filter** | **str**| Expression to filter the result set. Defaults to filtering out inactive instruments               (that is, those that have been deleted). For more information about filtering results,               see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] [default to &#39;State eq &#39;Active&#39;&#39;]
- **instrument_property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Defaults to filtering out inactive instruments              (that is, those that have been deleted). For more information about filtering results,              see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] [default to &#39;State eq &#39;Active&#39;&#39;]
+ **instrument_property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto              instruments, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
  **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. | [optional] 
@@ -1757,7 +1757,7 @@ Name | Type | Description  | Notes
 
 QueryInstrumentCapabilities: Query capabilities of a particular instrument in advance of creating it. These include instrument features, and if model is provided it also includes supported address keys and economic dependencies.
 
-Returns instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument e.g. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) e.g. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) e.g. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
+Returns instrument capabilities containing useful information about the instrument and the model. This includes - features corresponding to the instrument e.g. Optionality:American, Other:InflationLinked - supported addresses (if model provided) e.g. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued - economic dependencies (if model provided) e.g. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
 
 ### Example
 
@@ -1856,7 +1856,7 @@ Name | Type | Description  | Notes
 
 UpdateInstrumentIdentifier: Update instrument identifier
 
-Create, update or delete a particular instrument identifier for an instrument.                To delete the identifier, leave the value unspecified in the request. If not being deleted, the  identifier is updated if it exists and created if it does not.
+Create, update or delete a particular instrument identifier for an instrument.              To delete the identifier, leave the value unspecified in the request. If not being deleted, the identifier is updated if it exists and created if it does not.
 
 ### Example
 
@@ -1935,7 +1935,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The unique identifier type to search, for example &#39;Figi&#39;. | 
  **identifier** | **str**| An &lt;i&gt;identifierType&lt;/i&gt; value to use to identify the instrument, for example &#39;BBG000BLNNV0&#39;. | 
- **update_instrument_identifier_request** | [**UpdateInstrumentIdentifierRequest**](UpdateInstrumentIdentifierRequest.md)| The identifier to update or delete. This need not be the same value as the               &#39;identifier&#39; parameter used to retrieve the instrument. | 
+ **update_instrument_identifier_request** | [**UpdateInstrumentIdentifierRequest**](UpdateInstrumentIdentifierRequest.md)| The identifier to update or delete. This need not be the same value as the              &#39;identifier&#39; parameter used to retrieve the instrument. | 
  **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
@@ -1963,7 +1963,7 @@ Name | Type | Description  | Notes
 
 UpsertInstruments: Upsert instruments
 
-Create or update one or more instruments in the instrument master. An instrument is updated  if it already exists and created if it does not.                In the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral  and not stored by LUSID. It serves only to easily identify each instrument in the response.                Note that an instrument must have at least one unique identifier, which is a combination of a type  (such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically  generated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see  https://support.lusid.com/knowledgebase/article/KA-01862.                The response returns both the collection of successfully created or updated instruments, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.
+Create or update one or more instruments in the instrument master. An instrument is updated if it already exists and created if it does not.              In the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each instrument in the response.              Note that an instrument must have at least one unique identifier, which is a combination of a type (such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically generated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see https://support.lusid.com/knowledgebase/article/KA-01862.              The response returns both the collection of successfully created or updated instruments, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.
 
 ### Example
 
@@ -2061,7 +2061,7 @@ Name | Type | Description  | Notes
 
 UpsertInstrumentsProperties: Upsert instruments properties
 
-Create or update one or more properties for particular instruments.                Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.                Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Create or update one or more properties for particular instruments.              Each instrument property is updated if it exists and created if it does not. For any failures, a reason is provided.              Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i> datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 

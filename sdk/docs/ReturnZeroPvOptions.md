@@ -4,7 +4,7 @@ Options to indicate which errors to ignore when performing valuation.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_matured** | **bool** | Indicates whether attempting to value an instrument after its maturity date should produce a failure (false)  or a zero PV (true). | [optional] 
+**instrument_matured** | **bool** | Indicates whether attempting to value an instrument after its maturity date should produce a failure (false) or a zero PV (true). | [optional] 
 ## Example
 
 ```python

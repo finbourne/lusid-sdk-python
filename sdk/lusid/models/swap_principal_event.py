@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class SwapPrincipalEvent(InstrumentEvent):
     """
-    Definition of a Swap Principal Event.  This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
+    Definition of a Swap Principal Event. This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The entitlement date of the principal payment.")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the principal.")

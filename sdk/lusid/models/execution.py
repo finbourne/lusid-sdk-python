@@ -29,7 +29,7 @@ from lusid.models.version import Version
 
 class Execution(BaseModel):
     """
-    The record of a number of executions against a single Placement (directly analogous to  a partial or full fill against a street order).  # noqa: E501
+    The record of a number of executions against a single Placement (directly analogous to a partial or full fill against a street order).  # noqa: E501
     """
     id: ResourceId = Field(...)
     placement_id: ResourceId = Field(..., alias="placementId")

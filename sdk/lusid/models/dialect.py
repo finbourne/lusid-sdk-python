@@ -26,7 +26,7 @@ from lusid.models.version import Version
 
 class Dialect(BaseModel):
     """
-    The language/format of a translatable entity. Entities can be LUSID native or external and the Dialect describes  1) the system that understands the entity and  2) applicable validation for the entity, in the form of a schema.  # noqa: E501
+    The language/format of a translatable entity. Entities can be LUSID native or external and the Dialect describes 1) the system that understands the entity and 2) applicable validation for the entity, in the form of a schema.  # noqa: E501
     """
     id: DialectId = Field(...)
     var_schema: DialectSchema = Field(..., alias="schema")

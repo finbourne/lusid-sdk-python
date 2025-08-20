@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictI
 
 class CorporateActionTransitionComponentRequest(BaseModel):
     """
-    A single transition component request, when grouped with other transition component requests a corporate action  transition request is formed.  # noqa: E501
+    A single transition component request, when grouped with other transition component requests a corporate action transition request is formed.  # noqa: E501
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
     units_factor: Union[StrictFloat, StrictInt] = Field(..., alias="unitsFactor", description="The factor to scale units by")

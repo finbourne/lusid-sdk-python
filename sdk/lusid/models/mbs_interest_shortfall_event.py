@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class MbsInterestShortfallEvent(InstrumentEvent):
     """
-    Definition of an MBS Interest Shortfall Event  This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and  not capitalised into the outstanding principal balance of a mortgage-backed security.  # noqa: E501
+    Definition of an MBS Interest Shortfall Event This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and not capitalised into the outstanding principal balance of a mortgage-backed security.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date (entitlement date) of the interest payment, usually several weeks prior to the payment date")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the interest")

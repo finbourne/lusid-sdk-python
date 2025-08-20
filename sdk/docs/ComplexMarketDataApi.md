@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
 
-Delete one or more specified complex market data items from a single scope. Each item is identified by a unique id which includes  information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).                In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each quote in the response.                The response will return both the collection of successfully deleted  complex market data items, as well as those that failed.  For the failures a reason will be provided explaining why the it could not be deleted.                It is important to always check the failed set for any unsuccessful results.
+Delete one or more specified complex market data items from a single scope. Each item is identified by a unique id which includes information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).              In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each quote in the response.              The response will return both the collection of successfully deleted  complex market data items, as well as those that failed. For the failures a reason will be provided explaining why the it could not be deleted.              It is important to always check the failed set for any unsuccessful results.
 
 ### Example
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 
 GetComplexMarketData: Get complex market data
 
-Get one or more items of complex market data from a single scope.                Each item can be identified by its time invariant complex market data identifier.                For each id LUSID will return the most recent matched item with respect to the provided (or default) effective datetime.                An optional maximum age range window can be specified which defines how far back to look back for data from the specified effective datetime.  LUSID will return the most recent item within this window.                In the request each complex market data id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each item in the response.                The response will return three collections. One, the successfully retrieved complex market data. Two, those that had a  valid identifier but could not be found. Three, those that failed because LUSID could not construct a valid identifier from the request.                For the ids that failed to resolve or could not be found a reason will be provided explaining why that is the case.                It is important to always check the failed and not found sets for any unsuccessful results.
+Get one or more items of complex market data from a single scope.              Each item can be identified by its time invariant complex market data identifier.              For each id LUSID will return the most recent matched item with respect to the provided (or default) effective datetime.              An optional maximum age range window can be specified which defines how far back to look back for data from the specified effective datetime. LUSID will return the most recent item within this window.              In the request each complex market data id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each item in the response.              The response will return three collections. One, the successfully retrieved complex market data. Two, those that had a valid identifier but could not be found. Three, those that failed because LUSID could not construct a valid identifier from the request.              For the ids that failed to resolve or could not be found a reason will be provided explaining why that is the case.              It is important to always check the failed and not found sets for any unsuccessful results.
 
 ### Example
 
@@ -158,10 +158,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplexMarketDataApi)
     scope = 'scope_example' # str | The scope of the complex market data to retrieve.
-    request_body = {"first-item":{"provider":"DataScope","priceSource":"Some Bank Plc","lineage":"Swaps Desk Trader A","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USDOIS"},"second-item":{"provider":"DataScope","priceSource":"AN.Other Bank Plc","lineage":"Swaps Desk Trader B","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"RBS"}} # Dict[str, ComplexMarketDataId] | The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.
-    effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body. (optional)
+    request_body = {"first-item":{"provider":"DataScope","priceSource":"Some Bank Plc","lineage":"Swaps Desk Trader A","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USDOIS"},"second-item":{"provider":"DataScope","priceSource":"AN.Other Bank Plc","lineage":"Swaps Desk Trader B","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"RBS"}} # Dict[str, ComplexMarketDataId] | The time invariant set of complex data identifiers to retrieve the data for. These need to be              keyed by a unique correlation id allowing the retrieved item to be identified in the response.
+    effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the complex market data.              Defaults to the current LUSID system datetime if not specified.              Must match the Effective at of each ComplexMarketDataId given in the request body. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified. (optional)
-    max_age = 'max_age_example' # str | The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved. (optional)
+    max_age = 'max_age_example' # str | The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).              This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -182,10 +182,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the complex market data to retrieve. | 
- **request_body** | [**Dict[str, ComplexMarketDataId]**](ComplexMarketDataId.md)| The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response. | 
- **effective_at** | **str**| The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body. | [optional] 
+ **request_body** | [**Dict[str, ComplexMarketDataId]**](ComplexMarketDataId.md)| The time invariant set of complex data identifiers to retrieve the data for. These need to be              keyed by a unique correlation id allowing the retrieved item to be identified in the response. | 
+ **effective_at** | **str**| The effective datetime at which to retrieve the complex market data.              Defaults to the current LUSID system datetime if not specified.              Must match the Effective at of each ComplexMarketDataId given in the request body. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified. | [optional] 
- **max_age** | **str**| The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved. | [optional] 
+ **max_age** | **str**| The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).              This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved. | [optional] 
 
 ### Return type
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ListComplexMarketData: List the set of ComplexMarketData
 
-List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.
+List the set of ComplexMarketData at the specified date/time, along with the scope the data was stored in and its identifier in that scope.
 
 ### Example
 
@@ -258,9 +258,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplexMarketDataApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
-    limit = 56 # int | When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
+    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note that this parameter is not implemented at this time and the latest version of the ComplexMarketData will always be returned. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing ComplexMarketData; this             value is returned from the previous call. If a pagination token is provided, the effectiveAt             and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. If not specified, no pagination will be applied. It is highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -281,9 +281,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. | [optional] 
- **effective_at** | **str**| The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. | [optional] 
- **page** | **str**| The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
- **limit** | **int**| When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note that this parameter is not implemented at this time and the latest version of the ComplexMarketData will always be returned. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing ComplexMarketData; this             value is returned from the previous call. If a pagination token is provided, the effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. If not specified, no pagination will be applied. It is highly recommended to supply a value for this parameter as the default behaviour will change in the future. | [optional] 
 
 ### Return type
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertAppendComplexMarketData: Appends a new point to the end of a ComplexMarketData definition.
 
-Update a complex market data item in a single scope by appending a new point onto the end.                NOTE: This operation is only supported for FX curves with one of the following data types:  FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData
+Update a complex market data item in a single scope by appending a new point onto the end.              NOTE: This operation is only supported for FX curves with one of the following data types: FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData
 
 ### Example
 
@@ -362,7 +362,7 @@ def main():
     # append_complex_market_data_request = AppendComplexMarketDataRequest.from_json("")
     # append_complex_market_data_request = AppendComplexMarketDataRequest.from_dict({})
     append_complex_market_data_request = AppendComplexMarketDataRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the complex market data.              Defaults to the current LUSID system datetime if not specified.              Must match the effectiveAt of the ComplexMarketDataId given in the request body. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified. (optional)
 
     try:
@@ -385,7 +385,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the complex market data to append. | 
  **append_complex_market_data_request** | [**AppendComplexMarketDataRequest**](AppendComplexMarketDataRequest.md)| Request definition of the point to append. | 
- **effective_at** | **str**| The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body. | [optional] 
+ **effective_at** | **str**| The effective datetime at which to retrieve the complex market data.              Defaults to the current LUSID system datetime if not specified.              Must match the effectiveAt of the ComplexMarketDataId given in the request body. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified. | [optional] 
 
 ### Return type
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
 
-Update or insert one or more complex market data items in a single scope. An item will be updated if it already exists  and inserted if it does not.                In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each complex market data in the response.                The response will return both the collection of successfully updated or inserted complex market data, as well as those that failed.  For the failures a reason will be provided explaining why the item could not be updated or inserted.                It is important to always check the failed set for any unsuccessful results.
+Update or insert one or more complex market data items in a single scope. An item will be updated if it already exists and inserted if it does not.              In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each complex market data in the response.              The response will return both the collection of successfully updated or inserted complex market data, as well as those that failed. For the failures a reason will be provided explaining why the item could not be updated or inserted.              It is important to always check the failed set for any unsuccessful results.
 
 ### Example
 

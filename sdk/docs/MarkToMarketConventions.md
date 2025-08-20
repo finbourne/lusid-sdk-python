@@ -1,6 +1,6 @@
 # MarkToMarketConventions
 
-A set of conventions for mark to market. Mark to market is a method   that values financial instruments based on current market prices,   reflecting their current value, rather than historical cost.
+A set of conventions for mark to market. Mark to market is a method  that values financial instruments based on current market prices,  reflecting their current value, rather than historical cost.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

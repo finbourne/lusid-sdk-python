@@ -24,7 +24,7 @@ from lusid.models.link import Link
 
 class SideConfigurationData(BaseModel):
     """
-    Configuration needed to define a side. Sides are referenced by Label. Beyond that, other properties  can be used to reference either transaction fields, or transaction properties.  # noqa: E501
+    Configuration needed to define a side. Sides are referenced by Label. Beyond that, other properties can be used to reference either transaction fields, or transaction properties.  # noqa: E501
     """
     side:  StrictStr = Field(...,alias="side", description="The side's label.") 
     security:  StrictStr = Field(...,alias="security", description="The security, or instrument.") 

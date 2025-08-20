@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class MbsPrincipalWriteOffEvent(InstrumentEvent):
     """
-    Definition of an MBS Principal Write Off Event  This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal write off.  # noqa: E501
+    Definition of an MBS Principal Write Off Event This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal write off.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date (entitlement date) of the principal payment, usually several weeks prior to the payment date")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the principal that is written off")

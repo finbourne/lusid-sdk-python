@@ -24,7 +24,7 @@ import lusid.models
 
 class MarketDataOptions(BaseModel):
     """
-    Base class for representing market data options in LUSID.  Abstractly, these are any options that one should be able to specify for ComplexMarketData entities.  For example, CurveOptions allows one to decide how the data provided in a discountFactorCurve is interpolated.  This base class should not be directly instantiated;  each supported MarketDataOptionsType has a corresponding inherited class.  # noqa: E501
+    Base class for representing market data options in LUSID. Abstractly, these are any options that one should be able to specify for ComplexMarketData entities. For example, CurveOptions allows one to decide how the data provided in a discountFactorCurve is interpolated. This base class should not be directly instantiated; each supported MarketDataOptionsType has a corresponding inherited class.  # noqa: E501
     """
     market_data_options_type:  StrictStr = Field(...,alias="marketDataOptionsType", description="The available values are: CurveOptions") 
     __properties = ["marketDataOptionsType"]

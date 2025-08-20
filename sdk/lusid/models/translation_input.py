@@ -25,7 +25,7 @@ class TranslationInput(BaseModel):
     """
     The input to a translation script.  # noqa: E501
     """
-    entity:  StrictStr = Field(...,alias="entity", description="The serialised entity to be passed to the translation script. This could represent e.g. an instrument in any  dialect.") 
+    entity:  StrictStr = Field(...,alias="entity", description="The serialised entity to be passed to the translation script. This could represent e.g. an instrument in any dialect.") 
     __properties = ["entity"]
 
     class Config:

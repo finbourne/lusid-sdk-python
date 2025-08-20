@@ -27,9 +27,9 @@ class OptionalitySchedule(Schedule):
     """
     Optionality Schedule represents a class for creation of schedules for optionality (call, put)  # noqa: E501
     """
-    exercise_type:  Optional[StrictStr] = Field(None,alias="exerciseType", description="The exercise type of the optionality schedule (American or European).  For American type, the bond is perpetually callable from a given exercise date until it matures, or the next date in the schedule.  For European type, the bond is only callable on a given exercise date.    Supported string (enumeration) values are: [European, American].") 
+    exercise_type:  Optional[StrictStr] = Field(None,alias="exerciseType", description="The exercise type of the optionality schedule (American or European). For American type, the bond is perpetually callable from a given exercise date until it matures, or the next date in the schedule. For European type, the bond is only callable on a given exercise date.  Supported string (enumeration) values are: [European, American].") 
     option_entries: Optional[conlist(OptionEntry)] = Field(None, alias="optionEntries", description="The dates at which the bond call/put may be actioned, and associated strikes.")
-    option_type:  Optional[StrictStr] = Field(None,alias="optionType", description="Type of optionality for the schedule.    Supported string (enumeration) values are: [Call, Put].") 
+    option_type:  Optional[StrictStr] = Field(None,alias="optionType", description="Type of optionality for the schedule.  Supported string (enumeration) values are: [Call, Put].") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "exerciseType", "optionEntries", "optionType"]

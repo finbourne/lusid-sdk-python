@@ -24,7 +24,7 @@ from lusid.models.index_convention import IndexConvention
 
 class UpsertIndexConventionRequest(BaseModel):
     """
-    Index convention that is to be stored in the convention data store.  Only one of these must be present.  # noqa: E501
+    Index convention that is to be stored in the convention data store. Only one of these must be present.  # noqa: E501
     """
     index_convention: Optional[IndexConvention] = Field(None, alias="indexConvention")
     __properties = ["indexConvention"]

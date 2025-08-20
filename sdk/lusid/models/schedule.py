@@ -24,7 +24,7 @@ import lusid.models
 
 class Schedule(BaseModel):
     """
-    Base class for representing schedules in LUSID.  This base class should not be directly instantiated; each supported ScheduleType has a corresponding inherited class.  # noqa: E501
+    Base class for representing schedules in LUSID. This base class should not be directly instantiated; each supported ScheduleType has a corresponding inherited class.  # noqa: E501
     """
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     __properties = ["scheduleType"]

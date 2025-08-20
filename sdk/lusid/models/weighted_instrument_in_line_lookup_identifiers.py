@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr
 
 class WeightedInstrumentInLineLookupIdentifiers(BaseModel):
     """
-    External market codes and identifiers for the equity, e.g. IBM.  Required for valuation via SimpleStatic (look-up pricing).  Valuation will not succeed without a matching quote.  # noqa: E501
+    External market codes and identifiers for the equity, e.g. IBM. Required for valuation via SimpleStatic (look-up pricing). Valuation will not succeed without a matching quote.  # noqa: E501
     """
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="LusidInstrumentId") 
     isin:  Optional[StrictStr] = Field(None,alias="Isin") 

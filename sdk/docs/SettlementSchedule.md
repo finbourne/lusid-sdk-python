@@ -7,6 +7,10 @@ Name | Type | Description | Notes
 **settlement_date** | **datetime** |  | [optional] 
 **units** | **float** |  | [optional] 
 **bond_interest** | **float** |  | [optional] 
+**movement_name** | **str** |  | [optional] 
+**movement_type** | **str** |  | [optional] 
+**unsettled_units** | **float** |  | [optional] 
+**overdue_units** | **float** |  | [optional] 
 ## Example
 
 ```python
@@ -18,7 +22,11 @@ trade_id: Optional[StrictStr] = "example_trade_id"
 settlement_date: Optional[datetime] = # Replace with your value
 units: Optional[Union[StrictFloat, StrictInt]] = None
 bond_interest: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-settlement_schedule_instance = SettlementSchedule(trade_id=trade_id, settlement_date=settlement_date, units=units, bond_interest=bond_interest)
+movement_name: Optional[StrictStr] = "example_movement_name"
+movement_type: Optional[StrictStr] = "example_movement_type"
+unsettled_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+overdue_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+settlement_schedule_instance = SettlementSchedule(trade_id=trade_id, settlement_date=settlement_date, units=units, bond_interest=bond_interest, movement_name=movement_name, movement_type=movement_type, unsettled_units=unsettled_units, overdue_units=overdue_units)
 
 ```
 

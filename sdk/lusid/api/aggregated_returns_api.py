@@ -217,15 +217,15 @@ class AggregatedReturnsApi:
 
 
     @overload
-    async def get_returns_entity(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> ReturnsEntity:  # noqa: E501
+    async def get_returns_entity(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified.")] = None, **kwargs) -> ReturnsEntity:  # noqa: E501
         ...
 
     @overload
-    def get_returns_entity(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ReturnsEntity:  # noqa: E501
+    def get_returns_entity(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ReturnsEntity:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_returns_entity(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReturnsEntity, Awaitable[ReturnsEntity]]:  # noqa: E501
+    def get_returns_entity(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReturnsEntity, Awaitable[ReturnsEntity]]:  # noqa: E501
         """[EXPERIMENTAL] GetReturnsEntity: Get returns entity.  # noqa: E501
 
         Get returns entity.  # noqa: E501
@@ -239,7 +239,7 @@ class AggregatedReturnsApi:
         :type scope: str
         :param code: Returns entity code. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -260,7 +260,7 @@ class AggregatedReturnsApi:
         return self.get_returns_entity_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_returns_entity_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_returns_entity_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Returns entity scope.")], code : Annotated[StrictStr, Field(..., description="Returns entity code.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetReturnsEntity: Get returns entity.  # noqa: E501
 
         Get returns entity.  # noqa: E501
@@ -274,7 +274,7 @@ class AggregatedReturnsApi:
         :type scope: str
         :param code: Returns entity code. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -388,15 +388,15 @@ class AggregatedReturnsApi:
 
 
     @overload
-    async def list_returns_entities(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified.")] = None, **kwargs) -> ResourceListOfReturnsEntity:  # noqa: E501
+    async def list_returns_entities(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified.")] = None, **kwargs) -> ResourceListOfReturnsEntity:  # noqa: E501
         ...
 
     @overload
-    def list_returns_entities(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfReturnsEntity:  # noqa: E501
+    def list_returns_entities(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfReturnsEntity:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_returns_entities(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfReturnsEntity, Awaitable[ResourceListOfReturnsEntity]]:  # noqa: E501
+    def list_returns_entities(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfReturnsEntity, Awaitable[ResourceListOfReturnsEntity]]:  # noqa: E501
         """[EXPERIMENTAL] ListReturnsEntities: List returns entities.  # noqa: E501
 
         List returns entities.  # noqa: E501
@@ -406,7 +406,7 @@ class AggregatedReturnsApi:
         >>> thread = api.list_returns_entities(as_at, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -427,7 +427,7 @@ class AggregatedReturnsApi:
         return self.list_returns_entities_with_http_info(as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_returns_entities_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_returns_entities_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListReturnsEntities: List returns entities.  # noqa: E501
 
         List returns entities.  # noqa: E501
@@ -437,7 +437,7 @@ class AggregatedReturnsApi:
         >>> thread = api.list_returns_entities_with_http_info(as_at, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

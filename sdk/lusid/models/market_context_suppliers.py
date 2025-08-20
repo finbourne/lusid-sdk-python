@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr
 
 class MarketContextSuppliers(BaseModel):
     """
-    It is possible to control which supplier is used for a given asset class.  This field is deprecated in favour of market data rules, which subsumes its functionality.  # noqa: E501
+    It is possible to control which supplier is used for a given asset class. This field is deprecated in favour of market data rules, which subsumes its functionality.  # noqa: E501
     """
     commodity:  Optional[StrictStr] = Field(None,alias="Commodity") 
     credit:  Optional[StrictStr] = Field(None,alias="Credit") 

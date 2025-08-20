@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr
 
 class MarkToMarketConventions(BaseModel):
     """
-    A set of conventions for mark to market. Mark to market is a method   that values financial instruments based on current market prices,   reflecting their current value, rather than historical cost.  # noqa: E501
+    A set of conventions for mark to market. Mark to market is a method  that values financial instruments based on current market prices,  reflecting their current value, rather than historical cost.  # noqa: E501
     """
     calendar_code:  Optional[StrictStr] = Field(None,alias="calendarCode", description="The calendar to use when generating mark to market cashflows and events.") 
     __properties = ["calendarCode"]

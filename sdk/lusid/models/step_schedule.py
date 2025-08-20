@@ -25,10 +25,10 @@ from lusid.models.schedule import Schedule
 
 class StepSchedule(Schedule):
     """
-    Schedule that steps at known dated points in time.  Used in representation of a sinking bond, also called amortisation, steps in coupons for fixed bonds and spreads for floating bonds.  # noqa: E501
+    Schedule that steps at known dated points in time. Used in representation of a sinking bond, also called amortisation, steps in coupons for fixed bonds and spreads for floating bonds.  # noqa: E501
     """
-    level_type:  StrictStr = Field(...,alias="levelType", description="The type of shift or adjustment that the quantity represents.    Supported string (enumeration) values are: [Absolute, AbsoluteShift, Percentage, AbsolutePercentage].") 
-    step_schedule_type:  StrictStr = Field(...,alias="stepScheduleType", description="The type of step that this schedule is for.  Supported string (enumeration) values are: [Coupon, Notional, Spread].") 
+    level_type:  StrictStr = Field(...,alias="levelType", description="The type of shift or adjustment that the quantity represents.  Supported string (enumeration) values are: [Absolute, AbsoluteShift, Percentage, AbsolutePercentage].") 
+    step_schedule_type:  StrictStr = Field(...,alias="stepScheduleType", description="The type of step that this schedule is for. Supported string (enumeration) values are: [Coupon, Notional, Spread].") 
     steps: conlist(LevelStep) = Field(..., description="The level steps which are applied.")
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}

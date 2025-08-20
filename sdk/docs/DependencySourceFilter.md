@@ -1,14 +1,14 @@
 # DependencySourceFilter
 
-Encapsulates parts of a market data rule relating not to the nature of the market data requested, but rather the nature of the thing (instrument/model) that is requesting it.  In the first instance, this includes the instrument type, asset class, and the currency of the underlying instrument.  This can be used to differentiate requests for market data according to the source of the request. See MarketDataSpecificRule.
+Encapsulates parts of a market data rule relating not to the nature of the market data requested, but rather the nature of the thing (instrument/model) that is requesting it. In the first instance, this includes the instrument type, asset class, and the currency of the underlying instrument. This can be used to differentiate requests for market data according to the source of the request. See MarketDataSpecificRule.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_type** | **str** | Specify that a rule should only apply if the market data is requested by an instrument of a given instrument type.  If null, then no filtering on instrument type is applied. | [optional] 
-**asset_class** | **str** | Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.  If null, then no filtering on asset class is applied. | [optional] 
-**dom_ccy** | **str** | Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied. | [optional] 
-**long_or_short_indicator** | **str** | Specify that a rule should apply if the market data is requested by a model with a given long or short indicator.  If none, then no filtering on LongOrShortIndicator is applied. | [optional] 
-**address_key_filters** | [**List[AddressKeyFilter]**](AddressKeyFilter.md) | Specify that a rule should apply if the market data is requested by an instrument with features or properties  satisfying all the given address key filters. If an empty list is given, no additional filtering is done. | [optional] 
+**instrument_type** | **str** | Specify that a rule should only apply if the market data is requested by an instrument of a given instrument type. If null, then no filtering on instrument type is applied. | [optional] 
+**asset_class** | **str** | Specify that a rule should only apply if the market data is requested by an instrument of a given asset class. If null, then no filtering on asset class is applied. | [optional] 
+**dom_ccy** | **str** | Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency. If null, then no filtering on currency is applied. | [optional] 
+**long_or_short_indicator** | **str** | Specify that a rule should apply if the market data is requested by a model with a given long or short indicator. If none, then no filtering on LongOrShortIndicator is applied. | [optional] 
+**address_key_filters** | [**List[AddressKeyFilter]**](AddressKeyFilter.md) | Specify that a rule should apply if the market data is requested by an instrument with features or properties satisfying all the given address key filters. If an empty list is given, no additional filtering is done. | [optional] 
 ## Example
 
 ```python

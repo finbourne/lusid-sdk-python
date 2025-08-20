@@ -5,7 +5,7 @@ A simple result for a decimal value
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **float** | The value itself | [optional] 
-**dimension** | **int** | The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be  populate by the user on upsertion. | [optional] 
+**dimension** | **int** | The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be populate by the user on upsertion. | [optional] 
 **result_value_type** | **str** | The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset | 
 ## Example
 

@@ -161,7 +161,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(RelationshipDefinitionsApi)
     scope = 'scope_example' # str | The scope of the relationship definition to be deleted.
-    code = 'code_example' # str | The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship.
+    code = 'code_example' # str | The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -182,7 +182,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the relationship definition to be deleted. | 
- **code** | **str**| The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship. | 
+ **code** | **str**| The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship. | 
 
 ### Return type
 
@@ -255,8 +255,8 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(RelationshipDefinitionsApi)
     scope = 'scope_example' # str | The scope of the specified relationship definition.
-    code = 'code_example' # str | The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified. (optional)
+    code = 'code_example' # str | The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -277,8 +277,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified relationship definition. | 
- **code** | **str**| The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
+ **code** | **str**| The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
 
 ### Return type
 
@@ -350,10 +350,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(RelationshipDefinitionsApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -374,10 +374,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the Scope, use \&quot;scope eq &#39;ExampleScope&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             For example, to filter on the Scope, use \&quot;scope eq &#39;ExampleScope&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpdateRelationshipDefinition: Update Relationship Definition
 
-Update the definition of a specified existing relationship. Not all elements within a relationship definition  are modifiable due to the potential implications for values already stored against the relationship.
+Update the definition of a specified existing relationship. Not all elements within a relationship definition are modifiable due to the potential implications for values already stored against the relationship.
 
 ### Example
 
@@ -451,7 +451,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(RelationshipDefinitionsApi)
     scope = 'scope_example' # str | The scope of the relationship definition being updated.
-    code = 'code_example' # str | The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition.
+    code = 'code_example' # str | The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -478,7 +478,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the relationship definition being updated. | 
- **code** | **str**| The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition. | 
+ **code** | **str**| The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition. | 
  **update_relationship_definition_request** | [**UpdateRelationshipDefinitionRequest**](UpdateRelationshipDefinitionRequest.md)| The details of relationship definition to update. | 
 
 ### Return type

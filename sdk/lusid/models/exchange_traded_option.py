@@ -27,7 +27,7 @@ from lusid.models.trading_conventions import TradingConventions
 
 class ExchangeTradedOption(LusidInstrument):
     """
-    LUSID representation of an Exchange Traded Option.  Including, but not limited to, Equity Options, Bond Options, Index Options, Future Options, and Interest Rate Options.  # noqa: E501
+    LUSID representation of an Exchange Traded Option. Including, but not limited to, Equity Options, Bond Options, Index Options, Future Options, and Interest Rate Options.  # noqa: E501
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     contract_details: ExchangeTradedOptionContractDetails = Field(..., alias="contractDetails")

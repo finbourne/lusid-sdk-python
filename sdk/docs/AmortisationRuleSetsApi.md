@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CreateAmortisationRuleSet: Create an amortisation rule set.
 
-Creates an amortisation rule set definition at the given effective time.  The user must be entitled to read any properties specified in each rule.
+Creates an amortisation rule set definition at the given effective time. The user must be entitled to read any properties specified in each rule.
 
 ### Example
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.
 
-Deletes the rule set perpetually, including its rules.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.
+Deletes the rule set perpetually, including its rules.  The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.  This cannot be undone.
 
 ### Example
 
@@ -259,8 +259,8 @@ def main():
     api_instance = api_client_factory.build(AmortisationRuleSetsApi)
     scope = 'scope_example' # str | The rule set scope.
     code = 'code_example' # str | The rule set code.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -282,8 +282,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The rule set scope. | 
  **code** | **str**| The rule set code. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified. | [optional] 
 
 ### Return type
 
@@ -355,11 +355,11 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(AmortisationRuleSetsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -380,11 +380,11 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type

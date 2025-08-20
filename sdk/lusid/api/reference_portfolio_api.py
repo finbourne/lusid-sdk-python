@@ -229,15 +229,15 @@ class ReferencePortfolioApi:
 
 
     @overload
-    async def get_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, **kwargs) -> GetReferencePortfolioConstituentsResponse:  # noqa: E501
+    async def get_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, **kwargs) -> GetReferencePortfolioConstituentsResponse:  # noqa: E501
         ...
 
     @overload
-    def get_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetReferencePortfolioConstituentsResponse:  # noqa: E501
+    def get_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetReferencePortfolioConstituentsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetReferencePortfolioConstituentsResponse, Awaitable[GetReferencePortfolioConstituentsResponse]]:  # noqa: E501
+    def get_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetReferencePortfolioConstituentsResponse, Awaitable[GetReferencePortfolioConstituentsResponse]]:  # noqa: E501
         """GetReferencePortfolioConstituents: Get reference portfolio constituents  # noqa: E501
 
         Get constituents from a reference portfolio at a particular effective time.  # noqa: E501
@@ -249,13 +249,13 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param effective_at: The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.
+        :param as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
+        :param property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -276,7 +276,7 @@ class ReferencePortfolioApi:
         return self.get_reference_portfolio_constituents_with_http_info(scope, code, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_reference_portfolio_constituents_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_reference_portfolio_constituents_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetReferencePortfolioConstituents: Get reference portfolio constituents  # noqa: E501
 
         Get constituents from a reference portfolio at a particular effective time.  # noqa: E501
@@ -288,13 +288,13 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param effective_at: The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.
+        :param as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
+        :param property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -417,15 +417,15 @@ class ReferencePortfolioApi:
 
 
     @overload
-    async def list_constituents_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, **kwargs) -> ResourceListOfConstituentsAdjustmentHeader:  # noqa: E501
+    async def list_constituents_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, **kwargs) -> ResourceListOfConstituentsAdjustmentHeader:  # noqa: E501
         ...
 
     @overload
-    def list_constituents_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfConstituentsAdjustmentHeader:  # noqa: E501
+    def list_constituents_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfConstituentsAdjustmentHeader:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_constituents_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfConstituentsAdjustmentHeader, Awaitable[ResourceListOfConstituentsAdjustmentHeader]]:  # noqa: E501
+    def list_constituents_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfConstituentsAdjustmentHeader, Awaitable[ResourceListOfConstituentsAdjustmentHeader]]:  # noqa: E501
         """ListConstituentsAdjustments: List constituents adjustments  # noqa: E501
 
         List adjustments made to constituents in a reference portfolio.  # noqa: E501
@@ -437,7 +437,7 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param from_effective_at: Events between this time (inclusive) and the toEffectiveAt are returned. (required)
         :type from_effective_at: str
@@ -464,7 +464,7 @@ class ReferencePortfolioApi:
         return self.list_constituents_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, as_at_time, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_constituents_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_constituents_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], from_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the toEffectiveAt are returned.")], to_effective_at : Annotated[StrictStr, Field(..., description="Events between this time (inclusive) and the fromEffectiveAt are returned.")], as_at_time : Annotated[Optional[datetime], Field(description="The asAt time for which the result is valid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListConstituentsAdjustments: List constituents adjustments  # noqa: E501
 
         List adjustments made to constituents in a reference portfolio.  # noqa: E501
@@ -476,7 +476,7 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param from_effective_at: Events between this time (inclusive) and the toEffectiveAt are returned. (required)
         :type from_effective_at: str
@@ -604,18 +604,18 @@ class ReferencePortfolioApi:
 
 
     @overload
-    async def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], **kwargs) -> UpsertReferencePortfolioConstituentPropertiesResponse:  # noqa: E501
+    async def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], **kwargs) -> UpsertReferencePortfolioConstituentPropertiesResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], async_req: Optional[bool]=True, **kwargs) -> UpsertReferencePortfolioConstituentPropertiesResponse:  # noqa: E501
+    def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], async_req: Optional[bool]=True, **kwargs) -> UpsertReferencePortfolioConstituentPropertiesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReferencePortfolioConstituentPropertiesResponse, Awaitable[UpsertReferencePortfolioConstituentPropertiesResponse]]:  # noqa: E501
+    def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReferencePortfolioConstituentPropertiesResponse, Awaitable[UpsertReferencePortfolioConstituentPropertiesResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties  # noqa: E501
 
-        Create or update one or more constituent properties for a single constituent in the reference portfolio.  Each property will be updated if it already exists, created if it does not and deleted if value is null.  Both constituent and portfolio must exist at the time when properties are created or updated.  # noqa: E501
+        Create or update one or more constituent properties for a single constituent in the reference portfolio. Each property will be updated if it already exists, created if it does not and deleted if value is null. Both constituent and portfolio must exist at the time when properties are created or updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -624,7 +624,7 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param upsert_reference_portfolio_constituent_properties_request: The request to modify properties for the constituent. (required)
         :type upsert_reference_portfolio_constituent_properties_request: UpsertReferencePortfolioConstituentPropertiesRequest
@@ -647,10 +647,10 @@ class ReferencePortfolioApi:
         return self.upsert_reference_portfolio_constituent_properties_with_http_info(scope, code, upsert_reference_portfolio_constituent_properties_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_reference_portfolio_constituent_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_reference_portfolio_constituent_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties  # noqa: E501
 
-        Create or update one or more constituent properties for a single constituent in the reference portfolio.  Each property will be updated if it already exists, created if it does not and deleted if value is null.  Both constituent and portfolio must exist at the time when properties are created or updated.  # noqa: E501
+        Create or update one or more constituent properties for a single constituent in the reference portfolio. Each property will be updated if it already exists, created if it does not and deleted if value is null. Both constituent and portfolio must exist at the time when properties are created or updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -659,7 +659,7 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param upsert_reference_portfolio_constituent_properties_request: The request to modify properties for the constituent. (required)
         :type upsert_reference_portfolio_constituent_properties_request: UpsertReferencePortfolioConstituentPropertiesRequest
@@ -779,15 +779,15 @@ class ReferencePortfolioApi:
 
 
     @overload
-    async def upsert_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], **kwargs) -> UpsertReferencePortfolioConstituentsResponse:  # noqa: E501
+    async def upsert_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], **kwargs) -> UpsertReferencePortfolioConstituentsResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], async_req: Optional[bool]=True, **kwargs) -> UpsertReferencePortfolioConstituentsResponse:  # noqa: E501
+    def upsert_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], async_req: Optional[bool]=True, **kwargs) -> UpsertReferencePortfolioConstituentsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReferencePortfolioConstituentsResponse, Awaitable[UpsertReferencePortfolioConstituentsResponse]]:  # noqa: E501
+    def upsert_reference_portfolio_constituents(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReferencePortfolioConstituentsResponse, Awaitable[UpsertReferencePortfolioConstituentsResponse]]:  # noqa: E501
         """UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents  # noqa: E501
 
         Add constituents to a reference portfolio.  # noqa: E501
@@ -799,7 +799,7 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param upsert_reference_portfolio_constituents_request: The constituents to upload to the reference portfolio. (required)
         :type upsert_reference_portfolio_constituents_request: UpsertReferencePortfolioConstituentsRequest
@@ -822,7 +822,7 @@ class ReferencePortfolioApi:
         return self.upsert_reference_portfolio_constituents_with_http_info(scope, code, upsert_reference_portfolio_constituents_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_reference_portfolio_constituents_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_reference_portfolio_constituents_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the reference portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.")], upsert_reference_portfolio_constituents_request : Annotated[UpsertReferencePortfolioConstituentsRequest, Field(..., description="The constituents to upload to the reference portfolio.")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents  # noqa: E501
 
         Add constituents to a reference portfolio.  # noqa: E501
@@ -834,7 +834,7 @@ class ReferencePortfolioApi:
 
         :param scope: The scope of the reference portfolio. (required)
         :type scope: str
-        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. (required)
         :type code: str
         :param upsert_reference_portfolio_constituents_request: The constituents to upload to the reference portfolio. (required)
         :type upsert_reference_portfolio_constituents_request: UpsertReferencePortfolioConstituentsRequest

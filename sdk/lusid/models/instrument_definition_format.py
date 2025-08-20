@@ -23,10 +23,10 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr
 
 class InstrumentDefinitionFormat(BaseModel):
     """
-    What is the provenance of an instrument. This defines who creates/owns it, what format it is in (e.g. a proprietary format or a common and known one)              and what the version of that is.  # noqa: E501
+    What is the provenance of an instrument. This defines who creates/owns it, what format it is in (e.g. a proprietary format or a common and known one)             and what the version of that is.  # noqa: E501
     """
     source_system:  StrictStr = Field(...,alias="sourceSystem", description="which source system does the format originate from") 
-    vendor:  StrictStr = Field(...,alias="vendor", description="An instrument will potentially have been created by any number of different organisations. Some will be understood completely (e.g. LUSID's), some won't.              The provenance of an instrument indicates who \"owns\" the associated format.") 
+    vendor:  StrictStr = Field(...,alias="vendor", description="An instrument will potentially have been created by any number of different organisations. Some will be understood completely (e.g. LUSID's), some won't.             The provenance of an instrument indicates who \"owns\" the associated format.") 
     version:  StrictStr = Field(...,alias="version", description="Version of the document. Would be preferable to avoid the need, but LUSID will not control other organisations' trade formats.") 
     __properties = ["sourceSystem", "vendor", "version"]
 

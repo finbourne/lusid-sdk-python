@@ -42,7 +42,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 
-Accepts the specified estimate Valuation Point.  Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate',  otherwise it will be marked as 'Final'.
+Accepts the specified estimate Valuation Point. Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate', otherwise it will be marked as 'Final'.
 
 ### Example
 
@@ -987,7 +987,7 @@ def main():
     fee_code = 'fee_code_example' # str | The code of the Fee.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto the Fee.             These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1012,7 +1012,7 @@ Name | Type | Description  | Notes
  **fee_code** | **str**| The code of the Fee. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto the Fee.             These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
 
 ### Return type
 
@@ -1188,7 +1188,7 @@ def main():
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto the Fund.             These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1212,7 +1212,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto the Fund.             These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
 
 ### Return type
 
@@ -1391,9 +1391,9 @@ def main():
     # single_valuation_point_query_parameters = SingleValuationPointQueryParameters.from_dict({})
     single_valuation_point_query_parameters = SingleValuationPointQueryParameters()
     nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults             to return the latest version of the holdings if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto             the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
     by_taxlots = True # bool | Whether to expand the holdings to return the underlying tax-lots. Defaults to False. (optional)
     include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
 
@@ -1419,9 +1419,9 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **single_valuation_point_query_parameters** | [**SingleValuationPointQueryParameters**](SingleValuationPointQueryParameters.md)| The query parameters used for diary entry or effective date of Holdings | 
  **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults             to return the latest version of the holdings if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto             the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
  **by_taxlots** | **bool**| Whether to expand the holdings to return the underlying tax-lots. Defaults to False. | [optional] 
  **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
 
@@ -1551,7 +1551,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
 
-Retrieves the Valuation Point data for a date or specified Diary Entry Id.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the related ABOR's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' DiaryEntry and EndDate will be as provided.
+Retrieves the Valuation Point data for a date or specified Diary Entry Id. The endpoint will internally extract all 'Assets' and 'Liabilities' from the related ABOR's Trial balance to produce a GAV. Start date will be assumed from the last 'official' DiaryEntry and EndDate will be as provided.
 
 ### Example
 
@@ -1656,7 +1656,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
 
-Gets the Journal Entry lines for the given Valuation Point for a Fund                The Journal Entry lines have been generated from transactions, translated via posting rules and used in the valuation point
+Gets the Journal Entry lines for the given Valuation Point for a Fund              The Journal Entry lines have been generated from transactions, translated via posting rules and used in the valuation point
 
 ### Example
 
@@ -1712,11 +1712,11 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
     general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a general ledger profile used to decorate journal entry lines with levels. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version              of each transaction if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines. (optional)
     nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
@@ -1741,11 +1741,11 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope is creating the unique identifier for the given Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Journal Entry lines. | 
  **general_ledger_profile_code** | **str**| The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the journal entry lines. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the journal entry lines. | [optional] 
  **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
@@ -1827,7 +1827,7 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
     general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a general ledger profile used to decorate journal entry lines with levels. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version             of each transaction if not specified. (optional)
     filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Trial balance from a previous call to Trial balance. (optional)
@@ -1855,7 +1855,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The query parameters used in running the generation of the PnL summary | 
  **general_ledger_profile_code** | **str**| The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version             of each transaction if not specified. | [optional] 
  **filter** | **str**| \&quot;Expression to filter the result set.\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Trial balance from a previous call to Trial balance. | [optional] 
@@ -1939,11 +1939,11 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve transactions. Defaults to returning the latest version             of each transaction if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'             domain to decorate onto the journal entry lines. (optional)
     nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
@@ -1967,11 +1967,11 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope is creating the unique identifier for the given Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the transactions. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version             of each transaction if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the journal entry lines. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;             domain to decorate onto the journal entry lines. | [optional] 
  **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
@@ -1997,7 +1997,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
 
-Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).
+Gets the Trial Balance for the given Valuation Point for a Fund.              The Trial Balance has been generated from transactions, translated via Posting Rules and aggregated based on a General Ledger Profile (where specified).
 
 ### Example
 
@@ -2053,11 +2053,11 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
     general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a general ledger profile used to decorate journal entry lines with levels. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    limit = 56 # int | When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this number.              Defaults to 100 if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines. (optional)
     nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
@@ -2082,11 +2082,11 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The query parameters used in running the generation of the Trial Balance. | 
  **general_ledger_profile_code** | **str**| The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **limit** | **int**| When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the journal entry lines. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this number.              Defaults to 100 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the journal entry lines. | [optional] 
  **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
@@ -2161,13 +2161,13 @@ def main():
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID             system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing fees; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto each Fee.             These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2189,13 +2189,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID             system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing fees; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the treatment, specify \&quot;treatment eq &#39;Monthly&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the treatment, specify \&quot;treatment eq &#39;Monthly&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto each Fee.             These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. | [optional] 
 
 ### Return type
 
@@ -2270,9 +2270,9 @@ def main():
     scope = 'scope_example' # str | The Scope for the Fund.
     code = 'code_example' # str | The Code for the Fund.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Valuation Points; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the DisplayName, specify \"displayName eq 'VP 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the DisplayName, specify \"displayName eq 'VP 1'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -2296,9 +2296,9 @@ Name | Type | Description  | Notes
  **scope** | **str**| The Scope for the Fund. | 
  **code** | **str**| The Code for the Fund. | 
  **as_at** | **datetime**| The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Valuation Points; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the DisplayName, specify \&quot;displayName eq &#39;VP 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the DisplayName, specify \&quot;displayName eq &#39;VP 1&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -2371,13 +2371,13 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID             system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Funds; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Fund type, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the Fund type, specify \"id.Code eq 'Fund1'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto each Fund.             These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2397,13 +2397,13 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID             system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Funds; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the Fund type, specify \&quot;id.Code eq &#39;Fund1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the Fund type, specify \&quot;id.Code eq &#39;Fund1&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto each Fund.             These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. | [optional] 
 
 ### Return type
 
@@ -2477,12 +2477,12 @@ def main():
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID             system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing ValuationPoints; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'. (optional)
+    filter = 'filter_example' # str | Expression to filter the results by.             For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.             These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'. (optional)
     nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
 
     try:
@@ -2505,12 +2505,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID             system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing ValuationPoints; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results by.              For example, to filter on the NAV, specify \&quot;NAV gt 300\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/ValuationPoint/Id&#39;. | [optional] 
+ **filter** | **str**| Expression to filter the results by.             For example, to filter on the NAV, specify \&quot;NAV gt 300\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each ValuationPoint.             These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/ValuationPoint/Id&#39;. | [optional] 
  **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
 
 ### Return type
@@ -2934,7 +2934,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
 
-Update or insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.
+Update or insert the estimate Valuation Point.              If the Valuation Point does not exist, this method will create it in estimate state.              If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.
 
 ### Example
 
@@ -3037,7 +3037,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
 
-Update or insert one or more properties onto a single Fee. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fee'.                Upserting a property that exists for an Fee, with a null value, will delete the instance of the property for that group.       Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Update or insert one or more properties onto a single Fee. A property will be updated if it already exists and inserted if it does not. All properties must be of the domain 'Fee'.              Upserting a property that exists for an Fee, with a null value, will delete the instance of the property for that group.     Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i> datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -3087,7 +3087,7 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     fee_code = 'fee_code_example' # str | The code of the Fee to update or insert the properties onto.
-    request_body = {"Fee/MyScope/FundManagerName":{"key":"Fee/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fee/MyScope/SomeProperty":{"key":"Fee/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/AnotherProperty":{"key":"Fee/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/ReBalanceInterval":{"key":"Fee/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\". (optional)
+    request_body = {"Fee/MyScope/FundManagerName":{"key":"Fee/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fee/MyScope/SomeProperty":{"key":"Fee/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/AnotherProperty":{"key":"Fee/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/ReBalanceInterval":{"key":"Fee/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fee. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3110,7 +3110,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **fee_code** | **str**| The code of the Fee to update or insert the properties onto. | 
- **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fee/Manager/Id\&quot;. | [optional] 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Fee. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fee/Manager/Id\&quot;. | [optional] 
 
 ### Return type
 
@@ -3135,7 +3135,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
 
-Update or insert one or more properties onto a single Fund. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fund'.                Upserting a property that exists for an Fund, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Update or insert one or more properties onto a single Fund. A property will be updated if it already exists and inserted if it does not. All properties must be of the domain 'Fund'.              Upserting a property that exists for an Fund, with a null value, will delete the instance of the property for that group.              Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i> datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -3184,7 +3184,7 @@ def main():
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund to update or insert the properties onto.
     code = 'code_example' # str | The code of the Fund to update or insert the properties onto. Together with the scope this uniquely identifies the Fund.
-    request_body = {"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fund/MyScope/SomeProperty":{"key":"Fund/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/AnotherProperty":{"key":"Fund/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/ReBalanceInterval":{"key":"Fund/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\". (optional)
+    request_body = {"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fund/MyScope/SomeProperty":{"key":"Fund/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/AnotherProperty":{"key":"Fund/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/ReBalanceInterval":{"key":"Fund/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3206,7 +3206,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund to update or insert the properties onto. | 
  **code** | **str**| The code of the Fund to update or insert the properties onto. Together with the scope this uniquely identifies the Fund. | 
- **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fund/Manager/Id\&quot;. | [optional] 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Fund. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fund/Manager/Id\&quot;. | [optional] 
 
 ### Return type
 

@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class BondCouponEvent(InstrumentEvent):
     """
-    Definition of a Bond Coupon Event  This is an event that describes the occurence of a cashflow due to a fixed rate bond coupon payment.  # noqa: E501
+    Definition of a Bond Coupon Event This is an event that describes the occurence of a cashflow due to a fixed rate bond coupon payment.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="Ex-Dividend date of the coupon payment")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Payment date of the coupon payment")

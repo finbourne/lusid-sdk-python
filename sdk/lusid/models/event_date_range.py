@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel
 
 class EventDateRange(BaseModel):
     """
-    A standard representation of the effective date range for the event, used for display, filtering and windowing use cases.  The start and end values for the eventDateRange are mapped from the particular dates contained within the specific  InstrumentEvent schema.  Note that the start and end values may be identical for some types of events.  # noqa: E501
+    A standard representation of the effective date range for the event, used for display, filtering and windowing use cases. The start and end values for the eventDateRange are mapped from the particular dates contained within the specific InstrumentEvent schema.  Note that the start and end values may be identical for some types of events.  # noqa: E501
     """
     start: Optional[datetime] = None
     end: Optional[datetime] = None

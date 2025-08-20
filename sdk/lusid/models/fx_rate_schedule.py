@@ -25,7 +25,7 @@ from lusid.models.schedule import Schedule
 
 class FxRateSchedule(Schedule):
     """
-    Schedule to define fx conversion of cashflows on complex bonds. If an fx schedule is defined then  on payment schedule generation the coupon and principal payoffs will be wrapped in an fx rate payoff method.  Either the fx rate is predefined (fixed) or relies on fx resets (floating).  Used in representation of dual currency bond.  # noqa: E501
+    Schedule to define fx conversion of cashflows on complex bonds. If an fx schedule is defined then on payment schedule generation the coupon and principal payoffs will be wrapped in an fx rate payoff method. Either the fx rate is predefined (fixed) or relies on fx resets (floating). Used in representation of dual currency bond.  # noqa: E501
     """
     flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
     fx_conversion_types: Optional[conlist(StrictStr)] = Field(None, alias="fxConversionTypes", description="List of flags to indicate if coupon payments, principal payments or both are converted")

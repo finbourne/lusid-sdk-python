@@ -25,8 +25,8 @@ class CashFlowLineage(BaseModel):
     """
     Lineage for cash flow value  # noqa: E501
     """
-    instrument_type:  Optional[StrictStr] = Field(None,alias="instrumentType", description="The instrument type of the instrument to which the cash flow belongs to. When upserting CashFlowValues, this  should be null.") 
-    cash_flow_type:  Optional[StrictStr] = Field(None,alias="cashFlowType", description="The cashflow type.When upserting CashFlowValues, this should be null, or one of [Unknown, Coupon, Notional,  Premium, Principal, Protection, Cash]") 
+    instrument_type:  Optional[StrictStr] = Field(None,alias="instrumentType", description="The instrument type of the instrument to which the cash flow belongs to. When upserting CashFlowValues, this should be null.") 
+    cash_flow_type:  Optional[StrictStr] = Field(None,alias="cashFlowType", description="The cashflow type.When upserting CashFlowValues, this should be null, or one of [Unknown, Coupon, Notional, Premium, Principal, Protection, Cash]") 
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The LUID of the instrument to which the cash flow belongs to. When upserting this should be null.") 
     leg_id:  Optional[StrictStr] = Field(None,alias="legId", description="The leg id to which the cash flow belongs to.") 
     source_transaction_id:  Optional[StrictStr] = Field(None,alias="sourceTransactionId", description="The source transaction of the instrument to which the cash flow belongs to. When upserting this should be null") 

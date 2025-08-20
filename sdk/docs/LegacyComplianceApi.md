@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] DeleteLegacyComplianceRule: Deletes a compliance rule.
 
-Deletes the rule for all effective time.                The rule will remain viewable at previous as at times, and as part of the results of compliance runs, but it  will no longer be considered in new compliance runs.                This cannot be undone.
+Deletes the rule for all effective time.              The rule will remain viewable at previous as at times, and as part of the results of compliance runs, but it will no longer be considered in new compliance runs.              This cannot be undone.
 
 ### Example
 
@@ -260,8 +260,8 @@ def main():
     api_instance = api_client_factory.build(LegacyComplianceApi)
     scope = 'scope_example' # str | The compliance rule scope.
     code = 'code_example' # str | The compliance rule code.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID  system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -283,8 +283,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The compliance rule scope. | 
  **code** | **str**| The compliance rule code. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID  system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified. | [optional] 
 
 ### Return type
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetLegacyComplianceRunResults: Get the details of a single compliance run.
 
-Use this endpoint to fetch the detail associated with a specific compliance run, including a breakdown  of the passing state of each rule, portfolio combination.
+Use this endpoint to fetch the detail associated with a specific compliance run, including a breakdown of the passing state of each rule, portfolio combination.
 
 ### Example
 
@@ -357,7 +357,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(LegacyComplianceApi)
     run_id = 'run_id_example' # str | The unique identifier of the compliance run requested.
-    page = 'page_example' # str | The pagination token to use to continue listing compliance rule results from a previous call to list compliance rule result.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing compliance rule results from a previous call to list compliance rule result.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
@@ -380,7 +380,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **run_id** | **str**| The unique identifier of the compliance run requested. | 
- **page** | **str**| The pagination token to use to continue listing compliance rule results from a previous call to list compliance rule result.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing compliance rule results from a previous call to list compliance rule result.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListLegacyComplianceRules: List compliance rules, with optional filtering.
 
-For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.
+For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.
 
 ### Example
 
@@ -454,9 +454,9 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(LegacyComplianceApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing entities; this value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results. (optional)
 
@@ -478,9 +478,9 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing entities; this value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results. | [optional] 
 
@@ -555,7 +555,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(LegacyComplianceApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The time at which to get results from. Default : latest (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
@@ -578,7 +578,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| Optional. The time at which to get results from. Default : latest | [optional] 
- **page** | **str**| The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
@@ -703,7 +703,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpsertLegacyComplianceRules: Upsert compliance rules.
 
-To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part  of the response. To update an existing rule, include the rule code. It is possible to both create and update  compliance rules in the same request.                The upsert is transactional - either all create/update operations will succeed or none of them will.
+To upsert a new rule, the code field must be left empty, a code will then be assigned and returned as part of the response. To update an existing rule, include the rule code. It is possible to both create and update compliance rules in the same request.              The upsert is transactional - either all create/update operations will succeed or none of them will.
 
 ### Example
 
@@ -750,8 +750,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(LegacyComplianceApi)
-    request_body = {"Create":{"scope":"CompanyPolicies","displayName":"Max 200 Securities","type":"RangeNumberSecurities","lowerBound":0,"upperBound":200,"schedule":"PreAndPostTrade","hardRequirement":true,"targetPortfolioIds":[{"scope":"CorePortfolios","code":"UK"},{"scope":"CorePortfolios","code":"World"}],"description":"Portfolio must contain no more than 200 securities.","addressKey":"Valuation/PvInPortfolioCcy"},"Update":{"scope":"FundObjectives","code":"ComplianceRule_1","displayName":"30 percent bonds","type":"RangePercentSecurityType","value":"Bond","lowerBound":25,"upperBound":35,"schedule":"PostTrade","hardRequirement":false,"targetPortfolioIds":[{"scope":"CorePortfolios","code":"Balanced"}],"description":"Portfolio must contain 30% bonds by value.","addressKey":"Valuation/ExposureInPortfolioCcy"}} # Dict[str, ComplianceRuleUpsertRequest] | A dictionary of upsert request identifiers to rule upsert requests. The request               identifiers are valid for the request only and can be used to link the upserted compliance rule to the code               of a created compliance rule.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition. (optional)
+    request_body = {"Create":{"scope":"CompanyPolicies","displayName":"Max 200 Securities","type":"RangeNumberSecurities","lowerBound":0,"upperBound":200,"schedule":"PreAndPostTrade","hardRequirement":true,"targetPortfolioIds":[{"scope":"CorePortfolios","code":"UK"},{"scope":"CorePortfolios","code":"World"}],"description":"Portfolio must contain no more than 200 securities.","addressKey":"Valuation/PvInPortfolioCcy"},"Update":{"scope":"FundObjectives","code":"ComplianceRule_1","displayName":"30 percent bonds","type":"RangePercentSecurityType","value":"Bond","lowerBound":25,"upperBound":35,"schedule":"PostTrade","hardRequirement":false,"targetPortfolioIds":[{"scope":"CorePortfolios","code":"Balanced"}],"description":"Portfolio must contain 30% bonds by value.","addressKey":"Valuation/ExposureInPortfolioCcy"}} # Dict[str, ComplianceRuleUpsertRequest] | A dictionary of upsert request identifiers to rule upsert requests. The request              identifiers are valid for the request only and can be used to link the upserted compliance rule to the code              of a created compliance rule.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID system datetime if not specified. In the case of an update, the changes will take place from this effective time until the next effective time that the rule as been upserted at. For example, consider a rule that already exists, and has previously had an update applied so that the definition will change on the first day of the coming month. An upsert effective from the current day will only change the definition until the first day of the coming month. An additional upsert at the same time (first day of the month) is required if the newly-updated definition is to supersede the future definition. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -771,8 +771,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, ComplianceRuleUpsertRequest]**](ComplianceRuleUpsertRequest.md)| A dictionary of upsert request identifiers to rule upsert requests. The request               identifiers are valid for the request only and can be used to link the upserted compliance rule to the code               of a created compliance rule. | 
- **effective_at** | **str**| The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID  system datetime if not specified. In the case of an update, the changes will take place from this effective  time until the next effective time that the rule as been upserted at. For example, consider a rule that  already exists, and has previously had an update applied so that the definition will change on the first day  of the coming month. An upsert effective from the current day will only change the definition until the  first day of the coming month. An additional upsert at the same time (first day of the month) is required  if the newly-updated definition is to supersede the future definition. | [optional] 
+ **request_body** | [**Dict[str, ComplianceRuleUpsertRequest]**](ComplianceRuleUpsertRequest.md)| A dictionary of upsert request identifiers to rule upsert requests. The request              identifiers are valid for the request only and can be used to link the upserted compliance rule to the code              of a created compliance rule. | 
+ **effective_at** | **str**| The effective datetime or cut label at which the rule will take effect. Defaults to the current LUSID system datetime if not specified. In the case of an update, the changes will take place from this effective time until the next effective time that the rule as been upserted at. For example, consider a rule that already exists, and has previously had an update applied so that the definition will change on the first day of the coming month. An upsert effective from the current day will only change the definition until the first day of the coming month. An additional upsert at the same time (first day of the month) is required if the newly-updated definition is to supersede the future definition. | [optional] 
 
 ### Return type
 

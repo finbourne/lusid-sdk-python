@@ -24,7 +24,7 @@ from lusid.models.typed_resource_id import TypedResourceId
 
 class CounterpartySignatory(BaseModel):
     """
-    The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user.  The CounterpartySignatory represents the 'other side' of the agreement.  It comprises a name and identifier for a Legal Entity in LUSID.  # noqa: E501
+    The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user. The CounterpartySignatory represents the 'other side' of the agreement. It comprises a name and identifier for a Legal Entity in LUSID.  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="A user-defined name or label for the counterparty signatory.  There is no requirement for this to match the \"displayName\" of the legal entity.") 
     legal_entity_identifier: TypedResourceId = Field(..., alias="legalEntityIdentifier")

@@ -159,7 +159,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(RelationDefinitionsApi)
     scope = 'scope_example' # str | The scope of the relation to be deleted.
-    code = 'code_example' # str | The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation.
+    code = 'code_example' # str | The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -180,7 +180,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the relation to be deleted. | 
- **code** | **str**| The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation. | 
+ **code** | **str**| The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation. | 
 
 ### Return type
 
@@ -253,8 +253,8 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(RelationDefinitionsApi)
     scope = 'scope_example' # str | The scope of the specified relation.
-    code = 'code_example' # str | The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified. (optional)
+    code = 'code_example' # str | The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -275,8 +275,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified relation. | 
- **code** | **str**| The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
+ **code** | **str**| The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
 
 ### Return type
 

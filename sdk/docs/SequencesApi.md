@@ -162,7 +162,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(SequencesApi)
     scope = 'scope_example' # str | Scope of the sequence.
-    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
+    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely             identifies the sequence.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -183,7 +183,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| Scope of the sequence. | 
- **code** | **str**| Code of the sequence. This together with stated scope uniquely              identifies the sequence. | 
+ **code** | **str**| Code of the sequence. This together with stated scope uniquely             identifies the sequence. | 
 
 ### Return type
 
@@ -255,9 +255,9 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(SequencesApi)
-    page = 'page_example' # str | The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 500 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -277,9 +277,9 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **str**| The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 500 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -352,7 +352,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(SequencesApi)
     scope = 'scope_example' # str | Scope of the sequence.
-    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
+    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely             identifies the sequence.
     batch = 56 # int | Number of sequences items to return for the specified sequence. Default to 1 if not specified. (optional)
 
     try:
@@ -374,7 +374,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| Scope of the sequence. | 
- **code** | **str**| Code of the sequence. This together with stated scope uniquely              identifies the sequence. | 
+ **code** | **str**| Code of the sequence. This together with stated scope uniquely             identifies the sequence. | 
  **batch** | **int**| Number of sequences items to return for the specified sequence. Default to 1 if not specified. | [optional] 
 
 ### Return type

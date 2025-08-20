@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 CreateDataMap: Create data map
 
-Create or update one or more structured result store address definition data maps in a particular scope. Note these are immutable and cannot be changed once created.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map object in the response.                The response returns both the collection of successfully created or updated data maps, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
+Create or update one or more structured result store address definition data maps in a particular scope. Note these are immutable and cannot be changed once created.              In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data map object in the response.              The response returns both the collection of successfully created or updated data maps, as well as those that failed. For each failure, a reason is provided.              It is important to check the failed set for any unsuccessful results.
 
 ### Example
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 
 DeleteStructuredResultData: Delete structured result data
 
-Delete one or more structured result data items from a particular scope. Each item is identified by a unique ID which includes  information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully deleted data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
+Delete one or more structured result data items from a particular scope. Each item is identified by a unique ID which includes information about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).              In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data item in the response.              The response returns both the collection of successfully deleted data items, as well as those that failed. For each failure, a reason is provided.              It is important to check the failed set for any unsuccessful results.
 
 ### Example
 
@@ -259,8 +259,8 @@ def main():
     code = 'code_example' # str | The code of the document for which address key definitions are retrieved.
     source = 'source_example' # str | The source of the document for which address key definitions are retrieved.
     result_type = 'result_type_example' # str | The result type of the document for which address key definitions are retrieved.
-    effective_at = 'effective_at_example' # str | The effective datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime to query the document for which the address key definitions are retrieved.             Defaults to querying the latest version if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime to query the document for which the address key definitions are retrieved.             Defaults to querying the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -284,8 +284,8 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the document for which address key definitions are retrieved. | 
  **source** | **str**| The source of the document for which address key definitions are retrieved. | 
  **result_type** | **str**| The result type of the document for which address key definitions are retrieved. | 
- **effective_at** | **str**| The effective datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime to query the document for which the address key definitions are retrieved.              Defaults to querying the latest version if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime to query the document for which the address key definitions are retrieved.             Defaults to querying the latest version if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime to query the document for which the address key definitions are retrieved.             Defaults to querying the latest version if not specified. | [optional] 
 
 ### Return type
 
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
 
 GetDataMap: Get data map
 
-Retrieve one or more structured result store address definition data maps from a particular scope.                Each data map can be identified by its invariant key, which can be thought of as a permanent URL.  For each ID, LUSID returns the most recently matched item.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map in the response.                The response returns three collections. The first contains successfully retrieved data maps. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.
+Retrieve one or more structured result store address definition data maps from a particular scope.              Each data map can be identified by its invariant key, which can be thought of as a permanent URL. For each ID, LUSID returns the most recently matched item.              In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data map in the response.              The response returns three collections. The first contains successfully retrieved data maps. The second contains those with a valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.              For the IDs that failed to resolve or could not be found, a reason is provided.              It is important to check the failed sets for any unsuccessful results.
 
 ### Example
 
@@ -404,7 +404,7 @@ Name | Type | Description  | Notes
 
 GetStructuredResultData: Get structured result data
 
-Retrieve one or more structured result data items from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided (or default) effective datetime.                 An optional maximum age range window can be specified to control how far back to look from the specified  effective datetime. LUSID returns the most recent item within this window.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.    The response returns three collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.    For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.
+Retrieve one or more structured result data items from a particular scope.              Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID returns the most recently matched item with respect to the provided (or default) effective datetime.               An optional maximum age range window can be specified to control how far back to look from the specified effective datetime. LUSID returns the most recent item within this window.              In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data item in the response.  The response returns three collections. The first contains successfully retrieved data items. The second contains those with a valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.  For the IDs that failed to resolve or could not be found, a reason is provided.              It is important to check the failed sets for any unsuccessful results.
 
 ### Example
 
@@ -454,7 +454,7 @@ def main():
     scope = 'scope_example' # str | The scope from which to retrieve data items.
     request_body = {"SomeCorrelationId1":{"source":"MiddleOffice","code":"MyUploadedRiskResults","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"Risk"}} # Dict[str, StructuredResultDataId] | The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified. (optional)
-    max_age = 'max_age_example' # str | The duration of the look-back window in ISO8601 time interval format, for example 'P1Y2M3DT4H30M' (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. (optional)
+    max_age = 'max_age_example' # str | The duration of the look-back window in ISO8601 time interval format, for example 'P1Y2M3DT4H30M' (1 year, 2 months, 3 days, 4 hours and 30 minutes).              This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -477,7 +477,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope from which to retrieve data items. | 
  **request_body** | [**Dict[str, StructuredResultDataId]**](StructuredResultDataId.md)| The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified. | [optional] 
- **max_age** | **str**| The duration of the look-back window in ISO8601 time interval format, for example &#39;P1Y2M3DT4H30M&#39; (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. | [optional] 
+ **max_age** | **str**| The duration of the look-back window in ISO8601 time interval format, for example &#39;P1Y2M3DT4H30M&#39; (1 year, 2 months, 3 days, 4 hours and 30 minutes).              This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. | [optional] 
 
 ### Return type
 
@@ -502,7 +502,7 @@ Name | Type | Description  | Notes
 
 GetVirtualDocument: Get Virtual Documents
 
-Retrieve one or more virtual documents from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided effective datetime.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns two collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found, or those that failed because LUSID could not construct a valid identifier from the request.                For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.
+Retrieve one or more virtual documents from a particular scope.              Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID returns the most recently matched item with respect to the provided effective datetime.              In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data item in the response.              The response returns two collections. The first contains successfully retrieved data items. The second contains those with a valid identifier but that could not be found, or those that failed because LUSID could not construct a valid identifier from the request.              For the IDs that failed to resolve or could not be found, a reason is provided.              It is important to check the failed sets for any unsuccessful results.
 
 ### Example
 
@@ -598,7 +598,7 @@ Name | Type | Description  | Notes
 
 GetVirtualDocumentRows: Get Virtual Document Rows
 
-Retrieve the rows of the virtual document with the specified identifiers and the given effectiveAt date time.    Get virtual document rows merges multiple StructuredResultData items upserted with UpsertStructuredResultData  for a single StructuredResultDataId.                Since an item of StructuredResultData is always upserted with a StructuredResultDataId, of which  effectiveAt is a part, then merging across the asAt dimension is supported but not merging across the  effectiveAt dimension.
+Retrieve the rows of the virtual document with the specified identifiers and the given effectiveAt date time.  Get virtual document rows merges multiple StructuredResultData items upserted with UpsertStructuredResultData for a single StructuredResultDataId.              Since an item of StructuredResultData is always upserted with a StructuredResultDataId, of which effectiveAt is a part, then merging across the asAt dimension is supported but not merging across the effectiveAt dimension.
 
 ### Example
 
@@ -651,9 +651,9 @@ def main():
     result_type = 'result_type_example' # str | The result type of the virtual document to retrieve.
     effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the virtual document.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the virtual document. Defaults to returning the latest version if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing virtual document rows from a previous               call to list virtual document rows. This value is returned from the previous call. If a pagination token is               provided the filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing virtual document rows from a previous              call to list virtual document rows. This value is returned from the previous call. If a pagination token is              provided the filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:               https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -679,9 +679,9 @@ Name | Type | Description  | Notes
  **result_type** | **str**| The result type of the virtual document to retrieve. | 
  **effective_at** | **str**| The effectiveAt datetime at which to retrieve the virtual document. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the virtual document. Defaults to returning the latest version if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing virtual document rows from a previous               call to list virtual document rows. This value is returned from the previous call. If a pagination token is               provided the filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing virtual document rows from a previous              call to list virtual document rows. This value is returned from the previous call. If a pagination token is              provided the filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:               https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -706,7 +706,7 @@ Name | Type | Description  | Notes
 
 UpsertResultValue: Upsert result value
 
-Create or update one or more Upsert one or more result values in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
+Create or update one or more Upsert one or more result values in a particular scope. An item is updated if it already exists and created if it does not.              In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data item in the response.              The response returns both the collection of successfully created or updated data items, as well as those that failed. For each failure, a reason is provided.              It is important to check the failed set for any unsuccessful results.
 
 ### Example
 
@@ -800,7 +800,7 @@ Name | Type | Description  | Notes
 
 UpsertStructuredResultData: Upsert structured result data
 
-Create or update one or more structured result data items in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
+Create or update one or more structured result data items in a particular scope. An item is updated if it already exists and created if it does not.              In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID. It serves only to easily identify each data item in the response.              The response returns both the collection of successfully created or updated data items, as well as those that failed. For each failure, a reason is provided.              It is important to check the failed set for any unsuccessful results.
 
 ### Example
 

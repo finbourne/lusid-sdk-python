@@ -1,6 +1,6 @@
 # ConfigurationRecipe
 
-The Configuration or Calculation Recipe controls how LUSID processes a given request.  This can be used to change where market data used in pricing is loaded from and in what order, or which model is used to  price a given instrument as well as how aggregation will process the produced results.
+The Configuration or Calculation Recipe controls how LUSID processes a given request. This can be used to change where market data used in pricing is loaded from and in what order, or which model is used to price a given instrument as well as how aggregation will process the produced results.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

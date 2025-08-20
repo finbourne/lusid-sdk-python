@@ -27,7 +27,7 @@ class ConstituentsAdjustmentHeader(BaseModel):
     """
     ConstituentsAdjustmentHeader
     """
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="There can be at most one holdings adjustment for a portfolio at a  specific effective time so this uniquely identifies the adjustment.")
+    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="There can be at most one holdings adjustment for a portfolio at a specific effective time so this uniquely identifies the adjustment.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
     __properties = ["effectiveAt", "version", "links"]

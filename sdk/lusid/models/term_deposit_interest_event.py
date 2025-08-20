@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class TermDepositInterestEvent(InstrumentEvent):
     """
-    Definition of a Term Deposit Interest Event.  This is an event that describes the occurence of interest on a term deposit ().  # noqa: E501
+    Definition of a Term Deposit Interest Event. This is an event that describes the occurence of interest on a term deposit ().  # noqa: E501
     """
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the interest payment.") 
     interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="interestPerUnit", description="The interest payment made per unit of the held .")

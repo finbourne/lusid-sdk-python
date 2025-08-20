@@ -24,9 +24,9 @@ from lusid.models.market_data_key_rule import MarketDataKeyRule
 
 class GroupOfMarketDataKeyRules(BaseModel):
     """
-    Represents a collection of MarketDataKeyRules that should be resolved together when resolving market data.  That is, market data resolution will always attempt to resolve with all rules in the group  before deciding what market data to return.  # noqa: E501
+    Represents a collection of MarketDataKeyRules that should be resolved together when resolving market data. That is, market data resolution will always attempt to resolve with all rules in the group before deciding what market data to return.  # noqa: E501
     """
-    market_data_key_rule_group_operation:  StrictStr = Field(...,alias="marketDataKeyRuleGroupOperation", description="The operation that will be used to process the collection of market data items and failures found on resolution  into a single market data item or failure to be used.  Supported values: [FirstLatest, AverageOfQuotesFound, AverageOfAllQuotes, FirstMinimum, FirstMaximum]") 
+    market_data_key_rule_group_operation:  StrictStr = Field(...,alias="marketDataKeyRuleGroupOperation", description="The operation that will be used to process the collection of market data items and failures found on resolution into a single market data item or failure to be used. Supported values: [FirstLatest, AverageOfQuotesFound, AverageOfAllQuotes, FirstMinimum, FirstMaximum]") 
     market_rules: conlist(MarketDataKeyRule) = Field(..., alias="marketRules", description="The rules that should be grouped together in market data resolution.")
     __properties = ["marketDataKeyRuleGroupOperation", "marketRules"]
 

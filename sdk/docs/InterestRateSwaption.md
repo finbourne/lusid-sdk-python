@@ -5,9 +5,9 @@ LUSID representation of an Interest Rate Swaption.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The start date of the instrument. This is normally synonymous with the trade-date. | 
-**pay_or_receive_fixed** | **str** | Pay or Receive the fixed leg of the underlying swap.    Supported string (enumeration) values are: [Pay, Receive]. | 
+**pay_or_receive_fixed** | **str** | Pay or Receive the fixed leg of the underlying swap.  Supported string (enumeration) values are: [Pay, Receive]. | 
 **premium** | [**Premium**](Premium.md) |  | [optional] 
-**delivery_method** | **str** | How does the option settle    Supported string (enumeration) values are: [Cash, Physical]. | 
+**delivery_method** | **str** | How does the option settle  Supported string (enumeration) values are: [Cash, Physical]. | 
 **swap** | [**InterestRateSwap**](InterestRateSwap.md) |  | 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo | 

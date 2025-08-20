@@ -59,15 +59,15 @@ class InstrumentEventTypesApi:
 
 
     @overload
-    async def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> TransactionTemplate:  # noqa: E501
+    async def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @overload
-    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
+    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
+    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
         """CreateTransactionTemplate: Create Transaction Template  # noqa: E501
 
         Create a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -79,7 +79,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. (required)
         :type scope: str
@@ -104,7 +104,7 @@ class InstrumentEventTypesApi:
         return self.create_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, transaction_template_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateTransactionTemplate: Create Transaction Template  # noqa: E501
 
         Create a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -116,7 +116,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. (required)
         :type scope: str
@@ -242,15 +242,15 @@ class InstrumentEventTypesApi:
 
 
     @overload
-    async def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], **kwargs) -> datetime:  # noqa: E501
+    async def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], **kwargs) -> datetime:  # noqa: E501
         ...
 
     @overload
-    def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], async_req: Optional[bool]=True, **kwargs) -> datetime:  # noqa: E501
+    def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], async_req: Optional[bool]=True, **kwargs) -> datetime:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], async_req: Optional[bool]=None, **kwargs) -> Union[datetime, Awaitable[datetime]]:  # noqa: E501
+    def delete_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], async_req: Optional[bool]=None, **kwargs) -> Union[datetime, Awaitable[datetime]]:  # noqa: E501
         """DeleteTransactionTemplate: Delete Transaction Template  # noqa: E501
 
         Delete a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -262,7 +262,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope of the template. (required)
         :type scope: str
@@ -285,7 +285,7 @@ class InstrumentEventTypesApi:
         return self.delete_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope of the template.")], **kwargs) -> ApiResponse:  # noqa: E501
         """DeleteTransactionTemplate: Delete Transaction Template  # noqa: E501
 
         Delete a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -297,7 +297,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope of the template. (required)
         :type scope: str
@@ -410,15 +410,15 @@ class InstrumentEventTypesApi:
 
 
     @overload
-    async def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> TransactionTemplate:  # noqa: E501
+    async def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
+    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
+    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
         """GetTransactionTemplate: Get Transaction Template  # noqa: E501
 
         Gets the Transaction Template that for the instrument event type within the scope specified.  # noqa: E501
@@ -430,7 +430,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The instrument event type of the transaction template (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. When not supplied the scope is 'default'. (required)
         :type scope: str
@@ -455,7 +455,7 @@ class InstrumentEventTypesApi:
         return self.get_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetTransactionTemplate: Get Transaction Template  # noqa: E501
 
         Gets the Transaction Template that for the instrument event type within the scope specified.  # noqa: E501
@@ -467,7 +467,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The instrument event type of the transaction template (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. When not supplied the scope is 'default'. (required)
         :type scope: str
@@ -741,15 +741,15 @@ class InstrumentEventTypesApi:
 
 
     @overload
-    async def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> PagedResourceListOfTransactionTemplateSpecification:  # noqa: E501
+    async def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> PagedResourceListOfTransactionTemplateSpecification:  # noqa: E501
         ...
 
     @overload
-    def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionTemplateSpecification:  # noqa: E501
+    def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionTemplateSpecification:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionTemplateSpecification, Awaitable[PagedResourceListOfTransactionTemplateSpecification]]:  # noqa: E501
+    def list_transaction_template_specifications(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionTemplateSpecification, Awaitable[PagedResourceListOfTransactionTemplateSpecification]]:  # noqa: E501
         """ListTransactionTemplateSpecifications: List Transaction Template Specifications.  # noqa: E501
 
         Retrieves all transaction template specifications.  # noqa: E501
@@ -761,11 +761,11 @@ class InstrumentEventTypesApi:
 
         :param as_at: AsAt of the request
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
         :type sort_by: List[str]
@@ -788,7 +788,7 @@ class InstrumentEventTypesApi:
         return self.list_transaction_template_specifications_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_transaction_template_specifications_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_transaction_template_specifications_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="AsAt of the request")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionTemplateSpecifications: List Transaction Template Specifications.  # noqa: E501
 
         Retrieves all transaction template specifications.  # noqa: E501
@@ -800,11 +800,11 @@ class InstrumentEventTypesApi:
 
         :param as_at: AsAt of the request
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
         :type sort_by: List[str]
@@ -929,15 +929,15 @@ class InstrumentEventTypesApi:
 
 
     @overload
-    async def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfTransactionTemplate:  # noqa: E501
+    async def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfTransactionTemplate:  # noqa: E501
         ...
 
     @overload
-    def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionTemplate:  # noqa: E501
+    def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionTemplate:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionTemplate, Awaitable[PagedResourceListOfTransactionTemplate]]:  # noqa: E501
+    def list_transaction_templates(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionTemplate, Awaitable[PagedResourceListOfTransactionTemplate]]:  # noqa: E501
         """ListTransactionTemplates: List Transaction Templates  # noqa: E501
 
         Lists all Transaction Templates.  # noqa: E501
@@ -949,11 +949,11 @@ class InstrumentEventTypesApi:
 
         :param as_at: The AsAt time at which to retrieve the Transaction Templates
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.
+        :param page: The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -976,7 +976,7 @@ class InstrumentEventTypesApi:
         return self.list_transaction_templates_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_transaction_templates_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_transaction_templates_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The AsAt time at which to retrieve the Transaction Templates")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionTemplates: List Transaction Templates  # noqa: E501
 
         Lists all Transaction Templates.  # noqa: E501
@@ -988,11 +988,11 @@ class InstrumentEventTypesApi:
 
         :param as_at: The AsAt time at which to retrieve the Transaction Templates
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request.
+        :param page: The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -1117,15 +1117,15 @@ class InstrumentEventTypesApi:
 
 
     @overload
-    async def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], **kwargs) -> TransactionTemplate:  # noqa: E501
+    async def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @overload
-    def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
+    def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
+    def update_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
         """UpdateTransactionTemplate: Update Transaction Template  # noqa: E501
 
         Update a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -1137,7 +1137,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. (required)
         :type scope: str
@@ -1162,7 +1162,7 @@ class InstrumentEventTypesApi:
         return self.update_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, transaction_template_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[StrictStr, Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining the updated values for the transaction template.")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpdateTransactionTemplate: Update Transaction Template  # noqa: E501
 
         Update a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -1174,7 +1174,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. (required)
         :type scope: str

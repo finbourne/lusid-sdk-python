@@ -29,7 +29,11 @@ class SettlementSchedule(BaseModel):
     settlement_date: Optional[datetime] = Field(None, alias="settlementDate")
     units: Optional[Union[StrictFloat, StrictInt]] = None
     bond_interest: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="bondInterest")
-    __properties = ["tradeId", "settlementDate", "units", "bondInterest"]
+    movement_name:  Optional[StrictStr] = Field(None,alias="movementName") 
+    movement_type:  Optional[StrictStr] = Field(None,alias="movementType") 
+    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unsettledUnits")
+    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="overdueUnits")
+    __properties = ["tradeId", "settlementDate", "units", "bondInterest", "movementName", "movementType", "unsettledUnits", "overdueUnits"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +72,16 @@ class SettlementSchedule(BaseModel):
         if self.trade_id is None and "trade_id" in self.__fields_set__:
             _dict['tradeId'] = None
 
+        # set to None if movement_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.movement_name is None and "movement_name" in self.__fields_set__:
+            _dict['movementName'] = None
+
+        # set to None if movement_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.movement_type is None and "movement_type" in self.__fields_set__:
+            _dict['movementType'] = None
+
         return _dict
 
     @classmethod
@@ -83,6 +97,10 @@ class SettlementSchedule(BaseModel):
             "trade_id": obj.get("tradeId"),
             "settlement_date": obj.get("settlementDate"),
             "units": obj.get("units"),
-            "bond_interest": obj.get("bondInterest")
+            "bond_interest": obj.get("bondInterest"),
+            "movement_name": obj.get("movementName"),
+            "movement_type": obj.get("movementType"),
+            "unsettled_units": obj.get("unsettledUnits"),
+            "overdue_units": obj.get("overdueUnits")
         })
         return _obj

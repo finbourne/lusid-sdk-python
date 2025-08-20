@@ -52,7 +52,9 @@ class PortfolioHolding(BaseModel):
     settlement_schedule: Optional[conlist(SettlementSchedule)] = Field(None, alias="settlementSchedule", description="Where no. of days ahead has been specified, future dated settlements will be captured here.")
     current_face: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="currentFace", description="Current face value of the holding.")
     custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId"]
+    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unsettledUnits", description="The number of unsettled units for the holding.")
+    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="overdueUnits", description="The number of unsettled units for the holding that are beyond their contractual settlement date.")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId", "unsettledUnits", "overdueUnits"]
 
     class Config:
         """Pydantic configuration"""
@@ -216,6 +218,8 @@ class PortfolioHolding(BaseModel):
             "variation_margin_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("variationMarginPortfolioCcy")) if obj.get("variationMarginPortfolioCcy") is not None else None,
             "settlement_schedule": [SettlementSchedule.from_dict(_item) for _item in obj.get("settlementSchedule")] if obj.get("settlementSchedule") is not None else None,
             "current_face": obj.get("currentFace"),
-            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
+            "unsettled_units": obj.get("unsettledUnits"),
+            "overdue_units": obj.get("overdueUnits")
         })
         return _obj

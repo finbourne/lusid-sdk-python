@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator
 
 class TimeZoneConventions(BaseModel):
     """
-    Provides information on the primary time zone of an instrument and optional cut labels  for defining times to be used by instrument events.  # noqa: E501
+    Provides information on the primary time zone of an instrument and optional cut labels for defining times to be used by instrument events.  # noqa: E501
     """
     primary_time_zone:  StrictStr = Field(...,alias="primaryTimeZone", description="The IANA time zone code for the instrument.") 
     start_of_day:  Optional[StrictStr] = Field(None,alias="startOfDay", description="A LUSID Cut Label code used for generating instrument events at a time other than local midnight.") 

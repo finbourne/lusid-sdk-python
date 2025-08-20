@@ -27,7 +27,7 @@ class AggregateSpec(BaseModel):
     """
     key:  StrictStr = Field(...,alias="key", description="The key that uniquely identifies a queryable address in Lusid.") 
     op:  StrictStr = Field(...,alias="op", description="The available values are: Sum, DefaultSum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears") 
-    options: Optional[Dict[str, Any]] = Field(None, description="Additional options to apply when performing computations. Options that do not apply to the Key will be  ignored. Option values can be boolean, numeric, string or date-time.")
+    options: Optional[Dict[str, Any]] = Field(None, description="Additional options to apply when performing computations. Options that do not apply to the Key will be ignored. Option values can be boolean, numeric, string or date-time.")
     __properties = ["key", "op", "options"]
 
     @validator('op')

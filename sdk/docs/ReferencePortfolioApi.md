@@ -163,10 +163,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReferencePortfolioApi)
     scope = 'scope_example' # str | The scope of the reference portfolio.
-    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.
     effective_at = 'effective_at_example' # str | The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or             'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -187,10 +187,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the reference portfolio. | 
- **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | 
+ **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. | 
  **effective_at** | **str**| The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; or &#39;ReferenceHolding&#39; domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. &#39;Instrument/system/Name&#39; or              &#39;ReferenceHolding/strategy/quantsignal&#39;. Defaults to return all available instrument and reference holding properties if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve constituents. Defaults to return the latest version             of each constituent if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; or &#39;ReferenceHolding&#39; domain to decorate onto             constituents. These take the format {domain}/{scope}/{code} e.g. &#39;Instrument/system/Name&#39; or             &#39;ReferenceHolding/strategy/quantsignal&#39;. Defaults to return all available instrument and reference holding properties if not specified. | [optional] 
 
 ### Return type
 
@@ -263,7 +263,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReferencePortfolioApi)
     scope = 'scope_example' # str | The scope of the reference portfolio.
-    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.
     from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned.
     to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned.
     as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The asAt time for which the result is valid. (optional)
@@ -287,7 +287,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the reference portfolio. | 
- **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | 
+ **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. | 
  **from_effective_at** | **str**| Events between this time (inclusive) and the toEffectiveAt are returned. | 
  **to_effective_at** | **str**| Events between this time (inclusive) and the fromEffectiveAt are returned. | 
  **as_at_time** | **datetime**| The asAt time for which the result is valid. | [optional] 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties
 
-Create or update one or more constituent properties for a single constituent in the reference portfolio.  Each property will be updated if it already exists, created if it does not and deleted if value is null.  Both constituent and portfolio must exist at the time when properties are created or updated.
+Create or update one or more constituent properties for a single constituent in the reference portfolio. Each property will be updated if it already exists, created if it does not and deleted if value is null. Both constituent and portfolio must exist at the time when properties are created or updated.
 
 ### Example
 
@@ -363,7 +363,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReferencePortfolioApi)
     scope = 'scope_example' # str | The scope of the reference portfolio.
-    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -390,7 +390,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the reference portfolio. | 
- **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | 
+ **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. | 
  **upsert_reference_portfolio_constituent_properties_request** | [**UpsertReferencePortfolioConstituentPropertiesRequest**](UpsertReferencePortfolioConstituentPropertiesRequest.md)| The request to modify properties for the constituent. | 
 
 ### Return type
@@ -464,7 +464,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReferencePortfolioApi)
     scope = 'scope_example' # str | The scope of the reference portfolio.
-    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
+    code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -491,7 +491,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the reference portfolio. | 
- **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | 
+ **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies             the reference portfolio. | 
  **upsert_reference_portfolio_constituents_request** | [**UpsertReferencePortfolioConstituentsRequest**](UpsertReferencePortfolioConstituentsRequest.md)| The constituents to upload to the reference portfolio. | 
 
 ### Return type

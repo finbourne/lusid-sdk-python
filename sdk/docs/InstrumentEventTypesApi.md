@@ -66,7 +66,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventTypesApi)
     instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
-    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template
     scope = 'scope_example' # str | The scope in which the template lies.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -94,7 +94,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instrument_event_type** | **str**| The type of instrument events that the template is applied to. | 
- **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template | 
+ **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template | 
  **scope** | **str**| The scope in which the template lies. | 
  **transaction_template_request** | [**TransactionTemplateRequest**](TransactionTemplateRequest.md)| A request defining a new transaction template to be created. | 
 
@@ -169,7 +169,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventTypesApi)
     instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
-    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template
     scope = 'scope_example' # str | The scope of the template.
 
     try:
@@ -191,7 +191,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instrument_event_type** | **str**| The type of instrument events that the template is applied to. | 
- **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template | 
+ **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template | 
  **scope** | **str**| The scope of the template. | 
 
 ### Return type
@@ -265,7 +265,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventTypesApi)
     instrument_event_type = 'instrument_event_type_example' # str | The instrument event type of the transaction template
-    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template
     scope = 'scope_example' # str | The scope in which the template lies. When not supplied the scope is 'default'.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time of the requested Transaction Template (optional)
 
@@ -288,7 +288,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instrument_event_type** | **str**| The instrument event type of the transaction template | 
- **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template | 
+ **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template | 
  **scope** | **str**| The scope in which the template lies. When not supplied the scope is &#39;default&#39;. | 
  **as_at** | **datetime**| The AsAt time of the requested Transaction Template | [optional] 
 
@@ -455,9 +455,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventTypesApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt of the request (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
     try:
@@ -479,9 +479,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| AsAt of the request | [optional] 
- **page** | **str**| The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Transaction Template Specifications from             a previous call to list Transaction Template Specifications.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt             fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
 
 ### Return type
@@ -555,9 +555,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventTypesApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time at which to retrieve the Transaction Templates (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -579,9 +579,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The AsAt time at which to retrieve the Transaction Templates | [optional] 
- **page** | **str**| The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Transaction Templates from a previous call to list Transaction Templates.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, limit, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -655,7 +655,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventTypesApi)
     instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
-    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
+    instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template
     scope = 'scope_example' # str | The scope in which the template lies.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -683,7 +683,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instrument_event_type** | **str**| The type of instrument events that the template is applied to. | 
- **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template | 
+ **instrument_type** | **str**| The instrument type of the transaction template. The combination of the instrument             event type, instrument type and scope uniquely identifies a transaction template | 
  **scope** | **str**| The scope in which the template lies. | 
  **transaction_template_request** | [**TransactionTemplateRequest**](TransactionTemplateRequest.md)| A request defining the updated values for the transaction template. | 
 

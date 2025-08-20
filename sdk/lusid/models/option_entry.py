@@ -27,7 +27,7 @@ class OptionEntry(BaseModel):
     """
     strike: Union[StrictFloat, StrictInt] = Field(..., description="The strike on this date")
     var_date: datetime = Field(..., alias="date", description="The date at which the option can be actioned at this strike")
-    end_date: Optional[datetime] = Field(None, alias="endDate", description="If American exercise, this is the end of the exercise period.  Optional field. Defaults to the Date field if not set.")
+    end_date: Optional[datetime] = Field(None, alias="endDate", description="If American exercise, this is the end of the exercise period. Optional field. Defaults to the Date field if not set.")
     __properties = ["strike", "date", "endDate"]
 
     class Config:

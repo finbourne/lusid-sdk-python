@@ -1,6 +1,6 @@
 # BondCouponEvent
 
-Definition of a Bond Coupon Event  This is an event that describes the occurence of a cashflow due to a fixed rate bond coupon payment.
+Definition of a Bond Coupon Event This is an event that describes the occurence of a cashflow due to a fixed rate bond coupon payment.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

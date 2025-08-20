@@ -73,7 +73,7 @@ class CounterpartiesApi:
     def delete_counterparty_agreement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Counterparty Agreement to delete.")], code : Annotated[StrictStr, Field(..., description="The Counterparty Agreement to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteCounterpartyAgreement: Delete the Counterparty Agreement of given scope and code  # noqa: E501
 
-        Delete the specified Counterparty Agreement from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Counterparty Agreement from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -106,7 +106,7 @@ class CounterpartiesApi:
     def delete_counterparty_agreement_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Counterparty Agreement to delete.")], code : Annotated[StrictStr, Field(..., description="The Counterparty Agreement to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteCounterpartyAgreement: Delete the Counterparty Agreement of given scope and code  # noqa: E501
 
-        Delete the specified Counterparty Agreement from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Counterparty Agreement from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -233,7 +233,7 @@ class CounterpartiesApi:
     def delete_credit_support_annex(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Credit Support Annex to delete.")], code : Annotated[StrictStr, Field(..., description="The Credit Support Annex to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteCreditSupportAnnex: Delete the Credit Support Annex of given scope and code  # noqa: E501
 
-        Delete the specified Credit Support Annex from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Credit Support Annex from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -266,7 +266,7 @@ class CounterpartiesApi:
     def delete_credit_support_annex_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Credit Support Annex to delete.")], code : Annotated[StrictStr, Field(..., description="The Credit Support Annex to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteCreditSupportAnnex: Delete the Credit Support Annex of given scope and code  # noqa: E501
 
-        Delete the specified Credit Support Annex from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Credit Support Annex from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -393,7 +393,7 @@ class CounterpartiesApi:
     def get_counterparty_agreement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Counterparty Agreement to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Counterparty Agreement to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Counterparty Agreement. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetCounterpartyAgreementResponse, Awaitable[GetCounterpartyAgreementResponse]]:  # noqa: E501
         """[EARLY ACCESS] GetCounterpartyAgreement: Get Counterparty Agreement  # noqa: E501
 
-        Get a Counterparty Agreement from a single scope.  The response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Counterparty Agreement from a single scope. The response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -428,7 +428,7 @@ class CounterpartiesApi:
     def get_counterparty_agreement_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Counterparty Agreement to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Counterparty Agreement to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Counterparty Agreement. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetCounterpartyAgreement: Get Counterparty Agreement  # noqa: E501
 
-        Get a Counterparty Agreement from a single scope.  The response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Counterparty Agreement from a single scope. The response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -564,7 +564,7 @@ class CounterpartiesApi:
     def get_credit_support_annex(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Credit Support Annex to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Credit Support Annex to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Credit Support Annex . Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetCreditSupportAnnexResponse, Awaitable[GetCreditSupportAnnexResponse]]:  # noqa: E501
         """[EARLY ACCESS] GetCreditSupportAnnex: Get Credit Support Annex  # noqa: E501
 
-        Get a Credit Support Annex from a single scope.  The response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Credit Support Annex from a single scope. The response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -599,7 +599,7 @@ class CounterpartiesApi:
     def get_credit_support_annex_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Credit Support Annex to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Credit Support Annex to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Credit Support Annex . Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetCreditSupportAnnex: Get Credit Support Annex  # noqa: E501
 
-        Get a Credit Support Annex from a single scope.  The response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Credit Support Annex from a single scope. The response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1045,7 +1045,7 @@ class CounterpartiesApi:
     def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(..., description="The Counterparty Agreement to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement  # noqa: E501
 
-        Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1076,7 +1076,7 @@ class CounterpartiesApi:
     def upsert_counterparty_agreement_with_http_info(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(..., description="The Counterparty Agreement to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement  # noqa: E501
 
-        Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1204,7 +1204,7 @@ class CounterpartiesApi:
     def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(..., description="The Credit Support Annex to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex  # noqa: E501
 
-        Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1235,7 +1235,7 @@ class CounterpartiesApi:
     def upsert_credit_support_annex_with_http_info(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(..., description="The Credit Support Annex to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex  # noqa: E501
 
-        Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteIdentifierDefinition: Delete a particular Identifier Definition
 
-The deletion will take effect from the Identifier Definition deletion datetime.  i.e. will no longer exist at any asAt datetime after the asAt datetime of deletion.
+The deletion will take effect from the Identifier Definition deletion datetime. i.e. will no longer exist at any asAt datetime after the asAt datetime of deletion.
 
 ### Example
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetIdentifierDefinition: Get a single Identifier Definition
 
-Get a single Identifier Definition using domain, identifierScope, identifierType, and an optional asAt              - defaulting to latest if not specified
+Get a single Identifier Definition using domain, identifierScope, identifierType, and an optional asAt             - defaulting to latest if not specified
 
 ### Example
 
@@ -259,9 +259,9 @@ def main():
     domain = 'domain_example' # str | The type of entity to which the identifier relates.
     identifier_scope = 'identifier_scope_example' # str | The scope that the identifier exists in
     identifier_type = 'identifier_type_example' # str | What the identifier represents. Together with \"domain\" and \"identifierScope\" this uniquely identifies the identifier definition
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Identifier Definition. Defaults to return              the latest version of the definition if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the Identifier Definitions.              Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)              on the Identifier Definition. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'IdentifierDefinition' domain to decorate onto the Identifier Definition.              These must take the format {domain}/{scope}/{code}. If no properties are specified, then no properties will be returned. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Identifier Definition. Defaults to return             the latest version of the definition if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the Identifier Definitions.             Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)             on the Identifier Definition. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'IdentifierDefinition' domain to decorate onto the Identifier Definition.             These must take the format {domain}/{scope}/{code}. If no properties are specified, then no properties will be returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -284,9 +284,9 @@ Name | Type | Description  | Notes
  **domain** | **str**| The type of entity to which the identifier relates. | 
  **identifier_scope** | **str**| The scope that the identifier exists in | 
  **identifier_type** | **str**| What the identifier represents. Together with \&quot;domain\&quot; and \&quot;identifierScope\&quot; this uniquely identifies the identifier definition | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Identifier Definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
- **effective_at** | **str**| The effectiveAt datetime at which to retrieve the Identifier Definitions.              Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)              on the Identifier Definition. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;IdentifierDefinition&#39; domain to decorate onto the Identifier Definition.              These must take the format {domain}/{scope}/{code}. If no properties are specified, then no properties will be returned. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Identifier Definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime at which to retrieve the Identifier Definitions.             Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)             on the Identifier Definition. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;IdentifierDefinition&#39; domain to decorate onto the Identifier Definition.             These must take the format {domain}/{scope}/{code}. If no properties are specified, then no properties will be returned. | [optional] 
 
 ### Return type
 
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListIdentifierDefinitions: List Identifier Definitions
 
-Retrieves all Identifier Definitions that fit the filter, in a specific order if sortBy is provided  Supports pagination
+Retrieves all Identifier Definitions that fit the filter, in a specific order if sortBy is provided Supports pagination
 
 ### Example
 
@@ -358,13 +358,13 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(IdentifierDefinitionsApi)
-    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the Identifier Definitions.              Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)              on the Identifier Definition. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Identifier Definitions. Defaults to return the latest              version of the Identifier Definitions if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Identifier Definitions from a previous call to list              Identifier Definitions. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the Identifier Definitions.             Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)             on the Identifier Definition. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Identifier Definitions. Defaults to return the latest             version of the Identifier Definitions if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Identifier Definitions from a previous call to list             Identifier Definitions. This value is returned from the previous call. If a pagination token is provided the sortBy,             filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many per page. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'IdentifierDefinition' domain to decorate onto the Identifier Definition.              These must take the format {domain}/{scope}/{code}. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'IdentifierDefinition' domain to decorate onto the Identifier Definition.             These must take the format {domain}/{scope}/{code}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -384,13 +384,13 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effectiveAt datetime at which to retrieve the Identifier Definitions.              Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)              on the Identifier Definition. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Identifier Definitions. Defaults to return the latest              version of the Identifier Definitions if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Identifier Definitions from a previous call to list              Identifier Definitions. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime at which to retrieve the Identifier Definitions.             Since Identifier Definitions exist for all effective time, this will only apply to properties (if requested)             on the Identifier Definition. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Identifier Definitions. Defaults to return the latest             version of the Identifier Definitions if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Identifier Definitions from a previous call to list             Identifier Definitions. This value is returned from the previous call. If a pagination token is provided the sortBy,             filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many per page. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;IdentifierDefinition&#39; domain to decorate onto the Identifier Definition.              These must take the format {domain}/{scope}/{code}. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;IdentifierDefinition&#39; domain to decorate onto the Identifier Definition.             These must take the format {domain}/{scope}/{code}. | [optional] 
 
 ### Return type
 

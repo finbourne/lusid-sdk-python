@@ -26,7 +26,7 @@ from lusid.models.translation_script_id import TranslationScriptId
 
 class TranslateEntitiesRequest(BaseModel):
     """
-    Request to translate financial entities with a specified script stored in LUSID,  specified in the request by its id. The output of the translation is validated against a dialect stored in LUSID,  again specified in the request by its id.  # noqa: E501
+    Request to translate financial entities with a specified script stored in LUSID, specified in the request by its id. The output of the translation is validated against a dialect stored in LUSID, again specified in the request by its id.  # noqa: E501
     """
     entity_payloads: Dict[str, TranslationInput] = Field(..., alias="entityPayloads", description="Entity payloads to be translated, indexed by (ephemeral) unique correlation ids.")
     script_id: TranslationScriptId = Field(..., alias="scriptId")

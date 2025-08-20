@@ -23,7 +23,7 @@ from aenum import Enum, no_arg
 
 class PropertyDomain(str, Enum):
     """
-    See https://wiki.finbourne.com/information/domain-model-properties                Each domain refers to a logical set of properties which reside within it.
+    See https://wiki.finbourne.com/information/domain-model-properties              Each domain refers to a logical set of properties which reside within it.
     """
 
     """

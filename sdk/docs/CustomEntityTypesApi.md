@@ -253,11 +253,11 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomEntityTypesApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the entities. Defaults to returning the latest version             of each Custom Entity Type if not specified. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing entities; this             value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,             and asAt fields must not have changed since the original request. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -277,11 +277,11 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the entities. Defaults to returning the latest version             of each Custom Entity Type if not specified. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **page** | **str**| The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing entities; this             value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,             and asAt fields must not have changed since the original request. | [optional] 
 
 ### Return type
 

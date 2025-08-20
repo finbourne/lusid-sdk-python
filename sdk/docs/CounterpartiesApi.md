@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] DeleteCounterpartyAgreement: Delete the Counterparty Agreement of given scope and code
 
-Delete the specified Counterparty Agreement from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.
+Delete the specified Counterparty Agreement from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.
 
 ### Example
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteCreditSupportAnnex: Delete the Credit Support Annex of given scope and code
 
-Delete the specified Credit Support Annex from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.
+Delete the specified Credit Support Annex from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.
 
 ### Example
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetCounterpartyAgreement: Get Counterparty Agreement
 
-Get a Counterparty Agreement from a single scope.  The response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).
+Get a Counterparty Agreement from a single scope. The response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).
 
 ### Example
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetCreditSupportAnnex: Get Credit Support Annex
 
-Get a Credit Support Annex from a single scope.  The response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).
+Get a Credit Support Annex from a single scope. The response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).
 
 ### Example
 
@@ -583,7 +583,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement
 
-Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful                It is important to always check to verify success (or failure).
+Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful              It is important to always check to verify success (or failure).
 
 ### Example
 
@@ -680,7 +680,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex
 
-Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful                It is important to always check to verify success (or failure).
+Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful              It is important to always check to verify success (or failure).
 
 ### Example
 

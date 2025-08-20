@@ -64,15 +64,15 @@ class InstrumentEventsApi:
 
 
     @overload
-    async def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, **kwargs) -> ResourceListOfApplicableInstrumentEvent:  # noqa: E501
+    async def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, **kwargs) -> ResourceListOfApplicableInstrumentEvent:  # noqa: E501
         ...
 
     @overload
-    def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfApplicableInstrumentEvent:  # noqa: E501
+    def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfApplicableInstrumentEvent:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfApplicableInstrumentEvent, Awaitable[ResourceListOfApplicableInstrumentEvent]]:  # noqa: E501
+    def query_applicable_instrument_events(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfApplicableInstrumentEvent, Awaitable[ResourceListOfApplicableInstrumentEvent]]:  # noqa: E501
         """QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
@@ -84,9 +84,9 @@ class InstrumentEventsApi:
 
         :param as_at: The as at time to use.
         :type as_at: datetime
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this
         :type page: str
         :param query_applicable_instrument_events_request: The filter parameters used to retrieve applicable instrument events.
         :type query_applicable_instrument_events_request: QueryApplicableInstrumentEventsRequest
@@ -109,7 +109,7 @@ class InstrumentEventsApi:
         return self.query_applicable_instrument_events_with_http_info(as_at, limit, page, query_applicable_instrument_events_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def query_applicable_instrument_events_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def query_applicable_instrument_events_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The as at time to use.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this")] = None, query_applicable_instrument_events_request : Annotated[Optional[QueryApplicableInstrumentEventsRequest], Field(description="The filter parameters used to retrieve applicable instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
@@ -121,9 +121,9 @@ class InstrumentEventsApi:
 
         :param as_at: The as at time to use.
         :type as_at: datetime
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this
         :type page: str
         :param query_applicable_instrument_events_request: The filter parameters used to retrieve applicable instrument events.
         :type query_applicable_instrument_events_request: QueryApplicableInstrumentEventsRequest
@@ -409,15 +409,15 @@ class InstrumentEventsApi:
 
 
     @overload
-    async def query_cash_flows(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ResourceListOfInstrumentCashFlow:  # noqa: E501
+    async def query_cash_flows(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ResourceListOfInstrumentCashFlow:  # noqa: E501
         ...
 
     @overload
-    def query_cash_flows(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfInstrumentCashFlow:  # noqa: E501
+    def query_cash_flows(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfInstrumentCashFlow:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_cash_flows(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfInstrumentCashFlow, Awaitable[ResourceListOfInstrumentCashFlow]]:  # noqa: E501
+    def query_cash_flows(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfInstrumentCashFlow, Awaitable[ResourceListOfInstrumentCashFlow]]:  # noqa: E501
         """QueryCashFlows: Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
@@ -427,9 +427,9 @@ class InstrumentEventsApi:
         >>> thread = api.query_cash_flows(limit, page, query_cash_flows_request, async_req=True)
         >>> result = thread.get()
 
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.
         :type page: str
         :param query_cash_flows_request: The filter parameters used to retrieve instrument events.
         :type query_cash_flows_request: QueryCashFlowsRequest
@@ -452,7 +452,7 @@ class InstrumentEventsApi:
         return self.query_cash_flows_with_http_info(limit, page, query_cash_flows_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def query_cash_flows_with_http_info(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def query_cash_flows_with_http_info(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_cash_flows_request : Annotated[Optional[QueryCashFlowsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """QueryCashFlows: Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
@@ -462,9 +462,9 @@ class InstrumentEventsApi:
         >>> thread = api.query_cash_flows_with_http_info(limit, page, query_cash_flows_request, async_req=True)
         >>> result = thread.get()
 
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.
         :type page: str
         :param query_cash_flows_request: The filter parameters used to retrieve instrument events.
         :type query_cash_flows_request: QueryCashFlowsRequest
@@ -584,15 +584,15 @@ class InstrumentEventsApi:
 
 
     @overload
-    async def query_instrument_events(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ResourceListOfInstrumentEventHolder:  # noqa: E501
+    async def query_instrument_events(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ResourceListOfInstrumentEventHolder:  # noqa: E501
         ...
 
     @overload
-    def query_instrument_events(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfInstrumentEventHolder:  # noqa: E501
+    def query_instrument_events(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfInstrumentEventHolder:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_instrument_events(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfInstrumentEventHolder, Awaitable[ResourceListOfInstrumentEventHolder]]:  # noqa: E501
+    def query_instrument_events(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfInstrumentEventHolder, Awaitable[ResourceListOfInstrumentEventHolder]]:  # noqa: E501
         """QueryInstrumentEvents: Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
@@ -602,9 +602,9 @@ class InstrumentEventsApi:
         >>> thread = api.query_instrument_events(limit, page, query_instrument_events_request, async_req=True)
         >>> result = thread.get()
 
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.
         :type page: str
         :param query_instrument_events_request: The filter parameters used to retrieve instrument events.
         :type query_instrument_events_request: QueryInstrumentEventsRequest
@@ -627,7 +627,7 @@ class InstrumentEventsApi:
         return self.query_instrument_events_with_http_info(limit, page, query_instrument_events_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def query_instrument_events_with_http_info(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def query_instrument_events_with_http_info(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_instrument_events_request : Annotated[Optional[QueryInstrumentEventsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """QueryInstrumentEvents: Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
@@ -637,9 +637,9 @@ class InstrumentEventsApi:
         >>> thread = api.query_instrument_events_with_http_info(limit, page, query_instrument_events_request, async_req=True)
         >>> result = thread.get()
 
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.
         :type page: str
         :param query_instrument_events_request: The filter parameters used to retrieve instrument events.
         :type query_instrument_events_request: QueryInstrumentEventsRequest
@@ -759,27 +759,27 @@ class InstrumentEventsApi:
 
 
     @overload
-    async def query_trade_tickets(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ResourceListOfPortfolioTradeTicket:  # noqa: E501
+    async def query_trade_tickets(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ResourceListOfPortfolioTradeTicket:  # noqa: E501
         ...
 
     @overload
-    def query_trade_tickets(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfPortfolioTradeTicket:  # noqa: E501
+    def query_trade_tickets(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfPortfolioTradeTicket:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_trade_tickets(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPortfolioTradeTicket, Awaitable[ResourceListOfPortfolioTradeTicket]]:  # noqa: E501
+    def query_trade_tickets(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPortfolioTradeTicket, Awaitable[ResourceListOfPortfolioTradeTicket]]:  # noqa: E501
         """QueryTradeTickets: Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
-        Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.    These trade tickets are derived from events that involve transition of instrument states, such as transitions  on exercise or default of an instrument. The trade tickets are to allow the new position to be created given the  existing portfolio configuration.  # noqa: E501
+        Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.  These trade tickets are derived from events that involve transition of instrument states, such as transitions on exercise or default of an instrument. The trade tickets are to allow the new position to be created given the existing portfolio configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.query_trade_tickets(limit, page, query_trade_tickets_request, async_req=True)
         >>> result = thread.get()
 
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.
         :type page: str
         :param query_trade_tickets_request: The filter parameters used to retrieve instrument events.
         :type query_trade_tickets_request: QueryTradeTicketsRequest
@@ -802,19 +802,19 @@ class InstrumentEventsApi:
         return self.query_trade_tickets_with_http_info(limit, page, query_trade_tickets_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def query_trade_tickets_with_http_info(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def query_trade_tickets_with_http_info(self, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.")] = None, query_trade_tickets_request : Annotated[Optional[QueryTradeTicketsRequest], Field(description="The filter parameters used to retrieve instrument events.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """QueryTradeTickets: Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
-        Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.    These trade tickets are derived from events that involve transition of instrument states, such as transitions  on exercise or default of an instrument. The trade tickets are to allow the new position to be created given the  existing portfolio configuration.  # noqa: E501
+        Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.  These trade tickets are derived from events that involve transition of instrument states, such as transitions on exercise or default of an instrument. The trade tickets are to allow the new position to be created given the existing portfolio configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.query_trade_tickets_with_http_info(limit, page, query_trade_tickets_request, async_req=True)
         >>> result = thread.get()
 
-        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.
+        :param limit: Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used.
         :type limit: int
-        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified.
+        :param page: Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified.
         :type page: str
         :param query_trade_tickets_request: The filter parameters used to retrieve instrument events.
         :type query_trade_tickets_request: QueryTradeTicketsRequest

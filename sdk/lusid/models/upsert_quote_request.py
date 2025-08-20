@@ -25,7 +25,7 @@ from lusid.models.quote_id import QuoteId
 
 class UpsertQuoteRequest(BaseModel):
     """
-    The details of the quote including its unique identifier, value and lineage.  Please note the Unit field on MetricValue is nullable on the upsert but there  is validation within the quote store to make sure this field is populated.  In the absence of a real unit then we recommend putting something in line with  the data in QuoteId.QuoteSeriesId.quoteType e.g. InterestRate.  # noqa: E501
+    The details of the quote including its unique identifier, value and lineage. Please note the Unit field on MetricValue is nullable on the upsert but there is validation within the quote store to make sure this field is populated. In the absence of a real unit then we recommend putting something in line with the data in QuoteId.QuoteSeriesId.quoteType e.g. InterestRate.  # noqa: E501
     """
     quote_id: QuoteId = Field(..., alias="quoteId")
     metric_value: Optional[MetricValue] = Field(None, alias="metricValue")

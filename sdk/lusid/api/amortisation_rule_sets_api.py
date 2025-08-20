@@ -71,7 +71,7 @@ class AmortisationRuleSetsApi:
     def create_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rule set.")], create_amortisation_rule_set_request : Annotated[CreateAmortisationRuleSetRequest, Field(..., description="The contents of the rule set.")], async_req: Optional[bool]=None, **kwargs) -> Union[AmortisationRuleSet, Awaitable[AmortisationRuleSet]]:  # noqa: E501
         """[EXPERIMENTAL] CreateAmortisationRuleSet: Create an amortisation rule set.  # noqa: E501
 
-        Creates an amortisation rule set definition at the given effective time.  The user must be entitled to read any properties specified in each rule.  # noqa: E501
+        Creates an amortisation rule set definition at the given effective time. The user must be entitled to read any properties specified in each rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -104,7 +104,7 @@ class AmortisationRuleSetsApi:
     def create_amortisation_rule_set_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rule set.")], create_amortisation_rule_set_request : Annotated[CreateAmortisationRuleSetRequest, Field(..., description="The contents of the rule set.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateAmortisationRuleSet: Create an amortisation rule set.  # noqa: E501
 
-        Creates an amortisation rule set definition at the given effective time.  The user must be entitled to read any properties specified in each rule.  # noqa: E501
+        Creates an amortisation rule set definition at the given effective time. The user must be entitled to read any properties specified in each rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -238,7 +238,7 @@ class AmortisationRuleSetsApi:
     def delete_amortisation_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.  # noqa: E501
 
-        Deletes the rule set perpetually, including its rules.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.  # noqa: E501
+        Deletes the rule set perpetually, including its rules.  The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.  This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -271,7 +271,7 @@ class AmortisationRuleSetsApi:
     def delete_amortisation_ruleset_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.  # noqa: E501
 
-        Deletes the rule set perpetually, including its rules.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.  # noqa: E501
+        Deletes the rule set perpetually, including its rules.  The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.  This cannot be undone.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -387,15 +387,15 @@ class AmortisationRuleSetsApi:
 
 
     @overload
-    async def get_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified.")] = None, **kwargs) -> AmortisationRuleSet:  # noqa: E501
+    async def get_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> AmortisationRuleSet:  # noqa: E501
         ...
 
     @overload
-    def get_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AmortisationRuleSet:  # noqa: E501
+    def get_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AmortisationRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AmortisationRuleSet, Awaitable[AmortisationRuleSet]]:  # noqa: E501
+    def get_amortisation_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AmortisationRuleSet, Awaitable[AmortisationRuleSet]]:  # noqa: E501
         """[EXPERIMENTAL] GetAmortisationRuleSet: Retrieve the definition of a single amortisation rule set  # noqa: E501
 
         Retrieves the amortisation rule set definition at the given effective and as at times.  # noqa: E501
@@ -409,9 +409,9 @@ class AmortisationRuleSetsApi:
         :type scope: str
         :param code: The rule set code. (required)
         :type code: str
-        :param effective_at: The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified.
+        :param as_at: The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -432,7 +432,7 @@ class AmortisationRuleSetsApi:
         return self.get_amortisation_rule_set_with_http_info(scope, code, effective_at, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_amortisation_rule_set_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_amortisation_rule_set_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetAmortisationRuleSet: Retrieve the definition of a single amortisation rule set  # noqa: E501
 
         Retrieves the amortisation rule set definition at the given effective and as at times.  # noqa: E501
@@ -446,9 +446,9 @@ class AmortisationRuleSetsApi:
         :type scope: str
         :param code: The rule set code. (required)
         :type code: str
-        :param effective_at: The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified.
+        :param as_at: The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -566,15 +566,15 @@ class AmortisationRuleSetsApi:
 
 
     @overload
-    async def list_amortisation_rule_sets(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfAmortisationRuleSet:  # noqa: E501
+    async def list_amortisation_rule_sets(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfAmortisationRuleSet:  # noqa: E501
         ...
 
     @overload
-    def list_amortisation_rule_sets(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfAmortisationRuleSet:  # noqa: E501
+    def list_amortisation_rule_sets(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfAmortisationRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_amortisation_rule_sets(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAmortisationRuleSet, Awaitable[PagedResourceListOfAmortisationRuleSet]]:  # noqa: E501
+    def list_amortisation_rule_sets(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAmortisationRuleSet, Awaitable[PagedResourceListOfAmortisationRuleSet]]:  # noqa: E501
         """[EXPERIMENTAL] ListAmortisationRuleSets: List amortisation rule sets.  # noqa: E501
 
         Retrieves all amortisation rule sets at the given effective and as at times  # noqa: E501
@@ -584,15 +584,15 @@ class AmortisationRuleSetsApi:
         >>> thread = api.list_amortisation_rule_sets(effective_at, as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.
+        :param as_at: The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :param filter: Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.
         :type filter: str
         :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -615,7 +615,7 @@ class AmortisationRuleSetsApi:
         return self.list_amortisation_rule_sets_with_http_info(effective_at, as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_amortisation_rule_sets_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_amortisation_rule_sets_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListAmortisationRuleSets: List amortisation rule sets.  # noqa: E501
 
         Retrieves all amortisation rule sets at the given effective and as at times  # noqa: E501
@@ -625,15 +625,15 @@ class AmortisationRuleSetsApi:
         >>> thread = api.list_amortisation_rule_sets_with_http_info(effective_at, as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.
+        :param as_at: The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing AmortisationRuleSets; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing AmortisationRuleSets; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Expression to filter the results.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :param filter: Expression to filter the results.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.
         :type filter: str
         :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]

@@ -218,15 +218,15 @@ class RelationshipDefinitionsApi:
 
 
     @overload
-    async def delete_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteRelationshipDefinition: Delete Relationship Definition  # noqa: E501
 
         Delete the definition of the specified relationship.  # noqa: E501
@@ -238,7 +238,7 @@ class RelationshipDefinitionsApi:
 
         :param scope: The scope of the relationship definition to be deleted. (required)
         :type scope: str
-        :param code: The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship. (required)
+        :param code: The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship. (required)
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -259,7 +259,7 @@ class RelationshipDefinitionsApi:
         return self.delete_relationship_definition_with_http_info(scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_relationship_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_relationship_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteRelationshipDefinition: Delete Relationship Definition  # noqa: E501
 
         Delete the definition of the specified relationship.  # noqa: E501
@@ -271,7 +271,7 @@ class RelationshipDefinitionsApi:
 
         :param scope: The scope of the relationship definition to be deleted. (required)
         :type scope: str
-        :param code: The code of the relationship definition to be deleted. Together with the domain and scope this uniquely              identifies the relationship. (required)
+        :param code: The code of the relationship definition to be deleted. Together with the domain and scope this uniquely             identifies the relationship. (required)
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -378,15 +378,15 @@ class RelationshipDefinitionsApi:
 
 
     @overload
-    async def get_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> RelationshipDefinition:  # noqa: E501
+    async def get_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified.")] = None, **kwargs) -> RelationshipDefinition:  # noqa: E501
         ...
 
     @overload
-    def get_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> RelationshipDefinition:  # noqa: E501
+    def get_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> RelationshipDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationshipDefinition, Awaitable[RelationshipDefinition]]:  # noqa: E501
+    def get_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationshipDefinition, Awaitable[RelationshipDefinition]]:  # noqa: E501
         """[EARLY ACCESS] GetRelationshipDefinition: Get relationship definition  # noqa: E501
 
         Retrieve the specified relationship definition  # noqa: E501
@@ -398,9 +398,9 @@ class RelationshipDefinitionsApi:
 
         :param scope: The scope of the specified relationship definition. (required)
         :type scope: str
-        :param code: The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition. (required)
+        :param code: The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -421,7 +421,7 @@ class RelationshipDefinitionsApi:
         return self.get_relationship_definition_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_relationship_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_relationship_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relationship definition.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetRelationshipDefinition: Get relationship definition  # noqa: E501
 
         Retrieve the specified relationship definition  # noqa: E501
@@ -433,9 +433,9 @@ class RelationshipDefinitionsApi:
 
         :param scope: The scope of the specified relationship definition. (required)
         :type scope: str
-        :param code: The code of the specified relationship definition. Together with the domain and scope this uniquely              identifies the relationship definition. (required)
+        :param code: The code of the specified relationship definition. Together with the domain and scope this uniquely             identifies the relationship definition. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the relationship definition. Defaults to return              the latest version of the definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relationship definition. Defaults to return             the latest version of the definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -549,15 +549,15 @@ class RelationshipDefinitionsApi:
 
 
     @overload
-    async def list_relationship_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfRelationshipDefinition:  # noqa: E501
+    async def list_relationship_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfRelationshipDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_relationship_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRelationshipDefinition:  # noqa: E501
+    def list_relationship_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRelationshipDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_relationship_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationshipDefinition, Awaitable[PagedResourceListOfRelationshipDefinition]]:  # noqa: E501
+    def list_relationship_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationshipDefinition, Awaitable[PagedResourceListOfRelationshipDefinition]]:  # noqa: E501
         """[EARLY ACCESS] ListRelationshipDefinitions: List relationship definitions  # noqa: E501
 
         Retrieve one or more specified relationship definitions.  # noqa: E501
@@ -567,13 +567,13 @@ class RelationshipDefinitionsApi:
         >>> thread = api.list_relationship_definitions(as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request.
+        :param page: The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -596,7 +596,7 @@ class RelationshipDefinitionsApi:
         return self.list_relationship_definitions_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_relationship_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_relationship_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListRelationshipDefinitions: List relationship definitions  # noqa: E501
 
         Retrieve one or more specified relationship definitions.  # noqa: E501
@@ -606,13 +606,13 @@ class RelationshipDefinitionsApi:
         >>> thread = api.list_relationship_definitions_with_http_info(as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the relationship definitions. Defaults to return              the latest version of each definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relationship definitions. Defaults to return             the latest version of each definition if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This  value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field  must not have changed since the original request.
+        :param page: The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This value is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -737,18 +737,18 @@ class RelationshipDefinitionsApi:
 
 
     @overload
-    async def update_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], **kwargs) -> RelationshipDefinition:  # noqa: E501
+    async def update_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], **kwargs) -> RelationshipDefinition:  # noqa: E501
         ...
 
     @overload
-    def update_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], async_req: Optional[bool]=True, **kwargs) -> RelationshipDefinition:  # noqa: E501
+    def update_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], async_req: Optional[bool]=True, **kwargs) -> RelationshipDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationshipDefinition, Awaitable[RelationshipDefinition]]:  # noqa: E501
+    def update_relationship_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationshipDefinition, Awaitable[RelationshipDefinition]]:  # noqa: E501
         """[EARLY ACCESS] UpdateRelationshipDefinition: Update Relationship Definition  # noqa: E501
 
-        Update the definition of a specified existing relationship. Not all elements within a relationship definition  are modifiable due to the potential implications for values already stored against the relationship.  # noqa: E501
+        Update the definition of a specified existing relationship. Not all elements within a relationship definition are modifiable due to the potential implications for values already stored against the relationship.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -757,7 +757,7 @@ class RelationshipDefinitionsApi:
 
         :param scope: The scope of the relationship definition being updated. (required)
         :type scope: str
-        :param code: The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition. (required)
+        :param code: The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition. (required)
         :type code: str
         :param update_relationship_definition_request: The details of relationship definition to update. (required)
         :type update_relationship_definition_request: UpdateRelationshipDefinitionRequest
@@ -780,10 +780,10 @@ class RelationshipDefinitionsApi:
         return self.update_relationship_definition_with_http_info(scope, code, update_relationship_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_relationship_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_relationship_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship definition being updated.")], code : Annotated[StrictStr, Field(..., description="The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition.")], update_relationship_definition_request : Annotated[UpdateRelationshipDefinitionRequest, Field(..., description="The details of relationship definition to update.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateRelationshipDefinition: Update Relationship Definition  # noqa: E501
 
-        Update the definition of a specified existing relationship. Not all elements within a relationship definition  are modifiable due to the potential implications for values already stored against the relationship.  # noqa: E501
+        Update the definition of a specified existing relationship. Not all elements within a relationship definition are modifiable due to the potential implications for values already stored against the relationship.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -792,7 +792,7 @@ class RelationshipDefinitionsApi:
 
         :param scope: The scope of the relationship definition being updated. (required)
         :type scope: str
-        :param code: The code of the relationship definition being updated. Together with the scope this uniquely              identifies the relationship definition. (required)
+        :param code: The code of the relationship definition being updated. Together with the scope this uniquely             identifies the relationship definition. (required)
         :type code: str
         :param update_relationship_definition_request: The details of relationship definition to update. (required)
         :type update_relationship_definition_request: UpdateRelationshipDefinitionRequest

@@ -216,15 +216,15 @@ class RelationDefinitionsApi:
 
 
     @overload
-    async def delete_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteRelationDefinition: Delete relation definition  # noqa: E501
 
         Delete the definition of the specified relation.  # noqa: E501
@@ -236,7 +236,7 @@ class RelationDefinitionsApi:
 
         :param scope: The scope of the relation to be deleted. (required)
         :type scope: str
-        :param code: The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation. (required)
+        :param code: The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation. (required)
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -257,7 +257,7 @@ class RelationDefinitionsApi:
         return self.delete_relation_definition_with_http_info(scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_relation_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_relation_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteRelationDefinition: Delete relation definition  # noqa: E501
 
         Delete the definition of the specified relation.  # noqa: E501
@@ -269,7 +269,7 @@ class RelationDefinitionsApi:
 
         :param scope: The scope of the relation to be deleted. (required)
         :type scope: str
-        :param code: The code of the relation to be deleted. Together with the domain and scope this uniquely              identifies the relation. (required)
+        :param code: The code of the relation to be deleted. Together with the domain and scope this uniquely             identifies the relation. (required)
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -376,15 +376,15 @@ class RelationDefinitionsApi:
 
 
     @overload
-    async def get_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> RelationDefinition:  # noqa: E501
+    async def get_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified.")] = None, **kwargs) -> RelationDefinition:  # noqa: E501
         ...
 
     @overload
-    def get_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> RelationDefinition:  # noqa: E501
+    def get_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> RelationDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationDefinition, Awaitable[RelationDefinition]]:  # noqa: E501
+    def get_relation_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationDefinition, Awaitable[RelationDefinition]]:  # noqa: E501
         """[EXPERIMENTAL] GetRelationDefinition: Get relation definition  # noqa: E501
 
         Retrieve the definition of a specified relation.  # noqa: E501
@@ -396,9 +396,9 @@ class RelationDefinitionsApi:
 
         :param scope: The scope of the specified relation. (required)
         :type scope: str
-        :param code: The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation. (required)
+        :param code: The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -419,7 +419,7 @@ class RelationDefinitionsApi:
         return self.get_relation_definition_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_relation_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_relation_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified relation.")], code : Annotated[StrictStr, Field(..., description="The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetRelationDefinition: Get relation definition  # noqa: E501
 
         Retrieve the definition of a specified relation.  # noqa: E501
@@ -431,9 +431,9 @@ class RelationDefinitionsApi:
 
         :param scope: The scope of the specified relation. (required)
         :type scope: str
-        :param code: The code of the specified relation. Together with the domain and scope this uniquely              identifies the relation. (required)
+        :param code: The code of the specified relation. Together with the domain and scope this uniquely             identifies the relation. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the relation definition. Defaults to return              the latest version of the definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the relation definition. Defaults to return             the latest version of the definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

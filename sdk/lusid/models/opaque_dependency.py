@@ -24,7 +24,7 @@ from lusid.models.economic_dependency import EconomicDependency
 
 class OpaqueDependency(EconomicDependency):
     """
-    Represents a dependency that could not be understood as an externally exposed dependency.  If this is an unexpected dependency, then please contact support.  # noqa: E501
+    Represents a dependency that could not be understood as an externally exposed dependency. If this is an unexpected dependency, then please contact support.  # noqa: E501
     """
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}

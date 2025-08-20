@@ -28,7 +28,7 @@ class ResultValue0D(ResultValue):
     """
     units:  Optional[StrictStr] = Field(None,alias="units", description="Unit of the result") 
     value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The value of the result")
-    dimension: Optional[StrictInt] = Field(None, description="The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be  populate by the user on upsertion.")
+    dimension: Optional[StrictInt] = Field(None, description="The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be populate by the user on upsertion.")
     result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "units", "value", "dimension"]

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 
-Retrieve a particular Custom Entity instance.  If the Custom Entity is deleted, this will return the state of the Custom Entity immediately prior to deletion.
+Retrieve a particular Custom Entity instance. If the Custom Entity is deleted, this will return the state of the Custom Entity immediately prior to deletion.
 
 ### Example
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 
-Retrieve the definition of a particular DataType.  If the DataType is deleted, this will return the state of the DataType immediately prior to deletion.
+Retrieve the definition of a particular DataType. If the DataType is deleted, this will return the state of the DataType immediately prior to deletion.
 
 ### Example
 
@@ -262,9 +262,9 @@ def main():
     entity_type = 'entity_type_example' # str | The type of the entity to list the change history for.
     entity_unique_id = 'entity_unique_id_example' # str | The universally unique identifier of the entity.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list change history information. Defaults to return the change history at the latest datetime if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing change history information from a previous call to list change              history information. This value is returned from the previous call. If a pagination token is provided the filter, sortBy              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing change history information from a previous call to list change             history information. This value is returned from the previous call. If a pagination token is provided the filter, sortBy             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -288,9 +288,9 @@ Name | Type | Description  | Notes
  **entity_type** | **str**| The type of the entity to list the change history for. | 
  **entity_unique_id** | **str**| The universally unique identifier of the entity. | 
  **as_at** | **datetime**| The asAt datetime at which to list change history information. Defaults to return the change history at the latest datetime if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing change history information from a previous call to list change              history information. This value is returned from the previous call. If a pagination token is provided the filter, sortBy              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing change history information from a previous call to list change             history information. This value is returned from the previous call. If a pagination token is provided the filter, sortBy             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 
-Retrieve the definition of a particular instrument.  If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.
+Retrieve the definition of a particular instrument. If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.
 
 ### Example
 
@@ -414,7 +414,7 @@ Name | Type | Description  | Notes
 
 GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 
-Retrieve the definition of a particular portfolio.  If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.
+Retrieve the definition of a particular portfolio. If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.
 
 ### Example
 
@@ -512,7 +512,7 @@ Name | Type | Description  | Notes
 
 GetPortfolioChanges: Get the next change to each portfolio in a scope.
 
-Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subscriptions (e.g corporate actions).
+Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time. Includes changes from parent portfolios in different scopes. Excludes changes from subscriptions (e.g corporate actions).
 
 ### Example
 
@@ -608,7 +608,7 @@ Name | Type | Description  | Notes
 
 GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
 
-Retrieve a particular property definition.  If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.
+Retrieve a particular property definition. If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.
 
 ### Example
 

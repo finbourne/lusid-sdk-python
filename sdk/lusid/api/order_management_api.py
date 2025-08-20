@@ -261,7 +261,7 @@ class OrderManagementApi:
     def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the orders to be cancelled.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelOrdersResponse, Awaitable[CancelOrdersResponse]]:  # noqa: E501
         """[EARLY ACCESS] CancelOrders: Cancel existing orders  # noqa: E501
 
-        The response returns both the collection of successfully canceled orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully canceled orders, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -292,7 +292,7 @@ class OrderManagementApi:
     def cancel_orders_with_http_info(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the orders to be cancelled.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CancelOrders: Cancel existing orders  # noqa: E501
 
-        The response returns both the collection of successfully canceled orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully canceled orders, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -420,7 +420,7 @@ class OrderManagementApi:
     def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(..., description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelOrdersAndMoveRemainingResponse, Awaitable[CancelOrdersAndMoveRemainingResponse]]:  # noqa: E501
         """[EARLY ACCESS] CancelOrdersAndMoveRemaining: Cancel existing orders and move any unplaced quantities to new orders in new blocks  # noqa: E501
 
-        Cancels existing orders, reducing their quantities to those aleady placed. Any remaining quantities are moved  to new orders in new blocks. The placed quantities are distributed to the cancelled orders on a pro-rata basis.  # noqa: E501
+        Cancels existing orders, reducing their quantities to those aleady placed. Any remaining quantities are moved to new orders in new blocks. The placed quantities are distributed to the cancelled orders on a pro-rata basis.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -451,7 +451,7 @@ class OrderManagementApi:
     def cancel_orders_and_move_remaining_with_http_info(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(..., description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CancelOrdersAndMoveRemaining: Cancel existing orders and move any unplaced quantities to new orders in new blocks  # noqa: E501
 
-        Cancels existing orders, reducing their quantities to those aleady placed. Any remaining quantities are moved  to new orders in new blocks. The placed quantities are distributed to the cancelled orders on a pro-rata basis.  # noqa: E501
+        Cancels existing orders, reducing their quantities to those aleady placed. Any remaining quantities are moved to new orders in new blocks. The placed quantities are distributed to the cancelled orders on a pro-rata basis.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -579,7 +579,7 @@ class OrderManagementApi:
     def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the placements to be cancelled.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelPlacementsResponse, Awaitable[CancelPlacementsResponse]]:  # noqa: E501
         """[EARLY ACCESS] CancelPlacements: Cancel existing placements  # noqa: E501
 
-        The response returns both the collection of successfully canceled placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully canceled placements, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -610,7 +610,7 @@ class OrderManagementApi:
     def cancel_placements_with_http_info(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the placements to be cancelled.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CancelPlacements: Cancel existing placements  # noqa: E501
 
-        The response returns both the collection of successfully canceled placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully canceled placements, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -738,7 +738,7 @@ class OrderManagementApi:
     def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfBlockAndOrders, Awaitable[ResourceListOfBlockAndOrders]]:  # noqa: E501
         """CreateOrders: Upsert a Block and associated orders  # noqa: E501
 
-        Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
+        Create orders, and blocks if they don't already exist. This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -769,7 +769,7 @@ class OrderManagementApi:
     def create_orders_with_http_info(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateOrders: Upsert a Block and associated orders  # noqa: E501
 
-        Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
+        Create orders, and blocks if they don't already exist. This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -886,15 +886,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, **kwargs) -> ResourceListOfChangeIntervalWithOrderManagementDetail:  # noqa: E501
+    async def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults             to return the latest version if not specified.")] = None, **kwargs) -> ResourceListOfChangeIntervalWithOrderManagementDetail:  # noqa: E501
         ...
 
     @overload
-    def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfChangeIntervalWithOrderManagementDetail:  # noqa: E501
+    def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults             to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfChangeIntervalWithOrderManagementDetail:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeIntervalWithOrderManagementDetail, Awaitable[ResourceListOfChangeIntervalWithOrderManagementDetail]]:  # noqa: E501
+    def get_order_history(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults             to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeIntervalWithOrderManagementDetail, Awaitable[ResourceListOfChangeIntervalWithOrderManagementDetail]]:  # noqa: E501
         """GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
 
         Get the changes that have happened to an order and related entities.  # noqa: E501
@@ -908,7 +908,7 @@ class OrderManagementApi:
         :type scope: str
         :param code: The code of the order. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.
+        :param as_at: The asAt datetime at which to retrieve the history of the order and related entities. Defaults             to return the latest version if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -929,7 +929,7 @@ class OrderManagementApi:
         return self.get_order_history_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_order_history_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_order_history_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the order.")], code : Annotated[StrictStr, Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults             to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
 
         Get the changes that have happened to an order and related entities.  # noqa: E501
@@ -943,7 +943,7 @@ class OrderManagementApi:
         :type scope: str
         :param code: The code of the order. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.
+        :param as_at: The asAt datetime at which to retrieve the history of the order and related entities. Defaults             to return the latest version if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1069,7 +1069,7 @@ class OrderManagementApi:
     def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMovedOrderToDifferentBlockResponse, Awaitable[ResourceListOfMovedOrderToDifferentBlockResponse]]:  # noqa: E501
         """[EARLY ACCESS] MoveOrders: Move orders to new or existing block  # noqa: E501
 
-        Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
+        Move an order to a block, creating the block if it does not already exist.  This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1100,7 +1100,7 @@ class OrderManagementApi:
     def move_orders_with_http_info(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] MoveOrders: Move orders to new or existing block  # noqa: E501
 
-        Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
+        Move an order to a block, creating the block if it does not already exist.  This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1376,15 +1376,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\". This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\". This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\". This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
         """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
@@ -1396,7 +1396,7 @@ class OrderManagementApi:
 
         :param resource_id: The List of Placement IDs for which you wish to allocate Executions. (required)
         :type resource_id: List[ResourceId]
-        :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
+        :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\". This defaults to \"PR-FIFO\".
         :type allocation_algorithm: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1417,7 +1417,7 @@ class OrderManagementApi:
         return self.run_allocation_service_with_http_info(resource_id, allocation_algorithm, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\". This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
@@ -1429,7 +1429,7 @@ class OrderManagementApi:
 
         :param resource_id: The List of Placement IDs for which you wish to allocate Executions. (required)
         :type resource_id: List[ResourceId]
-        :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
+        :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\". This defaults to \"PR-FIFO\".
         :type allocation_algorithm: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1554,7 +1554,7 @@ class OrderManagementApi:
     def sweep_blocks(self, sweep_blocks_request : SweepBlocksRequest, async_req: Optional[bool]=None, **kwargs) -> Union[SweepBlocksResponse, Awaitable[SweepBlocksResponse]]:  # noqa: E501
         """[EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.  # noqa: E501
 
-        The requirements are:  <list type=\"bullet\"><term>The block exists.</term><term>All orders have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>All placements have state \"Allocated\" or \"Over-allocated\".</term><term>All allocations have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>No execution or allocation has been modified since the passed LatestAllowableModificationTime.</term></list>  # noqa: E501
+        The requirements are: <list type=\"bullet\"><term>The block exists.</term><term>All orders have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>All placements have state \"Allocated\" or \"Over-allocated\".</term><term>All allocations have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>No execution or allocation has been modified since the passed LatestAllowableModificationTime.</term></list>  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1585,7 +1585,7 @@ class OrderManagementApi:
     def sweep_blocks_with_http_info(self, sweep_blocks_request : SweepBlocksRequest, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.  # noqa: E501
 
-        The requirements are:  <list type=\"bullet\"><term>The block exists.</term><term>All orders have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>All placements have state \"Allocated\" or \"Over-allocated\".</term><term>All allocations have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>No execution or allocation has been modified since the passed LatestAllowableModificationTime.</term></list>  # noqa: E501
+        The requirements are: <list type=\"bullet\"><term>The block exists.</term><term>All orders have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>All placements have state \"Allocated\" or \"Over-allocated\".</term><term>All allocations have state \"Closed\", \"Cancelled\", \"Canceled\" or \"Booked\".</term><term>No execution or allocation has been modified since the passed LatestAllowableModificationTime.</term></list>  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1713,7 +1713,7 @@ class OrderManagementApi:
     def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(..., description="The request containing the orders to be updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdateOrdersResponse, Awaitable[UpdateOrdersResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpdateOrders: Update existing orders  # noqa: E501
 
-        The response returns both the collection of successfully updated orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully updated orders, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1744,7 +1744,7 @@ class OrderManagementApi:
     def update_orders_with_http_info(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(..., description="The request containing the orders to be updated.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateOrders: Update existing orders  # noqa: E501
 
-        The response returns both the collection of successfully updated orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully updated orders, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1872,7 +1872,7 @@ class OrderManagementApi:
     def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(..., description="The request containing the placements to be updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdatePlacementsResponse, Awaitable[UpdatePlacementsResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpdatePlacements: Update existing placements  # noqa: E501
 
-        The response returns both the collection of successfully updated placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully updated placements, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1903,7 +1903,7 @@ class OrderManagementApi:
     def update_placements_with_http_info(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(..., description="The request containing the placements to be updated.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdatePlacements: Update existing placements  # noqa: E501
 
-        The response returns both the collection of successfully updated placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
+        The response returns both the collection of successfully updated placements, as well as those that failed. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

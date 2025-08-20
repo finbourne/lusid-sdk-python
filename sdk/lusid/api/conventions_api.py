@@ -76,7 +76,7 @@ class ConventionsApi:
     def delete_cds_flow_conventions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the CDS Flow Conventions to delete.")], code : Annotated[StrictStr, Field(..., description="The CDS Flow Conventions to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] DeleteCdsFlowConventions: Delete the CDS Flow Conventions of given scope and code, assuming that it is present.  # noqa: E501
 
-        Delete the specified CDS Flow Conventions from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.  It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified CDS Flow Conventions from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed. It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -109,7 +109,7 @@ class ConventionsApi:
     def delete_cds_flow_conventions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the CDS Flow Conventions to delete.")], code : Annotated[StrictStr, Field(..., description="The CDS Flow Conventions to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] DeleteCdsFlowConventions: Delete the CDS Flow Conventions of given scope and code, assuming that it is present.  # noqa: E501
 
-        Delete the specified CDS Flow Conventions from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.  It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified CDS Flow Conventions from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed. It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -236,7 +236,7 @@ class ConventionsApi:
     def delete_flow_conventions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Flow Conventions to delete.")], code : Annotated[StrictStr, Field(..., description="The Flow Conventions to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] DeleteFlowConventions: Delete the Flow Conventions of given scope and code, assuming that it is present.  # noqa: E501
 
-        Delete the specified conventions from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.  It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified conventions from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed. It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -269,7 +269,7 @@ class ConventionsApi:
     def delete_flow_conventions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Flow Conventions to delete.")], code : Annotated[StrictStr, Field(..., description="The Flow Conventions to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] DeleteFlowConventions: Delete the Flow Conventions of given scope and code, assuming that it is present.  # noqa: E501
 
-        Delete the specified conventions from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.  It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified conventions from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed. It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -396,7 +396,7 @@ class ConventionsApi:
     def delete_index_convention(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Index Convention to delete.")], code : Annotated[StrictStr, Field(..., description="The Index Convention to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] DeleteIndexConvention: Delete the Index Convention of given scope and code, assuming that it is present.  # noqa: E501
 
-        Delete the specified Index Convention from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.  It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Index Convention from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed. It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -429,7 +429,7 @@ class ConventionsApi:
     def delete_index_convention_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Index Convention to delete.")], code : Annotated[StrictStr, Field(..., description="The Index Convention to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] DeleteIndexConvention: Delete the Index Convention of given scope and code, assuming that it is present.  # noqa: E501
 
-        Delete the specified Index Convention from a single scope.  The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.  It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Index Convention from a single scope. The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed. It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -556,7 +556,7 @@ class ConventionsApi:
     def get_cds_flow_conventions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the CDS Flow Conventions to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the CDS Flow Conventions to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the CDS Flow Conventions. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetCdsFlowConventionsResponse, Awaitable[GetCdsFlowConventionsResponse]]:  # noqa: E501
         """[BETA] GetCdsFlowConventions: Get CDS Flow Conventions  # noqa: E501
 
-        Get a CDS Flow Conventions from a single scope.  The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a CDS Flow Conventions from a single scope. The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -591,7 +591,7 @@ class ConventionsApi:
     def get_cds_flow_conventions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the CDS Flow Conventions to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the CDS Flow Conventions to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the CDS Flow Conventions. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] GetCdsFlowConventions: Get CDS Flow Conventions  # noqa: E501
 
-        Get a CDS Flow Conventions from a single scope.  The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a CDS Flow Conventions from a single scope. The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -727,7 +727,7 @@ class ConventionsApi:
     def get_flow_conventions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Flow Conventions to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Flow Conventions to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Flow Conventions. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetFlowConventionsResponse, Awaitable[GetFlowConventionsResponse]]:  # noqa: E501
         """[BETA] GetFlowConventions: Get Flow Conventions  # noqa: E501
 
-        Get a Flow Conventions from a single scope.  The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Flow Conventions from a single scope. The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -762,7 +762,7 @@ class ConventionsApi:
     def get_flow_conventions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Flow Conventions to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Flow Conventions to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Flow Conventions. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] GetFlowConventions: Get Flow Conventions  # noqa: E501
 
-        Get a Flow Conventions from a single scope.  The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Flow Conventions from a single scope. The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -898,7 +898,7 @@ class ConventionsApi:
     def get_index_convention(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Index Convention to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Index Convention to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Index Convention. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetIndexConventionResponse, Awaitable[GetIndexConventionResponse]]:  # noqa: E501
         """[BETA] GetIndexConvention: Get Index Convention  # noqa: E501
 
-        Get a Index Convention from a single scope.  The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Index Convention from a single scope. The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -933,7 +933,7 @@ class ConventionsApi:
     def get_index_convention_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Index Convention to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Index Convention to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Index Convention. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] GetIndexConvention: Get Index Convention  # noqa: E501
 
-        Get a Index Convention from a single scope.  The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful.  It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Index Convention from a single scope. The response will return either the conventions that has been stored, or a failure explaining why the request was unsuccessful. It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1534,7 +1534,7 @@ class ConventionsApi:
     def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(..., description="The CDS Flow Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] UpsertCdsFlowConventions: Upsert a set of CDS Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert CDS Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted CDS Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert CDS Flow Conventions in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted CDS Flow Conventions or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1565,7 +1565,7 @@ class ConventionsApi:
     def upsert_cds_flow_conventions_with_http_info(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(..., description="The CDS Flow Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] UpsertCdsFlowConventions: Upsert a set of CDS Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert CDS Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted CDS Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert CDS Flow Conventions in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted CDS Flow Conventions or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1693,7 +1693,7 @@ class ConventionsApi:
     def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(..., description="The Flow Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] UpsertFlowConventions: Upsert Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Flow Conventions in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Flow Conventions or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1724,7 +1724,7 @@ class ConventionsApi:
     def upsert_flow_conventions_with_http_info(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(..., description="The Flow Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] UpsertFlowConventions: Upsert Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Flow Conventions in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Flow Conventions or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1852,7 +1852,7 @@ class ConventionsApi:
     def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(..., description="The Index Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] UpsertIndexConvention: Upsert a set of Index Convention. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert Index Convention in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Index Convention or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Index Convention in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Index Convention or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1883,7 +1883,7 @@ class ConventionsApi:
     def upsert_index_convention_with_http_info(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(..., description="The Index Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] UpsertIndexConvention: Upsert a set of Index Convention. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert Index Convention in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Index Convention or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert Index Convention in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Index Convention or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

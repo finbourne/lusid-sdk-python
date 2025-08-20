@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **exercise_date** | **datetime** | The exercise date of the option. | [optional] 
 **delivery_date** | **datetime** | The delivery date of the option. | [optional] 
-**exercise_type** | **str** | The optionality type of the underlying option e.g. American, European.    Supported string (enumeration) values are: [European, Bermudan, American]. | 
+**exercise_type** | **str** | The optionality type of the underlying option e.g. American, European.  Supported string (enumeration) values are: [European, Bermudan, American]. | 
 **maturity_date** | **datetime** | The maturity date of the option. | [optional] 
-**moneyness** | **str** | The moneyness of the option e.g. InTheMoney, OutOfTheMoney.    Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney]. | [optional] 
+**moneyness** | **str** | The moneyness of the option e.g. InTheMoney, OutOfTheMoney.  Supported string (enumeration) values are: [InTheMoney, OutOfTheMoney, AtTheMoney]. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | 
 **option_exercise_elections** | [**List[OptionExerciseElection]**](OptionExerciseElection.md) | Option exercise election for this OptionExercisePhysicalEvent. | [optional] 
-**option_type** | **str** | Type of optionality that is present e.g. call, put.    Supported string (enumeration) values are: [Call, Put]. | 
+**option_type** | **str** | Type of optionality that is present e.g. call, put.  Supported string (enumeration) values are: [Call, Put]. | 
 **start_date** | **datetime** | The trade date of the option. | [optional] 
 **strike_currency** | **str** | The strike currency of the equity option. | 
 **strike_per_unit** | **float** | The strike of the equity option times the number of shares to exchange if exercised. | 

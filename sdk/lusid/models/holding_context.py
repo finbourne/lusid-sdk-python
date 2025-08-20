@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool
 
 class HoldingContext(BaseModel):
     """
-    Holding context node.  Contains settings that control how LUSID handles holdings within portfolios.  # noqa: E501
+    Holding context node. Contains settings that control how LUSID handles holdings within portfolios.  # noqa: E501
     """
     tax_lot_level_holdings: Optional[StrictBool] = Field(None, alias="taxLotLevelHoldings", description="Whether or not to expand the holdings to return the underlying tax-lots. Defaults to True.")
     __properties = ["taxLotLevelHoldings"]

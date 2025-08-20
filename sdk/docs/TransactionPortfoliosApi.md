@@ -54,7 +54,7 @@ Method | HTTP request | Description
 
 AdjustHoldings: Adjust holdings
 
-Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.
+Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will automatically construct adjustment transactions to ensure that the holdings which have been adjusted are always set to the provided targets for the specified effective datetime. Read more about the difference between adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.
 
 ### Example
 
@@ -102,9 +102,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
-    adjust_holding_request = [{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/ibor/CurrentMarketValue":{"key":"Holding/ibor/CurrentMarketValue","value":{"metricValue":{"value":1000}}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP","custodianAccountId":{"scope":"CustodianAccountScope","code":"CustodianAccountCode"}}] # List[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio.
+    adjust_holding_request = [{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/ibor/CurrentMarketValue":{"key":"Holding/ibor/CurrentMarketValue","value":{"metricValue":{"value":1000}}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP","custodianAccountId":{"scope":"CustodianAccountScope","code":"CustodianAccountCode"}}] # List[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the             transaction portfolio.
     reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
     override_movement_name = 'override_movement_name_example' # str | Optional parameter to override movement name for the set holdings. (optional)
     override_offset_movement_name = 'override_offset_movement_name_example' # str | Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl (optional)
@@ -128,9 +128,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
- **adjust_holding_request** | [**List[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | 
+ **adjust_holding_request** | [**List[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The selected set of holdings to adjust to the provided targets for the             transaction portfolio. | 
  **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
  **override_movement_name** | **str**| Optional parameter to override movement name for the set holdings. | [optional] 
  **override_offset_movement_name** | **str**| Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl | [optional] 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 BatchAdjustHoldings: Batch adjust holdings
 
-Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime in each request.                Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each adjustment in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
+Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will automatically construct adjustment transactions to ensure that the holdings which have been adjusted are always set to the provided targets for the specified effective datetime in each request.              Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each adjustment in the response.  Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
 
 ### Example
 
@@ -206,9 +206,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies               the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
     success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial (default to 'Partial')
-    request_body = {"AdjustHoldingRequest1":{"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"},"AdjustHoldingRequest2":{"effectiveAt":"2019-10-02T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"CCG000C6K6G9","Instrument/default/Isin":"US00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":50,"cost":{"amount":500,"currency":"USD"},"portfolioCost":500,"price":50,"purchaseDate":"2019-03-05T00:00:00.0000000+00:00","settlementDate":"2019-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"}} # Dict[str, AdjustHoldingForDateRequest] | The selected set of holdings to adjust to the provided targets for the               transaction portfolio.
+    request_body = {"AdjustHoldingRequest1":{"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"},"AdjustHoldingRequest2":{"effectiveAt":"2019-10-02T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"CCG000C6K6G9","Instrument/default/Isin":"US00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":50,"cost":{"amount":500,"currency":"USD"},"portfolioCost":500,"price":50,"purchaseDate":"2019-03-05T00:00:00.0000000+00:00","settlementDate":"2019-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"}} # Dict[str, AdjustHoldingForDateRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio.
     reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
 
     try:
@@ -230,9 +230,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies               the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | [default to &#39;Partial&#39;]
- **request_body** | [**Dict[str, AdjustHoldingForDateRequest]**](AdjustHoldingForDateRequest.md)| The selected set of holdings to adjust to the provided targets for the               transaction portfolio. | 
+ **request_body** | [**Dict[str, AdjustHoldingForDateRequest]**](AdjustHoldingForDateRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | 
  **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
 
 ### Return type
@@ -258,7 +258,7 @@ Name | Type | Description  | Notes
 
 BatchCreateTradeTickets: Batch Create Trade Tickets
 
-Batch create trade tickets. Each ticket is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two.
+Batch create trade tickets. Each ticket is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally a transaction that makes use of the two.
 
 ### Example
 
@@ -306,7 +306,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     lusid_trade_ticket = [{"transactionId":"TradeTicket-1111111","transactionType":"OpenTradeTicket","source":"default","transactionDate":"2020-01-01T09:00:00.00Z","settlementDate":"2020-01-01T09:00:00.00Z","totalConsideration":{"amount":1020000,"currency":"GBP"},"units":1000000,"instrumentIdentifiers":{"Instrument/default/ClientInternal":"my-bond"},"instrumentScope":"myScope","instrumentName":"my_bond","instrumentDefinition":{"startDate":"2018-01-01T00:00:00.0000000+00:00","maturityDate":"2019-01-01T00:00:00.0000000+00:00","domAmount":1,"domCcy":"GBP","fgnAmount":-1.5,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"counterpartyAgreementId":{"scope":"demoScope","code":"myCounterparty"},"tradeTicketType":"LusidTradeTicket"}] # List[LusidTradeTicket] | the trade tickets to create
 
     try:
@@ -328,7 +328,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **lusid_trade_ticket** | [**List[LusidTradeTicket]**](LusidTradeTicket.md)| the trade tickets to create | 
 
 ### Return type
@@ -354,107 +354,7 @@ Name | Type | Description  | Notes
 
 BatchSetHoldings: Batch set holdings
 
-Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.                Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each adjustment in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
-
-### Example
-
-```python
-from lusid.exceptions import ApiException
-from lusid.extensions.configuration_options import ConfigurationOptions
-from lusid.models import *
-from pprint import pprint
-from lusid import (
-    SyncApiClientFactory,
-    TransactionPortfoliosApi
-)
-
-def main():
-
-    with open("secrets.json", "w") as file:
-        file.write('''
-    {
-        "api":
-        {
-            "tokenUrl":"<your-token-url>",
-            "lusidUrl":"https://<your-domain>.lusid.com/api",
-            "username":"<your-username>",
-            "password":"<your-password>",
-            "clientId":"<your-client-id>",
-            "clientSecret":"<your-client-secret>"
-        }
-    }''')
-
-    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
-    # By default this will read config from environment variables
-    # Then from a secrets.json file found in the current working directory
-
-    # uncomment the below to use configuration overrides
-    # opts = ConfigurationOptions();
-    # opts.total_timeout_ms = 30_000
-
-    # uncomment the below to use an api client factory with overrides
-    # api_client_factory = SyncApiClientFactory(opts=opts)
-
-    api_client_factory = SyncApiClientFactory()
-
-    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
-    
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(TransactionPortfoliosApi)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies               the transaction portfolio.
-    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial (default to 'Partial')
-    request_body = {"AdjustHoldingRequest1":{"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"},"AdjustHoldingRequest2":{"effectiveAt":"2019-10-02T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"CCG000C6K6G9","Instrument/default/Isin":"US00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":50,"cost":{"amount":500,"currency":"USD"},"portfolioCost":500,"price":50,"purchaseDate":"2019-03-05T00:00:00.0000000+00:00","settlementDate":"2019-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"}} # Dict[str, AdjustHoldingForDateRequest] | The selected set of holdings to adjust to the provided targets for the               transaction portfolio.
-    reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
-
-    try:
-        # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods, opts=opts)
-
-        # BatchSetHoldings: Batch set holdings
-        api_response = api_instance.batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods)
-        pprint(api_response)
-
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->batch_set_holdings: %s\n" % e)
-
-main()
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies               the transaction portfolio. | 
- **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | [default to &#39;Partial&#39;]
- **request_body** | [**Dict[str, AdjustHoldingForDateRequest]**](AdjustHoldingForDateRequest.md)| The selected set of holdings to adjust to the provided targets for the               transaction portfolio. | 
- **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
-
-### Return type
-
-[**BatchAdjustHoldingsResponse**](BatchAdjustHoldingsResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: text/plain, application/json, text/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The successful SetHolding requests along with any failures |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
-[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
-
-# **batch_upsert_transactions**
-> BatchUpsertPortfolioTransactionsResponse batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties=preserve_properties)
-
-BatchUpsertTransactions: Batch upsert transactions
-
-Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.    Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each transaction in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
+Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio are always set to the provided targets for the specified effective datetime. Read more about the difference between adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.              Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each adjustment in the response.  Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
 
 ### Example
 
@@ -503,6 +403,106 @@ def main():
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
     code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial (default to 'Partial')
+    request_body = {"AdjustHoldingRequest1":{"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"},"AdjustHoldingRequest2":{"effectiveAt":"2019-10-02T00:00:00.0000000+00:00","instrumentIdentifiers":{"Instrument/default/Figi":"CCG000C6K6G9","Instrument/default/Isin":"US00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/Entity/Name":{"key":"Holding/Entity/Name","value":{"labelValue":"Financial Entity"}}},"taxLots":[{"units":50,"cost":{"amount":500,"currency":"USD"},"portfolioCost":500,"price":50,"purchaseDate":"2019-03-05T00:00:00.0000000+00:00","settlementDate":"2019-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP"}} # Dict[str, AdjustHoldingForDateRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio.
+    reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods, opts=opts)
+
+        # BatchSetHoldings: Batch set holdings
+        api_response = api_instance.batch_set_holdings(scope, code, success_mode, request_body, reconciliation_methods=reconciliation_methods)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->batch_set_holdings: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | [default to &#39;Partial&#39;]
+ **request_body** | [**Dict[str, AdjustHoldingForDateRequest]**](AdjustHoldingForDateRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | 
+ **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
+
+### Return type
+
+[**BatchAdjustHoldingsResponse**](BatchAdjustHoldingsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The successful SetHolding requests along with any failures |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **batch_upsert_transactions**
+> BatchUpsertPortfolioTransactionsResponse batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties=preserve_properties)
+
+BatchUpsertTransactions: Batch upsert transactions
+
+Create or update transactions in the transaction portfolio. A transaction will be updated if it already exists and created if it does not.  Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each transaction in the response.  Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (default to 'Partial')
     request_body = {"transactionRequest-1":{"transactionId":"TransactionId-111111","type":"StockIn","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"transactionDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","units":1000,"transactionPrice":{"price":123,"type":"Price"},"totalConsideration":{"amount":123000,"currency":"GBP"},"transactionCurrency":"GBP","properties":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"counterpartyId":"CounterpartyId-118263","source":"","otcConfirmation":{"counterpartyAgreementId":{"scope":"someScope","code":"someCode"}},"orderId":{"scope":"someScope","code":"ORD001"},"allocationId":{"scope":"someScope","code":"ALLOC001"}},"transactionRequest-2":{"transactionId":"TransactionId-222222","type":"StockIn","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000GJ45S5","Instrument/default/Isin":"GB00BFRLS45S"},"transactionDate":"2019-03-05T00:00:00.0000000+00:00","settlementDate":"2019-03-08T00:00:00.0000000+00:00","units":1000,"transactionPrice":{"price":123,"type":"Price"},"totalConsideration":{"amount":123000,"currency":"GBP"},"transactionCurrency":"GBP","properties":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"counterpartyId":"CounterpartyId-141556","source":"","otcConfirmation":{"counterpartyAgreementId":{"scope":"someScope","code":"someCode"}},"orderId":{"scope":"someScope","code":"ORD001"},"allocationId":{"scope":"someScope","code":"ALLOC001"}}} # Dict[str, TransactionRequest] | The payload describing the transactions to be created or updated.
     preserve_properties = True # bool | If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional) (default to True)
@@ -526,7 +526,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [default to &#39;Partial&#39;]
  **request_body** | [**Dict[str, TransactionRequest]**](TransactionRequest.md)| The payload describing the transactions to be created or updated. | 
  **preserve_properties** | **bool**| If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. | [optional] [default to True]
@@ -554,7 +554,7 @@ Name | Type | Description  | Notes
 
 BuildTransactions: Build transactions
 
-Builds and returns all transactions that affect the holdings of a portfolio over a given interval of  effective time into a set of output transactions. This includes transactions automatically generated by  LUSID such as holding adjustments.
+Builds and returns all transactions that affect the holdings of a portfolio over a given interval of effective time into a set of output transactions. This includes transactions automatically generated by LUSID such as holding adjustments.
 
 ### Example
 
@@ -602,16 +602,16 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # transaction_query_parameters = TransactionQueryParameters.from_json("")
     # transaction_query_parameters = TransactionQueryParameters.from_dict({})
     transaction_query_parameters = TransactionQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest             version of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or             \"Transaction/strategy/quantsignal\". (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to BuildTransactions. (optional)
 
@@ -634,11 +634,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_query_parameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| The query queryParameters which control how the output transactions are built. | 
- **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest             version of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto             the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or             \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to BuildTransactions. | [optional] 
 
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 CancelAdjustHoldings: Cancel adjust holdings
 
-Cancel all previous holding adjustments made on the specified transaction portfolio for a specified effective  datetime. This should be used to undo holding adjustments made via set holdings or adjust holdings.
+Cancel all previous holding adjustments made on the specified transaction portfolio for a specified effective datetime. This should be used to undo holding adjustments made via set holdings or adjust holdings.
 
 ### Example
 
@@ -713,7 +713,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holding adjustments should be undone.
 
     try:
@@ -735,7 +735,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holding adjustments should be undone. | 
 
 ### Return type
@@ -809,7 +809,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the previous adjustment was made.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -837,7 +837,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the previous adjustment was made. | 
  **cancel_single_holding_adjustment_request** | [**CancelSingleHoldingAdjustmentRequest**](CancelSingleHoldingAdjustmentRequest.md)| The selected holding adjustment to be canceled. | 
 
@@ -912,7 +912,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     transaction_ids = ['transaction_ids_example'] # List[str] | The IDs of the transactions to cancel.
 
     try:
@@ -934,7 +934,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_ids** | [**List[str]**](str.md)| The IDs of the transactions to cancel. | 
 
 ### Return type
@@ -1059,7 +1059,7 @@ Name | Type | Description  | Notes
 
 CreateTradeTicket: Create Trade Ticket
 
-Upsert a trade ticket. Broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.
+Upsert a trade ticket. Broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users with OTC systems than flow and equity trading ones.
 
 ### Example
 
@@ -1107,7 +1107,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1134,7 +1134,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **lusid_trade_ticket** | [**LusidTradeTicket**](LusidTradeTicket.md)| the trade ticket to upsert | [optional] 
 
 ### Return type
@@ -1160,7 +1160,7 @@ Name | Type | Description  | Notes
 
 DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
 
-Delete one or more custodian accounts from the Transaction Portfolios. Soft deletion marks the custodian account as inactive  While the Hard deletion is deleting the custodian account.  The batch limit per request is 2,000.
+Delete one or more custodian accounts from the Transaction Portfolios. Soft deletion marks the custodian account as inactive While the Hard deletion is deleting the custodian account.  The batch limit per request is 2,000.
 
 ### Example
 
@@ -1208,7 +1208,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the Transaction Portfolios.
-    code = 'code_example' # str | The code of the Transaction Portfolios. Together with the scope this uniquely identifies              the Transaction Portfolios.
+    code = 'code_example' # str | The code of the Transaction Portfolios. Together with the scope this uniquely identifies             the Transaction Portfolios.
     resource_id = [{"scope":"ScopeA","code":"AccountCode1"},{"scope":"ScopeB","code":"AccountCode2"}] # List[ResourceId] | The scope and codes of the custodian accounts to delete.
     delete_mode = 'delete_mode_example' # str | The delete mode to use (defaults to 'Soft'). (optional)
 
@@ -1231,7 +1231,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Transaction Portfolios. | 
- **code** | **str**| The code of the Transaction Portfolios. Together with the scope this uniquely identifies              the Transaction Portfolios. | 
+ **code** | **str**| The code of the Transaction Portfolios. Together with the scope this uniquely identifies             the Transaction Portfolios. | 
  **resource_id** | [**List[ResourceId]**](ResourceId.md)| The scope and codes of the custodian accounts to delete. | 
  **delete_mode** | **str**| The delete mode to use (defaults to &#39;Soft&#39;). | [optional] 
 
@@ -1306,9 +1306,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     transaction_id = 'transaction_id_example' # str | The unique ID of the transaction from which to delete properties.
-    property_keys = ['property_keys_example'] # List[str] | The property keys of the properties to delete.              These must be from the \"Transaction\" domain and have the format {domain}/{scope}/{code}, for example              \"Transaction/strategy/quantsignal\".
+    property_keys = ['property_keys_example'] # List[str] | The property keys of the properties to delete.             These must be from the \"Transaction\" domain and have the format {domain}/{scope}/{code}, for example             \"Transaction/strategy/quantsignal\".
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1329,9 +1329,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_id** | **str**| The unique ID of the transaction from which to delete properties. | 
- **property_keys** | [**List[str]**](str.md)| The property keys of the properties to delete.              These must be from the \&quot;Transaction\&quot; domain and have the format {domain}/{scope}/{code}, for example              \&quot;Transaction/strategy/quantsignal\&quot;. | 
+ **property_keys** | [**List[str]**](str.md)| The property keys of the properties to delete.             These must be from the \&quot;Transaction\&quot; domain and have the format {domain}/{scope}/{code}, for example             \&quot;Transaction/strategy/quantsignal\&quot;. | 
 
 ### Return type
 
@@ -1404,7 +1404,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
-    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies              the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies             the portfolio.
     settlement_instruction_ids = ['settlement_instruction_ids_example'] # List[str] | A list of Ids of settlement instructions to be deleted.
 
     try:
@@ -1426,7 +1426,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio. | 
- **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies              the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies             the portfolio. | 
  **settlement_instruction_ids** | [**List[str]**](str.md)| A list of Ids of settlement instructions to be deleted. | 
 
 ### Return type
@@ -1500,14 +1500,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio to retrieve the A2B report for.
-    code = 'code_example' # str | The code of the portfolio to retrieve the A2B report for. Together with the scope this              uniquely identifies the portfolio.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified.
-    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. (optional)
+    code = 'code_example' # str | The code of the portfolio to retrieve the A2B report for. Together with the scope this             uniquely identifies the portfolio.
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified.
+    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version             of each transaction if not specified. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto             the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1528,14 +1528,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio to retrieve the A2B report for. | 
- **code** | **str**| The code of the portfolio to retrieve the A2B report for. Together with the scope this              uniquely identifies the portfolio. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. | 
- **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. | [optional] 
+ **code** | **str**| The code of the portfolio to retrieve the A2B report for. Together with the scope this             uniquely identifies the portfolio. | 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. | 
+ **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version             of each transaction if not specified. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
- **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto             the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -1608,14 +1608,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio to retrieve the A2B movement report for.
-    code = 'code_example' # str | The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified.
-    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. (optional)
+    code = 'code_example' # str | The code of the portfolio to retrieve the A2B movement report for. Together with the scope this             uniquely identifies the portfolio.
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified.
+    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version             of each transaction if not specified. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto             the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1636,14 +1636,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio to retrieve the A2B movement report for. | 
- **code** | **str**| The code of the portfolio to retrieve the A2B movement report for. Together with the scope this              uniquely identifies the portfolio. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. | 
- **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. | [optional] 
+ **code** | **str**| The code of the portfolio to retrieve the A2B movement report for. Together with the scope this             uniquely identifies the portfolio. | 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. | 
+ **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version             of each transaction if not specified. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
- **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto             the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -1668,7 +1668,7 @@ Name | Type | Description  | Notes
 
 GetBucketedCashFlows: Get bucketed cash flows from a list of portfolios
 
-We bucket/aggregate a transaction portfolio's instruments by date or tenor specified in the request.  The cashflows are grouped by both instrumentId and currency.                If you want transactional level cashflow, please use the 'GetUpsertableCashFlows' endpoint.  If you want instrument cashflow, please use the 'GetPortfolioCashFlows' endpoint.  Note that these endpoints do not apply bucketing.
+We bucket/aggregate a transaction portfolio's instruments by date or tenor specified in the request. The cashflows are grouped by both instrumentId and currency.              If you want transactional level cashflow, please use the 'GetUpsertableCashFlows' endpoint. If you want instrument cashflow, please use the 'GetPortfolioCashFlows' endpoint. Note that these endpoints do not apply bucketing.
 
 ### Example
 
@@ -1822,7 +1822,7 @@ def main():
     custodian_account_code = 'custodian_account_code_example' # str | The code of the Custodian Account.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Custodian Account properties. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Custodian Account definition. Defaults to returning the latest version of the Custodian Account definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must take the format {domain}/{scope}/{code}, for example 'CustodianAccount/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.             These must take the format {domain}/{scope}/{code}, for example 'CustodianAccount/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1848,7 +1848,7 @@ Name | Type | Description  | Notes
  **custodian_account_code** | **str**| The code of the Custodian Account. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the Custodian Account properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Custodian Account definition. Defaults to returning the latest version of the Custodian Account definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.              These must take the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.             These must take the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
 
 ### Return type
 
@@ -1921,9 +1921,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to returning the latest version of the details if not specified. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the             scope this uniquely identifies the transaction portfolio.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the details of the transaction             portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults             to returning the latest version of the details if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1944,9 +1944,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to returning the latest version of the details if not specified. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the             scope this uniquely identifies the transaction portfolio. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the details of the transaction             portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults             to returning the latest version of the details if not specified. | [optional] 
 
 ### Return type
 
@@ -1971,7 +1971,7 @@ Name | Type | Description  | Notes
 
 GetHoldingContributors: Get Holdings Contributors
 
-Lists all transactions that affect the holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.
+Lists all transactions that affect the holdings of a portfolio over a given effective interval. This includes transactions automatically generated by LUSID such as holding adjustments.
 
 ### Example
 
@@ -2019,16 +2019,16 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     holding_id = 56 # int | The unique holding identifier
     effective_date = 'effective_date_example' # str | Effective date (optional)
     from_trade_date = 'from_trade_date_example' # str | The from trade date, defaults to first time this holding is opened, lower bound for transactions (optional)
     to_trade_date = 'to_trade_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
-    include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
+    include_historic = False # bool | If true, transactions from previously closed holdings are returned.             If false, only transactions from last time position is opened. (optional) (default to False)
     tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
     include_unsettled_movements = False # bool | If true, contributing transaction which have not settled yet will also be returned. False by default (optional) (default to False)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest             version of each transaction if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
 
     try:
@@ -2050,16 +2050,16 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **holding_id** | **int**| The unique holding identifier | 
  **effective_date** | **str**| Effective date | [optional] 
  **from_trade_date** | **str**| The from trade date, defaults to first time this holding is opened, lower bound for transactions | [optional] 
  **to_trade_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
- **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
+ **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.             If false, only transactions from last time position is opened. | [optional] [default to False]
  **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
  **include_unsettled_movements** | **bool**| If true, contributing transaction which have not settled yet will also be returned. False by default | [optional] [default to False]
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest             version of each transaction if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
 
 ### Return type
@@ -2133,12 +2133,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Holding Type, use \"holdingType eq 'p'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\", \"Custodian Account\", \"Legal Entity\" or \"Portfolio\" domain to decorate onto              holdings. These must have the format {domain}/{scope}/{code}, for example \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
-    by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of the transaction             portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults             to return the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             For example, to filter on the Holding Type, use \"holdingType eq 'p'\".             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\", \"Custodian Account\", \"Legal Entity\" or \"Portfolio\" domain to decorate onto             holdings. These must have the format {domain}/{scope}/{code}, for example \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
+    by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to             False. (optional)
     include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
     timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
     timeline_code = 'timeline_code_example' # str | The code of the Timeline. (optional)
@@ -2163,12 +2163,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the Holding Type, use \&quot;holdingType eq &#39;p&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot;, \&quot;Custodian Account\&quot;, \&quot;Legal Entity\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              holdings. These must have the format {domain}/{scope}/{code}, for example \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
- **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of the transaction             portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults             to return the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             For example, to filter on the Holding Type, use \&quot;holdingType eq &#39;p&#39;\&quot;.             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot;, \&quot;Custodian Account\&quot;, \&quot;Legal Entity\&quot; or \&quot;Portfolio\&quot; domain to decorate onto             holdings. These must have the format {domain}/{scope}/{code}, for example \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
+ **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to             False. | [optional] 
  **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
  **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
  **timeline_code** | **str**| The code of the Timeline. | [optional] 
@@ -2197,7 +2197,7 @@ Name | Type | Description  | Notes
 
 GetHoldingsAdjustment: Get holdings adjustment
 
-Get a holdings adjustment made to a transaction portfolio at a specific effective datetime. Note that a  holdings adjustment will only be returned if one exists for the specified effective datetime.
+Get a holdings adjustment made to a transaction portfolio at a specific effective datetime. Note that a holdings adjustment will only be returned if one exists for the specified effective datetime.
 
 ### Example
 
@@ -2245,10 +2245,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label of the holdings adjustment.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest             version of the holdings adjustment if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.             These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.             Note that properties from the 'Holding’ domain are automatically returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2269,10 +2269,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label of the holdings adjustment. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the ‘Instrument&#39; domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;.              Note that properties from the &#39;Holding’ domain are automatically returned. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest             version of the holdings adjustment if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the ‘Instrument&#39; domain to decorate onto holdings adjustments.             These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;.             Note that properties from the &#39;Holding’ domain are automatically returned. | [optional] 
 
 ### Return type
 
@@ -2297,7 +2297,7 @@ Name | Type | Description  | Notes
 
 GetHoldingsWithOrders: Get holdings with orders
 
-Get the holdings of a transaction portfolio. Create virtual holdings for any outstanding orders,  and account for order state/fulfillment; that is, treat outstanding orders (and related records) as  if they had been realised at moment of query.
+Get the holdings of a transaction portfolio. Create virtual holdings for any outstanding orders, and account for order state/fulfillment; that is, treat outstanding orders (and related records) as if they had been realised at moment of query.
 
 ### Example
 
@@ -2345,12 +2345,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Holding Type, use \"holdingType eq 'p'\"              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
-    by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of the transaction             portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults             to return the latest version of the holdings if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             For example, to filter on the Holding Type, use \"holdingType eq 'p'\"             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto             the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
+    by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to             False. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
     include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
@@ -2374,12 +2374,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the Holding Type, use \&quot;holdingType eq &#39;p&#39;\&quot;              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
- **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of the transaction             portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults             to return the latest version of the holdings if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             For example, to filter on the Holding Type, use \&quot;holdingType eq &#39;p&#39;\&quot;             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto             the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
+ **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to             False. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
  **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
@@ -2407,7 +2407,7 @@ Name | Type | Description  | Notes
 
 GetMultipleHoldingContributors: Get Multiple Holding Contributors
 
-Lists all transactions that affect multiple specified holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.
+Lists all transactions that affect multiple specified holdings of a portfolio over a given effective interval. This includes transactions automatically generated by LUSID such as holding adjustments.
 
 ### Example
 
@@ -2455,7 +2455,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -2465,11 +2465,11 @@ def main():
     effective_date = 'effective_date_example' # str | Effective date (optional)
     from_transaction_date = 'from_transaction_date_example' # str | The from trade date, defaults to first time this holding is opened, lower bound for transactions (optional)
     to_transaction_date = 'to_transaction_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
-    include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
+    include_historic = False # bool | If true, transactions from previously closed holdings are returned.             If false, only transactions from last time position is opened. (optional) (default to False)
     tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
     include_unsettled_movements = False # bool | If true, contributing transaction which have not settled yet will also be returned. False by default (optional) (default to False)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest             version of each transaction if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
 
     try:
@@ -2491,16 +2491,16 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **holding_ids_request** | [**HoldingIdsRequest**](HoldingIdsRequest.md)| The array of unique holding identifiers | 
  **effective_date** | **str**| Effective date | [optional] 
  **from_transaction_date** | **str**| The from trade date, defaults to first time this holding is opened, lower bound for transactions | [optional] 
  **to_transaction_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
- **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
+ **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.             If false, only transactions from last time position is opened. | [optional] [default to False]
  **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
  **include_unsettled_movements** | **bool**| If true, contributing transaction which have not settled yet will also be returned. False by default | [optional] [default to False]
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest             version of each transaction if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
 
 ### Return type
@@ -2526,7 +2526,7 @@ Name | Type | Description  | Notes
 
 GetPortfolioCashFlows: Get portfolio cash flows
 
-Get the set of cash flows that occur in a window for the transaction portfolio's instruments.                Note that grouping can affect the quantity of information returned; where a holding is an amalgamation of one or more (e.g. cash) instruments, a unique  transaction identifier will not be available. The same may go for diagnostic information (e.g. multiple sources of an aggregate cash amount on a date that is  not split out. Grouping at the transaction and instrument level is recommended for those seeking to attribute individual flows.
+Get the set of cash flows that occur in a window for the transaction portfolio's instruments.              Note that grouping can affect the quantity of information returned; where a holding is an amalgamation of one or more (e.g. cash) instruments, a unique transaction identifier will not be available. The same may go for diagnostic information (e.g. multiple sources of an aggregate cash amount on a date that is not split out. Grouping at the transaction and instrument level is recommended for those seeking to attribute individual flows.
 
 ### Example
 
@@ -2574,12 +2574,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this               uniquely identifies the portfolio.
-    effective_at = 'effective_at_example' # str | The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. (optional)
-    window_start = 'window_start_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               There is no lower bound if this is not specified. i.e. it is the minimum date. (optional)
-    window_end = 'window_end_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               The upper bound defaults to 'max date' if it is not specified (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data. Defaults to returning the latest version               of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.               For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".               For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio.
+    effective_at = 'effective_at_example' # str | The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows. This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up. For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt is before the start of the range they are forward looking and will be expectations assuming the model supports that. There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. (optional)
+    window_start = 'window_start_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              There is no lower bound if this is not specified. i.e. it is the minimum date. (optional)
+    window_end = 'window_end_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              The upper bound defaults to 'max date' if it is not specified (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data. Defaults to returning the latest version              of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     exclude_unsettled_trades = False # bool | If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. (optional) (default to False)
@@ -2603,12 +2603,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this               uniquely identifies the portfolio. | 
- **effective_at** | **str**| The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. | [optional] 
- **window_start** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               There is no lower bound if this is not specified. i.e. it is the minimum date. | [optional] 
- **window_end** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               The upper bound defaults to &#39;max date&#39; if it is not specified | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the data. Defaults to returning the latest version               of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.               For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.               For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio. | 
+ **effective_at** | **str**| The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows. This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up. For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt is before the start of the range they are forward looking and will be expectations assuming the model supports that. There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. | [optional] 
+ **window_start** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              There is no lower bound if this is not specified. i.e. it is the minimum date. | [optional] 
+ **window_end** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              The upper bound defaults to &#39;max date&#39; if it is not specified | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the data. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **exclude_unsettled_trades** | **bool**| If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. | [optional] [default to False]
@@ -2684,12 +2684,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified.
-    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified.
-    effective_at = 'effective_at_example' # str | The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version              of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this             uniquely identifies the portfolio.
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified.
+    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified.
+    effective_at = 'effective_at_example' # str | The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows. This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up. For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt is before the start of the range they are forward looking and will be expectations assuming the model supports that. There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version             of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     exclude_unsettled_trades = False # bool | If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. (optional) (default to False)
@@ -2713,12 +2713,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. | 
- **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified. | 
- **effective_at** | **str**| The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this             uniquely identifies the portfolio. | 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. | 
+ **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified. | 
+ **effective_at** | **str**| The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows. This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up. For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt is before the start of the range they are forward looking and will be expectations assuming the model supports that. There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version             of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **exclude_unsettled_trades** | **bool**| If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. | [optional] [default to False]
@@ -2794,14 +2794,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified.
-    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version              of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this             uniquely identifies the portfolio.
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified.
+    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version             of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.             For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the cash flows' transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto             the cash flows' transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or             \"Transaction/strategy/quantsignal\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2822,14 +2822,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. | 
- **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this             uniquely identifies the portfolio. | 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. | 
+ **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version             of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.             For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the cash flows&#39; transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto             the cash flows&#39; transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or             \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
 
 ### Return type
 
@@ -2902,9 +2902,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     transaction_id = 'transaction_id_example' # str | The unique ID of the transaction to create or update.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the history of the transaction. Defaults              to return the latest version if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the history of the transaction. Defaults             to return the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2925,9 +2925,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_id** | **str**| The unique ID of the transaction to create or update. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the history of the transaction. Defaults              to return the latest version if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the history of the transaction. Defaults             to return the latest version if not specified. | [optional] 
 
 ### Return type
 
@@ -2952,7 +2952,7 @@ Name | Type | Description  | Notes
 
 GetTransactions: Get transactions
 
-Retrieve all the transactions that occurred during a particular time interval.                If the portfolio is a derived transaction portfolio, the transactions returned are the  union set of all transactions of the parent (and any grandparents, etc.) as well as  those of the derived transaction portfolio itself.
+Retrieve all the transactions that occurred during a particular time interval.              If the portfolio is a derived transaction portfolio, the transactions returned are the union set of all transactions of the parent (and any grandparents, etc.) as well as those of the derived transaction portfolio itself.
 
 ### Example
 
@@ -3000,15 +3000,15 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies               the transaction portfolio.
-    from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no lower bound if this is not specified. (optional)
-    to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no upper bound if this is not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression with which to filter the result set.               For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"               For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', \"LegalEntity\" or \"CustodianAccount\" domain to decorate onto               transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or               'Transaction/strategy/quantsignal'. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no lower bound if this is not specified. (optional)
+    to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression with which to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', \"LegalEntity\" or \"CustodianAccount\" domain to decorate onto              transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or              'Transaction/strategy/quantsignal'. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetTransactions. (optional)
-    limit = 56 # int | When paginating, limit the number of returned results to this many. The current behaviour is               to return all transactions if possible, but this will change to defaulting to 1000 if not specified in the future. It is recommended               to populate this field to enable pagination. (optional)
-    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. The current behaviour is              to return all transactions if possible, but this will change to defaulting to 1000 if not specified in the future. It is recommended              to populate this field to enable pagination. (optional)
+    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
@@ -3032,15 +3032,15 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies               the transaction portfolio. | 
- **from_transaction_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no lower bound if this is not specified. | [optional] 
- **to_transaction_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no upper bound if this is not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression with which to filter the result set.               For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;               For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, \&quot;LegalEntity\&quot; or \&quot;CustodianAccount\&quot; domain to decorate onto               transactions. These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39; or               &#39;Transaction/strategy/quantsignal&#39;. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **from_transaction_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no lower bound if this is not specified. | [optional] 
+ **to_transaction_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression with which to filter the result set.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, \&quot;LegalEntity\&quot; or \&quot;CustodianAccount\&quot; domain to decorate onto              transactions. These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39; or              &#39;Transaction/strategy/quantsignal&#39;. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetTransactions. | [optional] 
- **limit** | **int**| When paginating, limit the number of returned results to this many. The current behaviour is               to return all transactions if possible, but this will change to defaulting to 1000 if not specified in the future. It is recommended               to populate this field to enable pagination. | [optional] 
- **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. The current behaviour is              to return all transactions if possible, but this will change to defaulting to 1000 if not specified in the future. It is recommended              to populate this field to enable pagination. | [optional] 
+ **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
@@ -3068,7 +3068,7 @@ Name | Type | Description  | Notes
 
 GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 
-Get the set of cash flows that occur in a window for the given portfolio instruments as a set of upsertable transactions (DTOs).                Note that grouping can affect the quantity of information returned; where a holding is an amalgamation of one or more (e.g. cash) instruments, a unique  transaction identifier will not be available. The same may go for diagnostic information (e.g. multiple sources of an aggregate cash amount on a date that is  not split out. Grouping at the transaction and instrument level is recommended for those seeking to attribute individual flows.                In essence this is identical to the 'GetCashFlows' endpoint but returns the cash flows as a set of transactions suitable for directly putting back into LUSID.  There are a couple of important points:  (1) Internally it can not be fully known where the user wishes to insert these transactions, e.g. portfolio and movement type.      These are therefore defaulted to a sensible option; the user will likely need to change these.  (2) Similarly, knowledge of any properties the user might wish to add to a transaction are unknown and consequently left empty.  (3) The transaction id that is added is simply a concatenation of the original transaction id, instrument id and payment date and direction. The user can happily override this.
+Get the set of cash flows that occur in a window for the given portfolio instruments as a set of upsertable transactions (DTOs).              Note that grouping can affect the quantity of information returned; where a holding is an amalgamation of one or more (e.g. cash) instruments, a unique transaction identifier will not be available. The same may go for diagnostic information (e.g. multiple sources of an aggregate cash amount on a date that is not split out. Grouping at the transaction and instrument level is recommended for those seeking to attribute individual flows.              In essence this is identical to the 'GetCashFlows' endpoint but returns the cash flows as a set of transactions suitable for directly putting back into LUSID. There are a couple of important points: (1) Internally it can not be fully known where the user wishes to insert these transactions, e.g. portfolio and movement type.     These are therefore defaulted to a sensible option; the user will likely need to change these. (2) Similarly, knowledge of any properties the user might wish to add to a transaction are unknown and consequently left empty. (3) The transaction id that is added is simply a concatenation of the original transaction id, instrument id and payment date and direction. The user can happily override this.
 
 ### Example
 
@@ -3116,12 +3116,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this               uniquely identifies the portfolio.
-    effective_at = 'effective_at_example' # str | The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. (optional)
-    window_start = 'window_start_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               There is no lower bound if this is not specified. i.e. uses minimum date-time (optional)
-    window_end = 'window_end_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               The upper bound defaults to 'max date' if it is not specified (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version               of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.               For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".               For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio.
+    effective_at = 'effective_at_example' # str | The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows. This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up. For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt is before the start of the range they are forward looking and will be expectations assuming the model supports that. There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. (optional)
+    window_start = 'window_start_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              There is no lower bound if this is not specified. i.e. uses minimum date-time (optional)
+    window_end = 'window_end_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              The upper bound defaults to 'max date' if it is not specified (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     exclude_unsettled_trades = True # bool | If absent or set to true, unsettled trades will be excluded from the result set. If set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. (optional) (default to True)
@@ -3145,12 +3145,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this               uniquely identifies the portfolio. | 
- **effective_at** | **str**| The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. | [optional] 
- **window_start** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               There is no lower bound if this is not specified. i.e. uses minimum date-time | [optional] 
- **window_end** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.               The upper bound defaults to &#39;max date&#39; if it is not specified | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version               of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.               For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.               For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this              uniquely identifies the portfolio. | 
+ **effective_at** | **str**| The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows. This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up. For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt is before the start of the range they are forward looking and will be expectations assuming the model supports that. There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today. | [optional] 
+ **window_start** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              There is no lower bound if this is not specified. i.e. uses minimum date-time | [optional] 
+ **window_end** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.              The upper bound defaults to &#39;max date&#39; if it is not specified | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **exclude_unsettled_trades** | **bool**| If absent or set to true, unsettled trades will be excluded from the result set. If set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. | [optional] [default to True]
@@ -3226,13 +3226,13 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the Transaction Portfolio.
-    code = 'code_example' # str | The code of the Transaction Portfolio. Together with the scope this uniquely identifies              the Transaction Portfolios.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties decorated on Custodian Accounts. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing custodian accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    code = 'code_example' # str | The code of the Transaction Portfolio. Together with the scope this uniquely identifies             the Transaction Portfolios.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties decorated on Custodian Accounts. Defaults to the current LUSID             system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing custodian accounts; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Custodian Account type, specify \"code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example 'CustodianAccount/system/Name'. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the Custodian Account type, specify \"code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.             These must have the format {domain}/{scope}/{code}, for example 'CustodianAccount/system/Name'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3253,13 +3253,13 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Transaction Portfolio. | 
- **code** | **str**| The code of the Transaction Portfolio. Together with the scope this uniquely identifies              the Transaction Portfolios. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties decorated on Custodian Accounts. Defaults to the current LUSID              system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing custodian accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **code** | **str**| The code of the Transaction Portfolio. Together with the scope this uniquely identifies             the Transaction Portfolios. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties decorated on Custodian Accounts. Defaults to the current LUSID             system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to             returning the latest version if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing custodian accounts; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the Custodian Account type, specify \&quot;code eq &#39;001&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/system/Name&#39;. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the Custodian Account type, specify \&quot;code eq &#39;001&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.             These must have the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/system/Name&#39;. | [optional] 
 
 ### Return type
 
@@ -3332,10 +3332,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. (optional)
-    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings             adjustments. There is no lower bound if this is not specified. (optional)
+    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings             adjustments. There is no upper bound if this is not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the             latest version of each holding adjustment if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3356,10 +3356,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. | [optional] 
- **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings             adjustments. There is no lower bound if this is not specified. | [optional] 
+ **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings             adjustments. There is no upper bound if this is not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the             latest version of each holding adjustment if not specified. | [optional] 
 
 ### Return type
 
@@ -3433,9 +3433,9 @@ def main():
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio to retrieve settlement instructions for.
     code = 'code_example' # str | The code of the portfolio to retrieve settlement instructions for.
-    from_date = 'from_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. (optional)
+    from_date = 'from_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.             There is no lower bound if this is not specified. (optional)
     to_date = 'to_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing instructions; this value is returned from the previous call.             If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | The expression to filter out settlement instructions (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. (optional)
@@ -3460,9 +3460,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio to retrieve settlement instructions for. | 
  **code** | **str**| The code of the portfolio to retrieve settlement instructions for. | 
- **from_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified. | [optional] 
+ **from_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.             There is no lower bound if this is not specified. | [optional] 
  **to_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions. | [optional] 
- **page** | **str**| The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing instructions; this value is returned from the previous call.             If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| The expression to filter out settlement instructions | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. | [optional] 
@@ -3490,7 +3490,7 @@ Name | Type | Description  | Notes
 
 PatchPortfolioDetails: Patch portfolio details
 
-Create or update certain details for a particular transaction portfolio.  Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration.
+Create or update certain details for a particular transaction portfolio. Note that not all elements of a transaction portfolio definition are modifiable once it has been created due to the potential implications for data already stored.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: BaseCurrency, SubHoldingKeys, AmortisationMethod, TransactionTypeScope, CashGainLossCalculationDate, InstrumentEventConfiguration, AmortisationRuleSetId, TaxRuleSetScope, SettlementConfiguration.
 
 ### Example
 
@@ -3538,9 +3538,9 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the             scope this uniquely identifies the transaction portfolio.
     operation = [{"value":["Transaction/Client/AccountType"],"path":"/subHoldingKeys","op":"add"},{"value":"GBP","path":"/baseCurrency","op":"add"},{"value":"newscope","path":"/transactiontypescope","op":"add"},{"value":"TransactionDate","path":"/cashGainLossCalculationDate","op":"add"},{"value":["NewTransactionTemplateScope"],"path":"/instrumentEventConfiguration/transactionTemplateScopes","op":"add"},{"value":{"scope":"myRecipeScope","code":"myRecipeCode"},"path":"/instrumentEventConfiguration/recipeId","op":"add"}] # List[Operation] | The patch document.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.             Defaults to the current LUSID system datetime if not specified.             Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3561,9 +3561,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the             scope this uniquely identifies the transaction portfolio. | 
  **operation** | [**List[Operation]**](Operation.md)| The patch document. | 
- **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.             Defaults to the current LUSID system datetime if not specified.             Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. | [optional] 
 
 ### Return type
 
@@ -3588,7 +3588,7 @@ Name | Type | Description  | Notes
 
 PreviewTransaction: Preview a transaction
 
-Returns the output-transaction(s) - e.g. as returned by BuildTransactions  that would come out of LUSID if the provided TransactionRequest was booked.
+Returns the output-transaction(s) - e.g. as returned by BuildTransactions that would come out of LUSID if the provided TransactionRequest was booked.
 
 ### Example
 
@@ -3636,15 +3636,15 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # transaction_request = TransactionRequest.from_json("")
     # transaction_request = TransactionRequest.from_dict({})
     transaction_request = TransactionRequest()
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
-    show_cancelled_transactions = True # bool | Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or             \"Transaction/strategy/quantsignal\". (optional)
+    show_cancelled_transactions = True # bool | Option to specify whether to include previous versions of an amended transaction in the response.             Defaults to False if not specified. (optional)
     preserve_properties = True # bool | If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version. (optional)
 
     try:
@@ -3666,10 +3666,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_request** | [**TransactionRequest**](TransactionRequest.md)| The transaction to be previewed. | 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
- **show_cancelled_transactions** | **bool**| Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto             the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or             \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **show_cancelled_transactions** | **bool**| Option to specify whether to include previous versions of an amended transaction in the response.             Defaults to False if not specified. | [optional] 
  **preserve_properties** | **bool**| If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version. | [optional] 
 
 ### Return type
@@ -3695,7 +3695,7 @@ Name | Type | Description  | Notes
 
 ResolveInstrument: Resolve instrument
 
-Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified  period of time. Also update the instrument identifiers with the given instrument identifiers collection.
+Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified period of time. Also update the instrument identifiers with the given instrument identifiers collection.
 
 ### Example
 
@@ -3743,12 +3743,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     instrument_identifier_type = 'instrument_identifier_type_example' # str | The instrument identifier type.
     instrument_identifier_value = 'instrument_identifier_value_example' # str | The value for the given instrument identifier.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. (optional)
-    re_resolve = False # bool | When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.              When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved. (optional) (default to False)
-    request_body = {"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"} # Dict[str, str] | The dictionary with the instrument identifiers to be updated on the             transaction and holdings. (optional)
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. (optional)
+    re_resolve = False # bool | When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.             When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved. (optional) (default to False)
+    request_body = {"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"} # Dict[str, str] | The dictionary with the instrument identifiers to be updated on the            transaction and holdings. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3769,12 +3769,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **instrument_identifier_type** | **str**| The instrument identifier type. | 
  **instrument_identifier_value** | **str**| The value for the given instrument identifier. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. | [optional] 
- **re_resolve** | **bool**| When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.              When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved. | [optional] [default to False]
- **request_body** | [**Dict[str, str]**](str.md)| The dictionary with the instrument identifiers to be updated on the             transaction and holdings. | [optional] 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. | [optional] 
+ **re_resolve** | **bool**| When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.             When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved. | [optional] [default to False]
+ **request_body** | [**Dict[str, str]**](str.md)| The dictionary with the instrument identifiers to be updated on the            transaction and holdings. | [optional] 
 
 ### Return type
 
@@ -3799,7 +3799,7 @@ Name | Type | Description  | Notes
 
 SetHoldings: Set holdings
 
-Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.
+Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio are always set to the provided targets for the specified effective datetime. Read more about the difference between adjusting and setting holdings here https://support.lusid.com/docs/how-do-i-manually-adjust-or-set-holdings.
 
 ### Example
 
@@ -3847,7 +3847,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
     adjust_holding_request = [{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/ibor/CurrentMarketValue":{"key":"Holding/ibor/CurrentMarketValue","value":{"metricValue":{"value":1000}}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25}],"currency":"GBP","custodianAccountId":{"scope":"CustodianAccountScope","code":"CustodianAccountCode"}}] # List[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio.
     reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
@@ -3873,7 +3873,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
  **adjust_holding_request** | [**List[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The complete set of target holdings for the transaction portfolio. | 
  **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. | [optional] 
@@ -3903,7 +3903,7 @@ Name | Type | Description  | Notes
 
 UpsertCustodianAccounts: Upsert Custodian Accounts
 
-Create or update Custodian Accounts in the Transaction Portfolios. A Custodian Account will be updated  if it already exists and created if it does not.  The batch limit per request is 2,000.
+Create or update Custodian Accounts in the Transaction Portfolios. A Custodian Account will be updated if it already exists and created if it does not.  The batch limit per request is 2,000.
 
 ### Example
 
@@ -3951,7 +3951,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the Transaction Portfolio.
-    code = 'code_example' # str | The code of the Transaction Portfolio. Together with the scope this uniquely identifies              the Transaction Portfolios.
+    code = 'code_example' # str | The code of the Transaction Portfolio. Together with the scope this uniquely identifies             the Transaction Portfolios.
     custodian_account_request = [{"scope":"ScopeA","code":"Account1","status":"Active","accountNumber":"10003786BGBP","accountName":"Account1 Sterling","accountingMethod":"FirstInFirstOut","currency":"GBP","properties":{},"custodianIdentifier":{"idTypeScope":"ScopeA","idTypeCode":"LegalEntityCode1","code":"LegalEntityValue1"},"accountType":"Cash"},{"scope":"ScopeB","code":"Account2","status":"Active","accountNumber":"10003786BEUR","accountName":"Account2 Euro","accountingMethod":"FirstInFirstOut","currency":"EUR","properties":{},"custodianIdentifier":{"idTypeScope":"ScopeA","idTypeCode":"LegalEntityCode2","code":"LegalEntityValue2"},"accountType":"Swap"}] # List[CustodianAccountRequest] | A list of Custodian Accounts to be created or updated.
 
     try:
@@ -3973,7 +3973,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Transaction Portfolio. | 
- **code** | **str**| The code of the Transaction Portfolio. Together with the scope this uniquely identifies              the Transaction Portfolios. | 
+ **code** | **str**| The code of the Transaction Portfolio. Together with the scope this uniquely identifies             the Transaction Portfolios. | 
  **custodian_account_request** | [**List[CustodianAccountRequest]**](CustodianAccountRequest.md)| A list of Custodian Accounts to be created or updated. | 
 
 ### Return type
@@ -3999,7 +3999,7 @@ Name | Type | Description  | Notes
 
 UpsertCustodianAccountsProperties: Upsert custodian accounts properties
 
-Update or insert one or more properties onto a single custodian account. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'CustodianAccount'.                Upserting a property that exists for a Transaction Portfolios, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Update or insert one or more properties onto a single custodian account. A property will be updated if it already exists and inserted if it does not. All properties must be of the domain 'CustodianAccount'.              Upserting a property that exists for a Transaction Portfolios, with a null value, will delete the instance of the property for that group.              Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i> datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -4050,7 +4050,7 @@ def main():
     code = 'code_example' # str | The code of the Transaction Portfolios to update or insert the properties onto. Together with the scope this uniquely identifies the Transaction Portfolios.
     custodian_account_scope = 'custodian_account_scope_example' # str | The scope of the Custodian Account to update or insert the properties onto.
     custodian_account_code = 'custodian_account_code_example' # str | The unique ID of the custodian account to create or update properties for.
-    request_body = {"CustodianAccount/MyScope/FundManagerName":{"key":"CustodianAccount/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"CustodianAccount/MyScope/SomeProperty":{"key":"CustodianAccount/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"CustodianAccount/MyScope/AnotherProperty":{"key":"CustodianAccount/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"CustodianAccount/MyScope/ReBalanceInterval":{"key":"CustodianAccount/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Transaction Portfolio. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"CustodianAccount/Manager/Id\". (optional)
+    request_body = {"CustodianAccount/MyScope/FundManagerName":{"key":"CustodianAccount/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"CustodianAccount/MyScope/SomeProperty":{"key":"CustodianAccount/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"CustodianAccount/MyScope/AnotherProperty":{"key":"CustodianAccount/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"CustodianAccount/MyScope/ReBalanceInterval":{"key":"CustodianAccount/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Transaction Portfolio. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"CustodianAccount/Manager/Id\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -4074,7 +4074,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Transaction Portfolios to update or insert the properties onto. Together with the scope this uniquely identifies the Transaction Portfolios. | 
  **custodian_account_scope** | **str**| The scope of the Custodian Account to update or insert the properties onto. | 
  **custodian_account_code** | **str**| The unique ID of the custodian account to create or update properties for. | 
- **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Transaction Portfolio. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;CustodianAccount/Manager/Id\&quot;. | [optional] 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Transaction Portfolio. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;CustodianAccount/Manager/Id\&quot;. | [optional] 
 
 ### Return type
 
@@ -4099,7 +4099,7 @@ Name | Type | Description  | Notes
 
 UpsertPortfolioDetails: Upsert portfolio details
 
-Create or update certain details for a particular transaction portfolio. The details are updated if they already exist, and inserted if they do not.                Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.
+Create or update certain details for a particular transaction portfolio. The details are updated if they already exist, and inserted if they do not.              Note that not all elements of a transaction portfolio definition are modifiable once it has been created due to the potential implications for data already stored.
 
 ### Example
 
@@ -4147,14 +4147,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # create_portfolio_details = CreatePortfolioDetails.from_json("")
     # create_portfolio_details = CreatePortfolioDetails.from_dict({})
     create_portfolio_details = CreatePortfolioDetails()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -4175,9 +4175,9 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. | 
  **create_portfolio_details** | [**CreatePortfolioDetails**](CreatePortfolioDetails.md)| The details to create or update for the specified transaction portfolio. | 
- **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -4298,7 +4298,7 @@ Name | Type | Description  | Notes
 
 UpsertTransactionProperties: Upsert transaction properties
 
-Create or update one or more transaction properties for a single transaction in the transaction portfolio.  Each property will be updated if it already exists and created if it does not.  Both transaction and portfolio must exist at the time when properties are created or updated.
+Create or update one or more transaction properties for a single transaction in the transaction portfolio. Each property will be updated if it already exists and created if it does not. Both transaction and portfolio must exist at the time when properties are created or updated.
 
 ### Example
 
@@ -4346,7 +4346,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     transaction_id = 'transaction_id_example' # str | The unique ID of the transaction to create or update properties for.
     request_body = {"Transaction/MyScope/MyPropertyName":{"key":"Transaction/MyScope/MyPropertyName","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}},"Transaction/MyScope/MyPropertyName2":{"key":"Transaction/MyScope/MyPropertyName2","value":{"metricValue":{"value":925.3,"unit":"Unit"}}}} # Dict[str, PerpetualProperty] | The properties and their associated values to create or update.
 
@@ -4369,7 +4369,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_id** | **str**| The unique ID of the transaction to create or update properties for. | 
  **request_body** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md)| The properties and their associated values to create or update. | 
 
@@ -4396,7 +4396,7 @@ Name | Type | Description  | Notes
 
 UpsertTransactions: Upsert transactions
 
-Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.  The maximum number of transactions that this method can upsert per request is 10,000.
+Create or update transactions in the transaction portfolio. A transaction will be updated if it already exists and created if it does not.  The maximum number of transactions that this method can upsert per request is 10,000.
 
 ### Example
 
@@ -4444,7 +4444,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio.
     transaction_request = [{"transactionId":"TransactionId-111111","type":"StockIn","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"transactionDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","units":1000,"transactionPrice":{"price":123,"type":"Price"},"totalConsideration":{"amount":123000,"currency":"GBP"},"transactionCurrency":"GBP","properties":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"counterpartyId":"CounterpartyId-118263","source":"","otcConfirmation":{"counterpartyAgreementId":{"scope":"someScope","code":"someCode"}},"orderId":{"scope":"someScope","code":"ORD001"},"allocationId":{"scope":"someScope","code":"ALLOC001"}}] # List[TransactionRequest] | A list of transactions to be created or updated.
     preserve_properties = True # bool | If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. (optional) (default to True)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
@@ -4469,7 +4469,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies             the transaction portfolio. | 
  **transaction_request** | [**List[TransactionRequest]**](TransactionRequest.md)| A list of transactions to be created or updated. | 
  **preserve_properties** | **bool**| If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated. | [optional] [default to True]
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 

@@ -558,15 +558,15 @@ class ReconciliationsApi:
 
 
     @overload
-    async def get_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> Reconciliation:  # noqa: E501
+    async def get_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> Reconciliation:  # noqa: E501
         ...
 
     @overload
-    def get_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Reconciliation:  # noqa: E501
+    def get_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Reconciliation:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Reconciliation, Awaitable[Reconciliation]]:  # noqa: E501
+    def get_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Reconciliation, Awaitable[Reconciliation]]:  # noqa: E501
         """[EXPERIMENTAL] GetReconciliation: Get scheduled reconciliation  # noqa: E501
 
         Get the requested scheduled reconciliation  # noqa: E501
@@ -584,7 +584,7 @@ class ReconciliationsApi:
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
+        :param property_keys: A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -605,7 +605,7 @@ class ReconciliationsApi:
         return self.get_reconciliation_with_http_info(scope, code, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the scheduled reconciliation")], code : Annotated[StrictStr, Field(..., description="The code of the scheduled reconciliation")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetReconciliation: Get scheduled reconciliation  # noqa: E501
 
         Get the requested scheduled reconciliation  # noqa: E501
@@ -623,7 +623,7 @@ class ReconciliationsApi:
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
+        :param property_keys: A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -906,15 +906,15 @@ class ReconciliationsApi:
 
 
     @overload
-    async def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, **kwargs) -> ResourceListOfMapping:  # noqa: E501
+    async def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided.")] = None, **kwargs) -> ResourceListOfMapping:  # noqa: E501
         ...
 
     @overload
-    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMapping:  # noqa: E501
+    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMapping:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMapping, Awaitable[ResourceListOfMapping]]:  # noqa: E501
+    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMapping, Awaitable[ResourceListOfMapping]]:  # noqa: E501
         """[EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings  # noqa: E501
 
         Lists all mappings this user is entitled to see  # noqa: E501
@@ -924,7 +924,7 @@ class ReconciliationsApi:
         >>> thread = api.list_reconciliation_mappings(reconciliation_type, async_req=True)
         >>> result = thread.get()
 
-        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.
+        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided.
         :type reconciliation_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -945,7 +945,7 @@ class ReconciliationsApi:
         return self.list_reconciliation_mappings_with_http_info(reconciliation_type, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_reconciliation_mappings_with_http_info(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_reconciliation_mappings_with_http_info(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings  # noqa: E501
 
         Lists all mappings this user is entitled to see  # noqa: E501
@@ -955,7 +955,7 @@ class ReconciliationsApi:
         >>> thread = api.list_reconciliation_mappings_with_http_info(reconciliation_type, async_req=True)
         >>> result = thread.get()
 
-        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.
+        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided.
         :type reconciliation_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1058,15 +1058,15 @@ class ReconciliationsApi:
 
 
     @overload
-    async def list_reconciliations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> PagedResourceListOfReconciliation:  # noqa: E501
+    async def list_reconciliations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> PagedResourceListOfReconciliation:  # noqa: E501
         ...
 
     @overload
-    def list_reconciliations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfReconciliation:  # noqa: E501
+    def list_reconciliations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfReconciliation:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_reconciliations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfReconciliation, Awaitable[PagedResourceListOfReconciliation]]:  # noqa: E501
+    def list_reconciliations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfReconciliation, Awaitable[PagedResourceListOfReconciliation]]:  # noqa: E501
         """[EXPERIMENTAL] ListReconciliations: List scheduled reconciliations  # noqa: E501
 
         List all the scheduled reconciliations matching particular criteria  # noqa: E501
@@ -1076,17 +1076,17 @@ class ReconciliationsApi:
         >>> thread = api.list_reconciliations(effective_at, as_at, page, limit, filter, property_keys, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified.
+        :param as_at: The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :param filter: Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914.
         :type filter: str
-        :param property_keys: A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
+        :param property_keys: A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1107,7 +1107,7 @@ class ReconciliationsApi:
         return self.list_reconciliations_with_http_info(effective_at, as_at, page, limit, filter, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_reconciliations_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_reconciliations_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListReconciliations: List scheduled reconciliations  # noqa: E501
 
         List all the scheduled reconciliations matching particular criteria  # noqa: E501
@@ -1117,17 +1117,17 @@ class ReconciliationsApi:
         >>> thread = api.list_reconciliations_with_http_info(effective_at, as_at, page, limit, filter, property_keys, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified.
+        :param as_at: The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :param filter: Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914.
         :type filter: str
-        :param property_keys: A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
+        :param property_keys: A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'.
         :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1263,9 +1263,9 @@ class ReconciliationsApi:
 
     @validate_arguments
     def reconcile_generic(self, reconciliation_request : Annotated[Optional[ReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReconciliationResponse, Awaitable[ReconciliationResponse]]:  # noqa: E501
-        """ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are 'empty' or null or zero.  # noqa: E501
+        """ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.              The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings, and elision of resulting differences where they are 'empty' or null or zero.  # noqa: E501
 
-        Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes.  Produce a breakdown of the resulting differences in evaluation that can be iterated through.  # noqa: E501
+        Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes. Produce a breakdown of the resulting differences in evaluation that can be iterated through.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1294,9 +1294,9 @@ class ReconciliationsApi:
 
     @validate_arguments
     def reconcile_generic_with_http_info(self, reconciliation_request : Annotated[Optional[ReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are 'empty' or null or zero.  # noqa: E501
+        """ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.              The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings, and elision of resulting differences where they are 'empty' or null or zero.  # noqa: E501
 
-        Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes.  Produce a breakdown of the resulting differences in evaluation that can be iterated through.  # noqa: E501
+        Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes. Produce a breakdown of the resulting differences in evaluation that can be iterated through.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1413,15 +1413,15 @@ class ReconciliationsApi:
 
 
     @overload
-    async def reconcile_holdings(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, **kwargs) -> ResourceListOfReconciliationBreak:  # noqa: E501
+    async def reconcile_holdings(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, **kwargs) -> ResourceListOfReconciliationBreak:  # noqa: E501
         ...
 
     @overload
-    def reconcile_holdings(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfReconciliationBreak:  # noqa: E501
+    def reconcile_holdings(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfReconciliationBreak:  # noqa: E501
         ...
 
     @validate_arguments
-    def reconcile_holdings(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfReconciliationBreak, Awaitable[ResourceListOfReconciliationBreak]]:  # noqa: E501
+    def reconcile_holdings(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfReconciliationBreak, Awaitable[ResourceListOfReconciliationBreak]]:  # noqa: E501
         """[EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings  # noqa: E501
 
         Reconcile the holdings of two portfolios.  # noqa: E501
@@ -1435,7 +1435,7 @@ class ReconciliationsApi:
         :type sort_by: List[str]
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param portfolios_reconciliation_request: The specifications of the inputs to the reconciliation
         :type portfolios_reconciliation_request: PortfoliosReconciliationRequest
@@ -1458,7 +1458,7 @@ class ReconciliationsApi:
         return self.reconcile_holdings_with_http_info(sort_by, limit, filter, portfolios_reconciliation_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def reconcile_holdings_with_http_info(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def reconcile_holdings_with_http_info(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, portfolios_reconciliation_request : Annotated[Optional[PortfoliosReconciliationRequest], Field(description="The specifications of the inputs to the reconciliation")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings  # noqa: E501
 
         Reconcile the holdings of two portfolios.  # noqa: E501
@@ -1472,7 +1472,7 @@ class ReconciliationsApi:
         :type sort_by: List[str]
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param portfolios_reconciliation_request: The specifications of the inputs to the reconciliation
         :type portfolios_reconciliation_request: PortfoliosReconciliationRequest
@@ -1767,7 +1767,7 @@ class ReconciliationsApi:
     def reconcile_transactions(self, transaction_reconciliation_request : Optional[TransactionReconciliationRequest] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionsReconciliationsResponse, Awaitable[TransactionsReconciliationsResponse]]:  # noqa: E501
         """[EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.  # noqa: E501
 
-        Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.  # noqa: E501
+        Evaluates two sets of transactions to determine which transactions from each set likely match using the rules of a specified mapping.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1798,7 +1798,7 @@ class ReconciliationsApi:
     def reconcile_transactions_with_http_info(self, transaction_reconciliation_request : Optional[TransactionReconciliationRequest] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.  # noqa: E501
 
-        Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.  # noqa: E501
+        Evaluates two sets of transactions to determine which transactions from each set likely match using the rules of a specified mapping.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1926,7 +1926,7 @@ class ReconciliationsApi:
     def reconcile_transactions_v2(self, transaction_reconciliation_request_v2 : Optional[TransactionReconciliationRequestV2] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReconciliationResponse, Awaitable[ReconciliationResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ReconcileTransactionsV2: Perform a Transactions Reconciliation.  # noqa: E501
 
-        Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.  # noqa: E501
+        Evaluates two sets of transactions to determine which transactions from each set likely match using the rules of a specified mapping.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1957,7 +1957,7 @@ class ReconciliationsApi:
     def reconcile_transactions_v2_with_http_info(self, transaction_reconciliation_request_v2 : Optional[TransactionReconciliationRequestV2] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ReconcileTransactionsV2: Perform a Transactions Reconciliation.  # noqa: E501
 
-        Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.  # noqa: E501
+        Evaluates two sets of transactions to determine which transactions from each set likely match using the rules of a specified mapping.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2419,7 +2419,7 @@ class ReconciliationsApi:
     def upsert_reconciliation_mapping(self, mapping : Annotated[Optional[Mapping], Field(description="The mapping to be created / updated.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Mapping, Awaitable[Mapping]]:  # noqa: E501
         """[EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping  # noqa: E501
 
-        If no mapping exists with the specified scope and code will create a new one.  Else will update the existing mapping  # noqa: E501
+        If no mapping exists with the specified scope and code will create a new one. Else will update the existing mapping  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2450,7 +2450,7 @@ class ReconciliationsApi:
     def upsert_reconciliation_mapping_with_http_info(self, mapping : Annotated[Optional[Mapping], Field(description="The mapping to be created / updated.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping  # noqa: E501
 
-        If no mapping exists with the specified scope and code will create a new one.  Else will update the existing mapping  # noqa: E501
+        If no mapping exists with the specified scope and code will create a new one. Else will update the existing mapping  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

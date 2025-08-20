@@ -27,7 +27,7 @@ class FlowConventionName(BaseModel):
     """
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the flow convention name.") 
     index_name:  Optional[StrictStr] = Field(None,alias="indexName", description="The index, if present, that is required. e.g. \"IBOR\", \"OIS\" or \"SONIA\".") 
-    tenor:  StrictStr = Field(...,alias="tenor", description="Tenor for the convention name.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
+    tenor:  StrictStr = Field(...,alias="tenor", description="Tenor for the convention name.  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
     __properties = ["currency", "indexName", "tenor"]
 
     class Config:

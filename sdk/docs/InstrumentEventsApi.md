@@ -64,8 +64,8 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The as at time to use. (optional)
-    limit = 100 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used. (optional) (default to 100)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this (optional)
+    limit = 100 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used. (optional) (default to 100)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -92,8 +92,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The as at time to use. | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 100 is used. | [optional] [default to 100]
- **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 100 is used. | [optional] [default to 100]
+ **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this | [optional] 
  **query_applicable_instrument_events_request** | [**QueryApplicableInstrumentEventsRequest**](QueryApplicableInstrumentEventsRequest.md)| The filter parameters used to retrieve applicable instrument events. | [optional] 
 
 ### Return type
@@ -263,8 +263,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventsApi)
-    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. (optional) (default to 1000)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. (optional)
+    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used. (optional) (default to 1000)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -290,8 +290,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000]
- **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used. | [optional] [default to 1000]
+ **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified. | [optional] 
  **query_cash_flows_request** | [**QueryCashFlowsRequest**](QueryCashFlowsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] 
 
 ### Return type
@@ -364,8 +364,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventsApi)
-    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. (optional) (default to 1000)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. (optional)
+    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used. (optional) (default to 1000)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -391,8 +391,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000]
- **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used. | [optional] [default to 1000]
+ **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified. | [optional] 
  **query_instrument_events_request** | [**QueryInstrumentEventsRequest**](QueryInstrumentEventsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] 
 
 ### Return type
@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 
 QueryTradeTickets: Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.
 
-Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.    These trade tickets are derived from events that involve transition of instrument states, such as transitions  on exercise or default of an instrument. The trade tickets are to allow the new position to be created given the  existing portfolio configuration.
+Returns a list of trade tickets based on the holdings of the portfolios and date range specified in the query.  These trade tickets are derived from events that involve transition of instrument states, such as transitions on exercise or default of an instrument. The trade tickets are to allow the new position to be created given the existing portfolio configuration.
 
 ### Example
 
@@ -465,8 +465,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentEventsApi)
-    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. (optional) (default to 1000)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. (optional)
+    limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used. (optional) (default to 1000)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -492,8 +492,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000]
- **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, queryBody, and limit must not  be modified. | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default of 1000 is used. | [optional] [default to 1000]
+ **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are return from list calls, and must be supplied exactly as returned. Additionally, when specifying this value, queryBody, and limit must not be modified. | [optional] 
  **query_trade_tickets_request** | [**QueryTradeTicketsRequest**](QueryTradeTicketsRequest.md)| The filter parameters used to retrieve instrument events. | [optional] 
 
 ### Return type

@@ -1,6 +1,6 @@
 # MbsPrincipalWriteOffEvent
 
-Definition of an MBS Principal Write Off Event  This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal write off.
+Definition of an MBS Principal Write Off Event This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal write off.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

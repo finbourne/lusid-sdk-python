@@ -5,7 +5,7 @@ A scrip dividend issued to shareholders.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | Date on which the dividend was announced / declared. | [optional] 
-**ex_date** | **datetime** | The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate. | [optional] 
+**ex_date** | **datetime** | The first business day on which the dividend is not owed to the buying party. Typically this is T-1 from the RecordDate. | [optional] 
 **record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 
 **payment_date** | **datetime** | The date the company pays out dividends to shareholders. | [optional] 
 **fractional_units_cash_price** | **float** | The cash price per unit paid in lieu when fractional units can not be distributed. | [optional] 

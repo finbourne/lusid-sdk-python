@@ -42,7 +42,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] BatchUpsertPortfolioAccessMetadata: Upsert multiple Portfolio Access Metadata Rules to multiple Portfolios
 
-Update or insert multiple Access Metadata rules for multiple Portfolios. Items will be updated if they already exist  and inserted if they do not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or a failure message if unsuccessful                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
+Update or insert multiple Access Metadata rules for multiple Portfolios. Items will be updated if they already exist and inserted if they do not. No other items will be affected  The response will return the successfully updated or inserted Portfolio Access Metadata Rules or a failure message if unsuccessful              Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
 
 ### Example
 
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 DeletePortfolio: Delete portfolio
 
-Delete a particular portfolio.                The deletion will take effect from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime, as per the asAt datetime of deletion.
+Delete a particular portfolio.              The deletion will take effect from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime, as per the asAt datetime of deletion.
 
 ### Example
 
@@ -430,7 +430,7 @@ Name | Type | Description  | Notes
 
 DeletePortfolioProperties: Delete portfolio properties
 
-Delete one or more properties from a particular portfolio. If the properties are time-variant then an effective datetime from which  to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.
+Delete one or more properties from a particular portfolio. If the properties are time-variant then an effective datetime from which to delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.
 
 ### Example
 
@@ -479,8 +479,8 @@ def main():
     api_instance = api_client_factory.build(PortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
-    property_keys = ['property_keys_example'] # List[str] | The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Each property must be from the 'Portfolio' domain.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys of the properties to delete. These must take the format             {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Each property must be from the 'Portfolio' domain.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -502,8 +502,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio. | 
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
- **property_keys** | [**List[str]**](str.md)| The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. Each property must be from the &#39;Portfolio&#39; domain. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys of the properties to delete. These must take the format             {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. Each property must be from the &#39;Portfolio&#39; domain. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. | [optional] 
 
 ### Return type
 
@@ -632,7 +632,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetAggregatedReturnsDispersionMetrics: Get the Aggregated Returns Dispersion metric
 
-Calculate the dispersion metric with the Aggregate Returns which are on the specified portfolio.             This works only for composites which have at least 6 constituents for a full year in.
+Calculate the dispersion metric with the Aggregate Returns which are on the specified portfolio.            This works only for composites which have at least 6 constituents for a full year in.
 
 ### Example
 
@@ -993,8 +993,8 @@ def main():
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Portfolio' domain to decorate onto the portfolio,              or from any domain that supports relationships to decorate onto related entities. These must take the format              {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolio in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Portfolio' domain to decorate onto the portfolio,             or from any domain that supports relationships to decorate onto related entities. These must take the format             {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the portfolio in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1018,8 +1018,8 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto the portfolio,              or from any domain that supports relationships to decorate onto related entities. These must take the format              {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto the portfolio,             or from any domain that supports relationships to decorate onto related entities. These must take the format             {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the portfolio in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -1099,7 +1099,7 @@ def main():
     recipe_id_code = 'recipe_id_code_example' # str | The Recipe Code for getting the fx rates (optional)
     from_effective_at = 'from_effective_at_example' # str | The start date from which to calculate the Returns. (optional)
     to_effective_at = 'to_effective_at_example' # str | The end date for which to calculate the Returns. (optional)
-    composite_method = 'composite_method_example' # str | The method used to calculate the Portfolio performance:              Equal/Asset. (optional)
+    composite_method = 'composite_method_example' # str | The method used to calculate the Portfolio performance:             Equal/Asset. (optional)
     period = 'period_example' # str | The type of the returns used to calculate the aggregation result: Daily/Monthly. (optional)
     output_frequency = 'output_frequency_example' # str | The type of calculated output: Daily/Weekly/Monthly/Quarterly/Half-Yearly/Yearly. (optional)
     metrics = ['metrics_example'] # List[str] | Determines what type of returns should be calculated, see https://support.lusid.com/knowledgebase/article/KA-01675/en-us for a list of available metrics. (optional)
@@ -1132,7 +1132,7 @@ Name | Type | Description  | Notes
  **recipe_id_code** | **str**| The Recipe Code for getting the fx rates | [optional] 
  **from_effective_at** | **str**| The start date from which to calculate the Returns. | [optional] 
  **to_effective_at** | **str**| The end date for which to calculate the Returns. | [optional] 
- **composite_method** | **str**| The method used to calculate the Portfolio performance:              Equal/Asset. | [optional] 
+ **composite_method** | **str**| The method used to calculate the Portfolio performance:             Equal/Asset. | [optional] 
  **period** | **str**| The type of the returns used to calculate the aggregation result: Daily/Monthly. | [optional] 
  **output_frequency** | **str**| The type of calculated output: Daily/Weekly/Monthly/Quarterly/Half-Yearly/Yearly. | [optional] 
  **metrics** | [**List[str]**](str.md)| Determines what type of returns should be calculated, see https://support.lusid.com/knowledgebase/article/KA-01675/en-us for a list of available metrics. | [optional] 
@@ -1320,7 +1320,7 @@ def main():
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
     from_as_at = '2013-10-20T19:20:30+01:00' # datetime | The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. (optional)
     to_as_at = '2013-10-20T19:20:30+01:00' # datetime | The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the User ID, specify \"userId.id eq 'string'\".              For more information about filtering, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the User ID, specify \"userId.id eq 'string'\".             For more information about filtering, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing commands; this value is returned from the previous call. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 500 if not specified. (optional)
 
@@ -1346,7 +1346,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
  **from_as_at** | **datetime**| The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. | [optional] 
  **to_as_at** | **datetime**| The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the User ID, specify \&quot;userId.id eq &#39;string&#39;\&quot;.              For more information about filtering, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the User ID, specify \&quot;userId.id eq &#39;string&#39;\&quot;.             For more information about filtering, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **page** | **str**| The pagination token to use to continue listing commands; this value is returned from the previous call. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 500 if not specified. | [optional] 
 
@@ -1618,11 +1618,11 @@ def main():
     api_instance = api_client_factory.build(PortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
-    property_key = 'property_key_example' # str | The property key of the property whose history to show.              This must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.
+    property_key = 'property_key_example' # str | The property key of the property whose history to show.             This must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.
     portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields              must not have changed since the original request. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering,             see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties; this value is returned from             the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. (optional)
 
     try:
@@ -1645,11 +1645,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio. | 
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
- **property_key** | **str**| The property key of the property whose history to show.              This must be from the &#39;Portfolio&#39; domain and in the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | 
+ **property_key** | **str**| The property key of the property whose history to show.             This must be from the &#39;Portfolio&#39; domain and in the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | 
  **portfolio_effective_at** | **str**| The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied. | [optional] 
- **filter** | **str**| Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **page** | **str**| The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering,             see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing properties; this value is returned from             the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. | [optional] 
 
 ### Return type
@@ -1727,7 +1727,7 @@ def main():
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve relations. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve relations. Defaults to returning the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the relations. Provide a null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These must be from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. Only identifier types provided will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.             These must be from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example             'Person/CompanyDetails/Role'. Only identifier types provided will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1752,7 +1752,7 @@ Name | Type | Description  | Notes
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve relations. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve relations. Defaults to returning the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter the relations. Provide a null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These must be from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. Only identifier types provided will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.             These must be from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example             &#39;Person/CompanyDetails/Role&#39;. Only identifier types provided will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] 
 
 ### Return type
 
@@ -1829,7 +1829,7 @@ def main():
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve relationships. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve relationships. Defaults to returning the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the relationships. Provide a null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example             'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1854,7 +1854,7 @@ Name | Type | Description  | Notes
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve relationships. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve relationships. Defaults to returning the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter the relationships. Provide a null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example             &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
 
 ### Return type
 
@@ -1985,7 +1985,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetPortfoliosAccessMetadataByKey: Get an entry identified by a metadataKey in the access metadata object
 
-Get a specific portfolio access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
+Get a specific portfolio access metadata rule by specifying the corresponding identifier parts              No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
 
 ### Example
 
@@ -2136,9 +2136,9 @@ def main():
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
     portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing instructions; this value is returned from the previous call.             If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
     try:
@@ -2163,9 +2163,9 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
  **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing instructions; this value is returned from the previous call.             If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
 
 ### Return type
@@ -2340,15 +2340,15 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfoliosApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing portfolios; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID             system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version             of each portfolio if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing portfolios; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the transaction type, specify \"type eq 'Transaction'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the transaction type, specify \"type eq 'Transaction'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-    query = 'query_example' # str | Expression specifying the criteria that the returned portfolios must meet. For example, to see which              portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',              specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\". (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio,              or from any domain that supports relationships to decorate onto related entities. These must take the              format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    query = 'query_example' # str | Expression specifying the criteria that the returned portfolios must meet. For example, to see which             portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',             specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\". (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio,             or from any domain that supports relationships to decorate onto related entities. These must take the             format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2368,15 +2368,15 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing portfolios; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID             system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to returning the latest version             of each portfolio if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing portfolios; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the transaction type, specify \&quot;type eq &#39;Transaction&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the transaction type, specify \&quot;type eq &#39;Transaction&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **query** | **str**| Expression specifying the criteria that the returned portfolios must meet. For example, to see which              portfolios have holdings in instruments with a LusidInstrumentId (LUID) of &#39;LUID_PPA8HI6M&#39; or a Figi of &#39;BBG000BLNNH6&#39;,              specify \&quot;instrument.identifiers in ((&#39;LusidInstrumentId&#39;, &#39;LUID_PPA8HI6M&#39;), (&#39;Figi&#39;, &#39;BBG000BLNNH6&#39;))\&quot;. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto each portfolio,              or from any domain that supports relationships to decorate onto related entities. These must take the              format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **query** | **str**| Expression specifying the criteria that the returned portfolios must meet. For example, to see which             portfolios have holdings in instruments with a LusidInstrumentId (LUID) of &#39;LUID_PPA8HI6M&#39; or a Figi of &#39;BBG000BLNNH6&#39;,             specify \&quot;instrument.identifiers in ((&#39;LusidInstrumentId&#39;, &#39;LUID_PPA8HI6M&#39;), (&#39;Figi&#39;, &#39;BBG000BLNNH6&#39;))\&quot;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto each portfolio,             or from any domain that supports relationships to decorate onto related entities. These must take the             format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -2449,14 +2449,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfoliosApi)
     scope = 'scope_example' # str | The scope whose portfolios to list.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing portfolios. This  value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt  and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID             system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version             of each portfolio if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing portfolios. This value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio,              or from any domain that supports relationships to decorate onto related entities. These must take the              format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio,             or from any domain that supports relationships to decorate onto related entities. These must take the             format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2477,14 +2477,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope whose portfolios to list. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing portfolios. This  value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt  and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID             system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to returning the latest version             of each portfolio if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing portfolios. This value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.             For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto each portfolio,              or from any domain that supports relationships to decorate onto related entities. These must take the              format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto each portfolio,             or from any domain that supports relationships to decorate onto related entities. These must take the             format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the portfolios in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -2557,7 +2557,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
-    code = 'code_example' # str | The code of the portfolio. Together with the              scope this uniquely identifies the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the             scope this uniquely identifies the portfolio.
     operation = [{"value":"2020-01-01","path":"/creationDate","op":"add"}] # List[Operation] | The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
@@ -2579,7 +2579,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio. | 
- **code** | **str**| The code of the portfolio. Together with the              scope this uniquely identifies the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the             scope this uniquely identifies the portfolio. | 
  **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902. | 
 
 ### Return type
@@ -2605,7 +2605,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] PatchPortfolioAccessMetadata: Patch Access Metadata rules for a Portfolio.
 
-Patch Portfolio Access Metadata Rules in a single scope.  The behaviour is defined by the JSON Patch specification.                Currently only 'add' is a supported operation on the patch document.    Currently only valid metadata keys are supported paths on the patch document.    The response will return any affected Portfolio Access Metadata rules or a failure message if unsuccessful.    It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
+Patch Portfolio Access Metadata Rules in a single scope. The behaviour is defined by the JSON Patch specification.              Currently only 'add' is a supported operation on the patch document.  Currently only valid metadata keys are supported paths on the patch document.  The response will return any affected Portfolio Access Metadata rules or a failure message if unsuccessful.  It is important to always check to verify success (or failure).              Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
 
 ### Example
 
@@ -2705,7 +2705,7 @@ Name | Type | Description  | Notes
 
 UpdatePortfolio: Update portfolio
 
-Update the definition of a particular portfolio.                Note that not all elements of a portfolio definition are  modifiable due to the potential implications for data already stored.
+Update the definition of a particular portfolio.              Note that not all elements of a portfolio definition are modifiable due to the potential implications for data already stored.
 
 ### Example
 
@@ -2760,7 +2760,7 @@ def main():
     # update_portfolio_request = UpdatePortfolioRequest.from_json("")
     # update_portfolio_request = UpdatePortfolioRequest.from_dict({})
     update_portfolio_request = UpdatePortfolioRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to update the definition. Defaults to the current               LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to update the definition. Defaults to the current              LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2783,7 +2783,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the portfolio. | 
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
  **update_portfolio_request** | [**UpdatePortfolioRequest**](UpdatePortfolioRequest.md)| The updated portfolio definition. | 
- **effective_at** | **str**| The effective datetime or cut label at which to update the definition. Defaults to the current               LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to update the definition. Defaults to the current              LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -2908,7 +2908,7 @@ Name | Type | Description  | Notes
 
 UpsertPortfolioAccessMetadata: Upsert a Portfolio Access Metadata Rule associated with specific metadataKey. This creates or updates the data in LUSID.
 
-Update or insert one Portfolio Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Portfolio Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
+Update or insert one Portfolio Access Metadata Rule in a single scope. An item will be updated if it already exists and inserted if it does not.  The response will return the successfully updated or inserted Portfolio Access Metadata Rule or failure message if unsuccessful  It is important to always check to verify success (or failure).              Multiple rules for a metadataKey can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
 
 ### Example
 
@@ -3015,7 +3015,7 @@ Name | Type | Description  | Notes
 
 UpsertPortfolioProperties: Upsert portfolio properties
 
-Create or update one or more properties for a particular portfolio. A property is updated if it  already exists and created if it does not. All properties must be from the 'Portfolio' domain.                Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which it is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Create or update one or more properties for a particular portfolio. A property is updated if it already exists and created if it does not. All properties must be from the 'Portfolio' domain.              Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i> datetime until which it is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -3064,7 +3064,7 @@ def main():
     api_instance = api_client_factory.build(PortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
-    request_body = {"Portfolio/MyScope/FundManagerName":{"key":"Portfolio/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Portfolio/MyScope/SomeProperty":{"key":"Portfolio/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Portfolio/MyScope/AnotherProperty":{"key":"Portfolio/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Portfolio/MyScope/ReBalanceInterval":{"key":"Portfolio/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be created or updated. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'Portfolio/Manager/Id'.
+    request_body = {"Portfolio/MyScope/FundManagerName":{"key":"Portfolio/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Portfolio/MyScope/SomeProperty":{"key":"Portfolio/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Portfolio/MyScope/AnotherProperty":{"key":"Portfolio/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Portfolio/MyScope/ReBalanceInterval":{"key":"Portfolio/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'Portfolio/Manager/Id'.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3086,7 +3086,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio. | 
  **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
- **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be created or updated. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;Portfolio/Manager/Id&#39;. | 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;Portfolio/Manager/Id&#39;. | 
 
 ### Return type
 

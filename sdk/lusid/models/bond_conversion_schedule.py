@@ -25,13 +25,13 @@ from lusid.models.schedule import Schedule
 
 class BondConversionSchedule(Schedule):
     """
-    A BondConversionSchedule object represents a class containing the  information required for the creation of convertible features in a ComplexBond  # noqa: E501
+    A BondConversionSchedule object represents a class containing the information required for the creation of convertible features in a ComplexBond  # noqa: E501
     """
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The market identifier(s) of the share that the bond converts to. The instrument  will not fail validation if no identifier is supplied.")
+    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The market identifier(s) of the share that the bond converts to. The instrument will not fail validation if no identifier is supplied.")
     bond_conversion_entries: Optional[conlist(BondConversionEntry)] = Field(None, alias="bondConversionEntries", description="The dates at which the bond may be converted and associated information required about the conversion.")
-    conversion_trigger:  StrictStr = Field(...,alias="conversionTrigger", description="Corporate event that triggers a conversion    Supported string (enumeration) values are: [NextEquityFinancing, IpoConversion, KnownDates, SoftCall].") 
-    delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Is a conversion made into cash or into shares?    Supported string (enumeration) values are: [Cash, Physical].") 
-    exercise_type:  StrictStr = Field(...,alias="exerciseType", description="The exercise type of the conversion schedule (American or European).  For American type, the bond is convertible from a given exercise date until the next date in the schedule, or until it matures.  For European type, the bond is only convertible on the given exercise date.    Supported string (enumeration) values are: [European, Bermudan, American].") 
+    conversion_trigger:  StrictStr = Field(...,alias="conversionTrigger", description="Corporate event that triggers a conversion  Supported string (enumeration) values are: [NextEquityFinancing, IpoConversion, KnownDates, SoftCall].") 
+    delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Is a conversion made into cash or into shares?  Supported string (enumeration) values are: [Cash, Physical].") 
+    exercise_type:  StrictStr = Field(...,alias="exerciseType", description="The exercise type of the conversion schedule (American or European). For American type, the bond is convertible from a given exercise date until the next date in the schedule, or until it matures. For European type, the bond is only convertible on the given exercise date.  Supported string (enumeration) values are: [European, Bermudan, American].") 
     includes_accrued: Optional[StrictBool] = Field(None, alias="includesAccrued", description="Set this to true if a accrued interest is included in the conversion. Defaults to true.")
     mandatory_conversion: Optional[StrictBool] = Field(None, alias="mandatoryConversion", description="Set this to true if a conversion is mandatory if the trigger occurs. Defaults to false.")
     notification_period_end: Optional[datetime] = Field(None, alias="notificationPeriodEnd", description="The last day in the notification period for the conversion of the bond")

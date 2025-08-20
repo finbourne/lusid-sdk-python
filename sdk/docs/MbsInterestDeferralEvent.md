@@ -1,6 +1,6 @@
 # MbsInterestDeferralEvent
 
-Definition of an MBS Interest Deferral Event  This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and  capitalised into the outstanding principal balance of a mortgage-backed security.
+Definition of an MBS Interest Deferral Event This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and capitalised into the outstanding principal balance of a mortgage-backed security.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

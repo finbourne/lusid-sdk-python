@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**get_reconciliation_mapping**](ReconciliationsApi.md#get_reconciliation_mapping) | **GET** /api/portfolios/mapping/{scope}/{code} | [EARLY ACCESS] GetReconciliationMapping: Get a mapping
 [**list_reconciliation_mappings**](ReconciliationsApi.md#list_reconciliation_mappings) | **GET** /api/portfolios/mapping | [EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings
 [**list_reconciliations**](ReconciliationsApi.md#list_reconciliations) | **GET** /api/portfolios/$scheduledReconciliations | [EXPERIMENTAL] ListReconciliations: List scheduled reconciliations
-[**reconcile_generic**](ReconciliationsApi.md#reconcile_generic) | **POST** /api/portfolios/$reconcileGeneric | ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are &#39;empty&#39; or null or zero.
+[**reconcile_generic**](ReconciliationsApi.md#reconcile_generic) | **POST** /api/portfolios/$reconcileGeneric | ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.              The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings, and elision of resulting differences where they are &#39;empty&#39; or null or zero.
 [**reconcile_holdings**](ReconciliationsApi.md#reconcile_holdings) | **POST** /api/portfolios/$reconcileholdings | [EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings
 [**reconcile_inline**](ReconciliationsApi.md#reconcile_inline) | **POST** /api/portfolios/$reconcileInline | ReconcileInline: Reconcile valuations performed on one or two sets of inline instruments using one or two configuration recipes.
 [**reconcile_transactions**](ReconciliationsApi.md#reconcile_transactions) | **POST** /api/portfolios/$reconcileTransactions | [EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.
@@ -364,7 +364,7 @@ def main():
     code = 'code_example' # str | The code of the scheduled reconciliation
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the scheduled reconciliation | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the scheduled reconciliation. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the scheduled reconciliation. Defaults to returning the latest version of the reconciliation if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Reconciliation&#39; property domain to decorate onto the reconciliation.              These must take the form {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Reconciliation&#39; property domain to decorate onto the reconciliation.             These must take the form {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] 
 
 ### Return type
 
@@ -554,7 +554,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReconciliationsApi)
-    reconciliation_type = 'reconciliation_type_example' # str | Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. (optional)
+    reconciliation_type = 'reconciliation_type_example' # str | Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -574,7 +574,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **reconciliation_type** | **str**| Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. | [optional] 
+ **reconciliation_type** | **str**| Optional parameter to specify which type of mappings should be returned. Defaults to Transaction if not provided. | [optional] 
 
 ### Return type
 
@@ -646,12 +646,12 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReconciliationsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -671,12 +671,12 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID             system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the reconciliation. Defaults to returning the latest version             of each reconciliation if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing reconciliations; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the reconciliation type, specify \&quot;id.Code eq &#39;001&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Reconciliation&#39; domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the reconciliation type, specify \&quot;id.Code eq &#39;001&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Reconciliation&#39; domain to decorate onto each reconciliation.             These must take the format {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] 
 
 ### Return type
 
@@ -699,9 +699,9 @@ Name | Type | Description  | Notes
 # **reconcile_generic**
 > ReconciliationResponse reconcile_generic(reconciliation_request=reconciliation_request)
 
-ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are 'empty' or null or zero.
+ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.              The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings, and elision of resulting differences where they are 'empty' or null or zero.
 
-Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes.  Produce a breakdown of the resulting differences in evaluation that can be iterated through.
+Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes. Produce a breakdown of the resulting differences in evaluation that can be iterated through.
 
 ### Example
 
@@ -759,7 +759,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.reconcile_generic(reconciliation_request=reconciliation_request, opts=opts)
 
-        # ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are 'empty' or null or zero.
+        # ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.              The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings, and elision of resulting differences where they are 'empty' or null or zero.
         api_response = api_instance.reconcile_generic(reconciliation_request=reconciliation_request)
         pprint(api_response)
 
@@ -847,7 +847,7 @@ def main():
     api_instance = api_client_factory.build(ReconciliationsApi)
     sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -875,7 +875,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sort_by** | [**List[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \&quot;left.portfolioId.code eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set.             For example, to filter on the left portfolio Code, use \&quot;left.portfolioId.code eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **portfolios_reconciliation_request** | [**PortfoliosReconciliationRequest**](PortfoliosReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] 
 
 ### Return type
@@ -998,7 +998,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.
 
-Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.
+Evaluates two sets of transactions to determine which transactions from each set likely match using the rules of a specified mapping.
 
 ### Example
 
@@ -1095,7 +1095,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ReconcileTransactionsV2: Perform a Transactions Reconciliation.
 
-Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.
+Evaluates two sets of transactions to determine which transactions from each set likely match using the rules of a specified mapping.
 
 ### Example
 
@@ -1390,7 +1390,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping
 
-If no mapping exists with the specified scope and code will create a new one.  Else will update the existing mapping
+If no mapping exists with the specified scope and code will create a new one. Else will update the existing mapping
 
 ### Example
 

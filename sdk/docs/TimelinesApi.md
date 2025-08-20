@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CreateClosedPeriod: Create a new closed period against a timeline entity
 
-Creates a new closed period against a timeline entity  Returns the newly created closed period entity with properties
+Creates a new closed period against a timeline entity Returns the newly created closed period entity with properties
 
 ### Example
 
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] CreateTimeline: Create a Timeline
 
-Creates a Timeline. Returns the created Timeline at the current effectiveAt.  Note that Timelines are mono-temporal, however they can have Time-Variant Properties.  Upserted Properties will be returned at the latest AsAt and EffectiveAt
+Creates a Timeline. Returns the created Timeline at the current effectiveAt. Note that Timelines are mono-temporal, however they can have Time-Variant Properties. Upserted Properties will be returned at the latest AsAt and EffectiveAt
 
 ### Example
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteTimeline: Deletes a particular Timeline
 
-The deletion will take effect from the Timeline deletion datetime.  i.e. will no longer exist at any asAt datetime after the asAt datetime of deletion.
+The deletion will take effect from the Timeline deletion datetime. i.e. will no longer exist at any asAt datetime after the asAt datetime of deletion.
 
 ### Example
 
@@ -266,7 +266,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TimelinesApi)
     scope = 'scope_example' # str | The scope of the specified Timeline.
-    code = 'code_example' # str | The code of the specified Timeline. Together with the domain and scope this uniquely              identifies the Timeline.
+    code = 'code_example' # str | The code of the specified Timeline. Together with the domain and scope this uniquely             identifies the Timeline.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -287,7 +287,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified Timeline. | 
- **code** | **str**| The code of the specified Timeline. Together with the domain and scope this uniquely              identifies the Timeline. | 
+ **code** | **str**| The code of the specified Timeline. Together with the domain and scope this uniquely             identifies the Timeline. | 
 
 ### Return type
 
@@ -360,10 +360,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TimelinesApi)
     scope = 'scope_example' # str | The scope of the Timeline.
-    code = 'code_example' # str | The code of the Timeline. Together with the scope this uniquely              identifies the Timeline.
-    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the ClosedPeriod definition. Defaults to return              the latest version of the definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'ClosedPeriod' domain to decorate onto              the ClosedPeriod.              These must have the format {domain}/{scope}/{code}, for example 'ClosedPeriod/system/Name'. (optional)
+    code = 'code_example' # str | The code of the Timeline. Together with the scope this uniquely             identifies the Timeline.
+    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,             this uniquely identifies the ClosedPeriod
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the ClosedPeriod definition. Defaults to return             the latest version of the definition if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'ClosedPeriod' domain to decorate onto             the ClosedPeriod.             These must have the format {domain}/{scope}/{code}, for example 'ClosedPeriod/system/Name'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -384,10 +384,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Timeline. | 
- **code** | **str**| The code of the Timeline. Together with the scope this uniquely              identifies the Timeline. | 
- **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the ClosedPeriod definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto              the ClosedPeriod.              These must have the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/system/Name&#39;. | [optional] 
+ **code** | **str**| The code of the Timeline. Together with the scope this uniquely             identifies the Timeline. | 
+ **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,             this uniquely identifies the ClosedPeriod | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the ClosedPeriod definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto             the ClosedPeriod.             These must have the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/system/Name&#39;. | [optional] 
 
 ### Return type
 
@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetTimeline: Get a single Timeline by scope and code.
 
-Retrieves one Timeline by scope and code.  Timelines are mono-temporal. The EffectiveAt is only applied to Time-Variant Properties.
+Retrieves one Timeline by scope and code. Timelines are mono-temporal. The EffectiveAt is only applied to Time-Variant Properties.
 
 ### Example
 
@@ -460,10 +460,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TimelinesApi)
     scope = 'scope_example' # str | The scope of the specified Timeline.
-    code = 'code_example' # str | The code of the specified Timeline. Together with the scope this uniquely              identifies the Timeline.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Timeline definition. Defaults to return              the latest version of the definition if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the timeline properties.              Defaults to the current LUSID system datetime if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Timeline' domain to decorate onto              the Timeline.              These must have the format {domain}/{scope}/{code}, for example 'Timeline/system/Name'. (optional)
+    code = 'code_example' # str | The code of the specified Timeline. Together with the scope this uniquely             identifies the Timeline.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Timeline definition. Defaults to return             the latest version of the definition if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the timeline properties.             Defaults to the current LUSID system datetime if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Timeline' domain to decorate onto             the Timeline.             These must have the format {domain}/{scope}/{code}, for example 'Timeline/system/Name'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -484,10 +484,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified Timeline. | 
- **code** | **str**| The code of the specified Timeline. Together with the scope this uniquely              identifies the Timeline. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Timeline definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the timeline properties.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto              the Timeline.              These must have the format {domain}/{scope}/{code}, for example &#39;Timeline/system/Name&#39;. | [optional] 
+ **code** | **str**| The code of the specified Timeline. Together with the scope this uniquely             identifies the Timeline. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Timeline definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the timeline properties.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto             the Timeline.             These must have the format {domain}/{scope}/{code}, for example &#39;Timeline/system/Name&#39;. | [optional] 
 
 ### Return type
 
@@ -562,11 +562,11 @@ def main():
     scope = 'scope_example' # str | The scope of the Timeline.
     code = 'code_example' # str | The code of the Timeline.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ClosedPeriods. Defaults to returning the latest version of each ClosedPeriod if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing ClosedPeriods; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing ClosedPeriods; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the effectiveEnd, specify \"effectiveEnd gt 2019-01-15T10:00:00\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the effectiveEnd, specify \"effectiveEnd gt 2019-01-15T10:00:00\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'ClosedPeriod' domain to decorate onto each ClosedPeriod.              These must take the format {domain}/{scope}/{code}, for example 'ClosedPeriod/Account/id'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'ClosedPeriod' domain to decorate onto each ClosedPeriod.             These must take the format {domain}/{scope}/{code}, for example 'ClosedPeriod/Account/id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -589,11 +589,11 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Timeline. | 
  **code** | **str**| The code of the Timeline. | 
  **as_at** | **datetime**| The asAt datetime at which to list the ClosedPeriods. Defaults to returning the latest version of each ClosedPeriod if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing ClosedPeriods; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing ClosedPeriods; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the effectiveEnd, specify \&quot;effectiveEnd gt 2019-01-15T10:00:00\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the effectiveEnd, specify \&quot;effectiveEnd gt 2019-01-15T10:00:00\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each ClosedPeriod.              These must take the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/Account/id&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each ClosedPeriod.             These must take the format {domain}/{scope}/{code}, for example &#39;ClosedPeriod/Account/id&#39;. | [optional] 
 
 ### Return type
 
@@ -666,12 +666,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TimelinesApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Timelines. Defaults to returning the latest version of each Timeline if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Timelines.              Note that Timelines are monotemporal, the effectiveAt is for Timevariant Properties on the Timeline only.              Defaults to the current LUSID system datetime if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Timelines; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Timelines.             Note that Timelines are monotemporal, the effectiveAt is for Timevariant Properties on the Timeline only.             Defaults to the current LUSID system datetime if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Timelines; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the displayName, specify \"displayName eq 'AccountingTimeline'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the displayName, specify \"displayName eq 'AccountingTimeline'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Timeline' domain to decorate onto each Timeline.              These must take the format {domain}/{scope}/{code}, for example 'Timeline/Account/id'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Timeline' domain to decorate onto each Timeline.             These must take the format {domain}/{scope}/{code}, for example 'Timeline/Account/id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -692,12 +692,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the Timelines. Defaults to returning the latest version of each Timeline if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to list the Timelines.              Note that Timelines are monotemporal, the effectiveAt is for Timevariant Properties on the Timeline only.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Timelines; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the Timelines.             Note that Timelines are monotemporal, the effectiveAt is for Timevariant Properties on the Timeline only.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Timelines; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the displayName, specify \&quot;displayName eq &#39;AccountingTimeline&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.             For example, to filter on the displayName, specify \&quot;displayName eq &#39;AccountingTimeline&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto each Timeline.              These must take the format {domain}/{scope}/{code}, for example &#39;Timeline/Account/id&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Timeline&#39; domain to decorate onto each Timeline.             These must take the format {domain}/{scope}/{code}, for example &#39;Timeline/Account/id&#39;. | [optional] 
 
 ### Return type
 
@@ -771,7 +771,7 @@ def main():
     api_instance = api_client_factory.build(TimelinesApi)
     scope = 'scope_example' # str | The scope of the Timeline.
     code = 'code_example' # str | The code of the Timeline.
-    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod
+    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,             this uniquely identifies the ClosedPeriod
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -799,7 +799,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Timeline. | 
  **code** | **str**| The code of the Timeline. | 
- **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod | 
+ **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,             this uniquely identifies the ClosedPeriod | 
  **post_close_activities_request** | [**PostCloseActivitiesRequest**](PostCloseActivitiesRequest.md)| Specifies collection of post close activities | [optional] 
 
 ### Return type
@@ -825,7 +825,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 
-Overwrites an existing Timeline  Update request has the same required fields as Create apart from the id.  Returns the updated Timeline at the current effectiveAt.  Note that Timelines are mono-temporal, however they can have Time-Variant Properties.  Updated Properties will be returned at the latest AsAt and EffectiveAt
+Overwrites an existing Timeline Update request has the same required fields as Create apart from the id. Returns the updated Timeline at the current effectiveAt. Note that Timelines are mono-temporal, however they can have Time-Variant Properties. Updated Properties will be returned at the latest AsAt and EffectiveAt
 
 ### Example
 

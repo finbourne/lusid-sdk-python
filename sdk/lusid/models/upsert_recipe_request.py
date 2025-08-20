@@ -24,7 +24,7 @@ from lusid.models.configuration_recipe import ConfigurationRecipe
 
 class UpsertRecipeRequest(BaseModel):
     """
-    A recipe that is to be stored in the recipe structured data store.  Only one of these must be present.  # noqa: E501
+    A recipe that is to be stored in the recipe structured data store. Only one of these must be present.  # noqa: E501
     """
     configuration_recipe: Optional[ConfigurationRecipe] = Field(None, alias="configurationRecipe")
     __properties = ["configurationRecipe"]

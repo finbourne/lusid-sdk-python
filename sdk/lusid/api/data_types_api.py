@@ -74,7 +74,7 @@ class DataTypesApi:
     def create_data_type(self, create_data_type_request : Annotated[Optional[CreateDataTypeRequest], Field(description="The definition of the new data type")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DataType, Awaitable[DataType]]:  # noqa: E501
         """[EARLY ACCESS] CreateDataType: Create data type definition  # noqa: E501
 
-        Create a new data type definition    Data types cannot be created in either the \"default\" or \"system\" scopes.  # noqa: E501
+        Create a new data type definition  Data types cannot be created in either the \"default\" or \"system\" scopes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -105,7 +105,7 @@ class DataTypesApi:
     def create_data_type_with_http_info(self, create_data_type_request : Annotated[Optional[CreateDataTypeRequest], Field(description="The definition of the new data type")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CreateDataType: Create data type definition  # noqa: E501
 
-        Create a new data type definition    Data types cannot be created in either the \"default\" or \"system\" scopes.  # noqa: E501
+        Create a new data type definition  Data types cannot be created in either the \"default\" or \"system\" scopes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -233,7 +233,7 @@ class DataTypesApi:
     def delete_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """DeleteDataType: Delete a data type definition.  # noqa: E501
 
-        Delete an existing data type definition.    Data types cannot be deleted in either the \"default\" or \"system\" scopes, scopes beginning with \"LUSID-\",  or data types that are in use on a property definition.  # noqa: E501
+        Delete an existing data type definition.  Data types cannot be deleted in either the \"default\" or \"system\" scopes, scopes beginning with \"LUSID-\", or data types that are in use on a property definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -266,7 +266,7 @@ class DataTypesApi:
     def delete_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], **kwargs) -> ApiResponse:  # noqa: E501
         """DeleteDataType: Delete a data type definition.  # noqa: E501
 
-        Delete an existing data type definition.    Data types cannot be deleted in either the \"default\" or \"system\" scopes, scopes beginning with \"LUSID-\",  or data types that are in use on a property definition.  # noqa: E501
+        Delete an existing data type definition.  Data types cannot be deleted in either the \"default\" or \"system\" scopes, scopes beginning with \"LUSID-\", or data types that are in use on a property definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -382,15 +382,15 @@ class DataTypesApi:
 
 
     @overload
-    async def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, **kwargs) -> DataType:  # noqa: E501
+    async def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified.")] = None, **kwargs) -> DataType:  # noqa: E501
         ...
 
     @overload
-    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DataType:  # noqa: E501
+    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DataType:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DataType, Awaitable[DataType]]:  # noqa: E501
+    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DataType, Awaitable[DataType]]:  # noqa: E501
         """GetDataType: Get data type definition  # noqa: E501
 
         Get the definition of a specified data type  # noqa: E501
@@ -404,7 +404,7 @@ class DataTypesApi:
         :type scope: str
         :param code: The code of the data type (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -425,7 +425,7 @@ class DataTypesApi:
         return self.get_data_type_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetDataType: Get data type definition  # noqa: E501
 
         Get the definition of a specified data type  # noqa: E501
@@ -439,7 +439,7 @@ class DataTypesApi:
         :type scope: str
         :param code: The code of the data type (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.
+        :param as_at: The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -553,15 +553,15 @@ class DataTypesApi:
 
 
     @overload
-    async def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
+    async def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
         ...
 
     @overload
-    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
+    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfIUnitDefinitionDto, Awaitable[ResourceListOfIUnitDefinitionDto]]:  # noqa: E501
+    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfIUnitDefinitionDto, Awaitable[ResourceListOfIUnitDefinitionDto]]:  # noqa: E501
         """[EARLY ACCESS] GetUnitsFromDataType: Get units from data type  # noqa: E501
 
         Get the definitions of the specified units associated bound to a specific data type  # noqa: E501
@@ -577,7 +577,7 @@ class DataTypesApi:
         :type code: str
         :param units: One or more unit identifiers for which the definition is being requested
         :type units: List[str]
-        :param filter: Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param as_at: Optional. The as at of the requested data type
         :type as_at: datetime
@@ -600,7 +600,7 @@ class DataTypesApi:
         return self.get_units_from_data_type_with_http_info(scope, code, units, filter, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_units_from_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_units_from_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetUnitsFromDataType: Get units from data type  # noqa: E501
 
         Get the definitions of the specified units associated bound to a specific data type  # noqa: E501
@@ -616,7 +616,7 @@ class DataTypesApi:
         :type code: str
         :param units: One or more unit identifiers for which the definition is being requested
         :type units: List[str]
-        :param filter: Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param as_at: Optional. The as at of the requested data type
         :type as_at: datetime
@@ -741,15 +741,15 @@ class DataTypesApi:
 
 
     @overload
-    async def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
+    async def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
         ...
 
     @overload
-    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
+    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDataTypeSummary, Awaitable[PagedResourceListOfDataTypeSummary]]:  # noqa: E501
+    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDataTypeSummary, Awaitable[PagedResourceListOfDataTypeSummary]]:  # noqa: E501
         """[EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data  # noqa: E501
 
         List all data type summaries  # noqa: E501
@@ -759,13 +759,13 @@ class DataTypesApi:
         >>> thread = api.list_data_type_summaries(as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.
+        :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -788,7 +788,7 @@ class DataTypesApi:
         return self.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_type_summaries_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_type_summaries_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data  # noqa: E501
 
         List all data type summaries  # noqa: E501
@@ -798,13 +798,13 @@ class DataTypesApi:
         >>> thread = api.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.
+        :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
-        :param filter: Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
@@ -929,15 +929,15 @@ class DataTypesApi:
 
 
     @overload
-    async def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfDataType:  # noqa: E501
+    async def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfDataType:  # noqa: E501
         ...
 
     @overload
-    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataType:  # noqa: E501
+    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataType:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataType, Awaitable[ResourceListOfDataType]]:  # noqa: E501
+    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataType, Awaitable[ResourceListOfDataType]]:  # noqa: E501
         """ListDataTypes: List data types  # noqa: E501
 
         List all data types in a specified scope  # noqa: E501
@@ -957,7 +957,7 @@ class DataTypesApi:
         :type sort_by: List[str]
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -978,7 +978,7 @@ class DataTypesApi:
         return self.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_types_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_types_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListDataTypes: List data types  # noqa: E501
 
         List all data types in a specified scope  # noqa: E501
@@ -998,7 +998,7 @@ class DataTypesApi:
         :type sort_by: List[str]
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
-        :param filter: Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1136,7 +1136,7 @@ class DataTypesApi:
     def update_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], update_data_type_request : Annotated[UpdateDataTypeRequest, Field(..., description="The updated definition of the data type")], async_req: Optional[bool]=None, **kwargs) -> Union[DataType, Awaitable[DataType]]:  # noqa: E501
         """[EARLY ACCESS] UpdateDataType: Update data type definition  # noqa: E501
 
-        Update the definition of the specified existing data type    Not all elements within a data type definition are modifiable due to the potential implications for data  already stored against the types  # noqa: E501
+        Update the definition of the specified existing data type  Not all elements within a data type definition are modifiable due to the potential implications for data already stored against the types  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1171,7 +1171,7 @@ class DataTypesApi:
     def update_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], update_data_type_request : Annotated[UpdateDataTypeRequest, Field(..., description="The updated definition of the data type")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateDataType: Update data type definition  # noqa: E501
 
-        Update the definition of the specified existing data type    Not all elements within a data type definition are modifiable due to the potential implications for data  already stored against the types  # noqa: E501
+        Update the definition of the specified existing data type  Not all elements within a data type definition are modifiable due to the potential implications for data already stored against the types  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

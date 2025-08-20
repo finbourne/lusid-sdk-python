@@ -28,7 +28,7 @@ from lusid.models.translation_context import TranslationContext
 
 class ConfigurationRecipe(BaseModel):
     """
-    The Configuration or Calculation Recipe controls how LUSID processes a given request.  This can be used to change where market data used in pricing is loaded from and in what order, or which model is used to  price a given instrument as well as how aggregation will process the produced results.  # noqa: E501
+    The Configuration or Calculation Recipe controls how LUSID processes a given request. This can be used to change where market data used in pricing is loaded from and in what order, or which model is used to price a given instrument as well as how aggregation will process the produced results.  # noqa: E501
     """
     scope:  StrictStr = Field(...,alias="scope", description="The scope used when updating or inserting the Configuration Recipe.") 
     code:  StrictStr = Field(...,alias="code", description="User given string name (code) to identify the recipe.") 

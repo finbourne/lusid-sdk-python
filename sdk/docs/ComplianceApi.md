@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteComplianceRule: Delete compliance rule.
 
-Use this endpoint to delete a compliance rule. The rule will be recoverable for asat times earlier than the  delete time, but will otherwise appear to have never existed.
+Use this endpoint to delete a compliance rule. The rule will be recoverable for asat times earlier than the delete time, but will otherwise appear to have never existed.
 
 ### Example
 
@@ -364,7 +364,7 @@ def main():
     scope = 'scope_example' # str | The compliance rule's scope.
     code = 'code_example' # str | The compliance rule's code.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. Asat time for query. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto the rule.             These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The compliance rule&#39;s scope. | 
  **code** | **str**| The compliance rule&#39;s code. | 
  **as_at** | **datetime**| Optional. Asat time for query. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto the rule.             These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. | [optional] 
 
 ### Return type
 
@@ -751,7 +751,7 @@ def main():
     page = 'page_example' # str | Optional. Pagination token. (optional)
     limit = 56 # int | Optional. Entries per page. (optional)
     filter = 'filter_example' # str | Optional. Filter. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for each rule. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto each rule.             These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for each rule. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -775,7 +775,7 @@ Name | Type | Description  | Notes
  **page** | **str**| Optional. Pagination token. | [optional] 
  **limit** | **int**| Optional. Entries per page. | [optional] 
  **filter** | **str**| Optional. Filter. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. If not provided will return all the entitled properties for each rule. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto each rule.             These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. If not provided will return all the entitled properties for each rule. | [optional] 
 
 ### Return type
 
@@ -848,7 +848,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplianceApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The time at which to get results from. Default : latest (optional)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | Optional. A list of field names to sort by, each suffixed by \"ASC\" or \"DESC\" (optional)
@@ -872,7 +872,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| Optional. The time at which to get results from. Default : latest | [optional] 
- **page** | **str**| Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] 
@@ -948,7 +948,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplianceApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The time at which to get results from. Default : latest (optional)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
@@ -971,7 +971,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| Optional. The time at which to get results from. Default : latest | [optional] 
- **page** | **str**| Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
@@ -1046,7 +1046,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplianceApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The time at which to get results from. Default : latest (optional)
-    page = 'page_example' # str | Optional. The pagination token to use to continue listing historical order breaches from a previous call to list historical order breaches.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
+    page = 'page_example' # str | Optional. The pagination token to use to continue listing historical order breaches from a previous call to list historical order breaches.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | Optional. A list of field names to sort by, each suffixed by \"ASC\" or \"DESC\" (optional)
@@ -1070,7 +1070,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| Optional. The time at which to get results from. Default : latest | [optional] 
- **page** | **str**| Optional. The pagination token to use to continue listing historical order breaches from a previous call to list historical order breaches.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
+ **page** | **str**| Optional. The pagination token to use to continue listing historical order breaches from a previous call to list historical order breaches.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields             must not have changed since the original request. | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] 
@@ -1404,7 +1404,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 
-Use this endpoint to upsert a single compliance rule. The template and variation specified must already  exist, as must the portfolio group. The parameters passed must match those required by the template variation.
+Use this endpoint to upsert a single compliance rule. The template and variation specified must already exist, as must the portfolio group. The parameters passed must match those required by the template variation.
 
 ### Example
 

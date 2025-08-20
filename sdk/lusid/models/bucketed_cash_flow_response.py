@@ -29,10 +29,10 @@ class BucketedCashFlowResponse(BaseModel):
     BucketedCashFlowResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    data: Optional[conlist(Dict[str, Any])] = Field(None, description="List of dictionary bucketed cash flow result set.  Each dictionary represent a bucketed cashflow result set keyed by AddressKeys.  e.g. dictionary[\"Valuation/CashFlowAmount\"] for the aggregated cash flow amount for the bucket.  e.g. suppose \"RoundUp\" method, then dictionary[\"Valuation/CashFlowDate/RoundUp\"] returns the bucketed cashflow date.")
-    report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCcy denominated queries.  If not present then the currency of the relevant portfolio will be used in its place where relevant.") 
+    data: Optional[conlist(Dict[str, Any])] = Field(None, description="List of dictionary bucketed cash flow result set. Each dictionary represent a bucketed cashflow result set keyed by AddressKeys. e.g. dictionary[\"Valuation/CashFlowAmount\"] for the aggregated cash flow amount for the bucket. e.g. suppose \"RoundUp\" method, then dictionary[\"Valuation/CashFlowDate/RoundUp\"] returns the bucketed cashflow date.")
+    report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCcy denominated queries. If not present then the currency of the relevant portfolio will be used in its place where relevant.") 
     data_schema: Optional[ResultDataSchema] = Field(None, alias="dataSchema")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="Information about where instruments have failed to return cashflows in so far as it is available.  e.g., failure to retrieve a market quote for a floating rate instrument.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="Information about where instruments have failed to return cashflows in so far as it is available. e.g., failure to retrieve a market quote for a floating rate instrument.")
     links: Optional[conlist(Link)] = None
     __properties = ["href", "data", "reportCurrency", "dataSchema", "failed", "links"]
 

@@ -158,7 +158,7 @@ def main():
     api_instance = api_client_factory.build(AggregatedReturnsApi)
     scope = 'scope_example' # str | Returns entity scope.
     code = 'code_example' # str | Returns entity code.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| Returns entity scope. | 
  **code** | **str**| Returns entity code. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the returns entity. Defaults to return              the latest version of the definition if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the returns entity. Defaults to return             the latest version of the definition if not specified. | [optional] 
 
 ### Return type
 
@@ -252,7 +252,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(AggregatedReturnsApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -272,7 +272,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the relation definitions. Defaults to return              the latest version of each definition if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the relation definitions. Defaults to return             the latest version of each definition if not specified. | [optional] 
 
 ### Return type
 

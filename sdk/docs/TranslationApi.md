@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
 
-Translates one or more instruments into the given target dialect.                In the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                Any instrument that is not already in the LUSID dialect should be given as an ExoticInstrument.                The response will return both the collection of successfully translated instruments in the target dialect,  as well as those that failed.  For the failures a reason will be provided explaining why the instrument could not be updated or inserted.
+Translates one or more instruments into the given target dialect.              In the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.              Any instrument that is not already in the LUSID dialect should be given as an ExoticInstrument.              The response will return both the collection of successfully translated instruments in the target dialect, as well as those that failed. For the failures a reason will be provided explaining why the instrument could not be updated or inserted.
 
 ### Example
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
 
-Translates one or more trade tickets into the given target dialect.                In the request each trade ticket definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each trade ticket in the response.                The response will return both the collection of successfully translated trade tickets in the target dialect,  as well as those that failed.  For the failures a reason will be provided explaining why the trade ticket could not be updated or inserted.
+Translates one or more trade tickets into the given target dialect.              In the request each trade ticket definition should be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each trade ticket in the response.              The response will return both the collection of successfully translated trade tickets in the target dialect, as well as those that failed. For the failures a reason will be provided explaining why the trade ticket could not be updated or inserted.
 
 ### Example
 

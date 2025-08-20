@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictI
 
 class PropertyReferenceDataValue(BaseModel):
     """
-    The ReferenceData relevant to the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the Property.  Only ReferenceData where the ReferenceData value matches the Property value is included.  # noqa: E501
+    The ReferenceData relevant to the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the Property. Only ReferenceData where the ReferenceData value matches the Property value is included.  # noqa: E501
     """
     string_value:  Optional[StrictStr] = Field(None,alias="stringValue") 
     numeric_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="numericValue")

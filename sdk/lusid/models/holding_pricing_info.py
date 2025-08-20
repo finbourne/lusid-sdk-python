@@ -24,10 +24,10 @@ from lusid.models.specific_holding_pricing_info import SpecificHoldingPricingInf
 
 class HoldingPricingInfo(BaseModel):
     """
-    Enables price quotes to be created from Holding fields as either overrides or fallbacks to the Market Data  resolution process. For example, we may wish to price an instrument at Cost if Market Data resolution fails.  We may also wish to always price Bonds using the LastTradedPrice on the corresponding Holding.  # noqa: E501
+    Enables price quotes to be created from Holding fields as either overrides or fallbacks to the Market Data resolution process. For example, we may wish to price an instrument at Cost if Market Data resolution fails. We may also wish to always price Bonds using the LastTradedPrice on the corresponding Holding.  # noqa: E501
     """
     fallback_field:  Optional[StrictStr] = Field(None,alias="fallbackField", description="The default Holding field to fall back on if the Market Data resolution process fails to find a price quote.") 
-    override_field:  Optional[StrictStr] = Field(None,alias="overrideField", description="The default Holding field to be used as an override for instrument price quotes. This cannot be specified  along with a FallbackField or any SpecificFallbacks, since we'll never attempt Market Data resolution  for price quotes if this field is populated.") 
+    override_field:  Optional[StrictStr] = Field(None,alias="overrideField", description="The default Holding field to be used as an override for instrument price quotes. This cannot be specified along with a FallbackField or any SpecificFallbacks, since we'll never attempt Market Data resolution for price quotes if this field is populated.") 
     specific_fallbacks: Optional[conlist(SpecificHoldingPricingInfo)] = Field(None, alias="specificFallbacks", description="Allows a user to specify fallbacks using Holding fields for sources that match a particular DependencySourceFilter.")
     specific_overrides: Optional[conlist(SpecificHoldingPricingInfo)] = Field(None, alias="specificOverrides", description="Allows a user to specify overrides using Holding fields for sources that match a particular DependencySourceFilter.")
     __properties = ["fallbackField", "overrideField", "specificFallbacks", "specificOverrides"]
