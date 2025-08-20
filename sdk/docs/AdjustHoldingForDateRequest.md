@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Set of unique holding properties and associated values to store with the target holding. Each property must be from the &#39;Holding&#39; domain. | [optional] 
 **tax_lots** | [**List[TargetTaxLotRequest]**](TargetTaxLotRequest.md) | The tax-lots that together make up the target holding. | 
 **currency** | **str** | The Holding currency. This needs to be equal with the one on the TaxLot -&gt; cost if one is specified | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your v
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 tax_lots: conlist(TargetTaxLotRequest) = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
-adjust_holding_for_date_request_instance = AdjustHoldingForDateRequest(effective_at=effective_at, instrument_identifiers=instrument_identifiers, sub_holding_keys=sub_holding_keys, properties=properties, tax_lots=tax_lots, currency=currency)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+adjust_holding_for_date_request_instance = AdjustHoldingForDateRequest(effective_at=effective_at, instrument_identifiers=instrument_identifiers, sub_holding_keys=sub_holding_keys, properties=properties, tax_lots=tax_lots, currency=currency, custodian_account_id=custodian_account_id)
 
 ```
 

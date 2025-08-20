@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictI
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.resource_id import ResourceId
 from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.transaction import Transaction
 
@@ -50,7 +51,8 @@ class PortfolioHolding(BaseModel):
     variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="variationMarginPortfolioCcy")
     settlement_schedule: Optional[conlist(SettlementSchedule)] = Field(None, alias="settlementSchedule", description="Where no. of days ahead has been specified, future dated settlements will be captured here.")
     current_face: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="currentFace", description="Current face value of the holding.")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace"]
+    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -129,6 +131,9 @@ class PortfolioHolding(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['settlementSchedule'] = _items
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -210,6 +215,7 @@ class PortfolioHolding(BaseModel):
             "variation_margin": CurrencyAndAmount.from_dict(obj.get("variationMargin")) if obj.get("variationMargin") is not None else None,
             "variation_margin_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("variationMarginPortfolioCcy")) if obj.get("variationMarginPortfolioCcy") is not None else None,
             "settlement_schedule": [SettlementSchedule.from_dict(_item) for _item in obj.get("settlementSchedule")] if obj.get("settlementSchedule") is not None else None,
-            "current_face": obj.get("currentFace")
+            "current_face": obj.get("currentFace"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj

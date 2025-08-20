@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.resource_id import ResourceId
 
 class TransactionSettlementInstruction(BaseModel):
     """
@@ -35,7 +36,8 @@ class TransactionSettlementInstruction(BaseModel):
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the instrument being settled.") 
     contractual_settlement_date: Optional[datetime] = Field(None, alias="contractualSettlementDate", description="The contractual settlement date. Used to match the instruction to the correct settlement bucket.")
     sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides", description="Allows one or more sub-holding keys to be overridden for any movement being settled by an instruction. Providing a key and value will set the sub-holding key to the specified value; Providing a key only will nullify the sub-holding key. Not referenced sub-holding keys will not be impacted. ")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides"]
+    custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +78,9 @@ class TransactionSettlementInstruction(BaseModel):
                 if self.sub_holding_key_overrides[_key]:
                     _field_dict[_key] = self.sub_holding_key_overrides[_key].to_dict()
             _dict['subHoldingKeyOverrides'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_override
+        if self.custodian_account_override:
+            _dict['custodianAccountOverride'] = self.custodian_account_override.to_dict()
         # set to None if contractual_settlement_date (nullable) is None
         # and __fields_set__ contains the field
         if self.contractual_settlement_date is None and "contractual_settlement_date" in self.__fields_set__:
@@ -111,6 +116,7 @@ class TransactionSettlementInstruction(BaseModel):
                 for _k, _v in obj.get("subHoldingKeyOverrides").items()
             )
             if obj.get("subHoldingKeyOverrides") is not None
-            else None
+            else None,
+            "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None
         })
         return _obj

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **instrument_identifiers** | **Dict[str, str]** | A set of instrument identifiers that can resolve the holding adjustment to a unique instrument. | 
 **sub_holding_keys** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The sub-holding properties which identify the holding. Each property must be from the &#39;Transaction&#39; domain. | [optional] 
 **currency** | **str** | The Holding currency. | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from pydantic.v1 import BaseModel, Field, StrictStr
 instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
-cancel_single_holding_adjustment_request_instance = CancelSingleHoldingAdjustmentRequest(instrument_identifiers=instrument_identifiers, sub_holding_keys=sub_holding_keys, currency=currency)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+cancel_single_holding_adjustment_request_instance = CancelSingleHoldingAdjustmentRequest(instrument_identifiers=instrument_identifiers, sub_holding_keys=sub_holding_keys, currency=currency, custodian_account_id=custodian_account_id)
 
 ```
 

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **variation_margin_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **settlement_schedule** | [**List[SettlementSchedule]**](SettlementSchedule.md) | Where no. of days ahead has been specified, future dated settlements will be captured here. | [optional] 
 **current_face** | **float** | Current face value of the holding. | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -51,7 +52,8 @@ variation_margin: Optional[CurrencyAndAmount] = # Replace with your value
 variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = # Replace with your value
 settlement_schedule: Optional[conlist(SettlementSchedule)] = # Replace with your value
 current_face: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-portfolio_holding_instance = PortfolioHolding(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, holding_type=holding_type, units=units, settled_units=settled_units, cost=cost, cost_portfolio_ccy=cost_portfolio_ccy, transaction=transaction, currency=currency, holding_type_name=holding_type_name, holding_id=holding_id, notional_cost=notional_cost, amortised_cost=amortised_cost, amortised_cost_portfolio_ccy=amortised_cost_portfolio_ccy, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy, settlement_schedule=settlement_schedule, current_face=current_face)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+portfolio_holding_instance = PortfolioHolding(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, holding_type=holding_type, units=units, settled_units=settled_units, cost=cost, cost_portfolio_ccy=cost_portfolio_ccy, transaction=transaction, currency=currency, holding_type_name=holding_type_name, holding_id=holding_id, notional_cost=notional_cost, amortised_cost=amortised_cost, amortised_cost_portfolio_ccy=amortised_cost_portfolio_ccy, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy, settlement_schedule=settlement_schedule, current_face=current_face, custodian_account_id=custodian_account_id)
 
 ```
 

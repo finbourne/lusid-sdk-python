@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The set of unique holding properties and associated values stored with the target holding. Each property will be from the &#39;Holding&#39; domain. | [optional] 
 **tax_lots** | [**List[TargetTaxLot]**](TargetTaxLot.md) | The tax-lots that together make up the target holding. | 
 **currency** | **str** | The Holding currency. | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -26,7 +27,8 @@ sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your v
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 tax_lots: conlist(TargetTaxLot) = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
-holding_adjustment_with_date_instance = HoldingAdjustmentWithDate(effective_at=effective_at, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, tax_lots=tax_lots, currency=currency)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+holding_adjustment_with_date_instance = HoldingAdjustmentWithDate(effective_at=effective_at, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, tax_lots=tax_lots, currency=currency, custodian_account_id=custodian_account_id)
 
 ```
 

@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.resource_id import ResourceId
 
 class CancelSingleHoldingAdjustmentRequest(BaseModel):
     """
@@ -29,7 +30,8 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property must be from the 'Transaction' domain.")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency.") 
-    __properties = ["instrumentIdentifiers", "subHoldingKeys", "currency"]
+    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
+    __properties = ["instrumentIdentifiers", "subHoldingKeys", "currency", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +72,9 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
                 if self.sub_holding_keys[_key]:
                     _field_dict[_key] = self.sub_holding_keys[_key].to_dict()
             _dict['subHoldingKeys'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if sub_holding_keys (nullable) is None
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
@@ -99,6 +104,7 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
             )
             if obj.get("subHoldingKeys") is not None
             else None,
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj

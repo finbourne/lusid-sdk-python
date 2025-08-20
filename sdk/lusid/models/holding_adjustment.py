@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.resource_id import ResourceId
 from lusid.models.target_tax_lot import TargetTaxLot
 
 class HoldingAdjustment(BaseModel):
@@ -34,7 +35,8 @@ class HoldingAdjustment(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The set of unique holding properties and associated values stored with the target holding. Each property will be from the 'Holding' domain.")
     tax_lots: conlist(TargetTaxLot) = Field(..., alias="taxLots", description="The tax-lots that together make up the target holding.")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency.") 
-    __properties = ["instrumentIdentifiers", "instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "taxLots", "currency"]
+    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
+    __properties = ["instrumentIdentifiers", "instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "taxLots", "currency", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +91,9 @@ class HoldingAdjustment(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['taxLots'] = _items
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
@@ -142,6 +147,7 @@ class HoldingAdjustment(BaseModel):
             if obj.get("properties") is not None
             else None,
             "tax_lots": [TargetTaxLot.from_dict(_item) for _item in obj.get("taxLots")] if obj.get("taxLots") is not None else None,
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
