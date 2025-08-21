@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -37,7 +37,8 @@ class TransactionSettlementInstruction(BaseModel):
     contractual_settlement_date: Optional[datetime] = Field(None, alias="contractualSettlementDate", description="The contractual settlement date. Used to match the instruction to the correct settlement bucket.")
     sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides", description="Allows one or more sub-holding keys to be overridden for any movement being settled by an instruction. Providing a key and value will set the sub-holding key to the specified value; Providing a key only will nullify the sub-holding key. Not referenced sub-holding keys will not be impacted. ")
     custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride"]
+    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the settlement instruction to a unique instrument.")
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers"]
 
     class Config:
         """Pydantic configuration"""
@@ -117,6 +118,7 @@ class TransactionSettlementInstruction(BaseModel):
             )
             if obj.get("subHoldingKeyOverrides") is not None
             else None,
-            "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None
+            "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None,
+            "instrument_identifiers": obj.get("instrumentIdentifiers")
         })
         return _obj
