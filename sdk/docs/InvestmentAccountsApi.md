@@ -65,10 +65,10 @@ def main():
     identifier_value = 'identifier_value_example' # str | Code of the investment account under specified identifier type's scope and code.
     scope = 'scope_example' # str | The scope of the investment account entity.
     identifier_scope = 'identifier_scope_example' # str | Scope of the investment account identifier type.
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain             to include for found investment account, or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\". (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\". (optional)
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -92,10 +92,10 @@ Name | Type | Description  | Notes
  **identifier_value** | **str**| Code of the investment account under specified identifier type&#39;s scope and code. | 
  **scope** | **str**| The scope of the investment account entity. | 
  **identifier_scope** | **str**| Scope of the investment account identifier type. | 
- **property_keys** | [**List[str]**](str.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain             to include for found investment account, or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for found investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the investment account. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the investment account. Defaults to return the latest version of the investment account if not specified. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -167,14 +167,14 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InvestmentAccountsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID             system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the investment accounts. Defaults to return the latest version             of each investment accounts if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain             to include for each investment account, or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\". (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys or identifier types (as property keys) from the \"InvestmentAccount\" domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"InvestmentAccount/ContactDetails/Address\". (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -194,14 +194,14 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID             system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the investment accounts. Defaults to return the latest version             of each investment accounts if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the investment accounts. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the investment accounts. Defaults to return the latest version              of each investment accounts if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing investment accounts from a previous call to list investment accounts. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain             to include for each investment account, or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys or identifier types (as property keys) from the \&quot;InvestmentAccount\&quot; domain              to include for each investment account, or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;InvestmentAccount/ContactDetails/Address\&quot;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto each investment account in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 

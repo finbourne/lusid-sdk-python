@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, v
 
 class QuoteSeriesId(BaseModel):
     """
-    The time invariant unique identifier of the quote. Combined with the effective datetime of the quote this uniquely identifies the quote. This can be thought of as a unique identifier for a time series of quotes.  # noqa: E501
+    The time invariant unique identifier of the quote. Combined with the effective datetime of the quote this  uniquely identifies the quote. This can be thought of as a unique identifier for a time series of quotes.  # noqa: E501
     """
     provider:  StrictStr = Field(...,alias="provider", description="The platform or vendor that provided the quote. The available values are: Client, DataScope, Lusid, Edi, TraderMade, FactSet, SIX, Bloomberg, Rimes, ICE, LSEG") 
     price_source:  Optional[StrictStr] = Field(None,alias="priceSource", description="The source or originator of the quote, e.g. a bank or financial institution.") 

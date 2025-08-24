@@ -1,6 +1,6 @@
 # MarketDataType
 
-The format of the complex market data stored. Complex market data is used to store any data which requires more context than just a simple single point as is the case with a quote. Examples of such complex market data are Discount Curve and Volatility Surfaces.
+The format of the complex market data stored. Complex market data is used to store any  data which requires more context than just a simple single point as is the case with a  quote.  Examples of such complex market data are Discount Curve and Volatility Surfaces.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

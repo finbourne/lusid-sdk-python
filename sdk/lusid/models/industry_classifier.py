@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator
 
 class IndustryClassifier(BaseModel):
     """
-    Object describing a particular industry classifier, which comprises a classification code and the name of the classification system to which the code belongs.  # noqa: E501
+    Object describing a particular industry classifier,  which comprises a classification code and the name of the classification system to which the code belongs.  # noqa: E501
     """
     classification_system_name:  StrictStr = Field(...,alias="classificationSystemName", description="The name of the classification system to which the classification code belongs (e.g. GICS).") 
     classification_code:  StrictStr = Field(...,alias="classificationCode", description="The specific industry classification code assigned to the legal entity.") 

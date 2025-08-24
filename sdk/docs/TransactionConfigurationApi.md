@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 DeleteTransactionType: Delete a transaction type
 
-/// WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.
+/// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.
 
 ### Example
 
@@ -451,7 +451,7 @@ def main():
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     source = 'source_example' # str | The source that the type is in
     type = 'type_example' # str | One of the type's aliases
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
@@ -474,7 +474,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **source** | **str**| The source that the type is in | 
  **type** | **str**| One of the type&#39;s aliases | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified | [optional] 
  **scope** | **str**| The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
 
 ### Return type
@@ -594,7 +594,7 @@ Name | Type | Description  | Notes
 
 ListTransactionTypes: List transaction types
 
-Get the list of current transaction types. For information on the default transaction types provided with LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
+Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
 
 ### Example
 
@@ -641,7 +641,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionConfigurationApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
@@ -662,7 +662,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. | [optional] 
  **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
 
 ### Return type
@@ -883,7 +883,7 @@ Name | Type | Description  | Notes
 
 SetTransactionType: Set a specific transaction type
 
-Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created  WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.
+Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.
 
 ### Example
 

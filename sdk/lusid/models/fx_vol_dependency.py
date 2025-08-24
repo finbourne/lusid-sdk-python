@@ -24,12 +24,12 @@ from lusid.models.economic_dependency import EconomicDependency
 
 class FxVolDependency(EconomicDependency):
     """
-    Economic dependency required to price FX derivative products that contain optionality. FX Vol surface is a grid of implied volatilities for an array of strikes and tenors, derived from vanilla option prices in the market.  # noqa: E501
+    Economic dependency required to price FX derivative products that contain optionality.  FX Vol surface is a grid of implied volatilities for an array of strikes and tenors,  derived from vanilla option prices in the market.  # noqa: E501
     """
     domestic_currency:  StrictStr = Field(...,alias="domesticCurrency", description="DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency.") 
     foreign_currency:  StrictStr = Field(...,alias="foreignCurrency", description="ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency.") 
     vol_type:  StrictStr = Field(...,alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.") 
-    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for. Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
+    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "domesticCurrency", "foreignCurrency", "volType", "date"]

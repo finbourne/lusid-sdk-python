@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
 
-When a request is made for aggregation, the user needs to know what keys can be passed to it for queryable data. This endpoint allows to queries to provide the set of keys, what they are and what they return.
+When a request is made for aggregation, the user needs to know what keys can be passed to it for queryable data. This endpoint allows to queries to provide the set of keys,  what they are and what they return.
 
 ### Example
 
@@ -163,9 +163,9 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(AggregationApi)
-    page = 'page_example' # str | The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.             This value is returned from the previous call. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.              This value is returned from the previous call. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -185,9 +185,9 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **str**| The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.             This value is returned from the previous call. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.              This value is returned from the previous call. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 

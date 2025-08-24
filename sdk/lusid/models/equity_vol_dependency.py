@@ -24,12 +24,12 @@ from lusid.models.economic_dependency import EconomicDependency
 
 class EquityVolDependency(EconomicDependency):
     """
-    Economic dependency required to price Equity derivative products that contain optionality. Equity Vol surface is a grid of implied volatilities for an array of strikes and tenors, derived from vanilla option prices in the market.  # noqa: E501
+    Economic dependency required to price Equity derivative products that contain optionality.  Equity Vol surface is a grid of implied volatilities for an array of strikes and tenors,  derived from vanilla option prices in the market.  # noqa: E501
     """
     code:  StrictStr = Field(...,alias="code", description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN") 
     domestic_currency:  StrictStr = Field(...,alias="domesticCurrency", description="The domestic currency of the instrument declaring this dependency.") 
     vol_type:  StrictStr = Field(...,alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.") 
-    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for. Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
+    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "code", "domesticCurrency", "volType", "date"]

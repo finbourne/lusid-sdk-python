@@ -24,12 +24,12 @@ from lusid.models.economic_dependency import EconomicDependency
 
 class IndexProjectionDependency(EconomicDependency):
     """
-    Represents either a dependency on projections of an index. E.g. If the interest leg of a swap is a FloatingLeg, then it will declare an IndexProjectionDependency upon pricing. This is to indicate that pricing the floating leg requires predictions of future fixings of the index.  # noqa: E501
+    Represents either a dependency on projections of an index.  E.g. If the interest leg of a swap is a FloatingLeg, then it will declare an IndexProjectionDependency upon pricing.  This is to indicate that pricing the floating leg requires predictions of future fixings of the index.  # noqa: E501
     """
     currency:  StrictStr = Field(...,alias="currency", description="The currency of the corresponding IndexConvention. E.g. this would be USD for a convention named USD.6M.LIBOR") 
     tenor:  StrictStr = Field(...,alias="tenor", description="The tenor of the corresponding IndexConvention. E.g. this would be \"6M\" for a convention named USD.6M.LIBOR") 
     index_name:  StrictStr = Field(...,alias="indexName", description="The IndexName of the corresponding IndexConvention. E.g. this would be \"LIBOR\" for a convention named USD.6M.LIBOR") 
-    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for. Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
+    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "currency", "tenor", "indexName", "date"]

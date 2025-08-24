@@ -55,15 +55,15 @@ class QueryableKeysApi:
 
 
     @overload
-    async def get_all_queryable_keys(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfQueryableKey:  # noqa: E501
+    async def get_all_queryable_keys(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfQueryableKey:  # noqa: E501
         ...
 
     @overload
-    def get_all_queryable_keys(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfQueryableKey:  # noqa: E501
+    def get_all_queryable_keys(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfQueryableKey:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_all_queryable_keys(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfQueryableKey, Awaitable[ResourceListOfQueryableKey]]:  # noqa: E501
+    def get_all_queryable_keys(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfQueryableKey, Awaitable[ResourceListOfQueryableKey]]:  # noqa: E501
         """[EARLY ACCESS] GetAllQueryableKeys: Query the set of supported \"addresses\" that can be queried from all endpoints.  # noqa: E501
 
         When a request is made, the user needs to know what keys can be passed to it for queryable data. This endpoint provides all supported keys,  # noqa: E501
@@ -75,7 +75,7 @@ class QueryableKeysApi:
 
         :param as_at: For user defined DerivedValuation keys.
         :type as_at: datetime
-        :param filter: Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -96,7 +96,7 @@ class QueryableKeysApi:
         return self.get_all_queryable_keys_with_http_info(as_at, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_all_queryable_keys_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_all_queryable_keys_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="For user defined DerivedValuation keys.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetAllQueryableKeys: Query the set of supported \"addresses\" that can be queried from all endpoints.  # noqa: E501
 
         When a request is made, the user needs to know what keys can be passed to it for queryable data. This endpoint provides all supported keys,  # noqa: E501
@@ -108,7 +108,7 @@ class QueryableKeysApi:
 
         :param as_at: For user defined DerivedValuation keys.
         :type as_at: datetime
-        :param filter: Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

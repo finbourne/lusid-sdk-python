@@ -26,7 +26,7 @@ from lusid.models.schedule import Schedule
 
 class FxLinkedNotionalSchedule(Schedule):
     """
-    Schedule for notional changes based on the change in FX rate. Used in the representation of a resettable cross currency interest rate swap.  # noqa: E501
+    Schedule for notional changes based on the change in FX rate.  Used in the representation of a resettable cross currency interest rate swap.  # noqa: E501
     """
     fx_conventions: FxConventions = Field(..., alias="fxConventions")
     varying_notional_currency:  StrictStr = Field(...,alias="varyingNotionalCurrency", description="The currency of the varying notional amount.") 

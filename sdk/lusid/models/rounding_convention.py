@@ -23,12 +23,12 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictI
 
 class RoundingConvention(BaseModel):
     """
-    Certain bonds will follow certain rounding conventions. For example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for French government bonds, the rounding is to 7dp.  # noqa: E501
+    Certain bonds will follow certain rounding conventions.  For example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for  French government bonds, the rounding is to 7dp.  # noqa: E501
     """
-    face_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="faceValue", description="The face value to round against. The number to be rounded is scaled to this face value before being rounded, and then re-scaled to the holding amount. For example if rounding an accrued interest value using a FaceValue of 1,000, but 10,000 units are held, then the initial calculated value would be divided by 10,000, then multiplied by 1,000 and rounded per the convention. The result of this would then be divided by 1,000 and multiplied by 10,000 to get the final value.")
+    face_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="faceValue", description="The face value to round against.  The number to be rounded is scaled to this face value before being rounded, and then re-scaled to the holding amount.  For example if rounding an accrued interest value using a FaceValue of 1,000, but 10,000 units are held,  then the initial calculated value would be divided by 10,000, then multiplied by 1,000 and rounded per the convention.  The result of this would then be divided by 1,000 and multiplied by 10,000 to get the final value.")
     precision: Optional[StrictInt] = Field(None, description="The precision of the rounding.  The decimal places to which the rounding takes place.")
-    rounding_target:  Optional[StrictStr] = Field(None,alias="roundingTarget", description="The target of the rounding convention. Accepted values are 'AccruedInterest', 'Cashflows', or 'All'  Supported string (enumeration) values are: [All, AccruedInterest, Cashflows].") 
-    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  e.g. Round Up, Round Down  Supported string (enumeration) values are: [Down, Up, Floor, Ceiling, Nearest].") 
+    rounding_target:  Optional[StrictStr] = Field(None,alias="roundingTarget", description="The target of the rounding convention.  Accepted values are 'AccruedInterest', 'Cashflows', or 'All'    Supported string (enumeration) values are: [All, AccruedInterest, Cashflows].") 
+    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Floor, Ceiling, Nearest].") 
     __properties = ["faceValue", "precision", "roundingTarget", "roundingType"]
 
     class Config:

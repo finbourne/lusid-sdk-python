@@ -160,7 +160,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(DerivedTransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the derived transaction portfolio.
-    code = 'code_example' # str | The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio.
+    code = 'code_example' # str | The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.
     effective_at = 'effective_at_example' # str | The effective date of the change. (optional)
 
     try:
@@ -182,7 +182,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the derived transaction portfolio. | 
- **code** | **str**| The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio. | 
+ **code** | **str**| The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio. | 
  **effective_at** | **str**| The effective date of the change. | [optional] 
 
 ### Return type

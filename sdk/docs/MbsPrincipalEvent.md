@@ -1,6 +1,6 @@
 # MbsPrincipalEvent
 
-Definition of an MBS Principal Event This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal payment.
+Definition of an MBS Principal Event  This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal payment.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -29,7 +29,7 @@ class ResultDataKeyRule(ResultKeyRule):
     supplier:  StrictStr = Field(...,alias="supplier", description="the result resource supplier (where the data comes from)") 
     data_scope:  StrictStr = Field(...,alias="dataScope", description="which is the scope in which the data should be found") 
     document_code:  StrictStr = Field(...,alias="documentCode", description="document code that defines which document is desired") 
-    quote_interval:  Optional[StrictStr] = Field(None,alias="quoteInterval", description="Shorthand for the time interval used to select result data. This must be a dot-separated string             specifying a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago).") 
+    quote_interval:  Optional[StrictStr] = Field(None,alias="quoteInterval", description="Shorthand for the time interval used to select result data. This must be a dot-separated string              specifying a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago).") 
     as_at: Optional[datetime] = Field(None, alias="asAt", description="The AsAt predicate specification.")
     resource_key:  StrictStr = Field(...,alias="resourceKey", description="The result data key that identifies the address pattern that this is a rule for") 
     document_result_type:  StrictStr = Field(...,alias="documentResultType") 

@@ -31,12 +31,12 @@ class FxForwardTenorPipsCurveData(ComplexMarketData):
     base_date: datetime = Field(..., alias="baseDate", description="EffectiveAt date of the quoted pip rates")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
     fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
-    tenors: conlist(StrictStr) = Field(..., description="Tenors for which the forward rates apply. For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
+    tenors: conlist(StrictStr) = Field(..., description="Tenors for which the forward rates apply.  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
     pip_rates: conlist(Union[StrictFloat, StrictInt]) = Field(..., alias="pipRates", description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
     calendars: Optional[conlist(FxTenorConvention)] = Field(None, description="The list of conventions that should be used when interpreting tenors as dates.")
-    spot_days_calculation_type:  Optional[StrictStr] = Field(None,alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided. Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ]") 
+    spot_days_calculation_type:  Optional[StrictStr] = Field(None,alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ]") 
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "tenors", "pipRates", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType"]

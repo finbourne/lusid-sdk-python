@@ -24,7 +24,7 @@ import lusid.models
 
 class ResultKeyRule(BaseModel):
     """
-    Base class for representing result key rules in LUSID, which describe how to resolve (unit) result data. This base class should not be directly instantiated; each supported ResultKeyRuleType has a corresponding inherited class.  # noqa: E501
+    Base class for representing result key rules in LUSID, which describe how to resolve (unit) result data.  This base class should not be directly instantiated; each supported ResultKeyRuleType has a corresponding inherited class.  # noqa: E501
     """
     result_key_rule_type:  StrictStr = Field(...,alias="resultKeyRuleType", description="The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule") 
     __properties = ["resultKeyRuleType"]

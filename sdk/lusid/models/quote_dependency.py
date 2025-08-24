@@ -24,7 +24,7 @@ from lusid.models.economic_dependency import EconomicDependency
 
 class QuoteDependency(EconomicDependency):
     """
-    For indicating a dependency on the value of an asset at a point in time. If the time is omitted, then the dependency is interpreted as the latest value with respect to anything observing it. E.g. An EquitySwap will declare a dependency on the current price of the underlying equity.  # noqa: E501
+    For indicating a dependency on the value of an asset at a point in time.  If the time is omitted, then the dependency is interpreted as the latest value with respect to anything observing it.  E.g. An EquitySwap will declare a dependency on the current price of the underlying equity.  # noqa: E501
     """
     market_identifier:  StrictStr = Field(...,alias="marketIdentifier", description="Type of the code identifying the asset, e.g. ISIN or CUSIP") 
     code:  StrictStr = Field(...,alias="code", description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN") 

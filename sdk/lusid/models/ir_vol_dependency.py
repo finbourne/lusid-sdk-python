@@ -24,11 +24,11 @@ from lusid.models.economic_dependency import EconomicDependency
 
 class IrVolDependency(EconomicDependency):
     """
-    Economic dependency required to price interest rate products that contain optionality, for example swaptions. For example, can indicate a dependency on an IrVolCubeData.  # noqa: E501
+    Economic dependency required to price interest rate products that contain optionality, for example swaptions.  For example, can indicate a dependency on an IrVolCubeData.  # noqa: E501
     """
     currency:  StrictStr = Field(...,alias="currency", description="The domestic currency of the instrument declaring this dependency.") 
     vol_type:  StrictStr = Field(...,alias="volType", description="Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility.") 
-    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for. Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
+    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.")
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "currency", "volType", "date"]

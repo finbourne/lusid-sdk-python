@@ -28,7 +28,7 @@ class AdditionalPayment(BaseModel):
     amount: Union[StrictFloat, StrictInt] = Field(..., description="The payment amount.")
     currency:  StrictStr = Field(...,alias="currency", description="The payment currency.") 
     pay_date: datetime = Field(..., alias="payDate", description="Date when the payment is made.")
-    pay_receive:  StrictStr = Field(...,alias="payReceive", description="Is it pay or receive.  Supported string (enumeration) values are: [Pay, Receive].") 
+    pay_receive:  StrictStr = Field(...,alias="payReceive", description="Is it pay or receive.    Supported string (enumeration) values are: [Pay, Receive].") 
     __properties = ["amount", "currency", "payDate", "payReceive"]
 
     class Config:

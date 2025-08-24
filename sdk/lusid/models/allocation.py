@@ -29,7 +29,7 @@ from lusid.models.version import Version
 
 class Allocation(BaseModel):
     """
-    An Allocation of a certain quantity of a specific instrument against an originating Order.  # noqa: E501
+    An Allocation of a certain quantity of a specific instrument against an originating  Order.  # noqa: E501
     """
     id: ResourceId = Field(...)
     allocated_order_id: ResourceId = Field(..., alias="allocatedOrderId")

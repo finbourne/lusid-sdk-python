@@ -1,10 +1,10 @@
 # AmortisationEvent
 
-Definition of an Amortisation event. This is an event that describes the occurence of amortisation.
+Definition of an Amortisation event.  This is an event that describes the occurence of amortisation.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount_reduced** | **float** | The amount reduced in this amortisation event. That is, the difference between the previous notional amount and the current notional amount as set in this event. | 
+**amount_reduced** | **float** | The amount reduced in this amortisation event.  That is, the difference between the previous notional amount and the current notional amount as set in this event. | 
 **dom_ccy** | **str** | Domestic currency of the originating instrument | 
 **pay_receive** | **str** | Is this event in relation to the Pay or Receive leg | 
 **payment_date** | **datetime** | The date the principal payment is to be made. | 

@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr
 
 class FxTenorConvention(BaseModel):
     """
-    A wrapper of conventions that should be used when interpreting tenors in the context of FX. For instance, can be used to control how tenors are interpreted on an FxForwardTenorCurveData instance.  # noqa: E501
+    A wrapper of conventions that should be used when interpreting tenors in the context of FX.  For instance, can be used to control how tenors are interpreted on an FxForwardTenorCurveData instance.  # noqa: E501
     """
     calendar_code:  StrictStr = Field(...,alias="calendarCode", description="The code of the holiday calendar that should be used when interpreting FX tenors.") 
     spot_days: StrictInt = Field(..., alias="spotDays", description="The minimum number of business days that must pass within this calendar when calculating the spot date.")

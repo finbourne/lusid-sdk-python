@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field
 
 class ReconciliationLine(BaseModel):
     """
-    In evaluating a left and right hand side holding or valuation set, two data records result. These are then compared based on a set of rules. This results in either a match or failure to match. If there is a match both left and right will be present, otherwise one will not. A difference will be present if a match was calculated. The options used in comparison may result in elision of results where an exact or tolerable match is made.  # noqa: E501
+    In evaluating a left and right hand side holding or valuation set, two data records result. These are then compared based on a set of  rules. This results in either a match or failure to match. If there is a match both left and right will be present, otherwise one will not.  A difference will be present if a match was calculated.  The options used in comparison may result in elision of results where an exact or tolerable match is made.  # noqa: E501
     """
     left: Optional[Dict[str, Any]] = Field(None, description="Left hand side of the comparison")
     right: Optional[Dict[str, Any]] = Field(None, description="Right hand side of the comparison")

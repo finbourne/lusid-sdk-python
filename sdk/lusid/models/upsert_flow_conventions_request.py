@@ -24,7 +24,7 @@ from lusid.models.flow_conventions import FlowConventions
 
 class UpsertFlowConventionsRequest(BaseModel):
     """
-    Flow conventions that is to be stored in the convention data store. Only one of these must be present.  # noqa: E501
+    Flow conventions that is to be stored in the convention data store.  Only one of these must be present.  # noqa: E501
     """
     flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
     __properties = ["flowConventions"]

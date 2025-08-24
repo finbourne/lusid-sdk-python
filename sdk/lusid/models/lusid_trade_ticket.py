@@ -35,7 +35,7 @@ class LusidTradeTicket(BaseModel):
     transaction_date:  StrictStr = Field(...,alias="transactionDate", description="Transaction Date. Date at which transaction is known.") 
     settlement_date:  StrictStr = Field(...,alias="settlementDate", description="Transaction settlement. Date at which transaction is finalised and realised into the system.") 
     total_consideration: CurrencyAndAmount = Field(..., alias="totalConsideration")
-    units: Union[StrictFloat, StrictInt] = Field(..., description="Number of units in the transaction. For an OTC this is somewhat interchangeable with the quantity booked in the instrument. As M x N or N x M are equivalent it is advised a client chooses one approach and sticks to it. Arguably either the unit or holding is best unitised.")
+    units: Union[StrictFloat, StrictInt] = Field(..., description="Number of units in the transaction. For an OTC this is somewhat interchangeable with the quantity booked in the  instrument. As M x N or N x M are equivalent it is advised a client chooses one approach and sticks to it.  Arguably either the unit or holding is best unitised.")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Identifiers for the instrument.")
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="Scope of instrument") 
     instrument_name:  Optional[StrictStr] = Field(None,alias="instrumentName", description="Name of instrument") 

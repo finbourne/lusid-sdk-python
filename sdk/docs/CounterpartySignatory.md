@@ -1,6 +1,6 @@
 # CounterpartySignatory
 
-The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user. The CounterpartySignatory represents the 'other side' of the agreement. It comprises a name and identifier for a Legal Entity in LUSID.
+The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user.  The CounterpartySignatory represents the 'other side' of the agreement.  It comprises a name and identifier for a Legal Entity in LUSID.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

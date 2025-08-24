@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class MbsCouponEvent(InstrumentEvent):
     """
-    Definition of an MBS Coupon Event This is an event that describes the occurence of a cashflow due to a mortgage-backed security coupon payment.  # noqa: E501
+    Definition of an MBS Coupon Event  This is an event that describes the occurence of a cashflow due to a mortgage-backed security coupon payment.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date (entitlement date) of the coupon")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the coupon")

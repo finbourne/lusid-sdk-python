@@ -24,10 +24,10 @@ from lusid.models.lusid_instrument import LusidInstrument
 
 class AssetLeg(BaseModel):
     """
-    The underlying instrument representing one side of the TRS and its pay-receive direction.              Note that TRS currently only supports an asset of Bond or ComplexBond, no other instruments are allowed. Support for additional instrument types will be added in the future.  # noqa: E501
+    The underlying instrument representing one side of the TRS and its pay-receive direction.                Note that TRS currently only supports an asset of Bond or ComplexBond, no other instruments are allowed.  Support for additional instrument types will be added in the future.  # noqa: E501
     """
     asset: LusidInstrument = Field(...)
-    pay_receive:  StrictStr = Field(...,alias="payReceive", description="Either Pay or Receive stating direction of the asset in the swap.  Supported string (enumeration) values are: [Pay, Receive].") 
+    pay_receive:  StrictStr = Field(...,alias="payReceive", description="Either Pay or Receive stating direction of the asset in the swap.    Supported string (enumeration) values are: [Pay, Receive].") 
     __properties = ["asset", "payReceive"]
 
     class Config:

@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class CloseEvent(InstrumentEvent):
     """
-    The termination of an instrument. In some cases termination can happen over a range of dates e.g. american option exercise. In most cases the startDate == endDate  # noqa: E501
+    The termination of an instrument.  In some cases termination can happen over a range of dates e.g. american option exercise.  In most cases the startDate == endDate  # noqa: E501
     """
     start_date: Optional[datetime] = Field(None, alias="startDate", description="The first date on which the instrument could close")
     end_date: Optional[datetime] = Field(None, alias="endDate", description="The last date on which the instrument could close")

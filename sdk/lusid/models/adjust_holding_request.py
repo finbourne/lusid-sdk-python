@@ -26,7 +26,7 @@ from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 
 class AdjustHoldingRequest(BaseModel):
     """
-    This request specifies target holdings. i.e. holding data that the system should match. When processed by the movement engine, it will create 'true-up' adjustments on the fly.  # noqa: E501
+    This request specifies target holdings. i.e. holding data that the  system should match. When processed by the movement  engine, it will create 'true-up' adjustments on the fly.  # noqa: E501
     """
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="Set of unique transaction properties and associated values to store with the holding adjustment transaction automatically created by LUSID. Each property must be from the 'Transaction' domain.")

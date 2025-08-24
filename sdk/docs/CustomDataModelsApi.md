@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.
 
-Add/Remove entities to/from a Custom Data Model in a single operation.              Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each amendment in the response.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.
+Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.
 
 ### Example
 
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model
 
-Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer be part of any hierarchies.
+Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer  be part of any hierarchies.
 
 ### Example
 
@@ -357,7 +357,7 @@ def main():
     entity_type = 'entity_type_example' # str | The entity type of the Data Model.
     scope = 'scope_example' # str | The scope of the specified Data Model.
     code = 'code_example' # str | The code of the specified Data Model.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -380,7 +380,7 @@ Name | Type | Description  | Notes
  **entity_type** | **str**| The entity type of the Data Model. | 
  **scope** | **str**| The scope of the specified Data Model. | 
  **code** | **str**| The code of the specified Data Model. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. | [optional] 
 
 ### Return type
 
@@ -452,7 +452,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results. Only EntityType is supported (optional)
 
     try:
@@ -473,7 +473,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results. Only EntityType is supported | [optional] 
 
 ### Return type

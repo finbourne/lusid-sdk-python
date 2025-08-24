@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class MbsPrincipalEvent(InstrumentEvent):
     """
-    Definition of an MBS Principal Event This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal payment.  # noqa: E501
+    Definition of an MBS Principal Event  This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal payment.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date (entitlement date) of the principal payment, usually several weeks prior to the payment date")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the principal")

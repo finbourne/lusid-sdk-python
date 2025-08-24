@@ -25,7 +25,7 @@ from lusid.models.industry_classifier import IndustryClassifier
 
 class CounterpartyRiskInformation(BaseModel):
     """
-    In the event that the legal entity is a counterparty to an OTC transaction (as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement), this information would be needed for calculations such as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc).  # noqa: E501
+    In the event that the legal entity is a counterparty to an OTC transaction  (as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement),  this information would be needed for calculations  such as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc).  # noqa: E501
     """
     country_of_risk:  StrictStr = Field(...,alias="countryOfRisk", description="The country to which one would naturally ascribe risk, typically the legal entity's country of registration. This can be used to infer funding currency and related market data in the absence of a specific preference.") 
     credit_ratings: conlist(CreditRating) = Field(..., alias="creditRatings")

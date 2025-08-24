@@ -26,7 +26,7 @@ from lusid.models.link import Link
 
 class InstrumentCapabilities(BaseModel):
     """
-    Instrument capabilities containing useful information about the instrument and the model. This includes - features corresponding to the instrument i.e. Optionality:American, Other:InflationLinked - supported addresses (if model provided) i.e. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued - economic dependencies (if model provided) i.e. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS  # noqa: E501
+    Instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument i.e. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) i.e. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) i.e. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS  # noqa: E501
     """
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The Lusid instrument id for the instrument e.g. 'LUID_00003D4X'.") 
     model:  Optional[StrictStr] = Field(None,alias="model", description="The pricing model e.g. 'Discounting'.") 

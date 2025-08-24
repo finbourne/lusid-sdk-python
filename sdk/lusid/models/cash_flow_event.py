@@ -25,7 +25,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class CashFlowEvent(InstrumentEvent):
     """
-    Definition of a CashFlow event. This is an event that describes the occurence of a cashflow and associated information.  # noqa: E501
+    Definition of a CashFlow event.  This is an event that describes the occurence of a cashflow and associated information.  # noqa: E501
     """
     cash_flow_value: CashFlowValue = Field(..., alias="cashFlowValue")
     event_type:  StrictStr = Field(...,alias="eventType", description="What type of internal event does this represent; coupon, principal, premium etc.") 

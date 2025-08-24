@@ -24,10 +24,10 @@ from lusid.models.complex_market_data import ComplexMarketData
 
 class ConstantVolatilitySurface(ComplexMarketData):
     """
-    Market Data required to build a volatility surface for pricing. Single constant volatility point.  # noqa: E501
+    Market Data required to build a volatility surface for pricing.  Single constant volatility point.  # noqa: E501
     """
     base_date: datetime = Field(..., alias="baseDate", description="Base date of the engine - this is the reference date for resolution of tenors.")
-    asset_type:  StrictStr = Field(...,alias="assetType", description="What is the asset that the engine is for. Supported string (enumeration) values are: [Cash, Commodity, Credit, Equity, Fx, Rates, FxVol, IrVol, EquityVol, HolidayCalendar, IndexConvention, FlowConvention, CdsFlowConvention, CorporateActions, FxForwards, Quote, Inflation, EquityCurve, All, VendorOpaque].") 
+    asset_type:  StrictStr = Field(...,alias="assetType", description="What is the asset that the engine is for.  Supported string (enumeration) values are: [Cash, Commodity, Credit, Equity, Fx, Rates, FxVol, IrVol, EquityVol, HolidayCalendar, IndexConvention, FlowConvention, CdsFlowConvention, CorporateActions, FxForwards, Quote, Inflation, EquityCurve, All, VendorOpaque].") 
     lineage:  Optional[StrictStr] = Field(None,alias="lineage") 
     volatility: Union[StrictFloat, StrictInt] = Field(..., description="Volatility value.")
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 

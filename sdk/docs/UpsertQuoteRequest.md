@@ -1,6 +1,6 @@
 # UpsertQuoteRequest
 
-The details of the quote including its unique identifier, value and lineage. Please note the Unit field on MetricValue is nullable on the upsert but there is validation within the quote store to make sure this field is populated. In the absence of a real unit then we recommend putting something in line with the data in QuoteId.QuoteSeriesId.quoteType e.g. InterestRate.
+The details of the quote including its unique identifier, value and lineage.  Please note the Unit field on MetricValue is nullable on the upsert but there  is validation within the quote store to make sure this field is populated.  In the absence of a real unit then we recommend putting something in line with  the data in QuoteId.QuoteSeriesId.quoteType e.g. InterestRate.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

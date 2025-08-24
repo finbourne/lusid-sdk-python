@@ -5,7 +5,7 @@ Contains data (i.e. dates and prices + metadata) for building Equity curves
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **base_date** | **datetime** | EffectiveAt date of the provided prices | 
-**dates** | **List[datetime]** | Dates provided for the forward price of the Equity at the corresponding price in Prices. These dates should be in the future with respect to the BaseDate. | 
+**dates** | **List[datetime]** | Dates provided for the forward price of the Equity at the corresponding price in Prices.  These dates should be in the future with respect to the BaseDate. | 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **prices** | **List[float]** | Prices provided for the forward price of the Equity at the corresponding date in Dates. | 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 

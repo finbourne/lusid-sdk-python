@@ -1,6 +1,6 @@
 # TermDepositPrincipalEvent
 
-Definition of a Term Deposit Interest Event. This is an event that describes the occurence of principal on a term deposit ().
+Definition of a Term Deposit Interest Event.  This is an event that describes the occurence of principal on a term deposit ().
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

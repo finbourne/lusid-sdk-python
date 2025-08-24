@@ -25,7 +25,7 @@ from lusid.models.virtual_document_row import VirtualDocumentRow
 
 class VirtualDocument(BaseModel):
     """
-    Virtual document consists of (potentially several) upserted documents.              The documents get parsed according to the provided data map on upsert, the collection of resulting values in aggregated in a virtual document  # noqa: E501
+    Virtual document consists of (potentially several) upserted documents.                The documents get parsed according to the provided data map on upsert, the collection of resulting values in  aggregated in a virtual document  # noqa: E501
     """
     document_id: Optional[StructuredResultDataId] = Field(None, alias="documentId")
     data: Optional[conlist(VirtualDocumentRow)] = Field(None, description="The data inside the document")

@@ -23,10 +23,10 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator
 
 class TypedResourceId(BaseModel):
     """
-    Represents the user-defined identifier for a Legal Entity or Person. Users can define their own, scoped identifiers for Legal Entities and Persons using identifier properties. For example, when used to identify a Person, the identifier defined by Person/myScope/username would be represented as  {    \"idTypeScope\": \"myScope\",    \"idTypeCode\": \"username\",    \"code\": \"john_doe_001\"  }  # noqa: E501
+    Represents the user-defined identifier for a Legal Entity or Person.  Users can define their own, scoped identifiers for Legal Entities and Persons using identifier properties.  For example,  when used to identify a Person, the identifier defined by Person/myScope/username would be represented as   {     \"idTypeScope\": \"myScope\",     \"idTypeCode\": \"username\",     \"code\": \"john_doe_001\"   }  # noqa: E501
     """
     id_type_scope:  StrictStr = Field(...,alias="idTypeScope", description="The scope of the identifier's (property) definition.") 
-    id_type_code:  StrictStr = Field(...,alias="idTypeCode", description="The code of identifier's (property) definition. This describes what the identifier represents. For a Person this might be a username, nationalInsuranceNumber or similar. For a Legal Entity, this might be a registeredCompanyNumber or LEI.") 
+    id_type_code:  StrictStr = Field(...,alias="idTypeCode", description="The code of identifier's (property) definition. This describes what the identifier represents.  For a Person this might be a username, nationalInsuranceNumber or similar.  For a Legal Entity, this might be a registeredCompanyNumber or LEI.") 
     code:  StrictStr = Field(...,alias="code", description="The value of the user-defined identifier in respect of the entity.") 
     __properties = ["idTypeScope", "idTypeCode", "code"]
 

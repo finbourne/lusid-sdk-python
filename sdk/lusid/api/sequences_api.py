@@ -223,15 +223,15 @@ class SequencesApi:
 
 
     @overload
-    async def get_sequence(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], **kwargs) -> SequenceDefinition:  # noqa: E501
+    async def get_sequence(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], **kwargs) -> SequenceDefinition:  # noqa: E501
         ...
 
     @overload
-    def get_sequence(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], async_req: Optional[bool]=True, **kwargs) -> SequenceDefinition:  # noqa: E501
+    def get_sequence(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], async_req: Optional[bool]=True, **kwargs) -> SequenceDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_sequence(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], async_req: Optional[bool]=None, **kwargs) -> Union[SequenceDefinition, Awaitable[SequenceDefinition]]:  # noqa: E501
+    def get_sequence(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], async_req: Optional[bool]=None, **kwargs) -> Union[SequenceDefinition, Awaitable[SequenceDefinition]]:  # noqa: E501
         """[EARLY ACCESS] GetSequence: Get a specified sequence  # noqa: E501
 
         Return the details of a specified sequence  # noqa: E501
@@ -243,7 +243,7 @@ class SequencesApi:
 
         :param scope: Scope of the sequence. (required)
         :type scope: str
-        :param code: Code of the sequence. This together with stated scope uniquely             identifies the sequence. (required)
+        :param code: Code of the sequence. This together with stated scope uniquely              identifies the sequence. (required)
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -264,7 +264,7 @@ class SequencesApi:
         return self.get_sequence_with_http_info(scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_sequence_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_sequence_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetSequence: Get a specified sequence  # noqa: E501
 
         Return the details of a specified sequence  # noqa: E501
@@ -276,7 +276,7 @@ class SequencesApi:
 
         :param scope: Scope of the sequence. (required)
         :type scope: str
-        :param code: Code of the sequence. This together with stated scope uniquely             identifies the sequence. (required)
+        :param code: Code of the sequence. This together with stated scope uniquely              identifies the sequence. (required)
         :type code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -383,15 +383,15 @@ class SequencesApi:
 
 
     @overload
-    async def list_sequences(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfSequenceDefinition:  # noqa: E501
+    async def list_sequences(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfSequenceDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_sequences(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfSequenceDefinition:  # noqa: E501
+    def list_sequences(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfSequenceDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_sequences(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfSequenceDefinition, Awaitable[PagedResourceListOfSequenceDefinition]]:  # noqa: E501
+    def list_sequences(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfSequenceDefinition, Awaitable[PagedResourceListOfSequenceDefinition]]:  # noqa: E501
         """[EARLY ACCESS] ListSequences: List Sequences  # noqa: E501
 
         List sequences which satisfies filtering criteria.  # noqa: E501
@@ -401,11 +401,11 @@ class SequencesApi:
         >>> thread = api.list_sequences(page, limit, filter, async_req=True)
         >>> result = thread.get()
 
-        :param page: The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call.
+        :param page: The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.
         :type limit: int
-        :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -426,7 +426,7 @@ class SequencesApi:
         return self.list_sequences_with_http_info(page, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_sequences_with_http_info(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_sequences_with_http_info(self, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListSequences: List Sequences  # noqa: E501
 
         List sequences which satisfies filtering criteria.  # noqa: E501
@@ -436,11 +436,11 @@ class SequencesApi:
         >>> thread = api.list_sequences_with_http_info(page, limit, filter, async_req=True)
         >>> result = thread.get()
 
-        :param page: The pagination token to use to continue listing sequences from a previous call to list sequences. This value is returned from the previous call.
+        :param page: The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.
         :type limit: int
-        :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -551,15 +551,15 @@ class SequencesApi:
 
 
     @overload
-    async def next(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, **kwargs) -> NextValueInSequenceResponse:  # noqa: E501
+    async def next(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, **kwargs) -> NextValueInSequenceResponse:  # noqa: E501
         ...
 
     @overload
-    def next(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> NextValueInSequenceResponse:  # noqa: E501
+    def next(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> NextValueInSequenceResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def next(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[NextValueInSequenceResponse, Awaitable[NextValueInSequenceResponse]]:  # noqa: E501
+    def next(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[NextValueInSequenceResponse, Awaitable[NextValueInSequenceResponse]]:  # noqa: E501
         """[EARLY ACCESS] Next: Get next values from sequence  # noqa: E501
 
         Get the next set of values from a specified sequence  # noqa: E501
@@ -571,7 +571,7 @@ class SequencesApi:
 
         :param scope: Scope of the sequence. (required)
         :type scope: str
-        :param code: Code of the sequence. This together with stated scope uniquely             identifies the sequence. (required)
+        :param code: Code of the sequence. This together with stated scope uniquely              identifies the sequence. (required)
         :type code: str
         :param batch: Number of sequences items to return for the specified sequence. Default to 1 if not specified.
         :type batch: int
@@ -594,7 +594,7 @@ class SequencesApi:
         return self.next_with_http_info(scope, code, batch, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def next_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely             identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def next_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the sequence.")], code : Annotated[StrictStr, Field(..., description="Code of the sequence. This together with stated scope uniquely              identifies the sequence.")], batch : Annotated[Optional[conint(strict=True)], Field(description="Number of sequences items to return for the specified sequence. Default to 1 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] Next: Get next values from sequence  # noqa: E501
 
         Get the next set of values from a specified sequence  # noqa: E501
@@ -606,7 +606,7 @@ class SequencesApi:
 
         :param scope: Scope of the sequence. (required)
         :type scope: str
-        :param code: Code of the sequence. This together with stated scope uniquely             identifies the sequence. (required)
+        :param code: Code of the sequence. This together with stated scope uniquely              identifies the sequence. (required)
         :type code: str
         :param batch: Number of sequences items to return for the specified sequence. Default to 1 if not specified.
         :type batch: int

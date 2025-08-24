@@ -24,7 +24,7 @@ from lusid.models.data_map_key import DataMapKey
 
 class StructuredResultData(BaseModel):
     """
-    An item of structured result data that is to be inserted into Lusid. This will typically be a Json or Xml document that contains a set of result data appropriate to a specific entity such as an instrument or potentially an index.  # noqa: E501
+    An item of structured result data that is to be inserted into Lusid. This will typically be a Json or Xml document that  contains a set of result data appropriate to a specific entity such as an instrument or potentially an index.  # noqa: E501
     """
     document_format:  StrictStr = Field(...,alias="documentFormat", description="The format of the accompanying document.") 
     version:  Optional[StrictStr] = Field(None,alias="version", description="The semantic version of the document format; MAJOR.MINOR.PATCH") 

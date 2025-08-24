@@ -25,7 +25,7 @@ from lusid.models.life_cycle_event_value import LifeCycleEventValue
 
 class RawVendorEvent(InstrumentEvent):
     """
-    A generic event derived from the economic definition of an instrument. This should be considered purely informational; any data provided by this event is not guaranteed to be processable by LUSID.  # noqa: E501
+    A generic event derived from the economic definition of an instrument. This should be considered purely  informational; any data provided by this event is not guaranteed to be processable by LUSID.  # noqa: E501
     """
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date of the event")
     event_value: LifeCycleEventValue = Field(..., alias="eventValue")

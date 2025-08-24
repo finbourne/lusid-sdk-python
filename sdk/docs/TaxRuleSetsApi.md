@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CreateTaxRuleSet: Create a tax rule set.
 
-Creates a tax rule set definition at the given effective time. The user must be entitled to read any properties specified in each rule.
+Creates a tax rule set definition at the given effective time.  The user must be entitled to read any properties specified in each rule.
 
 ### Example
 
@@ -69,7 +69,7 @@ def main():
     # create_tax_rule_set_request = CreateTaxRuleSetRequest.from_json("")
     # create_tax_rule_set_request = CreateTaxRuleSetRequest.from_dict({})
     create_tax_rule_set_request = CreateTaxRuleSetRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -90,7 +90,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_tax_rule_set_request** | [**CreateTaxRuleSetRequest**](CreateTaxRuleSetRequest.md)| The contents of the rule set. | 
- **effective_at** | **str**| The effective datetime or cut label at which the rule set will take effect. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteTaxRuleSet: Delete a tax rule set.
 
-Deletes the rule set for all effective time.  The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.  This cannot be undone.
+Deletes the rule set for all effective time.    The rule set will remain viewable at previous as at times, but it will no longer be considered applicable.    This cannot be undone.
 
 ### Example
 
@@ -258,8 +258,8 @@ def main():
     api_instance = api_client_factory.build(TaxRuleSetsApi)
     scope = 'scope_example' # str | The rule set scope.
     code = 'code_example' # str | The rule set code.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -281,8 +281,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The rule set scope. | 
  **code** | **str**| The rule set code. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. | [optional] 
 
 ### Return type
 
@@ -354,8 +354,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TaxRuleSetsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -375,8 +375,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. | [optional] 
 
 ### Return type
 
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.
 
-Updates the tax rule set definition at the given effective time. The changes will take place from this effective time until the next effective time that the rule has been updated at. For example, consider a rule that has been created or updated effective at the first day of the coming month. An upsert effective from the current day will only change the definition until that day. An additional upsert at the same time (first day of the month) is required if the newly-updated definition is to supersede the future definition. The user must be entitled to read any properties specified in each rule.
+Updates the tax rule set definition at the given effective time.  The changes will take place from this effective time until the next effective time that the rule has been updated at.  For example, consider a rule that has been created or updated effective at the first day of the coming month.  An upsert effective from the current day will only change the definition until that day.  An additional upsert at the same time (first day of the month) is required if the newly-updated definition is to supersede the future definition.  The user must be entitled to read any properties specified in each rule.
 
 ### Example
 
@@ -456,7 +456,7 @@ def main():
     # update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_json("")
     # update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_dict({})
     update_tax_rule_set_request = UpdateTaxRuleSetRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The rule set scope. | 
  **code** | **str**| The rule set code. | 
  **update_tax_rule_set_request** | [**UpdateTaxRuleSetRequest**](UpdateTaxRuleSetRequest.md)| The contents of the rule set. | 
- **effective_at** | **str**| The effective datetime or cut label at which the rule set will take effect. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 

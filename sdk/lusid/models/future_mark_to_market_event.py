@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class FutureMarkToMarketEvent(InstrumentEvent):
     """
-    Definition of a Future Mark to Market Event. Represents 'Mark to Market' daily settlement of Future instruments.  # noqa: E501
+    Definition of a Future Mark to Market Event.  Represents 'Mark to Market' daily settlement of Future instruments.  # noqa: E501
     """
     effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="The date of the mark to market event.")
     settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="The currency in which the Future contract is paid.") 

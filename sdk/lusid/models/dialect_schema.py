@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr
 
 class DialectSchema(BaseModel):
     """
-    A schema that a given document must obey. A representation of the validation of a particular Dialect, in a given language.  # noqa: E501
+    A schema that a given document must obey. A representation of the validation of a particular Dialect,  in a given language.  # noqa: E501
     """
     type:  StrictStr = Field(...,alias="type", description="The type of schema this represents") 
     body:  Optional[StrictStr] = Field(None,alias="body", description="The body of the schema") 

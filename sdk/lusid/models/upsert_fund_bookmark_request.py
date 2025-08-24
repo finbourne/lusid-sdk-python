@@ -29,9 +29,9 @@ class UpsertFundBookmarkRequest(BaseModel):
     bookmark_code:  StrictStr = Field(...,alias="bookmarkCode", description="Unique code for the Bookmark.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="Identifiable Name assigned to the Bookmark.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description assigned to the Bookmark.") 
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
+    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the Bookmark.")
+    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the Bookmark. Defaults to latest.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Bookmark.")
     __properties = ["bookmarkCode", "displayName", "description", "effectiveAt", "queryAsAt", "properties"]
 
     class Config:

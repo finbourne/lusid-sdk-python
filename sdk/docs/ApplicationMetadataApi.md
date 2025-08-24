@@ -240,7 +240,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(ApplicationMetadataApi)
-    filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Application, use \"application eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -260,7 +260,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the Application, use \&quot;application eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set.               For example, to filter on the Application, use \&quot;application eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 

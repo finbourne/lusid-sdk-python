@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] CreateDataType: Create data type definition
 
-Create a new data type definition  Data types cannot be created in either the \"default\" or \"system\" scopes.
+Create a new data type definition    Data types cannot be created in either the \"default\" or \"system\" scopes.
 
 ### Example
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 DeleteDataType: Delete a data type definition.
 
-Delete an existing data type definition.  Data types cannot be deleted in either the \"default\" or \"system\" scopes, scopes beginning with \"LUSID-\", or data types that are in use on a property definition.
+Delete an existing data type definition.    Data types cannot be deleted in either the \"default\" or \"system\" scopes, scopes beginning with \"LUSID-\",  or data types that are in use on a property definition.
 
 ### Example
 
@@ -260,7 +260,7 @@ def main():
     api_instance = api_client_factory.build(DataTypesApi)
     scope = 'scope_example' # str | The scope of the data type
     code = 'code_example' # str | The code of the data type
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the data type | 
  **code** | **str**| The code of the data type | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the data type definition. Defaults to             return the latest version of the instrument definition if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. | [optional] 
 
 ### Return type
 
@@ -357,7 +357,7 @@ def main():
     scope = 'scope_example' # str | The scope of the data type
     code = 'code_example' # str | The code of the data type
     units = ['units_example'] # List[str] | One or more unit identifiers for which the definition is being requested (optional)
-    filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Schema, use \"schema eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at of the requested data type (optional)
 
     try:
@@ -381,7 +381,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the data type | 
  **code** | **str**| The code of the data type | 
  **units** | [**List[str]**](str.md)| One or more unit identifiers for which the definition is being requested | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the Schema, use \&quot;schema eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set.               For example, to filter on the Schema, use \&quot;schema eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **as_at** | **datetime**| Optional. The as at of the requested data type | [optional] 
 
 ### Return type
@@ -454,10 +454,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(DataTypesApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",              to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -478,10 +478,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to list the data type summaries. Defaults to returning the latest version              of each summary if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing data type summaries. This value is returned from the previous call. If a pagination token is provided, the filter, sortBy and asAt fields must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set.               For example, to filter on the Scope, use \&quot;id.scope eq &#39;myscope&#39;\&quot;, to filter on Schema, use \&quot;schema eq &#39;string&#39;\&quot;,              to filter on AcceptableValues use \&quot;acceptableValues any (~ eq &#39;value&#39;)\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set.                For example, to filter on the Scope, use \&quot;id.scope eq &#39;myscope&#39;\&quot;, to filter on Schema, use \&quot;schema eq &#39;string&#39;\&quot;,               to filter on AcceptableValues use \&quot;acceptableValues any (~ eq &#39;value&#39;)\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -559,7 +559,7 @@ def main():
     include_system = True # bool | Whether to additionally include those data types in the \"system\" scope (optional)
     sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -584,7 +584,7 @@ Name | Type | Description  | Notes
  **include_system** | **bool**| Whether to additionally include those data types in the \&quot;system\&quot; scope | [optional] 
  **sort_by** | [**List[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set.             For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -609,7 +609,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpdateDataType: Update data type definition
 
-Update the definition of the specified existing data type  Not all elements within a data type definition are modifiable due to the potential implications for data already stored against the types
+Update the definition of the specified existing data type    Not all elements within a data type definition are modifiable due to the potential implications for data  already stored against the types
 
 ### Example
 

@@ -23,10 +23,10 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr
 
 class SimpleRoundingConvention(BaseModel):
     """
-    Certain bonds will follow certain rounding conventions. For example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for French government bonds, the rounding is to 7dp.  # noqa: E501
+    Certain bonds will follow certain rounding conventions.  For example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for  French government bonds, the rounding is to 7dp.  # noqa: E501
     """
     precision: Optional[StrictInt] = Field(None, description="The precision of the rounding. The decimal places or significant figures to which the rounding takes place.")
-    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  e.g. Round Up, Round Down  Supported string (enumeration) values are: [Down, Up, Nearest].") 
+    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Nearest].") 
     __properties = ["precision", "roundingType"]
 
     class Config:

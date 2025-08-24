@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 DeleteStagingRuleSet: Delete a StagingRuleSet
 
-Delete a staging rule set of a specific entity type. Deletion will be valid from the staging rule set's creation datetime. This means that the staging rule set will no longer exist at any effective datetime from the asAt datetime of deletion.
+Delete a staging rule set of a specific entity type. Deletion will be valid from the staging rule set's creation datetime.  This means that the staging rule set will no longer exist at any effective datetime from the asAt datetime of deletion.
 
 ### Example
 
@@ -255,7 +255,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(StagingRuleSetApi)
     entity_type = 'entity_type_example' # str | The entity type for which to retrieve the staging rule set.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the staging rule set. Defaults to return the latest             version of the staging rule set if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the staging rule set. Defaults to return the latest              version of the staging rule set if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -276,7 +276,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **entity_type** | **str**| The entity type for which to retrieve the staging rule set. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the staging rule set. Defaults to return the latest             version of the staging rule set if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the staging rule set. Defaults to return the latest              version of the staging rule set if not specified. | [optional] 
 
 ### Return type
 
@@ -348,11 +348,11 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(StagingRuleSetApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest             version of the staging rule sets if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing staging rule sets from a previous call to list             staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,             filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -372,11 +372,11 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest             version of the staging rule sets if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing staging rule sets from a previous call to list             staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,             filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 

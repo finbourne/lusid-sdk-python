@@ -26,7 +26,7 @@ class LapseElection(BaseModel):
     Lapse election.  # noqa: E501
     """
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election") 
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made. May only be true for one election if multiple are provided.")
+    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
     __properties = ["electionKey", "isDefault", "isChosen"]
 

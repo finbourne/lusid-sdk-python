@@ -1,6 +1,6 @@
 # QuoteSeriesId
 
-The time invariant unique identifier of the quote. Combined with the effective datetime of the quote this uniquely identifies the quote. This can be thought of as a unique identifier for a time series of quotes.
+The time invariant unique identifier of the quote. Combined with the effective datetime of the quote this  uniquely identifies the quote. This can be thought of as a unique identifier for a time series of quotes.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

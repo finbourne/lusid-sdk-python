@@ -26,9 +26,9 @@ from lusid.models.trading_conventions import TradingConventions
 
 class SimpleInstrument(LusidInstrument):
     """
-    LUSID representation of a Simple Instrument, used as a basic definition of a generic instrument. No analytics can be obtained for this.  # noqa: E501
+    LUSID representation of a Simple Instrument, used as a basic definition of a generic instrument.  No analytics can be obtained for this.  # noqa: E501
     """
-    maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount. For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
+    maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency.") 
     asset_class:  StrictStr = Field(...,alias="assetClass", description="The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown") 
     fgn_ccys: Optional[conlist(StrictStr)] = Field(None, alias="fgnCcys", description="The set of foreign currencies, if any (optional).")

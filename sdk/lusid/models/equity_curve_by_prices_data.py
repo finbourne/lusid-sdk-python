@@ -28,7 +28,7 @@ class EquityCurveByPricesData(ComplexMarketData):
     Contains data (i.e. dates and prices + metadata) for building Equity curves  # noqa: E501
     """
     base_date: datetime = Field(..., alias="baseDate", description="EffectiveAt date of the provided prices")
-    dates: conlist(datetime) = Field(..., description="Dates provided for the forward price of the Equity at the corresponding price in Prices. These dates should be in the future with respect to the BaseDate.")
+    dates: conlist(datetime) = Field(..., description="Dates provided for the forward price of the Equity at the corresponding price in Prices.  These dates should be in the future with respect to the BaseDate.")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     prices: conlist(Union[StrictFloat, StrictInt]) = Field(..., description="Prices provided for the forward price of the Equity at the corresponding date in Dates.")
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] InstrumentsSearch: Instruments search
 
-Search across all instruments that have been mastered in LUSID. Optionally augment the results with instruments from an external symbology service, currently OpenFIGI.
+Search across all instruments that have been mastered in LUSID. Optionally augment the results with instruments from an external symbology service,  currently OpenFIGI.
 
 ### Example
 
@@ -62,8 +62,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(SearchApi)
-    instrument_search_property = [{"key":"Instrument/default/Isin","value":"US0378331005"}] # List[InstrumentSearchProperty] | A collection of instrument properties to search for. LUSID will return instruments for any matched             properties.
-    mastered_effective_at = 'mastered_effective_at_example' # str | The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that have not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified. (optional)
+    instrument_search_property = [{"key":"Instrument/default/Isin","value":"US0378331005"}] # List[InstrumentSearchProperty] | A collection of instrument properties to search for. LUSID will return instruments for any matched              properties.
+    mastered_effective_at = 'mastered_effective_at_example' # str | The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that  have not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified. (optional)
     mastered_only = False # bool | If set to true, only search over instruments that have been mastered within LUSID. Defaults to false. (optional) (default to False)
     scope = 'scope_example' # str | The scope in which the instrument lies. (optional)
 
@@ -85,8 +85,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instrument_search_property** | [**List[InstrumentSearchProperty]**](InstrumentSearchProperty.md)| A collection of instrument properties to search for. LUSID will return instruments for any matched             properties. | 
- **mastered_effective_at** | **str**| The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that have not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **instrument_search_property** | [**List[InstrumentSearchProperty]**](InstrumentSearchProperty.md)| A collection of instrument properties to search for. LUSID will return instruments for any matched              properties. | 
+ **mastered_effective_at** | **str**| The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that  have not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **mastered_only** | **bool**| If set to true, only search over instruments that have been mastered within LUSID. Defaults to false. | [optional] [default to False]
  **scope** | **str**| The scope in which the instrument lies. | [optional] 
 
@@ -161,7 +161,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(SearchApi)
     search = 'search_example' # str | A parameter used for searching any portfolio group field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.  For example, to filter on the Scope, use \"id.scope eq 'string'\" Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.   For example, to filter on the Scope, use \"id.scope eq 'string'\"  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = 'sort_by_example' # str | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName (optional)
     limit = 56 # int | When paginating, only return this number of records (optional)
     page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
@@ -185,7 +185,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search** | **str**| A parameter used for searching any portfolio group field. Wildcards(*) are supported at the end of words (e.g. &#39;Port*&#39;). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **filter** | **str**| Expression to filter the result set.  For example, to filter on the Scope, use \&quot;id.scope eq &#39;string&#39;\&quot; Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.   For example, to filter on the Scope, use \&quot;id.scope eq &#39;string&#39;\&quot;  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | **str**| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName | [optional] 
  **limit** | **int**| When paginating, only return this number of records | [optional] 
  **page** | **str**| Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. | [optional] 
@@ -261,7 +261,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(SearchApi)
     search = 'search_example' # str | A parameter used for searching any portfolio field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.  For example, to filter on the portfolio Type, use \"type eq 'Transaction'\" Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.   For example, to filter on the portfolio Type, use \"type eq 'Transaction'\"  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = 'sort_by_example' # str | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName (optional)
     limit = 56 # int | When paginating, only return this number of records (optional)
     page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
@@ -285,7 +285,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search** | **str**| A parameter used for searching any portfolio field. Wildcards(*) are supported at the end of words (e.g. &#39;Port*&#39;). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **filter** | **str**| Expression to filter the result set.  For example, to filter on the portfolio Type, use \&quot;type eq &#39;Transaction&#39;\&quot; Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.   For example, to filter on the portfolio Type, use \&quot;type eq &#39;Transaction&#39;\&quot;  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | **str**| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName | [optional] 
  **limit** | **int**| When paginating, only return this number of records | [optional] 
  **page** | **str**| Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. | [optional] 
@@ -361,7 +361,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(SearchApi)
     search = 'search_example' # str | A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.  For example, to filter on the Value Type, use \"valueType eq 'string'\" Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.   For example, to filter on the Value Type, use \"valueType eq 'string'\"  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = 'sort_by_example' # str | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName (optional)
     limit = 56 # int | When paginating, only return this number of records (optional)
     page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
@@ -385,7 +385,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search** | **str**| A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. &#39;Port*&#39;). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **filter** | **str**| Expression to filter the result set.  For example, to filter on the Value Type, use \&quot;valueType eq &#39;string&#39;\&quot; Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.   For example, to filter on the Value Type, use \&quot;valueType eq &#39;string&#39;\&quot;  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | **str**| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName | [optional] 
  **limit** | **int**| When paginating, only return this number of records | [optional] 
  **page** | **str**| Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. | [optional] 

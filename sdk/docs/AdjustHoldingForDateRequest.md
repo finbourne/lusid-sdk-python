@@ -1,6 +1,6 @@
 # AdjustHoldingForDateRequest
 
-This request specifies target holdings. i.e. holding data that the system should match. When processed by the movement engine, it will create 'true-up' adjustments on the fly.
+This request specifies target holdings. i.e. holding data that the  system should match. When processed by the movement  engine, it will create 'true-up' adjustments on the fly.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

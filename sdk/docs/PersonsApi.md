@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 DeletePerson: Delete person
 
-Delete a person. Deletion will be valid from the person's creation datetime. This means that the person will no longer exist at any effective datetime from the asAt datetime of deletion.
+Delete a person. Deletion will be valid from the person's creation datetime.  This means that the person will no longer exist at any effective datetime from the asAt datetime of deletion.
 
 ### Example
 
@@ -78,7 +78,7 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | The scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | The code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type scope and code. This together with defined             identifier type uniquely identifies the person to delete.
+    code = 'code_example' # str | Code of the person under specified identifier type scope and code. This together with defined              identifier type uniquely identifies the person to delete.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| The scope of the person identifier type. | 
  **id_type_code** | **str**| The code of the person identifier type. | 
- **code** | **str**| Code of the person under specified identifier type scope and code. This together with defined             identifier type uniquely identifies the person to delete. | 
+ **code** | **str**| Code of the person under specified identifier type scope and code. This together with defined              identifier type uniquely identifies the person to delete. | 
 
 ### Return type
 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry
 
-Deletes the Person Access Metadata entry that exactly matches the provided identifier parts.  It is important to always check to verify success (or failure).
+Deletes the Person Access Metadata entry that exactly matches the provided identifier parts.    It is important to always check to verify success (or failure).
 
 ### Example
 
@@ -276,9 +276,9 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely             identifies the person.
-    property_keys = ['property_keys_example'] # List[str] | The property keys of the identifiers to delete. These take the format             {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". Each property must be from the \"Person\" domain. Identifiers or identifiers not specified in request will not be changed.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete the identifiers. Defaults to the current LUSID system datetime if not specified.             Must not include an effective datetime if identifiers are perpetual. (optional)
+    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the person.
+    property_keys = ['property_keys_example'] # List[str] | The property keys of the identifiers to delete. These take the format              {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". Each property must be from the \"Person\" domain. Identifiers or identifiers not specified in request will not be changed.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete the identifiers. Defaults to the current LUSID system datetime if not specified.              Must not include an effective datetime if identifiers are perpetual. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -300,9 +300,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely             identifies the person. | 
- **property_keys** | [**List[str]**](str.md)| The property keys of the identifiers to delete. These take the format             {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. Each property must be from the \&quot;Person\&quot; domain. Identifiers or identifiers not specified in request will not be changed. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete the identifiers. Defaults to the current LUSID system datetime if not specified.             Must not include an effective datetime if identifiers are perpetual. | [optional] 
+ **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the person. | 
+ **property_keys** | [**List[str]**](str.md)| The property keys of the identifiers to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. Each property must be from the \&quot;Person\&quot; domain. Identifiers or identifiers not specified in request will not be changed. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete the identifiers. Defaults to the current LUSID system datetime if not specified.              Must not include an effective datetime if identifiers are perpetual. | [optional] 
 
 ### Return type
 
@@ -376,9 +376,9 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely             identifies the person.
-    property_keys = ['property_keys_example'] # List[str] | The property keys of the person's properties to delete. These take the format             {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". Each property must be from the \"Person\" domain. Properties or identifiers not specified in request will not be changed.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. (optional)
+    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the person.
+    property_keys = ['property_keys_example'] # List[str] | The property keys of the person's properties to delete. These take the format              {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". Each property must be from the \"Person\" domain. Properties or identifiers not specified in request will not be changed.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -400,9 +400,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely             identifies the person. | 
- **property_keys** | [**List[str]**](str.md)| The property keys of the person&#39;s properties to delete. These take the format             {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. Each property must be from the \&quot;Person\&quot; domain. Properties or identifiers not specified in request will not be changed. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. | [optional] 
+ **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the person. | 
+ **property_keys** | [**List[str]**](str.md)| The property keys of the person&#39;s properties to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. Each property must be from the \&quot;Person\&quot; domain. Properties or identifiers not specified in request will not be changed. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] 
 
 ### Return type
 
@@ -576,11 +576,11 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified scope and code. This together with stated identifier type uniquely             identifies the person.
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Person\" domain to decorate onto the person,              or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \"Person/ContactDetails/Address\". (optional)
+    code = 'code_example' # str | Code of the person under specified scope and code. This together with stated identifier type uniquely              identifies the person.
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Person\" domain to decorate onto the person,               or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"Person/ContactDetails/Address\". (optional)
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the person. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the person. Defaults to return the latest version of the person if not specified. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the person in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the person in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -602,11 +602,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **code** | **str**| Code of the person under specified scope and code. This together with stated identifier type uniquely             identifies the person. | 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Person\&quot; domain to decorate onto the person,              or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \&quot;Person/ContactDetails/Address\&quot;. | [optional] 
+ **code** | **str**| Code of the person under specified scope and code. This together with stated identifier type uniquely              identifies the person. | 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Person\&quot; domain to decorate onto the person,               or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;Person/ContactDetails/Address\&quot;. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the person. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the person. Defaults to return the latest version of the person if not specified. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the person in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the person in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -631,7 +631,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetPersonAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Person
 
-Get a specific Person Access Metadata by specifying the corresponding identifier parts and Person code              No matching will be performed through this endpoint. To retrieve an entry, it is necessary to specify, exactly, the identifier of the entry
+Get a specific Person Access Metadata by specifying the corresponding identifier parts and Person code                No matching will be performed through this endpoint. To retrieve an entry, it is necessary to specify, exactly, the identifier of the entry
 
 ### Example
 
@@ -783,10 +783,10 @@ def main():
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
     code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely identifies the person.
-    property_key = 'property_key_example' # str | The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\".             Each property must be from the \"Person\" domain.
+    property_key = 'property_key_example' # str | The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\".              Each property must be from the \"Person\" domain.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the person's property history. Defaults to return the current datetime if not supplied. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.             This value is returned from the previous call. If a pagination token is provided the filter and asAt fields             must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
     try:
@@ -810,10 +810,10 @@ Name | Type | Description  | Notes
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
  **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely identifies the person. | 
- **property_key** | **str**| The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;.             Each property must be from the \&quot;Person\&quot; domain. | 
+ **property_key** | **str**| The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;.              Each property must be from the \&quot;Person\&quot; domain. | 
  **as_at** | **datetime**| The asAt datetime at which to list the person&#39;s property history. Defaults to return the current datetime if not supplied. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **page** | **str**| The pagination token to use to continue listing properties from a previous call to get property time series.             This value is returned from the previous call. If a pagination token is provided the filter and asAt fields             must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
 
 ### Return type
@@ -888,11 +888,11 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely             identifies the person.
+    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the person.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to get relations. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the person's relations. Defaults to return the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the relations. Users should provide null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format             {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.             Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -914,11 +914,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely             identifies the person. | 
+ **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the person. | 
  **effective_at** | **str**| The effective datetime or cut label at which to get relations. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the person&#39;s relations. Defaults to return the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter the relations. Users should provide null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format             {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. They must be from the \&quot;Person\&quot; or \&quot;LegalEntity\&quot; domain.             Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. They must be from the \&quot;Person\&quot; or \&quot;LegalEntity\&quot; domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] 
 
 ### Return type
 
@@ -992,11 +992,11 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person's identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person's identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely             identifies the person.
+    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the person.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter relationships. Users should provide null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example             'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1018,11 +1018,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person&#39;s identifier type. | 
  **id_type_code** | **str**| Code of the person&#39;s identifier type. | 
- **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely             identifies the person. | 
+ **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the person. | 
  **effective_at** | **str**| The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter relationships. Users should provide null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example             &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
 
 ### Return type
 
@@ -1094,13 +1094,13 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(PersonsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the people. Defaults to the current LUSID             system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the people. Defaults to return the latest version             of each people if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing persons from a previous call to list persons. This             value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the people. Defaults to the current LUSID              system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the people. Defaults to return the latest version              of each people if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing persons from a previous call to list persons. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the display name, use \"displayName eq 'John'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Person\" domain to decorate onto each person,              or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \"Person/ContactDetails/Address\". (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the display name, use \"displayName eq 'John'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Person\" domain to decorate onto each person,               or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"Person/ContactDetails/Address\". (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1120,13 +1120,13 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to list the people. Defaults to the current LUSID             system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the people. Defaults to return the latest version             of each people if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing persons from a previous call to list persons. This             value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the people. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the people. Defaults to return the latest version              of each people if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing persons from a previous call to list persons. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the display name, use \&quot;displayName eq &#39;John&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Person\&quot; domain to decorate onto each person,              or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \&quot;Person/ContactDetails/Address\&quot;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               For example, to filter on the display name, use \&quot;displayName eq &#39;John&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Person\&quot; domain to decorate onto each person,               or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;Person/ContactDetails/Address\&quot;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -1200,13 +1200,13 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the people. Defaults to the current LUSID             system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the people. Defaults to return the latest version             of each people if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing persons from a previous call to list persons. This             value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the people. Defaults to the current LUSID              system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the people. Defaults to return the latest version              of each people if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing persons from a previous call to list persons. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the LUPID, use \"lusidPersonId eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Person\" domain to decorate onto each person,              or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \"Person/ContactDetails/Address\". (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the LUPID, use \"lusidPersonId eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Person\" domain to decorate onto each person,               or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \"Person/ContactDetails/Address\". (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1228,13 +1228,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the people. Defaults to the current LUSID             system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the people. Defaults to return the latest version             of each people if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing persons from a previous call to list persons. This             value is returned from the previous call. If a pagination token is provided the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the people. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the people. Defaults to return the latest version              of each people if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing persons from a previous call to list persons. This              value is returned from the previous call. If a pagination token is provided the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the LUPID, use \&quot;lusidPersonId eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Person\&quot; domain to decorate onto each person,              or from any domain that supports relationships to decorate onto related entities.             These take the format {domain}/{scope}/{code} e.g. \&quot;Person/ContactDetails/Address\&quot;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               For example, to filter on the LUPID, use \&quot;lusidPersonId eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Person\&quot; domain to decorate onto each person,               or from any domain that supports relationships to decorate onto related entities.              These take the format {domain}/{scope}/{code} e.g. \&quot;Person/ContactDetails/Address\&quot;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the persons in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -1259,7 +1259,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] PatchPersonAccessMetadata: Patch Access Metadata rules for a Person.
 
-Patch Person Access Metadata Rules in a single scope. The behaviour is defined by the JSON Patch specification.              Currently only 'add' is a supported operation on the patch document.  Currently only valid metadata keys are supported paths on the patch document.              The response will return any affected Person Access Metadata rules or a failure message if unsuccessful.              It is important to always check to verify success (or failure).              Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
+Patch Person Access Metadata Rules in a single scope.  The behaviour is defined by the JSON Patch specification.                Currently only 'add' is a supported operation on the patch document.    Currently only valid metadata keys are supported paths on the patch document.                The response will return any affected Person Access Metadata rules or a failure message if unsuccessful.                It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
 
 ### Example
 
@@ -1410,7 +1410,7 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely             identifies the person.
+    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the person.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1438,7 +1438,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely             identifies the person. | 
+ **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the person. | 
  **set_person_identifiers_request** | [**SetPersonIdentifiersRequest**](SetPersonIdentifiersRequest.md)| Request containing identifiers to set for the person. Identifiers not specified in request will not be changed. | 
 
 ### Return type
@@ -1513,7 +1513,7 @@ def main():
     api_instance = api_client_factory.build(PersonsApi)
     id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.
     id_type_code = 'id_type_code_example' # str | Code of the person identifier type.
-    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely             identifies the person.
+    code = 'code_example' # str | Code of the person under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the person.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1541,7 +1541,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id_type_scope** | **str**| Scope of the person identifier type. | 
  **id_type_code** | **str**| Code of the person identifier type. | 
- **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely             identifies the person. | 
+ **code** | **str**| Code of the person under specified identifier type&#39;s scope and code. This together with stated identifier type uniquely              identifies the person. | 
  **set_person_properties_request** | [**SetPersonPropertiesRequest**](SetPersonPropertiesRequest.md)| Request containing properties to set for the person. Properties not specified in request will not be changed. | 
 
 ### Return type
@@ -1664,7 +1664,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertPersonAccessMetadata: Upsert a Person Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
-Update or insert one Person Access Metadata entry in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Person Access Metadata rule or failure message if unsuccessful.              It is important to always check to verify success (or failure).              Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
+Update or insert one Person Access Metadata entry in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Person Access Metadata rule or failure message if unsuccessful.                It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
 
 ### Example
 

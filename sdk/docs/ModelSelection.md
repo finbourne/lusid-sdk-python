@@ -1,6 +1,6 @@
 # ModelSelection
 
-The combination of a library to use and a model in that library that defines which pricing code will evaluate instruments having a particular type/class. This allows us to control the model type and library for a given instrument.
+The combination of a library to use and a model in that library that defines which pricing code will evaluate instruments  having a particular type/class. This allows us to control the model type and library for a given instrument.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

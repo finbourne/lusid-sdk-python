@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr
 
 class AccessMetadataValue(BaseModel):
     """
-    An access control value. Provider should only be used if you are a service provider licensing data. In that case the provider value must match your domain.  # noqa: E501
+    An access control value. Provider should only be used if you are a service provider licensing data. In that case  the provider value must match your domain.  # noqa: E501
     """
     value:  StrictStr = Field(...,alias="value") 
     provider:  Optional[StrictStr] = Field(None,alias="provider") 

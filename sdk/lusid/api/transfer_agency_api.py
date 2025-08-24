@@ -65,7 +65,7 @@ class TransferAgencyApi:
     def calculate_order_dates(self, request_body : Annotated[Dict[str, CalculateOrderDatesRequest], Field(..., description="The request containing the dates used for calculation")], async_req: Optional[bool]=None, **kwargs) -> Union[CalculateOrderDatesResponse, Awaitable[CalculateOrderDatesResponse]]:  # noqa: E501
         """[EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders  # noqa: E501
 
-        The response contains both the collection of successfully calculated dates and any failed calculations, each in the form of a dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
+        The response contains both the collection of successfully calculated dates and any failed calculations,  each in the form of a dictionary keyed by the request's keys.  For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -96,7 +96,7 @@ class TransferAgencyApi:
     def calculate_order_dates_with_http_info(self, request_body : Annotated[Dict[str, CalculateOrderDatesRequest], Field(..., description="The request containing the dates used for calculation")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders  # noqa: E501
 
-        The response contains both the collection of successfully calculated dates and any failed calculations, each in the form of a dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
+        The response contains both the collection of successfully calculated dates and any failed calculations,  each in the form of a dictionary keyed by the request's keys.  For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

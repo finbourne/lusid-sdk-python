@@ -265,7 +265,7 @@ def main():
     api_instance = api_client_factory.build(PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the property to be deleted.
     scope = 'scope_example' # str | The scope of the property to be deleted.
-    code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely             identifies the property.
+    code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -287,7 +287,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domain** | **str**| The domain of the property to be deleted. | 
  **scope** | **str**| The scope of the property to be deleted. | 
- **code** | **str**| The code of the property to be deleted. Together with the domain and scope this uniquely             identifies the property. | 
+ **code** | **str**| The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property. | 
 
 ### Return type
 
@@ -312,7 +312,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeletePropertyDefinitionProperties: Delete property definition properties
 
-Delete one or more properties from a single property definition. If the properties are time-variant then an effective date time from which the properties will be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.
+Delete one or more properties from a single property definition. If the properties are time-variant then an effective date time from which the  properties will be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.
 
 ### Example
 
@@ -362,8 +362,8 @@ def main():
     domain = 'domain_example' # str | The domain of the property definition to delete properties from.
     scope = 'scope_example' # str | The scope of the property definition to delete properties from.
     code = 'code_example' # str | The code of the property definition to delete properties from.
-    request_body = ["PropertyDefinition/MyScope/MyPropertyName","PropertyDefinition/MyScope/MyPropertyName2"] # List[str] | The property keys of the properties to delete. These must take the format             {domain}/{scope}/{code} e.g \"PropertyDefinition/myScope/someAttributeKey\". Each property must be from the \"PropertyDefinition\" domain.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is before             the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. (optional)
+    request_body = ["PropertyDefinition/MyScope/MyPropertyName","PropertyDefinition/MyScope/MyPropertyName2"] # List[str] | The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \"PropertyDefinition/myScope/someAttributeKey\". Each property must be from the \"PropertyDefinition\" domain.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -386,8 +386,8 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the property definition to delete properties from. | 
  **scope** | **str**| The scope of the property definition to delete properties from. | 
  **code** | **str**| The code of the property definition to delete properties from. | 
- **request_body** | [**List[str]**](str.md)| The property keys of the properties to delete. These must take the format             {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is before             the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. | [optional] 
+ **request_body** | [**List[str]**](str.md)| The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. | [optional] 
 
 ### Return type
 
@@ -459,10 +459,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(PropertyDefinitionsApi)
-    property_keys = ['property_keys_example'] # List[str] | One or more property keys which identify each property that a definition should             be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return             the latest version of each definition if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Lifetime, use \"lifeTime eq 'Perpetual'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.             Defaults to the current LUSID system datetime if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Lifetime, use \"lifeTime eq 'Perpetual'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -482,10 +482,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **property_keys** | [**List[str]**](str.md)| One or more property keys which identify each property that a definition should             be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the property definitions. Defaults to return             the latest version of each definition if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the Lifetime, use \&quot;lifeTime eq &#39;Perpetual&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to list properties attached to the Property Definition.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               For example, to filter on the Lifetime, use \&quot;lifeTime eq &#39;Perpetual&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -559,9 +559,9 @@ def main():
     api_instance = api_client_factory.build(PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the specified property.
     scope = 'scope_example' # str | The scope of the specified property.
-    code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely             identifies the property.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return             the latest version of the definition if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.             Defaults to the current LUSID system datetime if not specified. (optional)
+    code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely              identifies the property.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -583,9 +583,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domain** | **str**| The domain of the specified property. | 
  **scope** | **str**| The scope of the specified property. | 
- **code** | **str**| The code of the specified property. Together with the domain and scope this uniquely             identifies the property. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the property definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to list properties attached to the Property Definition.             Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **code** | **str**| The code of the specified property. Together with the domain and scope this uniquely              identifies the property. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -660,10 +660,10 @@ def main():
     domain = 'domain_example' # str | The domain of the property definition to which the property is attached
     scope = 'scope_example' # str | The scope of the property definition to which the property is attached
     code = 'code_example' # str | The code of the property definition to which the property is attached
-    property_key = 'property_key_example' # str | The property key of the property whose history to show. This must be from the \"Property Definition\" domain and in the format             {domain}/{scope}/{code}, for example \"PropertyDefinition/myScope/someAttributeKey\".
+    property_key = 'property_key_example' # str | The property key of the property whose history to show. This must be from the \"Property Definition\" domain and in the format              {domain}/{scope}/{code}, for example \"PropertyDefinition/myScope/someAttributeKey\".
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to show the history. Defaults to the current datetime if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.             This value is returned from the previous call. If a pagination token is provided the filter and asAt fields             must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
     try:
@@ -687,10 +687,10 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the property definition to which the property is attached | 
  **scope** | **str**| The scope of the property definition to which the property is attached | 
  **code** | **str**| The code of the property definition to which the property is attached | 
- **property_key** | **str**| The property key of the property whose history to show. This must be from the \&quot;Property Definition\&quot; domain and in the format             {domain}/{scope}/{code}, for example \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. | 
+ **property_key** | **str**| The property key of the property whose history to show. This must be from the \&quot;Property Definition\&quot; domain and in the format              {domain}/{scope}/{code}, for example \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. | 
  **as_at** | **datetime**| The asAt datetime at which to show the history. Defaults to the current datetime if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **page** | **str**| The pagination token to use to continue listing properties from a previous call to get property time series.             This value is returned from the previous call. If a pagination token is provided the filter and asAt fields             must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
 
 ### Return type
@@ -763,12 +763,12 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(PropertyDefinitionsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the property definitions. Defaults to the current LUSID             system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the property definitions. Defaults to returning the latest version             of each property definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Property Definition' domain to decorate onto             property definitions. These must take the format             {domain}/{scope}/{code} e.g \"PropertyDefinition/myScope/someAttributeKey\". Each property must be from the \"PropertyDefinition\" domain. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing property definitions; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the property definitions. Defaults to the current LUSID              system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the property definitions. Defaults to returning the latest version              of each property definition if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Property Definition' domain to decorate onto              property definitions. These must take the format              {domain}/{scope}/{code} e.g \"PropertyDefinition/myScope/someAttributeKey\". Each property must be from the \"PropertyDefinition\" domain. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing property definitions; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the display name, specify \"DisplayName eq 'DisplayName'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the display name, specify \"DisplayName eq 'DisplayName'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
@@ -789,12 +789,12 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime or cut label at which to list the property definitions. Defaults to the current LUSID             system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the property definitions. Defaults to returning the latest version             of each property definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Property Definition&#39; domain to decorate onto             property definitions. These must take the format             {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | [optional] 
- **page** | **str**| The pagination token to use to continue listing property definitions; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the property definitions. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the property definitions. Defaults to returning the latest version              of each property definition if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Property Definition&#39; domain to decorate onto              property definitions. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing property definitions; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.             For example, to filter on the display name, specify \&quot;DisplayName eq &#39;DisplayName&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.              For example, to filter on the display name, specify \&quot;DisplayName eq &#39;DisplayName&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
 
 ### Return type
@@ -923,7 +923,7 @@ Name | Type | Description  | Notes
 
 UpdatePropertyDefinition: Update property definition
 
-Update the definition of a specified existing property. Not all elements within a property definition are modifiable due to the potential implications for values already stored against the property.
+Update the definition of a specified existing property. Not all elements within a property definition  are modifiable due to the potential implications for values already stored against the property.
 
 ### Example
 
@@ -972,7 +972,7 @@ def main():
     api_instance = api_client_factory.build(PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the property being updated.
     scope = 'scope_example' # str | The scope of the property being updated.
-    code = 'code_example' # str | The code of the property being updated. Together with the domain and scope this uniquely             identifies the property.
+    code = 'code_example' # str | The code of the property being updated. Together with the domain and scope this uniquely              identifies the property.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1000,7 +1000,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domain** | **str**| The domain of the property being updated. | 
  **scope** | **str**| The scope of the property being updated. | 
- **code** | **str**| The code of the property being updated. Together with the domain and scope this uniquely             identifies the property. | 
+ **code** | **str**| The code of the property being updated. Together with the domain and scope this uniquely              identifies the property. | 
  **update_property_definition_request** | [**UpdatePropertyDefinitionRequest**](UpdatePropertyDefinitionRequest.md)| The updated definition of the property. | 
 
 ### Return type
@@ -1076,7 +1076,7 @@ def main():
     domain = 'domain_example' # str | The domain of the specified property.
     scope = 'scope_example' # str | The scope of the specified property.
     code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely
-    request_body = {"PropertyDefinition/MyScope/FundManagerName":{"key":"PropertyDefinition/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/SomeProperty":{"key":"PropertyDefinition/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/AnotherProperty":{"key":"PropertyDefinition/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/ReBalanceInterval":{"key":"PropertyDefinition/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be created or updated. Each property in             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example             'PropertyDefinition/Manager/Id'.
+    request_body = {"PropertyDefinition/MyScope/FundManagerName":{"key":"PropertyDefinition/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/SomeProperty":{"key":"PropertyDefinition/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/AnotherProperty":{"key":"PropertyDefinition/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/ReBalanceInterval":{"key":"PropertyDefinition/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'PropertyDefinition/Manager/Id'.
     success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
 
     try:
@@ -1100,7 +1100,7 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the specified property. | 
  **scope** | **str**| The scope of the specified property. | 
  **code** | **str**| The code of the specified property. Together with the domain and scope this uniquely | 
- **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be created or updated. Each property in             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example             &#39;PropertyDefinition/Manager/Id&#39;. | 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;PropertyDefinition/Manager/Id&#39;. | 
  **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
 
 ### Return type

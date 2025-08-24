@@ -1,6 +1,6 @@
 # CloseEvent
 
-The termination of an instrument. In some cases termination can happen over a range of dates e.g. american option exercise. In most cases the startDate == endDate
+The termination of an instrument.  In some cases termination can happen over a range of dates e.g. american option exercise.  In most cases the startDate == endDate
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

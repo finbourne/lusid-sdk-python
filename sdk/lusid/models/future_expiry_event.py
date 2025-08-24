@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class FutureExpiryEvent(InstrumentEvent):
     """
-    Definition of a Future Expiry Event. This is an event that describes the expiry of a Future instrument.  # noqa: E501
+    Definition of a Future Expiry Event.  This is an event that describes the expiry of a Future instrument.  # noqa: E501
     """
     expiry_date: Optional[datetime] = Field(None, alias="expiryDate", description="Expiry date of the Future instrument.")
     settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="Settlement currency of the Future instrument.") 

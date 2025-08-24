@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr
 
 class ChangeItem(BaseModel):
     """
-    Information about a change to a field / property. At least one of 'PreviousValue' or 'NewValue' will be set.  # noqa: E501
+    Information about a change to a field / property.  At least one of 'PreviousValue' or 'NewValue' will be set.  # noqa: E501
     """
     field_name:  StrictStr = Field(...,alias="fieldName", description="The name of the field or property that has been changed.") 
     previous_value:  Optional[StrictStr] = Field(None,alias="previousValue", description="The previous value for this field / property.") 

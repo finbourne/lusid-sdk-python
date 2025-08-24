@@ -1,6 +1,6 @@
 # CancelSingleHoldingAdjustmentRequest
 
-This request specifies single target holding. i.e. holding data that the system should match. And deletes previous adjustment made to that holding
+This request specifies single target holding. i.e. holding data that the  system should match. And deletes previous adjustment made to that holding
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

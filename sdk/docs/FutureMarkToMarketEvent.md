@@ -1,6 +1,6 @@
 # FutureMarkToMarketEvent
 
-Definition of a Future Mark to Market Event. Represents 'Mark to Market' daily settlement of Future instruments.
+Definition of a Future Mark to Market Event.  Represents 'Mark to Market' daily settlement of Future instruments.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

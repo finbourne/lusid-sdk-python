@@ -30,7 +30,7 @@ class DividendReinvestmentEvent(InstrumentEvent):
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
     cash_elections: conlist(CashElection) = Field(..., alias="cashElections", description="CashElection for this DividendReinvestmentEvent")
-    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first business day on which the dividend is not owed to the buying party. Typically this is T-1 from the RecordDate.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The date the company pays out dividends to shareholders.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
     security_elections: conlist(SecurityElection) = Field(..., alias="securityElections", description="SecurityElection for this DividendReinvestmentEvent")

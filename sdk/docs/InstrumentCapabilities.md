@@ -1,6 +1,6 @@
 # InstrumentCapabilities
 
-Instrument capabilities containing useful information about the instrument and the model. This includes - features corresponding to the instrument i.e. Optionality:American, Other:InflationLinked - supported addresses (if model provided) i.e. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued - economic dependencies (if model provided) i.e. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
+Instrument capabilities containing useful information about the instrument and the model. This includes  - features corresponding to the instrument i.e. Optionality:American, Other:InflationLinked  - supported addresses (if model provided) i.e. Valuation/Pv, Valuation/DirtyPriceKey, Valuation/Accrued  - economic dependencies (if model provided) i.e. Cash:USD, Fx:GBP.USD, Rates:GBP.GBPOIS
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

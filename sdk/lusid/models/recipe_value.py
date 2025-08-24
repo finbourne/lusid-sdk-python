@@ -24,7 +24,7 @@ from lusid.models.from_recipe import FromRecipe
 
 class RecipeValue(BaseModel):
     """
-    Recipe value represents a data that is then used to perform an atomic operation which is then used in composition of Configuration Recipe. This object either includes the data itself (in json form or as simple string) or is a reference where the data can be obtained from (from a Configuration Recipe say). Only one field is to be populated.  # noqa: E501
+    Recipe value represents a data that is then used to perform an atomic operation which is then used in composition of Configuration Recipe.  This object either includes the data itself (in json form or as simple string) or is a reference where the data can be obtained from (from a Configuration Recipe say).  Only one field is to be populated.  # noqa: E501
     """
     as_json:  Optional[StrictStr] = Field(None,alias="asJson", description="Field to allow providing a potentially complex json value.") 
     as_string:  Optional[StrictStr] = Field(None,alias="asString", description="For simple value, a single input value, note complex nested objects are not allowed here.") 

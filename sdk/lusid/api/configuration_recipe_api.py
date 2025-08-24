@@ -73,7 +73,7 @@ class ConfigurationRecipeApi:
     def delete_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to delete.")], code : Annotated[StrictStr, Field(..., description="The Configuration Recipe to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.  # noqa: E501
 
-        Delete the specified Configuration Recipe from a single scope.              The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Configuration Recipe from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -106,7 +106,7 @@ class ConfigurationRecipeApi:
     def delete_configuration_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to delete.")], code : Annotated[StrictStr, Field(..., description="The Configuration Recipe to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.  # noqa: E501
 
-        Delete the specified Configuration Recipe from a single scope.              The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Configuration Recipe from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -233,7 +233,7 @@ class ConfigurationRecipeApi:
     def delete_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[StrictStr, Field(..., description="The Recipe Composer to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
         """DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
 
-        Delete the specified Recipe Composer from a single scope.              The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -266,7 +266,7 @@ class ConfigurationRecipeApi:
     def delete_recipe_composer_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[StrictStr, Field(..., description="The Recipe Composer to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
 
-        Delete the specified Recipe Composer from a single scope.              The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.              It is important to always check for any unsuccessful response.  # noqa: E501
+        Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -393,7 +393,7 @@ class ConfigurationRecipeApi:
     def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
         """GetConfigurationRecipe: Get Configuration Recipe  # noqa: E501
 
-        Get a Configuration Recipe from a single scope.              The response will return either the recipe that has been stored, or a failure explaining why the request was unsuccessful.              It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Configuration Recipe from a single scope.                The response will return either the recipe that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -428,7 +428,7 @@ class ConfigurationRecipeApi:
     def get_configuration_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetConfigurationRecipe: Get Configuration Recipe  # noqa: E501
 
-        Get a Configuration Recipe from a single scope.              The response will return either the recipe that has been stored, or a failure explaining why the request was unsuccessful.              It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Configuration Recipe from a single scope.                The response will return either the recipe that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -735,7 +735,7 @@ class ConfigurationRecipeApi:
     def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeComposerResponse, Awaitable[GetRecipeComposerResponse]]:  # noqa: E501
         """GetRecipeComposer: Get Recipe Composer  # noqa: E501
 
-        Get a Recipe Composer from a single scope.              The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.              It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -770,7 +770,7 @@ class ConfigurationRecipeApi:
     def get_recipe_composer_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetRecipeComposer: Get Recipe Composer  # noqa: E501
 
-        Get a Recipe Composer from a single scope.              The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.              It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1054,15 +1054,15 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    async def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
+    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
         """ListConfigurationRecipes: List the set of Configuration Recipes  # noqa: E501
 
         List the set of configuration recipes at the specified date/time and scope. Note this only returns recipes stored directly and does not include any recipes expanded from recipe composers.  # noqa: E501
@@ -1074,7 +1074,7 @@ class ConfigurationRecipeApi:
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1095,7 +1095,7 @@ class ConfigurationRecipeApi:
         return self.list_configuration_recipes_with_http_info(as_at, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_configuration_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_configuration_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListConfigurationRecipes: List the set of Configuration Recipes  # noqa: E501
 
         List the set of configuration recipes at the specified date/time and scope. Note this only returns recipes stored directly and does not include any recipes expanded from recipe composers.  # noqa: E501
@@ -1107,7 +1107,7 @@ class ConfigurationRecipeApi:
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1228,7 +1228,7 @@ class ConfigurationRecipeApi:
     def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
         """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
-        This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints. Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
+        This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1261,7 +1261,7 @@ class ConfigurationRecipeApi:
     def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
-        This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints. Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
+        This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1554,7 +1554,7 @@ class ConfigurationRecipeApi:
     def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(..., description="The Configuration Recipe to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert one Configuration Recipe in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Configuration Recipe or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert one Configuration Recipe in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Configuration Recipe or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1585,7 +1585,7 @@ class ConfigurationRecipeApi:
     def upsert_configuration_recipe_with_http_info(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(..., description="The Configuration Recipe to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert one Configuration Recipe in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Configuration Recipe or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert one Configuration Recipe in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Configuration Recipe or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1713,7 +1713,7 @@ class ConfigurationRecipeApi:
     def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1744,7 +1744,7 @@ class ConfigurationRecipeApi:
     def upsert_recipe_composer_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
 
-        Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful              It is important to always check to verify success (or failure).  # noqa: E501
+        Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

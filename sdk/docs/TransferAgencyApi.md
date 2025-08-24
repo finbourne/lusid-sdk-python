@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
 
-The response contains both the collection of successfully calculated dates and any failed calculations, each in the form of a dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.
+The response contains both the collection of successfully calculated dates and any failed calculations,  each in the form of a dictionary keyed by the request's keys.  For each failure, a reason is provided. It is important to check the failed set for unsuccessful results.
 
 ### Example
 

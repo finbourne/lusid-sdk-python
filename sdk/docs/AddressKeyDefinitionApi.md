@@ -252,10 +252,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(AddressKeyDefinitionApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition.             Defaults to return the latest version of the address key definition if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields             must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -275,10 +275,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the address key definition.             Defaults to return the latest version of the address key definition if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.             This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields             must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 

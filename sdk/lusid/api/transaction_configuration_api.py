@@ -233,7 +233,7 @@ class TransactionConfigurationApi:
     def delete_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """DeleteTransactionType: Delete a transaction type  # noqa: E501
 
-        /// WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -268,7 +268,7 @@ class TransactionConfigurationApi:
     def delete_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """DeleteTransactionType: Delete a transaction type  # noqa: E501
 
-        /// WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -721,15 +721,15 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> TransactionType:  # noqa: E501
+    async def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> TransactionType:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionType:  # noqa: E501
+    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionType:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
+    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
         """GetTransactionType: Get a single transaction configuration type  # noqa: E501
 
         Get a single transaction type. Returns failure if not found  # noqa: E501
@@ -743,7 +743,7 @@ class TransactionConfigurationApi:
         :type source: str
         :param type: One of the type's aliases (required)
         :type type: str
-        :param as_at: The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified
+        :param as_at: The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified
         :type as_at: datetime
         :param scope: The scope in which the transaction types exists. When not supplied the scope is 'default'.
         :type scope: str
@@ -766,7 +766,7 @@ class TransactionConfigurationApi:
         return self.get_transaction_type_with_http_info(source, type, as_at, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetTransactionType: Get a single transaction configuration type  # noqa: E501
 
         Get a single transaction type. Returns failure if not found  # noqa: E501
@@ -780,7 +780,7 @@ class TransactionConfigurationApi:
         :type source: str
         :param type: One of the type's aliases (required)
         :type type: str
-        :param as_at: The asAt datetime at which to retrieve the transaction configuration.             Defaults to returning the latest version of the transaction configuration type if not specified
+        :param as_at: The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified
         :type as_at: datetime
         :param scope: The scope in which the transaction types exists. When not supplied the scope is 'default'.
         :type scope: str
@@ -1063,25 +1063,25 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
+    async def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
         ...
 
     @overload
-    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
+    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
+    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.list_transaction_types(as_at, scope, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.
+        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
         :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
         :type scope: str
@@ -1104,17 +1104,17 @@ class TransactionConfigurationApi:
         return self.list_transaction_types_with_http_info(as_at, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.list_transaction_types_with_http_info(as_at, scope, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.
+        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
         :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
         :type scope: str
@@ -1579,7 +1579,7 @@ class TransactionConfigurationApi:
     def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
         """SetTransactionType: Set a specific transaction type  # noqa: E501
 
-        Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created  WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1616,7 +1616,7 @@ class TransactionConfigurationApi:
     def set_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetTransactionType: Set a specific transaction type  # noqa: E501
 
-        Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created  WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

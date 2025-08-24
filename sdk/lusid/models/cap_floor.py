@@ -29,12 +29,12 @@ class CapFloor(LusidInstrument):
     """
     LUSID representation of Cap, Floor, or Collar.  # noqa: E501
     """
-    cap_floor_type:  StrictStr = Field(...,alias="capFloorType", description="Determine if it's CAP, FLOOR, or COLLAR.  Supported string (enumeration) values are: [Cap, Floor, Collar].") 
+    cap_floor_type:  StrictStr = Field(...,alias="capFloorType", description="Determine if it's CAP, FLOOR, or COLLAR.    Supported string (enumeration) values are: [Cap, Floor, Collar].") 
     cap_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="capStrike", description="Strike rate of the Cap.")
     floor_strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floorStrike", description="Strike rate of the Floor.")
     include_first_caplet: StrictBool = Field(..., alias="includeFirstCaplet", description="Include first caplet flag.")
     underlying_floating_leg: FloatingLeg = Field(..., alias="underlyingFloatingLeg")
-    additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven equity swap. The dates must be distinct and either all payments are Pay or all payments are Receive.")
+    additional_payments: Optional[conlist(AdditionalPayment)] = Field(None, alias="additionalPayments", description="Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo") 
     additional_properties: Dict[str, Any] = {}

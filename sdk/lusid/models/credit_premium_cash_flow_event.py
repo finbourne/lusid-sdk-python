@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class CreditPremiumCashFlowEvent(InstrumentEvent):
     """
-    Definition of a credit premium cash flow event. This event describes a premium cashflow for credit default instruments (CDS or CDX).  # noqa: E501
+    Definition of a credit premium cash flow event.  This event describes a premium cashflow for credit default instruments (CDS or CDX).  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex-dividend date of the cashflow.")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the cashflow.")

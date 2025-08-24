@@ -27,7 +27,7 @@ class ComplexMarketDataId(BaseModel):
     """
     provider:  StrictStr = Field(...,alias="provider", description="The platform or vendor that provided the complex market data, e.g. 'DataScope', 'LUSID', etc.") 
     price_source:  Optional[StrictStr] = Field(None,alias="priceSource", description="The source or originator of the complex market data, e.g. a bank or financial institution.") 
-    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="This is obsolete. It is not used, it will not be stored, and has no effects. If you wish to attach a Lineage to your ComplexMarketData, you should provide it in the optional Lineage field in the ComplexMarketData class.") 
+    lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="This is obsolete. It is not used, it will not be stored, and has no effects.  If you wish to attach a Lineage to your ComplexMarketData,  you should provide it in the optional Lineage field in the ComplexMarketData class.") 
     effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The effectiveAt or cut label that this item of complex market data is/was updated/inserted with.") 
     market_asset:  StrictStr = Field(...,alias="marketAsset", description="The name of the market entity that the document represents") 
     __properties = ["provider", "priceSource", "lineage", "effectiveAt", "marketAsset"]

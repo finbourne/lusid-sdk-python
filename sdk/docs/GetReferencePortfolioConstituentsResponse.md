@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **period_type** | **str** | The available values are: Daily, Weekly, Monthly, Quarterly, Annually | [optional] 
 **period_count** | **int** |  | [optional] 
 **constituents** | [**List[ReferencePortfolioConstituent]**](ReferencePortfolioConstituent.md) | Set of constituents (instrument/weight pairings) | 
-**href** | **str** | The Uri that returns the same result as the original request, but may include resolved as at time(s). | [optional] 
+**href** | **str** | The Uri that returns the same result as the original request,  but may include resolved as at time(s). | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 

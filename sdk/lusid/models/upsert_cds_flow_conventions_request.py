@@ -24,7 +24,7 @@ from lusid.models.cds_flow_conventions import CdsFlowConventions
 
 class UpsertCdsFlowConventionsRequest(BaseModel):
     """
-    CDS Flow convention that is to be stored in the convention data store. Only one of these must be present.  # noqa: E501
+    CDS Flow convention that is to be stored in the convention data store.  Only one of these must be present.  # noqa: E501
     """
     cds_flow_conventions: Optional[CdsFlowConventions] = Field(None, alias="cdsFlowConventions")
     __properties = ["cdsFlowConventions"]

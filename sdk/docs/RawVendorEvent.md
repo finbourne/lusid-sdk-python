@@ -1,6 +1,6 @@
 # RawVendorEvent
 
-A generic event derived from the economic definition of an instrument. This should be considered purely informational; any data provided by this event is not guaranteed to be processable by LUSID.
+A generic event derived from the economic definition of an instrument. This should be considered purely  informational; any data provided by this event is not guaranteed to be processable by LUSID.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

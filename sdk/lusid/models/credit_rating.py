@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator
 
 class CreditRating(BaseModel):
     """
-    Object describing a credit rating, which assesses the stability and credit worthiness of a legal entity and hence its likelihood of defaulting on its outstanding obligations (typically debt).  # noqa: E501
+    Object describing a credit rating,  which assesses the stability and credit worthiness of a legal entity  and hence its likelihood of defaulting on its outstanding obligations (typically debt).  # noqa: E501
     """
     rating_source:  StrictStr = Field(...,alias="ratingSource", description="The provider of the credit rating, which will typically be an agency such as Moody's or Standard and Poor.") 
     rating:  StrictStr = Field(...,alias="rating", description="The credit rating provided by the rating source. This would expected to be consistent with the rating scheme of that agency/source.") 

@@ -389,7 +389,7 @@ class SystemConfigurationApi:
     def delete_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to delete transaction configurations for")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteTransactionConfigurationSource: Delete all transaction configurations for a source  # noqa: E501
 
-        /// WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -420,7 +420,7 @@ class SystemConfigurationApi:
     def delete_transaction_configuration_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to delete transaction configurations for")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteTransactionConfigurationSource: Delete all transaction configurations for a source  # noqa: E501
 
-        /// WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -530,15 +530,15 @@ class SystemConfigurationApi:
 
 
     @overload
-    async def get_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.             Defaults to returning the latest version of the transaction configurations if not specified.")] = None, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
+    async def get_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified.")] = None, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.             Defaults to returning the latest version of the transaction configurations if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
+    def get_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.             Defaults to returning the latest version of the transaction configurations if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
+    def get_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionConfigurationSource: Get all transaction configurations for a source  # noqa: E501
 
         Returns failure if requested source is not found  # noqa: E501
@@ -550,7 +550,7 @@ class SystemConfigurationApi:
 
         :param source: The source for which to retrieve transaction configurations (required)
         :type source: str
-        :param as_at: The asAt datetime at which to retrieve the transaction configurations.             Defaults to returning the latest version of the transaction configurations if not specified.
+        :param as_at: The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -571,7 +571,7 @@ class SystemConfigurationApi:
         return self.get_transaction_configuration_source_with_http_info(source, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_configuration_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.             Defaults to returning the latest version of the transaction configurations if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_configuration_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source for which to retrieve transaction configurations")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionConfigurationSource: Get all transaction configurations for a source  # noqa: E501
 
         Returns failure if requested source is not found  # noqa: E501
@@ -583,7 +583,7 @@ class SystemConfigurationApi:
 
         :param source: The source for which to retrieve transaction configurations (required)
         :type source: str
-        :param as_at: The asAt datetime at which to retrieve the transaction configurations.             Defaults to returning the latest version of the transaction configurations if not specified.
+        :param as_at: The asAt datetime at which to retrieve the transaction configurations.              Defaults to returning the latest version of the transaction configurations if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -693,25 +693,25 @@ class SystemConfigurationApi:
 
 
     @overload
-    async def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
+    async def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
         ...
 
     @overload
-    def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
+    def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
+    def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.list_configuration_transaction_types(as_at, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.
+        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -732,17 +732,17 @@ class SystemConfigurationApi:
         return self.list_configuration_transaction_types_with_http_info(as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_configuration_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_configuration_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.list_configuration_transaction_types_with_http_info(as_at, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults             to returning the latest versions if not specified.
+        :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -859,7 +859,7 @@ class SystemConfigurationApi:
     def set_configuration_transaction_types(self, transaction_set_configuration_data_request : Annotated[Optional[TransactionSetConfigurationDataRequest], Field(description="The complete set of transaction type definitions.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EXPERIMENTAL] SetConfigurationTransactionTypes: Set transaction types  # noqa: E501
 
-        Configure all existing transaction types. Note it is not possible to configure a single existing transaction type on its own.              WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        Configure all existing transaction types. Note it is not possible to configure a single existing transaction type on its own.                WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -890,7 +890,7 @@ class SystemConfigurationApi:
     def set_configuration_transaction_types_with_http_info(self, transaction_set_configuration_data_request : Annotated[Optional[TransactionSetConfigurationDataRequest], Field(description="The complete set of transaction type definitions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] SetConfigurationTransactionTypes: Set transaction types  # noqa: E501
 
-        Configure all existing transaction types. Note it is not possible to configure a single existing transaction type on its own.              WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        Configure all existing transaction types. Note it is not possible to configure a single existing transaction type on its own.                WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1018,7 +1018,7 @@ class SystemConfigurationApi:
     def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[conlist(SetTransactionConfigurationSourceRequest), Field(..., description="The set of transaction configurations")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EXPERIMENTAL] SetTransactionConfigurationSource: Set transaction types for a source  # noqa: E501
 
-        This will replace all the existing transaction configurations for the given source              WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        This will replace all the existing transaction configurations for the given source                WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1051,7 +1051,7 @@ class SystemConfigurationApi:
     def set_transaction_configuration_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[conlist(SetTransactionConfigurationSourceRequest), Field(..., description="The set of transaction configurations")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] SetTransactionConfigurationSource: Set transaction types for a source  # noqa: E501
 
-        This will replace all the existing transaction configurations for the given source              WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
+        This will replace all the existing transaction configurations for the given source                WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

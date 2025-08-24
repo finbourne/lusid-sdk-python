@@ -27,12 +27,12 @@ from lusid.models.trading_conventions import TradingConventions
 
 class FundShareClass(LusidInstrument):
     """
-    LUSID representation of a FundShareClass. A ShareClass represents a pool of shares, held by investors, within a fund.  A ShareClass can represent a differing investment approach by either Fees,  Income, Currency Risk and Investor type.  # noqa: E501
+    LUSID representation of a FundShareClass.  A ShareClass represents a pool of shares, held by investors, within a fund.   A ShareClass can represent a differing investment approach by either Fees,   Income, Currency Risk and Investor type.  # noqa: E501
     """
     short_code:  StrictStr = Field(...,alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".") 
-    fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income.  Supported string (enumeration) values are: [Income, Accumulation].") 
-    distribution_payment_type:  StrictStr = Field(...,alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax).  Supported string (enumeration) values are: [Gross, Net].") 
-    hedging:  StrictStr = Field(...,alias="hedging", description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of it's investment strategy.  Supported string (enumeration) values are: [Invalid, None, ApplyHedging].") 
+    fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income.    Supported string (enumeration) values are: [Income, Accumulation].") 
+    distribution_payment_type:  StrictStr = Field(...,alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax).    Supported string (enumeration) values are: [Gross, Net].") 
+    hedging:  StrictStr = Field(...,alias="hedging", description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of it's investment strategy.    Supported string (enumeration) values are: [Invalid, None, ApplyHedging].") 
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     rounding_conventions: Optional[conlist(SimpleRoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding Convention used for the FundShareClass quotes")
     trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")

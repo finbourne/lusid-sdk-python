@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CreateCheckDefinition: Create a Check Definition
 
-Creates a Check Definition. Returns the created Check Definition at the current effectiveAt. Note that Check Definitions are mono-temporal, however they can have Time-Variant Properties. Upserted Properties will be returned at the latest AsAt and EffectiveAt
+Creates a Check Definition. Returns the created Check Definition at the current effectiveAt.  Note that Check Definitions are mono-temporal, however they can have Time-Variant Properties.  Upserted Properties will be returned at the latest AsAt and EffectiveAt
 
 ### Example
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteCheckDefinition: Deletes a particular Check Definition
 
-The deletion will take effect from the Check Definition deletion datetime. i.e. will no longer exist at any asAt datetime after the asAt datetime of deletion.
+The deletion will take effect from the Check Definition deletion datetime.  i.e. will no longer exist at any asAt datetime after the asAt datetime of deletion.
 
 ### Example
 
@@ -161,7 +161,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(CheckDefinitionsApi)
     scope = 'scope_example' # str | The scope of the specified Check Definition.
-    code = 'code_example' # str | The code of the specified Check Definition. Together with the domain and scope this uniquely             identifies the Check Definition.
+    code = 'code_example' # str | The code of the specified Check Definition. Together with the domain and scope this uniquely              identifies the Check Definition.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -182,7 +182,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified Check Definition. | 
- **code** | **str**| The code of the specified Check Definition. Together with the domain and scope this uniquely             identifies the Check Definition. | 
+ **code** | **str**| The code of the specified Check Definition. Together with the domain and scope this uniquely              identifies the Check Definition. | 
 
 ### Return type
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetCheckDefinition: Get a single Check Definition by scope and code.
 
-Retrieves one Check Definition by scope and code. Check Definitions are mono-temporal. The EffectiveAt is only applied to Time-Variant Properties.
+Retrieves one Check Definition by scope and code.  Check Definitions are mono-temporal. The EffectiveAt is only applied to Time-Variant Properties.
 
 ### Example
 
@@ -255,10 +255,10 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(CheckDefinitionsApi)
     scope = 'scope_example' # str | The scope of the specified Check Definition.
-    code = 'code_example' # str | The code of the specified Check Definition. Together with the scope this uniquely             identifies the Check Definition.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Check Definition definition. Defaults to return             the latest version of the definition if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the check definition properties.             Defaults to the current LUSID system datetime if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CheckDefinition' domain to decorate onto             the Check Definition.             These must have the format {domain}/{scope}/{code}, for example 'CheckDefinition/system/Name'. (optional)
+    code = 'code_example' # str | The code of the specified Check Definition. Together with the scope this uniquely              identifies the Check Definition.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Check Definition definition. Defaults to return              the latest version of the definition if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the check definition properties.              Defaults to the current LUSID system datetime if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CheckDefinition' domain to decorate onto              the Check Definition.              These must have the format {domain}/{scope}/{code}, for example 'CheckDefinition/system/Name'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -279,10 +279,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified Check Definition. | 
- **code** | **str**| The code of the specified Check Definition. Together with the scope this uniquely             identifies the Check Definition. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Check Definition definition. Defaults to return             the latest version of the definition if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the check definition properties.             Defaults to the current LUSID system datetime if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CheckDefinition&#39; domain to decorate onto             the Check Definition.             These must have the format {domain}/{scope}/{code}, for example &#39;CheckDefinition/system/Name&#39;. | [optional] 
+ **code** | **str**| The code of the specified Check Definition. Together with the scope this uniquely              identifies the Check Definition. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Check Definition definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the check definition properties.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CheckDefinition&#39; domain to decorate onto              the Check Definition.              These must have the format {domain}/{scope}/{code}, for example &#39;CheckDefinition/system/Name&#39;. | [optional] 
 
 ### Return type
 
@@ -355,12 +355,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(CheckDefinitionsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Check Definitions. Defaults to returning the latest version of each Check Definition if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Check Definitions.             Note that Check Definitions are monotemporal, the effectiveAt is for Timevariant Properties on the Check Definition only.             Defaults to the current LUSID system datetime if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Check Definitions; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Check Definitions.              Note that Check Definitions are monotemporal, the effectiveAt is for Timevariant Properties on the Check Definition only.              Defaults to the current LUSID system datetime if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Check Definitions; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.             For example, to filter on the displayName, specify \"displayName eq 'MyCheckDefinition'\". For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the displayName, specify \"displayName eq 'MyCheckDefinition'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CheckDefinition' domain to decorate onto each Check Definition.             These must take the format {domain}/{scope}/{code}, for example 'CheckDefinition/Account/id'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CheckDefinition' domain to decorate onto each Check Definition.              These must take the format {domain}/{scope}/{code}, for example 'CheckDefinition/Account/id'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -381,12 +381,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the Check Definitions. Defaults to returning the latest version of each Check Definition if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime or cut label at which to list the Check Definitions.             Note that Check Definitions are monotemporal, the effectiveAt is for Timevariant Properties on the Check Definition only.             Defaults to the current LUSID system datetime if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Check Definitions; this             value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt             and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the Check Definitions.              Note that Check Definitions are monotemporal, the effectiveAt is for Timevariant Properties on the Check Definition only.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Check Definitions; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.             For example, to filter on the displayName, specify \&quot;displayName eq &#39;MyCheckDefinition&#39;\&quot;. For more information about filtering             results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.              For example, to filter on the displayName, specify \&quot;displayName eq &#39;MyCheckDefinition&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CheckDefinition&#39; domain to decorate onto each Check Definition.             These must take the format {domain}/{scope}/{code}, for example &#39;CheckDefinition/Account/id&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CheckDefinition&#39; domain to decorate onto each Check Definition.              These must take the format {domain}/{scope}/{code}, for example &#39;CheckDefinition/Account/id&#39;. | [optional] 
 
 ### Return type
 
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpdateCheckDefinition: Update Check Definition defined by scope and code
 
-Overwrites an existing Check Definition Update request has the same required fields as Create apart from the id. Returns the updated Check Definition at the current effectiveAt. Note that Check Definitions are mono-temporal, however they can have Time-Variant Properties. Updated Properties will be returned at the latest AsAt and EffectiveAt
+Overwrites an existing Check Definition  Update request has the same required fields as Create apart from the id.  Returns the updated Check Definition at the current effectiveAt.  Note that Check Definitions are mono-temporal, however they can have Time-Variant Properties.  Updated Properties will be returned at the latest AsAt and EffectiveAt
 
 ### Example
 

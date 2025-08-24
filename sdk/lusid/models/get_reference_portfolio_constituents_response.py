@@ -32,7 +32,7 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
     period_type:  Optional[StrictStr] = Field(None,alias="periodType", description="The available values are: Daily, Weekly, Monthly, Quarterly, Annually") 
     period_count: Optional[StrictInt] = Field(None, alias="periodCount")
     constituents: conlist(ReferencePortfolioConstituent) = Field(..., description="Set of constituents (instrument/weight pairings)")
-    href:  Optional[StrictStr] = Field(None,alias="href", description="The Uri that returns the same result as the original request, but may include resolved as at time(s).") 
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The Uri that returns the same result as the original request,  but may include resolved as at time(s).") 
     links: Optional[conlist(Link)] = None
     __properties = ["effectiveFrom", "weightType", "periodType", "periodCount", "constituents", "href", "links"]
 

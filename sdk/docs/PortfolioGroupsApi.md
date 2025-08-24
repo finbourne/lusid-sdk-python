@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 
 BuildTransactionsForPortfolioGroup: Build transactions for transaction portfolios in a portfolio group
 
-Build transactions for transaction portfolios in a portfolio group over a given interval of effective time.              When the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.
+Build transactions for transaction portfolios in a portfolio group over a given interval of effective time.                When the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the  union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.
 
 ### Example
 
@@ -291,16 +291,16 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group.
-    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group.
+    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies               the portfolio group.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # transaction_query_parameters = TransactionQueryParameters.from_json("")
     # transaction_query_parameters = TransactionQueryParameters.from_dict({})
     transaction_query_parameters = TransactionQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Transaction Type, use \"type eq 'Buy'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest               version of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Transaction Type, use \"type eq 'Buy'\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or               \"Transaction/strategy/quantsignal\". (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to BuildTransactions. (optional)
 
@@ -323,11 +323,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group. | 
- **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group. | 
+ **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies               the portfolio group. | 
  **transaction_query_parameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| The query queryParameters which control how the output transactions are built. | 
- **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest               version of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or               \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to BuildTransactions. | [optional] 
 
@@ -453,7 +453,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteGroupProperties: Delete group properties
 
-Delete one or more properties from a single portfolio group. If the properties are time variant then an effective date time from which the properties will be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.
+Delete one or more properties from a single portfolio group. If the properties are time variant then an effective date time from which the properties  will be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.
 
 ### Example
 
@@ -502,8 +502,8 @@ def main():
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the group to delete properties from.
     code = 'code_example' # str | The code of the group to delete properties from. Together with the scope this uniquely identifies the group.
-    request_body = ["PortfolioGroup/MyScope/MyPropertyName","PortfolioGroup/MyScope/MyPropertyName2"] # List[str] | The property keys of the properties to delete. These take the format             {domain}/{scope}/{code} e.g. \"PortfolioGroup/Manager/Id\". Each property must be from the \"PortfolioGroup\" domain.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. (optional)
+    request_body = ["PortfolioGroup/MyScope/MyPropertyName","PortfolioGroup/MyScope/MyPropertyName2"] # List[str] | The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \"PortfolioGroup/Manager/Id\". Each property must be from the \"PortfolioGroup\" domain.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -525,8 +525,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the group to delete properties from. | 
  **code** | **str**| The code of the group to delete properties from. Together with the scope this uniquely identifies the group. | 
- **request_body** | [**List[str]**](str.md)| The property keys of the properties to delete. These take the format             {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. Each property must be from the \&quot;PortfolioGroup\&quot; domain. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.             The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is             before the time-variant property exists then a failure is returned. Do not specify this parameter if any of             the properties to delete are perpetual. | [optional] 
+ **request_body** | [**List[str]**](str.md)| The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. Each property must be from the \&quot;PortfolioGroup\&quot; domain. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is              before the time-variant property exists then a failure is returned. Do not specify this parameter if any of              the properties to delete are perpetual. | [optional] 
 
 ### Return type
 
@@ -551,7 +551,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteKeyFromPortfolioGroupAccessMetadata: Delete a Portfolio Group Access Metadata entry
 
-Deletes the Portfolio Group Access Metadata entry that exactly matches the provided identifier parts.  It is important to always check to verify success (or failure).
+Deletes the Portfolio Group Access Metadata entry that exactly matches the provided identifier parts.    It is important to always check to verify success (or failure).
 
 ### Example
 
@@ -751,7 +751,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeletePortfolioGroup: Delete portfolio group
 
-Delete a single portfolio group. A portfolio group can be deleted while it still contains portfolios or sub groups. In this case any portfolios or sub groups contained in this group will not be deleted, however they will no longer be grouped together by this portfolio group. The deletion will be valid from the portfolio group's creation datetime, ie. the portfolio group will no longer exist at any effective datetime from the asAt datetime of deletion.
+Delete a single portfolio group. A portfolio group can be deleted while it still contains portfolios or sub groups.  In this case any portfolios or sub groups contained in this group will not be deleted, however they will no longer be grouped together by this portfolio group.  The deletion will be valid from the portfolio group's creation datetime, ie. the portfolio group will no longer exist at any effective datetime from the asAt datetime of deletion.
 
 ### Example
 
@@ -993,14 +993,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the group to retrieve the A2B report for.
-    code = 'code_example' # str | The code of the group to retrieve the A2B report for. Together with the scope this             uniquely identifies the portfolio group.
-    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified.
-    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version             of each transaction if not specified. (optional)
+    code = 'code_example' # str | The code of the group to retrieve the A2B report for. Together with the scope this              uniquely identifies the portfolio group.
+    from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified.
+    to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. (optional)
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto             the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1021,14 +1021,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the group to retrieve the A2B report for. | 
- **code** | **str**| The code of the group to retrieve the A2B report for. Together with the scope this             uniquely identifies the portfolio group. | 
- **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no lower bound if this is not specified. | 
- **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.             There is no upper bound if this is not specified. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version             of each transaction if not specified. | [optional] 
+ **code** | **str**| The code of the group to retrieve the A2B report for. Together with the scope this              uniquely identifies the portfolio group. | 
+ **from_effective_at** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no lower bound if this is not specified. | 
+ **to_effective_at** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.              There is no upper bound if this is not specified. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version              of each transaction if not specified. | [optional] 
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto             the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
- **filter** | **str**| Expression to filter the result set.             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -1199,12 +1199,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group.
-    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies             the portfolio group.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of transaction             portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults             to return the latest version of the holdings if not specified. (optional)
+    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of transaction              portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults              to return the latest version of the holdings if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto             the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
-    by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to             False. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
+    by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
     include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
 
     try:
@@ -1226,12 +1226,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group. | 
- **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies             the portfolio group. | 
- **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of transaction             portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults             to return the latest version of the holdings if not specified. | [optional] 
+ **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of transaction              portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults              to return the latest version of the holdings if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto             the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
- **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to             False. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
+ **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
  **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
 
 ### Return type
@@ -1305,11 +1305,11 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group to retrieve the definition for.
-    code = 'code_example' # str | The code of the portfolio group to retrieve the definition for. Together with the scope             this uniquely identifies the portfolio group.
+    code = 'code_example' # str | The code of the portfolio group to retrieve the definition for. Together with the scope              this uniquely identifies the portfolio group.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio group definition. Defaults to return             the latest version of the portfolio group definition if not specified. (optional)
-    related_entity_property_keys = ['related_entity_property_keys_example'] # List[str] | A list of property keys from any domain that supports relationships             to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the portfolio group in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio group definition. Defaults to return              the latest version of the portfolio group definition if not specified. (optional)
+    related_entity_property_keys = ['related_entity_property_keys_example'] # List[str] | A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolio group in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1330,11 +1330,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group to retrieve the definition for. | 
- **code** | **str**| The code of the portfolio group to retrieve the definition for. Together with the scope             this uniquely identifies the portfolio group. | 
+ **code** | **str**| The code of the portfolio group to retrieve the definition for. Together with the scope              this uniquely identifies the portfolio group. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio group definition. Defaults to return             the latest version of the portfolio group definition if not specified. | [optional] 
- **related_entity_property_keys** | [**List[str]**](str.md)| A list of property keys from any domain that supports relationships             to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the portfolio group in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio group definition. Defaults to return              the latest version of the portfolio group definition if not specified. | [optional] 
+ **related_entity_property_keys** | [**List[str]**](str.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio group in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -1359,7 +1359,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetPortfolioGroupAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Portfolio Group
 
-Get a specific Portfolio Group access metadata by specifying the corresponding identifier parts              No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
+Get a specific Portfolio Group access metadata by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
 
 ### Example
 
@@ -1510,7 +1510,7 @@ def main():
     code = 'code_example' # str | The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group.
     from_as_at = '2013-10-20T19:20:30+01:00' # datetime | The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. (optional)
     to_as_at = '2013-10-20T19:20:30+01:00' # datetime | The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the User ID, use \"userId.id eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the User ID, use \"userId.id eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1534,7 +1534,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group. | 
  **from_as_at** | **datetime**| The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. | [optional] 
  **to_as_at** | **datetime**| The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the User ID, use \&quot;userId.id eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               For example, to filter on the User ID, use \&quot;userId.id eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -1607,7 +1607,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group to expand.
-    code = 'code_example' # str | The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio             group to expand.
+    code = 'code_example' # str | The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio              group to expand.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to expand the portfolio group. Defaults to return the latest version of each portfolio in the group if not specified. (optional)
     property_filter = ['property_filter_example'] # List[str] | The restricted list of property keys from the \"Portfolio\" domain which will be decorated onto each portfolio. These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". (optional)
@@ -1631,7 +1631,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group to expand. | 
- **code** | **str**| The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio             group to expand. | 
+ **code** | **str**| The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio              group to expand. | 
  **effective_at** | **str**| The effective datetime or cut label at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to expand the portfolio group. Defaults to return the latest version of each portfolio in the group if not specified. | [optional] 
  **property_filter** | [**List[str]**](str.md)| The restricted list of property keys from the \&quot;Portfolio\&quot; domain which will be decorated onto each portfolio. These take the format {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. | [optional] 
@@ -1805,12 +1805,12 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the group.
-    code = 'code_example' # str | The code of the group. Together with the scope this uniquely identifies             the portfolio group.
-    property_key = 'property_key_example' # str | The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"PortfolioGroup/Manager/Id\".             Each property must be from the \"PortfolioGroup\" domain.
+    code = 'code_example' # str | The code of the group. Together with the scope this uniquely identifies              the portfolio group.
+    property_key = 'property_key_example' # str | The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"PortfolioGroup/Manager/Id\".              Each property must be from the \"PortfolioGroup\" domain.
     portfolio_group_effective_at = 'portfolio_group_effective_at_example' # str | The effective datetime used to resolve the portfolio group. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio group's property history. Defaults to return the current datetime if not supplied. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.             This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields             must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
     try:
@@ -1832,12 +1832,12 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the group. | 
- **code** | **str**| The code of the group. Together with the scope this uniquely identifies             the portfolio group. | 
- **property_key** | **str**| The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;.             Each property must be from the \&quot;PortfolioGroup\&quot; domain. | 
+ **code** | **str**| The code of the group. Together with the scope this uniquely identifies              the portfolio group. | 
+ **property_key** | **str**| The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;.              Each property must be from the \&quot;PortfolioGroup\&quot; domain. | 
  **portfolio_group_effective_at** | **str**| The effective datetime used to resolve the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the portfolio group&#39;s property history. Defaults to return the current datetime if not supplied. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **page** | **str**| The pagination token to use to continue listing properties from a previous call to get property time series.             This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields             must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
 
 ### Return type
@@ -1911,11 +1911,11 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group.
-    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies             the portfolio group.
+    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve relations. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve relations. Defaults to return the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the relations. Users should provide null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format             {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.             Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1936,11 +1936,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group. | 
- **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies             the portfolio group. | 
+ **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve relations. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve relations. Defaults to return the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter the relations. Users should provide null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format             {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. They must be from the \&quot;Person\&quot; or \&quot;LegalEntity\&quot; domain.             Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \&quot;Person/CompanyDetails/Role\&quot;. They must be from the \&quot;Person\&quot; or \&quot;LegalEntity\&quot; domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. | [optional] 
 
 ### Return type
 
@@ -2013,11 +2013,11 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group.
-    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies             the portfolio group.
+    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve relationship. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter relationships. Users should provide null or empty string for this field until further notice. (optional)
-    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example             'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
+    identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2038,11 +2038,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group. | 
- **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies             the portfolio group. | 
+ **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve relationship. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified. | [optional] 
  **filter** | **str**| Expression to filter relationships. Users should provide null or empty string for this field until further notice. | [optional] 
- **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.             These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example             &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
+ **identifier_types** | [**List[str]**](str.md)| Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the &#39;Person&#39; or &#39;LegalEntity&#39; domains and have the format {domain}/{scope}/{code}, for example              &#39;Person/CompanyDetails/Role&#39;. An Empty array may be used to return all related Entities. | [optional] 
 
 ### Return type
 
@@ -2067,7 +2067,7 @@ Name | Type | Description  | Notes
 
 GetTransactionsForPortfolioGroup: Get transactions for transaction portfolios in a portfolio group
 
-Get transactions for transaction portfolios in a portfolio group over a given interval of effective time.              When the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.
+Get transactions for transaction portfolios in a portfolio group over a given interval of effective time.                When the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the  union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.
 
 ### Example
 
@@ -2115,15 +2115,15 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the portfolio group.
-    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group.
-    from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. (optional)
-    to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Transaction Type, use \"type eq 'Buy'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Transaction\", \"LegalEntity\" or \"CustodianAccount\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+    code = 'code_example' # str | The code of the portfolio group. Together with the scope this uniquely identifies               the portfolio group.
+    from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.               There is no lower bound if this is not specified. (optional)
+    to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no upper bound if this is not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transactions. Defaults to return the latest version               of each transaction if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Transaction Type, use \"type eq 'Buy'\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Transaction\", \"LegalEntity\" or \"CustodianAccount\" domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or               \"Transaction/strategy/quantsignal\". (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetTransactions. (optional)
-    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
     try:
@@ -2145,15 +2145,15 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group. | 
- **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies              the portfolio group. | 
- **from_transaction_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. | [optional] 
- **to_transaction_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.              For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Transaction\&quot;, \&quot;LegalEntity\&quot; or \&quot;CustodianAccount\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **code** | **str**| The code of the portfolio group. Together with the scope this uniquely identifies               the portfolio group. | 
+ **from_transaction_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.               There is no lower bound if this is not specified. | [optional] 
+ **to_transaction_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.               There is no upper bound if this is not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the transactions. Defaults to return the latest version               of each transaction if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.               For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Transaction\&quot;, \&quot;LegalEntity\&quot; or \&quot;CustodianAccount\&quot; domain to decorate onto               the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or               \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetTransactions. | [optional] 
- **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. | [optional] 
+ **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
 
 ### Return type
@@ -2229,12 +2229,12 @@ def main():
     scope = 'scope_example' # str | The scope to list the portfolio groups in.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio groups. Defaults to return the latest version of each portfolio group if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to no limit if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set.             For example, to filter on the Display Name, use \"displayName eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    related_entity_property_keys = ['related_entity_property_keys_example'] # List[str] | A list of property keys from any domain that supports relationships             to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
-    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities             onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
+    related_entity_property_keys = ['related_entity_property_keys_example'] # List[str] | A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
+    relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2257,12 +2257,12 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope to list the portfolio groups in. | 
  **effective_at** | **str**| The effective datetime or cut label at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the portfolio groups. Defaults to return the latest version of each portfolio group if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to no limit if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set.             For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **related_entity_property_keys** | [**List[str]**](str.md)| A list of property keys from any domain that supports relationships             to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
- **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities             onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
+ **related_entity_property_keys** | [**List[str]**](str.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
+ **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
@@ -2287,7 +2287,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] PatchPortfolioGroupAccessMetadata: Patch Access Metadata rules for a Portfolio Group.
 
-Patch Portfolio Group Access Metadata Rules in a single scope. The behaviour is defined by the JSON Patch specification.              Currently only 'add' is a supported operation on the patch document.  Currently only valid metadata keys are supported paths on the patch document.              The response will return any affected Portfolio Group Access Metadata rules or a failure message if unsuccessful.              It is important to always check to verify success (or failure).              Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
+Patch Portfolio Group Access Metadata Rules in a single scope.  The behaviour is defined by the JSON Patch specification.                Currently only 'add' is a supported operation on the patch document.    Currently only valid metadata keys are supported paths on the patch document.                The response will return any affected Portfolio Group Access Metadata rules or a failure message if unsuccessful.                It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
 
 ### Example
 
@@ -2387,7 +2387,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpdatePortfolioGroup: Update portfolio group
 
-Update the definition of a single portfolio group. Not all elements within a portfolio group definition are modifiable due to the potential implications for data already stored against the portfolio group.
+Update the definition of a single portfolio group. Not all elements within a portfolio group definition are modifiable  due to the potential implications for data already stored against the portfolio group.
 
 ### Example
 
@@ -2490,7 +2490,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertGroupProperties: Upsert group properties
 
-Update or insert one or more properties onto a single group. A property will be updated if it already exists and inserted if it does not. All properties must be of the domain 'PortfolioGroup'.              Upserting a property that exists for a group, with a null value, will delete the instance of the property for that group.              Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i> datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Update or insert one or more properties onto a single group. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'PortfolioGroup'.                Upserting a property that exists for a group, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -2539,7 +2539,7 @@ def main():
     api_instance = api_client_factory.build(PortfolioGroupsApi)
     scope = 'scope_example' # str | The scope of the group to update or insert the properties onto.
     code = 'code_example' # str | The code of the group to update or insert the properties onto. Together with the scope this uniquely identifies the group.
-    request_body = {"PortfolioGroup/MyScope/FundManagerName":{"key":"PortfolioGroup/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PortfolioGroup/MyScope/SomeProperty":{"key":"PortfolioGroup/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PortfolioGroup/MyScope/AnotherProperty":{"key":"PortfolioGroup/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PortfolioGroup/MyScope/ReBalanceInterval":{"key":"PortfolioGroup/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the group. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"PortfolioGroup/Manager/Id\". (optional)
+    request_body = {"PortfolioGroup/MyScope/FundManagerName":{"key":"PortfolioGroup/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PortfolioGroup/MyScope/SomeProperty":{"key":"PortfolioGroup/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PortfolioGroup/MyScope/AnotherProperty":{"key":"PortfolioGroup/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PortfolioGroup/MyScope/ReBalanceInterval":{"key":"PortfolioGroup/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the group. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"PortfolioGroup/Manager/Id\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2561,7 +2561,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the group to update or insert the properties onto. | 
  **code** | **str**| The code of the group to update or insert the properties onto. Together with the scope this uniquely identifies the group. | 
- **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the group. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. | [optional] 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the group. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;PortfolioGroup/Manager/Id\&quot;. | [optional] 
 
 ### Return type
 
@@ -2586,7 +2586,7 @@ Name | Type | Description  | Notes
 
 UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
-Update or insert one Portfolio Group Access Metadata Entry in a single scope. An item will be updated if it already exists and inserted if it does not.              The response will return the successfully updated or inserted Portfolio Group Access Metadata rule or failure message if unsuccessful.              It is important to always check to verify success (or failure).              Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
+Update or insert one Portfolio Group Access Metadata Entry in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Portfolio Group Access Metadata rule or failure message if unsuccessful.                It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
 
 ### Example
 

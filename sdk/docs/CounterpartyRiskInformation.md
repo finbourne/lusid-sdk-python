@@ -1,6 +1,6 @@
 # CounterpartyRiskInformation
 
-In the event that the legal entity is a counterparty to an OTC transaction (as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement), this information would be needed for calculations such as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc).
+In the event that the legal entity is a counterparty to an OTC transaction  (as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement),  this information would be needed for calculations  such as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc).
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

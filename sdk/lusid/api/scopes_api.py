@@ -55,15 +55,15 @@ class ScopesApi:
 
 
     @overload
-    async def list_entity_scopes(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.             This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
+    async def list_entity_scopes(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_entity_scopes(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.             This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
+    def list_entity_scopes(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_entity_scopes(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.             This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
+    def list_entity_scopes(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
         """ListEntityScopes: List Entity Scopes  # noqa: E501
 
         List all the scopes for a given entity type that contain data.  # noqa: E501
@@ -77,7 +77,7 @@ class ScopesApi:
         :type entity_type: str
         :param as_at: The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing scopes from a previous call to list scopes.             This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields             must not have changed since the original request.
+        :param page: The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.
         :type limit: int
@@ -100,7 +100,7 @@ class ScopesApi:
         return self.list_entity_scopes_with_http_info(entity_type, as_at, page, limit, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_entity_scopes_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.             This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields             must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_entity_scopes_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListEntityScopes: List Entity Scopes  # noqa: E501
 
         List all the scopes for a given entity type that contain data.  # noqa: E501
@@ -114,7 +114,7 @@ class ScopesApi:
         :type entity_type: str
         :param as_at: The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing scopes from a previous call to list scopes.             This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields             must not have changed since the original request.
+        :param page: The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.
         :type limit: int
@@ -234,15 +234,15 @@ class ScopesApi:
 
 
     @overload
-    async def list_scopes(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
+    async def list_scopes(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_scopes(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
+    def list_scopes(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_scopes(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
+    def list_scopes(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
         """ListScopes: List Scopes  # noqa: E501
 
         List all the scopes that contain data.  # noqa: E501
@@ -252,7 +252,7 @@ class ScopesApi:
         >>> thread = api.list_scopes(filter, async_req=True)
         >>> result = thread.get()
 
-        :param filter: Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -273,7 +273,7 @@ class ScopesApi:
         return self.list_scopes_with_http_info(filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_scopes_with_http_info(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_scopes_with_http_info(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListScopes: List Scopes  # noqa: E501
 
         List all the scopes that contain data.  # noqa: E501
@@ -283,7 +283,7 @@ class ScopesApi:
         >>> thread = api.list_scopes_with_http_info(filter, async_req=True)
         >>> result = thread.get()
 
-        :param filter: Expression to filter the result set.             For example, to filter on the Scope, use \"scope eq 'string'\"             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param filter: Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

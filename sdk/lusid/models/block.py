@@ -29,7 +29,7 @@ from lusid.models.version import Version
 
 class Block(BaseModel):
     """
-    A block of orders for the same instrument, intended to record for example a trader's aggregation of outstanding orders at a given time.  # noqa: E501
+    A block of orders for the same instrument, intended to record for example a trader's aggregation  of outstanding orders at a given time.  # noqa: E501
     """
     id: ResourceId = Field(...)
     order_ids: conlist(ResourceId) = Field(..., alias="orderIds", description="The related order ids.")

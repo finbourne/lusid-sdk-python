@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class TriggerEvent(InstrumentEvent):
     """
-    Definition of a trigger event. This is an event that occurs on transformation of an option instrument being triggered by a barrier/touch price level being hit by the underlying asset.  # noqa: E501
+    Definition of a trigger event.  This is an event that occurs on transformation of an option instrument being  triggered by a barrier/touch price level being hit by the underlying asset.  # noqa: E501
     """
     level: Union[StrictFloat, StrictInt] = Field(..., description="The underlying price level that triggers the event")
     trigger_type:  StrictStr = Field(...,alias="triggerType", description="The type of the trigger; valid options are Knock-In, Knock-Out, Touch or No-Touch") 

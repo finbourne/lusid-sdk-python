@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class SwapCashFlowEvent(InstrumentEvent):
     """
-    Definition of a swap cash flow event. This event describes the cashflow generated from either an interest rate swap or inflation swap instrument.  # noqa: E501
+    Definition of a swap cash flow event.  This event describes the cashflow generated from either an interest rate swap or inflation swap instrument.  # noqa: E501
     """
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex-dividend date of the cashflow.")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the cashflow.")

@@ -28,7 +28,7 @@ class ScripDividendEvent(InstrumentEvent):
     A scrip dividend issued to shareholders.  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
-    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first business day on which the dividend is not owed to the buying party. Typically this is T-1 from the RecordDate.")
+    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The date the company pays out dividends to shareholders.")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price per unit paid in lieu when fractional units can not be distributed.")

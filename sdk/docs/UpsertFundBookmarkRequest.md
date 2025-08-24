@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **bookmark_code** | **str** | Unique code for the Bookmark. | 
 **display_name** | **str** | Identifiable Name assigned to the Bookmark. | 
 **description** | **str** | Description assigned to the Bookmark. | [optional] 
-**effective_at** | **datetime** | The effective time of the diary entry. | 
-**query_as_at** | **datetime** | The query time of the diary entry. Defaults to latest. | [optional] 
-**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
+**effective_at** | **datetime** | The effective time of the Bookmark. | 
+**query_as_at** | **datetime** | The query time of the Bookmark. Defaults to latest. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Bookmark. | [optional] 
 ## Example
 
 ```python

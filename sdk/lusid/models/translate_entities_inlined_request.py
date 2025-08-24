@@ -25,7 +25,7 @@ from lusid.models.translation_input import TranslationInput
 
 class TranslateEntitiesInlinedRequest(BaseModel):
     """
-    Request to translate financial entities with a given script body. The output of the translation is validated against a schema specified in the request.  # noqa: E501
+    Request to translate financial entities with a given script body.  The output of the translation is validated against a schema specified in the request.  # noqa: E501
     """
     entity_payloads: Dict[str, TranslationInput] = Field(..., alias="entityPayloads", description="Entity payloads to be translated indexed by (ephemeral) unique correlation ids.")
     script_body:  StrictStr = Field(...,alias="scriptBody", description="The body of the translation script to use for translating the entities.") 

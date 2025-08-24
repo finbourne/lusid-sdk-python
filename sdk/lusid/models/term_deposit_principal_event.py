@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class TermDepositPrincipalEvent(InstrumentEvent):
     """
-    Definition of a Term Deposit Interest Event. This is an event that describes the occurence of principal on a term deposit ().  # noqa: E501
+    Definition of a Term Deposit Interest Event.  This is an event that describes the occurence of principal on a term deposit ().  # noqa: E501
     """
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the principal payment.") 
     payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Payment date of the principal payment.")

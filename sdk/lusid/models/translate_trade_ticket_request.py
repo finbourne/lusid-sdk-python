@@ -26,7 +26,7 @@ class TranslateTradeTicketRequest(BaseModel):
     """
     A collection of instruments to translate, along with the target dialect to translate into.  # noqa: E501
     """
-    tickets: Dict[str, TradeTicket] = Field(..., description="The collection of trade tickets to translate.              Each trade ticket should be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.")
+    tickets: Dict[str, TradeTicket] = Field(..., description="The collection of trade tickets to translate.                Each trade ticket should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.")
     dialect:  StrictStr = Field(...,alias="dialect", description="The target dialect that the given instruments should be translated to.") 
     __properties = ["tickets", "dialect"]
 

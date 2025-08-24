@@ -31,7 +31,7 @@ class CashAndSecurityOfferElection(BaseModel):
     cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="costFactor", description="Optional. The fraction of cost that is transferred from the existing shares to the new shares.")
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election.") 
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made. May only be true for one election if multiple are provided.")
+    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     __properties = ["cashOfferCurrency", "cashOfferPrice", "costFactor", "electionKey", "isChosen", "isDefault", "unitsRatio"]
 

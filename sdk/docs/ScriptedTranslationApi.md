@@ -268,10 +268,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(ScriptedTranslationApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialects.             Defaults to return the latest version of the dialect if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.             This value is returned from the previous call. If a pagination token is provided the filter and asAt fields             must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -291,10 +291,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| The asAt datetime at which to retrieve the dialects.             Defaults to return the latest version of the dialect if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.             This value is returned from the previous call. If a pagination token is provided the filter and asAt fields             must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:             https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -368,8 +368,8 @@ def main():
     api_instance = api_client_factory.build(ScriptedTranslationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the script identifiers. Defaults to latest. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1             or Id.Scope eq 'my-scripts' to list result only for a particular scope. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing translation script IDs; this             value is returned from the previous call. If a pagination token is provided, the filter field             must not have changed since the original request. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -391,8 +391,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the script identifiers. Defaults to latest. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1             or Id.Scope eq &#39;my-scripts&#39; to list result only for a particular scope. | [optional] 
- **page** | **str**| The pagination token to use to continue listing translation script IDs; this             value is returned from the previous call. If a pagination token is provided, the filter field             must not have changed since the original request. | [optional] 
+ **filter** | **str**| Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq &#39;my-scripts&#39; to list result only for a particular scope. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request. | [optional] 
 
 ### Return type
 
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] TranslateEntities: Translate a collection of entities with a specified translation script.
 
-Run the provided translation request. The entities to translate are specified in the request body as a dictionary with (ephemeral) unique correlation IDs. The script to use and optional dialect to validate results against are sourced from the database.
+Run the provided translation request. The entities to translate are specified in the request body as a  dictionary with (ephemeral) unique correlation IDs. The script to use and optional dialect to validate  results against are sourced from the database.
 
 ### Example
 
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] TranslateEntitiesInlined: Translate a collection of entities, inlining the body of the translation script.
 
-Run the provided translation request. The entities to translate, script to use and dialect to validate results against are all specified in the request body. The entities are given as a dictionary with (ephemeral) unique correlation IDs.
+Run the provided translation request. The entities to translate, script to use and dialect to validate results against  are all specified in the request body. The entities are given as a dictionary with (ephemeral) unique correlation IDs.
 
 ### Example
 

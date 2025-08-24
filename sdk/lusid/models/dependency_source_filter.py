@@ -24,13 +24,13 @@ from lusid.models.address_key_filter import AddressKeyFilter
 
 class DependencySourceFilter(BaseModel):
     """
-    Encapsulates parts of a market data rule relating not to the nature of the market data requested, but rather the nature of the thing (instrument/model) that is requesting it. In the first instance, this includes the instrument type, asset class, and the currency of the underlying instrument. This can be used to differentiate requests for market data according to the source of the request. See MarketDataSpecificRule.  # noqa: E501
+    Encapsulates parts of a market data rule relating not to the nature of the market data requested, but rather the nature of the thing (instrument/model) that is requesting it.  In the first instance, this includes the instrument type, asset class, and the currency of the underlying instrument.  This can be used to differentiate requests for market data according to the source of the request. See MarketDataSpecificRule.  # noqa: E501
     """
-    instrument_type:  Optional[StrictStr] = Field(None,alias="instrumentType", description="Specify that a rule should only apply if the market data is requested by an instrument of a given instrument type. If null, then no filtering on instrument type is applied.") 
-    asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="Specify that a rule should only apply if the market data is requested by an instrument of a given asset class. If null, then no filtering on asset class is applied.") 
-    dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency. If null, then no filtering on currency is applied.") 
-    long_or_short_indicator:  Optional[StrictStr] = Field(None,alias="longOrShortIndicator", description="Specify that a rule should apply if the market data is requested by a model with a given long or short indicator. If none, then no filtering on LongOrShortIndicator is applied.") 
-    address_key_filters: Optional[conlist(AddressKeyFilter)] = Field(None, alias="addressKeyFilters", description="Specify that a rule should apply if the market data is requested by an instrument with features or properties satisfying all the given address key filters. If an empty list is given, no additional filtering is done.")
+    instrument_type:  Optional[StrictStr] = Field(None,alias="instrumentType", description="Specify that a rule should only apply if the market data is requested by an instrument of a given instrument type.  If null, then no filtering on instrument type is applied.") 
+    asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.  If null, then no filtering on asset class is applied.") 
+    dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied.") 
+    long_or_short_indicator:  Optional[StrictStr] = Field(None,alias="longOrShortIndicator", description="Specify that a rule should apply if the market data is requested by a model with a given long or short indicator.  If none, then no filtering on LongOrShortIndicator is applied.") 
+    address_key_filters: Optional[conlist(AddressKeyFilter)] = Field(None, alias="addressKeyFilters", description="Specify that a rule should apply if the market data is requested by an instrument with features or properties  satisfying all the given address key filters. If an empty list is given, no additional filtering is done.")
     __properties = ["instrumentType", "assetClass", "domCcy", "longOrShortIndicator", "addressKeyFilters"]
 
     class Config:

@@ -24,7 +24,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class BondPrincipalEvent(InstrumentEvent):
     """
-    Definition of a Bond Principal Event This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
+    Definition of a Bond Principal Event  This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
     """
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the principal payment") 
     ex_date: Optional[datetime] = Field(None, alias="exDate", description="Ex-Dividend date of the principal payment")

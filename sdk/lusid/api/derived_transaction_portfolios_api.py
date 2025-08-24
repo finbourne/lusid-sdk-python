@@ -222,15 +222,15 @@ class DerivedTransactionPortfoliosApi:
 
 
     @overload
-    async def delete_derived_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_derived_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_derived_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_derived_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_derived_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_derived_portfolio_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details  # noqa: E501
 
         Delete all the portfolio details for a derived transaction portfolio.  # noqa: E501
@@ -242,7 +242,7 @@ class DerivedTransactionPortfoliosApi:
 
         :param scope: The scope of the derived transaction portfolio. (required)
         :type scope: str
-        :param code: The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio. (required)
+        :param code: The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio. (required)
         :type code: str
         :param effective_at: The effective date of the change.
         :type effective_at: str
@@ -265,7 +265,7 @@ class DerivedTransactionPortfoliosApi:
         return self.delete_derived_portfolio_details_with_http_info(scope, code, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_derived_portfolio_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_derived_portfolio_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the derived transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the change.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details  # noqa: E501
 
         Delete all the portfolio details for a derived transaction portfolio.  # noqa: E501
@@ -277,7 +277,7 @@ class DerivedTransactionPortfoliosApi:
 
         :param scope: The scope of the derived transaction portfolio. (required)
         :type scope: str
-        :param code: The code of the derived transaction portfolio. Together with the scope this uniquely identifies             the derived transaction portfolio. (required)
+        :param code: The code of the derived transaction portfolio. Together with the scope this uniquely identifies              the derived transaction portfolio. (required)
         :type code: str
         :param effective_at: The effective date of the change.
         :type effective_at: str

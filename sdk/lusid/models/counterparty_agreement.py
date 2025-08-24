@@ -25,7 +25,7 @@ from lusid.models.resource_id import ResourceId
 
 class CounterpartyAgreement(BaseModel):
     """
-    Represents the legal agreement between two parties engaged in an OTC transaction. A typical example would be a 2002 ISDA Master Agreement, signed by two legal entities on a given date.  # noqa: E501
+    Represents the legal agreement between two parties engaged in an OTC transaction.  A typical example would be a 2002 ISDA Master Agreement, signed by two legal entities on a given date.  # noqa: E501
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-defined display label for the Counterparty Agreement.") 
     agreement_type:  StrictStr = Field(...,alias="agreementType", description="A user-defined field to capture the type of agreement this represents. Examples might be \"ISDA 2002 Master Agreement\" or \"ISDA 1992 Master Agreement\".") 

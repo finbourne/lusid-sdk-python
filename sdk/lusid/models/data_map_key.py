@@ -25,7 +25,7 @@ class DataMapKey(BaseModel):
     """
     DataMapKey
     """
-    version:  Optional[StrictStr] = Field(None,alias="version", description="The version of the mappings. It is possible that a client will wish to update mappings over time. The version identifies the MAJOR.MINOR.PATCH version of the mappings that the client assigns it.") 
+    version:  Optional[StrictStr] = Field(None,alias="version", description="The version of the mappings. It is possible that a client will wish to update mappings over time. The version identifies the MAJOR.MINOR.PATCH version  of the mappings that the client assigns it.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="A unique name to semantically identify the mapping set.") 
     __properties = ["version", "code"]
 

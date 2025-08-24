@@ -23,7 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictI
 
 class FixedLegAllOfOverrides(BaseModel):
     """
-    Any overriding data for notionals, spreads or rates that would affect generation of a leg. This supports the case where an amortisation schedule is given but otherwise generation is allowed as usual.  # noqa: E501
+    Any overriding data for notionals, spreads or rates that would affect generation of a leg.  This supports the case where an amortisation schedule is given but otherwise generation is allowed as usual.  # noqa: E501
     """
     amortization: Optional[conlist(Union[StrictFloat, StrictInt])] = Field(None, alias="Amortization")
     spreads: Optional[conlist(Union[StrictFloat, StrictInt])] = Field(None, alias="Spreads")

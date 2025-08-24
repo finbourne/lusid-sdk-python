@@ -26,7 +26,7 @@ from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 
 class AdjustHoldingForDateRequest(BaseModel):
     """
-    This request specifies target holdings. i.e. holding data that the system should match. When processed by the movement engine, it will create 'true-up' adjustments on the fly.  # noqa: E501
+    This request specifies target holdings. i.e. holding data that the  system should match. When processed by the movement  engine, it will create 'true-up' adjustments on the fly.  # noqa: E501
     """
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The Effective date that the target holding will be adjusted at.") 
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")

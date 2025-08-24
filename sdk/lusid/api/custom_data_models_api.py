@@ -73,7 +73,7 @@ class CustomDataModelsApi:
     def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchAmendCustomDataModelMembershipResponse, Awaitable[BatchAmendCustomDataModelMembershipResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.  # noqa: E501
 
-        Add/Remove entities to/from a Custom Data Model in a single operation.              Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each amendment in the response.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.  # noqa: E501
+        Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -106,7 +106,7 @@ class CustomDataModelsApi:
     def batch_amend_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.  # noqa: E501
 
-        Add/Remove entities to/from a Custom Data Model in a single operation.              Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID. It serves only as a way to easily identify each amendment in the response.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.  # noqa: E501
+        Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -407,7 +407,7 @@ class CustomDataModelsApi:
     def delete_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model  # noqa: E501
 
-        Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer be part of any hierarchies.  # noqa: E501
+        Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer  be part of any hierarchies.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -442,7 +442,7 @@ class CustomDataModelsApi:
     def delete_custom_data_model_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteCustomDataModel: Delete a Custom Data Model  # noqa: E501
 
-        Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer be part of any hierarchies.  # noqa: E501
+        Delete a Custom Data Model. The data model will remain viewable at previous as at times, but will no longer  be part of any hierarchies.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -564,15 +564,15 @@ class CustomDataModelsApi:
 
 
     @overload
-    async def get_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
+    async def get_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @overload
-    def get_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
+    def get_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CustomDataModel:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
+    def get_custom_data_model(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CustomDataModel, Awaitable[CustomDataModel]]:  # noqa: E501
         """[EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model  # noqa: E501
 
         Retrieves a Custom Data Model at a given as at time.  # noqa: E501
@@ -588,7 +588,7 @@ class CustomDataModelsApi:
         :type scope: str
         :param code: The code of the specified Data Model. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.
+        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -609,7 +609,7 @@ class CustomDataModelsApi:
         return self.get_custom_data_model_with_http_info(entity_type, scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_custom_data_model_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_custom_data_model_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type of the Data Model.")], scope : Annotated[StrictStr, Field(..., description="The scope of the specified Data Model.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Data Model.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetCustomDataModel: Get a Custom Data Model  # noqa: E501
 
         Retrieves a Custom Data Model at a given as at time.  # noqa: E501
@@ -625,7 +625,7 @@ class CustomDataModelsApi:
         :type scope: str
         :param code: The code of the specified Data Model. (required)
         :type code: str
-        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.
+        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -743,15 +743,15 @@ class CustomDataModelsApi:
 
 
     @overload
-    async def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
+    async def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
         ...
 
     @overload
-    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
+    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataModelSummary, Awaitable[ResourceListOfDataModelSummary]]:  # noqa: E501
+    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataModelSummary, Awaitable[ResourceListOfDataModelSummary]]:  # noqa: E501
         """[EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.  # noqa: E501
 
         Lists the data model summaries within their hierarchical structure.  # noqa: E501
@@ -761,7 +761,7 @@ class CustomDataModelsApi:
         >>> thread = api.list_data_model_hierarchies(as_at, filter, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.
+        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the results. Only EntityType is supported
         :type filter: str
@@ -784,7 +784,7 @@ class CustomDataModelsApi:
         return self.list_data_model_hierarchies_with_http_info(as_at, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_model_hierarchies_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_model_hierarchies_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.  # noqa: E501
 
         Lists the data model summaries within their hierarchical structure.  # noqa: E501
@@ -794,7 +794,7 @@ class CustomDataModelsApi:
         >>> thread = api.list_data_model_hierarchies_with_http_info(as_at, filter, async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return             the latest version of the Data Model if not specified.
+        :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the results. Only EntityType is supported
         :type filter: str
