@@ -37,7 +37,7 @@ class NavTypeDefinition(BaseModel):
     accounting_method:  StrictStr = Field(...,alias="accountingMethod") 
     sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="Set of unique holding identifiers, e.g. trader, desk, strategy.")
     amortisation_method:  StrictStr = Field(...,alias="amortisationMethod") 
-    transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope") 
+    transaction_type_scope:  StrictStr = Field(...,alias="transactionTypeScope") 
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
     __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
 
@@ -111,11 +111,6 @@ class NavTypeDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
             _dict['subHoldingKeys'] = None
-
-        # set to None if transaction_type_scope (nullable) is None
-        # and __fields_set__ contains the field
-        if self.transaction_type_scope is None and "transaction_type_scope" in self.__fields_set__:
-            _dict['transactionTypeScope'] = None
 
         return _dict
 

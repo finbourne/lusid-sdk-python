@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **accounting_method** | **str** |  | 
 **sub_holding_keys** | **List[str]** | Set of unique holding identifiers, e.g. trader, desk, strategy. | [optional] 
 **amortisation_method** | **str** |  | 
-**transaction_type_scope** | **str** |  | [optional] 
+**transaction_type_scope** | **str** |  | 
 **cash_gain_loss_calculation_date** | **str** |  | 
 ## Example
 
@@ -34,7 +34,7 @@ holding_recipe_id: ResourceId = # Replace with your value
 accounting_method: StrictStr = "example_accounting_method"
 sub_holding_keys: Optional[conlist(StrictStr)] = # Replace with your value
 amortisation_method: StrictStr = "example_amortisation_method"
-transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
+transaction_type_scope: StrictStr = "example_transaction_type_scope"
 cash_gain_loss_calculation_date: StrictStr = "example_cash_gain_loss_calculation_date"
 nav_type_definition_instance = NavTypeDefinition(code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date)
 

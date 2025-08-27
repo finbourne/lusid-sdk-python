@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
@@ -26,7 +26,7 @@ class SingleValuationPointQueryParameters(BaseModel):
     """
     SingleValuationPointQueryParameters
     """
-    date_or_diary_entry: Optional[DateOrDiaryEntry] = Field(None, alias="dateOrDiaryEntry")
+    date_or_diary_entry: DateOrDiaryEntry = Field(..., alias="dateOrDiaryEntry")
     __properties = ["dateOrDiaryEntry"]
 
     class Config:
