@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.event_date_range import EventDateRange
@@ -41,7 +41,8 @@ class InstrumentEventHolder(BaseModel):
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
     participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
-    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
+    as_at: Optional[datetime] = Field(None, alias="asAt", description="The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert.")
+    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType", "asAt"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,6 +75,7 @@ class InstrumentEventHolder(BaseModel):
         _dict = self.dict(by_alias=True,
                           exclude={
                             "completeness",
+                            "as_at",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
@@ -107,6 +109,11 @@ class InstrumentEventHolder(BaseModel):
         if self.participation_type is None and "participation_type" in self.__fields_set__:
             _dict['participationType'] = None
 
+        # set to None if as_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.as_at is None and "as_at" in self.__fields_set__:
+            _dict['asAt'] = None
+
         return _dict
 
     @classmethod
@@ -130,6 +137,7 @@ class InstrumentEventHolder(BaseModel):
             "instrument_event": InstrumentEvent.from_dict(obj.get("instrumentEvent")) if obj.get("instrumentEvent") is not None else None,
             "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
             "sequence_number": obj.get("sequenceNumber"),
-            "participation_type": obj.get("participationType") if obj.get("participationType") is not None else 'Mandatory'
+            "participation_type": obj.get("participationType") if obj.get("participationType") is not None else 'Mandatory',
+            "as_at": obj.get("asAt")
         })
         return _obj
