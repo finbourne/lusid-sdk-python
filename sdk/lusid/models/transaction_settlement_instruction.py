@@ -38,7 +38,8 @@ class TransactionSettlementInstruction(BaseModel):
     sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides", description="Allows one or more sub-holding keys to be overridden for any movement being settled by an instruction. Providing a key and value will set the sub-holding key to the specified value; Providing a key only will nullify the sub-holding key. Not referenced sub-holding keys will not be impacted. ")
     custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the settlement instruction to a unique instrument.")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers"]
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the settlement instruction - 'Invalid', 'Rejected' 'Applied' or 'Orphan'.") 
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,6 +93,11 @@ class TransactionSettlementInstruction(BaseModel):
         if self.sub_holding_key_overrides is None and "sub_holding_key_overrides" in self.__fields_set__:
             _dict['subHoldingKeyOverrides'] = None
 
+        # set to None if status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.status is None and "status" in self.__fields_set__:
+            _dict['status'] = None
+
         return _dict
 
     @classmethod
@@ -119,6 +125,7 @@ class TransactionSettlementInstruction(BaseModel):
             if obj.get("subHoldingKeyOverrides") is not None
             else None,
             "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None,
-            "instrument_identifiers": obj.get("instrumentIdentifiers")
+            "instrument_identifiers": obj.get("instrumentIdentifiers"),
+            "status": obj.get("status")
         })
         return _obj

@@ -1138,7 +1138,10 @@ from lusid.models.transaction_request import TransactionRequest
 from lusid.models.transaction_roles import TransactionRoles
 from lusid.models.transaction_set_configuration_data import TransactionSetConfigurationData
 from lusid.models.transaction_set_configuration_data_request import TransactionSetConfigurationDataRequest
+from lusid.models.transaction_settlement_bucket import TransactionSettlementBucket
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
+from lusid.models.transaction_settlement_movement import TransactionSettlementMovement
+from lusid.models.transaction_settlement_status import TransactionSettlementStatus
 from lusid.models.transaction_status import TransactionStatus
 from lusid.models.transaction_template import TransactionTemplate
 from lusid.models.transaction_template_request import TransactionTemplateRequest
@@ -2423,7 +2426,10 @@ __all__ = [
     "TransactionRoles",
     "TransactionSetConfigurationData",
     "TransactionSetConfigurationDataRequest",
+    "TransactionSettlementBucket",
     "TransactionSettlementInstruction",
+    "TransactionSettlementMovement",
+    "TransactionSettlementStatus",
     "TransactionStatus",
     "TransactionTemplate",
     "TransactionTemplateRequest",
