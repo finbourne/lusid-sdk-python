@@ -26,7 +26,9 @@ class MarkToMarketConventions(BaseModel):
     A set of conventions for mark to market. Mark to market is a method   that values financial instruments based on current market prices,   reflecting their current value, rather than historical cost.  # noqa: E501
     """
     calendar_code:  Optional[StrictStr] = Field(None,alias="calendarCode", description="The calendar to use when generating mark to market cashflows and events.") 
-    __properties = ["calendarCode"]
+    hour_offset_tenor:  Optional[StrictStr] = Field(None,alias="hourOffsetTenor", description="The hour tenor component of the time offset against the maturity date.  This is an optional field, if a value is provided it must be a positive value between '0hour' and '23hour'.") 
+    minute_offset_tenor:  Optional[StrictStr] = Field(None,alias="minuteOffsetTenor", description="The minute tenor component of the time offset against the maturity date.  This is an optional field, if a value is provided it must be a positive value between '0min' and '59min'.") 
+    __properties = ["calendarCode", "hourOffsetTenor", "minuteOffsetTenor"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,16 @@ class MarkToMarketConventions(BaseModel):
         if self.calendar_code is None and "calendar_code" in self.__fields_set__:
             _dict['calendarCode'] = None
 
+        # set to None if hour_offset_tenor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.hour_offset_tenor is None and "hour_offset_tenor" in self.__fields_set__:
+            _dict['hourOffsetTenor'] = None
+
+        # set to None if minute_offset_tenor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.minute_offset_tenor is None and "minute_offset_tenor" in self.__fields_set__:
+            _dict['minuteOffsetTenor'] = None
+
         return _dict
 
     @classmethod
@@ -77,6 +89,8 @@ class MarkToMarketConventions(BaseModel):
             return MarkToMarketConventions.parse_obj(obj)
 
         _obj = MarkToMarketConventions.parse_obj({
-            "calendar_code": obj.get("calendarCode")
+            "calendar_code": obj.get("calendarCode"),
+            "hour_offset_tenor": obj.get("hourOffsetTenor"),
+            "minute_offset_tenor": obj.get("minuteOffsetTenor")
         })
         return _obj
