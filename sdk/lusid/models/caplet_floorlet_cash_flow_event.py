@@ -19,20 +19,20 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, constr, validator 
+from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.instrument_event import InstrumentEvent
 
-class ResetEvent(InstrumentEvent):
+class CapletFloorletCashFlowEvent(InstrumentEvent):
     """
-    Definition of a reset event.  This is an event that describes a reset or fixing for an instrument such as the floating payment on  a swap cash flow.  # noqa: E501
+    Definition of a cap or floor (or collar) cash flow event.  This is an event that describes the occurence of a caplet or floorlet payment.  # noqa: E501
     """
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity associated with the reset. This will only be populated if the information is known.")
-    reset_type:  StrictStr = Field(...,alias="resetType", description="The type of the reset; e.g. RIC, Currency-pair") 
-    fixing_source:  Optional[StrictStr] = Field(None,alias="fixingSource", description="Fixing identification source, if available.") 
-    fixing_date: datetime = Field(..., alias="fixingDate", description="The date the reset fixes, or is observed upon.")
+    entitlement_date: Optional[datetime] = Field(None, alias="entitlementDate", description="Ex-Dividend / entitlement date of the cashflow payment.  Required field.")
+    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="Payment date of the cashflow payment  Required field.")
+    currency:  StrictStr = Field(...,alias="currency", description="Currency of the cashflow payment") 
+    cash_flow_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="cashFlowPerUnit", description="The total payment per unit of the held instrument, if entitled.  Not required.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "value", "resetType", "fixingSource", "fixingDate"]
+    __properties = ["instrumentEventType", "entitlementDate", "paymentDate", "currency", "cashFlowPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -45,7 +45,7 @@ class ResetEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'ResetEvent' not in [ 
+        if 'CapletFloorletCashFlowEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -115,8 +115,8 @@ class ResetEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResetEvent:
-        """Create an instance of ResetEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> CapletFloorletCashFlowEvent:
+        """Create an instance of CapletFloorletCashFlowEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -131,33 +131,23 @@ class ResetEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if value (nullable) is None
-        # and __fields_set__ contains the field
-        if self.value is None and "value" in self.__fields_set__:
-            _dict['value'] = None
-
-        # set to None if fixing_source (nullable) is None
-        # and __fields_set__ contains the field
-        if self.fixing_source is None and "fixing_source" in self.__fields_set__:
-            _dict['fixingSource'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResetEvent:
-        """Create an instance of ResetEvent from a dict"""
+    def from_dict(cls, obj: dict) -> CapletFloorletCashFlowEvent:
+        """Create an instance of CapletFloorletCashFlowEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResetEvent.parse_obj(obj)
+            return CapletFloorletCashFlowEvent.parse_obj(obj)
 
-        _obj = ResetEvent.parse_obj({
+        _obj = CapletFloorletCashFlowEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "value": obj.get("value"),
-            "reset_type": obj.get("resetType"),
-            "fixing_source": obj.get("fixingSource"),
-            "fixing_date": obj.get("fixingDate")
+            "entitlement_date": obj.get("entitlementDate"),
+            "payment_date": obj.get("paymentDate"),
+            "currency": obj.get("currency"),
+            "cash_flow_per_unit": obj.get("cashFlowPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

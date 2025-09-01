@@ -27,7 +27,7 @@ class Touch(BaseModel):
     """
     direction:  StrictStr = Field(...,alias="direction", description="Supported string (enumeration) values are: [Down, Up].") 
     level: Union[StrictFloat, StrictInt] = Field(..., description="Trigger level, which the underlying should (or should not) cross/touch.")
-    monitoring:  Optional[StrictStr] = Field(None,alias="monitoring", description="Supported string (enumeration) values are: [European, Bermudan, American].") 
+    monitoring:  Optional[StrictStr] = Field(None,alias="monitoring", description="Supported string (enumeration) values are: [European, Bermudan, American].  Defaults to \"European\" if not set.") 
     type:  StrictStr = Field(...,alias="type", description="Supported string (enumeration) values are: [Touch, Notouch].") 
     __properties = ["direction", "level", "monitoring", "type"]
 

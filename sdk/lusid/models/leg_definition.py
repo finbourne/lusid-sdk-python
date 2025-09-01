@@ -38,7 +38,7 @@ class LegDefinition(BaseModel):
     notional_exchange_type:  StrictStr = Field(...,alias="notionalExchangeType", description="what type of notional exchange does the leg have    Supported string (enumeration) values are: [None, Initial, Final, Both].") 
     pay_receive:  StrictStr = Field(...,alias="payReceive", description="Is the leg to be paid or received    Supported string (enumeration) values are: [Pay, Receive].") 
     rate_or_spread: Union[StrictFloat, StrictInt] = Field(..., alias="rateOrSpread", description="Is there either a fixed rate (non-zero) or spread to be paid over the value of the leg.")
-    reset_convention:  Optional[StrictStr] = Field(None,alias="resetConvention", description="Control how resets are generated relative to swap payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].") 
+    reset_convention:  Optional[StrictStr] = Field(None,alias="resetConvention", description="Control how resets are generated relative to swap payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].  Defaults to \"InAdvance\" if not set.") 
     stub_type:  StrictStr = Field(...,alias="stubType", description="If a stub is required should it be at the front or back of the leg.    Supported string (enumeration) values are: [None, ShortFront, ShortBack, LongBack, LongFront, Both].") 
     compounding: Optional[Compounding] = None
     amortisation: Optional[StepSchedule] = None

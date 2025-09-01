@@ -792,6 +792,7 @@ Class | Method | HTTP request | Description
  - [CancelledPlacementResult](docs/CancelledPlacementResult.md)
  - [CapFloor](docs/CapFloor.md)
  - [CapitalDistributionEvent](docs/CapitalDistributionEvent.md)
+ - [CapletFloorletCashFlowEvent](docs/CapletFloorletCashFlowEvent.md)
  - [Cash](docs/Cash.md)
  - [CashAndSecurityOfferElection](docs/CashAndSecurityOfferElection.md)
  - [CashDependency](docs/CashDependency.md)

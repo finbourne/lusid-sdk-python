@@ -144,6 +144,7 @@ from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
+from lusid.models.caplet_floorlet_cash_flow_event import CapletFloorletCashFlowEvent
 from lusid.models.cash import Cash
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
 from lusid.models.cash_dependency import CashDependency
@@ -1432,6 +1433,7 @@ __all__ = [
     "CancelledPlacementResult",
     "CapFloor",
     "CapitalDistributionEvent",
+    "CapletFloorletCashFlowEvent",
     "Cash",
     "CashAndSecurityOfferElection",
     "CashDependency",

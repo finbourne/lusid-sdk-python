@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **notional_exchange_type** | **str** | what type of notional exchange does the leg have    Supported string (enumeration) values are: [None, Initial, Final, Both]. | 
 **pay_receive** | **str** | Is the leg to be paid or received    Supported string (enumeration) values are: [Pay, Receive]. | 
 **rate_or_spread** | **float** | Is there either a fixed rate (non-zero) or spread to be paid over the value of the leg. | 
-**reset_convention** | **str** | Control how resets are generated relative to swap payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears]. | [optional] 
+**reset_convention** | **str** | Control how resets are generated relative to swap payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].  Defaults to \&quot;InAdvance\&quot; if not set. | [optional] 
 **stub_type** | **str** | If a stub is required should it be at the front or back of the leg.    Supported string (enumeration) values are: [None, ShortFront, ShortBack, LongBack, LongFront, Both]. | 
 **compounding** | [**Compounding**](Compounding.md) |  | [optional] 
 **amortisation** | [**StepSchedule**](StepSchedule.md) |  | [optional] 

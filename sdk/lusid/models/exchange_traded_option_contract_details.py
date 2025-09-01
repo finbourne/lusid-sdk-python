@@ -39,8 +39,8 @@ class ExchangeTradedOptionContractDetails(BaseModel):
     option_type:  StrictStr = Field(...,alias="optionType", description="The option type, Call or Put.    Supported string (enumeration) values are: [Call, Put].") 
     underlying: LusidInstrument = Field(...)
     underlying_code:  StrictStr = Field(...,alias="underlyingCode", description="Code of the underlying, for an option on futures this should be the futures code.") 
-    delivery_days: Optional[StrictInt] = Field(None, alias="deliveryDays", description="Number of business days between exercise date and settlement of the option payoff or underlying.")
-    business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].") 
+    delivery_days: Optional[StrictInt] = Field(None, alias="deliveryDays", description="Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set.")
+    business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].  Defaults to \"F\" if not set.") 
     settlement_calendars: Optional[conlist(StrictStr)] = Field(None, alias="settlementCalendars", description="An array of strings denoting calendars used in calculating the option settlement date.")
     __properties = ["domCcy", "strike", "contractSize", "country", "deliveryType", "description", "exchangeCode", "exerciseDate", "exerciseType", "optionCode", "optionType", "underlying", "underlyingCode", "deliveryDays", "businessDayConvention", "settlementCalendars"]
 

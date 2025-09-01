@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **direction** | **str** | Supported string (enumeration) values are: [Down, Up]. | 
 **level** | **float** | Trigger level, which the underlying should (or should not) cross/touch. | 
-**monitoring** | **str** | Supported string (enumeration) values are: [European, Bermudan, American]. | [optional] 
+**monitoring** | **str** | Supported string (enumeration) values are: [European, Bermudan, American].  Defaults to \&quot;European\&quot; if not set. | [optional] 
 **type** | **str** | Supported string (enumeration) values are: [Touch, Notouch]. | 
 ## Example
 

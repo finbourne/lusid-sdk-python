@@ -27,7 +27,7 @@ class RelativeDateOffset(BaseModel):
     """
     days: StrictInt = Field(..., description="The number of days to add to the anchor date.")
     business_day_convention:  StrictStr = Field(...,alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.    Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].") 
-    day_type:  Optional[StrictStr] = Field(None,alias="dayType", description="Indicates if consideration is given to whether a day is a good business day or not when calculating the offset date.    Supported string (enumeration) values are: [Business, Calendar].") 
+    day_type:  Optional[StrictStr] = Field(None,alias="dayType", description="Indicates if consideration is given to whether a day is a good business day or not when calculating the offset date.    Supported string (enumeration) values are: [Business, Calendar].  Defaults to \"Business\" if not set.") 
     __properties = ["days", "businessDayConvention", "dayType"]
 
     class Config:

@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, constr, validator
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
 from typing import Dict, Optional
 
@@ -743,28 +743,30 @@ class CustomDataModelsApi:
 
 
     @overload
-    async def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
+    async def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
         ...
 
     @overload
-    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
+    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataModelSummary, Awaitable[ResourceListOfDataModelSummary]]:  # noqa: E501
+    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataModelSummary, Awaitable[ResourceListOfDataModelSummary]]:  # noqa: E501
         """[EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.  # noqa: E501
 
         Lists the data model summaries within their hierarchical structure.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_model_hierarchies(as_at, filter, async_req=True)
+        >>> thread = api.list_data_model_hierarchies(as_at, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.
         :type as_at: datetime
-        :param filter: Expression to filter the results. Only EntityType is supported
+        :param filter: Expression to filter the results.
         :type filter: str
+        :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -781,23 +783,25 @@ class CustomDataModelsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_data_model_hierarchies_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+        return self.list_data_model_hierarchies_with_http_info(as_at, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_model_hierarchies_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. Only EntityType is supported")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_model_hierarchies_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.  # noqa: E501
 
         Lists the data model summaries within their hierarchical structure.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_model_hierarchies_with_http_info(as_at, filter, async_req=True)
+        >>> thread = api.list_data_model_hierarchies_with_http_info(as_at, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.
         :type as_at: datetime
-        :param filter: Expression to filter the results. Only EntityType is supported
+        :param filter: Expression to filter the results.
         :type filter: str
+        :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -826,7 +830,8 @@ class CustomDataModelsApi:
 
         _all_params = [
             'as_at',
-            'filter'
+            'filter',
+            'sort_by'
         ]
         _all_params.extend(
             [
@@ -866,6 +871,10 @@ class CustomDataModelsApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

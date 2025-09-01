@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_data_model_hierarchies**
-> ResourceListOfDataModelSummary list_data_model_hierarchies(as_at=as_at, filter=filter)
+> ResourceListOfDataModelSummary list_data_model_hierarchies(as_at=as_at, filter=filter, sort_by=sort_by)
 
 [EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.
 
@@ -453,14 +453,15 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(CustomDataModelsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. Only EntityType is supported (optional)
+    filter = 'filter_example' # str | Expression to filter the results. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_data_model_hierarchies(as_at=as_at, filter=filter, opts=opts)
+        # api_response =  api_instance.list_data_model_hierarchies(as_at=as_at, filter=filter, sort_by=sort_by, opts=opts)
 
         # [EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.
-        api_response = api_instance.list_data_model_hierarchies(as_at=as_at, filter=filter)
+        api_response = api_instance.list_data_model_hierarchies(as_at=as_at, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
     except ApiException as e:
@@ -474,7 +475,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results. Only EntityType is supported | [optional] 
+ **filter** | **str**| Expression to filter the results. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
 
 ### Return type
 
