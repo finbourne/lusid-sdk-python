@@ -28,10 +28,10 @@ class InvestmentPortfolio(BaseModel):
     """
     key:  Optional[StrictStr] = Field(None,alias="key", description="A client-defined key used to identify the Investment Portfolio, unique within the Investment Account") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the Investment Portfolio") 
-    code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the Investment Portfolio") 
+    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The code identifier of the Investment Portfolio")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Portfolio entity identifier") 
     portfolio: Optional[Portfolio] = None
-    __properties = ["key", "scope", "code", "entityUniqueId", "portfolio"]
+    __properties = ["key", "scope", "identifiers", "entityUniqueId", "portfolio"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,10 +78,10 @@ class InvestmentPortfolio(BaseModel):
         if self.scope is None and "scope" in self.__fields_set__:
             _dict['scope'] = None
 
-        # set to None if code (nullable) is None
+        # set to None if identifiers (nullable) is None
         # and __fields_set__ contains the field
-        if self.code is None and "code" in self.__fields_set__:
-            _dict['code'] = None
+        if self.identifiers is None and "identifiers" in self.__fields_set__:
+            _dict['identifiers'] = None
 
         # set to None if entity_unique_id (nullable) is None
         # and __fields_set__ contains the field
@@ -102,7 +102,7 @@ class InvestmentPortfolio(BaseModel):
         _obj = InvestmentPortfolio.parse_obj({
             "key": obj.get("key"),
             "scope": obj.get("scope"),
-            "code": obj.get("code"),
+            "identifiers": obj.get("identifiers"),
             "entity_unique_id": obj.get("entityUniqueId"),
             "portfolio": Portfolio.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None
         })

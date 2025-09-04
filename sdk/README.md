@@ -1495,6 +1495,7 @@ Class | Method | HTTP request | Description
  - [PostingModuleRulesUpdatedResponse](docs/PostingModuleRulesUpdatedResponse.md)
  - [PreTradeConfiguration](docs/PreTradeConfiguration.md)
  - [Premium](docs/Premium.md)
+ - [PreviousFundCalendarEntry](docs/PreviousFundCalendarEntry.md)
  - [PreviousFundValuationPointData](docs/PreviousFundValuationPointData.md)
  - [PreviousNAV](docs/PreviousNAV.md)
  - [PreviousShareClassBreakdown](docs/PreviousShareClassBreakdown.md)

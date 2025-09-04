@@ -21,7 +21,6 @@ import json
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.investor_record import InvestorRecord
-from lusid.models.model_property import ModelProperty
 
 class AccountHolder(BaseModel):
     """
@@ -29,7 +28,7 @@ class AccountHolder(BaseModel):
     """
     key:  Optional[StrictStr] = Field(None,alias="key", description="A client-defined key used to identify the Account Holder, unique within the Investment Account") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investor Record lies.") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Single Account Holder identifier that should target the desired Investor Record.")
+    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="Single Account Holder identifier that should target the desired Investor Record.")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique InvestorRecord entity identifier") 
     investor_record: Optional[InvestorRecord] = Field(None, alias="investorRecord")
     __properties = ["key", "scope", "identifiers", "entityUniqueId", "investorRecord"]
@@ -66,13 +65,6 @@ class AccountHolder(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in identifiers (dict)
-        _field_dict = {}
-        if self.identifiers:
-            for _key in self.identifiers:
-                if self.identifiers[_key]:
-                    _field_dict[_key] = self.identifiers[_key].to_dict()
-            _dict['identifiers'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of investor_record
         if self.investor_record:
             _dict['investorRecord'] = self.investor_record.to_dict()
@@ -110,12 +102,7 @@ class AccountHolder(BaseModel):
         _obj = AccountHolder.parse_obj({
             "key": obj.get("key"),
             "scope": obj.get("scope"),
-            "identifiers": dict(
-                (_k, ModelProperty.from_dict(_v))
-                for _k, _v in obj.get("identifiers").items()
-            )
-            if obj.get("identifiers") is not None
-            else None,
+            "identifiers": obj.get("identifiers"),
             "entity_unique_id": obj.get("entityUniqueId"),
             "investor_record": InvestorRecord.from_dict(obj.get("investorRecord")) if obj.get("investorRecord") is not None else None
         })

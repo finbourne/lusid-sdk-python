@@ -19,15 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
-from lusid.models.model_property import ModelProperty
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class InvestorIdentifier(BaseModel):
     """
     Identification of an Investor on the LUSID API.  # noqa: E501
     """
     investor_type:  StrictStr = Field(...,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person or a LegalEntity") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Single identifier that should target the desired person or legal entity")
+    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="Single identifier that should target the desired person or legal entity")
     __properties = ["investorType", "identifiers"]
 
     class Config:
@@ -62,13 +61,6 @@ class InvestorIdentifier(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in identifiers (dict)
-        _field_dict = {}
-        if self.identifiers:
-            for _key in self.identifiers:
-                if self.identifiers[_key]:
-                    _field_dict[_key] = self.identifiers[_key].to_dict()
-            _dict['identifiers'] = _field_dict
         # set to None if identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.identifiers is None and "identifiers" in self.__fields_set__:
@@ -87,11 +79,6 @@ class InvestorIdentifier(BaseModel):
 
         _obj = InvestorIdentifier.parse_obj({
             "investor_type": obj.get("investorType"),
-            "identifiers": dict(
-                (_k, ModelProperty.from_dict(_v))
-                for _k, _v in obj.get("identifiers").items()
-            )
-            if obj.get("identifiers") is not None
-            else None
+            "identifiers": obj.get("identifiers")
         })
         return _obj

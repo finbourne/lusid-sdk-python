@@ -847,6 +847,7 @@ from lusid.models.posting_module_rule import PostingModuleRule
 from lusid.models.posting_module_rules_updated_response import PostingModuleRulesUpdatedResponse
 from lusid.models.pre_trade_configuration import PreTradeConfiguration
 from lusid.models.premium import Premium
+from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
 from lusid.models.previous_nav import PreviousNAV
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
@@ -2136,6 +2137,7 @@ __all__ = [
     "PostingModuleRulesUpdatedResponse",
     "PreTradeConfiguration",
     "Premium",
+    "PreviousFundCalendarEntry",
     "PreviousFundValuationPointData",
     "PreviousNAV",
     "PreviousShareClassBreakdown",

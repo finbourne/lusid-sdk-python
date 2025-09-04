@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class InvestmentPortfolioIdentifier(BaseModel):
     """
     InvestmentPortfolioIdentifier
     """
     key:  StrictStr = Field(...,alias="key", description="A client-defined key used to identify the Investment Portfolio, unique within the Investment Account") 
-    portfolio_scope:  StrictStr = Field(...,alias="portfolioScope", description="The scope of the Investment Portfolio.") 
-    portfolio_code:  StrictStr = Field(...,alias="portfolioCode", description="The code of the Investment Portfolio.") 
-    __properties = ["key", "portfolioScope", "portfolioCode"]
+    scope:  StrictStr = Field(...,alias="scope", description="The scope of the Investment Portfolio.") 
+    identifiers: Dict[str, StrictStr] = Field(..., description="The code identifier of the Investment Portfolio.")
+    __properties = ["key", "scope", "identifiers"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,7 +75,7 @@ class InvestmentPortfolioIdentifier(BaseModel):
 
         _obj = InvestmentPortfolioIdentifier.parse_obj({
             "key": obj.get("key"),
-            "portfolio_scope": obj.get("portfolioScope"),
-            "portfolio_code": obj.get("portfolioCode")
+            "scope": obj.get("scope"),
+            "identifiers": obj.get("identifiers")
         })
         return _obj
