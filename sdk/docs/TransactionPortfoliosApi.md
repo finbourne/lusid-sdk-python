@@ -3641,7 +3641,7 @@ def main():
     scope = 'scope_example' # str | The scope of the transaction portfolio.
     code = 'code_example' # str | The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio.
     operation = [{"value":["Transaction/Client/AccountType"],"path":"/subHoldingKeys","op":"add"},{"value":"GBP","path":"/baseCurrency","op":"add"},{"value":"newscope","path":"/transactiontypescope","op":"add"},{"value":"TransactionDate","path":"/cashGainLossCalculationDate","op":"add"},{"value":["NewTransactionTemplateScope"],"path":"/instrumentEventConfiguration/transactionTemplateScopes","op":"add"},{"value":{"scope":"myRecipeScope","code":"myRecipeCode"},"path":"/instrumentEventConfiguration/recipeId","op":"add"}] # List[Operation] | The patch document.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal fields (eg: SettlementConfiguration) in the request (but will not be used for any              perpetual fields). When patching a bitemporal field, the field will be updated from the              effectiveAt onwards and until the end of effective time. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3664,7 +3664,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the              scope this uniquely identifies the transaction portfolio. | 
  **operation** | [**List[Operation]**](Operation.md)| The patch document. | 
- **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified.              Note that this will affect all bitemporal fields (eg: SettlementConfiguration) in the request (but will not be used for any              perpetual fields). When patching a bitemporal field, the field will be updated from the              effectiveAt onwards and until the end of effective time. | [optional] 
 
 ### Return type
 
