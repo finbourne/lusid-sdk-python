@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ```python
 from lusid.models.alias import Alias
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, constr, validator
 
 attribute_name: StrictStr = "example_attribute_name"
 attribute_alias: StrictStr = "example_attribute_alias"

@@ -38,7 +38,9 @@ class RealisedGainLoss(BaseModel):
     realised_total: CurrencyAndAmount = Field(..., alias="realisedTotal")
     realised_market: Optional[CurrencyAndAmount] = Field(None, alias="realisedMarket")
     realised_currency: Optional[CurrencyAndAmount] = Field(None, alias="realisedCurrency")
-    __properties = ["instrumentScope", "instrumentUid", "units", "purchaseTradeDate", "purchaseSettlementDate", "purchasePrice", "costTradeCcy", "costPortfolioCcy", "realisedTradeCcy", "realisedTotal", "realisedMarket", "realisedCurrency"]
+    tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="The identifier of the tax lot with which this gain or loss is associated.") 
+    realised_amortisation: Optional[CurrencyAndAmount] = Field(None, alias="realisedAmortisation")
+    __properties = ["instrumentScope", "instrumentUid", "units", "purchaseTradeDate", "purchaseSettlementDate", "purchasePrice", "costTradeCcy", "costPortfolioCcy", "realisedTradeCcy", "realisedTotal", "realisedMarket", "realisedCurrency", "taxLotId", "realisedAmortisation"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,6 +94,9 @@ class RealisedGainLoss(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of realised_currency
         if self.realised_currency:
             _dict['realisedCurrency'] = self.realised_currency.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of realised_amortisation
+        if self.realised_amortisation:
+            _dict['realisedAmortisation'] = self.realised_amortisation.to_dict()
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -111,6 +116,11 @@ class RealisedGainLoss(BaseModel):
         # and __fields_set__ contains the field
         if self.purchase_price is None and "purchase_price" in self.__fields_set__:
             _dict['purchasePrice'] = None
+
+        # set to None if tax_lot_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
+            _dict['taxLotId'] = None
 
         return _dict
 
@@ -135,6 +145,8 @@ class RealisedGainLoss(BaseModel):
             "realised_trade_ccy": CurrencyAndAmount.from_dict(obj.get("realisedTradeCcy")) if obj.get("realisedTradeCcy") is not None else None,
             "realised_total": CurrencyAndAmount.from_dict(obj.get("realisedTotal")) if obj.get("realisedTotal") is not None else None,
             "realised_market": CurrencyAndAmount.from_dict(obj.get("realisedMarket")) if obj.get("realisedMarket") is not None else None,
-            "realised_currency": CurrencyAndAmount.from_dict(obj.get("realisedCurrency")) if obj.get("realisedCurrency") is not None else None
+            "realised_currency": CurrencyAndAmount.from_dict(obj.get("realisedCurrency")) if obj.get("realisedCurrency") is not None else None,
+            "tax_lot_id": obj.get("taxLotId"),
+            "realised_amortisation": CurrencyAndAmount.from_dict(obj.get("realisedAmortisation")) if obj.get("realisedAmortisation") is not None else None
         })
         return _obj

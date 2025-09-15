@@ -310,6 +310,7 @@ from lusid.models.custom_entity_entity import CustomEntityEntity
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 from lusid.models.custom_entity_id import CustomEntityId
+from lusid.models.custom_entity_properties import CustomEntityProperties
 from lusid.models.custom_entity_request import CustomEntityRequest
 from lusid.models.custom_entity_response import CustomEntityResponse
 from lusid.models.custom_entity_type import CustomEntityType
@@ -1600,6 +1601,7 @@ __all__ = [
     "CustomEntityField",
     "CustomEntityFieldDefinition",
     "CustomEntityId",
+    "CustomEntityProperties",
     "CustomEntityRequest",
     "CustomEntityResponse",
     "CustomEntityType",
