@@ -25,6 +25,7 @@ from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import 
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
 from lusid.models.group_reconciliation_definition_portfolio_entity_ids import GroupReconciliationDefinitionPortfolioEntityIds
 from lusid.models.group_reconciliation_definition_recipe_ids import GroupReconciliationDefinitionRecipeIds
+from lusid.models.primary_schedule import PrimarySchedule
 from lusid.models.transaction_date_windows import TransactionDateWindows
 
 class UpdateGroupReconciliationDefinitionRequest(BaseModel):
@@ -39,7 +40,8 @@ class UpdateGroupReconciliationDefinitionRequest(BaseModel):
     transaction_date_windows: Optional[TransactionDateWindows] = Field(None, alias="transactionDateWindows")
     comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = Field(None, alias="comparisonRulesetIds")
     break_code_source: Optional[BreakCodeSource] = Field(None, alias="breakCodeSource")
-    __properties = ["displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource"]
+    primary_schedule: Optional[PrimarySchedule] = Field(None, alias="primarySchedule")
+    __properties = ["displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource", "primarySchedule"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +93,9 @@ class UpdateGroupReconciliationDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of break_code_source
         if self.break_code_source:
             _dict['breakCodeSource'] = self.break_code_source.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of primary_schedule
+        if self.primary_schedule:
+            _dict['primarySchedule'] = self.primary_schedule.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -115,6 +120,7 @@ class UpdateGroupReconciliationDefinitionRequest(BaseModel):
             "currencies": GroupReconciliationDefinitionCurrencies.from_dict(obj.get("currencies")) if obj.get("currencies") is not None else None,
             "transaction_date_windows": TransactionDateWindows.from_dict(obj.get("transactionDateWindows")) if obj.get("transactionDateWindows") is not None else None,
             "comparison_ruleset_ids": GroupReconciliationDefinitionComparisonRulesetIds.from_dict(obj.get("comparisonRulesetIds")) if obj.get("comparisonRulesetIds") is not None else None,
-            "break_code_source": BreakCodeSource.from_dict(obj.get("breakCodeSource")) if obj.get("breakCodeSource") is not None else None
+            "break_code_source": BreakCodeSource.from_dict(obj.get("breakCodeSource")) if obj.get("breakCodeSource") is not None else None,
+            "primary_schedule": PrimarySchedule.from_dict(obj.get("primarySchedule")) if obj.get("primarySchedule") is not None else None
         })
         return _obj

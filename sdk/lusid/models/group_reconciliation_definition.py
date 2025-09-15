@@ -25,6 +25,7 @@ from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import 
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
 from lusid.models.group_reconciliation_definition_portfolio_entity_ids import GroupReconciliationDefinitionPortfolioEntityIds
 from lusid.models.group_reconciliation_definition_recipe_ids import GroupReconciliationDefinitionRecipeIds
+from lusid.models.primary_schedule import PrimarySchedule
 from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.version import Version
@@ -42,9 +43,10 @@ class GroupReconciliationDefinition(BaseModel):
     transaction_date_windows: Optional[TransactionDateWindows] = Field(None, alias="transactionDateWindows")
     comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = Field(None, alias="comparisonRulesetIds")
     break_code_source: Optional[BreakCodeSource] = Field(None, alias="breakCodeSource")
+    primary_schedule: Optional[PrimarySchedule] = Field(None, alias="primarySchedule")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    __properties = ["id", "displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource", "href", "version"]
+    __properties = ["id", "displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource", "primarySchedule", "href", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -99,6 +101,9 @@ class GroupReconciliationDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of break_code_source
         if self.break_code_source:
             _dict['breakCodeSource'] = self.break_code_source.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of primary_schedule
+        if self.primary_schedule:
+            _dict['primarySchedule'] = self.primary_schedule.to_dict()
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -138,6 +143,7 @@ class GroupReconciliationDefinition(BaseModel):
             "transaction_date_windows": TransactionDateWindows.from_dict(obj.get("transactionDateWindows")) if obj.get("transactionDateWindows") is not None else None,
             "comparison_ruleset_ids": GroupReconciliationDefinitionComparisonRulesetIds.from_dict(obj.get("comparisonRulesetIds")) if obj.get("comparisonRulesetIds") is not None else None,
             "break_code_source": BreakCodeSource.from_dict(obj.get("breakCodeSource")) if obj.get("breakCodeSource") is not None else None,
+            "primary_schedule": PrimarySchedule.from_dict(obj.get("primarySchedule")) if obj.get("primarySchedule") is not None else None,
             "href": obj.get("href"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })

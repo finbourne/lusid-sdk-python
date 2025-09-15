@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **transaction_date_windows** | [**TransactionDateWindows**](TransactionDateWindows.md) |  | [optional] 
 **comparison_ruleset_ids** | [**GroupReconciliationDefinitionComparisonRulesetIds**](GroupReconciliationDefinitionComparisonRulesetIds.md) |  | [optional] 
 **break_code_source** | [**BreakCodeSource**](BreakCodeSource.md) |  | [optional] 
+**primary_schedule** | [**PrimarySchedule**](PrimarySchedule.md) |  | [optional] 
 ## Example
 
 ```python
@@ -28,7 +29,8 @@ currencies: Optional[GroupReconciliationDefinitionCurrencies] = None
 transaction_date_windows: Optional[TransactionDateWindows] = # Replace with your value
 comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = # Replace with your value
 break_code_source: Optional[BreakCodeSource] = # Replace with your value
-create_group_reconciliation_definition_request_instance = CreateGroupReconciliationDefinitionRequest(id=id, display_name=display_name, description=description, portfolio_entity_ids=portfolio_entity_ids, recipe_ids=recipe_ids, currencies=currencies, transaction_date_windows=transaction_date_windows, comparison_ruleset_ids=comparison_ruleset_ids, break_code_source=break_code_source)
+primary_schedule: Optional[PrimarySchedule] = # Replace with your value
+create_group_reconciliation_definition_request_instance = CreateGroupReconciliationDefinitionRequest(id=id, display_name=display_name, description=description, portfolio_entity_ids=portfolio_entity_ids, recipe_ids=recipe_ids, currencies=currencies, transaction_date_windows=transaction_date_windows, comparison_ruleset_ids=comparison_ruleset_ids, break_code_source=break_code_source, primary_schedule=primary_schedule)
 
 ```
 
