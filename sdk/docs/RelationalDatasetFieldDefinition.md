@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **description** | **str** | A detailed description of the field and its purpose. | [optional] 
 **data_type_id** | [**ResourceId**](ResourceId.md) |  | 
 **required** | **bool** | Whether this field is mandatory in the dataset. | [optional] 
-**usage** | **str** | The intended usage of the field (SeriesIdentifier, Value, or Metadata). | 
+**category** | **str** | The intended category of the field (SeriesIdentifier, Value, or Metadata). | 
 ## Example
 
 ```python
@@ -22,8 +22,8 @@ description: Optional[StrictStr] = "example_description"
 data_type_id: ResourceId = # Replace with your value
 required: Optional[StrictBool] = # Replace with your value
 required:Optional[StrictBool] = None
-usage: StrictStr = "example_usage"
-relational_dataset_field_definition_instance = RelationalDatasetFieldDefinition(field_name=field_name, display_name=display_name, description=description, data_type_id=data_type_id, required=required, usage=usage)
+category: StrictStr = "example_category"
+relational_dataset_field_definition_instance = RelationalDatasetFieldDefinition(field_name=field_name, display_name=display_name, description=description, data_type_id=data_type_id, required=required, category=category)
 
 ```
 

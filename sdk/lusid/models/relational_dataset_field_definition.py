@@ -31,8 +31,8 @@ class RelationalDatasetFieldDefinition(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A detailed description of the field and its purpose.") 
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
     required: Optional[StrictBool] = Field(None, description="Whether this field is mandatory in the dataset.")
-    usage:  StrictStr = Field(...,alias="usage", description="The intended usage of the field (SeriesIdentifier, Value, or Metadata).") 
-    __properties = ["fieldName", "displayName", "description", "dataTypeId", "required", "usage"]
+    category:  StrictStr = Field(...,alias="category", description="The intended category of the field (SeriesIdentifier, Value, or Metadata).") 
+    __properties = ["fieldName", "displayName", "description", "dataTypeId", "required", "category"]
 
     class Config:
         """Pydantic configuration"""
@@ -96,6 +96,6 @@ class RelationalDatasetFieldDefinition(BaseModel):
             "description": obj.get("description"),
             "data_type_id": ResourceId.from_dict(obj.get("dataTypeId")) if obj.get("dataTypeId") is not None else None,
             "required": obj.get("required"),
-            "usage": obj.get("usage")
+            "category": obj.get("category")
         })
         return _obj
