@@ -38,9 +38,10 @@ class ClosedPeriod(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
     version: Optional[Version] = None
     post_close_activities: Optional[conlist(PostCloseActivity)] = Field(None, alias="postCloseActivities", description="All the post close activities for the closed period.")
+    holdings_as_at_closed_override: Optional[datetime] = Field(None, alias="holdingsAsAtClosedOverride", description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[conlist(Link)] = None
-    __properties = ["closedPeriodId", "displayName", "description", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "href", "links"]
+    __properties = ["closedPeriodId", "displayName", "description", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "holdingsAsAtClosedOverride", "href", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -123,6 +124,11 @@ class ClosedPeriod(BaseModel):
         if self.post_close_activities is None and "post_close_activities" in self.__fields_set__:
             _dict['postCloseActivities'] = None
 
+        # set to None if holdings_as_at_closed_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_as_at_closed_override is None and "holdings_as_at_closed_override" in self.__fields_set__:
+            _dict['holdingsAsAtClosedOverride'] = None
+
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -159,6 +165,7 @@ class ClosedPeriod(BaseModel):
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "post_close_activities": [PostCloseActivity.from_dict(_item) for _item in obj.get("postCloseActivities")] if obj.get("postCloseActivities") is not None else None,
+            "holdings_as_at_closed_override": obj.get("holdingsAsAtClosedOverride"),
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

@@ -61,6 +61,7 @@ from lusid.models.resource_list_of_portfolio_cash_flow import ResourceListOfPort
 from lusid.models.resource_list_of_portfolio_cash_ladder import ResourceListOfPortfolioCashLadder
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
+from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.transaction_query_parameters import TransactionQueryParameters
 from lusid.models.transaction_request import TransactionRequest
@@ -73,6 +74,7 @@ from lusid.models.versioned_resource_list_of_holding_contributor import Versione
 from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
+from lusid.models.versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query import VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
 
 from lusid.api_client import ApiClient
@@ -1042,6 +1044,192 @@ class TransactionPortfoliosApi:
 
         return self.api_client.call_api(
             '/api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, **kwargs) -> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery:  # noqa: E501
+        ...
+
+    @overload
+    def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery, Awaitable[VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery]]:  # noqa: E501
+        """[EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions  # noqa: E501
+
+        Builds and returns all settlement instructions that have been loaded against this portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.build_settlement_instructions(scope, code, settlement_instruction_query, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
+        :type code: str
+        :param settlement_instruction_query: The queryParameters which control how the settlement instructions are built and returned. (required)
+        :type settlement_instruction_query: SettlementInstructionQuery
+        :param as_at: The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the build_settlement_instructions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.build_settlement_instructions_with_http_info(scope, code, settlement_instruction_query, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def build_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions  # noqa: E501
+
+        Builds and returns all settlement instructions that have been loaded against this portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.build_settlement_instructions_with_http_info(scope, code, settlement_instruction_query, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
+        :type code: str
+        :param settlement_instruction_query: The queryParameters which control how the settlement instructions are built and returned. (required)
+        :type settlement_instruction_query: SettlementInstructionQuery
+        :param as_at: The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'settlement_instruction_query',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method build_settlement_instructions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['settlement_instruction_query'] is not None:
+            _body_params = _params['settlement_instruction_query']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/settlementinstructions/$build', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -7126,22 +7314,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def preview_transaction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, **kwargs) -> ResourceListOfOutputTransaction:  # noqa: E501
+    async def preview_transaction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> ResourceListOfOutputTransaction:  # noqa: E501
         ...
 
     @overload
-    def preview_transaction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfOutputTransaction:  # noqa: E501
+    def preview_transaction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfOutputTransaction:  # noqa: E501
         ...
 
     @validate_arguments
-    def preview_transaction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfOutputTransaction, Awaitable[ResourceListOfOutputTransaction]]:  # noqa: E501
+    def preview_transaction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfOutputTransaction, Awaitable[ResourceListOfOutputTransaction]]:  # noqa: E501
         """PreviewTransaction: Preview a transaction  # noqa: E501
 
         Returns the output-transaction(s) - e.g. as returned by BuildTransactions  that would come out of LUSID if the provided TransactionRequest was booked.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.preview_transaction(scope, code, transaction_request, property_keys, show_cancelled_transactions, preserve_properties, async_req=True)
+        >>> thread = api.preview_transaction(scope, code, transaction_request, property_keys, show_cancelled_transactions, preserve_properties, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7156,6 +7344,10 @@ class TransactionPortfoliosApi:
         :type show_cancelled_transactions: bool
         :param preserve_properties: If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.
         :type preserve_properties: bool
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -7172,17 +7364,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.preview_transaction_with_http_info(scope, code, transaction_request, property_keys, show_cancelled_transactions, preserve_properties, **kwargs)  # noqa: E501
+        return self.preview_transaction_with_http_info(scope, code, transaction_request, property_keys, show_cancelled_transactions, preserve_properties, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def preview_transaction_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def preview_transaction_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[TransactionRequest, Field(..., description="The transaction to be previewed.")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\".")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """PreviewTransaction: Preview a transaction  # noqa: E501
 
         Returns the output-transaction(s) - e.g. as returned by BuildTransactions  that would come out of LUSID if the provided TransactionRequest was booked.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.preview_transaction_with_http_info(scope, code, transaction_request, property_keys, show_cancelled_transactions, preserve_properties, async_req=True)
+        >>> thread = api.preview_transaction_with_http_info(scope, code, transaction_request, property_keys, show_cancelled_transactions, preserve_properties, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7197,6 +7389,10 @@ class TransactionPortfoliosApi:
         :type show_cancelled_transactions: bool
         :param preserve_properties: If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version.
         :type preserve_properties: bool
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -7229,7 +7425,9 @@ class TransactionPortfoliosApi:
             'transaction_request',
             'property_keys',
             'show_cancelled_transactions',
-            'preserve_properties'
+            'preserve_properties',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -7276,6 +7474,12 @@ class TransactionPortfoliosApi:
 
         if _params.get('preserve_properties') is not None:  # noqa: E501
             _query_params.append(('preserveProperties', _params['preserve_properties']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

@@ -317,6 +317,7 @@ Class | Method | HTTP request | Description
 *InstrumentsApi* | [**update_instrument_identifier**](docs/InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | UpdateInstrumentIdentifier: Update instrument identifier
 *InstrumentsApi* | [**upsert_instruments**](docs/InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | UpsertInstruments: Upsert instruments
 *InstrumentsApi* | [**upsert_instruments_properties**](docs/InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | UpsertInstrumentsProperties: Upsert instruments properties
+*InvestmentAccountsApi* | [**delete_investment_account**](docs/InvestmentAccountsApi.md#delete_investment_account) | **DELETE** /api/investmentaccounts/{identifierType}/{identifierValue} | [EXPERIMENTAL] DeleteInvestmentAccount: Delete Investment Account
 *InvestmentAccountsApi* | [**get_investment_account**](docs/InvestmentAccountsApi.md#get_investment_account) | **GET** /api/investmentaccounts/{identifierType}/{identifierValue} | [EXPERIMENTAL] GetInvestmentAccount: Get Investment Account
 *InvestmentAccountsApi* | [**list_all_investment_accounts**](docs/InvestmentAccountsApi.md#list_all_investment_accounts) | **GET** /api/investmentaccounts | [EXPERIMENTAL] ListAllInvestmentAccounts: List Investment Accounts
 *InvestmentAccountsApi* | [**upsert_investment_accounts**](docs/InvestmentAccountsApi.md#upsert_investment_accounts) | **POST** /api/investmentaccounts/$batchUpsert | [EXPERIMENTAL] UpsertInvestmentAccounts: Upsert Investment Accounts
@@ -605,6 +606,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**batch_create_trade_tickets**](docs/TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | BatchCreateTradeTickets: Batch Create Trade Tickets
 *TransactionPortfoliosApi* | [**batch_set_holdings**](docs/TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | BatchSetHoldings: Batch set holdings
 *TransactionPortfoliosApi* | [**batch_upsert_transactions**](docs/TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | BatchUpsertTransactions: Batch upsert transactions
+*TransactionPortfoliosApi* | [**build_settlement_instructions**](docs/TransactionPortfoliosApi.md#build_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$build | [EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
 *TransactionPortfoliosApi* | [**build_transactions**](docs/TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
 *TransactionPortfoliosApi* | [**cancel_adjust_holdings**](docs/TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
 *TransactionPortfoliosApi* | [**cancel_single_adjust_holding**](docs/TransactionPortfoliosApi.md#cancel_single_adjust_holding) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$cancelAdjustment | CancelSingleAdjustHolding: Cancel single holding adjustment.
@@ -1703,7 +1705,9 @@ Class | Method | HTTP request | Description
  - [SetTransactionConfigurationSourceRequest](docs/SetTransactionConfigurationSourceRequest.md)
  - [SettlementConfigurationCategory](docs/SettlementConfigurationCategory.md)
  - [SettlementCycle](docs/SettlementCycle.md)
+ - [SettlementInstructionQuery](docs/SettlementInstructionQuery.md)
  - [SettlementInstructionRequest](docs/SettlementInstructionRequest.md)
+ - [SettlementInstructionWithTransaction](docs/SettlementInstructionWithTransaction.md)
  - [SettlementSchedule](docs/SettlementSchedule.md)
  - [ShareClassAmount](docs/ShareClassAmount.md)
  - [ShareClassBreakdown](docs/ShareClassBreakdown.md)
@@ -1777,6 +1781,7 @@ Class | Method | HTTP request | Description
  - [TransactionDateWindows](docs/TransactionDateWindows.md)
  - [TransactionDiagnostics](docs/TransactionDiagnostics.md)
  - [TransactionFieldMap](docs/TransactionFieldMap.md)
+ - [TransactionMatchingAlternativeId](docs/TransactionMatchingAlternativeId.md)
  - [TransactionPrice](docs/TransactionPrice.md)
  - [TransactionPriceAndType](docs/TransactionPriceAndType.md)
  - [TransactionPriceType](docs/TransactionPriceType.md)
@@ -1934,6 +1939,7 @@ Class | Method | HTTP request | Description
  - [VersionedResourceListOfPortfolioHolding](docs/VersionedResourceListOfPortfolioHolding.md)
  - [VersionedResourceListOfTransaction](docs/VersionedResourceListOfTransaction.md)
  - [VersionedResourceListOfTrialBalance](docs/VersionedResourceListOfTrialBalance.md)
+ - [VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery](docs/VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery.md)
  - [VersionedResourceListWithWarningsOfPortfolioHolding](docs/VersionedResourceListWithWarningsOfPortfolioHolding.md)
  - [VirtualDocument](docs/VirtualDocument.md)
  - [VirtualDocumentRow](docs/VirtualDocumentRow.md)

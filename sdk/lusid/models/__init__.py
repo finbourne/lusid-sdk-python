@@ -1054,7 +1054,9 @@ from lusid.models.set_transaction_configuration_alias import SetTransactionConfi
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.settlement_cycle import SettlementCycle
+from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
+from lusid.models.settlement_instruction_with_transaction import SettlementInstructionWithTransaction
 from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
@@ -1128,6 +1130,7 @@ from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndA
 from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
 from lusid.models.transaction_field_map import TransactionFieldMap
+from lusid.models.transaction_matching_alternative_id import TransactionMatchingAlternativeId
 from lusid.models.transaction_price import TransactionPrice
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
 from lusid.models.transaction_price_type import TransactionPriceType
@@ -1285,6 +1288,7 @@ from lusid.models.versioned_resource_list_of_output_transaction import Versioned
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
 from lusid.models.versioned_resource_list_of_trial_balance import VersionedResourceListOfTrialBalance
+from lusid.models.versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query import VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
 from lusid.models.virtual_document import VirtualDocument
 from lusid.models.virtual_document_row import VirtualDocumentRow
@@ -2346,7 +2350,9 @@ __all__ = [
     "SetTransactionConfigurationSourceRequest",
     "SettlementConfigurationCategory",
     "SettlementCycle",
+    "SettlementInstructionQuery",
     "SettlementInstructionRequest",
+    "SettlementInstructionWithTransaction",
     "SettlementSchedule",
     "ShareClassAmount",
     "ShareClassBreakdown",
@@ -2420,6 +2426,7 @@ __all__ = [
     "TransactionDateWindows",
     "TransactionDiagnostics",
     "TransactionFieldMap",
+    "TransactionMatchingAlternativeId",
     "TransactionPrice",
     "TransactionPriceAndType",
     "TransactionPriceType",
@@ -2577,6 +2584,7 @@ __all__ = [
     "VersionedResourceListOfPortfolioHolding",
     "VersionedResourceListOfTransaction",
     "VersionedResourceListOfTrialBalance",
+    "VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery",
     "VersionedResourceListWithWarningsOfPortfolioHolding",
     "VirtualDocument",
     "VirtualDocumentRow",

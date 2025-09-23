@@ -4,10 +4,109 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete_investment_account**](InvestmentAccountsApi.md#delete_investment_account) | **DELETE** /api/investmentaccounts/{identifierType}/{identifierValue} | [EXPERIMENTAL] DeleteInvestmentAccount: Delete Investment Account
 [**get_investment_account**](InvestmentAccountsApi.md#get_investment_account) | **GET** /api/investmentaccounts/{identifierType}/{identifierValue} | [EXPERIMENTAL] GetInvestmentAccount: Get Investment Account
 [**list_all_investment_accounts**](InvestmentAccountsApi.md#list_all_investment_accounts) | **GET** /api/investmentaccounts | [EXPERIMENTAL] ListAllInvestmentAccounts: List Investment Accounts
 [**upsert_investment_accounts**](InvestmentAccountsApi.md#upsert_investment_accounts) | **POST** /api/investmentaccounts/$batchUpsert | [EXPERIMENTAL] UpsertInvestmentAccounts: Upsert Investment Accounts
 
+
+# **delete_investment_account**
+> DeletedEntityResponse delete_investment_account(identifier_type, identifier_value, scope, identifier_scope)
+
+[EXPERIMENTAL] DeleteInvestmentAccount: Delete Investment Account
+
+Delete an investment account. Deletion will be valid from the investment account's creation datetime.  This means that the investment account will no longer exist at any effective datetime from the asAt datetime of deletion.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    InvestmentAccountsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InvestmentAccountsApi)
+    identifier_type = 'identifier_type_example' # str | Code of the investment account identifier type.
+    identifier_value = 'identifier_value_example' # str | Code of the investment account under specified identifier type's scope and code.
+    scope = 'scope_example' # str | The scope of the investment account entity.
+    identifier_scope = 'identifier_scope_example' # str | Scope of the investment account identifier type.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_investment_account(identifier_type, identifier_value, scope, identifier_scope, opts=opts)
+
+        # [EXPERIMENTAL] DeleteInvestmentAccount: Delete Investment Account
+        api_response = api_instance.delete_investment_account(identifier_type, identifier_value, scope, identifier_scope)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling InvestmentAccountsApi->delete_investment_account: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **identifier_type** | **str**| Code of the investment account identifier type. | 
+ **identifier_value** | **str**| Code of the investment account under specified identifier type&#39;s scope and code. | 
+ **scope** | **str**| The scope of the investment account entity. | 
+ **identifier_scope** | **str**| Scope of the investment account identifier type. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The response from deleting investment account. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_investment_account**
 > InvestmentAccount get_investment_account(identifier_type, identifier_value, scope, identifier_scope, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)

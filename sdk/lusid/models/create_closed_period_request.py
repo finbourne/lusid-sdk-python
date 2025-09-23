@@ -32,7 +32,8 @@ class CreateClosedPeriodRequest(BaseModel):
     as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt closed datetime for the Closed Period")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Closed Period.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Closed Period.") 
-    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description"]
+    holdings_as_at_closed_override: Optional[datetime] = Field(None, alias="holdingsAsAtClosedOverride", description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.")
+    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description", "holdingsAsAtClosedOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +94,11 @@ class CreateClosedPeriodRequest(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if holdings_as_at_closed_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_as_at_closed_override is None and "holdings_as_at_closed_override" in self.__fields_set__:
+            _dict['holdingsAsAtClosedOverride'] = None
+
         return _dict
 
     @classmethod
@@ -115,6 +121,7 @@ class CreateClosedPeriodRequest(BaseModel):
             else None,
             "as_at_closed": obj.get("asAtClosed"),
             "display_name": obj.get("displayName"),
-            "description": obj.get("description")
+            "description": obj.get("description"),
+            "holdings_as_at_closed_override": obj.get("holdingsAsAtClosedOverride")
         })
         return _obj

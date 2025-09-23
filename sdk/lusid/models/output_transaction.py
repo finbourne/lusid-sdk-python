@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
+from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.economics import Economics
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
@@ -68,7 +69,8 @@ class OutputTransaction(BaseModel):
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     accounting_date: Optional[datetime] = Field(None, alias="accountingDate", description="The accounting date of the transaction.")
     economics: Optional[conlist(Economics)] = Field(None, description="Set of economic data related with the transaction impacts.")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics"]
+    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -206,6 +208,9 @@ class OutputTransaction(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['economics'] = _items
+        # override the default output from pydantic by calling `to_dict()` of data_model_membership
+        if self.data_model_membership:
+            _dict['dataModelMembership'] = self.data_model_membership.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -336,6 +341,7 @@ class OutputTransaction(BaseModel):
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
             "accounting_date": obj.get("accountingDate"),
-            "economics": [Economics.from_dict(_item) for _item in obj.get("economics")] if obj.get("economics") is not None else None
+            "economics": [Economics.from_dict(_item) for _item in obj.get("economics")] if obj.get("economics") is not None else None,
+            "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None
         })
         return _obj

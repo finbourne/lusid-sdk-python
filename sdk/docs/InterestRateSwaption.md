@@ -11,13 +11,16 @@ Name | Type | Description | Notes
 **swap** | [**InterestRateSwap**](InterestRateSwap.md) |  | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **underlying** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
+**delivery_days** | **int** | Number of business days between exercise date and settlement of the option payoff or underlying.                Defaults to 0. | [optional] 
+**business_day_convention** | **str** | Business day convention for option exercise date to settlement date calculation.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].                Defaults to \&quot;F\&quot;. | [optional] 
+**settlement_calendars** | **List[str]** | Holiday calendars for option exercise date to settlement date calculation. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo | 
 ## Example
 
 ```python
 from lusid.models.interest_rate_swaption import InterestRateSwaption
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import Field, StrictInt, StrictStr, conlist, constr, validator
 from datetime import datetime
 start_date: datetime = # Replace with your value
 pay_or_receive_fixed: StrictStr = "example_pay_or_receive_fixed"
@@ -26,8 +29,12 @@ delivery_method: StrictStr = "example_delivery_method"
 swap: Optional[InterestRateSwap] = None
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 underlying: Optional[LusidInstrument] = None
+delivery_days: Optional[StrictInt] = # Replace with your value
+delivery_days: Optional[StrictInt] = None
+business_day_convention: Optional[StrictStr] = "example_business_day_convention"
+settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-interest_rate_swaption_instance = InterestRateSwaption(start_date=start_date, pay_or_receive_fixed=pay_or_receive_fixed, premium=premium, delivery_method=delivery_method, swap=swap, time_zone_conventions=time_zone_conventions, underlying=underlying, instrument_type=instrument_type)
+interest_rate_swaption_instance = InterestRateSwaption(start_date=start_date, pay_or_receive_fixed=pay_or_receive_fixed, premium=premium, delivery_method=delivery_method, swap=swap, time_zone_conventions=time_zone_conventions, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, instrument_type=instrument_type)
 
 ```
 

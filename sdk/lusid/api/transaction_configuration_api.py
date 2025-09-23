@@ -550,22 +550,22 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def get_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, **kwargs) -> SideDefinition:  # noqa: E501
+    async def get_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> SideDefinition:  # noqa: E501
         ...
 
     @overload
-    def get_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> SideDefinition:  # noqa: E501
+    def get_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> SideDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
+    def get_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
         """GetSideDefinition: Get the side definition for a given side name( or label)  # noqa: E501
 
         Get the side definition user requested.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_side_definition(side, scope, as_at, async_req=True)
+        >>> thread = api.get_side_definition(side, scope, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param side: The label to uniquely identify the side. (required)
@@ -574,6 +574,12 @@ class TransactionConfigurationApi:
         :type scope: str
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -590,17 +596,17 @@ class TransactionConfigurationApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_side_definition_with_http_info(side, scope, as_at, **kwargs)  # noqa: E501
+        return self.get_side_definition_with_http_info(side, scope, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_side_definition_with_http_info(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_side_definition_with_http_info(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetSideDefinition: Get the side definition for a given side name( or label)  # noqa: E501
 
         Get the side definition user requested.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_side_definition_with_http_info(side, scope, as_at, async_req=True)
+        >>> thread = api.get_side_definition_with_http_info(side, scope, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param side: The label to uniquely identify the side. (required)
@@ -609,6 +615,12 @@ class TransactionConfigurationApi:
         :type scope: str
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -638,7 +650,10 @@ class TransactionConfigurationApi:
         _all_params = [
             'side',
             'scope',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -682,6 +697,15 @@ class TransactionConfigurationApi:
             else:
                 _query_params.append(('asAt', _params['as_at']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -721,22 +745,22 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> TransactionType:  # noqa: E501
+    async def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> TransactionType:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionType:  # noqa: E501
+    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionType:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
+    def get_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
         """GetTransactionType: Get a single transaction configuration type  # noqa: E501
 
         Get a single transaction type. Returns failure if not found  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_type(source, type, as_at, scope, async_req=True)
+        >>> thread = api.get_transaction_type(source, type, as_at, scope, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param source: The source that the type is in (required)
@@ -747,6 +771,12 @@ class TransactionConfigurationApi:
         :type as_at: datetime
         :param scope: The scope in which the transaction types exists. When not supplied the scope is 'default'.
         :type scope: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -763,17 +793,17 @@ class TransactionConfigurationApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_transaction_type_with_http_info(source, type, as_at, scope, **kwargs)  # noqa: E501
+        return self.get_transaction_type_with_http_info(source, type, as_at, scope, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source that the type is in")], type : Annotated[StrictStr, Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetTransactionType: Get a single transaction configuration type  # noqa: E501
 
         Get a single transaction type. Returns failure if not found  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_type_with_http_info(source, type, as_at, scope, async_req=True)
+        >>> thread = api.get_transaction_type_with_http_info(source, type, as_at, scope, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param source: The source that the type is in (required)
@@ -784,6 +814,12 @@ class TransactionConfigurationApi:
         :type as_at: datetime
         :param scope: The scope in which the transaction types exists. When not supplied the scope is 'default'.
         :type scope: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -814,7 +850,10 @@ class TransactionConfigurationApi:
             'source',
             'type',
             'as_at',
-            'scope'
+            'scope',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -861,6 +900,15 @@ class TransactionConfigurationApi:
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -900,28 +948,34 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
+    async def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
+    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
+    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
         """ListSideDefinitions: List the side definitions  # noqa: E501
 
         List all the side definitions in the given scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_side_definitions(as_at, scope, async_req=True)
+        >>> thread = api.list_side_definitions(as_at, scope, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.
         :type as_at: datetime
         :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
         :type scope: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -938,23 +992,29 @@ class TransactionConfigurationApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_side_definitions_with_http_info(as_at, scope, **kwargs)  # noqa: E501
+        return self.list_side_definitions_with_http_info(as_at, scope, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_side_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_side_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListSideDefinitions: List the side definitions  # noqa: E501
 
         List all the side definitions in the given scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_side_definitions_with_http_info(as_at, scope, async_req=True)
+        >>> thread = api.list_side_definitions_with_http_info(as_at, scope, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.
         :type as_at: datetime
         :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
         :type scope: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -983,7 +1043,10 @@ class TransactionConfigurationApi:
 
         _all_params = [
             'as_at',
-            'scope'
+            'scope',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1024,6 +1087,15 @@ class TransactionConfigurationApi:
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -1063,28 +1135,34 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
+    async def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
         ...
 
     @overload
-    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
+    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
+    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
         Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_transaction_types(as_at, scope, async_req=True)
+        >>> thread = api.list_transaction_types(as_at, scope, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
         :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
         :type scope: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1101,23 +1179,29 @@ class TransactionConfigurationApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_transaction_types_with_http_info(as_at, scope, **kwargs)  # noqa: E501
+        return self.list_transaction_types_with_http_info(as_at, scope, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
         Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_transaction_types_with_http_info(as_at, scope, async_req=True)
+        >>> thread = api.list_transaction_types_with_http_info(as_at, scope, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
         :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
         :type scope: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1146,7 +1230,10 @@ class TransactionConfigurationApi:
 
         _all_params = [
             'as_at',
-            'scope'
+            'scope',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1186,6 +1273,15 @@ class TransactionConfigurationApi:
 
         if _params.get('scope') is not None:  # noqa: E501
             _query_params.append(('scope', _params['scope']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

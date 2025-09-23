@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**batch_create_trade_tickets**](TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | BatchCreateTradeTickets: Batch Create Trade Tickets
 [**batch_set_holdings**](TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | BatchSetHoldings: Batch set holdings
 [**batch_upsert_transactions**](TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | BatchUpsertTransactions: Batch upsert transactions
+[**build_settlement_instructions**](TransactionPortfoliosApi.md#build_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$build | [EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
 [**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
 [**cancel_single_adjust_holding**](TransactionPortfoliosApi.md#cancel_single_adjust_holding) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$cancelAdjustment | CancelSingleAdjustHolding: Cancel single holding adjustment.
@@ -545,6 +546,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The successfully upserted transaction requests along with any failures |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **build_settlement_instructions**
+> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery build_settlement_instructions(scope, code, settlement_instruction_query, as_at=as_at)
+
+[EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
+
+Builds and returns all settlement instructions that have been loaded against this portfolio.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # settlement_instruction_query = SettlementInstructionQuery.from_json("")
+    # settlement_instruction_query = SettlementInstructionQuery.from_dict({})
+    settlement_instruction_query = SettlementInstructionQuery()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.build_settlement_instructions(scope, code, settlement_instruction_query, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
+        api_response = api_instance.build_settlement_instructions(scope, code, settlement_instruction_query, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->build_settlement_instructions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **settlement_instruction_query** | [**SettlementInstructionQuery**](SettlementInstructionQuery.md)| The queryParameters which control how the settlement instructions are built and returned. | 
+ **as_at** | **datetime**| The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
+
+### Return type
+
+[**VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery**](VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested settlement instructions from the specified transaction portfolio |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -3685,7 +3789,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **preview_transaction**
-> ResourceListOfOutputTransaction preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties)
+> ResourceListOfOutputTransaction preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 PreviewTransaction: Preview a transaction
 
@@ -3747,13 +3851,15 @@ def main():
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
     show_cancelled_transactions = True # bool | Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified. (optional)
     preserve_properties = True # bool | If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version. (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties, opts=opts)
+        # api_response =  api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # PreviewTransaction: Preview a transaction
-        api_response = api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties)
+        api_response = api_instance.preview_transaction(scope, code, transaction_request, property_keys=property_keys, show_cancelled_transactions=show_cancelled_transactions, preserve_properties=preserve_properties, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -3772,6 +3878,8 @@ Name | Type | Description  | Notes
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
  **show_cancelled_transactions** | **bool**| Option to specify whether to include previous versions of an amended transaction in the response.              Defaults to False if not specified. | [optional] 
  **preserve_properties** | **bool**| If the preview transaction is an amendment to an existing transaction, then setting this to true will carry forward any unmodified properties from the earlier version. | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 

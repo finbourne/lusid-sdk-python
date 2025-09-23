@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **stock_settlement** | [**SettlementConfigurationCategory**](SettlementConfigurationCategory.md) |  | [optional] 
 **cash_settlement** | [**SettlementConfigurationCategory**](SettlementConfigurationCategory.md) |  | [optional] 
 **deferred_cash_receipt** | [**SettlementConfigurationCategory**](SettlementConfigurationCategory.md) |  | [optional] 
+**transaction_matching_alternative_id** | [**TransactionMatchingAlternativeId**](TransactionMatchingAlternativeId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -16,7 +17,8 @@ from pydantic.v1 import BaseModel, Field
 stock_settlement: Optional[SettlementConfigurationCategory] = # Replace with your value
 cash_settlement: Optional[SettlementConfigurationCategory] = # Replace with your value
 deferred_cash_receipt: Optional[SettlementConfigurationCategory] = # Replace with your value
-portfolio_settlement_configuration_instance = PortfolioSettlementConfiguration(stock_settlement=stock_settlement, cash_settlement=cash_settlement, deferred_cash_receipt=deferred_cash_receipt)
+transaction_matching_alternative_id: Optional[TransactionMatchingAlternativeId] = # Replace with your value
+portfolio_settlement_configuration_instance = PortfolioSettlementConfiguration(stock_settlement=stock_settlement, cash_settlement=cash_settlement, deferred_cash_receipt=deferred_cash_receipt, transaction_matching_alternative_id=transaction_matching_alternative_id)
 
 ```
 

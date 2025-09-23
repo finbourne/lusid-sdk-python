@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
+from lusid.models.transaction_matching_alternative_id import TransactionMatchingAlternativeId
 
 class PortfolioSettlementConfiguration(BaseModel):
     """
@@ -29,7 +30,8 @@ class PortfolioSettlementConfiguration(BaseModel):
     stock_settlement: Optional[SettlementConfigurationCategory] = Field(None, alias="stockSettlement")
     cash_settlement: Optional[SettlementConfigurationCategory] = Field(None, alias="cashSettlement")
     deferred_cash_receipt: Optional[SettlementConfigurationCategory] = Field(None, alias="deferredCashReceipt")
-    __properties = ["stockSettlement", "cashSettlement", "deferredCashReceipt"]
+    transaction_matching_alternative_id: Optional[TransactionMatchingAlternativeId] = Field(None, alias="transactionMatchingAlternativeId")
+    __properties = ["stockSettlement", "cashSettlement", "deferredCashReceipt", "transactionMatchingAlternativeId"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +74,9 @@ class PortfolioSettlementConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of deferred_cash_receipt
         if self.deferred_cash_receipt:
             _dict['deferredCashReceipt'] = self.deferred_cash_receipt.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of transaction_matching_alternative_id
+        if self.transaction_matching_alternative_id:
+            _dict['transactionMatchingAlternativeId'] = self.transaction_matching_alternative_id.to_dict()
         return _dict
 
     @classmethod
@@ -86,6 +91,7 @@ class PortfolioSettlementConfiguration(BaseModel):
         _obj = PortfolioSettlementConfiguration.parse_obj({
             "stock_settlement": SettlementConfigurationCategory.from_dict(obj.get("stockSettlement")) if obj.get("stockSettlement") is not None else None,
             "cash_settlement": SettlementConfigurationCategory.from_dict(obj.get("cashSettlement")) if obj.get("cashSettlement") is not None else None,
-            "deferred_cash_receipt": SettlementConfigurationCategory.from_dict(obj.get("deferredCashReceipt")) if obj.get("deferredCashReceipt") is not None else None
+            "deferred_cash_receipt": SettlementConfigurationCategory.from_dict(obj.get("deferredCashReceipt")) if obj.get("deferredCashReceipt") is not None else None,
+            "transaction_matching_alternative_id": TransactionMatchingAlternativeId.from_dict(obj.get("transactionMatchingAlternativeId")) if obj.get("transactionMatchingAlternativeId") is not None else None
         })
         return _obj

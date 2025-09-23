@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period | [optional] 
 **display_name** | **str** | The name of the Closed Period. | [optional] 
 **description** | **str** | A description for the Closed Period. | [optional] 
+**holdings_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,8 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 as_at_closed: Optional[datetime] = # Replace with your value
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-create_closed_period_request_instance = CreateClosedPeriodRequest(closed_period_id=closed_period_id, effective_end=effective_end, properties=properties, as_at_closed=as_at_closed, display_name=display_name, description=description)
+holdings_as_at_closed_override: Optional[datetime] = # Replace with your value
+create_closed_period_request_instance = CreateClosedPeriodRequest(closed_period_id=closed_period_id, effective_end=effective_end, properties=properties, as_at_closed=as_at_closed, display_name=display_name, description=description, holdings_as_at_closed_override=holdings_as_at_closed_override)
 
 ```
 
