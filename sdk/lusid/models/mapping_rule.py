@@ -29,7 +29,7 @@ class MappingRule(BaseModel):
     left:  Optional[StrictStr] = Field(None,alias="left", description="The name of the field/property in the left resource (e.g. a transaction)") 
     right:  Optional[StrictStr] = Field(None,alias="right", description="The name of the field/property in the right resource (e.g. a transaction)") 
     comparison_type:  Optional[StrictStr] = Field(None,alias="comparisonType", description="The type of comparison to be performed") 
-    comparison_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="comparisonValue", description="The (optional) value used with Finbourne.WebApi.Interface.Dto.Mappings.MappingRule.ComparisonType")
+    comparison_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="comparisonValue", description="The (optional) value used with ComparisonType.")
     weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="A factor used to influence the importance of this item.")
     mapped_strings: Optional[conlist(MappedString)] = Field(None, alias="mappedStrings", description="The (optional) value used to map string values.")
     is_case_sensitive: Optional[StrictBool] = Field(None, alias="isCaseSensitive", description="Should string comparisons take case into account, defaults to `false`.")

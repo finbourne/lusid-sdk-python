@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] BatchUpdateComparisonResults: Add User Review entries for a range of comparison results related to a specific GroupReconciliationDefinition.
 
-Allows to update multiple Group Reconciliation Comparison Results related to the same definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code.  Updates User Review with new entries and sets the relevant Review Status.  Supports partial success when all the entries that haven't passed validation or are not related to the definition will be returned with respectful error details.
+Allows to update multiple Group Reconciliation Comparison Results related to the same definition specified by the Scope and Code.  Updates User Review with new entries and sets the relevant Review Status.  Supports partial success when all the entries that haven't passed validation or are not related to the definition will be returned with respectful error details.
 
 ### Example
 
@@ -1099,7 +1099,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
 
-Runs a Group Reconciliation using the definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code  Supports pagination.
+Runs a Group Reconciliation using the definition specified by the Scope and Code  Supports pagination.
 
 ### Example
 

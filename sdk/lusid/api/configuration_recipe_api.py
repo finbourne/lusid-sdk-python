@@ -382,22 +382,22 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> GetRecipeResponse:  # noqa: E501
+    async def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> GetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
+    def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
+    def get_configuration_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
         """GetConfigurationRecipe: Get Configuration Recipe  # noqa: E501
 
         Get a Configuration Recipe from a single scope.                The response will return either the recipe that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_configuration_recipe(scope, code, as_at, async_req=True)
+        >>> thread = api.get_configuration_recipe(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Configuration Recipe to retrieve. (required)
@@ -406,6 +406,12 @@ class ConfigurationRecipeApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -422,17 +428,17 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_configuration_recipe_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_configuration_recipe_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_configuration_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_configuration_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the recipe to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetConfigurationRecipe: Get Configuration Recipe  # noqa: E501
 
         Get a Configuration Recipe from a single scope.                The response will return either the recipe that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_configuration_recipe_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_configuration_recipe_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Configuration Recipe to retrieve. (required)
@@ -441,6 +447,12 @@ class ConfigurationRecipeApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -470,7 +482,10 @@ class ConfigurationRecipeApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -514,6 +529,15 @@ class ConfigurationRecipeApi:
             else:
                 _query_params.append(('asAt', _params['as_at']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -553,22 +577,22 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> GetRecipeResponse:  # noqa: E501
+    async def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> GetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
+    def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
+    def get_derived_recipe(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
         """GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
 
         If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_derived_recipe(scope, code, as_at, async_req=True)
+        >>> thread = api.get_derived_recipe(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Configuration Recipe or Recipe Composer to return. (required)
@@ -577,6 +601,12 @@ class ConfigurationRecipeApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -593,17 +623,17 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_derived_recipe_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_derived_recipe_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_derived_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_derived_recipe_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[StrictStr, Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
 
         If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_derived_recipe_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_derived_recipe_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Configuration Recipe or Recipe Composer to return. (required)
@@ -612,6 +642,12 @@ class ConfigurationRecipeApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -641,7 +677,10 @@ class ConfigurationRecipeApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -685,6 +724,15 @@ class ConfigurationRecipeApi:
             else:
                 _query_params.append(('asAt', _params['as_at']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -724,22 +772,22 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, **kwargs) -> GetRecipeComposerResponse:  # noqa: E501
+    async def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> GetRecipeComposerResponse:  # noqa: E501
         ...
 
     @overload
-    def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeComposerResponse:  # noqa: E501
+    def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeComposerResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeComposerResponse, Awaitable[GetRecipeComposerResponse]]:  # noqa: E501
+    def get_recipe_composer(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeComposerResponse, Awaitable[GetRecipeComposerResponse]]:  # noqa: E501
         """GetRecipeComposer: Get Recipe Composer  # noqa: E501
 
         Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_recipe_composer(scope, code, as_at, async_req=True)
+        >>> thread = api.get_recipe_composer(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Recipe Composer to retrieve. (required)
@@ -748,6 +796,12 @@ class ConfigurationRecipeApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -764,17 +818,17 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_recipe_composer_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_recipe_composer_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_recipe_composer_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_recipe_composer_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[StrictStr, Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetRecipeComposer: Get Recipe Composer  # noqa: E501
 
         Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_recipe_composer_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_recipe_composer_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Recipe Composer to retrieve. (required)
@@ -783,6 +837,12 @@ class ConfigurationRecipeApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -812,7 +872,10 @@ class ConfigurationRecipeApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -855,6 +918,15 @@ class ConfigurationRecipeApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -1054,28 +1126,34 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    async def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
+    def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
         """ListConfigurationRecipes: List the set of Configuration Recipes  # noqa: E501
 
         List the set of configuration recipes at the specified date/time and scope. Note this only returns recipes stored directly and does not include any recipes expanded from recipe composers.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_configuration_recipes(as_at, filter, async_req=True)
+        >>> thread = api.list_configuration_recipes(as_at, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1092,23 +1170,29 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_configuration_recipes_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+        return self.list_configuration_recipes_with_http_info(as_at, filter, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_configuration_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_configuration_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListConfigurationRecipes: List the set of Configuration Recipes  # noqa: E501
 
         List the set of configuration recipes at the specified date/time and scope. Note this only returns recipes stored directly and does not include any recipes expanded from recipe composers.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_configuration_recipes_with_http_info(as_at, filter, async_req=True)
+        >>> thread = api.list_configuration_recipes_with_http_info(as_at, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1137,7 +1221,10 @@ class ConfigurationRecipeApi:
 
         _all_params = [
             'as_at',
-            'filter'
+            'filter',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1178,6 +1265,15 @@ class ConfigurationRecipeApi:
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -1217,28 +1313,34 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    async def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
+    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
         """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
         This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_derived_recipes(as_at, filter, async_req=True)
+        >>> thread = api.list_derived_recipes(as_at, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1255,23 +1357,29 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_derived_recipes_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+        return self.list_derived_recipes_with_http_info(as_at, filter, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
         This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_derived_recipes_with_http_info(as_at, filter, async_req=True)
+        >>> thread = api.list_derived_recipes_with_http_info(as_at, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1300,7 +1408,10 @@ class ConfigurationRecipeApi:
 
         _all_params = [
             'as_at',
-            'filter'
+            'filter',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1341,6 +1452,15 @@ class ConfigurationRecipeApi:
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -1380,28 +1500,34 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ResourceListOfGetRecipeComposerResponse:  # noqa: E501
+    async def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ResourceListOfGetRecipeComposerResponse:  # noqa: E501
         ...
 
     @overload
-    def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeComposerResponse:  # noqa: E501
+    def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeComposerResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeComposerResponse, Awaitable[ResourceListOfGetRecipeComposerResponse]]:  # noqa: E501
+    def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeComposerResponse, Awaitable[ResourceListOfGetRecipeComposerResponse]]:  # noqa: E501
         """ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
 
         List the set of Recipe Composers at the specified date/time and scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_recipe_composers(as_at, filter, async_req=True)
+        >>> thread = api.list_recipe_composers(as_at, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1418,23 +1544,29 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_recipe_composers_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+        return self.list_recipe_composers_with_http_info(as_at, filter, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_recipe_composers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_recipe_composers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
 
         List the set of Recipe Composers at the specified date/time and scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_recipe_composers_with_http_info(as_at, filter, async_req=True)
+        >>> thread = api.list_recipe_composers_with_http_info(as_at, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.
         :type as_at: datetime
         :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1463,7 +1595,10 @@ class ConfigurationRecipeApi:
 
         _all_params = [
             'as_at',
-            'filter'
+            'filter',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1503,6 +1638,15 @@ class ConfigurationRecipeApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

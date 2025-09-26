@@ -80,7 +80,7 @@ class GroupReconciliationsApi:
     def batch_update_comparison_results(self, scope : Annotated[StrictStr, Field(..., description="Shared Scope of the GroupReconciliationDefinition and GroupReconciliationComparisonResults.")], code : Annotated[StrictStr, Field(..., description="GroupReconciliationDefinitionId code.")], batch_update_user_review_for_comparison_result_request : Annotated[conlist(BatchUpdateUserReviewForComparisonResultRequest), Field(..., description="A collection of the comparison result Ids and their user review entries to be added or removed.                  Single request contains resultId, break code/match key/comment to add and break code/match key/comment to remove by added timestamp.")], success_mode : Annotated[Optional[StrictStr], Field( description="Defines whether the request should fail if at least one of the entries is failed to update                  or process all the entries regardless and return collections of successful and failed updates. \"Partial\" (default) | \"Atomic\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpdateUserReviewForComparisonResultResponse, Awaitable[BatchUpdateUserReviewForComparisonResultResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BatchUpdateComparisonResults: Add User Review entries for a range of comparison results related to a specific GroupReconciliationDefinition.  # noqa: E501
 
-        Allows to update multiple Group Reconciliation Comparison Results related to the same definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code.  Updates User Review with new entries and sets the relevant Review Status.  Supports partial success when all the entries that haven't passed validation or are not related to the definition will be returned with respectful error details.  # noqa: E501
+        Allows to update multiple Group Reconciliation Comparison Results related to the same definition specified by the Scope and Code.  Updates User Review with new entries and sets the relevant Review Status.  Supports partial success when all the entries that haven't passed validation or are not related to the definition will be returned with respectful error details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -117,7 +117,7 @@ class GroupReconciliationsApi:
     def batch_update_comparison_results_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Shared Scope of the GroupReconciliationDefinition and GroupReconciliationComparisonResults.")], code : Annotated[StrictStr, Field(..., description="GroupReconciliationDefinitionId code.")], batch_update_user_review_for_comparison_result_request : Annotated[conlist(BatchUpdateUserReviewForComparisonResultRequest), Field(..., description="A collection of the comparison result Ids and their user review entries to be added or removed.                  Single request contains resultId, break code/match key/comment to add and break code/match key/comment to remove by added timestamp.")], success_mode : Annotated[Optional[StrictStr], Field( description="Defines whether the request should fail if at least one of the entries is failed to update                  or process all the entries regardless and return collections of successful and failed updates. \"Partial\" (default) | \"Atomic\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BatchUpdateComparisonResults: Add User Review entries for a range of comparison results related to a specific GroupReconciliationDefinition.  # noqa: E501
 
-        Allows to update multiple Group Reconciliation Comparison Results related to the same definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code.  Updates User Review with new entries and sets the relevant Review Status.  Supports partial success when all the entries that haven't passed validation or are not related to the definition will be returned with respectful error details.  # noqa: E501
+        Allows to update multiple Group Reconciliation Comparison Results related to the same definition specified by the Scope and Code.  Updates User Review with new entries and sets the relevant Review Status.  Supports partial success when all the entries that haven't passed validation or are not related to the definition will be returned with respectful error details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2002,7 +2002,7 @@ class GroupReconciliationsApi:
     def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : Optional[GroupReconciliationRunRequest] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationRunResponse, Awaitable[GroupReconciliationRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation  # noqa: E501
 
-        Runs a Group Reconciliation using the definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code  Supports pagination.  # noqa: E501
+        Runs a Group Reconciliation using the definition specified by the Scope and Code  Supports pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2037,7 +2037,7 @@ class GroupReconciliationsApi:
     def run_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : Optional[GroupReconciliationRunRequest] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation  # noqa: E501
 
-        Runs a Group Reconciliation using the definition specified by the Finbourne.Identifiers.Abstractions.Scope and Finbourne.Identifiers.Abstractions.Code  Supports pagination.  # noqa: E501
+        Runs a Group Reconciliation using the definition specified by the Scope and Code  Supports pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

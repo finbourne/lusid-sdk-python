@@ -1,13 +1,13 @@
 # ReconciledTransaction
 
-Information about reconciled transactions.  At least one of Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Left and Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Right will be populated.
+Information about reconciled transactions.  At least one of Left and Right will be populated.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **left** | [**Transaction**](Transaction.md) |  | [optional] 
 **right** | [**Transaction**](Transaction.md) |  | [optional] 
 **percentage_match** | **float** | How good a match this is considered to be. | [optional] 
-**mapping_rule_set_results** | **List[bool]** | The result of each individual mapping rule result.  Will only be present if both Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Left and Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Right are populated. | [optional] 
+**mapping_rule_set_results** | **List[bool]** | The result of each individual mapping rule result.  Will only be present if both Left and Right are populated. | [optional] 
 ## Example
 
 ```python

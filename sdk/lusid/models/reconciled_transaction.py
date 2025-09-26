@@ -24,12 +24,12 @@ from lusid.models.transaction import Transaction
 
 class ReconciledTransaction(BaseModel):
     """
-    Information about reconciled transactions.  At least one of Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Left and Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Right will be populated.  # noqa: E501
+    Information about reconciled transactions.  At least one of Left and Right will be populated.  # noqa: E501
     """
     left: Optional[Transaction] = None
     right: Optional[Transaction] = None
     percentage_match: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="percentageMatch", description="How good a match this is considered to be.")
-    mapping_rule_set_results: Optional[conlist(StrictBool)] = Field(None, alias="mappingRuleSetResults", description="The result of each individual mapping rule result.  Will only be present if both Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Left and Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Right are populated.")
+    mapping_rule_set_results: Optional[conlist(StrictBool)] = Field(None, alias="mappingRuleSetResults", description="The result of each individual mapping rule result.  Will only be present if both Left and Right are populated.")
     __properties = ["left", "right", "percentageMatch", "mappingRuleSetResults"]
 
     class Config:
