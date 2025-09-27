@@ -37,7 +37,8 @@ class SettlementInstructionRequest(BaseModel):
     units: Union[StrictFloat, StrictInt] = Field(...)
     sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides")
     custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
-    __properties = ["settlementInstructionId", "transactionId", "settlementCategory", "instructionType", "instrumentIdentifiers", "contractualSettlementDate", "actualSettlementDate", "units", "subHoldingKeyOverrides", "custodianAccountOverride"]
+    instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="instructionToPortfolioRate")
+    __properties = ["settlementInstructionId", "transactionId", "settlementCategory", "instructionType", "instrumentIdentifiers", "contractualSettlementDate", "actualSettlementDate", "units", "subHoldingKeyOverrides", "custodianAccountOverride", "instructionToPortfolioRate"]
 
     class Config:
         """Pydantic configuration"""
@@ -96,6 +97,11 @@ class SettlementInstructionRequest(BaseModel):
         if self.sub_holding_key_overrides is None and "sub_holding_key_overrides" in self.__fields_set__:
             _dict['subHoldingKeyOverrides'] = None
 
+        # set to None if instruction_to_portfolio_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instruction_to_portfolio_rate is None and "instruction_to_portfolio_rate" in self.__fields_set__:
+            _dict['instructionToPortfolioRate'] = None
+
         return _dict
 
     @classmethod
@@ -122,6 +128,7 @@ class SettlementInstructionRequest(BaseModel):
             )
             if obj.get("subHoldingKeyOverrides") is not None
             else None,
-            "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None
+            "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None,
+            "instruction_to_portfolio_rate": obj.get("instructionToPortfolioRate")
         })
         return _obj

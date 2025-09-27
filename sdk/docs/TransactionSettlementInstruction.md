@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **custodian_account_override** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_identifiers** | **Dict[str, str]** | A set of instrument identifiers that can resolve the settlement instruction to a unique instrument. | 
 **status** | **str** | The status of the settlement instruction - &#39;Invalid&#39;, &#39;Rejected&#39; &#39;Applied&#39; or &#39;Orphan&#39;. | [optional] 
+**instruction_to_portfolio_rate** | **float** | The exchange rate between the Settlement Instruction and Portfolio. | [optional] 
 ## Example
 
 ```python
@@ -34,7 +35,8 @@ sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = # Replace wi
 custodian_account_override: Optional[ResourceId] = # Replace with your value
 instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
 status: Optional[StrictStr] = "example_status"
-transaction_settlement_instruction_instance = TransactionSettlementInstruction(settlement_instruction_id=settlement_instruction_id, instruction_type=instruction_type, actual_settlement_date=actual_settlement_date, units=units, transaction_id=transaction_id, settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, contractual_settlement_date=contractual_settlement_date, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instrument_identifiers=instrument_identifiers, status=status)
+instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+transaction_settlement_instruction_instance = TransactionSettlementInstruction(settlement_instruction_id=settlement_instruction_id, instruction_type=instruction_type, actual_settlement_date=actual_settlement_date, units=units, transaction_id=transaction_id, settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, contractual_settlement_date=contractual_settlement_date, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instrument_identifiers=instrument_identifiers, status=status, instruction_to_portfolio_rate=instruction_to_portfolio_rate)
 
 ```
 

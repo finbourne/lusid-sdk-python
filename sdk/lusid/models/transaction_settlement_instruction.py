@@ -39,7 +39,8 @@ class TransactionSettlementInstruction(BaseModel):
     custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the settlement instruction to a unique instrument.")
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the settlement instruction - 'Invalid', 'Rejected' 'Applied' or 'Orphan'.") 
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status"]
+    instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="instructionToPortfolioRate", description="The exchange rate between the Settlement Instruction and Portfolio.")
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,6 +99,11 @@ class TransactionSettlementInstruction(BaseModel):
         if self.status is None and "status" in self.__fields_set__:
             _dict['status'] = None
 
+        # set to None if instruction_to_portfolio_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instruction_to_portfolio_rate is None and "instruction_to_portfolio_rate" in self.__fields_set__:
+            _dict['instructionToPortfolioRate'] = None
+
         return _dict
 
     @classmethod
@@ -126,6 +132,7 @@ class TransactionSettlementInstruction(BaseModel):
             else None,
             "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None,
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "instruction_to_portfolio_rate": obj.get("instructionToPortfolioRate")
         })
         return _obj
