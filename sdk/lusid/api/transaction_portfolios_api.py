@@ -1062,22 +1062,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, **kwargs) -> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery:  # noqa: E501
+    async def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], **kwargs) -> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery:  # noqa: E501
         ...
 
     @overload
-    def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery:  # noqa: E501
+    def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery:  # noqa: E501
         ...
 
     @validate_arguments
-    def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery, Awaitable[VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery]]:  # noqa: E501
+    def build_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery, Awaitable[VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery]]:  # noqa: E501
         """[EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions  # noqa: E501
 
         Builds and returns all settlement instructions that have been loaded against this portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.build_settlement_instructions(scope, code, settlement_instruction_query, as_at, async_req=True)
+        >>> thread = api.build_settlement_instructions(scope, code, settlement_instruction_query, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -1086,8 +1086,6 @@ class TransactionPortfoliosApi:
         :type code: str
         :param settlement_instruction_query: The queryParameters which control how the settlement instructions are built and returned. (required)
         :type settlement_instruction_query: SettlementInstructionQuery
-        :param as_at: The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.
-        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1104,17 +1102,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.build_settlement_instructions_with_http_info(scope, code, settlement_instruction_query, as_at, **kwargs)  # noqa: E501
+        return self.build_settlement_instructions_with_http_info(scope, code, settlement_instruction_query, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def build_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def build_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], settlement_instruction_query : Annotated[SettlementInstructionQuery, Field(..., description="The queryParameters which control how the settlement instructions are built and returned.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions  # noqa: E501
 
         Builds and returns all settlement instructions that have been loaded against this portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.build_settlement_instructions_with_http_info(scope, code, settlement_instruction_query, as_at, async_req=True)
+        >>> thread = api.build_settlement_instructions_with_http_info(scope, code, settlement_instruction_query, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -1123,8 +1121,6 @@ class TransactionPortfoliosApi:
         :type code: str
         :param settlement_instruction_query: The queryParameters which control how the settlement instructions are built and returned. (required)
         :type settlement_instruction_query: SettlementInstructionQuery
-        :param as_at: The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified.
-        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1154,8 +1150,7 @@ class TransactionPortfoliosApi:
         _all_params = [
             'scope',
             'code',
-            'settlement_instruction_query',
-            'as_at'
+            'settlement_instruction_query'
         ]
         _all_params.extend(
             [
@@ -1193,12 +1188,6 @@ class TransactionPortfoliosApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('as_at') is not None:  # noqa: E501
-            if isinstance(_params['as_at'], datetime):
-                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
-            else:
-                _query_params.append(('asAt', _params['as_at']))
-
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

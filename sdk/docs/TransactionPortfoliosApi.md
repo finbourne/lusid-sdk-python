@@ -552,7 +552,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **build_settlement_instructions**
-> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery build_settlement_instructions(scope, code, settlement_instruction_query, as_at=as_at)
+> VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery build_settlement_instructions(scope, code, settlement_instruction_query)
 
 [EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
 
@@ -611,14 +611,13 @@ def main():
     # settlement_instruction_query = SettlementInstructionQuery.from_json("")
     # settlement_instruction_query = SettlementInstructionQuery.from_dict({})
     settlement_instruction_query = SettlementInstructionQuery()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.build_settlement_instructions(scope, code, settlement_instruction_query, as_at=as_at, opts=opts)
+        # api_response =  api_instance.build_settlement_instructions(scope, code, settlement_instruction_query, opts=opts)
 
         # [EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
-        api_response = api_instance.build_settlement_instructions(scope, code, settlement_instruction_query, as_at=as_at)
+        api_response = api_instance.build_settlement_instructions(scope, code, settlement_instruction_query)
         pprint(api_response)
 
     except ApiException as e:
@@ -634,7 +633,6 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **settlement_instruction_query** | [**SettlementInstructionQuery**](SettlementInstructionQuery.md)| The queryParameters which control how the settlement instructions are built and returned. | 
- **as_at** | **datetime**| The asAt datetime at which to build the settlement instructions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
 
 ### Return type
 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 
@@ -25,6 +25,7 @@ class SettlementInstructionQuery(BaseModel):
     """
     SettlementInstructionQuery
     """
+    as_at: Optional[datetime] = Field(None, alias="asAt")
     start_date:  Optional[StrictStr] = Field(None,alias="startDate") 
     end_date:  Optional[StrictStr] = Field(None,alias="endDate") 
     limit: Optional[StrictInt] = None
@@ -32,7 +33,7 @@ class SettlementInstructionQuery(BaseModel):
     filter:  Optional[StrictStr] = Field(None,alias="filter") 
     settlement_instruction_property_keys: Optional[conlist(StrictStr)] = Field(None, alias="settlementInstructionPropertyKeys")
     transaction_property_keys: Optional[conlist(StrictStr)] = Field(None, alias="transactionPropertyKeys")
-    __properties = ["startDate", "endDate", "limit", "page", "filter", "settlementInstructionPropertyKeys", "transactionPropertyKeys"]
+    __properties = ["asAt", "startDate", "endDate", "limit", "page", "filter", "settlementInstructionPropertyKeys", "transactionPropertyKeys"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class SettlementInstructionQuery(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if as_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.as_at is None and "as_at" in self.__fields_set__:
+            _dict['asAt'] = None
+
         # set to None if start_date (nullable) is None
         # and __fields_set__ contains the field
         if self.start_date is None and "start_date" in self.__fields_set__:
@@ -113,6 +119,7 @@ class SettlementInstructionQuery(BaseModel):
             return SettlementInstructionQuery.parse_obj(obj)
 
         _obj = SettlementInstructionQuery.parse_obj({
+            "as_at": obj.get("asAt"),
             "start_date": obj.get("startDate"),
             "end_date": obj.get("endDate"),
             "limit": obj.get("limit"),

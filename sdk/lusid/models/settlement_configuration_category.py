@@ -19,14 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class SettlementConfigurationCategory(BaseModel):
     """
     SettlementConfigurationCategory
     """
     method:  Optional[StrictStr] = Field(None,alias="method", description="The method of settlement for the movements of the relevant type(s). Allowed values: 'Automatic' and 'Instructed'. A value of 'Instructed' means that such movements can only be settled with a SettlementInstruction. A value of 'Automatic' means that such movements will settle automatically but a SettlementInstruction will still override automatic settlement.") 
-    __properties = ["method"]
+    calculate_instruction_to_portfolio_rate: Optional[StrictBool] = Field(None, alias="calculateInstructionToPortfolioRate", description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.")
+    calculate_in_lieu_settlement_amount: Optional[StrictBool] = Field(None, alias="calculateInLieuSettlementAmount", description="An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.")
+    __properties = ["method", "calculateInstructionToPortfolioRate", "calculateInLieuSettlementAmount"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +79,8 @@ class SettlementConfigurationCategory(BaseModel):
             return SettlementConfigurationCategory.parse_obj(obj)
 
         _obj = SettlementConfigurationCategory.parse_obj({
-            "method": obj.get("method")
+            "method": obj.get("method"),
+            "calculate_instruction_to_portfolio_rate": obj.get("calculateInstructionToPortfolioRate"),
+            "calculate_in_lieu_settlement_amount": obj.get("calculateInLieuSettlementAmount")
         })
         return _obj
