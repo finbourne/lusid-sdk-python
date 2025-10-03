@@ -382,22 +382,22 @@ class DataTypesApi:
 
 
     @overload
-    async def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, **kwargs) -> DataType:  # noqa: E501
+    async def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> DataType:  # noqa: E501
         ...
 
     @overload
-    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DataType:  # noqa: E501
+    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> DataType:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DataType, Awaitable[DataType]]:  # noqa: E501
+    def get_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DataType, Awaitable[DataType]]:  # noqa: E501
         """GetDataType: Get data type definition  # noqa: E501
 
         Get the definition of a specified data type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_data_type(scope, code, as_at, async_req=True)
+        >>> thread = api.get_data_type(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the data type (required)
@@ -406,6 +406,12 @@ class DataTypesApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -422,17 +428,17 @@ class DataTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_data_type_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_data_type_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetDataType: Get data type definition  # noqa: E501
 
         Get the definition of a specified data type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_data_type_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_data_type_with_http_info(scope, code, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the data type (required)
@@ -441,6 +447,12 @@ class DataTypesApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -470,7 +482,10 @@ class DataTypesApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -514,6 +529,15 @@ class DataTypesApi:
             else:
                 _query_params.append(('asAt', _params['as_at']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -553,22 +577,22 @@ class DataTypesApi:
 
 
     @overload
-    async def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
+    async def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
         ...
 
     @overload
-    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
+    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfIUnitDefinitionDto:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfIUnitDefinitionDto, Awaitable[ResourceListOfIUnitDefinitionDto]]:  # noqa: E501
+    def get_units_from_data_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfIUnitDefinitionDto, Awaitable[ResourceListOfIUnitDefinitionDto]]:  # noqa: E501
         """[EARLY ACCESS] GetUnitsFromDataType: Get units from data type  # noqa: E501
 
         Get the definitions of the specified units associated bound to a specific data type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_units_from_data_type(scope, code, units, filter, as_at, async_req=True)
+        >>> thread = api.get_units_from_data_type(scope, code, units, filter, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the data type (required)
@@ -581,6 +605,12 @@ class DataTypesApi:
         :type filter: str
         :param as_at: Optional. The as at of the requested data type
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -597,17 +627,17 @@ class DataTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_units_from_data_type_with_http_info(scope, code, units, filter, as_at, **kwargs)  # noqa: E501
+        return self.get_units_from_data_type_with_http_info(scope, code, units, filter, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_units_from_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_units_from_data_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the data type")], code : Annotated[StrictStr, Field(..., description="The code of the data type")], units : Annotated[Optional[conlist(StrictStr)], Field(description="One or more unit identifiers for which the definition is being requested")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The as at of the requested data type")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetUnitsFromDataType: Get units from data type  # noqa: E501
 
         Get the definitions of the specified units associated bound to a specific data type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_units_from_data_type_with_http_info(scope, code, units, filter, as_at, async_req=True)
+        >>> thread = api.get_units_from_data_type_with_http_info(scope, code, units, filter, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the data type (required)
@@ -620,6 +650,12 @@ class DataTypesApi:
         :type filter: str
         :param as_at: Optional. The as at of the requested data type
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -651,7 +687,10 @@ class DataTypesApi:
             'code',
             'units',
             'filter',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -702,6 +741,15 @@ class DataTypesApi:
             else:
                 _query_params.append(('asAt', _params['as_at']))
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -741,22 +789,22 @@ class DataTypesApi:
 
 
     @overload
-    async def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
+    async def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
         ...
 
     @overload
-    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
+    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDataTypeSummary, Awaitable[PagedResourceListOfDataTypeSummary]]:  # noqa: E501
+    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDataTypeSummary, Awaitable[PagedResourceListOfDataTypeSummary]]:  # noqa: E501
         """[EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data  # noqa: E501
 
         List all data type summaries  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_type_summaries(as_at, page, limit, filter, sort_by, async_req=True)
+        >>> thread = api.list_data_type_summaries(as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.
@@ -769,6 +817,12 @@ class DataTypesApi:
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -785,17 +839,17 @@ class DataTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
+        return self.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_type_summaries_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_type_summaries_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data  # noqa: E501
 
         List all data type summaries  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, async_req=True)
+        >>> thread = api.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.
@@ -808,6 +862,12 @@ class DataTypesApi:
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -839,7 +899,10 @@ class DataTypesApi:
             'page',
             'limit',
             'filter',
-            'sort_by'
+            'sort_by',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -890,6 +953,15 @@ class DataTypesApi:
             _query_params.append(('sortBy', _params['sort_by']))
             _collection_formats['sortBy'] = 'multi'
 
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -929,22 +1001,22 @@ class DataTypesApi:
 
 
     @overload
-    async def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfDataType:  # noqa: E501
+    async def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ResourceListOfDataType:  # noqa: E501
         ...
 
     @overload
-    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataType:  # noqa: E501
+    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataType:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataType, Awaitable[ResourceListOfDataType]]:  # noqa: E501
+    def list_data_types(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataType, Awaitable[ResourceListOfDataType]]:  # noqa: E501
         """ListDataTypes: List data types  # noqa: E501
 
         List all data types in a specified scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_types(scope, as_at, include_system, sort_by, limit, filter, async_req=True)
+        >>> thread = api.list_data_types(scope, as_at, include_system, sort_by, limit, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The requested scope of the data types (required)
@@ -959,6 +1031,12 @@ class DataTypesApi:
         :type limit: int
         :param filter: Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -975,17 +1053,17 @@ class DataTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, **kwargs)  # noqa: E501
+        return self.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_types_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_types_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListDataTypes: List data types  # noqa: E501
 
         List all data types in a specified scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, async_req=True)
+        >>> thread = api.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The requested scope of the data types (required)
@@ -1000,6 +1078,12 @@ class DataTypesApi:
         :type limit: int
         :param filter: Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1032,7 +1116,10 @@ class DataTypesApi:
             'include_system',
             'sort_by',
             'limit',
-            'filter'
+            'filter',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1085,6 +1172,15 @@ class DataTypesApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

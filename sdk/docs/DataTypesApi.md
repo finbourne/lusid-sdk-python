@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_data_type**
-> DataType get_data_type(scope, code, as_at=as_at)
+> DataType get_data_type(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 GetDataType: Get data type definition
 
@@ -261,13 +261,16 @@ def main():
     scope = 'scope_example' # str | The scope of the data type
     code = 'code_example' # str | The code of the data type
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_data_type(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_data_type(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # GetDataType: Get data type definition
-        api_response = api_instance.get_data_type(scope, code, as_at=as_at)
+        api_response = api_instance.get_data_type(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -283,6 +286,9 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the data type | 
  **code** | **str**| The code of the data type | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -303,7 +309,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_units_from_data_type**
-> ResourceListOfIUnitDefinitionDto get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
+> ResourceListOfIUnitDefinitionDto get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EARLY ACCESS] GetUnitsFromDataType: Get units from data type
 
@@ -359,13 +365,16 @@ def main():
     units = ['units_example'] # List[str] | One or more unit identifiers for which the definition is being requested (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at of the requested data type (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EARLY ACCESS] GetUnitsFromDataType: Get units from data type
-        api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
+        api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -383,6 +392,9 @@ Name | Type | Description  | Notes
  **units** | [**List[str]**](str.md)| One or more unit identifiers for which the definition is being requested | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set.               For example, to filter on the Schema, use \&quot;schema eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **as_at** | **datetime**| Optional. The as at of the requested data type | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -403,7 +415,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_data_type_summaries**
-> PagedResourceListOfDataTypeSummary list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+> PagedResourceListOfDataTypeSummary list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data
 
@@ -459,13 +471,16 @@ def main():
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+        # api_response =  api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data
-        api_response = api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        api_response = api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -483,6 +498,9 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set.                For example, to filter on the Scope, use \&quot;id.scope eq &#39;myscope&#39;\&quot;, to filter on Schema, use \&quot;schema eq &#39;string&#39;\&quot;,               to filter on AcceptableValues use \&quot;acceptableValues any (~ eq &#39;value&#39;)\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -503,7 +521,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_data_types**
-> ResourceListOfDataType list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter)
+> ResourceListOfDataType list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 ListDataTypes: List data types
 
@@ -560,13 +578,16 @@ def main():
     sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+        # api_response =  api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # ListDataTypes: List data types
-        api_response = api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter)
+        api_response = api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -585,6 +606,9 @@ Name | Type | Description  | Notes
  **sort_by** | [**List[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 

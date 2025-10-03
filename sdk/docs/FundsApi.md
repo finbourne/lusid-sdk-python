@@ -12,15 +12,15 @@ Method | HTTP request | Description
 [**delete_fee**](FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] DeleteFee: Delete a Fee.
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
 [**delete_valuation_point**](FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
-[**finalise_candidate_valuation_point**](FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
+[**finalise_candidate_valuation_point**](FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
 [**get_fee**](FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
-[**get_fee_properties**](FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties
+[**get_fee_properties**](FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties.
 [**get_fund**](FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
-[**get_fund_properties**](FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EXPERIMENTAL] GetFundProperties: Get Fund properties
+[**get_fund_properties**](FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EXPERIMENTAL] GetFundProperties: Get Fund properties.
 [**get_holdings_for_fund**](FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
-[**get_valuation_for_fund**](FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund
+[**get_valuation_for_fund**](FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.
 [**get_valuation_point_data**](FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
-[**get_valuation_point_journal_entry_lines**](FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
+[**get_valuation_point_journal_entry_lines**](FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
 [**get_valuation_point_pnl_summary**](FundsApi.md#get_valuation_point_pnl_summary) | **POST** /api/funds/{scope}/{code}/valuationpoints/pnlsummary/$query | [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
 [**get_valuation_point_transactions**](FundsApi.md#get_valuation_point_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/transactions/$query | [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
 [**get_valuation_point_trial_balance**](FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
@@ -30,9 +30,9 @@ Method | HTTP request | Description
 [**list_valuation_point_overview**](FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 [**patch_fee**](FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] PatchFee: Patch Fee.
 [**patch_fund**](FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EXPERIMENTAL] PatchFund: Patch a Fund.
-[**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
+[**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
 [**upsert_bookmark**](FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EXPERIMENTAL] UpsertBookmark: Upsert a bookmark.
-[**upsert_diary_entry_type_valuation_point**](FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
+[**upsert_diary_entry_type_valuation_point**](FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
 [**upsert_fee_properties**](FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
 [**upsert_fund_properties**](FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
 
@@ -97,7 +97,7 @@ def main():
     # valuation_point_data_request = ValuationPointDataRequest.from_json("")
     # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
     valuation_point_data_request = ValuationPointDataRequest()
-    nav_type_code = 'nav_type_code_example' # str | When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, accepts the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_request** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. | 
- **nav_type_code** | **str**| When provided Accepts the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Accepted. | [optional] 
+ **nav_type_code** | **str**| When provided, accepts the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -200,7 +200,7 @@ def main():
     # fee_request = FeeRequest.from_json("")
     # fee_request = FeeRequest.from_dict({})
     fee_request = FeeRequest()
-    nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, creates the Fee against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **fee_request** | [**FeeRequest**](FeeRequest.md)| The Fee to create. | 
- **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **nav_type_code** | **str**| When provided, creates the Fee against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -493,10 +493,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund for the Bookmark to be deleted.
-    code = 'code_example' # str | The code of the Fund containing the Bookmark to be deleted. Together with the scope this uniquely identifies the Fund.
-    bookmark_code = 'bookmark_code_example' # str | The bookmark code for the bookmark to be deleted
-    nav_type_code = 'nav_type_code_example' # str | When provided, Deletes the Bookmark against the specified NAV Type. When not provided the Primary NAV Type will be Deleted. (optional)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    bookmark_code = 'bookmark_code_example' # str | The bookmark code for the bookmark to be deleted.
+    nav_type_code = 'nav_type_code_example' # str | When provided, deletes the Bookmark against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -516,10 +516,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Fund for the Bookmark to be deleted. | 
- **code** | **str**| The code of the Fund containing the Bookmark to be deleted. Together with the scope this uniquely identifies the Fund. | 
- **bookmark_code** | **str**| The bookmark code for the bookmark to be deleted | 
- **nav_type_code** | **str**| When provided, Deletes the Bookmark against the specified NAV Type. When not provided the Primary NAV Type will be Deleted. | [optional] 
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **bookmark_code** | **str**| The bookmark code for the bookmark to be deleted. | 
+ **nav_type_code** | **str**| When provided, deletes the Bookmark against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -591,7 +591,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund
+    scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     fee_code = 'fee_code_example' # str | The code of the Fee to be deleted.
 
@@ -613,7 +613,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Fund | 
+ **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **fee_code** | **str**| The code of the Fee to be deleted. | 
 
@@ -781,10 +781,10 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund for the valuation point to be deleted.
-    code = 'code_example' # str | The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     diary_entry_code = 'diary_entry_code_example' # str | The diary entry code for the valuation Point to be deleted.
-    nav_type_code = 'nav_type_code_example' # str | When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -804,10 +804,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Fund for the valuation point to be deleted. | 
- **code** | **str**| The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund. | 
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **diary_entry_code** | **str**| The diary entry code for the valuation Point to be deleted. | 
- **nav_type_code** | **str**| When provided, Deletes the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be Deleted. | [optional] 
+ **nav_type_code** | **str**| When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -830,7 +830,7 @@ Name | Type | Description  | Notes
 # **finalise_candidate_valuation_point**
 > ValuationPointDataResponse finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
 
-[EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
+[EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
 
 Moves a 'Candidate' status Valuation Point to status 'Final'.
 
@@ -887,13 +887,13 @@ def main():
     # valuation_point_data_request = ValuationPointDataRequest.from_json("")
     # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
     valuation_point_data_request = ValuationPointDataRequest()
-    nav_type_code = 'nav_type_code_example' # str | When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, finalises the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code, opts=opts)
 
-        # [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
+        # [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
         api_response = api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
@@ -909,8 +909,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **valuation_point_data_request** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the diary entry code to mark as final. | 
- **nav_type_code** | **str**| When provided Finalises the Valuation Point of the specified NAV Type. When not provided the Primary NAV Type will be Finalised. | [optional] 
+ **valuation_point_data_request** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The details of the Valuation Point to mark as final. | 
+ **nav_type_code** | **str**| When provided, finalises the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -935,7 +935,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
 
-Retrieve a fee for a specified Fund
+Retrieve a fee for a specified Fund.
 
 ### Example
 
@@ -1035,7 +1035,7 @@ Name | Type | Description  | Notes
 # **get_fee_properties**
 > FeeProperties get_fee_properties(scope, code, fee_code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetFeeProperties: Get Fee properties
+[EXPERIMENTAL] GetFeeProperties: Get Fee properties.
 
 Get all the properties of a single fee.
 
@@ -1094,7 +1094,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_fee_properties(scope, code, fee_code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetFeeProperties: Get Fee properties
+        # [EXPERIMENTAL] GetFeeProperties: Get Fee properties.
         api_response = api_instance.get_fee_properties(scope, code, fee_code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -1235,7 +1235,7 @@ Name | Type | Description  | Notes
 # **get_fund_properties**
 > FundProperties get_fund_properties(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetFundProperties: Get Fund properties
+[EXPERIMENTAL] GetFundProperties: Get Fund properties.
 
 Get all the properties of a single fund.
 
@@ -1293,7 +1293,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_fund_properties(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetFundProperties: Get Fund properties
+        # [EXPERIMENTAL] GetFundProperties: Get Fund properties.
         api_response = api_instance.get_fund_properties(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -1390,12 +1390,12 @@ def main():
     # single_valuation_point_query_parameters = SingleValuationPointQueryParameters.from_json("")
     # single_valuation_point_query_parameters = SingleValuationPointQueryParameters.from_dict({})
     single_valuation_point_query_parameters = SingleValuationPointQueryParameters()
-    nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
     by_taxlots = True # bool | Whether to expand the holdings to return the underlying tax-lots. Defaults to False. (optional)
-    include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
+    include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1417,13 +1417,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **single_valuation_point_query_parameters** | [**SingleValuationPointQueryParameters**](SingleValuationPointQueryParameters.md)| The query parameters used for diary entry or effective date of Holdings | 
- **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **single_valuation_point_query_parameters** | [**SingleValuationPointQueryParameters**](SingleValuationPointQueryParameters.md)| The arguments to use for querying the holdings. | 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot;, \&quot;Holding\&quot; or \&quot;Portfolio\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
  **by_taxlots** | **bool**| Whether to expand the holdings to return the underlying tax-lots. Defaults to False. | [optional] 
- **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
+ **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt. | [optional] 
 
 ### Return type
 
@@ -1437,7 +1437,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The holdings of transaction portfolios in a specific version of a Fund |  -  |
+**200** | The holdings of transaction portfolios for a Fund |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -1446,7 +1446,7 @@ Name | Type | Description  | Notes
 # **get_valuation_for_fund**
 > ListAggregationResponse get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, fund_valuation_request=fund_valuation_request)
 
-[EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund
+[EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.
 
 Perform valuation on a specified Fund.
 
@@ -1495,9 +1495,9 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund
-    code = 'code_example' # str | The code of the Fund
-    nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1509,7 +1509,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, fund_valuation_request=fund_valuation_request, opts=opts)
 
-        # [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund
+        # [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.
         api_response = api_instance.get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, fund_valuation_request=fund_valuation_request)
         pprint(api_response)
 
@@ -1523,10 +1523,10 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Fund | 
- **code** | **str**| The code of the Fund | 
- **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
- **fund_valuation_request** | [**FundValuationRequest**](FundValuationRequest.md)| The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics | [optional] 
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **fund_valuation_request** | [**FundValuationRequest**](FundValuationRequest.md)| The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics. | [optional] 
 
 ### Return type
 
@@ -1551,7 +1551,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
 
-Retrieves the Valuation Point data for a date or specified Diary Entry Id.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the related ABOR's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' DiaryEntry and EndDate will be as provided.
+Retrieves the Valuation Point data between given dates or Valuation Point codes.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the Fund's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' ValuationPoint and EndDate will be as provided.
 
 ### Example
 
@@ -1607,7 +1607,7 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
-    nav_type_code = 'nav_type_code_example' # str | When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1629,9 +1629,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Valuation Point data | 
+ **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Valuation Point data. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. | [optional] 
- **nav_type_code** | **str**| When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -1645,7 +1645,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The specified Valuation Point for the Fund. |  -  |
+**200** | The requested Valuation Point data for the Fund. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -1654,9 +1654,9 @@ Name | Type | Description  | Notes
 # **get_valuation_point_journal_entry_lines**
 > ValuationPointResourceListOfFundJournalEntryLine get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
 
-[EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
+[EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
 
-Gets the Journal Entry lines for the given Valuation Point for a Fund                The Journal Entry lines have been generated from transactions, translated via posting rules and used in the valuation point
+Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.
 
 ### Example
 
@@ -1704,26 +1704,26 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a general ledger profile used to decorate journal entry lines with levels. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified. (optional)
+    general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve Journal Entry Lines. Defaults to returning the latest version if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines. (optional)
-    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Journal Entry Lines from a previous call to GetValuationPointJournalEntryLines. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the Journal Entry Lines. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
 
-        # [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry lines for the given Fund.
+        # [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
         api_response = api_instance.get_valuation_point_journal_entry_lines(scope, code, valuation_point_data_query_parameters, general_ledger_profile_code=general_ledger_profile_code, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
         pprint(api_response)
 
@@ -1738,15 +1738,15 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
- **code** | **str**| The code of the Fund. Together with the scope is creating the unique identifier for the given Fund. | 
- **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Journal Entry lines. | 
- **general_ledger_profile_code** | **str**| The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve Journal Entry lines. Defaults to returning the latest version               of each transaction if not specified. | [optional] 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the Journal Entry Lines. | 
+ **general_ledger_profile_code** | **str**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve Journal Entry Lines. Defaults to returning the latest version if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Journal Entry lines from a previous call to GetValuationPointJournalEntryLines. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the journal entry lines. | [optional] 
- **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Journal Entry Lines from a previous call to GetValuationPointJournalEntryLines. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the Journal Entry Lines. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -1760,7 +1760,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested Journal Entry lines for the specified Valuation Point for a Fund. |  -  |
+**200** | The requested Journal Entry Lines for the specified Valuation Point for a Fund. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -1771,7 +1771,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
 
-Gets the PnL Summary lines from the journal entry lines produced when calculating the valuation point.
+Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.
 
 ### Example
 
@@ -1819,19 +1819,19 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope is the unique identifier for the given Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a general ledger profile used to decorate journal entry lines with levels. (optional)
+    general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
     filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Trial balance from a previous call to Trial balance. (optional)
-    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1852,14 +1852,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
- **code** | **str**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | 
- **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The query parameters used in running the generation of the PnL summary | 
- **general_ledger_profile_code** | **str**| The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for generating the PnL summary. | 
+ **general_ledger_profile_code** | **str**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
  **filter** | **str**| \&quot;Expression to filter the result set.\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Trial balance from a previous call to Trial balance. | [optional] 
- **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -1873,18 +1873,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested PnL summary for the specified Fund. |  -  |
+**200** | The requested PnL summary for the specified Valuation Point for a Fund. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_transactions**
-> ValuationPointResourceListOfAccountedTransaction get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+> ValuationPointResourceListOfAccountedTransaction get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
 
-Gets the Transactions for the given Valuation Point for a Fund
+Gets the Transactions for the given Valuation Point for a Fund.
 
 ### Example
 
@@ -1932,7 +1932,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope is creating the unique identifier for the given Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -1943,15 +1943,17 @@ def main():
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the journal entry lines. (optional)
-    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the transactions. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
+        # api_response =  api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
-        api_response = api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+        api_response = api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -1965,14 +1967,16 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
- **code** | **str**| The code of the Fund. Together with the scope is creating the unique identifier for the given Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the transactions. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the journal entry lines. | [optional] 
- **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
 
 ### Return type
 
@@ -2052,13 +2056,13 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a general ledger profile used to decorate journal entry lines with levels. (optional)
+    general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the journal entry lines. (optional)
-    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the TrialBalance. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2080,14 +2084,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The query parameters used in running the generation of the Trial Balance. | 
- **general_ledger_profile_code** | **str**| The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
+ **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for generating the Trial Balance. | 
+ **general_ledger_profile_code** | **str**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the journal entry lines. | [optional] 
- **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the TrialBalance. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -2101,7 +2105,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested Trial Balance for the specified Fund. |  -  |
+**200** | The requested Trial Balance for the specified Valuation Point for a Fund. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2160,7 +2164,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
@@ -2188,7 +2192,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
- **code** | **str**| The code of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
@@ -2267,13 +2271,13 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    scope = 'scope_example' # str | The Scope for the Fund.
-    code = 'code_example' # str | The Code for the Fund.
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the DisplayName, specify \"displayName eq 'VP 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'ClosedPeriod' domain to decorate onto each item. (optional)
 
     try:
@@ -2294,13 +2298,13 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The Scope for the Fund. | 
- **code** | **str**| The Code for the Fund. | 
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **as_at** | **datetime**| The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the DisplayName, specify \&quot;displayName eq &#39;VP 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;ClosedPeriod&#39; domain to decorate onto each item. | [optional] 
 
 ### Return type
@@ -2315,7 +2319,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested Fund Calendars. |  -  |
+**200** | The requested Fund Calendar Entries. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2377,7 +2381,7 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Fund type, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Fund code, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. (optional)
 
@@ -2403,7 +2407,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results.              For example, to filter on the Fund type, specify \&quot;id.Code eq &#39;Fund1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **filter** | **str**| Expression to filter the results.              For example, to filter on the Fund code, specify \&quot;id.Code eq &#39;Fund1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fund&#39; domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example &#39;Fund/Manager/Id&#39;. | [optional] 
 
@@ -2430,7 +2434,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 
-List all the Valuation Points that match the given criteria for a given Fund.
+List the overview of all the Valuation Points that match the given criteria for a given Fund.
 
 ### Example
 
@@ -2478,14 +2482,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Valuation Points. Defaults to the current LUSID              system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Valuation Points. Defaults to returning the latest version of each Valuation Point if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'. (optional)
-    nav_type_code = 'nav_type_code_example' # str | May be provided to view a specific NAV type. When not provided, Primary NAV will be used. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2506,14 +2510,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
- **code** | **str**| The code of the Fund. | 
- **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the ValuationPoints. Defaults to the current LUSID              system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to list the ValuationPoints. Defaults to returning the latest version of each ValuationPoint if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing ValuationPoints; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the Valuation Points. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the Valuation Points. Defaults to returning the latest version of each Valuation Point if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results by.              For example, to filter on the NAV, specify \&quot;NAV gt 300\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;DiaryEntry&#39; domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example &#39;DiaryEntry/ValuationPoint/Id&#39;. | [optional] 
- **nav_type_code** | **str**| May be provided to view a specific NAV type. When not provided, Primary NAV will be used. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -2527,7 +2531,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested ValuationPointOverview. |  -  |
+**200** | The overviews of the requested Valuation Points. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2730,9 +2734,9 @@ Name | Type | Description  | Notes
 # **set_share_class_instruments**
 > Fund set_share_class_instruments(scope, code, set_share_class_instruments_request)
 
-[EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
+[EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
 
-Update the ShareClass Instruments on an existing fund with the set of instruments provided.
+Update the ShareClass Instruments on an existing Fund with the set of instruments provided.
 
 ### Example
 
@@ -2780,7 +2784,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -2792,7 +2796,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request, opts=opts)
 
-        # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
+        # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
         api_response = api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request)
         pprint(api_response)
 
@@ -2807,7 +2811,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
- **code** | **str**| The code of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **set_share_class_instruments_request** | [**SetShareClassInstrumentsRequest**](SetShareClassInstrumentsRequest.md)| The scopes and instrument identifiers for the instruments to be set. | 
 
 ### Return type
@@ -2822,7 +2826,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The updated fund. |  -  |
+**200** | The updated Fund definition. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2888,7 +2892,7 @@ def main():
     # upsert_fund_bookmark_request = UpsertFundBookmarkRequest.from_json("")
     # upsert_fund_bookmark_request = UpsertFundBookmarkRequest.from_dict({})
     upsert_fund_bookmark_request = UpsertFundBookmarkRequest()
-    nav_type_code = 'nav_type_code_example' # str | When provided, Upserts the Valuation Point against the specified NAV Type. When not provided, the Primary NAV Type will be used. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2910,8 +2914,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **upsert_fund_bookmark_request** | [**UpsertFundBookmarkRequest**](UpsertFundBookmarkRequest.md)| The bookmark definition to Upsert | 
- **nav_type_code** | **str**| When provided, Upserts the Valuation Point against the specified NAV Type. When not provided, the Primary NAV Type will be used. | [optional] 
+ **upsert_fund_bookmark_request** | [**UpsertFundBookmarkRequest**](UpsertFundBookmarkRequest.md)| The bookmark definition to upsert. | 
+ **nav_type_code** | **str**| When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -2934,7 +2938,7 @@ Name | Type | Description  | Notes
 # **upsert_diary_entry_type_valuation_point**
 > DiaryEntry upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code=nav_type_code)
 
-[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
+[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
 
 Update or insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.
 
@@ -2991,13 +2995,13 @@ def main():
     # upsert_valuation_point_request = UpsertValuationPointRequest.from_json("")
     # upsert_valuation_point_request = UpsertValuationPointRequest.from_dict({})
     upsert_valuation_point_request = UpsertValuationPointRequest()
-    nav_type_code = 'nav_type_code_example' # str | When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code=nav_type_code, opts=opts)
 
-        # [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
+        # [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
         api_response = api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
@@ -3013,8 +3017,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **upsert_valuation_point_request** | [**UpsertValuationPointRequest**](UpsertValuationPointRequest.md)| The Valuation Point Estimate definition to Upsert | 
- **nav_type_code** | **str**| When provided, Upserts the Valuation Point against the specified NAV Type. When not provided the Primary NAV Type will be used. | [optional] 
+ **upsert_valuation_point_request** | [**UpsertValuationPointRequest**](UpsertValuationPointRequest.md)| The Valuation Point Estimate definition to upsert. | 
+ **nav_type_code** | **str**| When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
 
@@ -3039,7 +3043,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
 
-Update or insert one or more properties onto a single Fee. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fee'.                Upserting a property that exists for an Fee, with a null value, will delete the instance of the property for that group.       Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
+Update or insert one or more properties onto a single Fee. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fee'.                Upserting a property that exists for an Fee, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
 ### Example
 
@@ -3184,8 +3188,8 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund to update or insert the properties onto.
-    code = 'code_example' # str | The code of the Fund to update or insert the properties onto. Together with the scope this uniquely identifies the Fund.
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     request_body = {"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fund/MyScope/SomeProperty":{"key":"Fund/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/AnotherProperty":{"key":"Fund/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/ReBalanceInterval":{"key":"Fund/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\". (optional)
 
     try:
@@ -3206,8 +3210,8 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Fund to update or insert the properties onto. | 
- **code** | **str**| The code of the Fund to update or insert the properties onto. Together with the scope this uniquely identifies the Fund. | 
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \&quot;Fund/Manager/Id\&quot;. | [optional] 
 
 ### Return type

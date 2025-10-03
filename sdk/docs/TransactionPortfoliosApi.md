@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**batch_adjust_holdings**](TransactionPortfoliosApi.md#batch_adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchAdjust | BatchAdjustHoldings: Batch adjust holdings
 [**batch_create_trade_tickets**](TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | BatchCreateTradeTickets: Batch Create Trade Tickets
 [**batch_set_holdings**](TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | BatchSetHoldings: Batch set holdings
+[**batch_upsert_settlement_instructions**](TransactionPortfoliosApi.md#batch_upsert_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$batchUpsert | [EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
 [**batch_upsert_transactions**](TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | BatchUpsertTransactions: Batch upsert transactions
 [**build_settlement_instructions**](TransactionPortfoliosApi.md#build_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$build | [EARLY ACCESS] BuildSettlementInstructions: Build Settlement Instructions
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
@@ -446,6 +447,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The successful SetHolding requests along with any failures |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **batch_upsert_settlement_instructions**
+> BatchUpsertTransactionSettlementInstructionResponse batch_upsert_settlement_instructions(scope, code, request_body)
+
+[EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
+
+Create or update instructions to settle specific transactions.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio.
+    request_body = {"request-1":{"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{}},"request-2":{"settlementInstructionId":"settlementInstructionId-2","transactionId":"transactionId2","settlementCategory":"StockSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9"},"contractualSettlementDate":"2024-01-02T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-05T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{}}} # Dict[str, SettlementInstructionRequest] | The definition of the settlement instruction.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_upsert_settlement_instructions(scope, code, request_body, opts=opts)
+
+        # [EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
+        api_response = api_instance.batch_upsert_settlement_instructions(scope, code, request_body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->batch_upsert_settlement_instructions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. | 
+ **request_body** | [**Dict[str, SettlementInstructionRequest]**](SettlementInstructionRequest.md)| The definition of the settlement instruction. | 
+
+### Return type
+
+[**BatchUpsertTransactionSettlementInstructionResponse**](BatchUpsertTransactionSettlementInstructionResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The newly created or undated Settlement Instructions. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -4462,7 +4559,7 @@ def main():
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio.
-    settlement_instruction_request = {"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{}} # List[SettlementInstructionRequest] | The definition of the settlement instruction.
+    settlement_instruction_request = [{"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{}},{"settlementInstructionId":"settlementInstructionId-2","transactionId":"transactionId2","settlementCategory":"StockSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9"},"contractualSettlementDate":"2024-01-02T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-05T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{}}] # List[SettlementInstructionRequest] | The definition of the settlement instruction.
 
     try:
         # uncomment the below to set overrides at the request level

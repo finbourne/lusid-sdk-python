@@ -192,6 +192,7 @@ from lusid.models.batch_upsert_portfolio_access_metadata_response import BatchUp
 from lusid.models.batch_upsert_portfolio_access_metadata_response_item import BatchUpsertPortfolioAccessMetadataResponseItem
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
+from lusid.models.batch_upsert_transaction_settlement_instruction_response import BatchUpsertTransactionSettlementInstructionResponse
 from lusid.models.block import Block
 from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
 from lusid.models.block_and_orders import BlockAndOrders
@@ -1578,6 +1579,7 @@ __all__ = [
     "BatchUpsertPortfolioAccessMetadataResponseItem",
     "BatchUpsertPortfolioTransactionsResponse",
     "BatchUpsertPropertyDefinitionPropertiesResponse",
+    "BatchUpsertTransactionSettlementInstructionResponse",
     "Block",
     "BlockAndOrderIdRequest",
     "BlockAndOrders",

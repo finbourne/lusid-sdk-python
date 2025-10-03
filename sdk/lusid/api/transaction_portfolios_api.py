@@ -31,6 +31,7 @@ from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateReq
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
+from lusid.models.batch_upsert_transaction_settlement_instruction_response import BatchUpsertTransactionSettlementInstructionResponse
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.cancel_single_holding_adjustment_request import CancelSingleHoldingAdjustmentRequest
@@ -853,6 +854,181 @@ class TransactionPortfoliosApi:
 
         return self.api_client.call_api(
             '/api/transactionportfolios/{scope}/{code}/holdings/$batchSet', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(..., description="The definition of the settlement instruction.")], **kwargs) -> BatchUpsertTransactionSettlementInstructionResponse:  # noqa: E501
+        ...
+
+    @overload
+    def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(..., description="The definition of the settlement instruction.")], async_req: Optional[bool]=True, **kwargs) -> BatchUpsertTransactionSettlementInstructionResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(..., description="The definition of the settlement instruction.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertTransactionSettlementInstructionResponse, Awaitable[BatchUpsertTransactionSettlementInstructionResponse]]:  # noqa: E501
+        """[EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.  # noqa: E501
+
+        Create or update instructions to settle specific transactions.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.batch_upsert_settlement_instructions(scope, code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. (required)
+        :type code: str
+        :param request_body: The definition of the settlement instruction. (required)
+        :type request_body: Dict[str, SettlementInstructionRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: BatchUpsertTransactionSettlementInstructionResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the batch_upsert_settlement_instructions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.batch_upsert_settlement_instructions_with_http_info(scope, code, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def batch_upsert_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(..., description="The definition of the settlement instruction.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.  # noqa: E501
+
+        Create or update instructions to settle specific transactions.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.batch_upsert_settlement_instructions_with_http_info(scope, code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. (required)
+        :type code: str
+        :param request_body: The definition of the settlement instruction. (required)
+        :type request_body: Dict[str, SettlementInstructionRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(BatchUpsertTransactionSettlementInstructionResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method batch_upsert_settlement_instructions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "BatchUpsertTransactionSettlementInstructionResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/settlementinstructions/$batchUpsert', 'POST',
             _path_params,
             _query_params,
             _header_params,
