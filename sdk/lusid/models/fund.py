@@ -38,11 +38,12 @@ class Fund(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
+    investor_structure:  StrictStr = Field(...,alias="investorStructure", description="The Investor structure to be used by the Fund. Supported values are 'NonUnitised', 'Classes' and 'Custom'.") 
     portfolio_ids: Optional[conlist(PortfolioEntityIdWithDetails)] = Field(None, alias="portfolioIds", description="A list of the portfolios on the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.")
     fund_configuration_id: Optional[ResourceId] = Field(None, alias="fundConfigurationId")
     abor_id: Optional[ResourceId] = Field(None, alias="aborId")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
-    type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
     decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
     year_end_date: Optional[DayMonth] = Field(None, alias="yearEndDate")
@@ -51,7 +52,7 @@ class Fund(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -168,6 +169,11 @@ class Fund(BaseModel):
         if self.share_class_instruments is None and "share_class_instruments" in self.__fields_set__:
             _dict['shareClassInstruments'] = None
 
+        # set to None if type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type is None and "type" in self.__fields_set__:
+            _dict['type'] = None
+
         # set to None if decimal_places (nullable) is None
         # and __fields_set__ contains the field
         if self.decimal_places is None and "decimal_places" in self.__fields_set__:
@@ -205,6 +211,7 @@ class Fund(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "base_currency": obj.get("baseCurrency"),
+            "investor_structure": obj.get("investorStructure"),
             "portfolio_ids": [PortfolioEntityIdWithDetails.from_dict(_item) for _item in obj.get("portfolioIds")] if obj.get("portfolioIds") is not None else None,
             "fund_configuration_id": ResourceId.from_dict(obj.get("fundConfigurationId")) if obj.get("fundConfigurationId") is not None else None,
             "abor_id": ResourceId.from_dict(obj.get("aborId")) if obj.get("aborId") is not None else None,

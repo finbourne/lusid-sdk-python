@@ -34,17 +34,18 @@ class FundDefinitionRequest(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
+    investor_structure:  Optional[StrictStr] = Field(None,alias="investorStructure", description="The Investor structure to be used by the Fund. Supported values are 'NonUnitised', 'Classes' and 'Custom'.") 
     portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.")
     fund_configuration_id: ResourceId = Field(..., alias="fundConfigurationId")
     share_class_instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
-    type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
     decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
     primary_nav_type: NavTypeDefinition = Field(..., alias="primaryNavType")
     additional_nav_types: Optional[conlist(NavTypeDefinition)] = Field(None, alias="additionalNavTypes", description="The definitions for any additional NAVs on the Fund.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
-    __properties = ["code", "displayName", "description", "baseCurrency", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties"]
+    __properties = ["code", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -117,6 +118,11 @@ class FundDefinitionRequest(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if investor_structure (nullable) is None
+        # and __fields_set__ contains the field
+        if self.investor_structure is None and "investor_structure" in self.__fields_set__:
+            _dict['investorStructure'] = None
+
         # set to None if share_class_instrument_scopes (nullable) is None
         # and __fields_set__ contains the field
         if self.share_class_instrument_scopes is None and "share_class_instrument_scopes" in self.__fields_set__:
@@ -126,6 +132,11 @@ class FundDefinitionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.share_class_instruments is None and "share_class_instruments" in self.__fields_set__:
             _dict['shareClassInstruments'] = None
+
+        # set to None if type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type is None and "type" in self.__fields_set__:
+            _dict['type'] = None
 
         # set to None if decimal_places (nullable) is None
         # and __fields_set__ contains the field
@@ -158,6 +169,7 @@ class FundDefinitionRequest(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "base_currency": obj.get("baseCurrency"),
+            "investor_structure": obj.get("investorStructure"),
             "portfolio_ids": [PortfolioEntityId.from_dict(_item) for _item in obj.get("portfolioIds")] if obj.get("portfolioIds") is not None else None,
             "fund_configuration_id": ResourceId.from_dict(obj.get("fundConfigurationId")) if obj.get("fundConfigurationId") is not None else None,
             "share_class_instrument_scopes": obj.get("shareClassInstrumentScopes"),

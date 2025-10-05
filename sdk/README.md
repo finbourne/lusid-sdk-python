@@ -1708,6 +1708,7 @@ Class | Method | HTTP request | Description
  - [SetTransactionConfigurationSourceRequest](docs/SetTransactionConfigurationSourceRequest.md)
  - [SettlementConfigurationCategory](docs/SettlementConfigurationCategory.md)
  - [SettlementCycle](docs/SettlementCycle.md)
+ - [SettlementInLieu](docs/SettlementInLieu.md)
  - [SettlementInstructionQuery](docs/SettlementInstructionQuery.md)
  - [SettlementInstructionRequest](docs/SettlementInstructionRequest.md)
  - [SettlementInstructionWithTransaction](docs/SettlementInstructionWithTransaction.md)

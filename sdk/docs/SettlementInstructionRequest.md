@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **sub_holding_key_overrides** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **custodian_account_override** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instruction_to_portfolio_rate** | **float** |  | [optional] 
+**settlement_in_lieu** | [**SettlementInLieu**](SettlementInLieu.md) |  | [optional] 
 ## Example
 
 ```python
@@ -32,7 +33,8 @@ units: Union[StrictFloat, StrictInt] = # Replace with your value
 sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 custodian_account_override: Optional[ResourceId] = # Replace with your value
 instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instruction_to_portfolio_rate=instruction_to_portfolio_rate)
+settlement_in_lieu: Optional[SettlementInLieu] = # Replace with your value
+settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu)
 
 ```
 

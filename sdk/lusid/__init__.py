@@ -1146,6 +1146,7 @@ from lusid.models.set_transaction_configuration_alias import SetTransactionConfi
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.settlement_cycle import SettlementCycle
+from lusid.models.settlement_in_lieu import SettlementInLieu
 from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.settlement_instruction_with_transaction import SettlementInstructionWithTransaction
@@ -2533,6 +2534,7 @@ __all__ = [
     "SetTransactionConfigurationSourceRequest",
     "SettlementConfigurationCategory",
     "SettlementCycle",
+    "SettlementInLieu",
     "SettlementInstructionQuery",
     "SettlementInstructionRequest",
     "SettlementInstructionWithTransaction",

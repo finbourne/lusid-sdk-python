@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.settlement_in_lieu import SettlementInLieu
 
 class TransactionSettlementInstruction(BaseModel):
     """
@@ -40,7 +41,8 @@ class TransactionSettlementInstruction(BaseModel):
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the settlement instruction to a unique instrument.")
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the settlement instruction - 'Invalid', 'Rejected' 'Applied' or 'Orphan'.") 
     instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="instructionToPortfolioRate", description="The exchange rate between the Settlement Instruction and Portfolio.")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate"]
+    settlement_in_lieu: Optional[SettlementInLieu] = Field(None, alias="settlementInLieu")
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +86,9 @@ class TransactionSettlementInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of custodian_account_override
         if self.custodian_account_override:
             _dict['custodianAccountOverride'] = self.custodian_account_override.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of settlement_in_lieu
+        if self.settlement_in_lieu:
+            _dict['settlementInLieu'] = self.settlement_in_lieu.to_dict()
         # set to None if contractual_settlement_date (nullable) is None
         # and __fields_set__ contains the field
         if self.contractual_settlement_date is None and "contractual_settlement_date" in self.__fields_set__:
@@ -133,6 +138,7 @@ class TransactionSettlementInstruction(BaseModel):
             "custodian_account_override": ResourceId.from_dict(obj.get("custodianAccountOverride")) if obj.get("custodianAccountOverride") is not None else None,
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "status": obj.get("status"),
-            "instruction_to_portfolio_rate": obj.get("instructionToPortfolioRate")
+            "instruction_to_portfolio_rate": obj.get("instructionToPortfolioRate"),
+            "settlement_in_lieu": SettlementInLieu.from_dict(obj.get("settlementInLieu")) if obj.get("settlementInLieu") is not None else None
         })
         return _obj

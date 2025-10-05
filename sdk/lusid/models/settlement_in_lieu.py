@@ -18,17 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
-from lusid.models.date_or_diary_entry import DateOrDiaryEntry
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
-class ValuationPointDataQueryParameters(BaseModel):
+class SettlementInLieu(BaseModel):
     """
-    The parameters used in getting the ValuationPointData.  # noqa: E501
+    SettlementInLieu
     """
-    start: Optional[DateOrDiaryEntry] = None
-    end: DateOrDiaryEntry = Field(...)
-    __properties = ["start", "end"]
+    original_settlement_currency:  StrictStr = Field(...,alias="originalSettlementCurrency") 
+    amount: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties = ["originalSettlementCurrency", "amount"]
 
     class Config:
         """Pydantic configuration"""
@@ -52,8 +51,8 @@ class ValuationPointDataQueryParameters(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ValuationPointDataQueryParameters:
-        """Create an instance of ValuationPointDataQueryParameters from a JSON string"""
+    def from_json(cls, json_str: str) -> SettlementInLieu:
+        """Create an instance of SettlementInLieu from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -62,25 +61,24 @@ class ValuationPointDataQueryParameters(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of start
-        if self.start:
-            _dict['start'] = self.start.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of end
-        if self.end:
-            _dict['end'] = self.end.to_dict()
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ValuationPointDataQueryParameters:
-        """Create an instance of ValuationPointDataQueryParameters from a dict"""
+    def from_dict(cls, obj: dict) -> SettlementInLieu:
+        """Create an instance of SettlementInLieu from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ValuationPointDataQueryParameters.parse_obj(obj)
+            return SettlementInLieu.parse_obj(obj)
 
-        _obj = ValuationPointDataQueryParameters.parse_obj({
-            "start": DateOrDiaryEntry.from_dict(obj.get("start")) if obj.get("start") is not None else None,
-            "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None
+        _obj = SettlementInLieu.parse_obj({
+            "original_settlement_currency": obj.get("originalSettlementCurrency"),
+            "amount": obj.get("amount")
         })
         return _obj

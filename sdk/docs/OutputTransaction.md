@@ -39,6 +39,8 @@ Name | Type | Description | Notes
 **accounting_date** | **datetime** | The accounting date of the transaction. | [optional] 
 **economics** | [**List[Economics]**](Economics.md) | Set of economic data related with the transaction impacts. | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
+**sequence** | **int** | The sequential position in which this transaction was processed. | [optional] 
+**sequence_priority** | **int** | The calculated priority level for this transaction. | [optional] 
 ## Example
 
 ```python
@@ -81,7 +83,11 @@ allocation_id: Optional[ResourceId] = # Replace with your value
 accounting_date: Optional[datetime] = # Replace with your value
 economics: Optional[conlist(Economics)] = # Replace with your value
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
-output_transaction_instance = OutputTransaction(transaction_id=transaction_id, type=type, description=description, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_amount=transaction_amount, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_to_portfolio_rate=transaction_to_portfolio_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, transaction_status=transaction_status, entry_date_time=entry_date_time, cancel_date_time=cancel_date_time, realised_gain_loss=realised_gain_loss, holding_ids=holding_ids, source_type=source_type, source_instrument_event_id=source_instrument_event_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, resolved_transaction_type_details=resolved_transaction_type_details, gross_transaction_amount=gross_transaction_amount, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, accounting_date=accounting_date, economics=economics, data_model_membership=data_model_membership)
+sequence: Optional[StrictInt] = # Replace with your value
+sequence: Optional[StrictInt] = None
+sequence_priority: Optional[StrictInt] = # Replace with your value
+sequence_priority: Optional[StrictInt] = None
+output_transaction_instance = OutputTransaction(transaction_id=transaction_id, type=type, description=description, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_amount=transaction_amount, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_to_portfolio_rate=transaction_to_portfolio_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, transaction_status=transaction_status, entry_date_time=entry_date_time, cancel_date_time=cancel_date_time, realised_gain_loss=realised_gain_loss, holding_ids=holding_ids, source_type=source_type, source_instrument_event_id=source_instrument_event_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, resolved_transaction_type_details=resolved_transaction_type_details, gross_transaction_amount=gross_transaction_amount, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, accounting_date=accounting_date, economics=economics, data_model_membership=data_model_membership, sequence=sequence, sequence_priority=sequence_priority)
 
 ```
 
