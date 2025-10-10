@@ -33,7 +33,8 @@ class InstrumentEventInstructionRequest(BaseModel):
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
     quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
-    __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "entitlementDateInstructed", "quantityInstructed"]
+    tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply") 
+    __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "entitlementDateInstructed", "quantityInstructed", "taxLotId"]
 
     class Config:
         """Pydantic configuration"""
@@ -85,6 +86,11 @@ class InstrumentEventInstructionRequest(BaseModel):
         if self.entitlement_date_instructed is None and "entitlement_date_instructed" in self.__fields_set__:
             _dict['entitlementDateInstructed'] = None
 
+        # set to None if tax_lot_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
+            _dict['taxLotId'] = None
+
         return _dict
 
     @classmethod
@@ -103,6 +109,7 @@ class InstrumentEventInstructionRequest(BaseModel):
             "election_key": obj.get("electionKey"),
             "holding_id": obj.get("holdingId"),
             "entitlement_date_instructed": obj.get("entitlementDateInstructed"),
-            "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None
+            "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None,
+            "tax_lot_id": obj.get("taxLotId")
         })
         return _obj

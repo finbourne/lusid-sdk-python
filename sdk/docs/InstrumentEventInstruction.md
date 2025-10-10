@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **href** | **str** | The uri for this version of this instruction | [optional] 
 **entitlement_date_instructed** | **datetime** | The instructed entitlement date for the event (where none is set on the event itself) | [optional] 
 **quantity_instructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] 
+**tax_lot_id** | **str** | For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -32,8 +33,9 @@ version: Optional[Version] = None
 href: Optional[StrictStr] = "example_href"
 entitlement_date_instructed: Optional[datetime] = # Replace with your value
 quantity_instructed: Optional[QuantityInstructed] = # Replace with your value
+tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
 links: Optional[conlist(Link)] = None
-instrument_event_instruction_instance = InstrumentEventInstruction(instrument_event_instruction_id=instrument_event_instruction_id, portfolio_id=portfolio_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, version=version, href=href, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, links=links)
+instrument_event_instruction_instance = InstrumentEventInstruction(instrument_event_instruction_id=instrument_event_instruction_id, portfolio_id=portfolio_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, version=version, href=href, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, tax_lot_id=tax_lot_id, links=links)
 
 ```
 

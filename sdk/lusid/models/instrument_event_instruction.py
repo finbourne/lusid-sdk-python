@@ -39,8 +39,9 @@ class InstrumentEventInstruction(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The uri for this version of this instruction") 
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
     quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
+    tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply") 
     links: Optional[conlist(Link)] = None
-    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "links"]
+    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "taxLotId", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -125,6 +126,11 @@ class InstrumentEventInstruction(BaseModel):
         if self.entitlement_date_instructed is None and "entitlement_date_instructed" in self.__fields_set__:
             _dict['entitlementDateInstructed'] = None
 
+        # set to None if tax_lot_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
+            _dict['taxLotId'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -152,6 +158,7 @@ class InstrumentEventInstruction(BaseModel):
             "href": obj.get("href"),
             "entitlement_date_instructed": obj.get("entitlementDateInstructed"),
             "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None,
+            "tax_lot_id": obj.get("taxLotId"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
