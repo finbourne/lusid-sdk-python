@@ -31,7 +31,8 @@ class QuoteSeriesId(BaseModel):
     instrument_id_type:  StrictStr = Field(...,alias="instrumentIdType", description="The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'. The available values are: LusidInstrumentId, Figi, RIC, QuotePermId, Isin, CurrencyPair, ClientInternal, Sedol, Cusip") 
     quote_type:  StrictStr = Field(...,alias="quoteType", description="The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor") 
     field:  StrictStr = Field(...,alias="field", description="The field of the quote e.g. bid, mid, ask etc. This should be consistent across a time series of quotes. The allowed values depend on the provider according to the following rules: Client : *Any value is accepted*; DataScope : 'bid', 'mid', 'ask'; Lusid : *Any value is accepted*; Edi : 'bid', 'mid', 'ask', 'open', 'close', 'last'; TraderMade : 'bid', 'mid', 'ask', 'open', 'close', 'high', 'low'; FactSet : 'bid', 'mid', 'ask', 'open', 'close'; SIX : 'bid', 'mid', 'ask', 'open', 'close', 'last', 'referencePrice', 'highPrice', 'lowPrice', 'maxRedemptionPrice', 'maxSubscriptionPrice', 'openPrice', 'bestBidPrice', 'lastBidPrice', 'bestAskPrice', 'lastAskPrice', 'finalSettlementOptions', 'finalSettlementFutures', 'valuationPriceAmount'; Bloomberg : 'bid', 'mid', 'ask', 'open', 'close', 'last'; Rimes : 'bid', 'mid', 'ask', 'open', 'close', 'last'; ICE : 'ask', 'bid', 'close', 'high', 'low', 'open', 'primaryExchangeTradePrice', 'vwap', 'mid'; LSEG : 'ASK', 'BID', 'MID_PRICE'") 
-    __properties = ["provider", "priceSource", "instrumentId", "instrumentIdType", "quoteType", "field"]
+    entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The entity unique ID of the quote series. Together with the InstrumentId, EffectiveAt and AsAt this can uniquely identify a single quote. This field is readonly and cannot be provided on upsert.") 
+    __properties = ["provider", "priceSource", "instrumentId", "instrumentIdType", "quoteType", "field", "entityUniqueId"]
 
     @validator('instrument_id_type')
     def instrument_id_type_validate_enum(cls, value):
@@ -181,12 +182,18 @@ class QuoteSeriesId(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "entity_unique_id",
                           },
                           exclude_none=True)
         # set to None if price_source (nullable) is None
         # and __fields_set__ contains the field
         if self.price_source is None and "price_source" in self.__fields_set__:
             _dict['priceSource'] = None
+
+        # set to None if entity_unique_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
+            _dict['entityUniqueId'] = None
 
         return _dict
 
@@ -205,6 +212,7 @@ class QuoteSeriesId(BaseModel):
             "instrument_id": obj.get("instrumentId"),
             "instrument_id_type": obj.get("instrumentIdType"),
             "quote_type": obj.get("quoteType"),
-            "field": obj.get("field")
+            "field": obj.get("field"),
+            "entity_unique_id": obj.get("entityUniqueId")
         })
         return _obj
