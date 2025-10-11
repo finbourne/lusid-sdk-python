@@ -602,30 +602,28 @@ class ComplexMarketDataApi:
 
 
     @overload
-    async def upsert_append_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_append_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_append_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_append_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_append_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_append_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpsertAppendComplexMarketData: Appends a new point to the end of a ComplexMarketData definition.  # noqa: E501
 
         Update a complex market data item in a single scope by appending a new point onto the end.                NOTE: This operation is only supported for FX curves with one of the following data types:  FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_append_complex_market_data(scope, append_complex_market_data_request, effective_at, as_at, async_req=True)
+        >>> thread = api.upsert_append_complex_market_data(scope, append_complex_market_data_request, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the complex market data to append. (required)
         :type scope: str
         :param append_complex_market_data_request: Request definition of the point to append. (required)
         :type append_complex_market_data_request: AppendComplexMarketDataRequest
-        :param effective_at: The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body.
-        :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
@@ -644,25 +642,23 @@ class ComplexMarketDataApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_append_complex_market_data_with_http_info(scope, append_complex_market_data_request, effective_at, as_at, **kwargs)  # noqa: E501
+        return self.upsert_append_complex_market_data_with_http_info(scope, append_complex_market_data_request, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_append_complex_market_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_append_complex_market_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to append.")], append_complex_market_data_request : Annotated[AppendComplexMarketDataRequest, Field(..., description="Request definition of the point to append.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertAppendComplexMarketData: Appends a new point to the end of a ComplexMarketData definition.  # noqa: E501
 
         Update a complex market data item in a single scope by appending a new point onto the end.                NOTE: This operation is only supported for FX curves with one of the following data types:  FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_append_complex_market_data_with_http_info(scope, append_complex_market_data_request, effective_at, as_at, async_req=True)
+        >>> thread = api.upsert_append_complex_market_data_with_http_info(scope, append_complex_market_data_request, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the complex market data to append. (required)
         :type scope: str
         :param append_complex_market_data_request: Request definition of the point to append. (required)
         :type append_complex_market_data_request: AppendComplexMarketDataRequest
-        :param effective_at: The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body.
-        :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.
         :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
@@ -694,7 +690,6 @@ class ComplexMarketDataApi:
         _all_params = [
             'scope',
             'append_complex_market_data_request',
-            'effective_at',
             'as_at'
         ]
         _all_params.extend(
@@ -730,9 +725,6 @@ class ComplexMarketDataApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('effective_at') is not None:  # noqa: E501
-            _query_params.append(('effectiveAt', _params['effective_at']))
-
         if _params.get('as_at') is not None:  # noqa: E501
             if isinstance(_params['as_at'], datetime):
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))

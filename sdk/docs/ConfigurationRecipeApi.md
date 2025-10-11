@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_configuration_recipe**
-> GetRecipeResponse get_configuration_recipe(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> GetRecipeResponse get_configuration_recipe(scope, code, as_at=as_at)
 
 GetConfigurationRecipe: Get Configuration Recipe
 
@@ -260,16 +260,13 @@ def main():
     scope = 'scope_example' # str | The scope of the Configuration Recipe to retrieve.
     code = 'code_example' # str | The name of the recipe to retrieve the data for.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_configuration_recipe(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.get_configuration_recipe(scope, code, as_at=as_at, opts=opts)
 
         # GetConfigurationRecipe: Get Configuration Recipe
-        api_response = api_instance.get_configuration_recipe(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.get_configuration_recipe(scope, code, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -285,9 +282,6 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Configuration Recipe to retrieve. | 
  **code** | **str**| The name of the recipe to retrieve the data for. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -308,7 +302,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_derived_recipe**
-> GetRecipeResponse get_derived_recipe(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> GetRecipeResponse get_derived_recipe(scope, code, as_at=as_at)
 
 GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
 
@@ -362,16 +356,13 @@ def main():
     scope = 'scope_example' # str | The scope of the Configuration Recipe or Recipe Composer to return.
     code = 'code_example' # str | The code of the Configuration Recipe or Recipe Composer to return.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_derived_recipe(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.get_derived_recipe(scope, code, as_at=as_at, opts=opts)
 
         # GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.
-        api_response = api_instance.get_derived_recipe(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.get_derived_recipe(scope, code, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -387,9 +378,6 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Configuration Recipe or Recipe Composer to return. | 
  **code** | **str**| The code of the Configuration Recipe or Recipe Composer to return. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -410,7 +398,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_recipe_composer**
-> GetRecipeComposerResponse get_recipe_composer(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> GetRecipeComposerResponse get_recipe_composer(scope, code, as_at=as_at)
 
 GetRecipeComposer: Get Recipe Composer
 
@@ -464,16 +452,13 @@ def main():
     scope = 'scope_example' # str | The scope of the Recipe Composer to retrieve.
     code = 'code_example' # str | The name of the Recipe Composer to retrieve the data for.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_recipe_composer(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.get_recipe_composer(scope, code, as_at=as_at, opts=opts)
 
         # GetRecipeComposer: Get Recipe Composer
-        api_response = api_instance.get_recipe_composer(scope, code, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.get_recipe_composer(scope, code, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -489,9 +474,6 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Recipe Composer to retrieve. | 
  **code** | **str**| The name of the Recipe Composer to retrieve the data for. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.               If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.               If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.               If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -609,7 +591,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_configuration_recipes**
-> ResourceListOfGetRecipeResponse list_configuration_recipes(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> ResourceListOfGetRecipeResponse list_configuration_recipes(as_at=as_at, filter=filter)
 
 ListConfigurationRecipes: List the set of Configuration Recipes
 
@@ -662,16 +644,13 @@ def main():
     api_instance = api_client_factory.build(ConfigurationRecipeApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_configuration_recipes(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.list_configuration_recipes(as_at=as_at, filter=filter, opts=opts)
 
         # ListConfigurationRecipes: List the set of Configuration Recipes
-        api_response = api_instance.list_configuration_recipes(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.list_configuration_recipes(as_at=as_at, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -686,9 +665,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -709,7 +685,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_derived_recipes**
-> ResourceListOfGetRecipeResponse list_derived_recipes(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> ResourceListOfGetRecipeResponse list_derived_recipes(as_at=as_at, filter=filter)
 
 ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
 
@@ -762,16 +738,13 @@ def main():
     api_instance = api_client_factory.build(ConfigurationRecipeApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_derived_recipes(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.list_derived_recipes(as_at=as_at, filter=filter, opts=opts)
 
         # ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
-        api_response = api_instance.list_derived_recipes(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.list_derived_recipes(as_at=as_at, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -786,9 +759,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set, note this functionality is not yet enabled for this endpoint. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -809,7 +779,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_recipe_composers**
-> ResourceListOfGetRecipeComposerResponse list_recipe_composers(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> ResourceListOfGetRecipeComposerResponse list_recipe_composers(as_at=as_at, filter=filter)
 
 ListRecipeComposers: List the set of Recipe Composers
 
@@ -862,16 +832,13 @@ def main():
     api_instance = api_client_factory.build(ConfigurationRecipeApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_recipe_composers(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.list_recipe_composers(as_at=as_at, filter=filter, opts=opts)
 
         # ListRecipeComposers: List the set of Recipe Composers
-        api_response = api_instance.list_recipe_composers(as_at=as_at, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.list_recipe_composers(as_at=as_at, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -886,9 +853,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set, note this functionality is not yet enabled for this endpoint. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 

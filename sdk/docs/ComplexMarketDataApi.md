@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_append_complex_market_data**
-> UpsertSingleStructuredDataResponse upsert_append_complex_market_data(scope, append_complex_market_data_request, effective_at=effective_at, as_at=as_at)
+> UpsertSingleStructuredDataResponse upsert_append_complex_market_data(scope, append_complex_market_data_request, as_at=as_at)
 
 [EARLY ACCESS] UpsertAppendComplexMarketData: Appends a new point to the end of a ComplexMarketData definition.
 
@@ -362,15 +362,14 @@ def main():
     # append_complex_market_data_request = AppendComplexMarketDataRequest.from_json("")
     # append_complex_market_data_request = AppendComplexMarketDataRequest.from_dict({})
     append_complex_market_data_request = AppendComplexMarketDataRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_append_complex_market_data(scope, append_complex_market_data_request, effective_at=effective_at, as_at=as_at, opts=opts)
+        # api_response =  api_instance.upsert_append_complex_market_data(scope, append_complex_market_data_request, as_at=as_at, opts=opts)
 
         # [EARLY ACCESS] UpsertAppendComplexMarketData: Appends a new point to the end of a ComplexMarketData definition.
-        api_response = api_instance.upsert_append_complex_market_data(scope, append_complex_market_data_request, effective_at=effective_at, as_at=as_at)
+        api_response = api_instance.upsert_append_complex_market_data(scope, append_complex_market_data_request, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -385,7 +384,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the complex market data to append. | 
  **append_complex_market_data_request** | [**AppendComplexMarketDataRequest**](AppendComplexMarketDataRequest.md)| Request definition of the point to append. | 
- **effective_at** | **str**| The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the effectiveAt of the ComplexMarketDataId given in the request body. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified. | [optional] 
 
 ### Return type

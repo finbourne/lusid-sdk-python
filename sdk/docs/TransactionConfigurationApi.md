@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_side_definition**
-> SideDefinition get_side_definition(side, scope=scope, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> SideDefinition get_side_definition(side, scope=scope, as_at=as_at)
 
 GetSideDefinition: Get the side definition for a given side name( or label)
 
@@ -356,16 +356,13 @@ def main():
     side = 'side_example' # str | The label to uniquely identify the side.
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_side_definition(side, scope=scope, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.get_side_definition(side, scope=scope, as_at=as_at, opts=opts)
 
         # GetSideDefinition: Get the side definition for a given side name( or label)
-        api_response = api_instance.get_side_definition(side, scope=scope, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.get_side_definition(side, scope=scope, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -381,9 +378,6 @@ Name | Type | Description  | Notes
  **side** | **str**| The label to uniquely identify the side. | 
  **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. | [optional] 
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -404,7 +398,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_transaction_type**
-> TransactionType get_transaction_type(source, type, as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> TransactionType get_transaction_type(source, type, as_at=as_at, scope=scope)
 
 GetTransactionType: Get a single transaction configuration type
 
@@ -459,16 +453,13 @@ def main():
     type = 'type_example' # str | One of the type's aliases
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, opts=opts)
 
         # GetTransactionType: Get a single transaction configuration type
-        api_response = api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope)
         pprint(api_response)
 
     except ApiException as e:
@@ -485,9 +476,6 @@ Name | Type | Description  | Notes
  **type** | **str**| One of the type&#39;s aliases | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified | [optional] 
  **scope** | **str**| The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -508,7 +496,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_side_definitions**
-> ResourceListOfSideDefinition list_side_definitions(as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> ResourceListOfSideDefinition list_side_definitions(as_at=as_at, scope=scope)
 
 ListSideDefinitions: List the side definitions
 
@@ -561,16 +549,13 @@ def main():
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_side_definitions(as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.list_side_definitions(as_at=as_at, scope=scope, opts=opts)
 
         # ListSideDefinitions: List the side definitions
-        api_response = api_instance.list_side_definitions(as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.list_side_definitions(as_at=as_at, scope=scope)
         pprint(api_response)
 
     except ApiException as e:
@@ -585,9 +570,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. | [optional] 
  **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
@@ -608,7 +590,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_transaction_types**
-> Dict[str, List[TransactionType]] list_transaction_types(as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> Dict[str, List[TransactionType]] list_transaction_types(as_at=as_at, scope=scope)
 
 ListTransactionTypes: List transaction types
 
@@ -661,16 +643,13 @@ def main():
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
-    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_transaction_types(as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.list_transaction_types(as_at=as_at, scope=scope, opts=opts)
 
         # ListTransactionTypes: List transaction types
-        api_response = api_instance.list_transaction_types(as_at=as_at, scope=scope, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.list_transaction_types(as_at=as_at, scope=scope)
         pprint(api_response)
 
     except ApiException as e:
@@ -685,9 +664,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. | [optional] 
  **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
- **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt. If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
- **timeline_code** | **str**| The code of the Timeline, used to override the AsAt. If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
- **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt. If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
