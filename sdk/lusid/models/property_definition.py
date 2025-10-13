@@ -103,7 +103,9 @@ class PropertyDefinition(BaseModel):
                                     'HealthCheckResponse', 
                                     'LuminesceViewResponse', 
                                     'SchedulerJobResponse', 
-                                    'SleepResponse']:
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -165,7 +167,9 @@ class PropertyDefinition(BaseModel):
                                     'HealthCheckResponse', 
                                     'LuminesceViewResponse', 
                                     'SchedulerJobResponse', 
-                                    'SleepResponse']:
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -227,7 +231,9 @@ class PropertyDefinition(BaseModel):
                                     'HealthCheckResponse', 
                                     'LuminesceViewResponse', 
                                     'SchedulerJobResponse', 
-                                    'SleepResponse']:
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -289,7 +295,9 @@ class PropertyDefinition(BaseModel):
                                     'HealthCheckResponse', 
                                     'LuminesceViewResponse', 
                                     'SchedulerJobResponse', 
-                                    'SleepResponse']:
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -351,7 +359,9 @@ class PropertyDefinition(BaseModel):
                                     'HealthCheckResponse', 
                                     'LuminesceViewResponse', 
                                     'SchedulerJobResponse', 
-                                    'SleepResponse']:
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -413,7 +423,9 @@ class PropertyDefinition(BaseModel):
                                     'HealthCheckResponse', 
                                     'LuminesceViewResponse', 
                                     'SchedulerJobResponse', 
-                                    'SleepResponse']:
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse']:
            return value
         
         # Only validate the 'type' property of the class
