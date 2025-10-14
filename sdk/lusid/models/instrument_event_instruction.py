@@ -32,7 +32,7 @@ class InstrumentEventInstruction(BaseModel):
     instrument_event_instruction_id:  Optional[StrictStr] = Field(None,alias="instrumentEventInstructionId", description="The unique identifier for this instruction") 
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     instrument_event_id:  Optional[StrictStr] = Field(None,alias="instrumentEventId", description="The identifier of the instrument event being instructed") 
-    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)") 
+    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding, ElectForLoanFacilityHolding)") 
     election_key:  Optional[StrictStr] = Field(None,alias="electionKey", description="For elected instructions, the key to be chosen") 
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     version: Optional[Version] = None

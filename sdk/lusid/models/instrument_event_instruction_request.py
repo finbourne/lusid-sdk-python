@@ -28,7 +28,7 @@ class InstrumentEventInstructionRequest(BaseModel):
     """
     instrument_event_instruction_id:  StrictStr = Field(...,alias="instrumentEventInstructionId", description="The unique identifier for this instruction") 
     instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The identifier of the instrument event being instructed") 
-    instruction_type:  StrictStr = Field(...,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding)") 
+    instruction_type:  StrictStr = Field(...,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding, ElectForLoanFacilityHolding)") 
     election_key:  Optional[StrictStr] = Field(None,alias="electionKey", description="For elected instructions, the key to be chosen") 
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
