@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | CreatePropertyDefinition: Create property definition
 [**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | DeletePropertyDefinition: Delete property definition
 [**delete_property_definition_properties**](PropertyDefinitionsApi.md#delete_property_definition_properties) | **POST** /api/propertydefinitions/{domain}/{scope}/{code}/properties/$delete | [EARLY ACCESS] DeletePropertyDefinitionProperties: Delete property definition properties
+[**get_derived_formula_explanation**](PropertyDefinitionsApi.md#get_derived_formula_explanation) | **GET** /api/propertydefinitions/derived/$formulaExplanation | [INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula
 [**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | GetMultiplePropertyDefinitions: Get multiple property definitions
 [**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | GetPropertyDefinition: Get property definition
 [**get_property_definition_property_time_series**](PropertyDefinitionsApi.md#get_property_definition_property_time_series) | **GET** /api/propertydefinitions/{domain}/{scope}/{code}/properties/time-series | [EARLY ACCESS] GetPropertyDefinitionPropertyTimeSeries: Get Property Definition Property Time Series
@@ -402,6 +403,107 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the properties were deleted from the specified definition |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_derived_formula_explanation**
+> DerivedPropertyComponent get_derived_formula_explanation(derivation_formula_explain_request, as_at=as_at, effective_at=effective_at)
+
+[INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula
+
+Produces a manifest that shows the nested hierarchy of any source properties and the actions taken upon them to create the derived property.  This can either be done against an existing entity, which will produce a manifest that includes the values of the source properties  at the specified effective date time, or it can be done without providing an entity which will produce a manifest without values.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PropertyDefinitionsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PropertyDefinitionsApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # derivation_formula_explain_request = DerivationFormulaExplainRequest.from_json("")
+    # derivation_formula_explain_request = DerivationFormulaExplainRequest.from_dict({})
+    derivation_formula_explain_request = DerivationFormulaExplainRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to resolve the entity. Defaults to returning the latest asAt in LUSID              if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to resolve the entity. Defaults to the current LUSID              system datetime if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_derived_formula_explanation(derivation_formula_explain_request, as_at=as_at, effective_at=effective_at, opts=opts)
+
+        # [INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula
+        api_response = api_instance.get_derived_formula_explanation(derivation_formula_explain_request, as_at=as_at, effective_at=effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PropertyDefinitionsApi->get_derived_formula_explanation: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **derivation_formula_explain_request** | [**DerivationFormulaExplainRequest**](DerivationFormulaExplainRequest.md)| Information about the derivation formula to explain, and optionally, the entity to resolve the formula against. | 
+ **as_at** | **datetime**| The asAt datetime at which to resolve the entity. Defaults to returning the latest asAt in LUSID              if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to resolve the entity. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+
+### Return type
+
+[**DerivedPropertyComponent**](DerivedPropertyComponent.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested derived property formula components. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
