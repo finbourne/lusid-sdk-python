@@ -51,6 +51,7 @@ class PricingModel(str, Enum):
     CDSLOOKUPPRICER = 'CdsLookupPricer'
     LOANFACILITYPRICER = 'LoanFacilityPricer'
     OVERRIDEONLYPRICER = 'OverrideOnlyPricer'
+    FLEXIBLEREPOSIMPLEPRICER = 'FlexibleRepoSimplePricer'
 
     @classmethod
     def from_json(cls, json_str: str) -> PricingModel:

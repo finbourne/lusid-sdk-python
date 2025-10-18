@@ -903,7 +903,7 @@ class PropertyDefinitionsApi:
         }
 
         return self.api_client.call_api(
-            '/api/propertydefinitions/derived/$formulaExplanation', 'GET',
+            '/api/propertydefinitions/derived/$formulaExplanation', 'POST',
             _path_params,
             _query_params,
             _header_params,
