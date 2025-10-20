@@ -1880,7 +1880,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_transactions**
-> ValuationPointResourceListOfAccountedTransaction get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code)
+> ValuationPointResourceListOfAccountedTransaction get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code, show_cancelled_transactions=show_cancelled_transactions)
 
 [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
 
@@ -1947,13 +1947,14 @@ def main():
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
+    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
+        # api_response =  api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code, show_cancelled_transactions=show_cancelled_transactions, opts=opts)
 
         # [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
-        api_response = api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code)
+        api_response = api_instance.get_valuation_point_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, data_model_scope=data_model_scope, data_model_code=data_model_code, show_cancelled_transactions=show_cancelled_transactions)
         pprint(api_response)
 
     except ApiException as e:
@@ -1977,6 +1978,7 @@ Name | Type | Description  | Notes
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
+ **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. | [optional] 
 
 ### Return type
 

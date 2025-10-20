@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | CreatePropertyDefinition: Create property definition
 [**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | DeletePropertyDefinition: Delete property definition
 [**delete_property_definition_properties**](PropertyDefinitionsApi.md#delete_property_definition_properties) | **POST** /api/propertydefinitions/{domain}/{scope}/{code}/properties/$delete | [EARLY ACCESS] DeletePropertyDefinitionProperties: Delete property definition properties
-[**get_derived_formula_explanation**](PropertyDefinitionsApi.md#get_derived_formula_explanation) | **POST** /api/propertydefinitions/derived/$formulaExplanation | [INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula
+[**get_derived_formula_explanation**](PropertyDefinitionsApi.md#get_derived_formula_explanation) | **POST** /api/propertydefinitions/derived/$formulaExplanation | GetDerivedFormulaExplanation: Get explanation of a derived property formula
 [**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | GetMultiplePropertyDefinitions: Get multiple property definitions
 [**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | GetPropertyDefinition: Get property definition
 [**get_property_definition_property_time_series**](PropertyDefinitionsApi.md#get_property_definition_property_time_series) | **GET** /api/propertydefinitions/{domain}/{scope}/{code}/properties/time-series | [EARLY ACCESS] GetPropertyDefinitionPropertyTimeSeries: Get Property Definition Property Time Series
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 # **get_derived_formula_explanation**
 > DerivedPropertyComponent get_derived_formula_explanation(derivation_formula_explain_request, as_at=as_at, effective_at=effective_at)
 
-[INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula
+GetDerivedFormulaExplanation: Get explanation of a derived property formula
 
 Produces a manifest that shows the nested hierarchy of any source properties and the actions taken upon them to create the derived property.  This can either be done against an existing entity, which will produce a manifest that includes the values of the source properties  at the specified effective date time, or it can be done without providing an entity which will produce a manifest without values.
 
@@ -473,7 +473,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_derived_formula_explanation(derivation_formula_explain_request, as_at=as_at, effective_at=effective_at, opts=opts)
 
-        # [INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula
+        # GetDerivedFormulaExplanation: Get explanation of a derived property formula
         api_response = api_instance.get_derived_formula_explanation(derivation_formula_explain_request, as_at=as_at, effective_at=effective_at)
         pprint(api_response)
 

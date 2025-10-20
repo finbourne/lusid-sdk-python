@@ -753,7 +753,7 @@ class PropertyDefinitionsApi:
 
     @validate_arguments
     def get_derived_formula_explanation(self, derivation_formula_explain_request : Annotated[DerivationFormulaExplainRequest, Field(..., description="Information about the derivation formula to explain, and optionally, the entity to resolve the formula against.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to resolve the entity. Defaults to returning the latest asAt in LUSID              if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve the entity. Defaults to the current LUSID              system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DerivedPropertyComponent, Awaitable[DerivedPropertyComponent]]:  # noqa: E501
-        """[INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula  # noqa: E501
+        """GetDerivedFormulaExplanation: Get explanation of a derived property formula  # noqa: E501
 
         Produces a manifest that shows the nested hierarchy of any source properties and the actions taken upon them to create the derived property.  This can either be done against an existing entity, which will produce a manifest that includes the values of the source properties  at the specified effective date time, or it can be done without providing an entity which will produce a manifest without values.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -788,7 +788,7 @@ class PropertyDefinitionsApi:
 
     @validate_arguments
     def get_derived_formula_explanation_with_http_info(self, derivation_formula_explain_request : Annotated[DerivationFormulaExplainRequest, Field(..., description="Information about the derivation formula to explain, and optionally, the entity to resolve the formula against.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to resolve the entity. Defaults to returning the latest asAt in LUSID              if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve the entity. Defaults to the current LUSID              system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[INTERNAL] GetDerivedFormulaExplanation: Get explanation of a derived property formula  # noqa: E501
+        """GetDerivedFormulaExplanation: Get explanation of a derived property formula  # noqa: E501
 
         Produces a manifest that shows the nested hierarchy of any source properties and the actions taken upon them to create the derived property.  This can either be done against an existing entity, which will produce a manifest that includes the values of the source properties  at the specified effective date time, or it can be done without providing an entity which will produce a manifest without values.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
