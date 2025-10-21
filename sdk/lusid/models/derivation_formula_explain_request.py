@@ -26,11 +26,12 @@ class DerivationFormulaExplainRequest(BaseModel):
     DerivationFormulaExplainRequest
     """
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity for which the derived property or partial formula is to be resolved against.") 
-    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope that entity exists in. If no scope is provided, the default scope for the entity type will be used.") 
-    identifier: Optional[Dict[str, StrictStr]] = Field(None, description="An identifier key/value pair that uniquely identifies the entity to explain the derived property for. This can be either an instrument identifier, an identifier property, or a scope/code identifier which take the format {entityType}/default/code : {identifier}. If no identifiers are provided, the logical evaluation tree without resolved values is returned.")
-    property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="The key of the derived property to explain. This takes the format {domain}/{scope}/{code}.") 
-    partial_formula:  Optional[StrictStr] = Field(None,alias="partialFormula", description="A partial derivation formula to explain. Can be provided in lieu of a property key.") 
-    __properties = ["entityType", "scope", "identifier", "propertyKey", "partialFormula"]
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="(Optional) The scope that entity exists in. If no scope is provided, the default scope for the entity type will be used.") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="(Optional) The code of the entity, to be provided for entities that support scope/code retrieval. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.") 
+    identifier: Optional[Dict[str, StrictStr]] = Field(None, description="(Optional). An identifier key/value pair that uniquely identifies the entity to explain the derived property for. This can be either an instrument identifier, or an identifier property. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.")
+    property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="(Optional) The key of the derived property to get an explanation for. This takes the format {domain}/{scope}/{code}. One of either property key or partial formula must be provided.") 
+    partial_formula:  Optional[StrictStr] = Field(None,alias="partialFormula", description="(Optional) A partial derivation formula to get an explanation for. Can be provided in lieu of a property key. One of either property key or partial formula must be provided.") 
+    __properties = ["entityType", "scope", "code", "identifier", "propertyKey", "partialFormula"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,6 +70,11 @@ class DerivationFormulaExplainRequest(BaseModel):
         if self.scope is None and "scope" in self.__fields_set__:
             _dict['scope'] = None
 
+        # set to None if code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.code is None and "code" in self.__fields_set__:
+            _dict['code'] = None
+
         # set to None if identifier (nullable) is None
         # and __fields_set__ contains the field
         if self.identifier is None and "identifier" in self.__fields_set__:
@@ -98,6 +104,7 @@ class DerivationFormulaExplainRequest(BaseModel):
         _obj = DerivationFormulaExplainRequest.parse_obj({
             "entity_type": obj.get("entityType"),
             "scope": obj.get("scope"),
+            "code": obj.get("code"),
             "identifier": obj.get("identifier"),
             "property_key": obj.get("propertyKey"),
             "partial_formula": obj.get("partialFormula")

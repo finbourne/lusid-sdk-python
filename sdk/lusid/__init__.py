@@ -413,6 +413,7 @@ from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.data_model_summary import DataModelSummary
+from lusid.models.data_quality_check_result import DataQualityCheckResult
 from lusid.models.data_scope import DataScope
 from lusid.models.data_type import DataType
 from lusid.models.data_type_entity import DataTypeEntity
@@ -715,6 +716,8 @@ from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEven
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
+from lusid.models.lusid_entity_dataset import LusidEntityDataset
+from lusid.models.lusid_entity_result import LusidEntityResult
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.lusid_problem_details import LusidProblemDetails
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
@@ -1129,6 +1132,8 @@ from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
 from lusid.models.rounding_convention import RoundingConvention
 from lusid.models.rules_interval import RulesInterval
+from lusid.models.run_check_request import RunCheckRequest
+from lusid.models.run_check_response import RunCheckResponse
 from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
@@ -1803,6 +1808,7 @@ __all__ = [
     "DataMapping",
     "DataModelMembership",
     "DataModelSummary",
+    "DataQualityCheckResult",
     "DataScope",
     "DataType",
     "DataTypeEntity",
@@ -2105,6 +2111,8 @@ __all__ = [
     "LoanPeriod",
     "LoanPrincipalRepaymentEvent",
     "LockPeriodDiaryEntryRequest",
+    "LusidEntityDataset",
+    "LusidEntityResult",
     "LusidInstrument",
     "LusidProblemDetails",
     "LusidTradeTicket",
@@ -2519,6 +2527,8 @@ __all__ = [
     "RoundingConfigurationComponent",
     "RoundingConvention",
     "RulesInterval",
+    "RunCheckRequest",
+    "RunCheckResponse",
     "ScalingMethodology",
     "Schedule",
     "ScheduleType",
