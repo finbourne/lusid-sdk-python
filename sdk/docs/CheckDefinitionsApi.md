@@ -6,10 +6,12 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_check_definition**](CheckDefinitionsApi.md#create_check_definition) | **POST** /api/dataquality/checkdefinitions | [EXPERIMENTAL] CreateCheckDefinition: Create a Check Definition
 [**delete_check_definition**](CheckDefinitionsApi.md#delete_check_definition) | **DELETE** /api/dataquality/checkdefinitions/{scope}/{code} | [EXPERIMENTAL] DeleteCheckDefinition: Deletes a particular Check Definition
+[**delete_rules**](CheckDefinitionsApi.md#delete_rules) | **POST** /api/dataquality/checkdefinitions/{scope}/{code}/$deleteRules | [EXPERIMENTAL] DeleteRules: Delete rules on a particular Check Definition
 [**get_check_definition**](CheckDefinitionsApi.md#get_check_definition) | **GET** /api/dataquality/checkdefinitions/{scope}/{code} | [EXPERIMENTAL] GetCheckDefinition: Get a single Check Definition by scope and code.
 [**list_check_definitions**](CheckDefinitionsApi.md#list_check_definitions) | **GET** /api/dataquality/checkdefinitions | [EXPERIMENTAL] ListCheckDefinitions: List Check Definitions
 [**run_check_definition**](CheckDefinitionsApi.md#run_check_definition) | **PUT** /api/dataquality/checkdefinitions/{scope}/{code}/$run | [EXPERIMENTAL] RunCheckDefinition: Runs a Check Definition against given dataset.
 [**update_check_definition**](CheckDefinitionsApi.md#update_check_definition) | **PUT** /api/dataquality/checkdefinitions/{scope}/{code} | [EXPERIMENTAL] UpdateCheckDefinition: Update Check Definition defined by scope and code
+[**upsert_rules**](CheckDefinitionsApi.md#upsert_rules) | **POST** /api/dataquality/checkdefinitions/{scope}/{code}/$upsertRules | [EXPERIMENTAL] UpsertRules: Upsert rules to a particular Check Definition
 
 
 # **create_check_definition**
@@ -198,6 +200,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The deleted entity metadata |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_rules**
+> CheckDefinition delete_rules(scope, code, delete_data_quality_rule=delete_data_quality_rule)
+
+[EXPERIMENTAL] DeleteRules: Delete rules on a particular Check Definition
+
+Delete rules for a given check definition. This will not affect any other rules that are not included in the request.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CheckDefinitionsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CheckDefinitionsApi)
+    scope = 'scope_example' # str | The scope of the specified Check Definition.
+    code = 'code_example' # str | The code of the specified Check Definition. Together with the domain and scope this uniquely              identifies the Check Definition.
+    delete_data_quality_rule = [{"ruleSetKey":"ruleSetKey1","ruleKey":"ruleKey1"},{"ruleSetKey":"ruleSetKey2","ruleKey":"ruleKey2"}] # List[DeleteDataQualityRule] | The request containing the rules to be deleted (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_rules(scope, code, delete_data_quality_rule=delete_data_quality_rule, opts=opts)
+
+        # [EXPERIMENTAL] DeleteRules: Delete rules on a particular Check Definition
+        api_response = api_instance.delete_rules(scope, code, delete_data_quality_rule=delete_data_quality_rule)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CheckDefinitionsApi->delete_rules: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the specified Check Definition. | 
+ **code** | **str**| The code of the specified Check Definition. Together with the domain and scope this uniquely              identifies the Check Definition. | 
+ **delete_data_quality_rule** | [**List[DeleteDataQualityRule]**](DeleteDataQualityRule.md)| The request containing the rules to be deleted | [optional] 
+
+### Return type
+
+[**CheckDefinition**](CheckDefinition.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated check definition |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -604,6 +702,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated version of the requested Check Definition |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_rules**
+> CheckDefinition upsert_rules(scope, code, upsert_data_quality_rule=upsert_data_quality_rule)
+
+[EXPERIMENTAL] UpsertRules: Upsert rules to a particular Check Definition
+
+Upsert rules for a given check definition. This will not affect any other rules that are not included in the request.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CheckDefinitionsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CheckDefinitionsApi)
+    scope = 'scope_example' # str | The scope of the specified Check Definition.
+    code = 'code_example' # str | The code of the specified Check Definition. Together with the domain and scope this uniquely              identifies the Check Definition.
+    upsert_data_quality_rule = [{"ruleSetKey":"ruleSetKey1","rule":{"ruleKey":"ruleKey1","displayName":"ruleName","description":"description1","ruleFormula":"expression1","severity":1}},{"ruleSetKey":"ruleSetKey2","rule":{"ruleKey":"ruleKey2","displayName":"ruleName","description":"description2","ruleFormula":"expression2","severity":5}}] # List[UpsertDataQualityRule] | The request containing the rules to be upserted (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_rules(scope, code, upsert_data_quality_rule=upsert_data_quality_rule, opts=opts)
+
+        # [EXPERIMENTAL] UpsertRules: Upsert rules to a particular Check Definition
+        api_response = api_instance.upsert_rules(scope, code, upsert_data_quality_rule=upsert_data_quality_rule)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CheckDefinitionsApi->upsert_rules: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the specified Check Definition. | 
+ **code** | **str**| The code of the specified Check Definition. Together with the domain and scope this uniquely              identifies the Check Definition. | 
+ **upsert_data_quality_rule** | [**List[UpsertDataQualityRule]**](UpsertDataQualityRule.md)| The request containing the rules to be upserted | [optional] 
+
+### Return type
+
+[**CheckDefinition**](CheckDefinition.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated check definition |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -433,6 +433,7 @@ from lusid.models.decimal_list_compliance_parameter import DecimalListCompliance
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
 from lusid.models.delete_accounts_response import DeleteAccountsResponse
 from lusid.models.delete_custodian_accounts_response import DeleteCustodianAccountsResponse
+from lusid.models.delete_data_quality_rule import DeleteDataQualityRule
 from lusid.models.delete_instrument_properties_response import DeleteInstrumentPropertiesResponse
 from lusid.models.delete_instrument_response import DeleteInstrumentResponse
 from lusid.models.delete_instruments_response import DeleteInstrumentsResponse
@@ -1323,6 +1324,7 @@ from lusid.models.upsert_counterparty_agreement_request import UpsertCounterpart
 from lusid.models.upsert_credit_support_annex_request import UpsertCreditSupportAnnexRequest
 from lusid.models.upsert_custom_entities_response import UpsertCustomEntitiesResponse
 from lusid.models.upsert_custom_entity_access_metadata_request import UpsertCustomEntityAccessMetadataRequest
+from lusid.models.upsert_data_quality_rule import UpsertDataQualityRule
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
 from lusid.models.upsert_flow_conventions_request import UpsertFlowConventionsRequest
 from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
@@ -1828,6 +1830,7 @@ __all__ = [
     "DecoratedComplianceRunSummary",
     "DeleteAccountsResponse",
     "DeleteCustodianAccountsResponse",
+    "DeleteDataQualityRule",
     "DeleteInstrumentPropertiesResponse",
     "DeleteInstrumentResponse",
     "DeleteInstrumentsResponse",
@@ -2718,6 +2721,7 @@ __all__ = [
     "UpsertCreditSupportAnnexRequest",
     "UpsertCustomEntitiesResponse",
     "UpsertCustomEntityAccessMetadataRequest",
+    "UpsertDataQualityRule",
     "UpsertDialectRequest",
     "UpsertFlowConventionsRequest",
     "UpsertFundBookmarkRequest",
