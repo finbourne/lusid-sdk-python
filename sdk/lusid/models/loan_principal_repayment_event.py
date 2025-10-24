@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, validator 
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator 
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.lapse_election import LapseElection
 
@@ -32,9 +32,10 @@ class LoanPrincipalRepaymentEvent(InstrumentEvent):
     lapse_elections: Optional[conlist(LapseElection)] = Field(None, alias="lapseElections", description="Election for controlling whether the Principal is paid automatically or not.  Exactly one election must be provided.")
     fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Fraction of the outstanding settled principal balance to be repaid. Must be between 0 and 1, inclusive.  Defaults to 1 if not set. Ignored if the field Amount is set to a value different than zero.")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Amount to be repaid (independent of the fraction).  This field is not used at all if not set or set to 0, in this case the fraction field will be used instead.  Otherwise, the fraction field is ignored.")
+    with_interest: Optional[StrictBool] = Field(None, alias="withInterest", description="If set to true, then active contracts whose balance is reduced by the repayment will have  their accrued interest repaid proportionally to the balance reduction.")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "paymentDate", "currency", "lapseElections", "fraction", "amount"]
+    __properties = ["instrumentEventType", "paymentDate", "currency", "lapseElections", "fraction", "amount", "withInterest"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -174,7 +175,8 @@ class LoanPrincipalRepaymentEvent(InstrumentEvent):
             "currency": obj.get("currency"),
             "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None,
             "fraction": obj.get("fraction"),
-            "amount": obj.get("amount")
+            "amount": obj.get("amount"),
+            "with_interest": obj.get("withInterest")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

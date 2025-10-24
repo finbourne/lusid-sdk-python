@@ -74,6 +74,7 @@ from lusid.api.reference_lists_api import ReferenceListsApi
 from lusid.api.reference_portfolio_api import ReferencePortfolioApi
 from lusid.api.relation_definitions_api import RelationDefinitionsApi
 from lusid.api.relational_dataset_definition_api import RelationalDatasetDefinitionApi
+from lusid.api.relational_datasets_api import RelationalDatasetsApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
@@ -175,6 +176,7 @@ from lusid.models.append_fx_forward_tenor_curve_data import AppendFxForwardTenor
 from lusid.models.append_fx_forward_tenor_pips_curve_data import AppendFxForwardTenorPipsCurveData
 from lusid.models.append_market_data import AppendMarketData
 from lusid.models.append_market_data_type import AppendMarketDataType
+from lusid.models.applicable_entity import ApplicableEntity
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
 from lusid.models.asset_class import AssetClass
 from lusid.models.asset_leg import AssetLeg
@@ -192,6 +194,7 @@ from lusid.models.batch_upsert_portfolio_access_metadata_response import BatchUp
 from lusid.models.batch_upsert_portfolio_access_metadata_response_item import BatchUpsertPortfolioAccessMetadataResponseItem
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
+from lusid.models.batch_upsert_relational_datasets_response import BatchUpsertRelationalDatasetsResponse
 from lusid.models.batch_upsert_transaction_settlement_instruction_response import BatchUpsertTransactionSettlementInstructionResponse
 from lusid.models.block import Block
 from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
@@ -876,6 +879,7 @@ from lusid.models.paged_resource_list_of_property_definition import PagedResourc
 from lusid.models.paged_resource_list_of_property_definition_search_result import PagedResourceListOfPropertyDefinitionSearchResult
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
+from lusid.models.paged_resource_list_of_relational_data_point_response import PagedResourceListOfRelationalDataPointResponse
 from lusid.models.paged_resource_list_of_relational_dataset_definition import PagedResourceListOfRelationalDatasetDefinition
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
@@ -979,6 +983,7 @@ from lusid.models.query_applicable_instrument_events_request import QueryApplica
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
 from lusid.models.query_instrument_events_request import QueryInstrumentEventsRequest
+from lusid.models.query_relational_dataset_request import QueryRelationalDatasetRequest
 from lusid.models.query_trade_tickets_request import QueryTradeTicketsRequest
 from lusid.models.queryable_key import QueryableKey
 from lusid.models.quote import Quote
@@ -1025,6 +1030,9 @@ from lusid.models.reference_portfolio_weight_type import ReferencePortfolioWeigh
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.relation import Relation
 from lusid.models.relation_definition import RelationDefinition
+from lusid.models.relational_data_point_field_value_response import RelationalDataPointFieldValueResponse
+from lusid.models.relational_data_point_response import RelationalDataPointResponse
+from lusid.models.relational_data_series_response import RelationalDataSeriesResponse
 from lusid.models.relational_dataset_definition import RelationalDatasetDefinition
 from lusid.models.relational_dataset_field_definition import RelationalDatasetFieldDefinition
 from lusid.models.relationship import Relationship
@@ -1356,6 +1364,8 @@ from lusid.models.upsert_reference_portfolio_constituent_properties_request impo
 from lusid.models.upsert_reference_portfolio_constituent_properties_response import UpsertReferencePortfolioConstituentPropertiesResponse
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
+from lusid.models.upsert_relational_data_point_data_series import UpsertRelationalDataPointDataSeries
+from lusid.models.upsert_relational_data_point_request import UpsertRelationalDataPointRequest
 from lusid.models.upsert_result_values_data_request import UpsertResultValuesDataRequest
 from lusid.models.upsert_returns_response import UpsertReturnsResponse
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
@@ -1481,6 +1491,7 @@ __all__ = [
     "ReferencePortfolioApi",
     "RelationDefinitionsApi",
     "RelationalDatasetDefinitionApi",
+    "RelationalDatasetsApi",
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
@@ -1572,6 +1583,7 @@ __all__ = [
     "AppendFxForwardTenorPipsCurveData",
     "AppendMarketData",
     "AppendMarketDataType",
+    "ApplicableEntity",
     "ApplicableInstrumentEvent",
     "AssetClass",
     "AssetLeg",
@@ -1589,6 +1601,7 @@ __all__ = [
     "BatchUpsertPortfolioAccessMetadataResponseItem",
     "BatchUpsertPortfolioTransactionsResponse",
     "BatchUpsertPropertyDefinitionPropertiesResponse",
+    "BatchUpsertRelationalDatasetsResponse",
     "BatchUpsertTransactionSettlementInstructionResponse",
     "Block",
     "BlockAndOrderIdRequest",
@@ -2273,6 +2286,7 @@ __all__ = [
     "PagedResourceListOfPropertyDefinitionSearchResult",
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
+    "PagedResourceListOfRelationalDataPointResponse",
     "PagedResourceListOfRelationalDatasetDefinition",
     "PagedResourceListOfRelationshipDefinition",
     "PagedResourceListOfSequenceDefinition",
@@ -2376,6 +2390,7 @@ __all__ = [
     "QueryBucketedCashFlowsRequest",
     "QueryCashFlowsRequest",
     "QueryInstrumentEventsRequest",
+    "QueryRelationalDatasetRequest",
     "QueryTradeTicketsRequest",
     "QueryableKey",
     "Quote",
@@ -2422,6 +2437,9 @@ __all__ = [
     "RelatedEntity",
     "Relation",
     "RelationDefinition",
+    "RelationalDataPointFieldValueResponse",
+    "RelationalDataPointResponse",
+    "RelationalDataSeriesResponse",
     "RelationalDatasetDefinition",
     "RelationalDatasetFieldDefinition",
     "Relationship",
@@ -2753,6 +2771,8 @@ __all__ = [
     "UpsertReferencePortfolioConstituentPropertiesResponse",
     "UpsertReferencePortfolioConstituentsRequest",
     "UpsertReferencePortfolioConstituentsResponse",
+    "UpsertRelationalDataPointDataSeries",
+    "UpsertRelationalDataPointRequest",
     "UpsertResultValuesDataRequest",
     "UpsertReturnsResponse",
     "UpsertSingleStructuredDataResponse",

@@ -58,6 +58,7 @@ from lusid.api.reference_lists_api import ReferenceListsApi
 from lusid.api.reference_portfolio_api import ReferencePortfolioApi
 from lusid.api.relation_definitions_api import RelationDefinitionsApi
 from lusid.api.relational_dataset_definition_api import RelationalDatasetDefinitionApi
+from lusid.api.relational_datasets_api import RelationalDatasetsApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
@@ -139,6 +140,7 @@ __all__ = [
     "ReferencePortfolioApi",
     "RelationDefinitionsApi",
     "RelationalDatasetDefinitionApi",
+    "RelationalDatasetsApi",
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
