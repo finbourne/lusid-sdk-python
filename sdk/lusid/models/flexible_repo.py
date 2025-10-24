@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
+from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.collateral import Collateral
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.schedule import Schedule
@@ -45,9 +45,10 @@ class FlexibleRepo(LusidInstrument):
     repurchase_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="repurchasePrice", description="The repurchase price of the repo, if known.  Only one of RepurchasePrice and RepoRateSchedules should be provided.  In the case of an OpenRepo, RepurchasePrice should not be provided,  and RepoRateSchedules should be provided instead in order to calculate the RepoRate.")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
     trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
+    is_collateral_transfer_activated: Optional[StrictBool] = Field(None, alias="isCollateralTransferActivated", description="Indicates whether the FlexibleRepoCollateralTransfer event is activated.  Determines the behavior of manufactured coupons and related boolean parameters.  Defaults to false.  When true:  - Generates the FlexibleRepoCollateralTransfer event  - Processes collateral transfer transactions into holding changes  - Generates manufactured payments when due to be paid                When false:  - Does not generate the event  - Generates manufactured payments when due to be received")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "buyerOrSeller", "repoCcy", "repoType", "accrualBasis", "collateral", "haircut", "margin", "openRepoRollingPeriod", "purchasePrice", "repoRateSchedules", "repurchasePrice", "timeZoneConventions", "tradingConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "buyerOrSeller", "repoCcy", "repoType", "accrualBasis", "collateral", "haircut", "margin", "openRepoRollingPeriod", "purchasePrice", "repoRateSchedules", "repurchasePrice", "timeZoneConventions", "tradingConventions", "isCollateralTransferActivated"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -231,7 +232,8 @@ class FlexibleRepo(LusidInstrument):
             "repo_rate_schedules": [Schedule.from_dict(_item) for _item in obj.get("repoRateSchedules")] if obj.get("repoRateSchedules") is not None else None,
             "repurchase_price": obj.get("repurchasePrice"),
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
-            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
+            "is_collateral_transfer_activated": obj.get("isCollateralTransferActivated")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

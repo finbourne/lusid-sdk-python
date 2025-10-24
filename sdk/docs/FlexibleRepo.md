@@ -19,13 +19,14 @@ Name | Type | Description | Notes
 **repurchase_price** | **float** | The repurchase price of the repo, if known.  Only one of RepurchasePrice and RepoRateSchedules should be provided.  In the case of an OpenRepo, RepurchasePrice should not be provided,  and RepoRateSchedules should be provided instead in order to calculate the RepoRate. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**is_collateral_transfer_activated** | **bool** | Indicates whether the FlexibleRepoCollateralTransfer event is activated.  Determines the behavior of manufactured coupons and related boolean parameters.  Defaults to false.  When true:  - Generates the FlexibleRepoCollateralTransfer event  - Processes collateral transfer transactions into holding changes  - Generates manufactured payments when due to be paid                When false:  - Does not generate the event  - Generates manufactured payments when due to be received | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo | 
 ## Example
 
 ```python
 from lusid.models.flexible_repo import FlexibleRepo
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from datetime import datetime
 start_date: datetime = # Replace with your value
 maturity_date: Optional[datetime] = # Replace with your value
@@ -42,8 +43,10 @@ repo_rate_schedules: Optional[conlist(Schedule)] = # Replace with your value
 repurchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+is_collateral_transfer_activated: Optional[StrictBool] = # Replace with your value
+is_collateral_transfer_activated:Optional[StrictBool] = None
 instrument_type: StrictStr = "example_instrument_type"
-flexible_repo_instance = FlexibleRepo(start_date=start_date, maturity_date=maturity_date, buyer_or_seller=buyer_or_seller, repo_ccy=repo_ccy, repo_type=repo_type, accrual_basis=accrual_basis, collateral=collateral, haircut=haircut, margin=margin, open_repo_rolling_period=open_repo_rolling_period, purchase_price=purchase_price, repo_rate_schedules=repo_rate_schedules, repurchase_price=repurchase_price, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
+flexible_repo_instance = FlexibleRepo(start_date=start_date, maturity_date=maturity_date, buyer_or_seller=buyer_or_seller, repo_ccy=repo_ccy, repo_type=repo_type, accrual_basis=accrual_basis, collateral=collateral, haircut=haircut, margin=margin, open_repo_rolling_period=open_repo_rolling_period, purchase_price=purchase_price, repo_rate_schedules=repo_rate_schedules, repurchase_price=repurchase_price, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, is_collateral_transfer_activated=is_collateral_transfer_activated, instrument_type=instrument_type)
 
 ```
 

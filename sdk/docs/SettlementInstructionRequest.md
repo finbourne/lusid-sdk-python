@@ -15,12 +15,13 @@ Name | Type | Description | Notes
 **custodian_account_override** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instruction_to_portfolio_rate** | **float** |  | [optional] 
 **settlement_in_lieu** | [**SettlementInLieu**](SettlementInLieu.md) |  | [optional] 
+**properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 ## Example
 
 ```python
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from datetime import datetime
 settlement_instruction_id: StrictStr = "example_settlement_instruction_id"
 transaction_id: StrictStr = "example_transaction_id"
@@ -34,7 +35,8 @@ sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = # Replace wi
 custodian_account_override: Optional[ResourceId] = # Replace with your value
 instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 settlement_in_lieu: Optional[SettlementInLieu] = # Replace with your value
-settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu)
+properties: Optional[conlist(PerpetualProperty)] = None
+settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu, properties=properties)
 
 ```
 

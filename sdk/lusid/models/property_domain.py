@@ -111,6 +111,7 @@ class PropertyDomain(str, Enum):
     WORKER = 'Worker'
     STAGINGRULESET = 'StagingRuleSet'
     IDENTIFIERDEFINITION = 'IdentifierDefinition'
+    SETTLEMENTINSTRUCTION = 'SettlementInstruction'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:

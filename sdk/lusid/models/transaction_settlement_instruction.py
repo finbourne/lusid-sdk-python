@@ -42,7 +42,8 @@ class TransactionSettlementInstruction(BaseModel):
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the settlement instruction - 'Invalid', 'Rejected' 'Applied' or 'Orphan'.") 
     instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="instructionToPortfolioRate", description="The exchange rate between the Settlement Instruction and Portfolio.")
     settlement_in_lieu: Optional[SettlementInLieu] = Field(None, alias="settlementInLieu")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu"]
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties which have been requested to be decorated onto the settlement instruction. These will be from the 'SettlementInstruction', 'Portfolio', or 'Instrument' domains.")
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +90,13 @@ class TransactionSettlementInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settlement_in_lieu
         if self.settlement_in_lieu:
             _dict['settlementInLieu'] = self.settlement_in_lieu.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # set to None if contractual_settlement_date (nullable) is None
         # and __fields_set__ contains the field
         if self.contractual_settlement_date is None and "contractual_settlement_date" in self.__fields_set__:
@@ -108,6 +116,11 @@ class TransactionSettlementInstruction(BaseModel):
         # and __fields_set__ contains the field
         if self.instruction_to_portfolio_rate is None and "instruction_to_portfolio_rate" in self.__fields_set__:
             _dict['instructionToPortfolioRate'] = None
+
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
 
         return _dict
 
@@ -139,6 +152,12 @@ class TransactionSettlementInstruction(BaseModel):
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "status": obj.get("status"),
             "instruction_to_portfolio_rate": obj.get("instructionToPortfolioRate"),
-            "settlement_in_lieu": SettlementInLieu.from_dict(obj.get("settlementInLieu")) if obj.get("settlementInLieu") is not None else None
+            "settlement_in_lieu": SettlementInLieu.from_dict(obj.get("settlementInLieu")) if obj.get("settlementInLieu") is not None else None,
+            "properties": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None
         })
         return _obj

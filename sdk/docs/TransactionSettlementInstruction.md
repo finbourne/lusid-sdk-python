@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **status** | **str** | The status of the settlement instruction - &#39;Invalid&#39;, &#39;Rejected&#39; &#39;Applied&#39; or &#39;Orphan&#39;. | [optional] 
 **instruction_to_portfolio_rate** | **float** | The exchange rate between the Settlement Instruction and Portfolio. | [optional] 
 **settlement_in_lieu** | [**SettlementInLieu**](SettlementInLieu.md) |  | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties which have been requested to be decorated onto the settlement instruction. These will be from the &#39;SettlementInstruction&#39;, &#39;Portfolio&#39;, or &#39;Instrument&#39; domains. | [optional] 
 ## Example
 
 ```python
@@ -38,7 +39,8 @@ instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
 status: Optional[StrictStr] = "example_status"
 instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 settlement_in_lieu: Optional[SettlementInLieu] = # Replace with your value
-transaction_settlement_instruction_instance = TransactionSettlementInstruction(settlement_instruction_id=settlement_instruction_id, instruction_type=instruction_type, actual_settlement_date=actual_settlement_date, units=units, transaction_id=transaction_id, settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, contractual_settlement_date=contractual_settlement_date, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instrument_identifiers=instrument_identifiers, status=status, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+transaction_settlement_instruction_instance = TransactionSettlementInstruction(settlement_instruction_id=settlement_instruction_id, instruction_type=instruction_type, actual_settlement_date=actual_settlement_date, units=units, transaction_id=transaction_id, settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, contractual_settlement_date=contractual_settlement_date, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instrument_identifiers=instrument_identifiers, status=status, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu, properties=properties)
 
 ```
 
