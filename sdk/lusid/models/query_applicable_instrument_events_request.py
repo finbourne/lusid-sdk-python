@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
 
@@ -27,11 +29,11 @@ class QueryApplicableInstrumentEventsRequest(BaseModel):
     """
     QueryApplicableInstrumentEventsRequest
     """
-    window_start: datetime = Field(..., alias="windowStart", description="The start date of the window.")
-    window_end: datetime = Field(..., alias="windowEnd", description="The end date of the window.")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The Effective date that splits query window into two parts: factual period and forecast period")
-    portfolio_entity_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioEntityIds", description="The set of portfolios and portfolio groups to which the instrument events must belong.")
-    forecasting_recipe_id: ResourceId = Field(..., alias="forecastingRecipeId")
+    window_start: datetime = Field(description="The start date of the window.", alias="windowStart")
+    window_end: datetime = Field(description="The end date of the window.", alias="windowEnd")
+    effective_at: datetime = Field(description="The Effective date that splits query window into two parts: factual period and forecast period", alias="effectiveAt")
+    portfolio_entity_ids: List[PortfolioEntityId] = Field(description="The set of portfolios and portfolio groups to which the instrument events must belong.", alias="portfolioEntityIds")
+    forecasting_recipe_id: ResourceId = Field(alias="forecastingRecipeId")
     __properties = ["windowStart", "windowEnd", "effectiveAt", "portfolioEntityIds", "forecastingRecipeId"]
 
     class Config:
@@ -95,3 +97,5 @@ class QueryApplicableInstrumentEventsRequest(BaseModel):
             "forecasting_recipe_id": ResourceId.from_dict(obj.get("forecastingRecipeId")) if obj.get("forecastingRecipeId") is not None else None
         })
         return _obj
+
+QueryApplicableInstrumentEventsRequest.update_forward_refs()

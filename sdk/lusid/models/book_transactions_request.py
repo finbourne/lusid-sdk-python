@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -27,8 +29,8 @@ class BookTransactionsRequest(BaseModel):
     """
     BookTransactionsRequest
     """
-    allocation_ids: conlist(ResourceId) = Field(..., alias="allocationIds", description="A collection of Allocation IDs")
-    transaction_properties: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="transactionProperties", description="A collection of properties")
+    allocation_ids: List[ResourceId] = Field(description="A collection of Allocation IDs", alias="allocationIds")
+    transaction_properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="A collection of properties", alias="transactionProperties")
     __properties = ["allocationIds", "transactionProperties"]
 
     class Config:
@@ -103,3 +105,5 @@ class BookTransactionsRequest(BaseModel):
             else None
         })
         return _obj
+
+BookTransactionsRequest.update_forward_refs()

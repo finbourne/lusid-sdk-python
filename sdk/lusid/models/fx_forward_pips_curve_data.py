@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.market_data_options import MarketDataOptions
 
@@ -27,13 +29,13 @@ class FxForwardPipsCurveData(ComplexMarketData):
     """
     Contains data (i.e. dates and pips + metadata) for building fx forward curves (when combined with a spot rate to build on)  # noqa: E501
     """
-    base_date: datetime = Field(..., alias="baseDate", description="EffectiveAt date of the quoted pip rates")
+    base_date: datetime = Field(description="EffectiveAt date of the quoted pip rates", alias="baseDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
     fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
-    dates: conlist(datetime) = Field(..., description="Dates for which the forward rates apply")
-    pip_rates: conlist(Union[StrictFloat, StrictInt]) = Field(..., alias="pipRates", description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips")
+    dates: List[datetime] = Field(description="Dates for which the forward rates apply")
+    pip_rates: List[Union[StrictFloat, StrictInt]] = Field(description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips", alias="pipRates")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
-    market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
+    market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "dates", "pipRates", "lineage", "marketDataOptions"]
@@ -88,14 +90,19 @@ class FxForwardPipsCurveData(ComplexMarketData):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "market_data_type" != "type":
             return value
 
-        if value not in ('DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface'):
+        if value not in ['DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface']:
             raise ValueError("must be one of enum values ('DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface')")
         return value
 
@@ -172,3 +179,5 @@ class FxForwardPipsCurveData(ComplexMarketData):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FxForwardPipsCurveData.update_forward_refs()

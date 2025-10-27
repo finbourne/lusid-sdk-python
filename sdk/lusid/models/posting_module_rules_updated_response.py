@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.posting_module_rule import PostingModuleRule
 from lusid.models.version import Version
@@ -28,10 +30,10 @@ class PostingModuleRulesUpdatedResponse(BaseModel):
     """
     A Posting Module rules update response  # noqa: E501
     """
-    rules: Optional[conlist(PostingModuleRule)] = Field(None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
+    rules: Optional[List[PostingModuleRule]] = Field(default=None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
     version: Optional[Version] = None
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["rules", "version", "href", "links"]
 
     class Config:
@@ -116,3 +118,5 @@ class PostingModuleRulesUpdatedResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PostingModuleRulesUpdatedResponse.update_forward_refs()

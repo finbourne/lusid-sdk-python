@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class GroupReconciliationDatePair(BaseModel):
     """
     GroupReconciliationDatePair
     """
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective at date for the reconciliation")
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The as at date for the reconciliation")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective at date for the reconciliation", alias="effectiveAt")
+    as_at: Optional[datetime] = Field(default=None, description="The as at date for the reconciliation", alias="asAt")
     __properties = ["effectiveAt", "asAt"]
 
     class Config:
@@ -87,3 +89,5 @@ class GroupReconciliationDatePair(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+GroupReconciliationDatePair.update_forward_refs()

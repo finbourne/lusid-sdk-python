@@ -22,9 +22,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.equity_swap import EquitySwap
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 code: StrictStr = "example_code"
@@ -38,7 +40,7 @@ notional_reset:StrictBool = True
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 underlying_identifier: StrictStr = "example_underlying_identifier"
 equity_swap_dividend_payment_timing: Optional[StrictStr] = "example_equity_swap_dividend_payment_timing"
-additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 equity_swap_instance = EquitySwap(start_date=start_date, maturity_date=maturity_date, code=code, equity_flow_conventions=equity_flow_conventions, funding_leg=funding_leg, include_dividends=include_dividends, initial_price=initial_price, notional_reset=notional_reset, quantity=quantity, underlying_identifier=underlying_identifier, equity_swap_dividend_payment_timing=equity_swap_dividend_payment_timing, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

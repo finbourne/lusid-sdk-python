@@ -18,18 +18,20 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.collateral_instrument import CollateralInstrument
 
 class Collateral(BaseModel):
     """
     Representation of the collateral of a repurchase agreement, along with related details of the agreement.  # noqa: E501
     """
-    buyer_receives_cashflows: StrictBool = Field(..., alias="buyerReceivesCashflows", description="Does the buyer of the FlexibleRepo receive the cashflows from any collateral instruments, or do they get paid to the seller.")
-    buyer_receives_corporate_action_payments: StrictBool = Field(..., alias="buyerReceivesCorporateActionPayments", description="Does the buyer of the FlexibleRepo receive any dividend or cash payments as the result of a corporate action  on any of the collateral instruments, or are these amounts paid to the seller.  Referred to as \"manufactured payments\" in the UK, and valid only under a repo with GMRA in Europe")
-    collateral_instruments: Optional[conlist(CollateralInstrument)] = Field(None, alias="collateralInstruments", description="List of any collateral instruments.")
-    collateral_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="collateralValue", description="Total value of the collateral before any margin or haircut applied.  Can be provided instead of PurchasePrice, so that PurchasePrice can be inferred from the CollateralValue and one of  Haircut or Margin.")
+    buyer_receives_cashflows: StrictBool = Field(description="Does the buyer of the FlexibleRepo receive the cashflows from any collateral instruments, or do they get paid to the seller.", alias="buyerReceivesCashflows")
+    buyer_receives_corporate_action_payments: StrictBool = Field(description="Does the buyer of the FlexibleRepo receive any dividend or cash payments as the result of a corporate action  on any of the collateral instruments, or are these amounts paid to the seller.  Referred to as \"manufactured payments\" in the UK, and valid only under a repo with GMRA in Europe", alias="buyerReceivesCorporateActionPayments")
+    collateral_instruments: Optional[List[CollateralInstrument]] = Field(default=None, description="List of any collateral instruments.", alias="collateralInstruments")
+    collateral_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total value of the collateral before any margin or haircut applied.  Can be provided instead of PurchasePrice, so that PurchasePrice can be inferred from the CollateralValue and one of  Haircut or Margin.", alias="collateralValue")
     __properties = ["buyerReceivesCashflows", "buyerReceivesCorporateActionPayments", "collateralInstruments", "collateralValue"]
 
     class Config:
@@ -99,3 +101,5 @@ class Collateral(BaseModel):
             "collateral_value": obj.get("collateralValue")
         })
         return _obj
+
+Collateral.update_forward_refs()

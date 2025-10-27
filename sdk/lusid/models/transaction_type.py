@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_type_alias import TransactionTypeAlias
@@ -30,11 +32,11 @@ class TransactionType(BaseModel):
     """
     TransactionType
     """
-    aliases: conlist(TransactionTypeAlias) = Field(..., description="List of transaction types that map to this specific transaction configuration")
-    movements: conlist(TransactionTypeMovement) = Field(..., description="Movement data for the transaction type")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Properties attached to the transaction type")
-    calculations: Optional[conlist(TransactionTypeCalculation)] = Field(None, description="Calculations to be performed for the transaction type")
-    links: Optional[conlist(Link)] = None
+    aliases: List[TransactionTypeAlias] = Field(description="List of transaction types that map to this specific transaction configuration")
+    movements: List[TransactionTypeMovement] = Field(description="Movement data for the transaction type")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties attached to the transaction type")
+    calculations: Optional[List[TransactionTypeCalculation]] = Field(default=None, description="Calculations to be performed for the transaction type")
+    links: Optional[List[Link]] = None
     __properties = ["aliases", "movements", "properties", "calculations", "links"]
 
     class Config:
@@ -143,3 +145,5 @@ class TransactionType(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TransactionType.update_forward_refs()

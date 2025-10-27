@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-left: PortfolioReconciliationRequest = # Replace with your value
-right: PortfolioReconciliationRequest = # Replace with your value
-instrument_property_keys: conlist(StrictStr) = # Replace with your value
+left: PortfolioReconciliationRequest
+right: PortfolioReconciliationRequest
+instrument_property_keys: List[StrictStr] = # Replace with your value
 portfolios_reconciliation_request_instance = PortfoliosReconciliationRequest(left=left, right=right, instrument_property_keys=instrument_property_keys)
 
 ```

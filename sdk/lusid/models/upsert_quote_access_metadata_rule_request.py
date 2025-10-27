@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.access_metadata_value import AccessMetadataValue
 from lusid.models.quote_access_metadata_rule_id import QuoteAccessMetadataRuleId
 
@@ -27,8 +29,8 @@ class UpsertQuoteAccessMetadataRuleRequest(BaseModel):
     """
     UpsertQuoteAccessMetadataRuleRequest
     """
-    id: QuoteAccessMetadataRuleId = Field(...)
-    metadata: Dict[str, conlist(AccessMetadataValue)] = Field(..., description="The access control metadata to assign to quotes that match the identifier")
+    id: QuoteAccessMetadataRuleId
+    metadata: Dict[str, Optional[List[AccessMetadataValue]]] = Field(description="The access control metadata to assign to quotes that match the identifier")
     __properties = ["id", "metadata"]
 
     class Config:
@@ -98,3 +100,5 @@ class UpsertQuoteAccessMetadataRuleRequest(BaseModel):
             )
         })
         return _obj
+
+UpsertQuoteAccessMetadataRuleRequest.update_forward_refs()

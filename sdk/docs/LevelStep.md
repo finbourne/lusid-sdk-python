@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.level_step import LevelStep
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 var_date: datetime = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 level_step_instance = LevelStep(var_date=var_date, quantity=quantity)

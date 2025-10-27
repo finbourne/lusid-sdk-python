@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, validator 
 from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,11 +30,11 @@ class HoldingsAdjustment(BaseModel):
     """
     Full content of a holdings adjustment for a single portfolio and effective date.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective datetime from which the adjustment is valid. There can only be one holdings adjustment for a transaction portfolio at a specific effective datetime, so this uniquely identifies the adjustment.")
-    version: Version = Field(...)
+    effective_at: datetime = Field(description="The effective datetime from which the adjustment is valid. There can only be one holdings adjustment for a transaction portfolio at a specific effective datetime, so this uniquely identifies the adjustment.", alias="effectiveAt")
+    version: Version
     unmatched_holding_method:  StrictStr = Field(...,alias="unmatchedHoldingMethod", description="Describes how the holdings were adjusted. If 'PositionToZero' the entire transaction portfolio's holdings were set via a call to 'Set holdings'. If 'KeepTheSame' only the specified holdings were adjusted via a call to 'Adjust holdings'. The available values are: PositionToZero, KeepTheSame") 
-    adjustments: conlist(HoldingAdjustment) = Field(..., description="The holding adjustments.")
-    links: Optional[conlist(Link)] = None
+    adjustments: List[HoldingAdjustment] = Field(description="The holding adjustments.")
+    links: Optional[List[Link]] = None
     __properties = ["effectiveAt", "version", "unmatchedHoldingMethod", "adjustments", "links"]
 
     @validator('unmatched_holding_method')
@@ -85,14 +87,19 @@ class HoldingsAdjustment(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "unmatched_holding_method" != "type":
             return value
 
-        if value not in ('PositionToZero', 'KeepTheSame'):
+        if value not in ['PositionToZero', 'KeepTheSame']:
             raise ValueError("must be one of enum values ('PositionToZero', 'KeepTheSame')")
         return value
 
@@ -169,3 +176,5 @@ class HoldingsAdjustment(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+HoldingsAdjustment.update_forward_refs()

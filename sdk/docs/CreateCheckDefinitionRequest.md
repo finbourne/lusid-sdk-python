@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_check_definition_request import CreateCheckDefinitionRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 dataset_schema: Optional[CheckDefinitionDatasetSchema] = # Replace with your value
-rule_sets: conlist(CheckDefinitionRuleSet) = # Replace with your value
+rule_sets: List[CheckDefinitionRuleSet] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 create_check_definition_request_instance = CreateCheckDefinitionRequest(id=id, display_name=display_name, description=description, dataset_schema=dataset_schema, rule_sets=rule_sets, properties=properties)
 

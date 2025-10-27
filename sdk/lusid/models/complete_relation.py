@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -29,12 +31,12 @@ class CompleteRelation(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
     version: Optional[Version] = None
-    relation_definition_id: ResourceId = Field(..., alias="relationDefinitionId")
-    source_entity_id: Dict[str, StrictStr] = Field(..., alias="sourceEntityId")
-    target_entity_id: Dict[str, StrictStr] = Field(..., alias="targetEntityId")
+    relation_definition_id: ResourceId = Field(alias="relationDefinitionId")
+    source_entity_id: Dict[str, Optional[StrictStr]] = Field(alias="sourceEntityId")
+    target_entity_id: Dict[str, Optional[StrictStr]] = Field(alias="targetEntityId")
     outward_description:  StrictStr = Field(...,alias="outwardDescription") 
     inward_description:  StrictStr = Field(...,alias="inwardDescription") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom")
+    effective_from: Optional[datetime] = Field(default=None, alias="effectiveFrom")
     __properties = ["href", "version", "relationDefinitionId", "sourceEntityId", "targetEntityId", "outwardDescription", "inwardDescription", "effectiveFrom"]
 
     class Config:
@@ -102,3 +104,5 @@ class CompleteRelation(BaseModel):
             "effective_from": obj.get("effectiveFrom")
         })
         return _obj
+
+CompleteRelation.update_forward_refs()

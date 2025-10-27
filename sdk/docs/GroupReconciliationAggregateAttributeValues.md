@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_aggregate_attribute_values import GroupReconciliationAggregateAttributeValues
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-left_aggregate_attributes: conlist(ComparisonAttributeValuePair) = # Replace with your value
-right_aggregate_attributes: conlist(ComparisonAttributeValuePair) = # Replace with your value
+left_aggregate_attributes: List[ComparisonAttributeValuePair] = # Replace with your value
+right_aggregate_attributes: List[ComparisonAttributeValuePair] = # Replace with your value
 group_reconciliation_aggregate_attribute_values_instance = GroupReconciliationAggregateAttributeValues(left_aggregate_attributes=left_aggregate_attributes, right_aggregate_attributes=right_aggregate_attributes)
 
 ```

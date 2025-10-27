@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.market_context import MarketContext
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-market_rules: Optional[conlist(MarketDataKeyRule)] = # Replace with your value
+market_rules: Optional[List[MarketDataKeyRule]] = # Replace with your value
 suppliers: Optional[MarketContextSuppliers] = None
 options: Optional[MarketOptions] = None
-specific_rules: Optional[conlist(MarketDataSpecificRule)] = # Replace with your value
-grouped_market_rules: Optional[conlist(GroupOfMarketDataKeyRules)] = # Replace with your value
+specific_rules: Optional[List[MarketDataSpecificRule]] = # Replace with your value
+grouped_market_rules: Optional[List[GroupOfMarketDataKeyRules]] = # Replace with your value
 market_context_instance = MarketContext(market_rules=market_rules, suppliers=suppliers, options=options, specific_rules=specific_rules, grouped_market_rules=grouped_market_rules)
 
 ```

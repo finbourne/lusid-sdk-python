@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 import lusid.models
 
 class ResultKeyRule(BaseModel):
@@ -79,14 +81,19 @@ class ResultKeyRule(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "result_key_rule_type" != "type":
             return value
 
-        if value not in ('Invalid', 'ResultDataKeyRule', 'PortfolioResultDataKeyRule'):
+        if value not in ['Invalid', 'ResultDataKeyRule', 'PortfolioResultDataKeyRule']:
             raise ValueError("must be one of enum values ('Invalid', 'ResultDataKeyRule', 'PortfolioResultDataKeyRule')")
         return value
 
@@ -154,3 +161,5 @@ class ResultKeyRule(BaseModel):
             raise ValueError("ResultKeyRule failed to lookup discriminator value from " +
                              json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
                              ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+
+ResultKeyRule.update_forward_refs()

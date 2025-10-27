@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.property_definition import PropertyDefinition
 
@@ -29,17 +31,17 @@ class PropertyDefinitionEntity(BaseModel):
     """
     href:  StrictStr = Field(...,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The unique id of the entity.") 
-    as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
+    as_at_version_number: Optional[StrictInt] = Field(default=None, description="The integer version number for the entity (the entity was created at version 1)", alias="asAtVersionNumber")
     status:  StrictStr = Field(...,alias="status", description="The status of the entity at the current time.") 
-    as_at_deleted: Optional[datetime] = Field(None, alias="asAtDeleted", description="The asAt datetime at which the entity was deleted.")
+    as_at_deleted: Optional[datetime] = Field(default=None, description="The asAt datetime at which the entity was deleted.", alias="asAtDeleted")
     user_id_deleted:  Optional[StrictStr] = Field(None,alias="userIdDeleted", description="The unique id of the user who deleted the entity.") 
     request_id_deleted:  Optional[StrictStr] = Field(None,alias="requestIdDeleted", description="The unique request id of the command that deleted the entity.") 
-    effective_at_created: Optional[datetime] = Field(None, alias="effectiveAtCreated", description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt.")
-    prevailing_property_definition: Optional[PropertyDefinition] = Field(None, alias="prevailingPropertyDefinition")
-    deleted_property_definition: Optional[PropertyDefinition] = Field(None, alias="deletedPropertyDefinition")
+    effective_at_created: Optional[datetime] = Field(default=None, description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt.", alias="effectiveAtCreated")
+    prevailing_property_definition: Optional[PropertyDefinition] = Field(default=None, alias="prevailingPropertyDefinition")
+    deleted_property_definition: Optional[PropertyDefinition] = Field(default=None, alias="deletedPropertyDefinition")
     previewed_status:  Optional[StrictStr] = Field(None,alias="previewedStatus", description="The status of the previewed entity.") 
-    previewed_property_definition: Optional[PropertyDefinition] = Field(None, alias="previewedPropertyDefinition")
-    links: Optional[conlist(Link)] = None
+    previewed_property_definition: Optional[PropertyDefinition] = Field(default=None, alias="previewedPropertyDefinition")
+    links: Optional[List[Link]] = None
     __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingPropertyDefinition", "deletedPropertyDefinition", "previewedStatus", "previewedPropertyDefinition", "links"]
 
     class Config:
@@ -152,3 +154,5 @@ class PropertyDefinitionEntity(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PropertyDefinitionEntity.update_forward_refs()

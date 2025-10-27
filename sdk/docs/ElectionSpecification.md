@@ -4,18 +4,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **election_type** | **str** |  | 
-**cardinality** | **Dict[str, str]** |  | 
+**cardinality** | **Dict[str, Optional[str]]** |  | 
 **referenced_as** | **List[str]** |  | 
 ## Example
 
 ```python
 from lusid.models.election_specification import ElectionSpecification
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 election_type: StrictStr = "example_election_type"
-cardinality: Dict[str, StrictStr] = # Replace with your value
-referenced_as: conlist(StrictStr) = # Replace with your value
+cardinality: Dict[str, Optional[StrictStr]]
+referenced_as: List[StrictStr] = # Replace with your value
 election_specification_instance = ElectionSpecification(election_type=election_type, cardinality=cardinality, referenced_as=referenced_as)
 
 ```

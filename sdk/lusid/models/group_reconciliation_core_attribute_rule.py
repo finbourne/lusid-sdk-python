@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_comparison_rule_string_value_map import GroupReconciliationComparisonRuleStringValueMap
 from lusid.models.group_reconciliation_core_comparison_rule_operand import GroupReconciliationCoreComparisonRuleOperand
 
@@ -27,10 +29,10 @@ class GroupReconciliationCoreAttributeRule(BaseModel):
     """
     GroupReconciliationCoreAttributeRule
     """
-    left: GroupReconciliationCoreComparisonRuleOperand = Field(...)
-    right: GroupReconciliationCoreComparisonRuleOperand = Field(...)
-    allowable_string_mappings: Optional[conlist(GroupReconciliationComparisonRuleStringValueMap)] = Field(None, alias="allowableStringMappings", description="The string mappings to use when comparing")
-    is_comparison_case_sensitive: StrictBool = Field(..., alias="isComparisonCaseSensitive", description="Whether the compare keys and strings mappings case sensitive or not")
+    left: GroupReconciliationCoreComparisonRuleOperand
+    right: GroupReconciliationCoreComparisonRuleOperand
+    allowable_string_mappings: Optional[List[GroupReconciliationComparisonRuleStringValueMap]] = Field(default=None, description="The string mappings to use when comparing", alias="allowableStringMappings")
+    is_comparison_case_sensitive: StrictBool = Field(description="Whether the compare keys and strings mappings case sensitive or not", alias="isComparisonCaseSensitive")
     __properties = ["left", "right", "allowableStringMappings", "isComparisonCaseSensitive"]
 
     class Config:
@@ -101,3 +103,5 @@ class GroupReconciliationCoreAttributeRule(BaseModel):
             "is_comparison_case_sensitive": obj.get("isComparisonCaseSensitive")
         })
         return _obj
+
+GroupReconciliationCoreAttributeRule.update_forward_refs()

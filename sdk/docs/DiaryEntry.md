@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.diary_entry import DiaryEntry
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
 abor_id: Optional[ResourceId] = # Replace with your value
 diary_entry_code: Optional[StrictStr] = "example_diary_entry_code"
@@ -36,7 +38,7 @@ query_as_at: Optional[datetime] = # Replace with your value
 previous_entry_time: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 diary_entry_instance = DiaryEntry(href=href, abor_id=abor_id, diary_entry_code=diary_entry_code, type=type, name=name, status=status, apply_clear_down=apply_clear_down, effective_at=effective_at, query_as_at=query_as_at, previous_entry_time=previous_entry_time, properties=properties, version=version, links=links)
 
 ```

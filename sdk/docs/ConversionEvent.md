@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.conversion_event import ConversionEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 record_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 new_instrument: NewInstrument = # Replace with your value
@@ -31,9 +33,9 @@ market_deadline_date: Optional[datetime] = # Replace with your value
 period_of_action: Optional[EventDateRange] = # Replace with your value
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
-security_offer_elections: Optional[conlist(SecurityOfferElection)] = # Replace with your value
-cash_and_security_offer_elections: Optional[conlist(CashAndSecurityOfferElection)] = # Replace with your value
-cash_offer_elections: Optional[conlist(CashOfferElection)] = # Replace with your value
+security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
+cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = # Replace with your value
+cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
 conversion_event_instance = ConversionEvent(record_date=record_date, payment_date=payment_date, new_instrument=new_instrument, response_deadline_date=response_deadline_date, market_deadline_date=market_deadline_date, period_of_action=period_of_action, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, instrument_event_type=instrument_event_type)
 

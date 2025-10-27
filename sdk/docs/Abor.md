@@ -18,19 +18,21 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.abor import Abor
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-portfolio_ids: conlist(PortfolioEntityId) = # Replace with your value
+portfolio_ids: List[PortfolioEntityId] = # Replace with your value
 abor_configuration_id: Optional[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
 base_currency: Optional[StrictStr] = "example_base_currency"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 abor_instance = Abor(href=href, id=id, display_name=display_name, description=description, portfolio_ids=portfolio_ids, abor_configuration_id=abor_configuration_id, properties=properties, version=version, base_currency=base_currency, links=links)
 
 ```

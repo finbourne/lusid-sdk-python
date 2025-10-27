@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 economic_dependency: EconomicDependency = # Replace with your value
 complex_market_data: ComplexMarketData = # Replace with your value

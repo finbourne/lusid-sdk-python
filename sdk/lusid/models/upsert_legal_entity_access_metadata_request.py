@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.access_metadata_value import AccessMetadataValue
 
 class UpsertLegalEntityAccessMetadataRequest(BaseModel):
     """
     UpsertLegalEntityAccessMetadataRequest
     """
-    metadata: Optional[conlist(AccessMetadataValue)] = Field(None, description="The access control metadata to assign to a Legal Entity that matches the identifier")
+    metadata: Optional[List[AccessMetadataValue]] = Field(default=None, description="The access control metadata to assign to a Legal Entity that matches the identifier")
     __properties = ["metadata"]
 
     class Config:
@@ -88,3 +90,5 @@ class UpsertLegalEntityAccessMetadataRequest(BaseModel):
             "metadata": [AccessMetadataValue.from_dict(_item) for _item in obj.get("metadata")] if obj.get("metadata") is not None else None
         })
         return _obj
+
+UpsertLegalEntityAccessMetadataRequest.update_forward_refs()

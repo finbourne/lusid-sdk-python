@@ -14,9 +14,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.trigger_event import TriggerEvent
-from typing import Any, Dict, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 level: Union[StrictFloat, StrictInt] = # Replace with your value
 trigger_type: StrictStr = "example_trigger_type"
 trigger_direction: StrictStr = "example_trigger_direction"

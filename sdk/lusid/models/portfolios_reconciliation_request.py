@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.portfolio_reconciliation_request import PortfolioReconciliationRequest
 
 class PortfoliosReconciliationRequest(BaseModel):
     """
     PortfoliosReconciliationRequest
     """
-    left: PortfolioReconciliationRequest = Field(...)
-    right: PortfolioReconciliationRequest = Field(...)
-    instrument_property_keys: conlist(StrictStr) = Field(..., alias="instrumentPropertyKeys", description="Instrument properties to be included with any identified breaks. These properties will be in the effective and AsAt dates of the left portfolio")
+    left: PortfolioReconciliationRequest
+    right: PortfolioReconciliationRequest
+    instrument_property_keys: List[StrictStr] = Field(description="Instrument properties to be included with any identified breaks. These properties will be in the effective and AsAt dates of the left portfolio", alias="instrumentPropertyKeys")
     __properties = ["left", "right", "instrumentPropertyKeys"]
 
     class Config:
@@ -86,3 +88,5 @@ class PortfoliosReconciliationRequest(BaseModel):
             "instrument_property_keys": obj.get("instrumentPropertyKeys")
         })
         return _obj
+
+PortfoliosReconciliationRequest.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class IndexConvention(BaseModel):
     """
     A set of conventions that describe the conventions for calculation of payments made on rates interbank lending and similar.  Based on ISDA 2006 conventions and similar documentation. Please see the knowledge base for further documentation.  # noqa: E501
     """
     fixing_reference:  StrictStr = Field(...,alias="fixingReference", description="The reference rate name for fixings.") 
-    publication_day_lag: StrictInt = Field(..., alias="publicationDayLag", description="Number of days between spot and publication of the rate.")
+    publication_day_lag: StrictInt = Field(description="Number of days between spot and publication of the rate.", alias="publicationDayLag")
     payment_tenor:  StrictStr = Field(...,alias="paymentTenor", description="The tenor of the payment. For an OIS index this is always 1 day. For other indices, e.g. LIBOR it will have a variable tenor typically between 1 day and 1 year.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
     day_count_convention:  StrictStr = Field(...,alias="dayCountConvention", description="when calculating the fraction of a year between two dates, what convention is used to represent the number of days in a year  and difference between them.  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365].") 
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the index convention.") 
@@ -104,3 +106,5 @@ class IndexConvention(BaseModel):
             "code": obj.get("code")
         })
         return _obj
+
+IndexConvention.update_forward_refs()

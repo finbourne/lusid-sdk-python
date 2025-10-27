@@ -17,24 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.resource_id import ResourceId
 
 class AggregatedReturn(BaseModel):
     """
     A list of Aggregated Returns.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effectiveAt for the return.")
-    end_of_period: datetime = Field(..., alias="endOfPeriod", description="The end of period date. For the monthly period this will be the Month End Date.")
-    opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openingMarketValue", description="The opening market value.")
-    closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closingMarketValue", description="The closing market value.")
-    metrics_value: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="metricsValue", description="The value for the specified metric.")
+    effective_at: datetime = Field(description="The effectiveAt for the return.", alias="effectiveAt")
+    end_of_period: datetime = Field(description="The end of period date. For the monthly period this will be the Month End Date.", alias="endOfPeriod")
+    opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The opening market value.", alias="openingMarketValue")
+    closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The closing market value.", alias="closingMarketValue")
+    metrics_value: Dict[str, Union[StrictFloat, StrictInt]] = Field(description="The value for the specified metric.", alias="metricsValue")
     frequency:  Optional[StrictStr] = Field(None,alias="frequency", description="Show the aggregated output returns on a Daily or Monthly period.") 
-    composite_members: Optional[StrictInt] = Field(None, alias="compositeMembers", description="The number of members in the Composite on the given day.")
-    composite_members_without_return: Optional[conlist(ResourceId)] = Field(None, alias="compositeMembersWithoutReturn", description="List containing Composite members which post no return on the given day.")
-    warnings: Optional[conlist(StrictStr)] = Field(None, description="List of the warnings about the calculation of the aggregated return.")
+    composite_members: Optional[StrictInt] = Field(default=None, description="The number of members in the Composite on the given day.", alias="compositeMembers")
+    composite_members_without_return: Optional[List[ResourceId]] = Field(default=None, description="List containing Composite members which post no return on the given day.", alias="compositeMembersWithoutReturn")
+    warnings: Optional[List[StrictStr]] = Field(default=None, description="List of the warnings about the calculation of the aggregated return.")
     __properties = ["effectiveAt", "endOfPeriod", "openingMarketValue", "closingMarketValue", "metricsValue", "frequency", "compositeMembers", "compositeMembersWithoutReturn", "warnings"]
 
     class Config:
@@ -129,3 +131,5 @@ class AggregatedReturn(BaseModel):
             "warnings": obj.get("warnings")
         })
         return _obj
+
+AggregatedReturn.update_forward_refs()

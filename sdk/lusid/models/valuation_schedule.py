@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class ValuationSchedule(BaseModel):
@@ -30,10 +32,10 @@ class ValuationSchedule(BaseModel):
     effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The market data time, i.e. the time to run the valuation request effective of.") 
     tenor:  Optional[StrictStr] = Field(None,alias="tenor", description="Tenor, e.g \"1D\", \"1M\" to be used in generating the date schedule when effectiveFrom and effectiveAt are both given and are not the same.") 
     roll_convention:  Optional[StrictStr] = Field(None,alias="rollConvention", description="When Tenor is given and is \"1M\" or longer, this specifies the rule which should be used to generate the date schedule.    For example, \"EndOfMonth\" to generate end of month dates, or \"1\" to specify the first day of the applicable month.") 
-    holiday_calendars: Optional[conlist(StrictStr)] = Field(None, alias="holidayCalendars", description="The holiday calendar(s) that should be used in determining the date schedule.  Holiday calendar(s) are supplied by their names, for example, \"CoppClark\".   Note that when the calendars are not available (e.g. when the user has insufficient permissions),   a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.")
-    valuation_date_times: Optional[conlist(StrictStr)] = Field(None, alias="valuationDateTimes", description="If given, this is the exact set of dates on which to perform a valuation. This will replace/override all other specified values if given.")
+    holiday_calendars: Optional[List[StrictStr]] = Field(default=None, description="The holiday calendar(s) that should be used in determining the date schedule.  Holiday calendar(s) are supplied by their names, for example, \"CoppClark\".   Note that when the calendars are not available (e.g. when the user has insufficient permissions),   a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.", alias="holidayCalendars")
+    valuation_date_times: Optional[List[StrictStr]] = Field(default=None, description="If given, this is the exact set of dates on which to perform a valuation. This will replace/override all other specified values if given.", alias="valuationDateTimes")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.  In that case, the BusinessDayConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.") 
-    timeline_id: Optional[ResourceId] = Field(None, alias="timelineId")
+    timeline_id: Optional[ResourceId] = Field(default=None, alias="timelineId")
     closed_period_id:  Optional[StrictStr] = Field(None,alias="closedPeriodId", description="Unique identifier for a closed period within a given timeline. If this field is specified, the TimelineId  field must also be specified. If given, this field defines the effective date of the request as the  EffectiveEnd of the given closed period.") 
     __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention", "timelineId", "closedPeriodId"]
 
@@ -135,3 +137,5 @@ class ValuationSchedule(BaseModel):
             "closed_period_id": obj.get("closedPeriodId")
         })
         return _obj
+
+ValuationSchedule.update_forward_refs()

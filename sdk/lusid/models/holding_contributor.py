@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.movement_settlement_summary import MovementSettlementSummary
 from lusid.models.transaction import Transaction
 
@@ -27,9 +29,9 @@ class HoldingContributor(BaseModel):
     """
     A list of transactions contributed to a holding.  # noqa: E501
     """
-    transaction: Transaction = Field(...)
-    holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="The unique holding identifier")
-    movements: Optional[conlist(MovementSettlementSummary)] = Field(None, description="Movements contributed to holding")
+    transaction: Transaction
+    holding_id: Optional[StrictInt] = Field(default=None, description="The unique holding identifier", alias="holdingId")
+    movements: Optional[List[MovementSettlementSummary]] = Field(default=None, description="Movements contributed to holding")
     __properties = ["transaction", "holdingId", "movements"]
 
     class Config:
@@ -101,3 +103,5 @@ class HoldingContributor(BaseModel):
             "movements": [MovementSettlementSummary.from_dict(_item) for _item in obj.get("movements")] if obj.get("movements") is not None else None
         })
         return _obj
+
+HoldingContributor.update_forward_refs()

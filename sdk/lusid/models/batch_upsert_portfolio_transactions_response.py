@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.response_meta_data import ResponseMetaData
@@ -29,10 +31,10 @@ class BatchUpsertPortfolioTransactionsResponse(BaseModel):
     """
     BatchUpsertPortfolioTransactionsResponse
     """
-    values: Optional[Dict[str, Transaction]] = Field(None, description="The transactions which have been successfully upserted.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The transactions that could not be upserted along with a reason for their failure.")
-    metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = Field(None, description="Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, Transaction]] = Field(default=None, description="The transactions which have been successfully upserted.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The transactions that could not be upserted along with a reason for their failure.")
+    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades")
+    links: Optional[List[Link]] = None
     __properties = ["values", "failed", "metadata", "links"]
 
     class Config:
@@ -152,3 +154,5 @@ class BatchUpsertPortfolioTransactionsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+BatchUpsertPortfolioTransactionsResponse.update_forward_refs()

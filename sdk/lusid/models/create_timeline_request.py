@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 
@@ -27,10 +29,10 @@ class CreateTimelineRequest(BaseModel):
     """
     CreateTimelineRequest
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Timeline.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Timeline.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Timelines properties. These will be from the 'Timeline' domain.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Timelines properties. These will be from the 'Timeline' domain.")
     __properties = ["id", "displayName", "description", "properties"]
 
     class Config:
@@ -108,3 +110,5 @@ class CreateTimelineRequest(BaseModel):
             else None
         })
         return _obj
+
+CreateTimelineRequest.update_forward_refs()

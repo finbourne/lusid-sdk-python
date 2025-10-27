@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.reconciliation_rule import ReconciliationRule
 
@@ -28,8 +30,8 @@ class ReconcileStringRule(ReconciliationRule):
     Comparison of string values  # noqa: E501
     """
     comparison_type:  StrictStr = Field(...,alias="comparisonType", description="The available values are: Exact, Contains, CaseInsensitive, ContainsAnyCase, IsOneOf, IsOneOfCaseInsensitive") 
-    one_of_candidates: Optional[Dict[str, conlist(StrictStr)]] = Field(None, alias="oneOfCandidates", description="For cases of \"IsOneOf\" or \"IsOneOfCaseInsensitive\", a mapping from the left hand to side to lists of  equivalent alternative values on the right hand side.  Fuzzy matching of strings against one of a set. There can be cases where systems \"A\" and \"B\" might use different terms for the same logical entity. A common case would be  comparison of something like a day count fraction where some convention like the \"actual 365\" convention might be represented as one of [\"A365\", \"Act365\", \"Actual365\"] or similar.  This is to allow this kind of fuzzy matching of values. Note that as this is exhaustive comparison across sets it will be slow and should therefore be used sparingly.")
-    applies_to: AggregateSpec = Field(..., alias="appliesTo")
+    one_of_candidates: Optional[Dict[str, Optional[List[StrictStr]]]] = Field(default=None, description="For cases of \"IsOneOf\" or \"IsOneOfCaseInsensitive\", a mapping from the left hand to side to lists of  equivalent alternative values on the right hand side.  Fuzzy matching of strings against one of a set. There can be cases where systems \"A\" and \"B\" might use different terms for the same logical entity. A common case would be  comparison of something like a day count fraction where some convention like the \"actual 365\" convention might be represented as one of [\"A365\", \"Act365\", \"Actual365\"] or similar.  This is to allow this kind of fuzzy matching of values. Note that as this is exhaustive comparison across sets it will be slow and should therefore be used sparingly.", alias="oneOfCandidates")
+    applies_to: AggregateSpec = Field(alias="appliesTo")
     rule_type:  StrictStr = Field(...,alias="ruleType", description="The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["ruleType", "comparisonType", "oneOfCandidates", "appliesTo"]
@@ -84,14 +86,19 @@ class ReconcileStringRule(ReconciliationRule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "comparison_type" != "type":
             return value
 
-        if value not in ('Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf', 'IsOneOfCaseInsensitive'):
+        if value not in ['Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf', 'IsOneOfCaseInsensitive']:
             raise ValueError("must be one of enum values ('Exact', 'Contains', 'CaseInsensitive', 'ContainsAnyCase', 'IsOneOf', 'IsOneOfCaseInsensitive')")
         return value
 
@@ -145,14 +152,19 @@ class ReconcileStringRule(ReconciliationRule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "rule_type" != "type":
             return value
 
-        if value not in ('ReconcileNumericRule', 'ReconcileDateTimeRule', 'ReconcileStringRule', 'ReconcileExact'):
+        if value not in ['ReconcileNumericRule', 'ReconcileDateTimeRule', 'ReconcileStringRule', 'ReconcileExact']:
             raise ValueError("must be one of enum values ('ReconcileNumericRule', 'ReconcileDateTimeRule', 'ReconcileStringRule', 'ReconcileExact')")
         return value
 
@@ -234,3 +246,5 @@ class ReconcileStringRule(ReconciliationRule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+ReconcileStringRule.update_forward_refs()

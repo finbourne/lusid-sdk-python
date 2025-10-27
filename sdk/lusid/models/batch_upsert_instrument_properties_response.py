@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -28,10 +30,10 @@ class BatchUpsertInstrumentPropertiesResponse(BaseModel):
     """
     BatchUpsertInstrumentPropertiesResponse
     """
-    values: Dict[str, conlist(ModelProperty)] = Field(..., description="The properties that have been successfully upserted")
-    failed: Dict[str, ErrorDetail] = Field(..., description="The properties that could not be upserted along with a reason for their failure.")
-    as_at_date: datetime = Field(..., alias="asAtDate", description="The as-at datetime at which properties were created or updated.")
-    links: Optional[conlist(Link)] = None
+    values: Dict[str, Optional[List[ModelProperty]]] = Field(description="The properties that have been successfully upserted")
+    failed: Dict[str, ErrorDetail] = Field(description="The properties that could not be upserted along with a reason for their failure.")
+    as_at_date: datetime = Field(description="The as-at datetime at which properties were created or updated.", alias="asAtDate")
+    links: Optional[List[Link]] = None
     __properties = ["values", "failed", "asAtDate", "links"]
 
     class Config:
@@ -124,3 +126,5 @@ class BatchUpsertInstrumentPropertiesResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+BatchUpsertInstrumentPropertiesResponse.update_forward_refs()

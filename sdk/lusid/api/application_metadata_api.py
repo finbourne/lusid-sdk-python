@@ -19,11 +19,9 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.file_response import FileResponse
 from lusid.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
 from lusid.models.version_summary_dto import VersionSummaryDto

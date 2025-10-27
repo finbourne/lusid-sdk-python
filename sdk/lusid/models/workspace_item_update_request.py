@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class WorkspaceItemUpdateRequest(BaseModel):
     """
     A request to update a workspace item.  # noqa: E501
     """
-    format: StrictInt = Field(..., description="A simple integer format identifier.")
+    format: StrictInt = Field(description="A simple integer format identifier.")
     description:  StrictStr = Field(...,alias="description", description="The description of a workspace item.") 
-    content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
+    content: Optional[Any] = Field(description="The content associated with a workspace item.")
     type:  StrictStr = Field(...,alias="type", description="The type of the workspace item.") 
     __properties = ["format", "description", "content", "type"]
 
@@ -86,3 +88,5 @@ class WorkspaceItemUpdateRequest(BaseModel):
             "type": obj.get("type")
         })
         return _obj
+
+WorkspaceItemUpdateRequest.update_forward_refs()

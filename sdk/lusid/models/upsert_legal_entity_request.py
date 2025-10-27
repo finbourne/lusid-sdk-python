@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
 from lusid.models.model_property import ModelProperty
 
@@ -27,11 +29,11 @@ class UpsertLegalEntityRequest(BaseModel):
     """
     Request to create or update an legal entity  # noqa: E501
     """
-    identifiers: Dict[str, ModelProperty] = Field(..., description="The identifiers the legal entity will be upserted with.The provided keys should be idTypeScope, idTypeCode, code")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Legal Entity.")
+    identifiers: Dict[str, ModelProperty] = Field(description="The identifiers the legal entity will be upserted with.The provided keys should be idTypeScope, idTypeCode, code")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Legal Entity.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Legal Entity") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Legal Entity") 
-    counterparty_risk_information: Optional[CounterpartyRiskInformation] = Field(None, alias="counterpartyRiskInformation")
+    counterparty_risk_information: Optional[CounterpartyRiskInformation] = Field(default=None, alias="counterpartyRiskInformation")
     __properties = ["identifiers", "properties", "displayName", "description", "counterpartyRiskInformation"]
 
     class Config:
@@ -122,3 +124,5 @@ class UpsertLegalEntityRequest(BaseModel):
             "counterparty_risk_information": CounterpartyRiskInformation.from_dict(obj.get("counterpartyRiskInformation")) if obj.get("counterpartyRiskInformation") is not None else None
         })
         return _obj
+
+UpsertLegalEntityRequest.update_forward_refs()

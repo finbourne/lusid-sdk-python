@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.rules_interval import RulesInterval
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 effective_range: DateRange = # Replace with your value
-rules: conlist(AmortisationRule, max_items=100) = Field(..., description="The rules of this rule set.")
+rules: List[AmortisationRule] = # Replace with your value
 rules_interval_instance = RulesInterval(effective_range=effective_range, rules=rules)
 
 ```

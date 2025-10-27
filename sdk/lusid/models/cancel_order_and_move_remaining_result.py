@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.order import Order
 from lusid.models.resource_id import ResourceId
 
@@ -27,9 +29,9 @@ class CancelOrderAndMoveRemainingResult(BaseModel):
     """
     CancelOrderAndMoveRemainingResult
     """
-    cancelled_order: Optional[Order] = Field(None, alias="cancelledOrder")
-    new_order: Optional[Order] = Field(None, alias="newOrder")
-    new_block_id: Optional[ResourceId] = Field(None, alias="newBlockId")
+    cancelled_order: Optional[Order] = Field(default=None, alias="cancelledOrder")
+    new_order: Optional[Order] = Field(default=None, alias="newOrder")
+    new_block_id: Optional[ResourceId] = Field(default=None, alias="newBlockId")
     __properties = ["cancelledOrder", "newOrder", "newBlockId"]
 
     class Config:
@@ -90,3 +92,5 @@ class CancelOrderAndMoveRemainingResult(BaseModel):
             "new_block_id": ResourceId.from_dict(obj.get("newBlockId")) if obj.get("newBlockId") is not None else None
         })
         return _obj
+
+CancelOrderAndMoveRemainingResult.update_forward_refs()

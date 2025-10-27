@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_event_id** | **str** | Free string that uniquely identifies the event within the corporate action source | 
-**instrument_identifiers** | **Dict[str, str]** | The set of identifiers which determine the instrument this event relates to. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The set of identifiers which determine the instrument this event relates to. | 
 **description** | **str** | The description of the instrument event. | [optional] 
 **instrument_event** | [**InstrumentEvent**](InstrumentEvent.md) |  | 
 **properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | The properties attached to this instrument event. | [optional] 
@@ -15,14 +15,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_instrument_event_request import UpsertInstrumentEventRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_event_id: StrictStr = "example_instrument_event_id"
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 description: Optional[StrictStr] = "example_description"
 instrument_event: InstrumentEvent = # Replace with your value
-properties: Optional[conlist(PerpetualProperty)] = # Replace with your value
+properties: Optional[List[PerpetualProperty]] = # Replace with your value
 sequence_number: Optional[StrictInt] = # Replace with your value
 sequence_number: Optional[StrictInt] = None
 participation_type: Optional[StrictStr] = "example_participation_type"

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -27,9 +29,9 @@ class ConstituentsAdjustmentHeader(BaseModel):
     """
     ConstituentsAdjustmentHeader
     """
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="There can be at most one holdings adjustment for a portfolio at a  specific effective time so this uniquely identifies the adjustment.")
+    effective_at: Optional[datetime] = Field(default=None, description="There can be at most one holdings adjustment for a portfolio at a  specific effective time so this uniquely identifies the adjustment.", alias="effectiveAt")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["effectiveAt", "version", "links"]
 
     class Config:
@@ -96,3 +98,5 @@ class ConstituentsAdjustmentHeader(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ConstituentsAdjustmentHeader.update_forward_refs()

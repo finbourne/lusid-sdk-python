@@ -13,9 +13,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.amortisation_event import AmortisationEvent
-from typing import Any, Dict, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 amount_reduced: Union[StrictFloat, StrictInt] = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
 pay_receive: StrictStr = "example_pay_receive"

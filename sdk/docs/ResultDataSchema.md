@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.result_data_schema import ResultDataSchema
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 node_value_schema: Optional[Dict[str, FieldSchema]] = # Replace with your value
 property_schema: Optional[Dict[str, FieldSchema]] = # Replace with your value

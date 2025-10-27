@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.reconciliation_line import ReconciliationLine
 from lusid.models.result_data_schema import ResultDataSchema
 
@@ -27,8 +29,8 @@ class ReconciliationResponse(BaseModel):
     """
     Class representing the set of comparisons that result from comparing holdings and their valuations between two separate evaluations.  # noqa: E501
     """
-    comparisons: Optional[conlist(ReconciliationLine)] = Field(None, description="List of comparisons of left to right hand sides.")
-    data_schema: Optional[ResultDataSchema] = Field(None, alias="dataSchema")
+    comparisons: Optional[List[ReconciliationLine]] = Field(default=None, description="List of comparisons of left to right hand sides.")
+    data_schema: Optional[ResultDataSchema] = Field(default=None, alias="dataSchema")
     __properties = ["comparisons", "dataSchema"]
 
     class Config:
@@ -94,3 +96,5 @@ class ReconciliationResponse(BaseModel):
             "data_schema": ResultDataSchema.from_dict(obj.get("dataSchema")) if obj.get("dataSchema") is not None else None
         })
         return _obj
+
+ReconciliationResponse.update_forward_refs()

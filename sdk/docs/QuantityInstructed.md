@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.quantity_instructed import QuantityInstructed
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: StrictStr = "example_type"
-amount: Union[StrictFloat, StrictInt] = # Replace with your value
+amount: Union[StrictFloat, StrictInt]
 quantity_instructed_instance = QuantityInstructed(type=type, amount=amount)
 
 ```

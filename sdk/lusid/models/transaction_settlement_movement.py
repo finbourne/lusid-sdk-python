@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionSettlementMovement(BaseModel):
     """
@@ -27,8 +29,8 @@ class TransactionSettlementMovement(BaseModel):
     """
     name:  Optional[StrictStr] = Field(None,alias="name", description="The movement name (optional)") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="Movement types determine the impact of the movement on the holdings. The available values are: Settlement, Traded, StockMovement, FutureCash,  Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, Carry, CarryAsPnl, VariationMargin, Capital, Fee, Deferred, CashDeferred.") 
-    units: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The number of units for the movement.")
-    direction: Optional[StrictInt] = Field(None, description=" A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease")
+    units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of units for the movement.")
+    direction: Optional[StrictInt] = Field(default=None, description=" A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease")
     settlement_mode:  Optional[StrictStr] = Field(None,alias="settlementMode", description="The mode of settlement for the movement which can either be Internal or External. An Internal movement will settle automatically on the contractual settlement date using TransactionConfiguration. An External movement will be determined by portfolio configuration and settlement instruction.") 
     __properties = ["name", "type", "units", "direction", "settlementMode"]
 
@@ -98,3 +100,5 @@ class TransactionSettlementMovement(BaseModel):
             "settlement_mode": obj.get("settlementMode")
         })
         return _obj
+
+TransactionSettlementMovement.update_forward_refs()

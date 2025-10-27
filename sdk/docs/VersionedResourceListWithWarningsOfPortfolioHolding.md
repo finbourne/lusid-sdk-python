@@ -14,16 +14,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-version: Version = # Replace with your value
-values: conlist(PortfolioHolding) = # Replace with your value
+version: Version
+values: List[PortfolioHolding] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 next_page: Optional[StrictStr] = "example_next_page"
 previous_page: Optional[StrictStr] = "example_previous_page"
-warnings: Optional[conlist(Warning)] = None
-links: Optional[conlist(Link)] = None
+warnings: Optional[List[Warning]] = None
+links: Optional[List[Link]] = None
 versioned_resource_list_with_warnings_of_portfolio_holding_instance = VersionedResourceListWithWarningsOfPortfolioHolding(version=version, values=values, href=href, next_page=next_page, previous_page=previous_page, warnings=warnings, links=links)
 
 ```

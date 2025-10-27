@@ -14,16 +14,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query import VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-version: Version = # Replace with your value
-values: conlist(SettlementInstructionWithTransaction) = # Replace with your value
+version: Version
+values: List[SettlementInstructionWithTransaction] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 post_body: Optional[SettlementInstructionQuery] = # Replace with your value
 next_page: Optional[SettlementInstructionQuery] = # Replace with your value
 previous_page: Optional[SettlementInstructionQuery] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query_instance = VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery(version=version, values=values, href=href, post_body=post_body, next_page=next_page, previous_page=previous_page, links=links)
 
 ```

@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.step_schedule import StepSchedule
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 level_type: StrictStr = "example_level_type"
 step_schedule_type: StrictStr = "example_step_schedule_type"
-steps: conlist(LevelStep) = # Replace with your value
+steps: List[LevelStep] = # Replace with your value
 schedule_type: StrictStr = "example_schedule_type"
 step_schedule_instance = StepSchedule(level_type=level_type, step_schedule_type=step_schedule_type, steps=steps, schedule_type=schedule_type)
 

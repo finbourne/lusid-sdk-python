@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.calendar import Calendar
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 type: StrictStr = "example_type"
 weekend_mask: WeekendMask = # Replace with your value
 source_provider: StrictStr = "example_source_provider"
-properties: conlist(ModelProperty) = # Replace with your value
+properties: List[ModelProperty]
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 calendar_instance = Calendar(href=href, id=id, type=type, weekend_mask=weekend_mask, source_provider=source_provider, properties=properties, version=version, links=links)
 
 ```

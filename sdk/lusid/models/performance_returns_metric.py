@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class PerformanceReturnsMetric(BaseModel):
     """
@@ -27,9 +29,9 @@ class PerformanceReturnsMetric(BaseModel):
     """
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the metric. Default to Return") 
     window:  Optional[StrictStr] = Field(None,alias="window", description="The given metric for the calculation i.e. 1Y, 1D.") 
-    allow_partial: Optional[StrictBool] = Field(None, alias="allowPartial", description="Bool if the metric is allowed partial results. Default to false.")
-    annualised: Optional[StrictBool] = Field(None, description="Bool if the metric is annualized. Default to false.")
-    with_fee: Optional[StrictBool] = Field(None, alias="withFee", description="Bool if the metric should consider the fees when is calculated. Default to false.")
+    allow_partial: Optional[StrictBool] = Field(default=None, description="Bool if the metric is allowed partial results. Default to false.", alias="allowPartial")
+    annualised: Optional[StrictBool] = Field(default=None, description="Bool if the metric is annualized. Default to false.")
+    with_fee: Optional[StrictBool] = Field(default=None, description="Bool if the metric should consider the fees when is calculated. Default to false.", alias="withFee")
     seed_amount:  Optional[StrictStr] = Field(None,alias="seedAmount", description="The given seed amount for the calculation of the indicative amount metrics.") 
     alias:  Optional[StrictStr] = Field(None,alias="alias", description="The alias for the metric.") 
     __properties = ["type", "window", "allowPartial", "annualised", "withFee", "seedAmount", "alias"]
@@ -107,3 +109,5 @@ class PerformanceReturnsMetric(BaseModel):
             "alias": obj.get("alias")
         })
         return _obj
+
+PerformanceReturnsMetric.update_forward_refs()

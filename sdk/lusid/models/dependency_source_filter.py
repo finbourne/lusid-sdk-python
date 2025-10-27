@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.address_key_filter import AddressKeyFilter
 
 class DependencySourceFilter(BaseModel):
@@ -30,7 +32,7 @@ class DependencySourceFilter(BaseModel):
     asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.  If null, then no filtering on asset class is applied.") 
     dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied.") 
     long_or_short_indicator:  Optional[StrictStr] = Field(None,alias="longOrShortIndicator", description="Specify that a rule should apply if the market data is requested by a model with a given long or short indicator.  If none, then no filtering on LongOrShortIndicator is applied.") 
-    address_key_filters: Optional[conlist(AddressKeyFilter)] = Field(None, alias="addressKeyFilters", description="Specify that a rule should apply if the market data is requested by an instrument with features or properties  satisfying all the given address key filters. If an empty list is given, no additional filtering is done.")
+    address_key_filters: Optional[List[AddressKeyFilter]] = Field(default=None, description="Specify that a rule should apply if the market data is requested by an instrument with features or properties  satisfying all the given address key filters. If an empty list is given, no additional filtering is done.", alias="addressKeyFilters")
     __properties = ["instrumentType", "assetClass", "domCcy", "longOrShortIndicator", "addressKeyFilters"]
 
     class Config:
@@ -116,3 +118,5 @@ class DependencySourceFilter(BaseModel):
             "address_key_filters": [AddressKeyFilter.from_dict(_item) for _item in obj.get("addressKeyFilters")] if obj.get("addressKeyFilters") is not None else None
         })
         return _obj
+
+DependencySourceFilter.update_forward_refs()

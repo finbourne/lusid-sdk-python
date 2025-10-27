@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CreateUnitDefinition(BaseModel):
     """
@@ -28,7 +30,7 @@ class CreateUnitDefinition(BaseModel):
     code:  StrictStr = Field(...,alias="code") 
     display_name:  StrictStr = Field(...,alias="displayName") 
     description:  StrictStr = Field(...,alias="description") 
-    details: Optional[Dict[str, StrictStr]] = None
+    details: Optional[Dict[str, Optional[StrictStr]]] = None
     __properties = ["code", "displayName", "description", "details"]
 
     class Config:
@@ -86,3 +88,5 @@ class CreateUnitDefinition(BaseModel):
             "details": obj.get("details")
         })
         return _obj
+
+CreateUnitDefinition.update_forward_refs()

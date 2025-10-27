@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
 from lusid.models.resource_id import ResourceId
 
@@ -27,10 +29,10 @@ class ComplianceRuleResultDetail(BaseModel):
     """
     ComplianceRuleResultDetail
     """
-    rule_id: ResourceId = Field(..., alias="ruleId")
-    affected_portfolios_details: conlist(ComplianceRuleResultPortfolioDetail) = Field(..., alias="affectedPortfoliosDetails")
-    affected_orders: conlist(ResourceId) = Field(..., alias="affectedOrders")
-    template_id: ResourceId = Field(..., alias="templateId")
+    rule_id: ResourceId = Field(alias="ruleId")
+    affected_portfolios_details: List[ComplianceRuleResultPortfolioDetail] = Field(alias="affectedPortfoliosDetails")
+    affected_orders: List[ResourceId] = Field(alias="affectedOrders")
+    template_id: ResourceId = Field(alias="templateId")
     template_description:  StrictStr = Field(...,alias="templateDescription") 
     template_variation:  StrictStr = Field(...,alias="templateVariation") 
     status:  StrictStr = Field(...,alias="status") 
@@ -115,3 +117,5 @@ class ComplianceRuleResultDetail(BaseModel):
             "outcome": obj.get("outcome")
         })
         return _obj
+
+ComplianceRuleResultDetail.update_forward_refs()

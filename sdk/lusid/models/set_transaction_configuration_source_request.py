@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
@@ -28,8 +30,8 @@ class SetTransactionConfigurationSourceRequest(BaseModel):
     """
     SetTransactionConfigurationSourceRequest
     """
-    aliases: conlist(SetTransactionConfigurationAlias) = Field(...)
-    movements: conlist(TransactionConfigurationMovementDataRequest) = Field(...)
+    aliases: List[SetTransactionConfigurationAlias]
+    movements: List[TransactionConfigurationMovementDataRequest]
     properties: Optional[Dict[str, PerpetualProperty]] = None
     __properties = ["aliases", "movements", "properties"]
 
@@ -113,3 +115,5 @@ class SetTransactionConfigurationSourceRequest(BaseModel):
             else None
         })
         return _obj
+
+SetTransactionConfigurationSourceRequest.update_forward_refs()

@@ -19,17 +19,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.queryable_key import QueryableKey
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 address_key: StrictStr = "example_address_key"
 description: Optional[StrictStr] = "example_description"
 display_name: StrictStr = "example_display_name"
 type: StrictStr = "example_type"
 flattened_type: StrictStr = "example_flattened_type"
 holding_quantity_scaling: StrictStr = "example_holding_quantity_scaling"
-supported_usages: conlist(StrictStr) = # Replace with your value
-supported_operations: conlist(StrictStr) = # Replace with your value
+supported_usages: List[StrictStr] = # Replace with your value
+supported_operations: List[StrictStr] = # Replace with your value
 life_cycle_status: StrictStr = "example_life_cycle_status"
 removal_date: Optional[datetime] = # Replace with your value
 applicable_options: Optional[Dict[str, AddressKeyOptionDefinition]] = # Replace with your value

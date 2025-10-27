@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictInt, StrictStr, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid.models.model_schema import ModelSchema
 from lusid.models.property_schema import PropertySchema
 from lusid.models.resource_list_of_string import ResourceListOfString
@@ -210,15 +207,15 @@ class SchemasApi:
 
 
     @overload
-    async def get_property_schema(self, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, **kwargs) -> PropertySchema:  # noqa: E501
+    async def get_property_schema(self, property_keys : Annotated[Optional[List[StrictStr]], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, **kwargs) -> PropertySchema:  # noqa: E501
         ...
 
     @overload
-    def get_property_schema(self, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, async_req: Optional[bool]=True, **kwargs) -> PropertySchema:  # noqa: E501
+    def get_property_schema(self, property_keys : Annotated[Optional[List[StrictStr]], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, async_req: Optional[bool]=True, **kwargs) -> PropertySchema:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_property_schema(self, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PropertySchema, Awaitable[PropertySchema]]:  # noqa: E501
+    def get_property_schema(self, property_keys : Annotated[Optional[List[StrictStr]], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PropertySchema, Awaitable[PropertySchema]]:  # noqa: E501
         """[EARLY ACCESS] GetPropertySchema: Get property schema  # noqa: E501
 
         Get the schemas for the provided list of property keys.  # noqa: E501
@@ -251,7 +248,7 @@ class SchemasApi:
         return self.get_property_schema_with_http_info(property_keys, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_property_schema_with_http_info(self, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_property_schema_with_http_info(self, property_keys : Annotated[Optional[List[StrictStr]], Field(description="One or more property keys for which the schema is requested")] = None, as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetPropertySchema: Get property schema  # noqa: E501
 
         Get the schemas for the provided list of property keys.  # noqa: E501
@@ -374,15 +371,15 @@ class SchemasApi:
 
 
     @overload
-    async def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ResourceListOfValueType:  # noqa: E501
+    async def get_value_types(self, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ResourceListOfValueType:  # noqa: E501
         ...
 
     @overload
-    def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfValueType:  # noqa: E501
+    def get_value_types(self, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfValueType:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfValueType, Awaitable[ResourceListOfValueType]]:  # noqa: E501
+    def get_value_types(self, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfValueType, Awaitable[ResourceListOfValueType]]:  # noqa: E501
         """[EARLY ACCESS] GetValueTypes: Get value types  # noqa: E501
 
         Gets the available value types for which a schema is available.  # noqa: E501
@@ -415,7 +412,7 @@ class SchemasApi:
         return self.get_value_types_with_http_info(sort_by, limit, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_value_types_with_http_info(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_value_types_with_http_info(self, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetValueTypes: Get value types  # noqa: E501
 
         Gets the available value types for which a schema is available.  # noqa: E501

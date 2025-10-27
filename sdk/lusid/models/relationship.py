@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -29,12 +31,12 @@ class Relationship(BaseModel):
     Representation of a Relationship between a requested entity with the stated entity as RelatedEntityId  # noqa: E501
     """
     version: Optional[Version] = None
-    relationship_definition_id: ResourceId = Field(..., alias="relationshipDefinitionId")
-    related_entity: RelatedEntity = Field(..., alias="relatedEntity")
+    relationship_definition_id: ResourceId = Field(alias="relationshipDefinitionId")
+    related_entity: RelatedEntity = Field(alias="relatedEntity")
     traversal_direction:  StrictStr = Field(...,alias="traversalDirection", description="Direction of relationship between the requested entity and related entity. This can be 'In' or 'Out'. Read more about relationships traversal direction in LUSID Knowledge Base here https://support.lusid.com/knowledgebase/article/KA-01679.") 
     traversal_description:  StrictStr = Field(...,alias="traversalDescription", description="Description of the relationship based on relationship's traversal direction. If 'TraversalDirection' is 'Out', this description would be 'OutwardDescription' from the associated relationship definition. If 'TraversalDirection' is 'In', this description would be 'InwardDescription' from the associated relationship definition.") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the relationship is valid.")
-    effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the relationship is valid. If no future deletions are present or an effective until has not been set for the relationship, this will be indefinite and represented by the maximum date.")
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime from which the relationship is valid.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The effective datetime until which the relationship is valid. If no future deletions are present or an effective until has not been set for the relationship, this will be indefinite and represented by the maximum date.", alias="effectiveUntil")
     __properties = ["version", "relationshipDefinitionId", "relatedEntity", "traversalDirection", "traversalDescription", "effectiveFrom", "effectiveUntil"]
 
     class Config:
@@ -99,3 +101,5 @@ class Relationship(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+Relationship.update_forward_refs()

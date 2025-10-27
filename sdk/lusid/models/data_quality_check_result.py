@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 from lusid.models.lusid_entity_result import LusidEntityResult
 
 class DataQualityCheckResult(BaseModel):
@@ -29,7 +31,7 @@ class DataQualityCheckResult(BaseModel):
     check_definition_scope:  Optional[StrictStr] = Field(None,alias="checkDefinitionScope", description="The scope of the check definition") 
     check_definition_code:  Optional[StrictStr] = Field(None,alias="checkDefinitionCode", description="The code of the check definition") 
     check_definition_display_name:  Optional[StrictStr] = Field(None,alias="checkDefinitionDisplayName", description="The display name of the check definition") 
-    check_run_as_at: Optional[datetime] = Field(None, alias="checkRunAsAt", description="The timestamp when the check was run")
+    check_run_as_at: Optional[datetime] = Field(default=None, description="The timestamp when the check was run", alias="checkRunAsAt")
     result_type:  Optional[StrictStr] = Field(None,alias="resultType", description="The type of result from the check") 
     rule_set_key:  Optional[StrictStr] = Field(None,alias="ruleSetKey", description="The key identifying the ruleset") 
     rule_set_display_name:  Optional[StrictStr] = Field(None,alias="ruleSetDisplayName", description="The display name of the ruleset") 
@@ -37,9 +39,9 @@ class DataQualityCheckResult(BaseModel):
     rule_display_name:  Optional[StrictStr] = Field(None,alias="ruleDisplayName", description="The display name of the rule (for RuleInvalid, RuleBreached, RuleBreachesOverLimit)") 
     rule_description:  Optional[StrictStr] = Field(None,alias="ruleDescription", description="The description of the rule (for RuleInvalid, RuleBreached, RuleBreachesOverLimit)") 
     rule_formula:  Optional[StrictStr] = Field(None,alias="ruleFormula", description="The formula of the rule (for RuleInvalid, RuleBreached, RuleBreachesOverLimit)") 
-    severity: Optional[StrictInt] = Field(None, description="The severity level")
-    lusid_entity: Optional[LusidEntityResult] = Field(None, alias="lusidEntity")
-    count_rule_breaches: Optional[StrictInt] = Field(None, alias="countRuleBreaches", description="The count of rule breaches (1 for RuleBreached, multiple for RuleBreachesOverLimit)")
+    severity: Optional[StrictInt] = Field(default=None, description="The severity level")
+    lusid_entity: Optional[LusidEntityResult] = Field(default=None, alias="lusidEntity")
+    count_rule_breaches: Optional[StrictInt] = Field(default=None, description="The count of rule breaches (1 for RuleBreached, multiple for RuleBreachesOverLimit)", alias="countRuleBreaches")
     error_detail:  Optional[StrictStr] = Field(None,alias="errorDetail", description="Error details (for RulesetInvalid, RuleInvalid)") 
     result_id:  Optional[StrictStr] = Field(None,alias="resultId", description="Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}}") 
     __properties = ["checkDefinitionScope", "checkDefinitionCode", "checkDefinitionDisplayName", "checkRunAsAt", "resultType", "ruleSetKey", "ruleSetDisplayName", "ruleKey", "ruleDisplayName", "ruleDescription", "ruleFormula", "severity", "lusidEntity", "countRuleBreaches", "errorDetail", "resultId"]
@@ -179,3 +181,5 @@ class DataQualityCheckResult(BaseModel):
             "result_id": obj.get("resultId")
         })
         return _obj
+
+DataQualityCheckResult.update_forward_refs()

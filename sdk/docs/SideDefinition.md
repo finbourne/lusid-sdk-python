@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.side_definition import SideDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 side: StrictStr = "example_side"
 security: StrictStr = "example_security"
@@ -27,7 +29,7 @@ units: StrictStr = "example_units"
 amount: StrictStr = "example_amount"
 notional_amount: Optional[StrictStr] = "example_notional_amount"
 current_face: Optional[StrictStr] = "example_current_face"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 side_definition_instance = SideDefinition(side=side, security=security, currency=currency, rate=rate, units=units, amount=amount, notional_amount=notional_amount, current_face=current_face, links=links)
 
 ```

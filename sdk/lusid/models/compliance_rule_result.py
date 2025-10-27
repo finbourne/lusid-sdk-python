@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleResult(BaseModel):
@@ -29,13 +31,13 @@ class ComplianceRuleResult(BaseModel):
     rule_id:  StrictStr = Field(...,alias="ruleId", description="The unique identifierof a compliance rule") 
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The User-given name of the rule") 
     rule_description:  StrictStr = Field(...,alias="ruleDescription", description="The User-given description of the rule") 
-    portfolio: ResourceId = Field(...)
-    passed: StrictBool = Field(..., description="The result of an individual compliance run, true if passed")
-    result_value: Union[StrictFloat, StrictInt] = Field(..., alias="resultValue", description="The calculation result that was used to confirm a pass/fail")
+    portfolio: ResourceId
+    passed: StrictBool = Field(description="The result of an individual compliance run, true if passed")
+    result_value: Union[StrictFloat, StrictInt] = Field(description="The calculation result that was used to confirm a pass/fail", alias="resultValue")
     rule_information_match:  StrictStr = Field(...,alias="ruleInformationMatch", description="The value matched by the rule") 
     rule_information_key:  StrictStr = Field(...,alias="ruleInformationKey", description="The property key matched by the rule") 
-    rule_lower_limit: Union[StrictFloat, StrictInt] = Field(..., alias="ruleLowerLimit", description="The lower limit of the rule")
-    rule_upper_limit: Union[StrictFloat, StrictInt] = Field(..., alias="ruleUpperLimit", description="The upper limit of the rule")
+    rule_lower_limit: Union[StrictFloat, StrictInt] = Field(description="The lower limit of the rule", alias="ruleLowerLimit")
+    rule_upper_limit: Union[StrictFloat, StrictInt] = Field(description="The upper limit of the rule", alias="ruleUpperLimit")
     __properties = ["ruleId", "ruleName", "ruleDescription", "portfolio", "passed", "resultValue", "ruleInformationMatch", "ruleInformationKey", "ruleLowerLimit", "ruleUpperLimit"]
 
     class Config:
@@ -97,3 +99,5 @@ class ComplianceRuleResult(BaseModel):
             "rule_upper_limit": obj.get("ruleUpperLimit")
         })
         return _obj
+
+ComplianceRuleResult.update_forward_refs()

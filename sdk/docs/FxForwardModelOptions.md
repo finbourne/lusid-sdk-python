@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fx_forward_model_options import FxForwardModelOptions
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictBool, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 forward_rate_observable_type: StrictStr = "example_forward_rate_observable_type"
 discounting_method: StrictStr = "example_discounting_method"

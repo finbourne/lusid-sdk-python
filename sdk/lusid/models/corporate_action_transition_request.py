@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
 
 class CorporateActionTransitionRequest(BaseModel):
     """
     A 'transition' within a corporate action, representing a set of output movements paired to a single input position  # noqa: E501
     """
-    input_transition: Optional[CorporateActionTransitionComponentRequest] = Field(None, alias="inputTransition")
-    output_transitions: Optional[conlist(CorporateActionTransitionComponentRequest)] = Field(None, alias="outputTransitions")
+    input_transition: Optional[CorporateActionTransitionComponentRequest] = Field(default=None, alias="inputTransition")
+    output_transitions: Optional[List[CorporateActionTransitionComponentRequest]] = Field(default=None, alias="outputTransitions")
     __properties = ["inputTransition", "outputTransitions"]
 
     class Config:
@@ -93,3 +95,5 @@ class CorporateActionTransitionRequest(BaseModel):
             "output_transitions": [CorporateActionTransitionComponentRequest.from_dict(_item) for _item in obj.get("outputTransitions")] if obj.get("outputTransitions") is not None else None
         })
         return _obj
+
+CorporateActionTransitionRequest.update_forward_refs()

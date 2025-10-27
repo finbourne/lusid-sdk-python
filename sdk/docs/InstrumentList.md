@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_list import InstrumentList
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(StrictStr, max_items=10000, min_items=0) = Field(...)
+values: List[StrictStr]
 reference_list_type: StrictStr = "example_reference_list_type"
 instrument_list_instance = InstrumentList(values=values, reference_list_type=reference_list_type)
 

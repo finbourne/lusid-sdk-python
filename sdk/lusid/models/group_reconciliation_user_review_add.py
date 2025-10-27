@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class GroupReconciliationUserReviewAdd(BaseModel):
     """
@@ -94,3 +96,5 @@ class GroupReconciliationUserReviewAdd(BaseModel):
             "comment_text": obj.get("commentText")
         })
         return _obj
+
+GroupReconciliationUserReviewAdd.update_forward_refs()

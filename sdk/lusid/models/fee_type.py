@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -30,12 +32,12 @@ class FeeType(BaseModel):
     FeeType
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the fee type.") 
     description:  StrictStr = Field(...,alias="description", description="The description of the fee type.") 
-    component_transactions: conlist(ComponentTransaction) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
+    component_transactions: List[ComponentTransaction] = Field(description="A set of component transactions that relate to the fee type to be created.", alias="componentTransactions")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "componentTransactions", "version", "links"]
 
     class Config:
@@ -121,3 +123,5 @@ class FeeType(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+FeeType.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CdsFlowConventions(BaseModel):
     """
@@ -30,10 +32,10 @@ class CdsFlowConventions(BaseModel):
     payment_frequency:  StrictStr = Field(...,alias="paymentFrequency", description="When generating a multiperiod flow, or when the maturity of the flow is not given but the start date is,  the tenor is the time-step from the anchor-date to the nominal maturity of the flow prior to any adjustment.") 
     day_count_convention:  StrictStr = Field(...,alias="dayCountConvention", description="when calculating the fraction of a year between two dates, what convention is used to represent the number of days in a year  and difference between them.  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].") 
     roll_convention:  StrictStr = Field(...,alias="rollConvention", description="For backward compatibility, this can either specify a business day convention or a roll convention. If the business  day convention is provided using the BusinessDayConvention property, this must be a valid roll convention.                When used as a roll convention:  The conventions specifying the rule used to generate dates in a schedule.    Supported string (enumeration) values are: [None, EndOfMonth, IMM, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, FirstMonday, FirstTuesday, FirstWednesday, FirstThursday, FirstFriday, SecondMonday, SecondTuesday, SecondWednesday, SecondThursday, SecondFriday, ThirdMonday, ThirdTuesday, ThirdWednesday, ThirdThursday, ThirdFriday, FourthMonday, FourthTuesday, FourthWednesday, FourthThursday, FourthFriday, LastMonday, LastTuesday, LastWednesday, LastThursday, LastFriday].                When in backward compatible mode:  Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing].") 
-    payment_calendars: conlist(StrictStr) = Field(..., alias="paymentCalendars", description="An array of strings denoting holiday calendars that apply to generation of payment schedules.")
-    reset_calendars: conlist(StrictStr) = Field(..., alias="resetCalendars", description="An array of strings denoting holiday calendars that apply to generation of reset schedules.")
-    settle_days: Optional[StrictInt] = Field(None, alias="settleDays", description="Number of Good Business Days between the trade date and the effective or settlement date of the instrument. Defaults to 0 if not set.")
-    reset_days: Optional[StrictInt] = Field(None, alias="resetDays", description="The number of Good Business Days between determination and payment of reset. Defaults to 0 if not set.")
+    payment_calendars: List[StrictStr] = Field(description="An array of strings denoting holiday calendars that apply to generation of payment schedules.", alias="paymentCalendars")
+    reset_calendars: List[StrictStr] = Field(description="An array of strings denoting holiday calendars that apply to generation of reset schedules.", alias="resetCalendars")
+    settle_days: Optional[StrictInt] = Field(default=None, description="Number of Good Business Days between the trade date and the effective or settlement date of the instrument. Defaults to 0 if not set.", alias="settleDays")
+    reset_days: Optional[StrictInt] = Field(default=None, description="The number of Good Business Days between determination and payment of reset. Defaults to 0 if not set.", alias="resetDays")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope used when updating or inserting the convention.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the convention.") 
@@ -117,3 +119,5 @@ class CdsFlowConventions(BaseModel):
             "code": obj.get("code")
         })
         return _obj
+
+CdsFlowConventions.update_forward_refs()

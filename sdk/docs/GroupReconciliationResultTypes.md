@@ -15,8 +15,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_result_types import GroupReconciliationResultTypes
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 count_match: StrictInt = # Replace with your value
 count_match: StrictInt = 42

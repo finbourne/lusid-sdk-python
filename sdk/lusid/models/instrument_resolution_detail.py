@@ -17,19 +17,21 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator 
 
 class InstrumentResolutionDetail(BaseModel):
     """
     InstrumentResolutionDetail
     """
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
-    launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="launchPrice", description="The launch price set when a shareclass is added to the fund. Defaults to 1.")
-    launch_date: Optional[datetime] = Field(None, alias="launchDate", description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.")
+    launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The launch price set when a shareclass is added to the fund. Defaults to 1.", alias="launchPrice")
+    launch_date: Optional[datetime] = Field(default=None, description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.", alias="launchDate")
     __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "launchPrice", "launchDate"]
 
     class Config:
@@ -105,3 +107,5 @@ class InstrumentResolutionDetail(BaseModel):
             "launch_date": obj.get("launchDate")
         })
         return _obj
+
+InstrumentResolutionDetail.update_forward_refs()

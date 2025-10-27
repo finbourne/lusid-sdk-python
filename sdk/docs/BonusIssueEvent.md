@@ -18,18 +18,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.bonus_issue_event import BonusIssueEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 announcement_date: Optional[datetime] = # Replace with your value
 ex_date: Optional[datetime] = # Replace with your value
 record_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
-security_offer_elections: Optional[conlist(SecurityOfferElection)] = # Replace with your value
-cash_offer_elections: Optional[conlist(CashOfferElection)] = # Replace with your value
-lapse_elections: Optional[conlist(LapseElection)] = # Replace with your value
+security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
+cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your value
+lapse_elections: Optional[List[LapseElection]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
 bonus_issue_event_instance = BonusIssueEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, security_offer_elections=security_offer_elections, cash_offer_elections=cash_offer_elections, lapse_elections=lapse_elections, instrument_event_type=instrument_event_type)
 

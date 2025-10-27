@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.check_definition_rule import CheckDefinitionRule
 
 class UpsertDataQualityRule(BaseModel):
@@ -86,3 +88,5 @@ class UpsertDataQualityRule(BaseModel):
             "rule": CheckDefinitionRule.from_dict(obj.get("rule")) if obj.get("rule") is not None else None
         })
         return _obj
+
+UpsertDataQualityRule.update_forward_refs()

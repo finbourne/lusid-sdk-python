@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_rule_upsert_response import ComplianceRuleUpsertResponse
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: Dict[str, ComplianceRule] = # Replace with your value
+values: Dict[str, ComplianceRule]
 compliance_rule_upsert_response_instance = ComplianceRuleUpsertResponse(values=values)
 
 ```

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.from_recipe import FromRecipe
 
 class RecipeValue(BaseModel):
@@ -28,7 +30,7 @@ class RecipeValue(BaseModel):
     """
     as_json:  Optional[StrictStr] = Field(None,alias="asJson", description="Field to allow providing a potentially complex json value.") 
     as_string:  Optional[StrictStr] = Field(None,alias="asString", description="For simple value, a single input value, note complex nested objects are not allowed here.") 
-    from_recipe: Optional[FromRecipe] = Field(None, alias="fromRecipe")
+    from_recipe: Optional[FromRecipe] = Field(default=None, alias="fromRecipe")
     __properties = ["asJson", "asString", "fromRecipe"]
 
     class Config:
@@ -93,3 +95,5 @@ class RecipeValue(BaseModel):
             "from_recipe": FromRecipe.from_dict(obj.get("fromRecipe")) if obj.get("fromRecipe") is not None else None
         })
         return _obj
+
+RecipeValue.update_forward_refs()

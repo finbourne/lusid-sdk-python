@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-transaction_template_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="transactionTemplateScopes")
+transaction_template_scopes: Optional[List[StrictStr]] = # Replace with your value
 recipe_id: Optional[ResourceId] = # Replace with your value
 instrument_event_configuration_instance = InstrumentEventConfiguration(transaction_template_scopes=transaction_template_scopes, recipe_id=recipe_id)
 

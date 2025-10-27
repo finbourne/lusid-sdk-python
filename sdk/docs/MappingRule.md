@@ -15,15 +15,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.mapping_rule import MappingRule
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 left: Optional[StrictStr] = "example_left"
 right: Optional[StrictStr] = "example_right"
 comparison_type: Optional[StrictStr] = "example_comparison_type"
 comparison_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-mapped_strings: Optional[conlist(MappedString)] = # Replace with your value
+mapped_strings: Optional[List[MappedString]] = # Replace with your value
 is_case_sensitive: Optional[StrictBool] = # Replace with your value
 is_case_sensitive:Optional[StrictBool] = None
 mapping_rule_instance = MappingRule(left=left, right=right, comparison_type=comparison_type, comparison_value=comparison_value, weight=weight, mapped_strings=mapped_strings, is_case_sensitive=is_case_sensitive)

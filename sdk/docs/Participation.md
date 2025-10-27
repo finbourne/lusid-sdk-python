@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.participation import Participation
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 placement_id: ResourceId = # Replace with your value
 order_id: ResourceId = # Replace with your value
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 participation_instance = Participation(id=id, placement_id=placement_id, order_id=order_id, version=version, data_model_membership=data_model_membership, links=links)
 
 ```

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
 
 class MoveOrdersToDifferentBlocksRequest(BaseModel):
     """
     MoveOrdersToDifferentBlocksRequest
     """
-    requests: conlist(BlockAndOrderIdRequest) = Field(..., description="A collection of BlockAndOrderId.")
+    requests: List[BlockAndOrderIdRequest] = Field(description="A collection of BlockAndOrderId.")
     __properties = ["requests"]
 
     class Config:
@@ -83,3 +85,5 @@ class MoveOrdersToDifferentBlocksRequest(BaseModel):
             "requests": [BlockAndOrderIdRequest.from_dict(_item) for _item in obj.get("requests")] if obj.get("requests") is not None else None
         })
         return _obj
+
+MoveOrdersToDifferentBlocksRequest.update_forward_refs()

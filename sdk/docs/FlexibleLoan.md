@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.flexible_loan import FlexibleLoan
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
-schedules: conlist(Schedule) = # Replace with your value
+schedules: List[Schedule] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 flexible_loan_instance = FlexibleLoan(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, schedules=schedules, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

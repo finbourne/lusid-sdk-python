@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.cut_local_time import CutLocalTime
 
 class CreateCutLabelDefinitionRequest(BaseModel):
@@ -29,7 +31,7 @@ class CreateCutLabelDefinitionRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code") 
     display_name:  StrictStr = Field(...,alias="displayName") 
     description:  Optional[StrictStr] = Field(None,alias="description") 
-    cut_local_time: CutLocalTime = Field(..., alias="cutLocalTime")
+    cut_local_time: CutLocalTime = Field(alias="cutLocalTime")
     time_zone:  StrictStr = Field(...,alias="timeZone") 
     __properties = ["code", "displayName", "description", "cutLocalTime", "timeZone"]
 
@@ -92,3 +94,5 @@ class CreateCutLabelDefinitionRequest(BaseModel):
             "time_zone": obj.get("timeZone")
         })
         return _obj
+
+CreateCutLabelDefinitionRequest.update_forward_refs()

@@ -17,22 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class SettlementSchedule(BaseModel):
     """
     SettlementSchedule
     """
     trade_id:  Optional[StrictStr] = Field(None,alias="tradeId") 
-    settlement_date: Optional[datetime] = Field(None, alias="settlementDate")
+    settlement_date: Optional[datetime] = Field(default=None, alias="settlementDate")
     units: Optional[Union[StrictFloat, StrictInt]] = None
-    bond_interest: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="bondInterest")
+    bond_interest: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="bondInterest")
     movement_name:  Optional[StrictStr] = Field(None,alias="movementName") 
     movement_type:  Optional[StrictStr] = Field(None,alias="movementType") 
-    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unsettledUnits")
-    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="overdueUnits")
+    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="unsettledUnits")
+    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="overdueUnits")
     __properties = ["tradeId", "settlementDate", "units", "bondInterest", "movementName", "movementType", "unsettledUnits", "overdueUnits"]
 
     class Config:
@@ -104,3 +106,5 @@ class SettlementSchedule(BaseModel):
             "overdue_units": obj.get("overdueUnits")
         })
         return _obj
+
+SettlementSchedule.update_forward_refs()

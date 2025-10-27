@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.calculate_order_dates_response import CalculateOrderDatesResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 successes: Optional[Dict[str, TransferAgencyDates]] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 calculate_order_dates_response_instance = CalculateOrderDatesResponse(successes=successes, failed=failed, links=links)
 
 ```

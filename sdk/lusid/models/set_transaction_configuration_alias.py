@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class SetTransactionConfigurationAlias(BaseModel):
     """
@@ -29,7 +31,7 @@ class SetTransactionConfigurationAlias(BaseModel):
     description:  StrictStr = Field(...,alias="description") 
     transaction_class:  StrictStr = Field(...,alias="transactionClass") 
     transaction_role:  StrictStr = Field(...,alias="transactionRole") 
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault")
+    is_default: Optional[StrictBool] = Field(default=None, alias="isDefault")
     __properties = ["type", "description", "transactionClass", "transactionRole", "isDefault"]
 
     class Config:
@@ -83,3 +85,5 @@ class SetTransactionConfigurationAlias(BaseModel):
             "is_default": obj.get("isDefault")
         })
         return _obj
+
+SetTransactionConfigurationAlias.update_forward_refs()

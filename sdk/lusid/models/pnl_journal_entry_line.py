@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.journal_entry_line import JournalEntryLine
 from lusid.models.link import Link
 
@@ -28,8 +30,8 @@ class PnlJournalEntryLine(BaseModel):
     PnlJournalEntryLine
     """
     pnl_bucket:  Optional[StrictStr] = Field(None,alias="pnlBucket", description="The Filter ID of the grouping used from the Fund Configuration PnL filters") 
-    journal_entry_line: Optional[JournalEntryLine] = Field(None, alias="journalEntryLine")
-    links: Optional[conlist(Link)] = None
+    journal_entry_line: Optional[JournalEntryLine] = Field(default=None, alias="journalEntryLine")
+    links: Optional[List[Link]] = None
     __properties = ["pnlBucket", "journalEntryLine", "links"]
 
     class Config:
@@ -101,3 +103,5 @@ class PnlJournalEntryLine(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PnlJournalEntryLine.update_forward_refs()

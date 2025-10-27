@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.strategy import Strategy
-from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-keys: conlist(PerpetualProperty, min_items=1) = Field(...)
+keys: List[PerpetualProperty]
 value_type: StrictStr = "example_value_type"
-value: Union[StrictFloat, StrictInt] = # Replace with your value
+value: Union[StrictFloat, StrictInt]
 strategy_instance = Strategy(keys=keys, value_type=value_type, value=value)
 
 ```

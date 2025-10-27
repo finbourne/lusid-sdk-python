@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.recipe_block import RecipeBlock
 
 class RecipeComposer(BaseModel):
@@ -28,7 +30,7 @@ class RecipeComposer(BaseModel):
     """
     scope:  StrictStr = Field(...,alias="scope", description="The scope used when updating or inserting the Recipe Composer.") 
     code:  StrictStr = Field(...,alias="code", description="User given string name (code) to identify the recipe.") 
-    operations: Optional[conlist(RecipeBlock)] = Field(None, description="Atomic operations used to compose a Configuration Recipe.")
+    operations: Optional[List[RecipeBlock]] = Field(default=None, description="Atomic operations used to compose a Configuration Recipe.")
     __properties = ["scope", "code", "operations"]
 
     class Config:
@@ -92,3 +94,5 @@ class RecipeComposer(BaseModel):
             "operations": [RecipeBlock.from_dict(_item) for _item in obj.get("operations")] if obj.get("operations") is not None else None
         })
         return _obj
+
+RecipeComposer.update_forward_refs()

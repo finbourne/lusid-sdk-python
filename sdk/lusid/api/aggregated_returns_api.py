@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.resource_list_of_returns_entity import ResourceListOfReturnsEntity
 from lusid.models.returns_entity import ReturnsEntity
@@ -543,15 +540,15 @@ class AggregatedReturnsApi:
 
 
     @overload
-    async def upsert_returns_entity(self, returns_entity : Annotated[ReturnsEntity, Field(..., description="Definition of the returns entity.")], **kwargs) -> ReturnsEntity:  # noqa: E501
+    async def upsert_returns_entity(self, returns_entity : Annotated[ReturnsEntity, Field(description="Definition of the returns entity.")], **kwargs) -> ReturnsEntity:  # noqa: E501
         ...
 
     @overload
-    def upsert_returns_entity(self, returns_entity : Annotated[ReturnsEntity, Field(..., description="Definition of the returns entity.")], async_req: Optional[bool]=True, **kwargs) -> ReturnsEntity:  # noqa: E501
+    def upsert_returns_entity(self, returns_entity : Annotated[ReturnsEntity, Field(description="Definition of the returns entity.")], async_req: Optional[bool]=True, **kwargs) -> ReturnsEntity:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_returns_entity(self, returns_entity : Annotated[ReturnsEntity, Field(..., description="Definition of the returns entity.")], async_req: Optional[bool]=None, **kwargs) -> Union[ReturnsEntity, Awaitable[ReturnsEntity]]:  # noqa: E501
+    def upsert_returns_entity(self, returns_entity : Annotated[ReturnsEntity, Field(description="Definition of the returns entity.")], async_req: Optional[bool]=None, **kwargs) -> Union[ReturnsEntity, Awaitable[ReturnsEntity]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.  # noqa: E501
 
         Upsert returns entity.  # noqa: E501
@@ -582,7 +579,7 @@ class AggregatedReturnsApi:
         return self.upsert_returns_entity_with_http_info(returns_entity, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_returns_entity_with_http_info(self, returns_entity : Annotated[ReturnsEntity, Field(..., description="Definition of the returns entity.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_returns_entity_with_http_info(self, returns_entity : Annotated[ReturnsEntity, Field(description="Definition of the returns entity.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.  # noqa: E501
 
         Upsert returns entity.  # noqa: E501

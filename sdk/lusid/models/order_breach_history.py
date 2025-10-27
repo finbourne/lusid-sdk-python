@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.order_rule_breach import OrderRuleBreach
 from lusid.models.resource_id import ResourceId
 
@@ -27,11 +29,11 @@ class OrderBreachHistory(BaseModel):
     """
     OrderBreachHistory
     """
-    id: ResourceId = Field(...)
-    order_id: ResourceId = Field(..., alias="orderId")
-    run_id: ResourceId = Field(..., alias="runId")
-    breaches_by_rule: Optional[Dict[str, conlist(OrderRuleBreach)]] = Field(None, alias="breachesByRule", description="Compliance rule breaches associations with the order and run.")
-    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the order breach was created in LUSID.")
+    id: ResourceId
+    order_id: ResourceId = Field(alias="orderId")
+    run_id: ResourceId = Field(alias="runId")
+    breaches_by_rule: Optional[Dict[str, Optional[List[OrderRuleBreach]]]] = Field(default=None, description="Compliance rule breaches associations with the order and run.", alias="breachesByRule")
+    as_at: datetime = Field(description="The asAt datetime at which the order breach was created in LUSID.", alias="asAt")
     __properties = ["id", "orderId", "runId", "breachesByRule", "asAt"]
 
     class Config:
@@ -115,3 +117,5 @@ class OrderBreachHistory(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+OrderBreachHistory.update_forward_refs()

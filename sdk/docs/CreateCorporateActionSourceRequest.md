@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.")
+instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
 create_corporate_action_source_request_instance = CreateCorporateActionSourceRequest(scope=scope, code=code, display_name=display_name, description=description, instrument_scopes=instrument_scopes)
 
 ```

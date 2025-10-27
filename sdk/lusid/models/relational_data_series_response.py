@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.applicable_entity import ApplicableEntity
 from lusid.models.relational_data_point_field_value_response import RelationalDataPointFieldValueResponse
 
@@ -28,8 +30,8 @@ class RelationalDataSeriesResponse(BaseModel):
     RelationalDataSeriesResponse
     """
     series_scope:  StrictStr = Field(...,alias="seriesScope", description="The scope of the DataSeries.") 
-    applicable_entity: ApplicableEntity = Field(..., alias="applicableEntity")
-    series_identifiers: Dict[str, RelationalDataPointFieldValueResponse] = Field(..., alias="seriesIdentifiers", description="The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition.")
+    applicable_entity: ApplicableEntity = Field(alias="applicableEntity")
+    series_identifiers: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="seriesIdentifiers")
     __properties = ["seriesScope", "applicableEntity", "seriesIdentifiers"]
 
     class Config:
@@ -96,3 +98,5 @@ class RelationalDataSeriesResponse(BaseModel):
             else None
         })
         return _obj
+
+RelationalDataSeriesResponse.update_forward_refs()

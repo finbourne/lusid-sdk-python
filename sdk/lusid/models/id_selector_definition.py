@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.action_id import ActionId
 
 class IdSelectorDefinition(BaseModel):
     """
     IdSelectorDefinition
     """
-    identifier: Dict[str, StrictStr] = Field(...)
-    actions: conlist(ActionId) = Field(...)
+    identifier: Dict[str, Optional[StrictStr]]
+    actions: List[ActionId]
     name:  Optional[StrictStr] = Field(None,alias="name") 
     description:  Optional[StrictStr] = Field(None,alias="description") 
     __properties = ["identifier", "actions", "name", "description"]
@@ -99,3 +101,5 @@ class IdSelectorDefinition(BaseModel):
             "description": obj.get("description")
         })
         return _obj
+
+IdSelectorDefinition.update_forward_refs()

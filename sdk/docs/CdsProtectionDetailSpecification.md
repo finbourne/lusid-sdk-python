@@ -12,8 +12,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 seniority: Optional[StrictStr] = "example_seniority"
 restructuring_type: Optional[StrictStr] = "example_restructuring_type"

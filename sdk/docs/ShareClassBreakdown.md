@@ -19,15 +19,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.share_class_breakdown import ShareClassBreakdown
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 back_out: Dict[str, ShareClassAmount] = # Replace with your value
-dealing: ShareClassDealingBreakdown = # Replace with your value
+dealing: ShareClassDealingBreakdown
 pn_l: ShareClassPnlBreakdown = # Replace with your value
-gav: ShareClassAmount = # Replace with your value
+gav: ShareClassAmount
 fees: Dict[str, FeeAccrual] = # Replace with your value
-nav: ShareClassAmount = # Replace with your value
+nav: ShareClassAmount
 unitisation: Optional[UnitisationData] = None
 miscellaneous: Optional[Dict[str, ShareClassAmount]] = # Replace with your value
 share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = # Replace with your value

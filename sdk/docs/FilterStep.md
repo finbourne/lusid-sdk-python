@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.filter_step import FilterStep
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 label: StrictStr = "example_label"
-parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+parameters: List[ComplianceTemplateParameter] = # Replace with your value
 compliance_step_type: StrictStr = "example_compliance_step_type"
 filter_step_instance = FilterStep(label=label, parameters=parameters, compliance_step_type=compliance_step_type)
 

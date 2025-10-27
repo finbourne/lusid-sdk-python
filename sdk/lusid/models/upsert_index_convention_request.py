@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.index_convention import IndexConvention
 
 class UpsertIndexConventionRequest(BaseModel):
     """
     Index convention that is to be stored in the convention data store.  Only one of these must be present.  # noqa: E501
     """
-    index_convention: Optional[IndexConvention] = Field(None, alias="indexConvention")
+    index_convention: Optional[IndexConvention] = Field(default=None, alias="indexConvention")
     __properties = ["indexConvention"]
 
     class Config:
@@ -79,3 +81,5 @@ class UpsertIndexConventionRequest(BaseModel):
             "index_convention": IndexConvention.from_dict(obj.get("indexConvention")) if obj.get("indexConvention") is not None else None
         })
         return _obj
+
+UpsertIndexConventionRequest.update_forward_refs()

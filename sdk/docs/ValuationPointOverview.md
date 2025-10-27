@@ -18,9 +18,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.valuation_point_overview import ValuationPointOverview
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
 diary_entry_code: StrictStr = "example_diary_entry_code"
 effective_from: datetime = # Replace with your value
@@ -31,7 +33,7 @@ status: StrictStr = "example_status"
 gav: Union[StrictFloat, StrictInt] = # Replace with your value
 nav: Union[StrictFloat, StrictInt] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, properties=properties, links=links)
 
 ```

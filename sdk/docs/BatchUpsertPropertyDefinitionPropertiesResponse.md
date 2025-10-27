@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 values: Dict[str, ModelProperty] = # Replace with your value
 failed: Dict[str, ErrorDetail] = # Replace with your value
 as_at_date: datetime = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 batch_upsert_property_definition_properties_response_instance = BatchUpsertPropertyDefinitionPropertiesResponse(values=values, failed=failed, as_at_date=as_at_date, links=links)
 
 ```

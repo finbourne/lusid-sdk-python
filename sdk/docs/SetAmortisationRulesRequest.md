@@ -8,8 +8,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 rules_interval: RulesInterval = # Replace with your value
 set_amortisation_rules_request_instance = SetAmortisationRulesRequest(rules_interval=rules_interval)

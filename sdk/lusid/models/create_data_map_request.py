@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
 
@@ -27,7 +29,7 @@ class CreateDataMapRequest(BaseModel):
     """
     Request to create a new data map  # noqa: E501
     """
-    id: DataMapKey = Field(...)
+    id: DataMapKey
     data: Optional[DataMapping] = None
     __properties = ["id", "data"]
 
@@ -85,3 +87,5 @@ class CreateDataMapRequest(BaseModel):
             "data": DataMapping.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
+
+CreateDataMapRequest.update_forward_refs()

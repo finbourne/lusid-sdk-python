@@ -19,9 +19,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.interest_rate_swaption import InterestRateSwaption
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 pay_or_receive_fixed: StrictStr = "example_pay_or_receive_fixed"
 premium: Optional[Premium] = None
@@ -32,7 +34,7 @@ underlying: Optional[LusidInstrument] = None
 delivery_days: Optional[StrictInt] = # Replace with your value
 delivery_days: Optional[StrictInt] = None
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
-settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+settlement_calendars: Optional[List[StrictStr]] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 interest_rate_swaption_instance = InterestRateSwaption(start_date=start_date, pay_or_receive_fixed=pay_or_receive_fixed, premium=premium, delivery_method=delivery_method, swap=swap, time_zone_conventions=time_zone_conventions, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, instrument_type=instrument_type)
 

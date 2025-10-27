@@ -26,16 +26,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fx_option import FxOption
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
 dom_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fgn_ccy: StrictStr = "example_fgn_ccy"
 fgn_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-barriers: Optional[conlist(Barrier)] = # Replace with your value
+barriers: Optional[List[Barrier]] = # Replace with your value
 exercise_type: Optional[StrictStr] = "example_exercise_type"
 is_call_not_put: StrictBool = # Replace with your value
 is_call_not_put:StrictBool = True
@@ -47,7 +49,7 @@ option_maturity_date: datetime = # Replace with your value
 option_settlement_date: datetime = # Replace with your value
 payout_style: Optional[StrictStr] = "example_payout_style"
 premium: Optional[Premium] = None
-touches: Optional[conlist(Touch)] = # Replace with your value
+touches: Optional[List[Touch]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 fx_option_instance = FxOption(start_date=start_date, dom_ccy=dom_ccy, dom_amount=dom_amount, fgn_ccy=fgn_ccy, fgn_amount=fgn_amount, strike=strike, barriers=barriers, exercise_type=exercise_type, is_call_not_put=is_call_not_put, is_delivery_not_cash=is_delivery_not_cash, is_payoff_digital=is_payoff_digital, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, payout_style=payout_style, premium=premium, touches=touches, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

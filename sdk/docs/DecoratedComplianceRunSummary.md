@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 run_id: ResourceId = # Replace with your value
-details: conlist(ComplianceRuleResultDetail) = # Replace with your value
+details: List[ComplianceRuleResultDetail]
 decorated_compliance_run_summary_instance = DecoratedComplianceRunSummary(run_id=run_id, details=details)
 
 ```

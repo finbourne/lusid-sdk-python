@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.field_schema import FieldSchema
 from lusid.models.link import Link
 
@@ -30,7 +32,7 @@ class ModelSchema(BaseModel):
     entity:  Optional[StrictStr] = Field(None,alias="entity") 
     href:  Optional[StrictStr] = Field(None,alias="href") 
     values: Optional[Dict[str, FieldSchema]] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["entity", "href", "values", "links"]
 
     class Config:
@@ -122,3 +124,5 @@ class ModelSchema(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ModelSchema.update_forward_refs()

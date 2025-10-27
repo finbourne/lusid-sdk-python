@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class RelationalDatasetFieldDefinition(BaseModel):
@@ -29,8 +31,8 @@ class RelationalDatasetFieldDefinition(BaseModel):
     field_name:  StrictStr = Field(...,alias="fieldName", description="The unique identifier for the field within the dataset.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="A user-friendly display name for the field.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A detailed description of the field and its purpose.") 
-    data_type_id: ResourceId = Field(..., alias="dataTypeId")
-    required: Optional[StrictBool] = Field(None, description="Whether this field is mandatory in the dataset.")
+    data_type_id: ResourceId = Field(alias="dataTypeId")
+    required: Optional[StrictBool] = Field(default=None, description="Whether this field is mandatory in the dataset.")
     category:  StrictStr = Field(...,alias="category", description="The intended category of the field (SeriesIdentifier, Value, or Metadata).") 
     __properties = ["fieldName", "displayName", "description", "dataTypeId", "required", "category"]
 
@@ -99,3 +101,5 @@ class RelationalDatasetFieldDefinition(BaseModel):
             "category": obj.get("category")
         })
         return _obj
+
+RelationalDatasetFieldDefinition.update_forward_refs()

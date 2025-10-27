@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.units_ratio import UnitsRatio
 
 class SecurityElection(BaseModel):
@@ -27,10 +29,10 @@ class SecurityElection(BaseModel):
     Security election for Events that result in equity  # noqa: E501
     """
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election.") 
-    is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
-    price: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Price per unit of the security. At least one of UnitsRatio or Price must be provided.  Price must non-zero.")
-    units_ratio: Optional[UnitsRatio] = Field(None, alias="unitsRatio")
+    is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
+    is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Price per unit of the security. At least one of UnitsRatio or Price must be provided.  Price must non-zero.")
+    units_ratio: Optional[UnitsRatio] = Field(default=None, alias="unitsRatio")
     __properties = ["electionKey", "isChosen", "isDefault", "price", "unitsRatio"]
 
     class Config:
@@ -92,3 +94,5 @@ class SecurityElection(BaseModel):
             "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
         })
         return _obj
+
+SecurityElection.update_forward_refs()

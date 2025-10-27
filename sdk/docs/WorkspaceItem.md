@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.workspace_item import WorkspaceItem
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: StrictStr = "example_type"
 format: StrictInt = # Replace with your value
@@ -27,7 +29,7 @@ group: StrictStr = "example_group"
 description: StrictStr = "example_description"
 content: Optional[Any] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 workspace_item_instance = WorkspaceItem(type=type, format=format, name=name, group=group, description=description, content=content, version=version, links=links)
 
 ```

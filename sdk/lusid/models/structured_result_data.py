@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_map_key import DataMapKey
 
 class StructuredResultData(BaseModel):
@@ -30,7 +32,7 @@ class StructuredResultData(BaseModel):
     version:  Optional[StrictStr] = Field(None,alias="version", description="The semantic version of the document format; MAJOR.MINOR.PATCH") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="The name or description for the document") 
     document:  StrictStr = Field(...,alias="document", description="The document that will be stored (or retrieved) and which describes a unit result data entity such as a set of prices or yields") 
-    data_map_key: Optional[DataMapKey] = Field(None, alias="dataMapKey")
+    data_map_key: Optional[DataMapKey] = Field(default=None, alias="dataMapKey")
     __properties = ["documentFormat", "version", "name", "document", "dataMapKey"]
 
     class Config:
@@ -97,3 +99,5 @@ class StructuredResultData(BaseModel):
             "data_map_key": DataMapKey.from_dict(obj.get("dataMapKey")) if obj.get("dataMapKey") is not None else None
         })
         return _obj
+
+StructuredResultData.update_forward_refs()

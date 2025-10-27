@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.user import User
 
 class ProcessedCommand(BaseModel):
@@ -28,8 +30,8 @@ class ProcessedCommand(BaseModel):
     """
     description:  StrictStr = Field(...,alias="description", description="The description of the command issued.") 
     path:  Optional[StrictStr] = Field(None,alias="path", description="The unique identifier for the command including the request id.") 
-    user_id: User = Field(..., alias="userId")
-    processed_time: datetime = Field(..., alias="processedTime", description="The asAt datetime that the events published by the processing of this command were committed to LUSID.")
+    user_id: User = Field(alias="userId")
+    processed_time: datetime = Field(description="The asAt datetime that the events published by the processing of this command were committed to LUSID.", alias="processedTime")
     __properties = ["description", "path", "userId", "processedTime"]
 
     class Config:
@@ -90,3 +92,5 @@ class ProcessedCommand(BaseModel):
             "processed_time": obj.get("processedTime")
         })
         return _obj
+
+ProcessedCommand.update_forward_refs()

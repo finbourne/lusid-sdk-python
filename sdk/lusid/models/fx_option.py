@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator 
 from lusid.models.barrier import Barrier
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium
@@ -30,23 +32,23 @@ class FxOption(LusidInstrument):
     """
     LUSID representation of an FX Option.  Including Vanilla, American, European, and Digital (Binary) options.  # noqa: E501
     """
-    start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
+    start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
-    dom_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="domAmount", description="The Amount of DomCcy that will be exchanged if the option is exercised.  This amount should be a positive number, with the Call/Put flag used to indicate direction.  The corresponding amount of FgnCcy that will be exchanged is this amount times the strike.  Note there is no rounding performed on this computed value.  This is an optional field, if not set the option ContractSize will default to 1.")
+    dom_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Amount of DomCcy that will be exchanged if the option is exercised.  This amount should be a positive number, with the Call/Put flag used to indicate direction.  The corresponding amount of FgnCcy that will be exchanged is this amount times the strike.  Note there is no rounding performed on this computed value.  This is an optional field, if not set the option ContractSize will default to 1.", alias="domAmount")
     fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="The foreign currency of the FX.") 
-    fgn_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fgnAmount", description="For a vanilla FxOption contract, FgnAmount cannot be set.  In case of a digital FxOption (IsPayoffDigital==true)  a payoff (if the option is in the money) can be either  in domestic or in foreign currency - for the latter  FgnAmount must be set.  Note: It is invalid to have FgnAmount and DomAmount  at the same time.")
-    strike: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The strike of the option.")
-    barriers: Optional[conlist(Barrier)] = Field(None, description="For a barrier option the list should not be empty. Up to two barriers are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty.")
+    fgn_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For a vanilla FxOption contract, FgnAmount cannot be set.  In case of a digital FxOption (IsPayoffDigital==true)  a payoff (if the option is in the money) can be either  in domestic or in foreign currency - for the latter  FgnAmount must be set.  Note: It is invalid to have FgnAmount and DomAmount  at the same time.", alias="fgnAmount")
+    strike: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The strike of the option.")
+    barriers: Optional[List[Barrier]] = Field(default=None, description="For a barrier option the list should not be empty. Up to two barriers are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty.")
     exercise_type:  Optional[StrictStr] = Field(None,alias="exerciseType", description="Type of optionality that is present; European, American.    Supported string (enumeration) values are: [European, American].  Defaults to \"European\" if not set.") 
-    is_call_not_put: StrictBool = Field(..., alias="isCallNotPut", description="True if the option is a call, false if the option is a put.")
-    is_delivery_not_cash: StrictBool = Field(..., alias="isDeliveryNotCash", description="True if the option delivers the FX underlying, False if the option is settled in cash.")
-    is_payoff_digital: Optional[StrictBool] = Field(None, alias="isPayoffDigital", description="By default IsPayoffDigital is false. If IsPayoffDigital=true,  the option is 'digital', and the option payoff is 0 or 1 unit of currency,  instead of a vanilla CallPayoff=max(spot-strike,0) or PutPayoff=max(strike-spot,0).")
-    option_maturity_date: datetime = Field(..., alias="optionMaturityDate", description="The maturity date of the option.")
-    option_settlement_date: datetime = Field(..., alias="optionSettlementDate", description="The settlement date of the option.")
+    is_call_not_put: StrictBool = Field(description="True if the option is a call, false if the option is a put.", alias="isCallNotPut")
+    is_delivery_not_cash: StrictBool = Field(description="True if the option delivers the FX underlying, False if the option is settled in cash.", alias="isDeliveryNotCash")
+    is_payoff_digital: Optional[StrictBool] = Field(default=None, description="By default IsPayoffDigital is false. If IsPayoffDigital=true,  the option is 'digital', and the option payoff is 0 or 1 unit of currency,  instead of a vanilla CallPayoff=max(spot-strike,0) or PutPayoff=max(strike-spot,0).", alias="isPayoffDigital")
+    option_maturity_date: datetime = Field(description="The maturity date of the option.", alias="optionMaturityDate")
+    option_settlement_date: datetime = Field(description="The settlement date of the option.", alias="optionSettlementDate")
     payout_style:  Optional[StrictStr] = Field(None,alias="payoutStyle", description="PayoutStyle for touch options.                For options without touch optionality, payoutStyle should not be set.  For options with touch optionality (where the touches data has been set), payoutStyle must be defined and cannot be None.    Supported string (enumeration) values are: [Deferred, Immediate].  Defaults to \"None\" if not set.") 
     premium: Optional[Premium] = None
-    touches: Optional[conlist(Touch)] = Field(None, description="For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty.")
-    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
+    touches: Optional[List[Touch]] = Field(default=None, description="For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty.")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "domCcy", "domAmount", "fgnCcy", "fgnAmount", "strike", "barriers", "exerciseType", "isCallNotPut", "isDeliveryNotCash", "isPayoffDigital", "optionMaturityDate", "optionSettlementDate", "payoutStyle", "premium", "touches", "timeZoneConventions"]
@@ -101,14 +103,19 @@ class FxOption(LusidInstrument):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "instrument_type" != "type":
             return value
 
-        if value not in ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo'):
+        if value not in ['QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo']:
             raise ValueError("must be one of enum values ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo')")
         return value
 
@@ -242,3 +249,5 @@ class FxOption(LusidInstrument):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FxOption.update_forward_refs()

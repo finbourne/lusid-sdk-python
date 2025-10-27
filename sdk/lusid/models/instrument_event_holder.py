@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
@@ -30,18 +32,18 @@ class InstrumentEventHolder(BaseModel):
     An instrument event equipped with additional metadata.  # noqa: E501
     """
     instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The unique identifier of this corporate action.") 
-    corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The set of identifiers which determine the instrument this event relates to.")
+    corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The set of identifiers which determine the instrument this event relates to.", alias="instrumentIdentifiers")
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUID for the instrument.") 
     instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The scope of the instrument.") 
     description:  StrictStr = Field(...,alias="description", description="The description of the instrument event.") 
-    event_date_range: EventDateRange = Field(..., alias="eventDateRange")
+    event_date_range: EventDateRange = Field(alias="eventDateRange")
     completeness:  Optional[StrictStr] = Field(None,alias="completeness", description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete).") 
-    instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
-    properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
-    sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
+    instrument_event: InstrumentEvent = Field(alias="instrumentEvent")
+    properties: Optional[List[PerpetualProperty]] = Field(default=None, description="The properties attached to this instrument event.")
+    sequence_number: Optional[StrictInt] = Field(default=None, description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.", alias="sequenceNumber")
     participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert.")
+    as_at: Optional[datetime] = Field(default=None, description="The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert.", alias="asAt")
     __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType", "asAt"]
 
     class Config:
@@ -141,3 +143,5 @@ class InstrumentEventHolder(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+InstrumentEventHolder.update_forward_refs()

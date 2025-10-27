@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.instrument_payment_diary_row import InstrumentPaymentDiaryRow
 
 class InstrumentPaymentDiaryLeg(BaseModel):
     """
     A leg containing a set of cashflows.  # noqa: E501
     """
-    leg_index: Optional[StrictInt] = Field(None, alias="legIndex", description="Index (integer) for the leg of a payment diary.")
+    leg_index: Optional[StrictInt] = Field(default=None, description="Index (integer) for the leg of a payment diary.", alias="legIndex")
     leg_id:  Optional[StrictStr] = Field(None,alias="legId", description="Identifier string for the leg of a payment diary.") 
-    rows: Optional[conlist(InstrumentPaymentDiaryRow)] = Field(None, description="List of individual cashflows within the payment diary.")
+    rows: Optional[List[InstrumentPaymentDiaryRow]] = Field(default=None, description="List of individual cashflows within the payment diary.")
     __properties = ["legIndex", "legId", "rows"]
 
     class Config:
@@ -97,3 +99,5 @@ class InstrumentPaymentDiaryLeg(BaseModel):
             "rows": [InstrumentPaymentDiaryRow.from_dict(_item) for _item in obj.get("rows")] if obj.get("rows") is not None else None
         })
         return _obj
+
+InstrumentPaymentDiaryLeg.update_forward_refs()

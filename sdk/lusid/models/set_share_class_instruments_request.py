@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 
 class SetShareClassInstrumentsRequest(BaseModel):
     """
     The request used to create a Fund.  # noqa: E501
     """
-    share_class_instrument_scopes: conlist(StrictStr) = Field(..., alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
-    share_class_instruments: conlist(InstrumentResolutionDetail) = Field(..., alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
+    share_class_instrument_scopes: List[StrictStr] = Field(description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
+    share_class_instruments: List[InstrumentResolutionDetail] = Field(description="Details the user-provided instrument identifiers and the instrument resolved from them.", alias="shareClassInstruments")
     __properties = ["shareClassInstrumentScopes", "shareClassInstruments"]
 
     class Config:
@@ -85,3 +87,5 @@ class SetShareClassInstrumentsRequest(BaseModel):
             "share_class_instruments": [InstrumentResolutionDetail.from_dict(_item) for _item in obj.get("shareClassInstruments")] if obj.get("shareClassInstruments") is not None else None
         })
         return _obj
+
+SetShareClassInstrumentsRequest.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.side_definition_request import SideDefinitionRequest
 
 class SidesDefinitionRequest(BaseModel):
@@ -27,7 +29,7 @@ class SidesDefinitionRequest(BaseModel):
     SidesDefinitionRequest
     """
     side:  StrictStr = Field(...,alias="side", description="A unique label identifying the side definition.") 
-    side_request: SideDefinitionRequest = Field(..., alias="sideRequest")
+    side_request: SideDefinitionRequest = Field(alias="sideRequest")
     __properties = ["side", "sideRequest"]
 
     class Config:
@@ -81,3 +83,5 @@ class SidesDefinitionRequest(BaseModel):
             "side_request": SideDefinitionRequest.from_dict(obj.get("sideRequest")) if obj.get("sideRequest") is not None else None
         })
         return _obj
+
+SidesDefinitionRequest.update_forward_refs()

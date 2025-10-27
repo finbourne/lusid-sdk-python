@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -30,36 +32,36 @@ class JournalEntryLine(BaseModel):
     """
     A Journal Entry line entity.  # noqa: E501
     """
-    accounting_date: datetime = Field(..., alias="accountingDate", description="The Journal Entry Line accounting date.")
-    activity_date: datetime = Field(..., alias="activityDate", description="The actual date of the activity. Differs from the accounting date when creating journals that would occur in a closed period.")
-    portfolio_id: ResourceId = Field(..., alias="portfolioId")
+    accounting_date: datetime = Field(description="The Journal Entry Line accounting date.", alias="accountingDate")
+    activity_date: datetime = Field(description="The actual date of the activity. Differs from the accounting date when creating journals that would occur in a closed period.", alias="activityDate")
+    portfolio_id: ResourceId = Field(alias="portfolioId")
     instrument_id:  StrictStr = Field(...,alias="instrumentId", description="To indicate the instrument of the transaction that the Journal Entry Line posted for, if applicable.") 
     instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The scope in which the Journal Entry Line instrument is in.") 
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which are part of the AccountingKey.")
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which are part of the AccountingKey.", alias="subHoldingKeys")
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="If the holding type is 'B' (settled cash balance), this is 1. Otherwise, this is the ID of a tax lot if applicable, or the source ID of the original transaction if not.") 
     general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The code of the account in the general ledger the Journal Entry was posted to.") 
-    local: CurrencyAndAmount = Field(...)
-    base: CurrencyAndAmount = Field(...)
-    units: Union[StrictFloat, StrictInt] = Field(..., description="Units held for the Journal Entry Line.")
+    local: CurrencyAndAmount
+    base: CurrencyAndAmount
+    units: Union[StrictFloat, StrictInt] = Field(description="Units held for the Journal Entry Line.")
     posting_module_code:  Optional[StrictStr] = Field(None,alias="postingModuleCode", description="The code of the posting module where the posting rules derived the Journal Entry lines.") 
     posting_rule:  StrictStr = Field(...,alias="postingRule", description="The rule generating the Journal Entry Line.") 
-    as_at_date: datetime = Field(..., alias="asAtDate", description="The corresponding input date and time of the Transaction generating the Journal Entry Line.")
+    as_at_date: datetime = Field(description="The corresponding input date and time of the Transaction generating the Journal Entry Line.", alias="asAtDate")
     activities_description:  Optional[StrictStr] = Field(None,alias="activitiesDescription", description="This would be the description of the business activities this Journal Entry Line is for.") 
     source_type:  StrictStr = Field(...,alias="sourceType", description="So far are 4 types: LusidTxn, LusidValuation, Manual and External.") 
     source_id:  StrictStr = Field(...,alias="sourceId", description="For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Abor.")
     movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="If the JE Line is generated from a transaction, the name of the side in the transaction type's movement. If from a valuation, this is 'MarkToMarket'.") 
     holding_type:  StrictStr = Field(...,alias="holdingType", description="One of the LUSID holding types such as 'P' for position or 'B' for settled cash balance.") 
     economic_bucket:  StrictStr = Field(...,alias="economicBucket", description="LUSID automatically categorises a JE Line into a broad economic bucket such as 'NA_Cost' or 'PL_RealPriceGL'.") 
     economic_bucket_component:  Optional[StrictStr] = Field(None,alias="economicBucketComponent", description="Sub bucket of the economic bucket.") 
     economic_bucket_variant:  Optional[StrictStr] = Field(None,alias="economicBucketVariant", description="Categorisation of a Mark-to-market journal entry line into LongTerm or ShortTerm based on whether the ActivityDate is more than a year after the purchase trade date or not.") 
-    levels: Optional[conlist(StrictStr)] = Field(None, description="Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
-    source_levels: Optional[conlist(StrictStr)] = Field(None, alias="sourceLevels", description="Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
+    levels: Optional[List[StrictStr]] = Field(default=None, description="Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
+    source_levels: Optional[List[StrictStr]] = Field(default=None, description="Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.", alias="sourceLevels")
     movement_sign:  Optional[StrictStr] = Field(None,alias="movementSign", description="Indicates if the Journal Entry Line corresponds to a Long or Short movement.") 
     holding_sign:  Optional[StrictStr] = Field(None,alias="holdingSign", description="Indicates if the Journal Entry Line is operating against a Long or Short holding.") 
     ledger_column:  Optional[StrictStr] = Field(None,alias="ledgerColumn", description="Indicates if the Journal Entry Line is credit or debit.") 
     journal_entry_line_type:  Optional[StrictStr] = Field(None,alias="journalEntryLineType", description="Indicates the Journal Entry Line type") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "links"]
 
     class Config:
@@ -253,3 +255,5 @@ class JournalEntryLine(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+JournalEntryLine.update_forward_refs()

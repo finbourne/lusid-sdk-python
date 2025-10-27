@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.reference_list_request import ReferenceListRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 name: StrictStr = "example_name"
 description: Optional[StrictStr] = "example_description"
-tags: Optional[conlist(StrictStr)] = # Replace with your value
+tags: Optional[List[StrictStr]] = # Replace with your value
 reference_list: ReferenceList = # Replace with your value
 reference_list_request_instance = ReferenceListRequest(id=id, name=name, description=description, tags=tags, reference_list=reference_list)
 

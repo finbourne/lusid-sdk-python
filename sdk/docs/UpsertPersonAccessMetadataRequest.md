@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_person_access_metadata_request import UpsertPersonAccessMetadataRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-metadata: Optional[conlist(AccessMetadataValue)] = # Replace with your value
+metadata: Optional[List[AccessMetadataValue]] = # Replace with your value
 upsert_person_access_metadata_request_instance = UpsertPersonAccessMetadataRequest(metadata=metadata)
 
 ```

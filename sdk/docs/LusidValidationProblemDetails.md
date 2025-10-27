@@ -16,14 +16,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.lusid_validation_problem_details import LusidValidationProblemDetails
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: StrictStr = "example_name"
-error_details: Optional[conlist(Dict[str, StrictStr])] = # Replace with your value
-code: StrictInt = # Replace with your value
+error_details: Optional[List[Dict[str, StrictStr]]] = # Replace with your value
+code: StrictInt
 code: StrictInt = 42
-errors: Optional[Dict[str, conlist(StrictStr)]] = None
+errors: Optional[Dict[str, List[StrictStr]]] = None
 type: Optional[StrictStr] = "example_type"
 title: Optional[StrictStr] = "example_title"
 status: Optional[StrictInt] = None

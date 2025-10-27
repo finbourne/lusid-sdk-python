@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class StagedModificationsInfo(BaseModel):
     """
     The staged modifications metadata.  # noqa: E501
     """
-    count_pending: StrictInt = Field(..., alias="countPending", description="The number of staged modifications for the entity with a status of Pending for the requested asAt.")
+    count_pending: StrictInt = Field(description="The number of staged modifications for the entity with a status of Pending for the requested asAt.", alias="countPending")
     href_pending:  StrictStr = Field(...,alias="hrefPending", description="Link to the list staged modifications endpoint, filtered by entityType, entityUniqueId and status (= Pending).") 
-    ids_previewed: Optional[conlist(StrictStr)] = Field(None, alias="idsPreviewed", description="An array of the ids of any StagedModifications being previewed.")
+    ids_previewed: Optional[List[StrictStr]] = Field(default=None, description="An array of the ids of any StagedModifications being previewed.", alias="idsPreviewed")
     __properties = ["countPending", "hrefPending", "idsPreviewed"]
 
     class Config:
@@ -84,3 +86,5 @@ class StagedModificationsInfo(BaseModel):
             "ids_previewed": obj.get("idsPreviewed")
         })
         return _obj
+
+StagedModificationsInfo.update_forward_refs()

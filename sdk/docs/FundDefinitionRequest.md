@@ -23,24 +23,26 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_definition_request import FundDefinitionRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 base_currency: StrictStr = "example_base_currency"
 investor_structure: Optional[StrictStr] = "example_investor_structure"
-portfolio_ids: conlist(PortfolioEntityId) = # Replace with your value
+portfolio_ids: List[PortfolioEntityId] = # Replace with your value
 fund_configuration_id: ResourceId = # Replace with your value
-share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
-share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = # Replace with your value
+share_class_instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
+share_class_instruments: Optional[List[InstrumentResolutionDetail]] = # Replace with your value
 type: Optional[StrictStr] = "example_type"
 inception_date: datetime = # Replace with your value
-decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+decimal_places: Optional[StrictInt] = # Replace with your value
 decimal_places: Optional[StrictInt] = None
 primary_nav_type: NavTypeDefinition = # Replace with your value
-additional_nav_types: Optional[conlist(NavTypeDefinition)] = # Replace with your value
+additional_nav_types: Optional[List[NavTypeDefinition]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 fund_definition_request_instance = FundDefinitionRequest(code=code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties)
 

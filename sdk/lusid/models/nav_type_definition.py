@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class NavTypeDefinition(BaseModel):
@@ -29,13 +31,13 @@ class NavTypeDefinition(BaseModel):
     code:  Optional[StrictStr] = Field(None,alias="code") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName") 
     description:  Optional[StrictStr] = Field(None,alias="description") 
-    chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
-    posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes")
-    cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes")
-    valuation_recipe_id: ResourceId = Field(..., alias="valuationRecipeId")
-    holding_recipe_id: ResourceId = Field(..., alias="holdingRecipeId")
+    chart_of_accounts_id: ResourceId = Field(alias="chartOfAccountsId")
+    posting_module_codes: Optional[List[StrictStr]] = Field(default=None, alias="postingModuleCodes")
+    cleardown_module_codes: Optional[List[StrictStr]] = Field(default=None, alias="cleardownModuleCodes")
+    valuation_recipe_id: ResourceId = Field(alias="valuationRecipeId")
+    holding_recipe_id: ResourceId = Field(alias="holdingRecipeId")
     accounting_method:  StrictStr = Field(...,alias="accountingMethod") 
-    sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="Set of unique holding identifiers, e.g. trader, desk, strategy.")
+    sub_holding_keys: Optional[List[StrictStr]] = Field(default=None, description="Set of unique holding identifiers, e.g. trader, desk, strategy.", alias="subHoldingKeys")
     amortisation_method:  StrictStr = Field(...,alias="amortisationMethod") 
     transaction_type_scope:  StrictStr = Field(...,alias="transactionTypeScope") 
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
@@ -139,3 +141,5 @@ class NavTypeDefinition(BaseModel):
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")
         })
         return _obj
+
+NavTypeDefinition.update_forward_refs()

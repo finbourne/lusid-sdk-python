@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.instrument_id_value import InstrumentIdValue
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
@@ -31,11 +33,11 @@ class InstrumentDefinition(BaseModel):
     InstrumentDefinition
     """
     name:  StrictStr = Field(...,alias="name", description="The name of the instrument.") 
-    identifiers: Dict[str, InstrumentIdValue] = Field(..., description="A set of identifiers that can be used to identify the instrument. At least one of these must be configured to be a unique identifier.")
-    properties: Optional[conlist(ModelProperty)] = Field(None, description="Set of unique instrument properties and associated values to store with the instrument. Each property must be from the 'Instrument' domain.")
-    look_through_portfolio_id: Optional[ResourceId] = Field(None, alias="lookThroughPortfolioId")
+    identifiers: Dict[str, InstrumentIdValue] = Field(description="A set of identifiers that can be used to identify the instrument. At least one of these must be configured to be a unique identifier.")
+    properties: Optional[List[ModelProperty]] = Field(default=None, description="Set of unique instrument properties and associated values to store with the instrument. Each property must be from the 'Instrument' domain.")
+    look_through_portfolio_id: Optional[ResourceId] = Field(default=None, alias="lookThroughPortfolioId")
     definition: Optional[LusidInstrument] = None
-    settlement_cycle: Optional[SettlementCycle] = Field(None, alias="settlementCycle")
+    settlement_cycle: Optional[SettlementCycle] = Field(default=None, alias="settlementCycle")
     __properties = ["name", "identifiers", "properties", "lookThroughPortfolioId", "definition", "settlementCycle"]
 
     class Config:
@@ -123,3 +125,5 @@ class InstrumentDefinition(BaseModel):
             "settlement_cycle": SettlementCycle.from_dict(obj.get("settlementCycle")) if obj.get("settlementCycle") is not None else None
         })
         return _obj
+
+InstrumentDefinition.update_forward_refs()

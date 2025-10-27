@@ -17,17 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class Premium(BaseModel):
     """
     A class containing information for a given premium payment.  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="Premium amount.")
+    amount: Union[StrictFloat, StrictInt] = Field(description="Premium amount.")
     currency:  StrictStr = Field(...,alias="currency", description="Premium currency.") 
-    var_date: datetime = Field(..., alias="date", description="Date when premium paid.")
+    var_date: datetime = Field(description="Date when premium paid.", alias="date")
     __properties = ["amount", "currency", "date"]
 
     class Config:
@@ -79,3 +81,5 @@ class Premium(BaseModel):
             "var_date": obj.get("date")
         })
         return _obj
+
+Premium.update_forward_refs()

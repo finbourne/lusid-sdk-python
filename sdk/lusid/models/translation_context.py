@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.script_map_reference import ScriptMapReference
 
 class TranslationContext(BaseModel):
     """
     Options for overriding default scripted translation configuration.  # noqa: E501
     """
-    disable_scripted_translation: Optional[StrictBool] = Field(None, alias="disableScriptedTranslation")
-    script_map: Optional[ScriptMapReference] = Field(None, alias="scriptMap")
+    disable_scripted_translation: Optional[StrictBool] = Field(default=None, alias="disableScriptedTranslation")
+    script_map: Optional[ScriptMapReference] = Field(default=None, alias="scriptMap")
     __properties = ["disableScriptedTranslation", "scriptMap"]
 
     class Config:
@@ -81,3 +83,5 @@ class TranslationContext(BaseModel):
             "script_map": ScriptMapReference.from_dict(obj.get("scriptMap")) if obj.get("scriptMap") is not None else None
         })
         return _obj
+
+TranslationContext.update_forward_refs()

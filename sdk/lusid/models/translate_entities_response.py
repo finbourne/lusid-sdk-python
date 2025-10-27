@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.translation_result import TranslationResult
@@ -28,9 +30,9 @@ class TranslateEntitiesResponse(BaseModel):
     """
     TranslateEntitiesResponse
     """
-    values: Optional[Dict[str, TranslationResult]] = Field(None, description="The entities that were successfully translated.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The error details corresponding to entities that failed to be translated.")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, TranslationResult]] = Field(default=None, description="The entities that were successfully translated.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The error details corresponding to entities that failed to be translated.")
+    links: Optional[List[Link]] = None
     __properties = ["values", "failed", "links"]
 
     class Config:
@@ -128,3 +130,5 @@ class TranslateEntitiesResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TranslateEntitiesResponse.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.transfer_agency_dates import TransferAgencyDates
@@ -28,9 +30,9 @@ class CalculateOrderDatesResponse(BaseModel):
     """
     CalculateOrderDatesResponse
     """
-    successes: Optional[Dict[str, TransferAgencyDates]] = Field(None, description="A dictionary of successful date calculations, keyed by the request key.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="A dictionary of failed date calculations, keyed by the request key, containing the error details of any failures that occurred during the calculation.")
-    links: Optional[conlist(Link)] = None
+    successes: Optional[Dict[str, TransferAgencyDates]] = Field(default=None, description="A dictionary of successful date calculations, keyed by the request key.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="A dictionary of failed date calculations, keyed by the request key, containing the error details of any failures that occurred during the calculation.")
+    links: Optional[List[Link]] = None
     __properties = ["successes", "failed", "links"]
 
     class Config:
@@ -128,3 +130,5 @@ class CalculateOrderDatesResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CalculateOrderDatesResponse.update_forward_refs()

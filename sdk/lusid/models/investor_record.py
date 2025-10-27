@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.investor import Investor
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -31,16 +33,16 @@ class InvestorRecord(BaseModel):
     Representation of an Investor Record on the LUSID API  # noqa: E501
     """
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investor Record lies.") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Investor Record.")
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Unique client-defined identifiers of the Investor Record.")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the Investor Record") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investor Record") 
     investor: Optional[Investor] = None
     lusid_investor_record_id:  Optional[StrictStr] = Field(None,alias="lusidInvestorRecordId", description="The unique LUSID Investor Record Identifier of the Investor Record.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investor Record.")
-    relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Investor Record.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Investor Record.")
+    relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the Investor Record.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["scope", "identifiers", "displayName", "description", "investor", "lusidInvestorRecordId", "properties", "relationships", "href", "version", "links"]
 
     class Config:
@@ -189,3 +191,5 @@ class InvestorRecord(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+InvestorRecord.update_forward_refs()

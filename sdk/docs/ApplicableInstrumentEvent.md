@@ -21,8 +21,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 portfolio_id: ResourceId = # Replace with your value
 holding_id: StrictInt = # Replace with your value
@@ -35,7 +37,7 @@ generated_event: Optional[InstrumentEventHolder] = # Replace with your value
 generated_event_diagnostics: Optional[GeneratedEventDiagnostics] = # Replace with your value
 loaded_event: Optional[InstrumentEventHolder] = # Replace with your value
 applied_instrument_event_instruction_id: Optional[StrictStr] = "example_applied_instrument_event_instruction_id"
-transactions: Optional[conlist(Transaction)] = None
+transactions: Optional[List[Transaction]] = None
 transaction_diagnostics: Optional[TransactionDiagnostics] = # Replace with your value
 applicable_instrument_event_instance = ApplicableInstrumentEvent(portfolio_id=portfolio_id, holding_id=holding_id, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, instrument_type=instrument_type, instrument_event_type=instrument_event_type, instrument_event_id=instrument_event_id, generated_event=generated_event, generated_event_diagnostics=generated_event_diagnostics, loaded_event=loaded_event, applied_instrument_event_instruction_id=applied_instrument_event_instruction_id, transactions=transactions, transaction_diagnostics=transaction_diagnostics)
 

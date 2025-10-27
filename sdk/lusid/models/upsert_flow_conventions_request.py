@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.flow_conventions import FlowConventions
 
 class UpsertFlowConventionsRequest(BaseModel):
     """
     Flow conventions that is to be stored in the convention data store.  Only one of these must be present.  # noqa: E501
     """
-    flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
+    flow_conventions: Optional[FlowConventions] = Field(default=None, alias="flowConventions")
     __properties = ["flowConventions"]
 
     class Config:
@@ -79,3 +81,5 @@ class UpsertFlowConventionsRequest(BaseModel):
             "flow_conventions": FlowConventions.from_dict(obj.get("flowConventions")) if obj.get("flowConventions") is not None else None
         })
         return _obj
+
+UpsertFlowConventionsRequest.update_forward_refs()

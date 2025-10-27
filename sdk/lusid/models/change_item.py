@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class ChangeItem(BaseModel):
     """
@@ -28,8 +30,8 @@ class ChangeItem(BaseModel):
     field_name:  StrictStr = Field(...,alias="fieldName", description="The name of the field or property that has been changed.") 
     previous_value:  Optional[StrictStr] = Field(None,alias="previousValue", description="The previous value for this field / property.") 
     new_value:  Optional[StrictStr] = Field(None,alias="newValue", description="The new value for this field / property.") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The market data time, i.e. the time to run the change from.")
-    effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The market data time, i.e. the time to run the change until.")
+    effective_from: Optional[datetime] = Field(default=None, description="The market data time, i.e. the time to run the change from.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The market data time, i.e. the time to run the change until.", alias="effectiveUntil")
     __properties = ["fieldName", "previousValue", "newValue", "effectiveFrom", "effectiveUntil"]
 
     class Config:
@@ -103,3 +105,5 @@ class ChangeItem(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+ChangeItem.update_forward_refs()

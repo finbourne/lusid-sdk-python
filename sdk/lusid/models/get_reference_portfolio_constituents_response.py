@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, validator 
 from lusid.models.link import Link
 from lusid.models.reference_portfolio_constituent import ReferencePortfolioConstituent
 
@@ -27,13 +29,13 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
     """
     GetReferencePortfolioConstituentsResponse
     """
-    effective_from: datetime = Field(..., alias="effectiveFrom")
+    effective_from: datetime = Field(alias="effectiveFrom")
     weight_type:  StrictStr = Field(...,alias="weightType", description="The available values are: Static, Floating, Periodical") 
     period_type:  Optional[StrictStr] = Field(None,alias="periodType", description="The available values are: Daily, Weekly, Monthly, Quarterly, Annually") 
-    period_count: Optional[StrictInt] = Field(None, alias="periodCount")
-    constituents: conlist(ReferencePortfolioConstituent) = Field(..., description="Set of constituents (instrument/weight pairings)")
+    period_count: Optional[StrictInt] = Field(default=None, alias="periodCount")
+    constituents: List[ReferencePortfolioConstituent] = Field(description="Set of constituents (instrument/weight pairings)")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The Uri that returns the same result as the original request,  but may include resolved as at time(s).") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["effectiveFrom", "weightType", "periodType", "periodCount", "constituents", "href", "links"]
 
     @validator('weight_type')
@@ -86,14 +88,19 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "weight_type" != "type":
             return value
 
-        if value not in ('Static', 'Floating', 'Periodical'):
+        if value not in ['Static', 'Floating', 'Periodical']:
             raise ValueError("must be one of enum values ('Static', 'Floating', 'Periodical')")
         return value
 
@@ -147,7 +154,12 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -157,7 +169,7 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Daily', 'Weekly', 'Monthly', 'Quarterly', 'Annually'):
+        if value not in ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Annually']:
             raise ValueError("must be one of enum values ('Daily', 'Weekly', 'Monthly', 'Quarterly', 'Annually')")
         return value
 
@@ -248,3 +260,5 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+GetReferencePortfolioConstituentsResponse.update_forward_refs()

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.order_graph_placement_child_placement_detail import OrderGraphPlacementChildPlacementDetail
 
 class OrderGraphPlacementPlacementSynopsis(BaseModel):
     """
     OrderGraphPlacementPlacementSynopsis
     """
-    details: conlist(OrderGraphPlacementChildPlacementDetail) = Field(..., description="Identifiers for each child placement for this placement.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="Total number of units placed.")
+    details: List[OrderGraphPlacementChildPlacementDetail] = Field(description="Identifiers for each child placement for this placement.")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="Total number of units placed.")
     __properties = ["details", "quantity"]
 
     class Config:
@@ -85,3 +87,5 @@ class OrderGraphPlacementPlacementSynopsis(BaseModel):
             "quantity": obj.get("quantity")
         })
         return _obj
+
+OrderGraphPlacementPlacementSynopsis.update_forward_refs()

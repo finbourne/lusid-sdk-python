@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_user_review_break_code import GroupReconciliationUserReviewBreakCode
 from lusid.models.group_reconciliation_user_review_comment import GroupReconciliationUserReviewComment
 from lusid.models.group_reconciliation_user_review_match_key import GroupReconciliationUserReviewMatchKey
@@ -28,9 +30,9 @@ class GroupReconciliationUserReview(BaseModel):
     """
     GroupReconciliationUserReview
     """
-    break_codes: Optional[conlist(GroupReconciliationUserReviewBreakCode)] = Field(None, alias="breakCodes", description="A list of break codes shared between the reconciliation runs of the same run instance and result hash.")
-    match_keys: Optional[conlist(GroupReconciliationUserReviewMatchKey)] = Field(None, alias="matchKeys", description="A list of match keys shared between the reconciliation runs of the same run instance and result hash.")
-    comments: Optional[conlist(GroupReconciliationUserReviewComment)] = Field(None, description="A list of comments shared between the reconciliation runs of the same run instance and result hash.")
+    break_codes: Optional[List[GroupReconciliationUserReviewBreakCode]] = Field(default=None, description="A list of break codes shared between the reconciliation runs of the same run instance and result hash.", alias="breakCodes")
+    match_keys: Optional[List[GroupReconciliationUserReviewMatchKey]] = Field(default=None, description="A list of match keys shared between the reconciliation runs of the same run instance and result hash.", alias="matchKeys")
+    comments: Optional[List[GroupReconciliationUserReviewComment]] = Field(default=None, description="A list of comments shared between the reconciliation runs of the same run instance and result hash.")
     __properties = ["breakCodes", "matchKeys", "comments"]
 
     class Config:
@@ -118,3 +120,5 @@ class GroupReconciliationUserReview(BaseModel):
             "comments": [GroupReconciliationUserReviewComment.from_dict(_item) for _item in obj.get("comments")] if obj.get("comments") is not None else None
         })
         return _obj
+
+GroupReconciliationUserReview.update_forward_refs()

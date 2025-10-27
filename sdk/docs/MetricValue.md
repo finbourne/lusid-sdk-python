@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.metric_value import MetricValue
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 unit: Optional[StrictStr] = "example_unit"

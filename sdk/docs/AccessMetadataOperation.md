@@ -11,10 +11,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.access_metadata_operation import AccessMetadataOperation
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-value: conlist(AccessMetadataValue, min_items=1) = Field(...)
+value: List[AccessMetadataValue]
 path: StrictStr = "example_path"
 op: StrictStr = "example_op"
 var_from: Optional[StrictStr] = "example_var_from"

@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.ir_vol_dependency import IrVolDependency
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 currency: StrictStr = "example_currency"
 vol_type: StrictStr = "example_vol_type"
 var_date: datetime = # Replace with your value

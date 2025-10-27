@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
@@ -33,27 +35,27 @@ class PortfolioHolding(BaseModel):
     """
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the holding's instrument is in.") 
     instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' or 'Holding' domain.")
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.", alias="subHoldingKeys")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' or 'Holding' domain.")
     holding_type:  StrictStr = Field(...,alias="holdingType", description="The code for the type of the holding e.g. P, B, C, R, F etc.") 
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The total number of units of the holding.")
-    settled_units: Union[StrictFloat, StrictInt] = Field(..., alias="settledUnits", description="The total number of settled units of the holding.")
-    cost: CurrencyAndAmount = Field(...)
-    cost_portfolio_ccy: CurrencyAndAmount = Field(..., alias="costPortfolioCcy")
+    units: Union[StrictFloat, StrictInt] = Field(description="The total number of units of the holding.")
+    settled_units: Union[StrictFloat, StrictInt] = Field(description="The total number of settled units of the holding.", alias="settledUnits")
+    cost: CurrencyAndAmount
+    cost_portfolio_ccy: CurrencyAndAmount = Field(alias="costPortfolioCcy")
     transaction: Optional[Transaction] = None
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The holding currency.") 
     holding_type_name:  Optional[StrictStr] = Field(None,alias="holdingTypeName", description="The decoded type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc.") 
-    holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="A single identifier for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.")
-    notional_cost: Optional[CurrencyAndAmount] = Field(None, alias="notionalCost")
-    amortised_cost: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCost")
-    amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCostPortfolioCcy")
-    variation_margin: Optional[CurrencyAndAmount] = Field(None, alias="variationMargin")
-    variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="variationMarginPortfolioCcy")
-    settlement_schedule: Optional[conlist(SettlementSchedule)] = Field(None, alias="settlementSchedule", description="Where no. of days ahead has been specified, future dated settlements will be captured here.")
-    current_face: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="currentFace", description="Current face value of the holding.")
-    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
-    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unsettledUnits", description="The number of unsettled units for the holding.")
-    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="overdueUnits", description="The number of unsettled units for the holding that are beyond their contractual settlement date.")
+    holding_id: Optional[StrictInt] = Field(default=None, description="A single identifier for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.", alias="holdingId")
+    notional_cost: Optional[CurrencyAndAmount] = Field(default=None, alias="notionalCost")
+    amortised_cost: Optional[CurrencyAndAmount] = Field(default=None, alias="amortisedCost")
+    amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = Field(default=None, alias="amortisedCostPortfolioCcy")
+    variation_margin: Optional[CurrencyAndAmount] = Field(default=None, alias="variationMargin")
+    variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = Field(default=None, alias="variationMarginPortfolioCcy")
+    settlement_schedule: Optional[List[SettlementSchedule]] = Field(default=None, description="Where no. of days ahead has been specified, future dated settlements will be captured here.", alias="settlementSchedule")
+    current_face: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Current face value of the holding.", alias="currentFace")
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
+    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of unsettled units for the holding.", alias="unsettledUnits")
+    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of unsettled units for the holding that are beyond their contractual settlement date.", alias="overdueUnits")
     __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId", "unsettledUnits", "overdueUnits"]
 
     class Config:
@@ -223,3 +225,5 @@ class PortfolioHolding(BaseModel):
             "overdue_units": obj.get("overdueUnits")
         })
         return _obj
+
+PortfolioHolding.update_forward_refs()

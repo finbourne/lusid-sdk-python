@@ -12,15 +12,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 effective_from: StrictStr = "example_effective_from"
 weight_type: StrictStr = "example_weight_type"
 period_type: Optional[StrictStr] = "example_period_type"
 period_count: Optional[StrictInt] = # Replace with your value
 period_count: Optional[StrictInt] = None
-constituents: conlist(ReferencePortfolioConstituentRequest) = # Replace with your value
+constituents: List[ReferencePortfolioConstituentRequest] = # Replace with your value
 upsert_reference_portfolio_constituents_request_instance = UpsertReferencePortfolioConstituentsRequest(effective_from=effective_from, weight_type=weight_type, period_type=period_type, period_count=period_count, constituents=constituents)
 
 ```

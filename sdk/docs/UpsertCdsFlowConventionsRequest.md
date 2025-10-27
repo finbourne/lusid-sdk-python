@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 cds_flow_conventions: Optional[CdsFlowConventions] = # Replace with your value
 upsert_cds_flow_conventions_request_instance = UpsertCdsFlowConventionsRequest(cds_flow_conventions=cds_flow_conventions)

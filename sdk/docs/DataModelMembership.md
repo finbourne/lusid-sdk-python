@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.data_model_membership import DataModelMembership
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-membership: conlist(Membership) = # Replace with your value
+membership: List[Membership] = # Replace with your value
 current_model: Optional[MembershipAndStatus] = # Replace with your value
 data_model_membership_instance = DataModelMembership(membership=membership, current_model=current_model)
 

@@ -11,9 +11,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.update_deposit_amount_event import UpdateDepositAmountEvent
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 var_date: Optional[datetime] = # Replace with your value
 amount: Union[StrictFloat, StrictInt] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"

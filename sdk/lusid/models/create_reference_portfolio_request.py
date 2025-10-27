@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.model_property import ModelProperty
 
 class CreateReferencePortfolioRequest(BaseModel):
@@ -29,9 +31,9 @@ class CreateReferencePortfolioRequest(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the reference portfolio.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A long form text description of the portfolio.") 
     code:  StrictStr = Field(...,alias="code", description="Unique identifier for the portfolio.") 
-    created: Optional[datetime] = Field(None, description="The original creation date, defaults to today if not specified when creating a portfolio.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Portfolio properties to add to the portfolio.")
-    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="Instrument Scopes.")
+    created: Optional[datetime] = Field(default=None, description="The original creation date, defaults to today if not specified when creating a portfolio.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Portfolio properties to add to the portfolio.")
+    instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="Instrument Scopes.", alias="instrumentScopes")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.") 
     __properties = ["displayName", "description", "code", "created", "properties", "instrumentScopes", "baseCurrency"]
 
@@ -125,3 +127,5 @@ class CreateReferencePortfolioRequest(BaseModel):
             "base_currency": obj.get("baseCurrency")
         })
         return _obj
+
+CreateReferencePortfolioRequest.update_forward_refs()

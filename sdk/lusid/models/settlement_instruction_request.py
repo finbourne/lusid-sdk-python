@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.settlement_in_lieu import SettlementInLieu
@@ -32,15 +34,15 @@ class SettlementInstructionRequest(BaseModel):
     transaction_id:  StrictStr = Field(...,alias="transactionId") 
     settlement_category:  StrictStr = Field(...,alias="settlementCategory") 
     instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType") 
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers")
-    contractual_settlement_date: Optional[datetime] = Field(None, alias="contractualSettlementDate")
-    actual_settlement_date: datetime = Field(..., alias="actualSettlementDate")
-    units: Union[StrictFloat, StrictInt] = Field(...)
-    sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides")
-    custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
-    instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="instructionToPortfolioRate")
-    settlement_in_lieu: Optional[SettlementInLieu] = Field(None, alias="settlementInLieu")
-    properties: Optional[conlist(PerpetualProperty)] = None
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(alias="instrumentIdentifiers")
+    contractual_settlement_date: Optional[datetime] = Field(default=None, alias="contractualSettlementDate")
+    actual_settlement_date: datetime = Field(alias="actualSettlementDate")
+    units: Union[StrictFloat, StrictInt]
+    sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(default=None, alias="subHoldingKeyOverrides")
+    custodian_account_override: Optional[ResourceId] = Field(default=None, alias="custodianAccountOverride")
+    instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="instructionToPortfolioRate")
+    settlement_in_lieu: Optional[SettlementInLieu] = Field(default=None, alias="settlementInLieu")
+    properties: Optional[List[PerpetualProperty]] = None
     __properties = ["settlementInstructionId", "transactionId", "settlementCategory", "instructionType", "instrumentIdentifiers", "contractualSettlementDate", "actualSettlementDate", "units", "subHoldingKeyOverrides", "custodianAccountOverride", "instructionToPortfolioRate", "settlementInLieu", "properties"]
 
     class Config:
@@ -152,3 +154,5 @@ class SettlementInstructionRequest(BaseModel):
             "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None
         })
         return _obj
+
+SettlementInstructionRequest.update_forward_refs()

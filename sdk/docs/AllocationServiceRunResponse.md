@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: Optional[conlist(ResourceId)] = None
+values: Optional[List[ResourceId]] = None
 failed: Optional[Dict[str, ErrorDetail]] = None
 allocation_service_run_response_instance = AllocationServiceRunResponse(values=values, failed=failed)
 

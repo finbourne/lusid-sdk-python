@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.transaction_configuration_data import TransactionConfigurationData
@@ -28,9 +30,9 @@ class TransactionSetConfigurationData(BaseModel):
     """
     A collection of the data required to configure transaction types..  # noqa: E501
     """
-    transaction_configs: conlist(TransactionConfigurationData) = Field(..., alias="transactionConfigs", description="Collection of transaction type models")
-    side_definitions: Optional[conlist(SideConfigurationData)] = Field(None, alias="sideDefinitions", description="Collection of side definitions")
-    links: Optional[conlist(Link)] = None
+    transaction_configs: List[TransactionConfigurationData] = Field(description="Collection of transaction type models", alias="transactionConfigs")
+    side_definitions: Optional[List[SideConfigurationData]] = Field(default=None, description="Collection of side definitions", alias="sideDefinitions")
+    links: Optional[List[Link]] = None
     __properties = ["transactionConfigs", "sideDefinitions", "links"]
 
     class Config:
@@ -113,3 +115,5 @@ class TransactionSetConfigurationData(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TransactionSetConfigurationData.update_forward_refs()

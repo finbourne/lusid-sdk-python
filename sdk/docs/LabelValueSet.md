@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.label_value_set import LabelValueSet
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(StrictStr, min_items=1) = Field(...)
+values: List[StrictStr]
 label_value_set_instance = LabelValueSet(values=values)
 
 ```

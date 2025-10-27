@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.staging_rule_set import StagingRuleSet
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 entity_type: StrictStr = "example_entity_type"
 staging_rule_set_id: StrictStr = "example_staging_rule_set_id"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: conlist(StagingRule) = # Replace with your value
+rules: List[StagingRule] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 staging_rule_set_instance = StagingRuleSet(entity_type=entity_type, staging_rule_set_id=staging_rule_set_id, display_name=display_name, description=description, rules=rules, href=href, version=version, links=links)
 
 ```

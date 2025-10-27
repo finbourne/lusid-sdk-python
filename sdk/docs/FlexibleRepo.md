@@ -25,9 +25,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.flexible_repo import FlexibleRepo
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: Optional[datetime] = # Replace with your value
 buyer_or_seller: StrictStr = "example_buyer_or_seller"
@@ -39,7 +41,7 @@ haircut: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 open_repo_rolling_period: Optional[StrictStr] = "example_open_repo_rolling_period"
 purchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-repo_rate_schedules: Optional[conlist(Schedule)] = # Replace with your value
+repo_rate_schedules: Optional[List[Schedule]] = # Replace with your value
 repurchase_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.inline_valuation_request import InlineValuationRequest
 from lusid.models.reconciliation_left_right_address_key_pair import ReconciliationLeftRightAddressKeyPair
 
@@ -27,10 +29,10 @@ class InlineValuationsReconciliationRequest(BaseModel):
     """
     Specification for the reconciliation request. Left and Right hand sides are constructed. Each consists of a valuation of a inline set of instruments  using an inline aggregation request. The results of this can then be compared to each other. The difference, which is effectively a risk based  difference allows comparison of the effects of changing a recipe, valuation date, or (though it may or may not make logical sense) a set of instruments.  # noqa: E501
     """
-    left: InlineValuationRequest = Field(...)
-    right: InlineValuationRequest = Field(...)
-    left_to_right_mapping: Optional[conlist(ReconciliationLeftRightAddressKeyPair)] = Field(None, alias="leftToRightMapping", description="The mapping from property keys requested by left aggregation to property keys on right hand side")
-    preserve_keys: Optional[conlist(StrictStr)] = Field(None, alias="preserveKeys", description="List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping")
+    left: InlineValuationRequest
+    right: InlineValuationRequest
+    left_to_right_mapping: Optional[List[ReconciliationLeftRightAddressKeyPair]] = Field(default=None, description="The mapping from property keys requested by left aggregation to property keys on right hand side", alias="leftToRightMapping")
+    preserve_keys: Optional[List[StrictStr]] = Field(default=None, description="List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping", alias="preserveKeys")
     __properties = ["left", "right", "leftToRightMapping", "preserveKeys"]
 
     class Config:
@@ -106,3 +108,5 @@ class InlineValuationsReconciliationRequest(BaseModel):
             "preserve_keys": obj.get("preserveKeys")
         })
         return _obj
+
+InlineValuationsReconciliationRequest.update_forward_refs()

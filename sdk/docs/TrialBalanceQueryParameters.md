@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParameters
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 start: Optional[DateOrDiaryEntry] = None
 end: Optional[DateOrDiaryEntry] = None
 date_mode: Optional[StrictStr] = "example_date_mode"
 general_ledger_profile_code: Optional[StrictStr] = "example_general_ledger_profile_code"
-property_keys: Optional[conlist(StrictStr)] = # Replace with your value
+property_keys: Optional[List[StrictStr]] = # Replace with your value
 exclude_cleardown_module: Optional[StrictBool] = # Replace with your value
 exclude_cleardown_module:Optional[StrictBool] = None
 trial_balance_query_parameters_instance = TrialBalanceQueryParameters(start=start, end=end, date_mode=date_mode, general_ledger_profile_code=general_ledger_profile_code, property_keys=property_keys, exclude_cleardown_module=exclude_cleardown_module)

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **created_date** | **datetime** | The active date of this order instruction. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The quantity of given instrument ordered. | [optional] 
 **weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
@@ -21,14 +21,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_instruction import OrderInstruction
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 created_date: datetime = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 price: Optional[CurrencyAndAmount] = None
@@ -36,7 +38,7 @@ instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 order_instruction_instance = OrderInstruction(id=id, created_date=created_date, properties=properties, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, version=version, data_model_membership=data_model_membership, links=links)
 
 ```

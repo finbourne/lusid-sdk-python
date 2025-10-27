@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class DateRange(BaseModel):
     """
     DateRange
     """
-    from_date: datetime = Field(..., alias="fromDate")
-    until_date: Optional[datetime] = Field(None, alias="untilDate")
+    from_date: datetime = Field(alias="fromDate")
+    until_date: Optional[datetime] = Field(default=None, alias="untilDate")
     __properties = ["fromDate", "untilDate"]
 
     class Config:
@@ -82,3 +84,5 @@ class DateRange(BaseModel):
             "until_date": obj.get("untilDate")
         })
         return _obj
+
+DateRange.update_forward_refs()

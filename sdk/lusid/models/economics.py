@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.bucket import Bucket
 from lusid.models.perpetual_property import PerpetualProperty
 
@@ -29,8 +31,8 @@ class Economics(BaseModel):
     """
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The unique Lusid Instrument Id (LUID) of the instrument that economics are for.") 
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the Economic. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
-    buckets: Optional[conlist(Bucket)] = Field(None, description="Set of economic data related with each of the side impact of the transaction.")
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which identify the Economic. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.", alias="subHoldingKeys")
+    buckets: Optional[List[Bucket]] = Field(default=None, description="Set of economic data related with each of the side impact of the transaction.")
     __properties = ["instrumentScope", "lusidInstrumentId", "subHoldingKeys", "buckets"]
 
     class Config:
@@ -117,3 +119,5 @@ class Economics(BaseModel):
             "buckets": [Bucket.from_dict(_item) for _item in obj.get("buckets")] if obj.get("buckets") is not None else None
         })
         return _obj
+
+Economics.update_forward_refs()

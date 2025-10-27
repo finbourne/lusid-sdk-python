@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.option_entry import OptionEntry
 from lusid.models.schedule import Schedule
 
@@ -28,7 +30,7 @@ class OptionalitySchedule(Schedule):
     Optionality Schedule represents a class for creation of schedules for optionality (call, put)  # noqa: E501
     """
     exercise_type:  Optional[StrictStr] = Field(None,alias="exerciseType", description="The exercise type of the optionality schedule (American or European).  For American type, the bond is perpetually callable from a given exercise date until it matures, or the next date in the schedule.  For European type, the bond is only callable on a given exercise date.    Supported string (enumeration) values are: [European, American].  Defaults to \"European\" if not set.") 
-    option_entries: Optional[conlist(OptionEntry)] = Field(None, alias="optionEntries", description="The dates at which the bond call/put may be actioned, and associated strikes.")
+    option_entries: Optional[List[OptionEntry]] = Field(default=None, description="The dates at which the bond call/put may be actioned, and associated strikes.", alias="optionEntries")
     option_type:  Optional[StrictStr] = Field(None,alias="optionType", description="Type of optionality for the schedule.    Supported string (enumeration) values are: [Call, Put].  Defaults to \"Call\" if not set.") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
@@ -84,14 +86,19 @@ class OptionalitySchedule(Schedule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "schedule_type" != "type":
             return value
 
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid'):
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
             raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
         return value
 
@@ -178,3 +185,5 @@ class OptionalitySchedule(Schedule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+OptionalitySchedule.update_forward_refs()

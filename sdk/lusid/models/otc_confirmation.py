@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class OtcConfirmation(BaseModel):
     """
     For the storage of any information pertinent to the confirmation of an OTC trade. e.g the Counterparty Agreement Code  # noqa: E501
     """
-    counterparty_agreement_id: Optional[ResourceId] = Field(None, alias="counterpartyAgreementId")
+    counterparty_agreement_id: Optional[ResourceId] = Field(default=None, alias="counterpartyAgreementId")
     __properties = ["counterpartyAgreementId"]
 
     class Config:
@@ -79,3 +81,5 @@ class OtcConfirmation(BaseModel):
             "counterparty_agreement_id": ResourceId.from_dict(obj.get("counterpartyAgreementId")) if obj.get("counterpartyAgreementId") is not None else None
         })
         return _obj
+
+OtcConfirmation.update_forward_refs()

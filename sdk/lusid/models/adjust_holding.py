@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.version import Version
@@ -29,9 +31,9 @@ class AdjustHolding(BaseModel):
     AdjustHolding
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    version: Version = Field(...)
-    metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = Field(None, description="Contains warnings related to unresolved instruments")
-    links: Optional[conlist(Link)] = None
+    version: Version
+    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Contains warnings related to unresolved instruments")
+    links: Optional[List[Link]] = None
     __properties = ["href", "version", "metadata", "links"]
 
     class Config:
@@ -125,3 +127,5 @@ class AdjustHolding(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AdjustHolding.update_forward_refs()

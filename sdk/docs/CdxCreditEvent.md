@@ -15,9 +15,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cdx_credit_event import CdxCreditEvent
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_date: Optional[datetime] = # Replace with your value
 auction_date: Optional[datetime] = # Replace with your value
 recovery_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CalculationInfo(BaseModel):
     """
@@ -27,7 +29,7 @@ class CalculationInfo(BaseModel):
     """
     calculation_method:  StrictStr = Field(...,alias="calculationMethod", description="Method of calculating the fees or commission among: BasisPoints, Percentage, Rate, Flat etc.") 
     multiplier:  StrictStr = Field(...,alias="multiplier", description="Field by which to multiply the numerical amount. Eg: Quantity, Value") 
-    calculation_amount: Union[StrictFloat, StrictInt] = Field(..., alias="calculationAmount", description="Numerical fee amount")
+    calculation_amount: Union[StrictFloat, StrictInt] = Field(description="Numerical fee amount", alias="calculationAmount")
     __properties = ["calculationMethod", "multiplier", "calculationAmount"]
 
     class Config:
@@ -79,3 +81,5 @@ class CalculationInfo(BaseModel):
             "calculation_amount": obj.get("calculationAmount")
         })
         return _obj
+
+CalculationInfo.update_forward_refs()

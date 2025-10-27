@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
 from lusid.models.economic_dependency_with_quote import EconomicDependencyWithQuote
 
@@ -27,8 +29,8 @@ class MarketDataOverrides(BaseModel):
     """
     Class which holds market data overrides to be used in valuation  # noqa: E501
     """
-    complex_market_data: Optional[conlist(EconomicDependencyWithComplexMarketData)] = Field(None, alias="complexMarketData", description="A list of EconomicDependency paired with quote data satisfying that economic dependency")
-    quotes: Optional[conlist(EconomicDependencyWithQuote)] = Field(None, description="A list of EconomicDependency paired with a ComplexMarketData satisfying that economic dependency")
+    complex_market_data: Optional[List[EconomicDependencyWithComplexMarketData]] = Field(default=None, description="A list of EconomicDependency paired with quote data satisfying that economic dependency", alias="complexMarketData")
+    quotes: Optional[List[EconomicDependencyWithQuote]] = Field(default=None, description="A list of EconomicDependency paired with a ComplexMarketData satisfying that economic dependency")
     __properties = ["complexMarketData", "quotes"]
 
     class Config:
@@ -103,3 +105,5 @@ class MarketDataOverrides(BaseModel):
             "quotes": [EconomicDependencyWithQuote.from_dict(_item) for _item in obj.get("quotes")] if obj.get("quotes") is not None else None
         })
         return _obj
+
+MarketDataOverrides.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.resource_id import ResourceId
@@ -30,17 +32,17 @@ class InstrumentEventInstruction(BaseModel):
     An instruction for an instrument event  # noqa: E501
     """
     instrument_event_instruction_id:  Optional[StrictStr] = Field(None,alias="instrumentEventInstructionId", description="The unique identifier for this instruction") 
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     instrument_event_id:  Optional[StrictStr] = Field(None,alias="instrumentEventId", description="The identifier of the instrument event being instructed") 
     instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding, ElectForLoanFacilityHolding)") 
     election_key:  Optional[StrictStr] = Field(None,alias="electionKey", description="For elected instructions, the key to be chosen") 
-    holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
+    holding_id: Optional[StrictInt] = Field(default=None, description="For holding instructions, the id of the holding for which the instruction will apply", alias="holdingId")
     version: Optional[Version] = None
     href:  Optional[StrictStr] = Field(None,alias="href", description="The uri for this version of this instruction") 
-    entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
-    quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
+    entitlement_date_instructed: Optional[datetime] = Field(default=None, description="The instructed entitlement date for the event (where none is set on the event itself)", alias="entitlementDateInstructed")
+    quantity_instructed: Optional[QuantityInstructed] = Field(default=None, alias="quantityInstructed")
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "taxLotId", "links"]
 
     class Config:
@@ -162,3 +164,5 @@ class InstrumentEventInstruction(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+InstrumentEventInstruction.update_forward_refs()

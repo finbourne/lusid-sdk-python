@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.a2_b_breakdown import A2BBreakdown
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 total: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"

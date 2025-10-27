@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
 from lusid.models.transaction_configuration_data_request import TransactionConfigurationDataRequest
 
@@ -27,8 +29,8 @@ class TransactionSetConfigurationDataRequest(BaseModel):
     """
     A bundle of requests to configure a set of transaction types.  # noqa: E501
     """
-    transaction_config_requests: conlist(TransactionConfigurationDataRequest) = Field(..., alias="transactionConfigRequests", description="Collection of transaction type models")
-    side_config_requests: Optional[conlist(SideConfigurationDataRequest)] = Field(None, alias="sideConfigRequests", description="Collection of side definition requests.")
+    transaction_config_requests: List[TransactionConfigurationDataRequest] = Field(description="Collection of transaction type models", alias="transactionConfigRequests")
+    side_config_requests: Optional[List[SideConfigurationDataRequest]] = Field(default=None, description="Collection of side definition requests.", alias="sideConfigRequests")
     __properties = ["transactionConfigRequests", "sideConfigRequests"]
 
     class Config:
@@ -98,3 +100,5 @@ class TransactionSetConfigurationDataRequest(BaseModel):
             "side_config_requests": [SideConfigurationDataRequest.from_dict(_item) for _item in obj.get("sideConfigRequests")] if obj.get("sideConfigRequests") is not None else None
         })
         return _obj
+
+TransactionSetConfigurationDataRequest.update_forward_refs()

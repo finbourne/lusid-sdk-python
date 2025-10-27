@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -28,11 +30,11 @@ class ComplianceTemplate(BaseModel):
     """
     ComplianceTemplate
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     description:  StrictStr = Field(...,alias="description", description="The description of the Compliance Template") 
-    tags: Optional[conlist(StrictStr)] = Field(None, description="Tags for a Compliance Template")
-    variations: conlist(ComplianceTemplateVariation) = Field(..., description="Variation details of a Compliance Template")
-    links: Optional[conlist(Link)] = None
+    tags: Optional[List[StrictStr]] = Field(default=None, description="Tags for a Compliance Template")
+    variations: List[ComplianceTemplateVariation] = Field(description="Variation details of a Compliance Template")
+    links: Optional[List[Link]] = None
     __properties = ["id", "description", "tags", "variations", "links"]
 
     class Config:
@@ -113,3 +115,5 @@ class ComplianceTemplate(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ComplianceTemplate.update_forward_refs()

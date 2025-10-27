@@ -4,17 +4,19 @@ A single transition component request, when grouped with other transition compon
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_identifiers** | **Dict[str, str]** | Unique instrument identifiers | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers | 
 **units_factor** | **float** | The factor to scale units by | 
 **cost_factor** | **float** | The factor to scale cost by | 
 ## Example
 
 ```python
 from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 units_factor: Union[StrictFloat, StrictInt] = # Replace with your value
 cost_factor: Union[StrictFloat, StrictInt] = # Replace with your value
 corporate_action_transition_component_request_instance = CorporateActionTransitionComponentRequest(instrument_identifiers=instrument_identifiers, units_factor=units_factor, cost_factor=cost_factor)

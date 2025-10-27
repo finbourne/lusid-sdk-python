@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class TranslationResult(BaseModel):
@@ -27,7 +29,7 @@ class TranslationResult(BaseModel):
     The result of invoking a translation script.  # noqa: E501
     """
     entity:  StrictStr = Field(...,alias="entity", description="The serialised entity the translation script produced.") 
-    properties: Dict[str, ModelProperty] = Field(..., description="Any properties the translation script produced.")
+    properties: Dict[str, ModelProperty] = Field(description="Any properties the translation script produced.")
     __properties = ["entity", "properties"]
 
     class Config:
@@ -90,3 +92,5 @@ class TranslationResult(BaseModel):
             else None
         })
         return _obj
+
+TranslationResult.update_forward_refs()

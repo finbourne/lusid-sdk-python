@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.share_class_breakdown import ShareClassBreakdown
 from lusid.models.share_class_details import ShareClassDetails
 
@@ -27,8 +29,8 @@ class ShareClassData(BaseModel):
     """
     The data for a Share Class. Includes Valuation Point Data and instrument information.  # noqa: E501
     """
-    share_class_breakdown: ShareClassBreakdown = Field(..., alias="shareClassBreakdown")
-    share_class_details: Optional[ShareClassDetails] = Field(None, alias="shareClassDetails")
+    share_class_breakdown: ShareClassBreakdown = Field(alias="shareClassBreakdown")
+    share_class_details: Optional[ShareClassDetails] = Field(default=None, alias="shareClassDetails")
     __properties = ["shareClassBreakdown", "shareClassDetails"]
 
     class Config:
@@ -85,3 +87,5 @@ class ShareClassData(BaseModel):
             "share_class_details": ShareClassDetails.from_dict(obj.get("shareClassDetails")) if obj.get("shareClassDetails") is not None else None
         })
         return _obj
+
+ShareClassData.update_forward_refs()

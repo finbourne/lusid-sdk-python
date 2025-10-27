@@ -4,7 +4,7 @@ Defines a change that occured for an entity, with extra detail about the change
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**detail** | **Dict[str, str]** | Information about the particular instance of the ChangeInterval (supplied information depends on the type of Action). Contains extra detail for order management actions such as related entity ids and compliance run details. | [optional] 
+**detail** | **Dict[str, Optional[str]]** | Information about the particular instance of the ChangeInterval (supplied information depends on the type of Action). Contains extra detail for order management actions such as related entity ids and compliance run details. | [optional] 
 **action_description** | **str** | Description of the action performed on the entity. | [optional] 
 **as_at_modified** | **datetime** | The date/time of the change. | [optional] 
 **user_id_modified** | **str** | The unique identifier of the user that made the change. | [optional] 
@@ -21,10 +21,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-detail: Optional[Dict[str, StrictStr]] = # Replace with your value
+
+detail: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 action_description: Optional[StrictStr] = "example_action_description"
 as_at_modified: Optional[datetime] = # Replace with your value
 user_id_modified: Optional[StrictStr] = "example_user_id_modified"

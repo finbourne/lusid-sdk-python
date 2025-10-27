@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.resource_id import ResourceId
 from lusid.models.staged_modifications_info import StagedModificationsInfo
@@ -29,14 +31,14 @@ class MembershipAmendmentResponse(BaseModel):
     """
     MembershipAmendmentResponse
     """
-    custom_data_model_id: ResourceId = Field(..., alias="customDataModelId")
+    custom_data_model_id: ResourceId = Field(alias="customDataModelId")
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity that was added or removed from the Custom Data Model.") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The entity unique identifier of the entity that was added or removed from the Custom Data Model.") 
     operation:  StrictStr = Field(...,alias="operation", description="The operation that was performed on the entity's membership in the Custom Data Model. Either 'Add' or 'Remove'.") 
     entity_display_name:  StrictStr = Field(...,alias="entityDisplayName", description="The display name of the entity that was added or removed from the Custom Data Model.") 
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
     version: Optional[Version] = None
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     __properties = ["customDataModelId", "entityType", "entityUniqueId", "operation", "entityDisplayName", "dataModelMembership", "version", "stagedModifications"]
 
     class Config:
@@ -105,3 +107,5 @@ class MembershipAmendmentResponse(BaseModel):
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None
         })
         return _obj
+
+MembershipAmendmentResponse.update_forward_refs()

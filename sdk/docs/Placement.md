@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **parent_placement_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **block_ids** | [**List[ResourceId]**](ResourceId.md) | The IDs of the Blocks associated with this placement. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this placement. | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument placement. | 
 **quantity** | **float** | The quantity of given instrument ordered. | 
 **state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | 
@@ -28,14 +28,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.placement import Placement
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 parent_placement_id: Optional[ResourceId] = # Replace with your value
-block_ids: conlist(ResourceId) = # Replace with your value
+block_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 state: StrictStr = "example_state"
@@ -50,7 +52,7 @@ execution_system: Optional[StrictStr] = "example_execution_system"
 entry_type: Optional[StrictStr] = "example_entry_type"
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
 
 ```

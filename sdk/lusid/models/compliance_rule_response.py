@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -34,13 +36,13 @@ class ComplianceRuleResponse(BaseModel):
     name:  Optional[StrictStr] = Field(None,alias="name") 
     description:  Optional[StrictStr] = Field(None,alias="description") 
     active: Optional[StrictBool] = None
-    template_id: Optional[ResourceId] = Field(None, alias="templateId")
+    template_id: Optional[ResourceId] = Field(default=None, alias="templateId")
     variation:  Optional[StrictStr] = Field(None,alias="variation") 
-    portfolio_group_id: Optional[ResourceId] = Field(None, alias="portfolioGroupId")
+    portfolio_group_id: Optional[ResourceId] = Field(default=None, alias="portfolioGroupId")
     parameters: Optional[Dict[str, ComplianceParameter]] = None
     properties: Optional[Dict[str, PerpetualProperty]] = None
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "name", "description", "active", "templateId", "variation", "portfolioGroupId", "parameters", "properties", "version", "links"]
 
     class Config:
@@ -173,3 +175,5 @@ class ComplianceRuleResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ComplianceRuleResponse.update_forward_refs()

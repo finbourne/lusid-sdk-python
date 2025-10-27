@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class MetricValue(BaseModel):
     """
     MetricValue
     """
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The numerical value of the property.")
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The numerical value of the property.")
     unit:  Optional[StrictStr] = Field(None,alias="unit") 
     __properties = ["value", "unit"]
 
@@ -82,3 +84,5 @@ class MetricValue(BaseModel):
             "unit": obj.get("unit")
         })
         return _obj
+
+MetricValue.update_forward_refs()

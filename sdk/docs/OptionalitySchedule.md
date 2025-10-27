@@ -12,11 +12,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.optionality_schedule import OptionalitySchedule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 exercise_type: Optional[StrictStr] = "example_exercise_type"
-option_entries: Optional[conlist(OptionEntry)] = # Replace with your value
+option_entries: Optional[List[OptionEntry]] = # Replace with your value
 option_type: Optional[StrictStr] = "example_option_type"
 schedule_type: StrictStr = "example_schedule_type"
 optionality_schedule_instance = OptionalitySchedule(exercise_type=exercise_type, option_entries=option_entries, option_type=option_type, schedule_type=schedule_type)

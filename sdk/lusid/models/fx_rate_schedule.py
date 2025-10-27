@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.schedule import Schedule
 
@@ -27,9 +29,9 @@ class FxRateSchedule(Schedule):
     """
     Schedule to define fx conversion of cashflows on complex bonds. If an fx schedule is defined then  on payment schedule generation the coupon and principal payoffs will be wrapped in an fx rate payoff method.  Either the fx rate is predefined (fixed) or relies on fx resets (floating).  Used in representation of dual currency bond.  # noqa: E501
     """
-    flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
-    fx_conversion_types: Optional[conlist(StrictStr)] = Field(None, alias="fxConversionTypes", description="List of flags to indicate if coupon payments, principal payments or both are converted")
-    rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="FxRate used to convert payments. Assumed to be in units of the ToCurrency so conversion is paymentAmount x fxRate")
+    flow_conventions: Optional[FlowConventions] = Field(default=None, alias="flowConventions")
+    fx_conversion_types: Optional[List[StrictStr]] = Field(default=None, description="List of flags to indicate if coupon payments, principal payments or both are converted", alias="fxConversionTypes")
+    rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="FxRate used to convert payments. Assumed to be in units of the ToCurrency so conversion is paymentAmount x fxRate")
     to_currency:  Optional[StrictStr] = Field(None,alias="toCurrency", description="Currency that payments are converted to") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
@@ -85,14 +87,19 @@ class FxRateSchedule(Schedule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "schedule_type" != "type":
             return value
 
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid'):
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
             raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
         return value
 
@@ -171,3 +178,5 @@ class FxRateSchedule(Schedule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FxRateSchedule.update_forward_refs()

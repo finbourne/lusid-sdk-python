@@ -11,10 +11,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-nav: PreviousNAV = # Replace with your value
+nav: PreviousNAV
 unitisation: Optional[UnitisationData] = None
 share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 previous_share_class_breakdown_instance = PreviousShareClassBreakdown(nav=nav, unitisation=unitisation, share_class_to_fund_fx_rate=share_class_to_fund_fx_rate)

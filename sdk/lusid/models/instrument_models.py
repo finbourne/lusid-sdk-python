@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 
 class InstrumentModels(BaseModel):
@@ -27,8 +29,8 @@ class InstrumentModels(BaseModel):
     Supported pricing models for an instrument.  # noqa: E501
     """
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.") 
-    supported_models: Optional[conlist(StrictStr)] = Field(None, alias="supportedModels", description="The pricing models supported by the instrument e.g. 'Discounting'.")
-    links: Optional[conlist(Link)] = None
+    supported_models: Optional[List[StrictStr]] = Field(default=None, description="The pricing models supported by the instrument e.g. 'Discounting'.", alias="supportedModels")
+    links: Optional[List[Link]] = None
     __properties = ["instrumentId", "supportedModels", "links"]
 
     class Config:
@@ -102,3 +104,5 @@ class InstrumentModels(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+InstrumentModels.update_forward_refs()

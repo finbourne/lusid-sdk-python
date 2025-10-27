@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.market_data_overrides import MarketDataOverrides
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-complex_market_data: Optional[conlist(EconomicDependencyWithComplexMarketData)] = # Replace with your value
-quotes: Optional[conlist(EconomicDependencyWithQuote)] = # Replace with your value
+complex_market_data: Optional[List[EconomicDependencyWithComplexMarketData]] = # Replace with your value
+quotes: Optional[List[EconomicDependencyWithQuote]] = # Replace with your value
 market_data_overrides_instance = MarketDataOverrides(complex_market_data=complex_market_data, quotes=quotes)
 
 ```

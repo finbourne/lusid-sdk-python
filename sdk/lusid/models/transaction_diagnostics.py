@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionDiagnostics(BaseModel):
     """
     Represents a set of diagnostics per transaction, where applicable.  # noqa: E501
     """
     transaction_display_name:  StrictStr = Field(...,alias="transactionDisplayName") 
-    error_details: conlist(StrictStr) = Field(..., alias="errorDetails")
+    error_details: List[StrictStr] = Field(alias="errorDetails")
     __properties = ["transactionDisplayName", "errorDetails"]
 
     class Config:
@@ -77,3 +79,5 @@ class TransactionDiagnostics(BaseModel):
             "error_details": obj.get("errorDetails")
         })
         return _obj
+
+TransactionDiagnostics.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.append_market_data import AppendMarketData
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 
@@ -27,8 +29,8 @@ class AppendComplexMarketDataRequest(BaseModel):
     """
     The details of the point to be appended to a complex market data item.  # noqa: E501
     """
-    market_data_id: ComplexMarketDataId = Field(..., alias="marketDataId")
-    append_market_data: AppendMarketData = Field(..., alias="appendMarketData")
+    market_data_id: ComplexMarketDataId = Field(alias="marketDataId")
+    append_market_data: AppendMarketData = Field(alias="appendMarketData")
     __properties = ["marketDataId", "appendMarketData"]
 
     class Config:
@@ -85,3 +87,5 @@ class AppendComplexMarketDataRequest(BaseModel):
             "append_market_data": AppendMarketData.from_dict(obj.get("appendMarketData")) if obj.get("appendMarketData") is not None else None
         })
         return _obj
+
+AppendComplexMarketDataRequest.update_forward_refs()

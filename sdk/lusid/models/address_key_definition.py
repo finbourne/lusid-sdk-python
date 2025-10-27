@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -30,7 +32,7 @@ class AddressKeyDefinition(BaseModel):
     address_key:  StrictStr = Field(...,alias="addressKey", description="The address key of the address key definition.") 
     type:  StrictStr = Field(...,alias="type", description="The type of the address key definition") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["addressKey", "type", "version", "links"]
 
     class Config:
@@ -98,3 +100,5 @@ class AddressKeyDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AddressKeyDefinition.update_forward_refs()

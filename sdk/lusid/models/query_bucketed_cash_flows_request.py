@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.bucketing_schedule import BucketingSchedule
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
@@ -28,22 +30,22 @@ class QueryBucketedCashFlowsRequest(BaseModel):
     """
     Query for bucketed cashflows from one or more portfolios.  # noqa: E501
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The time of the system at which to query for bucketed cashflows.")
-    window_start: datetime = Field(..., alias="windowStart", description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.  There is no lower bound if this is not specified.")
-    window_end: datetime = Field(..., alias="windowEnd", description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.  The upper bound defaults to 'today' if it is not specified")
-    portfolio_entity_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioEntityIds", description="The set of portfolios and portfolio groups to which the instrument events must belong.")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today.")
-    recipe_id: ResourceId = Field(..., alias="recipeId")
+    as_at: Optional[datetime] = Field(default=None, description="The time of the system at which to query for bucketed cashflows.", alias="asAt")
+    window_start: datetime = Field(description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.  There is no lower bound if this is not specified.", alias="windowStart")
+    window_end: datetime = Field(description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the cashflows.  The upper bound defaults to 'today' if it is not specified", alias="windowEnd")
+    portfolio_entity_ids: List[PortfolioEntityId] = Field(description="The set of portfolios and portfolio groups to which the instrument events must belong.", alias="portfolioEntityIds")
+    effective_at: datetime = Field(description="The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.  For example, on a swap if the effectiveAt is in the middle of the window, cashflows before it will be historic and resets assumed to exist where if the effectiveAt  is before the start of the range they are forward looking and will be expectations assuming the model supports that.  There is evidently a presumption here about availability of data and that the effectiveAt is realistically on or before the real-world today.", alias="effectiveAt")
+    recipe_id: ResourceId = Field(alias="recipeId")
     rounding_method:  StrictStr = Field(...,alias="roundingMethod", description="When bucketing, there is not a unique way to allocate the bucket points.  RoundingMethod Supported string (enumeration) values are: [RoundDown, RoundUp].") 
-    bucketing_dates: Optional[conlist(datetime)] = Field(None, alias="bucketingDates", description="A list of dates to perform cashflow bucketing upon.  If this is provided, the list of tenors for bucketing should be empty.")
-    bucketing_tenors: Optional[conlist(StrictStr)] = Field(None, alias="bucketingTenors", description="A list of tenors to perform cashflow bucketing upon.  If this is provided, the list of dates for bucketing should be empty.")
+    bucketing_dates: Optional[List[datetime]] = Field(default=None, description="A list of dates to perform cashflow bucketing upon.  If this is provided, the list of tenors for bucketing should be empty.", alias="bucketingDates")
+    bucketing_tenors: Optional[List[StrictStr]] = Field(default=None, description="A list of tenors to perform cashflow bucketing upon.  If this is provided, the list of dates for bucketing should be empty.", alias="bucketingTenors")
     report_currency:  StrictStr = Field(...,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.") 
-    group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy", description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.")
-    addresses: Optional[conlist(StrictStr)] = Field(None, description="The set of items that the user wishes to see in the results. If empty, will be defaulted to standard ones.")
-    equip_with_subtotals: Optional[StrictBool] = Field(None, alias="equipWithSubtotals", description="Flag directing the Valuation call to populate the results with subtotals of aggregates.")
-    exclude_unsettled_trades: Optional[StrictBool] = Field(None, alias="excludeUnsettledTrades", description="Flag directing the Valuation call to exclude cashflows from unsettled trades.  If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set.")
+    group_by: Optional[List[StrictStr]] = Field(default=None, description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.", alias="groupBy")
+    addresses: Optional[List[StrictStr]] = Field(default=None, description="The set of items that the user wishes to see in the results. If empty, will be defaulted to standard ones.")
+    equip_with_subtotals: Optional[StrictBool] = Field(default=None, description="Flag directing the Valuation call to populate the results with subtotals of aggregates.", alias="equipWithSubtotals")
+    exclude_unsettled_trades: Optional[StrictBool] = Field(default=None, description="Flag directing the Valuation call to exclude cashflows from unsettled trades.  If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set.", alias="excludeUnsettledTrades")
     cash_flow_type:  Optional[StrictStr] = Field(None,alias="cashFlowType", description="Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow]") 
-    bucketing_schedule: Optional[BucketingSchedule] = Field(None, alias="bucketingSchedule")
+    bucketing_schedule: Optional[BucketingSchedule] = Field(default=None, alias="bucketingSchedule")
     filter:  Optional[StrictStr] = Field(None,alias="filter", description="") 
     __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "roundingMethod", "bucketingDates", "bucketingTenors", "reportCurrency", "groupBy", "addresses", "equipWithSubtotals", "excludeUnsettledTrades", "cashFlowType", "bucketingSchedule", "filter"]
 
@@ -158,3 +160,5 @@ class QueryBucketedCashFlowsRequest(BaseModel):
             "filter": obj.get("filter")
         })
         return _obj
+
+QueryBucketedCashFlowsRequest.update_forward_refs()

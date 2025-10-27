@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.scope_definition import ScopeDefinition
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 scope_definition_instance = ScopeDefinition(scope=scope)

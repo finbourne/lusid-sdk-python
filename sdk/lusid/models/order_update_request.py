@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -28,14 +30,14 @@ class OrderUpdateRequest(BaseModel):
     """
     A request to create or update a Order.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of the given instrument ordered.")
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
+    id: ResourceId
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of the given instrument ordered.")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
     price: Optional[CurrencyAndAmount] = None
-    limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
-    stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the order was made")
+    limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
+    stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
+    var_date: Optional[datetime] = Field(default=None, description="The date on which the order was made", alias="date")
     side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
     __properties = ["id", "quantity", "portfolioId", "properties", "price", "limitPrice", "stopPrice", "date", "side"]
 
@@ -141,3 +143,5 @@ class OrderUpdateRequest(BaseModel):
             "side": obj.get("side")
         })
         return _obj
+
+OrderUpdateRequest.update_forward_refs()

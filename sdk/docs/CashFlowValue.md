@@ -14,9 +14,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cash_flow_value import CashFlowValue
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 payment_date: datetime = # Replace with your value
 diagnostics: Optional[ResultValueDictionary] = None
 cash_flow_lineage: Optional[CashFlowLineage] = # Replace with your value

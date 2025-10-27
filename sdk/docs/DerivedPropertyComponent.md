@@ -13,15 +13,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.derived_property_component import DerivedPropertyComponent
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 component: Optional[StrictStr] = "example_component"
 type: Optional[StrictStr] = "example_type"
 value: Optional[PropertyValue] = None
 derivation_formula: Optional[StrictStr] = "example_derivation_formula"
-sub_components: Optional[conlist(DerivedPropertyComponent)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+sub_components: Optional[List[DerivedPropertyComponent]] = # Replace with your value
+links: Optional[List[Link]] = None
 derived_property_component_instance = DerivedPropertyComponent(component=component, type=type, value=value, derivation_formula=derivation_formula, sub_components=sub_components, links=links)
 
 ```

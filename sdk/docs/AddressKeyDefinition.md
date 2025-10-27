@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.address_key_definition import AddressKeyDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 address_key: StrictStr = "example_address_key"
 type: StrictStr = "example_type"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 address_key_definition_instance = AddressKeyDefinition(address_key=address_key, type=type, version=version, links=links)
 
 ```

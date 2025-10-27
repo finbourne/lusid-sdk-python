@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.model_property import ModelProperty
@@ -30,9 +32,9 @@ class CustomEntityRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity.") 
     description:  StrictStr = Field(...,alias="description", description="A description of the custom entity.") 
-    identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
-    fields: Optional[conlist(CustomEntityField)] = Field(None, description="The fields that decorate the custom entity.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties that decorate the custom entity.")
+    identifiers: List[CustomEntityId] = Field(description="The identifiers the custom entity will be upserted with.")
+    fields: Optional[List[CustomEntityField]] = Field(default=None, description="The fields that decorate the custom entity.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties that decorate the custom entity.")
     __properties = ["displayName", "description", "identifiers", "fields", "properties"]
 
     class Config:
@@ -122,3 +124,5 @@ class CustomEntityRequest(BaseModel):
             else None
         })
         return _obj
+
+CustomEntityRequest.update_forward_refs()

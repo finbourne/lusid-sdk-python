@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.change_item import ChangeItem
 from lusid.models.link import Link
 
@@ -28,11 +30,11 @@ class ChangeHistory(BaseModel):
     A group of changes made by the same person at the same time.  # noqa: E501
     """
     user_id:  StrictStr = Field(...,alias="userId", description="The unique identifier of the user that made the change.") 
-    modified_as_at: datetime = Field(..., alias="modifiedAsAt", description="The date/time of the change.")
+    modified_as_at: datetime = Field(description="The date/time of the change.", alias="modifiedAsAt")
     request_id:  StrictStr = Field(...,alias="requestId", description="The unique identifier of the request that the changes were part of.") 
     action:  StrictStr = Field(...,alias="action", description="The action performed on the transaction, either created, updated, or deleted. The available values are: Create, Update, Delete") 
-    changes: conlist(ChangeItem) = Field(..., description="The collection of changes that were made.")
-    links: Optional[conlist(Link)] = None
+    changes: List[ChangeItem] = Field(description="The collection of changes that were made.")
+    links: Optional[List[Link]] = None
     __properties = ["userId", "modifiedAsAt", "requestId", "action", "changes", "links"]
 
     @validator('action')
@@ -85,14 +87,19 @@ class ChangeHistory(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "action" != "type":
             return value
 
-        if value not in ('Create', 'Update', 'Delete'):
+        if value not in ['Create', 'Update', 'Delete']:
             raise ValueError("must be one of enum values ('Create', 'Update', 'Delete')")
         return value
 
@@ -167,3 +174,5 @@ class ChangeHistory(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ChangeHistory.update_forward_refs()

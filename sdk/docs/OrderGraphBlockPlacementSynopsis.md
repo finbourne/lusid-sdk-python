@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_graph_block_placement_synopsis import OrderGraphBlockPlacementSynopsis
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 quantity_by_state: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = # Replace with your value
-details: conlist(OrderGraphBlockPlacementDetail) = # Replace with your value
+details: List[OrderGraphBlockPlacementDetail] = # Replace with your value
 order_graph_block_placement_synopsis_instance = OrderGraphBlockPlacementSynopsis(quantity=quantity, quantity_by_state=quantity_by_state, details=details)
 
 ```

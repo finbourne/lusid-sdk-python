@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class LabelValueSet(BaseModel):
     """
     The set of string labels in a multi-value property.  # noqa: E501
     """
-    values: conlist(StrictStr) = Field(...)
+    values: List[StrictStr]
     __properties = ["values"]
 
     class Config:
@@ -75,3 +77,5 @@ class LabelValueSet(BaseModel):
             "values": obj.get("values")
         })
         return _obj
+
+LabelValueSet.update_forward_refs()

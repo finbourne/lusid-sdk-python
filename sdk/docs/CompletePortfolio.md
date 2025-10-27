@@ -20,10 +20,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.complete_portfolio import CompletePortfolio
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 href: Optional[StrictStr] = "example_href"
 description: Optional[StrictStr] = "example_description"
 display_name: Optional[StrictStr] = "example_display_name"
@@ -32,11 +34,11 @@ parent_portfolio_id: Optional[ResourceId] = # Replace with your value
 is_derived: Optional[StrictBool] = # Replace with your value
 is_derived:Optional[StrictBool] = None
 type: Optional[StrictStr] = "example_type"
-version: Version = # Replace with your value
-properties: Optional[conlist(ModelProperty)] = # Replace with your value
+version: Version
+properties: Optional[List[ModelProperty]] = # Replace with your value
 base_currency: Optional[StrictStr] = "example_base_currency"
-sub_holding_keys: Optional[conlist(StrictStr)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+sub_holding_keys: Optional[List[StrictStr]] = # Replace with your value
+links: Optional[List[Link]] = None
 complete_portfolio_instance = CompletePortfolio(id=id, href=href, description=description, display_name=display_name, created=created, parent_portfolio_id=parent_portfolio_id, is_derived=is_derived, type=type, version=version, properties=properties, base_currency=base_currency, sub_holding_keys=sub_holding_keys, links=links)
 
 ```

@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.string_list_compliance_parameter import StringListComplianceParameter
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-value: ResourceId = # Replace with your value
+value: ResourceId
 compliance_parameter_type: StrictStr = "example_compliance_parameter_type"
 string_list_compliance_parameter_instance = StringListComplianceParameter(value=value, compliance_parameter_type=compliance_parameter_type)
 

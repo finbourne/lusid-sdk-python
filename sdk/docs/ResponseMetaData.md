@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.response_meta_data import ResponseMetaData
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: Optional[StrictStr] = "example_type"
 description: Optional[StrictStr] = "example_description"
 identifier_type: Optional[StrictStr] = "example_identifier_type"
-identifiers: Optional[conlist(StrictStr)] = # Replace with your value
+identifiers: Optional[List[StrictStr]] = # Replace with your value
 response_meta_data_instance = ResponseMetaData(type=type, description=description, identifier_type=identifier_type, identifiers=identifiers)
 
 ```

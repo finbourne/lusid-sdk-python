@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 window_start: datetime = # Replace with your value
 window_end: datetime = # Replace with your value
 effective_at: datetime = # Replace with your value
-portfolio_entity_ids: conlist(PortfolioEntityId) = # Replace with your value
+portfolio_entity_ids: List[PortfolioEntityId] = # Replace with your value
 forecasting_recipe_id: ResourceId = # Replace with your value
 query_applicable_instrument_events_request_instance = QueryApplicableInstrumentEventsRequest(window_start=window_start, window_end=window_end, effective_at=effective_at, portfolio_entity_ids=portfolio_entity_ids, forecasting_recipe_id=forecasting_recipe_id)
 

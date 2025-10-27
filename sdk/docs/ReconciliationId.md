@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.reconciliation_id import ReconciliationId
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: Optional[DataScope] = None
 identifier: Optional[StrictStr] = "example_identifier"

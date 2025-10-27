@@ -15,9 +15,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.exchange_traded_option import ExchangeTradedOption
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 contract_details: ExchangeTradedOptionContractDetails = # Replace with your value
 contracts: Union[StrictFloat, StrictInt] = # Replace with your value

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -30,8 +32,8 @@ class GetCdsFlowConventionsResponse(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     value: Optional[CdsFlowConventions] = None
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The identifiers that did not resolve to a conventions along with the nature of the failure.")
-    links: Optional[conlist(Link)] = None
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The identifiers that did not resolve to a conventions along with the nature of the failure.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "value", "failed", "links"]
 
     class Config:
@@ -121,3 +123,5 @@ class GetCdsFlowConventionsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+GetCdsFlowConventionsResponse.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class PreviousFundCalendarEntry(BaseModel):
     """
@@ -28,8 +30,8 @@ class PreviousFundCalendarEntry(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective at of the Calendar Entry.")
-    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime for the Calendar Entry.")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
+    as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
     __properties = ["code", "displayName", "description", "effectiveAt", "asAt"]
 
     class Config:
@@ -88,3 +90,5 @@ class PreviousFundCalendarEntry(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+PreviousFundCalendarEntry.update_forward_refs()

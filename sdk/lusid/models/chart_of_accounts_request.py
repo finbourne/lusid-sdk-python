@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class ChartOfAccountsRequest(BaseModel):
@@ -29,7 +31,7 @@ class ChartOfAccountsRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code given for the Chart of Accounts.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Chart of Account.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the Chart of Accounts.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Chart of Accounts.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Chart of Accounts.")
     __properties = ["code", "displayName", "description", "properties"]
 
     class Config:
@@ -109,3 +111,5 @@ class ChartOfAccountsRequest(BaseModel):
             else None
         })
         return _obj
+
+ChartOfAccountsRequest.update_forward_refs()

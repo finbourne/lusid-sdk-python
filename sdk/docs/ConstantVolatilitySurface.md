@@ -13,9 +13,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 base_date: datetime = # Replace with your value
 asset_type: StrictStr = "example_asset_type"
 lineage: Optional[StrictStr] = "example_lineage"

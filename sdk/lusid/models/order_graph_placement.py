@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.order_graph_placement_allocation_synopsis import OrderGraphPlacementAllocationSynopsis
 from lusid.models.order_graph_placement_execution_synopsis import OrderGraphPlacementExecutionSynopsis
 from lusid.models.order_graph_placement_order_synopsis import OrderGraphPlacementOrderSynopsis
@@ -31,14 +33,14 @@ class OrderGraphPlacement(BaseModel):
     """
     OrderGraphPlacement
     """
-    placement: Placement = Field(...)
-    block_id: ResourceId = Field(..., alias="blockId")
-    ordered: OrderGraphPlacementOrderSynopsis = Field(...)
-    placed: OrderGraphPlacementPlacementSynopsis = Field(...)
-    executed: OrderGraphPlacementExecutionSynopsis = Field(...)
-    allocated: OrderGraphPlacementAllocationSynopsis = Field(...)
+    placement: Placement
+    block_id: ResourceId = Field(alias="blockId")
+    ordered: OrderGraphPlacementOrderSynopsis
+    placed: OrderGraphPlacementPlacementSynopsis
+    executed: OrderGraphPlacementExecutionSynopsis
+    allocated: OrderGraphPlacementAllocationSynopsis
     derived_state:  StrictStr = Field(...,alias="derivedState", description="A simple description of the overall state of a placement.") 
-    calculated_average_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculatedAveragePrice", description="Average price realised on executions for a given placement")
+    calculated_average_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Average price realised on executions for a given placement", alias="calculatedAveragePrice")
     __properties = ["placement", "blockId", "ordered", "placed", "executed", "allocated", "derivedState", "calculatedAveragePrice"]
 
     class Config:
@@ -118,3 +120,5 @@ class OrderGraphPlacement(BaseModel):
             "calculated_average_price": obj.get("calculatedAveragePrice")
         })
         return _obj
+
+OrderGraphPlacement.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -29,14 +31,14 @@ class PortfolioGroupSearchResult(BaseModel):
     PortfolioGroupSearchResult
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio group.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio group.") 
-    created: Optional[datetime] = Field(None, description="The effective datetime at which the portfolio group was created. No portfolios or sub groups can be added to the group before this date.")
-    portfolios: Optional[conlist(ResourceId)] = Field(None, description="The collection of resource identifiers for the portfolios contained in the portfolio group.")
-    sub_groups: Optional[conlist(ResourceId)] = Field(None, alias="subGroups", description="The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.")
+    created: Optional[datetime] = Field(default=None, description="The effective datetime at which the portfolio group was created. No portfolios or sub groups can be added to the group before this date.")
+    portfolios: Optional[List[ResourceId]] = Field(default=None, description="The collection of resource identifiers for the portfolios contained in the portfolio group.")
+    sub_groups: Optional[List[ResourceId]] = Field(default=None, description="The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.", alias="subGroups")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "created", "portfolios", "subGroups", "version", "links"]
 
     class Config:
@@ -146,3 +148,5 @@ class PortfolioGroupSearchResult(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PortfolioGroupSearchResult.update_forward_refs()

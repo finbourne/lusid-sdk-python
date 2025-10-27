@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.dialect_id import DialectId
 from lusid.models.dialect_schema import DialectSchema
 from lusid.models.version import Version
@@ -28,8 +30,8 @@ class Dialect(BaseModel):
     """
     The language/format of a translatable entity. Entities can be LUSID native or external and the Dialect describes  1) the system that understands the entity and  2) applicable validation for the entity, in the form of a schema.  # noqa: E501
     """
-    id: DialectId = Field(...)
-    var_schema: DialectSchema = Field(..., alias="schema")
+    id: DialectId
+    var_schema: DialectSchema = Field(alias="schema")
     version: Optional[Version] = None
     __properties = ["id", "schema", "version"]
 
@@ -91,3 +93,5 @@ class Dialect(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj
+
+Dialect.update_forward_refs()

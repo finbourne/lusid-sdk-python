@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class CustomEntityField(BaseModel):
     """
     CustomEntityField
     """
     name:  StrictStr = Field(...,alias="name", description="The name of the field in the custom entity type definition.") 
-    value: Optional[Any] = Field(None, description="The value for the field.")
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the field's value is valid. For timeVariant fields, this defaults to the beginning of time.")
-    effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the field's value is valid. If not supplied, the value will be valid indefinitely or until the next “effectiveFrom” date of the field.")
+    value: Optional[Any] = Field(default=None, description="The value for the field.")
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime from which the field's value is valid. For timeVariant fields, this defaults to the beginning of time.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The effective datetime until which the field's value is valid. If not supplied, the value will be valid indefinitely or until the next “effectiveFrom” date of the field.", alias="effectiveUntil")
     __properties = ["name", "value", "effectiveFrom", "effectiveUntil"]
 
     class Config:
@@ -96,3 +98,5 @@ class CustomEntityField(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+CustomEntityField.update_forward_refs()

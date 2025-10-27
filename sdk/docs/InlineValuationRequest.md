@@ -21,22 +21,24 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.inline_valuation_request import InlineValuationRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 recipe_id: Optional[ResourceId] = # Replace with your value
 as_at: Optional[datetime] = # Replace with your value
-metrics: conlist(AggregateSpec) = # Replace with your value
-group_by: Optional[conlist(StrictStr)] = # Replace with your value
-filters: Optional[conlist(PropertyFilter)] = # Replace with your value
-sort: Optional[conlist(OrderBySpec)] = # Replace with your value
+metrics: List[AggregateSpec] = # Replace with your value
+group_by: Optional[List[StrictStr]] = # Replace with your value
+filters: Optional[List[PropertyFilter]] = # Replace with your value
+sort: Optional[List[OrderBySpec]] = # Replace with your value
 report_currency: Optional[StrictStr] = "example_report_currency"
 equip_with_subtotals: Optional[StrictBool] = # Replace with your value
 equip_with_subtotals:Optional[StrictBool] = None
 return_result_as_expanded_types: Optional[StrictBool] = # Replace with your value
 return_result_as_expanded_types:Optional[StrictBool] = None
 valuation_schedule: Optional[ValuationSchedule] = # Replace with your value
-instruments: conlist(WeightedInstrument) = # Replace with your value
+instruments: List[WeightedInstrument] = # Replace with your value
 market_data_overrides: Optional[MarketDataOverrides] = # Replace with your value
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
 inline_valuation_request_instance = InlineValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, valuation_schedule=valuation_schedule, instruments=instruments, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id)

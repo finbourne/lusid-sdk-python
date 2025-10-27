@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_configuration_request import FundConfigurationRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: StrictStr = "example_code"
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-dealing_filters: conlist(ComponentFilter) = # Replace with your value
-pnl_filters: conlist(ComponentFilter) = # Replace with your value
-back_out_filters: conlist(ComponentFilter) = # Replace with your value
-external_fee_filters: Optional[conlist(ExternalFeeComponentFilter)] = # Replace with your value
+dealing_filters: List[ComponentFilter] = # Replace with your value
+pnl_filters: List[ComponentFilter] = # Replace with your value
+back_out_filters: List[ComponentFilter] = # Replace with your value
+external_fee_filters: Optional[List[ExternalFeeComponentFilter]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 fund_configuration_request_instance = FundConfigurationRequest(code=code, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties)
 

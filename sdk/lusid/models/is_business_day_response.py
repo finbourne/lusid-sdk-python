@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
 
 class IsBusinessDayResponse(BaseModel):
     """
     Whether or not a DateTimeOffset is a business DateTime  # noqa: E501
     """
-    requested_date_time: datetime = Field(..., alias="requestedDateTime")
-    is_business_day: StrictBool = Field(..., alias="isBusinessDay")
+    requested_date_time: datetime = Field(alias="requestedDateTime")
+    is_business_day: StrictBool = Field(alias="isBusinessDay")
     __properties = ["requestedDateTime", "isBusinessDay"]
 
     class Config:
@@ -77,3 +79,5 @@ class IsBusinessDayResponse(BaseModel):
             "is_business_day": obj.get("isBusinessDay")
         })
         return _obj
+
+IsBusinessDayResponse.update_forward_refs()

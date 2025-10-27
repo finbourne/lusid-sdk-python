@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.compliance_summary_rule_result import ComplianceSummaryRuleResult
 from lusid.models.resource_id import ResourceId
 
@@ -27,11 +29,11 @@ class ComplianceRuleResultV2(BaseModel):
     """
     ComplianceRuleResultV2
     """
-    run_id: ResourceId = Field(..., alias="runId")
-    instigated_at: datetime = Field(..., alias="instigatedAt")
-    completed_at: datetime = Field(..., alias="completedAt")
+    run_id: ResourceId = Field(alias="runId")
+    instigated_at: datetime = Field(alias="instigatedAt")
+    completed_at: datetime = Field(alias="completedAt")
     schedule:  StrictStr = Field(...,alias="schedule") 
-    rule_result: ComplianceSummaryRuleResult = Field(..., alias="ruleResult")
+    rule_result: ComplianceSummaryRuleResult = Field(alias="ruleResult")
     __properties = ["runId", "instigatedAt", "completedAt", "schedule", "ruleResult"]
 
     class Config:
@@ -91,3 +93,5 @@ class ComplianceRuleResultV2(BaseModel):
             "rule_result": ComplianceSummaryRuleResult.from_dict(obj.get("ruleResult")) if obj.get("ruleResult") is not None else None
         })
         return _obj
+
+ComplianceRuleResultV2.update_forward_refs()

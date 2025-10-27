@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.append_market_data import AppendMarketData
 
 class AppendFxForwardCurveByQuoteReference(AppendMarketData):
@@ -27,7 +29,7 @@ class AppendFxForwardCurveByQuoteReference(AppendMarketData):
     Used to append a new point to an FX curve defined using `FxForwardCurveByQuoteReference`.  # noqa: E501
     """
     tenor:  StrictStr = Field(...,alias="tenor", description="Tenor for which the forward rate applies.") 
-    quote_reference: Dict[str, StrictStr] = Field(..., alias="quoteReference", description="A collection of identifiers for the tenor, which will be used to query the LUSID Quote Store to resolve the actual rates.  The keys must be chosen from the following enumeration:  [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].    For example:    \"quoteReference\": {\"ClientInternal\": \"SomeIdentifierForTenor\"}")
+    quote_reference: Dict[str, Optional[StrictStr]] = Field(description="A collection of identifiers for the tenor, which will be used to query the LUSID Quote Store to resolve the actual rates.  The keys must be chosen from the following enumeration:  [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].    For example:    \"quoteReference\": {\"ClientInternal\": \"SomeIdentifierForTenor\"}", alias="quoteReference")
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "tenor", "quoteReference"]
@@ -82,14 +84,19 @@ class AppendFxForwardCurveByQuoteReference(AppendMarketData):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "market_data_type" != "type":
             return value
 
-        if value not in ('AppendFxForwardCurveByQuoteReference', 'AppendFxForwardCurveData', 'AppendFxForwardPipsCurveData', 'AppendFxForwardTenorCurveData', 'AppendFxForwardTenorPipsCurveData'):
+        if value not in ['AppendFxForwardCurveByQuoteReference', 'AppendFxForwardCurveData', 'AppendFxForwardPipsCurveData', 'AppendFxForwardTenorCurveData', 'AppendFxForwardTenorPipsCurveData']:
             raise ValueError("must be one of enum values ('AppendFxForwardCurveByQuoteReference', 'AppendFxForwardCurveData', 'AppendFxForwardPipsCurveData', 'AppendFxForwardTenorCurveData', 'AppendFxForwardTenorPipsCurveData')")
         return value
 
@@ -153,3 +160,5 @@ class AppendFxForwardCurveByQuoteReference(AppendMarketData):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+AppendFxForwardCurveByQuoteReference.update_forward_refs()

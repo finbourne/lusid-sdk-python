@@ -4,7 +4,7 @@ LUSID representation of a reference to another instrument that has already been 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifiers** | **Dict[str, str]** | Dictionary of identifiers of the mastered instrument | 
+**identifiers** | **Dict[str, Optional[str]]** | Dictionary of identifiers of the mastered instrument | 
 **mastered_dom_ccy** | **str** | DomCcy of the Instrument that Mastered Instrument points to - read only field | [optional] [readonly] 
 **mastered_instrument_type** | **str** | Type of the Instrument that Mastered Instrument points to - read only field | [optional] [readonly] 
 **mastered_lusid_instrument_id** | **str** | Luid of the Instrument that Mastered Instrument points to - read only field | [optional] [readonly] 
@@ -16,10 +16,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.mastered_instrument import MasteredInstrument
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-identifiers: Dict[str, StrictStr] = # Replace with your value
+identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 mastered_dom_ccy: Optional[StrictStr] = "example_mastered_dom_ccy"
 mastered_instrument_type: Optional[StrictStr] = "example_mastered_instrument_type"
 mastered_lusid_instrument_id: Optional[StrictStr] = "example_mastered_lusid_instrument_id"

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conint, conlist, constr, validator 
 from lusid.models.day_month import DayMonth
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.model_property import ModelProperty
@@ -32,15 +34,15 @@ class FundRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code given for the Fund.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
-    fund_configuration_id: ResourceId = Field(..., alias="fundConfigurationId")
-    abor_id: ResourceId = Field(..., alias="aborId")
-    share_class_instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
-    share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
+    fund_configuration_id: ResourceId = Field(alias="fundConfigurationId")
+    abor_id: ResourceId = Field(alias="aborId")
+    share_class_instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
+    share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them.", alias="shareClassInstruments")
     type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
-    inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
-    decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
-    year_end_date: DayMonth = Field(..., alias="yearEndDate")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
+    inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
+    decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
+    year_end_date: DayMonth = Field(alias="yearEndDate")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     __properties = ["code", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties"]
 
     class Config:
@@ -159,3 +161,5 @@ class FundRequest(BaseModel):
             else None
         })
         return _obj
+
+FundRequest.update_forward_refs()

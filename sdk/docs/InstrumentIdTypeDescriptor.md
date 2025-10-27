@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_id_type_descriptor import InstrumentIdTypeDescriptor
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 identifier_type: StrictStr = "example_identifier_type"
 property_key: StrictStr = "example_property_key"

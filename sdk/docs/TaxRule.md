@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.tax_rule import TaxRule
-from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: StrictStr = "example_name"
 description: StrictStr = "example_description"
 rate: Union[StrictFloat, StrictInt] = # Replace with your value
-match_criteria: conlist(MatchCriterion, max_items=20) = Field(..., alias="matchCriteria", description="A set of criteria to be met for this rule to be applied")
+match_criteria: List[MatchCriterion] = # Replace with your value
 tax_rule_instance = TaxRule(name=name, description=description, rate=rate, match_criteria=match_criteria)
 
 ```

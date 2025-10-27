@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.calendar_dependency import CalendarDependency
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-calendars: conlist(StrictStr) = # Replace with your value
+calendars: List[StrictStr] = # Replace with your value
 dependency_type: StrictStr = "example_dependency_type"
 calendar_dependency_instance = CalendarDependency(calendars=calendars, dependency_type=dependency_type)
 

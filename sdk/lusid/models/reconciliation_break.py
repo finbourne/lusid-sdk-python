@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
@@ -30,14 +32,14 @@ class ReconciliationBreak(BaseModel):
     """
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
     instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="Unique instrument identifier") 
-    sub_holding_keys: Dict[str, PerpetualProperty] = Field(..., alias="subHoldingKeys", description="Any other properties that comprise the Sub-Holding Key")
-    left_units: Union[StrictFloat, StrictInt] = Field(..., alias="leftUnits", description="Units from the left hand side")
-    right_units: Union[StrictFloat, StrictInt] = Field(..., alias="rightUnits", description="Units from the right hand side")
-    difference_units: Union[StrictFloat, StrictInt] = Field(..., alias="differenceUnits", description="Difference in units")
-    left_cost: CurrencyAndAmount = Field(..., alias="leftCost")
-    right_cost: CurrencyAndAmount = Field(..., alias="rightCost")
-    difference_cost: CurrencyAndAmount = Field(..., alias="differenceCost")
-    instrument_properties: conlist(ModelProperty) = Field(..., alias="instrumentProperties", description="Additional features relating to the instrument")
+    sub_holding_keys: Dict[str, PerpetualProperty] = Field(description="Any other properties that comprise the Sub-Holding Key", alias="subHoldingKeys")
+    left_units: Union[StrictFloat, StrictInt] = Field(description="Units from the left hand side", alias="leftUnits")
+    right_units: Union[StrictFloat, StrictInt] = Field(description="Units from the right hand side", alias="rightUnits")
+    difference_units: Union[StrictFloat, StrictInt] = Field(description="Difference in units", alias="differenceUnits")
+    left_cost: CurrencyAndAmount = Field(alias="leftCost")
+    right_cost: CurrencyAndAmount = Field(alias="rightCost")
+    difference_cost: CurrencyAndAmount = Field(alias="differenceCost")
+    instrument_properties: List[ModelProperty] = Field(description="Additional features relating to the instrument", alias="instrumentProperties")
     __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "leftUnits", "rightUnits", "differenceUnits", "leftCost", "rightCost", "differenceCost", "instrumentProperties"]
 
     class Config:
@@ -129,3 +131,5 @@ class ReconciliationBreak(BaseModel):
             "instrument_properties": [ModelProperty.from_dict(_item) for _item in obj.get("instrumentProperties")] if obj.get("instrumentProperties") is not None else None
         })
         return _obj
+
+ReconciliationBreak.update_forward_refs()

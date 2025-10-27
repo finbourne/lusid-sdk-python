@@ -18,19 +18,21 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CreateSequenceRequest(BaseModel):
     """
     CreateSequenceRequest
     """
     code:  StrictStr = Field(...,alias="code", description="The code of the sequence definition to create") 
-    increment: Optional[StrictInt] = Field(None, description="The value to increment between each value in the sequence")
-    min_value: Optional[StrictInt] = Field(None, alias="minValue", description="The minimum value of the sequence")
-    max_value: Optional[StrictInt] = Field(None, alias="maxValue", description="The maximum value of the sequence")
-    start: Optional[StrictInt] = Field(None, description="The start value of the sequence")
-    cycle: Optional[StrictBool] = Field(None, description="Set to true to start the sequence over again when it reaches the end. Defaults to false if not provided.")
+    increment: Optional[StrictInt] = Field(default=None, description="The value to increment between each value in the sequence")
+    min_value: Optional[StrictInt] = Field(default=None, description="The minimum value of the sequence", alias="minValue")
+    max_value: Optional[StrictInt] = Field(default=None, description="The maximum value of the sequence", alias="maxValue")
+    start: Optional[StrictInt] = Field(default=None, description="The start value of the sequence")
+    cycle: Optional[StrictBool] = Field(default=None, description="Set to true to start the sequence over again when it reaches the end. Defaults to false if not provided.")
     pattern:  Optional[StrictStr] = Field(None,alias="pattern", description="The pattern to be used to generate next values in the sequence. Defaults to null if not provided.") 
     __properties = ["code", "increment", "minValue", "maxValue", "start", "cycle", "pattern"]
 
@@ -112,3 +114,5 @@ class CreateSequenceRequest(BaseModel):
             "pattern": obj.get("pattern")
         })
         return _obj
+
+CreateSequenceRequest.update_forward_refs()

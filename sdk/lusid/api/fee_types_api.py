@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.fee_transaction_template_specification import FeeTransactionTemplateSpecification
 from lusid.models.fee_type import FeeType
@@ -60,15 +57,15 @@ class FeeTypesApi:
 
 
     @overload
-    async def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(..., description="The contents of the FeeType.")], **kwargs) -> FeeType:  # noqa: E501
+    async def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(description="The contents of the FeeType.")], **kwargs) -> FeeType:  # noqa: E501
         ...
 
     @overload
-    def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(..., description="The contents of the FeeType.")], async_req: Optional[bool]=True, **kwargs) -> FeeType:  # noqa: E501
+    def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(description="The contents of the FeeType.")], async_req: Optional[bool]=True, **kwargs) -> FeeType:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(..., description="The contents of the FeeType.")], async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
+    def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(description="The contents of the FeeType.")], async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
         """[EXPERIMENTAL] CreateFeeType: Create a FeeType.  # noqa: E501
 
         Create a FeeType that contains templates used to create fee transactions.  # noqa: E501
@@ -101,7 +98,7 @@ class FeeTypesApi:
         return self.create_fee_type_with_http_info(scope, fee_type_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(..., description="The contents of the FeeType.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(description="The contents of the FeeType.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateFeeType: Create a FeeType.  # noqa: E501
 
         Create a FeeType that contains templates used to create fee transactions.  # noqa: E501
@@ -701,15 +698,15 @@ class FeeTypesApi:
 
 
     @overload
-    async def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfFeeType:  # noqa: E501
+    async def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfFeeType:  # noqa: E501
         ...
 
     @overload
-    def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfFeeType:  # noqa: E501
+    def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfFeeType:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFeeType, Awaitable[PagedResourceListOfFeeType]]:  # noqa: E501
+    def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFeeType, Awaitable[PagedResourceListOfFeeType]]:  # noqa: E501
         """[EXPERIMENTAL] ListFeeTypes: List FeeTypes  # noqa: E501
 
         List FeeTypes that contain templates used to create fee transactions.  # noqa: E501
@@ -748,7 +745,7 @@ class FeeTypesApi:
         return self.list_fee_types_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_fee_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_fee_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListFeeTypes: List FeeTypes  # noqa: E501
 
         List FeeTypes that contain templates used to create fee transactions.  # noqa: E501
@@ -889,15 +886,15 @@ class FeeTypesApi:
 
 
     @overload
-    async def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(..., description="The contents of the FeeType.")], **kwargs) -> FeeType:  # noqa: E501
+    async def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(description="The contents of the FeeType.")], **kwargs) -> FeeType:  # noqa: E501
         ...
 
     @overload
-    def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(..., description="The contents of the FeeType.")], async_req: Optional[bool]=True, **kwargs) -> FeeType:  # noqa: E501
+    def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(description="The contents of the FeeType.")], async_req: Optional[bool]=True, **kwargs) -> FeeType:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(..., description="The contents of the FeeType.")], async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
+    def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(description="The contents of the FeeType.")], async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateFeeType: Update a FeeType.  # noqa: E501
 
         Update a FeeType that contains templates used to create fee transactions.  # noqa: E501
@@ -932,7 +929,7 @@ class FeeTypesApi:
         return self.update_fee_type_with_http_info(scope, code, update_fee_type_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(..., description="The contents of the FeeType.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(description="The contents of the FeeType.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateFeeType: Update a FeeType.  # noqa: E501
 
         Update a FeeType that contains templates used to create fee transactions.  # noqa: E501

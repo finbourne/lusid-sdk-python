@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.configuration_recipe import ConfigurationRecipe
 
 class UpsertRecipeRequest(BaseModel):
     """
     A recipe that is to be stored in the recipe structured data store.  Only one of these must be present.  # noqa: E501
     """
-    configuration_recipe: Optional[ConfigurationRecipe] = Field(None, alias="configurationRecipe")
+    configuration_recipe: Optional[ConfigurationRecipe] = Field(default=None, alias="configurationRecipe")
     __properties = ["configurationRecipe"]
 
     class Config:
@@ -79,3 +81,5 @@ class UpsertRecipeRequest(BaseModel):
             "configuration_recipe": ConfigurationRecipe.from_dict(obj.get("configurationRecipe")) if obj.get("configurationRecipe") is not None else None
         })
         return _obj
+
+UpsertRecipeRequest.update_forward_refs()

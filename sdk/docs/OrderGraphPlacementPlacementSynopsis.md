@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_graph_placement_placement_synopsis import OrderGraphPlacementPlacementSynopsis
-from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-details: conlist(OrderGraphPlacementChildPlacementDetail) = # Replace with your value
+details: List[OrderGraphPlacementChildPlacementDetail] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 order_graph_placement_placement_synopsis_instance = OrderGraphPlacementPlacementSynopsis(details=details, quantity=quantity)
 

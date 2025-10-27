@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class InvestorIdentifier(BaseModel):
     """
     Identification of an Investor on the LUSID API.  # noqa: E501
     """
     investor_type:  StrictStr = Field(...,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person or a LegalEntity") 
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="Single identifier that should target the desired person or legal entity")
+    identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Single identifier that should target the desired person or legal entity")
     __properties = ["investorType", "identifiers"]
 
     class Config:
@@ -82,3 +84,5 @@ class InvestorIdentifier(BaseModel):
             "identifiers": obj.get("identifiers")
         })
         return _obj
+
+InvestorIdentifier.update_forward_refs()

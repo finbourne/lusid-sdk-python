@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 
@@ -28,14 +30,14 @@ class Change(BaseModel):
     The time an entity was modified (amendment and/or historical correction).  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    entity_id: ResourceId = Field(..., alias="entityId")
-    corrected: StrictBool = Field(...)
-    correction_effective_at: Optional[datetime] = Field(None, alias="correctionEffectiveAt")
-    correction_as_at: Optional[datetime] = Field(None, alias="correctionAsAt")
-    amended: StrictBool = Field(...)
-    amendment_effective_at: Optional[datetime] = Field(None, alias="amendmentEffectiveAt")
-    amendment_as_at: Optional[datetime] = Field(None, alias="amendmentAsAt")
-    links: Optional[conlist(Link)] = None
+    entity_id: ResourceId = Field(alias="entityId")
+    corrected: StrictBool
+    correction_effective_at: Optional[datetime] = Field(default=None, alias="correctionEffectiveAt")
+    correction_as_at: Optional[datetime] = Field(default=None, alias="correctionAsAt")
+    amended: StrictBool
+    amendment_effective_at: Optional[datetime] = Field(default=None, alias="amendmentEffectiveAt")
+    amendment_as_at: Optional[datetime] = Field(default=None, alias="amendmentAsAt")
+    links: Optional[List[Link]] = None
     __properties = ["href", "entityId", "corrected", "correctionEffectiveAt", "correctionAsAt", "amended", "amendmentEffectiveAt", "amendmentAsAt", "links"]
 
     class Config:
@@ -133,3 +135,5 @@ class Change(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Change.update_forward_refs()

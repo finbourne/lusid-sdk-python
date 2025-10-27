@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.order_by_spec import OrderBySpec
 from lusid.models.portfolio_entity_id import PortfolioEntityId
@@ -30,15 +32,15 @@ class AggregatedTransactionsRequest(BaseModel):
     """
     AggregatedTransactionsRequest
     """
-    from_transaction_date: datetime = Field(..., alias="fromTransactionDate")
-    to_transaction_date: datetime = Field(..., alias="toTransactionDate")
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    portfolio_entity_ids: Optional[conlist(PortfolioEntityId)] = Field(None, alias="portfolioEntityIds", description="The set of portfolio or portfolio group identifiers containing the relevant transactions.")
-    as_at: Optional[datetime] = Field(None, alias="asAt")
-    metrics: conlist(AggregateSpec) = Field(...)
-    group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy")
-    filters: Optional[conlist(PropertyFilter)] = None
-    sort: Optional[conlist(OrderBySpec)] = None
+    from_transaction_date: datetime = Field(alias="fromTransactionDate")
+    to_transaction_date: datetime = Field(alias="toTransactionDate")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    portfolio_entity_ids: Optional[List[PortfolioEntityId]] = Field(default=None, description="The set of portfolio or portfolio group identifiers containing the relevant transactions.", alias="portfolioEntityIds")
+    as_at: Optional[datetime] = Field(default=None, alias="asAt")
+    metrics: List[AggregateSpec]
+    group_by: Optional[List[StrictStr]] = Field(default=None, alias="groupBy")
+    filters: Optional[List[PropertyFilter]] = None
+    sort: Optional[List[OrderBySpec]] = None
     __properties = ["fromTransactionDate", "toTransactionDate", "portfolioId", "portfolioEntityIds", "asAt", "metrics", "groupBy", "filters", "sort"]
 
     class Config:
@@ -152,3 +154,5 @@ class AggregatedTransactionsRequest(BaseModel):
             "sort": [OrderBySpec.from_dict(_item) for _item in obj.get("sort")] if obj.get("sort") is not None else None
         })
         return _obj
+
+AggregatedTransactionsRequest.update_forward_refs()

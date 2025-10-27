@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.placement import Placement
 from lusid.models.resource_id import ResourceId
 
@@ -27,8 +29,8 @@ class CancelledPlacementResult(BaseModel):
     """
     CancelledPlacementResult
     """
-    placement_state: Optional[Placement] = Field(None, alias="placementState")
-    cancelled_child_placements: conlist(ResourceId) = Field(..., alias="cancelledChildPlacements", description="Child placements which have also been cancelled following cancellation of the parent")
+    placement_state: Optional[Placement] = Field(default=None, alias="placementState")
+    cancelled_child_placements: List[ResourceId] = Field(description="Child placements which have also been cancelled following cancellation of the parent", alias="cancelledChildPlacements")
     __properties = ["placementState", "cancelledChildPlacements"]
 
     class Config:
@@ -89,3 +91,5 @@ class CancelledPlacementResult(BaseModel):
             "cancelled_child_placements": [ResourceId.from_dict(_item) for _item in obj.get("cancelledChildPlacements")] if obj.get("cancelledChildPlacements") is not None else None
         })
         return _obj
+
+CancelledPlacementResult.update_forward_refs()

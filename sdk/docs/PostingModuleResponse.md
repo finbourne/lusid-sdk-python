@@ -17,18 +17,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.posting_module_response import PostingModuleResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 posting_module_code: StrictStr = "example_posting_module_code"
 chart_of_accounts_id: ResourceId = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: Optional[conlist(PostingModuleRule)] = # Replace with your value
+rules: Optional[List[PostingModuleRule]] = # Replace with your value
 status: StrictStr = "example_status"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 posting_module_response_instance = PostingModuleResponse(href=href, posting_module_code=posting_module_code, chart_of_accounts_id=chart_of_accounts_id, display_name=display_name, description=description, rules=rules, status=status, version=version, links=links)
 
 ```

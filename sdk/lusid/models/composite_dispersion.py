@@ -17,23 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist 
 from lusid.models.resource_id import ResourceId
 
 class CompositeDispersion(BaseModel):
     """
     A list of Dispersion calculations for the given years.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The date for which dipsersion calculation has been done. This should be 31 Dec for each given year.")
-    dispersion_calculation: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="dispersionCalculation", description="The result for the dispersion calculation on the given effectiveAt.")
-    variance: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The variance on the given effectiveAt.")
-    first_quartile: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="firstQuartile", description="First Quartile (Q1) =  (lower quartile) = the middle of the bottom half of the returns.")
-    third_quartile: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="thirdQuartile", description="Third Quartile (Q3) =  (higher quartile) = the middle of the top half of the returns.")
-    range: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Highest return - Lowest return.")
-    constituents_in_scope: Optional[conlist(ResourceId)] = Field(None, alias="constituentsInScope", description="List containing Composite members which are part of the dispersion calcualtion.")
-    constituents_excluded: Optional[conlist(ResourceId)] = Field(None, alias="constituentsExcluded", description="List containing the Composite members which are not part of the dispersion calculation")
+    effective_at: datetime = Field(description="The date for which dipsersion calculation has been done. This should be 31 Dec for each given year.", alias="effectiveAt")
+    dispersion_calculation: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The result for the dispersion calculation on the given effectiveAt.", alias="dispersionCalculation")
+    variance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The variance on the given effectiveAt.")
+    first_quartile: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="First Quartile (Q1) =  (lower quartile) = the middle of the bottom half of the returns.", alias="firstQuartile")
+    third_quartile: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Third Quartile (Q3) =  (higher quartile) = the middle of the top half of the returns.", alias="thirdQuartile")
+    range: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Highest return - Lowest return.")
+    constituents_in_scope: Optional[List[ResourceId]] = Field(default=None, description="List containing Composite members which are part of the dispersion calcualtion.", alias="constituentsInScope")
+    constituents_excluded: Optional[List[ResourceId]] = Field(default=None, description="List containing the Composite members which are not part of the dispersion calculation", alias="constituentsExcluded")
     __properties = ["effectiveAt", "dispersionCalculation", "variance", "firstQuartile", "thirdQuartile", "range", "constituentsInScope", "constituentsExcluded"]
 
     class Config:
@@ -139,3 +141,5 @@ class CompositeDispersion(BaseModel):
             "constituents_excluded": [ResourceId.from_dict(_item) for _item in obj.get("constituentsExcluded")] if obj.get("constituentsExcluded") is not None else None
         })
         return _obj
+
+CompositeDispersion.update_forward_refs()

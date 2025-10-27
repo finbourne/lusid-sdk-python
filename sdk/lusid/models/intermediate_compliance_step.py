@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 
@@ -28,7 +30,7 @@ class IntermediateComplianceStep(ComplianceStep):
     IntermediateComplianceStep
     """
     label:  StrictStr = Field(...,alias="label", description="The label of the compliance step") 
-    grouped_parameters: Dict[str, conlist(ComplianceTemplateParameter)] = Field(..., alias="groupedParameters", description="Parameters required for the step")
+    grouped_parameters: Dict[str, Optional[List[ComplianceTemplateParameter]]] = Field(description="Parameters required for the step", alias="groupedParameters")
     compliance_step_type:  StrictStr = Field(...,alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceStepType", "label", "groupedParameters"]
@@ -83,14 +85,19 @@ class IntermediateComplianceStep(ComplianceStep):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "compliance_step_type" != "type":
             return value
 
-        if value not in ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep', 'PercentCheckStep'):
+        if value not in ['FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep', 'PercentCheckStep']:
             raise ValueError("must be one of enum values ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep', 'PercentCheckStep')")
         return value
 
@@ -170,3 +177,5 @@ class IntermediateComplianceStep(ComplianceStep):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+IntermediateComplianceStep.update_forward_refs()

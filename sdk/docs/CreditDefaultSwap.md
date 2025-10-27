@@ -19,9 +19,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.credit_default_swap import CreditDefaultSwap
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 ticker: Optional[StrictStr] = "example_ticker"
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
@@ -30,7 +32,7 @@ coupon_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 convention_name: Optional[FlowConventionName] = # Replace with your value
 notional: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 protection_detail_specification: Optional[CdsProtectionDetailSpecification] = # Replace with your value
-additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 credit_default_swap_instance = CreditDefaultSwap(ticker=ticker, start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, convention_name=convention_name, notional=notional, protection_detail_specification=protection_detail_specification, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

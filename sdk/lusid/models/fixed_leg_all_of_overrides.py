@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FixedLegAllOfOverrides(BaseModel):
     """
     Any overriding data for notionals, spreads or rates that would affect generation of a leg.  This supports the case where an amortisation schedule is given but otherwise generation is allowed as usual.  # noqa: E501
     """
-    amortization: Optional[conlist(Union[StrictFloat, StrictInt])] = Field(None, alias="Amortization")
-    spreads: Optional[conlist(Union[StrictFloat, StrictInt])] = Field(None, alias="Spreads")
+    amortization: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, alias="Amortization")
+    spreads: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, alias="Spreads")
     additional_properties: Dict[str, Any] = {}
     __properties = ["Amortization", "Spreads"]
 
@@ -89,3 +91,5 @@ class FixedLegAllOfOverrides(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FixedLegAllOfOverrides.update_forward_refs()

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class UpsertPersonRequest(BaseModel):
     """
     UpsertPersonRequest
     """
-    identifiers: Dict[str, ModelProperty] = Field(..., description="The identifiers the person will be upserted with.The provided keys should be idTypeScope, idTypeCode, code")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
+    identifiers: Dict[str, ModelProperty] = Field(description="The identifiers the person will be upserted with.The provided keys should be idTypeScope, idTypeCode, code")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Person") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Person") 
     __properties = ["identifiers", "properties", "displayName", "description"]
@@ -116,3 +118,5 @@ class UpsertPersonRequest(BaseModel):
             "description": obj.get("description")
         })
         return _obj
+
+UpsertPersonRequest.update_forward_refs()

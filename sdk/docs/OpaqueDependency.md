@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.opaque_dependency import OpaqueDependency
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 dependency_type: StrictStr = "example_dependency_type"
 opaque_dependency_instance = OpaqueDependency(dependency_type=dependency_type)

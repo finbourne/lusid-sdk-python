@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_reference_portfolio_request import CreateReferencePortfolioRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 code: StrictStr = "example_code"
 created: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="Instrument Scopes.")
+instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
 base_currency: Optional[StrictStr] = "example_base_currency"
 create_reference_portfolio_request_instance = CreateReferencePortfolioRequest(display_name=display_name, description=description, code=code, created=created, properties=properties, instrument_scopes=instrument_scopes, base_currency=base_currency)
 

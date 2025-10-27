@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.address_key_filter import AddressKeyFilter
 from lusid.models.model_options import ModelOptions
 
@@ -31,9 +33,9 @@ class VendorModelRule(BaseModel):
     model_name:  StrictStr = Field(...,alias="modelName", description="The vendor library model name") 
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The vendor library instrument type") 
     parameters:  Optional[StrictStr] = Field(None,alias="parameters", description="THIS FIELD IS DEPRECATED - use ModelOptions  The set of opaque model parameters, provided as a Json object, that is a string object which will internally be converted to a dictionary of string to object.  Note that this is not intended as the final form of this object. It will be replaced with a more structured object as the set of parameters that are possible is  better understood.") 
-    model_options: Optional[ModelOptions] = Field(None, alias="modelOptions")
+    model_options: Optional[ModelOptions] = Field(default=None, alias="modelOptions")
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="This field should generally not be required. It indicates a specific case where there is a particular need to make a rule apply to only a single instrument  specified by an identifier on that instrument such as its LUID. One particular example would be to control the behaviour of a look-through portfolio scaling  methodology, such as where there is a mixture of indices and credit-debit portfolios where scaling on the sum of valuation would be deemed incorrectly for one  set but desired in general.") 
-    address_key_filters: Optional[conlist(AddressKeyFilter)] = Field(None, alias="addressKeyFilters", description="Condition for model selection. If a condition is satisfied the default model for valuation is overridden (for that instrument).")
+    address_key_filters: Optional[List[AddressKeyFilter]] = Field(default=None, description="Condition for model selection. If a condition is satisfied the default model for valuation is overridden (for that instrument).", alias="addressKeyFilters")
     __properties = ["supplier", "modelName", "instrumentType", "parameters", "modelOptions", "instrumentId", "addressKeyFilters"]
 
     @validator('supplier')
@@ -86,14 +88,19 @@ class VendorModelRule(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "supplier" != "type":
             return value
 
-        if value not in ('Lusid', 'RefinitivQps', 'RefinitivTracsWeb', 'VolMaster', 'IsdaCds', 'YieldBook', 'LusidCalc'):
+        if value not in ['Lusid', 'RefinitivQps', 'RefinitivTracsWeb', 'VolMaster', 'IsdaCds', 'YieldBook', 'LusidCalc']:
             raise ValueError("must be one of enum values ('Lusid', 'RefinitivQps', 'RefinitivTracsWeb', 'VolMaster', 'IsdaCds', 'YieldBook', 'LusidCalc')")
         return value
 
@@ -175,3 +182,5 @@ class VendorModelRule(BaseModel):
             "address_key_filters": [AddressKeyFilter.from_dict(_item) for _item in obj.get("addressKeyFilters")] if obj.get("addressKeyFilters") is not None else None
         })
         return _obj
+
+VendorModelRule.update_forward_refs()

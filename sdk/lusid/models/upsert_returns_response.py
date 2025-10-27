@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,11 +30,11 @@ class UpsertReturnsResponse(BaseModel):
     """
     Response from upserting Returns  # noqa: E501
     """
-    version: Version = Field(...)
+    version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    values: Optional[conlist(Dict[str, datetime])] = Field(None, description="The set of values that were successfully retrieved.")
-    failed: Optional[conlist(Dict[str, ErrorDetail])] = Field(None, description="The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.")
-    links: Optional[conlist(Link)] = None
+    values: Optional[List[Dict[str, datetime]]] = Field(default=None, description="The set of values that were successfully retrieved.")
+    failed: Optional[List[Dict[str, ErrorDetail]]] = Field(default=None, description="The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.")
+    links: Optional[List[Link]] = None
     __properties = ["version", "href", "values", "failed", "links"]
 
     class Config:
@@ -123,3 +125,5 @@ class UpsertReturnsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+UpsertReturnsResponse.update_forward_refs()

@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-requests: conlist(BlockAndOrdersRequest, max_items=100, min_items=1) = Field(..., description="A collection of BlockAndOrdersRequest.")
+requests: List[BlockAndOrdersRequest] = # Replace with your value
 block_and_orders_create_request_instance = BlockAndOrdersCreateRequest(requests=requests)
 
 ```

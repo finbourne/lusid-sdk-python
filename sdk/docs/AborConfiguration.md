@@ -19,20 +19,22 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.abor_configuration import AborConfiguration
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 recipe_id: Optional[ResourceId] = # Replace with your value
 chart_of_accounts_id: ResourceId = # Replace with your value
-posting_module_codes: Optional[conlist(StrictStr)] = # Replace with your value
-cleardown_module_codes: Optional[conlist(StrictStr)] = # Replace with your value
+posting_module_codes: Optional[List[StrictStr]] = # Replace with your value
+cleardown_module_codes: Optional[List[StrictStr]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 abor_configuration_instance = AborConfiguration(href=href, id=id, display_name=display_name, description=description, recipe_id=recipe_id, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, properties=properties, version=version, links=links)
 
 ```

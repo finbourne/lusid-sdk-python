@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CreateCorporateActionSourceRequest(BaseModel):
     """
@@ -29,7 +31,7 @@ class CreateCorporateActionSourceRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code of the corporate action source") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the corporate action source") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action source") 
-    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.")
+    instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.", alias="instrumentScopes")
     __properties = ["scope", "code", "displayName", "description", "instrumentScopes"]
 
     class Config:
@@ -93,3 +95,5 @@ class CreateCorporateActionSourceRequest(BaseModel):
             "instrument_scopes": obj.get("instrumentScopes")
         })
         return _obj
+
+CreateCorporateActionSourceRequest.update_forward_refs()

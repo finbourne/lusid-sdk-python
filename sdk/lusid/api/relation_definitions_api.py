@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.create_relation_definition_request import CreateRelationDefinitionRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.relation_definition import RelationDefinition
@@ -57,15 +54,15 @@ class RelationDefinitionsApi:
 
 
     @overload
-    async def create_relation_definition(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(..., description="The definition of the new relation.")], **kwargs) -> RelationDefinition:  # noqa: E501
+    async def create_relation_definition(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(description="The definition of the new relation.")], **kwargs) -> RelationDefinition:  # noqa: E501
         ...
 
     @overload
-    def create_relation_definition(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(..., description="The definition of the new relation.")], async_req: Optional[bool]=True, **kwargs) -> RelationDefinition:  # noqa: E501
+    def create_relation_definition(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(description="The definition of the new relation.")], async_req: Optional[bool]=True, **kwargs) -> RelationDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_relation_definition(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(..., description="The definition of the new relation.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationDefinition, Awaitable[RelationDefinition]]:  # noqa: E501
+    def create_relation_definition(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(description="The definition of the new relation.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationDefinition, Awaitable[RelationDefinition]]:  # noqa: E501
         """[EXPERIMENTAL] CreateRelationDefinition: Create a relation definition  # noqa: E501
 
         Define a new relation.  # noqa: E501
@@ -96,7 +93,7 @@ class RelationDefinitionsApi:
         return self.create_relation_definition_with_http_info(create_relation_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_relation_definition_with_http_info(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(..., description="The definition of the new relation.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_relation_definition_with_http_info(self, create_relation_definition_request : Annotated[CreateRelationDefinitionRequest, Field(description="The definition of the new relation.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateRelationDefinition: Create a relation definition  # noqa: E501
 
         Define a new relation.  # noqa: E501

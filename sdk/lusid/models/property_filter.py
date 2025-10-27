@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class PropertyFilter(BaseModel):
     """
@@ -81,7 +83,12 @@ class PropertyFilter(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -91,7 +98,7 @@ class PropertyFilter(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Equals', 'NotEquals', 'GreaterThan', 'GreaterThanOrEqualTo', 'LessThan', 'LessThanOrEqualTo', 'In'):
+        if value not in ['Equals', 'NotEquals', 'GreaterThan', 'GreaterThanOrEqualTo', 'LessThan', 'LessThanOrEqualTo', 'In']:
             raise ValueError("must be one of enum values ('Equals', 'NotEquals', 'GreaterThan', 'GreaterThanOrEqualTo', 'LessThan', 'LessThanOrEqualTo', 'In')")
         return value
 
@@ -145,7 +152,12 @@ class PropertyFilter(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -155,7 +167,7 @@ class PropertyFilter(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Absolute', 'Property'):
+        if value not in ['Absolute', 'Property']:
             raise ValueError("must be one of enum values ('Absolute', 'Property')")
         return value
 
@@ -219,3 +231,5 @@ class PropertyFilter(BaseModel):
             "right_operand_type": obj.get("rightOperandType")
         })
         return _obj
+
+PropertyFilter.update_forward_refs()

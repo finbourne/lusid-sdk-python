@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conint, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class SettlementCycle(BaseModel):
     """
     The settlement cycle for an instrument  # noqa: E501
     """
-    business_day_offset: conint(strict=True) = Field(..., alias="businessDayOffset")
-    calendars: conlist(ResourceId) = Field(...)
+    business_day_offset: StrictInt = Field(alias="businessDayOffset")
+    calendars: List[ResourceId]
     __properties = ["businessDayOffset", "calendars"]
 
     class Config:
@@ -85,3 +87,5 @@ class SettlementCycle(BaseModel):
             "calendars": [ResourceId.from_dict(_item) for _item in obj.get("calendars")] if obj.get("calendars") is not None else None
         })
         return _obj
+
+SettlementCycle.update_forward_refs()

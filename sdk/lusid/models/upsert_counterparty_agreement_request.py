@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.counterparty_agreement import CounterpartyAgreement
 
 class UpsertCounterpartyAgreementRequest(BaseModel):
     """
     Counterparty Agreement that is to be stored in the convention data store.  There must be only one of these present.  # noqa: E501
     """
-    counterparty_agreement: CounterpartyAgreement = Field(..., alias="counterpartyAgreement")
+    counterparty_agreement: CounterpartyAgreement = Field(alias="counterpartyAgreement")
     __properties = ["counterpartyAgreement"]
 
     class Config:
@@ -79,3 +81,5 @@ class UpsertCounterpartyAgreementRequest(BaseModel):
             "counterparty_agreement": CounterpartyAgreement.from_dict(obj.get("counterpartyAgreement")) if obj.get("counterpartyAgreement") is not None else None
         })
         return _obj
+
+UpsertCounterpartyAgreementRequest.update_forward_refs()

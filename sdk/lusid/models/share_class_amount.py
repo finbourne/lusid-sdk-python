@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ShareClassAmount(BaseModel):
     """
     ShareClassAmount
     """
-    fund_currency_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fundCurrencyAmount", description="The value of the amount in the fund currency.")
-    share_class_currency_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="shareClassCurrencyAmount", description="The value of the amount in the share class currency.")
+    fund_currency_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value of the amount in the fund currency.", alias="fundCurrencyAmount")
+    share_class_currency_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value of the amount in the share class currency.", alias="shareClassCurrencyAmount")
     __properties = ["fundCurrencyAmount", "shareClassCurrencyAmount"]
 
     class Config:
@@ -77,3 +79,5 @@ class ShareClassAmount(BaseModel):
             "share_class_currency_amount": obj.get("shareClassCurrencyAmount")
         })
         return _obj
+
+ShareClassAmount.update_forward_refs()

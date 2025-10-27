@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class BreakCodeSource(BaseModel):
     """
     BreakCodeSource
     """
-    data_type_id: ResourceId = Field(..., alias="dataTypeId")
+    data_type_id: ResourceId = Field(alias="dataTypeId")
     __properties = ["dataTypeId"]
 
     class Config:
@@ -79,3 +81,5 @@ class BreakCodeSource(BaseModel):
             "data_type_id": ResourceId.from_dict(obj.get("dataTypeId")) if obj.get("dataTypeId") is not None else None
         })
         return _obj
+
+BreakCodeSource.update_forward_refs()

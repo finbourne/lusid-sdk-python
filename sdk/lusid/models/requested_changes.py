@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class RequestedChanges(BaseModel):
     """
     RequestedChanges
     """
-    attribute_count: Optional[StrictInt] = Field(None, alias="attributeCount", description="Number of attributes staged change applies to")
-    attribute_names: Optional[conlist(StrictStr)] = Field(None, alias="attributeNames", description="Names of the attributes the staged change applies to.")
+    attribute_count: Optional[StrictInt] = Field(default=None, description="Number of attributes staged change applies to", alias="attributeCount")
+    attribute_names: Optional[List[StrictStr]] = Field(default=None, description="Names of the attributes the staged change applies to.", alias="attributeNames")
     __properties = ["attributeCount", "attributeNames"]
 
     class Config:
@@ -82,3 +84,5 @@ class RequestedChanges(BaseModel):
             "attribute_names": obj.get("attributeNames")
         })
         return _obj
+
+RequestedChanges.update_forward_refs()

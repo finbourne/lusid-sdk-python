@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_reconciliation_request_v2 import TransactionReconciliationRequestV2
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-left: AggregatedTransactionsRequest = # Replace with your value
-right: AggregatedTransactionsRequest = # Replace with your value
-left_to_right_mapping: Optional[conlist(ReconciliationLeftRightAddressKeyPair)] = # Replace with your value
-comparison_rules: Optional[conlist(ReconciliationRule)] = # Replace with your value
-preserve_keys: Optional[conlist(StrictStr)] = # Replace with your value
+left: AggregatedTransactionsRequest
+right: AggregatedTransactionsRequest
+left_to_right_mapping: Optional[List[ReconciliationLeftRightAddressKeyPair]] = # Replace with your value
+comparison_rules: Optional[List[ReconciliationRule]] = # Replace with your value
+preserve_keys: Optional[List[StrictStr]] = # Replace with your value
 transaction_reconciliation_request_v2_instance = TransactionReconciliationRequestV2(left=left, right=right, left_to_right_mapping=left_to_right_mapping, comparison_rules=comparison_rules, preserve_keys=preserve_keys)
 
 ```

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class InstrumentEventConfiguration(BaseModel):
     """
     InstrumentEventConfiguration
     """
-    transaction_template_scopes: Optional[conlist(StrictStr)] = Field(None, alias="transactionTemplateScopes")
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
+    transaction_template_scopes: Optional[List[StrictStr]] = Field(default=None, alias="transactionTemplateScopes")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
     __properties = ["transactionTemplateScopes", "recipeId"]
 
     class Config:
@@ -86,3 +88,5 @@ class InstrumentEventConfiguration(BaseModel):
             "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None
         })
         return _obj
+
+InstrumentEventConfiguration.update_forward_refs()

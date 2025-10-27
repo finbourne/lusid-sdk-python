@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
@@ -31,29 +33,29 @@ class Order(BaseModel):
     """
     An Order for a certain quantity of a specific instrument  # noqa: E501
     """
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
     version: Optional[Version] = None
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of the given instrument ordered.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of the given instrument ordered.")
     side:  StrictStr = Field(...,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
-    order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    id: ResourceId = Field(...)
+    order_book_id: Optional[ResourceId] = Field(default=None, alias="orderBookId")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    id: ResourceId
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.") 
     state:  Optional[StrictStr] = Field(None,alias="state", description="The order's state (examples: New, PartiallyFilled, ...)") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="The order's type (examples: Limit, Market, ...)") 
     time_in_force:  Optional[StrictStr] = Field(None,alias="timeInForce", description="The order's time in force (examples: Day, GoodTilCancel, ...)") 
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the order was made")
+    var_date: Optional[datetime] = Field(default=None, description="The date on which the order was made", alias="date")
     price: Optional[CurrencyAndAmount] = None
-    limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
-    stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
-    order_instruction_id: Optional[ResourceId] = Field(None, alias="orderInstructionId")
-    package_id: Optional[ResourceId] = Field(None, alias="packageId")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
+    stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
+    order_instruction_id: Optional[ResourceId] = Field(default=None, alias="orderInstructionId")
+    package_id: Optional[ResourceId] = Field(default=None, alias="packageId")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
     amount: Optional[CurrencyAndAmount] = None
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["properties", "version", "instrumentIdentifiers", "quantity", "side", "orderBookId", "portfolioId", "id", "instrumentScope", "lusidInstrumentId", "state", "type", "timeInForce", "date", "price", "limitPrice", "stopPrice", "orderInstructionId", "packageId", "weight", "amount", "dataModelMembership", "links"]
 
     class Config:
@@ -217,3 +219,5 @@ class Order(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Order.update_forward_refs()

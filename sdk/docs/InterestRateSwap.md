@@ -16,16 +16,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.interest_rate_swap import InterestRateSwap
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictBool, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 is_non_deliverable: Optional[StrictBool] = # Replace with your value
 is_non_deliverable:Optional[StrictBool] = None
-legs: conlist(InstrumentLeg) = # Replace with your value
+legs: List[InstrumentLeg] = # Replace with your value
 settlement_ccy: Optional[StrictStr] = "example_settlement_ccy"
-additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 interest_rate_swap_instance = InterestRateSwap(start_date=start_date, maturity_date=maturity_date, is_non_deliverable=is_non_deliverable, legs=legs, settlement_ccy=settlement_ccy, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

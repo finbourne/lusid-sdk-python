@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_index_convention_request import UpsertIndexConventionRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 index_convention: Optional[IndexConvention] = # Replace with your value
 upsert_index_convention_request_instance = UpsertIndexConventionRequest(index_convention=index_convention)

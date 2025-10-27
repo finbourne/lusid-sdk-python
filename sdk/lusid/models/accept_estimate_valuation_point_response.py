@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 
@@ -28,9 +30,9 @@ class AcceptEstimateValuationPointResponse(BaseModel):
     The Valuation Point Data Response for AcceptEstimate called on the Fund and specified date.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    candidate_valuation_point: ValuationPointDataResponse = Field(..., alias="candidateValuationPoint")
-    latest_valuation_point: Optional[ValuationPointDataResponse] = Field(None, alias="latestValuationPoint")
-    links: Optional[conlist(Link)] = None
+    candidate_valuation_point: ValuationPointDataResponse = Field(alias="candidateValuationPoint")
+    latest_valuation_point: Optional[ValuationPointDataResponse] = Field(default=None, alias="latestValuationPoint")
+    links: Optional[List[Link]] = None
     __properties = ["href", "candidateValuationPoint", "latestValuationPoint", "links"]
 
     class Config:
@@ -106,3 +108,5 @@ class AcceptEstimateValuationPointResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AcceptEstimateValuationPointResponse.update_forward_refs()

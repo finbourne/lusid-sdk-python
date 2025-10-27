@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class SingleValuationPointQueryParameters(BaseModel):
     """
     SingleValuationPointQueryParameters
     """
-    date_or_diary_entry: DateOrDiaryEntry = Field(..., alias="dateOrDiaryEntry")
+    date_or_diary_entry: DateOrDiaryEntry = Field(alias="dateOrDiaryEntry")
     __properties = ["dateOrDiaryEntry"]
 
     class Config:
@@ -79,3 +81,5 @@ class SingleValuationPointQueryParameters(BaseModel):
             "date_or_diary_entry": DateOrDiaryEntry.from_dict(obj.get("dateOrDiaryEntry")) if obj.get("dateOrDiaryEntry") is not None else None
         })
         return _obj
+
+SingleValuationPointQueryParameters.update_forward_refs()

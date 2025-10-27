@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.resource_id import ResourceId
 
@@ -27,14 +29,14 @@ class OrderGraphBlockOrderDetail(BaseModel):
     """
     OrderGraphBlockOrderDetail
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     compliance_state:  StrictStr = Field(...,alias="complianceState", description="The compliance state of this order. Possible values are 'Pending', 'Failed', 'Manually approved', 'Passed' and 'Warning'.") 
     approval_state:  StrictStr = Field(...,alias="approvalState", description="The approval state of this order. Possible values are 'Pending', 'Rejected' and 'Approved'.") 
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     portfolio_name:  Optional[StrictStr] = Field(None,alias="portfolioName", description="The name of the order's referenced Portfolio.") 
     order_approval_task_id:  Optional[StrictStr] = Field(None,alias="orderApprovalTaskId", description="The task id associated with the approval state of the order.") 
-    order_approval_task_definition_id: Optional[ResourceId] = Field(None, alias="orderApprovalTaskDefinitionId")
-    non_passing_compliance_rule_results: Optional[conlist(ContributionToNonPassingRuleDetail)] = Field(None, alias="nonPassingComplianceRuleResults", description="The details of compliance rules in non-passing states.")
+    order_approval_task_definition_id: Optional[ResourceId] = Field(default=None, alias="orderApprovalTaskDefinitionId")
+    non_passing_compliance_rule_results: Optional[List[ContributionToNonPassingRuleDetail]] = Field(default=None, description="The details of compliance rules in non-passing states.", alias="nonPassingComplianceRuleResults")
     __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName", "orderApprovalTaskId", "orderApprovalTaskDefinitionId", "nonPassingComplianceRuleResults"]
 
     class Config:
@@ -122,3 +124,5 @@ class OrderGraphBlockOrderDetail(BaseModel):
             "non_passing_compliance_rule_results": [ContributionToNonPassingRuleDetail.from_dict(_item) for _item in obj.get("nonPassingComplianceRuleResults")] if obj.get("nonPassingComplianceRuleResults") is not None else None
         })
         return _obj
+
+OrderGraphBlockOrderDetail.update_forward_refs()

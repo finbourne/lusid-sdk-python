@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.get_cds_flow_conventions_response import GetCdsFlowConventionsResponse
 from lusid.models.get_flow_conventions_response import GetFlowConventionsResponse
@@ -1523,15 +1520,15 @@ class ConventionsApi:
 
 
     @overload
-    async def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(..., description="The CDS Flow Conventions to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(description="The CDS Flow Conventions to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(..., description="The CDS Flow Conventions to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(description="The CDS Flow Conventions to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(..., description="The CDS Flow Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_cds_flow_conventions(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(description="The CDS Flow Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] UpsertCdsFlowConventions: Upsert a set of CDS Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert CDS Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted CDS Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1562,7 +1559,7 @@ class ConventionsApi:
         return self.upsert_cds_flow_conventions_with_http_info(upsert_cds_flow_conventions_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_cds_flow_conventions_with_http_info(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(..., description="The CDS Flow Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_cds_flow_conventions_with_http_info(self, upsert_cds_flow_conventions_request : Annotated[UpsertCdsFlowConventionsRequest, Field(description="The CDS Flow Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] UpsertCdsFlowConventions: Upsert a set of CDS Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert CDS Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted CDS Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1682,15 +1679,15 @@ class ConventionsApi:
 
 
     @overload
-    async def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(..., description="The Flow Conventions to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(description="The Flow Conventions to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(..., description="The Flow Conventions to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(description="The Flow Conventions to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(..., description="The Flow Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_flow_conventions(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(description="The Flow Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] UpsertFlowConventions: Upsert Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1721,7 +1718,7 @@ class ConventionsApi:
         return self.upsert_flow_conventions_with_http_info(upsert_flow_conventions_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_flow_conventions_with_http_info(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(..., description="The Flow Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_flow_conventions_with_http_info(self, upsert_flow_conventions_request : Annotated[UpsertFlowConventionsRequest, Field(description="The Flow Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] UpsertFlowConventions: Upsert Flow Conventions. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert Flow Conventions in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Flow Conventions or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1841,15 +1838,15 @@ class ConventionsApi:
 
 
     @overload
-    async def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(..., description="The Index Conventions to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(description="The Index Conventions to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(..., description="The Index Conventions to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(description="The Index Conventions to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(..., description="The Index Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_index_convention(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(description="The Index Conventions to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[BETA] UpsertIndexConvention: Upsert a set of Index Convention. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert Index Convention in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Index Convention or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1880,7 +1877,7 @@ class ConventionsApi:
         return self.upsert_index_convention_with_http_info(upsert_index_convention_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_index_convention_with_http_info(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(..., description="The Index Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_index_convention_with_http_info(self, upsert_index_convention_request : Annotated[UpsertIndexConventionRequest, Field(description="The Index Conventions to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[BETA] UpsertIndexConvention: Upsert a set of Index Convention. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert Index Convention in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Index Convention or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501

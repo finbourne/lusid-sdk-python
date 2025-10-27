@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.instrument_event_instruction import InstrumentEventInstruction
 
@@ -27,8 +29,8 @@ class InstrumentEventInstructionsResponse(BaseModel):
     """
     The collection of successfully upserted instructions, and the collection of failures for those instructions that could not be upserted  # noqa: E501
     """
-    values: Optional[Dict[str, InstrumentEventInstruction]] = Field(None, description="The collection of successfully upserted instructions")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The collection of error information for instructions that could not be upserted")
+    values: Optional[Dict[str, InstrumentEventInstruction]] = Field(default=None, description="The collection of successfully upserted instructions")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The collection of error information for instructions that could not be upserted")
     __properties = ["values", "failed"]
 
     class Config:
@@ -113,3 +115,5 @@ class InstrumentEventInstructionsResponse(BaseModel):
             else None
         })
         return _obj
+
+InstrumentEventInstructionsResponse.update_forward_refs()

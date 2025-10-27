@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_reconciliation_request import TransactionReconciliationRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 left_portfolio_id: ResourceId = # Replace with your value
 right_portfolio_id: ResourceId = # Replace with your value
 mapping_id: Optional[ResourceId] = # Replace with your value
 from_transaction_date: datetime = # Replace with your value
 to_transaction_date: datetime = # Replace with your value
 as_at: Optional[datetime] = # Replace with your value
-property_keys: Optional[conlist(StrictStr)] = # Replace with your value
+property_keys: Optional[List[StrictStr]] = # Replace with your value
 transaction_reconciliation_request_instance = TransactionReconciliationRequest(left_portfolio_id=left_portfolio_id, right_portfolio_id=right_portfolio_id, mapping_id=mapping_id, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, property_keys=property_keys)
 
 ```

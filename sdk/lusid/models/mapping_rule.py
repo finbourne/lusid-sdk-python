@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.mapped_string import MappedString
 
 class MappingRule(BaseModel):
@@ -29,10 +31,10 @@ class MappingRule(BaseModel):
     left:  Optional[StrictStr] = Field(None,alias="left", description="The name of the field/property in the left resource (e.g. a transaction)") 
     right:  Optional[StrictStr] = Field(None,alias="right", description="The name of the field/property in the right resource (e.g. a transaction)") 
     comparison_type:  Optional[StrictStr] = Field(None,alias="comparisonType", description="The type of comparison to be performed") 
-    comparison_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="comparisonValue", description="The (optional) value used with ComparisonType.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="A factor used to influence the importance of this item.")
-    mapped_strings: Optional[conlist(MappedString)] = Field(None, alias="mappedStrings", description="The (optional) value used to map string values.")
-    is_case_sensitive: Optional[StrictBool] = Field(None, alias="isCaseSensitive", description="Should string comparisons take case into account, defaults to `false`.")
+    comparison_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The (optional) value used with ComparisonType.", alias="comparisonValue")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="A factor used to influence the importance of this item.")
+    mapped_strings: Optional[List[MappedString]] = Field(default=None, description="The (optional) value used to map string values.", alias="mappedStrings")
+    is_case_sensitive: Optional[StrictBool] = Field(default=None, description="Should string comparisons take case into account, defaults to `false`.", alias="isCaseSensitive")
     __properties = ["left", "right", "comparisonType", "comparisonValue", "weight", "mappedStrings", "isCaseSensitive"]
 
     class Config:
@@ -120,3 +122,5 @@ class MappingRule(BaseModel):
             "is_case_sensitive": obj.get("isCaseSensitive")
         })
         return _obj
+
+MappingRule.update_forward_refs()

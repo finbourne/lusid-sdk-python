@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.resource_list_of_order import ResourceListOfOrder
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(Order) = # Replace with your value
+values: List[Order]
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 next_page: Optional[StrictStr] = "example_next_page"
 previous_page: Optional[StrictStr] = "example_previous_page"
 resource_list_of_order_instance = ResourceListOfOrder(values=values, href=href, links=links, next_page=next_page, previous_page=previous_page)

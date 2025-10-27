@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.link import Link
@@ -34,15 +36,15 @@ class CustomEntityResponse(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of custom entity this is.") 
-    version: Version = Field(...)
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
+    version: Version
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the custom entity.") 
-    identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
-    fields: conlist(CustomEntityField) = Field(..., description="The fields that decorate the custom entity.")
-    relationships: conlist(Relationship) = Field(..., description="A set of relationships associated to the custom entity.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties that decorate the custom entity.")
-    links: Optional[conlist(Link)] = None
+    identifiers: List[CustomEntityId] = Field(description="The identifiers the custom entity will be upserted with.")
+    fields: List[CustomEntityField] = Field(description="The fields that decorate the custom entity.")
+    relationships: List[Relationship] = Field(description="A set of relationships associated to the custom entity.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties that decorate the custom entity.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "entityType", "version", "stagedModifications", "displayName", "description", "identifiers", "fields", "relationships", "properties", "links"]
 
     class Config:
@@ -168,3 +170,5 @@ class CustomEntityResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CustomEntityResponse.update_forward_refs()

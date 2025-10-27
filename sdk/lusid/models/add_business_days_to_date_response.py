@@ -17,15 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class AddBusinessDaysToDateResponse(BaseModel):
     """
     The date that is the requested number of business days after the given start date  # noqa: E501
     """
-    value: datetime = Field(...)
+    value: datetime
     __properties = ["value"]
 
     class Config:
@@ -75,3 +77,5 @@ class AddBusinessDaysToDateResponse(BaseModel):
             "value": obj.get("value")
         })
         return _obj
+
+AddBusinessDaysToDateResponse.update_forward_refs()

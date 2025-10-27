@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
 from lusid.models.resource_id import ResourceId
 
@@ -27,14 +29,14 @@ class ComplianceSummaryRuleResult(BaseModel):
     """
     ComplianceSummaryRuleResult
     """
-    rule_id: ResourceId = Field(..., alias="ruleId")
-    template_id: ResourceId = Field(..., alias="templateId")
+    rule_id: ResourceId = Field(alias="ruleId")
+    template_id: ResourceId = Field(alias="templateId")
     variation:  StrictStr = Field(...,alias="variation") 
     rule_status:  StrictStr = Field(...,alias="ruleStatus") 
-    affected_portfolios: conlist(ResourceId) = Field(..., alias="affectedPortfolios")
-    affected_orders: conlist(ResourceId) = Field(..., alias="affectedOrders")
-    parameters_used: Dict[str, StrictStr] = Field(..., alias="parametersUsed")
-    rule_breakdown: conlist(ComplianceRuleBreakdown) = Field(..., alias="ruleBreakdown")
+    affected_portfolios: List[ResourceId] = Field(alias="affectedPortfolios")
+    affected_orders: List[ResourceId] = Field(alias="affectedOrders")
+    parameters_used: Dict[str, Optional[StrictStr]] = Field(alias="parametersUsed")
+    rule_breakdown: List[ComplianceRuleBreakdown] = Field(alias="ruleBreakdown")
     __properties = ["ruleId", "templateId", "variation", "ruleStatus", "affectedPortfolios", "affectedOrders", "parametersUsed", "ruleBreakdown"]
 
     class Config:
@@ -118,3 +120,5 @@ class ComplianceSummaryRuleResult(BaseModel):
             "rule_breakdown": [ComplianceRuleBreakdown.from_dict(_item) for _item in obj.get("ruleBreakdown")] if obj.get("ruleBreakdown") is not None else None
         })
         return _obj
+
+ComplianceSummaryRuleResult.update_forward_refs()

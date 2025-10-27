@@ -18,8 +18,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.reconciliation_break import ReconciliationBreak
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 instrument_uid: StrictStr = "example_instrument_uid"
@@ -30,7 +32,7 @@ difference_units: Union[StrictFloat, StrictInt] = # Replace with your value
 left_cost: CurrencyAndAmount = # Replace with your value
 right_cost: CurrencyAndAmount = # Replace with your value
 difference_cost: CurrencyAndAmount = # Replace with your value
-instrument_properties: conlist(ModelProperty) = # Replace with your value
+instrument_properties: List[ModelProperty] = # Replace with your value
 reconciliation_break_instance = ReconciliationBreak(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, left_units=left_units, right_units=right_units, difference_units=difference_units, left_cost=left_cost, right_cost=right_cost, difference_cost=difference_cost, instrument_properties=instrument_properties)
 
 ```

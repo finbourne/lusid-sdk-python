@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.delete_custodian_accounts_response import DeleteCustodianAccountsResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 version: Optional[Version] = None
-custodian_account_ids: Optional[conlist(ResourceId)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+custodian_account_ids: Optional[List[ResourceId]] = # Replace with your value
+links: Optional[List[Link]] = None
 delete_custodian_accounts_response_instance = DeleteCustodianAccountsResponse(version=version, custodian_account_ids=custodian_account_ids, links=links)
 
 ```

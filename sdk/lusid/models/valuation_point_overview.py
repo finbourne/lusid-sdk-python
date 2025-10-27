@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 
@@ -29,15 +31,15 @@ class ValuationPointOverview(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="The code for the Valuation Point.") 
-    effective_from: datetime = Field(..., alias="effectiveFrom", description="The effective time of the last Valuation Point.")
-    effective_to: datetime = Field(..., alias="effectiveTo", description="The effective time of the current Valuation Point.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the Valuation Point. Defaults to latest.")
+    effective_from: datetime = Field(description="The effective time of the last Valuation Point.", alias="effectiveFrom")
+    effective_to: datetime = Field(description="The effective time of the current Valuation Point.", alias="effectiveTo")
+    query_as_at: Optional[datetime] = Field(default=None, description="The query time of the Valuation Point. Defaults to latest.", alias="queryAsAt")
     type:  StrictStr = Field(...,alias="type", description="The type of the diary entry. This is 'ValuationPoint'.") 
     status:  StrictStr = Field(...,alias="status", description="The status of the Valuation Point. Can be 'Estimate', 'Candidate' or 'Final'.") 
-    gav: Union[StrictFloat, StrictInt] = Field(..., description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
-    nav: Union[StrictFloat, StrictInt] = Field(..., description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")
-    links: Optional[conlist(Link)] = None
+    gav: Union[StrictFloat, StrictInt] = Field(description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
+    nav: Union[StrictFloat, StrictInt] = Field(description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Fee properties. These will be from the 'Fee' domain.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "diaryEntryCode", "effectiveFrom", "effectiveTo", "queryAsAt", "type", "status", "gav", "nav", "properties", "links"]
 
     class Config:
@@ -131,3 +133,5 @@ class ValuationPointOverview(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ValuationPointOverview.update_forward_refs()

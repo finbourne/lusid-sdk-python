@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.workspace_item import WorkspaceItem
 
 class ItemAndWorkspace(BaseModel):
@@ -27,7 +29,7 @@ class ItemAndWorkspace(BaseModel):
     An item plus its containing workspace name.  # noqa: E501
     """
     workspace_name:  StrictStr = Field(...,alias="workspaceName", description="A workspace's name.") 
-    workspace_item: WorkspaceItem = Field(..., alias="workspaceItem")
+    workspace_item: WorkspaceItem = Field(alias="workspaceItem")
     __properties = ["workspaceName", "workspaceItem"]
 
     class Config:
@@ -81,3 +83,5 @@ class ItemAndWorkspace(BaseModel):
             "workspace_item": WorkspaceItem.from_dict(obj.get("workspaceItem")) if obj.get("workspaceItem") is not None else None
         })
         return _obj
+
+ItemAndWorkspace.update_forward_refs()

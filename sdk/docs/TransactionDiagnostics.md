@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 transaction_display_name: StrictStr = "example_transaction_display_name"
-error_details: conlist(StrictStr) = # Replace with your value
+error_details: List[StrictStr] = # Replace with your value
 transaction_diagnostics_instance = TransactionDiagnostics(transaction_display_name=transaction_display_name, error_details=error_details)
 
 ```

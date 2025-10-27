@@ -17,25 +17,27 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 
 class Version(BaseModel):
     """
     The version metadata.  # noqa: E501
     """
-    effective_from: datetime = Field(..., alias="effectiveFrom", description="The effective datetime at which this version became valid. Only applies when a single entity is being interacted with.")
-    as_at_date: datetime = Field(..., alias="asAtDate", description="The asAt datetime at which the data was committed to LUSID.")
-    as_at_created: Optional[datetime] = Field(None, alias="asAtCreated", description="The asAt datetime at which the entity was first created in LUSID.")
+    effective_from: datetime = Field(description="The effective datetime at which this version became valid. Only applies when a single entity is being interacted with.", alias="effectiveFrom")
+    as_at_date: datetime = Field(description="The asAt datetime at which the data was committed to LUSID.", alias="asAtDate")
+    as_at_created: Optional[datetime] = Field(default=None, description="The asAt datetime at which the entity was first created in LUSID.", alias="asAtCreated")
     user_id_created:  Optional[StrictStr] = Field(None,alias="userIdCreated", description="The unique id of the user who created the entity.") 
     request_id_created:  Optional[StrictStr] = Field(None,alias="requestIdCreated", description="The unique request id of the command that created the entity.") 
     reason_created:  Optional[StrictStr] = Field(None,alias="reasonCreated", description="The reason for an entity creation.") 
-    as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The asAt datetime at which the entity (including its properties) was last updated in LUSID.")
+    as_at_modified: Optional[datetime] = Field(default=None, description="The asAt datetime at which the entity (including its properties) was last updated in LUSID.", alias="asAtModified")
     user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique id of the user who last updated the entity (including its properties) in LUSID.") 
     request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique request id of the command that last updated the entity (including its properties) in LUSID.") 
     reason_modified:  Optional[StrictStr] = Field(None,alias="reasonModified", description="The reason for an entity modification.") 
-    as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
+    as_at_version_number: Optional[StrictInt] = Field(default=None, description="The integer version number for the entity (the entity was created at version 1)", alias="asAtVersionNumber")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique id of the entity") 
     staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The ID of the staged change that resulted in the most recent modification.") 
     __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "reasonCreated", "asAtModified", "userIdModified", "requestIdModified", "reasonModified", "asAtVersionNumber", "entityUniqueId", "stagedModificationIdModified"]
@@ -154,3 +156,5 @@ class Version(BaseModel):
             "staged_modification_id_modified": obj.get("stagedModificationIdModified")
         })
         return _obj
+
+Version.update_forward_refs()

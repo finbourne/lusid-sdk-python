@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.package import Package
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
-order_ids: conlist(ResourceId) = # Replace with your value
-order_instruction_ids: conlist(ResourceId) = # Replace with your value
+id: ResourceId
+order_ids: List[ResourceId] = # Replace with your value
+order_instruction_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 package_instance = Package(id=id, order_ids=order_ids, order_instruction_ids=order_instruction_ids, properties=properties, version=version, data_model_membership=data_model_membership, links=links)
 
 ```

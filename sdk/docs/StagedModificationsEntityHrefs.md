@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.staged_modifications_entity_hrefs import StagedModificationsEntityHrefs
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 when_staged: Optional[StrictStr] = "example_when_staged"
 preview: Optional[StrictStr] = "example_preview"
 latest: Optional[StrictStr] = "example_latest"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 staged_modifications_entity_hrefs_instance = StagedModificationsEntityHrefs(when_staged=when_staged, preview=preview, latest=latest, links=links)
 
 ```

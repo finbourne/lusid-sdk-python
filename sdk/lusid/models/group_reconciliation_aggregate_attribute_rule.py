@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_aggregate_comparison_rule_operand import GroupReconciliationAggregateComparisonRuleOperand
 from lusid.models.group_reconciliation_comparison_rule_tolerance import GroupReconciliationComparisonRuleTolerance
 
@@ -27,8 +29,8 @@ class GroupReconciliationAggregateAttributeRule(BaseModel):
     """
     GroupReconciliationAggregateAttributeRule
     """
-    left: GroupReconciliationAggregateComparisonRuleOperand = Field(...)
-    right: GroupReconciliationAggregateComparisonRuleOperand = Field(...)
+    left: GroupReconciliationAggregateComparisonRuleOperand
+    right: GroupReconciliationAggregateComparisonRuleOperand
     tolerance: Optional[GroupReconciliationComparisonRuleTolerance] = None
     __properties = ["left", "right", "tolerance"]
 
@@ -90,3 +92,5 @@ class GroupReconciliationAggregateAttributeRule(BaseModel):
             "tolerance": GroupReconciliationComparisonRuleTolerance.from_dict(obj.get("tolerance")) if obj.get("tolerance") is not None else None
         })
         return _obj
+
+GroupReconciliationAggregateAttributeRule.update_forward_refs()

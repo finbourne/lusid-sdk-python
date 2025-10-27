@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class CustomEntityId(BaseModel):
     """
@@ -28,8 +30,8 @@ class CustomEntityId(BaseModel):
     identifier_scope:  StrictStr = Field(...,alias="identifierScope", description="The scope the identifier resides in (the scope of the identifier property definition).") 
     identifier_type:  StrictStr = Field(...,alias="identifierType", description="What the identifier represents (the code of the identifier property definition).") 
     identifier_value:  StrictStr = Field(...,alias="identifierValue", description="The value of the identifier for this entity.") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the identifier is valid.")
-    effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the identifier is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the identifier.")
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime from which the identifier is valid.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The effective datetime until which the identifier is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the identifier.", alias="effectiveUntil")
     __properties = ["identifierScope", "identifierType", "identifierValue", "effectiveFrom", "effectiveUntil"]
 
     class Config:
@@ -93,3 +95,5 @@ class CustomEntityId(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+CustomEntityId.update_forward_refs()

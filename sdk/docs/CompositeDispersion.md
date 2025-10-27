@@ -16,17 +16,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.composite_dispersion import CompositeDispersion
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_at: datetime = # Replace with your value
 dispersion_calculation: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 variance: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 first_quartile: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 third_quartile: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 range: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-constituents_in_scope: Optional[conlist(ResourceId)] = # Replace with your value
-constituents_excluded: Optional[conlist(ResourceId)] = # Replace with your value
+constituents_in_scope: Optional[List[ResourceId]] = # Replace with your value
+constituents_excluded: Optional[List[ResourceId]] = # Replace with your value
 composite_dispersion_instance = CompositeDispersion(effective_at=effective_at, dispersion_calculation=dispersion_calculation, variance=variance, first_quartile=first_quartile, third_quartile=third_quartile, range=range, constituents_in_scope=constituents_in_scope, constituents_excluded=constituents_excluded)
 
 ```

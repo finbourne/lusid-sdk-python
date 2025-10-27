@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 from lusid.models.tax_rule import TaxRule
 
@@ -27,11 +29,11 @@ class CreateTaxRuleSetRequest(BaseModel):
     """
     CreateTaxRuleSetRequest
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="") 
     description:  StrictStr = Field(...,alias="description", description="") 
     output_property_key:  StrictStr = Field(...,alias="outputPropertyKey", description="") 
-    rules: conlist(TaxRule) = Field(...)
+    rules: List[TaxRule]
     __properties = ["id", "displayName", "description", "outputPropertyKey", "rules"]
 
     class Config:
@@ -95,3 +97,5 @@ class CreateTaxRuleSetRequest(BaseModel):
             "rules": [TaxRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None
         })
         return _obj
+
+CreateTaxRuleSetRequest.update_forward_refs()

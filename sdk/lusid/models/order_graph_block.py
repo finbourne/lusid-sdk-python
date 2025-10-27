@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.block import Block
 from lusid.models.order_graph_block_allocation_synopsis import OrderGraphBlockAllocationSynopsis
 from lusid.models.order_graph_block_execution_synopsis import OrderGraphBlockExecutionSynopsis
@@ -31,12 +33,12 @@ class OrderGraphBlock(BaseModel):
     """
     OrderGraphBlock
     """
-    block: Block = Field(...)
-    ordered: OrderGraphBlockOrderSynopsis = Field(...)
-    placed: OrderGraphBlockPlacementSynopsis = Field(...)
-    executed: OrderGraphBlockExecutionSynopsis = Field(...)
-    allocated: OrderGraphBlockAllocationSynopsis = Field(...)
-    booked: OrderGraphBlockTransactionSynopsis = Field(...)
+    block: Block
+    ordered: OrderGraphBlockOrderSynopsis
+    placed: OrderGraphBlockPlacementSynopsis
+    executed: OrderGraphBlockExecutionSynopsis
+    allocated: OrderGraphBlockAllocationSynopsis
+    booked: OrderGraphBlockTransactionSynopsis
     derived_state:  StrictStr = Field(...,alias="derivedState", description="A simple description of the overall state of a block.") 
     derived_compliance_state:  StrictStr = Field(...,alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'.") 
     derived_approval_state:  StrictStr = Field(...,alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Possible values are 'Pending', 'Approved' and 'Rejected'.") 
@@ -115,3 +117,5 @@ class OrderGraphBlock(BaseModel):
             "derived_approval_state": obj.get("derivedApprovalState")
         })
         return _obj
+
+OrderGraphBlock.update_forward_refs()

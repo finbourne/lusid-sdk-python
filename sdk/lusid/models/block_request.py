@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -28,18 +30,18 @@ class BlockRequest(BaseModel):
     """
     A request to create or update an Order.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    order_ids: conlist(ResourceId) = Field(..., alias="orderIds", description="The related order ids.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this block.")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The total quantity of given instrument ordered.")
+    id: ResourceId
+    order_ids: List[ResourceId] = Field(description="The related order ids.", alias="orderIds")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this block.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The total quantity of given instrument ordered.")
     side:  StrictStr = Field(...,alias="side", description="The client's representation of the block's side (buy, sell, short, etc)") 
     type:  StrictStr = Field(...,alias="type", description="The block order's type (examples: Limit, Market, ...)") 
     time_in_force:  StrictStr = Field(...,alias="timeInForce", description="The block orders' time in force (examples: Day, GoodTilCancel, ...)") 
-    created_date: datetime = Field(..., alias="createdDate", description="The date on which the block was made")
-    limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
-    stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
-    is_swept: Optional[StrictBool] = Field(None, alias="isSwept", description="Swept blocks are considered no longer of active interest, and no longer take part in various order management processes")
+    created_date: datetime = Field(description="The date on which the block was made", alias="createdDate")
+    limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
+    stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
+    is_swept: Optional[StrictBool] = Field(default=None, description="Swept blocks are considered no longer of active interest, and no longer take part in various order management processes", alias="isSwept")
     __properties = ["id", "orderIds", "properties", "instrumentIdentifiers", "quantity", "side", "type", "timeInForce", "createdDate", "limitPrice", "stopPrice", "isSwept"]
 
     class Config:
@@ -133,3 +135,5 @@ class BlockRequest(BaseModel):
             "is_swept": obj.get("isSwept")
         })
         return _obj
+
+BlockRequest.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
@@ -33,11 +35,11 @@ class Person(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Person") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     lusid_person_id:  Optional[StrictStr] = Field(None,alias="lusidPersonId", description="The unique LUSID Person Identifier of the Person.") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Person.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
-    relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Person.")
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Unique client-defined identifiers of the Person.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
+    relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the Person.")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["displayName", "description", "href", "lusidPersonId", "identifiers", "properties", "relationships", "version", "links"]
 
     class Config:
@@ -176,3 +178,5 @@ class Person(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Person.update_forward_refs()

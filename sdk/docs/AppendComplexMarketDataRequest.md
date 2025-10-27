@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.append_complex_market_data_request import AppendComplexMarketDataRequest
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 market_data_id: ComplexMarketDataId = # Replace with your value
 append_market_data: AppendMarketData = # Replace with your value

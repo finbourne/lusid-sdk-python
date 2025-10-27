@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_type import TransactionType
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-aliases: conlist(TransactionTypeAlias) = # Replace with your value
-movements: conlist(TransactionTypeMovement) = # Replace with your value
+aliases: List[TransactionTypeAlias] = # Replace with your value
+movements: List[TransactionTypeMovement] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-calculations: Optional[conlist(TransactionTypeCalculation)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+calculations: Optional[List[TransactionTypeCalculation]] = # Replace with your value
+links: Optional[List[Link]] = None
 transaction_type_instance = TransactionType(aliases=aliases, movements=movements, properties=properties, calculations=calculations, links=links)
 
 ```

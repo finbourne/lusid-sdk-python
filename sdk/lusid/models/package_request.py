@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -27,10 +29,10 @@ class PackageRequest(BaseModel):
     """
     A request to create or update a Package.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    order_ids: conlist(ResourceId) = Field(..., alias="orderIds", description="Related order ids.")
-    order_instruction_ids: conlist(ResourceId) = Field(..., alias="orderInstructionIds", description="Related order instruction ids.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
+    id: ResourceId
+    order_ids: List[ResourceId] = Field(description="Related order ids.", alias="orderIds")
+    order_instruction_ids: List[ResourceId] = Field(description="Related order instruction ids.", alias="orderInstructionIds")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
     __properties = ["id", "orderIds", "orderInstructionIds", "properties"]
 
     class Config:
@@ -117,3 +119,5 @@ class PackageRequest(BaseModel):
             else None
         })
         return _obj
+
+PackageRequest.update_forward_refs()

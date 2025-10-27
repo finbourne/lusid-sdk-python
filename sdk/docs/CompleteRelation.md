@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **href** | **str** |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **relation_definition_id** | [**ResourceId**](ResourceId.md) |  | 
-**source_entity_id** | **Dict[str, str]** |  | 
-**target_entity_id** | **Dict[str, str]** |  | 
+**source_entity_id** | **Dict[str, Optional[str]]** |  | 
+**target_entity_id** | **Dict[str, Optional[str]]** |  | 
 **outward_description** | **str** |  | 
 **inward_description** | **str** |  | 
 **effective_from** | **datetime** |  | [optional] 
@@ -16,14 +16,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.complete_relation import CompleteRelation
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 relation_definition_id: ResourceId = # Replace with your value
-source_entity_id: Dict[str, StrictStr] = # Replace with your value
-target_entity_id: Dict[str, StrictStr] = # Replace with your value
+source_entity_id: Dict[str, Optional[StrictStr]] = # Replace with your value
+target_entity_id: Dict[str, Optional[StrictStr]] = # Replace with your value
 outward_description: StrictStr = "example_outward_description"
 inward_description: StrictStr = "example_inward_description"
 effective_from: Optional[datetime] = # Replace with your value

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
 from lusid.models.transaction_settlement_movement import TransactionSettlementMovement
 
@@ -30,15 +32,15 @@ class TransactionSettlementBucket(BaseModel):
     settlement_category:  StrictStr = Field(...,alias="settlementCategory", description="A category representing the set of movement types that this instruction applies to.") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the instrument being settled.") 
     instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The Scope of the instrument being settled.") 
-    contractual_settlement_date: Optional[datetime] = Field(None, alias="contractualSettlementDate", description="The contractual settlement date. Used to match the instruction to the correct settlement bucket.")
-    contracted_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="contractedUnits", description="The contracted units.")
-    settled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="settledUnits", description="The settled units.")
-    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unsettledUnits", description="The unsettled units.")
-    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="overdueUnits", description="The overdue units.")
+    contractual_settlement_date: Optional[datetime] = Field(default=None, description="The contractual settlement date. Used to match the instruction to the correct settlement bucket.", alias="contractualSettlementDate")
+    contracted_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The contracted units.", alias="contractedUnits")
+    settled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The settled units.", alias="settledUnits")
+    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The unsettled units.", alias="unsettledUnits")
+    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The overdue units.", alias="overdueUnits")
     configured_settlement:  Optional[StrictStr] = Field(None,alias="configuredSettlement", description="The method of settlement for the settlement bucket, as defined in the portfolio's SettlementConfiguration") 
     status:  StrictStr = Field(...,alias="status", description="The Status of the settlement bucket - 'Settled', 'Part Settled' or 'Unsettled'.") 
-    settlement_instructions: Optional[conlist(TransactionSettlementInstruction)] = Field(None, alias="settlementInstructions", description="The settlement instructions received for this settlement bucket.")
-    movements: Optional[conlist(TransactionSettlementMovement)] = Field(None, description="The movements for the settlement bucket.")
+    settlement_instructions: Optional[List[TransactionSettlementInstruction]] = Field(default=None, description="The settlement instructions received for this settlement bucket.", alias="settlementInstructions")
+    movements: Optional[List[TransactionSettlementMovement]] = Field(default=None, description="The movements for the settlement bucket.")
     __properties = ["settlementCategory", "lusidInstrumentId", "instrumentScope", "contractualSettlementDate", "contractedUnits", "settledUnits", "unsettledUnits", "overdueUnits", "configuredSettlement", "status", "settlementInstructions", "movements"]
 
     class Config:
@@ -133,3 +135,5 @@ class TransactionSettlementBucket(BaseModel):
             "movements": [TransactionSettlementMovement.from_dict(_item) for _item in obj.get("movements")] if obj.get("movements") is not None else None
         })
         return _obj
+
+TransactionSettlementBucket.update_forward_refs()

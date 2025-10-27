@@ -22,16 +22,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.option_exercise_physical_event import OptionExercisePhysicalEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 exercise_date: Optional[datetime] = # Replace with your value
 delivery_date: Optional[datetime] = # Replace with your value
 exercise_type: StrictStr = "example_exercise_type"
 maturity_date: Optional[datetime] = # Replace with your value
 moneyness: Optional[StrictStr] = "example_moneyness"
 new_instrument: NewInstrument = # Replace with your value
-option_exercise_elections: Optional[conlist(OptionExerciseElection)] = # Replace with your value
+option_exercise_elections: Optional[List[OptionExerciseElection]] = # Replace with your value
 option_type: StrictStr = "example_option_type"
 start_date: Optional[datetime] = # Replace with your value
 strike_currency: StrictStr = "example_strike_currency"

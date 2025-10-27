@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.corporate_action_transition import CorporateActionTransition
 
 class CorporateAction(BaseModel):
@@ -28,11 +30,11 @@ class CorporateAction(BaseModel):
     """
     corporate_action_code:  StrictStr = Field(...,alias="corporateActionCode", description="The unique identifier of this corporate action") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action.") 
-    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="The announcement date of the corporate action")
-    ex_date: Optional[datetime] = Field(None, alias="exDate", description="The ex date of the corporate action")
-    record_date: Optional[datetime] = Field(None, alias="recordDate", description="The record date of the corporate action")
-    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The payment date of the corporate action")
-    transitions: Optional[conlist(CorporateActionTransition)] = Field(None, description="The transitions that result from this corporate action")
+    announcement_date: Optional[datetime] = Field(default=None, description="The announcement date of the corporate action", alias="announcementDate")
+    ex_date: Optional[datetime] = Field(default=None, description="The ex date of the corporate action", alias="exDate")
+    record_date: Optional[datetime] = Field(default=None, description="The record date of the corporate action", alias="recordDate")
+    payment_date: Optional[datetime] = Field(default=None, description="The payment date of the corporate action", alias="paymentDate")
+    transitions: Optional[List[CorporateActionTransition]] = Field(default=None, description="The transitions that result from this corporate action")
     __properties = ["corporateActionCode", "description", "announcementDate", "exDate", "recordDate", "paymentDate", "transitions"]
 
     class Config:
@@ -105,3 +107,5 @@ class CorporateAction(BaseModel):
             "transitions": [CorporateActionTransition.from_dict(_item) for _item in obj.get("transitions")] if obj.get("transitions") is not None else None
         })
         return _obj
+
+CorporateAction.update_forward_refs()

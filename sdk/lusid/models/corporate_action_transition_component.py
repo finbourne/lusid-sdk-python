@@ -18,18 +18,20 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CorporateActionTransitionComponent(BaseModel):
     """
     A single transition component, when grouped with other components a corporate action transition is formed.  # noqa: E501
     """
     instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The scope in which the instrument lies.") 
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
     instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
-    units_factor: Union[StrictFloat, StrictInt] = Field(..., alias="unitsFactor", description="The factor to scale units by")
-    cost_factor: Union[StrictFloat, StrictInt] = Field(..., alias="costFactor", description="The factor to scale cost by")
+    units_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale units by", alias="unitsFactor")
+    cost_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale cost by", alias="costFactor")
     __properties = ["instrumentScope", "instrumentIdentifiers", "instrumentUid", "unitsFactor", "costFactor"]
 
     class Config:
@@ -83,3 +85,5 @@ class CorporateActionTransitionComponent(BaseModel):
             "cost_factor": obj.get("costFactor")
         })
         return _obj
+
+CorporateActionTransitionComponent.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.fx_conventions import FxConventions
 from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.schedule import Schedule
@@ -28,10 +30,10 @@ class FxLinkedNotionalSchedule(Schedule):
     """
     Schedule for notional changes based on the change in FX rate.  Used in the representation of a resettable cross currency interest rate swap.  # noqa: E501
     """
-    fx_conventions: FxConventions = Field(..., alias="fxConventions")
+    fx_conventions: FxConventions = Field(alias="fxConventions")
     varying_notional_currency:  StrictStr = Field(...,alias="varyingNotionalCurrency", description="The currency of the varying notional amount.") 
-    varying_notional_fixing_dates: RelativeDateOffset = Field(..., alias="varyingNotionalFixingDates")
-    varying_notional_interim_exchange_payment_dates: Optional[RelativeDateOffset] = Field(None, alias="varyingNotionalInterimExchangePaymentDates")
+    varying_notional_fixing_dates: RelativeDateOffset = Field(alias="varyingNotionalFixingDates")
+    varying_notional_interim_exchange_payment_dates: Optional[RelativeDateOffset] = Field(default=None, alias="varyingNotionalInterimExchangePaymentDates")
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "fxConventions", "varyingNotionalCurrency", "varyingNotionalFixingDates", "varyingNotionalInterimExchangePaymentDates"]
@@ -86,14 +88,19 @@ class FxLinkedNotionalSchedule(Schedule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "schedule_type" != "type":
             return value
 
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid'):
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
             raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
         return value
 
@@ -168,3 +175,5 @@ class FxLinkedNotionalSchedule(Schedule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FxLinkedNotionalSchedule.update_forward_refs()

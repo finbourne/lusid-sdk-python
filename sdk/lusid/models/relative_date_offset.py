@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class RelativeDateOffset(BaseModel):
     """
     Defines a date offset which is relative to some anchor date.  # noqa: E501
     """
-    days: StrictInt = Field(..., description="The number of days to add to the anchor date.")
+    days: StrictInt = Field(description="The number of days to add to the anchor date.")
     business_day_convention:  StrictStr = Field(...,alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.    Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].") 
     day_type:  Optional[StrictStr] = Field(None,alias="dayType", description="Indicates if consideration is given to whether a day is a good business day or not when calculating the offset date.    Supported string (enumeration) values are: [Business, Calendar].  Defaults to \"Business\" if not set.") 
     __properties = ["days", "businessDayConvention", "dayType"]
@@ -84,3 +86,5 @@ class RelativeDateOffset(BaseModel):
             "day_type": obj.get("dayType")
         })
         return _obj
+
+RelativeDateOffset.update_forward_refs()

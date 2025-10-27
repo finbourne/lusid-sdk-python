@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.address_key_option_definition import AddressKeyOptionDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: StrictStr = "example_name"
 type: StrictStr = "example_type"
 description: StrictStr = "example_description"
 optional: StrictBool = # Replace with your value
 optional:StrictBool = True
-allowed_value_set: Optional[conlist(StrictStr)] = # Replace with your value
+allowed_value_set: Optional[List[StrictStr]] = # Replace with your value
 default_value: Optional[StrictStr] = "example_default_value"
 address_key_option_definition_instance = AddressKeyOptionDefinition(name=name, type=type, description=description, optional=optional, allowed_value_set=allowed_value_set, default_value=default_value)
 

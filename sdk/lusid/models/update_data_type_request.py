@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.update_unit_request import UpdateUnitRequest
 
 class UpdateDataTypeRequest(BaseModel):
@@ -28,8 +30,8 @@ class UpdateDataTypeRequest(BaseModel):
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the data type.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the data type.") 
-    acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues", description="The acceptable set of values for this data type. Only applies to 'open' value type range.")
-    acceptable_units: Optional[conlist(UpdateUnitRequest)] = Field(None, alias="acceptableUnits", description="The definitions of the acceptable units.")
+    acceptable_values: Optional[List[StrictStr]] = Field(default=None, description="The acceptable set of values for this data type. Only applies to 'open' value type range.", alias="acceptableValues")
+    acceptable_units: Optional[List[UpdateUnitRequest]] = Field(default=None, description="The definitions of the acceptable units.", alias="acceptableUnits")
     __properties = ["displayName", "description", "acceptableValues", "acceptableUnits"]
 
     class Config:
@@ -109,3 +111,5 @@ class UpdateDataTypeRequest(BaseModel):
             "acceptable_units": [UpdateUnitRequest.from_dict(_item) for _item in obj.get("acceptableUnits")] if obj.get("acceptableUnits") is not None else None
         })
         return _obj
+
+UpdateDataTypeRequest.update_forward_refs()

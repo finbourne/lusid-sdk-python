@@ -19,9 +19,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.closed_period import ClosedPeriod
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 closed_period_id: Optional[StrictStr] = "example_closed_period_id"
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
@@ -30,10 +32,10 @@ effective_end: Optional[datetime] = # Replace with your value
 as_at_closed: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
-post_close_activities: Optional[conlist(PostCloseActivity)] = # Replace with your value
+post_close_activities: Optional[List[PostCloseActivity]] = # Replace with your value
 holdings_as_at_closed_override: Optional[datetime] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 closed_period_instance = ClosedPeriod(closed_period_id=closed_period_id, display_name=display_name, description=description, effective_start=effective_start, effective_end=effective_end, as_at_closed=as_at_closed, properties=properties, version=version, post_close_activities=post_close_activities, holdings_as_at_closed_override=holdings_as_at_closed_override, href=href, links=links)
 
 ```

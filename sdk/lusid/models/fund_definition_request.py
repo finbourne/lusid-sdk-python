@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conint, conlist, constr, validator 
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.model_property import ModelProperty
 from lusid.models.nav_type_definition import NavTypeDefinition
@@ -35,16 +37,16 @@ class FundDefinitionRequest(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
     investor_structure:  Optional[StrictStr] = Field(None,alias="investorStructure", description="The Investor structure to be used by the Fund. Supported values are 'NonUnitised', 'Classes' and 'Custom'.") 
-    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.")
-    fund_configuration_id: ResourceId = Field(..., alias="fundConfigurationId")
-    share_class_instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
-    share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
+    portfolio_ids: List[PortfolioEntityId] = Field(description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.", alias="portfolioIds")
+    fund_configuration_id: ResourceId = Field(alias="fundConfigurationId")
+    share_class_instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
+    share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them.", alias="shareClassInstruments")
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
-    inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")
-    decimal_places: Optional[conint(strict=True)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
-    primary_nav_type: NavTypeDefinition = Field(..., alias="primaryNavType")
-    additional_nav_types: Optional[conlist(NavTypeDefinition)] = Field(None, alias="additionalNavTypes", description="The definitions for any additional NAVs on the Fund.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
+    inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
+    decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
+    primary_nav_type: NavTypeDefinition = Field(alias="primaryNavType")
+    additional_nav_types: Optional[List[NavTypeDefinition]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     __properties = ["code", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties"]
 
     class Config:
@@ -187,3 +189,5 @@ class FundDefinitionRequest(BaseModel):
             else None
         })
         return _obj
+
+FundDefinitionRequest.update_forward_refs()

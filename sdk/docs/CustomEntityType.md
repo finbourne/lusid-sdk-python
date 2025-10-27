@@ -16,17 +16,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.custom_entity_type import CustomEntityType
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 entity_type_name: StrictStr = "example_entity_type_name"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 entity_type: StrictStr = "example_entity_type"
-field_schema: conlist(CustomEntityFieldDefinition) = # Replace with your value
-version: Version = # Replace with your value
-links: Optional[conlist(Link)] = None
+field_schema: List[CustomEntityFieldDefinition] = # Replace with your value
+version: Version
+links: Optional[List[Link]] = None
 custom_entity_type_instance = CustomEntityType(href=href, entity_type_name=entity_type_name, display_name=display_name, description=description, entity_type=entity_type, field_schema=field_schema, version=version, links=links)
 
 ```

@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_user_review_remove import GroupReconciliationUserReviewRemove
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 break_code_as_at_added: Optional[datetime] = # Replace with your value
 match_key_as_at_added: Optional[datetime] = # Replace with your value
 comment_text_as_at_added: Optional[datetime] = # Replace with your value

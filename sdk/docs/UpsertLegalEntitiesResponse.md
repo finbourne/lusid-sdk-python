@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_legal_entities_response import UpsertLegalEntitiesResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 values: Optional[Dict[str, LegalEntity]] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 upsert_legal_entities_response_instance = UpsertLegalEntitiesResponse(href=href, values=values, failed=failed, links=links)
 
 ```

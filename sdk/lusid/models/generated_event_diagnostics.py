@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class GeneratedEventDiagnostics(BaseModel):
     """
@@ -28,7 +30,7 @@ class GeneratedEventDiagnostics(BaseModel):
     instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId") 
     type:  StrictStr = Field(...,alias="type") 
     detail:  StrictStr = Field(...,alias="detail") 
-    error_details: conlist(StrictStr) = Field(..., alias="errorDetails")
+    error_details: List[StrictStr] = Field(alias="errorDetails")
     __properties = ["instrumentEventId", "type", "detail", "errorDetails"]
 
     class Config:
@@ -81,3 +83,5 @@ class GeneratedEventDiagnostics(BaseModel):
             "error_details": obj.get("errorDetails")
         })
         return _obj
+
+GeneratedEventDiagnostics.update_forward_refs()

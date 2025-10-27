@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -29,22 +31,22 @@ class PortfolioCashFlow(BaseModel):
     """
     The details for the cashflow for a given portfolio.  # noqa: E501
     """
-    group_by_id: StrictInt = Field(..., alias="groupById", description="The groupBy subHoldings and currency.")
-    sequence_number: StrictInt = Field(..., alias="sequenceNumber", description="Sequence number determining the order of the cash flow records.")
-    effective_date: Optional[datetime] = Field(None, alias="effectiveDate", description="Indicates the date when the cash-flow settles.")
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
+    group_by_id: StrictInt = Field(description="The groupBy subHoldings and currency.", alias="groupById")
+    sequence_number: StrictInt = Field(description="Sequence number determining the order of the cash flow records.", alias="sequenceNumber")
+    effective_date: Optional[datetime] = Field(default=None, description="Indicates the date when the cash-flow settles.", alias="effectiveDate")
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.", alias="subHoldingKeys")
     type:  StrictStr = Field(...,alias="type", description="Indicates the record type (Closed, Open, Activity).") 
     movement_name:  StrictStr = Field(...,alias="movementName", description="Indicates the specific movement of the transaction that generated this cash flow.") 
-    cashflow: CurrencyAndAmount = Field(...)
-    balance: CurrencyAndAmount = Field(...)
-    fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="fxRate", description="Exchange rate between the currency of this cash flow and the reporting currency.")
-    cashflow_reporting_currency: CurrencyAndAmount = Field(..., alias="cashflowReportingCurrency")
-    balance_reporting_currency: CurrencyAndAmount = Field(..., alias="balanceReportingCurrency")
-    translation_gain_loss: CurrencyAndAmount = Field(..., alias="translationGainLoss")
-    cost_basis_reporting_currency: CurrencyAndAmount = Field(..., alias="costBasisReportingCurrency")
+    cashflow: CurrencyAndAmount
+    balance: CurrencyAndAmount
+    fx_rate: Union[StrictFloat, StrictInt] = Field(description="Exchange rate between the currency of this cash flow and the reporting currency.", alias="fxRate")
+    cashflow_reporting_currency: CurrencyAndAmount = Field(alias="cashflowReportingCurrency")
+    balance_reporting_currency: CurrencyAndAmount = Field(alias="balanceReportingCurrency")
+    translation_gain_loss: CurrencyAndAmount = Field(alias="translationGainLoss")
+    cost_basis_reporting_currency: CurrencyAndAmount = Field(alias="costBasisReportingCurrency")
     transaction: Optional[Transaction] = None
-    unrealised_gain_loss_reporting_currency: CurrencyAndAmount = Field(..., alias="unrealisedGainLossReportingCurrency")
-    links: Optional[conlist(Link)] = None
+    unrealised_gain_loss_reporting_currency: CurrencyAndAmount = Field(alias="unrealisedGainLossReportingCurrency")
+    links: Optional[List[Link]] = None
     __properties = ["groupById", "sequenceNumber", "effectiveDate", "subHoldingKeys", "type", "movementName", "cashflow", "balance", "fxRate", "cashflowReportingCurrency", "balanceReportingCurrency", "translationGainLoss", "costBasisReportingCurrency", "transaction", "unrealisedGainLossReportingCurrency", "links"]
 
     class Config:
@@ -162,3 +164,5 @@ class PortfolioCashFlow(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PortfolioCashFlow.update_forward_refs()

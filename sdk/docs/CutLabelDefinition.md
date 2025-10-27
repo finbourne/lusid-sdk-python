@@ -15,8 +15,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cut_label_definition import CutLabelDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: Optional[StrictStr] = "example_code"
 display_name: Optional[StrictStr] = "example_display_name"
@@ -25,7 +27,7 @@ cut_local_time: Optional[CutLocalTime] = # Replace with your value
 time_zone: Optional[StrictStr] = "example_time_zone"
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 cut_label_definition_instance = CutLabelDefinition(code=code, display_name=display_name, description=description, cut_local_time=cut_local_time, time_zone=time_zone, href=href, version=version, links=links)
 
 ```

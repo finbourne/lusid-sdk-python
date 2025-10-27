@@ -18,20 +18,22 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 
 class GroupReconciliationResultStatuses(BaseModel):
     """
     GroupReconciliationResultStatuses
     """
-    count_new: StrictInt = Field(..., alias="countNew", description="The number of comparison results of resultStatus \"New\" with this instanceId and reconciliationType")
-    link_new: Link = Field(..., alias="linkNew")
-    count_confirmed: StrictInt = Field(..., alias="countConfirmed", description="The number of comparison results of resultStatus \"Confirmed\" with this instanceId and reconciliationType")
-    link_confirmed: Link = Field(..., alias="linkConfirmed")
-    count_changed: StrictInt = Field(..., alias="countChanged", description="The number of comparison results of resultStatus \"Changed\" with this instanceId and reconciliationType")
-    link_changed: Link = Field(..., alias="linkChanged")
+    count_new: StrictInt = Field(description="The number of comparison results of resultStatus \"New\" with this instanceId and reconciliationType", alias="countNew")
+    link_new: Link = Field(alias="linkNew")
+    count_confirmed: StrictInt = Field(description="The number of comparison results of resultStatus \"Confirmed\" with this instanceId and reconciliationType", alias="countConfirmed")
+    link_confirmed: Link = Field(alias="linkConfirmed")
+    count_changed: StrictInt = Field(description="The number of comparison results of resultStatus \"Changed\" with this instanceId and reconciliationType", alias="countChanged")
+    link_changed: Link = Field(alias="linkChanged")
     __properties = ["countNew", "linkNew", "countConfirmed", "linkConfirmed", "countChanged", "linkChanged"]
 
     class Config:
@@ -95,3 +97,5 @@ class GroupReconciliationResultStatuses(BaseModel):
             "link_changed": Link.from_dict(obj.get("linkChanged")) if obj.get("linkChanged") is not None else None
         })
         return _obj
+
+GroupReconciliationResultStatuses.update_forward_refs()

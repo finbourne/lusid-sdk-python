@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.book_transactions_request import BookTransactionsRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-allocation_ids: conlist(ResourceId, max_items=5000, min_items=1) = Field(..., alias="allocationIds", description="A collection of Allocation IDs")
+allocation_ids: List[ResourceId] = # Replace with your value
 transaction_properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 book_transactions_request_instance = BookTransactionsRequest(allocation_ids=allocation_ids, transaction_properties=transaction_properties)
 

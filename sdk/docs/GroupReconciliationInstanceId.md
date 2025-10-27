@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_instance_id import GroupReconciliationInstanceId
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instance_id_type: StrictStr = "example_instance_id_type"
 instance_id_value: StrictStr = "example_instance_id_value"

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
 
@@ -27,8 +29,8 @@ class CreateTradeTicketsResponse(BaseModel):
     """
     Batch trade ticket creation response  # noqa: E501
     """
-    values: conlist(LusidTradeTicket) = Field(...)
-    failures: conlist(ErrorDetail) = Field(...)
+    values: List[LusidTradeTicket]
+    failures: List[ErrorDetail]
     __properties = ["values", "failures"]
 
     class Config:
@@ -93,3 +95,5 @@ class CreateTradeTicketsResponse(BaseModel):
             "failures": [ErrorDetail.from_dict(_item) for _item in obj.get("failures")] if obj.get("failures") is not None else None
         })
         return _obj
+
+CreateTradeTicketsResponse.update_forward_refs()

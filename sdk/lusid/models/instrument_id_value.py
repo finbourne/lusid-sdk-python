@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class InstrumentIdValue(BaseModel):
     """
     InstrumentIdValue
     """
     value:  StrictStr = Field(...,alias="value", description="The value of the identifier.") 
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective datetime from which the identifier will be valid. If left unspecified the default value is the beginning of time.")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective datetime from which the identifier will be valid. If left unspecified the default value is the beginning of time.", alias="effectiveAt")
     __properties = ["value", "effectiveAt"]
 
     class Config:
@@ -77,3 +79,5 @@ class InstrumentIdValue(BaseModel):
             "effective_at": obj.get("effectiveAt")
         })
         return _obj
+
+InstrumentIdValue.update_forward_refs()

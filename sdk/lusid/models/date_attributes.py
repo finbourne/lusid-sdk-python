@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class DateAttributes(BaseModel):
     """
     DateAttributes
     """
-    irregular: StrictBool = Field(...)
-    irregular_session: StrictBool = Field(..., alias="irregularSession")
-    new_hours: StrictBool = Field(..., alias="newHours")
+    irregular: StrictBool
+    irregular_session: StrictBool = Field(alias="irregularSession")
+    new_hours: StrictBool = Field(alias="newHours")
     activity:  Optional[StrictStr] = Field(None,alias="activity") 
     first_open:  Optional[StrictStr] = Field(None,alias="firstOpen") 
     last_open:  Optional[StrictStr] = Field(None,alias="lastOpen") 
@@ -114,3 +116,5 @@ class DateAttributes(BaseModel):
             "last_close": obj.get("lastClose")
         })
         return _obj
+
+DateAttributes.update_forward_refs()

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class AggregationOptions(BaseModel):
     """
     Options for controlling the default aspects and behaviour of the aggregation.  # noqa: E501
     """
-    use_ansi_like_syntax: Optional[StrictBool] = Field(None, alias="useAnsiLikeSyntax", description="Should the aggregation behave like ANSI Sql or MySql with respect to a conceptual request which is equivalent to \"select a,sum(a) from results\";  ANSI Sql would report an error if a was not unique where MySql would simply view a,suma(a) as equivalent to firstof(a),sum(a).")
-    allow_partial_entitlement_success: Optional[StrictBool] = Field(None, alias="allowPartialEntitlementSuccess", description="In the case of valuing a portfolio group where some, but not all entitlements fail, should the aggregation return the valuations  applied only to those portfolios where entitlements checks succeeded.")
-    apply_iso4217_rounding: Optional[StrictBool] = Field(None, alias="applyIso4217Rounding", description="Various results that are units of currency might need to be rounded.  This will round according to the ISO4217 standard number of decimal places for a currency.")
+    use_ansi_like_syntax: Optional[StrictBool] = Field(default=None, description="Should the aggregation behave like ANSI Sql or MySql with respect to a conceptual request which is equivalent to \"select a,sum(a) from results\";  ANSI Sql would report an error if a was not unique where MySql would simply view a,suma(a) as equivalent to firstof(a),sum(a).", alias="useAnsiLikeSyntax")
+    allow_partial_entitlement_success: Optional[StrictBool] = Field(default=None, description="In the case of valuing a portfolio group where some, but not all entitlements fail, should the aggregation return the valuations  applied only to those portfolios where entitlements checks succeeded.", alias="allowPartialEntitlementSuccess")
+    apply_iso4217_rounding: Optional[StrictBool] = Field(default=None, description="Various results that are units of currency might need to be rounded.  This will round according to the ISO4217 standard number of decimal places for a currency.", alias="applyIso4217Rounding")
     __properties = ["useAnsiLikeSyntax", "allowPartialEntitlementSuccess", "applyIso4217Rounding"]
 
     class Config:
@@ -79,3 +81,5 @@ class AggregationOptions(BaseModel):
             "apply_iso4217_rounding": obj.get("applyIso4217Rounding")
         })
         return _obj
+
+AggregationOptions.update_forward_refs()

@@ -18,22 +18,24 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class DataModelSummary(BaseModel):
     """
     DataModelSummary
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
     description:  StrictStr = Field(...,alias="description", description="A description for the Custom Data Model.") 
     entity_type:  StrictStr = Field(...,alias="entityType", description="The entity type that the Custom Data Model binds to.") 
     type:  StrictStr = Field(...,alias="type", description="Either Root or Leaf or Intermediate.") 
-    precedence: StrictInt = Field(..., description="Where in the hierarchy this model sits.")
+    precedence: StrictInt = Field(description="Where in the hierarchy this model sits.")
     parent: Optional[ResourceId] = None
-    children: conlist(DataModelSummary) = Field(..., description="Child Custom Data Models that will inherit from this data model.")
+    children: List[DataModelSummary] = Field(description="Child Custom Data Models that will inherit from this data model.")
     __properties = ["id", "displayName", "description", "entityType", "type", "precedence", "parent", "children"]
 
     class Config:
@@ -103,3 +105,5 @@ class DataModelSummary(BaseModel):
             "children": [DataModelSummary.from_dict(_item) for _item in obj.get("children")] if obj.get("children") is not None else None
         })
         return _obj
+
+DataModelSummary.update_forward_refs()

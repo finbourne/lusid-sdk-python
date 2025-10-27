@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.reference_list import ReferenceList
 from lusid.models.resource_id import ResourceId
 
@@ -27,11 +29,11 @@ class ReferenceListRequest(BaseModel):
     """
     ReferenceListRequest
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     name:  StrictStr = Field(...,alias="name", description="The name of the reference list.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the reference list.") 
-    tags: Optional[conlist(StrictStr)] = Field(None, description="The tags associated with the reference list.")
-    reference_list: ReferenceList = Field(..., alias="referenceList")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The tags associated with the reference list.")
+    reference_list: ReferenceList = Field(alias="referenceList")
     __properties = ["id", "name", "description", "tags", "referenceList"]
 
     class Config:
@@ -101,3 +103,5 @@ class ReferenceListRequest(BaseModel):
             "reference_list": ReferenceList.from_dict(obj.get("referenceList")) if obj.get("referenceList") is not None else None
         })
         return _obj
+
+ReferenceListRequest.update_forward_refs()

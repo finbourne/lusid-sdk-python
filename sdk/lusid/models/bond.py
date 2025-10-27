@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.lusid_instrument import LusidInstrument
@@ -31,22 +33,22 @@ class Bond(LusidInstrument):
     """
     LUSID representation of a Vanilla Fixed Rate Bond.  # noqa: E501
     """
-    start_date: datetime = Field(..., alias="startDate", description="The Start date of the bond, this is normally when accrual of the first coupon begins.")
-    maturity_date: datetime = Field(..., alias="maturityDate", description="The Maturity date of the bond, this is when the last coupon accrual period ends.  Note that while most bonds have their last payment on this date there are some cases where the final payment is the next working day.")
+    start_date: datetime = Field(description="The Start date of the bond, this is normally when accrual of the first coupon begins.", alias="startDate")
+    maturity_date: datetime = Field(description="The Maturity date of the bond, this is when the last coupon accrual period ends.  Note that while most bonds have their last payment on this date there are some cases where the final payment is the next working day.", alias="maturityDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions.") 
-    flow_conventions: FlowConventions = Field(..., alias="flowConventions")
-    principal: Union[StrictFloat, StrictInt] = Field(..., description="The face-value or principal for the bond at outset.  This might be reduced through its lifetime in the event of amortisation or similar.")
-    coupon_rate: Union[StrictFloat, StrictInt] = Field(..., alias="couponRate", description="Simple coupon rate.")
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="External market codes and identifiers for the bond, e.g. ISIN.")
-    ex_dividend_days: Optional[StrictInt] = Field(None, alias="exDividendDays", description="Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration.")
-    initial_coupon_date: Optional[datetime] = Field(None, alias="initialCouponDate", description="Optional and to be DEPRECATED. If set, this is the date at which the bond begins to accrue interest. Instead, this information should be entered in the field StartDate.")
-    first_coupon_pay_date: Optional[datetime] = Field(None, alias="firstCouponPayDate", description="The date that the first coupon of the bond is paid. This is required for bonds that have a long first coupon or short first coupon. The first coupon pay date is used  as an anchor to compare with the start date and determine if this is a long/short coupon period.")
+    flow_conventions: FlowConventions = Field(alias="flowConventions")
+    principal: Union[StrictFloat, StrictInt] = Field(description="The face-value or principal for the bond at outset.  This might be reduced through its lifetime in the event of amortisation or similar.")
+    coupon_rate: Union[StrictFloat, StrictInt] = Field(description="Simple coupon rate.", alias="couponRate")
+    identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="External market codes and identifiers for the bond, e.g. ISIN.")
+    ex_dividend_days: Optional[StrictInt] = Field(default=None, description="Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration.", alias="exDividendDays")
+    initial_coupon_date: Optional[datetime] = Field(default=None, description="Optional and to be DEPRECATED. If set, this is the date at which the bond begins to accrue interest. Instead, this information should be entered in the field StartDate.", alias="initialCouponDate")
+    first_coupon_pay_date: Optional[datetime] = Field(default=None, description="The date that the first coupon of the bond is paid. This is required for bonds that have a long first coupon or short first coupon. The first coupon pay date is used  as an anchor to compare with the start date and determine if this is a long/short coupon period.", alias="firstCouponPayDate")
     calculation_type:  Optional[StrictStr] = Field(None,alias="calculationType", description="The calculation type applied to the bond coupon amount. This is required for bonds that have a particular type of computing the period coupon, such as simple compounding,  irregular coupons etc.  The default CalculationType is `Standard`, which returns a coupon amount equal to Principal * Coupon Rate / Coupon Frequency. Coupon Frequency is 12M / Payment Frequency.  Payment Frequency can be 1M, 3M, 6M, 12M etc. So Coupon Frequency can be 12, 4, 2, 1 respectively.    Supported string (enumeration) values are: [Standard, DayCountCoupon, NoCalculationFloater, BrazilFixedCoupon, StandardWithCappedAccruedInterest].") 
-    rounding_conventions: Optional[conlist(RoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding conventions for analytics, if any.")
-    ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
-    original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="originalIssuePrice", description="The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.")
-    trading_conventions: Optional[TradingConventions] = Field(None, alias="tradingConventions")
-    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
+    rounding_conventions: Optional[List[RoundingConvention]] = Field(default=None, description="Rounding conventions for analytics, if any.", alias="roundingConventions")
+    ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(default=None, alias="exDividendConfiguration")
+    original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.", alias="originalIssuePrice")
+    trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "flowConventions", "principal", "couponRate", "identifiers", "exDividendDays", "initialCouponDate", "firstCouponPayDate", "calculationType", "roundingConventions", "exDividendConfiguration", "originalIssuePrice", "tradingConventions", "timeZoneConventions"]
@@ -101,14 +103,19 @@ class Bond(LusidInstrument):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "instrument_type" != "type":
             return value
 
-        if value not in ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo'):
+        if value not in ['QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo']:
             raise ValueError("must be one of enum values ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo')")
         return value
 
@@ -240,3 +247,5 @@ class Bond(LusidInstrument):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+Bond.update_forward_refs()

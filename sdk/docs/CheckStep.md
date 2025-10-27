@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.check_step import CheckStep
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 label: StrictStr = "example_label"
-limit_check_parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
-warning_check_parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+limit_check_parameters: List[ComplianceTemplateParameter] = # Replace with your value
+warning_check_parameters: List[ComplianceTemplateParameter] = # Replace with your value
 compliance_step_type: StrictStr = "example_compliance_step_type"
 check_step_instance = CheckStep(label=label, limit_check_parameters=limit_check_parameters, warning_check_parameters=warning_check_parameters, compliance_step_type=compliance_step_type)
 

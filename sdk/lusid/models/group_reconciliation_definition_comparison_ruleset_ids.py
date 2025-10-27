@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class GroupReconciliationDefinitionComparisonRulesetIds(BaseModel):
     """
     GroupReconciliationDefinitionComparisonRulesetIds
     """
-    transaction_reconciliation: Optional[ResourceId] = Field(None, alias="transactionReconciliation")
-    holding_reconciliation: Optional[ResourceId] = Field(None, alias="holdingReconciliation")
-    valuation_reconciliation: Optional[ResourceId] = Field(None, alias="valuationReconciliation")
+    transaction_reconciliation: Optional[ResourceId] = Field(default=None, alias="transactionReconciliation")
+    holding_reconciliation: Optional[ResourceId] = Field(default=None, alias="holdingReconciliation")
+    valuation_reconciliation: Optional[ResourceId] = Field(default=None, alias="valuationReconciliation")
     __properties = ["transactionReconciliation", "holdingReconciliation", "valuationReconciliation"]
 
     class Config:
@@ -89,3 +91,5 @@ class GroupReconciliationDefinitionComparisonRulesetIds(BaseModel):
             "valuation_reconciliation": ResourceId.from_dict(obj.get("valuationReconciliation")) if obj.get("valuationReconciliation") is not None else None
         })
         return _obj
+
+GroupReconciliationDefinitionComparisonRulesetIds.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.described_address_key import DescribedAddressKey
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.link import Link
@@ -30,10 +32,10 @@ class InstrumentCapabilities(BaseModel):
     """
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The Lusid instrument id for the instrument e.g. 'LUID_00003D4X'.") 
     model:  Optional[StrictStr] = Field(None,alias="model", description="The pricing model e.g. 'Discounting'.") 
-    features: Optional[Dict[str, StrictStr]] = Field(None, description="Features of the instrument describing its optionality, payoff type and more e.g. 'Instrument/Features/Exercise: American', 'Instrument/Features/Product: Option'")
-    supported_addresses: Optional[conlist(DescribedAddressKey)] = Field(None, alias="supportedAddresses", description="Queryable addresses supported by the model, e.g. 'Valuation/Pv', 'Valuation/Accrued'.")
-    economic_dependencies: Optional[conlist(EconomicDependency)] = Field(None, alias="economicDependencies", description="Economic dependencies for the model, e.g. 'Fx:GBP.USD', 'Cash:GBP', 'Rates:GBP.GBPOIS'.")
-    links: Optional[conlist(Link)] = None
+    features: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Features of the instrument describing its optionality, payoff type and more e.g. 'Instrument/Features/Exercise: American', 'Instrument/Features/Product: Option'")
+    supported_addresses: Optional[List[DescribedAddressKey]] = Field(default=None, description="Queryable addresses supported by the model, e.g. 'Valuation/Pv', 'Valuation/Accrued'.", alias="supportedAddresses")
+    economic_dependencies: Optional[List[EconomicDependency]] = Field(default=None, description="Economic dependencies for the model, e.g. 'Fx:GBP.USD', 'Cash:GBP', 'Rates:GBP.GBPOIS'.", alias="economicDependencies")
+    links: Optional[List[Link]] = None
     __properties = ["instrumentId", "model", "features", "supportedAddresses", "economicDependencies", "links"]
 
     class Config:
@@ -139,3 +141,5 @@ class InstrumentCapabilities(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+InstrumentCapabilities.update_forward_refs()

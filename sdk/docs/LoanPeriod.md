@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.loan_period import LoanPeriod
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 payment_date: datetime = # Replace with your value
-notional: Union[StrictFloat, StrictInt] = # Replace with your value
+notional: Union[StrictFloat, StrictInt]
 interest_amount: Union[StrictFloat, StrictInt] = # Replace with your value
 loan_period_instance = LoanPeriod(payment_date=payment_date, notional=notional, interest_amount=interest_amount)
 

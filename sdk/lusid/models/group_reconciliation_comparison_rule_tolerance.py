@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class GroupReconciliationComparisonRuleTolerance(BaseModel):
     """
     GroupReconciliationComparisonRuleTolerance
     """
     type:  StrictStr = Field(...,alias="type", description="The type of tolerance to allow. \"Relative\" | \"Absolute\"") 
-    value: Union[StrictFloat, StrictInt] = Field(..., description="The decimal value of how much tolerance to allow when comparing in relative (i.e percentage) or absolute terms depending on the ToleranceType specified")
+    value: Union[StrictFloat, StrictInt] = Field(description="The decimal value of how much tolerance to allow when comparing in relative (i.e percentage) or absolute terms depending on the ToleranceType specified")
     __properties = ["type", "value"]
 
     class Config:
@@ -77,3 +79,5 @@ class GroupReconciliationComparisonRuleTolerance(BaseModel):
             "value": obj.get("value")
         })
         return _obj
+
+GroupReconciliationComparisonRuleTolerance.update_forward_refs()

@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.data_type_entity import DataTypeEntity
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: StrictStr = "example_href"
 entity_unique_id: StrictStr = "example_entity_unique_id"
 as_at_version_number: Optional[StrictInt] = # Replace with your value
@@ -36,7 +38,7 @@ prevailing_data_type: Optional[DataType] = # Replace with your value
 deleted_data_type: Optional[DataType] = # Replace with your value
 previewed_status: Optional[StrictStr] = "example_previewed_status"
 previewed_data_type: Optional[DataType] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 data_type_entity_instance = DataTypeEntity(href=href, entity_unique_id=entity_unique_id, as_at_version_number=as_at_version_number, status=status, as_at_deleted=as_at_deleted, user_id_deleted=user_id_deleted, request_id_deleted=request_id_deleted, effective_at_created=effective_at_created, prevailing_data_type=prevailing_data_type, deleted_data_type=deleted_data_type, previewed_status=previewed_status, previewed_data_type=previewed_data_type, links=links)
 
 ```

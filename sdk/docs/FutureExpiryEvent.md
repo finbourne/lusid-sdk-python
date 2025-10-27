@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.future_expiry_event import FutureExpiryEvent
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 expiry_date: Optional[datetime] = # Replace with your value
 settlement_currency: StrictStr = "example_settlement_currency"
 notional_amount_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

@@ -17,8 +17,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.movement_settlement_summary import MovementSettlementSummary
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: Optional[StrictStr] = "example_name"
 type: Optional[StrictStr] = "example_type"

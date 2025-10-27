@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.membership import Membership
 from lusid.models.membership_and_status import MembershipAndStatus
 
@@ -27,8 +29,8 @@ class DataModelMembership(BaseModel):
     """
     DataModelMembership
     """
-    membership: conlist(Membership) = Field(..., description="The collection of data models this entity is a member of.")
-    current_model: Optional[MembershipAndStatus] = Field(None, alias="currentModel")
+    membership: List[Membership] = Field(description="The collection of data models this entity is a member of.")
+    current_model: Optional[MembershipAndStatus] = Field(default=None, alias="currentModel")
     __properties = ["membership", "currentModel"]
 
     class Config:
@@ -89,3 +91,5 @@ class DataModelMembership(BaseModel):
             "current_model": MembershipAndStatus.from_dict(obj.get("currentModel")) if obj.get("currentModel") is not None else None
         })
         return _obj
+
+DataModelMembership.update_forward_refs()

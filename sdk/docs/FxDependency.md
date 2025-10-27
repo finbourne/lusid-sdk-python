@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fx_dependency import FxDependency
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 domestic_currency: StrictStr = "example_domestic_currency"
 foreign_currency: StrictStr = "example_foreign_currency"
 var_date: datetime = # Replace with your value

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.check_definition_rule import CheckDefinitionRule
 
 class CheckDefinitionRuleSet(BaseModel):
@@ -30,7 +32,7 @@ class CheckDefinitionRuleSet(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Rule Set.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Rule Set.") 
     rule_set_filter:  Optional[StrictStr] = Field(None,alias="ruleSetFilter", description="A filter for the Rule Set to filter entity instances the rule set applies to.") 
-    rules: Optional[conlist(CheckDefinitionRule)] = Field(None, description="A collection of rules for the Rule Set.")
+    rules: Optional[List[CheckDefinitionRule]] = Field(default=None, description="A collection of rules for the Rule Set.")
     __properties = ["ruleSetKey", "displayName", "description", "ruleSetFilter", "rules"]
 
     class Config:
@@ -116,3 +118,5 @@ class CheckDefinitionRuleSet(BaseModel):
             "rules": [CheckDefinitionRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None
         })
         return _obj
+
+CheckDefinitionRuleSet.update_forward_refs()

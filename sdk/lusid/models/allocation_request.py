@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -28,23 +30,23 @@ class AllocationRequest(BaseModel):
     """
     A request to create or update an Allocation.  # noqa: E501
     """
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this allocation.")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument allocated.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument allocated.")
-    portfolio_id: ResourceId = Field(..., alias="portfolioId")
-    allocated_order_id: ResourceId = Field(..., alias="allocatedOrderId")
-    id: ResourceId = Field(...)
-    placement_ids: Optional[conlist(ResourceId)] = Field(None, alias="placementIds", description="A placement - also known as an order placed in the market - associated with this allocation.")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this allocation.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument allocated.", alias="instrumentIdentifiers")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of given instrument allocated.")
+    portfolio_id: ResourceId = Field(alias="portfolioId")
+    allocated_order_id: ResourceId = Field(alias="allocatedOrderId")
+    id: ResourceId
+    placement_ids: Optional[List[ResourceId]] = Field(default=None, description="A placement - also known as an order placed in the market - associated with this allocation.", alias="placementIds")
     state:  Optional[StrictStr] = Field(None,alias="state", description="The state of this allocation.") 
     side:  Optional[StrictStr] = Field(None,alias="side", description="The side of this allocation (examples: Buy, Sell, ...).") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of order associated with this allocation (examples: Limit, Market, ...).") 
-    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The settlement date for this allocation.")
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date of this allocation.")
+    settlement_date: Optional[datetime] = Field(default=None, description="The settlement date for this allocation.", alias="settlementDate")
+    var_date: Optional[datetime] = Field(default=None, description="The date of this allocation.", alias="date")
     price: Optional[CurrencyAndAmount] = None
     settlement_currency:  Optional[StrictStr] = Field(None,alias="settlementCurrency", description="The settlement currency of this allocation.") 
-    settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="settlementCurrencyFxRate", description="The settlement currency to allocation currency FX rate.")
+    settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The settlement currency to allocation currency FX rate.", alias="settlementCurrencyFxRate")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="The counterparty for this allocation.") 
-    execution_ids: Optional[conlist(ResourceId)] = Field(None, alias="executionIds", description="The executions associated with this allocation")
+    execution_ids: Optional[List[ResourceId]] = Field(default=None, description="The executions associated with this allocation", alias="executionIds")
     __properties = ["properties", "instrumentIdentifiers", "quantity", "portfolioId", "allocatedOrderId", "id", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds"]
 
     class Config:
@@ -198,3 +200,5 @@ class AllocationRequest(BaseModel):
             "execution_ids": [ResourceId.from_dict(_item) for _item in obj.get("executionIds")] if obj.get("executionIds") is not None else None
         })
         return _obj
+
+AllocationRequest.update_forward_refs()

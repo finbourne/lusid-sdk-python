@@ -5,7 +5,7 @@ This request specifies target holdings. i.e. holding data that the  system shoul
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **effective_at** | **str** | The Effective date that the target holding will be adjusted at. | 
-**instrument_identifiers** | **Dict[str, str]** | A set of instrument identifiers that can resolve the holding adjustment to a unique instrument. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | A set of instrument identifiers that can resolve the holding adjustment to a unique instrument. | 
 **sub_holding_keys** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Set of unique transaction properties and associated values to store with the holding adjustment transaction automatically created by LUSID. Each property must be from the &#39;Transaction&#39; domain. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Set of unique holding properties and associated values to store with the target holding. Each property must be from the &#39;Holding&#39; domain. | [optional] 
 **tax_lots** | [**List[TargetTaxLotRequest]**](TargetTaxLotRequest.md) | The tax-lots that together make up the target holding. | 
@@ -15,14 +15,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 effective_at: StrictStr = "example_effective_at"
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-tax_lots: conlist(TargetTaxLotRequest) = # Replace with your value
+tax_lots: List[TargetTaxLotRequest] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 adjust_holding_for_date_request_instance = AdjustHoldingForDateRequest(effective_at=effective_at, instrument_identifiers=instrument_identifiers, sub_holding_keys=sub_holding_keys, properties=properties, tax_lots=tax_lots, currency=currency, custodian_account_id=custodian_account_id)

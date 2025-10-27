@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 
@@ -28,9 +30,9 @@ class AnnulStructuredDataResponse(BaseModel):
     The response to a request to annul (delete) a set of structured data from Lusid. This might have been for market data or some other structured entity.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    values: Optional[Dict[str, datetime]] = Field(None, description="The set of values that were removed.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The set of values where removal failed, with a description as to why that is the case, e.g. badly formed request")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, datetime]] = Field(default=None, description="The set of values that were removed.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The set of values where removal failed, with a description as to why that is the case, e.g. badly formed request")
+    links: Optional[List[Link]] = None
     __properties = ["href", "values", "failed", "links"]
 
     class Config:
@@ -122,3 +124,5 @@ class AnnulStructuredDataResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AnnulStructuredDataResponse.update_forward_refs()

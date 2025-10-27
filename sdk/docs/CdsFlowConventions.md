@@ -19,16 +19,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cds_flow_conventions import CdsFlowConventions
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 roll_frequency: Optional[StrictStr] = "example_roll_frequency"
 currency: StrictStr = "example_currency"
 payment_frequency: StrictStr = "example_payment_frequency"
 day_count_convention: StrictStr = "example_day_count_convention"
 roll_convention: StrictStr = "example_roll_convention"
-payment_calendars: conlist(StrictStr) = # Replace with your value
-reset_calendars: conlist(StrictStr) = # Replace with your value
+payment_calendars: List[StrictStr] = # Replace with your value
+reset_calendars: List[StrictStr] = # Replace with your value
 settle_days: Optional[StrictInt] = # Replace with your value
 settle_days: Optional[StrictInt] = None
 reset_days: Optional[StrictInt] = # Replace with your value

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class Touch(BaseModel):
     """
     Touch class for exotic FxOption  # noqa: E501
     """
     direction:  StrictStr = Field(...,alias="direction", description="Supported string (enumeration) values are: [Down, Up].") 
-    level: Union[StrictFloat, StrictInt] = Field(..., description="Trigger level, which the underlying should (or should not) cross/touch.")
+    level: Union[StrictFloat, StrictInt] = Field(description="Trigger level, which the underlying should (or should not) cross/touch.")
     monitoring:  Optional[StrictStr] = Field(None,alias="monitoring", description="Supported string (enumeration) values are: [European, Bermudan, American].  Defaults to \"European\" if not set.") 
     type:  StrictStr = Field(...,alias="type", description="Supported string (enumeration) values are: [Touch, Notouch].") 
     __properties = ["direction", "level", "monitoring", "type"]
@@ -86,3 +88,5 @@ class Touch(BaseModel):
             "type": obj.get("type")
         })
         return _obj
+
+Touch.update_forward_refs()

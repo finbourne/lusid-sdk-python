@@ -14,17 +14,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_from: datetime = # Replace with your value
 weight_type: StrictStr = "example_weight_type"
 period_type: Optional[StrictStr] = "example_period_type"
 period_count: Optional[StrictInt] = # Replace with your value
 period_count: Optional[StrictInt] = None
-constituents: conlist(ReferencePortfolioConstituent) = # Replace with your value
+constituents: List[ReferencePortfolioConstituent] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 get_reference_portfolio_constituents_response_instance = GetReferencePortfolioConstituentsResponse(effective_from=effective_from, weight_type=weight_type, period_type=period_type, period_count=period_count, constituents=constituents, href=href, links=links)
 
 ```

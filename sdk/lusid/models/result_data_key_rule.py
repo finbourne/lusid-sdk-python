@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, constr, validator 
 from lusid.models.result_key_rule import ResultKeyRule
 
 class ResultDataKeyRule(ResultKeyRule):
@@ -30,10 +32,10 @@ class ResultDataKeyRule(ResultKeyRule):
     data_scope:  StrictStr = Field(...,alias="dataScope", description="which is the scope in which the data should be found") 
     document_code:  StrictStr = Field(...,alias="documentCode", description="document code that defines which document is desired") 
     quote_interval:  Optional[StrictStr] = Field(None,alias="quoteInterval", description="Shorthand for the time interval used to select result data. This must be a dot-separated string              specifying a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago).") 
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The AsAt predicate specification.")
+    as_at: Optional[datetime] = Field(default=None, description="The AsAt predicate specification.", alias="asAt")
     resource_key:  StrictStr = Field(...,alias="resourceKey", description="The result data key that identifies the address pattern that this is a rule for") 
     document_result_type:  StrictStr = Field(...,alias="documentResultType") 
-    use_document_to_infer_holdings: Optional[StrictBool] = Field(None, alias="useDocumentToInferHoldings", description="Indicates whether the relevant document should be used to infer the set of holdings in the valuation.")
+    use_document_to_infer_holdings: Optional[StrictBool] = Field(default=None, description="Indicates whether the relevant document should be used to infer the set of holdings in the valuation.", alias="useDocumentToInferHoldings")
     result_key_rule_type:  StrictStr = Field(...,alias="resultKeyRuleType", description="The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultKeyRuleType", "supplier", "dataScope", "documentCode", "quoteInterval", "asAt", "resourceKey", "documentResultType", "useDocumentToInferHoldings"]
@@ -88,14 +90,19 @@ class ResultDataKeyRule(ResultKeyRule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "result_key_rule_type" != "type":
             return value
 
-        if value not in ('Invalid', 'ResultDataKeyRule', 'PortfolioResultDataKeyRule'):
+        if value not in ['Invalid', 'ResultDataKeyRule', 'PortfolioResultDataKeyRule']:
             raise ValueError("must be one of enum values ('Invalid', 'ResultDataKeyRule', 'PortfolioResultDataKeyRule')")
         return value
 
@@ -175,3 +182,5 @@ class ResultDataKeyRule(ResultKeyRule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+ResultDataKeyRule.update_forward_refs()

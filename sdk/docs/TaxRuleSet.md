@@ -14,16 +14,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.tax_rule_set import TaxRuleSet
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 output_property_key: StrictStr = "example_output_property_key"
-rules: conlist(TaxRule, max_items=100) = Field(..., description="The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions")
+rules: List[TaxRule] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 tax_rule_set_instance = TaxRuleSet(id=id, display_name=display_name, description=description, output_property_key=output_property_key, rules=rules, version=version, links=links)
 
 ```

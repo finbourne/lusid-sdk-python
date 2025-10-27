@@ -13,17 +13,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.identifier_part_schema import IdentifierPartSchema
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-index: StrictInt = # Replace with your value
+index: StrictInt
 index: StrictInt = 42
 name: StrictStr = "example_name"
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
-required: StrictBool = # Replace with your value
+required: StrictBool
 required:StrictBool = True
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 identifier_part_schema_instance = IdentifierPartSchema(index=index, name=name, display_name=display_name, description=description, required=required, links=links)
 
 ```

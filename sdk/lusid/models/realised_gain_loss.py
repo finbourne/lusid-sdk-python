@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 
 class RealisedGainLoss(BaseModel):
@@ -28,18 +30,18 @@ class RealisedGainLoss(BaseModel):
     """
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
     instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with.") 
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units of the associated instrument against which the gain or loss has been realised.")
-    purchase_trade_date: Optional[datetime] = Field(None, alias="purchaseTradeDate", description="The effective datetime at which the units associated with this gain or loss were originally purchased.")
-    purchase_settlement_date: Optional[datetime] = Field(None, alias="purchaseSettlementDate", description="The effective datetime at which the units associated with this gain or loss were originally settled.")
-    purchase_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="purchasePrice", description="The purchase price of each unit associated with this gain or loss.")
-    cost_trade_ccy: CurrencyAndAmount = Field(..., alias="costTradeCcy")
-    cost_portfolio_ccy: CurrencyAndAmount = Field(..., alias="costPortfolioCcy")
-    realised_trade_ccy: CurrencyAndAmount = Field(..., alias="realisedTradeCcy")
-    realised_total: CurrencyAndAmount = Field(..., alias="realisedTotal")
-    realised_market: Optional[CurrencyAndAmount] = Field(None, alias="realisedMarket")
-    realised_currency: Optional[CurrencyAndAmount] = Field(None, alias="realisedCurrency")
+    units: Union[StrictFloat, StrictInt] = Field(description="The number of units of the associated instrument against which the gain or loss has been realised.")
+    purchase_trade_date: Optional[datetime] = Field(default=None, description="The effective datetime at which the units associated with this gain or loss were originally purchased.", alias="purchaseTradeDate")
+    purchase_settlement_date: Optional[datetime] = Field(default=None, description="The effective datetime at which the units associated with this gain or loss were originally settled.", alias="purchaseSettlementDate")
+    purchase_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The purchase price of each unit associated with this gain or loss.", alias="purchasePrice")
+    cost_trade_ccy: CurrencyAndAmount = Field(alias="costTradeCcy")
+    cost_portfolio_ccy: CurrencyAndAmount = Field(alias="costPortfolioCcy")
+    realised_trade_ccy: CurrencyAndAmount = Field(alias="realisedTradeCcy")
+    realised_total: CurrencyAndAmount = Field(alias="realisedTotal")
+    realised_market: Optional[CurrencyAndAmount] = Field(default=None, alias="realisedMarket")
+    realised_currency: Optional[CurrencyAndAmount] = Field(default=None, alias="realisedCurrency")
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="The identifier of the tax lot with which this gain or loss is associated.") 
-    realised_amortisation: Optional[CurrencyAndAmount] = Field(None, alias="realisedAmortisation")
+    realised_amortisation: Optional[CurrencyAndAmount] = Field(default=None, alias="realisedAmortisation")
     __properties = ["instrumentScope", "instrumentUid", "units", "purchaseTradeDate", "purchaseSettlementDate", "purchasePrice", "costTradeCcy", "costPortfolioCcy", "realisedTradeCcy", "realisedTotal", "realisedMarket", "realisedCurrency", "taxLotId", "realisedAmortisation"]
 
     class Config:
@@ -150,3 +152,5 @@ class RealisedGainLoss(BaseModel):
             "realised_amortisation": CurrencyAndAmount.from_dict(obj.get("realisedAmortisation")) if obj.get("realisedAmortisation") is not None else None
         })
         return _obj
+
+RealisedGainLoss.update_forward_refs()

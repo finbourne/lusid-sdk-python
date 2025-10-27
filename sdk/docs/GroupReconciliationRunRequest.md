@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_run_request import GroupReconciliationRunRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instance_id: StrictStr = "example_instance_id"
 dates_to_reconcile: Optional[GroupReconciliationDates] = # Replace with your value

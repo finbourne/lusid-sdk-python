@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.aggregation_measure_failure_detail import AggregationMeasureFailureDetail
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -29,15 +31,15 @@ class ListAggregationResponse(BaseModel):
     """
     ListAggregationResponse
     """
-    aggregation_effective_at: Optional[datetime] = Field(None, alias="aggregationEffectiveAt")
-    aggregation_as_at: Optional[datetime] = Field(None, alias="aggregationAsAt")
+    aggregation_effective_at: Optional[datetime] = Field(default=None, alias="aggregationEffectiveAt")
+    aggregation_as_at: Optional[datetime] = Field(default=None, alias="aggregationAsAt")
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    data: Optional[conlist(Dict[str, Any])] = None
+    data: Optional[List[Dict[str, Any]]] = None
     aggregation_currency:  Optional[StrictStr] = Field(None,alias="aggregationCurrency") 
-    data_schema: Optional[ResultDataSchema] = Field(None, alias="dataSchema")
-    aggregation_failures: Optional[conlist(AggregationMeasureFailureDetail)] = Field(None, alias="aggregationFailures")
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    links: Optional[conlist(Link)] = None
+    data_schema: Optional[ResultDataSchema] = Field(default=None, alias="dataSchema")
+    aggregation_failures: Optional[List[AggregationMeasureFailureDetail]] = Field(default=None, alias="aggregationFailures")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    links: Optional[List[Link]] = None
     __properties = ["aggregationEffectiveAt", "aggregationAsAt", "href", "data", "aggregationCurrency", "dataSchema", "aggregationFailures", "recipeId", "links"]
 
     class Config:
@@ -140,3 +142,5 @@ class ListAggregationResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ListAggregationResponse.update_forward_refs()

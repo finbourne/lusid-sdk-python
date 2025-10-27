@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.mapping_rule import MappingRule
 
 class Mapping(BaseModel):
@@ -30,7 +32,7 @@ class Mapping(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code for this mapping.") 
     name:  StrictStr = Field(...,alias="name", description="The mapping name") 
     reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="What type of reconciliation this mapping is for") 
-    rules: Optional[conlist(MappingRule)] = Field(None, description="The rules in this mapping, keyed by the left field/property name")
+    rules: Optional[List[MappingRule]] = Field(default=None, description="The rules in this mapping, keyed by the left field/property name")
     __properties = ["scope", "code", "name", "reconciliationType", "rules"]
 
     class Config:
@@ -96,3 +98,5 @@ class Mapping(BaseModel):
             "rules": [MappingRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None
         })
         return _obj
+
+Mapping.update_forward_refs()

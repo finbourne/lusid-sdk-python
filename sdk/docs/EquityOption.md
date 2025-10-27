@@ -27,9 +27,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.equity_option import EquityOption
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 option_maturity_date: datetime = # Replace with your value
 option_settlement_date: Optional[datetime] = # Replace with your value
@@ -47,7 +49,7 @@ underlying: Optional[LusidInstrument] = None
 delivery_days: Optional[StrictInt] = # Replace with your value
 delivery_days: Optional[StrictInt] = None
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
-settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+settlement_calendars: Optional[List[StrictStr]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 equity_option_instance = EquityOption(start_date=start_date, option_maturity_date=option_maturity_date, option_settlement_date=option_settlement_date, delivery_type=delivery_type, option_type=option_type, strike=strike, dom_ccy=dom_ccy, underlying_identifier=underlying_identifier, code=code, equity_option_type=equity_option_type, number_of_shares=number_of_shares, premium=premium, exercise_type=exercise_type, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

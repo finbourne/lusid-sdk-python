@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.translation_script_id import TranslationScriptId
 from lusid.models.version import Version
 
@@ -27,7 +29,7 @@ class TranslationScript(BaseModel):
     """
     TranslationScript
     """
-    id: TranslationScriptId = Field(...)
+    id: TranslationScriptId
     body:  StrictStr = Field(...,alias="body", description="Body of the translation script, i.e. the actual translation code.") 
     version: Optional[Version] = None
     __properties = ["id", "body", "version"]
@@ -87,3 +89,5 @@ class TranslationScript(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj
+
+TranslationScript.update_forward_refs()

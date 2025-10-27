@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 
@@ -28,9 +30,9 @@ class DeleteInstrumentResponse(BaseModel):
     DeleteInstrumentResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    as_at: datetime = Field(..., alias="asAt", description="The as-at datetime at which the instrument was deleted.")
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    links: Optional[conlist(Link)] = None
+    as_at: datetime = Field(description="The as-at datetime at which the instrument was deleted.", alias="asAt")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    links: Optional[List[Link]] = None
     __properties = ["href", "asAt", "stagedModifications", "links"]
 
     class Config:
@@ -103,3 +105,5 @@ class DeleteInstrumentResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+DeleteInstrumentResponse.update_forward_refs()

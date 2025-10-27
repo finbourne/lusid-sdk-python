@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class SetLegalEntityPropertiesRequest(BaseModel):
     """
     SetLegalEntityPropertiesRequest
     """
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Properties to set for a Legal Entity. All time-variant properties must have same EffectiveFrom date. Properties not included in the request will not be amended.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Properties to set for a Legal Entity. All time-variant properties must have same EffectiveFrom date. Properties not included in the request will not be amended.")
     __properties = ["properties"]
 
     class Config:
@@ -93,3 +95,5 @@ class SetLegalEntityPropertiesRequest(BaseModel):
             else None
         })
         return _obj
+
+SetLegalEntityPropertiesRequest.update_forward_refs()

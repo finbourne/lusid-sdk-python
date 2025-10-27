@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.get_counterparty_agreement_response import GetCounterpartyAgreementResponse
 from lusid.models.get_credit_support_annex_response import GetCreditSupportAnnexResponse
@@ -1034,15 +1031,15 @@ class CounterpartiesApi:
 
 
     @overload
-    async def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(..., description="The Counterparty Agreement to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(description="The Counterparty Agreement to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(..., description="The Counterparty Agreement to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(description="The Counterparty Agreement to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(..., description="The Counterparty Agreement to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_counterparty_agreement(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(description="The Counterparty Agreement to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement  # noqa: E501
 
         Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1073,7 +1070,7 @@ class CounterpartiesApi:
         return self.upsert_counterparty_agreement_with_http_info(upsert_counterparty_agreement_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_counterparty_agreement_with_http_info(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(..., description="The Counterparty Agreement to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_counterparty_agreement_with_http_info(self, upsert_counterparty_agreement_request : Annotated[UpsertCounterpartyAgreementRequest, Field(description="The Counterparty Agreement to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement  # noqa: E501
 
         Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1193,15 +1190,15 @@ class CounterpartiesApi:
 
 
     @overload
-    async def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(..., description="The Credit Support Annex to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(description="The Credit Support Annex to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(..., description="The Credit Support Annex to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(description="The Credit Support Annex to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(..., description="The Credit Support Annex to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_credit_support_annex(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(description="The Credit Support Annex to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex  # noqa: E501
 
         Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1232,7 +1229,7 @@ class CounterpartiesApi:
         return self.upsert_credit_support_annex_with_http_info(upsert_credit_support_annex_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_credit_support_annex_with_http_info(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(..., description="The Credit Support Annex to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_credit_support_annex_with_http_info(self, upsert_credit_support_annex_request : Annotated[UpsertCreditSupportAnnexRequest, Field(description="The Credit Support Annex to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex  # noqa: E501
 
         Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.                The response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501

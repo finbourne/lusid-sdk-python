@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_event_instruction import InstrumentEventInstruction
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 instrument_event_instruction_id: Optional[StrictStr] = "example_instrument_event_instruction_id"
 portfolio_id: Optional[ResourceId] = # Replace with your value
 instrument_event_id: Optional[StrictStr] = "example_instrument_event_id"
@@ -34,7 +36,7 @@ href: Optional[StrictStr] = "example_href"
 entitlement_date_instructed: Optional[datetime] = # Replace with your value
 quantity_instructed: Optional[QuantityInstructed] = # Replace with your value
 tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 instrument_event_instruction_instance = InstrumentEventInstruction(instrument_event_instruction_id=instrument_event_instruction_id, portfolio_id=portfolio_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, version=version, href=href, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, tax_lot_id=tax_lot_id, links=links)
 
 ```

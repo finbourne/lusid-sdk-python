@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -28,14 +30,14 @@ class OrderInstructionRequest(BaseModel):
     """
     A request to create or update a Order Instruction.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    created_date: datetime = Field(..., alias="createdDate", description="The active date of this order instruction.")
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="The instrument ordered.")
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    id: ResourceId
+    created_date: datetime = Field(description="The active date of this order instruction.", alias="createdDate")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The instrument ordered.", alias="instrumentIdentifiers")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
     price: Optional[CurrencyAndAmount] = None
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
     __properties = ["id", "createdDate", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "properties"]
 
     class Config:
@@ -133,3 +135,5 @@ class OrderInstructionRequest(BaseModel):
             else None
         })
         return _obj
+
+OrderInstructionRequest.update_forward_refs()

@@ -19,10 +19,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_search_result import PortfolioSearchResult
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 type: StrictStr = "example_type"
 href: Optional[StrictStr] = "example_href"
 description: Optional[StrictStr] = "example_description"
@@ -32,8 +34,8 @@ is_derived:Optional[StrictBool] = None
 created: datetime = # Replace with your value
 parent_portfolio_id: Optional[ResourceId] = # Replace with your value
 base_currency: Optional[StrictStr] = "example_base_currency"
-properties: Optional[conlist(ModelProperty)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+properties: Optional[List[ModelProperty]] = # Replace with your value
+links: Optional[List[Link]] = None
 portfolio_search_result_instance = PortfolioSearchResult(id=id, type=type, href=href, description=description, display_name=display_name, is_derived=is_derived, created=created, parent_portfolio_id=parent_portfolio_id, base_currency=base_currency, properties=properties, links=links)
 
 ```

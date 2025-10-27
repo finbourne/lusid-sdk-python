@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
-
-from typing import Dict, Optional
-
+from pydantic.v1 import Field, StrictStr
+from typing import Dict, List, Optional
+from typing_extensions import Annotated
 from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
 from lusid.models.create_custom_data_model_request import CreateCustomDataModelRequest
 from lusid.models.custom_data_model import CustomDataModel
@@ -62,15 +59,15 @@ class CustomDataModelsApi:
 
 
     @overload
-    async def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], **kwargs) -> BatchAmendCustomDataModelMembershipResponse:  # noqa: E501
+    async def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(description="The payload describing the amendments to make for the given Custom Data Model.")], **kwargs) -> BatchAmendCustomDataModelMembershipResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], async_req: Optional[bool]=True, **kwargs) -> BatchAmendCustomDataModelMembershipResponse:  # noqa: E501
+    def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(description="The payload describing the amendments to make for the given Custom Data Model.")], async_req: Optional[bool]=True, **kwargs) -> BatchAmendCustomDataModelMembershipResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchAmendCustomDataModelMembershipResponse, Awaitable[BatchAmendCustomDataModelMembershipResponse]]:  # noqa: E501
+    def batch_amend(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(description="The payload describing the amendments to make for the given Custom Data Model.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchAmendCustomDataModelMembershipResponse, Awaitable[BatchAmendCustomDataModelMembershipResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.  # noqa: E501
 
         Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.  # noqa: E501
@@ -103,7 +100,7 @@ class CustomDataModelsApi:
         return self.batch_amend_with_http_info(success_mode, request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_amend_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(..., description="The payload describing the amendments to make for the given Custom Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_amend_with_http_info(self, success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, MembershipAmendmentRequest], Field(description="The payload describing the amendments to make for the given Custom Data Model.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BatchAmend: Batch amend entities Custom Data Model membership.  # noqa: E501
 
         Add/Remove entities to/from a Custom Data Model in a single operation.                Each amendment request must be keyed by a unique correlation ID.  This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each amendment in the response.                Note: If using partial failure modes, then it is important to check the response body for failures as any  failures will still return a 200 status code.  # noqa: E501
@@ -743,15 +740,15 @@ class CustomDataModelsApi:
 
 
     @overload
-    async def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
+    async def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
         ...
 
     @overload
-    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
+    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataModelSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataModelSummary, Awaitable[ResourceListOfDataModelSummary]]:  # noqa: E501
+    def list_data_model_hierarchies(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataModelSummary, Awaitable[ResourceListOfDataModelSummary]]:  # noqa: E501
         """[EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.  # noqa: E501
 
         Lists the data model summaries within their hierarchical structure.  # noqa: E501
@@ -786,7 +783,7 @@ class CustomDataModelsApi:
         return self.list_data_model_hierarchies_with_http_info(as_at, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_model_hierarchies_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_model_hierarchies_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Data Model. Defaults to return              the latest version of the Data Model if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListDataModelHierarchies: List Custom Data Model hierarchies.  # noqa: E501
 
         Lists the data model summaries within their hierarchical structure.  # noqa: E501

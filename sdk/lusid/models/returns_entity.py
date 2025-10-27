@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class ReturnsEntity(BaseModel):
     """
     Returns entity, used for configuring the calculation of aggregated returns.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
+    id: ResourceId
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
     recipe_entity:  Optional[StrictStr] = Field(None,alias="recipeEntity", description="Entity a recipe is retrieved from for use in the aggregated returns calculation. Either RecipeId or RecipeEntity must be specified.") 
     fee_handling:  Optional[StrictStr] = Field(None,alias="feeHandling", description="Configures how fees are handled in the aggregated returns calculation.") 
     flow_handling:  Optional[StrictStr] = Field(None,alias="flowHandling", description="Configures how flows are handled in the aggregated returns calculation.") 
@@ -119,3 +121,5 @@ class ReturnsEntity(BaseModel):
             "handle_flow_discrepancy": obj.get("handleFlowDiscrepancy")
         })
         return _obj
+
+ReturnsEntity.update_forward_refs()

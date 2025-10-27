@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conint, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class InflationIndexConventions(BaseModel):
     """
@@ -30,7 +32,7 @@ class InflationIndexConventions(BaseModel):
     observation_lag:  StrictStr = Field(...,alias="observationLag", description="Observation lag. This is a string that must have units of Month.  This field is typically 3 or 4 months, but can vary, older bonds and swaps have 8 months lag.  For Bonds with a calculation type of Ratio, this property, if set, must be 0Invalid.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
     inflation_interpolation:  Optional[StrictStr] = Field(None,alias="inflationInterpolation", description="Inflation Interpolation. This is optional and defaults to Linear if not set.    Supported string (enumeration) values are: [Linear, Flat].") 
     inflation_frequency:  Optional[StrictStr] = Field(None,alias="inflationFrequency", description="Frequency of inflation updated. Optional and defaults to Monthly which is the most common.  However both Australian and New Zealand inflation is published Quarterly. Only tenors of 1M or 3M are supported.    For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)") 
-    inflation_roll_day: Optional[conint(strict=True)] = Field(1, alias="inflationRollDay", description="Day of the month that inflation rolls from one month to the next. This is optional and defaults to 1, which is  the typically value for the majority of inflation bonds (exceptions include Japan which rolls on the 10th  and some LatAm bonds which roll on the 15th).")
+    inflation_roll_day: Optional[StrictInt] = Field(default=1, description="Day of the month that inflation rolls from one month to the next. This is optional and defaults to 1, which is  the typically value for the majority of inflation bonds (exceptions include Japan which rolls on the 10th  and some LatAm bonds which roll on the 15th).", alias="inflationRollDay")
     __properties = ["inflationIndexName", "currency", "observationLag", "inflationInterpolation", "inflationFrequency", "inflationRollDay"]
 
     class Config:
@@ -95,3 +97,5 @@ class InflationIndexConventions(BaseModel):
             "inflation_roll_day": obj.get("inflationRollDay") if obj.get("inflationRollDay") is not None else 1
         })
         return _obj
+
+InflationIndexConventions.update_forward_refs()

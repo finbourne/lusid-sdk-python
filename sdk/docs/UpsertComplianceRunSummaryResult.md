@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_compliance_run_summary_result import UpsertComplianceRunSummaryResult
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 run_id: ResourceId = # Replace with your value
 instigated_at: datetime = # Replace with your value
 completed_at: datetime = # Replace with your value
 schedule: StrictStr = "example_schedule"
-results: conlist(ComplianceSummaryRuleResult) = # Replace with your value
+results: List[ComplianceSummaryRuleResult]
 upsert_compliance_run_summary_result_instance = UpsertComplianceRunSummaryResult(run_id=run_id, instigated_at=instigated_at, completed_at=completed_at, schedule=schedule, results=results)
 
 ```

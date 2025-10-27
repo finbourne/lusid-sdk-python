@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ReturnZeroPvOptions(BaseModel):
     """
     Options to indicate which errors to ignore when performing valuation.  # noqa: E501
     """
-    instrument_matured: Optional[StrictBool] = Field(None, alias="instrumentMatured", description="Indicates whether attempting to value an instrument after its maturity date should produce a failure (false)  or a zero PV (true).")
+    instrument_matured: Optional[StrictBool] = Field(default=None, description="Indicates whether attempting to value an instrument after its maturity date should produce a failure (false)  or a zero PV (true).", alias="instrumentMatured")
     __properties = ["instrumentMatured"]
 
     class Config:
@@ -75,3 +77,5 @@ class ReturnZeroPvOptions(BaseModel):
             "instrument_matured": obj.get("instrumentMatured")
         })
         return _obj
+
+ReturnZeroPvOptions.update_forward_refs()

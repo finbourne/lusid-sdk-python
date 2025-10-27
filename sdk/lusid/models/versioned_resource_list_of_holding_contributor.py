@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.holding_contributor import HoldingContributor
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -28,12 +30,12 @@ class VersionedResourceListOfHoldingContributor(BaseModel):
     """
     VersionedResourceListOfHoldingContributor
     """
-    version: Version = Field(...)
-    values: conlist(HoldingContributor) = Field(...)
+    version: Version
+    values: List[HoldingContributor]
     href:  Optional[StrictStr] = Field(None,alias="href") 
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
     previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["version", "values", "href", "nextPage", "previousPage", "links"]
 
     class Config:
@@ -125,3 +127,5 @@ class VersionedResourceListOfHoldingContributor(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+VersionedResourceListOfHoldingContributor.update_forward_refs()

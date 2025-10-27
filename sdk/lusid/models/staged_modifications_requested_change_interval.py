@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.property_value import PropertyValue
 from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
@@ -29,11 +31,11 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
     StagedModificationsRequestedChangeInterval
     """
     attribute_name:  Optional[StrictStr] = Field(None,alias="attributeName", description="Name of the property the change applies to.") 
-    effective_range: Optional[StagedModificationEffectiveRange] = Field(None, alias="effectiveRange")
-    previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
-    new_value: Optional[PropertyValue] = Field(None, alias="newValue")
+    effective_range: Optional[StagedModificationEffectiveRange] = Field(default=None, alias="effectiveRange")
+    previous_value: Optional[PropertyValue] = Field(default=None, alias="previousValue")
+    new_value: Optional[PropertyValue] = Field(default=None, alias="newValue")
     as_at_basis:  Optional[StrictStr] = Field(None,alias="asAtBasis", description="Whether the change represents the modification when the request was made or the modification as it would be at the latest time.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["attributeName", "effectiveRange", "previousValue", "newValue", "asAtBasis", "links"]
 
     class Config:
@@ -119,3 +121,5 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+StagedModificationsRequestedChangeInterval.update_forward_refs()

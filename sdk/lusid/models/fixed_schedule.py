@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
@@ -29,16 +31,16 @@ class FixedSchedule(Schedule):
     """
     Schedule for fixed coupon payments  # noqa: E501
     """
-    start_date: datetime = Field(..., alias="startDate", description="Date from which LUSID starts generating the payment schedule.")
-    maturity_date: datetime = Field(..., alias="maturityDate", description="Last date of the payment generation schedule. May not necessarily be the maturity date  of the underlying instrument (e.g. in case the instrument has multiple payment schedules).")
-    flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
-    coupon_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="couponRate", description="Coupon rate given as a fraction.")
-    convention_name: Optional[FlowConventionName] = Field(None, alias="conventionName")
-    ex_dividend_days: Optional[StrictInt] = Field(None, alias="exDividendDays", description="Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration.")
-    notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Scaling factor, the quantity outstanding on which the rate will be paid.")
+    start_date: datetime = Field(description="Date from which LUSID starts generating the payment schedule.", alias="startDate")
+    maturity_date: datetime = Field(description="Last date of the payment generation schedule. May not necessarily be the maturity date  of the underlying instrument (e.g. in case the instrument has multiple payment schedules).", alias="maturityDate")
+    flow_conventions: Optional[FlowConventions] = Field(default=None, alias="flowConventions")
+    coupon_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Coupon rate given as a fraction.", alias="couponRate")
+    convention_name: Optional[FlowConventionName] = Field(default=None, alias="conventionName")
+    ex_dividend_days: Optional[StrictInt] = Field(default=None, description="Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration.", alias="exDividendDays")
+    notional: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Scaling factor, the quantity outstanding on which the rate will be paid.")
     payment_currency:  StrictStr = Field(...,alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.") 
     stub_type:  Optional[StrictStr] = Field(None,alias="stubType", description="When a payment schedule doesn't have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None = this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both = this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set.") 
-    ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
+    ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(default=None, alias="exDividendConfiguration")
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "exDividendDays", "notional", "paymentCurrency", "stubType", "exDividendConfiguration"]
@@ -93,14 +95,19 @@ class FixedSchedule(Schedule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "schedule_type" != "type":
             return value
 
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid'):
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
             raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
         return value
 
@@ -191,3 +198,5 @@ class FixedSchedule(Schedule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FixedSchedule.update_forward_refs()

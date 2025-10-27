@@ -17,24 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator 
 from lusid.models.link import Link
 
 class FeeAccrual(BaseModel):
     """
     FeeAccrual
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date for which the fee accrual has been calculated.")
+    effective_at: datetime = Field(description="The effective date for which the fee accrual has been calculated.", alias="effectiveAt")
     code:  StrictStr = Field(...,alias="code", description="The code of the fee for which the accrual has been calculated.") 
     name:  StrictStr = Field(...,alias="name", description="The name of the fee for which the accrual has been calculated.") 
-    calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculationBase", description="The result of the evaluating the fee's calculation base expression.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The result of applying the fee to the calculation base, and scaled down to a day.")
-    previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousAccrual", description="The previous valuation point's total accrual.")
-    previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousTotalAccrual", description="The previous valuation point's total accrual.")
-    total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAccrual", description="The sum of the PreviousAccrual and Amount.")
-    links: Optional[conlist(Link)] = None
+    calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The result of the evaluating the fee's calculation base expression.", alias="calculationBase")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The result of applying the fee to the calculation base, and scaled down to a day.")
+    previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's total accrual.", alias="previousAccrual")
+    previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's total accrual.", alias="previousTotalAccrual")
+    total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The sum of the PreviousAccrual and Amount.", alias="totalAccrual")
+    links: Optional[List[Link]] = None
     __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "links"]
 
     class Config:
@@ -104,3 +106,5 @@ class FeeAccrual(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+FeeAccrual.update_forward_refs()

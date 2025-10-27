@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class UnitsRatio(BaseModel):
     """
     The number of units you have after the event (output) for a given number of units you have prior to the event (input).  # noqa: E501
     """
-    input: Union[StrictFloat, StrictInt] = Field(..., description="Input amount.  Denominator of the Ratio")
-    output: Union[StrictFloat, StrictInt] = Field(..., description="Output amount. Numerator of the Ratio")
+    input: Union[StrictFloat, StrictInt] = Field(description="Input amount.  Denominator of the Ratio")
+    output: Union[StrictFloat, StrictInt] = Field(description="Output amount. Numerator of the Ratio")
     __properties = ["input", "output"]
 
     class Config:
@@ -77,3 +79,5 @@ class UnitsRatio(BaseModel):
             "output": obj.get("output")
         })
         return _obj
+
+UnitsRatio.update_forward_refs()

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 
 class GroupReconciliationDefinitionPortfolioEntityIds(BaseModel):
     """
     GroupReconciliationDefinitionPortfolioEntityIds
     """
-    left: conlist(PortfolioEntityId) = Field(..., description="Portfolio Entity Id of the left side of a reconciliation")
-    right: conlist(PortfolioEntityId) = Field(..., description="Portfolio Entity Id of the right side of a reconciliation")
+    left: List[PortfolioEntityId] = Field(description="Portfolio Entity Id of the left side of a reconciliation")
+    right: List[PortfolioEntityId] = Field(description="Portfolio Entity Id of the right side of a reconciliation")
     __properties = ["left", "right"]
 
     class Config:
@@ -92,3 +94,5 @@ class GroupReconciliationDefinitionPortfolioEntityIds(BaseModel):
             "right": [PortfolioEntityId.from_dict(_item) for _item in obj.get("right")] if obj.get("right") is not None else None
         })
         return _obj
+
+GroupReconciliationDefinitionPortfolioEntityIds.update_forward_refs()

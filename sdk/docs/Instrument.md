@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **name** | **str** | The name of the instrument. | 
-**identifiers** | **Dict[str, str]** | The set of identifiers that can be used to identify the instrument. | 
+**identifiers** | **Dict[str, Optional[str]]** | The set of identifiers that can be used to identify the instrument. | 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) | The requested instrument properties. These will be from the &#39;Instrument&#39; domain. | [optional] 
 **lookthrough_portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_definition** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
@@ -25,26 +25,28 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument import Instrument
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 scope: Optional[StrictStr] = "example_scope"
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
-version: Version = # Replace with your value
+version: Version
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 name: StrictStr = "example_name"
-identifiers: Dict[str, StrictStr] = # Replace with your value
-properties: Optional[conlist(ModelProperty)] = # Replace with your value
+identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
+properties: Optional[List[ModelProperty]] = # Replace with your value
 lookthrough_portfolio: Optional[ResourceId] = # Replace with your value
 instrument_definition: Optional[LusidInstrument] = # Replace with your value
 state: StrictStr = "example_state"
 asset_class: Optional[StrictStr] = "example_asset_class"
 dom_ccy: Optional[StrictStr] = "example_dom_ccy"
-relationships: Optional[conlist(Relationship)] = # Replace with your value
+relationships: Optional[List[Relationship]] = # Replace with your value
 settlement_cycle: Optional[SettlementCycle] = # Replace with your value
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 instrument_instance = Instrument(href=href, scope=scope, lusid_instrument_id=lusid_instrument_id, version=version, staged_modifications=staged_modifications, name=name, identifiers=identifiers, properties=properties, lookthrough_portfolio=lookthrough_portfolio, instrument_definition=instrument_definition, state=state, asset_class=asset_class, dom_ccy=dom_ccy, relationships=relationships, settlement_cycle=settlement_cycle, data_model_membership=data_model_membership, links=links)
 
 ```

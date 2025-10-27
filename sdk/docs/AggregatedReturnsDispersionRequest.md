@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.aggregated_returns_dispersion_request import AggregatedReturnsDispersionRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 to_effective_at: Optional[StrictStr] = "example_to_effective_at"
 years_count: Optional[StrictInt] = # Replace with your value
 years_count: Optional[StrictInt] = None
-return_ids: Optional[conlist(ResourceId)] = # Replace with your value
+return_ids: Optional[List[ResourceId]] = # Replace with your value
 recipe_id: Optional[ResourceId] = # Replace with your value
 composite_method: Optional[StrictStr] = "example_composite_method"
 alternative_inception_date: Optional[StrictStr] = "example_alternative_inception_date"

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class Account(BaseModel):
@@ -31,7 +33,7 @@ class Account(BaseModel):
     type:  StrictStr = Field(...,alias="type", description="The Account type. Can have the values: Asset/Liabilities/Income/Expense/Capital/Revenue.") 
     status:  StrictStr = Field(...,alias="status", description="The Account status. Can be Active, Inactive or Deleted. The available values are: Active, Inactive, Deleted") 
     control:  Optional[StrictStr] = Field(None,alias="control", description="This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Account.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Account.")
     __properties = ["code", "description", "type", "status", "control", "properties"]
 
     @validator('status')
@@ -84,14 +86,19 @@ class Account(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "status" != "type":
             return value
 
-        if value not in ('Active', 'Inactive', 'Deleted'):
+        if value not in ['Active', 'Inactive', 'Deleted']:
             raise ValueError("must be one of enum values ('Active', 'Inactive', 'Deleted')")
         return value
 
@@ -174,3 +181,5 @@ class Account(BaseModel):
             else None
         })
         return _obj
+
+Account.update_forward_refs()

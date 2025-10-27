@@ -12,8 +12,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.applicable_entity import ApplicableEntity
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 entity_type: StrictStr = "example_entity_type"
 entity_scope: Optional[StrictStr] = "example_entity_scope"

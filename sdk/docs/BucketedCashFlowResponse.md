@@ -13,15 +13,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-data: Optional[conlist(Dict[str, Any])] = # Replace with your value
+data: Optional[List[Dict[str, Any]]] = # Replace with your value
 report_currency: Optional[StrictStr] = "example_report_currency"
 data_schema: Optional[ResultDataSchema] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 bucketed_cash_flow_response_instance = BucketedCashFlowResponse(href=href, data=data, report_currency=report_currency, data_schema=data_schema, failed=failed, links=links)
 
 ```

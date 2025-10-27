@@ -16,13 +16,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.simple_instrument import SimpleInstrument
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 maturity_date: Optional[datetime] = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
 asset_class: StrictStr = "example_asset_class"
-fgn_ccys: Optional[conlist(StrictStr)] = # Replace with your value
+fgn_ccys: Optional[List[StrictStr]] = # Replace with your value
 simple_instrument_type: StrictStr = "example_simple_instrument_type"
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value

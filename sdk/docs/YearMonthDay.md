@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.year_month_day import YearMonthDay
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 year: StrictInt = # Replace with your value
 year: StrictInt = 42

@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.translation_context import TranslationContext
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 disable_scripted_translation: Optional[StrictBool] = # Replace with your value
 disable_scripted_translation:Optional[StrictBool] = None

@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 currency: StrictStr = "example_currency"
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-records: conlist(CashLadderRecord) = # Replace with your value
+records: List[CashLadderRecord] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 portfolio_cash_ladder_instance = PortfolioCashLadder(currency=currency, sub_holding_keys=sub_holding_keys, records=records, failed=failed, links=links)
 
 ```

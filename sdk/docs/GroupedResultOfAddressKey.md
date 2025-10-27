@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-columns: Optional[conlist(StrictStr)] = # Replace with your value
-values: Optional[conlist(ResultValue)] = # Replace with your value
+columns: Optional[List[StrictStr]] = # Replace with your value
+values: Optional[List[ResultValue]] = # Replace with your value
 grouped_result_of_address_key_instance = GroupedResultOfAddressKey(columns=columns, values=values)
 
 ```

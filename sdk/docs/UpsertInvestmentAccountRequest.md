@@ -16,16 +16,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_investment_account_request import UpsertInvestmentAccountRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 identifiers: Dict[str, ModelProperty] = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 account_type: StrictStr = "example_account_type"
-account_holders: Optional[conlist(AccountHolderIdentifier)] = # Replace with your value
-investment_portfolios: Optional[conlist(InvestmentPortfolioIdentifier)] = # Replace with your value
+account_holders: Optional[List[AccountHolderIdentifier]] = # Replace with your value
+investment_portfolios: Optional[List[InvestmentPortfolioIdentifier]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 upsert_investment_account_request_instance = UpsertInvestmentAccountRequest(scope=scope, identifiers=identifiers, display_name=display_name, description=description, account_type=account_type, account_holders=account_holders, investment_portfolios=investment_portfolios, properties=properties)
 

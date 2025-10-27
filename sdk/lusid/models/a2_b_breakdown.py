@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class A2BBreakdown(BaseModel):
     """
     A2B Breakdown - Shows the total, and each sub-element within an A2B Category  # noqa: E501
     """
-    total: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The total value of all the components within this category.")
+    total: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total value of all the components within this category.")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency. Applies to the Total, as well as all the componenents.") 
-    components: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(None, description="The individual components that make up the category. For example, the Start category may have Cost, Unrealised gains and accrued interest components.")
+    components: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="The individual components that make up the category. For example, the Start category may have Cost, Unrealised gains and accrued interest components.")
     __properties = ["total", "currency", "components"]
 
     class Config:
@@ -89,3 +91,5 @@ class A2BBreakdown(BaseModel):
             "components": obj.get("components")
         })
         return _obj
+
+A2BBreakdown.update_forward_refs()

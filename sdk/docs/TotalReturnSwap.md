@@ -15,14 +15,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.total_return_swap import TotalReturnSwap
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 asset_leg: AssetLeg = # Replace with your value
 funding_leg: InstrumentLeg = # Replace with your value
-additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 total_return_swap_instance = TotalReturnSwap(start_date=start_date, maturity_date=maturity_date, asset_leg=asset_leg, funding_leg=funding_leg, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

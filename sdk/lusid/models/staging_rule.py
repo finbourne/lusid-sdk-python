@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCriteria
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
 
@@ -30,8 +32,8 @@ class StagingRule(BaseModel):
     rule_id:  StrictStr = Field(...,alias="ruleId", description="The ID of the staging rule.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule.") 
     status:  StrictStr = Field(...,alias="status", description="Whether the rule is 'Active' or 'Inactive'.") 
-    match_criteria: StagingRuleMatchCriteria = Field(..., alias="matchCriteria")
-    approval_criteria: StagingRuleApprovalCriteria = Field(..., alias="approvalCriteria")
+    match_criteria: StagingRuleMatchCriteria = Field(alias="matchCriteria")
+    approval_criteria: StagingRuleApprovalCriteria = Field(alias="approvalCriteria")
     __properties = ["ruleId", "description", "status", "matchCriteria", "approvalCriteria"]
 
     class Config:
@@ -96,3 +98,5 @@ class StagingRule(BaseModel):
             "approval_criteria": StagingRuleApprovalCriteria.from_dict(obj.get("approvalCriteria")) if obj.get("approvalCriteria") is not None else None
         })
         return _obj
+
+StagingRule.update_forward_refs()

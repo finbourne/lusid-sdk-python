@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid.models.configuration_recipe import ConfigurationRecipe
 from lusid.models.resource_id import ResourceId
 
@@ -27,10 +29,10 @@ class CreateRecipeRequest(BaseModel):
     """
     Specification class to request for the creation/supplementing of a configuration recipe  # noqa: E501
     """
-    recipe_creation_market_data_scopes: conlist(StrictStr) = Field(..., alias="recipeCreationMarketDataScopes", description="The scopes in which the recipe creation would look for quotes/data.")
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    inline_recipe: Optional[ConfigurationRecipe] = Field(None, alias="inlineRecipe")
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The asAt date to use")
+    recipe_creation_market_data_scopes: List[StrictStr] = Field(description="The scopes in which the recipe creation would look for quotes/data.", alias="recipeCreationMarketDataScopes")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    inline_recipe: Optional[ConfigurationRecipe] = Field(default=None, alias="inlineRecipe")
+    as_at: Optional[datetime] = Field(default=None, description="The asAt date to use", alias="asAt")
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The market data time, i.e. the recipe generated will look for rules with this effectiveAt.") 
     __properties = ["recipeCreationMarketDataScopes", "recipeId", "inlineRecipe", "asAt", "effectiveAt"]
 
@@ -96,3 +98,5 @@ class CreateRecipeRequest(BaseModel):
             "effective_at": obj.get("effectiveAt")
         })
         return _obj
+
+CreateRecipeRequest.update_forward_refs()

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 
 class UpsertReferencePortfolioConstituentPropertiesRequest(BaseModel):
     """
     UpsertReferencePortfolioConstituentPropertiesRequest
     """
-    identifiers: Dict[str, StrictStr] = Field(..., description="A set of instrument identifiers that can resolve the constituent to a unique instrument.")
-    properties: Dict[str, PerpetualProperty] = Field(..., description="The updated collection of properties of the constituent.")
+    identifiers: Dict[str, Optional[StrictStr]] = Field(description="A set of instrument identifiers that can resolve the constituent to a unique instrument.")
+    properties: Dict[str, PerpetualProperty] = Field(description="The updated collection of properties of the constituent.")
     __properties = ["identifiers", "properties"]
 
     class Config:
@@ -90,3 +92,5 @@ class UpsertReferencePortfolioConstituentPropertiesRequest(BaseModel):
             else None
         })
         return _obj
+
+UpsertReferencePortfolioConstituentPropertiesRequest.update_forward_refs()

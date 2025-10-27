@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: DialectId = # Replace with your value
+id: DialectId
 var_schema: DialectSchema = # Replace with your value
 upsert_dialect_request_instance = UpsertDialectRequest(id=id, var_schema=var_schema)
 

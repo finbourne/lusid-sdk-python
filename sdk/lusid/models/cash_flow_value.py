@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
 from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.result_value import ResultValue
 from lusid.models.result_value_dictionary import ResultValueDictionary
@@ -28,10 +30,10 @@ class CashFlowValue(ResultValue):
     """
     Result class for a cash flow value  # noqa: E501
     """
-    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the cash flow")
+    payment_date: datetime = Field(description="The payment date of the cash flow", alias="paymentDate")
     diagnostics: Optional[ResultValueDictionary] = None
-    cash_flow_lineage: Optional[CashFlowLineage] = Field(None, alias="cashFlowLineage")
-    payment_amount: Union[StrictFloat, StrictInt] = Field(..., alias="paymentAmount", description="The amount paid or received")
+    cash_flow_lineage: Optional[CashFlowLineage] = Field(default=None, alias="cashFlowLineage")
+    payment_amount: Union[StrictFloat, StrictInt] = Field(description="The amount paid or received", alias="paymentAmount")
     payment_ccy:  StrictStr = Field(...,alias="paymentCcy", description="The currency of the transaction") 
     result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
     additional_properties: Dict[str, Any] = {}
@@ -87,14 +89,19 @@ class CashFlowValue(ResultValue):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "result_value_type" != "type":
             return value
 
-        if value not in ('ResultValue', 'ResultValueDictionary', 'ResultValue0D', 'ResultValueDecimal', 'ResultValueInt', 'ResultValueString', 'ResultValueBool', 'ResultValueCurrency', 'CashFlowValue', 'CashFlowValueSet', 'ResultValueLifeCycleEventValue', 'ResultValueDateTimeOffset'):
+        if value not in ['ResultValue', 'ResultValueDictionary', 'ResultValue0D', 'ResultValueDecimal', 'ResultValueInt', 'ResultValueString', 'ResultValueBool', 'ResultValueCurrency', 'CashFlowValue', 'CashFlowValueSet', 'ResultValueLifeCycleEventValue', 'ResultValueDateTimeOffset']:
             raise ValueError("must be one of enum values ('ResultValue', 'ResultValueDictionary', 'ResultValue0D', 'ResultValueDecimal', 'ResultValueInt', 'ResultValueString', 'ResultValueBool', 'ResultValueCurrency', 'CashFlowValue', 'CashFlowValueSet', 'ResultValueLifeCycleEventValue', 'ResultValueDateTimeOffset')")
         return value
 
@@ -167,3 +174,5 @@ class CashFlowValue(ResultValue):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+CashFlowValue.update_forward_refs()

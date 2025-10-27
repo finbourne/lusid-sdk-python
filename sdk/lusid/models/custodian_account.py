@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.legal_entity import LegalEntity
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -28,14 +30,14 @@ class CustodianAccount(BaseModel):
     """
     CustodianAccount
     """
-    custodian_account_id: ResourceId = Field(..., alias="custodianAccountId")
+    custodian_account_id: ResourceId = Field(alias="custodianAccountId")
     status:  StrictStr = Field(...,alias="status", description="The Account status. Can be Active, Inactive or Deleted.") 
     account_number:  StrictStr = Field(...,alias="accountNumber", description="The Custodian Account Number") 
     account_name:  StrictStr = Field(...,alias="accountName", description="The identifiable name given to the Custodian Account") 
     accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="The Accounting method to be used") 
     currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
-    custodian: LegalEntity = Field(...)
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
+    custodian: LegalEntity
     account_type:  StrictStr = Field(...,alias="accountType", description="The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin.") 
     __properties = ["custodianAccountId", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodian", "accountType"]
 
@@ -117,3 +119,5 @@ class CustodianAccount(BaseModel):
             "account_type": obj.get("accountType")
         })
         return _obj
+
+CustodianAccount.update_forward_refs()

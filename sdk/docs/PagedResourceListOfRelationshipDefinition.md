@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 next_page: Optional[StrictStr] = "example_next_page"
 previous_page: Optional[StrictStr] = "example_previous_page"
-values: conlist(RelationshipDefinition) = # Replace with your value
+values: List[RelationshipDefinition]
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 paged_resource_list_of_relationship_definition_instance = PagedResourceListOfRelationshipDefinition(next_page=next_page, previous_page=previous_page, values=values, href=href, links=links)
 
 ```

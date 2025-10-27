@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.portfolio_holding import PortfolioHolding
 from lusid.models.version import Version
@@ -29,13 +31,13 @@ class VersionedResourceListWithWarningsOfPortfolioHolding(BaseModel):
     """
     VersionedResourceListWithWarningsOfPortfolioHolding
     """
-    version: Version = Field(...)
-    values: conlist(PortfolioHolding) = Field(..., description="The resources to list.")
+    version: Version
+    values: List[PortfolioHolding] = Field(description="The resources to list.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The URI of the resource list.") 
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage", description="The next page of results.") 
     previous_page:  Optional[StrictStr] = Field(None,alias="previousPage", description="The previous page of results.") 
-    warnings: Optional[conlist(Warning)] = None
-    links: Optional[conlist(Link)] = None
+    warnings: Optional[List[Warning]] = None
+    links: Optional[List[Link]] = None
     __properties = ["version", "values", "href", "nextPage", "previousPage", "warnings", "links"]
 
     class Config:
@@ -140,3 +142,5 @@ class VersionedResourceListWithWarningsOfPortfolioHolding(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+VersionedResourceListWithWarningsOfPortfolioHolding.update_forward_refs()

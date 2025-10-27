@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.access_metadata_value import AccessMetadataValue
 from lusid.models.resource_id import ResourceId
 
@@ -27,8 +29,8 @@ class BatchUpsertPortfolioAccessMetadataResponseItem(BaseModel):
     """
     BatchUpsertPortfolioAccessMetadataResponseItem
     """
-    portfolio_id: ResourceId = Field(..., alias="portfolioId")
-    metadata: Dict[str, conlist(AccessMetadataValue)] = Field(...)
+    portfolio_id: ResourceId = Field(alias="portfolioId")
+    metadata: Dict[str, Optional[List[AccessMetadataValue]]]
     __properties = ["portfolioId", "metadata"]
 
     class Config:
@@ -98,3 +100,5 @@ class BatchUpsertPortfolioAccessMetadataResponseItem(BaseModel):
             )
         })
         return _obj
+
+BatchUpsertPortfolioAccessMetadataResponseItem.update_forward_refs()

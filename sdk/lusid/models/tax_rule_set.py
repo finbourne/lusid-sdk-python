@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.tax_rule import TaxRule
@@ -29,13 +31,13 @@ class TaxRuleSet(BaseModel):
     """
     TaxRuleSet
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-friendly name") 
     description:  StrictStr = Field(...,alias="description", description="A description of what this rule set is for") 
     output_property_key:  StrictStr = Field(...,alias="outputPropertyKey", description="The property key that this rule set will write to") 
-    rules: conlist(TaxRule) = Field(..., description="The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions")
+    rules: List[TaxRule] = Field(description="The rules of this rule set, which stipulate what rate to apply (i.e. write to the OutputPropertyKey) under certain conditions")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "displayName", "description", "outputPropertyKey", "rules", "version", "links"]
 
     class Config:
@@ -116,3 +118,5 @@ class TaxRuleSet(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TaxRuleSet.update_forward_refs()

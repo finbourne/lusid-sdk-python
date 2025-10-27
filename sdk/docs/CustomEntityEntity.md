@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.custom_entity_entity import CustomEntityEntity
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: StrictStr = "example_href"
 entity_unique_id: StrictStr = "example_entity_unique_id"
 as_at_version_number: Optional[StrictInt] = # Replace with your value
@@ -36,7 +38,7 @@ prevailing_custom_entity: Optional[CustomEntityResponse] = # Replace with your v
 deleted_custom_entity: Optional[CustomEntityResponse] = # Replace with your value
 previewed_status: Optional[StrictStr] = "example_previewed_status"
 previewed_custom_entity: Optional[CustomEntityResponse] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 custom_entity_entity_instance = CustomEntityEntity(href=href, entity_unique_id=entity_unique_id, as_at_version_number=as_at_version_number, status=status, as_at_deleted=as_at_deleted, user_id_deleted=user_id_deleted, request_id_deleted=request_id_deleted, effective_at_created=effective_at_created, prevailing_custom_entity=prevailing_custom_entity, deleted_custom_entity=deleted_custom_entity, previewed_status=previewed_status, previewed_custom_entity=previewed_custom_entity, links=links)
 
 ```

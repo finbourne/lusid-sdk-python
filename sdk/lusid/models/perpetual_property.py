@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.property_reference_data_value import PropertyReferenceDataValue
 from lusid.models.property_value import PropertyValue
 
@@ -29,7 +31,7 @@ class PerpetualProperty(BaseModel):
     """
     key:  StrictStr = Field(...,alias="key", description="The key of the property. This takes the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or 'Transaction/strategy/quantsignal'.") 
     value: Optional[PropertyValue] = None
-    reference_data: Optional[Dict[str, PropertyReferenceDataValue]] = Field(None, alias="referenceData", description="The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property.")
+    reference_data: Optional[Dict[str, PropertyReferenceDataValue]] = Field(default=None, description="The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property.", alias="referenceData")
     __properties = ["key", "value", "referenceData"]
 
     class Config:
@@ -102,3 +104,5 @@ class PerpetualProperty(BaseModel):
             else None
         })
         return _obj
+
+PerpetualProperty.update_forward_refs()

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **fee** | [**CalculationInfo**](CalculationInfo.md) |  | 
 **min_fee** | [**CalculationInfo**](CalculationInfo.md) |  | [optional] 
 **max_fee** | [**CalculationInfo**](CalculationInfo.md) |  | [optional] 
-**additional_keys** | **Dict[str, str]** |  | [optional] 
+**additional_keys** | **Dict[str, Optional[str]]** |  | [optional] 
 **description** | **str** |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
@@ -24,8 +24,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fee_rule import FeeRule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: StrictStr = "example_code"
 transaction_property_key: StrictStr = "example_transaction_property_key"
@@ -37,13 +39,13 @@ settlement_currency: StrictStr = "example_settlement_currency"
 execution_broker: StrictStr = "example_execution_broker"
 custodian: StrictStr = "example_custodian"
 exchange: StrictStr = "example_exchange"
-fee: CalculationInfo = # Replace with your value
+fee: CalculationInfo
 min_fee: Optional[CalculationInfo] = # Replace with your value
 max_fee: Optional[CalculationInfo] = # Replace with your value
-additional_keys: Optional[Dict[str, StrictStr]] = # Replace with your value
+additional_keys: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 description: Optional[StrictStr] = "example_description"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 fee_rule_instance = FeeRule(code=code, transaction_property_key=transaction_property_key, transaction_type=transaction_type, country=country, counterparty=counterparty, transaction_currency=transaction_currency, settlement_currency=settlement_currency, execution_broker=execution_broker, custodian=custodian, exchange=exchange, fee=fee, min_fee=min_fee, max_fee=max_fee, additional_keys=additional_keys, description=description, version=version, links=links)
 
 ```

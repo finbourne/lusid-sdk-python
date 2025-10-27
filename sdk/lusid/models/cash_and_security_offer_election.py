@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.units_ratio import UnitsRatio
 
 class CashAndSecurityOfferElection(BaseModel):
@@ -27,12 +29,12 @@ class CashAndSecurityOfferElection(BaseModel):
     Election for events that result in both cash and equity via a merger or acquisition  # noqa: E501
     """
     cash_offer_currency:  StrictStr = Field(...,alias="cashOfferCurrency", description="Currency of the cash offer") 
-    cash_offer_price: Union[StrictFloat, StrictInt] = Field(..., alias="cashOfferPrice", description="Price per share of the cash offer")
-    cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="costFactor", description="Optional. The fraction of cost that is transferred from the existing shares to the new shares.")
+    cash_offer_price: Union[StrictFloat, StrictInt] = Field(description="Price per share of the cash offer", alias="cashOfferPrice")
+    cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. The fraction of cost that is transferred from the existing shares to the new shares.", alias="costFactor")
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election.") 
-    is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
-    units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
+    is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
+    is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
+    units_ratio: UnitsRatio = Field(alias="unitsRatio")
     __properties = ["cashOfferCurrency", "cashOfferPrice", "costFactor", "electionKey", "isChosen", "isDefault", "unitsRatio"]
 
     class Config:
@@ -96,3 +98,5 @@ class CashAndSecurityOfferElection(BaseModel):
             "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
         })
         return _obj
+
+CashAndSecurityOfferElection.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.relational_dataset_field_definition import RelationalDatasetFieldDefinition
 
 class UpdateRelationalDatasetDefinitionRequest(BaseModel):
@@ -28,8 +30,8 @@ class UpdateRelationalDatasetDefinitionRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-friendly display name for the relational dataset definition.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A detailed description of the relational dataset definition and its purpose.") 
-    applicable_entity_types: conlist(StrictStr) = Field(..., alias="applicableEntityTypes", description="The types of entities this relational dataset definition can be applied to (e.g. Instrument, Portfolio, etc.).")
-    field_schema: conlist(RelationalDatasetFieldDefinition) = Field(..., alias="fieldSchema", description="The schema defining the structure and data types of the relational dataset.")
+    applicable_entity_types: List[StrictStr] = Field(description="The types of entities this relational dataset definition can be applied to (e.g. Instrument, Portfolio, etc.).", alias="applicableEntityTypes")
+    field_schema: List[RelationalDatasetFieldDefinition] = Field(description="The schema defining the structure and data types of the relational dataset.", alias="fieldSchema")
     __properties = ["displayName", "description", "applicableEntityTypes", "fieldSchema"]
 
     class Config:
@@ -94,3 +96,5 @@ class UpdateRelationalDatasetDefinitionRequest(BaseModel):
             "field_schema": [RelationalDatasetFieldDefinition.from_dict(_item) for _item in obj.get("fieldSchema")] if obj.get("fieldSchema") is not None else None
         })
         return _obj
+
+UpdateRelationalDatasetDefinitionRequest.update_forward_refs()

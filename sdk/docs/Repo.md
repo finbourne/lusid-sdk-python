@@ -21,14 +21,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.repo import Repo
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
 accrual_basis: StrictStr = "example_accrual_basis"
-collateral: Optional[conlist(LusidInstrument)] = # Replace with your value
+collateral: Optional[List[LusidInstrument]] = # Replace with your value
 collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 haircut: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

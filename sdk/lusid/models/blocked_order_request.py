@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -28,15 +30,15 @@ class BlockedOrderRequest(BaseModel):
     """
     BlockedOrderRequest
     """
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this order.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of the given instrument ordered.")
-    order_book_id: Optional[ResourceId] = Field(None, alias="orderBookId")
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    id: ResourceId = Field(...)
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of the given instrument ordered.")
+    order_book_id: Optional[ResourceId] = Field(default=None, alias="orderBookId")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    id: ResourceId
     state:  Optional[StrictStr] = Field(None,alias="state", description="The order's state (examples: New, PartiallyFilled, ...)") 
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the order was made")
+    var_date: Optional[datetime] = Field(default=None, description="The date on which the order was made", alias="date")
     price: Optional[CurrencyAndAmount] = None
-    order_instruction: Optional[ResourceId] = Field(None, alias="orderInstruction")
+    order_instruction: Optional[ResourceId] = Field(default=None, alias="orderInstruction")
     package: Optional[ResourceId] = None
     side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
     __properties = ["properties", "quantity", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side"]
@@ -143,3 +145,5 @@ class BlockedOrderRequest(BaseModel):
             "side": obj.get("side")
         })
         return _obj
+
+BlockedOrderRequest.update_forward_refs()

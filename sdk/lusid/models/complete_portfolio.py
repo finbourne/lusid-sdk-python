@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, validator 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -29,19 +31,19 @@ class CompletePortfolio(BaseModel):
     """
     CompletePortfolio
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the portfolio.") 
-    created: Optional[datetime] = Field(None, description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
-    parent_portfolio_id: Optional[ResourceId] = Field(None, alias="parentPortfolioId")
-    is_derived: Optional[StrictBool] = Field(None, alias="isDerived", description="Whether or not this is a derived portfolio.")
+    created: Optional[datetime] = Field(default=None, description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
+    parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
+    is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
-    version: Version = Field(...)
-    properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
+    version: Version
+    properties: Optional[List[ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.") 
-    sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="The sub holding key properties configured for the portfolio")
-    links: Optional[conlist(Link)] = None
+    sub_holding_keys: Optional[List[StrictStr]] = Field(default=None, description="The sub holding key properties configured for the portfolio", alias="subHoldingKeys")
+    links: Optional[List[Link]] = None
     __properties = ["id", "href", "description", "displayName", "created", "parentPortfolioId", "isDerived", "type", "version", "properties", "baseCurrency", "subHoldingKeys", "links"]
 
     @validator('type')
@@ -94,7 +96,12 @@ class CompletePortfolio(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -104,7 +111,7 @@ class CompletePortfolio(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition'):
+        if value not in ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition']:
             raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition')")
         return value
 
@@ -226,3 +233,5 @@ class CompletePortfolio(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CompletePortfolio.update_forward_refs()

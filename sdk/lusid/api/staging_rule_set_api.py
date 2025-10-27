@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.paged_resource_list_of_staging_rule_set import PagedResourceListOfStagingRuleSet
@@ -59,15 +56,15 @@ class StagingRuleSetApi:
 
 
     @overload
-    async def create_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(..., description="Request to create a staging rule set.")], **kwargs) -> StagingRuleSet:  # noqa: E501
+    async def create_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(description="Request to create a staging rule set.")], **kwargs) -> StagingRuleSet:  # noqa: E501
         ...
 
     @overload
-    def create_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(..., description="Request to create a staging rule set.")], async_req: Optional[bool]=True, **kwargs) -> StagingRuleSet:  # noqa: E501
+    def create_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(description="Request to create a staging rule set.")], async_req: Optional[bool]=True, **kwargs) -> StagingRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(..., description="Request to create a staging rule set.")], async_req: Optional[bool]=None, **kwargs) -> Union[StagingRuleSet, Awaitable[StagingRuleSet]]:  # noqa: E501
+    def create_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(description="Request to create a staging rule set.")], async_req: Optional[bool]=None, **kwargs) -> Union[StagingRuleSet, Awaitable[StagingRuleSet]]:  # noqa: E501
         """CreateStagingRuleSet: Create a StagingRuleSet  # noqa: E501
 
         Create a new staging rule set.  # noqa: E501
@@ -100,7 +97,7 @@ class StagingRuleSetApi:
         return self.create_staging_rule_set_with_http_info(entity_type, create_staging_rule_set_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_staging_rule_set_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(..., description="Request to create a staging rule set.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_staging_rule_set_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to create the staging rule set.")], create_staging_rule_set_request : Annotated[CreateStagingRuleSetRequest, Field(description="Request to create a staging rule set.")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateStagingRuleSet: Create a StagingRuleSet  # noqa: E501
 
         Create a new staging rule set.  # noqa: E501
@@ -541,15 +538,15 @@ class StagingRuleSetApi:
 
 
     @overload
-    async def list_staging_rule_sets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfStagingRuleSet:  # noqa: E501
+    async def list_staging_rule_sets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfStagingRuleSet:  # noqa: E501
         ...
 
     @overload
-    def list_staging_rule_sets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfStagingRuleSet:  # noqa: E501
+    def list_staging_rule_sets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfStagingRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_staging_rule_sets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfStagingRuleSet, Awaitable[PagedResourceListOfStagingRuleSet]]:  # noqa: E501
+    def list_staging_rule_sets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfStagingRuleSet, Awaitable[PagedResourceListOfStagingRuleSet]]:  # noqa: E501
         """ListStagingRuleSets: List StagingRuleSets  # noqa: E501
 
         List all the staging rule sets matching particular criteria.  # noqa: E501
@@ -588,7 +585,7 @@ class StagingRuleSetApi:
         return self.list_staging_rule_sets_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_staging_rule_sets_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_staging_rule_sets_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing staging rule sets from a previous call to list              staging rule sets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListStagingRuleSets: List StagingRuleSets  # noqa: E501
 
         List all the staging rule sets matching particular criteria.  # noqa: E501
@@ -729,15 +726,15 @@ class StagingRuleSetApi:
 
 
     @overload
-    async def update_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(..., description="Request to update a staging rule set.")], **kwargs) -> StagingRuleSet:  # noqa: E501
+    async def update_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(description="Request to update a staging rule set.")], **kwargs) -> StagingRuleSet:  # noqa: E501
         ...
 
     @overload
-    def update_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(..., description="Request to update a staging rule set.")], async_req: Optional[bool]=True, **kwargs) -> StagingRuleSet:  # noqa: E501
+    def update_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(description="Request to update a staging rule set.")], async_req: Optional[bool]=True, **kwargs) -> StagingRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(..., description="Request to update a staging rule set.")], async_req: Optional[bool]=None, **kwargs) -> Union[StagingRuleSet, Awaitable[StagingRuleSet]]:  # noqa: E501
+    def update_staging_rule_set(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(description="Request to update a staging rule set.")], async_req: Optional[bool]=None, **kwargs) -> Union[StagingRuleSet, Awaitable[StagingRuleSet]]:  # noqa: E501
         """UpdateStagingRuleSet: Update a StagingRuleSet  # noqa: E501
 
         Update an existing staging rule set.  # noqa: E501
@@ -770,7 +767,7 @@ class StagingRuleSetApi:
         return self.update_staging_rule_set_with_http_info(entity_type, update_staging_rule_set_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_staging_rule_set_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(..., description="Request to update a staging rule set.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_staging_rule_set_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The entity type for which to update the staging rule set.")], update_staging_rule_set_request : Annotated[UpdateStagingRuleSetRequest, Field(description="Request to update a staging rule set.")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpdateStagingRuleSet: Update a StagingRuleSet  # noqa: E501
 
         Update an existing staging rule set.  # noqa: E501

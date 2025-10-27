@@ -25,9 +25,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.staged_modification import StagedModification
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 id: Optional[StrictStr] = "example_id"
 as_at_staged: Optional[datetime] = # Replace with your value
 user_id_staged: Optional[StrictStr] = "example_user_id_staged"
@@ -35,7 +37,7 @@ requested_id_staged: Optional[StrictStr] = "example_requested_id_staged"
 request_reason: Optional[StrictStr] = "example_request_reason"
 action: Optional[StrictStr] = "example_action"
 staging_rule: Optional[StagedModificationStagingRule] = # Replace with your value
-decisions: Optional[conlist(StagedModificationDecision)] = # Replace with your value
+decisions: Optional[List[StagedModificationDecision]] = # Replace with your value
 decisions_count: Optional[StrictInt] = # Replace with your value
 decisions_count: Optional[StrictInt] = None
 status: Optional[StrictStr] = "example_status"
@@ -46,7 +48,7 @@ entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
 requested_changes: Optional[RequestedChanges] = # Replace with your value
 entity_hrefs: Optional[StagedModificationsEntityHrefs] = # Replace with your value
 display_name: Optional[StrictStr] = "example_display_name"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 staged_modification_instance = StagedModification(id=id, as_at_staged=as_at_staged, user_id_staged=user_id_staged, requested_id_staged=requested_id_staged, request_reason=request_reason, action=action, staging_rule=staging_rule, decisions=decisions, decisions_count=decisions_count, status=status, as_at_closed=as_at_closed, entity_type=entity_type, scope=scope, entity_unique_id=entity_unique_id, requested_changes=requested_changes, entity_hrefs=entity_hrefs, display_name=display_name, links=links)
 
 ```

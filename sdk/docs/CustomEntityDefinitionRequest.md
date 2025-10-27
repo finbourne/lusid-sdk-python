@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.custom_entity_definition_request import CustomEntityDefinitionRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 entity_type_name: StrictStr = "example_entity_type_name"
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
-field_schema: conlist(CustomEntityFieldDefinition) = # Replace with your value
+field_schema: List[CustomEntityFieldDefinition] = # Replace with your value
 custom_entity_definition_request_instance = CustomEntityDefinitionRequest(entity_type_name=entity_type_name, display_name=display_name, description=description, field_schema=field_schema)
 
 ```

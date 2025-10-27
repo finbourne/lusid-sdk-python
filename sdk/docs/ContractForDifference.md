@@ -21,9 +21,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.contract_for_difference import ContractForDifference
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: Optional[datetime] = # Replace with your value
 code: Optional[StrictStr] = "example_code"

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.match_criterion import MatchCriterion
 
 class PropertyValueEquals(MatchCriterion):
@@ -82,14 +84,19 @@ class PropertyValueEquals(MatchCriterion):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "criterion_type" != "type":
             return value
 
-        if value not in ('PropertyValueEquals', 'PropertyValueIn', 'SubHoldingKeyValueEquals'):
+        if value not in ['PropertyValueEquals', 'PropertyValueIn', 'SubHoldingKeyValueEquals']:
             raise ValueError("must be one of enum values ('PropertyValueEquals', 'PropertyValueIn', 'SubHoldingKeyValueEquals')")
         return value
 
@@ -153,3 +160,5 @@ class PropertyValueEquals(MatchCriterion):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+PropertyValueEquals.update_forward_refs()

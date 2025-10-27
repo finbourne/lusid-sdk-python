@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.dialect_schema import DialectSchema
 from lusid.models.translation_input import TranslationInput
 
@@ -27,9 +29,9 @@ class TranslateEntitiesInlinedRequest(BaseModel):
     """
     Request to translate financial entities with a given script body.  The output of the translation is validated against a schema specified in the request.  # noqa: E501
     """
-    entity_payloads: Dict[str, TranslationInput] = Field(..., alias="entityPayloads", description="Entity payloads to be translated indexed by (ephemeral) unique correlation ids.")
+    entity_payloads: Dict[str, TranslationInput] = Field(description="Entity payloads to be translated indexed by (ephemeral) unique correlation ids.", alias="entityPayloads")
     script_body:  StrictStr = Field(...,alias="scriptBody", description="The body of the translation script to use for translating the entities.") 
-    var_schema: Optional[DialectSchema] = Field(None, alias="schema")
+    var_schema: Optional[DialectSchema] = Field(default=None, alias="schema")
     __properties = ["entityPayloads", "scriptBody", "schema"]
 
     class Config:
@@ -96,3 +98,5 @@ class TranslateEntitiesInlinedRequest(BaseModel):
             "var_schema": DialectSchema.from_dict(obj.get("schema")) if obj.get("schema") is not None else None
         })
         return _obj
+
+TranslateEntitiesInlinedRequest.update_forward_refs()

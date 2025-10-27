@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.compounding import Compounding
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
@@ -31,23 +33,23 @@ class LegDefinition(BaseModel):
     """
     Definition of the set of flow and index conventions along with other miscellaneous information required to generate an instrument leg.  # noqa: E501
     """
-    convention_name: Optional[FlowConventionName] = Field(None, alias="conventionName")
+    convention_name: Optional[FlowConventionName] = Field(default=None, alias="conventionName")
     conventions: Optional[FlowConventions] = None
-    index_convention: Optional[IndexConvention] = Field(None, alias="indexConvention")
-    index_convention_name: Optional[FlowConventionName] = Field(None, alias="indexConventionName")
+    index_convention: Optional[IndexConvention] = Field(default=None, alias="indexConvention")
+    index_convention_name: Optional[FlowConventionName] = Field(default=None, alias="indexConventionName")
     notional_exchange_type:  StrictStr = Field(...,alias="notionalExchangeType", description="what type of notional exchange does the leg have    Supported string (enumeration) values are: [None, Initial, Final, Both].") 
     pay_receive:  StrictStr = Field(...,alias="payReceive", description="Is the leg to be paid or received    Supported string (enumeration) values are: [Pay, Receive].") 
-    rate_or_spread: Union[StrictFloat, StrictInt] = Field(..., alias="rateOrSpread", description="Is there either a fixed rate (non-zero) or spread to be paid over the value of the leg.")
+    rate_or_spread: Union[StrictFloat, StrictInt] = Field(description="Is there either a fixed rate (non-zero) or spread to be paid over the value of the leg.", alias="rateOrSpread")
     reset_convention:  Optional[StrictStr] = Field(None,alias="resetConvention", description="Control how resets are generated relative to swap payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].  Defaults to \"InAdvance\" if not set.") 
     stub_type:  StrictStr = Field(...,alias="stubType", description="If a stub is required should it be at the front or back of the leg.    Supported string (enumeration) values are: [None, ShortFront, ShortBack, LongBack, LongFront, Both].") 
     compounding: Optional[Compounding] = None
     amortisation: Optional[StepSchedule] = None
-    first_regular_payment_date: Optional[datetime] = Field(None, alias="firstRegularPaymentDate", description="Optional payment date of the first regular coupon.  Must be greater than the StartDate.  If set, the regular coupon schedule will be built such that the first regular coupon  will end on this date. The start date of this coupon will be calculated as normal and  a stub coupon will be created from the StartDate to the start of the first regular coupon.")
+    first_regular_payment_date: Optional[datetime] = Field(default=None, description="Optional payment date of the first regular coupon.  Must be greater than the StartDate.  If set, the regular coupon schedule will be built such that the first regular coupon  will end on this date. The start date of this coupon will be calculated as normal and  a stub coupon will be created from the StartDate to the start of the first regular coupon.", alias="firstRegularPaymentDate")
     first_coupon_type:  Optional[StrictStr] = Field(None,alias="firstCouponType", description="Optional coupon type setting for the first coupon, can be used with Stub coupons.  If set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,  however if set to \"Full\" the year fraction is overwritten with the standard year fraction  for a regular ful\" coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full].") 
-    last_regular_payment_date: Optional[datetime] = Field(None, alias="lastRegularPaymentDate", description="Optional payment date of the last regular coupon.  Must be less than the Maturity date.  If set, the regular coupon schedule will be built up to this date and the final  coupon will be a stub between this date and the Maturity date.")
+    last_regular_payment_date: Optional[datetime] = Field(default=None, description="Optional payment date of the last regular coupon.  Must be less than the Maturity date.  If set, the regular coupon schedule will be built up to this date and the final  coupon will be a stub between this date and the Maturity date.", alias="lastRegularPaymentDate")
     last_coupon_type:  Optional[StrictStr] = Field(None,alias="lastCouponType", description="Optional coupon type setting for the last coupon, can be used with Stub coupons.  If set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,  however if set to \"Full\" the year fraction is overwritten with the standard year fraction  for a regular ful\" coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full].") 
-    fx_linked_notional_schedule: Optional[FxLinkedNotionalSchedule] = Field(None, alias="fxLinkedNotionalSchedule")
-    intermediate_notional_exchange: Optional[StrictBool] = Field(None, alias="intermediateNotionalExchange", description="Indicates whether there are intermediate notional exchanges.")
+    fx_linked_notional_schedule: Optional[FxLinkedNotionalSchedule] = Field(default=None, alias="fxLinkedNotionalSchedule")
+    intermediate_notional_exchange: Optional[StrictBool] = Field(default=None, description="Indicates whether there are intermediate notional exchanges.", alias="intermediateNotionalExchange")
     __properties = ["conventionName", "conventions", "indexConvention", "indexConventionName", "notionalExchangeType", "payReceive", "rateOrSpread", "resetConvention", "stubType", "compounding", "amortisation", "firstRegularPaymentDate", "firstCouponType", "lastRegularPaymentDate", "lastCouponType", "fxLinkedNotionalSchedule", "intermediateNotionalExchange"]
 
     class Config:
@@ -164,3 +166,5 @@ class LegDefinition(BaseModel):
             "intermediate_notional_exchange": obj.get("intermediateNotionalExchange")
         })
         return _obj
+
+LegDefinition.update_forward_refs()

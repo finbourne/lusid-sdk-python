@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.weighted_instruments import WeightedInstruments
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-instruments: conlist(WeightedInstrument) = # Replace with your value
+instruments: List[WeightedInstrument] = # Replace with your value
 weighted_instruments_instance = WeightedInstruments(instruments=instruments)
 
 ```

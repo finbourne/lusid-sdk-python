@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 
 class AddBusinessDaysToDateRequest(BaseModel):
     """
     AddBusinessDaysToDateRequest
     """
-    business_day_offset: StrictInt = Field(..., alias="businessDayOffset")
-    holiday_codes: conlist(StrictStr) = Field(..., alias="holidayCodes")
-    start_date: Optional[datetime] = Field(None, alias="startDate")
-    as_at: Optional[datetime] = Field(None, alias="asAt")
+    business_day_offset: StrictInt = Field(alias="businessDayOffset")
+    holiday_codes: List[StrictStr] = Field(alias="holidayCodes")
+    start_date: Optional[datetime] = Field(default=None, alias="startDate")
+    as_at: Optional[datetime] = Field(default=None, alias="asAt")
     __properties = ["businessDayOffset", "holidayCodes", "startDate", "asAt"]
 
     class Config:
@@ -86,3 +88,5 @@ class AddBusinessDaysToDateRequest(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+AddBusinessDaysToDateRequest.update_forward_refs()

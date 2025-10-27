@@ -31,8 +31,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_holding import PortfolioHolding
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 instrument_uid: StrictStr = "example_instrument_uid"
@@ -41,7 +43,7 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 holding_type: StrictStr = "example_holding_type"
 units: Union[StrictFloat, StrictInt] = # Replace with your value
 settled_units: Union[StrictFloat, StrictInt] = # Replace with your value
-cost: CurrencyAndAmount = # Replace with your value
+cost: CurrencyAndAmount
 cost_portfolio_ccy: CurrencyAndAmount = # Replace with your value
 transaction: Optional[Transaction] = None
 currency: Optional[StrictStr] = "example_currency"
@@ -52,7 +54,7 @@ amortised_cost: Optional[CurrencyAndAmount] = # Replace with your value
 amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = # Replace with your value
 variation_margin: Optional[CurrencyAndAmount] = # Replace with your value
 variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = # Replace with your value
-settlement_schedule: Optional[conlist(SettlementSchedule)] = # Replace with your value
+settlement_schedule: Optional[List[SettlementSchedule]] = # Replace with your value
 current_face: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 unsettled_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

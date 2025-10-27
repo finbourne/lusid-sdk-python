@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CustomEntityFieldDefinition(BaseModel):
     """
@@ -29,7 +31,7 @@ class CustomEntityFieldDefinition(BaseModel):
     lifetime:  StrictStr = Field(...,alias="lifetime", description="Describes how the field’s values can change over time. The available values are: “Perpetual”, “TimeVariant”.") 
     type:  StrictStr = Field(...,alias="type", description="The value type for the field. Available values are: “String”, “Boolean”, “DateTime”, “Decimal”.") 
     collection_type:  Optional[StrictStr] = Field(None,alias="collectionType", description="The collection type for the field. Available values are: “Single”, “Array”. Null value defaults to “Single”") 
-    required: StrictBool = Field(..., description="Whether the field is required or not.")
+    required: StrictBool = Field(description="Whether the field is required or not.")
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the field.") 
     __properties = ["name", "lifetime", "type", "collectionType", "required", "description"]
 
@@ -95,3 +97,5 @@ class CustomEntityFieldDefinition(BaseModel):
             "description": obj.get("description")
         })
         return _obj
+
+CustomEntityFieldDefinition.update_forward_refs()

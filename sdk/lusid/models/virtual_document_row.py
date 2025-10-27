@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 
 class VirtualDocumentRow(BaseModel):
     """
     Rows identified by the composite id, based on the data maps  # noqa: E501
     """
-    row_id: Optional[Dict[str, StrictStr]] = Field(None, alias="rowId", description="The identifier for the row. This is keyed by address keys, and values obtained through applying the data map to the documents.")
-    row_data: Optional[GroupedResultOfAddressKey] = Field(None, alias="rowData")
+    row_id: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The identifier for the row. This is keyed by address keys, and values obtained through applying the data map to the documents.", alias="rowId")
+    row_data: Optional[GroupedResultOfAddressKey] = Field(default=None, alias="rowData")
     __properties = ["rowId", "rowData"]
 
     class Config:
@@ -86,3 +88,5 @@ class VirtualDocumentRow(BaseModel):
             "row_data": GroupedResultOfAddressKey.from_dict(obj.get("rowData")) if obj.get("rowData") is not None else None
         })
         return _obj
+
+VirtualDocumentRow.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class GeneralLedgerProfileMapping(BaseModel):
     """
     GeneralLedgerProfileMapping
     """
     mapping_filter:  StrictStr = Field(...,alias="mappingFilter", description="The filter syntax for the Mapping filter. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax") 
-    levels: conlist(StrictStr) = Field(..., description="References fields and properties on the associated Journal Entry Line and graph of associated objects.")
+    levels: List[StrictStr] = Field(description="References fields and properties on the associated Journal Entry Line and graph of associated objects.")
     __properties = ["mappingFilter", "levels"]
 
     class Config:
@@ -77,3 +79,5 @@ class GeneralLedgerProfileMapping(BaseModel):
             "levels": obj.get("levels")
         })
         return _obj
+
+GeneralLedgerProfileMapping.update_forward_refs()

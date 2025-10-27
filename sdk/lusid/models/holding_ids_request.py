@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class HoldingIdsRequest(BaseModel):
     """
     HoldingIdsRequest
     """
-    holding_ids: conlist(StrictInt) = Field(..., alias="holdingIds", description="The array of unique holding identifiers")
+    holding_ids: List[StrictInt] = Field(description="The array of unique holding identifiers", alias="holdingIds")
     __properties = ["holdingIds"]
 
     class Config:
@@ -75,3 +77,5 @@ class HoldingIdsRequest(BaseModel):
             "holding_ids": obj.get("holdingIds")
         })
         return _obj
+
+HoldingIdsRequest.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class UpsertValuationPointRequest(BaseModel):
@@ -28,10 +30,10 @@ class UpsertValuationPointRequest(BaseModel):
     """
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="Unique code for the Valuation Point.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="Identifiable Name assigned to the Valuation Point.") 
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
-    apply_clear_down: Optional[StrictBool] = Field(None, alias="applyClearDown", description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.")
+    effective_at: datetime = Field(description="The effective time of the diary entry.", alias="effectiveAt")
+    query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
+    apply_clear_down: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.", alias="applyClearDown")
     __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown"]
 
     class Config:
@@ -113,3 +115,5 @@ class UpsertValuationPointRequest(BaseModel):
             "apply_clear_down": obj.get("applyClearDown")
         })
         return _obj
+
+UpsertValuationPointRequest.update_forward_refs()

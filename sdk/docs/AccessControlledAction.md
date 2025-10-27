@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.access_controlled_action import AccessControlledAction
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 description: StrictStr = "example_description"
-action: ActionId = # Replace with your value
-limited_set: Optional[conlist(IdSelectorDefinition)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+action: ActionId
+limited_set: Optional[List[IdSelectorDefinition]] = # Replace with your value
+links: Optional[List[Link]] = None
 access_controlled_action_instance = AccessControlledAction(description=description, action=action, limited_set=limited_set, links=links)
 
 ```

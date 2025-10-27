@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCriteria
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 required_approvals: Optional[StrictInt] = # Replace with your value
 required_approvals: Optional[StrictInt] = None

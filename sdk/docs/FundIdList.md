@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_id_list import FundIdList
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(ResourceId, max_items=10000) = Field(...)
+values: List[ResourceId]
 reference_list_type: StrictStr = "example_reference_list_type"
 fund_id_list_instance = FundIdList(values=values, reference_list_type=reference_list_type)
 

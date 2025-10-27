@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
 
@@ -29,8 +31,8 @@ class UpdateGroupReconciliationComparisonRulesetRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the ruleset") 
     reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
-    core_attribute_rules: conlist(GroupReconciliationCoreAttributeRule) = Field(..., alias="coreAttributeRules", description="The core comparison rules")
-    aggregate_attribute_rules: conlist(GroupReconciliationAggregateAttributeRule) = Field(..., alias="aggregateAttributeRules", description="The aggregate comparison rules")
+    core_attribute_rules: List[GroupReconciliationCoreAttributeRule] = Field(description="The core comparison rules", alias="coreAttributeRules")
+    aggregate_attribute_rules: List[GroupReconciliationAggregateAttributeRule] = Field(description="The aggregate comparison rules", alias="aggregateAttributeRules")
     __properties = ["displayName", "reconciliationType", "coreAttributeRules", "aggregateAttributeRules"]
 
     class Config:
@@ -97,3 +99,5 @@ class UpdateGroupReconciliationComparisonRulesetRequest(BaseModel):
             "aggregate_attribute_rules": [GroupReconciliationAggregateAttributeRule.from_dict(_item) for _item in obj.get("aggregateAttributeRules")] if obj.get("aggregateAttributeRules") is not None else None
         })
         return _obj
+
+UpdateGroupReconciliationComparisonRulesetRequest.update_forward_refs()

@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.holding_contributor import HoldingContributor
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-transaction: Transaction = # Replace with your value
+transaction: Transaction
 holding_id: Optional[StrictInt] = # Replace with your value
-movements: Optional[conlist(MovementSettlementSummary)] = # Replace with your value
+movements: Optional[List[MovementSettlementSummary]] = # Replace with your value
 holding_contributor_instance = HoldingContributor(transaction=transaction, holding_id=holding_id, movements=movements)
 
 ```

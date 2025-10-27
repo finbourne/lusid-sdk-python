@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -30,16 +32,16 @@ class AborConfiguration(BaseModel):
     An AborConfiguration entity.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Abor Configuration.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Abor Configuration.") 
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
-    posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes", description="The Posting Module Codes from which the rules to be applied are retrieved.")
-    cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes", description="The Cleardown Module Codes from which the rules to be applied are retrieved.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor Configuration.")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    chart_of_accounts_id: ResourceId = Field(alias="chartOfAccountsId")
+    posting_module_codes: Optional[List[StrictStr]] = Field(default=None, description="The Posting Module Codes from which the rules to be applied are retrieved.", alias="postingModuleCodes")
+    cleardown_module_codes: Optional[List[StrictStr]] = Field(default=None, description="The Cleardown Module Codes from which the rules to be applied are retrieved.", alias="cleardownModuleCodes")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Abor Configuration.")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "properties", "version", "links"]
 
     class Config:
@@ -165,3 +167,5 @@ class AborConfiguration(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AborConfiguration.update_forward_refs()

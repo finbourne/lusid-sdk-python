@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FieldDefinition(BaseModel):
     """
     FieldDefinition
     """
     key:  StrictStr = Field(...,alias="key") 
-    is_required: StrictBool = Field(..., alias="isRequired")
-    is_unique: StrictBool = Field(..., alias="isUnique")
+    is_required: StrictBool = Field(alias="isRequired")
+    is_unique: StrictBool = Field(alias="isUnique")
     value_type:  Optional[StrictStr] = Field(None,alias="valueType") 
     __properties = ["key", "isRequired", "isUnique", "valueType"]
 
@@ -86,3 +88,5 @@ class FieldDefinition(BaseModel):
             "value_type": obj.get("valueType")
         })
         return _obj
+
+FieldDefinition.update_forward_refs()

@@ -18,17 +18,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.aggregated_returns_request import AggregatedReturnsRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-metrics: conlist(PerformanceReturnsMetric) = # Replace with your value
-return_ids: Optional[conlist(ResourceId)] = # Replace with your value
+metrics: List[PerformanceReturnsMetric] = # Replace with your value
+return_ids: Optional[List[ResourceId]] = # Replace with your value
 recipe_id: Optional[ResourceId] = # Replace with your value
 composite_method: Optional[StrictStr] = "example_composite_method"
 period: Optional[StrictStr] = "example_period"
 output_frequency: Optional[StrictStr] = "example_output_frequency"
 alternative_inception_date: Optional[StrictStr] = "example_alternative_inception_date"
-holiday_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+holiday_calendars: Optional[List[StrictStr]] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
 run_mode: Optional[StrictStr] = "example_run_mode"
 aggregated_returns_request_instance = AggregatedReturnsRequest(metrics=metrics, return_ids=return_ids, recipe_id=recipe_id, composite_method=composite_method, period=period, output_frequency=output_frequency, alternative_inception_date=alternative_inception_date, holiday_calendars=holiday_calendars, currency=currency, run_mode=run_mode)

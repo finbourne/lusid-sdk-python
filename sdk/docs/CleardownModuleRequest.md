@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cleardown_module_request import CleardownModuleRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: Optional[conlist(CleardownModuleRule)] = # Replace with your value
+rules: Optional[List[CleardownModuleRule]] = # Replace with your value
 cleardown_module_request_instance = CleardownModuleRequest(code=code, display_name=display_name, description=description, rules=rules)
 
 ```

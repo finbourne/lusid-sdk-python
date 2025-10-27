@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.aggregated_transactions_request import AggregatedTransactionsRequest
 from lusid.models.reconciliation_left_right_address_key_pair import ReconciliationLeftRightAddressKeyPair
 from lusid.models.reconciliation_rule import ReconciliationRule
@@ -28,11 +30,11 @@ class TransactionReconciliationRequestV2(BaseModel):
     """
     Specification for the reconciliation request. Left and Right hand sides are constructed. Each consists of transactions from a portfolio  The results of this can then be compared to each other.  # noqa: E501
     """
-    left: AggregatedTransactionsRequest = Field(...)
-    right: AggregatedTransactionsRequest = Field(...)
-    left_to_right_mapping: Optional[conlist(ReconciliationLeftRightAddressKeyPair)] = Field(None, alias="leftToRightMapping", description="The mapping from property keys requested by left aggregation to property keys on right hand side")
-    comparison_rules: Optional[conlist(ReconciliationRule)] = Field(None, alias="comparisonRules", description="The set of rules to be used in comparing values. These are the rules that determine what constitutes a match.  The simplest is obviously an exact one-for-one comparison, but tolerances on numerical or date time values and  case-insensitive string comparison are supported amongst other types.")
-    preserve_keys: Optional[conlist(StrictStr)] = Field(None, alias="preserveKeys", description="List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping.  If two values are equal, for a given key then the value is elided from the results. Setting it here  will preserve it (takes the values from the RHS and puts it into the line by line results).")
+    left: AggregatedTransactionsRequest
+    right: AggregatedTransactionsRequest
+    left_to_right_mapping: Optional[List[ReconciliationLeftRightAddressKeyPair]] = Field(default=None, description="The mapping from property keys requested by left aggregation to property keys on right hand side", alias="leftToRightMapping")
+    comparison_rules: Optional[List[ReconciliationRule]] = Field(default=None, description="The set of rules to be used in comparing values. These are the rules that determine what constitutes a match.  The simplest is obviously an exact one-for-one comparison, but tolerances on numerical or date time values and  case-insensitive string comparison are supported amongst other types.", alias="comparisonRules")
+    preserve_keys: Optional[List[StrictStr]] = Field(default=None, description="List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping.  If two values are equal, for a given key then the value is elided from the results. Setting it here  will preserve it (takes the values from the RHS and puts it into the line by line results).", alias="preserveKeys")
     __properties = ["left", "right", "leftToRightMapping", "comparisonRules", "preserveKeys"]
 
     class Config:
@@ -121,3 +123,5 @@ class TransactionReconciliationRequestV2(BaseModel):
             "preserve_keys": obj.get("preserveKeys")
         })
         return _obj
+
+TransactionReconciliationRequestV2.update_forward_refs()

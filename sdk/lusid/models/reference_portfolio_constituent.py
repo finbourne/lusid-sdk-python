@@ -18,20 +18,22 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 
 class ReferencePortfolioConstituent(BaseModel):
     """
     ReferencePortfolioConstituent
     """
-    instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="Unique instrument identifiers")
+    instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Unique instrument identifiers", alias="instrumentIdentifiers")
     instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
     currency:  StrictStr = Field(...,alias="currency", description="") 
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Properties associated with the constituent")
-    weight: Union[StrictFloat, StrictInt] = Field(...)
-    floating_weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="floatingWeight")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties associated with the constituent")
+    weight: Union[StrictFloat, StrictInt]
+    floating_weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="floatingWeight")
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="") 
     __properties = ["instrumentIdentifiers", "instrumentUid", "currency", "properties", "weight", "floatingWeight", "instrumentScope"]
 
@@ -120,3 +122,5 @@ class ReferencePortfolioConstituent(BaseModel):
             "instrument_scope": obj.get("instrumentScope")
         })
         return _obj
+
+ReferencePortfolioConstituent.update_forward_refs()

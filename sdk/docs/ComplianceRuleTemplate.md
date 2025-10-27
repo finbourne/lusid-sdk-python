@@ -14,16 +14,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 id: Optional[ResourceId] = None
 description: Optional[StrictStr] = "example_description"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-variations: Optional[conlist(ComplianceTemplateVariationDto)] = # Replace with your value
+variations: Optional[List[ComplianceTemplateVariationDto]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 compliance_rule_template_instance = ComplianceRuleTemplate(id=id, description=description, properties=properties, variations=variations, href=href, version=version, links=links)
 
 ```

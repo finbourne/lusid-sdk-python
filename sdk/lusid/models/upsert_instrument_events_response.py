@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.link import Link
@@ -29,9 +31,9 @@ class UpsertInstrumentEventsResponse(BaseModel):
     UpsertInstrumentEventsResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    values: Optional[Dict[str, InstrumentEventHolder]] = Field(None, description="The corporate actions which have been successfully updated or inserted.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The corporate actions that could not be updated or inserted along with a reason for their failure.")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, InstrumentEventHolder]] = Field(default=None, description="The corporate actions which have been successfully updated or inserted.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The corporate actions that could not be updated or inserted along with a reason for their failure.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "values", "failed", "links"]
 
     class Config:
@@ -135,3 +137,5 @@ class UpsertInstrumentEventsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+UpsertInstrumentEventsResponse.update_forward_refs()

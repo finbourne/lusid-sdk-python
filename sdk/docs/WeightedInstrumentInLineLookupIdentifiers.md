@@ -19,8 +19,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 isin: Optional[StrictStr] = "example_isin"

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_event_id** | **str** | The unique identifier of this corporate action. | 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The set of identifiers which determine the instrument this event relates to. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The set of identifiers which determine the instrument this event relates to. | 
 **lusid_instrument_id** | **str** | The LUID for the instrument. | 
 **instrument_scope** | **str** | The scope of the instrument. | 
 **description** | **str** | The description of the instrument event. | 
@@ -21,19 +21,21 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_event_holder import InstrumentEventHolder
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 instrument_event_id: StrictStr = "example_instrument_event_id"
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 instrument_scope: StrictStr = "example_instrument_scope"
 description: StrictStr = "example_description"
 event_date_range: EventDateRange = # Replace with your value
 completeness: Optional[StrictStr] = "example_completeness"
 instrument_event: InstrumentEvent = # Replace with your value
-properties: Optional[conlist(PerpetualProperty)] = # Replace with your value
+properties: Optional[List[PerpetualProperty]] = # Replace with your value
 sequence_number: Optional[StrictInt] = # Replace with your value
 sequence_number: Optional[StrictInt] = None
 participation_type: Optional[StrictStr] = "example_participation_type"

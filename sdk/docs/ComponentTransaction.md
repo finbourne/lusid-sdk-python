@@ -13,16 +13,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.component_transaction import ComponentTransaction
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
 condition: Optional[StrictStr] = "example_condition"
 transaction_field_map: TransactionFieldMap = # Replace with your value
-transaction_property_map: conlist(TransactionPropertyMap) = # Replace with your value
+transaction_property_map: List[TransactionPropertyMap] = # Replace with your value
 preserve_tax_lot_structure: Optional[StrictBool] = # Replace with your value
 preserve_tax_lot_structure:Optional[StrictBool] = None
-market_open_time_adjustments: Optional[conlist(StrictStr)] = # Replace with your value
+market_open_time_adjustments: Optional[List[StrictStr]] = # Replace with your value
 component_transaction_instance = ComponentTransaction(display_name=display_name, condition=condition, transaction_field_map=transaction_field_map, transaction_property_map=transaction_property_map, preserve_tax_lot_structure=preserve_tax_lot_structure, market_open_time_adjustments=market_open_time_adjustments)
 
 ```

@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_graph_block_order_detail import OrderGraphBlockOrderDetail
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 compliance_state: StrictStr = "example_compliance_state"
 approval_state: StrictStr = "example_approval_state"
 portfolio_id: Optional[ResourceId] = # Replace with your value
 portfolio_name: Optional[StrictStr] = "example_portfolio_name"
 order_approval_task_id: Optional[StrictStr] = "example_order_approval_task_id"
 order_approval_task_definition_id: Optional[ResourceId] = # Replace with your value
-non_passing_compliance_rule_results: Optional[conlist(ContributionToNonPassingRuleDetail)] = # Replace with your value
+non_passing_compliance_rule_results: Optional[List[ContributionToNonPassingRuleDetail]] = # Replace with your value
 order_graph_block_order_detail_instance = OrderGraphBlockOrderDetail(id=id, compliance_state=compliance_state, approval_state=approval_state, portfolio_id=portfolio_id, portfolio_name=portfolio_name, order_approval_task_id=order_approval_task_id, order_approval_task_definition_id=order_approval_task_definition_id, non_passing_compliance_rule_results=non_passing_compliance_rule_results)
 
 ```

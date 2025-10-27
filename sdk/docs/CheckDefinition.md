@@ -16,18 +16,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.check_definition import CheckDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 dataset_schema: Optional[CheckDefinitionDatasetSchema] = # Replace with your value
-rule_sets: Optional[conlist(CheckDefinitionRuleSet)] = # Replace with your value
+rule_sets: Optional[List[CheckDefinitionRuleSet]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 check_definition_instance = CheckDefinition(id=id, display_name=display_name, description=description, dataset_schema=dataset_schema, rule_sets=rule_sets, href=href, version=version, properties=properties, links=links)
 
 ```

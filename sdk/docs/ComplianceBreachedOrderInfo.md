@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_breached_order_info import ComplianceBreachedOrderInfo
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 order_id: ResourceId = # Replace with your value
-list_rule_result: conlist(ComplianceRuleResult) = # Replace with your value
+list_rule_result: List[ComplianceRuleResult] = # Replace with your value
 compliance_breached_order_info_instance = ComplianceBreachedOrderInfo(order_id=order_id, list_rule_result=list_rule_result)
 
 ```

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 
 class Bucket(BaseModel):
@@ -35,8 +37,8 @@ class Bucket(BaseModel):
     holding_sign:  Optional[StrictStr] = Field(None,alias="holdingSign", description="The holding sign.") 
     local: Optional[CurrencyAndAmount] = None
     base: Optional[CurrencyAndAmount] = None
-    units: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The units.")
-    activity_date: Optional[datetime] = Field(None, alias="activityDate", description="The activity date of the bucket.")
+    units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The units.")
+    activity_date: Optional[datetime] = Field(default=None, description="The activity date of the bucket.", alias="activityDate")
     __properties = ["taxLotId", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "holdingSign", "local", "base", "units", "activityDate"]
 
     class Config:
@@ -137,3 +139,5 @@ class Bucket(BaseModel):
             "activity_date": obj.get("activityDate")
         })
         return _obj
+
+Bucket.update_forward_refs()

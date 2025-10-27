@@ -4,7 +4,7 @@ A 'transition' within a corporate action, representing an output transition.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_identifiers** | **Dict[str, str]** | Unique instrument identifiers | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers | 
 **units_factor** | **float** | The factor to scale units by | 
 **cost_factor** | **float** | The factor to scale cost by | 
 **lusid_instrument_id** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the instrument identifiers | [optional] [readonly] 
@@ -14,10 +14,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.output_transition import OutputTransition
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 units_factor: Union[StrictFloat, StrictInt] = # Replace with your value
 cost_factor: Union[StrictFloat, StrictInt] = # Replace with your value
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"

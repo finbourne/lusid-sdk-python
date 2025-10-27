@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class OrderGraphPlacementExecutionDetail(BaseModel):
     """
     OrderGraphPlacementExecutionDetail
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     __properties = ["id"]
 
     class Config:
@@ -79,3 +81,5 @@ class OrderGraphPlacementExecutionDetail(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None
         })
         return _obj
+
+OrderGraphPlacementExecutionDetail.update_forward_refs()

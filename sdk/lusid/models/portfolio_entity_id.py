@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class PortfolioEntityId(BaseModel):
     """
@@ -84,3 +86,5 @@ class PortfolioEntityId(BaseModel):
             "portfolio_entity_type": obj.get("portfolioEntityType")
         })
         return _obj
+
+PortfolioEntityId.update_forward_refs()

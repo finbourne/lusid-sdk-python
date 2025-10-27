@@ -26,8 +26,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.property_definition_search_result import PropertyDefinitionSearchResult
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 key: Optional[StrictStr] = "example_key"
@@ -48,7 +50,7 @@ property_description: Optional[StrictStr] = "example_property_description"
 derivation_formula: Optional[StrictStr] = "example_derivation_formula"
 is_filterable: Optional[StrictBool] = # Replace with your value
 is_filterable:Optional[StrictBool] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 property_definition_search_result_instance = PropertyDefinitionSearchResult(href=href, key=key, value_type=value_type, display_name=display_name, data_type_id=data_type_id, type=type, unit_schema=unit_schema, domain=domain, scope=scope, code=code, value_required=value_required, life_time=life_time, constraint_style=constraint_style, property_definition_type=property_definition_type, property_description=property_description, derivation_formula=derivation_formula, is_filterable=is_filterable, links=links)
 
 ```

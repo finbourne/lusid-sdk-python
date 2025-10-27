@@ -4,7 +4,7 @@ A BondConversionSchedule object represents a class containing the  information r
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifiers** | **Dict[str, str]** | The market identifier(s) of the share that the bond converts to. The instrument  will not fail validation if no identifier is supplied. | [optional] 
+**identifiers** | **Dict[str, Optional[str]]** | The market identifier(s) of the share that the bond converts to. The instrument  will not fail validation if no identifier is supplied. | [optional] 
 **bond_conversion_entries** | [**List[BondConversionEntry]**](BondConversionEntry.md) | The dates at which the bond may be converted and associated information required about the conversion. | [optional] 
 **conversion_trigger** | **str** | Corporate event that triggers a conversion    Supported string (enumeration) values are: [NextEquityFinancing, IpoConversion, KnownDates, SoftCall]. | 
 **delivery_type** | **str** | Is a conversion made into cash or into shares?  Defaults to \&quot;Physical\&quot; if not set.    Supported string (enumeration) values are: [Cash, Physical]. | [optional] 
@@ -18,11 +18,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.bond_conversion_schedule import BondConversionSchedule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
-bond_conversion_entries: Optional[conlist(BondConversionEntry)] = # Replace with your value
+
+identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
+bond_conversion_entries: Optional[List[BondConversionEntry]] = # Replace with your value
 conversion_trigger: StrictStr = "example_conversion_trigger"
 delivery_type: Optional[StrictStr] = "example_delivery_type"
 exercise_type: StrictStr = "example_exercise_type"

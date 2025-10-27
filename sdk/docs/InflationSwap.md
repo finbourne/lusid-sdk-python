@@ -15,14 +15,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.inflation_swap import InflationSwap
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 inflation_leg: InflationLeg = # Replace with your value
 fixed_leg: FixedLeg = # Replace with your value
-additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 inflation_swap_instance = InflationSwap(start_date=start_date, maturity_date=maturity_date, inflation_leg=inflation_leg, fixed_leg=fixed_leg, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

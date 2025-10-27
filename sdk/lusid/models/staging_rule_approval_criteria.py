@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class StagingRuleApprovalCriteria(BaseModel):
     """
     StagingRuleApprovalCriteria
     """
-    required_approvals: Optional[StrictInt] = Field(None, alias="requiredApprovals")
+    required_approvals: Optional[StrictInt] = Field(default=None, alias="requiredApprovals")
     deciding_user:  Optional[StrictStr] = Field(None,alias="decidingUser") 
-    staging_user_can_decide: Optional[StrictBool] = Field(None, alias="stagingUserCanDecide")
+    staging_user_can_decide: Optional[StrictBool] = Field(default=None, alias="stagingUserCanDecide")
     __properties = ["requiredApprovals", "decidingUser", "stagingUserCanDecide"]
 
     class Config:
@@ -94,3 +96,5 @@ class StagingRuleApprovalCriteria(BaseModel):
             "staging_user_can_decide": obj.get("stagingUserCanDecide")
         })
         return _obj
+
+StagingRuleApprovalCriteria.update_forward_refs()

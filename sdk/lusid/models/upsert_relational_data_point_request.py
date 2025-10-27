@@ -18,18 +18,20 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.upsert_relational_data_point_data_series import UpsertRelationalDataPointDataSeries
 
 class UpsertRelationalDataPointRequest(BaseModel):
     """
     UpsertRelationalDataPointRequest
     """
-    data_point_data_series: UpsertRelationalDataPointDataSeries = Field(..., alias="dataPointDataSeries")
+    data_point_data_series: UpsertRelationalDataPointDataSeries = Field(alias="dataPointDataSeries")
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effectiveAt or cut-label datetime of the DataPoint.") 
-    value_fields: Dict[str, Any] = Field(..., alias="valueFields", description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.")
-    meta_data_fields: Optional[Dict[str, Any]] = Field(None, alias="metaDataFields", description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.")
+    value_fields: Dict[str, Any] = Field(description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="valueFields")
+    meta_data_fields: Optional[Dict[str, Any]] = Field(default=None, description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="metaDataFields")
     __properties = ["dataPointDataSeries", "effectiveAt", "valueFields", "metaDataFields"]
 
     class Config:
@@ -90,3 +92,5 @@ class UpsertRelationalDataPointRequest(BaseModel):
             "meta_data_fields": obj.get("metaDataFields")
         })
         return _obj
+
+UpsertRelationalDataPointRequest.update_forward_refs()

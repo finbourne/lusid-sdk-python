@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.quote_series_id import QuoteSeriesId
 
 class QuoteId(BaseModel):
     """
     The unique identifier of the quote.  # noqa: E501
     """
-    quote_series_id: QuoteSeriesId = Field(..., alias="quoteSeriesId")
+    quote_series_id: QuoteSeriesId = Field(alias="quoteSeriesId")
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effective datetime or cut label at which the quote is valid from.") 
     __properties = ["quoteSeriesId", "effectiveAt"]
 
@@ -81,3 +83,5 @@ class QuoteId(BaseModel):
             "effective_at": obj.get("effectiveAt")
         })
         return _obj
+
+QuoteId.update_forward_refs()

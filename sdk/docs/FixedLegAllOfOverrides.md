@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-amortization: Optional[conlist(Union[StrictFloat, StrictInt])] = # Replace with your value
-spreads: Optional[conlist(Union[StrictFloat, StrictInt])] = # Replace with your value
+amortization: Optional[List[Union[StrictFloat, StrictInt]]] = # Replace with your value
+spreads: Optional[List[Union[StrictFloat, StrictInt]]] = # Replace with your value
 fixed_leg_all_of_overrides_instance = FixedLegAllOfOverrides(amortization=amortization, spreads=spreads)
 
 ```

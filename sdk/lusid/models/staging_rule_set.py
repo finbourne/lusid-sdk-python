@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.staging_rule import StagingRule
 from lusid.models.version import Version
@@ -32,10 +34,10 @@ class StagingRuleSet(BaseModel):
     staging_rule_set_id:  StrictStr = Field(...,alias="stagingRuleSetId", description="System generated unique id for the staging rule set.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the staging rule set.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule set.") 
-    rules: conlist(StagingRule) = Field(..., description="The list of staging rules that apply to a specific entity type.")
+    rules: List[StagingRule] = Field(description="The list of staging rules that apply to a specific entity type.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["entityType", "stagingRuleSetId", "displayName", "description", "rules", "href", "version", "links"]
 
     class Config:
@@ -124,3 +126,5 @@ class StagingRuleSet(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+StagingRuleSet.update_forward_refs()

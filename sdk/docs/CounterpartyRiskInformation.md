@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 country_of_risk: StrictStr = "example_country_of_risk"
-credit_ratings: conlist(CreditRating) = # Replace with your value
-industry_classifiers: conlist(IndustryClassifier) = # Replace with your value
+credit_ratings: List[CreditRating] = # Replace with your value
+industry_classifiers: List[IndustryClassifier] = # Replace with your value
 counterparty_risk_information_instance = CounterpartyRiskInformation(country_of_risk=country_of_risk, credit_ratings=credit_ratings, industry_classifiers=industry_classifiers)
 
 ```

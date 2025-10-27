@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
 
 class RoundingConfiguration(BaseModel):
     """
     RoundingConfiguration
     """
-    stock_units: Optional[RoundingConfigurationComponent] = Field(None, alias="stockUnits")
+    stock_units: Optional[RoundingConfigurationComponent] = Field(default=None, alias="stockUnits")
     __properties = ["stockUnits"]
 
     class Config:
@@ -79,3 +81,5 @@ class RoundingConfiguration(BaseModel):
             "stock_units": RoundingConfigurationComponent.from_dict(obj.get("stockUnits")) if obj.get("stockUnits") is not None else None
         })
         return _obj
+
+RoundingConfiguration.update_forward_refs()

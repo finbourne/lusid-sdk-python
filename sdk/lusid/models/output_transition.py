@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.rounding_configuration import RoundingConfiguration
 
 class OutputTransition(BaseModel):
     """
     A 'transition' within a corporate action, representing an output transition.  # noqa: E501
     """
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
-    units_factor: Union[StrictFloat, StrictInt] = Field(..., alias="unitsFactor", description="The factor to scale units by")
-    cost_factor: Union[StrictFloat, StrictInt] = Field(..., alias="costFactor", description="The factor to scale cost by")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
+    units_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale units by", alias="unitsFactor")
+    cost_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale cost by", alias="costFactor")
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers") 
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies.") 
     rounding: Optional[RoundingConfiguration] = None
@@ -101,3 +103,5 @@ class OutputTransition(BaseModel):
             "rounding": RoundingConfiguration.from_dict(obj.get("rounding")) if obj.get("rounding") is not None else None
         })
         return _obj
+
+OutputTransition.update_forward_refs()

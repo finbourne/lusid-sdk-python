@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.mapping import Mapping
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 code: StrictStr = "example_code"
 name: StrictStr = "example_name"
 reconciliation_type: StrictStr = "example_reconciliation_type"
-rules: Optional[conlist(MappingRule)] = # Replace with your value
+rules: Optional[List[MappingRule]] = # Replace with your value
 mapping_instance = Mapping(scope=scope, code=code, name=name, reconciliation_type=reconciliation_type, rules=rules)
 
 ```

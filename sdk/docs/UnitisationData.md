@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.unitisation_data import UnitisationData
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 shares_in_issue: Union[StrictFloat, StrictInt] = # Replace with your value
 unit_price: Union[StrictFloat, StrictInt] = # Replace with your value

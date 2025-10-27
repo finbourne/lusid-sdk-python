@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 from lusid.models.model_property import ModelProperty
 from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.version import Version
@@ -32,14 +34,14 @@ class FundCalendarEntry(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with.") 
-    previous_entry: Optional[PreviousFundCalendarEntry] = Field(None, alias="previousEntry")
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective at of the Calendar Entry.")
-    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime for the Calendar Entry.")
+    previous_entry: Optional[PreviousFundCalendarEntry] = Field(default=None, alias="previousEntry")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
+    as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
     entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. Only 'ValuationPoint' currently supported. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the Fund Calendar Entry. Can be 'Estimate', 'Candidate' or 'Final'.") 
-    apply_clear_down: StrictBool = Field(..., alias="applyClearDown", description="Set to true if that closed period shoould have the clear down applied.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties for the Calendar Entry. These will be from the 'ClosedPeriod' domain.")
-    version: Version = Field(...)
+    apply_clear_down: StrictBool = Field(description="Set to true if that closed period shoould have the clear down applied.", alias="applyClearDown")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties for the Calendar Entry. These will be from the 'ClosedPeriod' domain.")
+    version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     __properties = ["code", "displayName", "description", "navTypeCode", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "properties", "version", "href"]
 
@@ -93,14 +95,19 @@ class FundCalendarEntry(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "entry_type" != "type":
             return value
 
-        if value not in ('ValuationPointFundCalendarEntry', 'BookmarkFundCalendarEntry'):
+        if value not in ['ValuationPointFundCalendarEntry', 'BookmarkFundCalendarEntry']:
             raise ValueError("must be one of enum values ('ValuationPointFundCalendarEntry', 'BookmarkFundCalendarEntry')")
         return value
 
@@ -201,3 +208,5 @@ class FundCalendarEntry(BaseModel):
             "href": obj.get("href")
         })
         return _obj
+
+FundCalendarEntry.update_forward_refs()

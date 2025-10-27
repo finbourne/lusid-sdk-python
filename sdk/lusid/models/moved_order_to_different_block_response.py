@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.block import Block
 from lusid.models.order import Order
 from lusid.models.resource_id import ResourceId
@@ -28,9 +30,9 @@ class MovedOrderToDifferentBlockResponse(BaseModel):
     """
     MovedOrderToDifferentBlockResponse
     """
-    destination_block: Optional[Block] = Field(None, alias="destinationBlock")
+    destination_block: Optional[Block] = Field(default=None, alias="destinationBlock")
     order: Optional[Order] = None
-    source_block_id: Optional[ResourceId] = Field(None, alias="sourceBlockId")
+    source_block_id: Optional[ResourceId] = Field(default=None, alias="sourceBlockId")
     __properties = ["destinationBlock", "order", "sourceBlockId"]
 
     class Config:
@@ -91,3 +93,5 @@ class MovedOrderToDifferentBlockResponse(BaseModel):
             "source_block_id": ResourceId.from_dict(obj.get("sourceBlockId")) if obj.get("sourceBlockId") is not None else None
         })
         return _obj
+
+MovedOrderToDifferentBlockResponse.update_forward_refs()

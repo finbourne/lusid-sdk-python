@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_rule_result import ComplianceRuleResult
 from lusid.models.resource_id import ResourceId
 
@@ -27,8 +29,8 @@ class ComplianceBreachedOrderInfo(BaseModel):
     """
     ComplianceBreachedOrderInfo
     """
-    order_id: ResourceId = Field(..., alias="orderId")
-    list_rule_result: conlist(ComplianceRuleResult) = Field(..., alias="listRuleResult", description="The Rule Results for a particular compliance run")
+    order_id: ResourceId = Field(alias="orderId")
+    list_rule_result: List[ComplianceRuleResult] = Field(description="The Rule Results for a particular compliance run", alias="listRuleResult")
     __properties = ["orderId", "listRuleResult"]
 
     class Config:
@@ -89,3 +91,5 @@ class ComplianceBreachedOrderInfo(BaseModel):
             "list_rule_result": [ComplianceRuleResult.from_dict(_item) for _item in obj.get("listRuleResult")] if obj.get("listRuleResult") is not None else None
         })
         return _obj
+
+ComplianceBreachedOrderInfo.update_forward_refs()

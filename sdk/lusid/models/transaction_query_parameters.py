@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionQueryParameters(BaseModel):
     """
@@ -28,10 +30,10 @@ class TransactionQueryParameters(BaseModel):
     start_date:  StrictStr = Field(...,alias="startDate", description="The lower bound effective datetime or cut label (inclusive) from which to build the transactions.") 
     end_date:  StrictStr = Field(...,alias="endDate", description="The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.") 
     query_mode:  Optional[StrictStr] = Field(None,alias="queryMode", description="The date to compare against the upper and lower bounds for the effective datetime or cut label. Defaults to 'TradeDate' if not specified. The available values are: TradeDate, SettleDate") 
-    show_cancelled_transactions: Optional[StrictBool] = Field(None, alias="showCancelledTransactions", description="Option to specify whether or not to include cancelled transactions in the output. Defaults to False if not specified.")
+    show_cancelled_transactions: Optional[StrictBool] = Field(default=None, description="Option to specify whether or not to include cancelled transactions in the output. Defaults to False if not specified.", alias="showCancelledTransactions")
     timeline_scope:  Optional[StrictStr] = Field(None,alias="timelineScope", description="Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
     timeline_code:  Optional[StrictStr] = Field(None,alias="timelineCode", description="Code of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
-    include_economics: Optional[StrictBool] = Field(None, alias="includeEconomics", description="By default is false. When set to true the Economics data would be populated in the response.")
+    include_economics: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Economics data would be populated in the response.", alias="includeEconomics")
     __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics"]
 
     @validator('query_mode')
@@ -84,7 +86,12 @@ class TransactionQueryParameters(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -94,7 +101,7 @@ class TransactionQueryParameters(BaseModel):
         if value is None:
             return value
 
-        if value not in ('TradeDate', 'SettleDate'):
+        if value not in ['TradeDate', 'SettleDate']:
             raise ValueError("must be one of enum values ('TradeDate', 'SettleDate')")
         return value
 
@@ -161,3 +168,5 @@ class TransactionQueryParameters(BaseModel):
             "include_economics": obj.get("includeEconomics")
         })
         return _obj
+
+TransactionQueryParameters.update_forward_refs()

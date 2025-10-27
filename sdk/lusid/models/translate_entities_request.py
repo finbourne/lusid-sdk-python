@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.dialect_id import DialectId
 from lusid.models.translation_input import TranslationInput
 from lusid.models.translation_script_id import TranslationScriptId
@@ -28,9 +30,9 @@ class TranslateEntitiesRequest(BaseModel):
     """
     Request to translate financial entities with a specified script stored in LUSID,  specified in the request by its id. The output of the translation is validated against a dialect stored in LUSID,  again specified in the request by its id.  # noqa: E501
     """
-    entity_payloads: Dict[str, TranslationInput] = Field(..., alias="entityPayloads", description="Entity payloads to be translated, indexed by (ephemeral) unique correlation ids.")
-    script_id: TranslationScriptId = Field(..., alias="scriptId")
-    dialect_id: Optional[DialectId] = Field(None, alias="dialectId")
+    entity_payloads: Dict[str, TranslationInput] = Field(description="Entity payloads to be translated, indexed by (ephemeral) unique correlation ids.", alias="entityPayloads")
+    script_id: TranslationScriptId = Field(alias="scriptId")
+    dialect_id: Optional[DialectId] = Field(default=None, alias="dialectId")
     __properties = ["entityPayloads", "scriptId", "dialectId"]
 
     class Config:
@@ -100,3 +102,5 @@ class TranslateEntitiesRequest(BaseModel):
             "dialect_id": DialectId.from_dict(obj.get("dialectId")) if obj.get("dialectId") is not None else None
         })
         return _obj
+
+TranslateEntitiesRequest.update_forward_refs()

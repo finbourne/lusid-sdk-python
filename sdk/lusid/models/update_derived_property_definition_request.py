@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class UpdateDerivedPropertyDefinitionRequest(BaseModel):
@@ -27,10 +29,10 @@ class UpdateDerivedPropertyDefinitionRequest(BaseModel):
     UpdateDerivedPropertyDefinitionRequest
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
-    data_type_id: ResourceId = Field(..., alias="dataTypeId")
+    data_type_id: ResourceId = Field(alias="dataTypeId")
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     derivation_formula:  StrictStr = Field(...,alias="derivationFormula", description="The rule that defines how data is composed for a derived property.") 
-    is_filterable: StrictBool = Field(..., alias="isFilterable", description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.")
+    is_filterable: StrictBool = Field(description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.", alias="isFilterable")
     __properties = ["displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable"]
 
     class Config:
@@ -92,3 +94,5 @@ class UpdateDerivedPropertyDefinitionRequest(BaseModel):
             "is_filterable": obj.get("isFilterable")
         })
         return _obj
+
+UpdateDerivedPropertyDefinitionRequest.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CheckDefinitionRule(BaseModel):
     """
@@ -29,7 +31,7 @@ class CheckDefinitionRule(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Rule.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Rule.") 
     rule_formula:  Optional[StrictStr] = Field(None,alias="ruleFormula", description="The formula for the rule.") 
-    severity: Optional[StrictInt] = Field(None, description="Severity of the rule if formaula is not satisfied.")
+    severity: Optional[StrictInt] = Field(default=None, description="Severity of the rule if formaula is not satisfied.")
     __properties = ["ruleKey", "displayName", "description", "ruleFormula", "severity"]
 
     class Config:
@@ -103,3 +105,5 @@ class CheckDefinitionRule(BaseModel):
             "severity": obj.get("severity")
         })
         return _obj
+
+CheckDefinitionRule.update_forward_refs()

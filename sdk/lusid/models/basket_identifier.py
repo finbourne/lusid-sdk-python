@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class BasketIdentifier(BaseModel):
     """
@@ -28,7 +30,7 @@ class BasketIdentifier(BaseModel):
     index:  StrictStr = Field(...,alias="index", description="Index set, e.g. iTraxx or CDX.") 
     name:  StrictStr = Field(...,alias="name", description="The index name within the set, e.g. \"MAIN\" or \"Crossover\".") 
     region:  StrictStr = Field(...,alias="region", description="Applicable geographic country or region. Typically something like \"Europe\", \"Asia ex-Japan\", \"Japan\" or \"Australia\".") 
-    series_id: StrictInt = Field(..., alias="seriesId", description="The series identifier.")
+    series_id: StrictInt = Field(description="The series identifier.", alias="seriesId")
     __properties = ["index", "name", "region", "seriesId"]
 
     class Config:
@@ -81,3 +83,5 @@ class BasketIdentifier(BaseModel):
             "series_id": obj.get("seriesId")
         })
         return _obj
+
+BasketIdentifier.update_forward_refs()

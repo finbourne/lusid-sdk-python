@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
 from lusid.models.link import Link
@@ -30,14 +32,14 @@ class GroupReconciliationComparisonRuleset(BaseModel):
     """
     GroupReconciliationComparisonRuleset
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the ruleset") 
     reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
-    core_attribute_rules: conlist(GroupReconciliationCoreAttributeRule) = Field(..., alias="coreAttributeRules", description="The core comparison rules")
-    aggregate_attribute_rules: conlist(GroupReconciliationAggregateAttributeRule) = Field(..., alias="aggregateAttributeRules", description="The aggregate comparison rules")
+    core_attribute_rules: List[GroupReconciliationCoreAttributeRule] = Field(description="The core comparison rules", alias="coreAttributeRules")
+    aggregate_attribute_rules: List[GroupReconciliationAggregateAttributeRule] = Field(description="The aggregate comparison rules", alias="aggregateAttributeRules")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "displayName", "reconciliationType", "coreAttributeRules", "aggregateAttributeRules", "href", "version", "links"]
 
     class Config:
@@ -131,3 +133,5 @@ class GroupReconciliationComparisonRuleset(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+GroupReconciliationComparisonRuleset.update_forward_refs()

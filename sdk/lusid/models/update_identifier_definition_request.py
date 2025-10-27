@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class UpdateIdentifierDefinitionRequest(BaseModel):
@@ -29,7 +31,7 @@ class UpdateIdentifierDefinitionRequest(BaseModel):
     hierarchy_level:  Optional[StrictStr] = Field(None,alias="hierarchyLevel", description="Optional metadata associated with the identifier definition.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="A display name for the identifier. E.g. Figi.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the identifier.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the identifier definition.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the identifier definition.")
     __properties = ["hierarchyLevel", "displayName", "description", "properties"]
 
     class Config:
@@ -114,3 +116,5 @@ class UpdateIdentifierDefinitionRequest(BaseModel):
             else None
         })
         return _obj
+
+UpdateIdentifierDefinitionRequest.update_forward_refs()

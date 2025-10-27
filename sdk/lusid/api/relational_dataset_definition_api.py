@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid.models.create_relational_dataset_definition_request import CreateRelationalDatasetDefinitionRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.paged_resource_list_of_relational_dataset_definition import PagedResourceListOfRelationalDatasetDefinition
@@ -59,15 +56,15 @@ class RelationalDatasetDefinitionApi:
 
 
     @overload
-    async def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(..., description="The relational dataset definition to create.")], **kwargs) -> RelationalDatasetDefinition:  # noqa: E501
+    async def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(description="The relational dataset definition to create.")], **kwargs) -> RelationalDatasetDefinition:  # noqa: E501
         ...
 
     @overload
-    def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(..., description="The relational dataset definition to create.")], async_req: Optional[bool]=True, **kwargs) -> RelationalDatasetDefinition:  # noqa: E501
+    def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(description="The relational dataset definition to create.")], async_req: Optional[bool]=True, **kwargs) -> RelationalDatasetDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(..., description="The relational dataset definition to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
+    def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(description="The relational dataset definition to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
         """[EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition  # noqa: E501
 
         Create a new relational dataset definition.  # noqa: E501
@@ -98,7 +95,7 @@ class RelationalDatasetDefinitionApi:
         return self.create_relational_dataset_definition_with_http_info(create_relational_dataset_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_relational_dataset_definition_with_http_info(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(..., description="The relational dataset definition to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_relational_dataset_definition_with_http_info(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(description="The relational dataset definition to create.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition  # noqa: E501
 
         Create a new relational dataset definition.  # noqa: E501
@@ -549,15 +546,15 @@ class RelationalDatasetDefinitionApi:
 
 
     @overload
-    async def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> PagedResourceListOfRelationalDatasetDefinition:  # noqa: E501
+    async def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> PagedResourceListOfRelationalDatasetDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRelationalDatasetDefinition:  # noqa: E501
+    def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRelationalDatasetDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationalDatasetDefinition, Awaitable[PagedResourceListOfRelationalDatasetDefinition]]:  # noqa: E501
+    def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationalDatasetDefinition, Awaitable[PagedResourceListOfRelationalDatasetDefinition]]:  # noqa: E501
         """[EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions  # noqa: E501
 
         List all relational dataset definitions matching particular criteria.  # noqa: E501
@@ -596,7 +593,7 @@ class RelationalDatasetDefinitionApi:
         return self.list_relational_dataset_definitions_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_relational_dataset_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_relational_dataset_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions  # noqa: E501
 
         List all relational dataset definitions matching particular criteria.  # noqa: E501

@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.post_close_activities_request import PostCloseActivitiesRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-post_close_activities: conlist(PostCloseActivity) = # Replace with your value
+post_close_activities: List[PostCloseActivity] = # Replace with your value
 post_close_activities_request_instance = PostCloseActivitiesRequest(post_close_activities=post_close_activities)
 
 ```

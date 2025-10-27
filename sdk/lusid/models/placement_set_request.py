@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.placement_request import PlacementRequest
 
 class PlacementSetRequest(BaseModel):
     """
     A request to create or update multiple Placements.  # noqa: E501
     """
-    requests: Optional[conlist(PlacementRequest)] = Field(None, description="A collection of PlacementRequests.")
+    requests: Optional[List[PlacementRequest]] = Field(default=None, description="A collection of PlacementRequests.")
     __properties = ["requests"]
 
     class Config:
@@ -88,3 +90,5 @@ class PlacementSetRequest(BaseModel):
             "requests": [PlacementRequest.from_dict(_item) for _item in obj.get("requests")] if obj.get("requests") is not None else None
         })
         return _obj
+
+PlacementSetRequest.update_forward_refs()

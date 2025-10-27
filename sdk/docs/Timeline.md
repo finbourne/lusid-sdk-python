@@ -14,8 +14,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.timeline import Timeline
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 id: Optional[ResourceId] = None
 display_name: Optional[StrictStr] = "example_display_name"
@@ -23,7 +25,7 @@ description: Optional[StrictStr] = "example_description"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 timeline_instance = Timeline(id=id, display_name=display_name, description=description, properties=properties, version=version, href=href, links=links)
 
 ```

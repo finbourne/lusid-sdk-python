@@ -18,20 +18,22 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.custom_entity_response import CustomEntityResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 entity_type: StrictStr = "example_entity_type"
-version: Version = # Replace with your value
+version: Version
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-identifiers: conlist(CustomEntityId) = # Replace with your value
-fields: conlist(CustomEntityField) = # Replace with your value
-relationships: conlist(Relationship) = # Replace with your value
+identifiers: List[CustomEntityId] = # Replace with your value
+fields: List[CustomEntityField] = # Replace with your value
+relationships: List[Relationship] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 custom_entity_response_instance = CustomEntityResponse(href=href, entity_type=entity_type, version=version, staged_modifications=staged_modifications, display_name=display_name, description=description, identifiers=identifiers, fields=fields, relationships=relationships, properties=properties, links=links)
 
 ```

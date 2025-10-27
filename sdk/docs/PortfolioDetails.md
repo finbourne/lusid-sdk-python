@@ -24,16 +24,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_details import PortfolioDetails
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 origin_portfolio_id: ResourceId = # Replace with your value
-version: Version = # Replace with your value
+version: Version
 base_currency: StrictStr = "example_base_currency"
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
-sub_holding_keys: Optional[conlist(StrictStr)] = # Replace with your value
-instrument_scopes: Optional[conlist(StrictStr)] = # Replace with your value
+sub_holding_keys: Optional[List[StrictStr]] = # Replace with your value
+instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
 accounting_method: Optional[StrictStr] = "example_accounting_method"
 amortisation_method: Optional[StrictStr] = "example_amortisation_method"
 transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
@@ -43,7 +45,7 @@ amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 tax_rule_set_scope: Optional[StrictStr] = "example_tax_rule_set_scope"
 settlement_configuration: Optional[PortfolioSettlementConfiguration] = # Replace with your value
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 portfolio_details_instance = PortfolioDetails(href=href, origin_portfolio_id=origin_portfolio_id, version=version, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, sub_holding_keys=sub_holding_keys, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, staged_modifications=staged_modifications, links=links)
 
 ```

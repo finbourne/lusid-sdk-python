@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class ClosePeriodDiaryEntryRequest(BaseModel):
@@ -28,11 +30,11 @@ class ClosePeriodDiaryEntryRequest(BaseModel):
     """
     diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="Unique code assigned to a period. When left blank a code will be created by the system in the format 'yyyyMMDD'.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="Identifiable Name assigned to the period. Where left blank, the system will generate a name in the format 'yyyyMMDD'.") 
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective time of the diary entry.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective time of the diary entry.", alias="effectiveAt")
+    query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of a Diary Entry of Type 'PeriodBoundary'. Defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
-    closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
+    closing_options: Optional[List[StrictStr]] = Field(default=None, description="The options which will be executed once a period is closed or locked.", alias="closingOptions")
     __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "status", "properties", "closingOptions"]
 
     class Config:
@@ -135,3 +137,5 @@ class ClosePeriodDiaryEntryRequest(BaseModel):
             "closing_options": obj.get("closingOptions")
         })
         return _obj
+
+ClosePeriodDiaryEntryRequest.update_forward_refs()

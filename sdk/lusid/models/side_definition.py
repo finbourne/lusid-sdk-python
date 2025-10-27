@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 
 class SideDefinition(BaseModel):
@@ -34,7 +36,7 @@ class SideDefinition(BaseModel):
     amount:  StrictStr = Field(...,alias="amount", description="The value, field or property key defining the side's amount") 
     notional_amount:  Optional[StrictStr] = Field(None,alias="notionalAmount", description="The value, field or property key defining the side's notional amount") 
     current_face:  Optional[StrictStr] = Field(None,alias="currentFace", description="The value, field or property key defining the side's current face / outstanding notional.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["side", "security", "currency", "rate", "units", "amount", "notionalAmount", "currentFace", "links"]
 
     class Config:
@@ -114,3 +116,5 @@ class SideDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+SideDefinition.update_forward_refs()

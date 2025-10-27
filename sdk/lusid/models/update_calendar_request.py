@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.weekend_mask import WeekendMask
 
@@ -27,9 +29,9 @@ class UpdateCalendarRequest(BaseModel):
     """
     UpdateCalendarRequest
     """
-    weekend_mask: WeekendMask = Field(..., alias="weekendMask")
+    weekend_mask: WeekendMask = Field(alias="weekendMask")
     source_provider:  StrictStr = Field(...,alias="sourceProvider") 
-    properties: conlist(ModelProperty) = Field(...)
+    properties: List[ModelProperty]
     __properties = ["weekendMask", "sourceProvider", "properties"]
 
     class Config:
@@ -91,3 +93,5 @@ class UpdateCalendarRequest(BaseModel):
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None
         })
         return _obj
+
+UpdateCalendarRequest.update_forward_refs()

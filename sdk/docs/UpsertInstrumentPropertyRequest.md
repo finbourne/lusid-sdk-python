@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_instrument_property_request import UpsertInstrumentPropertyRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 identifier_type: StrictStr = "example_identifier_type"
 identifier: StrictStr = "example_identifier"
-properties: Optional[conlist(ModelProperty)] = # Replace with your value
+properties: Optional[List[ModelProperty]] = # Replace with your value
 upsert_instrument_property_request_instance = UpsertInstrumentPropertyRequest(identifier_type=identifier_type, identifier=identifier, properties=properties)
 
 ```

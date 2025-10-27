@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.asset_leg import AssetLeg
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-asset: LusidInstrument = # Replace with your value
+asset: LusidInstrument
 pay_receive: StrictStr = "example_pay_receive"
 asset_leg_instance = AssetLeg(asset=asset, pay_receive=pay_receive)
 

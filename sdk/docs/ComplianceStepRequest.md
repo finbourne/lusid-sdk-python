@@ -8,8 +8,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_step_request import ComplianceStepRequest
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 compliance_step_type_request: StrictStr = "example_compliance_step_type_request"
 compliance_step_request_instance = ComplianceStepRequest(compliance_step_type_request=compliance_step_type_request)

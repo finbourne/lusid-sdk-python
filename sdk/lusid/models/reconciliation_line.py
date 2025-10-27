@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ReconciliationLine(BaseModel):
     """
     In evaluating a left and right hand side holding or valuation set, two data records result. These are then compared based on a set of  rules. This results in either a match or failure to match. If there is a match both left and right will be present, otherwise one will not.  A difference will be present if a match was calculated.  The options used in comparison may result in elision of results where an exact or tolerable match is made.  # noqa: E501
     """
-    left: Optional[Dict[str, Any]] = Field(None, description="Left hand side of the comparison")
-    right: Optional[Dict[str, Any]] = Field(None, description="Right hand side of the comparison")
-    difference: Optional[Dict[str, Any]] = Field(None, description="Difference between LHS and RHS of comparison")
-    result_comparison: Optional[Dict[str, Any]] = Field(None, alias="resultComparison", description="The logical or semantic description of the difference, e.g. \"Matches\" or \"MatchesWithTolerance\" or \"Failed\".")
+    left: Optional[Dict[str, Any]] = Field(default=None, description="Left hand side of the comparison")
+    right: Optional[Dict[str, Any]] = Field(default=None, description="Right hand side of the comparison")
+    difference: Optional[Dict[str, Any]] = Field(default=None, description="Difference between LHS and RHS of comparison")
+    result_comparison: Optional[Dict[str, Any]] = Field(default=None, description="The logical or semantic description of the difference, e.g. \"Matches\" or \"MatchesWithTolerance\" or \"Failed\".", alias="resultComparison")
     __properties = ["left", "right", "difference", "resultComparison"]
 
     class Config:
@@ -101,3 +103,5 @@ class ReconciliationLine(BaseModel):
             "result_comparison": obj.get("resultComparison")
         })
         return _obj
+
+ReconciliationLine.update_forward_refs()

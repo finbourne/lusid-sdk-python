@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-component_transactions: conlist(ComponentTransaction, max_items=1000) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
+component_transactions: List[ComponentTransaction] = # Replace with your value
 update_fee_type_request_instance = UpdateFeeTypeRequest(display_name=display_name, description=description, component_transactions=component_transactions)
 
 ```

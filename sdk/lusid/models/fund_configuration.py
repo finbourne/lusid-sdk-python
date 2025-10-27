@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.component_filter import ComponentFilter
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.link import Link
@@ -32,16 +34,16 @@ class FundConfiguration(BaseModel):
     FundConfiguration
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the FundConfiguration.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the FundConfiguration.") 
-    dealing_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="dealingFilters", description="The set of filters used to decide which JE lines are included in the dealing.")
-    pnl_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="pnlFilters", description="The set of filters used to decide which JE lines are included in the PnL.")
-    back_out_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="backOutFilters", description="The set of filters used to decide which JE lines are included in the back outs.")
-    external_fee_filters: Optional[conlist(ExternalFeeComponentFilter)] = Field(None, alias="externalFeeFilters", description="The set of filters used to decide which JE lines are used for inputting fees from an external source.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
+    dealing_filters: Optional[List[ComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are included in the dealing.", alias="dealingFilters")
+    pnl_filters: Optional[List[ComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are included in the PnL.", alias="pnlFilters")
+    back_out_filters: Optional[List[ComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are included in the back outs.", alias="backOutFilters")
+    external_fee_filters: Optional[List[ExternalFeeComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are used for inputting fees from an external source.", alias="externalFeeFilters")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund Configuration.")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "externalFeeFilters", "properties", "version", "links"]
 
     class Config:
@@ -199,3 +201,5 @@ class FundConfiguration(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+FundConfiguration.update_forward_refs()

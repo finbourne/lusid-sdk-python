@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.action_id import ActionId
 from lusid.models.id_selector_definition import IdSelectorDefinition
 from lusid.models.link import Link
@@ -29,9 +31,9 @@ class AccessControlledAction(BaseModel):
     AccessControlledAction
     """
     description:  StrictStr = Field(...,alias="description") 
-    action: ActionId = Field(...)
-    limited_set: Optional[conlist(IdSelectorDefinition)] = Field(None, alias="limitedSet")
-    links: Optional[conlist(Link)] = None
+    action: ActionId
+    limited_set: Optional[List[IdSelectorDefinition]] = Field(default=None, alias="limitedSet")
+    links: Optional[List[Link]] = None
     __properties = ["description", "action", "limitedSet", "links"]
 
     class Config:
@@ -111,3 +113,5 @@ class AccessControlledAction(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AccessControlledAction.update_forward_refs()

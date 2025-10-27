@@ -16,18 +16,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_group_search_result import PortfolioGroupSearchResult
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 created: Optional[datetime] = # Replace with your value
-portfolios: Optional[conlist(ResourceId)] = # Replace with your value
-sub_groups: Optional[conlist(ResourceId)] = # Replace with your value
+portfolios: Optional[List[ResourceId]] = # Replace with your value
+sub_groups: Optional[List[ResourceId]] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 portfolio_group_search_result_instance = PortfolioGroupSearchResult(href=href, id=id, display_name=display_name, description=description, created=created, portfolios=portfolios, sub_groups=sub_groups, version=version, links=links)
 
 ```

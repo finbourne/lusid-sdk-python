@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.custodian_account import CustodianAccount
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 custodian_account_id: ResourceId = # Replace with your value
 status: StrictStr = "example_status"
@@ -26,7 +28,7 @@ account_name: StrictStr = "example_account_name"
 accounting_method: StrictStr = "example_accounting_method"
 currency: StrictStr = "example_currency"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-custodian: LegalEntity = # Replace with your value
+custodian: LegalEntity
 account_type: StrictStr = "example_account_type"
 custodian_account_instance = CustodianAccount(custodian_account_id=custodian_account_id, status=status, account_number=account_number, account_name=account_name, accounting_method=accounting_method, currency=currency, properties=properties, custodian=custodian, account_type=account_type)
 

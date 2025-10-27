@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.composite_breakdown import CompositeBreakdown
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_at: datetime = # Replace with your value
 composite: Optional[PortfolioReturnBreakdown] = None
-constituents: Optional[conlist(PortfolioReturnBreakdown)] = # Replace with your value
+constituents: Optional[List[PortfolioReturnBreakdown]] = # Replace with your value
 composite_breakdown_instance = CompositeBreakdown(effective_at=effective_at, composite=composite, constituents=constituents)
 
 ```

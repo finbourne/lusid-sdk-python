@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, constr, validator 
 from lusid.models.economic_dependency import EconomicDependency
 
 class VendorDependency(EconomicDependency):
@@ -27,8 +29,8 @@ class VendorDependency(EconomicDependency):
     For indicating a dependency on some opaque market data requested by an outside vendor  # noqa: E501
     """
     vendor_name:  StrictStr = Field(...,alias="vendorName", description="The name of the outside vendor") 
-    vendor_path: conlist(StrictStr) = Field(..., alias="vendorPath", description="The specific dependency path")
-    var_date: datetime = Field(..., alias="date", description="The effectiveDate of the entity that this is a dependency for.")
+    vendor_path: List[StrictStr] = Field(description="The specific dependency path", alias="vendorPath")
+    var_date: datetime = Field(description="The effectiveDate of the entity that this is a dependency for.", alias="date")
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "vendorName", "vendorPath", "date"]
@@ -83,14 +85,19 @@ class VendorDependency(EconomicDependency):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "dependency_type" != "type":
             return value
 
-        if value not in ('OpaqueDependency', 'CashDependency', 'DiscountingDependency', 'EquityCurveDependency', 'EquityVolDependency', 'FxDependency', 'FxForwardsDependency', 'FxVolDependency', 'IndexProjectionDependency', 'IrVolDependency', 'QuoteDependency', 'Vendor', 'CalendarDependency', 'InflationFixingDependency'):
+        if value not in ['OpaqueDependency', 'CashDependency', 'DiscountingDependency', 'EquityCurveDependency', 'EquityVolDependency', 'FxDependency', 'FxForwardsDependency', 'FxVolDependency', 'IndexProjectionDependency', 'IrVolDependency', 'QuoteDependency', 'Vendor', 'CalendarDependency', 'InflationFixingDependency']:
             raise ValueError("must be one of enum values ('OpaqueDependency', 'CashDependency', 'DiscountingDependency', 'EquityCurveDependency', 'EquityVolDependency', 'FxDependency', 'FxForwardsDependency', 'FxVolDependency', 'IndexProjectionDependency', 'IrVolDependency', 'QuoteDependency', 'Vendor', 'CalendarDependency', 'InflationFixingDependency')")
         return value
 
@@ -155,3 +162,5 @@ class VendorDependency(EconomicDependency):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+VendorDependency.update_forward_refs()

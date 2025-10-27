@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CreateRelationRequest(BaseModel):
     """
     CreateRelationRequest
     """
-    source_entity_id: Dict[str, StrictStr] = Field(..., alias="sourceEntityId", description="The identifier of the source entity.")
-    target_entity_id: Dict[str, StrictStr] = Field(..., alias="targetEntityId", description="The identifier of the target entity.")
+    source_entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the source entity.", alias="sourceEntityId")
+    target_entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the target entity.", alias="targetEntityId")
     __properties = ["sourceEntityId", "targetEntityId"]
 
     class Config:
@@ -77,3 +79,5 @@ class CreateRelationRequest(BaseModel):
             "target_entity_id": obj.get("targetEntityId")
         })
         return _obj
+
+CreateRelationRequest.update_forward_refs()

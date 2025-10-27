@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_user_review_add import GroupReconciliationUserReviewAdd
 from lusid.models.group_reconciliation_user_review_remove import GroupReconciliationUserReviewRemove
 
@@ -28,8 +30,8 @@ class BatchUpdateUserReviewForComparisonResultRequest(BaseModel):
     BatchUpdateUserReviewForComparisonResultRequest
     """
     comparison_result_id:  StrictStr = Field(...,alias="comparisonResultId", description="Comparison result identifier, encoded value for core attribute results, aggregate attribute results, reconciliation type and run instanceId.") 
-    user_review_add: Optional[GroupReconciliationUserReviewAdd] = Field(None, alias="userReviewAdd")
-    user_review_remove: Optional[GroupReconciliationUserReviewRemove] = Field(None, alias="userReviewRemove")
+    user_review_add: Optional[GroupReconciliationUserReviewAdd] = Field(default=None, alias="userReviewAdd")
+    user_review_remove: Optional[GroupReconciliationUserReviewRemove] = Field(default=None, alias="userReviewRemove")
     __properties = ["comparisonResultId", "userReviewAdd", "userReviewRemove"]
 
     class Config:
@@ -87,3 +89,5 @@ class BatchUpdateUserReviewForComparisonResultRequest(BaseModel):
             "user_review_remove": GroupReconciliationUserReviewRemove.from_dict(obj.get("userReviewRemove")) if obj.get("userReviewRemove") is not None else None
         })
         return _obj
+
+BatchUpdateUserReviewForComparisonResultRequest.update_forward_refs()

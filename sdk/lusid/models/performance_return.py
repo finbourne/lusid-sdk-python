@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
 
 class PerformanceReturn(BaseModel):
     """
     A list of Returns.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effectiveAt for the return.")
-    rate_of_return: Union[StrictFloat, StrictInt] = Field(..., alias="rateOfReturn", description="The return number.")
-    opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openingMarketValue", description="The opening market value.")
-    closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closingMarketValue", description="The closing market value.")
+    effective_at: datetime = Field(description="The effectiveAt for the return.", alias="effectiveAt")
+    rate_of_return: Union[StrictFloat, StrictInt] = Field(description="The return number.", alias="rateOfReturn")
+    opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The opening market value.", alias="openingMarketValue")
+    closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The closing market value.", alias="closingMarketValue")
     period:  Optional[StrictStr] = Field(None,alias="period", description="Upsert the returns on a Daily or Monthly period. Defaults to Daily.") 
     __properties = ["effectiveAt", "rateOfReturn", "openingMarketValue", "closingMarketValue", "period"]
 
@@ -98,3 +100,5 @@ class PerformanceReturn(BaseModel):
             "period": obj.get("period")
         })
         return _obj
+
+PerformanceReturn.update_forward_refs()

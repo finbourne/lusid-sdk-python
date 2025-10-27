@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_comparison_ruleset import GroupReconciliationComparisonRuleset
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 reconciliation_type: StrictStr = "example_reconciliation_type"
-core_attribute_rules: conlist(GroupReconciliationCoreAttributeRule) = # Replace with your value
-aggregate_attribute_rules: conlist(GroupReconciliationAggregateAttributeRule) = # Replace with your value
+core_attribute_rules: List[GroupReconciliationCoreAttributeRule] = # Replace with your value
+aggregate_attribute_rules: List[GroupReconciliationAggregateAttributeRule] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 group_reconciliation_comparison_ruleset_instance = GroupReconciliationComparisonRuleset(id=id, display_name=display_name, reconciliation_type=reconciliation_type, core_attribute_rules=core_attribute_rules, aggregate_attribute_rules=aggregate_attribute_rules, href=href, version=version, links=links)
 
 ```

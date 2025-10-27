@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.corporate_action import CorporateAction
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 corporate_action_code: StrictStr = "example_corporate_action_code"
 description: Optional[StrictStr] = "example_description"
 announcement_date: Optional[datetime] = # Replace with your value
 ex_date: Optional[datetime] = # Replace with your value
 record_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
-transitions: Optional[conlist(CorporateActionTransition)] = # Replace with your value
+transitions: Optional[List[CorporateActionTransition]] = # Replace with your value
 corporate_action_instance = CorporateAction(corporate_action_code=corporate_action_code, description=description, announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, transitions=transitions)
 
 ```

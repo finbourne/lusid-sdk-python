@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionTypeAlias(BaseModel):
     """
@@ -29,7 +31,7 @@ class TransactionTypeAlias(BaseModel):
     description:  StrictStr = Field(...,alias="description", description="Brief description of the transaction") 
     transaction_class:  StrictStr = Field(...,alias="transactionClass", description="Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut") 
     transaction_roles:  StrictStr = Field(...,alias="transactionRoles", description="Transactions role within a class. E.g. Increase a long position") 
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.")
+    is_default: Optional[StrictBool] = Field(default=None, description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.", alias="isDefault")
     __properties = ["type", "description", "transactionClass", "transactionRoles", "isDefault"]
 
     class Config:
@@ -83,3 +85,5 @@ class TransactionTypeAlias(BaseModel):
             "is_default": obj.get("isDefault")
         })
         return _obj
+
+TransactionTypeAlias.update_forward_refs()

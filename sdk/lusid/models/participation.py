@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -29,12 +31,12 @@ class Participation(BaseModel):
     """
     The record an order's participation in a specific placement.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    placement_id: ResourceId = Field(..., alias="placementId")
-    order_id: ResourceId = Field(..., alias="orderId")
+    id: ResourceId
+    placement_id: ResourceId = Field(alias="placementId")
+    order_id: ResourceId = Field(alias="orderId")
     version: Optional[Version] = None
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["id", "placementId", "orderId", "version", "dataModelMembership", "links"]
 
     class Config:
@@ -116,3 +118,5 @@ class Participation(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Participation.update_forward_refs()

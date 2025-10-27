@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -31,10 +33,10 @@ class CustomEntityProperties(BaseModel):
     """
     href:  StrictStr = Field(...,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of custom entity this is.") 
-    identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties that decorate the custom entity.")
-    version: Version = Field(...)
-    links: Optional[conlist(Link)] = None
+    identifiers: List[CustomEntityId] = Field(description="The identifiers the custom entity will be upserted with.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties that decorate the custom entity.")
+    version: Version
+    links: Optional[List[Link]] = None
     __properties = ["href", "entityType", "identifiers", "properties", "version", "links"]
 
     class Config:
@@ -128,3 +130,5 @@ class CustomEntityProperties(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CustomEntityProperties.update_forward_refs()

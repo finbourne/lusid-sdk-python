@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_user_review import GroupReconciliationUserReview
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-break_codes: Optional[conlist(GroupReconciliationUserReviewBreakCode)] = # Replace with your value
-match_keys: Optional[conlist(GroupReconciliationUserReviewMatchKey)] = # Replace with your value
-comments: Optional[conlist(GroupReconciliationUserReviewComment)] = # Replace with your value
+break_codes: Optional[List[GroupReconciliationUserReviewBreakCode]] = # Replace with your value
+match_keys: Optional[List[GroupReconciliationUserReviewMatchKey]] = # Replace with your value
+comments: Optional[List[GroupReconciliationUserReviewComment]] = # Replace with your value
 group_reconciliation_user_review_instance = GroupReconciliationUserReview(break_codes=break_codes, match_keys=match_keys, comments=comments)
 
 ```

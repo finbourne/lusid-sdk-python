@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: StrictStr = "example_code"
 description: StrictStr = "example_description"
-variations: conlist(ComplianceTemplateVariationRequest) = # Replace with your value
+variations: List[ComplianceTemplateVariationRequest] = # Replace with your value
 create_compliance_template_request_instance = CreateComplianceTemplateRequest(code=code, description=description, variations=variations)
 
 ```

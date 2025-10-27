@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 import lusid.models
 
 class ComplianceStepRequest(BaseModel):
@@ -79,14 +81,19 @@ class ComplianceStepRequest(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "compliance_step_type_request" != "type":
             return value
 
-        if value not in ('FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest', 'PercentCheckStepRequest'):
+        if value not in ['FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest', 'PercentCheckStepRequest']:
             raise ValueError("must be one of enum values ('FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest', 'PercentCheckStepRequest')")
         return value
 
@@ -159,3 +166,5 @@ class ComplianceStepRequest(BaseModel):
             raise ValueError("ComplianceStepRequest failed to lookup discriminator value from " +
                              json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
                              ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+
+ComplianceStepRequest.update_forward_refs()

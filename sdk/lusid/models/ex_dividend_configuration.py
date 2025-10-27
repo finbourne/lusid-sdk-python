@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ExDividendConfiguration(BaseModel):
     """
     Configure the ex-dividend periods for the instrument.  # noqa: E501
     """
-    use_business_days: Optional[StrictBool] = Field(None, alias="useBusinessDays", description="Is the ex-dividend period counted in business days or calendar days.  Defaults to false if not set.")
-    ex_dividend_days: StrictInt = Field(..., alias="exDividendDays", description="Number of days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, than there is no ex-dividend period.")
-    return_negative_accrued: Optional[StrictBool] = Field(None, alias="returnNegativeAccrued", description="Does the accrued interest go negative in the ex-dividend period, or does it go to zero.  Defaults to true if not set.")
-    apply_thirty360_pay_delay: Optional[StrictBool] = Field(None, alias="applyThirty360PayDelay", description="Set this flag to true if the ex-dividend days represent a pay delay from the accrual end date in calendar  days under the 30/360 day count convention. The typical use case for this flag are Mortgage Backed Securities  with pay delay between 1 and 60 days, such as FreddieMac and FannieMae. If this flag is set, the useBusinessDays  setting will be ignored.  Defaults to false if not provided.")
+    use_business_days: Optional[StrictBool] = Field(default=None, description="Is the ex-dividend period counted in business days or calendar days.  Defaults to false if not set.", alias="useBusinessDays")
+    ex_dividend_days: StrictInt = Field(description="Number of days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, than there is no ex-dividend period.", alias="exDividendDays")
+    return_negative_accrued: Optional[StrictBool] = Field(default=None, description="Does the accrued interest go negative in the ex-dividend period, or does it go to zero.  Defaults to true if not set.", alias="returnNegativeAccrued")
+    apply_thirty360_pay_delay: Optional[StrictBool] = Field(default=None, description="Set this flag to true if the ex-dividend days represent a pay delay from the accrual end date in calendar  days under the 30/360 day count convention. The typical use case for this flag are Mortgage Backed Securities  with pay delay between 1 and 60 days, such as FreddieMac and FannieMae. If this flag is set, the useBusinessDays  setting will be ignored.  Defaults to false if not provided.", alias="applyThirty360PayDelay")
     __properties = ["useBusinessDays", "exDividendDays", "returnNegativeAccrued", "applyThirty360PayDelay"]
 
     class Config:
@@ -81,3 +83,5 @@ class ExDividendConfiguration(BaseModel):
             "apply_thirty360_pay_delay": obj.get("applyThirty360PayDelay")
         })
         return _obj
+
+ExDividendConfiguration.update_forward_refs()

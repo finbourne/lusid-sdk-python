@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictBool, conlist, constr, validator
-
-from typing import Dict, Optional
-
+from pydantic.v1 import Field, StrictBool
+from typing import Dict, List, Optional
+from typing_extensions import Annotated
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
 from lusid.models.book_transactions_request import BookTransactionsRequest
@@ -75,15 +72,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
         """BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
@@ -118,7 +115,7 @@ class OrderManagementApi:
         return self.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, mark_orders_and_allocations_as_booked, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, mark_orders_and_allocations_as_booked : Annotated[Optional[StrictBool], Field(description="Whether to mark allocations and fully-booked orders with state Booked")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
@@ -250,15 +247,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the orders to be cancelled.")], **kwargs) -> CancelOrdersResponse:  # noqa: E501
+    async def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the orders to be cancelled.")], **kwargs) -> CancelOrdersResponse:  # noqa: E501
         ...
 
     @overload
-    def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the orders to be cancelled.")], async_req: Optional[bool]=True, **kwargs) -> CancelOrdersResponse:  # noqa: E501
+    def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the orders to be cancelled.")], async_req: Optional[bool]=True, **kwargs) -> CancelOrdersResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the orders to be cancelled.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelOrdersResponse, Awaitable[CancelOrdersResponse]]:  # noqa: E501
+    def cancel_orders(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the orders to be cancelled.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelOrdersResponse, Awaitable[CancelOrdersResponse]]:  # noqa: E501
         """[EARLY ACCESS] CancelOrders: Cancel existing orders  # noqa: E501
 
         The response returns both the collection of successfully canceled orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -289,7 +286,7 @@ class OrderManagementApi:
         return self.cancel_orders_with_http_info(request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def cancel_orders_with_http_info(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the orders to be cancelled.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def cancel_orders_with_http_info(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the orders to be cancelled.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CancelOrders: Cancel existing orders  # noqa: E501
 
         The response returns both the collection of successfully canceled orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -409,15 +406,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(..., description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], **kwargs) -> CancelOrdersAndMoveRemainingResponse:  # noqa: E501
+    async def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], **kwargs) -> CancelOrdersAndMoveRemainingResponse:  # noqa: E501
         ...
 
     @overload
-    def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(..., description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], async_req: Optional[bool]=True, **kwargs) -> CancelOrdersAndMoveRemainingResponse:  # noqa: E501
+    def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], async_req: Optional[bool]=True, **kwargs) -> CancelOrdersAndMoveRemainingResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(..., description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelOrdersAndMoveRemainingResponse, Awaitable[CancelOrdersAndMoveRemainingResponse]]:  # noqa: E501
+    def cancel_orders_and_move_remaining(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelOrdersAndMoveRemainingResponse, Awaitable[CancelOrdersAndMoveRemainingResponse]]:  # noqa: E501
         """[EARLY ACCESS] CancelOrdersAndMoveRemaining: Cancel existing orders and move any unplaced quantities to new orders in new blocks  # noqa: E501
 
         Cancels existing orders, reducing their quantities to those aleady placed. Any remaining quantities are moved  to new orders in new blocks. The placed quantities are distributed to the cancelled orders on a pro-rata basis.  # noqa: E501
@@ -448,7 +445,7 @@ class OrderManagementApi:
         return self.cancel_orders_and_move_remaining_with_http_info(request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def cancel_orders_and_move_remaining_with_http_info(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(..., description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def cancel_orders_and_move_remaining_with_http_info(self, request_body : Annotated[Dict[str, CancelOrdersAndMoveRemainingRequest], Field(description="The request containing the orders to be cancelled, and the destinations of remaining quantities.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CancelOrdersAndMoveRemaining: Cancel existing orders and move any unplaced quantities to new orders in new blocks  # noqa: E501
 
         Cancels existing orders, reducing their quantities to those aleady placed. Any remaining quantities are moved  to new orders in new blocks. The placed quantities are distributed to the cancelled orders on a pro-rata basis.  # noqa: E501
@@ -568,15 +565,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the placements to be cancelled.")], **kwargs) -> CancelPlacementsResponse:  # noqa: E501
+    async def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the placements to be cancelled.")], **kwargs) -> CancelPlacementsResponse:  # noqa: E501
         ...
 
     @overload
-    def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the placements to be cancelled.")], async_req: Optional[bool]=True, **kwargs) -> CancelPlacementsResponse:  # noqa: E501
+    def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the placements to be cancelled.")], async_req: Optional[bool]=True, **kwargs) -> CancelPlacementsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the placements to be cancelled.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelPlacementsResponse, Awaitable[CancelPlacementsResponse]]:  # noqa: E501
+    def cancel_placements(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the placements to be cancelled.")], async_req: Optional[bool]=None, **kwargs) -> Union[CancelPlacementsResponse, Awaitable[CancelPlacementsResponse]]:  # noqa: E501
         """[EARLY ACCESS] CancelPlacements: Cancel existing placements  # noqa: E501
 
         The response returns both the collection of successfully canceled placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -607,7 +604,7 @@ class OrderManagementApi:
         return self.cancel_placements_with_http_info(request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def cancel_placements_with_http_info(self, request_body : Annotated[Dict[str, ResourceId], Field(..., description="The request containing the ids of the placements to be cancelled.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def cancel_placements_with_http_info(self, request_body : Annotated[Dict[str, ResourceId], Field(description="The request containing the ids of the placements to be cancelled.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CancelPlacements: Cancel existing placements  # noqa: E501
 
         The response returns both the collection of successfully canceled placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -727,15 +724,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], **kwargs) -> ResourceListOfBlockAndOrders:  # noqa: E501
+    async def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(description="The collection of block and orders requests.")], **kwargs) -> ResourceListOfBlockAndOrders:  # noqa: E501
         ...
 
     @overload
-    def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfBlockAndOrders:  # noqa: E501
+    def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(description="The collection of block and orders requests.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfBlockAndOrders:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfBlockAndOrders, Awaitable[ResourceListOfBlockAndOrders]]:  # noqa: E501
+    def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(description="The collection of block and orders requests.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfBlockAndOrders, Awaitable[ResourceListOfBlockAndOrders]]:  # noqa: E501
         """CreateOrders: Upsert a Block and associated orders  # noqa: E501
 
         Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
@@ -766,7 +763,7 @@ class OrderManagementApi:
         return self.create_orders_with_http_info(block_and_orders_create_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_orders_with_http_info(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(..., description="The collection of block and orders requests.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_orders_with_http_info(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(description="The collection of block and orders requests.")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateOrders: Upsert a Block and associated orders  # noqa: E501
 
         Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
@@ -1058,15 +1055,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], **kwargs) -> ResourceListOfMovedOrderToDifferentBlockResponse:  # noqa: E501
+    async def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(description="The collection of order and destination block ids.")], **kwargs) -> ResourceListOfMovedOrderToDifferentBlockResponse:  # noqa: E501
         ...
 
     @overload
-    def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMovedOrderToDifferentBlockResponse:  # noqa: E501
+    def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(description="The collection of order and destination block ids.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMovedOrderToDifferentBlockResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMovedOrderToDifferentBlockResponse, Awaitable[ResourceListOfMovedOrderToDifferentBlockResponse]]:  # noqa: E501
+    def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(description="The collection of order and destination block ids.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMovedOrderToDifferentBlockResponse, Awaitable[ResourceListOfMovedOrderToDifferentBlockResponse]]:  # noqa: E501
         """[EARLY ACCESS] MoveOrders: Move orders to new or existing block  # noqa: E501
 
         Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
@@ -1097,7 +1094,7 @@ class OrderManagementApi:
         return self.move_orders_with_http_info(move_orders_to_different_blocks_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def move_orders_with_http_info(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def move_orders_with_http_info(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(description="The collection of order and destination block ids.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] MoveOrders: Move orders to new or existing block  # noqa: E501
 
         Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
@@ -1376,15 +1373,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    async def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_allocation_service(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
         """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
@@ -1417,7 +1414,7 @@ class OrderManagementApi:
         return self.run_allocation_service_with_http_info(resource_id, allocation_algorithm, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_allocation_service_with_http_info(self, resource_id : Annotated[conlist(ResourceId), Field(..., description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def run_allocation_service_with_http_info(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
@@ -1702,15 +1699,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(..., description="The request containing the orders to be updated.")], **kwargs) -> UpdateOrdersResponse:  # noqa: E501
+    async def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(description="The request containing the orders to be updated.")], **kwargs) -> UpdateOrdersResponse:  # noqa: E501
         ...
 
     @overload
-    def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(..., description="The request containing the orders to be updated.")], async_req: Optional[bool]=True, **kwargs) -> UpdateOrdersResponse:  # noqa: E501
+    def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(description="The request containing the orders to be updated.")], async_req: Optional[bool]=True, **kwargs) -> UpdateOrdersResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(..., description="The request containing the orders to be updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdateOrdersResponse, Awaitable[UpdateOrdersResponse]]:  # noqa: E501
+    def update_orders(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(description="The request containing the orders to be updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdateOrdersResponse, Awaitable[UpdateOrdersResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpdateOrders: Update existing orders  # noqa: E501
 
         The response returns both the collection of successfully updated orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -1741,7 +1738,7 @@ class OrderManagementApi:
         return self.update_orders_with_http_info(request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_orders_with_http_info(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(..., description="The request containing the orders to be updated.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_orders_with_http_info(self, request_body : Annotated[Dict[str, OrderUpdateRequest], Field(description="The request containing the orders to be updated.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateOrders: Update existing orders  # noqa: E501
 
         The response returns both the collection of successfully updated orders, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -1861,15 +1858,15 @@ class OrderManagementApi:
 
 
     @overload
-    async def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(..., description="The request containing the placements to be updated.")], **kwargs) -> UpdatePlacementsResponse:  # noqa: E501
+    async def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(description="The request containing the placements to be updated.")], **kwargs) -> UpdatePlacementsResponse:  # noqa: E501
         ...
 
     @overload
-    def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(..., description="The request containing the placements to be updated.")], async_req: Optional[bool]=True, **kwargs) -> UpdatePlacementsResponse:  # noqa: E501
+    def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(description="The request containing the placements to be updated.")], async_req: Optional[bool]=True, **kwargs) -> UpdatePlacementsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(..., description="The request containing the placements to be updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdatePlacementsResponse, Awaitable[UpdatePlacementsResponse]]:  # noqa: E501
+    def update_placements(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(description="The request containing the placements to be updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdatePlacementsResponse, Awaitable[UpdatePlacementsResponse]]:  # noqa: E501
         """[EARLY ACCESS] UpdatePlacements: Update existing placements  # noqa: E501
 
         The response returns both the collection of successfully updated placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501
@@ -1900,7 +1897,7 @@ class OrderManagementApi:
         return self.update_placements_with_http_info(request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_placements_with_http_info(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(..., description="The request containing the placements to be updated.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_placements_with_http_info(self, request_body : Annotated[Dict[str, PlacementUpdateRequest], Field(description="The request containing the placements to be updated.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdatePlacements: Update existing placements  # noqa: E501
 
         The response returns both the collection of successfully updated placements, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  # noqa: E501

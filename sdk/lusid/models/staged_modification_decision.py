@@ -17,15 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class StagedModificationDecision(BaseModel):
     """
     StagedModificationDecision
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="Time the decision request is made.")
+    as_at: Optional[datetime] = Field(default=None, description="Time the decision request is made.", alias="asAt")
     user_id:  Optional[StrictStr] = Field(None,alias="userId", description="ID of user that approved the request.") 
     request_id:  Optional[StrictStr] = Field(None,alias="requestId", description="ID of user that made the request.") 
     decision:  Optional[StrictStr] = Field(None,alias="decision", description="The decision on the requested staged modification, can be 'Approve' or 'Reject'.") 
@@ -103,3 +105,5 @@ class StagedModificationDecision(BaseModel):
             "comment": obj.get("comment")
         })
         return _obj
+
+StagedModificationDecision.update_forward_refs()

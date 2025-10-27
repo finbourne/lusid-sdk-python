@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.update_custom_data_model_request import UpdateCustomDataModelRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 parent_data_model: Optional[ResourceId] = # Replace with your value
 conditions: Optional[StrictStr] = "example_conditions"
-properties: Optional[conlist(CustomDataModelPropertySpecification)] = # Replace with your value
-identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecification)] = # Replace with your value
-attribute_aliases: Optional[conlist(Alias)] = # Replace with your value
-recommended_sort_by: Optional[conlist(RecommendedSortBy)] = # Replace with your value
+properties: Optional[List[CustomDataModelPropertySpecification]] = # Replace with your value
+identifier_types: Optional[List[CustomDataModelIdentifierTypeSpecification]] = # Replace with your value
+attribute_aliases: Optional[List[Alias]] = # Replace with your value
+recommended_sort_by: Optional[List[RecommendedSortBy]] = # Replace with your value
 update_custom_data_model_request_instance = UpdateCustomDataModelRequest(display_name=display_name, description=description, parent_data_model=parent_data_model, conditions=conditions, properties=properties, identifier_types=identifier_types, attribute_aliases=attribute_aliases, recommended_sort_by=recommended_sort_by)
 
 ```

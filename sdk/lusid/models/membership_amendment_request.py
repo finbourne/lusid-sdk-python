@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class MembershipAmendmentRequest(BaseModel):
     """
     MembershipAmendmentRequest
     """
-    custom_data_model_id: ResourceId = Field(..., alias="customDataModelId")
+    custom_data_model_id: ResourceId = Field(alias="customDataModelId")
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity that is being added or removed from the Custom Data Model.") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The entity unique identifier of the entity that is being added or removed from the Custom Data Model.") 
     operation:  StrictStr = Field(...,alias="operation", description="The operation to be performed on the entity's membership in the Custom Data Model. Either 'Add' or 'Remove'.") 
@@ -85,3 +87,5 @@ class MembershipAmendmentRequest(BaseModel):
             "operation": obj.get("operation")
         })
         return _obj
+
+MembershipAmendmentRequest.update_forward_refs()

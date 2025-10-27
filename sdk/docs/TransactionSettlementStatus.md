@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_settlement_status import TransactionSettlementStatus
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 transaction_id: StrictStr = "example_transaction_id"
-settlement_buckets: Optional[conlist(TransactionSettlementBucket)] = # Replace with your value
-invalid_instructions: Optional[conlist(TransactionSettlementInstruction)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+settlement_buckets: Optional[List[TransactionSettlementBucket]] = # Replace with your value
+invalid_instructions: Optional[List[TransactionSettlementInstruction]] = # Replace with your value
+links: Optional[List[Link]] = None
 transaction_settlement_status_instance = TransactionSettlementStatus(transaction_id=transaction_id, settlement_buckets=settlement_buckets, invalid_instructions=invalid_instructions, links=links)
 
 ```

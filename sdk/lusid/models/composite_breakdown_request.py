@@ -18,19 +18,21 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class CompositeBreakdownRequest(BaseModel):
     """
     The request used in the GetCompositeBreakdown.  # noqa: E501
     """
-    return_ids: Optional[conlist(ResourceId)] = Field(None, alias="returnIds", description="The Scope and code of the returns.")
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
+    return_ids: Optional[List[ResourceId]] = Field(default=None, description="The Scope and code of the returns.", alias="returnIds")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
     composite_method:  Optional[StrictStr] = Field(None,alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.") 
     period:  Optional[StrictStr] = Field(None,alias="period", description="The type of the returns used to calculate the aggregation result: Daily/Monthly.") 
-    holiday_calendars: Optional[conlist(StrictStr)] = Field(None, alias="holidayCalendars", description="The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.")
+    holiday_calendars: Optional[List[StrictStr]] = Field(default=None, description="The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.", alias="holidayCalendars")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="Optional - either a string or a property. If provided, the results will be converted to the specified currency") 
     __properties = ["returnIds", "recipeId", "compositeMethod", "period", "holidayCalendars", "currency"]
 
@@ -121,3 +123,5 @@ class CompositeBreakdownRequest(BaseModel):
             "currency": obj.get("currency")
         })
         return _obj
+
+CompositeBreakdownRequest.update_forward_refs()

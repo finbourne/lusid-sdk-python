@@ -17,15 +17,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_share_class import FundShareClass
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 short_code: StrictStr = "example_short_code"
 fund_share_class_type: StrictStr = "example_fund_share_class_type"
 distribution_payment_type: StrictStr = "example_distribution_payment_type"
 hedging: StrictStr = "example_hedging"
 dom_ccy: StrictStr = "example_dom_ccy"
-rounding_conventions: Optional[conlist(SimpleRoundingConvention)] = # Replace with your value
+rounding_conventions: Optional[List[SimpleRoundingConvention]] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"

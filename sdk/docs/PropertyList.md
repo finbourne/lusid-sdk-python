@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.property_list import PropertyList
-from typing import Any, Dict, List
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(ModelProperty, max_items=10000, min_items=0) = Field(...)
+values: List[ModelProperty]
 reference_list_type: StrictStr = "example_reference_list_type"
 property_list_instance = PropertyList(values=values, reference_list_type=reference_list_type)
 

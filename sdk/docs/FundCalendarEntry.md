@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_calendar_entry import FundCalendarEntry
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
@@ -35,7 +37,7 @@ status: Optional[StrictStr] = "example_status"
 apply_clear_down: StrictBool = # Replace with your value
 apply_clear_down:StrictBool = True
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-version: Version = # Replace with your value
+version: Version
 href: Optional[StrictStr] = "example_href"
 fund_calendar_entry_instance = FundCalendarEntry(code=code, display_name=display_name, description=description, nav_type_code=nav_type_code, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, properties=properties, version=version, href=href)
 

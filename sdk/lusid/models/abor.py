@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.portfolio_entity_id import PortfolioEntityId
@@ -31,15 +33,15 @@ class Abor(BaseModel):
     An Abor entity.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Abor.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description for the Abor.") 
-    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.")
-    abor_configuration_id: Optional[ResourceId] = Field(None, alias="aborConfigurationId")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
+    portfolio_ids: List[PortfolioEntityId] = Field(description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.", alias="portfolioIds")
+    abor_configuration_id: Optional[ResourceId] = Field(default=None, alias="aborConfigurationId")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Abor.")
     version: Optional[Version] = None
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the abor based on contained portfolio base currencies.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties", "version", "baseCurrency", "links"]
 
     class Config:
@@ -163,3 +165,5 @@ class Abor(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Abor.update_forward_refs()

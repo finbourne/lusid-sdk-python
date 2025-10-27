@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class DeleteRelationshipRequest(BaseModel):
     """
     DeleteRelationshipRequest
     """
-    source_entity_id: Dict[str, StrictStr] = Field(..., alias="sourceEntityId", description="The identifier of the source entity of the relationship to be deleted.")
-    target_entity_id: Dict[str, StrictStr] = Field(..., alias="targetEntityId", description="The identifier of the target entity of the relationship to be deleted.")
+    source_entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the source entity of the relationship to be deleted.", alias="sourceEntityId")
+    target_entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the target entity of the relationship to be deleted.", alias="targetEntityId")
     effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="The effective date of the relationship to be deleted") 
     effective_until:  Optional[StrictStr] = Field(None,alias="effectiveUntil", description="The effective datetime until which the relationship will be deleted. If not supplied the deletion will be permanent.") 
     __properties = ["sourceEntityId", "targetEntityId", "effectiveFrom", "effectiveUntil"]
@@ -91,3 +93,5 @@ class DeleteRelationshipRequest(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+DeleteRelationshipRequest.update_forward_refs()

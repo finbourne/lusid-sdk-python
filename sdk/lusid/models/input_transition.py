@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class InputTransition(BaseModel):
     """
     The input 'transition' within a corporate action, representing the singular input position  # noqa: E501
     """
-    units_factor: Union[StrictFloat, StrictInt] = Field(..., alias="unitsFactor", description="The factor to scale units by")
-    cost_factor: Union[StrictFloat, StrictInt] = Field(..., alias="costFactor", description="The factor to scale cost by")
+    units_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale units by", alias="unitsFactor")
+    cost_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale cost by", alias="costFactor")
     __properties = ["unitsFactor", "costFactor"]
 
     class Config:
@@ -77,3 +79,5 @@ class InputTransition(BaseModel):
             "cost_factor": obj.get("costFactor")
         })
         return _obj
+
+InputTransition.update_forward_refs()

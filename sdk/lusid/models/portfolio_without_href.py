@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -33,28 +35,28 @@ class PortfolioWithoutHref(BaseModel):
     """
     A list of portfolios.  # noqa: E501
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
-    created: datetime = Field(..., description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
-    parent_portfolio_id: Optional[ResourceId] = Field(None, alias="parentPortfolioId")
+    created: datetime = Field(description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
+    parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
     version: Optional[Version] = None
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    is_derived: Optional[StrictBool] = Field(None, alias="isDerived", description="Whether or not this is a derived portfolio.")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the portfolio.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
-    relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the portfolio.")
-    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The instrument scope resolution strategy of this portfolio.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
+    relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the portfolio.")
+    instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The instrument scope resolution strategy of this portfolio.", alias="instrumentScopes")
     accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency") 
     amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
     transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope", description="The scope of the transaction types.") 
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The scope of the transaction types.") 
-    instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
-    amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
+    instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")
+    amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
-    settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(None, alias="settlementConfiguration")
-    links: Optional[conlist(Link)] = None
+    settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
+    links: Optional[List[Link]] = None
     __properties = ["id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "links"]
 
     @validator('type')
@@ -107,14 +109,19 @@ class PortfolioWithoutHref(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "type" != "type":
             return value
 
-        if value not in ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition'):
+        if value not in ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition']:
             raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition')")
         return value
 
@@ -168,7 +175,12 @@ class PortfolioWithoutHref(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -178,7 +190,7 @@ class PortfolioWithoutHref(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency'):
+        if value not in ['Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency']:
             raise ValueError("must be one of enum values ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency')")
         return value
 
@@ -347,3 +359,5 @@ class PortfolioWithoutHref(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PortfolioWithoutHref.update_forward_refs()

@@ -13,11 +13,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fx_rate_schedule import FxRateSchedule
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 flow_conventions: Optional[FlowConventions] = # Replace with your value
-fx_conversion_types: Optional[conlist(StrictStr)] = # Replace with your value
+fx_conversion_types: Optional[List[StrictStr]] = # Replace with your value
 rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 to_currency: Optional[StrictStr] = "example_to_currency"
 schedule_type: StrictStr = "example_schedule_type"

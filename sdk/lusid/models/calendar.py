@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -31,13 +33,13 @@ class Calendar(BaseModel):
     Calendar
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     type:  StrictStr = Field(...,alias="type") 
-    weekend_mask: WeekendMask = Field(..., alias="weekendMask")
+    weekend_mask: WeekendMask = Field(alias="weekendMask")
     source_provider:  StrictStr = Field(...,alias="sourceProvider") 
-    properties: conlist(ModelProperty) = Field(...)
+    properties: List[ModelProperty]
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "type", "weekendMask", "sourceProvider", "properties", "version", "links"]
 
     class Config:
@@ -127,3 +129,5 @@ class Calendar(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Calendar.update_forward_refs()

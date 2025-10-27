@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: conlist(StagingRule) = # Replace with your value
+rules: List[StagingRule] = # Replace with your value
 create_staging_rule_set_request_instance = CreateStagingRuleSetRequest(display_name=display_name, description=description, rules=rules)
 
 ```

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.data_model_membership import DataModelMembership
@@ -36,30 +38,30 @@ class Transaction(BaseModel):
     """
     transaction_id:  StrictStr = Field(...,alias="transactionId", description="The unique identifier for the transaction.") 
     type:  StrictStr = Field(...,alias="type", description="The type of the transaction e.g. 'Buy', 'Sell'. The transaction type should have been pre-configured via the System Configuration API endpoint.") 
-    instrument_identifiers: Optional[Dict[str, StrictStr]] = Field(None, alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the transaction to a unique instrument.")
+    instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="A set of instrument identifiers that can resolve the transaction to a unique instrument.", alias="instrumentIdentifiers")
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the transaction's instrument lies.") 
     instrument_uid:  StrictStr = Field(...,alias="instrumentUid", description="The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in.") 
-    transaction_date: datetime = Field(..., alias="transactionDate", description="The date of the transaction.")
-    settlement_date: datetime = Field(..., alias="settlementDate", description="The settlement date of the transaction.")
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units transacted in the associated instrument.")
-    transaction_price: Optional[TransactionPrice] = Field(None, alias="transactionPrice")
-    total_consideration: CurrencyAndAmount = Field(..., alias="totalConsideration")
-    exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="exchangeRate", description="The exchange rate between the transaction and settlement currency (settlement currency being represented by the TotalConsideration.Currency). For example if the transaction currency is in USD and the settlement currency is in GBP this this the USD/GBP rate.")
+    transaction_date: datetime = Field(description="The date of the transaction.", alias="transactionDate")
+    settlement_date: datetime = Field(description="The settlement date of the transaction.", alias="settlementDate")
+    units: Union[StrictFloat, StrictInt] = Field(description="The number of units transacted in the associated instrument.")
+    transaction_price: Optional[TransactionPrice] = Field(default=None, alias="transactionPrice")
+    total_consideration: CurrencyAndAmount = Field(alias="totalConsideration")
+    exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The exchange rate between the transaction and settlement currency (settlement currency being represented by the TotalConsideration.Currency). For example if the transaction currency is in USD and the settlement currency is in GBP this this the USD/GBP rate.", alias="exchangeRate")
     transaction_currency:  Optional[StrictStr] = Field(None,alias="transactionCurrency", description="The transaction currency.") 
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the 'Transaction' domain.")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the 'Transaction' domain.")
     counterparty_id:  Optional[StrictStr] = Field(None,alias="counterpartyId", description="The identifier for the counterparty of the transaction.") 
     source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.") 
-    entry_date_time: Optional[datetime] = Field(None, alias="entryDateTime", description="The asAt datetime that the transaction was added to LUSID.")
-    otc_confirmation: Optional[OtcConfirmation] = Field(None, alias="otcConfirmation")
+    entry_date_time: Optional[datetime] = Field(default=None, description="The asAt datetime that the transaction was added to LUSID.", alias="entryDateTime")
+    otc_confirmation: Optional[OtcConfirmation] = Field(default=None, alias="otcConfirmation")
     transaction_status:  Optional[StrictStr] = Field(None,alias="transactionStatus", description="The status of the transaction. The available values are: Active, Amended, Cancelled, ActiveReversal, ActiveTrueUp, CancelledTrueUp") 
-    cancel_date_time: Optional[datetime] = Field(None, alias="cancelDateTime", description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.")
-    order_id: Optional[ResourceId] = Field(None, alias="orderId")
-    allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
-    custodian_account: Optional[CustodianAccount] = Field(None, alias="custodianAccount")
+    cancel_date_time: Optional[datetime] = Field(default=None, description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.", alias="cancelDateTime")
+    order_id: Optional[ResourceId] = Field(default=None, alias="orderId")
+    allocation_id: Optional[ResourceId] = Field(default=None, alias="allocationId")
+    custodian_account: Optional[CustodianAccount] = Field(default=None, alias="custodianAccount")
     transaction_group_id:  Optional[StrictStr] = Field(None,alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions") 
-    strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A list of strategies representing the allocation of units across multiple sub-holding keys")
-    resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(None, alias="resolvedTransactionTypeDetails")
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
+    strategy_tag: Optional[List[Strategy]] = Field(default=None, description="A list of strategies representing the allocation of units across multiple sub-holding keys", alias="strategyTag")
+    resolved_transaction_type_details: Optional[TransactionTypeDetails] = Field(default=None, alias="resolvedTransactionTypeDetails")
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
     __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership"]
 
     @validator('transaction_status')
@@ -112,7 +114,12 @@ class Transaction(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -122,7 +129,7 @@ class Transaction(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp'):
+        if value not in ['Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp']:
             raise ValueError("must be one of enum values ('Active', 'Amended', 'Cancelled', 'ActiveReversal', 'ActiveTrueUp', 'CancelledTrueUp')")
         return value
 
@@ -291,3 +298,5 @@ class Transaction(BaseModel):
             "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None
         })
         return _obj
+
+Transaction.update_forward_refs()

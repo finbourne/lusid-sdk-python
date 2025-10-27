@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.structured_result_data import StructuredResultData
 from lusid.models.structured_result_data_id import StructuredResultDataId
 
@@ -27,7 +29,7 @@ class UpsertStructuredResultDataRequest(BaseModel):
     """
     The details of the structured unit result data item to upsert into Lusid.  # noqa: E501
     """
-    id: StructuredResultDataId = Field(...)
+    id: StructuredResultDataId
     data: Optional[StructuredResultData] = None
     __properties = ["id", "data"]
 
@@ -85,3 +87,5 @@ class UpsertStructuredResultDataRequest(BaseModel):
             "data": StructuredResultData.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
+
+UpsertStructuredResultDataRequest.update_forward_refs()

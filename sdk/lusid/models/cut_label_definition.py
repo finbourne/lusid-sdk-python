@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.cut_local_time import CutLocalTime
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -31,11 +33,11 @@ class CutLabelDefinition(BaseModel):
     code:  Optional[StrictStr] = Field(None,alias="code", description="") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="") 
-    cut_local_time: Optional[CutLocalTime] = Field(None, alias="cutLocalTime")
+    cut_local_time: Optional[CutLocalTime] = Field(default=None, alias="cutLocalTime")
     time_zone:  Optional[StrictStr] = Field(None,alias="timeZone", description="") 
     href:  Optional[StrictStr] = Field(None,alias="href") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["code", "displayName", "description", "cutLocalTime", "timeZone", "href", "version", "links"]
 
     class Config:
@@ -135,3 +137,5 @@ class CutLabelDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CutLabelDefinition.update_forward_refs()

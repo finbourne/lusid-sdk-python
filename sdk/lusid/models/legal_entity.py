@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -34,12 +36,12 @@ class LegalEntity(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Legal Entity") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     lusid_legal_entity_id:  Optional[StrictStr] = Field(None,alias="lusidLegalEntityId", description="The unique LUSID Legal Entity Identifier of the Legal Entity.") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Legal Entity.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Legal Entity.")
-    relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Legal Entity.")
-    counterparty_risk_information: Optional[CounterpartyRiskInformation] = Field(None, alias="counterpartyRiskInformation")
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Unique client-defined identifiers of the Legal Entity.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Legal Entity.")
+    relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the Legal Entity.")
+    counterparty_risk_information: Optional[CounterpartyRiskInformation] = Field(default=None, alias="counterpartyRiskInformation")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["displayName", "description", "href", "lusidLegalEntityId", "identifiers", "properties", "relationships", "counterpartyRiskInformation", "version", "links"]
 
     class Config:
@@ -182,3 +184,5 @@ class LegalEntity(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+LegalEntity.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.market_data_options import MarketDataOptions
 
 class CurveOptions(MarketDataOptions):
@@ -83,14 +85,19 @@ class CurveOptions(MarketDataOptions):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "market_data_options_type" != "type":
             return value
 
-        if value not in ('CurveOptions'):
+        if value not in ['CurveOptions']:
             raise ValueError("must be one of enum values ('CurveOptions')")
         return value
 
@@ -170,3 +177,5 @@ class CurveOptions(MarketDataOptions):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+CurveOptions.update_forward_refs()

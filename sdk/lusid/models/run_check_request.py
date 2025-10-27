@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.lusid_entity_dataset import LusidEntityDataset
 
 class RunCheckRequest(BaseModel):
     """
     RunCheckRequest
     """
-    lusid_entity_dataset: Optional[LusidEntityDataset] = Field(None, alias="lusidEntityDataset")
-    limit_individual_breaches_per_rule: Optional[StrictInt] = Field(None, alias="limitIndividualBreachesPerRule", description="The maximum number of individual breaches to return per rule. Defaults to 100 if not specified.")
+    lusid_entity_dataset: Optional[LusidEntityDataset] = Field(default=None, alias="lusidEntityDataset")
+    limit_individual_breaches_per_rule: Optional[StrictInt] = Field(default=None, description="The maximum number of individual breaches to return per rule. Defaults to 100 if not specified.", alias="limitIndividualBreachesPerRule")
     __properties = ["lusidEntityDataset", "limitIndividualBreachesPerRule"]
 
     class Config:
@@ -81,3 +83,5 @@ class RunCheckRequest(BaseModel):
             "limit_individual_breaches_per_rule": obj.get("limitIndividualBreachesPerRule")
         })
         return _obj
+
+RunCheckRequest.update_forward_refs()

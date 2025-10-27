@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
@@ -31,25 +33,25 @@ class Execution(BaseModel):
     """
     The record of a number of executions against a single Placement (directly analogous to  a partial or full fill against a street order).  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    placement_id: ResourceId = Field(..., alias="placementId")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
+    id: ResourceId
+    placement_id: ResourceId = Field(alias="placementId")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument execution.") 
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of given instrument ordered.")
     state:  StrictStr = Field(...,alias="state", description="The state of this execution (typically a FIX state; Open, Filled, etc).") 
     side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this execution.") 
     type:  StrictStr = Field(...,alias="type", description="The type of this execution (Market, Limit, etc).") 
-    created_date: datetime = Field(..., alias="createdDate", description="The active date of this execution.")
-    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The (optional) settlement date for this execution")
-    price: CurrencyAndAmount = Field(...)
+    created_date: datetime = Field(description="The active date of this execution.", alias="createdDate")
+    settlement_date: Optional[datetime] = Field(default=None, description="The (optional) settlement date for this execution", alias="settlementDate")
+    price: CurrencyAndAmount
     settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="The execution's settlement currency.") 
-    settlement_currency_fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="settlementCurrencyFxRate", description="The exectuion's settlement currency rate.")
+    settlement_currency_fx_rate: Union[StrictFloat, StrictInt] = Field(description="The exectuion's settlement currency rate.", alias="settlementCurrencyFxRate")
     counterparty:  StrictStr = Field(...,alias="counterparty", description="The market entity this placement is placed with.") 
-    average_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="averagePrice", description="The average price of all executions for a given placement at the time of upsert")
+    average_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average price of all executions for a given placement at the time of upsert", alias="averagePrice")
     version: Optional[Version] = None
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["id", "placementId", "properties", "instrumentIdentifiers", "lusidInstrumentId", "quantity", "state", "side", "type", "createdDate", "settlementDate", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "averagePrice", "version", "dataModelMembership", "links"]
 
     class Config:
@@ -171,3 +173,5 @@ class Execution(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Execution.update_forward_refs()

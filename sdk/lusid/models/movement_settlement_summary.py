@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class MovementSettlementSummary(BaseModel):
     """
@@ -32,9 +34,9 @@ class MovementSettlementSummary(BaseModel):
     settlement_mode:  Optional[StrictStr] = Field(None,alias="settlementMode") 
     contractual_settlement_date:  Optional[StrictStr] = Field(None,alias="contractualSettlementDate") 
     units: Optional[Union[StrictFloat, StrictInt]] = None
-    settled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="settledUnits")
-    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unsettledUnits")
-    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="overdueUnits")
+    settled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="settledUnits")
+    unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="unsettledUnits")
+    overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="overdueUnits")
     __properties = ["name", "type", "lusidInstrumentId", "instrumentScope", "settlementMode", "contractualSettlementDate", "units", "settledUnits", "unsettledUnits", "overdueUnits"]
 
     class Config:
@@ -123,3 +125,5 @@ class MovementSettlementSummary(BaseModel):
             "overdue_units": obj.get("overdueUnits")
         })
         return _obj
+
+MovementSettlementSummary.update_forward_refs()

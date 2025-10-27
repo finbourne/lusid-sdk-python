@@ -17,17 +17,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_type_movement import TransactionTypeMovement
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 movement_types: StrictStr = "example_movement_types"
 side: StrictStr = "example_side"
 direction: StrictInt = # Replace with your value
 direction: StrictInt = 42
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-mappings: Optional[conlist(TransactionTypePropertyMapping, max_items=5000)] = Field(None, description="This allows you to map a transaction property to a property on the underlying holding")
+mappings: Optional[List[TransactionTypePropertyMapping]] = # Replace with your value
 name: Optional[StrictStr] = "example_name"
-movement_options: Optional[conlist(StrictStr)] = # Replace with your value
+movement_options: Optional[List[StrictStr]] = # Replace with your value
 settlement_date_override: Optional[StrictStr] = "example_settlement_date_override"
 condition: Optional[StrictStr] = "example_condition"
 settlement_mode: Optional[StrictStr] = "example_settlement_mode"

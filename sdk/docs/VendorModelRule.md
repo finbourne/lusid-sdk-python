@@ -15,8 +15,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.vendor_model_rule import VendorModelRule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 supplier: StrictStr = "example_supplier"
 model_name: StrictStr = "example_model_name"
@@ -24,7 +26,7 @@ instrument_type: StrictStr = "example_instrument_type"
 parameters: Optional[StrictStr] = "example_parameters"
 model_options: Optional[ModelOptions] = # Replace with your value
 instrument_id: Optional[StrictStr] = "example_instrument_id"
-address_key_filters: Optional[conlist(AddressKeyFilter)] = # Replace with your value
+address_key_filters: Optional[List[AddressKeyFilter]] = # Replace with your value
 vendor_model_rule_instance = VendorModelRule(supplier=supplier, model_name=model_name, instrument_type=instrument_type, parameters=parameters, model_options=model_options, instrument_id=instrument_id, address_key_filters=address_key_filters)
 
 ```

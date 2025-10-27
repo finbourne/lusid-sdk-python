@@ -19,9 +19,8 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from pydantic.v1 import Field
-
+from typing_extensions import Annotated
 from lusid.models.translate_instrument_definitions_request import TranslateInstrumentDefinitionsRequest
 from lusid.models.translate_instrument_definitions_response import TranslateInstrumentDefinitionsResponse
 from lusid.models.translate_trade_ticket_request import TranslateTradeTicketRequest
@@ -54,15 +53,15 @@ class TranslationApi:
 
 
     @overload
-    async def translate_instrument_definitions(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(..., description="The definitions of the instruments to translate along with the target dialect.")], **kwargs) -> TranslateInstrumentDefinitionsResponse:  # noqa: E501
+    async def translate_instrument_definitions(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(description="The definitions of the instruments to translate along with the target dialect.")], **kwargs) -> TranslateInstrumentDefinitionsResponse:  # noqa: E501
         ...
 
     @overload
-    def translate_instrument_definitions(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(..., description="The definitions of the instruments to translate along with the target dialect.")], async_req: Optional[bool]=True, **kwargs) -> TranslateInstrumentDefinitionsResponse:  # noqa: E501
+    def translate_instrument_definitions(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(description="The definitions of the instruments to translate along with the target dialect.")], async_req: Optional[bool]=True, **kwargs) -> TranslateInstrumentDefinitionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def translate_instrument_definitions(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(..., description="The definitions of the instruments to translate along with the target dialect.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateInstrumentDefinitionsResponse, Awaitable[TranslateInstrumentDefinitionsResponse]]:  # noqa: E501
+    def translate_instrument_definitions(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(description="The definitions of the instruments to translate along with the target dialect.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateInstrumentDefinitionsResponse, Awaitable[TranslateInstrumentDefinitionsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments  # noqa: E501
 
         Translates one or more instruments into the given target dialect.                In the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                Any instrument that is not already in the LUSID dialect should be given as an ExoticInstrument.                The response will return both the collection of successfully translated instruments in the target dialect,  as well as those that failed.  For the failures a reason will be provided explaining why the instrument could not be updated or inserted.  # noqa: E501
@@ -93,7 +92,7 @@ class TranslationApi:
         return self.translate_instrument_definitions_with_http_info(translate_instrument_definitions_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def translate_instrument_definitions_with_http_info(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(..., description="The definitions of the instruments to translate along with the target dialect.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def translate_instrument_definitions_with_http_info(self, translate_instrument_definitions_request : Annotated[TranslateInstrumentDefinitionsRequest, Field(description="The definitions of the instruments to translate along with the target dialect.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments  # noqa: E501
 
         Translates one or more instruments into the given target dialect.                In the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                Any instrument that is not already in the LUSID dialect should be given as an ExoticInstrument.                The response will return both the collection of successfully translated instruments in the target dialect,  as well as those that failed.  For the failures a reason will be provided explaining why the instrument could not be updated or inserted.  # noqa: E501
@@ -213,15 +212,15 @@ class TranslationApi:
 
 
     @overload
-    async def translate_trade_tickets(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(..., description="The definitions of the trade ticket to translate along with the target dialect.")], **kwargs) -> TranslateTradeTicketsResponse:  # noqa: E501
+    async def translate_trade_tickets(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(description="The definitions of the trade ticket to translate along with the target dialect.")], **kwargs) -> TranslateTradeTicketsResponse:  # noqa: E501
         ...
 
     @overload
-    def translate_trade_tickets(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(..., description="The definitions of the trade ticket to translate along with the target dialect.")], async_req: Optional[bool]=True, **kwargs) -> TranslateTradeTicketsResponse:  # noqa: E501
+    def translate_trade_tickets(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(description="The definitions of the trade ticket to translate along with the target dialect.")], async_req: Optional[bool]=True, **kwargs) -> TranslateTradeTicketsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def translate_trade_tickets(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(..., description="The definitions of the trade ticket to translate along with the target dialect.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateTradeTicketsResponse, Awaitable[TranslateTradeTicketsResponse]]:  # noqa: E501
+    def translate_trade_tickets(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(description="The definitions of the trade ticket to translate along with the target dialect.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateTradeTicketsResponse, Awaitable[TranslateTradeTicketsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket  # noqa: E501
 
         Translates one or more trade tickets into the given target dialect.                In the request each trade ticket definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each trade ticket in the response.                The response will return both the collection of successfully translated trade tickets in the target dialect,  as well as those that failed.  For the failures a reason will be provided explaining why the trade ticket could not be updated or inserted.  # noqa: E501
@@ -252,7 +251,7 @@ class TranslationApi:
         return self.translate_trade_tickets_with_http_info(translate_trade_ticket_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def translate_trade_tickets_with_http_info(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(..., description="The definitions of the trade ticket to translate along with the target dialect.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def translate_trade_tickets_with_http_info(self, translate_trade_ticket_request : Annotated[TranslateTradeTicketRequest, Field(description="The definitions of the trade ticket to translate along with the target dialect.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket  # noqa: E501
 
         Translates one or more trade tickets into the given target dialect.                In the request each trade ticket definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each trade ticket in the response.                The response will return both the collection of successfully translated trade tickets in the target dialect,  as well as those that failed.  For the failures a reason will be provided explaining why the trade ticket could not be updated or inserted.  # noqa: E501

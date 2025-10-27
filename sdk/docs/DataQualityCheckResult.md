@@ -24,9 +24,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.data_quality_check_result import DataQualityCheckResult
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 check_definition_scope: Optional[StrictStr] = "example_check_definition_scope"
 check_definition_code: Optional[StrictStr] = "example_check_definition_code"
 check_definition_display_name: Optional[StrictStr] = "example_check_definition_display_name"

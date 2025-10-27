@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-share_class_instrument_scopes: conlist(StrictStr, max_items=1) = Field(..., alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
-share_class_instruments: conlist(InstrumentResolutionDetail) = # Replace with your value
+share_class_instrument_scopes: List[StrictStr] = # Replace with your value
+share_class_instruments: List[InstrumentResolutionDetail] = # Replace with your value
 set_share_class_instruments_request_instance = SetShareClassInstrumentsRequest(share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments)
 
 ```

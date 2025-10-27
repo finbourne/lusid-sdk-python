@@ -17,17 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class GroupReconciliationUserReviewRemove(BaseModel):
     """
     GroupReconciliationUserReviewRemove
     """
-    break_code_as_at_added: Optional[datetime] = Field(None, alias="breakCodeAsAtAdded", description="The timestamp of the added User Review input.")
-    match_key_as_at_added: Optional[datetime] = Field(None, alias="matchKeyAsAtAdded", description="The timestamp of the added User Review input.")
-    comment_text_as_at_added: Optional[datetime] = Field(None, alias="commentTextAsAtAdded", description="The timestamp of the added User Review input.")
+    break_code_as_at_added: Optional[datetime] = Field(default=None, description="The timestamp of the added User Review input.", alias="breakCodeAsAtAdded")
+    match_key_as_at_added: Optional[datetime] = Field(default=None, description="The timestamp of the added User Review input.", alias="matchKeyAsAtAdded")
+    comment_text_as_at_added: Optional[datetime] = Field(default=None, description="The timestamp of the added User Review input.", alias="commentTextAsAtAdded")
     __properties = ["breakCodeAsAtAdded", "matchKeyAsAtAdded", "commentTextAsAtAdded"]
 
     class Config:
@@ -94,3 +96,5 @@ class GroupReconciliationUserReviewRemove(BaseModel):
             "comment_text_as_at_added": obj.get("commentTextAsAtAdded")
         })
         return _obj
+
+GroupReconciliationUserReviewRemove.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.quote import Quote
@@ -29,10 +31,10 @@ class GetQuotesResponse(BaseModel):
     GetQuotesResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    values: Optional[Dict[str, Quote]] = Field(None, description="The quotes which have been successfully retrieved.")
-    not_found: Optional[Dict[str, ErrorDetail]] = Field(None, alias="notFound", description="The quotes that could not be found along with a reason why.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The quotes that could not be retrieved due to an error along with a reason for their failure.")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, Quote]] = Field(default=None, description="The quotes which have been successfully retrieved.")
+    not_found: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The quotes that could not be found along with a reason why.", alias="notFound")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The quotes that could not be retrieved due to an error along with a reason for their failure.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "values", "notFound", "failed", "links"]
 
     class Config:
@@ -154,3 +156,5 @@ class GetQuotesResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+GetQuotesResponse.update_forward_refs()

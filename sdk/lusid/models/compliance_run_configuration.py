@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.pre_trade_configuration import PreTradeConfiguration
 
 class ComplianceRunConfiguration(BaseModel):
     """
     Specification object for the configuration parameters of a compliance run  # noqa: E501
     """
-    pre_trade_configuration: PreTradeConfiguration = Field(..., alias="preTradeConfiguration")
+    pre_trade_configuration: PreTradeConfiguration = Field(alias="preTradeConfiguration")
     __properties = ["preTradeConfiguration"]
 
     class Config:
@@ -79,3 +81,5 @@ class ComplianceRunConfiguration(BaseModel):
             "pre_trade_configuration": PreTradeConfiguration.from_dict(obj.get("preTradeConfiguration")) if obj.get("preTradeConfiguration") is not None else None
         })
         return _obj
+
+ComplianceRunConfiguration.update_forward_refs()

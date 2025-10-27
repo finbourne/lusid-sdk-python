@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
@@ -30,15 +32,15 @@ class TrialBalance(BaseModel):
     """
     general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The Account code that the trial balance results have been grouped against.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the record.") 
-    levels: conlist(StrictStr) = Field(..., description="The levels that have been derived from the specified General Ledger Profile.")
+    levels: List[StrictStr] = Field(description="The levels that have been derived from the specified General Ledger Profile.")
     account_type:  StrictStr = Field(...,alias="accountType", description="The account type attributed to the record.") 
     local_currency:  StrictStr = Field(...,alias="localCurrency", description="The local currency for the amounts specified. Defaults to base currency if multiple different currencies present in the grouped line.") 
-    opening: MultiCurrencyAmounts = Field(...)
-    closing: MultiCurrencyAmounts = Field(...)
-    debit: MultiCurrencyAmounts = Field(...)
-    credit: MultiCurrencyAmounts = Field(...)
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Properties found on the mapped 'Account', as specified in request.")
-    links: Optional[conlist(Link)] = None
+    opening: MultiCurrencyAmounts
+    closing: MultiCurrencyAmounts
+    debit: MultiCurrencyAmounts
+    credit: MultiCurrencyAmounts
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Properties found on the mapped 'Account', as specified in request.")
+    links: Optional[List[Link]] = None
     __properties = ["generalLedgerAccountCode", "description", "levels", "accountType", "localCurrency", "opening", "closing", "debit", "credit", "properties", "links"]
 
     class Config:
@@ -144,3 +146,5 @@ class TrialBalance(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TrialBalance.update_forward_refs()

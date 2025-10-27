@@ -18,9 +18,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_summary import GroupReconciliationSummary
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 run_details: Optional[GroupReconciliationRunDetails] = # Replace with your value
 group_reconciliation_definition_id: Optional[ResourceId] = # Replace with your value
 reconciliation_type: StrictStr = "example_reconciliation_type"

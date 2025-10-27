@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_with_transaction import SettlementInstructionWithTransaction
@@ -29,13 +31,13 @@ class VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionT
     """
     VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
     """
-    version: Version = Field(...)
-    values: conlist(SettlementInstructionWithTransaction) = Field(..., description="The resources to list.")
+    version: Version
+    values: List[SettlementInstructionWithTransaction] = Field(description="The resources to list.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The URI of the resource list.") 
-    post_body: Optional[SettlementInstructionQuery] = Field(None, alias="postBody")
-    next_page: Optional[SettlementInstructionQuery] = Field(None, alias="nextPage")
-    previous_page: Optional[SettlementInstructionQuery] = Field(None, alias="previousPage")
-    links: Optional[conlist(Link)] = None
+    post_body: Optional[SettlementInstructionQuery] = Field(default=None, alias="postBody")
+    next_page: Optional[SettlementInstructionQuery] = Field(default=None, alias="nextPage")
+    previous_page: Optional[SettlementInstructionQuery] = Field(default=None, alias="previousPage")
+    links: Optional[List[Link]] = None
     __properties = ["version", "values", "href", "postBody", "nextPage", "previousPage", "links"]
 
     class Config:
@@ -127,3 +129,5 @@ class VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionT
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery.update_forward_refs()

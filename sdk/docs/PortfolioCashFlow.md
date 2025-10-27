@@ -24,9 +24,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_cash_flow import PortfolioCashFlow
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 group_by_id: StrictInt = # Replace with your value
 group_by_id: StrictInt = 42
 sequence_number: StrictInt = # Replace with your value
@@ -35,8 +37,8 @@ effective_date: Optional[datetime] = # Replace with your value
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 type: StrictStr = "example_type"
 movement_name: StrictStr = "example_movement_name"
-cashflow: CurrencyAndAmount = # Replace with your value
-balance: CurrencyAndAmount = # Replace with your value
+cashflow: CurrencyAndAmount
+balance: CurrencyAndAmount
 fx_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 cashflow_reporting_currency: CurrencyAndAmount = # Replace with your value
 balance_reporting_currency: CurrencyAndAmount = # Replace with your value
@@ -44,7 +46,7 @@ translation_gain_loss: CurrencyAndAmount = # Replace with your value
 cost_basis_reporting_currency: CurrencyAndAmount = # Replace with your value
 transaction: Optional[Transaction] = None
 unrealised_gain_loss_reporting_currency: CurrencyAndAmount = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 portfolio_cash_flow_instance = PortfolioCashFlow(group_by_id=group_by_id, sequence_number=sequence_number, effective_date=effective_date, sub_holding_keys=sub_holding_keys, type=type, movement_name=movement_name, cashflow=cashflow, balance=balance, fx_rate=fx_rate, cashflow_reporting_currency=cashflow_reporting_currency, balance_reporting_currency=balance_reporting_currency, translation_gain_loss=translation_gain_loss, cost_basis_reporting_currency=cost_basis_reporting_currency, transaction=transaction, unrealised_gain_loss_reporting_currency=unrealised_gain_loss_reporting_currency, links=links)
 
 ```

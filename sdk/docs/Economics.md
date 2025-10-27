@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.economics import Economics
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-buckets: Optional[conlist(Bucket)] = # Replace with your value
+buckets: Optional[List[Bucket]] = # Replace with your value
 economics_instance = Economics(instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, sub_holding_keys=sub_holding_keys, buckets=buckets)
 
 ```

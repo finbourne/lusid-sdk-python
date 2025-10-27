@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.previous_nav import PreviousNAV
 from lusid.models.unitisation_data import UnitisationData
 
@@ -27,9 +29,9 @@ class PreviousShareClassBreakdown(BaseModel):
     """
     The data for a Share Class at the previous valuation point.  # noqa: E501
     """
-    nav: PreviousNAV = Field(...)
+    nav: PreviousNAV
     unitisation: Optional[UnitisationData] = None
-    share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="shareClassToFundFxRate", description="The fx rate from the Share Class currency to the fund currency at this valuation point.")
+    share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(description="The fx rate from the Share Class currency to the fund currency at this valuation point.", alias="shareClassToFundFxRate")
     __properties = ["nav", "unitisation", "shareClassToFundFxRate"]
 
     class Config:
@@ -87,3 +89,5 @@ class PreviousShareClassBreakdown(BaseModel):
             "share_class_to_fund_fx_rate": obj.get("shareClassToFundFxRate")
         })
         return _obj
+
+PreviousShareClassBreakdown.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.amount import Amount
 from lusid.models.share_class_amount import ShareClassAmount
 
@@ -27,8 +29,8 @@ class ShareClassDealingBreakdown(BaseModel):
     """
     The breakdown of Dealing for a Share Class.  # noqa: E501
     """
-    class_dealing: Dict[str, ShareClassAmount] = Field(..., alias="classDealing", description="Bucket of detail for any 'Dealing' specific to the share class that has occured inside the queried period.")
-    class_dealing_units: Dict[str, Amount] = Field(..., alias="classDealingUnits", description="Bucket of detail for any 'Dealing' units specific to the share class that has occured inside the queried period.")
+    class_dealing: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for any 'Dealing' specific to the share class that has occured inside the queried period.", alias="classDealing")
+    class_dealing_units: Dict[str, Amount] = Field(description="Bucket of detail for any 'Dealing' units specific to the share class that has occured inside the queried period.", alias="classDealingUnits")
     __properties = ["classDealing", "classDealingUnits"]
 
     class Config:
@@ -103,3 +105,5 @@ class ShareClassDealingBreakdown(BaseModel):
             else None
         })
         return _obj
+
+ShareClassDealingBreakdown.update_forward_refs()

@@ -9,12 +9,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.requested_changes import RequestedChanges
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 attribute_count: Optional[StrictInt] = # Replace with your value
 attribute_count: Optional[StrictInt] = None
-attribute_names: Optional[conlist(StrictStr)] = # Replace with your value
+attribute_names: Optional[List[StrictStr]] = # Replace with your value
 requested_changes_instance = RequestedChanges(attribute_count=attribute_count, attribute_names=attribute_names)
 
 ```

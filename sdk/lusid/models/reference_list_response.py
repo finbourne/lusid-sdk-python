@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.reference_list import ReferenceList
 from lusid.models.resource_id import ResourceId
@@ -29,13 +31,13 @@ class ReferenceListResponse(BaseModel):
     """
     ReferenceListResponse
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     name:  StrictStr = Field(...,alias="name", description="The name of the reference list.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the reference list.") 
-    tags: Optional[conlist(StrictStr)] = Field(None, description="The tags associated with the reference list.")
-    reference_list: ReferenceList = Field(..., alias="referenceList")
-    version: Version = Field(...)
-    links: Optional[conlist(Link)] = None
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The tags associated with the reference list.")
+    reference_list: ReferenceList = Field(alias="referenceList")
+    version: Version
+    links: Optional[List[Link]] = None
     __properties = ["id", "name", "description", "tags", "referenceList", "version", "links"]
 
     class Config:
@@ -122,3 +124,5 @@ class ReferenceListResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ReferenceListResponse.update_forward_refs()

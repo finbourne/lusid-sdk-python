@@ -13,8 +13,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_legal_entity_request import UpsertLegalEntityRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 identifiers: Dict[str, ModelProperty] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value

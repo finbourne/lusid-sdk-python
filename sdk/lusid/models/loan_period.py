@@ -17,17 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
 
 class LoanPeriod(BaseModel):
     """
     LoanPeriod
     """
-    payment_date: datetime = Field(..., alias="paymentDate")
-    notional: Union[StrictFloat, StrictInt] = Field(...)
-    interest_amount: Union[StrictFloat, StrictInt] = Field(..., alias="interestAmount")
+    payment_date: datetime = Field(alias="paymentDate")
+    notional: Union[StrictFloat, StrictInt]
+    interest_amount: Union[StrictFloat, StrictInt] = Field(alias="interestAmount")
     __properties = ["paymentDate", "notional", "interestAmount"]
 
     class Config:
@@ -79,3 +81,5 @@ class LoanPeriod(BaseModel):
             "interest_amount": obj.get("interestAmount")
         })
         return _obj
+
+LoanPeriod.update_forward_refs()

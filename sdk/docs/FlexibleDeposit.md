@@ -15,13 +15,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.flexible_deposit import FlexibleDeposit
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
-schedules: conlist(Schedule) = # Replace with your value
+schedules: List[Schedule] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"

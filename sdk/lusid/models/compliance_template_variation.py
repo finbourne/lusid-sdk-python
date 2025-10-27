@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 from lusid.models.perpetual_property import PerpetualProperty
@@ -31,10 +33,10 @@ class ComplianceTemplateVariation(BaseModel):
     """
     label:  StrictStr = Field(...,alias="label", description="Label of a Compliance Template Variation") 
     description:  StrictStr = Field(...,alias="description", description="The description of the Compliance Template Variation") 
-    required_parameters: conlist(ComplianceTemplateParameter) = Field(..., alias="requiredParameters", description="A parameter required by a Compliance Template Variation")
-    properties: Dict[str, PerpetualProperty] = Field(..., description="Properties associated with the Compliance Template Variation")
-    accepted_address_keys: ResourceId = Field(..., alias="acceptedAddressKeys")
-    steps: conlist(ComplianceStep) = Field(..., description="The steps expressed in this template, with their required parameters")
+    required_parameters: List[ComplianceTemplateParameter] = Field(description="A parameter required by a Compliance Template Variation", alias="requiredParameters")
+    properties: Dict[str, PerpetualProperty] = Field(description="Properties associated with the Compliance Template Variation")
+    accepted_address_keys: ResourceId = Field(alias="acceptedAddressKeys")
+    steps: List[ComplianceStep] = Field(description="The steps expressed in this template, with their required parameters")
     referenced_group_label:  Optional[StrictStr] = Field(None,alias="referencedGroupLabel", description="The label of a given referenced group in a Compliance Rule Template Variation") 
     __properties = ["label", "description", "requiredParameters", "properties", "acceptedAddressKeys", "steps", "referencedGroupLabel"]
 
@@ -125,3 +127,5 @@ class ComplianceTemplateVariation(BaseModel):
             "referenced_group_label": obj.get("referencedGroupLabel")
         })
         return _obj
+
+ComplianceTemplateVariation.update_forward_refs()

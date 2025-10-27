@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
@@ -33,23 +35,23 @@ class TransactionRequest(BaseModel):
     """
     transaction_id:  StrictStr = Field(...,alias="transactionId", description="The unique identifier of the transaction.") 
     type:  StrictStr = Field(...,alias="type", description="The type of the transaction, for example 'Buy' or 'Sell'. The transaction type must have been pre-configured using the System Configuration API. If not, this operation will succeed but you are not able to calculate holdings for the portfolio that include this transaction.") 
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the transaction to a unique instrument.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="A set of instrument identifiers that can resolve the transaction to a unique instrument.", alias="instrumentIdentifiers")
     transaction_date:  StrictStr = Field(...,alias="transactionDate", description="The date of the transaction.") 
     settlement_date:  StrictStr = Field(...,alias="settlementDate", description="The settlement date of the transaction.") 
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units of the transacted instrument.")
-    transaction_price: Optional[TransactionPrice] = Field(None, alias="transactionPrice")
-    total_consideration: CurrencyAndAmount = Field(..., alias="totalConsideration")
-    exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="exchangeRate", description="The exchange rate between the transaction and settlement currency (settlement currency being represented by TotalConsideration.Currency). For example, if the transaction currency is USD and the settlement currency is GBP, this would be the appropriate USD/GBP rate.")
+    units: Union[StrictFloat, StrictInt] = Field(description="The number of units of the transacted instrument.")
+    transaction_price: Optional[TransactionPrice] = Field(default=None, alias="transactionPrice")
+    total_consideration: CurrencyAndAmount = Field(alias="totalConsideration")
+    exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The exchange rate between the transaction and settlement currency (settlement currency being represented by TotalConsideration.Currency). For example, if the transaction currency is USD and the settlement currency is GBP, this would be the appropriate USD/GBP rate.", alias="exchangeRate")
     transaction_currency:  Optional[StrictStr] = Field(None,alias="transactionCurrency", description="The transaction currency.") 
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="A list of unique transaction properties and associated values to store for the transaction. Each property must be from the 'Transaction' domain.")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="A list of unique transaction properties and associated values to store for the transaction. Each property must be from the 'Transaction' domain.")
     counterparty_id:  Optional[StrictStr] = Field(None,alias="counterpartyId", description="The identifier for the counterparty of the transaction.") 
     source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.") 
-    otc_confirmation: Optional[OtcConfirmation] = Field(None, alias="otcConfirmation")
-    order_id: Optional[ResourceId] = Field(None, alias="orderId")
-    allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
-    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
+    otc_confirmation: Optional[OtcConfirmation] = Field(default=None, alias="otcConfirmation")
+    order_id: Optional[ResourceId] = Field(default=None, alias="orderId")
+    allocation_id: Optional[ResourceId] = Field(default=None, alias="allocationId")
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     transaction_group_id:  Optional[StrictStr] = Field(None,alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions") 
-    strategy_tag: Optional[conlist(Strategy)] = Field(None, alias="strategyTag", description="A list of strategies representing the allocation of units across multiple sub-holding keys")
+    strategy_tag: Optional[List[Strategy]] = Field(default=None, description="A list of strategies representing the allocation of units across multiple sub-holding keys", alias="strategyTag")
     __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId", "strategyTag"]
 
     class Config:
@@ -189,3 +191,5 @@ class TransactionRequest(BaseModel):
             "strategy_tag": [Strategy.from_dict(_item) for _item in obj.get("strategyTag")] if obj.get("strategyTag") is not None else None
         })
         return _obj
+
+TransactionRequest.update_forward_refs()

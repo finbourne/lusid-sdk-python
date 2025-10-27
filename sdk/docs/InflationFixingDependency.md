@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.inflation_fixing_dependency import InflationFixingDependency
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 type: StrictStr = "example_type"
 code: StrictStr = "example_code"
 var_date: datetime = # Replace with your value

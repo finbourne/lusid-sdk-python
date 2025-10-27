@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.relational_dataset_field_definition import RelationalDatasetFieldDefinition
 from lusid.models.resource_id import ResourceId
@@ -29,14 +31,14 @@ class RelationalDatasetDefinition(BaseModel):
     """
     RelationalDatasetDefinition
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-friendly display name for the relational dataset definition.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A detailed description of the relational dataset definition and its purpose.") 
-    applicable_entity_types: conlist(StrictStr) = Field(..., alias="applicableEntityTypes", description="The types of entities this relational dataset definition can be applied to (e.g. Instrument, Portfolio, etc.).")
-    field_schema: conlist(RelationalDatasetFieldDefinition) = Field(..., alias="fieldSchema", description="The schema defining the structure and data types of the relational dataset.")
+    applicable_entity_types: List[StrictStr] = Field(description="The types of entities this relational dataset definition can be applied to (e.g. Instrument, Portfolio, etc.).", alias="applicableEntityTypes")
+    field_schema: List[RelationalDatasetFieldDefinition] = Field(description="The schema defining the structure and data types of the relational dataset.", alias="fieldSchema")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "displayName", "description", "applicableEntityTypes", "fieldSchema", "href", "version", "links"]
 
     class Config:
@@ -128,3 +130,5 @@ class RelationalDatasetDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+RelationalDatasetDefinition.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class PropertyReferenceDataValue(BaseModel):
     """
     The ReferenceData relevant to the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the Property.  Only ReferenceData where the ReferenceData value matches the Property value is included.  # noqa: E501
     """
     string_value:  Optional[StrictStr] = Field(None,alias="stringValue") 
-    numeric_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="numericValue")
+    numeric_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="numericValue")
     __properties = ["stringValue", "numericValue"]
 
     class Config:
@@ -87,3 +89,5 @@ class PropertyReferenceDataValue(BaseModel):
             "numeric_value": obj.get("numericValue")
         })
         return _obj
+
+PropertyReferenceDataValue.update_forward_refs()

@@ -17,29 +17,31 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr 
 
 class InstrumentPaymentDiaryRow(BaseModel):
     """
     An individual row containing details of a single cashflow in the diary.  # noqa: E501
     """
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity (amount) that will be paid. Note that this can be empty if the payment is in the future and a model is used that cannot estimate it.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity (amount) that will be paid. Note that this can be empty if the payment is in the future and a model is used that cannot estimate it.")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The payment currency of the cash flow.") 
-    payment_date: Optional[datetime] = Field(None, alias="paymentDate", description="The date at which the given cash flow is due to be paid.")
+    payment_date: Optional[datetime] = Field(default=None, description="The date at which the given cash flow is due to be paid.", alias="paymentDate")
     pay_or_receive:  Optional[StrictStr] = Field(None,alias="payOrReceive", description="Does the cash flow belong to the Pay or Receive leg.") 
-    accrual_start: Optional[datetime] = Field(None, alias="accrualStart", description="The date on which accruals start for this cashflow.")
-    accrual_end: Optional[datetime] = Field(None, alias="accrualEnd", description="The date on which accruals end for this cashflow.")
+    accrual_start: Optional[datetime] = Field(default=None, description="The date on which accruals start for this cashflow.", alias="accrualStart")
+    accrual_end: Optional[datetime] = Field(default=None, description="The date on which accruals end for this cashflow.", alias="accrualEnd")
     cash_flow_type:  Optional[StrictStr] = Field(None,alias="cashFlowType", description="The type of cashflow.") 
-    is_cash_flow_determined: Optional[StrictBool] = Field(None, alias="isCashFlowDetermined", description="Is the cashflow determined as of the effective date time.")
-    is_cash_flow_historic: Optional[StrictBool] = Field(None, alias="isCashFlowHistoric", description="Has the cashflow been paid, i.e. has it become a historic cashflow, as of the date and time pointed to be effectiveAt.")
-    discount_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="discountFactor", description="Weighting factor to discount cashflow to the present value.")
-    discounted_expected_cash_flow_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="discountedExpectedCashFlowAmount", description="The expected cashflow amount taking into account the discount factor.")
-    day_count_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="dayCountFraction", description="The day count fraction, if appropriate.")
-    forward_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="forwardRate", description="Forward rate for cash flow if appropriate. (as in for a rates fixed or floating leg)")
-    reset_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="resetRate", description="The value of the reset, if any.")
-    spread: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The spread that exists on the payoff.")
+    is_cash_flow_determined: Optional[StrictBool] = Field(default=None, description="Is the cashflow determined as of the effective date time.", alias="isCashFlowDetermined")
+    is_cash_flow_historic: Optional[StrictBool] = Field(default=None, description="Has the cashflow been paid, i.e. has it become a historic cashflow, as of the date and time pointed to be effectiveAt.", alias="isCashFlowHistoric")
+    discount_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weighting factor to discount cashflow to the present value.", alias="discountFactor")
+    discounted_expected_cash_flow_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The expected cashflow amount taking into account the discount factor.", alias="discountedExpectedCashFlowAmount")
+    day_count_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The day count fraction, if appropriate.", alias="dayCountFraction")
+    forward_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Forward rate for cash flow if appropriate. (as in for a rates fixed or floating leg)", alias="forwardRate")
+    reset_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value of the reset, if any.", alias="resetRate")
+    spread: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The spread that exists on the payoff.")
     __properties = ["quantity", "currency", "paymentDate", "payOrReceive", "accrualStart", "accrualEnd", "cashFlowType", "isCashFlowDetermined", "isCashFlowHistoric", "discountFactor", "discountedExpectedCashFlowAmount", "dayCountFraction", "forwardRate", "resetRate", "spread"]
 
     class Config:
@@ -138,3 +140,5 @@ class InstrumentPaymentDiaryRow(BaseModel):
             "spread": obj.get("spread")
         })
         return _obj
+
+InstrumentPaymentDiaryRow.update_forward_refs()

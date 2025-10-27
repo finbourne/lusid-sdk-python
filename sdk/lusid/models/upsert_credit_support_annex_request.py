@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.credit_support_annex import CreditSupportAnnex
 
 class UpsertCreditSupportAnnexRequest(BaseModel):
     """
     Credit Support Annex information. The interaction in terms of margining requirements between a set of trades for a given counterparty.  # noqa: E501
     """
-    credit_support_annex: Optional[CreditSupportAnnex] = Field(None, alias="creditSupportAnnex")
+    credit_support_annex: Optional[CreditSupportAnnex] = Field(default=None, alias="creditSupportAnnex")
     __properties = ["creditSupportAnnex"]
 
     class Config:
@@ -79,3 +81,5 @@ class UpsertCreditSupportAnnexRequest(BaseModel):
             "credit_support_annex": CreditSupportAnnex.from_dict(obj.get("creditSupportAnnex")) if obj.get("creditSupportAnnex") is not None else None
         })
         return _obj
+
+UpsertCreditSupportAnnexRequest.update_forward_refs()

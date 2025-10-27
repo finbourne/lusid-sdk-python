@@ -19,9 +19,8 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
+from pydantic.v1 import Field
 from typing_extensions import Annotated
-from pydantic.v1 import Field, constr, validator
-
 from lusid.models.create_simple_position_portfolio_request import CreateSimplePositionPortfolioRequest
 from lusid.models.portfolio import Portfolio
 
@@ -52,15 +51,15 @@ class SimplePositionPortfoliosApi:
 
 
     @overload
-    async def create_simple_position_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(..., description="The definition of the simple position portfolio.")], **kwargs) -> Portfolio:  # noqa: E501
+    async def create_simple_position_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(description="The definition of the simple position portfolio.")], **kwargs) -> Portfolio:  # noqa: E501
         ...
 
     @overload
-    def create_simple_position_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(..., description="The definition of the simple position portfolio.")], async_req: Optional[bool]=True, **kwargs) -> Portfolio:  # noqa: E501
+    def create_simple_position_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(description="The definition of the simple position portfolio.")], async_req: Optional[bool]=True, **kwargs) -> Portfolio:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_simple_position_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(..., description="The definition of the simple position portfolio.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
+    def create_simple_position_portfolio(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(description="The definition of the simple position portfolio.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
         """[EARLY ACCESS] CreateSimplePositionPortfolio: Create simple position portfolio  # noqa: E501
 
         Create a simple position portfolio in a particular scope.  # noqa: E501
@@ -93,7 +92,7 @@ class SimplePositionPortfoliosApi:
         return self.create_simple_position_portfolio_with_http_info(scope, create_simple_position_portfolio_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_simple_position_portfolio_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(..., description="The definition of the simple position portfolio.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_simple_position_portfolio_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope in which to create the simple position portfolio.")], create_simple_position_portfolio_request : Annotated[CreateSimplePositionPortfolioRequest, Field(description="The definition of the simple position portfolio.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CreateSimplePositionPortfolio: Create simple position portfolio  # noqa: E501
 
         Create a simple position portfolio in a particular scope.  # noqa: E501

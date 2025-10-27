@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class CalculateOrderDatesRequest(BaseModel):
     """
@@ -28,8 +30,8 @@ class CalculateOrderDatesRequest(BaseModel):
     instrument_identifier_type:  StrictStr = Field(...,alias="instrumentIdentifierType") 
     instrument_identifier:  StrictStr = Field(...,alias="instrumentIdentifier") 
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope") 
-    received_date: Optional[datetime] = Field(None, alias="receivedDate")
-    price_date: Optional[datetime] = Field(None, alias="priceDate")
+    received_date: Optional[datetime] = Field(default=None, alias="receivedDate")
+    price_date: Optional[datetime] = Field(default=None, alias="priceDate")
     transaction_category:  Optional[StrictStr] = Field(None,alias="transactionCategory") 
     liquidating_share_class_identifier:  Optional[StrictStr] = Field(None,alias="liquidatingShareClassIdentifier") 
     liquidating_share_class_identifier_type:  Optional[StrictStr] = Field(None,alias="liquidatingShareClassIdentifierType") 
@@ -126,3 +128,5 @@ class CalculateOrderDatesRequest(BaseModel):
             "liquidating_share_class_instrument_scope": obj.get("liquidatingShareClassInstrumentScope")
         })
         return _obj
+
+CalculateOrderDatesRequest.update_forward_refs()

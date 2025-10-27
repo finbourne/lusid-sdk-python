@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ShareClassDetails(BaseModel):
     """
@@ -29,7 +31,7 @@ class ShareClassDetails(BaseModel):
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the share class instrument lies.") 
     short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="The unique code within the fund for the share class instrument.") 
     dom_currency:  Optional[StrictStr] = Field(None,alias="domCurrency", description="The domestic currency of the share class instrument") 
-    instrument_active: Optional[StrictBool] = Field(None, alias="instrumentActive", description="If the instrument of the share class is active.")
+    instrument_active: Optional[StrictBool] = Field(default=None, description="If the instrument of the share class is active.", alias="instrumentActive")
     __properties = ["lusidInstrumentId", "instrumentScope", "shortCode", "domCurrency", "instrumentActive"]
 
     class Config:
@@ -103,3 +105,5 @@ class ShareClassDetails(BaseModel):
             "instrument_active": obj.get("instrumentActive")
         })
         return _obj
+
+ShareClassDetails.update_forward_refs()

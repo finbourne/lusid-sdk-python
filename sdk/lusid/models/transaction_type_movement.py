@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_type_property_mapping import TransactionTypePropertyMapping
 
@@ -29,11 +31,11 @@ class TransactionTypeMovement(BaseModel):
     """
     movement_types:  StrictStr = Field(...,alias="movementTypes", description="Movement types determine the impact of the movement on the holdings. The available values are: Settlement, Traded, StockMovement, FutureCash,  Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, Carry, CarryAsPnl, VariationMargin, Capital, Fee, Deferred, CashDeferred.") 
     side:  StrictStr = Field(...,alias="side", description="The Side determines which of the fields from our transaction are used to generate the Movement. Side1 means the 'security' side of the transaction, ie the Instrument and Units; Side2 means the 'cash' side, ie the Total Consideration") 
-    direction: StrictInt = Field(..., description=" A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement")
-    mappings: Optional[conlist(TransactionTypePropertyMapping)] = Field(None, description="This allows you to map a transaction property to a property on the underlying holding")
+    direction: StrictInt = Field(description=" A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties associated with the underlying Movement")
+    mappings: Optional[List[TransactionTypePropertyMapping]] = Field(default=None, description="This allows you to map a transaction property to a property on the underlying holding")
     name:  Optional[StrictStr] = Field(None,alias="name", description="The movement name (optional)") 
-    movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest', 'Virtual' and 'Income' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
+    movement_options: Optional[List[StrictStr]] = Field(default=None, description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest', 'Virtual' and 'Income' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.", alias="movementOptions")
     settlement_date_override:  Optional[StrictStr] = Field(None,alias="settlementDateOverride", description="Optional property key that must be in the Transaction domain when specified. When the movement is processed and the transaction has this property set to a valid date, then the property value will override the SettlementDate of the transaction.") 
     condition:  Optional[StrictStr] = Field(None,alias="condition", description="The condition that the transaction must satisfy to generate the movement, such as: Portfolio.BaseCurrency eq 'GBP'. The condition can contain fields and properties from transactions and portfolios. If no condition is provided, the movement will apply for all transactions of this type.") 
     settlement_mode:  Optional[StrictStr] = Field(None,alias="settlementMode", description="Configures how movements should settle. Allowed values: 'Internal' and 'External'. A movement with 'Internal' settlement mode will settle automatically on the contractual settlement date regardlesss of portfolio configuration or settlement instruction. An 'External' movement can be settled automatically or by a settlement instruction.") 
@@ -149,3 +151,5 @@ class TransactionTypeMovement(BaseModel):
             "settlement_mode": obj.get("settlementMode")
         })
         return _obj
+
+TransactionTypeMovement.update_forward_refs()

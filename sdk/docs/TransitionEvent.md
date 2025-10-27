@@ -15,15 +15,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transition_event import TransitionEvent
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 announcement_date: Optional[datetime] = # Replace with your value
 ex_date: Optional[datetime] = # Replace with your value
 record_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 input_transition: Optional[InputTransition] = # Replace with your value
-output_transitions: Optional[conlist(OutputTransition)] = # Replace with your value
+output_transitions: Optional[List[OutputTransition]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
 transition_event_instance = TransitionEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, input_transition=input_transition, output_transitions=output_transitions, instrument_event_type=instrument_event_type)
 

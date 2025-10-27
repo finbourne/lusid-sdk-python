@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.update_data_type_request import UpdateDataTypeRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-acceptable_values: Optional[conlist(StrictStr)] = # Replace with your value
-acceptable_units: Optional[conlist(UpdateUnitRequest)] = # Replace with your value
+acceptable_values: Optional[List[StrictStr]] = # Replace with your value
+acceptable_units: Optional[List[UpdateUnitRequest]] = # Replace with your value
 update_data_type_request_instance = UpdateDataTypeRequest(display_name=display_name, description=description, acceptable_values=acceptable_values, acceptable_units=acceptable_units)
 
 ```

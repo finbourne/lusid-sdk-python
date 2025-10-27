@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class LusidProblemDetails(BaseModel):
     """
     LusidProblemDetails
     """
     name:  StrictStr = Field(...,alias="name") 
-    error_details: Optional[conlist(Dict[str, StrictStr])] = Field(None, alias="errorDetails")
-    code: StrictInt = Field(...)
+    error_details: Optional[List[Dict[str, StrictStr]]] = Field(default=None, alias="errorDetails")
+    code: StrictInt
     type:  Optional[StrictStr] = Field(None,alias="type") 
     title:  Optional[StrictStr] = Field(None,alias="title") 
     status: Optional[StrictInt] = None
@@ -119,3 +121,5 @@ class LusidProblemDetails(BaseModel):
             "instance": obj.get("instance")
         })
         return _obj
+
+LusidProblemDetails.update_forward_refs()

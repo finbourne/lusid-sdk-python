@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.corporate_action_source import CorporateActionSource
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 id: Optional[ResourceId] = None
 version: Optional[Version] = None
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-instrument_scopes: Optional[conlist(StrictStr)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
+links: Optional[List[Link]] = None
 corporate_action_source_instance = CorporateActionSource(href=href, id=id, version=version, display_name=display_name, description=description, instrument_scopes=instrument_scopes, links=links)
 
 ```

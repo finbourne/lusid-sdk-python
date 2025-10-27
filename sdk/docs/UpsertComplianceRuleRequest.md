@@ -16,19 +16,21 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_compliance_rule_request import UpsertComplianceRuleRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 name: Optional[StrictStr] = "example_name"
 description: Optional[StrictStr] = "example_description"
-active: StrictBool = # Replace with your value
+active: StrictBool
 active:StrictBool = True
 template_id: ResourceId = # Replace with your value
 variation: StrictStr = "example_variation"
 portfolio_group_id: ResourceId = # Replace with your value
-parameters: Dict[str, ComplianceParameter] = # Replace with your value
-properties: Dict[str, PerpetualProperty] = # Replace with your value
+parameters: Dict[str, ComplianceParameter]
+properties: Dict[str, PerpetualProperty]
 upsert_compliance_rule_request_instance = UpsertComplianceRuleRequest(id=id, name=name, description=description, active=active, template_id=template_id, variation=variation, portfolio_group_id=portfolio_group_id, parameters=parameters, properties=properties)
 
 ```

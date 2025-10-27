@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.query_relational_dataset_request import QueryRelationalDatasetRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 query_method: StrictStr = "example_query_method"
 filter: Optional[StrictStr] = "example_filter"
-custom_sort_by: Optional[conlist(StrictStr)] = # Replace with your value
+custom_sort_by: Optional[List[StrictStr]] = # Replace with your value
 query_relational_dataset_request_instance = QueryRelationalDatasetRequest(query_method=query_method, filter=filter, custom_sort_by=custom_sort_by)
 
 ```

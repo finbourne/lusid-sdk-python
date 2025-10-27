@@ -16,9 +16,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fee_accrual import FeeAccrual
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_at: datetime = # Replace with your value
 code: StrictStr = "example_code"
 name: StrictStr = "example_name"
@@ -27,7 +29,7 @@ amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 previous_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 total_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 fee_accrual_instance = FeeAccrual(effective_at=effective_at, code=code, name=name, calculation_base=calculation_base, amount=amount, previous_accrual=previous_accrual, previous_total_accrual=previous_total_accrual, total_accrual=total_accrual, links=links)
 
 ```

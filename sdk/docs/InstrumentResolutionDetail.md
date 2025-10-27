@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_identifiers** | **Dict[str, str]** | Unique instrument identifiers | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers | 
 **lusid_instrument_id** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the instrument identifiers | [optional] [readonly] 
 **instrument_scope** | **str** | The scope in which the instrument lies. | [optional] [readonly] 
 **launch_price** | **float** | The launch price set when a shareclass is added to the fund. Defaults to 1. | [optional] 
@@ -12,10 +12,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 launch_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

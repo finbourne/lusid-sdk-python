@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ContractDetails(BaseModel):
     """
     Set of identifiers of an existing FlexibleLoan contract.  # noqa: E501
     """
-    identifiers: Dict[str, StrictStr] = Field(..., description="Unique instrument identifiers.")
+    identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers.")
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier - readonly field, resolved from the instrument identifiers.") 
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the FlexibleLoan instrument lies - readonly field, resolved from the instrument identifiers.") 
     instrument_name:  Optional[StrictStr] = Field(None,alias="instrumentName", description="The name of the FlexibleLoan instrument - readonly field, resolved from the instrument identifiers.") 
@@ -107,3 +109,5 @@ class ContractDetails(BaseModel):
             "dom_ccy": obj.get("domCcy")
         })
         return _obj
+
+ContractDetails.update_forward_refs()

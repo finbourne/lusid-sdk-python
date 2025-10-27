@@ -8,8 +8,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_portfolio_details import CreatePortfolioDetails
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
 create_portfolio_details_instance = CreatePortfolioDetails(corporate_action_source_id=corporate_action_source_id)

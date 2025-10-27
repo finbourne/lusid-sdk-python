@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **order_ids** | [**List[ResourceId]**](ResourceId.md) | The related order ids. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The total quantity of given instrument ordered. | 
 **side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc) | 
 **type** | **str** | The block order&#39;s type (examples: Limit, Market, ...) | 
@@ -20,13 +20,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.block_request import BlockRequest
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
-order_ids: conlist(ResourceId) = # Replace with your value
+
+id: ResourceId
+order_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 side: StrictStr = "example_side"
 type: StrictStr = "example_type"

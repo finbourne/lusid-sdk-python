@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class CancelOrdersAndMoveRemainingRequest(BaseModel):
     """
     A request to create or update a Order.  # noqa: E501
     """
-    cancel_order_id: ResourceId = Field(..., alias="cancelOrderId")
-    move_remaining_to_order_id: ResourceId = Field(..., alias="moveRemainingToOrderId")
-    move_remaining_to_block_id: ResourceId = Field(..., alias="moveRemainingToBlockId")
+    cancel_order_id: ResourceId = Field(alias="cancelOrderId")
+    move_remaining_to_order_id: ResourceId = Field(alias="moveRemainingToOrderId")
+    move_remaining_to_block_id: ResourceId = Field(alias="moveRemainingToBlockId")
     __properties = ["cancelOrderId", "moveRemainingToOrderId", "moveRemainingToBlockId"]
 
     class Config:
@@ -89,3 +91,5 @@ class CancelOrdersAndMoveRemainingRequest(BaseModel):
             "move_remaining_to_block_id": ResourceId.from_dict(obj.get("moveRemainingToBlockId")) if obj.get("moveRemainingToBlockId") is not None else None
         })
         return _obj
+
+CancelOrdersAndMoveRemainingRequest.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
     """
@@ -27,7 +29,7 @@ class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the property definition.") 
     identifier_key:  StrictStr = Field(...,alias="identifierKey", description="The identifier type that is required/allowed on the bound entity.") 
-    required: Optional[StrictBool] = Field(None, description="Whether identifier type is required or allowed.")
+    required: Optional[StrictBool] = Field(default=None, description="Whether identifier type is required or allowed.")
     identifier_type:  Optional[StrictStr] = Field(None,alias="identifierType", description="The name of the identifier type.") 
     __properties = ["displayName", "identifierKey", "required", "identifierType"]
 
@@ -91,3 +93,5 @@ class CustomDataModelIdentifierTypeSpecificationWithDisplayName(BaseModel):
             "identifier_type": obj.get("identifierType")
         })
         return _obj
+
+CustomDataModelIdentifierTypeSpecificationWithDisplayName.update_forward_refs()

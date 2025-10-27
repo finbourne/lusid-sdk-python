@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class LockPeriodDiaryEntryRequest(BaseModel):
     """
     A definition for the period you wish to lock  # noqa: E501
     """
     diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="Unique code assigned to a period. When left blank last closed period will be located.") 
-    closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
+    closing_options: Optional[List[StrictStr]] = Field(default=None, description="The options which will be executed once a period is closed or locked.", alias="closingOptions")
     __properties = ["diaryEntryCode", "closingOptions"]
 
     class Config:
@@ -87,3 +89,5 @@ class LockPeriodDiaryEntryRequest(BaseModel):
             "closing_options": obj.get("closingOptions")
         })
         return _obj
+
+LockPeriodDiaryEntryRequest.update_forward_refs()

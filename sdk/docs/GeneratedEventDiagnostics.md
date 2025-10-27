@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_event_id: StrictStr = "example_instrument_event_id"
 type: StrictStr = "example_type"
 detail: StrictStr = "example_detail"
-error_details: conlist(StrictStr) = # Replace with your value
+error_details: List[StrictStr] = # Replace with your value
 generated_event_diagnostics_instance = GeneratedEventDiagnostics(instrument_event_id=instrument_event_id, type=type, detail=detail, error_details=error_details)
 
 ```

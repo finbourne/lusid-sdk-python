@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 
@@ -27,8 +29,8 @@ class UpsertComplexMarketDataRequest(BaseModel):
     """
     The details of the complex market data item to upsert into Lusid.  # noqa: E501
     """
-    market_data_id: ComplexMarketDataId = Field(..., alias="marketDataId")
-    market_data: ComplexMarketData = Field(..., alias="marketData")
+    market_data_id: ComplexMarketDataId = Field(alias="marketDataId")
+    market_data: ComplexMarketData = Field(alias="marketData")
     __properties = ["marketDataId", "marketData"]
 
     class Config:
@@ -85,3 +87,5 @@ class UpsertComplexMarketDataRequest(BaseModel):
             "market_data": ComplexMarketData.from_dict(obj.get("marketData")) if obj.get("marketData") is not None else None
         })
         return _obj
+
+UpsertComplexMarketDataRequest.update_forward_refs()

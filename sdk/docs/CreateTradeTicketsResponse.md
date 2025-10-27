@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(LusidTradeTicket) = # Replace with your value
-failures: conlist(ErrorDetail) = # Replace with your value
+values: List[LusidTradeTicket]
+failures: List[ErrorDetail]
 create_trade_tickets_response_instance = CreateTradeTicketsResponse(values=values, failures=failures)
 
 ```

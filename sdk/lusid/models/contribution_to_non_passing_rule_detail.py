@@ -18,18 +18,20 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class ContributionToNonPassingRuleDetail(BaseModel):
     """
     ContributionToNonPassingRuleDetail
     """
-    rule_id: Optional[ResourceId] = Field(None, alias="ruleId")
+    rule_id: Optional[ResourceId] = Field(default=None, alias="ruleId")
     rule_status:  Optional[StrictStr] = Field(None,alias="ruleStatus", description="The status of the non-passing rule.") 
-    breach_task_ids: Optional[conlist(StrictStr)] = Field(None, alias="breachTaskIds", description="The task ids associated with the compliance breach for this order's groups (if failing).")
-    likely_responsible_for_status: Optional[StrictBool] = Field(None, alias="likelyResponsibleForStatus", description="Whether this order is deemed as a likely contributor to the non-passing rule for this group.")
+    breach_task_ids: Optional[List[StrictStr]] = Field(default=None, description="The task ids associated with the compliance breach for this order's groups (if failing).", alias="breachTaskIds")
+    likely_responsible_for_status: Optional[StrictBool] = Field(default=None, description="Whether this order is deemed as a likely contributor to the non-passing rule for this group.", alias="likelyResponsibleForStatus")
     __properties = ["ruleId", "ruleStatus", "breachTaskIds", "likelyResponsibleForStatus"]
 
     class Config:
@@ -95,3 +97,5 @@ class ContributionToNonPassingRuleDetail(BaseModel):
             "likely_responsible_for_status": obj.get("likelyResponsibleForStatus")
         })
         return _obj
+
+ContributionToNonPassingRuleDetail.update_forward_refs()

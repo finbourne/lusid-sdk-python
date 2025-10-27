@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
@@ -31,19 +33,19 @@ class OrderInstruction(BaseModel):
     """
     Record of an order instruction  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    created_date: datetime = Field(..., alias="createdDate", description="The active date of this order instruction.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
-    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    id: ResourceId
+    created_date: datetime = Field(description="The active date of this order instruction.", alias="createdDate")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
     price: Optional[CurrencyAndAmount] = None
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies") 
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.") 
     version: Optional[Version] = None
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["id", "createdDate", "properties", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "instrumentScope", "lusidInstrumentId", "version", "dataModelMembership", "links"]
 
     class Config:
@@ -169,3 +171,5 @@ class OrderInstruction(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+OrderInstruction.update_forward_refs()

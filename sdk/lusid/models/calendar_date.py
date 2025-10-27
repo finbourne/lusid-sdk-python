@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.date_attributes import DateAttributes
 
 class CalendarDate(BaseModel):
@@ -28,14 +30,14 @@ class CalendarDate(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
     date_identifier:  StrictStr = Field(...,alias="dateIdentifier") 
-    from_utc: datetime = Field(..., alias="fromUtc")
-    to_utc: datetime = Field(..., alias="toUtc")
+    from_utc: datetime = Field(alias="fromUtc")
+    to_utc: datetime = Field(alias="toUtc")
     local_date:  StrictStr = Field(...,alias="localDate") 
     timezone:  StrictStr = Field(...,alias="timezone") 
     description:  StrictStr = Field(...,alias="description") 
     type:  Optional[StrictStr] = Field(None,alias="type") 
     attributes: Optional[DateAttributes] = None
-    source_data: Optional[Dict[str, StrictStr]] = Field(None, alias="sourceData")
+    source_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="sourceData")
     __properties = ["href", "dateIdentifier", "fromUtc", "toUtc", "localDate", "timezone", "description", "type", "attributes", "sourceData"]
 
     class Config:
@@ -112,3 +114,5 @@ class CalendarDate(BaseModel):
             "source_data": obj.get("sourceData")
         })
         return _obj
+
+CalendarDate.update_forward_refs()

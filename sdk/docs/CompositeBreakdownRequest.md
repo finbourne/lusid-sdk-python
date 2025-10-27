@@ -14,14 +14,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-return_ids: Optional[conlist(ResourceId)] = # Replace with your value
+return_ids: Optional[List[ResourceId]] = # Replace with your value
 recipe_id: Optional[ResourceId] = # Replace with your value
 composite_method: Optional[StrictStr] = "example_composite_method"
 period: Optional[StrictStr] = "example_period"
-holiday_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+holiday_calendars: Optional[List[StrictStr]] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
 composite_breakdown_request_instance = CompositeBreakdownRequest(return_ids=return_ids, recipe_id=recipe_id, composite_method=composite_method, period=period, holiday_calendars=holiday_calendars, currency=currency)
 

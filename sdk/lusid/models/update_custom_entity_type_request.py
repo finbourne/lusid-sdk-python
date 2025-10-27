@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 
 class UpdateCustomEntityTypeRequest(BaseModel):
@@ -28,7 +30,7 @@ class UpdateCustomEntityTypeRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity type.") 
     description:  StrictStr = Field(...,alias="description", description="A description for the custom entity type.") 
-    field_schema: conlist(CustomEntityFieldDefinition) = Field(..., alias="fieldSchema", description="The description of the fields on the custom entity type.")
+    field_schema: List[CustomEntityFieldDefinition] = Field(description="The description of the fields on the custom entity type.", alias="fieldSchema")
     __properties = ["displayName", "description", "fieldSchema"]
 
     class Config:
@@ -87,3 +89,5 @@ class UpdateCustomEntityTypeRequest(BaseModel):
             "field_schema": [CustomEntityFieldDefinition.from_dict(_item) for _item in obj.get("fieldSchema")] if obj.get("fieldSchema") is not None else None
         })
         return _obj
+
+UpdateCustomEntityTypeRequest.update_forward_refs()

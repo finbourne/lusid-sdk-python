@@ -26,9 +26,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.a2_b_movement_record import A2BMovementRecord
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 portfolio_id: Optional[ResourceId] = # Replace with your value
 holding_type: Optional[StrictStr] = "example_holding_type"
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
@@ -46,7 +48,7 @@ carry: Optional[A2BCategory] = None
 end: Optional[A2BCategory] = None
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 group_id: Optional[StrictStr] = "example_group_id"
-errors: Optional[conlist(ResponseMetaData)] = # Replace with your value
+errors: Optional[List[ResponseMetaData]] = # Replace with your value
 a2_b_movement_record_instance = A2BMovementRecord(portfolio_id=portfolio_id, holding_type=holding_type, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, currency=currency, transaction_id=transaction_id, movement_name=movement_name, effective_date=effective_date, units=units, start=start, flows=flows, gains=gains, carry=carry, end=end, properties=properties, group_id=group_id, errors=errors)
 
 ```

@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.package_set_request import PackageSetRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-requests: Optional[conlist(PackageRequest)] = # Replace with your value
+requests: Optional[List[PackageRequest]] = # Replace with your value
 package_set_request_instance = PackageSetRequest(requests=requests)
 
 ```

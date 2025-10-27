@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictBool, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-value: StrictBool = # Replace with your value
+value: StrictBool
 value:StrictBool = True
 compliance_parameter_type: StrictStr = "example_compliance_parameter_type"
 bool_compliance_parameter_instance = BoolComplianceParameter(value=value, compliance_parameter_type=compliance_parameter_type)

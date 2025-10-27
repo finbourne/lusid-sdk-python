@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.counterparty_signatory import CounterpartySignatory
 from lusid.models.resource_id import ResourceId
 
@@ -29,10 +31,10 @@ class CounterpartyAgreement(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-defined display label for the Counterparty Agreement.") 
     agreement_type:  StrictStr = Field(...,alias="agreementType", description="A user-defined field to capture the type of agreement this represents. Examples might be \"ISDA 2002 Master Agreement\" or \"ISDA 1992 Master Agreement\".") 
-    counterparty_signatory: CounterpartySignatory = Field(..., alias="counterpartySignatory")
-    dated_as_of: datetime = Field(..., alias="datedAsOf", description="The date on which the CounterpartyAgreement was signed by both parties.")
-    credit_support_annex_id: ResourceId = Field(..., alias="creditSupportAnnexId")
-    id: ResourceId = Field(...)
+    counterparty_signatory: CounterpartySignatory = Field(alias="counterpartySignatory")
+    dated_as_of: datetime = Field(description="The date on which the CounterpartyAgreement was signed by both parties.", alias="datedAsOf")
+    credit_support_annex_id: ResourceId = Field(alias="creditSupportAnnexId")
+    id: ResourceId
     __properties = ["displayName", "agreementType", "counterpartySignatory", "datedAsOf", "creditSupportAnnexId", "id"]
 
     class Config:
@@ -96,3 +98,5 @@ class CounterpartyAgreement(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None
         })
         return _obj
+
+CounterpartyAgreement.update_forward_refs()

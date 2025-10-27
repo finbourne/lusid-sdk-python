@@ -15,9 +15,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_result_data_key_rule import PortfolioResultDataKeyRule
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 supplier: StrictStr = "example_supplier"
 data_scope: StrictStr = "example_data_scope"
 document_code: StrictStr = "example_document_code"

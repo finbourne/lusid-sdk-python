@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class UpdatePropertyDefinitionRequest(BaseModel):
     """
@@ -27,7 +29,7 @@ class UpdatePropertyDefinitionRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
-    custom_entity_types: Optional[conlist(StrictStr)] = Field(None, alias="customEntityTypes", description="The custom entity types that properties relating to this property definition can be applied to.")
+    custom_entity_types: Optional[List[StrictStr]] = Field(default=None, description="The custom entity types that properties relating to this property definition can be applied to.", alias="customEntityTypes")
     __properties = ["displayName", "propertyDescription", "customEntityTypes"]
 
     class Config:
@@ -89,3 +91,5 @@ class UpdatePropertyDefinitionRequest(BaseModel):
             "custom_entity_types": obj.get("customEntityTypes")
         })
         return _obj
+
+UpdatePropertyDefinitionRequest.update_forward_refs()

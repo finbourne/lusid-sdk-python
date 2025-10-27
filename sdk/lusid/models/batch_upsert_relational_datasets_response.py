@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.relational_data_point_response import RelationalDataPointResponse
@@ -28,10 +30,10 @@ class BatchUpsertRelationalDatasetsResponse(BaseModel):
     """
     BatchUpsertRelationalDatasetsResponse
     """
-    values: Dict[str, RelationalDataPointResponse] = Field(..., description="A list of data points that were successfully upserted.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="A list of data points that failed to be upserted, along with the associated error message.")
+    values: Dict[str, RelationalDataPointResponse] = Field(description="A list of data points that were successfully upserted.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="A list of data points that failed to be upserted, along with the associated error message.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["values", "failed", "href", "links"]
 
     class Config:
@@ -130,3 +132,5 @@ class BatchUpsertRelationalDatasetsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+BatchUpsertRelationalDatasetsResponse.update_forward_refs()

@@ -24,9 +24,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.exchange_traded_option_contract_details import ExchangeTradedOptionContractDetails
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 dom_ccy: StrictStr = "example_dom_ccy"
 strike: Union[StrictFloat, StrictInt] = # Replace with your value
 contract_size: Union[StrictFloat, StrictInt] = # Replace with your value
@@ -38,12 +40,12 @@ exercise_date: datetime = # Replace with your value
 exercise_type: StrictStr = "example_exercise_type"
 option_code: StrictStr = "example_option_code"
 option_type: StrictStr = "example_option_type"
-underlying: LusidInstrument = # Replace with your value
+underlying: LusidInstrument
 underlying_code: StrictStr = "example_underlying_code"
 delivery_days: Optional[StrictInt] = # Replace with your value
 delivery_days: Optional[StrictInt] = None
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
-settlement_calendars: Optional[conlist(StrictStr)] = # Replace with your value
+settlement_calendars: Optional[List[StrictStr]] = # Replace with your value
 exchange_traded_option_contract_details_instance = ExchangeTradedOptionContractDetails(dom_ccy=dom_ccy, strike=strike, contract_size=contract_size, country=country, delivery_type=delivery_type, description=description, exchange_code=exchange_code, exercise_date=exercise_date, exercise_type=exercise_type, option_code=option_code, option_type=option_type, underlying=underlying, underlying_code=underlying_code, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars)
 
 ```

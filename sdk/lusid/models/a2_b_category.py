@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.a2_b_breakdown import A2BBreakdown
 
 class A2BCategory(BaseModel):
     """
     A2B Category - one of the five major categories in the A2BDataRecord  # noqa: E501
     """
-    holding_currency: Optional[A2BBreakdown] = Field(None, alias="holdingCurrency")
-    portfolio_currency: Optional[A2BBreakdown] = Field(None, alias="portfolioCurrency")
+    holding_currency: Optional[A2BBreakdown] = Field(default=None, alias="holdingCurrency")
+    portfolio_currency: Optional[A2BBreakdown] = Field(default=None, alias="portfolioCurrency")
     __properties = ["holdingCurrency", "portfolioCurrency"]
 
     class Config:
@@ -84,3 +86,5 @@ class A2BCategory(BaseModel):
             "portfolio_currency": A2BBreakdown.from_dict(obj.get("portfolioCurrency")) if obj.get("portfolioCurrency") is not None else None
         })
         return _obj
+
+A2BCategory.update_forward_refs()

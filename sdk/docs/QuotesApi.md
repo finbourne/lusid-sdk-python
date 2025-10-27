@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **delete_quote_access_metadata_rule**
-> QuoteAccessMetadataRule delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at)
+> QuoteAccessMetadataRule delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, var_field=var_field, effective_at=effective_at)
 
 [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
 
@@ -73,15 +73,15 @@ def main():
     instrument_id_type = 'instrument_id_type_example' # str | The InstrumentIdType of the rule (optional)
     instrument_id = 'instrument_id_example' # str | The InstrumentId of the rule (optional)
     quote_type = 'quote_type_example' # str | The QuoteType of the rule (optional)
-    field = 'field_example' # str | The Field of the rule (optional)
+    var_field = 'var_field_example' # str | The Field of the rule (optional)
     effective_at = 'effective_at_example' # str | The effective date to delete at, if this is not supplied, it will delete all data found (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, opts=opts)
+        # api_response =  api_instance.delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, var_field=var_field, effective_at=effective_at, opts=opts)
 
         # [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
-        api_response = api_instance.delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at)
+        api_response = api_instance.delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, var_field=var_field, effective_at=effective_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
  **instrument_id_type** | **str**| The InstrumentIdType of the rule | [optional] 
  **instrument_id** | **str**| The InstrumentId of the rule | [optional] 
  **quote_type** | **str**| The QuoteType of the rule | [optional] 
- **field** | **str**| The Field of the rule | [optional] 
+ **var_field** | **str**| The Field of the rule | [optional] 
  **effective_at** | **str**| The effective date to delete at, if this is not supplied, it will delete all data found | [optional] 
 
 ### Return type
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_quotes_access_metadata_rule**
-> QuoteAccessMetadataRule get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, as_at=as_at)
+> QuoteAccessMetadataRule get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, var_field=var_field, effective_at=effective_at, as_at=as_at)
 
 [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
 
@@ -373,16 +373,16 @@ def main():
     instrument_id_type = 'instrument_id_type_example' # str | The InstrumentIdType of the rule (optional)
     instrument_id = 'instrument_id_example' # str | The InstrumentId of the rule (optional)
     quote_type = 'quote_type_example' # str | The QuoteType of the rule (optional)
-    field = 'field_example' # str | The Field of the rule (optional)
+    var_field = 'var_field_example' # str | The Field of the rule (optional)
     effective_at = 'effective_at_example' # str | The effective date of the rule (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, var_field=var_field, effective_at=effective_at, as_at=as_at, opts=opts)
 
         # [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
-        api_response = api_instance.get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, as_at=as_at)
+        api_response = api_instance.get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, var_field=var_field, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
  **instrument_id_type** | **str**| The InstrumentIdType of the rule | [optional] 
  **instrument_id** | **str**| The InstrumentId of the rule | [optional] 
  **quote_type** | **str**| The QuoteType of the rule | [optional] 
- **field** | **str**| The Field of the rule | [optional] 
+ **var_field** | **str**| The Field of the rule | [optional] 
  **effective_at** | **str**| The effective date of the rule | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified. | [optional] 
 

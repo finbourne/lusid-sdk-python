@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CorporateActionTransitionComponentRequest(BaseModel):
     """
     A single transition component request, when grouped with other transition component requests a corporate action  transition request is formed.  # noqa: E501
     """
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
-    units_factor: Union[StrictFloat, StrictInt] = Field(..., alias="unitsFactor", description="The factor to scale units by")
-    cost_factor: Union[StrictFloat, StrictInt] = Field(..., alias="costFactor", description="The factor to scale cost by")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
+    units_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale units by", alias="unitsFactor")
+    cost_factor: Union[StrictFloat, StrictInt] = Field(description="The factor to scale cost by", alias="costFactor")
     __properties = ["instrumentIdentifiers", "unitsFactor", "costFactor"]
 
     class Config:
@@ -79,3 +81,5 @@ class CorporateActionTransitionComponentRequest(BaseModel):
             "cost_factor": obj.get("costFactor")
         })
         return _obj
+
+CorporateActionTransitionComponentRequest.update_forward_refs()

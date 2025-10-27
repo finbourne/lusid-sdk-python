@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.metric_value import MetricValue
 
@@ -27,9 +29,9 @@ class EconomicDependencyWithQuote(BaseModel):
     """
     Container class pairing economic dependencies and quote data  # noqa: E501
     """
-    economic_dependency: EconomicDependency = Field(..., alias="economicDependency")
-    metric_value: MetricValue = Field(..., alias="metricValue")
-    scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="scaleFactor", description="Scale factor for the quote - this can be null, in which case we default to 1.")
+    economic_dependency: EconomicDependency = Field(alias="economicDependency")
+    metric_value: MetricValue = Field(alias="metricValue")
+    scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Scale factor for the quote - this can be null, in which case we default to 1.", alias="scaleFactor")
     __properties = ["economicDependency", "metricValue", "scaleFactor"]
 
     class Config:
@@ -92,3 +94,5 @@ class EconomicDependencyWithQuote(BaseModel):
             "scale_factor": obj.get("scaleFactor")
         })
         return _obj
+
+EconomicDependencyWithQuote.update_forward_refs()

@@ -5,7 +5,7 @@ Representation of an Investor on the LUSID API
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **investor_type** | **str** | The type of the Investor | [optional] 
-**identifiers** | **Dict[str, str]** | The identifiers of the Investor | [optional] 
+**identifiers** | **Dict[str, Optional[str]]** | The identifiers of the Investor | [optional] 
 **entity_unique_id** | **str** | The unique Investor entity identifier | [optional] 
 **person** | [**Person**](Person.md) |  | [optional] 
 **legal_entity** | [**LegalEntity**](LegalEntity.md) |  | [optional] 
@@ -13,11 +13,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.investor import Investor
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 investor_type: Optional[StrictStr] = "example_investor_type"
-identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
 person: Optional[Person] = None
 legal_entity: Optional[LegalEntity] = # Replace with your value

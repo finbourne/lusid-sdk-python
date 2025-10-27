@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class StagingRuleMatchCriteria(BaseModel):
     """
     StagingRuleMatchCriteria
     """
-    action_in: Optional[conlist(StrictStr)] = Field(None, alias="actionIn")
+    action_in: Optional[List[StrictStr]] = Field(default=None, alias="actionIn")
     requesting_user:  Optional[StrictStr] = Field(None,alias="requestingUser") 
     entity_attributes:  Optional[StrictStr] = Field(None,alias="entityAttributes") 
-    changed_attribute_name_in: Optional[conlist(StrictStr)] = Field(None, alias="changedAttributeNameIn")
+    changed_attribute_name_in: Optional[List[StrictStr]] = Field(default=None, alias="changedAttributeNameIn")
     __properties = ["actionIn", "requestingUser", "entityAttributes", "changedAttributeNameIn"]
 
     class Config:
@@ -101,3 +103,5 @@ class StagingRuleMatchCriteria(BaseModel):
             "changed_attribute_name_in": obj.get("changedAttributeNameIn")
         })
         return _obj
+
+StagingRuleMatchCriteria.update_forward_refs()

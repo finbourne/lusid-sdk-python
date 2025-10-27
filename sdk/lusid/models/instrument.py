@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.lusid_instrument import LusidInstrument
@@ -37,20 +39,20 @@ class Instrument(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the instrument lies.") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.") 
-    version: Version = Field(...)
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
+    version: Version
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     name:  StrictStr = Field(...,alias="name", description="The name of the instrument.") 
-    identifiers: Dict[str, StrictStr] = Field(..., description="The set of identifiers that can be used to identify the instrument.")
-    properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested instrument properties. These will be from the 'Instrument' domain.")
-    lookthrough_portfolio: Optional[ResourceId] = Field(None, alias="lookthroughPortfolio")
-    instrument_definition: Optional[LusidInstrument] = Field(None, alias="instrumentDefinition")
+    identifiers: Dict[str, Optional[StrictStr]] = Field(description="The set of identifiers that can be used to identify the instrument.")
+    properties: Optional[List[ModelProperty]] = Field(default=None, description="The requested instrument properties. These will be from the 'Instrument' domain.")
+    lookthrough_portfolio: Optional[ResourceId] = Field(default=None, alias="lookthroughPortfolio")
+    instrument_definition: Optional[LusidInstrument] = Field(default=None, alias="instrumentDefinition")
     state:  StrictStr = Field(...,alias="state", description="The state of of the instrument at the asAt datetime of this version of the instrument definition. The available values are: Active, Inactive, Deleted") 
     asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="The nominal asset class of the instrument, e.g. InterestRates, FX, Inflation, Equities, Credit, Commodities, etc. The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown") 
     dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.") 
-    relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the instrument.")
-    settlement_cycle: Optional[SettlementCycle] = Field(None, alias="settlementCycle")
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the instrument.")
+    settlement_cycle: Optional[SettlementCycle] = Field(default=None, alias="settlementCycle")
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["href", "scope", "lusidInstrumentId", "version", "stagedModifications", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "settlementCycle", "dataModelMembership", "links"]
 
     @validator('state')
@@ -103,14 +105,19 @@ class Instrument(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "state" != "type":
             return value
 
-        if value not in ('Active', 'Inactive', 'Deleted'):
+        if value not in ['Active', 'Inactive', 'Deleted']:
             raise ValueError("must be one of enum values ('Active', 'Inactive', 'Deleted')")
         return value
 
@@ -164,7 +171,12 @@ class Instrument(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -174,7 +186,7 @@ class Instrument(BaseModel):
         if value is None:
             return value
 
-        if value not in ('InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown'):
+        if value not in ['InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown']:
             raise ValueError("must be one of enum values ('InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown')")
         return value
 
@@ -310,3 +322,5 @@ class Instrument(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Instrument.update_forward_refs()

@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: Dict[str, FeeRule] = # Replace with your value
-links: Optional[conlist(Link)] = None
+values: Dict[str, FeeRule]
+links: Optional[List[Link]] = None
 fee_rule_upsert_response_instance = FeeRuleUpsertResponse(values=values, links=links)
 
 ```

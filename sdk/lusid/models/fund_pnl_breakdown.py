@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.fund_amount import FundAmount
 
 class FundPnlBreakdown(BaseModel):
     """
     The breakdown of PnL for a Fund on a specified date.  # noqa: E501
     """
-    non_class_specific_pnl: Dict[str, FundAmount] = Field(..., alias="nonClassSpecificPnl", description="Bucket of detail for PnL within the queried period that is not specific to any share class.")
-    aggregated_class_pnl: Dict[str, FundAmount] = Field(..., alias="aggregatedClassPnl", description="Bucket of detail for the sum of class PnL across all share classes in a fund and within the queried period.")
-    total_pnl: Dict[str, FundAmount] = Field(..., alias="totalPnl", description="Bucket of detail for the sum of class PnL and PnL not specific to a class within the queried period.")
+    non_class_specific_pnl: Dict[str, FundAmount] = Field(description="Bucket of detail for PnL within the queried period that is not specific to any share class.", alias="nonClassSpecificPnl")
+    aggregated_class_pnl: Dict[str, FundAmount] = Field(description="Bucket of detail for the sum of class PnL across all share classes in a fund and within the queried period.", alias="aggregatedClassPnl")
+    total_pnl: Dict[str, FundAmount] = Field(description="Bucket of detail for the sum of class PnL and PnL not specific to a class within the queried period.", alias="totalPnl")
     __properties = ["nonClassSpecificPnl", "aggregatedClassPnl", "totalPnl"]
 
     class Config:
@@ -116,3 +118,5 @@ class FundPnlBreakdown(BaseModel):
             else None
         })
         return _obj
+
+FundPnlBreakdown.update_forward_refs()

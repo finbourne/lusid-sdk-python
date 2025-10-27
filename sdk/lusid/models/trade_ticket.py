@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TradeTicket(BaseModel):
     """
@@ -78,14 +80,19 @@ class TradeTicket(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "trade_ticket_type" != "type":
             return value
 
-        if value not in ('LusidTradeTicket', 'ExternalTradeTicket'):
+        if value not in ['LusidTradeTicket', 'ExternalTradeTicket']:
             raise ValueError("must be one of enum values ('LusidTradeTicket', 'ExternalTradeTicket')")
         return value
 
@@ -136,3 +143,5 @@ class TradeTicket(BaseModel):
             "trade_ticket_type": obj.get("tradeTicketType")
         })
         return _obj
+
+TradeTicket.update_forward_refs()

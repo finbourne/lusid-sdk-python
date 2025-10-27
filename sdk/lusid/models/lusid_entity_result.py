@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class LusidEntityResult(BaseModel):
     """
     Represents LUSID entity details for a data quality check result  # noqa: E501
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The as-at timestamp for the entity")
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective-at timestamp for the entity")
+    as_at: Optional[datetime] = Field(default=None, description="The as-at timestamp for the entity", alias="asAt")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective-at timestamp for the entity", alias="effectiveAt")
     entity_type:  Optional[StrictStr] = Field(None,alias="entityType", description="The type of the LUSID entity") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the entity") 
     identifier_key:  Optional[StrictStr] = Field(None,alias="identifierKey", description="The identifier key for the entity") 
@@ -119,3 +121,5 @@ class LusidEntityResult(BaseModel):
             "display_name": obj.get("displayName")
         })
         return _obj
+
+LusidEntityResult.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class PostCloseActivity(BaseModel):
     """
@@ -27,7 +29,7 @@ class PostCloseActivity(BaseModel):
     """
     entity_type:  StrictStr = Field(...,alias="entityType") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId") 
-    as_at: datetime = Field(..., alias="asAt")
+    as_at: datetime = Field(alias="asAt")
     __properties = ["entityType", "entityUniqueId", "asAt"]
 
     class Config:
@@ -79,3 +81,5 @@ class PostCloseActivity(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+PostCloseActivity.update_forward_refs()

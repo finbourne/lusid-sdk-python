@@ -15,12 +15,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.early_redemption_event import EarlyRedemptionEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_date: Optional[datetime] = # Replace with your value
 currency: StrictStr = "example_currency"
-early_redemption_elections: conlist(EarlyRedemptionElection) = # Replace with your value
+early_redemption_elections: List[EarlyRedemptionElection] = # Replace with your value
 redemption_percentage: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 price_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 accrued_interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

@@ -12,8 +12,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 use_business_days: Optional[StrictBool] = # Replace with your value
 use_business_days:Optional[StrictBool] = None

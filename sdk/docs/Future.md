@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The start date of the instrument. This is normally synonymous with the trade-date. | 
 **maturity_date** | **datetime** | The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it. | 
-**identifiers** | **Dict[str, str]** | External market codes and identifiers for the bond, e.g. ISIN. | 
+**identifiers** | **Dict[str, Optional[str]]** | External market codes and identifiers for the bond, e.g. ISIN. | 
 **contract_details** | [**FuturesContractDetails**](FuturesContractDetails.md) |  | 
 **contracts** | **float** | The number of contracts held. This is optional and will default to 1 if not set.  Instrument events will only work when this field is 1.  We recommend not using this field and instead relying on the number of holdings to   represent the number of futures contracts. | [optional] [default to 1]
 **mark_to_market_conventions** | [**MarkToMarketConventions**](MarkToMarketConventions.md) |  | [optional] 
@@ -20,12 +20,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.future import Future
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
-identifiers: Dict[str, StrictStr] = # Replace with your value
+identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 contract_details: FuturesContractDetails = # Replace with your value
 contracts: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 mark_to_market_conventions: Optional[MarkToMarketConventions] = # Replace with your value

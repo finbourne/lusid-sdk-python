@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.posting_module_rules_updated_response import PostingModuleRulesUpdatedResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-rules: Optional[conlist(PostingModuleRule)] = # Replace with your value
+rules: Optional[List[PostingModuleRule]] = # Replace with your value
 version: Optional[Version] = None
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 posting_module_rules_updated_response_instance = PostingModuleRulesUpdatedResponse(rules=rules, version=version, href=href, links=links)
 
 ```

@@ -18,20 +18,22 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_configuration import FundConfiguration
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-dealing_filters: Optional[conlist(ComponentFilter)] = # Replace with your value
-pnl_filters: Optional[conlist(ComponentFilter)] = # Replace with your value
-back_out_filters: Optional[conlist(ComponentFilter)] = # Replace with your value
-external_fee_filters: Optional[conlist(ExternalFeeComponentFilter)] = # Replace with your value
+dealing_filters: Optional[List[ComponentFilter]] = # Replace with your value
+pnl_filters: Optional[List[ComponentFilter]] = # Replace with your value
+back_out_filters: Optional[List[ComponentFilter]] = # Replace with your value
+external_fee_filters: Optional[List[ExternalFeeComponentFilter]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 fund_configuration_instance = FundConfiguration(href=href, id=id, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties, version=version, links=links)
 
 ```

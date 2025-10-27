@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_at: datetime = # Replace with your value
-version: Version = # Replace with your value
+version: Version
 unmatched_holding_method: StrictStr = "example_unmatched_holding_method"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 holdings_adjustment_header_instance = HoldingsAdjustmentHeader(effective_at=effective_at, version=version, unmatched_holding_method=unmatched_holding_method, links=links)
 
 ```

@@ -21,8 +21,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 portfolio_id: ResourceId = # Replace with your value
 rate_of_return: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value

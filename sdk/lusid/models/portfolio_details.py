@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
@@ -32,22 +34,22 @@ class PortfolioDetails(BaseModel):
     PortfolioDetails
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    origin_portfolio_id: ResourceId = Field(..., alias="originPortfolioId")
-    version: Version = Field(...)
+    origin_portfolio_id: ResourceId = Field(alias="originPortfolioId")
+    version: Version
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the transaction portfolio.") 
-    corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
-    sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys")
-    instrument_scopes: Optional[conlist(StrictStr)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to the transaction portfolio.")
+    corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
+    sub_holding_keys: Optional[List[StrictStr]] = Field(default=None, alias="subHoldingKeys")
+    instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The resolution strategy used to resolve instruments of transactions/holdings upserted to the transaction portfolio.", alias="instrumentScopes")
     accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency") 
     amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
     transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope", description="The scope of the transaction types.") 
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.") 
-    instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
-    amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
+    instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")
+    amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
-    settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(None, alias="settlementConfiguration")
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    links: Optional[conlist(Link)] = None
+    settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    links: Optional[List[Link]] = None
     __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "stagedModifications", "links"]
 
     @validator('accounting_method')
@@ -100,7 +102,12 @@ class PortfolioDetails(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -110,7 +117,7 @@ class PortfolioDetails(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency'):
+        if value not in ['Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency']:
             raise ValueError("must be one of enum values ('Default', 'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst', 'LowestCostFirst', 'ProRateByUnits', 'ProRateByCost', 'ProRateByCostPortfolioCurrency', 'IntraDayThenFirstInFirstOut', 'LongTermHighestCostFirst', 'LongTermHighestCostFirstPortfolioCurrency', 'HighestCostFirstPortfolioCurrency', 'LowestCostFirstPortfolioCurrency', 'MaximumLossMinimumGain', 'MaximumLossMinimumGainPortfolioCurrency')")
         return value
 
@@ -245,3 +252,5 @@ class PortfolioDetails(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PortfolioDetails.update_forward_refs()

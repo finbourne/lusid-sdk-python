@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class ParticipationRequest(BaseModel):
     """
     A request to create or update a Participation.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    placement_id: ResourceId = Field(..., alias="placementId")
-    order_id: ResourceId = Field(..., alias="orderId")
+    id: ResourceId
+    placement_id: ResourceId = Field(alias="placementId")
+    order_id: ResourceId = Field(alias="orderId")
     __properties = ["id", "placementId", "orderId"]
 
     class Config:
@@ -89,3 +91,5 @@ class ParticipationRequest(BaseModel):
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None
         })
         return _obj
+
+ParticipationRequest.update_forward_refs()

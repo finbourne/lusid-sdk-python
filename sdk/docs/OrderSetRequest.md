@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_set_request import OrderSetRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-order_requests: Optional[conlist(OrderRequest)] = # Replace with your value
+order_requests: Optional[List[OrderRequest]] = # Replace with your value
 order_set_request_instance = OrderSetRequest(order_requests=order_requests)
 
 ```

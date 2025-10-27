@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cash_flow_value_set import CashFlowValueSet
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-cashflows: Optional[conlist(CashFlowValue)] = # Replace with your value
+cashflows: Optional[List[CashFlowValue]] = # Replace with your value
 result_value_type: StrictStr = "example_result_value_type"
 cash_flow_value_set_instance = CashFlowValueSet(cashflows=cashflows, result_value_type=result_value_type)
 

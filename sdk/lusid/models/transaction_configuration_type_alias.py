@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionConfigurationTypeAlias(BaseModel):
     """
@@ -31,7 +33,7 @@ class TransactionConfigurationTypeAlias(BaseModel):
     transaction_group:  Optional[StrictStr] = Field(None,alias="transactionGroup", description="Group is a set of codes related to a source, or sync. DEPRECATED: This field will be removed, use `Source` instead") 
     source:  Optional[StrictStr] = Field(None,alias="source", description="Used to group a set of transaction types") 
     transaction_roles:  StrictStr = Field(...,alias="transactionRoles", description=". The available values are: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles") 
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.")
+    is_default: Optional[StrictBool] = Field(default=None, description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.", alias="isDefault")
     __properties = ["type", "description", "transactionClass", "transactionGroup", "source", "transactionRoles", "isDefault"]
 
     @validator('transaction_roles')
@@ -84,14 +86,19 @@ class TransactionConfigurationTypeAlias(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "transaction_roles" != "type":
             return value
 
-        if value not in ('None', 'LongLonger', 'LongShorter', 'ShortShorter', 'Shorter', 'ShortLonger', 'Longer', 'AllRoles'):
+        if value not in ['None', 'LongLonger', 'LongShorter', 'ShortShorter', 'Shorter', 'ShortLonger', 'Longer', 'AllRoles']:
             raise ValueError("must be one of enum values ('None', 'LongLonger', 'LongShorter', 'ShortShorter', 'Shorter', 'ShortLonger', 'Longer', 'AllRoles')")
         return value
 
@@ -158,3 +165,5 @@ class TransactionConfigurationTypeAlias(BaseModel):
             "is_default": obj.get("isDefault")
         })
         return _obj
+
+TransactionConfigurationTypeAlias.update_forward_refs()

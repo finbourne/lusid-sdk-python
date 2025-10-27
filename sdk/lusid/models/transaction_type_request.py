@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_type_alias import TransactionTypeAlias
 from lusid.models.transaction_type_calculation import TransactionTypeCalculation
@@ -29,10 +31,10 @@ class TransactionTypeRequest(BaseModel):
     """
     TransactionTypeRequest
     """
-    aliases: conlist(TransactionTypeAlias) = Field(..., description="List of transaction types that map to this specific transaction configuration")
-    movements: conlist(TransactionTypeMovement) = Field(..., description="Movement data for the transaction type")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Properties attached to the transaction type")
-    calculations: Optional[conlist(TransactionTypeCalculation)] = Field(None, description="Calculations to be performed for the transaction type")
+    aliases: List[TransactionTypeAlias] = Field(description="List of transaction types that map to this specific transaction configuration")
+    movements: List[TransactionTypeMovement] = Field(description="Movement data for the transaction type")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties attached to the transaction type")
+    calculations: Optional[List[TransactionTypeCalculation]] = Field(default=None, description="Calculations to be performed for the transaction type")
     __properties = ["aliases", "movements", "properties", "calculations"]
 
     class Config:
@@ -128,3 +130,5 @@ class TransactionTypeRequest(BaseModel):
             "calculations": [TransactionTypeCalculation.from_dict(_item) for _item in obj.get("calculations")] if obj.get("calculations") is not None else None
         })
         return _obj
+
+TransactionTypeRequest.update_forward_refs()

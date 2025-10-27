@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_returns_response import UpsertReturnsResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-version: Version = # Replace with your value
+
+version: Version
 href: Optional[StrictStr] = "example_href"
-values: Optional[conlist(Dict[str, datetime])] = # Replace with your value
-failed: Optional[conlist(Dict[str, ErrorDetail])] = # Replace with your value
-links: Optional[conlist(Link)] = None
+values: Optional[List[Dict[str, datetime]]] = # Replace with your value
+failed: Optional[List[Dict[str, ErrorDetail]]] = # Replace with your value
+links: Optional[List[Link]] = None
 upsert_returns_response_instance = UpsertReturnsResponse(version=version, href=href, values=values, failed=failed, links=links)
 
 ```

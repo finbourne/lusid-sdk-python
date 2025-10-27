@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.link import Link
 from lusid.models.reference_data import ReferenceData
@@ -32,18 +34,18 @@ class DataType(BaseModel):
     DataType
     """
     type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="The available values are: Open, Closed") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName") 
     description:  StrictStr = Field(...,alias="description") 
     value_type:  StrictStr = Field(...,alias="valueType", description="The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
-    acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues")
+    acceptable_values: Optional[List[StrictStr]] = Field(default=None, alias="acceptableValues")
     unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The available values are: NoUnits, Basic, Iso4217Currency") 
-    acceptable_units: Optional[conlist(IUnitDefinitionDto)] = Field(None, alias="acceptableUnits")
-    reference_data: Optional[ReferenceData] = Field(None, alias="referenceData")
+    acceptable_units: Optional[List[IUnitDefinitionDto]] = Field(default=None, alias="acceptableUnits")
+    reference_data: Optional[ReferenceData] = Field(default=None, alias="referenceData")
     version: Optional[Version] = None
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    links: Optional[conlist(Link)] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    links: Optional[List[Link]] = None
     __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "href", "stagedModifications", "links"]
 
     @validator('type_value_range')
@@ -96,14 +98,19 @@ class DataType(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "type_value_range" != "type":
             return value
 
-        if value not in ('Open', 'Closed'):
+        if value not in ['Open', 'Closed']:
             raise ValueError("must be one of enum values ('Open', 'Closed')")
         return value
 
@@ -157,14 +164,19 @@ class DataType(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "value_type" != "type":
             return value
 
-        if value not in ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage', 'Code', 'Id', 'Uri', 'CurrencyAndAmount', 'TradePrice', 'Currency', 'MetricValue', 'ResourceId', 'ResultValue', 'CutLocalTime', 'DateOrCutLabel', 'UnindexedText'):
+        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage', 'Code', 'Id', 'Uri', 'CurrencyAndAmount', 'TradePrice', 'Currency', 'MetricValue', 'ResourceId', 'ResultValue', 'CutLocalTime', 'DateOrCutLabel', 'UnindexedText']:
             raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage', 'Code', 'Id', 'Uri', 'CurrencyAndAmount', 'TradePrice', 'Currency', 'MetricValue', 'ResourceId', 'ResultValue', 'CutLocalTime', 'DateOrCutLabel', 'UnindexedText')")
         return value
 
@@ -218,7 +230,12 @@ class DataType(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -228,7 +245,7 @@ class DataType(BaseModel):
         if value is None:
             return value
 
-        if value not in ('NoUnits', 'Basic', 'Iso4217Currency'):
+        if value not in ['NoUnits', 'Basic', 'Iso4217Currency']:
             raise ValueError("must be one of enum values ('NoUnits', 'Basic', 'Iso4217Currency')")
         return value
 
@@ -337,3 +354,5 @@ class DataType(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+DataType.update_forward_refs()

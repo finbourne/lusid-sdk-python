@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.posting_module_request import PostingModuleRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: Optional[conlist(PostingModuleRule)] = # Replace with your value
+rules: Optional[List[PostingModuleRule]] = # Replace with your value
 posting_module_request_instance = PostingModuleRequest(code=code, display_name=display_name, description=description, rules=rules)
 
 ```

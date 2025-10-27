@@ -226,7 +226,7 @@ class ApiClient:
                 _request_timeout=_request_timeout,
                 opts=opts)
         except ApiException as e:
-            if e.body:
+            if e.body and isinstance(e.body, bytes):
                 e.body = e.body.decode('utf-8')
             raise e
 

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.match_criterion import MatchCriterion
 
 class TaxRule(BaseModel):
@@ -28,8 +30,8 @@ class TaxRule(BaseModel):
     """
     name:  StrictStr = Field(...,alias="name", description="A user-friendly name") 
     description:  StrictStr = Field(...,alias="description", description="A description for this rule") 
-    rate: Union[StrictFloat, StrictInt] = Field(..., description="The rate to be applied if all criteria are met")
-    match_criteria: conlist(MatchCriterion) = Field(..., alias="matchCriteria", description="A set of criteria to be met for this rule to be applied")
+    rate: Union[StrictFloat, StrictInt] = Field(description="The rate to be applied if all criteria are met")
+    match_criteria: List[MatchCriterion] = Field(description="A set of criteria to be met for this rule to be applied", alias="matchCriteria")
     __properties = ["name", "description", "rate", "matchCriteria"]
 
     class Config:
@@ -89,3 +91,5 @@ class TaxRule(BaseModel):
             "match_criteria": [MatchCriterion.from_dict(_item) for _item in obj.get("matchCriteria")] if obj.get("matchCriteria") is not None else None
         })
         return _obj
+
+TaxRule.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.allocation_request import AllocationRequest
 
 class AllocationSetRequest(BaseModel):
     """
     A request to create or update multiple Allocations.  # noqa: E501
     """
-    allocation_requests: Optional[conlist(AllocationRequest)] = Field(None, alias="allocationRequests", description="A collection of AllocationRequests.")
+    allocation_requests: Optional[List[AllocationRequest]] = Field(default=None, description="A collection of AllocationRequests.", alias="allocationRequests")
     __properties = ["allocationRequests"]
 
     class Config:
@@ -88,3 +90,5 @@ class AllocationSetRequest(BaseModel):
             "allocation_requests": [AllocationRequest.from_dict(_item) for _item in obj.get("allocationRequests")] if obj.get("allocationRequests") is not None else None
         })
         return _obj
+
+AllocationSetRequest.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
@@ -34,16 +36,16 @@ class LusidTradeTicket(BaseModel):
     source:  Optional[StrictStr] = Field(None,alias="source", description="Transaction Source. Referenced by Transaction Configuration.") 
     transaction_date:  StrictStr = Field(...,alias="transactionDate", description="Transaction Date. Date at which transaction is known.") 
     settlement_date:  StrictStr = Field(...,alias="settlementDate", description="Transaction settlement. Date at which transaction is finalised and realised into the system.") 
-    total_consideration: CurrencyAndAmount = Field(..., alias="totalConsideration")
-    units: Union[StrictFloat, StrictInt] = Field(..., description="Number of units in the transaction. For an OTC this is somewhat interchangeable with the quantity booked in the  instrument. As M x N or N x M are equivalent it is advised a client chooses one approach and sticks to it.  Arguably either the unit or holding is best unitised.")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Identifiers for the instrument.")
+    total_consideration: CurrencyAndAmount = Field(alias="totalConsideration")
+    units: Union[StrictFloat, StrictInt] = Field(description="Number of units in the transaction. For an OTC this is somewhat interchangeable with the quantity booked in the  instrument. As M x N or N x M are equivalent it is advised a client chooses one approach and sticks to it.  Arguably either the unit or holding is best unitised.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Identifiers for the instrument.", alias="instrumentIdentifiers")
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="Scope of instrument") 
     instrument_name:  Optional[StrictStr] = Field(None,alias="instrumentName", description="Name of instrument") 
-    instrument_definition: Optional[LusidInstrument] = Field(None, alias="instrumentDefinition")
-    counterparty_agreement_id: Optional[ResourceId] = Field(None, alias="counterpartyAgreementId")
+    instrument_definition: Optional[LusidInstrument] = Field(default=None, alias="instrumentDefinition")
+    counterparty_agreement_id: Optional[ResourceId] = Field(default=None, alias="counterpartyAgreementId")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Counterparty") 
-    instrument_properties: Optional[conlist(ModelProperty)] = Field(None, alias="instrumentProperties", description="Set of instrument properties (as defined by client/user).")
-    transaction_properties: Optional[conlist(ModelProperty)] = Field(None, alias="transactionProperties", description="Set of transaction properties (as defined by client/user).")
+    instrument_properties: Optional[List[ModelProperty]] = Field(default=None, description="Set of instrument properties (as defined by client/user).", alias="instrumentProperties")
+    transaction_properties: Optional[List[ModelProperty]] = Field(default=None, description="Set of transaction properties (as defined by client/user).", alias="transactionProperties")
     trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket") 
     __properties = ["transactionId", "transactionType", "source", "transactionDate", "settlementDate", "totalConsideration", "units", "instrumentIdentifiers", "instrumentScope", "instrumentName", "instrumentDefinition", "counterpartyAgreementId", "counterparty", "instrumentProperties", "transactionProperties", "tradeTicketType"]
 
@@ -97,14 +99,19 @@ class LusidTradeTicket(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "trade_ticket_type" != "type":
             return value
 
-        if value not in ('LusidTradeTicket', 'ExternalTradeTicket'):
+        if value not in ['LusidTradeTicket', 'ExternalTradeTicket']:
             raise ValueError("must be one of enum values ('LusidTradeTicket', 'ExternalTradeTicket')")
         return value
 
@@ -223,3 +230,5 @@ class LusidTradeTicket(BaseModel):
             "trade_ticket_type": obj.get("tradeTicketType")
         })
         return _obj
+
+LusidTradeTicket.update_forward_refs()

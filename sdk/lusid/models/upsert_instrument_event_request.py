@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.year_month_day import YearMonthDay
@@ -29,13 +31,13 @@ class UpsertInstrumentEventRequest(BaseModel):
     UpsertInstrumentEventRequest
     """
     instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="Free string that uniquely identifies the event within the corporate action source") 
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The set of identifiers which determine the instrument this event relates to.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The set of identifiers which determine the instrument this event relates to.", alias="instrumentIdentifiers")
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the instrument event.") 
-    instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
-    properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
-    sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
+    instrument_event: InstrumentEvent = Field(alias="instrumentEvent")
+    properties: Optional[List[PerpetualProperty]] = Field(default=None, description="The properties attached to this instrument event.")
+    sequence_number: Optional[StrictInt] = Field(default=None, description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.", alias="sequenceNumber")
     participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
-    event_date_stamps: Optional[Dict[str, YearMonthDay]] = Field(None, alias="eventDateStamps", description="The date stamps corresponding to the relevant date-time fields for the instrument event. The key for each provided date stamp must match the field name of a valid datetime field from the InstrumentEvent DTO.")
+    event_date_stamps: Optional[Dict[str, YearMonthDay]] = Field(default=None, description="The date stamps corresponding to the relevant date-time fields for the instrument event. The key for each provided date stamp must match the field name of a valid datetime field from the InstrumentEvent DTO.", alias="eventDateStamps")
     __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber", "participationType", "eventDateStamps"]
 
     class Config:
@@ -134,3 +136,5 @@ class UpsertInstrumentEventRequest(BaseModel):
             else None
         })
         return _obj
+
+UpsertInstrumentEventRequest.update_forward_refs()

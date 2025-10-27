@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class UpsertFundBookmarkRequest(BaseModel):
@@ -29,9 +31,9 @@ class UpsertFundBookmarkRequest(BaseModel):
     bookmark_code:  StrictStr = Field(...,alias="bookmarkCode", description="Unique code for the Bookmark.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="Identifiable Name assigned to the Bookmark.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description assigned to the Bookmark.") 
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the Bookmark.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the Bookmark. Defaults to latest.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Bookmark.")
+    effective_at: datetime = Field(description="The effective time of the Bookmark.", alias="effectiveAt")
+    query_as_at: Optional[datetime] = Field(default=None, description="The query time of the Bookmark. Defaults to latest.", alias="queryAsAt")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Bookmark.")
     __properties = ["bookmarkCode", "displayName", "description", "effectiveAt", "queryAsAt", "properties"]
 
     class Config:
@@ -113,3 +115,5 @@ class UpsertFundBookmarkRequest(BaseModel):
             else None
         })
         return _obj
+
+UpsertFundBookmarkRequest.update_forward_refs()

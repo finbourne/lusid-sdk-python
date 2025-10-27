@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.informational_error_event import InformationalErrorEvent
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 error_detail: StrictStr = "example_error_detail"
 error_reason: StrictStr = "example_error_reason"
 effective_at: datetime = # Replace with your value

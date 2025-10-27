@@ -18,27 +18,29 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class PortfolioReturnBreakdown(BaseModel):
     """
     A list of Composite Breakdowns.  # noqa: E501
     """
-    portfolio_id: ResourceId = Field(..., alias="portfolioId")
-    rate_of_return: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="rateOfReturn", description="The return number.")
-    opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openingMarketValue", description="The opening market value.")
-    closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closingMarketValue", description="The closing market value.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The weight of the constituent into the composite.")
-    constituents_in_the_composite: Optional[StrictInt] = Field(None, alias="constituentsInTheComposite", description="The number of members in the Composite on the given day.")
-    constituents_missing: Optional[StrictInt] = Field(None, alias="constituentsMissing", description="The number of the constituents which have a missing return on that day.")
+    portfolio_id: ResourceId = Field(alias="portfolioId")
+    rate_of_return: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The return number.", alias="rateOfReturn")
+    opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The opening market value.", alias="openingMarketValue")
+    closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The closing market value.", alias="closingMarketValue")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The weight of the constituent into the composite.")
+    constituents_in_the_composite: Optional[StrictInt] = Field(default=None, description="The number of members in the Composite on the given day.", alias="constituentsInTheComposite")
+    constituents_missing: Optional[StrictInt] = Field(default=None, description="The number of the constituents which have a missing return on that day.", alias="constituentsMissing")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency of the portfolio.") 
-    open_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="openFxRate", description="The opening fxRate which is used in calculation.")
-    close_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="closeFxRate", description="The closing fxRate which is used in calculation.")
-    local_rate_of_return: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="localRateOfReturn", description="The rate of return in the local currency.")
-    local_opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="localOpeningMarketValue", description="The opening market value in the local currency.")
-    local_closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="localClosingMarketValue", description="The closing market value in the local currency.")
+    open_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The opening fxRate which is used in calculation.", alias="openFxRate")
+    close_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The closing fxRate which is used in calculation.", alias="closeFxRate")
+    local_rate_of_return: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rate of return in the local currency.", alias="localRateOfReturn")
+    local_opening_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The opening market value in the local currency.", alias="localOpeningMarketValue")
+    local_closing_market_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The closing market value in the local currency.", alias="localClosingMarketValue")
     __properties = ["portfolioId", "rateOfReturn", "openingMarketValue", "closingMarketValue", "weight", "constituentsInTheComposite", "constituentsMissing", "currency", "openFxRate", "closeFxRate", "localRateOfReturn", "localOpeningMarketValue", "localClosingMarketValue"]
 
     class Config:
@@ -133,3 +135,5 @@ class PortfolioReturnBreakdown(BaseModel):
             "local_closing_market_value": obj.get("localClosingMarketValue")
         })
         return _obj
+
+PortfolioReturnBreakdown.update_forward_refs()

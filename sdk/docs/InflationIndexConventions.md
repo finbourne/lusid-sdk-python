@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.inflation_index_conventions import InflationIndexConventions
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conint, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 inflation_index_name: StrictStr = "example_inflation_index_name"
 currency: StrictStr = "example_currency"
 observation_lag: StrictStr = "example_observation_lag"
 inflation_interpolation: Optional[StrictStr] = "example_inflation_interpolation"
 inflation_frequency: Optional[StrictStr] = "example_inflation_frequency"
-inflation_roll_day: Optional[conint(strict=True, le=28, ge=1)] = Field(1, alias="inflationRollDay", description="Day of the month that inflation rolls from one month to the next. This is optional and defaults to 1, which is  the typically value for the majority of inflation bonds (exceptions include Japan which rolls on the 10th  and some LatAm bonds which roll on the 15th).")
+inflation_roll_day: Optional[StrictInt] = # Replace with your value
 inflation_roll_day: Optional[StrictInt] = None
 inflation_index_conventions_instance = InflationIndexConventions(inflation_index_name=inflation_index_name, currency=currency, observation_lag=observation_lag, inflation_interpolation=inflation_interpolation, inflation_frequency=inflation_frequency, inflation_roll_day=inflation_roll_day)
 

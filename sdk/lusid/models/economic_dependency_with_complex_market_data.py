@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.economic_dependency import EconomicDependency
 
@@ -27,8 +29,8 @@ class EconomicDependencyWithComplexMarketData(BaseModel):
     """
     Container class pairing economic dependency and complex market data (i.e. discounting curves, etc.)  # noqa: E501
     """
-    economic_dependency: EconomicDependency = Field(..., alias="economicDependency")
-    complex_market_data: ComplexMarketData = Field(..., alias="complexMarketData")
+    economic_dependency: EconomicDependency = Field(alias="economicDependency")
+    complex_market_data: ComplexMarketData = Field(alias="complexMarketData")
     __properties = ["economicDependency", "complexMarketData"]
 
     class Config:
@@ -85,3 +87,5 @@ class EconomicDependencyWithComplexMarketData(BaseModel):
             "complex_market_data": ComplexMarketData.from_dict(obj.get("complexMarketData")) if obj.get("complexMarketData") is not None else None
         })
         return _obj
+
+EconomicDependencyWithComplexMarketData.update_forward_refs()

@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_payment_diary_leg import InstrumentPaymentDiaryLeg
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 leg_index: Optional[StrictInt] = # Replace with your value
 leg_index: Optional[StrictInt] = None
 leg_id: Optional[StrictStr] = "example_leg_id"
-rows: Optional[conlist(InstrumentPaymentDiaryRow)] = # Replace with your value
+rows: Optional[List[InstrumentPaymentDiaryRow]] = # Replace with your value
 instrument_payment_diary_leg_instance = InstrumentPaymentDiaryLeg(leg_index=leg_index, leg_id=leg_id, rows=rows)
 
 ```

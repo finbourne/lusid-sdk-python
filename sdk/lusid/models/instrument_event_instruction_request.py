@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, constr 
 from lusid.models.quantity_instructed import QuantityInstructed
 
 class InstrumentEventInstructionRequest(BaseModel):
@@ -30,9 +32,9 @@ class InstrumentEventInstructionRequest(BaseModel):
     instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The identifier of the instrument event being instructed") 
     instruction_type:  StrictStr = Field(...,alias="instructionType", description="The type of instruction (Ignore, ElectForPortfolio, ElectForHolding, ElectForLoanFacilityHolding)") 
     election_key:  Optional[StrictStr] = Field(None,alias="electionKey", description="For elected instructions, the key to be chosen") 
-    holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
-    entitlement_date_instructed: Optional[datetime] = Field(None, alias="entitlementDateInstructed", description="The instructed entitlement date for the event (where none is set on the event itself)")
-    quantity_instructed: Optional[QuantityInstructed] = Field(None, alias="quantityInstructed")
+    holding_id: Optional[StrictInt] = Field(default=None, description="For holding instructions, the id of the holding for which the instruction will apply", alias="holdingId")
+    entitlement_date_instructed: Optional[datetime] = Field(default=None, description="The instructed entitlement date for the event (where none is set on the event itself)", alias="entitlementDateInstructed")
+    quantity_instructed: Optional[QuantityInstructed] = Field(default=None, alias="quantityInstructed")
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply") 
     __properties = ["instrumentEventInstructionId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "entitlementDateInstructed", "quantityInstructed", "taxLotId"]
 
@@ -113,3 +115,5 @@ class InstrumentEventInstructionRequest(BaseModel):
             "tax_lot_id": obj.get("taxLotId")
         })
         return _obj
+
+InstrumentEventInstructionRequest.update_forward_refs()

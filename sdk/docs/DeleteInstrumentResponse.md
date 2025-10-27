@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.delete_instrument_response import DeleteInstrumentResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
 as_at: datetime = # Replace with your value
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 delete_instrument_response_instance = DeleteInstrumentResponse(href=href, as_at=as_at, staged_modifications=staged_modifications, links=links)
 
 ```

@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.change_history import ChangeHistory
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 user_id: StrictStr = "example_user_id"
 modified_as_at: datetime = # Replace with your value
 request_id: StrictStr = "example_request_id"
 action: StrictStr = "example_action"
-changes: conlist(ChangeItem) = # Replace with your value
-links: Optional[conlist(Link)] = None
+changes: List[ChangeItem] = # Replace with your value
+links: Optional[List[Link]] = None
 change_history_instance = ChangeHistory(user_id=user_id, modified_as_at=modified_as_at, request_id=request_id, action=action, changes=changes, links=links)
 
 ```

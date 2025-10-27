@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class InstrumentIdTypeDescriptor(BaseModel):
     """
@@ -27,7 +29,7 @@ class InstrumentIdTypeDescriptor(BaseModel):
     """
     identifier_type:  StrictStr = Field(...,alias="identifierType", description="The name of the identifier type.") 
     property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key that corresponds to the identifier type.") 
-    is_unique_identifier_type: StrictBool = Field(..., alias="isUniqueIdentifierType", description="Whether or not the identifier type is enforced to be unique.")
+    is_unique_identifier_type: StrictBool = Field(description="Whether or not the identifier type is enforced to be unique.", alias="isUniqueIdentifierType")
     __properties = ["identifierType", "propertyKey", "isUniqueIdentifierType"]
 
     class Config:
@@ -79,3 +81,5 @@ class InstrumentIdTypeDescriptor(BaseModel):
             "is_unique_identifier_type": obj.get("isUniqueIdentifierType")
         })
         return _obj
+
+InstrumentIdTypeDescriptor.update_forward_refs()

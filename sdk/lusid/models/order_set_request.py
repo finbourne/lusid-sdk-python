@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.order_request import OrderRequest
 
 class OrderSetRequest(BaseModel):
     """
     A request to create or update multiple Orders.  # noqa: E501
     """
-    order_requests: Optional[conlist(OrderRequest)] = Field(None, alias="orderRequests", description="A collection of OrderRequests.")
+    order_requests: Optional[List[OrderRequest]] = Field(default=None, description="A collection of OrderRequests.", alias="orderRequests")
     __properties = ["orderRequests"]
 
     class Config:
@@ -88,3 +90,5 @@ class OrderSetRequest(BaseModel):
             "order_requests": [OrderRequest.from_dict(_item) for _item in obj.get("orderRequests")] if obj.get("orderRequests") is not None else None
         })
         return _obj
+
+OrderSetRequest.update_forward_refs()

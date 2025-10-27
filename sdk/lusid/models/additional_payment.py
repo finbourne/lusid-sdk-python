@@ -17,17 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 
 class AdditionalPayment(BaseModel):
     """
     Record describing additional payment entity.  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="The payment amount.")
+    amount: Union[StrictFloat, StrictInt] = Field(description="The payment amount.")
     currency:  StrictStr = Field(...,alias="currency", description="The payment currency.") 
-    pay_date: datetime = Field(..., alias="payDate", description="Date when the payment is made.")
+    pay_date: datetime = Field(description="Date when the payment is made.", alias="payDate")
     pay_receive:  StrictStr = Field(...,alias="payReceive", description="Is it pay or receive.    Supported string (enumeration) values are: [Pay, Receive].") 
     __properties = ["amount", "currency", "payDate", "payReceive"]
 
@@ -81,3 +83,5 @@ class AdditionalPayment(BaseModel):
             "pay_receive": obj.get("payReceive")
         })
         return _obj
+
+AdditionalPayment.update_forward_refs()

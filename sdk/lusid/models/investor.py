@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.legal_entity import LegalEntity
 from lusid.models.person import Person
 
@@ -28,10 +30,10 @@ class Investor(BaseModel):
     Representation of an Investor on the LUSID API  # noqa: E501
     """
     investor_type:  Optional[StrictStr] = Field(None,alias="investorType", description="The type of the Investor") 
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The identifiers of the Investor")
+    identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The identifiers of the Investor")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Investor entity identifier") 
     person: Optional[Person] = None
-    legal_entity: Optional[LegalEntity] = Field(None, alias="legalEntity")
+    legal_entity: Optional[LegalEntity] = Field(default=None, alias="legalEntity")
     __properties = ["investorType", "identifiers", "entityUniqueId", "person", "legalEntity"]
 
     class Config:
@@ -106,3 +108,5 @@ class Investor(BaseModel):
             "legal_entity": LegalEntity.from_dict(obj.get("legalEntity")) if obj.get("legalEntity") is not None else None
         })
         return _obj
+
+Investor.update_forward_refs()

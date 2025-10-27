@@ -20,19 +20,21 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_request import FundRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 code: StrictStr = "example_code"
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 fund_configuration_id: ResourceId = # Replace with your value
 abor_id: ResourceId = # Replace with your value
-share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
-share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = # Replace with your value
+share_class_instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
+share_class_instruments: Optional[List[InstrumentResolutionDetail]] = # Replace with your value
 type: StrictStr = "example_type"
 inception_date: datetime = # Replace with your value
-decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+decimal_places: Optional[StrictInt] = # Replace with your value
 decimal_places: Optional[StrictInt] = None
 year_end_date: DayMonth = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value

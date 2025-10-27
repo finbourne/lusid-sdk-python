@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.portfolio_id import PortfolioId
 
@@ -27,10 +29,10 @@ class AccountedTransaction(BaseModel):
     """
     The Valuation Point Data Response for the Fund and specified date.  # noqa: E501
     """
-    accounting_date: Optional[datetime] = Field(None, alias="accountingDate", description="The transaction's accounting date.")
+    accounting_date: Optional[datetime] = Field(default=None, description="The transaction's accounting date.", alias="accountingDate")
     journal_entry_action:  Optional[StrictStr] = Field(None,alias="journalEntryAction", description="The journal entry line action associated with this transaction.") 
     transaction: Optional[OutputTransaction] = None
-    portfolio_id: Optional[PortfolioId] = Field(None, alias="portfolioId")
+    portfolio_id: Optional[PortfolioId] = Field(default=None, alias="portfolioId")
     __properties = ["accountingDate", "journalEntryAction", "transaction", "portfolioId"]
 
     class Config:
@@ -94,3 +96,5 @@ class AccountedTransaction(BaseModel):
             "portfolio_id": PortfolioId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None
         })
         return _obj
+
+AccountedTransaction.update_forward_refs()

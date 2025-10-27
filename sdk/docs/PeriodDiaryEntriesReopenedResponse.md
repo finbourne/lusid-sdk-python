@@ -14,9 +14,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.period_diary_entries_reopened_response import PeriodDiaryEntriesReopenedResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
 effective_from: Optional[datetime] = # Replace with your value
 as_at: datetime = # Replace with your value
@@ -24,7 +26,7 @@ period_diary_entries_removed: StrictInt = # Replace with your value
 period_diary_entries_removed: StrictInt = 42
 period_diary_entries_from: datetime = # Replace with your value
 period_diary_entries_to: datetime = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 period_diary_entries_reopened_response_instance = PeriodDiaryEntriesReopenedResponse(href=href, effective_from=effective_from, as_at=as_at, period_diary_entries_removed=period_diary_entries_removed, period_diary_entries_from=period_diary_entries_from, period_diary_entries_to=period_diary_entries_to, links=links)
 
 ```

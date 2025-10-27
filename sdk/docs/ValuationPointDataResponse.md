@@ -17,18 +17,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 type: StrictStr = "example_type"
 status: StrictStr = "example_status"
 fund_details: FundDetails = # Replace with your value
 fund_valuation_point_data: FundValuationPointData = # Replace with your value
-share_class_data: conlist(ShareClassData) = # Replace with your value
+share_class_data: List[ShareClassData] = # Replace with your value
 valuation_point_code: Optional[StrictStr] = "example_valuation_point_code"
 previous_valuation_point_code: Optional[StrictStr] = "example_previous_valuation_point_code"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, links=links)
 
 ```

@@ -11,9 +11,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_user_review_match_key import GroupReconciliationUserReviewMatchKey
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 match_key: StrictStr = "example_match_key"
 user_id: Optional[StrictStr] = "example_user_id"
 as_at_added: Optional[datetime] = # Replace with your value

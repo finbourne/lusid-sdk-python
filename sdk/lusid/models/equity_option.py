@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium
 from lusid.models.time_zone_conventions import TimeZoneConventions
@@ -28,24 +30,24 @@ class EquityOption(LusidInstrument):
     """
     LUSID representation of a plain vanilla OTC Equity Option.  # noqa: E501
     """
-    start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
-    option_maturity_date: datetime = Field(..., alias="optionMaturityDate", description="The maturity date of the option.")
-    option_settlement_date: Optional[datetime] = Field(None, alias="optionSettlementDate", description="The settlement date of the option.")
+    start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
+    option_maturity_date: datetime = Field(description="The maturity date of the option.", alias="optionMaturityDate")
+    option_settlement_date: Optional[datetime] = Field(default=None, description="The settlement date of the option.", alias="optionSettlementDate")
     delivery_type:  StrictStr = Field(...,alias="deliveryType", description="Is the option cash settled or physical delivery of option    Supported string (enumeration) values are: [Cash, Physical].") 
     option_type:  StrictStr = Field(...,alias="optionType", description="Type of optionality for the option    Supported string (enumeration) values are: [Call, Put].") 
-    strike: Union[StrictFloat, StrictInt] = Field(..., description="The strike of the option.")
+    strike: Union[StrictFloat, StrictInt] = Field(description="The strike of the option.")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     underlying_identifier:  Optional[StrictStr] = Field(None,alias="underlyingIdentifier", description="The market identifier type of the underlying code, e.g RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].  Optional field, should be used in combination with the Code field.  Not compatible with the Underlying field.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="The identifying code for the equity underlying, e.g. 'IBM.N'.  Optional field, should be used in combination with the UnderlyingIdentifier field.  Not compatible with the Underlying field.") 
     equity_option_type:  Optional[StrictStr] = Field(None,alias="equityOptionType", description="Equity option types. E.g. Vanilla (default), RightsIssue, Warrant.    Supported string (enumeration) values are: [Vanilla, RightsIssue, Warrant].") 
-    number_of_shares: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="numberOfShares", description="The amount of shares to exchange if the option is exercised.")
+    number_of_shares: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of shares to exchange if the option is exercised.", alias="numberOfShares")
     premium: Optional[Premium] = None
     exercise_type:  Optional[StrictStr] = Field(None,alias="exerciseType", description="Type of optionality that is present; European, American.    Supported string (enumeration) values are: [European, American].  Defaults to \"European\" if not set.") 
     underlying: Optional[LusidInstrument] = None
-    delivery_days: Optional[StrictInt] = Field(None, alias="deliveryDays", description="Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set.")
+    delivery_days: Optional[StrictInt] = Field(default=None, description="Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set.", alias="deliveryDays")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="Business day convention for option exercise date to settlement date calculation.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].  Defaults to \"F\" if not set.") 
-    settlement_calendars: Optional[conlist(StrictStr)] = Field(None, alias="settlementCalendars", description="Holiday calendars for option exercise date to settlement date calculation.")
-    time_zone_conventions: Optional[TimeZoneConventions] = Field(None, alias="timeZoneConventions")
+    settlement_calendars: Optional[List[StrictStr]] = Field(default=None, description="Holiday calendars for option exercise date to settlement date calculation.", alias="settlementCalendars")
+    time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["instrumentType", "startDate", "optionMaturityDate", "optionSettlementDate", "deliveryType", "optionType", "strike", "domCcy", "underlyingIdentifier", "code", "equityOptionType", "numberOfShares", "premium", "exerciseType", "underlying", "deliveryDays", "businessDayConvention", "settlementCalendars", "timeZoneConventions"]
@@ -100,14 +102,19 @@ class EquityOption(LusidInstrument):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "instrument_type" != "type":
             return value
 
-        if value not in ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo'):
+        if value not in ['QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo']:
             raise ValueError("must be one of enum values ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo')")
         return value
 
@@ -236,3 +243,5 @@ class EquityOption(LusidInstrument):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+EquityOption.update_forward_refs()

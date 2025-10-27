@@ -17,13 +17,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_rule_result import ComplianceRuleResult
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 rule_id: StrictStr = "example_rule_id"
 rule_name: StrictStr = "example_rule_name"
 rule_description: StrictStr = "example_rule_description"
-portfolio: ResourceId = # Replace with your value
+portfolio: ResourceId
 passed: StrictBool = # Replace with your value
 passed:StrictBool = True
 result_value: Union[StrictFloat, StrictInt] = # Replace with your value

@@ -15,12 +15,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 payment_date: Optional[datetime] = # Replace with your value
 currency: StrictStr = "example_currency"
-lapse_elections: Optional[conlist(LapseElection)] = # Replace with your value
+lapse_elections: Optional[List[LapseElection]] = # Replace with your value
 fraction: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 with_interest: Optional[StrictBool] = # Replace with your value

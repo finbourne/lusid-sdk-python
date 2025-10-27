@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.cleardown_module_rule import CleardownModuleRule
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -31,13 +33,13 @@ class CleardownModuleResponse(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     cleardown_module_code:  StrictStr = Field(...,alias="cleardownModuleCode", description="The code of the Cleardown Module.") 
-    chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
+    chart_of_accounts_id: ResourceId = Field(alias="chartOfAccountsId")
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Cleardown Module.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Cleardown Module.") 
-    rules: Optional[conlist(CleardownModuleRule)] = Field(None, description="The Cleardown Rules that apply for the Cleardown Module. Rules are evaluated in the order they occur in this collection.")
+    rules: Optional[List[CleardownModuleRule]] = Field(default=None, description="The Cleardown Rules that apply for the Cleardown Module. Rules are evaluated in the order they occur in this collection.")
     status:  StrictStr = Field(...,alias="status", description="The Cleardown Module status. Can be Active, Inactive or Deleted. Defaults to Active.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "cleardownModuleCode", "chartOfAccountsId", "displayName", "description", "rules", "status", "version", "links"]
 
     class Config:
@@ -135,3 +137,5 @@ class CleardownModuleResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CleardownModuleResponse.update_forward_refs()

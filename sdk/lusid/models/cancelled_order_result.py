@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.order import Order
 
 class CancelledOrderResult(BaseModel):
     """
     CancelledOrderResult
     """
-    order_state: Optional[Order] = Field(None, alias="orderState")
+    order_state: Optional[Order] = Field(default=None, alias="orderState")
     __properties = ["orderState"]
 
     class Config:
@@ -79,3 +81,5 @@ class CancelledOrderResult(BaseModel):
             "order_state": Order.from_dict(obj.get("orderState")) if obj.get("orderState") is not None else None
         })
         return _obj
+
+CancelledOrderResult.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import GroupReconciliationDefinitionComparisonRulesetIds
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
@@ -36,13 +38,13 @@ class CreateGroupReconciliationDefinitionRequest(BaseModel):
     id: Optional[ResourceId] = None
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Group Reconciliation Definition") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Group Reconciliation Definition") 
-    portfolio_entity_ids: GroupReconciliationDefinitionPortfolioEntityIds = Field(..., alias="portfolioEntityIds")
-    recipe_ids: Optional[GroupReconciliationDefinitionRecipeIds] = Field(None, alias="recipeIds")
+    portfolio_entity_ids: GroupReconciliationDefinitionPortfolioEntityIds = Field(alias="portfolioEntityIds")
+    recipe_ids: Optional[GroupReconciliationDefinitionRecipeIds] = Field(default=None, alias="recipeIds")
     currencies: Optional[GroupReconciliationDefinitionCurrencies] = None
-    transaction_date_windows: Optional[TransactionDateWindows] = Field(None, alias="transactionDateWindows")
-    comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = Field(None, alias="comparisonRulesetIds")
-    break_code_source: Optional[BreakCodeSource] = Field(None, alias="breakCodeSource")
-    primary_schedule: Optional[PrimarySchedule] = Field(None, alias="primarySchedule")
+    transaction_date_windows: Optional[TransactionDateWindows] = Field(default=None, alias="transactionDateWindows")
+    comparison_ruleset_ids: Optional[GroupReconciliationDefinitionComparisonRulesetIds] = Field(default=None, alias="comparisonRulesetIds")
+    break_code_source: Optional[BreakCodeSource] = Field(default=None, alias="breakCodeSource")
+    primary_schedule: Optional[PrimarySchedule] = Field(default=None, alias="primarySchedule")
     __properties = ["id", "displayName", "description", "portfolioEntityIds", "recipeIds", "currencies", "transactionDateWindows", "comparisonRulesetIds", "breakCodeSource", "primarySchedule"]
 
     class Config:
@@ -130,3 +132,5 @@ class CreateGroupReconciliationDefinitionRequest(BaseModel):
             "primary_schedule": PrimarySchedule.from_dict(obj.get("primarySchedule")) if obj.get("primarySchedule") is not None else None
         })
         return _obj
+
+CreateGroupReconciliationDefinitionRequest.update_forward_refs()

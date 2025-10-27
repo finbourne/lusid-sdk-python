@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.staged_modifications_info import StagedModificationsInfo
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 count_pending: StrictInt = # Replace with your value
 count_pending: StrictInt = 42
 href_pending: StrictStr = "example_href_pending"
-ids_previewed: Optional[conlist(StrictStr)] = # Replace with your value
+ids_previewed: Optional[List[StrictStr]] = # Replace with your value
 staged_modifications_info_instance = StagedModificationsInfo(count_pending=count_pending, href_pending=href_pending, ids_previewed=ids_previewed)
 
 ```

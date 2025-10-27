@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_counterparty_agreement_request import UpsertCounterpartyAgreementRequest
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 counterparty_agreement: CounterpartyAgreement = # Replace with your value
 upsert_counterparty_agreement_request_instance = UpsertCounterpartyAgreementRequest(counterparty_agreement=counterparty_agreement)

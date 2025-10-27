@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class AggregatedReturnsDispersionRequest(BaseModel):
@@ -27,9 +29,9 @@ class AggregatedReturnsDispersionRequest(BaseModel):
     The request used in the AggregatedReturnsDispersionMetric.  # noqa: E501
     """
     to_effective_at:  Optional[StrictStr] = Field(None,alias="toEffectiveAt", description="The end date for when the you want the dispersion to be calculated.") 
-    years_count: Optional[StrictInt] = Field(None, alias="yearsCount", description="For how many years to calculate the dispersion. Default to 10.")
-    return_ids: Optional[conlist(ResourceId)] = Field(None, alias="returnIds", description="The Scope and code of the returns.")
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
+    years_count: Optional[StrictInt] = Field(default=None, description="For how many years to calculate the dispersion. Default to 10.", alias="yearsCount")
+    return_ids: Optional[List[ResourceId]] = Field(default=None, description="The Scope and code of the returns.", alias="returnIds")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
     composite_method:  Optional[StrictStr] = Field(None,alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.") 
     alternative_inception_date:  Optional[StrictStr] = Field(None,alias="alternativeInceptionDate", description="Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.") 
     __properties = ["toEffectiveAt", "yearsCount", "returnIds", "recipeId", "compositeMethod", "alternativeInceptionDate"]
@@ -116,3 +118,5 @@ class AggregatedReturnsDispersionRequest(BaseModel):
             "alternative_inception_date": obj.get("alternativeInceptionDate")
         })
         return _obj
+
+AggregatedReturnsDispersionRequest.update_forward_refs()

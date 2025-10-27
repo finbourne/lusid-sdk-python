@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.blocked_order_request import BlockedOrderRequest
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
@@ -29,16 +31,16 @@ class BlockAndOrdersRequest(BaseModel):
     """
     BlockAndOrdersRequest
     """
-    block_id: ResourceId = Field(..., alias="blockId")
-    orders: conlist(BlockedOrderRequest) = Field(..., description="An order which belongs to a block. Fields common to both entities (such as instrument) should be derived from the block.")
-    block_properties: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="blockProperties", description="Client-defined properties associated with this block.")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
+    block_id: ResourceId = Field(alias="blockId")
+    orders: List[BlockedOrderRequest] = Field(description="An order which belongs to a block. Fields common to both entities (such as instrument) should be derived from the block.")
+    block_properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this block.", alias="blockProperties")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
     side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the block's side (buy, sell, short, etc). BlockedOrders in the request which do not specify a side will have their side populated with this value.") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="The block order's type (examples: Limit, Market, ...)") 
     time_in_force:  Optional[StrictStr] = Field(None,alias="timeInForce", description="The block orders' time in force (examples: Day, GoodTilCancel, ...)") 
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date on which the block was made")
-    limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
-    stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
+    var_date: Optional[datetime] = Field(default=None, description="The date on which the block was made", alias="date")
+    limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
+    stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
     __properties = ["blockId", "orders", "blockProperties", "instrumentIdentifiers", "side", "type", "timeInForce", "date", "limitPrice", "stopPrice"]
 
     class Config:
@@ -145,3 +147,5 @@ class BlockAndOrdersRequest(BaseModel):
             "stop_price": CurrencyAndAmount.from_dict(obj.get("stopPrice")) if obj.get("stopPrice") is not None else None
         })
         return _obj
+
+BlockAndOrdersRequest.update_forward_refs()

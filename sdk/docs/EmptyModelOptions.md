@@ -8,8 +8,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.empty_model_options import EmptyModelOptions
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 model_options_type: StrictStr = "example_model_options_type"
 empty_model_options_instance = EmptyModelOptions(model_options_type=model_options_type)

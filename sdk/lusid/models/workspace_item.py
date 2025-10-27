@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -28,13 +30,13 @@ class WorkspaceItem(BaseModel):
     An item stored in a workspace.  # noqa: E501
     """
     type:  StrictStr = Field(...,alias="type", description="The type of the workspace item.") 
-    format: StrictInt = Field(..., description="A simple integer format identifier.")
+    format: StrictInt = Field(description="A simple integer format identifier.")
     name:  StrictStr = Field(...,alias="name", description="A workspace item's name.") 
     group:  StrictStr = Field(...,alias="group", description="The group containing a workspace item.") 
     description:  StrictStr = Field(...,alias="description", description="The description of a workspace item.") 
-    content: Optional[Any] = Field(..., description="The content associated with a workspace item.")
+    content: Optional[Any] = Field(description="The content associated with a workspace item.")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["type", "format", "name", "group", "description", "content", "version", "links"]
 
     class Config:
@@ -111,3 +113,5 @@ class WorkspaceItem(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+WorkspaceItem.update_forward_refs()

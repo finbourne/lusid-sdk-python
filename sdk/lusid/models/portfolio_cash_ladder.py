@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.cash_ladder_record import CashLadderRecord
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -30,10 +32,10 @@ class PortfolioCashLadder(BaseModel):
     PortfolioCashLadder
     """
     currency:  StrictStr = Field(...,alias="currency", description="The currency of the cash-flows.") 
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.")
-    records: conlist(CashLadderRecord) = Field(..., description="A record of cash flows on a specific date.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The records that could not be returned along with a reason for their failure.")
-    links: Optional[conlist(Link)] = None
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.", alias="subHoldingKeys")
+    records: List[CashLadderRecord] = Field(description="A record of cash flows on a specific date.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The records that could not be returned along with a reason for their failure.")
+    links: Optional[List[Link]] = None
     __properties = ["currency", "subHoldingKeys", "records", "failed", "links"]
 
     class Config:
@@ -140,3 +142,5 @@ class PortfolioCashLadder(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PortfolioCashLadder.update_forward_refs()

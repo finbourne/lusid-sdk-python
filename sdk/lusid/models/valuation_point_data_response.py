@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.link import Link
@@ -32,12 +34,12 @@ class ValuationPointDataResponse(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     type:  StrictStr = Field(...,alias="type", description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).") 
     status:  StrictStr = Field(...,alias="status", description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used.") 
-    fund_details: FundDetails = Field(..., alias="fundDetails")
-    fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
-    share_class_data: conlist(ShareClassData) = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
+    fund_details: FundDetails = Field(alias="fundDetails")
+    fund_valuation_point_data: FundValuationPointData = Field(alias="fundValuationPointData")
+    share_class_data: List[ShareClassData] = Field(description="The data for all share classes in fund. Share classes are identified by their short codes.", alias="shareClassData")
     valuation_point_code:  Optional[StrictStr] = Field(None,alias="valuationPointCode", description="The code of the valuation point.") 
     previous_valuation_point_code:  Optional[StrictStr] = Field(None,alias="previousValuationPointCode", description="The code of the previous valuation point.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "type", "status", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
 
     class Config:
@@ -135,3 +137,5 @@ class ValuationPointDataResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ValuationPointDataResponse.update_forward_refs()

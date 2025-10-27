@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, conlist, constr, validator
-
+from pydantic.v1 import Field, StrictStr
 from typing import Dict, List, Optional
-
+from typing_extensions import Annotated
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
@@ -1226,15 +1223,15 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(..., description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> SideDefinition:  # noqa: E501
+    async def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> SideDefinition:  # noqa: E501
         ...
 
     @overload
-    def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(..., description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> SideDefinition:  # noqa: E501
+    def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> SideDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(..., description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
+    def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
         """SetSideDefinition: Set a side definition  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
@@ -1269,7 +1266,7 @@ class TransactionConfigurationApi:
         return self.set_side_definition_with_http_info(side, side_definition_request, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_side_definition_with_http_info(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(..., description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def set_side_definition_with_http_info(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetSideDefinition: Set a side definition  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
@@ -1401,15 +1398,15 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def set_side_definitions(self, sides_definition_request : Annotated[conlist(SidesDefinitionRequest), Field(..., description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
+    async def set_side_definitions(self, sides_definition_request : Annotated[List[SidesDefinitionRequest], Field(description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
         ...
 
     @overload
-    def set_side_definitions(self, sides_definition_request : Annotated[conlist(SidesDefinitionRequest), Field(..., description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
+    def set_side_definitions(self, sides_definition_request : Annotated[List[SidesDefinitionRequest], Field(description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_side_definitions(self, sides_definition_request : Annotated[conlist(SidesDefinitionRequest), Field(..., description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
+    def set_side_definitions(self, sides_definition_request : Annotated[List[SidesDefinitionRequest], Field(description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
         """SetSideDefinitions: Set the given side definitions  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
@@ -1442,7 +1439,7 @@ class TransactionConfigurationApi:
         return self.set_side_definitions_with_http_info(sides_definition_request, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_side_definitions_with_http_info(self, sides_definition_request : Annotated[conlist(SidesDefinitionRequest), Field(..., description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def set_side_definitions_with_http_info(self, sides_definition_request : Annotated[List[SidesDefinitionRequest], Field(description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetSideDefinitions: Set the given side definitions  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
@@ -1568,15 +1565,15 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> TransactionType:  # noqa: E501
+    async def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> TransactionType:  # noqa: E501
         ...
 
     @overload
-    def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionType:  # noqa: E501
+    def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionType:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
+    def set_transaction_type(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
         """SetTransactionType: Set a specific transaction type  # noqa: E501
 
         Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
@@ -1613,7 +1610,7 @@ class TransactionConfigurationApi:
         return self.set_transaction_type_with_http_info(source, type, transaction_type_request, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def set_transaction_type_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configuration for")], type : Annotated[StrictStr, Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(description="The transaction configuration to set")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetTransactionType: Set a specific transaction type  # noqa: E501
 
         Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
@@ -1751,15 +1748,15 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def set_transaction_type_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[conlist(TransactionTypeRequest), Field(..., description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ResourceListOfTransactionType:  # noqa: E501
+    async def set_transaction_type_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[List[TransactionTypeRequest], Field(description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ResourceListOfTransactionType:  # noqa: E501
         ...
 
     @overload
-    def set_transaction_type_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[conlist(TransactionTypeRequest), Field(..., description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionType:  # noqa: E501
+    def set_transaction_type_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[List[TransactionTypeRequest], Field(description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionType:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_transaction_type_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[conlist(TransactionTypeRequest), Field(..., description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionType, Awaitable[ResourceListOfTransactionType]]:  # noqa: E501
+    def set_transaction_type_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[List[TransactionTypeRequest], Field(description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionType, Awaitable[ResourceListOfTransactionType]]:  # noqa: E501
         """SetTransactionTypeSource: Set the transaction types for the given source and scope  # noqa: E501
 
         The complete set of transaction types for the source.  # noqa: E501
@@ -1794,7 +1791,7 @@ class TransactionConfigurationApi:
         return self.set_transaction_type_source_with_http_info(source, transaction_type_request, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_transaction_type_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[conlist(TransactionTypeRequest), Field(..., description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def set_transaction_type_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[List[TransactionTypeRequest], Field(description="The set of transaction types.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetTransactionTypeSource: Set the transaction types for the given source and scope  # noqa: E501
 
         The complete set of transaction types for the source.  # noqa: E501

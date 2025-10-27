@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.membership_amendment_response import MembershipAmendmentResponse
 from lusid.models.response_meta_data import ResponseMetaData
@@ -31,7 +33,7 @@ class BatchAmendCustomDataModelMembershipResponse(BaseModel):
     values: Optional[Dict[str, MembershipAmendmentResponse]] = None
     staged: Optional[Dict[str, MembershipAmendmentResponse]] = None
     failed: Optional[Dict[str, ErrorDetail]] = None
-    metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = None
+    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = None
     __properties = ["values", "staged", "failed", "metadata"]
 
     class Config:
@@ -156,3 +158,5 @@ class BatchAmendCustomDataModelMembershipResponse(BaseModel):
             )
         })
         return _obj
+
+BatchAmendCustomDataModelMembershipResponse.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.weighted_instrument import WeightedInstrument
 
 class WeightedInstruments(BaseModel):
     """
     Class that models a set of instruments of which each has some quantity and can be identified by a unique label.  # noqa: E501
     """
-    instruments: conlist(WeightedInstrument) = Field(..., description="The instruments that are held in the set.")
+    instruments: List[WeightedInstrument] = Field(description="The instruments that are held in the set.")
     __properties = ["instruments"]
 
     class Config:
@@ -83,3 +85,5 @@ class WeightedInstruments(BaseModel):
             "instruments": [WeightedInstrument.from_dict(_item) for _item in obj.get("instruments")] if obj.get("instruments") is not None else None
         })
         return _obj
+
+WeightedInstruments.update_forward_refs()

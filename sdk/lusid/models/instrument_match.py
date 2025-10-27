@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.instrument_definition import InstrumentDefinition
 
 class InstrumentMatch(BaseModel):
     """
     A collection of instrument search results  # noqa: E501
     """
-    mastered_instruments: Optional[conlist(InstrumentDefinition)] = Field(None, alias="masteredInstruments", description="The collection of instruments found by the search which have been mastered within LUSID.")
-    external_instruments: Optional[conlist(InstrumentDefinition)] = Field(None, alias="externalInstruments", description="The collection of instruments found by the search which have not been mastered within LUSID and instead found via OpenFIGI.")
+    mastered_instruments: Optional[List[InstrumentDefinition]] = Field(default=None, description="The collection of instruments found by the search which have been mastered within LUSID.", alias="masteredInstruments")
+    external_instruments: Optional[List[InstrumentDefinition]] = Field(default=None, description="The collection of instruments found by the search which have not been mastered within LUSID and instead found via OpenFIGI.", alias="externalInstruments")
     __properties = ["masteredInstruments", "externalInstruments"]
 
     class Config:
@@ -102,3 +104,5 @@ class InstrumentMatch(BaseModel):
             "external_instruments": [InstrumentDefinition.from_dict(_item) for _item in obj.get("externalInstruments")] if obj.get("externalInstruments") is not None else None
         })
         return _obj
+
+InstrumentMatch.update_forward_refs()

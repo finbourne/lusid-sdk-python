@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.account_holder import AccountHolder
 from lusid.models.investment_portfolio import InvestmentPortfolio
 from lusid.models.link import Link
@@ -32,18 +34,18 @@ class InvestmentAccount(BaseModel):
     Representation of an Investment Account on the LUSID API  # noqa: E501
     """
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investment Account lies.") 
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Unique client-defined identifiers of the Investment Account.")
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Unique client-defined identifiers of the Investment Account.")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the Investment Account") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investment Account") 
     account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the of the Investment Account.") 
-    account_holders: Optional[conlist(AccountHolder)] = Field(None, alias="accountHolders", description="The Account Holders of the Investment Account.")
-    investment_portfolios: Optional[conlist(InvestmentPortfolio)] = Field(None, alias="investmentPortfolios", description="The Investment Portfolios of the Investment Account.")
+    account_holders: Optional[List[AccountHolder]] = Field(default=None, description="The Account Holders of the Investment Account.", alias="accountHolders")
+    investment_portfolios: Optional[List[InvestmentPortfolio]] = Field(default=None, description="The Investment Portfolios of the Investment Account.", alias="investmentPortfolios")
     lusid_investment_account_id:  Optional[StrictStr] = Field(None,alias="lusidInvestmentAccountId", description="The unique LUSID Investment Account Identifier of the Investment Account.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investment Account.")
-    relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Investment Account.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Investment Account.")
+    relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the Investment Account.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["scope", "identifiers", "displayName", "description", "accountType", "accountHolders", "investmentPortfolios", "lusidInvestmentAccountId", "properties", "relationships", "href", "version", "links"]
 
     class Config:
@@ -220,3 +222,5 @@ class InvestmentAccount(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+InvestmentAccount.update_forward_refs()

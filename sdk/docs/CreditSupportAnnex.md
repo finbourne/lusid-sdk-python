@@ -18,11 +18,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.credit_support_annex import CreditSupportAnnex
-from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 reference_currency: StrictStr = "example_reference_currency"
-collateral_currencies: conlist(StrictStr) = # Replace with your value
+collateral_currencies: List[StrictStr] = # Replace with your value
 isda_agreement_version: StrictStr = "example_isda_agreement_version"
 margin_call_frequency: StrictStr = "example_margin_call_frequency"
 valuation_agent: StrictStr = "example_valuation_agent"
@@ -31,7 +33,7 @@ rounding_decimal_places: StrictInt = # Replace with your value
 rounding_decimal_places: StrictInt = 42
 initial_margin_amount: Union[StrictFloat, StrictInt] = # Replace with your value
 minimum_transfer_amount: Union[StrictFloat, StrictInt] = # Replace with your value
-id: ResourceId = # Replace with your value
+id: ResourceId
 credit_support_annex_instance = CreditSupportAnnex(reference_currency=reference_currency, collateral_currencies=collateral_currencies, isda_agreement_version=isda_agreement_version, margin_call_frequency=margin_call_frequency, valuation_agent=valuation_agent, threshold_amount=threshold_amount, rounding_decimal_places=rounding_decimal_places, initial_margin_amount=initial_margin_amount, minimum_transfer_amount=minimum_transfer_amount, id=id)
 
 ```

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -28,17 +30,17 @@ class PortfolioSearchResult(BaseModel):
     """
     A list of portfolios.  # noqa: E501
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 
-    is_derived: Optional[StrictBool] = Field(None, alias="isDerived", description="Whether or not this is a derived portfolio.")
-    created: datetime = Field(..., description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
-    parent_portfolio_id: Optional[ResourceId] = Field(None, alias="parentPortfolioId")
+    is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
+    created: datetime = Field(description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
+    parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the portfolio.") 
-    properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
-    links: Optional[conlist(Link)] = None
+    properties: Optional[List[ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
+    links: Optional[List[Link]] = None
     __properties = ["id", "type", "href", "description", "displayName", "isDerived", "created", "parentPortfolioId", "baseCurrency", "properties", "links"]
 
     @validator('type')
@@ -91,14 +93,19 @@ class PortfolioSearchResult(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "type" != "type":
             return value
 
-        if value not in ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition'):
+        if value not in ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition']:
             raise ValueError("must be one of enum values ('Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition')")
         return value
 
@@ -205,3 +212,5 @@ class PortfolioSearchResult(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PortfolioSearchResult.update_forward_refs()

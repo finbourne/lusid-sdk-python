@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.resource_id import ResourceId
 
@@ -27,7 +29,7 @@ class AllocationServiceRunResponse(BaseModel):
     """
     AllocationServiceRunResponse
     """
-    values: Optional[conlist(ResourceId)] = None
+    values: Optional[List[ResourceId]] = None
     failed: Optional[Dict[str, ErrorDetail]] = None
     __properties = ["values", "failed"]
 
@@ -108,3 +110,5 @@ class AllocationServiceRunResponse(BaseModel):
             else None
         })
         return _obj
+
+AllocationServiceRunResponse.update_forward_refs()

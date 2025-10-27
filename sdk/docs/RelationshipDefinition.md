@@ -17,8 +17,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.relationship_definition import RelationshipDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 version: Optional[Version] = None
 relationship_definition_id: ResourceId = # Replace with your value
@@ -29,7 +31,7 @@ outward_description: StrictStr = "example_outward_description"
 inward_description: StrictStr = "example_inward_description"
 life_time: StrictStr = "example_life_time"
 relationship_cardinality: StrictStr = "example_relationship_cardinality"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 relationship_definition_instance = RelationshipDefinition(version=version, relationship_definition_id=relationship_definition_id, source_entity_type=source_entity_type, target_entity_type=target_entity_type, display_name=display_name, outward_description=outward_description, inward_description=inward_description, life_time=life_time, relationship_cardinality=relationship_cardinality, links=links)
 
 ```

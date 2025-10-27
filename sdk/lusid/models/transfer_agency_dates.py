@@ -17,19 +17,21 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.link import Link
 
 class TransferAgencyDates(BaseModel):
     """
     TransferAgencyDates
     """
-    price_date: Optional[datetime] = Field(None, alias="priceDate", description="The date at which the fund is priced, for the order received on ReceivedDate. Can be passed into the request instead of the ReceivedDate to calculate the TransactionDate and ExpectedPaymentDate. If both the received date and price date are given, a failure is returned.")
-    transaction_date: Optional[datetime] = Field(None, alias="transactionDate", description="The date at which the transaction into or out of the fund is made.")
-    expected_payment_date: Optional[datetime] = Field(None, alias="expectedPaymentDate", description="The date by which the cash is expected to be paid to or from the fund.")
-    links: Optional[conlist(Link)] = None
+    price_date: Optional[datetime] = Field(default=None, description="The date at which the fund is priced, for the order received on ReceivedDate. Can be passed into the request instead of the ReceivedDate to calculate the TransactionDate and ExpectedPaymentDate. If both the received date and price date are given, a failure is returned.", alias="priceDate")
+    transaction_date: Optional[datetime] = Field(default=None, description="The date at which the transaction into or out of the fund is made.", alias="transactionDate")
+    expected_payment_date: Optional[datetime] = Field(default=None, description="The date by which the cash is expected to be paid to or from the fund.", alias="expectedPaymentDate")
+    links: Optional[List[Link]] = None
     __properties = ["priceDate", "transactionDate", "expectedPaymentDate", "links"]
 
     class Config:
@@ -94,3 +96,5 @@ class TransferAgencyDates(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TransferAgencyDates.update_forward_refs()

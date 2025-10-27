@@ -18,14 +18,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.blocked_order_request import BlockedOrderRequest
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 order_book_id: Optional[ResourceId] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
-id: ResourceId = # Replace with your value
+id: ResourceId
 state: Optional[StrictStr] = "example_state"
 var_date: Optional[datetime] = # Replace with your value
 price: Optional[CurrencyAndAmount] = None

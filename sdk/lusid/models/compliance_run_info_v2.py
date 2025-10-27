@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRunInfoV2(BaseModel):
     """
     ComplianceRunInfoV2
     """
-    run_id: ResourceId = Field(..., alias="runId")
-    instigated_at: datetime = Field(..., alias="instigatedAt")
-    completed_at: datetime = Field(..., alias="completedAt")
+    run_id: ResourceId = Field(alias="runId")
+    instigated_at: datetime = Field(alias="instigatedAt")
+    completed_at: datetime = Field(alias="completedAt")
     schedule:  StrictStr = Field(...,alias="schedule") 
     instigated_by:  StrictStr = Field(...,alias="instigatedBy") 
     __properties = ["runId", "instigatedAt", "completedAt", "schedule", "instigatedBy"]
@@ -87,3 +89,5 @@ class ComplianceRunInfoV2(BaseModel):
             "instigated_by": obj.get("instigatedBy")
         })
         return _obj
+
+ComplianceRunInfoV2.update_forward_refs()

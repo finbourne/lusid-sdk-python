@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_graph_placement_order_detail import OrderGraphPlacementOrderDetail
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 order_graph_placement_order_detail_instance = OrderGraphPlacementOrderDetail(id=id)
 
 ```

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class MultiCurrencyAmounts(BaseModel):
     """
     MultiCurrencyAmounts
     """
-    local_amount: Union[StrictFloat, StrictInt] = Field(..., alias="localAmount")
-    base_amount: Union[StrictFloat, StrictInt] = Field(..., alias="baseAmount")
+    local_amount: Union[StrictFloat, StrictInt] = Field(alias="localAmount")
+    base_amount: Union[StrictFloat, StrictInt] = Field(alias="baseAmount")
     __properties = ["localAmount", "baseAmount"]
 
     class Config:
@@ -77,3 +79,5 @@ class MultiCurrencyAmounts(BaseModel):
             "base_amount": obj.get("baseAmount")
         })
         return _obj
+
+MultiCurrencyAmounts.update_forward_refs()

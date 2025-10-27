@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.mastered_instrument import MasteredInstrument
 
 class CollateralInstrument(BaseModel):
     """
     Wrapper for one instrument in a larger collateral basket, as part of a repurchase agreement modelled as a FlexibleRepo.  # noqa: E501
     """
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The amount of the instrument in the basket for this repurchase agreement.")
-    instrument: MasteredInstrument = Field(...)
+    units: Union[StrictFloat, StrictInt] = Field(description="The amount of the instrument in the basket for this repurchase agreement.")
+    instrument: MasteredInstrument
     __properties = ["units", "instrument"]
 
     class Config:
@@ -81,3 +83,5 @@ class CollateralInstrument(BaseModel):
             "instrument": MasteredInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None
         })
         return _obj
+
+CollateralInstrument.update_forward_refs()

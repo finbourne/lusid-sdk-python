@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.fee_rule import FeeRule
 from lusid.models.link import Link
 
@@ -27,8 +29,8 @@ class FeeRuleUpsertResponse(BaseModel):
     """
     FeeRuleUpsertResponse
     """
-    values: Dict[str, FeeRule] = Field(...)
-    links: Optional[conlist(Link)] = None
+    values: Dict[str, FeeRule]
+    links: Optional[List[Link]] = None
     __properties = ["values", "links"]
 
     class Config:
@@ -103,3 +105,5 @@ class FeeRuleUpsertResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+FeeRuleUpsertResponse.update_forward_refs()

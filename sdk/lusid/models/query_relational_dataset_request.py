@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class QueryRelationalDatasetRequest(BaseModel):
     """
@@ -27,7 +29,7 @@ class QueryRelationalDatasetRequest(BaseModel):
     """
     query_method:  StrictStr = Field(...,alias="queryMethod", description="The method used to query data points. Can be either 'Latest' or 'TimeSeries'.") 
     filter:  Optional[StrictStr] = Field(None,alias="filter", description="Expression to filter the result set. For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.") 
-    custom_sort_by: Optional[conlist(StrictStr)] = Field(None, alias="customSortBy", description="A list of fields to sort the results by. For example, to sort by a Value field 'AValueField' in descending order, specify 'AValueField DESC'.")
+    custom_sort_by: Optional[List[StrictStr]] = Field(default=None, description="A list of fields to sort the results by. For example, to sort by a Value field 'AValueField' in descending order, specify 'AValueField DESC'.", alias="customSortBy")
     __properties = ["queryMethod", "filter", "customSortBy"]
 
     class Config:
@@ -89,3 +91,5 @@ class QueryRelationalDatasetRequest(BaseModel):
             "custom_sort_by": obj.get("customSortBy")
         })
         return _obj
+
+QueryRelationalDatasetRequest.update_forward_refs()

@@ -12,11 +12,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.loan_facility_contract_rollover_event import LoanFacilityContractRolloverEvent
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictBool, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 var_date: Optional[datetime] = # Replace with your value
-rollover_constituents: conlist(RolloverConstituent) = # Replace with your value
+rollover_constituents: List[RolloverConstituent] = # Replace with your value
 with_interest: StrictBool = # Replace with your value
 with_interest:StrictBool = True
 instrument_event_type: StrictStr = "example_instrument_event_type"

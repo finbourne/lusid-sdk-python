@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -32,10 +34,10 @@ class Timeline(BaseModel):
     id: Optional[ResourceId] = None
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Timeline.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Timeline.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Timelines properties. These will be from the 'Timeline' domain.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Timelines properties. These will be from the 'Timeline' domain.")
     version: Optional[Version] = None
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "displayName", "description", "properties", "version", "href", "links"]
 
     class Config:
@@ -141,3 +143,5 @@ class Timeline(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Timeline.update_forward_refs()

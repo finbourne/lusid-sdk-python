@@ -8,8 +8,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cancelled_order_result import CancelledOrderResult
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 order_state: Optional[Order] = # Replace with your value
 cancelled_order_result_instance = CancelledOrderResult(order_state=order_state)

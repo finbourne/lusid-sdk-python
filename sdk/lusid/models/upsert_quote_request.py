@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.metric_value import MetricValue
 from lusid.models.quote_id import QuoteId
 
@@ -27,10 +29,10 @@ class UpsertQuoteRequest(BaseModel):
     """
     The details of the quote including its unique identifier, value and lineage.  Please note the Unit field on MetricValue is nullable on the upsert but there  is validation within the quote store to make sure this field is populated.  In the absence of a real unit then we recommend putting something in line with  the data in QuoteId.QuoteSeriesId.quoteType e.g. InterestRate.  # noqa: E501
     """
-    quote_id: QuoteId = Field(..., alias="quoteId")
-    metric_value: Optional[MetricValue] = Field(None, alias="metricValue")
+    quote_id: QuoteId = Field(alias="quoteId")
+    metric_value: Optional[MetricValue] = Field(default=None, alias="metricValue")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.") 
-    scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="scaleFactor", description="An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.")
+    scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.", alias="scaleFactor")
     __properties = ["quoteId", "metricValue", "lineage", "scaleFactor"]
 
     class Config:
@@ -99,3 +101,5 @@ class UpsertQuoteRequest(BaseModel):
             "scale_factor": obj.get("scaleFactor")
         })
         return _obj
+
+UpsertQuoteRequest.update_forward_refs()

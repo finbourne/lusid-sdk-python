@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CreateRelationshipRequest(BaseModel):
     """
     CreateRelationshipRequest
     """
-    source_entity_id: Dict[str, StrictStr] = Field(..., alias="sourceEntityId", description="The identifier of the source entity.")
-    target_entity_id: Dict[str, StrictStr] = Field(..., alias="targetEntityId", description="The identifier of the target entity.")
+    source_entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the source entity.", alias="sourceEntityId")
+    target_entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the target entity.", alias="targetEntityId")
     effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="The effective date of the relationship to be created") 
     effective_until:  Optional[StrictStr] = Field(None,alias="effectiveUntil", description="The effective datetime until which the relationship is valid. If not supplied this will be valid indefinitely.") 
     __properties = ["sourceEntityId", "targetEntityId", "effectiveFrom", "effectiveUntil"]
@@ -91,3 +93,5 @@ class CreateRelationshipRequest(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+CreateRelationshipRequest.update_forward_refs()

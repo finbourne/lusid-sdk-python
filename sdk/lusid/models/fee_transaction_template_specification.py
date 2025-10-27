@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.template_field import TemplateField
 
 class FeeTransactionTemplateSpecification(BaseModel):
@@ -27,7 +29,7 @@ class FeeTransactionTemplateSpecification(BaseModel):
     FeeTransactionTemplateSpecification
     """
     specification_type_name:  StrictStr = Field(...,alias="specificationTypeName") 
-    supported_template_fields: conlist(TemplateField) = Field(..., alias="supportedTemplateFields")
+    supported_template_fields: List[TemplateField] = Field(alias="supportedTemplateFields")
     __properties = ["specificationTypeName", "supportedTemplateFields"]
 
     class Config:
@@ -85,3 +87,5 @@ class FeeTransactionTemplateSpecification(BaseModel):
             "supported_template_fields": [TemplateField.from_dict(_item) for _item in obj.get("supportedTemplateFields")] if obj.get("supportedTemplateFields") is not None else None
         })
         return _obj
+
+FeeTransactionTemplateSpecification.update_forward_refs()

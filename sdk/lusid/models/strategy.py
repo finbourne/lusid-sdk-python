@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 
 class Strategy(BaseModel):
     """
     Strategy
     """
-    keys: conlist(PerpetualProperty) = Field(...)
+    keys: List[PerpetualProperty]
     value_type:  StrictStr = Field(...,alias="valueType") 
-    value: Union[StrictFloat, StrictInt] = Field(...)
+    value: Union[StrictFloat, StrictInt]
     __properties = ["keys", "valueType", "value"]
 
     class Config:
@@ -87,3 +89,5 @@ class Strategy(BaseModel):
             "value": obj.get("value")
         })
         return _obj
+
+Strategy.update_forward_refs()

@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.delete_accounts_response import DeleteAccountsResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 version: Optional[Version] = None
-account_ids: Optional[conlist(StrictStr)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+account_ids: Optional[List[StrictStr]] = # Replace with your value
+links: Optional[List[Link]] = None
 delete_accounts_response_instance = DeleteAccountsResponse(version=version, account_ids=account_ids, links=links)
 
 ```

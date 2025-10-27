@@ -9,23 +9,25 @@ Name | Type | Description | Notes
 **rule_status** | **str** |  | 
 **affected_portfolios** | [**List[ResourceId]**](ResourceId.md) |  | 
 **affected_orders** | [**List[ResourceId]**](ResourceId.md) |  | 
-**parameters_used** | **Dict[str, str]** |  | 
+**parameters_used** | **Dict[str, Optional[str]]** |  | 
 **rule_breakdown** | [**List[ComplianceRuleBreakdownRequest]**](ComplianceRuleBreakdownRequest.md) |  | 
 ## Example
 
 ```python
 from lusid.models.compliance_summary_rule_result_request import ComplianceSummaryRuleResultRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 rule_id: ResourceId = # Replace with your value
 template_id: ResourceId = # Replace with your value
 variation: StrictStr = "example_variation"
 rule_status: StrictStr = "example_rule_status"
-affected_portfolios: conlist(ResourceId) = # Replace with your value
-affected_orders: conlist(ResourceId) = # Replace with your value
-parameters_used: Dict[str, StrictStr] = # Replace with your value
-rule_breakdown: conlist(ComplianceRuleBreakdownRequest) = # Replace with your value
+affected_portfolios: List[ResourceId] = # Replace with your value
+affected_orders: List[ResourceId] = # Replace with your value
+parameters_used: Dict[str, Optional[StrictStr]] = # Replace with your value
+rule_breakdown: List[ComplianceRuleBreakdownRequest] = # Replace with your value
 compliance_summary_rule_result_request_instance = ComplianceSummaryRuleResultRequest(rule_id=rule_id, template_id=template_id, variation=variation, rule_status=rule_status, affected_portfolios=affected_portfolios, affected_orders=affected_orders, parameters_used=parameters_used, rule_breakdown=rule_breakdown)
 
 ```

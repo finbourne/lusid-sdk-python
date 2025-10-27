@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.result_value import ResultValue
 
 class GroupedResultOfAddressKey(BaseModel):
     """
     Holder class for a group of results. It consists of a list of columns and values for that column.  # noqa: E501
     """
-    columns: Optional[conlist(StrictStr)] = Field(None, description="The columns, or keys, for a particular group of results")
-    values: Optional[conlist(ResultValue)] = Field(None, description="The values for the list of results")
+    columns: Optional[List[StrictStr]] = Field(default=None, description="The columns, or keys, for a particular group of results")
+    values: Optional[List[ResultValue]] = Field(default=None, description="The values for the list of results")
     __properties = ["columns", "values"]
 
     class Config:
@@ -95,3 +97,5 @@ class GroupedResultOfAddressKey(BaseModel):
             "values": [ResultValue.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
         })
         return _obj
+
+GroupedResultOfAddressKey.update_forward_refs()

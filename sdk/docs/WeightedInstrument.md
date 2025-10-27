@@ -13,8 +13,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.weighted_instrument import WeightedInstrument
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 holding_identifier: Optional[StrictStr] = "example_holding_identifier"

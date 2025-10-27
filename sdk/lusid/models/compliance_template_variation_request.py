@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_step_request import ComplianceStepRequest
 
 class ComplianceTemplateVariationRequest(BaseModel):
@@ -30,7 +32,7 @@ class ComplianceTemplateVariationRequest(BaseModel):
     description:  StrictStr = Field(...,alias="description") 
     outcome_description:  Optional[StrictStr] = Field(None,alias="outcomeDescription") 
     referenced_group_label:  Optional[StrictStr] = Field(None,alias="referencedGroupLabel") 
-    steps: conlist(ComplianceStepRequest) = Field(...)
+    steps: List[ComplianceStepRequest]
     __properties = ["label", "description", "outcomeDescription", "referencedGroupLabel", "steps"]
 
     class Config:
@@ -101,3 +103,5 @@ class ComplianceTemplateVariationRequest(BaseModel):
             "steps": [ComplianceStepRequest.from_dict(_item) for _item in obj.get("steps")] if obj.get("steps") is not None else None
         })
         return _obj
+
+ComplianceTemplateVariationRequest.update_forward_refs()

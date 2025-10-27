@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.delete_instrument_properties_response import DeleteInstrumentPropertiesResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 as_at: datetime = # Replace with your value
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 delete_instrument_properties_response_instance = DeleteInstrumentPropertiesResponse(as_at=as_at, staged_modifications=staged_modifications, links=links)
 
 ```

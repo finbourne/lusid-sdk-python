@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.amortisation_rule import AmortisationRule
 from lusid.models.date_range import DateRange
 
@@ -27,8 +29,8 @@ class RulesInterval(BaseModel):
     """
     RulesInterval
     """
-    effective_range: DateRange = Field(..., alias="effectiveRange")
-    rules: conlist(AmortisationRule) = Field(..., description="The rules of this rule set.")
+    effective_range: DateRange = Field(alias="effectiveRange")
+    rules: List[AmortisationRule] = Field(description="The rules of this rule set.")
     __properties = ["effectiveRange", "rules"]
 
     class Config:
@@ -89,3 +91,5 @@ class RulesInterval(BaseModel):
             "rules": [AmortisationRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None
         })
         return _obj
+
+RulesInterval.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid.models.corporate_action_transition_request import CorporateActionTransitionRequest
 
 class UpsertCorporateActionRequest(BaseModel):
@@ -28,11 +30,11 @@ class UpsertCorporateActionRequest(BaseModel):
     """
     corporate_action_code:  StrictStr = Field(...,alias="corporateActionCode", description="The unique identifier of this corporate action") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action.") 
-    announcement_date: datetime = Field(..., alias="announcementDate", description="The announcement date of the corporate action")
-    ex_date: datetime = Field(..., alias="exDate", description="The ex date of the corporate action")
-    record_date: datetime = Field(..., alias="recordDate", description="The record date of the corporate action")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the corporate action")
-    transitions: conlist(CorporateActionTransitionRequest) = Field(..., description="The transitions that result from this corporate action")
+    announcement_date: datetime = Field(description="The announcement date of the corporate action", alias="announcementDate")
+    ex_date: datetime = Field(description="The ex date of the corporate action", alias="exDate")
+    record_date: datetime = Field(description="The record date of the corporate action", alias="recordDate")
+    payment_date: datetime = Field(description="The payment date of the corporate action", alias="paymentDate")
+    transitions: List[CorporateActionTransitionRequest] = Field(description="The transitions that result from this corporate action")
     __properties = ["corporateActionCode", "description", "announcementDate", "exDate", "recordDate", "paymentDate", "transitions"]
 
     class Config:
@@ -100,3 +102,5 @@ class UpsertCorporateActionRequest(BaseModel):
             "transitions": [CorporateActionTransitionRequest.from_dict(_item) for _item in obj.get("transitions")] if obj.get("transitions") is not None else None
         })
         return _obj
+
+UpsertCorporateActionRequest.update_forward_refs()

@@ -5,21 +5,23 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **group_status** | **str** | The status of this subset of results. | 
 **results_used** | **Dict[str, float]** | Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule. | 
-**properties_used** | **Dict[str, List[ModelProperty]]** | Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule | 
+**properties_used** | **Dict[str, Optional[List[ModelProperty]]]** | Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule | 
 **missing_data_information** | **List[str]** | List of string information detailing data that was missing from contributions processed in this rule | 
 **lineage** | [**List[LineageMember]**](LineageMember.md) |  | 
 ## Example
 
 ```python
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
-from typing import Any, Dict, List, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 group_status: StrictStr = "example_group_status"
 results_used: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your value
-properties_used: Dict[str, conlist(ModelProperty)] = # Replace with your value
-missing_data_information: conlist(StrictStr) = # Replace with your value
-lineage: conlist(LineageMember) = # Replace with your value
+properties_used: Dict[str, Optional[List[ModelProperty]]] = # Replace with your value
+missing_data_information: List[StrictStr] = # Replace with your value
+lineage: List[LineageMember]
 compliance_rule_breakdown_instance = ComplianceRuleBreakdown(group_status=group_status, results_used=results_used, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
 
 ```

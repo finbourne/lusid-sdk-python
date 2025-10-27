@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.version import Version
@@ -29,9 +31,9 @@ class CustodianAccountProperties(BaseModel):
     CustodianAccountProperties
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Custodian Account properties. These will be from the 'CustodianAccount' domain.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Custodian Account properties. These will be from the 'CustodianAccount' domain.")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "properties", "version", "links"]
 
     class Config:
@@ -121,3 +123,5 @@ class CustodianAccountProperties(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CustodianAccountProperties.update_forward_refs()

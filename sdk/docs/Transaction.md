@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction_id** | **str** | The unique identifier for the transaction. | 
 **type** | **str** | The type of the transaction e.g. &#39;Buy&#39;, &#39;Sell&#39;. The transaction type should have been pre-configured via the System Configuration API endpoint. | 
-**instrument_identifiers** | **Dict[str, str]** | A set of instrument identifiers that can resolve the transaction to a unique instrument. | [optional] 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | A set of instrument identifiers that can resolve the transaction to a unique instrument. | [optional] 
 **instrument_scope** | **str** | The scope in which the transaction&#39;s instrument lies. | [optional] 
 **instrument_uid** | **str** | The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in. | 
 **transaction_date** | **datetime** | The date of the transaction. | 
@@ -34,12 +34,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction import Transaction
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 transaction_id: StrictStr = "example_transaction_id"
 type: StrictStr = "example_type"
-instrument_identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 instrument_uid: StrictStr = "example_instrument_uid"
 transaction_date: datetime = # Replace with your value
@@ -60,7 +62,7 @@ order_id: Optional[ResourceId] = # Replace with your value
 allocation_id: Optional[ResourceId] = # Replace with your value
 custodian_account: Optional[CustodianAccount] = # Replace with your value
 transaction_group_id: Optional[StrictStr] = "example_transaction_group_id"
-strategy_tag: Optional[conlist(Strategy)] = # Replace with your value
+strategy_tag: Optional[List[Strategy]] = # Replace with your value
 resolved_transaction_type_details: Optional[TransactionTypeDetails] = # Replace with your value
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
 transaction_instance = Transaction(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, entry_date_time=entry_date_time, otc_confirmation=otc_confirmation, transaction_status=transaction_status, cancel_date_time=cancel_date_time, order_id=order_id, allocation_id=allocation_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, resolved_transaction_type_details=resolved_transaction_type_details, data_model_membership=data_model_membership)

@@ -19,8 +19,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.investor_record import InvestorRecord
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: Optional[StrictStr] = "example_scope"
 identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
@@ -29,10 +31,10 @@ description: Optional[StrictStr] = "example_description"
 investor: Optional[Investor] = None
 lusid_investor_record_id: Optional[StrictStr] = "example_lusid_investor_record_id"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-relationships: Optional[conlist(Relationship)] = # Replace with your value
+relationships: Optional[List[Relationship]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 investor_record_instance = InvestorRecord(scope=scope, identifiers=identifiers, display_name=display_name, description=description, investor=investor, lusid_investor_record_id=lusid_investor_record_id, properties=properties, relationships=relationships, href=href, version=version, links=links)
 
 ```

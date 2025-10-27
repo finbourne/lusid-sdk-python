@@ -23,10 +23,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_comparison_result import GroupReconciliationComparisonResult
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 reconciliation_type: StrictStr = "example_reconciliation_type"
 group_reconciliation_definition_id: ResourceId = # Replace with your value
 instance_id: GroupReconciliationInstanceId = # Replace with your value
@@ -41,7 +43,7 @@ aggregate_attributes: GroupReconciliationAggregateAttributeValues = # Replace wi
 user_review: Optional[GroupReconciliationUserReview] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 group_reconciliation_comparison_result_instance = GroupReconciliationComparisonResult(id=id, reconciliation_type=reconciliation_type, group_reconciliation_definition_id=group_reconciliation_definition_id, instance_id=instance_id, comparison_result_id=comparison_result_id, reconciliation_run_as_at=reconciliation_run_as_at, result_type=result_type, result_status=result_status, review_status=review_status, dates_reconciled=dates_reconciled, core_attributes=core_attributes, aggregate_attributes=aggregate_attributes, user_review=user_review, href=href, version=version, links=links)
 
 ```

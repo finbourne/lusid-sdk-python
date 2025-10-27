@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 
@@ -27,15 +29,15 @@ class InstrumentCashFlow(BaseModel):
     """
     The details for the cashflow associated with an instrument from a given portfolio.  # noqa: E501
     """
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date at which the given cash flow is due to be paid (SettlementDate is used somewhat interchangeably with PaymentDate.)")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity (amount) that will be paid. Note that this can be empty if the payment is in the future and a model is used that cannot estimate it.")
+    payment_date: datetime = Field(description="The date at which the given cash flow is due to be paid (SettlementDate is used somewhat interchangeably with PaymentDate.)", alias="paymentDate")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity (amount) that will be paid. Note that this can be empty if the payment is in the future and a model is used that cannot estimate it.")
     currency:  StrictStr = Field(...,alias="currency", description="The payment currency of the cash flow.") 
-    source_portfolio_id: ResourceId = Field(..., alias="sourcePortfolioId")
+    source_portfolio_id: ResourceId = Field(alias="sourcePortfolioId")
     source_transaction_id:  StrictStr = Field(...,alias="sourceTransactionId", description="The identifier for the parent transaction on the instrument that will pay/receive this cash flow.") 
     source_instrument_scope:  StrictStr = Field(...,alias="sourceInstrumentScope", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
     source_instrument_id:  StrictStr = Field(...,alias="sourceInstrumentId", description="The unique Lusid Instrument Id (LUID) of the instrument that the holding is in.") 
-    diagnostics: Dict[str, StrictStr] = Field(..., description="Whilst a cash flow is defined by an (amount,ccy) pair and the date it is paid on there is additional information required for diagnostics. This includes a range of information and can be empty in the case of a simple cash quantity or where further information is not available. Typical information includes items such as reset dates, RIC, accrual start/end, number of days and curve data.")
-    links: Optional[conlist(Link)] = None
+    diagnostics: Dict[str, Optional[StrictStr]] = Field(description="Whilst a cash flow is defined by an (amount,ccy) pair and the date it is paid on there is additional information required for diagnostics. This includes a range of information and can be empty in the case of a simple cash quantity or where further information is not available. Typical information includes items such as reset dates, RIC, accrual start/end, number of days and curve data.")
+    links: Optional[List[Link]] = None
     __properties = ["paymentDate", "amount", "currency", "sourcePortfolioId", "sourceTransactionId", "sourceInstrumentScope", "sourceInstrumentId", "diagnostics", "links"]
 
     class Config:
@@ -113,3 +115,5 @@ class InstrumentCashFlow(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+InstrumentCashFlow.update_forward_refs()

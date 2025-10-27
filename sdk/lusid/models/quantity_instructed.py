@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class QuantityInstructed(BaseModel):
     """
     QuantityInstructed
     """
     type:  StrictStr = Field(...,alias="type", description="") 
-    amount: Union[StrictFloat, StrictInt] = Field(...)
+    amount: Union[StrictFloat, StrictInt]
     __properties = ["type", "amount"]
 
     class Config:
@@ -77,3 +79,5 @@ class QuantityInstructed(BaseModel):
             "amount": obj.get("amount")
         })
         return _obj
+
+QuantityInstructed.update_forward_refs()

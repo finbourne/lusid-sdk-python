@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.settlement_cycle import SettlementCycle
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conint, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-business_day_offset: conint(strict=True, le=2147483647, ge=0) = Field(..., alias="businessDayOffset")
+business_day_offset: StrictInt = # Replace with your value
 business_day_offset: StrictInt = 42
-calendars: conlist(ResourceId) = # Replace with your value
+calendars: List[ResourceId]
 settlement_cycle_instance = SettlementCycle(business_day_offset=business_day_offset, calendars=calendars)
 
 ```

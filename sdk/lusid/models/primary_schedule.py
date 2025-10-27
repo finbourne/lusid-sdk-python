@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class PrimarySchedule(BaseModel):
     """
     PrimarySchedule
     """
-    event_handler_id: ResourceId = Field(..., alias="eventHandlerId")
+    event_handler_id: ResourceId = Field(alias="eventHandlerId")
     __properties = ["eventHandlerId"]
 
     class Config:
@@ -79,3 +81,5 @@ class PrimarySchedule(BaseModel):
             "event_handler_id": ResourceId.from_dict(obj.get("eventHandlerId")) if obj.get("eventHandlerId") is not None else None
         })
         return _obj
+
+PrimarySchedule.update_forward_refs()

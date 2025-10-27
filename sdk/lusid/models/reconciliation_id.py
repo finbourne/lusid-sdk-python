@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_scope import DataScope
 
 class ReconciliationId(BaseModel):
@@ -86,3 +88,5 @@ class ReconciliationId(BaseModel):
             "identifier": obj.get("identifier")
         })
         return _obj
+
+ReconciliationId.update_forward_refs()

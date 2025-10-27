@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.check_definition_dataset_schema import CheckDefinitionDatasetSchema
 from lusid.models.check_definition_rule_set import CheckDefinitionRuleSet
 from lusid.models.model_property import ModelProperty
@@ -29,12 +31,12 @@ class CreateCheckDefinitionRequest(BaseModel):
     """
     CreateCheckDefinitionRequest
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Check Definition.") 
     description:  StrictStr = Field(...,alias="description", description="A description for the Check Definition.") 
-    dataset_schema: Optional[CheckDefinitionDatasetSchema] = Field(None, alias="datasetSchema")
-    rule_sets: conlist(CheckDefinitionRuleSet) = Field(..., alias="ruleSets", description="A collection of rule sets for the Check Definition.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Check Definition.")
+    dataset_schema: Optional[CheckDefinitionDatasetSchema] = Field(default=None, alias="datasetSchema")
+    rule_sets: List[CheckDefinitionRuleSet] = Field(description="A collection of rule sets for the Check Definition.", alias="ruleSets")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Check Definition.")
     __properties = ["id", "displayName", "description", "datasetSchema", "ruleSets", "properties"]
 
     class Config:
@@ -119,3 +121,5 @@ class CreateCheckDefinitionRequest(BaseModel):
             else None
         })
         return _obj
+
+CreateCheckDefinitionRequest.update_forward_refs()

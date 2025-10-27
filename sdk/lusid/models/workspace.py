@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.version import Version
 
@@ -30,7 +32,7 @@ class Workspace(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="A workspace's name.") 
     description:  StrictStr = Field(...,alias="description", description="A friendly description for the workspace.") 
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["name", "description", "version", "links"]
 
     class Config:
@@ -98,3 +100,5 @@ class Workspace(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Workspace.update_forward_refs()

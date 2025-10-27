@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_dates import GroupReconciliationDates
 
 class GroupReconciliationRunRequest(BaseModel):
@@ -27,7 +29,7 @@ class GroupReconciliationRunRequest(BaseModel):
     GroupReconciliationRunRequest
     """
     instance_id:  StrictStr = Field(...,alias="instanceId", description="Reconciliation run Id. Consists of run type (manual or workflow) and identifier.") 
-    dates_to_reconcile: Optional[GroupReconciliationDates] = Field(None, alias="datesToReconcile")
+    dates_to_reconcile: Optional[GroupReconciliationDates] = Field(default=None, alias="datesToReconcile")
     __properties = ["instanceId", "datesToReconcile"]
 
     class Config:
@@ -81,3 +83,5 @@ class GroupReconciliationRunRequest(BaseModel):
             "dates_to_reconcile": GroupReconciliationDates.from_dict(obj.get("datesToReconcile")) if obj.get("datesToReconcile") is not None else None
         })
         return _obj
+
+GroupReconciliationRunRequest.update_forward_refs()

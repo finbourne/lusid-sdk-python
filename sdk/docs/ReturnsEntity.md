@@ -15,10 +15,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.returns_entity import ReturnsEntity
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 recipe_id: Optional[ResourceId] = # Replace with your value
 recipe_entity: Optional[StrictStr] = "example_recipe_entity"
 fee_handling: Optional[StrictStr] = "example_fee_handling"

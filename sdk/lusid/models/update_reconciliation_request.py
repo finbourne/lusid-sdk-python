@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.reconciliation_configuration import ReconciliationConfiguration
 from lusid.models.reconciliation_transactions import ReconciliationTransactions
@@ -31,13 +33,13 @@ class UpdateReconciliationRequest(BaseModel):
     """
     name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the scheduled reconciliation") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the scheduled reconciliation") 
-    is_portfolio_group: Optional[StrictBool] = Field(None, alias="isPortfolioGroup", description="Specifies whether reconciliation is between portfolios or portfolio groups")
+    is_portfolio_group: Optional[StrictBool] = Field(default=None, description="Specifies whether reconciliation is between portfolios or portfolio groups", alias="isPortfolioGroup")
     left: Optional[ResourceId] = None
     right: Optional[ResourceId] = None
     transactions: Optional[ReconciliationTransactions] = None
     positions: Optional[ReconciliationConfiguration] = None
     valuations: Optional[ReconciliationConfiguration] = None
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Reconciliation properties")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Reconciliation properties")
     __properties = ["name", "description", "isPortfolioGroup", "left", "right", "transactions", "positions", "valuations", "properties"]
 
     class Config:
@@ -137,3 +139,5 @@ class UpdateReconciliationRequest(BaseModel):
             else None
         })
         return _obj
+
+UpdateReconciliationRequest.update_forward_refs()

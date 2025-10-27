@@ -21,22 +21,24 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.investment_account import InvestmentAccount
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: Optional[StrictStr] = "example_scope"
 identifiers: Optional[Dict[str, ModelProperty]] = # Replace with your value
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 account_type: Optional[StrictStr] = "example_account_type"
-account_holders: Optional[conlist(AccountHolder)] = # Replace with your value
-investment_portfolios: Optional[conlist(InvestmentPortfolio)] = # Replace with your value
+account_holders: Optional[List[AccountHolder]] = # Replace with your value
+investment_portfolios: Optional[List[InvestmentPortfolio]] = # Replace with your value
 lusid_investment_account_id: Optional[StrictStr] = "example_lusid_investment_account_id"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-relationships: Optional[conlist(Relationship)] = # Replace with your value
+relationships: Optional[List[Relationship]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 investment_account_instance = InvestmentAccount(scope=scope, identifiers=identifiers, display_name=display_name, description=description, account_type=account_type, account_holders=account_holders, investment_portfolios=investment_portfolios, lusid_investment_account_id=lusid_investment_account_id, properties=properties, relationships=relationships, href=href, version=version, links=links)
 
 ```

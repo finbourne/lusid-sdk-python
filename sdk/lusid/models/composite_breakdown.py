@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
 
 class CompositeBreakdown(BaseModel):
     """
     A list of Composite Breakdowns.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effectiveAt for the calculation.")
+    effective_at: datetime = Field(description="The effectiveAt for the calculation.", alias="effectiveAt")
     composite: Optional[PortfolioReturnBreakdown] = None
-    constituents: Optional[conlist(PortfolioReturnBreakdown)] = Field(None, description="The constituents with their information which are part of the composite.")
+    constituents: Optional[List[PortfolioReturnBreakdown]] = Field(default=None, description="The constituents with their information which are part of the composite.")
     __properties = ["effectiveAt", "composite", "constituents"]
 
     class Config:
@@ -95,3 +97,5 @@ class CompositeBreakdown(BaseModel):
             "constituents": [PortfolioReturnBreakdown.from_dict(_item) for _item in obj.get("constituents")] if obj.get("constituents") is not None else None
         })
         return _obj
+
+CompositeBreakdown.update_forward_refs()

@@ -23,8 +23,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.futures_contract_details import FuturesContractDetails
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 dom_ccy: StrictStr = "example_dom_ccy"
 fgn_ccy: Optional[StrictStr] = "example_fgn_ccy"
@@ -39,7 +41,7 @@ exchange_code: StrictStr = "example_exchange_code"
 exchange_name: Optional[StrictStr] = "example_exchange_name"
 ticker_step: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-calendars: Optional[conlist(StrictStr)] = # Replace with your value
+calendars: Optional[List[StrictStr]] = # Replace with your value
 delivery_type: Optional[StrictStr] = "example_delivery_type"
 futures_contract_details_instance = FuturesContractDetails(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, asset_class=asset_class, contract_code=contract_code, contract_month=contract_month, contract_size=contract_size, convention=convention, country=country, description=description, exchange_code=exchange_code, exchange_name=exchange_name, ticker_step=ticker_step, unit_value=unit_value, calendars=calendars, delivery_type=delivery_type)
 

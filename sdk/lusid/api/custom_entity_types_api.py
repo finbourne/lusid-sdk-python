@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid.models.create_custom_entity_type_request import CreateCustomEntityTypeRequest
 from lusid.models.custom_entity_type import CustomEntityType
 from lusid.models.paged_resource_list_of_custom_entity_type import PagedResourceListOfCustomEntityType
@@ -58,15 +55,15 @@ class CustomEntityTypesApi:
 
 
     @overload
-    async def create_custom_entity_type(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> CustomEntityType:  # noqa: E501
+    async def create_custom_entity_type(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> CustomEntityType:  # noqa: E501
         ...
 
     @overload
-    def create_custom_entity_type(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=True, **kwargs) -> CustomEntityType:  # noqa: E501
+    def create_custom_entity_type(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=True, **kwargs) -> CustomEntityType:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_custom_entity_type(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=None, **kwargs) -> Union[CustomEntityType, Awaitable[CustomEntityType]]:  # noqa: E501
+    def create_custom_entity_type(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=None, **kwargs) -> Union[CustomEntityType, Awaitable[CustomEntityType]]:  # noqa: E501
         """[EARLY ACCESS] CreateCustomEntityType: Define a new Custom Entity Type.  # noqa: E501
 
         The API will return a Bad Request if the Custom Entity Type already exists.  # noqa: E501
@@ -97,7 +94,7 @@ class CustomEntityTypesApi:
         return self.create_custom_entity_type_with_http_info(create_custom_entity_type_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_custom_entity_type_with_http_info(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_custom_entity_type_with_http_info(self, create_custom_entity_type_request : Annotated[CreateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CreateCustomEntityType: Define a new Custom Entity Type.  # noqa: E501
 
         The API will return a Bad Request if the Custom Entity Type already exists.  # noqa: E501
@@ -380,15 +377,15 @@ class CustomEntityTypesApi:
 
 
     @overload
-    async def list_custom_entity_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfCustomEntityType:  # noqa: E501
+    async def list_custom_entity_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfCustomEntityType:  # noqa: E501
         ...
 
     @overload
-    def list_custom_entity_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfCustomEntityType:  # noqa: E501
+    def list_custom_entity_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfCustomEntityType:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_custom_entity_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCustomEntityType, Awaitable[PagedResourceListOfCustomEntityType]]:  # noqa: E501
+    def list_custom_entity_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCustomEntityType, Awaitable[PagedResourceListOfCustomEntityType]]:  # noqa: E501
         """[EARLY ACCESS] ListCustomEntityTypes: List Custom Entity Types.  # noqa: E501
 
         List all Custom Entity Types matching particular criteria.  # noqa: E501
@@ -427,7 +424,7 @@ class CustomEntityTypesApi:
         return self.list_custom_entity_types_with_http_info(as_at, limit, filter, sort_by, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_custom_entity_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_custom_entity_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the entities. Defaults to returning the latest version              of each Custom Entity Type if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit, sortBy,              and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListCustomEntityTypes: List Custom Entity Types.  # noqa: E501
 
         List all Custom Entity Types matching particular criteria.  # noqa: E501
@@ -568,15 +565,15 @@ class CustomEntityTypesApi:
 
 
     @overload
-    async def update_custom_entity_type(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> CustomEntityType:  # noqa: E501
+    async def update_custom_entity_type(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> CustomEntityType:  # noqa: E501
         ...
 
     @overload
-    def update_custom_entity_type(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=True, **kwargs) -> CustomEntityType:  # noqa: E501
+    def update_custom_entity_type(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=True, **kwargs) -> CustomEntityType:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_custom_entity_type(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=None, **kwargs) -> Union[CustomEntityType, Awaitable[CustomEntityType]]:  # noqa: E501
+    def update_custom_entity_type(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], async_req: Optional[bool]=None, **kwargs) -> Union[CustomEntityType, Awaitable[CustomEntityType]]:  # noqa: E501
         """[EARLY ACCESS] UpdateCustomEntityType: Modify an existing Custom Entity Type.  # noqa: E501
 
         The API will return a Bad Request if the Custom Entity Type does not exist.  # noqa: E501
@@ -609,7 +606,7 @@ class CustomEntityTypesApi:
         return self.update_custom_entity_type_with_http_info(entity_type, update_custom_entity_type_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_custom_entity_type_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(..., description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_custom_entity_type_with_http_info(self, entity_type : Annotated[StrictStr, Field(..., description="The identifier for the Custom Entity Type, derived from the \"entityTypeName\" provided on creation.")], update_custom_entity_type_request : Annotated[UpdateCustomEntityTypeRequest, Field(description="The payload containing the description of the Custom Entity Type.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateCustomEntityType: Modify an existing Custom Entity Type.  # noqa: E501
 
         The API will return a Bad Request if the Custom Entity Type does not exist.  # noqa: E501

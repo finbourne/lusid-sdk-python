@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class JournalEntryLinesQueryParameters(BaseModel):
@@ -30,7 +32,7 @@ class JournalEntryLinesQueryParameters(BaseModel):
     end: Optional[DateOrDiaryEntry] = None
     date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the journal entry lines. The available values are: ActivityDate, AccountingDate.") 
     general_ledger_profile_code:  Optional[StrictStr] = Field(None,alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate journal entry lines with levels.") 
-    property_keys: Optional[conlist(StrictStr)] = Field(None, alias="propertyKeys", description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the journal entry lines.")
+    property_keys: Optional[List[StrictStr]] = Field(default=None, description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the journal entry lines.", alias="propertyKeys")
     __properties = ["start", "end", "dateMode", "generalLedgerProfileCode", "propertyKeys"]
 
     class Config:
@@ -105,3 +107,5 @@ class JournalEntryLinesQueryParameters(BaseModel):
             "property_keys": obj.get("propertyKeys")
         })
         return _obj
+
+JournalEntryLinesQueryParameters.update_forward_refs()

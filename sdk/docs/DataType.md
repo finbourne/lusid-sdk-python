@@ -20,22 +20,24 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.data_type import DataType
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type_value_range: StrictStr = "example_type_value_range"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 value_type: StrictStr = "example_value_type"
-acceptable_values: Optional[conlist(StrictStr)] = # Replace with your value
+acceptable_values: Optional[List[StrictStr]] = # Replace with your value
 unit_schema: Optional[StrictStr] = "example_unit_schema"
-acceptable_units: Optional[conlist(IUnitDefinitionDto)] = # Replace with your value
+acceptable_units: Optional[List[IUnitDefinitionDto]] = # Replace with your value
 reference_data: Optional[ReferenceData] = # Replace with your value
 version: Optional[Version] = None
 href: Optional[StrictStr] = "example_href"
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 data_type_instance = DataType(type_value_range=type_value_range, id=id, display_name=display_name, description=description, value_type=value_type, acceptable_values=acceptable_values, unit_schema=unit_schema, acceptable_units=acceptable_units, reference_data=reference_data, version=version, href=href, staged_modifications=staged_modifications, links=links)
 
 ```

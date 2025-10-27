@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.transaction_settlement_bucket import TransactionSettlementBucket
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
@@ -29,9 +31,9 @@ class TransactionSettlementStatus(BaseModel):
     TransactionSettlementStatus
     """
     transaction_id:  StrictStr = Field(...,alias="transactionId", description="The unique identifier for the transaction.") 
-    settlement_buckets: Optional[conlist(TransactionSettlementBucket)] = Field(None, alias="settlementBuckets", description="The transaction's external movements (ie: with SettlementMode=External) are grouped into buckets with each bucket uniquely defined by the combination of SettlementCategory, LusidInstrumentId, InstrumentScope and ContractualSettlementDate.")
-    invalid_instructions: Optional[conlist(TransactionSettlementInstruction)] = Field(None, alias="invalidInstructions", description="Invalid settlement instructions where the referenced transaction exists but the settlement bucket implied by the settlement instruction does not exist.")
-    links: Optional[conlist(Link)] = None
+    settlement_buckets: Optional[List[TransactionSettlementBucket]] = Field(default=None, description="The transaction's external movements (ie: with SettlementMode=External) are grouped into buckets with each bucket uniquely defined by the combination of SettlementCategory, LusidInstrumentId, InstrumentScope and ContractualSettlementDate.", alias="settlementBuckets")
+    invalid_instructions: Optional[List[TransactionSettlementInstruction]] = Field(default=None, description="Invalid settlement instructions where the referenced transaction exists but the settlement bucket implied by the settlement instruction does not exist.", alias="invalidInstructions")
+    links: Optional[List[Link]] = None
     __properties = ["transactionId", "settlementBuckets", "invalidInstructions", "links"]
 
     class Config:
@@ -120,3 +122,5 @@ class TransactionSettlementStatus(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+TransactionSettlementStatus.update_forward_refs()

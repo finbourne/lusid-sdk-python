@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class OrderFlowConfiguration(BaseModel):
     """
@@ -75,3 +77,5 @@ class OrderFlowConfiguration(BaseModel):
             "include_entity_types": obj.get("includeEntityTypes")
         })
         return _obj
+
+OrderFlowConfiguration.update_forward_refs()

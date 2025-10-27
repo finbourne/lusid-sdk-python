@@ -18,8 +18,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 id: Optional[ResourceId] = None
 name: Optional[StrictStr] = "example_name"
@@ -32,7 +34,7 @@ portfolio_group_id: Optional[ResourceId] = # Replace with your value
 parameters: Optional[Dict[str, ComplianceParameter]] = None
 properties: Optional[Dict[str, PerpetualProperty]] = None
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 compliance_rule_response_instance = ComplianceRuleResponse(id=id, name=name, description=description, active=active, template_id=template_id, variation=variation, portfolio_group_id=portfolio_group_id, parameters=parameters, properties=properties, version=version, links=links)
 
 ```

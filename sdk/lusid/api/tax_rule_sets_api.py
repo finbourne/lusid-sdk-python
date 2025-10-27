@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, constr, validator
-
+from pydantic.v1 import Field, StrictStr
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
@@ -59,15 +56,15 @@ class TaxRuleSetsApi:
 
 
     @overload
-    async def create_tax_rule_set(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> TaxRuleSet:  # noqa: E501
+    async def create_tax_rule_set(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> TaxRuleSet:  # noqa: E501
         ...
 
     @overload
-    def create_tax_rule_set(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxRuleSet:  # noqa: E501
+    def create_tax_rule_set(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_tax_rule_set(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxRuleSet, Awaitable[TaxRuleSet]]:  # noqa: E501
+    def create_tax_rule_set(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxRuleSet, Awaitable[TaxRuleSet]]:  # noqa: E501
         """[EXPERIMENTAL] CreateTaxRuleSet: Create a tax rule set.  # noqa: E501
 
         Creates a tax rule set definition at the given effective time.  The user must be entitled to read any properties specified in each rule.  # noqa: E501
@@ -100,7 +97,7 @@ class TaxRuleSetsApi:
         return self.create_tax_rule_set_with_http_info(create_tax_rule_set_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_tax_rule_set_with_http_info(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_tax_rule_set_with_http_info(self, create_tax_rule_set_request : Annotated[CreateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateTaxRuleSet: Create a tax rule set.  # noqa: E501
 
         Creates a tax rule set definition at the given effective time.  The user must be entitled to read any properties specified in each rule.  # noqa: E501
@@ -728,15 +725,15 @@ class TaxRuleSetsApi:
 
 
     @overload
-    async def update_tax_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> TaxRuleSet:  # noqa: E501
+    async def update_tax_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> TaxRuleSet:  # noqa: E501
         ...
 
     @overload
-    def update_tax_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxRuleSet:  # noqa: E501
+    def update_tax_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxRuleSet:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_tax_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxRuleSet, Awaitable[TaxRuleSet]]:  # noqa: E501
+    def update_tax_rule_set(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxRuleSet, Awaitable[TaxRuleSet]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.  # noqa: E501
 
         Updates the tax rule set definition at the given effective time.  The changes will take place from this effective time until the next effective time that the rule has been updated at.  For example, consider a rule that has been created or updated effective at the first day of the coming month.  An upsert effective from the current day will only change the definition until that day.  An additional upsert at the same time (first day of the month) is required if the newly-updated definition is to supersede the future definition.  The user must be entitled to read any properties specified in each rule.  # noqa: E501
@@ -773,7 +770,7 @@ class TaxRuleSetsApi:
         return self.update_tax_rule_set_with_http_info(scope, code, update_tax_rule_set_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_tax_rule_set_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(..., description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_tax_rule_set_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], update_tax_rule_set_request : Annotated[UpdateTaxRuleSetRequest, Field(description="The contents of the rule set.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.  # noqa: E501
 
         Updates the tax rule set definition at the given effective time.  The changes will take place from this effective time until the next effective time that the rule has been updated at.  For example, consider a rule that has been created or updated effective at the first day of the coming month.  An upsert effective from the current day will only change the definition until that day.  An additional upsert at the same time (first day of the month) is required if the newly-updated definition is to supersede the future definition.  The user must be entitled to read any properties specified in each rule.  # noqa: E501

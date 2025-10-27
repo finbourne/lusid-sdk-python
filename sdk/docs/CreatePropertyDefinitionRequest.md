@@ -18,8 +18,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 domain: StrictStr = "example_domain"
 scope: StrictStr = "example_scope"
@@ -32,7 +34,7 @@ life_time: Optional[StrictStr] = "example_life_time"
 constraint_style: Optional[StrictStr] = "example_constraint_style"
 property_description: Optional[StrictStr] = "example_property_description"
 collection_type: Optional[StrictStr] = "example_collection_type"
-custom_entity_types: Optional[conlist(StrictStr)] = # Replace with your value
+custom_entity_types: Optional[List[StrictStr]] = # Replace with your value
 create_property_definition_request_instance = CreatePropertyDefinitionRequest(domain=domain, scope=scope, code=code, value_required=value_required, display_name=display_name, data_type_id=data_type_id, life_time=life_time, constraint_style=constraint_style, property_description=property_description, collection_type=collection_type, custom_entity_types=custom_entity_types)
 
 ```

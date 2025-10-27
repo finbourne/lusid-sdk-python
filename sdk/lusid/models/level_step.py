@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
 
 class LevelStep(BaseModel):
     """
     Item which is stepped in level/quantity.  # noqa: E501
     """
-    var_date: datetime = Field(..., alias="date", description="The date from which the level should apply.")
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity which is applied. This might be an absolute, percentage, fractional or other value.")
+    var_date: datetime = Field(description="The date from which the level should apply.", alias="date")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity which is applied. This might be an absolute, percentage, fractional or other value.")
     __properties = ["date", "quantity"]
 
     class Config:
@@ -77,3 +79,5 @@ class LevelStep(BaseModel):
             "quantity": obj.get("quantity")
         })
         return _obj
+
+LevelStep.update_forward_refs()

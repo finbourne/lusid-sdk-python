@@ -12,8 +12,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.share_class_details import ShareClassDetails
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"

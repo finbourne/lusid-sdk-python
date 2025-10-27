@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
 
@@ -27,8 +29,8 @@ class SettlementInstructionWithTransaction(BaseModel):
     """
     A Settlement Instruction with its Matched Transaction (if any)  # noqa: E501
     """
-    settlement_instruction: Optional[TransactionSettlementInstruction] = Field(None, alias="settlementInstruction")
-    matched_transaction: Optional[OutputTransaction] = Field(None, alias="matchedTransaction")
+    settlement_instruction: Optional[TransactionSettlementInstruction] = Field(default=None, alias="settlementInstruction")
+    matched_transaction: Optional[OutputTransaction] = Field(default=None, alias="matchedTransaction")
     __properties = ["settlementInstruction", "matchedTransaction"]
 
     class Config:
@@ -85,3 +87,5 @@ class SettlementInstructionWithTransaction(BaseModel):
             "matched_transaction": OutputTransaction.from_dict(obj.get("matchedTransaction")) if obj.get("matchedTransaction") is not None else None
         })
         return _obj
+
+SettlementInstructionWithTransaction.update_forward_refs()

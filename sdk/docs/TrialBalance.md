@@ -19,20 +19,22 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.trial_balance import TrialBalance
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 general_ledger_account_code: StrictStr = "example_general_ledger_account_code"
 description: Optional[StrictStr] = "example_description"
-levels: conlist(StrictStr) = # Replace with your value
+levels: List[StrictStr] = # Replace with your value
 account_type: StrictStr = "example_account_type"
 local_currency: StrictStr = "example_local_currency"
-opening: MultiCurrencyAmounts = # Replace with your value
-closing: MultiCurrencyAmounts = # Replace with your value
-debit: MultiCurrencyAmounts = # Replace with your value
-credit: MultiCurrencyAmounts = # Replace with your value
+opening: MultiCurrencyAmounts
+closing: MultiCurrencyAmounts
+debit: MultiCurrencyAmounts
+credit: MultiCurrencyAmounts
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 trial_balance_instance = TrialBalance(general_ledger_account_code=general_ledger_account_code, description=description, levels=levels, account_type=account_type, local_currency=local_currency, opening=opening, closing=closing, debit=debit, credit=credit, properties=properties, links=links)
 
 ```

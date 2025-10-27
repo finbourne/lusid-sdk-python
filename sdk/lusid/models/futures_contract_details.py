@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FuturesContractDetails(BaseModel):
     """
@@ -30,15 +32,15 @@ class FuturesContractDetails(BaseModel):
     asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="The asset class of the underlying. Optional and will default to Unknown if not set.    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].") 
     contract_code:  StrictStr = Field(...,alias="contractCode", description="The contract code used by the exchange, e.g. “CL” for Crude Oil, “ES” for E-mini SP 500, “FGBL” for Bund Futures, etc.") 
     contract_month:  Optional[StrictStr] = Field(None,alias="contractMonth", description="Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].  Defaults to \"Unknown\" if not set.") 
-    contract_size: Union[StrictFloat, StrictInt] = Field(..., alias="contractSize", description="Size of a single contract.")
+    contract_size: Union[StrictFloat, StrictInt] = Field(description="Size of a single contract.", alias="contractSize")
     convention:  Optional[StrictStr] = Field(None,alias="convention", description="If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].") 
     country:  Optional[StrictStr] = Field(None,alias="country", description="Country (code) for the exchange.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description of contract.") 
     exchange_code:  StrictStr = Field(...,alias="exchangeCode", description="Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code).") 
     exchange_name:  Optional[StrictStr] = Field(None,alias="exchangeName", description="Exchange name (for when code is not automatically recognised).") 
-    ticker_step: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="tickerStep", description="Minimal step size change in ticker.")
-    unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unitValue", description="The value in the currency of a 1 unit change in the contract price.")
-    calendars: Optional[conlist(StrictStr)] = Field(None, description="Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).")
+    ticker_step: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Minimal step size change in ticker.", alias="tickerStep")
+    unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value in the currency of a 1 unit change in the contract price.", alias="unitValue")
+    calendars: Optional[List[StrictStr]] = Field(default=None, description="Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).")
     delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Delivery type to be used on settling the contract.  Optional: Defaults to DeliveryType.Physical if not provided.    Supported string (enumeration) values are: [Cash, Physical].") 
     __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType"]
 
@@ -148,3 +150,5 @@ class FuturesContractDetails(BaseModel):
             "delivery_type": obj.get("deliveryType")
         })
         return _obj
+
+FuturesContractDetails.update_forward_refs()

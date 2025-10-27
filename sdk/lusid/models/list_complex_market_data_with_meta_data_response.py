@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 
@@ -28,8 +30,8 @@ class ListComplexMarketDataWithMetaDataResponse(BaseModel):
     Wraps a ComplexMarketData object with information that was retrieved from storage with it.  In particular,  the scope that the data was stored in,  and an object identifying the market data in that scope.  # noqa: E501
     """
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope that the listed ComplexMarketData entity is stored in.") 
-    market_data_id: Optional[ComplexMarketDataId] = Field(None, alias="marketDataId")
-    market_data: Optional[ComplexMarketData] = Field(None, alias="marketData")
+    market_data_id: Optional[ComplexMarketDataId] = Field(default=None, alias="marketDataId")
+    market_data: Optional[ComplexMarketData] = Field(default=None, alias="marketData")
     __properties = ["scope", "marketDataId", "marketData"]
 
     class Config:
@@ -92,3 +94,5 @@ class ListComplexMarketDataWithMetaDataResponse(BaseModel):
             "market_data": ComplexMarketData.from_dict(obj.get("marketData")) if obj.get("marketData") is not None else None
         })
         return _obj
+
+ListComplexMarketDataWithMetaDataResponse.update_forward_refs()

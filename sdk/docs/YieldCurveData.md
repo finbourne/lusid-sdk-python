@@ -14,12 +14,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.yield_curve_data import YieldCurveData
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 base_date: datetime = # Replace with your value
-instruments: conlist(LusidInstrument) = # Replace with your value
-quotes: conlist(MarketQuote) = # Replace with your value
+instruments: List[LusidInstrument] = # Replace with your value
+quotes: List[MarketQuote] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
 market_data_type: StrictStr = "example_market_data_type"

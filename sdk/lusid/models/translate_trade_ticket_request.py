@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.trade_ticket import TradeTicket
 
 class TranslateTradeTicketRequest(BaseModel):
     """
     A collection of instruments to translate, along with the target dialect to translate into.  # noqa: E501
     """
-    tickets: Dict[str, TradeTicket] = Field(..., description="The collection of trade tickets to translate.                Each trade ticket should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.")
+    tickets: Dict[str, TradeTicket] = Field(description="The collection of trade tickets to translate.                Each trade ticket should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.")
     dialect:  StrictStr = Field(...,alias="dialect", description="The target dialect that the given instruments should be translated to.") 
     __properties = ["tickets", "dialect"]
 
@@ -90,3 +92,5 @@ class TranslateTradeTicketRequest(BaseModel):
             "dialect": obj.get("dialect")
         })
         return _obj
+
+TranslateTradeTicketRequest.update_forward_refs()

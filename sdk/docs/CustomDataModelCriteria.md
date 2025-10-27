@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.custom_data_model_criteria import CustomDataModelCriteria
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-conditions: Optional[conlist(StrictStr)] = # Replace with your value
-properties: Optional[conlist(CustomDataModelPropertySpecificationWithDisplayName)] = # Replace with your value
-identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecificationWithDisplayName)] = # Replace with your value
-attribute_aliases: Optional[conlist(Alias)] = # Replace with your value
-recommended_sort_by: Optional[conlist(RecommendedSortBy)] = # Replace with your value
+conditions: Optional[List[StrictStr]] = # Replace with your value
+properties: Optional[List[CustomDataModelPropertySpecificationWithDisplayName]] = # Replace with your value
+identifier_types: Optional[List[CustomDataModelIdentifierTypeSpecificationWithDisplayName]] = # Replace with your value
+attribute_aliases: Optional[List[Alias]] = # Replace with your value
+recommended_sort_by: Optional[List[RecommendedSortBy]] = # Replace with your value
 custom_data_model_criteria_instance = CustomDataModelCriteria(conditions=conditions, properties=properties, identifier_types=identifier_types, attribute_aliases=attribute_aliases, recommended_sort_by=recommended_sort_by)
 
 ```

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 
 class GroupReconciliationCoreAttributeValues(BaseModel):
     """
     GroupReconciliationCoreAttributeValues
     """
-    left_core_attributes: conlist(ComparisonAttributeValuePair) = Field(..., alias="leftCoreAttributes", description="Core attribute names and values for the left hand entity being reconciled.")
-    right_core_attributes: conlist(ComparisonAttributeValuePair) = Field(..., alias="rightCoreAttributes", description="Core attribute names and values for the right hand entity being reconciled.")
+    left_core_attributes: List[ComparisonAttributeValuePair] = Field(description="Core attribute names and values for the left hand entity being reconciled.", alias="leftCoreAttributes")
+    right_core_attributes: List[ComparisonAttributeValuePair] = Field(description="Core attribute names and values for the right hand entity being reconciled.", alias="rightCoreAttributes")
     __properties = ["leftCoreAttributes", "rightCoreAttributes"]
 
     class Config:
@@ -92,3 +94,5 @@ class GroupReconciliationCoreAttributeValues(BaseModel):
             "right_core_attributes": [ComparisonAttributeValuePair.from_dict(_item) for _item in obj.get("rightCoreAttributes")] if obj.get("rightCoreAttributes") is not None else None
         })
         return _obj
+
+GroupReconciliationCoreAttributeValues.update_forward_refs()

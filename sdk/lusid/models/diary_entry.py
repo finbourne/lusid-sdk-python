@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -30,18 +32,18 @@ class DiaryEntry(BaseModel):
     DiaryEntry
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    abor_id: Optional[ResourceId] = Field(None, alias="aborId")
+    abor_id: Optional[ResourceId] = Field(default=None, alias="aborId")
     diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="The code of the diary entry.") 
     type:  StrictStr = Field(...,alias="type", description="The type of the diary entry.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the diary entry.") 
     status:  StrictStr = Field(...,alias="status", description="The status of the diary entry. Statuses are constrained and defaulted by 'Type' specified.   Type 'Other' defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.  Type 'PeriodBoundary' defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.  Type 'ValuationPoint' defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised.") 
-    apply_clear_down: Optional[StrictBool] = Field(None, alias="applyClearDown", description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
-    previous_entry_time: Optional[datetime] = Field(None, alias="previousEntryTime", description="The entry time of the previous diary entry.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
+    apply_clear_down: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.", alias="applyClearDown")
+    effective_at: datetime = Field(description="The effective time of the diary entry.", alias="effectiveAt")
+    query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
+    previous_entry_time: Optional[datetime] = Field(default=None, description="The entry time of the previous diary entry.", alias="previousEntryTime")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "aborId", "diaryEntryCode", "type", "name", "status", "applyClearDown", "effectiveAt", "queryAsAt", "previousEntryTime", "properties", "version", "links"]
 
     class Config:
@@ -153,3 +155,5 @@ class DiaryEntry(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+DiaryEntry.update_forward_refs()

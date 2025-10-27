@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.file_response import FileResponse
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBytes, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 file_stream: Optional[Union[StrictBytes, StrictStr]] = # Replace with your value
 content_type: Optional[StrictStr] = "example_content_type"

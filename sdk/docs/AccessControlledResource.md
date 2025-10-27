@@ -13,15 +13,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.access_controlled_resource import AccessControlledResource
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 application: Optional[StrictStr] = "example_application"
 name: Optional[StrictStr] = "example_name"
 description: StrictStr = "example_description"
-actions: conlist(AccessControlledAction) = # Replace with your value
-identifier_parts: Optional[conlist(IdentifierPartSchema)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+actions: List[AccessControlledAction]
+identifier_parts: Optional[List[IdentifierPartSchema]] = # Replace with your value
+links: Optional[List[Link]] = None
 access_controlled_resource_instance = AccessControlledResource(application=application, name=name, description=description, actions=actions, identifier_parts=identifier_parts, links=links)
 
 ```

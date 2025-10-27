@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.property_reference_data_value import PropertyReferenceDataValue
 from lusid.models.property_value import PropertyValue
 
@@ -29,9 +31,9 @@ class ModelProperty(BaseModel):
     """
     key:  StrictStr = Field(...,alias="key", description="The key of the property. This takes the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or 'Transaction/strategy/quantsignal'.") 
     value: Optional[PropertyValue] = None
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the property is valid.")
-    effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime until which the property is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the property.")
-    reference_data: Optional[Dict[str, PropertyReferenceDataValue]] = Field(None, alias="referenceData", description="The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property.")
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime from which the property is valid.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The effective datetime until which the property is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the property.", alias="effectiveUntil")
+    reference_data: Optional[Dict[str, PropertyReferenceDataValue]] = Field(default=None, description="The ReferenceData linked to the value of the property. The ReferenceData is taken from the DataType on the PropertyDefinition that defines the property.", alias="referenceData")
     __properties = ["key", "value", "effectiveFrom", "effectiveUntil", "referenceData"]
 
     class Config:
@@ -116,3 +118,5 @@ class ModelProperty(BaseModel):
             else None
         })
         return _obj
+
+ModelProperty.update_forward_refs()

@@ -17,22 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.resource_id import ResourceId
 
 class TransactionReconciliationRequest(BaseModel):
     """
     Specifies the parameter to be use when performing a Transaction Reconciliation.  # noqa: E501
     """
-    left_portfolio_id: ResourceId = Field(..., alias="leftPortfolioId")
-    right_portfolio_id: ResourceId = Field(..., alias="rightPortfolioId")
-    mapping_id: Optional[ResourceId] = Field(None, alias="mappingId")
-    from_transaction_date: datetime = Field(..., alias="fromTransactionDate")
-    to_transaction_date: datetime = Field(..., alias="toTransactionDate")
-    as_at: Optional[datetime] = Field(None, alias="asAt")
-    property_keys: Optional[conlist(StrictStr)] = Field(None, alias="propertyKeys")
+    left_portfolio_id: ResourceId = Field(alias="leftPortfolioId")
+    right_portfolio_id: ResourceId = Field(alias="rightPortfolioId")
+    mapping_id: Optional[ResourceId] = Field(default=None, alias="mappingId")
+    from_transaction_date: datetime = Field(alias="fromTransactionDate")
+    to_transaction_date: datetime = Field(alias="toTransactionDate")
+    as_at: Optional[datetime] = Field(default=None, alias="asAt")
+    property_keys: Optional[List[StrictStr]] = Field(default=None, alias="propertyKeys")
     __properties = ["leftPortfolioId", "rightPortfolioId", "mappingId", "fromTransactionDate", "toTransactionDate", "asAt", "propertyKeys"]
 
     class Config:
@@ -107,3 +109,5 @@ class TransactionReconciliationRequest(BaseModel):
             "property_keys": obj.get("propertyKeys")
         })
         return _obj
+
+TransactionReconciliationRequest.update_forward_refs()

@@ -17,22 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
 
 class SettlementInstructionQuery(BaseModel):
     """
     SettlementInstructionQuery
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt")
+    as_at: Optional[datetime] = Field(default=None, alias="asAt")
     start_date:  Optional[StrictStr] = Field(None,alias="startDate") 
     end_date:  Optional[StrictStr] = Field(None,alias="endDate") 
     limit: Optional[StrictInt] = None
     page:  Optional[StrictStr] = Field(None,alias="page") 
     filter:  Optional[StrictStr] = Field(None,alias="filter") 
-    settlement_instruction_property_keys: Optional[conlist(StrictStr)] = Field(None, alias="settlementInstructionPropertyKeys")
-    transaction_property_keys: Optional[conlist(StrictStr)] = Field(None, alias="transactionPropertyKeys")
+    settlement_instruction_property_keys: Optional[List[StrictStr]] = Field(default=None, alias="settlementInstructionPropertyKeys")
+    transaction_property_keys: Optional[List[StrictStr]] = Field(default=None, alias="transactionPropertyKeys")
     __properties = ["asAt", "startDate", "endDate", "limit", "page", "filter", "settlementInstructionPropertyKeys", "transactionPropertyKeys"]
 
     class Config:
@@ -129,3 +131,5 @@ class SettlementInstructionQuery(BaseModel):
             "transaction_property_keys": obj.get("transactionPropertyKeys")
         })
         return _obj
+
+SettlementInstructionQuery.update_forward_refs()

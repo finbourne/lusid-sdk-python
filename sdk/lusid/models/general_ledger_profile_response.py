@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapping
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -30,13 +32,13 @@ class GeneralLedgerProfileResponse(BaseModel):
     A General Ledger Profile Definition.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
+    chart_of_accounts_id: ResourceId = Field(alias="chartOfAccountsId")
     general_ledger_profile_code:  StrictStr = Field(...,alias="generalLedgerProfileCode", description="The unique code for the General Ledger Profile") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the General Ledger Profile") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the General Ledger Profile") 
-    general_ledger_profile_mappings: conlist(GeneralLedgerProfileMapping) = Field(..., alias="generalLedgerProfileMappings", description="Rules for mapping Account or property values to aggregation pattern definitions")
+    general_ledger_profile_mappings: List[GeneralLedgerProfileMapping] = Field(description="Rules for mapping Account or property values to aggregation pattern definitions", alias="generalLedgerProfileMappings")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "chartOfAccountsId", "generalLedgerProfileCode", "displayName", "description", "generalLedgerProfileMappings", "version", "links"]
 
     class Config:
@@ -128,3 +130,5 @@ class GeneralLedgerProfileResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+GeneralLedgerProfileResponse.update_forward_refs()

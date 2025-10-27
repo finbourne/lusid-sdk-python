@@ -17,18 +17,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cleardown_module_response import CleardownModuleResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 cleardown_module_code: StrictStr = "example_cleardown_module_code"
 chart_of_accounts_id: ResourceId = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: Optional[conlist(CleardownModuleRule)] = # Replace with your value
+rules: Optional[List[CleardownModuleRule]] = # Replace with your value
 status: StrictStr = "example_status"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 cleardown_module_response_instance = CleardownModuleResponse(href=href, cleardown_module_code=cleardown_module_code, chart_of_accounts_id=chart_of_accounts_id, display_name=display_name, description=description, rules=rules, status=status, version=version, links=links)
 
 ```

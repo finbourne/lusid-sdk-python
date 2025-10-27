@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 output_property_key: StrictStr = "example_output_property_key"
-rules: conlist(TaxRule, max_items=100) = Field(...)
+rules: List[TaxRule]
 create_tax_rule_set_request_instance = CreateTaxRuleSetRequest(id=id, display_name=display_name, description=description, output_property_key=output_property_key, rules=rules)
 
 ```

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.relational_data_point_field_value_response import RelationalDataPointFieldValueResponse
 from lusid.models.relational_data_series_response import RelationalDataSeriesResponse
 from lusid.models.resource_id import ResourceId
@@ -28,11 +30,11 @@ class RelationalDataPointResponse(BaseModel):
     """
     RelationalDataPointResponse
     """
-    relational_dataset_definition_id: ResourceId = Field(..., alias="relationalDatasetDefinitionId")
-    data_series: RelationalDataSeriesResponse = Field(..., alias="dataSeries")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effectiveAt or cut-label datetime of the DataPoint.")
-    value_fields: Dict[str, RelationalDataPointFieldValueResponse] = Field(..., alias="valueFields", description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.")
-    meta_data_fields: Dict[str, RelationalDataPointFieldValueResponse] = Field(..., alias="metaDataFields", description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.")
+    relational_dataset_definition_id: ResourceId = Field(alias="relationalDatasetDefinitionId")
+    data_series: RelationalDataSeriesResponse = Field(alias="dataSeries")
+    effective_at: datetime = Field(description="The effectiveAt or cut-label datetime of the DataPoint.", alias="effectiveAt")
+    value_fields: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="valueFields")
+    meta_data_fields: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="metaDataFields")
     effective_at_entered:  StrictStr = Field(...,alias="effectiveAtEntered", description="The effectiveAt datetime as entered when the DataPoint was created.") 
     __properties = ["relationalDatasetDefinitionId", "dataSeries", "effectiveAt", "valueFields", "metaDataFields", "effectiveAtEntered"]
 
@@ -118,3 +120,5 @@ class RelationalDataPointResponse(BaseModel):
             "effective_at_entered": obj.get("effectiveAtEntered")
         })
         return _obj
+
+RelationalDataPointResponse.update_forward_refs()

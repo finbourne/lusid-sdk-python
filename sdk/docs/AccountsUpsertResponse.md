@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.accounts_upsert_response import AccountsUpsertResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-accounts: Optional[conlist(Account)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+accounts: Optional[List[Account]] = # Replace with your value
+links: Optional[List[Link]] = None
 accounts_upsert_response_instance = AccountsUpsertResponse(href=href, version=version, accounts=accounts, links=links)
 
 ```

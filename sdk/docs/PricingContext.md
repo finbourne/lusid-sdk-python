@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.pricing_context import PricingContext
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-model_rules: Optional[conlist(VendorModelRule)] = # Replace with your value
+model_rules: Optional[List[VendorModelRule]] = # Replace with your value
 model_choice: Optional[Dict[str, ModelSelection]] = # Replace with your value
 options: Optional[PricingOptions] = None
-result_data_rules: Optional[conlist(ResultKeyRule)] = # Replace with your value
+result_data_rules: Optional[List[ResultKeyRule]] = # Replace with your value
 holding_pricing_info: Optional[HoldingPricingInfo] = # Replace with your value
 accrual_definition: Optional[StrictStr] = "example_accrual_definition"
 pricing_context_instance = PricingContext(model_rules=model_rules, model_choice=model_choice, options=options, result_data_rules=result_data_rules, holding_pricing_info=holding_pricing_info, accrual_definition=accrual_definition)

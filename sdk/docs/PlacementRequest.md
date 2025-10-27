@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **parent_placement_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **block_ids** | [**List[ResourceId]**](ResourceId.md) | The IDs of the Blocks associated with this placement. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The quantity of given instrument ordered. | 
 **state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | 
 **side** | **str** | The side (Buy, Sell, ...) of this placement. | 
@@ -24,14 +24,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.placement_request import PlacementRequest
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 parent_placement_id: Optional[ResourceId] = # Replace with your value
-block_ids: conlist(ResourceId) = # Replace with your value
+block_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 state: StrictStr = "example_state"
 side: StrictStr = "example_side"

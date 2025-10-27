@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.post_close_activity import PostCloseActivity
 
 class PostCloseActivitiesRequest(BaseModel):
     """
     PostCloseActivitiesRequest
     """
-    post_close_activities: conlist(PostCloseActivity) = Field(..., alias="postCloseActivities", description="Collection of post close activites.")
+    post_close_activities: List[PostCloseActivity] = Field(description="Collection of post close activites.", alias="postCloseActivities")
     __properties = ["postCloseActivities"]
 
     class Config:
@@ -83,3 +85,5 @@ class PostCloseActivitiesRequest(BaseModel):
             "post_close_activities": [PostCloseActivity.from_dict(_item) for _item in obj.get("postCloseActivities")] if obj.get("postCloseActivities") is not None else None
         })
         return _obj
+
+PostCloseActivitiesRequest.update_forward_refs()

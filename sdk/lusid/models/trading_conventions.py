@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TradingConventions(BaseModel):
     """
     Common Trading details for exchange traded instruments like Futures and Bonds  # noqa: E501
     """
-    price_scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="priceScaleFactor", description="The factor used to scale prices for the instrument. Currently used by LUSID when calculating cost  and notional amounts on transactions. Note this factor does not yet impact Valuation, PV, exposure,  all of which use the scale factor attached to the price quotes in the QuoteStore.  Must be positive and defaults to 1 if not set.")
-    minimum_order_size: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="minimumOrderSize", description="The Minimum Order Size  Must be non-negative and defaults to 0 if not set.")
-    minimum_order_increment: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="minimumOrderIncrement", description="The Minimum Order Increment  Must be non-negative and defaults to 0 if not set.")
+    price_scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The factor used to scale prices for the instrument. Currently used by LUSID when calculating cost  and notional amounts on transactions. Note this factor does not yet impact Valuation, PV, exposure,  all of which use the scale factor attached to the price quotes in the QuoteStore.  Must be positive and defaults to 1 if not set.", alias="priceScaleFactor")
+    minimum_order_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Minimum Order Size  Must be non-negative and defaults to 0 if not set.", alias="minimumOrderSize")
+    minimum_order_increment: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Minimum Order Increment  Must be non-negative and defaults to 0 if not set.", alias="minimumOrderIncrement")
     __properties = ["priceScaleFactor", "minimumOrderSize", "minimumOrderIncrement"]
 
     class Config:
@@ -79,3 +81,5 @@ class TradingConventions(BaseModel):
             "minimum_order_increment": obj.get("minimumOrderIncrement")
         })
         return _obj
+
+TradingConventions.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.staging_rule import StagingRule
 
 class UpdateStagingRuleSetRequest(BaseModel):
@@ -28,7 +30,7 @@ class UpdateStagingRuleSetRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the staging rule set.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule set.") 
-    rules: conlist(StagingRule) = Field(..., description="The list of staging rules that apply to a specific entity type.")
+    rules: List[StagingRule] = Field(description="The list of staging rules that apply to a specific entity type.")
     __properties = ["displayName", "description", "rules"]
 
     class Config:
@@ -92,3 +94,5 @@ class UpdateStagingRuleSetRequest(BaseModel):
             "rules": [StagingRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None
         })
         return _obj
+
+UpdateStagingRuleSetRequest.update_forward_refs()

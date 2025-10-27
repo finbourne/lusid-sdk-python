@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cap_floor import CapFloor
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 cap_floor_type: StrictStr = "example_cap_floor_type"
 cap_strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
@@ -25,7 +27,7 @@ floor_strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your valu
 include_first_caplet: StrictBool = # Replace with your value
 include_first_caplet:StrictBool = True
 underlying_floating_leg: FloatingLeg = # Replace with your value
-additional_payments: Optional[conlist(AdditionalPayment)] = # Replace with your value
+additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 cap_floor_instance = CapFloor(cap_floor_type=cap_floor_type, cap_strike=cap_strike, floor_strike=floor_strike, include_first_caplet=include_first_caplet, underlying_floating_leg=underlying_floating_leg, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

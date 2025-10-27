@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class AddressKeyOptionDefinition(BaseModel):
     """
@@ -28,8 +30,8 @@ class AddressKeyOptionDefinition(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The name of the option") 
     type:  StrictStr = Field(...,alias="type", description="The type of the option") 
     description:  StrictStr = Field(...,alias="description", description="The description of the option") 
-    optional: StrictBool = Field(..., description="Is this option required or optional?")
-    allowed_value_set: Optional[conlist(StrictStr)] = Field(None, alias="allowedValueSet", description="If the option is a string or enum, the allowed set of values it can take.")
+    optional: StrictBool = Field(description="Is this option required or optional?")
+    allowed_value_set: Optional[List[StrictStr]] = Field(default=None, description="If the option is a string or enum, the allowed set of values it can take.", alias="allowedValueSet")
     default_value:  Optional[StrictStr] = Field(None,alias="defaultValue", description="If the option is not required, what is the default value?") 
     __properties = ["name", "type", "description", "optional", "allowedValueSet", "defaultValue"]
 
@@ -95,3 +97,5 @@ class AddressKeyOptionDefinition(BaseModel):
             "default_value": obj.get("defaultValue")
         })
         return _obj
+
+AddressKeyOptionDefinition.update_forward_refs()

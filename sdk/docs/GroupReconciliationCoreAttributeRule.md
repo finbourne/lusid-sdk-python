@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-left: GroupReconciliationCoreComparisonRuleOperand = # Replace with your value
-right: GroupReconciliationCoreComparisonRuleOperand = # Replace with your value
-allowable_string_mappings: Optional[conlist(GroupReconciliationComparisonRuleStringValueMap)] = # Replace with your value
+left: GroupReconciliationCoreComparisonRuleOperand
+right: GroupReconciliationCoreComparisonRuleOperand
+allowable_string_mappings: Optional[List[GroupReconciliationComparisonRuleStringValueMap]] = # Replace with your value
 is_comparison_case_sensitive: StrictBool = # Replace with your value
 is_comparison_case_sensitive:StrictBool = True
 group_reconciliation_core_attribute_rule_instance = GroupReconciliationCoreAttributeRule(left=left, right=right, allowable_string_mappings=allowable_string_mappings, is_comparison_case_sensitive=is_comparison_case_sensitive)

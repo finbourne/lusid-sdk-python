@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class JournalEntryLineShareClassBreakdown(BaseModel):
     """
     The apportionment from overall fund level journal entry Line to the share class.  # noqa: E501
     """
     short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="The share class identifier.") 
-    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="apportionmentFactor", description="The share class apportionment factor (capital ratio).")
-    local_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="localValue", description="This journal entry line's local value amount after apportionment is applied.")
-    base_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="baseValue", description="This journal entry line's base value amount after apportionment is applied")
+    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class apportionment factor (capital ratio).", alias="apportionmentFactor")
+    local_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="This journal entry line's local value amount after apportionment is applied.", alias="localValue")
+    base_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="This journal entry line's base value amount after apportionment is applied", alias="baseValue")
     __properties = ["shortCode", "apportionmentFactor", "localValue", "baseValue"]
 
     class Config:
@@ -86,3 +88,5 @@ class JournalEntryLineShareClassBreakdown(BaseModel):
             "base_value": obj.get("baseValue")
         })
         return _obj
+
+JournalEntryLineShareClassBreakdown.update_forward_refs()

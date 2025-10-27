@@ -16,15 +16,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 announcement_date: Optional[datetime] = # Replace with your value
-cash_elections: conlist(CashElection) = # Replace with your value
+cash_elections: List[CashElection] = # Replace with your value
 ex_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 record_date: Optional[datetime] = # Replace with your value
-security_elections: conlist(SecurityElection) = # Replace with your value
+security_elections: List[SecurityElection] = # Replace with your value
 security_settlement_date: Optional[datetime] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
 dividend_reinvestment_event_instance = DividendReinvestmentEvent(announcement_date=announcement_date, cash_elections=cash_elections, ex_date=ex_date, payment_date=payment_date, record_date=record_date, security_elections=security_elections, security_settlement_date=security_settlement_date, instrument_event_type=instrument_event_type)

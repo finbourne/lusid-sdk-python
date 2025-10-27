@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **flow_conventions** | [**FlowConventions**](FlowConventions.md) |  | 
 **inflation_index_conventions** | [**InflationIndexConventions**](InflationIndexConventions.md) |  | 
 **coupon_rate** | **float** | Simple coupon rate. | 
-**identifiers** | **Dict[str, str]** | External market codes and identifiers for the bond, e.g. ISIN. | [optional] 
+**identifiers** | **Dict[str, Optional[str]]** | External market codes and identifiers for the bond, e.g. ISIN. | [optional] 
 **base_cpi** | **float** | BaseCPI value. This is optional, if not provided the BaseCPI value will be calculated from the BaseCPIDate,  if that too is not present the StartDate will be used.                If provided then this value will always set the BaseCPI on this bond.                The BaseCPI of an inflation linked bond is calculated using the following logic:  - If a BaseCPI value is provided, this is used.  - Otherwise, if BaseCPIDate is provided, the CPI for this date is calculated and used.  - Otherwise, the CPI for the StartDate is calculated and used.                Note that if both BaseCPI and BaseCPIDate are set, the BaseCPI value will be used and the BaseCPIDate  will be ignored but can still be added for informative purposes.                Some bonds are issued with a BaseCPI date that does not correspond to the StartDate CPI value, in this  case the value should be provided here or with the BaseCPIDate. | [optional] 
 **base_cpi_date** | **datetime** | BaseCPIDate. This is optional. Gives the date that the BaseCPI is calculated for.                Note this is an un-lagged date (similar to StartDate) so the Bond ObservationLag will  be applied to this date when calculating the CPI.                The BaseCPI of an inflation linked bond is calculated using the following logic:  - If a BaseCPI value is provided, this is used.  - Otherwise, if BaseCPIDate is provided, the CPI for this date is calculated and used.  - Otherwise, the CPI for the StartDate is calculated and used.                Note that if both BaseCPI and BaseCPIDate are set, the BaseCPI value will be used and the BaseCPIDate  will be ignored but can still be added for informative purposes.                Some bonds are issued with a BaseCPI date that does not correspond to the StartDate CPI value, in this  case the value should be provided here or with the actual BaseCPI. | [optional] 
 **calculation_type** | **str** | The calculation type applied to the bond coupon and principal amount.  The default CalculationType is &#x60;Standard&#x60;.    Supported string (enumeration) values are: [Standard, Quarterly, Ratio, Brazil, StandardAccruedOnly, RatioAccruedOnly, StandardWithCappedAccruedInterest]. | [optional] 
@@ -27,15 +27,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.inflation_linked_bond import InflationLinkedBond
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 flow_conventions: FlowConventions = # Replace with your value
 inflation_index_conventions: InflationIndexConventions = # Replace with your value
 coupon_rate: Union[StrictFloat, StrictInt] = # Replace with your value
-identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 base_cpi: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 base_cpi_date: Optional[datetime] = # Replace with your value
 calculation_type: Optional[StrictStr] = "example_calculation_type"
@@ -47,7 +49,7 @@ principal: Union[StrictFloat, StrictInt] = # Replace with your value
 principal_protection: Optional[StrictBool] = # Replace with your value
 principal_protection:Optional[StrictBool] = None
 stub_type: Optional[StrictStr] = "example_stub_type"
-rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
+rounding_conventions: Optional[List[RoundingConvention]] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value

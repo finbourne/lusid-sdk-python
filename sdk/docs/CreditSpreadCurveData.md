@@ -18,16 +18,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.credit_spread_curve_data import CreditSpreadCurveData
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 base_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
-tenors: conlist(StrictStr) = # Replace with your value
-spreads: conlist(Union[StrictFloat, StrictInt]) = # Replace with your value
+tenors: List[StrictStr] = # Replace with your value
+spreads: List[Union[StrictFloat, StrictInt]] = # Replace with your value
 recovery_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 reference_date: Optional[datetime] = # Replace with your value
-maturities: Optional[conlist(datetime)] = # Replace with your value
+maturities: Optional[List[datetime]] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
 market_data_type: StrictStr = "example_market_data_type"

@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_payment_diary import InstrumentPaymentDiary
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_id_type: Optional[StrictStr] = "example_instrument_id_type"
 instrument_id: Optional[StrictStr] = "example_instrument_id"
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 version: Optional[Version] = None
-legs: Optional[conlist(InstrumentPaymentDiaryLeg)] = # Replace with your value
+legs: Optional[List[InstrumentPaymentDiaryLeg]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 instrument_payment_diary_instance = InstrumentPaymentDiary(instrument_id_type=instrument_id_type, instrument_id=instrument_id, instrument_scope=instrument_scope, version=version, legs=legs, href=href, links=links)
 
 ```

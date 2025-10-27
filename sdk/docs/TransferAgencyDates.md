@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transfer_agency_dates import TransferAgencyDates
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 price_date: Optional[datetime] = # Replace with your value
 transaction_date: Optional[datetime] = # Replace with your value
 expected_payment_date: Optional[datetime] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 transfer_agency_dates_instance = TransferAgencyDates(price_date=price_date, transaction_date=transaction_date, expected_payment_date=expected_payment_date, links=links)
 
 ```

@@ -16,10 +16,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.sequence_definition import SequenceDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 increment: StrictInt = # Replace with your value
 min_value: StrictInt = # Replace with your value
 max_value: StrictInt = # Replace with your value
@@ -28,7 +30,7 @@ value: Optional[StrictInt] = # Replace with your value
 cycle: StrictBool = # Replace with your value
 cycle:StrictBool = True
 pattern: Optional[StrictStr] = "example_pattern"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 sequence_definition_instance = SequenceDefinition(id=id, increment=increment, min_value=min_value, max_value=max_value, start=start, value=value, cycle=cycle, pattern=pattern, links=links)
 
 ```

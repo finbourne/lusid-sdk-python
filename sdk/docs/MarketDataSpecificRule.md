@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **supplier** | **str** | The market data supplier (where the data comes from) | 
 **data_scope** | **str** | The scope in which the data should be found when using this rule. | 
 **quote_type** | **str** | The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor | 
-**field** | **str** | The conceptual qualification for the field, such as bid, mid, or ask.  The field must be one of a defined set for the given supplier, in the same way as it  is for the Quotes.QuoteSeriesId\&quot; | 
+**var_field** | **str** | The conceptual qualification for the field, such as bid, mid, or ask.  The field must be one of a defined set for the given supplier, in the same way as it  is for the Quotes.QuoteSeriesId\&quot; | 
 **quote_interval** | **str** | Shorthand for the time interval used to select market data. This must be a dot-separated string              nominating a start and end date, for example &#39;5D.0D&#39; to look back 5 days from today (0 days ago). The syntax              is &lt;i&gt;int&lt;/i&gt;&lt;i&gt;char&lt;/i&gt;.&lt;i&gt;int&lt;/i&gt;&lt;i&gt;char&lt;/i&gt;, where &lt;i&gt;char&lt;/i&gt; is one of D(ay), W(eek), M(onth) or Y(ear). | [optional] 
 **as_at** | **datetime** | Deprecated field which no longer has any effect on market data resolution. | [optional] 
 **price_source** | **str** | The source of the quote. For a given provider/supplier of market data there may be an additional qualifier, e.g. the exchange or bank that provided the quote | [optional] 
@@ -20,14 +20,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.market_data_specific_rule import MarketDataSpecificRule
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 key: StrictStr = "example_key"
 supplier: StrictStr = "example_supplier"
 data_scope: StrictStr = "example_data_scope"
 quote_type: StrictStr = "example_quote_type"
-field: StrictStr = "example_field"
+var_field: StrictStr = "example_var_field"
 quote_interval: Optional[StrictStr] = "example_quote_interval"
 as_at: Optional[datetime] = # Replace with your value
 price_source: Optional[StrictStr] = "example_price_source"
@@ -36,7 +38,7 @@ dependency_source_filter: DependencySourceFilter = # Replace with your value
 source_system: Optional[StrictStr] = "example_source_system"
 fall_through_on_access_denied: Optional[StrictBool] = # Replace with your value
 fall_through_on_access_denied:Optional[StrictBool] = None
-market_data_specific_rule_instance = MarketDataSpecificRule(key=key, supplier=supplier, data_scope=data_scope, quote_type=quote_type, field=field, quote_interval=quote_interval, as_at=as_at, price_source=price_source, mask=mask, dependency_source_filter=dependency_source_filter, source_system=source_system, fall_through_on_access_denied=fall_through_on_access_denied)
+market_data_specific_rule_instance = MarketDataSpecificRule(key=key, supplier=supplier, data_scope=data_scope, quote_type=quote_type, var_field=var_field, quote_interval=quote_interval, as_at=as_at, price_source=price_source, mask=mask, dependency_source_filter=dependency_source_filter, source_system=source_system, fall_through_on_access_denied=fall_through_on_access_denied)
 
 ```
 

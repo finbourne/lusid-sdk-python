@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 left: Optional[ListAggregationResponse] = None
 right: Optional[ListAggregationResponse] = None
-diff: Optional[conlist(Dict[str, Any])] = None
+diff: Optional[List[Dict[str, Any]]] = None
 data_schema: Optional[ResultDataSchema] = # Replace with your value
 list_aggregation_reconciliation_instance = ListAggregationReconciliation(left=left, right=right, diff=diff, data_schema=data_schema)
 

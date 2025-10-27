@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **created_date** | **datetime** | The active date of this order instruction. | 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | [optional] 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | [optional] 
 **quantity** | **float** | The quantity of given instrument ordered. | [optional] 
 **weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
@@ -16,13 +16,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_instruction_request import OrderInstructionRequest
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 created_date: datetime = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
-instrument_identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 price: Optional[CurrencyAndAmount] = None

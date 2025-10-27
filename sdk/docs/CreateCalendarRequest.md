@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_calendar_request import CreateCalendarRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 calendar_id: ResourceId = # Replace with your value
 calendar_type: StrictStr = "example_calendar_type"
 weekend_mask: WeekendMask = # Replace with your value
 source_provider: StrictStr = "example_source_provider"
-properties: Optional[conlist(ModelProperty)] = None
+properties: Optional[List[ModelProperty]] = None
 create_calendar_request_instance = CreateCalendarRequest(calendar_id=calendar_id, calendar_type=calendar_type, weekend_mask=weekend_mask, source_provider=source_provider, properties=properties)
 
 ```

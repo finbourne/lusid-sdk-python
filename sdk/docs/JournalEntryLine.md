@@ -38,9 +38,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.journal_entry_line import JournalEntryLine
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 accounting_date: datetime = # Replace with your value
 activity_date: datetime = # Replace with your value
 portfolio_id: ResourceId = # Replace with your value
@@ -49,8 +51,8 @@ instrument_scope: StrictStr = "example_instrument_scope"
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
 general_ledger_account_code: StrictStr = "example_general_ledger_account_code"
-local: CurrencyAndAmount = # Replace with your value
-base: CurrencyAndAmount = # Replace with your value
+local: CurrencyAndAmount
+base: CurrencyAndAmount
 units: Union[StrictFloat, StrictInt] = # Replace with your value
 posting_module_code: Optional[StrictStr] = "example_posting_module_code"
 posting_rule: StrictStr = "example_posting_rule"
@@ -64,13 +66,13 @@ holding_type: StrictStr = "example_holding_type"
 economic_bucket: StrictStr = "example_economic_bucket"
 economic_bucket_component: Optional[StrictStr] = "example_economic_bucket_component"
 economic_bucket_variant: Optional[StrictStr] = "example_economic_bucket_variant"
-levels: Optional[conlist(StrictStr)] = # Replace with your value
-source_levels: Optional[conlist(StrictStr)] = # Replace with your value
+levels: Optional[List[StrictStr]] = # Replace with your value
+source_levels: Optional[List[StrictStr]] = # Replace with your value
 movement_sign: Optional[StrictStr] = "example_movement_sign"
 holding_sign: Optional[StrictStr] = "example_holding_sign"
 ledger_column: Optional[StrictStr] = "example_ledger_column"
 journal_entry_line_type: Optional[StrictStr] = "example_journal_entry_line_type"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 journal_entry_line_instance = JournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, links=links)
 
 ```

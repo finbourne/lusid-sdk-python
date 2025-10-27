@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.fund_valuation_schedule import FundValuationSchedule
 from lusid.models.market_data_overrides import MarketDataOverrides
@@ -32,17 +34,17 @@ class FundValuationRequest(BaseModel):
     """
     Specification object for the parameters of a valuation  # noqa: E501
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The asAt date to use.")
-    metrics: conlist(AggregateSpec) = Field(..., description="The set of specifications to calculate or retrieve during the valuation and present in the results. For example:  AggregateSpec('Valuation/PV','Sum') for returning the PV (present value) of holdings  AggregateSpec('Holding/default/Units','Sum') for returning the units of holidays  AggregateSpec('Instrument/default/LusidInstrumentId','Value') for returning the Lusid Instrument identifier")
-    group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy", description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.")
-    filters: Optional[conlist(PropertyFilter)] = Field(None, description="A set of filters to use to reduce the data found in a request. Equivalent to the 'where ...' part of a Sql select statement.  For example, filter a set of values within a given range or matching a particular value.")
-    sort: Optional[conlist(OrderBySpec)] = Field(None, description="A (possibly empty/null) set of specifications for how to order the results.")
-    equip_with_subtotals: Optional[StrictBool] = Field(None, alias="equipWithSubtotals", description="Flag directing the Valuation call to populate the results with subtotals of aggregates.")
-    return_result_as_expanded_types: Optional[StrictBool] = Field(None, alias="returnResultAsExpandedTypes", description="Financially meaningful results can be presented as either simple flat types or more complex expanded types.  For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)  or as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,  the returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false.")
-    include_order_flow: Optional[OrderFlowConfiguration] = Field(None, alias="includeOrderFlow")
-    fund_valuation_schedule: FundValuationSchedule = Field(..., alias="fundValuationSchedule")
-    market_data_overrides: Optional[MarketDataOverrides] = Field(None, alias="marketDataOverrides")
-    corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
+    as_at: Optional[datetime] = Field(default=None, description="The asAt date to use.", alias="asAt")
+    metrics: List[AggregateSpec] = Field(description="The set of specifications to calculate or retrieve during the valuation and present in the results. For example:  AggregateSpec('Valuation/PV','Sum') for returning the PV (present value) of holdings  AggregateSpec('Holding/default/Units','Sum') for returning the units of holidays  AggregateSpec('Instrument/default/LusidInstrumentId','Value') for returning the Lusid Instrument identifier")
+    group_by: Optional[List[StrictStr]] = Field(default=None, description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.", alias="groupBy")
+    filters: Optional[List[PropertyFilter]] = Field(default=None, description="A set of filters to use to reduce the data found in a request. Equivalent to the 'where ...' part of a Sql select statement.  For example, filter a set of values within a given range or matching a particular value.")
+    sort: Optional[List[OrderBySpec]] = Field(default=None, description="A (possibly empty/null) set of specifications for how to order the results.")
+    equip_with_subtotals: Optional[StrictBool] = Field(default=None, description="Flag directing the Valuation call to populate the results with subtotals of aggregates.", alias="equipWithSubtotals")
+    return_result_as_expanded_types: Optional[StrictBool] = Field(default=None, description="Financially meaningful results can be presented as either simple flat types or more complex expanded types.  For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)  or as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,  the returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false.", alias="returnResultAsExpandedTypes")
+    include_order_flow: Optional[OrderFlowConfiguration] = Field(default=None, alias="includeOrderFlow")
+    fund_valuation_schedule: FundValuationSchedule = Field(alias="fundValuationSchedule")
+    market_data_overrides: Optional[MarketDataOverrides] = Field(default=None, alias="marketDataOverrides")
+    corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
     __properties = ["asAt", "metrics", "groupBy", "filters", "sort", "equipWithSubtotals", "returnResultAsExpandedTypes", "includeOrderFlow", "fundValuationSchedule", "marketDataOverrides", "corporateActionSourceId"]
 
     class Config:
@@ -155,3 +157,5 @@ class FundValuationRequest(BaseModel):
             "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None
         })
         return _obj
+
+FundValuationRequest.update_forward_refs()

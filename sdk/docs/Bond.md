@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **flow_conventions** | [**FlowConventions**](FlowConventions.md) |  | 
 **principal** | **float** | The face-value or principal for the bond at outset.  This might be reduced through its lifetime in the event of amortisation or similar. | 
 **coupon_rate** | **float** | Simple coupon rate. | 
-**identifiers** | **Dict[str, str]** | External market codes and identifiers for the bond, e.g. ISIN. | [optional] 
+**identifiers** | **Dict[str, Optional[str]]** | External market codes and identifiers for the bond, e.g. ISIN. | [optional] 
 **ex_dividend_days** | **int** | Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration. | [optional] 
 **initial_coupon_date** | **datetime** | Optional and to be DEPRECATED. If set, this is the date at which the bond begins to accrue interest. Instead, this information should be entered in the field StartDate. | [optional] 
 **first_coupon_pay_date** | **datetime** | The date that the first coupon of the bond is paid. This is required for bonds that have a long first coupon or short first coupon. The first coupon pay date is used  as an anchor to compare with the start date and determine if this is a long/short coupon period. | [optional] 
@@ -25,22 +25,24 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.bond import Bond
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
 flow_conventions: FlowConventions = # Replace with your value
 principal: Union[StrictFloat, StrictInt] = # Replace with your value
 coupon_rate: Union[StrictFloat, StrictInt] = # Replace with your value
-identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 ex_dividend_days: Optional[StrictInt] = # Replace with your value
 ex_dividend_days: Optional[StrictInt] = None
 initial_coupon_date: Optional[datetime] = # Replace with your value
 first_coupon_pay_date: Optional[datetime] = # Replace with your value
 calculation_type: Optional[StrictStr] = "example_calculation_type"
-rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
+rounding_conventions: Optional[List[RoundingConvention]] = # Replace with your value
 ex_dividend_configuration: Optional[ExDividendConfiguration] = # Replace with your value
 original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value

@@ -16,18 +16,20 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.list_aggregation_response import ListAggregationResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 aggregation_effective_at: Optional[datetime] = # Replace with your value
 aggregation_as_at: Optional[datetime] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
-data: Optional[conlist(Dict[str, Any])] = None
+data: Optional[List[Dict[str, Any]]] = None
 aggregation_currency: Optional[StrictStr] = "example_aggregation_currency"
 data_schema: Optional[ResultDataSchema] = # Replace with your value
-aggregation_failures: Optional[conlist(AggregationMeasureFailureDetail)] = # Replace with your value
+aggregation_failures: Optional[List[AggregationMeasureFailureDetail]] = # Replace with your value
 recipe_id: Optional[ResourceId] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 list_aggregation_response_instance = ListAggregationResponse(aggregation_effective_at=aggregation_effective_at, aggregation_as_at=aggregation_as_at, href=href, data=data, aggregation_currency=aggregation_currency, data_schema=data_schema, aggregation_failures=aggregation_failures, recipe_id=recipe_id, links=links)
 
 ```

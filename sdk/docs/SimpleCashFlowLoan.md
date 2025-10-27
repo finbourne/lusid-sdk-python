@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
-periods: conlist(LoanPeriod) = # Replace with your value
+periods: List[LoanPeriod] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
 simple_cash_flow_loan_instance = SimpleCashFlowLoan(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, periods=periods, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)

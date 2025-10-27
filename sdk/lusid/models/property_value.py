@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.label_value_set import LabelValueSet
 from lusid.models.metric_value import MetricValue
 
@@ -28,8 +30,8 @@ class PropertyValue(BaseModel):
     The value of the property.  # noqa: E501
     """
     label_value:  Optional[StrictStr] = Field(None,alias="labelValue", description="The text value of a property defined as having the 'Label' type.") 
-    metric_value: Optional[MetricValue] = Field(None, alias="metricValue")
-    label_value_set: Optional[LabelValueSet] = Field(None, alias="labelValueSet")
+    metric_value: Optional[MetricValue] = Field(default=None, alias="metricValue")
+    label_value_set: Optional[LabelValueSet] = Field(default=None, alias="labelValueSet")
     __properties = ["labelValue", "metricValue", "labelValueSet"]
 
     class Config:
@@ -92,3 +94,5 @@ class PropertyValue(BaseModel):
             "label_value_set": LabelValueSet.from_dict(obj.get("labelValueSet")) if obj.get("labelValueSet") is not None else None
         })
         return _obj
+
+PropertyValue.update_forward_refs()

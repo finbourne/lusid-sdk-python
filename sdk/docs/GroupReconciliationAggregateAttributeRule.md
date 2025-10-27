@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-left: GroupReconciliationAggregateComparisonRuleOperand = # Replace with your value
-right: GroupReconciliationAggregateComparisonRuleOperand = # Replace with your value
+left: GroupReconciliationAggregateComparisonRuleOperand
+right: GroupReconciliationAggregateComparisonRuleOperand
 tolerance: Optional[GroupReconciliationComparisonRuleTolerance] = None
 group_reconciliation_aggregate_attribute_rule_instance = GroupReconciliationAggregateAttributeRule(left=left, right=right, tolerance=tolerance)
 

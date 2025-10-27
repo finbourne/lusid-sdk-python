@@ -15,15 +15,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_graph_placement import OrderGraphPlacement
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-placement: Placement = # Replace with your value
+placement: Placement
 block_id: ResourceId = # Replace with your value
-ordered: OrderGraphPlacementOrderSynopsis = # Replace with your value
-placed: OrderGraphPlacementPlacementSynopsis = # Replace with your value
-executed: OrderGraphPlacementExecutionSynopsis = # Replace with your value
-allocated: OrderGraphPlacementAllocationSynopsis = # Replace with your value
+ordered: OrderGraphPlacementOrderSynopsis
+placed: OrderGraphPlacementPlacementSynopsis
+executed: OrderGraphPlacementExecutionSynopsis
+allocated: OrderGraphPlacementAllocationSynopsis
 derived_state: StrictStr = "example_derived_state"
 calculated_average_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 order_graph_placement_instance = OrderGraphPlacement(placement=placement, block_id=block_id, ordered=ordered, placed=placed, executed=executed, allocated=allocated, derived_state=derived_state, calculated_average_price=calculated_average_price)

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.result_value import ResultValue
 from lusid.models.structured_result_data_id import StructuredResultDataId
 
@@ -27,10 +29,10 @@ class UpsertResultValuesDataRequest(BaseModel):
     """
     UpsertResultValuesDataRequest
     """
-    document_id: StructuredResultDataId = Field(..., alias="documentId")
-    key: Optional[Dict[str, StrictStr]] = Field(None, description="The structured unit result data key.")
+    document_id: StructuredResultDataId = Field(alias="documentId")
+    key: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The structured unit result data key.")
     data_address:  Optional[StrictStr] = Field(None,alias="dataAddress", description="The address of the piece of unit result data") 
-    result_value: Optional[ResultValue] = Field(None, alias="resultValue")
+    result_value: Optional[ResultValue] = Field(default=None, alias="resultValue")
     __properties = ["documentId", "key", "dataAddress", "resultValue"]
 
     class Config:
@@ -99,3 +101,5 @@ class UpsertResultValuesDataRequest(BaseModel):
             "result_value": ResultValue.from_dict(obj.get("resultValue")) if obj.get("resultValue") is not None else None
         })
         return _obj
+
+UpsertResultValuesDataRequest.update_forward_refs()

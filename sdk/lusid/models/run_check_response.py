@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_quality_check_result import DataQualityCheckResult
 
 class RunCheckResponse(BaseModel):
     """
     Response containing the results of running data quality checks  # noqa: E501
     """
-    data_quality_check_results: Optional[conlist(DataQualityCheckResult)] = Field(None, alias="dataQualityCheckResults", description="Collection of data quality check results")
+    data_quality_check_results: Optional[List[DataQualityCheckResult]] = Field(default=None, description="Collection of data quality check results", alias="dataQualityCheckResults")
     __properties = ["dataQualityCheckResults"]
 
     class Config:
@@ -88,3 +90,5 @@ class RunCheckResponse(BaseModel):
             "data_quality_check_results": [DataQualityCheckResult.from_dict(_item) for _item in obj.get("dataQualityCheckResults")] if obj.get("dataQualityCheckResults") is not None else None
         })
         return _obj
+
+RunCheckResponse.update_forward_refs()

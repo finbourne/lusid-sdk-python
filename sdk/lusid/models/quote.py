@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.metric_value import MetricValue
 from lusid.models.quote_id import QuoteId
 
@@ -27,13 +29,13 @@ class Quote(BaseModel):
     """
     The quote id, value and lineage of the quotes all keyed by a unique correlation id.  # noqa: E501
     """
-    quote_id: QuoteId = Field(..., alias="quoteId")
-    metric_value: Optional[MetricValue] = Field(None, alias="metricValue")
+    quote_id: QuoteId = Field(alias="quoteId")
+    metric_value: Optional[MetricValue] = Field(default=None, alias="metricValue")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.") 
     cut_label:  Optional[StrictStr] = Field(None,alias="cutLabel", description="The cut label that this quote was updated or inserted with.") 
     uploaded_by:  StrictStr = Field(...,alias="uploadedBy", description="The unique id of the user that updated or inserted the quote.") 
-    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the quote was committed to LUSID.")
-    scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="scaleFactor", description="An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.")
+    as_at: datetime = Field(description="The asAt datetime at which the quote was committed to LUSID.", alias="asAt")
+    scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.", alias="scaleFactor")
     __properties = ["quoteId", "metricValue", "lineage", "cutLabel", "uploadedBy", "asAt", "scaleFactor"]
 
     class Config:
@@ -110,3 +112,5 @@ class Quote(BaseModel):
             "scale_factor": obj.get("scaleFactor")
         })
         return _obj
+
+Quote.update_forward_refs()

@@ -13,8 +13,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.opaque_market_data import OpaqueMarketData
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 document: StrictStr = "example_document"
 format: StrictStr = "example_format"

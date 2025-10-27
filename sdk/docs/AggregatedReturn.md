@@ -17,9 +17,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.aggregated_return import AggregatedReturn
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 effective_at: datetime = # Replace with your value
 end_of_period: datetime = # Replace with your value
 opening_market_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
@@ -28,8 +30,8 @@ metrics_value: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your va
 frequency: Optional[StrictStr] = "example_frequency"
 composite_members: Optional[StrictInt] = # Replace with your value
 composite_members: Optional[StrictInt] = None
-composite_members_without_return: Optional[conlist(ResourceId)] = # Replace with your value
-warnings: Optional[conlist(StrictStr)] = # Replace with your value
+composite_members_without_return: Optional[List[ResourceId]] = # Replace with your value
+warnings: Optional[List[StrictStr]] = # Replace with your value
 aggregated_return_instance = AggregatedReturn(effective_at=effective_at, end_of_period=end_of_period, opening_market_value=opening_market_value, closing_market_value=closing_market_value, metrics_value=metrics_value, frequency=frequency, composite_members=composite_members, composite_members_without_return=composite_members_without_return, warnings=warnings)
 
 ```

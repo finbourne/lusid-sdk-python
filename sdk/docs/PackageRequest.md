@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.package_request import PackageRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
-order_ids: conlist(ResourceId) = # Replace with your value
-order_instruction_ids: conlist(ResourceId) = # Replace with your value
+id: ResourceId
+order_ids: List[ResourceId] = # Replace with your value
+order_instruction_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 package_request_instance = PackageRequest(id=id, order_ids=order_ids, order_instruction_ids=order_instruction_ids, properties=properties)
 

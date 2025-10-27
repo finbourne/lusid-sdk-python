@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from lusid.models.link import Link
 
 class PeriodDiaryEntriesReopenedResponse(BaseModel):
@@ -27,12 +29,12 @@ class PeriodDiaryEntriesReopenedResponse(BaseModel):
     PeriodDiaryEntriesReopenedResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.")
-    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the deletion was committed to LUSID.")
-    period_diary_entries_removed: StrictInt = Field(..., alias="periodDiaryEntriesRemoved", description="Number of Diary Entries removed as a result of reopening periods")
-    period_diary_entries_from: datetime = Field(..., alias="periodDiaryEntriesFrom", description="The start point where periods were removed from")
-    period_diary_entries_to: datetime = Field(..., alias="periodDiaryEntriesTo", description="The end point where periods were removed to")
-    links: Optional[conlist(Link)] = None
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.", alias="effectiveFrom")
+    as_at: datetime = Field(description="The asAt datetime at which the deletion was committed to LUSID.", alias="asAt")
+    period_diary_entries_removed: StrictInt = Field(description="Number of Diary Entries removed as a result of reopening periods", alias="periodDiaryEntriesRemoved")
+    period_diary_entries_from: datetime = Field(description="The start point where periods were removed from", alias="periodDiaryEntriesFrom")
+    period_diary_entries_to: datetime = Field(description="The end point where periods were removed to", alias="periodDiaryEntriesTo")
+    links: Optional[List[Link]] = None
     __properties = ["href", "effectiveFrom", "asAt", "periodDiaryEntriesRemoved", "periodDiaryEntriesFrom", "periodDiaryEntriesTo", "links"]
 
     class Config:
@@ -110,3 +112,5 @@ class PeriodDiaryEntriesReopenedResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PeriodDiaryEntriesReopenedResponse.update_forward_refs()

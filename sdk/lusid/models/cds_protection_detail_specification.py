@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CdsProtectionDetailSpecification(BaseModel):
     """
@@ -27,8 +29,8 @@ class CdsProtectionDetailSpecification(BaseModel):
     """
     seniority:  Optional[StrictStr] = Field(None,alias="seniority", description="The seniority level of the CDS.  Supported string (enumeration) values are: [SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2].  Defaults to \"SUB\" if not set.") 
     restructuring_type:  Optional[StrictStr] = Field(None,alias="restructuringType", description="The restructuring clause.  Supported string (enumeration) values are: [CR, MR, MM, XR]. Defaults to \"MM\" if not set.") 
-    protect_start_day: Optional[StrictBool] = Field(True, alias="protectStartDay", description="Does the protection leg pay out in the case of default on the start date. Defaults to true if not set.")
-    pay_accrued_interest_on_default: Optional[StrictBool] = Field(True, alias="payAccruedInterestOnDefault", description="Should accrued interest on the premium leg be paid if a credit event occurs. Defaults to true if not set.")
+    protect_start_day: Optional[StrictBool] = Field(default=True, description="Does the protection leg pay out in the case of default on the start date. Defaults to true if not set.", alias="protectStartDay")
+    pay_accrued_interest_on_default: Optional[StrictBool] = Field(default=True, description="Should accrued interest on the premium leg be paid if a credit event occurs. Defaults to true if not set.", alias="payAccruedInterestOnDefault")
     __properties = ["seniority", "restructuringType", "protectStartDay", "payAccruedInterestOnDefault"]
 
     class Config:
@@ -91,3 +93,5 @@ class CdsProtectionDetailSpecification(BaseModel):
             "pay_accrued_interest_on_default": obj.get("payAccruedInterestOnDefault") if obj.get("payAccruedInterestOnDefault") is not None else True
         })
         return _obj
+
+CdsProtectionDetailSpecification.update_forward_refs()

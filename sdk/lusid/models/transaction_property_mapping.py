@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionPropertyMapping(BaseModel):
     """
@@ -27,7 +29,7 @@ class TransactionPropertyMapping(BaseModel):
     """
     property_key:  StrictStr = Field(...,alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}") 
     map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The Property Key of the Property to map from") 
-    set_to: Optional[Any] = Field(None, alias="setTo", description="A pointer to the Property being mapped from")
+    set_to: Optional[Any] = Field(default=None, description="A pointer to the Property being mapped from", alias="setTo")
     __properties = ["propertyKey", "mapFrom", "setTo"]
 
     class Config:
@@ -89,3 +91,5 @@ class TransactionPropertyMapping(BaseModel):
             "set_to": obj.get("setTo")
         })
         return _obj
+
+TransactionPropertyMapping.update_forward_refs()

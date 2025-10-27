@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.recipe_composer import RecipeComposer
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 code: StrictStr = "example_code"
-operations: Optional[conlist(RecipeBlock)] = # Replace with your value
+operations: Optional[List[RecipeBlock]] = # Replace with your value
 recipe_composer_instance = RecipeComposer(scope=scope, code=code, operations=operations)
 
 ```

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.share_class_amount import ShareClassAmount
 
 class PreviousNAV(BaseModel):
@@ -79,3 +81,5 @@ class PreviousNAV(BaseModel):
             "amount": ShareClassAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None
         })
         return _obj
+
+PreviousNAV.update_forward_refs()

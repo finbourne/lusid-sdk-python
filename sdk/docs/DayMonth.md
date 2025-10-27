@@ -9,12 +9,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.day_month import DayMonth
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, conint
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-day: conint(strict=True, le=31, ge=1) = Field(..., description="Day part of Day, Month for Year End date specification.")
+day: StrictInt = # Replace with your value
 day: StrictInt = 42
-month: conint(strict=True, le=12, ge=1) = Field(..., description="Month part of Day, Month for Year End date specification.")
+month: StrictInt = # Replace with your value
 month: StrictInt = 42
 day_month_instance = DayMonth(day=day, month=month)
 

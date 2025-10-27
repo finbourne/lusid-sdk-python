@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: TranslationScriptId = # Replace with your value
+id: TranslationScriptId
 body: StrictStr = "example_body"
 upsert_translation_script_request_instance = UpsertTranslationScriptRequest(id=id, body=body)
 

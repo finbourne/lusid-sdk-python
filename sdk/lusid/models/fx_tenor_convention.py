@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FxTenorConvention(BaseModel):
     """
     A wrapper of conventions that should be used when interpreting tenors in the context of FX.  For instance, can be used to control how tenors are interpreted on an FxForwardTenorCurveData instance.  # noqa: E501
     """
     calendar_code:  StrictStr = Field(...,alias="calendarCode", description="The code of the holiday calendar that should be used when interpreting FX tenors.") 
-    spot_days: StrictInt = Field(..., alias="spotDays", description="The minimum number of business days that must pass within this calendar when calculating the spot date.")
+    spot_days: StrictInt = Field(description="The minimum number of business days that must pass within this calendar when calculating the spot date.", alias="spotDays")
     __properties = ["calendarCode", "spotDays"]
 
     class Config:
@@ -77,3 +79,5 @@ class FxTenorConvention(BaseModel):
             "spot_days": obj.get("spotDays")
         })
         return _obj
+
+FxTenorConvention.update_forward_refs()

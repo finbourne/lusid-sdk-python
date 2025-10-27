@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.get_recipe_composer_response import GetRecipeComposerResponse
 from lusid.models.get_recipe_response import GetRecipeResponse
@@ -895,15 +892,15 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> GetRecipeResponse:  # noqa: E501
+    async def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> GetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
+    def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
+    def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
         """GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
 
         Resolves an inline recipe composer into a ConfigurationRecipe.  # noqa: E501
@@ -934,7 +931,7 @@ class ConfigurationRecipeApi:
         return self.get_recipe_composer_resolved_inline_with_http_info(upsert_recipe_composer_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_recipe_composer_resolved_inline_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_recipe_composer_resolved_inline_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> ApiResponse:  # noqa: E501
         """GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
 
         Resolves an inline recipe composer into a ConfigurationRecipe.  # noqa: E501
@@ -1543,15 +1540,15 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(..., description="The Configuration Recipe to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(description="The Configuration Recipe to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(..., description="The Configuration Recipe to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(description="The Configuration Recipe to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(..., description="The Configuration Recipe to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_configuration_recipe(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(description="The Configuration Recipe to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one Configuration Recipe in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Configuration Recipe or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1582,7 +1579,7 @@ class ConfigurationRecipeApi:
         return self.upsert_configuration_recipe_with_http_info(upsert_recipe_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_configuration_recipe_with_http_info(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(..., description="The Configuration Recipe to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_configuration_recipe_with_http_info(self, upsert_recipe_request : Annotated[UpsertRecipeRequest, Field(description="The Configuration Recipe to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertConfigurationRecipe: Upsert a Configuration Recipe. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one Configuration Recipe in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Configuration Recipe or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1702,15 +1699,15 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    async def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="The Recipe Composer to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+    def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="The Recipe Composer to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+    def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="The Recipe Composer to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
         """UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
@@ -1741,7 +1738,7 @@ class ConfigurationRecipeApi:
         return self.upsert_recipe_composer_with_http_info(upsert_recipe_composer_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_recipe_composer_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_recipe_composer_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(description="The Recipe Composer to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 from lusid.models.link import Link
 from lusid.models.version import Version
@@ -33,9 +35,9 @@ class CustomEntityType(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="A display label for the custom entity type.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the custom entity type.") 
     entity_type:  StrictStr = Field(...,alias="entityType", description="The identifier for the custom entity type, derived from the “entityTypeName” provided on creation.") 
-    field_schema: conlist(CustomEntityFieldDefinition) = Field(..., alias="fieldSchema", description="The description of the fields on the custom entity type.")
-    version: Version = Field(...)
-    links: Optional[conlist(Link)] = None
+    field_schema: List[CustomEntityFieldDefinition] = Field(description="The description of the fields on the custom entity type.", alias="fieldSchema")
+    version: Version
+    links: Optional[List[Link]] = None
     __properties = ["href", "entityTypeName", "displayName", "description", "entityType", "fieldSchema", "version", "links"]
 
     class Config:
@@ -124,3 +126,5 @@ class CustomEntityType(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CustomEntityType.update_forward_refs()

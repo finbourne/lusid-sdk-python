@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
 
 class BondConversionEntry(BaseModel):
     """
     Information required to specify a conversion event for a convertible bond.  # noqa: E501
     """
-    var_date: Optional[datetime] = Field(None, alias="date", description="The date at which the bond can be converted")
-    denomination: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The number of shares to be issued on conversion will be equal to the denomination of the  bond divided by the conversion price.  Two (and only two) entries out of (Price, Ratio, Denomination) must be provided.  So, to allow one entry out of the three to not be provided, we make all the three  nullable defaulting to zero and during validation we check if there is exactly one  of the three equal to zero.")
-    price: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The conversion price  Two (and only two) entries out of (Price, Ratio, Denomination) must be provided.  So, to allow one entry out of the three to not be provided, we make all the three  nullable defaulting to zero and during validation we check if there is exactly one  of the three equal to zero.")
-    ratio: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The number of common shares received at the time of conversion for each convertible bond  Two (and only two) entries out of (Price, Ratio, Denomination) must be provided.  So, to allow one entry out of the three to not be provided, we make all the three  nullable defaulting to zero and during validation we check if there is exactly one  of the three equal to zero.")
+    var_date: Optional[datetime] = Field(default=None, description="The date at which the bond can be converted", alias="date")
+    denomination: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of shares to be issued on conversion will be equal to the denomination of the  bond divided by the conversion price.  Two (and only two) entries out of (Price, Ratio, Denomination) must be provided.  So, to allow one entry out of the three to not be provided, we make all the three  nullable defaulting to zero and during validation we check if there is exactly one  of the three equal to zero.")
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The conversion price  Two (and only two) entries out of (Price, Ratio, Denomination) must be provided.  So, to allow one entry out of the three to not be provided, we make all the three  nullable defaulting to zero and during validation we check if there is exactly one  of the three equal to zero.")
+    ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of common shares received at the time of conversion for each convertible bond  Two (and only two) entries out of (Price, Ratio, Denomination) must be provided.  So, to allow one entry out of the three to not be provided, we make all the three  nullable defaulting to zero and during validation we check if there is exactly one  of the three equal to zero.")
     __properties = ["date", "denomination", "price", "ratio"]
 
     class Config:
@@ -81,3 +83,5 @@ class BondConversionEntry(BaseModel):
             "ratio": obj.get("ratio")
         })
         return _obj
+
+BondConversionEntry.update_forward_refs()

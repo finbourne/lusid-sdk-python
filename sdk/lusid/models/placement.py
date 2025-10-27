@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
@@ -31,26 +33,26 @@ class Placement(BaseModel):
     """
     A street order for a quantity of a single instrument placed with a single market entity.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    parent_placement_id: Optional[ResourceId] = Field(None, alias="parentPlacementId")
-    block_ids: conlist(ResourceId) = Field(..., alias="blockIds", description="The IDs of the Blocks associated with this placement.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this placement.")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="The instrument ordered.")
+    id: ResourceId
+    parent_placement_id: Optional[ResourceId] = Field(default=None, alias="parentPlacementId")
+    block_ids: List[ResourceId] = Field(description="The IDs of the Blocks associated with this placement.", alias="blockIds")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this placement.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument placement.") 
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of given instrument ordered.")
     state:  StrictStr = Field(...,alias="state", description="The state of this placement (typically a FIX state; Open, Filled, etc).") 
     side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this placement.") 
     time_in_force:  StrictStr = Field(...,alias="timeInForce", description="The time in force applicable to this placement (GTC, FOK, Day, etc)") 
     type:  StrictStr = Field(...,alias="type", description="The type of this placement (Market, Limit, etc).") 
-    created_date: datetime = Field(..., alias="createdDate", description="The active date of this placement.")
-    limit_price: Optional[CurrencyAndAmount] = Field(None, alias="limitPrice")
-    stop_price: Optional[CurrencyAndAmount] = Field(None, alias="stopPrice")
+    created_date: datetime = Field(description="The active date of this placement.", alias="createdDate")
+    limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
+    stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
     execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
     entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement.") 
     version: Optional[Version] = None
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["id", "parentPlacementId", "blockIds", "properties", "instrumentIdentifiers", "lusidInstrumentId", "quantity", "state", "side", "timeInForce", "type", "createdDate", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType", "version", "dataModelMembership", "links"]
 
     class Config:
@@ -188,3 +190,5 @@ class Placement(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Placement.update_forward_refs()

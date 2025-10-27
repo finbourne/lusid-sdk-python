@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.abor_request import AborRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-portfolio_ids: conlist(PortfolioEntityId) = # Replace with your value
+portfolio_ids: List[PortfolioEntityId] = # Replace with your value
 abor_configuration_id: ResourceId = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 abor_request_instance = AborRequest(code=code, display_name=display_name, description=description, portfolio_ids=portfolio_ids, abor_configuration_id=abor_configuration_id, properties=properties)

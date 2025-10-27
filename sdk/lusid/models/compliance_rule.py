@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -34,11 +36,11 @@ class ComplianceRule(BaseModel):
     property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="") 
     value:  Optional[StrictStr] = Field(None,alias="value", description="") 
     address_key:  Optional[StrictStr] = Field(None,alias="addressKey", description="") 
-    lower_bound: Union[StrictFloat, StrictInt] = Field(..., alias="lowerBound")
-    upper_bound: Union[StrictFloat, StrictInt] = Field(..., alias="upperBound")
+    lower_bound: Union[StrictFloat, StrictInt] = Field(alias="lowerBound")
+    upper_bound: Union[StrictFloat, StrictInt] = Field(alias="upperBound")
     schedule:  StrictStr = Field(...,alias="schedule", description="") 
-    hard_requirement: StrictBool = Field(..., alias="hardRequirement")
-    target_portfolio_ids: conlist(ResourceId) = Field(..., alias="targetPortfolioIds")
+    hard_requirement: StrictBool = Field(alias="hardRequirement")
+    target_portfolio_ids: List[ResourceId] = Field(alias="targetPortfolioIds")
     description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     version: Optional[Version] = None
     __properties = ["scope", "code", "displayName", "type", "propertyKey", "value", "addressKey", "lowerBound", "upperBound", "schedule", "hardRequirement", "targetPortfolioIds", "description", "version"]
@@ -133,3 +135,5 @@ class ComplianceRule(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj
+
+ComplianceRule.update_forward_refs()

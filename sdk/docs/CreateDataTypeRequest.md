@@ -17,8 +17,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_data_type_request import CreateDataTypeRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 code: StrictStr = "example_code"
@@ -26,9 +28,9 @@ type_value_range: StrictStr = "example_type_value_range"
 display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 value_type: StrictStr = "example_value_type"
-acceptable_values: Optional[conlist(StrictStr)] = # Replace with your value
+acceptable_values: Optional[List[StrictStr]] = # Replace with your value
 unit_schema: Optional[StrictStr] = "example_unit_schema"
-acceptable_units: Optional[conlist(CreateUnitDefinition)] = # Replace with your value
+acceptable_units: Optional[List[CreateUnitDefinition]] = # Replace with your value
 reference_data: Optional[ReferenceData] = # Replace with your value
 create_data_type_request_instance = CreateDataTypeRequest(scope=scope, code=code, type_value_range=type_value_range, display_name=display_name, description=description, value_type=value_type, acceptable_values=acceptable_values, unit_schema=unit_schema, acceptable_units=acceptable_units, reference_data=reference_data)
 

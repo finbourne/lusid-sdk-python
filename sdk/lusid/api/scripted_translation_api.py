@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conint, constr, validator
-
+from pydantic.v1 import Field, StrictInt, StrictStr
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.dialect import Dialect
 from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
@@ -445,15 +442,15 @@ class ScriptedTranslationApi:
 
 
     @overload
-    async def list_dialect_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfDialectId:  # noqa: E501
+    async def list_dialect_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfDialectId:  # noqa: E501
         ...
 
     @overload
-    def list_dialect_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDialectId:  # noqa: E501
+    def list_dialect_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDialectId:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_dialect_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDialectId, Awaitable[PagedResourceListOfDialectId]]:  # noqa: E501
+    def list_dialect_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDialectId, Awaitable[PagedResourceListOfDialectId]]:  # noqa: E501
         """[EARLY ACCESS] ListDialectIds: List dialect identifiers matching an optional filter.  # noqa: E501
 
         List the stored dialects' identifiers with pagination and filtering at the specified asAt time.  # noqa: E501
@@ -490,7 +487,7 @@ class ScriptedTranslationApi:
         return self.list_dialect_ids_with_http_info(as_at, page, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_dialect_ids_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_dialect_ids_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListDialectIds: List dialect identifiers matching an optional filter.  # noqa: E501
 
         List the stored dialects' identifiers with pagination and filtering at the specified asAt time.  # noqa: E501
@@ -624,15 +621,15 @@ class ScriptedTranslationApi:
 
 
     @overload
-    async def list_translation_script_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfTranslationScriptId:  # noqa: E501
+    async def list_translation_script_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfTranslationScriptId:  # noqa: E501
         ...
 
     @overload
-    def list_translation_script_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTranslationScriptId:  # noqa: E501
+    def list_translation_script_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTranslationScriptId:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_translation_script_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTranslationScriptId, Awaitable[PagedResourceListOfTranslationScriptId]]:  # noqa: E501
+    def list_translation_script_ids(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTranslationScriptId, Awaitable[PagedResourceListOfTranslationScriptId]]:  # noqa: E501
         """[EARLY ACCESS] ListTranslationScriptIds: List translation script identifiers.  # noqa: E501
 
         List translation script ids.  # noqa: E501
@@ -669,7 +666,7 @@ class ScriptedTranslationApi:
         return self.list_translation_script_ids_with_http_info(as_at, limit, filter, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_translation_script_ids_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_translation_script_ids_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the script identifiers. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListTranslationScriptIds: List translation script identifiers.  # noqa: E501
 
         List translation script ids.  # noqa: E501
@@ -803,15 +800,15 @@ class ScriptedTranslationApi:
 
 
     @overload
-    async def translate_entities(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(..., description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
+    async def translate_entities(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
         ...
 
     @overload
-    def translate_entities(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(..., description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], async_req: Optional[bool]=True, **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
+    def translate_entities(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], async_req: Optional[bool]=True, **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def translate_entities(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(..., description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateEntitiesResponse, Awaitable[TranslateEntitiesResponse]]:  # noqa: E501
+    def translate_entities(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateEntitiesResponse, Awaitable[TranslateEntitiesResponse]]:  # noqa: E501
         """[EARLY ACCESS] TranslateEntities: Translate a collection of entities with a specified translation script.  # noqa: E501
 
         Run the provided translation request. The entities to translate are specified in the request body as a  dictionary with (ephemeral) unique correlation IDs. The script to use and optional dialect to validate  results against are sourced from the database.  # noqa: E501
@@ -842,7 +839,7 @@ class ScriptedTranslationApi:
         return self.translate_entities_with_http_info(translate_entities_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def translate_entities_with_http_info(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(..., description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def translate_entities_with_http_info(self, translate_entities_request : Annotated[TranslateEntitiesRequest, Field(description="The entities to translate, along with identifiers for the script and (optional) dialect to use.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] TranslateEntities: Translate a collection of entities with a specified translation script.  # noqa: E501
 
         Run the provided translation request. The entities to translate are specified in the request body as a  dictionary with (ephemeral) unique correlation IDs. The script to use and optional dialect to validate  results against are sourced from the database.  # noqa: E501
@@ -962,15 +959,15 @@ class ScriptedTranslationApi:
 
 
     @overload
-    async def translate_entities_inlined(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(..., description="The entities to translate, along with the script to use and an optional schema for validation.")], **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
+    async def translate_entities_inlined(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(description="The entities to translate, along with the script to use and an optional schema for validation.")], **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
         ...
 
     @overload
-    def translate_entities_inlined(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(..., description="The entities to translate, along with the script to use and an optional schema for validation.")], async_req: Optional[bool]=True, **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
+    def translate_entities_inlined(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(description="The entities to translate, along with the script to use and an optional schema for validation.")], async_req: Optional[bool]=True, **kwargs) -> TranslateEntitiesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def translate_entities_inlined(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(..., description="The entities to translate, along with the script to use and an optional schema for validation.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateEntitiesResponse, Awaitable[TranslateEntitiesResponse]]:  # noqa: E501
+    def translate_entities_inlined(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(description="The entities to translate, along with the script to use and an optional schema for validation.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslateEntitiesResponse, Awaitable[TranslateEntitiesResponse]]:  # noqa: E501
         """[EARLY ACCESS] TranslateEntitiesInlined: Translate a collection of entities, inlining the body of the translation script.  # noqa: E501
 
         Run the provided translation request. The entities to translate, script to use and dialect to validate results against  are all specified in the request body. The entities are given as a dictionary with (ephemeral) unique correlation IDs.  # noqa: E501
@@ -1001,7 +998,7 @@ class ScriptedTranslationApi:
         return self.translate_entities_inlined_with_http_info(translate_entities_inlined_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def translate_entities_inlined_with_http_info(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(..., description="The entities to translate, along with the script to use and an optional schema for validation.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def translate_entities_inlined_with_http_info(self, translate_entities_inlined_request : Annotated[TranslateEntitiesInlinedRequest, Field(description="The entities to translate, along with the script to use and an optional schema for validation.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] TranslateEntitiesInlined: Translate a collection of entities, inlining the body of the translation script.  # noqa: E501
 
         Run the provided translation request. The entities to translate, script to use and dialect to validate results against  are all specified in the request body. The entities are given as a dictionary with (ephemeral) unique correlation IDs.  # noqa: E501
@@ -1121,15 +1118,15 @@ class ScriptedTranslationApi:
 
 
     @overload
-    async def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], **kwargs) -> Dialect:  # noqa: E501
+    async def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(description="The dialect to upsert.")], **kwargs) -> Dialect:  # noqa: E501
         ...
 
     @overload
-    def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], async_req: Optional[bool]=True, **kwargs) -> Dialect:  # noqa: E501
+    def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(description="The dialect to upsert.")], async_req: Optional[bool]=True, **kwargs) -> Dialect:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[Dialect, Awaitable[Dialect]]:  # noqa: E501
+    def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(description="The dialect to upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[Dialect, Awaitable[Dialect]]:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.  # noqa: E501
 
         Upsert the given dialect.  # noqa: E501
@@ -1160,7 +1157,7 @@ class ScriptedTranslationApi:
         return self.upsert_translation_dialect_with_http_info(upsert_dialect_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_translation_dialect_with_http_info(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_translation_dialect_with_http_info(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(description="The dialect to upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.  # noqa: E501
 
         Upsert the given dialect.  # noqa: E501
@@ -1280,15 +1277,15 @@ class ScriptedTranslationApi:
 
 
     @overload
-    async def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], **kwargs) -> TranslationScript:  # noqa: E501
+    async def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(description="The translation script to be upserted.")], **kwargs) -> TranslationScript:  # noqa: E501
         ...
 
     @overload
-    def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], async_req: Optional[bool]=True, **kwargs) -> TranslationScript:  # noqa: E501
+    def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(description="The translation script to be upserted.")], async_req: Optional[bool]=True, **kwargs) -> TranslationScript:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslationScript, Awaitable[TranslationScript]]:  # noqa: E501
+    def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(description="The translation script to be upserted.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslationScript, Awaitable[TranslationScript]]:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.  # noqa: E501
 
         Upserts a translation script to be used for translating financial entities.  # noqa: E501
@@ -1319,7 +1316,7 @@ class ScriptedTranslationApi:
         return self.upsert_translation_script_with_http_info(upsert_translation_script_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_translation_script_with_http_info(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_translation_script_with_http_info(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(description="The translation script to be upserted.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.  # noqa: E501
 
         Upserts a translation script to be used for translating financial entities.  # noqa: E501

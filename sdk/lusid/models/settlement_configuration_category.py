@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class SettlementConfigurationCategory(BaseModel):
     """
     SettlementConfigurationCategory
     """
     method:  Optional[StrictStr] = Field(None,alias="method", description="The method of settlement for the movements of the relevant type(s). Allowed values: 'Automatic' and 'Instructed'. A value of 'Instructed' means that such movements can only be settled with a SettlementInstruction. A value of 'Automatic' means that such movements will settle automatically but a SettlementInstruction will still override automatic settlement.") 
-    calculate_instruction_to_portfolio_rate: Optional[StrictBool] = Field(None, alias="calculateInstructionToPortfolioRate", description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.")
-    calculate_in_lieu_settlement_amount: Optional[StrictBool] = Field(None, alias="calculateInLieuSettlementAmount", description="An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.")
+    calculate_instruction_to_portfolio_rate: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateInstructionToPortfolioRate")
+    calculate_in_lieu_settlement_amount: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateInLieuSettlementAmount")
     __properties = ["method", "calculateInstructionToPortfolioRate", "calculateInLieuSettlementAmount"]
 
     class Config:
@@ -84,3 +86,5 @@ class SettlementConfigurationCategory(BaseModel):
             "calculate_in_lieu_settlement_amount": obj.get("calculateInLieuSettlementAmount")
         })
         return _obj
+
+SettlementConfigurationCategory.update_forward_refs()

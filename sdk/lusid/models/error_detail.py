@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ErrorDetail(BaseModel):
     """
@@ -28,7 +30,7 @@ class ErrorDetail(BaseModel):
     id:  Optional[StrictStr] = Field(None,alias="id", description="The id of the failed item that this error relates to.") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of failure that occurred.") 
     detail:  Optional[StrictStr] = Field(None,alias="detail", description="Description of the failure that occurred.") 
-    error_details: Optional[conlist(Dict[str, StrictStr])] = Field(None, alias="errorDetails", description="Information about the particular instance of the failure (supplied information depends on the type of failure).")
+    error_details: Optional[List[Dict[str, StrictStr]]] = Field(default=None, description="Information about the particular instance of the failure (supplied information depends on the type of failure).", alias="errorDetails")
     __properties = ["id", "type", "detail", "errorDetails"]
 
     class Config:
@@ -101,3 +103,5 @@ class ErrorDetail(BaseModel):
             "error_details": obj.get("errorDetails")
         })
         return _obj
+
+ErrorDetail.update_forward_refs()

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **placement_id** | [**ResourceId**](ResourceId.md) |  | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The quantity of given instrument ordered. | 
 **state** | **str** | The state of this execution (typically a FIX state; Open, Filled, etc). | 
 **side** | **str** | The side (Buy, Sell, ...) of this execution. | 
@@ -23,20 +23,22 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.execution_request import ExecutionRequest
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-id: ResourceId = # Replace with your value
+
+id: ResourceId
 placement_id: ResourceId = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 state: StrictStr = "example_state"
 side: StrictStr = "example_side"
 type: StrictStr = "example_type"
 created_date: datetime = # Replace with your value
 settlement_date: Optional[datetime] = # Replace with your value
-price: CurrencyAndAmount = # Replace with your value
+price: CurrencyAndAmount
 settlement_currency: StrictStr = "example_settlement_currency"
 settlement_currency_fx_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 counterparty: StrictStr = "example_counterparty"

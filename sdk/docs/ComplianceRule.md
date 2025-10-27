@@ -21,8 +21,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_rule import ComplianceRule
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 scope: StrictStr = "example_scope"
 code: StrictStr = "example_code"
@@ -36,7 +38,7 @@ upper_bound: Union[StrictFloat, StrictInt] = # Replace with your value
 schedule: StrictStr = "example_schedule"
 hard_requirement: StrictBool = # Replace with your value
 hard_requirement:StrictBool = True
-target_portfolio_ids: conlist(ResourceId) = # Replace with your value
+target_portfolio_ids: List[ResourceId] = # Replace with your value
 description: Optional[StrictStr] = "example_description"
 version: Optional[Version] = None
 compliance_rule_instance = ComplianceRule(scope=scope, code=code, display_name=display_name, type=type, property_key=property_key, value=value, address_key=address_key, lower_bound=lower_bound, upper_bound=upper_bound, schedule=schedule, hard_requirement=hard_requirement, target_portfolio_ids=target_portfolio_ids, description=description, version=version)

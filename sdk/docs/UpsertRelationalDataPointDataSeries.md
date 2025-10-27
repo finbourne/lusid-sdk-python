@@ -5,13 +5,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **series_scope** | **str** | The scope of the DataSeries. | 
 **applicable_entity** | [**ApplicableEntity**](ApplicableEntity.md) |  | 
-**series_identifiers** | **Dict[str, object]** | The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition. | 
+**series_identifiers** | **Dict[str, Optional[object]]** | The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition. | 
 ## Example
 
 ```python
 from lusid.models.upsert_relational_data_point_data_series import UpsertRelationalDataPointDataSeries
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 series_scope: StrictStr = "example_series_scope"
 applicable_entity: ApplicableEntity = # Replace with your value

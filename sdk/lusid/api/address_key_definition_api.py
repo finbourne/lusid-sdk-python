@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictStr, conint, constr, validator
-
+from pydantic.v1 import Field, StrictInt, StrictStr
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.address_key_definition import AddressKeyDefinition
 from lusid.models.create_address_key_definition_request import CreateAddressKeyDefinitionRequest
 from lusid.models.paged_resource_list_of_address_key_definition import PagedResourceListOfAddressKeyDefinition
@@ -57,15 +54,15 @@ class AddressKeyDefinitionApi:
 
 
     @overload
-    async def create_address_key_definition(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(..., description="The request used to create the address key definition.")], **kwargs) -> AddressKeyDefinition:  # noqa: E501
+    async def create_address_key_definition(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(description="The request used to create the address key definition.")], **kwargs) -> AddressKeyDefinition:  # noqa: E501
         ...
 
     @overload
-    def create_address_key_definition(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(..., description="The request used to create the address key definition.")], async_req: Optional[bool]=True, **kwargs) -> AddressKeyDefinition:  # noqa: E501
+    def create_address_key_definition(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(description="The request used to create the address key definition.")], async_req: Optional[bool]=True, **kwargs) -> AddressKeyDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_address_key_definition(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(..., description="The request used to create the address key definition.")], async_req: Optional[bool]=None, **kwargs) -> Union[AddressKeyDefinition, Awaitable[AddressKeyDefinition]]:  # noqa: E501
+    def create_address_key_definition(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(description="The request used to create the address key definition.")], async_req: Optional[bool]=None, **kwargs) -> Union[AddressKeyDefinition, Awaitable[AddressKeyDefinition]]:  # noqa: E501
         """[EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.  # noqa: E501
 
         Create the given address key definition.  # noqa: E501
@@ -96,7 +93,7 @@ class AddressKeyDefinitionApi:
         return self.create_address_key_definition_with_http_info(create_address_key_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_address_key_definition_with_http_info(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(..., description="The request used to create the address key definition.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_address_key_definition_with_http_info(self, create_address_key_definition_request : Annotated[CreateAddressKeyDefinitionRequest, Field(description="The request used to create the address key definition.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.  # noqa: E501
 
         Create the given address key definition.  # noqa: E501
@@ -379,15 +376,15 @@ class AddressKeyDefinitionApi:
 
 
     @overload
-    async def list_address_key_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfAddressKeyDefinition:  # noqa: E501
+    async def list_address_key_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfAddressKeyDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_address_key_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfAddressKeyDefinition:  # noqa: E501
+    def list_address_key_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfAddressKeyDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_address_key_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAddressKeyDefinition, Awaitable[PagedResourceListOfAddressKeyDefinition]]:  # noqa: E501
+    def list_address_key_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAddressKeyDefinition, Awaitable[PagedResourceListOfAddressKeyDefinition]]:  # noqa: E501
         """[EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.  # noqa: E501
 
         Fetch the last pre-AsAt date version of each address key definition.  # noqa: E501
@@ -424,7 +421,7 @@ class AddressKeyDefinitionApi:
         return self.list_address_key_definitions_with_http_info(as_at, page, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_address_key_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_address_key_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the address key definition.              Defaults to return the latest version of the address key definition if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing address key definitions from a previous call to list address key definitions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.  # noqa: E501
 
         Fetch the last pre-AsAt date version of each address key definition.  # noqa: E501

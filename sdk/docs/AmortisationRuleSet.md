@@ -14,16 +14,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.amortisation_rule_set import AmortisationRuleSet
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 rules_interval: RulesInterval = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 amortisation_rule_set_instance = AmortisationRuleSet(href=href, id=id, display_name=display_name, description=description, rules_interval=rules_interval, version=version, links=links)
 
 ```

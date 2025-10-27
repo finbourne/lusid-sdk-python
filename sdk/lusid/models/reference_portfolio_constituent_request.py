@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 
 class ReferencePortfolioConstituentRequest(BaseModel):
     """
     ReferencePortfolioConstituentRequest
     """
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
     properties: Optional[Dict[str, PerpetualProperty]] = None
-    weight: Union[StrictFloat, StrictInt] = Field(...)
+    weight: Union[StrictFloat, StrictInt]
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="") 
     __properties = ["instrumentIdentifiers", "properties", "weight", "currency"]
 
@@ -104,3 +106,5 @@ class ReferencePortfolioConstituentRequest(BaseModel):
             "currency": obj.get("currency")
         })
         return _obj
+
+ReferencePortfolioConstituentRequest.update_forward_refs()

@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.resource_id import ResourceId
 
 class PortfolioReconciliationRequest(BaseModel):
     """
     PortfolioReconciliationRequest
     """
-    portfolio_id: ResourceId = Field(..., alias="portfolioId")
+    portfolio_id: ResourceId = Field(alias="portfolioId")
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effective date of the portfolio") 
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="Optional. The AsAt date of the portfolio")
+    as_at: Optional[datetime] = Field(default=None, description="Optional. The AsAt date of the portfolio", alias="asAt")
     __properties = ["portfolioId", "effectiveAt", "asAt"]
 
     class Config:
@@ -88,3 +90,5 @@ class PortfolioReconciliationRequest(BaseModel):
             "as_at": obj.get("asAt")
         })
         return _obj
+
+PortfolioReconciliationRequest.update_forward_refs()

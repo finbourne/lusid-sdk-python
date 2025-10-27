@@ -4,7 +4,7 @@ Set of identifiers of an existing FlexibleLoan contract.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifiers** | **Dict[str, str]** | Unique instrument identifiers. | 
+**identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers. | 
 **lusid_instrument_id** | **str** | LUSID&#39;s internal unique instrument identifier - readonly field, resolved from the instrument identifiers. | [optional] [readonly] 
 **instrument_scope** | **str** | The scope in which the FlexibleLoan instrument lies - readonly field, resolved from the instrument identifiers. | [optional] [readonly] 
 **instrument_name** | **str** | The name of the FlexibleLoan instrument - readonly field, resolved from the instrument identifiers. | [optional] [readonly] 
@@ -13,10 +13,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.contract_details import ContractDetails
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-identifiers: Dict[str, StrictStr] = # Replace with your value
+identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 instrument_name: Optional[StrictStr] = "example_instrument_name"

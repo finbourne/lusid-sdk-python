@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class EarlyRedemptionElection(BaseModel):
     """
     EarlyRedemptionElection for EarlyRedemptionEvent  # noqa: E501
     """
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election") 
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
-    is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
+    is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
+    is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
     __properties = ["electionKey", "isDefault", "isChosen"]
 
     class Config:
@@ -79,3 +81,5 @@ class EarlyRedemptionElection(BaseModel):
             "is_chosen": obj.get("isChosen")
         })
         return _obj
+
+EarlyRedemptionElection.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
 from lusid.models.resource_id import ResourceId
 
@@ -27,8 +29,8 @@ class PortfolioTradeTicket(BaseModel):
     """
     Response for querying trade tickets  # noqa: E501
     """
-    source_portfolio_id: Optional[ResourceId] = Field(None, alias="sourcePortfolioId")
-    trade_ticket: Optional[LusidTradeTicket] = Field(None, alias="tradeTicket")
+    source_portfolio_id: Optional[ResourceId] = Field(default=None, alias="sourcePortfolioId")
+    trade_ticket: Optional[LusidTradeTicket] = Field(default=None, alias="tradeTicket")
     __properties = ["sourcePortfolioId", "tradeTicket"]
 
     class Config:
@@ -85,3 +87,5 @@ class PortfolioTradeTicket(BaseModel):
             "trade_ticket": LusidTradeTicket.from_dict(obj.get("tradeTicket")) if obj.get("tradeTicket") is not None else None
         })
         return _obj
+
+PortfolioTradeTicket.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.portfolio import Portfolio
 
 class InvestmentPortfolio(BaseModel):
@@ -28,7 +30,7 @@ class InvestmentPortfolio(BaseModel):
     """
     key:  Optional[StrictStr] = Field(None,alias="key", description="A client-defined key used to identify the Investment Portfolio, unique within the Investment Account") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the Investment Portfolio") 
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The code identifier of the Investment Portfolio")
+    identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The code identifier of the Investment Portfolio")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Portfolio entity identifier") 
     portfolio: Optional[Portfolio] = None
     __properties = ["key", "scope", "identifiers", "entityUniqueId", "portfolio"]
@@ -107,3 +109,5 @@ class InvestmentPortfolio(BaseModel):
             "portfolio": Portfolio.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None
         })
         return _obj
+
+InvestmentPortfolio.update_forward_refs()

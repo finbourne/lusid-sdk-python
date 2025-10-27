@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.reconciled_transaction import ReconciledTransaction
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 left: Optional[Transaction] = None
 right: Optional[Transaction] = None
 percentage_match: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-mapping_rule_set_results: Optional[conlist(StrictBool)] = # Replace with your value
+mapping_rule_set_results: Optional[List[StrictBool]] = # Replace with your value
 reconciled_transaction_instance = ReconciledTransaction(left=left, right=right, percentage_match=percentage_match, mapping_rule_set_results=mapping_rule_set_results)
 
 ```

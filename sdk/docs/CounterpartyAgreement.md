@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.counterparty_agreement import CounterpartyAgreement
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 display_name: StrictStr = "example_display_name"
 agreement_type: StrictStr = "example_agreement_type"
 counterparty_signatory: CounterpartySignatory = # Replace with your value
 dated_as_of: datetime = # Replace with your value
 credit_support_annex_id: ResourceId = # Replace with your value
-id: ResourceId = # Replace with your value
+id: ResourceId
 counterparty_agreement_instance = CounterpartyAgreement(display_name=display_name, agreement_type=agreement_type, counterparty_signatory=counterparty_signatory, dated_as_of=dated_as_of, credit_support_annex_id=credit_support_annex_id, id=id)
 
 ```

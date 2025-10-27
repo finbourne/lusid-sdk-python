@@ -12,13 +12,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-left: ValuationRequest = # Replace with your value
-right: ValuationRequest = # Replace with your value
-left_to_right_mapping: Optional[conlist(ReconciliationLeftRightAddressKeyPair)] = # Replace with your value
-preserve_keys: Optional[conlist(StrictStr)] = # Replace with your value
+left: ValuationRequest
+right: ValuationRequest
+left_to_right_mapping: Optional[List[ReconciliationLeftRightAddressKeyPair]] = # Replace with your value
+preserve_keys: Optional[List[StrictStr]] = # Replace with your value
 valuations_reconciliation_request_instance = ValuationsReconciliationRequest(left=left, right=right, left_to_right_mapping=left_to_right_mapping, preserve_keys=preserve_keys)
 
 ```

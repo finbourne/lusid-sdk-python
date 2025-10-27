@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.market_data_overrides import MarketDataOverrides
 from lusid.models.order_by_spec import OrderBySpec
@@ -32,19 +34,19 @@ class InlineValuationRequest(BaseModel):
     """
     Specification object for the parameters of an inline valuation  # noqa: E501
     """
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The asAt date to use")
-    metrics: conlist(AggregateSpec) = Field(..., description="The set of specifications to calculate or retrieve during the valuation and present in the results. For example:  AggregateSpec('Valuation/PV','Sum') for returning the PV (present value) of holdings  AggregateSpec('Holding/default/Units','Sum') for returning the units of holidays  AggregateSpec('Instrument/default/LusidInstrumentId','Value') for returning the Lusid Instrument identifier")
-    group_by: Optional[conlist(StrictStr)] = Field(None, alias="groupBy", description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.")
-    filters: Optional[conlist(PropertyFilter)] = Field(None, description="A set of filters to use to reduce the data found in a request. Equivalent to the 'where ...' part of a Sql select statement.  For example, filter a set of values within a given range or matching a particular value.")
-    sort: Optional[conlist(OrderBySpec)] = Field(None, description="A (possibly empty/null) set of specifications for how to order the results.")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    as_at: Optional[datetime] = Field(default=None, description="The asAt date to use", alias="asAt")
+    metrics: List[AggregateSpec] = Field(description="The set of specifications to calculate or retrieve during the valuation and present in the results. For example:  AggregateSpec('Valuation/PV','Sum') for returning the PV (present value) of holdings  AggregateSpec('Holding/default/Units','Sum') for returning the units of holidays  AggregateSpec('Instrument/default/LusidInstrumentId','Value') for returning the Lusid Instrument identifier")
+    group_by: Optional[List[StrictStr]] = Field(default=None, description="The set of items by which to perform grouping. This primarily matters when one or more of the metric operators is a mapping  that reduces set size, e.g. sum or proportion. The group-by statement determines the set of keys by which to break the results out.", alias="groupBy")
+    filters: Optional[List[PropertyFilter]] = Field(default=None, description="A set of filters to use to reduce the data found in a request. Equivalent to the 'where ...' part of a Sql select statement.  For example, filter a set of values within a given range or matching a particular value.")
+    sort: Optional[List[OrderBySpec]] = Field(default=None, description="A (possibly empty/null) set of specifications for how to order the results.")
     report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.  If not present, then the currency of the relevant portfolio will be used in its place.") 
-    equip_with_subtotals: Optional[StrictBool] = Field(None, alias="equipWithSubtotals", description="Flag directing the Valuation call to populate the results with subtotals of aggregates.")
-    return_result_as_expanded_types: Optional[StrictBool] = Field(None, alias="returnResultAsExpandedTypes", description="Financially meaningful results can be presented as either simple flat types or more complex expanded types.  For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)  or as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,  the returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false.")
-    valuation_schedule: Optional[ValuationSchedule] = Field(None, alias="valuationSchedule")
-    instruments: conlist(WeightedInstrument) = Field(..., description="The set of instruments, weighted by the quantities held that are required.  It is identified by an identifier tag that can be used to identify it externally.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case.")
-    market_data_overrides: Optional[MarketDataOverrides] = Field(None, alias="marketDataOverrides")
-    corporate_action_source_id: Optional[ResourceId] = Field(None, alias="corporateActionSourceId")
+    equip_with_subtotals: Optional[StrictBool] = Field(default=None, description="Flag directing the Valuation call to populate the results with subtotals of aggregates.", alias="equipWithSubtotals")
+    return_result_as_expanded_types: Optional[StrictBool] = Field(default=None, description="Financially meaningful results can be presented as either simple flat types or more complex expanded types.  For example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)  or as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,  the returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false.", alias="returnResultAsExpandedTypes")
+    valuation_schedule: Optional[ValuationSchedule] = Field(default=None, alias="valuationSchedule")
+    instruments: List[WeightedInstrument] = Field(description="The set of instruments, weighted by the quantities held that are required.  It is identified by an identifier tag that can be used to identify it externally.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case.")
+    market_data_overrides: Optional[MarketDataOverrides] = Field(default=None, alias="marketDataOverrides")
+    corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
     __properties = ["recipeId", "asAt", "metrics", "groupBy", "filters", "sort", "reportCurrency", "equipWithSubtotals", "returnResultAsExpandedTypes", "valuationSchedule", "instruments", "marketDataOverrides", "corporateActionSourceId"]
 
     class Config:
@@ -171,3 +173,5 @@ class InlineValuationRequest(BaseModel):
             "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None
         })
         return _obj
+
+InlineValuationRequest.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
 
@@ -27,12 +29,12 @@ class QueryTradeTicketsRequest(BaseModel):
     """
     Query for tradetickets resulting from events on instrument that are taken from one or more portfolios  # noqa: E501
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The time of the system at which to query for tradetickets.")
-    window_start: datetime = Field(..., alias="windowStart", description="The start date of the window.")
-    window_end: datetime = Field(..., alias="windowEnd", description="The end date of the window.")
-    portfolio_entity_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioEntityIds", description="The set of portfolios and portfolio groups to which the instrument events must belong.")
-    recipe_id: ResourceId = Field(..., alias="recipeId")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The Effective date used in the valuation of the tradetickets.")
+    as_at: Optional[datetime] = Field(default=None, description="The time of the system at which to query for tradetickets.", alias="asAt")
+    window_start: datetime = Field(description="The start date of the window.", alias="windowStart")
+    window_end: datetime = Field(description="The end date of the window.", alias="windowEnd")
+    portfolio_entity_ids: List[PortfolioEntityId] = Field(description="The set of portfolios and portfolio groups to which the instrument events must belong.", alias="portfolioEntityIds")
+    recipe_id: ResourceId = Field(alias="recipeId")
+    effective_at: datetime = Field(description="The Effective date used in the valuation of the tradetickets.", alias="effectiveAt")
     __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "recipeId", "effectiveAt"]
 
     class Config:
@@ -102,3 +104,5 @@ class QueryTradeTicketsRequest(BaseModel):
             "effective_at": obj.get("effectiveAt")
         })
         return _obj
+
+QueryTradeTicketsRequest.update_forward_refs()

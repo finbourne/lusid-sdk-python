@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.instrument import Instrument
 from lusid.models.link import Link
@@ -30,11 +32,11 @@ class UpsertInstrumentsResponse(BaseModel):
     UpsertInstrumentsResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    values: Optional[Dict[str, Instrument]] = Field(None, description="The instruments which have been successfully updated or created.")
-    staged: Optional[Dict[str, Instrument]] = Field(None, description="The instruments that have been staged for updation or creation.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The instruments that could not be updated or created or were left unchanged without error along with a reason for their failure.")
-    metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = Field(None, description="Meta data associated with the upsert event.")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, Instrument]] = Field(default=None, description="The instruments which have been successfully updated or created.")
+    staged: Optional[Dict[str, Instrument]] = Field(default=None, description="The instruments that have been staged for updation or creation.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The instruments that could not be updated or created or were left unchanged without error along with a reason for their failure.")
+    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Meta data associated with the upsert event.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "values", "staged", "failed", "metadata", "links"]
 
     class Config:
@@ -178,3 +180,5 @@ class UpsertInstrumentsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+UpsertInstrumentsResponse.update_forward_refs()

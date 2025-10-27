@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class EligibilityCalculation(BaseModel):
     """
@@ -27,7 +29,7 @@ class EligibilityCalculation(BaseModel):
     """
     entitlement_date:  StrictStr = Field(...,alias="entitlementDate") 
     eligible_units:  StrictStr = Field(...,alias="eligibleUnits") 
-    date_modifiable_by_instruction: Optional[StrictBool] = Field(None, alias="dateModifiableByInstruction")
+    date_modifiable_by_instruction: Optional[StrictBool] = Field(default=None, alias="dateModifiableByInstruction")
     __properties = ["entitlementDate", "eligibleUnits", "dateModifiableByInstruction"]
 
     class Config:
@@ -79,3 +81,5 @@ class EligibilityCalculation(BaseModel):
             "date_modifiable_by_instruction": obj.get("dateModifiableByInstruction")
         })
         return _obj
+
+EligibilityCalculation.update_forward_refs()

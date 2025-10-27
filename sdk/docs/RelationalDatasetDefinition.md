@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.relational_dataset_definition import RelationalDatasetDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-applicable_entity_types: conlist(StrictStr) = # Replace with your value
-field_schema: conlist(RelationalDatasetFieldDefinition) = # Replace with your value
+applicable_entity_types: List[StrictStr] = # Replace with your value
+field_schema: List[RelationalDatasetFieldDefinition] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 relational_dataset_definition_instance = RelationalDatasetDefinition(id=id, display_name=display_name, description=description, applicable_entity_types=applicable_entity_types, field_schema=field_schema, href=href, version=version, links=links)
 
 ```

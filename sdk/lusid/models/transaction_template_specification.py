@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.template_field import TemplateField
@@ -29,11 +31,11 @@ class TransactionTemplateSpecification(BaseModel):
     TransactionTemplateSpecification
     """
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType") 
-    supported_instrument_types: conlist(StrictStr) = Field(..., alias="supportedInstrumentTypes")
-    supported_participation_types: conlist(StrictStr) = Field(..., alias="supportedParticipationTypes")
-    supported_election_types: conlist(ElectionSpecification) = Field(..., alias="supportedElectionTypes")
-    supported_template_fields: conlist(TemplateField) = Field(..., alias="supportedTemplateFields")
-    eligibility_calculation: EligibilityCalculation = Field(..., alias="eligibilityCalculation")
+    supported_instrument_types: List[StrictStr] = Field(alias="supportedInstrumentTypes")
+    supported_participation_types: List[StrictStr] = Field(alias="supportedParticipationTypes")
+    supported_election_types: List[ElectionSpecification] = Field(alias="supportedElectionTypes")
+    supported_template_fields: List[TemplateField] = Field(alias="supportedTemplateFields")
+    eligibility_calculation: EligibilityCalculation = Field(alias="eligibilityCalculation")
     __properties = ["instrumentEventType", "supportedInstrumentTypes", "supportedParticipationTypes", "supportedElectionTypes", "supportedTemplateFields", "eligibilityCalculation"]
 
     class Config:
@@ -105,3 +107,5 @@ class TransactionTemplateSpecification(BaseModel):
             "eligibility_calculation": EligibilityCalculation.from_dict(obj.get("eligibilityCalculation")) if obj.get("eligibilityCalculation") is not None else None
         })
         return _obj
+
+TransactionTemplateSpecification.update_forward_refs()

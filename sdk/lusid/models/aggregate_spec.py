@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class AggregateSpec(BaseModel):
     """
@@ -27,7 +29,7 @@ class AggregateSpec(BaseModel):
     """
     key:  StrictStr = Field(...,alias="key", description="The key that uniquely identifies a queryable address in Lusid.") 
     op:  StrictStr = Field(...,alias="op", description="The available values are: Sum, DefaultSum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears") 
-    options: Optional[Dict[str, Any]] = Field(None, description="Additional options to apply when performing computations. Options that do not apply to the Key will be  ignored. Option values can be boolean, numeric, string or date-time.")
+    options: Optional[Dict[str, Any]] = Field(default=None, description="Additional options to apply when performing computations. Options that do not apply to the Key will be  ignored. Option values can be boolean, numeric, string or date-time.")
     __properties = ["key", "op", "options"]
 
     @validator('op')
@@ -80,14 +82,19 @@ class AggregateSpec(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "op" != "type":
             return value
 
-        if value not in ('Sum', 'DefaultSum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears'):
+        if value not in ['Sum', 'DefaultSum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears']:
             raise ValueError("must be one of enum values ('Sum', 'DefaultSum', 'Proportion', 'Average', 'Count', 'Min', 'Max', 'Value', 'SumOfPositiveValues', 'SumOfNegativeValues', 'SumOfAbsoluteValues', 'ProportionOfAbsoluteValues', 'SumCumulativeInAdvance', 'SumCumulativeInArrears')")
         return value
 
@@ -145,3 +152,5 @@ class AggregateSpec(BaseModel):
             "options": obj.get("options")
         })
         return _obj
+
+AggregateSpec.update_forward_refs()

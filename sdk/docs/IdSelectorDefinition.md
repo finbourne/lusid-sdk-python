@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifier** | **Dict[str, str]** |  | 
+**identifier** | **Dict[str, Optional[str]]** |  | 
 **actions** | [**List[ActionId]**](ActionId.md) |  | 
 **name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.id_selector_definition import IdSelectorDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-identifier: Dict[str, StrictStr] = # Replace with your value
-actions: conlist(ActionId, min_items=1) = Field(...)
+identifier: Dict[str, Optional[StrictStr]]
+actions: List[ActionId]
 name: Optional[StrictStr] = "example_name"
 description: Optional[StrictStr] = "example_description"
 id_selector_definition_instance = IdSelectorDefinition(identifier=identifier, actions=actions, name=name, description=description)

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FieldValue(BaseModel):
     """
     FieldValue
     """
     value:  StrictStr = Field(...,alias="value") 
-    fields: Optional[Dict[str, StrictStr]] = None
-    numeric_fields: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(None, alias="numericFields")
+    fields: Optional[Dict[str, Optional[StrictStr]]] = None
+    numeric_fields: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, alias="numericFields")
     __properties = ["value", "fields", "numericFields"]
 
     class Config:
@@ -89,3 +91,5 @@ class FieldValue(BaseModel):
             "numeric_fields": obj.get("numericFields")
         })
         return _obj
+
+FieldValue.update_forward_refs()

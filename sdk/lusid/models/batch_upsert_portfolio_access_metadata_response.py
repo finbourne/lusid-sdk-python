@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.batch_upsert_portfolio_access_metadata_response_item import BatchUpsertPortfolioAccessMetadataResponseItem
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
@@ -28,9 +30,9 @@ class BatchUpsertPortfolioAccessMetadataResponse(BaseModel):
     """
     BatchUpsertPortfolioAccessMetadataResponse
     """
-    values: Optional[Dict[str, BatchUpsertPortfolioAccessMetadataResponseItem]] = Field(None, description="The items have been successfully updated or created.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The items that could not be updated or created along with a reason for their failure.")
-    links: Optional[conlist(Link)] = None
+    values: Optional[Dict[str, BatchUpsertPortfolioAccessMetadataResponseItem]] = Field(default=None, description="The items have been successfully updated or created.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The items that could not be updated or created along with a reason for their failure.")
+    links: Optional[List[Link]] = None
     __properties = ["values", "failed", "links"]
 
     class Config:
@@ -128,3 +130,5 @@ class BatchUpsertPortfolioAccessMetadataResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+BatchUpsertPortfolioAccessMetadataResponse.update_forward_refs()

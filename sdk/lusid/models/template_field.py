@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TemplateField(BaseModel):
     """
@@ -30,7 +32,7 @@ class TemplateField(BaseModel):
     description:  StrictStr = Field(...,alias="description") 
     type:  StrictStr = Field(...,alias="type") 
     availability:  StrictStr = Field(...,alias="availability") 
-    usage: conlist(StrictStr) = Field(...)
+    usage: List[StrictStr]
     __properties = ["fieldName", "specificity", "description", "type", "availability", "usage"]
 
     class Config:
@@ -85,3 +87,5 @@ class TemplateField(BaseModel):
             "usage": obj.get("usage")
         })
         return _obj
+
+TemplateField.update_forward_refs()

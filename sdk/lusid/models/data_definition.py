@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class DataDefinition(BaseModel):
     """
@@ -29,8 +31,8 @@ class DataDefinition(BaseModel):
     name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the data item. This is the name that will appear") 
     data_type:  Optional[StrictStr] = Field(None,alias="dataType", description="A member of the set of possible data types, that all data passed under that key is expected to be of.  Currently limited to one of [string, integer, decimal, result0d].") 
     key_type:  Optional[StrictStr] = Field(None,alias="keyType", description="Is the item either a unique key for the dictionary, i.e. does it identify a unique index or conceptual 'row' within the list of dictionaries,  or a partial key or is it simply a data item within that dictionary. Must be one of [Unique,PartOfUnique,Leaf, CompositeLeaf]") 
-    allow_null: Optional[StrictBool] = Field(None, alias="allowNull", description="The path to the field must exist (unless AllowMissing is true) but the actual value is allowed to be null.")
-    allow_missing: Optional[StrictBool] = Field(None, alias="allowMissing", description="The path (or column) is allowed to be missing but if it is present it is not allowed to be null unless AllowNull is true.")
+    allow_null: Optional[StrictBool] = Field(default=None, description="The path to the field must exist (unless AllowMissing is true) but the actual value is allowed to be null.", alias="allowNull")
+    allow_missing: Optional[StrictBool] = Field(default=None, description="The path (or column) is allowed to be missing but if it is present it is not allowed to be null unless AllowNull is true.", alias="allowMissing")
     __properties = ["address", "name", "dataType", "keyType", "allowNull", "allowMissing"]
 
     class Config:
@@ -100,3 +102,5 @@ class DataDefinition(BaseModel):
             "allow_missing": obj.get("allowMissing")
         })
         return _obj
+
+DataDefinition.update_forward_refs()

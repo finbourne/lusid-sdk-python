@@ -27,29 +27,31 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund import Fund
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 base_currency: Optional[StrictStr] = "example_base_currency"
 investor_structure: StrictStr = "example_investor_structure"
-portfolio_ids: Optional[conlist(PortfolioEntityIdWithDetails)] = # Replace with your value
+portfolio_ids: Optional[List[PortfolioEntityIdWithDetails]] = # Replace with your value
 fund_configuration_id: Optional[ResourceId] = # Replace with your value
 abor_id: Optional[ResourceId] = # Replace with your value
-share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = # Replace with your value
+share_class_instruments: Optional[List[InstrumentResolutionDetail]] = # Replace with your value
 type: Optional[StrictStr] = "example_type"
 inception_date: datetime = # Replace with your value
-decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
+decimal_places: Optional[StrictInt] = # Replace with your value
 decimal_places: Optional[StrictInt] = None
 year_end_date: Optional[DayMonth] = # Replace with your value
 primary_nav_type: Optional[NavTypeDefinition] = # Replace with your value
-additional_nav_types: Optional[conlist(NavTypeDefinition)] = # Replace with your value
+additional_nav_types: Optional[List[NavTypeDefinition]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 fund_instance = Fund(href=href, id=id, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, version=version, links=links)
 
 ```

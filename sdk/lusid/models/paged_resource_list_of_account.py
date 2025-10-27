@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.account import Account
 from lusid.models.link import Link
 
@@ -29,9 +31,9 @@ class PagedResourceListOfAccount(BaseModel):
     """
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
     previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
-    values: conlist(Account) = Field(...)
+    values: List[Account]
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["nextPage", "previousPage", "values", "href", "links"]
 
     class Config:
@@ -119,3 +121,5 @@ class PagedResourceListOfAccount(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+PagedResourceListOfAccount.update_forward_refs()

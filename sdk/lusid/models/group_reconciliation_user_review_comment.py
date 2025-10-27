@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class GroupReconciliationUserReviewComment(BaseModel):
     """
@@ -27,8 +29,8 @@ class GroupReconciliationUserReviewComment(BaseModel):
     """
     comment_text:  StrictStr = Field(...,alias="commentText", description="User's comment regarding the reconciliation result.") 
     user_id:  Optional[StrictStr] = Field(None,alias="userId", description="Id of the user who made a User Review input.") 
-    as_at_added: Optional[datetime] = Field(None, alias="asAtAdded", description="The timestamp of the added User Review input.")
-    as_at_invalid: Optional[datetime] = Field(None, alias="asAtInvalid", description="The timestamp when User Review input became invalid e.g. because of the different attribute values within the new run.")
+    as_at_added: Optional[datetime] = Field(default=None, description="The timestamp of the added User Review input.", alias="asAtAdded")
+    as_at_invalid: Optional[datetime] = Field(default=None, description="The timestamp when User Review input became invalid e.g. because of the different attribute values within the new run.", alias="asAtInvalid")
     __properties = ["commentText", "userId", "asAtAdded", "asAtInvalid"]
 
     class Config:
@@ -86,3 +88,5 @@ class GroupReconciliationUserReviewComment(BaseModel):
             "as_at_invalid": obj.get("asAtInvalid")
         })
         return _obj
+
+GroupReconciliationUserReviewComment.update_forward_refs()

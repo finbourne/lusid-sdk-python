@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.date_attributes import DateAttributes
 
 class CreateDateRequest(BaseModel):
@@ -27,13 +29,13 @@ class CreateDateRequest(BaseModel):
     CreateDateRequest
     """
     date_id:  StrictStr = Field(...,alias="dateId") 
-    from_utc: datetime = Field(..., alias="fromUtc")
-    to_utc: datetime = Field(..., alias="toUtc")
+    from_utc: datetime = Field(alias="fromUtc")
+    to_utc: datetime = Field(alias="toUtc")
     time_zone:  StrictStr = Field(...,alias="timeZone") 
     description:  StrictStr = Field(...,alias="description") 
     type:  Optional[StrictStr] = Field(None,alias="type") 
     attributes: Optional[DateAttributes] = None
-    source_data: Optional[Dict[str, StrictStr]] = Field(None, alias="sourceData")
+    source_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="sourceData")
     __properties = ["dateId", "fromUtc", "toUtc", "timeZone", "description", "type", "attributes", "sourceData"]
 
     class Config:
@@ -103,3 +105,5 @@ class CreateDateRequest(BaseModel):
             "source_data": obj.get("sourceData")
         })
         return _obj
+
+CreateDateRequest.update_forward_refs()

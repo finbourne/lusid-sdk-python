@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr 
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.settlement_in_lieu import SettlementInLieu
@@ -30,19 +32,19 @@ class TransactionSettlementInstruction(BaseModel):
     """
     settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId", description="The instruction identifier. Unique within the portfolio.") 
     instruction_type:  StrictStr = Field(...,alias="instructionType", description="The type of instruction which can be Complete or CancelAutomatic. Complete means that the instruction is intended to completely settle a settlement bucket. CancelAutomatic means that it is intended to cancel Automatic settlement.") 
-    actual_settlement_date: datetime = Field(..., alias="actualSettlementDate", description="The date that settlement takes place.")
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units for the instruction.")
+    actual_settlement_date: datetime = Field(description="The date that settlement takes place.", alias="actualSettlementDate")
+    units: Union[StrictFloat, StrictInt] = Field(description="The number of units for the instruction.")
     transaction_id:  StrictStr = Field(...,alias="transactionId", description="The ID for the transaction being instructed.") 
     settlement_category:  StrictStr = Field(...,alias="settlementCategory", description="A category representing the set of movement types that this instruction applies to.") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the instrument being settled.") 
-    contractual_settlement_date: Optional[datetime] = Field(None, alias="contractualSettlementDate", description="The contractual settlement date. Used to match the instruction to the correct settlement bucket.")
-    sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeyOverrides", description="Allows one or more sub-holding keys to be overridden for any movement being settled by an instruction. Providing a key and value will set the sub-holding key to the specified value; Providing a key only will nullify the sub-holding key. Not referenced sub-holding keys will not be impacted. ")
-    custodian_account_override: Optional[ResourceId] = Field(None, alias="custodianAccountOverride")
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the settlement instruction to a unique instrument.")
+    contractual_settlement_date: Optional[datetime] = Field(default=None, description="The contractual settlement date. Used to match the instruction to the correct settlement bucket.", alias="contractualSettlementDate")
+    sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Allows one or more sub-holding keys to be overridden for any movement being settled by an instruction. Providing a key and value will set the sub-holding key to the specified value; Providing a key only will nullify the sub-holding key. Not referenced sub-holding keys will not be impacted. ", alias="subHoldingKeyOverrides")
+    custodian_account_override: Optional[ResourceId] = Field(default=None, alias="custodianAccountOverride")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="A set of instrument identifiers that can resolve the settlement instruction to a unique instrument.", alias="instrumentIdentifiers")
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the settlement instruction - 'Invalid', 'Rejected' 'Applied' or 'Orphan'.") 
-    instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="instructionToPortfolioRate", description="The exchange rate between the Settlement Instruction and Portfolio.")
-    settlement_in_lieu: Optional[SettlementInLieu] = Field(None, alias="settlementInLieu")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties which have been requested to be decorated onto the settlement instruction. These will be from the 'SettlementInstruction', 'Portfolio', or 'Instrument' domains.")
+    instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The exchange rate between the Settlement Instruction and Portfolio.", alias="instructionToPortfolioRate")
+    settlement_in_lieu: Optional[SettlementInLieu] = Field(default=None, alias="settlementInLieu")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the settlement instruction. These will be from the 'SettlementInstruction', 'Portfolio', or 'Instrument' domains.")
     __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "properties"]
 
     class Config:
@@ -161,3 +163,5 @@ class TransactionSettlementInstruction(BaseModel):
             else None
         })
         return _obj
+
+TransactionSettlementInstruction.update_forward_refs()

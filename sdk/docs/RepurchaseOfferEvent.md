@@ -17,15 +17,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.repurchase_offer_event import RepurchaseOfferEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 payment_date: Optional[datetime] = # Replace with your value
 market_deadline_date: Optional[datetime] = # Replace with your value
 repurchase_quantity: Union[StrictFloat, StrictInt] = # Replace with your value
-cash_offer_elections: conlist(CashOfferElection) = # Replace with your value
-lapse_elections: conlist(LapseElection) = # Replace with your value
-tender_offer_elections: conlist(TenderOfferElection) = # Replace with your value
+cash_offer_elections: List[CashOfferElection] = # Replace with your value
+lapse_elections: List[LapseElection] = # Replace with your value
+tender_offer_elections: List[TenderOfferElection] = # Replace with your value
 proration_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 response_deadline_date: Optional[datetime] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"

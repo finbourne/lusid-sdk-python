@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.share_class_amount import ShareClassAmount
 
 class ShareClassPnlBreakdown(BaseModel):
     """
     The breakdown of PnL for a Share Class on a specified date.  # noqa: E501
     """
-    apportioned_non_class_specific_pnl: Dict[str, ShareClassAmount] = Field(..., alias="apportionedNonClassSpecificPnl", description="Bucket of detail for PnL within the queried period not explicitly allocated to any share class but has been apportioned to the share class.")
-    class_pnl: Dict[str, ShareClassAmount] = Field(..., alias="classPnl", description="Bucket of detail for PnL specific to the share class within the queried period.")
-    total_pnl: Dict[str, ShareClassAmount] = Field(..., alias="totalPnl", description="Bucket of detail for the sum of class PnL and PnL not specific to a class within the queried period.")
+    apportioned_non_class_specific_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for PnL within the queried period not explicitly allocated to any share class but has been apportioned to the share class.", alias="apportionedNonClassSpecificPnl")
+    class_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for PnL specific to the share class within the queried period.", alias="classPnl")
+    total_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for the sum of class PnL and PnL not specific to a class within the queried period.", alias="totalPnl")
     __properties = ["apportionedNonClassSpecificPnl", "classPnl", "totalPnl"]
 
     class Config:
@@ -116,3 +118,5 @@ class ShareClassPnlBreakdown(BaseModel):
             else None
         })
         return _obj
+
+ShareClassPnlBreakdown.update_forward_refs()

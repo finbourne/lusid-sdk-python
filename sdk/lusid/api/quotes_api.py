@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictInt, StrictStr, constr, validator
-
+from pydantic.v1 import Field, StrictInt, StrictStr
 from typing import Dict, Optional
-
+from typing_extensions import Annotated
 from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.get_quotes_response import GetQuotesResponse
 from lusid.models.quote_access_metadata_rule import QuoteAccessMetadataRule
@@ -64,22 +61,22 @@ class QuotesApi:
 
 
     @overload
-    async def delete_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
+    async def delete_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
         ...
 
     @overload
-    def delete_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, async_req: Optional[bool]=True, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
+    def delete_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, async_req: Optional[bool]=True, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[QuoteAccessMetadataRule, Awaitable[QuoteAccessMetadataRule]]:  # noqa: E501
+    def delete_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[QuoteAccessMetadataRule, Awaitable[QuoteAccessMetadataRule]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule  # noqa: E501
 
         Delete the Quote Access Metadata Rule that exactly matches the provided identifier parts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_quote_access_metadata_rule(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, field, effective_at, async_req=True)
+        >>> thread = api.delete_quote_access_metadata_rule(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, var_field, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Quote Access Metadata Rule to retrieve. (required)
@@ -94,8 +91,8 @@ class QuotesApi:
         :type instrument_id: str
         :param quote_type: The QuoteType of the rule
         :type quote_type: str
-        :param field: The Field of the rule
-        :type field: str
+        :param var_field: The Field of the rule
+        :type var_field: str
         :param effective_at: The effective date to delete at, if this is not supplied, it will delete all data found
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
@@ -114,17 +111,17 @@ class QuotesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_quote_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, field, effective_at, **kwargs)  # noqa: E501
+        return self.delete_quote_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, var_field, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_quote_access_metadata_rule_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_quote_access_metadata_rule_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule  # noqa: E501
 
         Delete the Quote Access Metadata Rule that exactly matches the provided identifier parts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_quote_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, field, effective_at, async_req=True)
+        >>> thread = api.delete_quote_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, var_field, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Quote Access Metadata Rule to retrieve. (required)
@@ -139,8 +136,8 @@ class QuotesApi:
         :type instrument_id: str
         :param quote_type: The QuoteType of the rule
         :type quote_type: str
-        :param field: The Field of the rule
-        :type field: str
+        :param var_field: The Field of the rule
+        :type var_field: str
         :param effective_at: The effective date to delete at, if this is not supplied, it will delete all data found
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
@@ -176,7 +173,7 @@ class QuotesApi:
             'instrument_id_type',
             'instrument_id',
             'quote_type',
-            'field',
+            'var_field',
             'effective_at'
         ]
         _all_params.extend(
@@ -227,8 +224,8 @@ class QuotesApi:
         if _params.get('quote_type') is not None:  # noqa: E501
             _query_params.append(('quoteType', _params['quote_type']))
 
-        if _params.get('field') is not None:  # noqa: E501
-            _query_params.append(('field', _params['field']))
+        if _params.get('var_field') is not None:  # noqa: E501
+            _query_params.append(('field', _params['var_field']))
 
         if _params.get('effective_at') is not None:  # noqa: E501
             _query_params.append(('effectiveAt', _params['effective_at']))
@@ -633,22 +630,22 @@ class QuotesApi:
 
 
     @overload
-    async def get_quotes_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
+    async def get_quotes_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
         ...
 
     @overload
-    def get_quotes_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
+    def get_quotes_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_quotes_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[QuoteAccessMetadataRule, Awaitable[QuoteAccessMetadataRule]]:  # noqa: E501
+    def get_quotes_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[QuoteAccessMetadataRule, Awaitable[QuoteAccessMetadataRule]]:  # noqa: E501
         """[EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule  # noqa: E501
 
         Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_quotes_access_metadata_rule(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, field, effective_at, as_at, async_req=True)
+        >>> thread = api.get_quotes_access_metadata_rule(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, var_field, effective_at, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Quote Access Metadata Rule to retrieve. (required)
@@ -663,8 +660,8 @@ class QuotesApi:
         :type instrument_id: str
         :param quote_type: The QuoteType of the rule
         :type quote_type: str
-        :param field: The Field of the rule
-        :type field: str
+        :param var_field: The Field of the rule
+        :type var_field: str
         :param effective_at: The effective date of the rule
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.
@@ -685,17 +682,17 @@ class QuotesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_quotes_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, field, effective_at, as_at, **kwargs)  # noqa: E501
+        return self.get_quotes_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, var_field, effective_at, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_quotes_access_metadata_rule_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_quotes_access_metadata_rule_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], provider : Annotated[Optional[StrictStr], Field( description="The Provider of the rule")] = None, price_source : Annotated[Optional[StrictStr], Field( description="The PriceSource of the rule")] = None, instrument_id_type : Annotated[Optional[StrictStr], Field( description="The InstrumentIdType of the rule")] = None, instrument_id : Annotated[Optional[StrictStr], Field( description="The InstrumentId of the rule")] = None, quote_type : Annotated[Optional[StrictStr], Field( description="The QuoteType of the rule")] = None, var_field : Annotated[Optional[StrictStr], Field( description="The Field of the rule")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective date of the rule")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule  # noqa: E501
 
         Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_quotes_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, field, effective_at, as_at, async_req=True)
+        >>> thread = api.get_quotes_access_metadata_rule_with_http_info(scope, provider, price_source, instrument_id_type, instrument_id, quote_type, var_field, effective_at, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Quote Access Metadata Rule to retrieve. (required)
@@ -710,8 +707,8 @@ class QuotesApi:
         :type instrument_id: str
         :param quote_type: The QuoteType of the rule
         :type quote_type: str
-        :param field: The Field of the rule
-        :type field: str
+        :param var_field: The Field of the rule
+        :type var_field: str
         :param effective_at: The effective date of the rule
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the access metadata rule. Defaults to return the latest version if not specified.
@@ -749,7 +746,7 @@ class QuotesApi:
             'instrument_id_type',
             'instrument_id',
             'quote_type',
-            'field',
+            'var_field',
             'effective_at',
             'as_at'
         ]
@@ -801,8 +798,8 @@ class QuotesApi:
         if _params.get('quote_type') is not None:  # noqa: E501
             _query_params.append(('quoteType', _params['quote_type']))
 
-        if _params.get('field') is not None:  # noqa: E501
-            _query_params.append(('field', _params['field']))
+        if _params.get('var_field') is not None:  # noqa: E501
+            _query_params.append(('field', _params['var_field']))
 
         if _params.get('effective_at') is not None:  # noqa: E501
             _query_params.append(('effectiveAt', _params['effective_at']))
@@ -1389,15 +1386,15 @@ class QuotesApi:
 
 
     @overload
-    async def upsert_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(..., description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
+    async def upsert_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
         ...
 
     @overload
-    def upsert_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(..., description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=True, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
+    def upsert_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=True, **kwargs) -> QuoteAccessMetadataRule:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(..., description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[QuoteAccessMetadataRule, Awaitable[QuoteAccessMetadataRule]]:  # noqa: E501
+    def upsert_quote_access_metadata_rule(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[QuoteAccessMetadataRule, Awaitable[QuoteAccessMetadataRule]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.  # noqa: E501
 
         Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
@@ -1434,7 +1431,7 @@ class QuotesApi:
         return self.upsert_quote_access_metadata_rule_with_http_info(scope, upsert_quote_access_metadata_rule_request, effective_at, effective_until, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_quote_access_metadata_rule_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(..., description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_quote_access_metadata_rule_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope to use when updating or inserting the Quote Access Metadata Rule.")], upsert_quote_access_metadata_rule_request : Annotated[UpsertQuoteAccessMetadataRuleRequest, Field(description="The Quote Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field( description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.  # noqa: E501
 
         Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501

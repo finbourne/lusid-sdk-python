@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_property_map import TransactionPropertyMap
 
@@ -29,10 +31,10 @@ class ComponentTransaction(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName") 
     condition:  Optional[StrictStr] = Field(None,alias="condition") 
-    transaction_field_map: TransactionFieldMap = Field(..., alias="transactionFieldMap")
-    transaction_property_map: conlist(TransactionPropertyMap) = Field(..., alias="transactionPropertyMap")
-    preserve_tax_lot_structure: Optional[StrictBool] = Field(None, alias="preserveTaxLotStructure", description="Controls if tax lot structure should be preserved when cost base is transferred to a new holding. For example in Spin Off instrument events.")
-    market_open_time_adjustments: Optional[conlist(StrictStr)] = Field(None, alias="marketOpenTimeAdjustments")
+    transaction_field_map: TransactionFieldMap = Field(alias="transactionFieldMap")
+    transaction_property_map: List[TransactionPropertyMap] = Field(alias="transactionPropertyMap")
+    preserve_tax_lot_structure: Optional[StrictBool] = Field(default=None, description="Controls if tax lot structure should be preserved when cost base is transferred to a new holding. For example in Spin Off instrument events.", alias="preserveTaxLotStructure")
+    market_open_time_adjustments: Optional[List[StrictStr]] = Field(default=None, alias="marketOpenTimeAdjustments")
     __properties = ["displayName", "condition", "transactionFieldMap", "transactionPropertyMap", "preserveTaxLotStructure", "marketOpenTimeAdjustments"]
 
     class Config:
@@ -112,3 +114,5 @@ class ComponentTransaction(BaseModel):
             "market_open_time_adjustments": obj.get("marketOpenTimeAdjustments")
         })
         return _obj
+
+ComponentTransaction.update_forward_refs()

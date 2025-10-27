@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.lineage_member import LineageMember
 from lusid.models.model_property import ModelProperty
 
@@ -28,10 +30,10 @@ class ComplianceRuleBreakdown(BaseModel):
     ComplianceRuleBreakdown
     """
     group_status:  StrictStr = Field(...,alias="groupStatus", description="The status of this subset of results.") 
-    results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="resultsUsed", description="Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule.")
-    properties_used: Dict[str, conlist(ModelProperty)] = Field(..., alias="propertiesUsed", description="Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule")
-    missing_data_information: conlist(StrictStr) = Field(..., alias="missingDataInformation", description="List of string information detailing data that was missing from contributions processed in this rule")
-    lineage: conlist(LineageMember) = Field(...)
+    results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(description="Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule.", alias="resultsUsed")
+    properties_used: Dict[str, Optional[List[ModelProperty]]] = Field(description="Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule", alias="propertiesUsed")
+    missing_data_information: List[StrictStr] = Field(description="List of string information detailing data that was missing from contributions processed in this rule", alias="missingDataInformation")
+    lineage: List[LineageMember]
     __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "missingDataInformation", "lineage"]
 
     class Config:
@@ -108,3 +110,5 @@ class ComplianceRuleBreakdown(BaseModel):
             "lineage": [LineageMember.from_dict(_item) for _item in obj.get("lineage")] if obj.get("lineage") is not None else None
         })
         return _obj
+
+ComplianceRuleBreakdown.update_forward_refs()

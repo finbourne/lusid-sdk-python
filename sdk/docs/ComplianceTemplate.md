@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_template import ComplianceTemplate
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 description: StrictStr = "example_description"
-tags: Optional[conlist(StrictStr)] = # Replace with your value
-variations: conlist(ComplianceTemplateVariation) = # Replace with your value
-links: Optional[conlist(Link)] = None
+tags: Optional[List[StrictStr]] = # Replace with your value
+variations: List[ComplianceTemplateVariation] = # Replace with your value
+links: Optional[List[Link]] = None
 compliance_template_instance = ComplianceTemplate(id=id, description=description, tags=tags, variations=variations, links=links)
 
 ```

@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.collateral_instrument import CollateralInstrument
-from typing import Any, Dict, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 units: Union[StrictFloat, StrictInt] = # Replace with your value
-instrument: MasteredInstrument = # Replace with your value
+instrument: MasteredInstrument
 collateral_instrument_instance = CollateralInstrument(units=units, instrument=instrument)
 
 ```

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.lusid_unique_id import LusidUniqueId
 from lusid.models.model_property import ModelProperty
@@ -29,12 +31,12 @@ class RelatedEntity(BaseModel):
     Information about the other related entity in the relationship  # noqa: E501
     """
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity.") 
-    entity_id: Dict[str, StrictStr] = Field(..., alias="entityId", description="The identifier of the other related entity in the relationship. It contains 'scope' and 'code' as keys for identifiers of a Portfolio or Portfolio Group, or 'idTypeScope', 'idTypeCode', 'code' as keys for identifiers of a Person or Legal entity, or 'scope', 'identifierType', 'identifierValue' as keys for identifiers of an Instrument")
+    entity_id: Dict[str, Optional[StrictStr]] = Field(description="The identifier of the other related entity in the relationship. It contains 'scope' and 'code' as keys for identifiers of a Portfolio or Portfolio Group, or 'idTypeScope', 'idTypeCode', 'code' as keys for identifiers of a Person or Legal entity, or 'scope', 'identifierType', 'identifierValue' as keys for identifiers of an Instrument", alias="entityId")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the entity.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties of the entity. This field is empty until further notice.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties of the entity. This field is empty until further notice.")
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the identifier") 
-    lusid_unique_id: Optional[LusidUniqueId] = Field(None, alias="lusidUniqueId")
-    identifiers: conlist(EntityIdentifier) = Field(..., description="The identifiers of the related entity in the relationship.")
+    lusid_unique_id: Optional[LusidUniqueId] = Field(default=None, alias="lusidUniqueId")
+    identifiers: List[EntityIdentifier] = Field(description="The identifiers of the related entity in the relationship.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The link to the entity.") 
     __properties = ["entityType", "entityId", "displayName", "properties", "scope", "lusidUniqueId", "identifiers", "href"]
 
@@ -129,3 +131,5 @@ class RelatedEntity(BaseModel):
             "href": obj.get("href")
         })
         return _obj
+
+RelatedEntity.update_forward_refs()

@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.group_of_market_data_key_rules import GroupOfMarketDataKeyRules
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 market_data_key_rule_group_operation: StrictStr = "example_market_data_key_rule_group_operation"
-market_rules: conlist(MarketDataKeyRule) = # Replace with your value
+market_rules: List[MarketDataKeyRule] = # Replace with your value
 group_of_market_data_key_rules_instance = GroupOfMarketDataKeyRules(market_data_key_rule_group_operation=market_data_key_rule_group_operation, market_rules=market_rules)
 
 ```

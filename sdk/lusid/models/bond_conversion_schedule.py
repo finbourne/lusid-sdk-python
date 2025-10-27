@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, conlist, constr, validator 
 from lusid.models.bond_conversion_entry import BondConversionEntry
 from lusid.models.schedule import Schedule
 
@@ -27,15 +29,15 @@ class BondConversionSchedule(Schedule):
     """
     A BondConversionSchedule object represents a class containing the  information required for the creation of convertible features in a ComplexBond  # noqa: E501
     """
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="The market identifier(s) of the share that the bond converts to. The instrument  will not fail validation if no identifier is supplied.")
-    bond_conversion_entries: Optional[conlist(BondConversionEntry)] = Field(None, alias="bondConversionEntries", description="The dates at which the bond may be converted and associated information required about the conversion.")
+    identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The market identifier(s) of the share that the bond converts to. The instrument  will not fail validation if no identifier is supplied.")
+    bond_conversion_entries: Optional[List[BondConversionEntry]] = Field(default=None, description="The dates at which the bond may be converted and associated information required about the conversion.", alias="bondConversionEntries")
     conversion_trigger:  StrictStr = Field(...,alias="conversionTrigger", description="Corporate event that triggers a conversion    Supported string (enumeration) values are: [NextEquityFinancing, IpoConversion, KnownDates, SoftCall].") 
     delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Is a conversion made into cash or into shares?  Defaults to \"Physical\" if not set.    Supported string (enumeration) values are: [Cash, Physical].") 
     exercise_type:  StrictStr = Field(...,alias="exerciseType", description="The exercise type of the conversion schedule (American or European).  For American type, the bond is convertible from a given exercise date until the next date in the schedule, or until it matures.  For European type, the bond is only convertible on the given exercise date.    Supported string (enumeration) values are: [European, Bermudan, American].") 
-    includes_accrued: Optional[StrictBool] = Field(None, alias="includesAccrued", description="Set this to true if a accrued interest is included in the conversion. Defaults to true.")
-    mandatory_conversion: Optional[StrictBool] = Field(None, alias="mandatoryConversion", description="Set this to true if a conversion is mandatory if the trigger occurs. Defaults to false.")
-    notification_period_end: Optional[datetime] = Field(None, alias="notificationPeriodEnd", description="The last day in the notification period for the conversion of the bond")
-    notification_period_start: Optional[datetime] = Field(None, alias="notificationPeriodStart", description="The first day in the notification period for the conversion of the bond")
+    includes_accrued: Optional[StrictBool] = Field(default=None, description="Set this to true if a accrued interest is included in the conversion. Defaults to true.", alias="includesAccrued")
+    mandatory_conversion: Optional[StrictBool] = Field(default=None, description="Set this to true if a conversion is mandatory if the trigger occurs. Defaults to false.", alias="mandatoryConversion")
+    notification_period_end: Optional[datetime] = Field(default=None, description="The last day in the notification period for the conversion of the bond", alias="notificationPeriodEnd")
+    notification_period_start: Optional[datetime] = Field(default=None, description="The first day in the notification period for the conversion of the bond", alias="notificationPeriodStart")
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "identifiers", "bondConversionEntries", "conversionTrigger", "deliveryType", "exerciseType", "includesAccrued", "mandatoryConversion", "notificationPeriodEnd", "notificationPeriodStart"]
@@ -90,14 +92,19 @@ class BondConversionSchedule(Schedule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "schedule_type" != "type":
             return value
 
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid'):
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
             raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
         return value
 
@@ -190,3 +197,5 @@ class BondConversionSchedule(Schedule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+BondConversionSchedule.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class MappedString(BaseModel):
     """
@@ -28,7 +30,7 @@ class MappedString(BaseModel):
     left_value:  Optional[StrictStr] = Field(None,alias="leftValue") 
     right_value:  Optional[StrictStr] = Field(None,alias="rightValue") 
     mapping_direction:  Optional[StrictStr] = Field(None,alias="mappingDirection") 
-    is_case_sensitive: Optional[StrictBool] = Field(None, alias="isCaseSensitive")
+    is_case_sensitive: Optional[StrictBool] = Field(default=None, alias="isCaseSensitive")
     __properties = ["leftValue", "rightValue", "mappingDirection", "isCaseSensitive"]
 
     class Config:
@@ -96,3 +98,5 @@ class MappedString(BaseModel):
             "is_case_sensitive": obj.get("isCaseSensitive")
         })
         return _obj
+
+MappedString.update_forward_refs()

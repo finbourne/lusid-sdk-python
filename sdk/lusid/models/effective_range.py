@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class EffectiveRange(BaseModel):
     """
     EffectiveRange
     """
-    from_date: Optional[datetime] = Field(None, alias="fromDate", description="The effective from datetime that this range applies to.")
-    until_date: Optional[datetime] = Field(None, alias="untilDate", description="The effective from datetime that this range applies to.")
+    from_date: Optional[datetime] = Field(default=None, description="The effective from datetime that this range applies to.", alias="fromDate")
+    until_date: Optional[datetime] = Field(default=None, description="The effective from datetime that this range applies to.", alias="untilDate")
     __properties = ["fromDate", "untilDate"]
 
     class Config:
@@ -77,3 +79,5 @@ class EffectiveRange(BaseModel):
             "until_date": obj.get("untilDate")
         })
         return _obj
+
+EffectiveRange.update_forward_refs()

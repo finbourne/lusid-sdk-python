@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.alias import Alias
 from lusid.models.custom_data_model_identifier_type_specification_with_display_name import CustomDataModelIdentifierTypeSpecificationWithDisplayName
 from lusid.models.custom_data_model_property_specification_with_display_name import CustomDataModelPropertySpecificationWithDisplayName
@@ -29,11 +31,11 @@ class CustomDataModelCriteria(BaseModel):
     """
     CustomDataModelCriteria
     """
-    conditions: Optional[conlist(StrictStr)] = Field(None, description="The conditions that the bound entity must meet to be valid.")
-    properties: Optional[conlist(CustomDataModelPropertySpecificationWithDisplayName)] = Field(None, description="The properties that are required or allowed on the bound entity.")
-    identifier_types: Optional[conlist(CustomDataModelIdentifierTypeSpecificationWithDisplayName)] = Field(None, alias="identifierTypes", description="The identifier types that are required or allowed on the bound entity.")
-    attribute_aliases: Optional[conlist(Alias)] = Field(None, alias="attributeAliases", description="The aliases for property keys, identifier types, and fields on the bound entity.")
-    recommended_sort_by: Optional[conlist(RecommendedSortBy)] = Field(None, alias="recommendedSortBy", description="The preferred default sorting instructions.")
+    conditions: Optional[List[StrictStr]] = Field(default=None, description="The conditions that the bound entity must meet to be valid.")
+    properties: Optional[List[CustomDataModelPropertySpecificationWithDisplayName]] = Field(default=None, description="The properties that are required or allowed on the bound entity.")
+    identifier_types: Optional[List[CustomDataModelIdentifierTypeSpecificationWithDisplayName]] = Field(default=None, description="The identifier types that are required or allowed on the bound entity.", alias="identifierTypes")
+    attribute_aliases: Optional[List[Alias]] = Field(default=None, description="The aliases for property keys, identifier types, and fields on the bound entity.", alias="attributeAliases")
+    recommended_sort_by: Optional[List[RecommendedSortBy]] = Field(default=None, description="The preferred default sorting instructions.", alias="recommendedSortBy")
     __properties = ["conditions", "properties", "identifierTypes", "attributeAliases", "recommendedSortBy"]
 
     class Config:
@@ -140,3 +142,5 @@ class CustomDataModelCriteria(BaseModel):
             "recommended_sort_by": [RecommendedSortBy.from_dict(_item) for _item in obj.get("recommendedSortBy")] if obj.get("recommendedSortBy") is not None else None
         })
         return _obj
+
+CustomDataModelCriteria.update_forward_refs()

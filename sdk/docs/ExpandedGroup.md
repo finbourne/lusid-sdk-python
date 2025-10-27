@@ -15,17 +15,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.expanded_group import ExpandedGroup
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-values: Optional[conlist(CompletePortfolio)] = # Replace with your value
-sub_groups: Optional[conlist(ExpandedGroup)] = # Replace with your value
+values: Optional[List[CompletePortfolio]] = # Replace with your value
+sub_groups: Optional[List[ExpandedGroup]] = # Replace with your value
 version: Optional[Version] = None
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 expanded_group_instance = ExpandedGroup(href=href, id=id, display_name=display_name, description=description, values=values, sub_groups=sub_groups, version=version, links=links)
 
 ```

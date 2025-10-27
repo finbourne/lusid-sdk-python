@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
 
@@ -34,10 +36,10 @@ class TransactionFieldMap(BaseModel):
     transaction_date:  StrictStr = Field(...,alias="transactionDate") 
     settlement_date:  StrictStr = Field(...,alias="settlementDate") 
     units:  StrictStr = Field(...,alias="units") 
-    transaction_price: Optional[TransactionPriceAndType] = Field(None, alias="transactionPrice")
+    transaction_price: Optional[TransactionPriceAndType] = Field(default=None, alias="transactionPrice")
     transaction_currency:  StrictStr = Field(...,alias="transactionCurrency") 
     exchange_rate:  Optional[StrictStr] = Field(None,alias="exchangeRate") 
-    total_consideration: TransactionCurrencyAndAmount = Field(..., alias="totalConsideration")
+    total_consideration: TransactionCurrencyAndAmount = Field(alias="totalConsideration")
     __properties = ["transactionId", "type", "source", "instrument", "transactionDate", "settlementDate", "units", "transactionPrice", "transactionCurrency", "exchangeRate", "totalConsideration"]
 
     class Config:
@@ -108,3 +110,5 @@ class TransactionFieldMap(BaseModel):
             "total_consideration": TransactionCurrencyAndAmount.from_dict(obj.get("totalConsideration")) if obj.get("totalConsideration") is not None else None
         })
         return _obj
+
+TransactionFieldMap.update_forward_refs()

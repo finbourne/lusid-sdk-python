@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -29,8 +31,8 @@ class DeleteCustodianAccountsResponse(BaseModel):
     The delete custodian accounts response  # noqa: E501
     """
     version: Optional[Version] = None
-    custodian_account_ids: Optional[conlist(ResourceId)] = Field(None, alias="custodianAccountIds", description="The Custodian Accounts which have been soft/hard deleted.")
-    links: Optional[conlist(Link)] = None
+    custodian_account_ids: Optional[List[ResourceId]] = Field(default=None, description="The Custodian Accounts which have been soft/hard deleted.", alias="custodianAccountIds")
+    links: Optional[List[Link]] = None
     __properties = ["version", "custodianAccountIds", "links"]
 
     class Config:
@@ -109,3 +111,5 @@ class DeleteCustodianAccountsResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+DeleteCustodianAccountsResponse.update_forward_refs()

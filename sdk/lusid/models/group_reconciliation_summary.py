@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr 
 from lusid.models.group_reconciliation_dates import GroupReconciliationDates
 from lusid.models.group_reconciliation_instance_id import GroupReconciliationInstanceId
 from lusid.models.group_reconciliation_result_statuses import GroupReconciliationResultStatuses
@@ -33,17 +35,17 @@ class GroupReconciliationSummary(BaseModel):
     """
     GroupReconciliationSummary
     """
-    run_details: Optional[GroupReconciliationRunDetails] = Field(None, alias="runDetails")
-    group_reconciliation_definition_id: Optional[ResourceId] = Field(None, alias="groupReconciliationDefinitionId")
+    run_details: Optional[GroupReconciliationRunDetails] = Field(default=None, alias="runDetails")
+    group_reconciliation_definition_id: Optional[ResourceId] = Field(default=None, alias="groupReconciliationDefinitionId")
     reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
-    instance_id: GroupReconciliationInstanceId = Field(..., alias="instanceId")
-    dates_reconciled: GroupReconciliationDates = Field(..., alias="datesReconciled")
-    reconciliation_run_as_at: datetime = Field(..., alias="reconciliationRunAsAt", description="The date and time the reconciliation was run")
-    count_comparison_results: StrictInt = Field(..., alias="countComparisonResults", description="The total number of comparison results with this InstanceId and ReconciliationType")
-    link_comparison_results: Optional[Link] = Field(None, alias="linkComparisonResults")
-    result_types: Optional[GroupReconciliationResultTypes] = Field(None, alias="resultTypes")
-    result_statuses: Optional[GroupReconciliationResultStatuses] = Field(None, alias="resultStatuses")
-    review_statuses: Optional[GroupReconciliationReviewStatuses] = Field(None, alias="reviewStatuses")
+    instance_id: GroupReconciliationInstanceId = Field(alias="instanceId")
+    dates_reconciled: GroupReconciliationDates = Field(alias="datesReconciled")
+    reconciliation_run_as_at: datetime = Field(description="The date and time the reconciliation was run", alias="reconciliationRunAsAt")
+    count_comparison_results: StrictInt = Field(description="The total number of comparison results with this InstanceId and ReconciliationType", alias="countComparisonResults")
+    link_comparison_results: Optional[Link] = Field(default=None, alias="linkComparisonResults")
+    result_types: Optional[GroupReconciliationResultTypes] = Field(default=None, alias="resultTypes")
+    result_statuses: Optional[GroupReconciliationResultStatuses] = Field(default=None, alias="resultStatuses")
+    review_statuses: Optional[GroupReconciliationReviewStatuses] = Field(default=None, alias="reviewStatuses")
     __properties = ["runDetails", "groupReconciliationDefinitionId", "reconciliationType", "instanceId", "datesReconciled", "reconciliationRunAsAt", "countComparisonResults", "linkComparisonResults", "resultTypes", "resultStatuses", "reviewStatuses"]
 
     class Config:
@@ -127,3 +129,5 @@ class GroupReconciliationSummary(BaseModel):
             "review_statuses": GroupReconciliationReviewStatuses.from_dict(obj.get("reviewStatuses")) if obj.get("reviewStatuses") is not None else None
         })
         return _obj
+
+GroupReconciliationSummary.update_forward_refs()

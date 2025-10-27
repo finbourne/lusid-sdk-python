@@ -19,9 +19,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_settlement_bucket import TransactionSettlementBucket
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 settlement_category: StrictStr = "example_settlement_category"
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 instrument_scope: StrictStr = "example_instrument_scope"
@@ -32,8 +34,8 @@ unsettled_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your v
 overdue_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 configured_settlement: Optional[StrictStr] = "example_configured_settlement"
 status: StrictStr = "example_status"
-settlement_instructions: Optional[conlist(TransactionSettlementInstruction)] = # Replace with your value
-movements: Optional[conlist(TransactionSettlementMovement)] = # Replace with your value
+settlement_instructions: Optional[List[TransactionSettlementInstruction]] = # Replace with your value
+movements: Optional[List[TransactionSettlementMovement]] = # Replace with your value
 transaction_settlement_bucket_instance = TransactionSettlementBucket(settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, contractual_settlement_date=contractual_settlement_date, contracted_units=contracted_units, settled_units=settled_units, unsettled_units=unsettled_units, overdue_units=overdue_units, configured_settlement=configured_settlement, status=status, settlement_instructions=settlement_instructions, movements=movements)
 
 ```

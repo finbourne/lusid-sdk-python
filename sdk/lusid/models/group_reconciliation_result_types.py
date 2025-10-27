@@ -18,22 +18,24 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 
 class GroupReconciliationResultTypes(BaseModel):
     """
     GroupReconciliationResultTypes
     """
-    count_match: StrictInt = Field(..., alias="countMatch", description="The number of comparison results of resultType \"Match\" with this instanceId and reconciliationType")
-    link_matches: Link = Field(..., alias="linkMatches")
-    count_partial_match: StrictInt = Field(..., alias="countPartialMatch", description="The number of comparison results of resultType \"PartialMatch\" with this instanceId and reconciliationType")
-    link_partial_matches: Link = Field(..., alias="linkPartialMatches")
-    count_break: StrictInt = Field(..., alias="countBreak", description="The number of comparison results of resultType \"Break\" with this instanceId and reconciliationType")
-    link_breaks: Link = Field(..., alias="linkBreaks")
-    count_resolved: StrictInt = Field(..., alias="countResolved", description="The number of comparison results of resultType \"Resolved\" with this instanceId and reconciliationType")
-    link_resolved: Link = Field(..., alias="linkResolved")
+    count_match: StrictInt = Field(description="The number of comparison results of resultType \"Match\" with this instanceId and reconciliationType", alias="countMatch")
+    link_matches: Link = Field(alias="linkMatches")
+    count_partial_match: StrictInt = Field(description="The number of comparison results of resultType \"PartialMatch\" with this instanceId and reconciliationType", alias="countPartialMatch")
+    link_partial_matches: Link = Field(alias="linkPartialMatches")
+    count_break: StrictInt = Field(description="The number of comparison results of resultType \"Break\" with this instanceId and reconciliationType", alias="countBreak")
+    link_breaks: Link = Field(alias="linkBreaks")
+    count_resolved: StrictInt = Field(description="The number of comparison results of resultType \"Resolved\" with this instanceId and reconciliationType", alias="countResolved")
+    link_resolved: Link = Field(alias="linkResolved")
     __properties = ["countMatch", "linkMatches", "countPartialMatch", "linkPartialMatches", "countBreak", "linkBreaks", "countResolved", "linkResolved"]
 
     class Config:
@@ -102,3 +104,5 @@ class GroupReconciliationResultTypes(BaseModel):
             "link_resolved": Link.from_dict(obj.get("linkResolved")) if obj.get("linkResolved") is not None else None
         })
         return _obj
+
+GroupReconciliationResultTypes.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.recipe_composer import RecipeComposer
 
 class UpsertRecipeComposerRequest(BaseModel):
     """
     A recipe composer that is to be stored in the recipe composer data store or used for inline resolving.  # noqa: E501
     """
-    recipe_composer: Optional[RecipeComposer] = Field(None, alias="recipeComposer")
+    recipe_composer: Optional[RecipeComposer] = Field(default=None, alias="recipeComposer")
     __properties = ["recipeComposer"]
 
     class Config:
@@ -79,3 +81,5 @@ class UpsertRecipeComposerRequest(BaseModel):
             "recipe_composer": RecipeComposer.from_dict(obj.get("recipeComposer")) if obj.get("recipeComposer") is not None else None
         })
         return _obj
+
+UpsertRecipeComposerRequest.update_forward_refs()

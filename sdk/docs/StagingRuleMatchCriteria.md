@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-action_in: Optional[conlist(StrictStr)] = # Replace with your value
+action_in: Optional[List[StrictStr]] = # Replace with your value
 requesting_user: Optional[StrictStr] = "example_requesting_user"
 entity_attributes: Optional[StrictStr] = "example_entity_attributes"
-changed_attribute_name_in: Optional[conlist(StrictStr)] = # Replace with your value
+changed_attribute_name_in: Optional[List[StrictStr]] = # Replace with your value
 staging_rule_match_criteria_instance = StagingRuleMatchCriteria(action_in=action_in, requesting_user=requesting_user, entity_attributes=entity_attributes, changed_attribute_name_in=changed_attribute_name_in)
 
 ```

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.address_definition import AddressDefinition
 from lusid.models.field_schema import FieldSchema
 
@@ -27,9 +29,9 @@ class ResultDataSchema(BaseModel):
     """
     The shape and type of the returned data. The AddressSchema gives information about the requested keys,  including the return type, links to further documentation, lifecycle status and removal date if they are  deprecated.                Note: the NodeValueSchema and PropertySchema fields have been deprecated. Please use the AddressSchema instead.  # noqa: E501
     """
-    node_value_schema: Optional[Dict[str, FieldSchema]] = Field(None, alias="nodeValueSchema", description="This has been deprecated. Please use AddressSchema instead.")
-    property_schema: Optional[Dict[str, FieldSchema]] = Field(None, alias="propertySchema", description="This has been deprecated. Please use AddressSchema instead.")
-    address_schema: Optional[Dict[str, AddressDefinition]] = Field(None, alias="addressSchema")
+    node_value_schema: Optional[Dict[str, FieldSchema]] = Field(default=None, description="This has been deprecated. Please use AddressSchema instead.", alias="nodeValueSchema")
+    property_schema: Optional[Dict[str, FieldSchema]] = Field(default=None, description="This has been deprecated. Please use AddressSchema instead.", alias="propertySchema")
+    address_schema: Optional[Dict[str, AddressDefinition]] = Field(default=None, alias="addressSchema")
     __properties = ["nodeValueSchema", "propertySchema", "addressSchema"]
 
     class Config:
@@ -132,3 +134,5 @@ class ResultDataSchema(BaseModel):
             else None
         })
         return _obj
+
+ResultDataSchema.update_forward_refs()

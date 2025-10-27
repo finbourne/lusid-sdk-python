@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class SweepBlocksRequest(BaseModel):
     """
     A request to sweep specified blocks.  # noqa: E501
     """
-    block_ids: Dict[str, ResourceId] = Field(..., alias="blockIds", description="A dictionary mapping ephemeral identifiers, which live as long as the request, to specific blocks to sweep.")
+    block_ids: Dict[str, ResourceId] = Field(description="A dictionary mapping ephemeral identifiers, which live as long as the request, to specific blocks to sweep.", alias="blockIds")
     latest_allowable_modification_time:  StrictStr = Field(...,alias="latestAllowableModificationTime", description="Timestamp or cut label which the  block or related entities must not have been updated after.") 
     __properties = ["blockIds", "latestAllowableModificationTime"]
 
@@ -90,3 +92,5 @@ class SweepBlocksRequest(BaseModel):
             "latest_allowable_modification_time": obj.get("latestAllowableModificationTime")
         })
         return _obj
+
+SweepBlocksRequest.update_forward_refs()

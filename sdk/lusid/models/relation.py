@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -28,11 +30,11 @@ class Relation(BaseModel):
     Representation of a Relation between a requested entity with the stated entity as RelationedEntityId  # noqa: E501
     """
     version: Optional[Version] = None
-    relation_definition_id: ResourceId = Field(..., alias="relationDefinitionId")
-    related_entity_id: Dict[str, StrictStr] = Field(..., alias="relatedEntityId")
+    relation_definition_id: ResourceId = Field(alias="relationDefinitionId")
+    related_entity_id: Dict[str, Optional[StrictStr]] = Field(alias="relatedEntityId")
     traversal_direction:  StrictStr = Field(...,alias="traversalDirection") 
     traversal_description:  StrictStr = Field(...,alias="traversalDescription") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom")
+    effective_from: Optional[datetime] = Field(default=None, alias="effectiveFrom")
     __properties = ["version", "relationDefinitionId", "relatedEntityId", "traversalDirection", "traversalDescription", "effectiveFrom"]
 
     class Config:
@@ -93,3 +95,5 @@ class Relation(BaseModel):
             "effective_from": obj.get("effectiveFrom")
         })
         return _obj
+
+Relation.update_forward_refs()

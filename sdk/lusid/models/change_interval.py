@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 from lusid.models.effective_range import EffectiveRange
 from lusid.models.property_value import PropertyValue
 
@@ -27,17 +29,17 @@ class ChangeInterval(BaseModel):
     """
     Defines a change that occured for an entity  # noqa: E501
     """
-    as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The date/time of the change.")
+    as_at_modified: Optional[datetime] = Field(default=None, description="The date/time of the change.", alias="asAtModified")
     user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique identifier of the user that made the change.") 
     request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The unique identifier of the request that the changes were part of.") 
     reason_modified:  Optional[StrictStr] = Field(None,alias="reasonModified", description="The reason for an entity modification.") 
-    as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The version number for the entity (the entity was created at version 1). This may refer to the version number of a changed related entity, not a change for the entity itself.")
+    as_at_version_number: Optional[StrictInt] = Field(default=None, description="The version number for the entity (the entity was created at version 1). This may refer to the version number of a changed related entity, not a change for the entity itself.", alias="asAtVersionNumber")
     staged_modification_id_modified:  Optional[StrictStr] = Field(None,alias="stagedModificationIdModified", description="The id of the staged modification that was approved. Will be null if the change didn't come from a staged modification.") 
     action:  Optional[StrictStr] = Field(None,alias="action", description="The action performed on the field.") 
     attribute_name:  Optional[StrictStr] = Field(None,alias="attributeName", description="The name of the field or property that has been changed.") 
-    previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
-    new_value: Optional[PropertyValue] = Field(None, alias="newValue")
-    effective_range: Optional[EffectiveRange] = Field(None, alias="effectiveRange")
+    previous_value: Optional[PropertyValue] = Field(default=None, alias="previousValue")
+    new_value: Optional[PropertyValue] = Field(default=None, alias="newValue")
+    effective_range: Optional[EffectiveRange] = Field(default=None, alias="effectiveRange")
     __properties = ["asAtModified", "userIdModified", "requestIdModified", "reasonModified", "asAtVersionNumber", "stagedModificationIdModified", "action", "attributeName", "previousValue", "newValue", "effectiveRange"]
 
     class Config:
@@ -136,3 +138,5 @@ class ChangeInterval(BaseModel):
             "effective_range": EffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None
         })
         return _obj
+
+ChangeInterval.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.day_of_week import DayOfWeek
 
 class WeekendMask(BaseModel):
@@ -78,3 +80,5 @@ class WeekendMask(BaseModel):
             "time_zone": obj.get("timeZone")
         })
         return _obj
+
+WeekendMask.update_forward_refs()

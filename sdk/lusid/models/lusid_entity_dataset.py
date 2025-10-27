@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class LusidEntityDataset(BaseModel):
     """
     Contains the run-time parameters that are appropriate for check definitions  with datasetSchema.type = \"LusidEntity\"  # noqa: E501
     """
-    as_at: Optional[datetime] = Field(None, alias="asAt", description="The asAt date to fetch the data. Nullable. Defaults to latest.")
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effectiveAt date to fetch the data. Nullable. Defaults to latest.")
+    as_at: Optional[datetime] = Field(default=None, description="The asAt date to fetch the data. Nullable. Defaults to latest.", alias="asAt")
+    effective_at: Optional[datetime] = Field(default=None, description="The effectiveAt date to fetch the data. Nullable. Defaults to latest.", alias="effectiveAt")
     scope:  StrictStr = Field(...,alias="scope", description="The scope of the entities to check. Required.") 
-    as_at_modified_since: Optional[datetime] = Field(None, alias="asAtModifiedSince", description="Nullable. Filters the dataset for version.asAtModified greater than or equal to this value.")
+    as_at_modified_since: Optional[datetime] = Field(default=None, description="Nullable. Filters the dataset for version.asAtModified greater than or equal to this value.", alias="asAtModifiedSince")
     selector_attribute:  StrictStr = Field(...,alias="selectorAttribute", description="An attribute (field name, propertyKey or identifierKey) to use to sub-divide the dataset.") 
     selector_value:  StrictStr = Field(...,alias="selectorValue", description="The value of the above attribute used to sub-divide the dataset.") 
     return_identifier_key:  Optional[StrictStr] = Field(None,alias="returnIdentifierKey", description="The preferred identifier to return for entities with multiple external identifiers.") 
@@ -107,3 +109,5 @@ class LusidEntityDataset(BaseModel):
             "return_identifier_key": obj.get("returnIdentifierKey")
         })
         return _obj
+
+LusidEntityDataset.update_forward_refs()

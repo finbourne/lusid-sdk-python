@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.investor_record import InvestorRecord
 
 class AccountHolder(BaseModel):
@@ -28,9 +30,9 @@ class AccountHolder(BaseModel):
     """
     key:  Optional[StrictStr] = Field(None,alias="key", description="A client-defined key used to identify the Account Holder, unique within the Investment Account") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the Investor Record lies.") 
-    identifiers: Optional[Dict[str, StrictStr]] = Field(None, description="Single Account Holder identifier that should target the desired Investor Record.")
+    identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Single Account Holder identifier that should target the desired Investor Record.")
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique InvestorRecord entity identifier") 
-    investor_record: Optional[InvestorRecord] = Field(None, alias="investorRecord")
+    investor_record: Optional[InvestorRecord] = Field(default=None, alias="investorRecord")
     __properties = ["key", "scope", "identifiers", "entityUniqueId", "investorRecord"]
 
     class Config:
@@ -107,3 +109,5 @@ class AccountHolder(BaseModel):
             "investor_record": InvestorRecord.from_dict(obj.get("investorRecord")) if obj.get("investorRecord") is not None else None
         })
         return _obj
+
+AccountHolder.update_forward_refs()

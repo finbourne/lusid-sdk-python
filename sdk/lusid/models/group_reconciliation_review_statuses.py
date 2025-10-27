@@ -18,22 +18,24 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 
 class GroupReconciliationReviewStatuses(BaseModel):
     """
     GroupReconciliationReviewStatuses
     """
-    count_pending: StrictInt = Field(..., alias="countPending", description="The number of comparison results of reviewStatus \"Pending\" with this instanceId and reconciliationType")
-    link_pending: Link = Field(..., alias="linkPending")
-    count_reviewed: StrictInt = Field(..., alias="countReviewed", description="The number of comparison results of reviewStatus \"Reviewed\" with this instanceId and reconciliationType")
-    link_reviewed: Link = Field(..., alias="linkReviewed")
-    count_matched: StrictInt = Field(..., alias="countMatched", description="The number of comparison results of reviewStatus \"Matched\" with this instanceId and reconciliationType")
-    link_matched: Link = Field(..., alias="linkMatched")
-    count_invalid: StrictInt = Field(..., alias="countInvalid", description="The number of comparison results of reviewStatus \"Invalid\" with this instanceId and reconciliationType")
-    link_invalid: Link = Field(..., alias="linkInvalid")
+    count_pending: StrictInt = Field(description="The number of comparison results of reviewStatus \"Pending\" with this instanceId and reconciliationType", alias="countPending")
+    link_pending: Link = Field(alias="linkPending")
+    count_reviewed: StrictInt = Field(description="The number of comparison results of reviewStatus \"Reviewed\" with this instanceId and reconciliationType", alias="countReviewed")
+    link_reviewed: Link = Field(alias="linkReviewed")
+    count_matched: StrictInt = Field(description="The number of comparison results of reviewStatus \"Matched\" with this instanceId and reconciliationType", alias="countMatched")
+    link_matched: Link = Field(alias="linkMatched")
+    count_invalid: StrictInt = Field(description="The number of comparison results of reviewStatus \"Invalid\" with this instanceId and reconciliationType", alias="countInvalid")
+    link_invalid: Link = Field(alias="linkInvalid")
     __properties = ["countPending", "linkPending", "countReviewed", "linkReviewed", "countMatched", "linkMatched", "countInvalid", "linkInvalid"]
 
     class Config:
@@ -102,3 +104,5 @@ class GroupReconciliationReviewStatuses(BaseModel):
             "link_invalid": Link.from_dict(obj.get("linkInvalid")) if obj.get("linkInvalid") is not None else None
         })
         return _obj
+
+GroupReconciliationReviewStatuses.update_forward_refs()

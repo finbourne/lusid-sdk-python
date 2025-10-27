@@ -4,16 +4,18 @@ In evaluating a left and right hand side holding or valuation set, two data reco
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**left** | **Dict[str, object]** | Left hand side of the comparison | [optional] 
-**right** | **Dict[str, object]** | Right hand side of the comparison | [optional] 
-**difference** | **Dict[str, object]** | Difference between LHS and RHS of comparison | [optional] 
-**result_comparison** | **Dict[str, object]** | The logical or semantic description of the difference, e.g. \&quot;Matches\&quot; or \&quot;MatchesWithTolerance\&quot; or \&quot;Failed\&quot;. | [optional] 
+**left** | **Dict[str, Optional[object]]** | Left hand side of the comparison | [optional] 
+**right** | **Dict[str, Optional[object]]** | Right hand side of the comparison | [optional] 
+**difference** | **Dict[str, Optional[object]]** | Difference between LHS and RHS of comparison | [optional] 
+**result_comparison** | **Dict[str, Optional[object]]** | The logical or semantic description of the difference, e.g. \&quot;Matches\&quot; or \&quot;MatchesWithTolerance\&quot; or \&quot;Failed\&quot;. | [optional] 
 ## Example
 
 ```python
 from lusid.models.reconciliation_line import ReconciliationLine
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 left: Optional[Dict[str, Any]] = # Replace with your value
 right: Optional[Dict[str, Any]] = # Replace with your value

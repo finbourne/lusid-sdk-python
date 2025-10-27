@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **transaction_id** | **str** |  | 
 **settlement_category** | **str** |  | 
 **instruction_type** | **str** |  | [optional] 
-**instrument_identifiers** | **Dict[str, str]** |  | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** |  | 
 **contractual_settlement_date** | **datetime** |  | [optional] 
 **actual_settlement_date** | **datetime** |  | 
 **units** | **float** |  | 
@@ -20,22 +20,24 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 settlement_instruction_id: StrictStr = "example_settlement_instruction_id"
 transaction_id: StrictStr = "example_transaction_id"
 settlement_category: StrictStr = "example_settlement_category"
 instruction_type: Optional[StrictStr] = "example_instruction_type"
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 contractual_settlement_date: Optional[datetime] = # Replace with your value
 actual_settlement_date: datetime = # Replace with your value
-units: Union[StrictFloat, StrictInt] = # Replace with your value
+units: Union[StrictFloat, StrictInt]
 sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 custodian_account_override: Optional[ResourceId] = # Replace with your value
 instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 settlement_in_lieu: Optional[SettlementInLieu] = # Replace with your value
-properties: Optional[conlist(PerpetualProperty)] = None
+properties: Optional[List[PerpetualProperty]] = None
 settlement_instruction_request_instance = SettlementInstructionRequest(settlement_instruction_id=settlement_instruction_id, transaction_id=transaction_id, settlement_category=settlement_category, instruction_type=instruction_type, instrument_identifiers=instrument_identifiers, contractual_settlement_date=contractual_settlement_date, actual_settlement_date=actual_settlement_date, units=units, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu, properties=properties)
 
 ```

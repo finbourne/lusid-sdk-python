@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_property_mapping_request import TransactionPropertyMappingRequest
 
@@ -29,11 +31,11 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
     """
     movement_types:  StrictStr = Field(...,alias="movementTypes", description=". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment, Deferred, CashDeferred") 
     side:  StrictStr = Field(...,alias="side", description="The movement side") 
-    direction: StrictInt = Field(..., description="The movement direction")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="The properties associated with the underlying Movement.")
-    mappings: Optional[conlist(TransactionPropertyMappingRequest)] = Field(None, description="This allows you to map a transaction property to a property on the underlying holding.")
+    direction: StrictInt = Field(description="The movement direction")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties associated with the underlying Movement.")
+    mappings: Optional[List[TransactionPropertyMappingRequest]] = Field(default=None, description="This allows you to map a transaction property to a property on the underlying holding.")
     name:  Optional[StrictStr] = Field(None,alias="name", description="The movement name (optional)") 
-    movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest', 'Virtual' and 'Income' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
+    movement_options: Optional[List[StrictStr]] = Field(default=None, description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment', 'IncludesTradedInterest', 'Virtual' and 'Income' (works only with the movement type 'StockMovement'). A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.", alias="movementOptions")
     __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions"]
 
     @validator('movement_types')
@@ -86,14 +88,19 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "movement_types" != "type":
             return value
 
-        if value not in ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment', 'Deferred', 'CashDeferred'):
+        if value not in ['Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment', 'Deferred', 'CashDeferred']:
             raise ValueError("must be one of enum values ('Settlement', 'Traded', 'StockMovement', 'FutureCash', 'Commitment', 'Receivable', 'CashSettlement', 'CashForward', 'CashCommitment', 'CashReceivable', 'Accrual', 'CashAccrual', 'ForwardFx', 'CashFxForward', 'Carry', 'CarryAsPnl', 'VariationMargin', 'Capital', 'Fee', 'LimitAdjustment', 'BalanceAdjustment', 'Deferred', 'CashDeferred')")
         return value
 
@@ -189,3 +196,5 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
             "movement_options": obj.get("movementOptions")
         })
         return _obj
+
+TransactionConfigurationMovementDataRequest.update_forward_refs()

@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid.models.resource_id import ResourceId
 
 class ReconciliationSideConfiguration(BaseModel):
     """
     Specification for one side of a valuations/positions scheduled reconciliation  # noqa: E501
     """
-    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt")
-    as_at: Optional[datetime] = Field(None, alias="asAt")
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    effective_at: Optional[datetime] = Field(default=None, alias="effectiveAt")
+    as_at: Optional[datetime] = Field(default=None, alias="asAt")
     currency:  Optional[StrictStr] = Field(None,alias="currency") 
     __properties = ["recipeId", "effectiveAt", "asAt", "currency"]
 
@@ -100,3 +102,5 @@ class ReconciliationSideConfiguration(BaseModel):
             "currency": obj.get("currency")
         })
         return _obj
+
+ReconciliationSideConfiguration.update_forward_refs()

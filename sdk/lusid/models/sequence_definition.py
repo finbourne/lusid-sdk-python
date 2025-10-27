@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 
@@ -27,15 +29,15 @@ class SequenceDefinition(BaseModel):
     """
     SequenceDefinition
     """
-    id: ResourceId = Field(...)
-    increment: StrictInt = Field(..., description="The Resource Id of the sequence definition")
-    min_value: StrictInt = Field(..., alias="minValue", description="The minimum value of the sequence")
-    max_value: StrictInt = Field(..., alias="maxValue", description="The maximum value of the sequence")
-    start: StrictInt = Field(..., description="The start value of the sequence")
-    value: Optional[StrictInt] = Field(None, description="The last used value of the sequence")
-    cycle: StrictBool = Field(..., description="Indicates if the sequence would start from minimun value once it reaches maximum value. If set to false, a failure would return if the sequence reaches maximum value.")
+    id: ResourceId
+    increment: StrictInt = Field(description="The Resource Id of the sequence definition")
+    min_value: StrictInt = Field(description="The minimum value of the sequence", alias="minValue")
+    max_value: StrictInt = Field(description="The maximum value of the sequence", alias="maxValue")
+    start: StrictInt = Field(description="The start value of the sequence")
+    value: Optional[StrictInt] = Field(default=None, description="The last used value of the sequence")
+    cycle: StrictBool = Field(description="Indicates if the sequence would start from minimun value once it reaches maximum value. If set to false, a failure would return if the sequence reaches maximum value.")
     pattern:  Optional[StrictStr] = Field(None,alias="pattern", description="The pattern to be used to generate next values in the sequence.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "increment", "minValue", "maxValue", "start", "value", "cycle", "pattern", "links"]
 
     class Config:
@@ -118,3 +120,5 @@ class SequenceDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+SequenceDefinition.update_forward_refs()

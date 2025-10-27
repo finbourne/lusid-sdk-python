@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TransactionTypePropertyMapping(BaseModel):
     """
@@ -29,7 +31,7 @@ class TransactionTypePropertyMapping(BaseModel):
     map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The Property Key of the Property to map from") 
     set_to:  Optional[StrictStr] = Field(None,alias="setTo", description="A pointer to the Property being mapped from") 
     template_from:  Optional[StrictStr] = Field(None,alias="templateFrom", description="The template that defines how the property value is constructed from transaction, instrument and portfolio details.") 
-    nullify: Optional[StrictBool] = Field(None, description="Flag to unset the Property Key for the mapping")
+    nullify: Optional[StrictBool] = Field(default=None, description="Flag to unset the Property Key for the mapping")
     __properties = ["propertyKey", "mapFrom", "setTo", "templateFrom", "nullify"]
 
     class Config:
@@ -103,3 +105,5 @@ class TransactionTypePropertyMapping(BaseModel):
             "nullify": obj.get("nullify")
         })
         return _obj
+
+TransactionTypePropertyMapping.update_forward_refs()

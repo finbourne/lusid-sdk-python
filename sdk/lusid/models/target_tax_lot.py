@@ -17,24 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
 from lusid.models.currency_and_amount import CurrencyAndAmount
 
 class TargetTaxLot(BaseModel):
     """
     Used to specify holdings target amounts at the tax-lot level  # noqa: E501
     """
-    units: Union[StrictFloat, StrictInt] = Field(..., description="The number of units of the instrument in this tax-lot.")
+    units: Union[StrictFloat, StrictInt] = Field(description="The number of units of the instrument in this tax-lot.")
     cost: Optional[CurrencyAndAmount] = None
-    portfolio_cost: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="portfolioCost", description="The total cost of the tax-lot in the transaction portfolio's base currency.")
-    price: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The purchase price of each unit of the instrument held in this tax-lot. This forms part of the unique key required for multiple tax-lots.")
-    purchase_date: Optional[datetime] = Field(None, alias="purchaseDate", description="The purchase date of this tax-lot. This forms part of the unique key required for multiple tax-lots.")
-    settlement_date: Optional[datetime] = Field(None, alias="settlementDate", description="The settlement date of the tax-lot's opening transaction.")
-    notional_cost: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="notionalCost", description="The notional cost of the tax-lot's opening transaction.")
-    variation_margin: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="variationMargin", description="The variation margin of the tax-lot's opening transaction.")
-    variation_margin_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="variationMarginPortfolioCcy", description="The variation margin in portfolio currency of the tax-lot's opening transaction.")
+    portfolio_cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total cost of the tax-lot in the transaction portfolio's base currency.", alias="portfolioCost")
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The purchase price of each unit of the instrument held in this tax-lot. This forms part of the unique key required for multiple tax-lots.")
+    purchase_date: Optional[datetime] = Field(default=None, description="The purchase date of this tax-lot. This forms part of the unique key required for multiple tax-lots.", alias="purchaseDate")
+    settlement_date: Optional[datetime] = Field(default=None, description="The settlement date of the tax-lot's opening transaction.", alias="settlementDate")
+    notional_cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The notional cost of the tax-lot's opening transaction.", alias="notionalCost")
+    variation_margin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The variation margin of the tax-lot's opening transaction.", alias="variationMargin")
+    variation_margin_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The variation margin in portfolio currency of the tax-lot's opening transaction.", alias="variationMarginPortfolioCcy")
     __properties = ["units", "cost", "portfolioCost", "price", "purchaseDate", "settlementDate", "notionalCost", "variationMargin", "variationMarginPortfolioCcy"]
 
     class Config:
@@ -130,3 +132,5 @@ class TargetTaxLot(BaseModel):
             "variation_margin_portfolio_ccy": obj.get("variationMarginPortfolioCcy")
         })
         return _obj
+
+TargetTaxLot.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.investor_identifier import InvestorIdentifier
 from lusid.models.model_property import ModelProperty
 
@@ -28,11 +30,11 @@ class UpsertInvestorRecordRequest(BaseModel):
     Request to create or update an investor record  # noqa: E501
     """
     scope:  StrictStr = Field(...,alias="scope", description="The scope in which the Investor Record lies.") 
-    identifiers: Dict[str, ModelProperty] = Field(..., description="Unique client-defined identifiers of the Investor Record.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Investor Record.")
+    identifiers: Dict[str, ModelProperty] = Field(description="Unique client-defined identifiers of the Investor Record.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Investor Record.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Investor Record") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investor Record") 
-    investor: InvestorIdentifier = Field(...)
+    investor: InvestorIdentifier
     __properties = ["scope", "identifiers", "properties", "displayName", "description", "investor"]
 
     class Config:
@@ -124,3 +126,5 @@ class UpsertInvestorRecordRequest(BaseModel):
             "investor": InvestorIdentifier.from_dict(obj.get("investor")) if obj.get("investor") is not None else None
         })
         return _obj
+
+UpsertInvestorRecordRequest.update_forward_refs()

@@ -19,11 +19,9 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
-from pydantic.v1 import Field, StrictStr, constr, validator
-
+from pydantic.v1 import Field, StrictStr
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.complete_relation import CompleteRelation
 from lusid.models.create_relation_request import CreateRelationRequest
 from lusid.models.delete_relation_request import DeleteRelationRequest
@@ -56,15 +54,15 @@ class RelationsApi:
 
 
     @overload
-    async def create_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(..., description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> CompleteRelation:  # noqa: E501
+    async def create_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> CompleteRelation:  # noqa: E501
         ...
 
     @overload
-    def create_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(..., description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CompleteRelation:  # noqa: E501
+    def create_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CompleteRelation:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(..., description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CompleteRelation, Awaitable[CompleteRelation]]:  # noqa: E501
+    def create_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CompleteRelation, Awaitable[CompleteRelation]]:  # noqa: E501
         """[EXPERIMENTAL] CreateRelation: Create Relation  # noqa: E501
 
         Create a relation between two entity objects by their identifiers  # noqa: E501
@@ -101,7 +99,7 @@ class RelationsApi:
         return self.create_relation_with_http_info(scope, code, create_relation_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_relation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(..., description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_relation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], create_relation_request : Annotated[CreateRelationRequest, Field(description="The details of the relation to create.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateRelation: Create Relation  # noqa: E501
 
         Create a relation between two entity objects by their identifiers  # noqa: E501
@@ -239,15 +237,15 @@ class RelationsApi:
 
 
     @overload
-    async def delete_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(..., description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(..., description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(..., description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_relation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteRelation: Delete a relation  # noqa: E501
 
         Delete a relation between two entity objects represented by their identifiers  # noqa: E501
@@ -284,7 +282,7 @@ class RelationsApi:
         return self.delete_relation_with_http_info(scope, code, delete_relation_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_relation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(..., description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_relation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relation definition")], code : Annotated[StrictStr, Field(..., description="The code of the relation definition")], delete_relation_request : Annotated[DeleteRelationRequest, Field(description="The details of the relation to delete.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteRelation: Delete a relation  # noqa: E501
 
         Delete a relation between two entity objects represented by their identifiers  # noqa: E501

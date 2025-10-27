@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.lusid_instrument import LusidInstrument
 
 class TranslateInstrumentDefinitionsRequest(BaseModel):
     """
     A collection of instruments to translate, along with the target dialect to translate into.  # noqa: E501
     """
-    instruments: Dict[str, LusidInstrument] = Field(..., description="The collection of instruments to translate.                Each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                Any instrument that is not already in the LUSID dialect should be given as an ExoticInstrument.")
+    instruments: Dict[str, LusidInstrument] = Field(description="The collection of instruments to translate.                Each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                Any instrument that is not already in the LUSID dialect should be given as an ExoticInstrument.")
     dialect:  StrictStr = Field(...,alias="dialect", description="The target dialect that the given instruments should be translated to.") 
     __properties = ["instruments", "dialect"]
 
@@ -90,3 +92,5 @@ class TranslateInstrumentDefinitionsRequest(BaseModel):
             "dialect": obj.get("dialect")
         })
         return _obj
+
+TranslateInstrumentDefinitionsRequest.update_forward_refs()

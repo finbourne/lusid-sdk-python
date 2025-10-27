@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.rules_interval import RulesInterval
@@ -30,12 +32,12 @@ class AmortisationRuleSet(BaseModel):
     AmortisationRuleSet
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="A user-friendly name.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of what this rule set is for.") 
-    rules_interval: RulesInterval = Field(..., alias="rulesInterval")
+    rules_interval: RulesInterval = Field(alias="rulesInterval")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "rulesInterval", "version", "links"]
 
     class Config:
@@ -122,3 +124,5 @@ class AmortisationRuleSet(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+AmortisationRuleSet.update_forward_refs()

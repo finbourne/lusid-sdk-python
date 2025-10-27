@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class HoldingContext(BaseModel):
     """
     Holding context node.  Contains settings that control how LUSID handles holdings within portfolios.  # noqa: E501
     """
-    tax_lot_level_holdings: Optional[StrictBool] = Field(None, alias="taxLotLevelHoldings", description="Whether or not to expand the holdings to return the underlying tax-lots. Defaults to True.")
+    tax_lot_level_holdings: Optional[StrictBool] = Field(default=None, description="Whether or not to expand the holdings to return the underlying tax-lots. Defaults to True.", alias="taxLotLevelHoldings")
     __properties = ["taxLotLevelHoldings"]
 
     class Config:
@@ -75,3 +77,5 @@ class HoldingContext(BaseModel):
             "tax_lot_level_holdings": obj.get("taxLotLevelHoldings")
         })
         return _obj
+
+HoldingContext.update_forward_refs()

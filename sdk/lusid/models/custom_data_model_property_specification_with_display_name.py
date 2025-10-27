@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CustomDataModelPropertySpecificationWithDisplayName(BaseModel):
     """
@@ -27,7 +29,7 @@ class CustomDataModelPropertySpecificationWithDisplayName(BaseModel):
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the property definition.") 
     property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key that is required/allowed on the bound entity.") 
-    required: Optional[StrictBool] = Field(None, description="Whether property is required or allowed.")
+    required: Optional[StrictBool] = Field(default=None, description="Whether property is required or allowed.")
     __properties = ["displayName", "propertyKey", "required"]
 
     class Config:
@@ -84,3 +86,5 @@ class CustomDataModelPropertySpecificationWithDisplayName(BaseModel):
             "required": obj.get("required")
         })
         return _obj
+
+CustomDataModelPropertySpecificationWithDisplayName.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.custom_data_model_criteria import CustomDataModelCriteria
 from lusid.models.data_model_summary import DataModelSummary
 from lusid.models.version import Version
@@ -28,7 +30,7 @@ class CustomDataModel(BaseModel):
     """
     CustomDataModel
     """
-    data_model_summary: Optional[DataModelSummary] = Field(None, alias="dataModelSummary")
+    data_model_summary: Optional[DataModelSummary] = Field(default=None, alias="dataModelSummary")
     inherited: Optional[CustomDataModelCriteria] = None
     incremental: Optional[CustomDataModelCriteria] = None
     applied: Optional[CustomDataModelCriteria] = None
@@ -101,3 +103,5 @@ class CustomDataModel(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj
+
+CustomDataModel.update_forward_refs()

@@ -15,8 +15,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_derived_property_definition_request import CreateDerivedPropertyDefinitionRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 domain: StrictStr = "example_domain"
 scope: StrictStr = "example_scope"

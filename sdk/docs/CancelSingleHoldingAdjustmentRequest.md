@@ -4,7 +4,7 @@ This request specifies single target holding. i.e. holding data that the  system
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_identifiers** | **Dict[str, str]** | A set of instrument identifiers that can resolve the holding adjustment to a unique instrument. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | A set of instrument identifiers that can resolve the holding adjustment to a unique instrument. | 
 **sub_holding_keys** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The sub-holding properties which identify the holding. Each property must be from the &#39;Transaction&#39; domain. | [optional] 
 **currency** | **str** | The Holding currency. | [optional] 
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
@@ -12,10 +12,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.cancel_single_holding_adjustment_request import CancelSingleHoldingAdjustmentRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
 custodian_account_id: Optional[ResourceId] = # Replace with your value

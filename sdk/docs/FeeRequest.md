@@ -25,9 +25,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fee_request import FeeRequest
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 code: StrictStr = "example_code"
 fee_type_id: ResourceId = # Replace with your value
 display_name: StrictStr = "example_display_name"
@@ -45,7 +47,7 @@ end_date: Optional[datetime] = # Replace with your value
 anchor_date: Optional[DayMonth] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
-share_classes: Optional[conlist(StrictStr)] = # Replace with your value
+share_classes: Optional[List[StrictStr]] = # Replace with your value
 fee_request_instance = FeeRequest(code=code, fee_type_id=fee_type_id, display_name=display_name, description=description, origin=origin, calculation_base=calculation_base, accrual_currency=accrual_currency, treatment=treatment, total_annual_accrual_amount=total_annual_accrual_amount, fee_rate_percentage=fee_rate_percentage, payable_frequency=payable_frequency, business_day_convention=business_day_convention, start_date=start_date, end_date=end_date, anchor_date=anchor_date, properties=properties, portfolio_id=portfolio_id, share_classes=share_classes)
 
 ```

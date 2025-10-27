@@ -14,14 +14,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.flexible_repo_partial_closure_event import FlexibleRepoPartialClosureEvent
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 entitlement_date: Optional[datetime] = # Replace with your value
 settlement_date: Optional[datetime] = # Replace with your value
 amount: Union[StrictFloat, StrictInt] = # Replace with your value
 amount_type: StrictStr = "example_amount_type"
-partial_closure_constituents: conlist(PartialClosureConstituent) = # Replace with your value
+partial_closure_constituents: List[PartialClosureConstituent] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
 flexible_repo_partial_closure_event_instance = FlexibleRepoPartialClosureEvent(entitlement_date=entitlement_date, settlement_date=settlement_date, amount=amount, amount_type=amount_type, partial_closure_constituents=partial_closure_constituents, instrument_event_type=instrument_event_type)
 

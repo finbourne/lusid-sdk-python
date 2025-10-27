@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class AddressDefinition(BaseModel):
     """
@@ -29,7 +31,7 @@ class AddressDefinition(BaseModel):
     type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description for this result.") 
     life_cycle_status:  Optional[StrictStr] = Field(None,alias="lifeCycleStatus", description="What is the status of the address path. If it is not Production then it might be removed at some point in the future.  See the removal date for the likely timing of that if any.") 
-    removal_date: Optional[datetime] = Field(None, alias="removalDate", description="If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.  After that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.")
+    removal_date: Optional[datetime] = Field(default=None, description="If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.  After that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.", alias="removalDate")
     documentation_link:  Optional[StrictStr] = Field(None,alias="documentationLink", description="Contains a link to the documentation for this AddressDefinition in KnowledgeBase.") 
     __properties = ["displayName", "type", "description", "lifeCycleStatus", "removalDate", "documentationLink"]
 
@@ -83,7 +85,12 @@ class AddressDefinition(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -93,7 +100,7 @@ class AddressDefinition(BaseModel):
         if value is None:
             return value
 
-        if value not in ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Json'):
+        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Json']:
             raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Json')")
         return value
 
@@ -174,3 +181,5 @@ class AddressDefinition(BaseModel):
             "documentation_link": obj.get("documentationLink")
         })
         return _obj
+
+AddressDefinition.update_forward_refs()

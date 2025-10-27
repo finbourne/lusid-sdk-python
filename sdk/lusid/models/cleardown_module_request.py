@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.cleardown_module_rule import CleardownModuleRule
 
 class CleardownModuleRequest(BaseModel):
@@ -29,7 +31,7 @@ class CleardownModuleRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code of the Cleardown Module.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Cleardown Module.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Cleardown Module.") 
-    rules: Optional[conlist(CleardownModuleRule)] = Field(None, description="The Cleardown Rules that apply for the Cleardown Module. Rules are evaluated in the order they occur in this collection.")
+    rules: Optional[List[CleardownModuleRule]] = Field(default=None, description="The Cleardown Rules that apply for the Cleardown Module. Rules are evaluated in the order they occur in this collection.")
     __properties = ["code", "displayName", "description", "rules"]
 
     class Config:
@@ -99,3 +101,5 @@ class CleardownModuleRequest(BaseModel):
             "rules": [CleardownModuleRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None
         })
         return _obj
+
+CleardownModuleRequest.update_forward_refs()

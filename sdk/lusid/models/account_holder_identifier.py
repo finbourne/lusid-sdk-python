@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class AccountHolderIdentifier(BaseModel):
     """
@@ -27,7 +29,7 @@ class AccountHolderIdentifier(BaseModel):
     """
     key:  StrictStr = Field(...,alias="key", description="A client-defined key used to identify the Account Holder, unique within the Investment Account") 
     scope:  StrictStr = Field(...,alias="scope", description="The scope in which the Investor Record lies.") 
-    identifiers: Dict[str, StrictStr] = Field(..., description="Single Account Holder identifier that should target the desired Investor Record.")
+    identifiers: Dict[str, Optional[StrictStr]] = Field(description="Single Account Holder identifier that should target the desired Investor Record.")
     __properties = ["key", "scope", "identifiers"]
 
     class Config:
@@ -79,3 +81,5 @@ class AccountHolderIdentifier(BaseModel):
             "identifiers": obj.get("identifiers")
         })
         return _obj
+
+AccountHolderIdentifier.update_forward_refs()

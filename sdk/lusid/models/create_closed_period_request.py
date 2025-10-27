@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 from lusid.models.model_property import ModelProperty
 
 class CreateClosedPeriodRequest(BaseModel):
@@ -27,12 +29,12 @@ class CreateClosedPeriodRequest(BaseModel):
     CreateClosedPeriodRequest
     """
     closed_period_id:  StrictStr = Field(...,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
-    effective_end: Optional[datetime] = Field(None, alias="effectiveEnd", description="The effective end of the Closed Period")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
-    as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="The asAt closed datetime for the Closed Period")
+    effective_end: Optional[datetime] = Field(default=None, description="The effective end of the Closed Period", alias="effectiveEnd")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
+    as_at_closed: Optional[datetime] = Field(default=None, description="The asAt closed datetime for the Closed Period", alias="asAtClosed")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Closed Period.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Closed Period.") 
-    holdings_as_at_closed_override: Optional[datetime] = Field(None, alias="holdingsAsAtClosedOverride", description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.")
+    holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="holdingsAsAtClosedOverride")
     __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description", "holdingsAsAtClosedOverride"]
 
     class Config:
@@ -125,3 +127,5 @@ class CreateClosedPeriodRequest(BaseModel):
             "holdings_as_at_closed_override": obj.get("holdingsAsAtClosedOverride")
         })
         return _obj
+
+CreateClosedPeriodRequest.update_forward_refs()

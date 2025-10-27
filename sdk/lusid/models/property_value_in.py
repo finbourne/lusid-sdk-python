@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, Field, StrictStr, conlist, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.match_criterion import MatchCriterion
 
 class PropertyValueIn(MatchCriterion):
@@ -27,7 +29,7 @@ class PropertyValueIn(MatchCriterion):
     A criterion that checks whether a Property Value is equal to one of the given string values  # noqa: E501
     """
     property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key whose value will form the left-hand side of the operation") 
-    value: conlist(StrictStr) = Field(..., description="The value to be compared against")
+    value: List[StrictStr] = Field(description="The value to be compared against")
     criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["criterionType", "propertyKey", "value"]
@@ -82,14 +84,19 @@ class PropertyValueIn(MatchCriterion):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "criterion_type" != "type":
             return value
 
-        if value not in ('PropertyValueEquals', 'PropertyValueIn', 'SubHoldingKeyValueEquals'):
+        if value not in ['PropertyValueEquals', 'PropertyValueIn', 'SubHoldingKeyValueEquals']:
             raise ValueError("must be one of enum values ('PropertyValueEquals', 'PropertyValueIn', 'SubHoldingKeyValueEquals')")
         return value
 
@@ -153,3 +160,5 @@ class PropertyValueIn(MatchCriterion):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+PropertyValueIn.update_forward_refs()

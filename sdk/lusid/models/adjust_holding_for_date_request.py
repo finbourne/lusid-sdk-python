@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
@@ -29,12 +31,12 @@ class AdjustHoldingForDateRequest(BaseModel):
     This request specifies target holdings. i.e. holding data that the  system should match. When processed by the movement  engine, it will create 'true-up' adjustments on the fly.  # noqa: E501
     """
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The Effective date that the target holding will be adjusted at.") 
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="Set of unique transaction properties and associated values to store with the holding adjustment transaction automatically created by LUSID. Each property must be from the 'Transaction' domain.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Set of unique holding properties and associated values to store with the target holding. Each property must be from the 'Holding' domain.")
-    tax_lots: conlist(TargetTaxLotRequest) = Field(..., alias="taxLots", description="The tax-lots that together make up the target holding.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.", alias="instrumentIdentifiers")
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Set of unique transaction properties and associated values to store with the holding adjustment transaction automatically created by LUSID. Each property must be from the 'Transaction' domain.", alias="subHoldingKeys")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Set of unique holding properties and associated values to store with the target holding. Each property must be from the 'Holding' domain.")
+    tax_lots: List[TargetTaxLotRequest] = Field(description="The tax-lots that together make up the target holding.", alias="taxLots")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency. This needs to be equal with the one on the TaxLot -> cost if one is specified") 
-    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     __properties = ["effectiveAt", "instrumentIdentifiers", "subHoldingKeys", "properties", "taxLots", "currency", "custodianAccountId"]
 
     class Config:
@@ -139,3 +141,5 @@ class AdjustHoldingForDateRequest(BaseModel):
             "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
+
+AdjustHoldingForDateRequest.update_forward_refs()

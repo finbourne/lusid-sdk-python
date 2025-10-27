@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid.models.model_property import ModelProperty
 
 class DiaryEntryRequest(BaseModel):
@@ -29,9 +31,9 @@ class DiaryEntryRequest(BaseModel):
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="The code of the diary entry.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the diary entry.") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.") 
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
-    query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
+    effective_at: datetime = Field(description="The effective time of the diary entry.", alias="effectiveAt")
+    query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
     __properties = ["diaryEntryCode", "name", "status", "effectiveAt", "queryAsAt", "properties"]
 
     class Config:
@@ -118,3 +120,5 @@ class DiaryEntryRequest(BaseModel):
             else None
         })
         return _obj
+
+DiaryEntryRequest.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleUpsertRequest(BaseModel):
@@ -32,11 +34,11 @@ class ComplianceRuleUpsertRequest(BaseModel):
     type:  StrictStr = Field(...,alias="type", description="") 
     property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="") 
     value:  Optional[StrictStr] = Field(None,alias="value", description="") 
-    lower_bound: Union[StrictFloat, StrictInt] = Field(..., alias="lowerBound")
-    upper_bound: Union[StrictFloat, StrictInt] = Field(..., alias="upperBound")
+    lower_bound: Union[StrictFloat, StrictInt] = Field(alias="lowerBound")
+    upper_bound: Union[StrictFloat, StrictInt] = Field(alias="upperBound")
     schedule:  StrictStr = Field(...,alias="schedule", description="") 
-    hard_requirement: StrictBool = Field(..., alias="hardRequirement")
-    target_portfolio_ids: conlist(ResourceId) = Field(..., alias="targetPortfolioIds")
+    hard_requirement: StrictBool = Field(alias="hardRequirement")
+    target_portfolio_ids: List[ResourceId] = Field(alias="targetPortfolioIds")
     description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     address_key:  Optional[StrictStr] = Field(None,alias="addressKey", description="") 
     __properties = ["scope", "code", "displayName", "type", "propertyKey", "value", "lowerBound", "upperBound", "schedule", "hardRequirement", "targetPortfolioIds", "description", "addressKey"]
@@ -137,3 +139,5 @@ class ComplianceRuleUpsertRequest(BaseModel):
             "address_key": obj.get("addressKey")
         })
         return _obj
+
+ComplianceRuleUpsertRequest.update_forward_refs()

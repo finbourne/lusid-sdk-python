@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.holding_ids_request import HoldingIdsRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-holding_ids: conlist(StrictInt, min_items=1) = Field(..., alias="holdingIds", description="The array of unique holding identifiers")
+holding_ids: List[StrictInt] = # Replace with your value
 holding_ids_request_instance = HoldingIdsRequest(holding_ids=holding_ids)
 
 ```

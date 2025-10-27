@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
@@ -30,13 +32,13 @@ class ExpandedGroup(BaseModel):
     ExpandedGroup
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio group.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio group.") 
-    values: Optional[conlist(CompletePortfolio)] = Field(None, description="The collection of resource identifiers for the portfolios contained in the portfolio group.")
-    sub_groups: Optional[conlist(ExpandedGroup)] = Field(None, alias="subGroups", description="The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.")
+    values: Optional[List[CompletePortfolio]] = Field(default=None, description="The collection of resource identifiers for the portfolios contained in the portfolio group.")
+    sub_groups: Optional[List[ExpandedGroup]] = Field(default=None, description="The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.", alias="subGroups")
     version: Optional[Version] = None
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["href", "id", "displayName", "description", "values", "subGroups", "version", "links"]
 
     class Config:
@@ -145,3 +147,5 @@ class ExpandedGroup(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+ExpandedGroup.update_forward_refs()

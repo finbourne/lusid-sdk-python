@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.address_key_definition import AddressKeyDefinition
 from lusid.models.link import Link
 
@@ -27,9 +29,9 @@ class ResourceListOfAddressKeyDefinition(BaseModel):
     """
     ResourceListOfAddressKeyDefinition
     """
-    values: conlist(AddressKeyDefinition) = Field(...)
+    values: List[AddressKeyDefinition]
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
     previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
     __properties = ["values", "href", "links", "nextPage", "previousPage"]
@@ -119,3 +121,5 @@ class ResourceListOfAddressKeyDefinition(BaseModel):
             "previous_page": obj.get("previousPage")
         })
         return _obj
+
+ResourceListOfAddressKeyDefinition.update_forward_refs()

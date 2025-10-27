@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.create_portfolio_group_request import CreatePortfolioGroupRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 code: StrictStr = "example_code"
 created: Optional[datetime] = # Replace with your value
-values: Optional[conlist(ResourceId)] = # Replace with your value
-sub_groups: Optional[conlist(ResourceId)] = # Replace with your value
+values: Optional[List[ResourceId]] = # Replace with your value
+sub_groups: Optional[List[ResourceId]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"

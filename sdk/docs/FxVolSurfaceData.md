@@ -13,12 +13,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fx_vol_surface_data import FxVolSurfaceData
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 base_date: datetime = # Replace with your value
-instruments: conlist(LusidInstrument) = # Replace with your value
-quotes: conlist(MarketQuote) = # Replace with your value
+instruments: List[LusidInstrument] = # Replace with your value
+quotes: List[MarketQuote] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_type: StrictStr = "example_market_data_type"
 fx_vol_surface_data_instance = FxVolSurfaceData(base_date=base_date, instruments=instruments, quotes=quotes, lineage=lineage, market_data_type=market_data_type)

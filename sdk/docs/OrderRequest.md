@@ -5,7 +5,7 @@ A request to create or update an Order.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The quantity of the given instrument ordered. | [optional] 
 **side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | 
 **order_book_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
@@ -26,16 +26,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_request import OrderRequest
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 side: StrictStr = "example_side"
 order_book_id: Optional[ResourceId] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
-id: ResourceId = # Replace with your value
+id: ResourceId
 state: Optional[StrictStr] = "example_state"
 type: Optional[StrictStr] = "example_type"
 time_in_force: Optional[StrictStr] = "example_time_in_force"

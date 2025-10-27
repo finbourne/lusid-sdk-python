@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_models import InstrumentModels
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_id: Optional[StrictStr] = "example_instrument_id"
-supported_models: Optional[conlist(StrictStr)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+supported_models: Optional[List[StrictStr]] = # Replace with your value
+links: Optional[List[Link]] = None
 instrument_models_instance = InstrumentModels(instrument_id=instrument_id, supported_models=supported_models, links=links)
 
 ```

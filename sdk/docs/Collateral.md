@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.collateral import Collateral
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 buyer_receives_cashflows: StrictBool = # Replace with your value
 buyer_receives_cashflows:StrictBool = True
 buyer_receives_corporate_action_payments: StrictBool = # Replace with your value
 buyer_receives_corporate_action_payments:StrictBool = True
-collateral_instruments: Optional[conlist(CollateralInstrument)] = # Replace with your value
+collateral_instruments: Optional[List[CollateralInstrument]] = # Replace with your value
 collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 collateral_instance = Collateral(buyer_receives_cashflows=buyer_receives_cashflows, buyer_receives_corporate_action_payments=buyer_receives_corporate_action_payments, collateral_instruments=collateral_instruments, collateral_value=collateral_value)
 

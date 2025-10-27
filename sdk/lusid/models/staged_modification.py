@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.requested_changes import RequestedChanges
 from lusid.models.staged_modification_decision import StagedModificationDecision
@@ -31,23 +33,23 @@ class StagedModification(BaseModel):
     StagedModification
     """
     id:  Optional[StrictStr] = Field(None,alias="id", description="The unique Id for the staged modification") 
-    as_at_staged: Optional[datetime] = Field(None, alias="asAtStaged", description="Time at which the modification was staged.")
+    as_at_staged: Optional[datetime] = Field(default=None, description="Time at which the modification was staged.", alias="asAtStaged")
     user_id_staged:  Optional[StrictStr] = Field(None,alias="userIdStaged", description="Id of the user who created the stage modification request.") 
     requested_id_staged:  Optional[StrictStr] = Field(None,alias="requestedIdStaged", description="The Request Id that initiated this staged modification.") 
     request_reason:  Optional[StrictStr] = Field(None,alias="requestReason", description="The Request Reason from the context that initiated this staged modification.") 
     action:  Optional[StrictStr] = Field(None,alias="action", description="Type of action of the staged modification, either create, update or delete.") 
-    staging_rule: Optional[StagedModificationStagingRule] = Field(None, alias="stagingRule")
-    decisions: Optional[conlist(StagedModificationDecision)] = Field(None, description="Object containing information relating to the decision on the staged modification.")
-    decisions_count: Optional[StrictInt] = Field(None, alias="decisionsCount", description="Number of decisions made.")
+    staging_rule: Optional[StagedModificationStagingRule] = Field(default=None, alias="stagingRule")
+    decisions: Optional[List[StagedModificationDecision]] = Field(default=None, description="Object containing information relating to the decision on the staged modification.")
+    decisions_count: Optional[StrictInt] = Field(default=None, description="Number of decisions made.", alias="decisionsCount")
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the staged modification.") 
-    as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="Time at which the modification was closed by either rejection or approval.")
+    as_at_closed: Optional[datetime] = Field(default=None, description="Time at which the modification was closed by either rejection or approval.", alias="asAtClosed")
     entity_type:  Optional[StrictStr] = Field(None,alias="entityType", description="The type of the entity that the staged modification applies to.") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the entity that this staged modification applies to.") 
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Id of the entity the staged modification applies to.") 
-    requested_changes: Optional[RequestedChanges] = Field(None, alias="requestedChanges")
-    entity_hrefs: Optional[StagedModificationsEntityHrefs] = Field(None, alias="entityHrefs")
+    requested_changes: Optional[RequestedChanges] = Field(default=None, alias="requestedChanges")
+    entity_hrefs: Optional[StagedModificationsEntityHrefs] = Field(default=None, alias="entityHrefs")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the entity the staged modification applies to.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "requestReason", "action", "stagingRule", "decisions", "decisionsCount", "status", "asAtClosed", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "displayName", "links"]
 
     class Config:
@@ -202,3 +204,5 @@ class StagedModification(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+StagedModification.update_forward_refs()

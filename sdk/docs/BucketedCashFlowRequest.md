@@ -24,19 +24,21 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 rounding_method: StrictStr = "example_rounding_method"
-bucketing_dates: Optional[conlist(datetime)] = # Replace with your value
-bucket_tenors: Optional[conlist(StrictStr)] = # Replace with your value
+bucketing_dates: Optional[List[datetime]] = # Replace with your value
+bucket_tenors: Optional[List[StrictStr]] = # Replace with your value
 effective_at: Optional[StrictStr] = "example_effective_at"
 window_start: Optional[StrictStr] = "example_window_start"
 window_end: Optional[StrictStr] = "example_window_end"
 recipe_id: Optional[ResourceId] = # Replace with your value
 report_currency: Optional[StrictStr] = "example_report_currency"
-group_by: Optional[conlist(StrictStr)] = # Replace with your value
-addresses: Optional[conlist(StrictStr)] = # Replace with your value
+group_by: Optional[List[StrictStr]] = # Replace with your value
+addresses: Optional[List[StrictStr]] = # Replace with your value
 equip_with_subtotals: Optional[StrictBool] = # Replace with your value
 equip_with_subtotals:Optional[StrictBool] = None
 as_at: Optional[datetime] = # Replace with your value

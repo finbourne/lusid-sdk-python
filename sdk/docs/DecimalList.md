@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.decimal_list import DecimalList
-from typing import Any, Dict, List, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: conlist(Union[StrictFloat, StrictInt], max_items=10000, min_items=0) = Field(...)
+values: List[Union[StrictFloat, StrictInt]]
 reference_list_type: StrictStr = "example_reference_list_type"
 decimal_list_instance = DecimalList(values=values, reference_list_type=reference_list_type)
 

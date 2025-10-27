@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.is_business_day_response import IsBusinessDayResponse
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 requested_date_time: datetime = # Replace with your value
 is_business_day: StrictBool = # Replace with your value
 is_business_day:StrictBool = True

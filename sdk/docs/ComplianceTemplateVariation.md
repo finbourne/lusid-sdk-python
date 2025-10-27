@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 label: StrictStr = "example_label"
 description: StrictStr = "example_description"
-required_parameters: conlist(ComplianceTemplateParameter) = # Replace with your value
+required_parameters: List[ComplianceTemplateParameter] = # Replace with your value
 properties: Dict[str, PerpetualProperty] = # Replace with your value
 accepted_address_keys: ResourceId = # Replace with your value
-steps: conlist(ComplianceStep) = # Replace with your value
+steps: List[ComplianceStep] = # Replace with your value
 referenced_group_label: Optional[StrictStr] = "example_referenced_group_label"
 compliance_template_variation_instance = ComplianceTemplateVariation(label=label, description=description, required_parameters=required_parameters, properties=properties, accepted_address_keys=accepted_address_keys, steps=steps, referenced_group_label=referenced_group_label)
 

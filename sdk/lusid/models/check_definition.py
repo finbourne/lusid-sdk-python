@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.check_definition_dataset_schema import CheckDefinitionDatasetSchema
 from lusid.models.check_definition_rule_set import CheckDefinitionRuleSet
 from lusid.models.link import Link
@@ -31,15 +33,15 @@ class CheckDefinition(BaseModel):
     """
     CheckDefinition
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Check Definition.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Check Definition.") 
-    dataset_schema: Optional[CheckDefinitionDatasetSchema] = Field(None, alias="datasetSchema")
-    rule_sets: Optional[conlist(CheckDefinitionRuleSet)] = Field(None, alias="ruleSets", description="A collection of rule sets for the Check Definition.")
+    dataset_schema: Optional[CheckDefinitionDatasetSchema] = Field(default=None, alias="datasetSchema")
+    rule_sets: Optional[List[CheckDefinitionRuleSet]] = Field(default=None, description="A collection of rule sets for the Check Definition.", alias="ruleSets")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Check Definition.")
-    links: Optional[conlist(Link)] = None
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Check Definition.")
+    links: Optional[List[Link]] = None
     __properties = ["id", "displayName", "description", "datasetSchema", "ruleSets", "href", "version", "properties", "links"]
 
     class Config:
@@ -162,3 +164,5 @@ class CheckDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+CheckDefinition.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.reconciliation_rule import ReconciliationRule
 
@@ -28,8 +30,8 @@ class ReconcileDateTimeRule(ReconciliationRule):
     Comparison of date time values  # noqa: E501
     """
     comparison_type:  StrictStr = Field(...,alias="comparisonType", description="The available values are: Exact, AbsoluteDifference") 
-    tolerance: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="For a numeric type only (i.e. decimal, integer, date or datetime offset possibly controversially), this is the quantity used in the comparison.  The units of the tolerance must be set appropriately for the item being compared.  For a number such as a currency or amount that will be a simple quantity, for a DateTime or DateTimeOffset it should be days. If fewer than a single day then this should be  passed as a fraction.")
-    applies_to: AggregateSpec = Field(..., alias="appliesTo")
+    tolerance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For a numeric type only (i.e. decimal, integer, date or datetime offset possibly controversially), this is the quantity used in the comparison.  The units of the tolerance must be set appropriately for the item being compared.  For a number such as a currency or amount that will be a simple quantity, for a DateTime or DateTimeOffset it should be days. If fewer than a single day then this should be  passed as a fraction.")
+    applies_to: AggregateSpec = Field(alias="appliesTo")
     rule_type:  StrictStr = Field(...,alias="ruleType", description="The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["ruleType", "comparisonType", "tolerance", "appliesTo"]
@@ -84,14 +86,19 @@ class ReconcileDateTimeRule(ReconciliationRule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "comparison_type" != "type":
             return value
 
-        if value not in ('Exact', 'AbsoluteDifference'):
+        if value not in ['Exact', 'AbsoluteDifference']:
             raise ValueError("must be one of enum values ('Exact', 'AbsoluteDifference')")
         return value
 
@@ -145,14 +152,19 @@ class ReconcileDateTimeRule(ReconciliationRule):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "rule_type" != "type":
             return value
 
-        if value not in ('ReconcileNumericRule', 'ReconcileDateTimeRule', 'ReconcileStringRule', 'ReconcileExact'):
+        if value not in ['ReconcileNumericRule', 'ReconcileDateTimeRule', 'ReconcileStringRule', 'ReconcileExact']:
             raise ValueError("must be one of enum values ('ReconcileNumericRule', 'ReconcileDateTimeRule', 'ReconcileStringRule', 'ReconcileExact')")
         return value
 
@@ -220,3 +232,5 @@ class ReconcileDateTimeRule(ReconciliationRule):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+ReconcileDateTimeRule.update_forward_refs()

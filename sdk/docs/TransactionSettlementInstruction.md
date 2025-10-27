@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **contractual_settlement_date** | **datetime** | The contractual settlement date. Used to match the instruction to the correct settlement bucket. | [optional] 
 **sub_holding_key_overrides** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Allows one or more sub-holding keys to be overridden for any movement being settled by an instruction. Providing a key and value will set the sub-holding key to the specified value; Providing a key only will nullify the sub-holding key. Not referenced sub-holding keys will not be impacted.  | [optional] 
 **custodian_account_override** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | A set of instrument identifiers that can resolve the settlement instruction to a unique instrument. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | A set of instrument identifiers that can resolve the settlement instruction to a unique instrument. | 
 **status** | **str** | The status of the settlement instruction - &#39;Invalid&#39;, &#39;Rejected&#39; &#39;Applied&#39; or &#39;Orphan&#39;. | [optional] 
 **instruction_to_portfolio_rate** | **float** | The exchange rate between the Settlement Instruction and Portfolio. | [optional] 
 **settlement_in_lieu** | [**SettlementInLieu**](SettlementInLieu.md) |  | [optional] 
@@ -22,9 +22,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 settlement_instruction_id: StrictStr = "example_settlement_instruction_id"
 instruction_type: StrictStr = "example_instruction_type"
 actual_settlement_date: datetime = # Replace with your value
@@ -35,7 +37,7 @@ lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 contractual_settlement_date: Optional[datetime] = # Replace with your value
 sub_holding_key_overrides: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 custodian_account_override: Optional[ResourceId] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 status: Optional[StrictStr] = "example_status"
 instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 settlement_in_lieu: Optional[SettlementInLieu] = # Replace with your value

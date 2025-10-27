@@ -16,15 +16,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.order_graph_block import OrderGraphBlock
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-block: Block = # Replace with your value
-ordered: OrderGraphBlockOrderSynopsis = # Replace with your value
-placed: OrderGraphBlockPlacementSynopsis = # Replace with your value
-executed: OrderGraphBlockExecutionSynopsis = # Replace with your value
-allocated: OrderGraphBlockAllocationSynopsis = # Replace with your value
-booked: OrderGraphBlockTransactionSynopsis = # Replace with your value
+block: Block
+ordered: OrderGraphBlockOrderSynopsis
+placed: OrderGraphBlockPlacementSynopsis
+executed: OrderGraphBlockExecutionSynopsis
+allocated: OrderGraphBlockAllocationSynopsis
+booked: OrderGraphBlockTransactionSynopsis
 derived_state: StrictStr = "example_derived_state"
 derived_compliance_state: StrictStr = "example_derived_compliance_state"
 derived_approval_state: StrictStr = "example_derived_approval_state"

@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapping
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 mapping_filter: StrictStr = "example_mapping_filter"
-levels: conlist(StrictStr, max_items=5) = Field(..., description="References fields and properties on the associated Journal Entry Line and graph of associated objects.")
+levels: List[StrictStr] = # Replace with your value
 general_ledger_profile_mapping_instance = GeneralLedgerProfileMapping(mapping_filter=mapping_filter, levels=levels)
 
 ```

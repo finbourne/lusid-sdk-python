@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.order_graph_block_order_detail import OrderGraphBlockOrderDetail
 
 class OrderGraphBlockOrderSynopsis(BaseModel):
     """
     OrderGraphBlockOrderSynopsis
     """
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="Total number of units ordered.")
-    quantity_by_state: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(None, alias="quantityByState", description="Total number of units placed.")
-    details: conlist(OrderGraphBlockOrderDetail) = Field(..., description="Identifiers and other info for each order in this block.")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="Total number of units ordered.")
+    quantity_by_state: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Total number of units placed.", alias="quantityByState")
+    details: List[OrderGraphBlockOrderDetail] = Field(description="Identifiers and other info for each order in this block.")
     __properties = ["quantity", "quantityByState", "details"]
 
     class Config:
@@ -92,3 +94,5 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
             "details": [OrderGraphBlockOrderDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj
+
+OrderGraphBlockOrderSynopsis.update_forward_refs()

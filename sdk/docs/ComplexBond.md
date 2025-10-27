@@ -4,7 +4,7 @@ LUSID representation of a Complex Bond.  Including Floating, Fixed-to-float, Sin
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifiers** | **Dict[str, str]** | External market codes and identifiers for the bond, e.g. ISIN. | [optional] 
+**identifiers** | **Dict[str, Optional[str]]** | External market codes and identifiers for the bond, e.g. ISIN. | [optional] 
 **calculation_type** | **str** | The calculation type applied to the bond coupon amount. This is required for bonds that have a particular type of computing the period coupon, such as simple compounding,  irregular coupons etc.  The default CalculationType is &#x60;Standard&#x60;, which returns a coupon amount equal to Principal * Coupon Rate / Coupon Frequency. Coupon Frequency is 12M / Payment Frequency.  Payment Frequency can be 1M, 3M, 6M, 12M etc. So Coupon Frequency can be 12, 4, 2, 1 respectively.    Supported string (enumeration) values are: [Standard, DayCountCoupon, NoCalculationFloater, BrazilFixedCoupon, StandardWithCappedAccruedInterest]. | [optional] 
 **schedules** | [**List[Schedule]**](Schedule.md) | schedules. | [optional] 
 **original_issue_price** | **float** | The price the complex bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
@@ -18,14 +18,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.complex_bond import ComplexBond
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-identifiers: Optional[Dict[str, StrictStr]] = # Replace with your value
+identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 calculation_type: Optional[StrictStr] = "example_calculation_type"
-schedules: Optional[conlist(Schedule)] = # Replace with your value
+schedules: Optional[List[Schedule]] = # Replace with your value
 original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-rounding_conventions: Optional[conlist(RoundingConvention)] = # Replace with your value
+rounding_conventions: Optional[List[RoundingConvention]] = # Replace with your value
 asset_backed: Optional[StrictBool] = # Replace with your value
 asset_backed:Optional[StrictBool] = None
 asset_pool_identifier: Optional[StrictStr] = "example_asset_pool_identifier"

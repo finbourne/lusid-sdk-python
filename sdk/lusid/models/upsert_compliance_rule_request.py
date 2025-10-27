@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -28,15 +30,15 @@ class UpsertComplianceRuleRequest(BaseModel):
     """
     UpsertComplianceRuleRequest
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     name:  Optional[StrictStr] = Field(None,alias="name") 
     description:  Optional[StrictStr] = Field(None,alias="description") 
-    active: StrictBool = Field(...)
-    template_id: ResourceId = Field(..., alias="templateId")
+    active: StrictBool
+    template_id: ResourceId = Field(alias="templateId")
     variation:  StrictStr = Field(...,alias="variation") 
-    portfolio_group_id: ResourceId = Field(..., alias="portfolioGroupId")
-    parameters: Dict[str, ComplianceParameter] = Field(...)
-    properties: Dict[str, PerpetualProperty] = Field(...)
+    portfolio_group_id: ResourceId = Field(alias="portfolioGroupId")
+    parameters: Dict[str, ComplianceParameter]
+    properties: Dict[str, PerpetualProperty]
     __properties = ["id", "name", "description", "active", "templateId", "variation", "portfolioGroupId", "parameters", "properties"]
 
     class Config:
@@ -137,3 +139,5 @@ class UpsertComplianceRuleRequest(BaseModel):
             else None
         })
         return _obj
+
+UpsertComplianceRuleRequest.update_forward_refs()

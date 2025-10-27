@@ -19,11 +19,9 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
-from pydantic.v1 import Field, constr, validator
-
+from pydantic.v1 import Field
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.portfolio import Portfolio

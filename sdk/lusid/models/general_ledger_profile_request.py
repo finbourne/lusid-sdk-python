@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapping
 
 class GeneralLedgerProfileRequest(BaseModel):
@@ -29,7 +31,7 @@ class GeneralLedgerProfileRequest(BaseModel):
     general_ledger_profile_code:  StrictStr = Field(...,alias="generalLedgerProfileCode", description="The unique code for the General Ledger Profile") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the General Ledger Profile") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the General Ledger Profile") 
-    general_ledger_profile_mappings: conlist(GeneralLedgerProfileMapping) = Field(..., alias="generalLedgerProfileMappings", description="Rules for mapping Account or property values to aggregation pattern definitions")
+    general_ledger_profile_mappings: List[GeneralLedgerProfileMapping] = Field(description="Rules for mapping Account or property values to aggregation pattern definitions", alias="generalLedgerProfileMappings")
     __properties = ["generalLedgerProfileCode", "displayName", "description", "generalLedgerProfileMappings"]
 
     class Config:
@@ -94,3 +96,5 @@ class GeneralLedgerProfileRequest(BaseModel):
             "general_ledger_profile_mappings": [GeneralLedgerProfileMapping.from_dict(_item) for _item in obj.get("generalLedgerProfileMappings")] if obj.get("generalLedgerProfileMappings") is not None else None
         })
         return _obj
+
+GeneralLedgerProfileRequest.update_forward_refs()

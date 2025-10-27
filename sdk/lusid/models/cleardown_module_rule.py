@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class CleardownModuleRule(BaseModel):
     """
@@ -79,3 +81,5 @@ class CleardownModuleRule(BaseModel):
             "rule_filter": obj.get("ruleFilter")
         })
         return _obj
+
+CleardownModuleRule.update_forward_refs()

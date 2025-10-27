@@ -18,17 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.new_instrument import NewInstrument
 
 class PartialClosureConstituent(BaseModel):
     """
     A single constituent of a partial closure event for a Flexible Repo. Contains details of the collateral  being exchanged in the Instrument field, represented as a NewInstrument object,  as well as the amount being exchanged and the type of that amount (Units or Percentage of current units).  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="If AmountType is set to Units, this field represents the number of units of the instrument being exchanged.  If AmountType is set to Percentage, this field represents the percentage of the total repoed units of the instrument being exchanged.  When defining a FlexibleRepoPartialClosureEvent the AmountType can be set to either Units or Percentage,  where Units represents the number of units of the instrument being exchanged, and Percentage represents the  percentage of the total repoed units of the instrument being exchanged in the context of the FlexibleRepo.")
+    amount: Union[StrictFloat, StrictInt] = Field(description="If AmountType is set to Units, this field represents the number of units of the instrument being exchanged.  If AmountType is set to Percentage, this field represents the percentage of the total repoed units of the instrument being exchanged.  When defining a FlexibleRepoPartialClosureEvent the AmountType can be set to either Units or Percentage,  where Units represents the number of units of the instrument being exchanged, and Percentage represents the  percentage of the total repoed units of the instrument being exchanged in the context of the FlexibleRepo.")
     amount_type:  StrictStr = Field(...,alias="amountType", description="The type of amount represented by the Amount field.  I.e., does it represent a number of units or a percentage of the total repoed units of the instrument?  When defining a FlexibleRepoPartialClosureEvent AmountType can be set to either Units or Percentage.    Supported string (enumeration) values are: [Percentage, Units].") 
-    instrument: NewInstrument = Field(...)
+    instrument: NewInstrument
     __properties = ["amount", "amountType", "instrument"]
 
     class Config:
@@ -83,3 +85,5 @@ class PartialClosureConstituent(BaseModel):
             "instrument": NewInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None
         })
         return _obj
+
+PartialClosureConstituent.update_forward_refs()

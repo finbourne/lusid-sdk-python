@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.field_definition import FieldDefinition
 from lusid.models.field_value import FieldValue
 
@@ -27,8 +29,8 @@ class ReferenceData(BaseModel):
     """
     ReferenceData
     """
-    field_definitions: conlist(FieldDefinition) = Field(..., alias="fieldDefinitions")
-    values: conlist(FieldValue) = Field(...)
+    field_definitions: List[FieldDefinition] = Field(alias="fieldDefinitions")
+    values: List[FieldValue]
     __properties = ["fieldDefinitions", "values"]
 
     class Config:
@@ -93,3 +95,5 @@ class ReferenceData(BaseModel):
             "values": [FieldValue.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
         })
         return _obj
+
+ReferenceData.update_forward_refs()

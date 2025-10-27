@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-aliases: conlist(SetTransactionConfigurationAlias) = # Replace with your value
-movements: conlist(TransactionConfigurationMovementDataRequest) = # Replace with your value
+aliases: List[SetTransactionConfigurationAlias]
+movements: List[TransactionConfigurationMovementDataRequest]
 properties: Optional[Dict[str, PerpetualProperty]] = None
 set_transaction_configuration_source_request_instance = SetTransactionConfigurationSourceRequest(aliases=aliases, movements=movements, properties=properties)
 

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
 from lusid.models.share_class_amount import ShareClassAmount
@@ -31,17 +33,17 @@ class ShareClassBreakdown(BaseModel):
     """
     The Valuation Point Data for a Share Class on a specified date.  # noqa: E501
     """
-    back_out: Dict[str, ShareClassAmount] = Field(..., alias="backOut", description="Bucket of detail for the Valuation Point where data points have been 'backed out'.")
-    dealing: ShareClassDealingBreakdown = Field(...)
-    pn_l: ShareClassPnlBreakdown = Field(..., alias="pnL")
-    gav: ShareClassAmount = Field(...)
-    fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
-    nav: ShareClassAmount = Field(...)
+    back_out: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for the Valuation Point where data points have been 'backed out'.", alias="backOut")
+    dealing: ShareClassDealingBreakdown
+    pn_l: ShareClassPnlBreakdown = Field(alias="pnL")
+    gav: ShareClassAmount
+    fees: Dict[str, FeeAccrual] = Field(description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
+    nav: ShareClassAmount
     unitisation: Optional[UnitisationData] = None
-    miscellaneous: Optional[Dict[str, ShareClassAmount]] = Field(None, description="Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations).")
-    share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="shareClassToFundFxRate", description="The fx rate from the Share Class currency to the fund currency at this valuation point.")
-    capital_ratio: Union[StrictFloat, StrictInt] = Field(..., alias="capitalRatio", description="The proportion of the fund's adjusted beginning equity (ie: the sum of the previous NAV and the net dealing) that is invested in the share class.")
-    previous_share_class_breakdown: PreviousShareClassBreakdown = Field(..., alias="previousShareClassBreakdown")
+    miscellaneous: Optional[Dict[str, ShareClassAmount]] = Field(default=None, description="Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations).")
+    share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(description="The fx rate from the Share Class currency to the fund currency at this valuation point.", alias="shareClassToFundFxRate")
+    capital_ratio: Union[StrictFloat, StrictInt] = Field(description="The proportion of the fund's adjusted beginning equity (ie: the sum of the previous NAV and the net dealing) that is invested in the share class.", alias="capitalRatio")
+    previous_share_class_breakdown: PreviousShareClassBreakdown = Field(alias="previousShareClassBreakdown")
     __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "unitisation", "miscellaneous", "shareClassToFundFxRate", "capitalRatio", "previousShareClassBreakdown"]
 
     class Config:
@@ -160,3 +162,5 @@ class ShareClassBreakdown(BaseModel):
             "previous_share_class_breakdown": PreviousShareClassBreakdown.from_dict(obj.get("previousShareClassBreakdown")) if obj.get("previousShareClassBreakdown") is not None else None
         })
         return _obj
+
+ShareClassBreakdown.update_forward_refs()

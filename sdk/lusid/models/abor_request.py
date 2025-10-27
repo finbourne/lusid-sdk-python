@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
@@ -31,9 +33,9 @@ class AborRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code given for the Abor.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Abor.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description for the Abor.") 
-    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.")
-    abor_configuration_id: ResourceId = Field(..., alias="aborConfigurationId")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
+    portfolio_ids: List[PortfolioEntityId] = Field(description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.", alias="portfolioIds")
+    abor_configuration_id: ResourceId = Field(alias="aborConfigurationId")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Abor.")
     __properties = ["code", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties"]
 
     class Config:
@@ -120,3 +122,5 @@ class AborRequest(BaseModel):
             else None
         })
         return _obj
+
+AborRequest.update_forward_refs()

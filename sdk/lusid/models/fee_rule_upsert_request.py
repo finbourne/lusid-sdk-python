@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.calculation_info import CalculationInfo
 
 class FeeRuleUpsertRequest(BaseModel):
@@ -36,10 +38,10 @@ class FeeRuleUpsertRequest(BaseModel):
     execution_broker:  StrictStr = Field(...,alias="executionBroker", description="") 
     custodian:  StrictStr = Field(...,alias="custodian", description="") 
     exchange:  StrictStr = Field(...,alias="exchange", description="") 
-    fee: CalculationInfo = Field(...)
-    min_fee: Optional[CalculationInfo] = Field(None, alias="minFee")
-    max_fee: Optional[CalculationInfo] = Field(None, alias="maxFee")
-    additional_keys: Optional[Dict[str, StrictStr]] = Field(None, alias="additionalKeys")
+    fee: CalculationInfo
+    min_fee: Optional[CalculationInfo] = Field(default=None, alias="minFee")
+    max_fee: Optional[CalculationInfo] = Field(default=None, alias="maxFee")
+    additional_keys: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="additionalKeys")
     description:  Optional[StrictStr] = Field(None,alias="description", description="") 
     __properties = ["code", "transactionPropertyKey", "transactionType", "country", "counterparty", "transactionCurrency", "settlementCurrency", "executionBroker", "custodian", "exchange", "fee", "minFee", "maxFee", "additionalKeys", "description"]
 
@@ -128,3 +130,5 @@ class FeeRuleUpsertRequest(BaseModel):
             "description": obj.get("description")
         })
         return _obj
+
+FeeRuleUpsertRequest.update_forward_refs()

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid.models.link import Link
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 
@@ -28,12 +30,12 @@ class DeletedEntityResponse(BaseModel):
     DeletedEntityResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.")
-    as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the deletion was committed to LUSID.")
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.", alias="effectiveFrom")
+    as_at: datetime = Field(description="The asAt datetime at which the deletion was committed to LUSID.", alias="asAt")
     entity_type:  Optional[StrictStr] = Field(None,alias="entityType", description="The type of the entity that the deleted response applies to.") 
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Id of the entity that the deleted response applies to.") 
-    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
-    links: Optional[conlist(Link)] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    links: Optional[List[Link]] = None
     __properties = ["href", "effectiveFrom", "asAt", "entityType", "entityUniqueId", "stagedModifications", "links"]
 
     class Config:
@@ -124,3 +126,5 @@ class DeletedEntityResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+DeletedEntityResponse.update_forward_refs()

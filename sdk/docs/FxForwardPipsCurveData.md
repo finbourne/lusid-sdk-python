@@ -16,14 +16,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fx_forward_pips_curve_data import FxForwardPipsCurveData
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 base_date: datetime = # Replace with your value
 dom_ccy: StrictStr = "example_dom_ccy"
 fgn_ccy: StrictStr = "example_fgn_ccy"
-dates: conlist(datetime) = # Replace with your value
-pip_rates: conlist(Union[StrictFloat, StrictInt]) = # Replace with your value
+dates: List[datetime] = # Replace with your value
+pip_rates: List[Union[StrictFloat, StrictInt]] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
 market_data_type: StrictStr = "example_market_data_type"

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class DerivationFormulaExplainRequest(BaseModel):
     """
@@ -28,7 +30,7 @@ class DerivationFormulaExplainRequest(BaseModel):
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity for which the derived property or partial formula is to be resolved against.") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="(Optional) The scope that entity exists in. If no scope is provided, the default scope for the entity type will be used.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="(Optional) The code of the entity, to be provided for entities that support scope/code retrieval. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.") 
-    identifier: Optional[Dict[str, StrictStr]] = Field(None, description="(Optional). An identifier key/value pair that uniquely identifies the entity to explain the derived property for. This can be either an instrument identifier, or an identifier property. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.")
+    identifier: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="(Optional). An identifier key/value pair that uniquely identifies the entity to explain the derived property for. This can be either an instrument identifier, or an identifier property. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.")
     property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="(Optional) The key of the derived property to get an explanation for. This takes the format {domain}/{scope}/{code}. One of either property key or partial formula must be provided.") 
     partial_formula:  Optional[StrictStr] = Field(None,alias="partialFormula", description="(Optional) A partial derivation formula to get an explanation for. Can be provided in lieu of a property key. One of either property key or partial formula must be provided.") 
     __properties = ["entityType", "scope", "code", "identifier", "propertyKey", "partialFormula"]
@@ -110,3 +112,5 @@ class DerivationFormulaExplainRequest(BaseModel):
             "partial_formula": obj.get("partialFormula")
         })
         return _obj
+
+DerivationFormulaExplainRequest.update_forward_refs()

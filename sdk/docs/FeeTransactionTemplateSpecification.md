@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fee_transaction_template_specification import FeeTransactionTemplateSpecification
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 specification_type_name: StrictStr = "example_specification_type_name"
-supported_template_fields: conlist(TemplateField) = # Replace with your value
+supported_template_fields: List[TemplateField] = # Replace with your value
 fee_transaction_template_specification_instance = FeeTransactionTemplateSpecification(specification_type_name=specification_type_name, supported_template_fields=supported_template_fields)
 
 ```

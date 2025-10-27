@@ -13,9 +13,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashFlowEvent
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 ex_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 currency: StrictStr = "example_currency"

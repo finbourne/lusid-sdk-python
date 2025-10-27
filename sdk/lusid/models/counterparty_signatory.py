@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.typed_resource_id import TypedResourceId
 
 class CounterpartySignatory(BaseModel):
@@ -27,7 +29,7 @@ class CounterpartySignatory(BaseModel):
     The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user.  The CounterpartySignatory represents the 'other side' of the agreement.  It comprises a name and identifier for a Legal Entity in LUSID.  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="A user-defined name or label for the counterparty signatory.  There is no requirement for this to match the \"displayName\" of the legal entity.") 
-    legal_entity_identifier: TypedResourceId = Field(..., alias="legalEntityIdentifier")
+    legal_entity_identifier: TypedResourceId = Field(alias="legalEntityIdentifier")
     __properties = ["name", "legalEntityIdentifier"]
 
     class Config:
@@ -81,3 +83,5 @@ class CounterpartySignatory(BaseModel):
             "legal_entity_identifier": TypedResourceId.from_dict(obj.get("legalEntityIdentifier")) if obj.get("legalEntityIdentifier") is not None else None
         })
         return _obj
+
+CounterpartySignatory.update_forward_refs()

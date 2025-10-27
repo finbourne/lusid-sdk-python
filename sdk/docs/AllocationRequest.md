@@ -5,7 +5,7 @@ A request to create or update an Allocation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this allocation. | [optional] 
-**instrument_identifiers** | **Dict[str, str]** | The instrument allocated. | 
+**instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument allocated. | 
 **quantity** | **float** | The quantity of given instrument allocated. | 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
 **allocated_order_id** | [**ResourceId**](ResourceId.md) |  | 
@@ -25,16 +25,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.allocation_request import AllocationRequest
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-instrument_identifiers: Dict[str, StrictStr] = # Replace with your value
+instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 portfolio_id: ResourceId = # Replace with your value
 allocated_order_id: ResourceId = # Replace with your value
-id: ResourceId = # Replace with your value
-placement_ids: Optional[conlist(ResourceId)] = # Replace with your value
+id: ResourceId
+placement_ids: Optional[List[ResourceId]] = # Replace with your value
 state: Optional[StrictStr] = "example_state"
 side: Optional[StrictStr] = "example_side"
 type: Optional[StrictStr] = "example_type"
@@ -44,7 +46,7 @@ price: Optional[CurrencyAndAmount] = None
 settlement_currency: Optional[StrictStr] = "example_settlement_currency"
 settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 counterparty: Optional[StrictStr] = "example_counterparty"
-execution_ids: Optional[conlist(ResourceId)] = # Replace with your value
+execution_ids: Optional[List[ResourceId]] = # Replace with your value
 allocation_request_instance = AllocationRequest(properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, portfolio_id=portfolio_id, allocated_order_id=allocated_order_id, id=id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids)
 
 ```

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.group_reconciliation_summary import GroupReconciliationSummary
 
 class GroupReconciliationRunResponse(BaseModel):
     """
     GroupReconciliationRunResponse
     """
-    reconciliation_summaries: conlist(GroupReconciliationSummary) = Field(..., alias="reconciliationSummaries", description="One summary record for each of the \"Holding\" | \"Transaction\" | \"Valuation\" reconciliations performed")
+    reconciliation_summaries: List[GroupReconciliationSummary] = Field(description="One summary record for each of the \"Holding\" | \"Transaction\" | \"Valuation\" reconciliations performed", alias="reconciliationSummaries")
     __properties = ["reconciliationSummaries"]
 
     class Config:
@@ -83,3 +85,5 @@ class GroupReconciliationRunResponse(BaseModel):
             "reconciliation_summaries": [GroupReconciliationSummary.from_dict(_item) for _item in obj.get("reconciliationSummaries")] if obj.get("reconciliationSummaries") is not None else None
         })
         return _obj
+
+GroupReconciliationRunResponse.update_forward_refs()

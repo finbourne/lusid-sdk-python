@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
@@ -30,13 +32,13 @@ class Package(BaseModel):
     """
     A structure used to describe the structure of an order or orders that make up a non-trivial trade.  # noqa: E501
     """
-    id: ResourceId = Field(...)
-    order_ids: conlist(ResourceId) = Field(..., alias="orderIds", description="Related order ids.")
-    order_instruction_ids: conlist(ResourceId) = Field(..., alias="orderInstructionIds", description="Related order instruction ids.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this execution.")
+    id: ResourceId
+    order_ids: List[ResourceId] = Field(description="Related order ids.", alias="orderIds")
+    order_instruction_ids: List[ResourceId] = Field(description="Related order instruction ids.", alias="orderInstructionIds")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
     version: Optional[Version] = None
-    data_model_membership: Optional[DataModelMembership] = Field(None, alias="dataModelMembership")
-    links: Optional[conlist(Link)] = None
+    data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    links: Optional[List[Link]] = None
     __properties = ["id", "orderIds", "orderInstructionIds", "properties", "version", "dataModelMembership", "links"]
 
     class Config:
@@ -144,3 +146,5 @@ class Package(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Package.update_forward_refs()

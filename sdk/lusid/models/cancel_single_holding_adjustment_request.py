@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -27,10 +29,10 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
     """
     This request specifies single target holding. i.e. holding data that the  system should match. And deletes previous adjustment made to that holding  # noqa: E501
     """
-    instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.")
-    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which identify the holding. Each property must be from the 'Transaction' domain.")
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.", alias="instrumentIdentifiers")
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which identify the holding. Each property must be from the 'Transaction' domain.", alias="subHoldingKeys")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency.") 
-    custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     __properties = ["instrumentIdentifiers", "subHoldingKeys", "currency", "custodianAccountId"]
 
     class Config:
@@ -108,3 +110,5 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
             "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
+
+CancelSingleHoldingAdjustmentRequest.update_forward_refs()

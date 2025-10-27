@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ResponseMetaData(BaseModel):
     """
@@ -28,7 +30,7 @@ class ResponseMetaData(BaseModel):
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of meta data information being provided") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of what occured for this specific piece of meta data") 
     identifier_type:  Optional[StrictStr] = Field(None,alias="identifierType", description="The type of the listed identifiers") 
-    identifiers: Optional[conlist(StrictStr)] = Field(None, description="The related identifiers that were impacted by this event")
+    identifiers: Optional[List[StrictStr]] = Field(default=None, description="The related identifiers that were impacted by this event")
     __properties = ["type", "description", "identifierType", "identifiers"]
 
     class Config:
@@ -101,3 +103,5 @@ class ResponseMetaData(BaseModel):
             "identifiers": obj.get("identifiers")
         })
         return _obj
+
+ResponseMetaData.update_forward_refs()

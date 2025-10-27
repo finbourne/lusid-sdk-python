@@ -19,9 +19,8 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
+from pydantic.v1 import Field
 from typing_extensions import Annotated
-from pydantic.v1 import Field, constr, validator
-
 from lusid.models.complete_relationship import CompleteRelationship
 from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.delete_relationship_request import DeleteRelationshipRequest
@@ -54,15 +53,15 @@ class RelationshipsApi:
 
 
     @overload
-    async def create_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(..., description="The details of the relationship to create.")], **kwargs) -> CompleteRelationship:  # noqa: E501
+    async def create_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(description="The details of the relationship to create.")], **kwargs) -> CompleteRelationship:  # noqa: E501
         ...
 
     @overload
-    def create_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(..., description="The details of the relationship to create.")], async_req: Optional[bool]=True, **kwargs) -> CompleteRelationship:  # noqa: E501
+    def create_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(description="The details of the relationship to create.")], async_req: Optional[bool]=True, **kwargs) -> CompleteRelationship:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(..., description="The details of the relationship to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[CompleteRelationship, Awaitable[CompleteRelationship]]:  # noqa: E501
+    def create_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(description="The details of the relationship to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[CompleteRelationship, Awaitable[CompleteRelationship]]:  # noqa: E501
         """CreateRelationship: Create Relationship  # noqa: E501
 
         Create a relationship between two entity objects by their identifiers  # noqa: E501
@@ -97,7 +96,7 @@ class RelationshipsApi:
         return self.create_relationship_with_http_info(scope, code, create_relationship_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_relationship_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(..., description="The details of the relationship to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_relationship_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(description="The details of the relationship to create.")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateRelationship: Create Relationship  # noqa: E501
 
         Create a relationship between two entity objects by their identifiers  # noqa: E501
@@ -229,15 +228,15 @@ class RelationshipsApi:
 
 
     @overload
-    async def delete_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(..., description="The details of the relationship to delete.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(description="The details of the relationship to delete.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(..., description="The details of the relationship to delete.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(description="The details of the relationship to delete.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(..., description="The details of the relationship to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_relationship(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(description="The details of the relationship to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteRelationship: Delete Relationship  # noqa: E501
 
         Delete a relationship between two entity objects represented by their identifiers  # noqa: E501
@@ -272,7 +271,7 @@ class RelationshipsApi:
         return self.delete_relationship_with_http_info(scope, code, delete_relationship_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_relationship_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(..., description="The details of the relationship to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_relationship_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relationship")], code : Annotated[StrictStr, Field(..., description="The code of the relationship")], delete_relationship_request : Annotated[DeleteRelationshipRequest, Field(description="The details of the relationship to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteRelationship: Delete Relationship  # noqa: E501
 
         Delete a relationship between two entity objects represented by their identifiers  # noqa: E501

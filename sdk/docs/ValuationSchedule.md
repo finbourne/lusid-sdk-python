@@ -17,15 +17,17 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.valuation_schedule import ValuationSchedule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 effective_from: Optional[StrictStr] = "example_effective_from"
 effective_at: Optional[StrictStr] = "example_effective_at"
 tenor: Optional[StrictStr] = "example_tenor"
 roll_convention: Optional[StrictStr] = "example_roll_convention"
-holiday_calendars: Optional[conlist(StrictStr)] = # Replace with your value
-valuation_date_times: Optional[conlist(StrictStr)] = # Replace with your value
+holiday_calendars: Optional[List[StrictStr]] = # Replace with your value
+valuation_date_times: Optional[List[StrictStr]] = # Replace with your value
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
 timeline_id: Optional[ResourceId] = # Replace with your value
 closed_period_id: Optional[StrictStr] = "example_closed_period_id"

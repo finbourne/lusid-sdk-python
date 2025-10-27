@@ -17,16 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class AggregationMeasureFailureDetail(BaseModel):
     """
     AggregationMeasureFailureDetail
     """
     id:  Optional[StrictStr] = Field(None,alias="id") 
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt")
+    effective_at: Optional[datetime] = Field(default=None, alias="effectiveAt")
     measure:  Optional[StrictStr] = Field(None,alias="measure") 
     reason:  Optional[StrictStr] = Field(None,alias="reason") 
     detail:  Optional[StrictStr] = Field(None,alias="detail") 
@@ -103,3 +105,5 @@ class AggregationMeasureFailureDetail(BaseModel):
             "detail": obj.get("detail")
         })
         return _obj
+
+AggregationMeasureFailureDetail.update_forward_refs()

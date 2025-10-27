@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBytes, StrictStr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FileResponse(BaseModel):
     """
     Allows a file (represented as a stream) to be returned from an Api call  # noqa: E501
     """
-    file_stream: Optional[Union[StrictBytes, StrictStr]] = Field(None, alias="fileStream")
+    file_stream: Optional[Union[StrictBytes, StrictStr]] = Field(default=None, alias="fileStream")
     content_type:  Optional[StrictStr] = Field(None,alias="contentType") 
     downloaded_filename:  Optional[StrictStr] = Field(None,alias="downloadedFilename") 
     __properties = ["fileStream", "contentType", "downloadedFilename"]
@@ -94,3 +96,5 @@ class FileResponse(BaseModel):
             "downloaded_filename": obj.get("downloadedFilename")
         })
         return _obj
+
+FileResponse.update_forward_refs()

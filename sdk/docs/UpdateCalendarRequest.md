@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.update_calendar_request import UpdateCalendarRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 weekend_mask: WeekendMask = # Replace with your value
 source_provider: StrictStr = "example_source_provider"
-properties: conlist(ModelProperty) = # Replace with your value
+properties: List[ModelProperty]
 update_calendar_request_instance = UpdateCalendarRequest(weekend_mask=weekend_mask, source_provider=source_provider, properties=properties)
 
 ```

@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 start_valuation_point: Optional[DiaryEntry] = # Replace with your value
-version: Version = # Replace with your value
-values: conlist(PnlJournalEntryLine) = # Replace with your value
+version: Version
+values: List[PnlJournalEntryLine]
 href: Optional[StrictStr] = "example_href"
 next_page: Optional[StrictStr] = "example_next_page"
 previous_page: Optional[StrictStr] = "example_previous_page"
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 valuation_point_resource_list_of_pnl_journal_entry_line_instance = ValuationPointResourceListOfPnlJournalEntryLine(start_valuation_point=start_valuation_point, version=version, values=values, href=href, next_page=next_page, previous_page=previous_page, links=links)
 
 ```

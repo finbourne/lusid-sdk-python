@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 apportioned_non_class_specific_pnl: Dict[str, ShareClassAmount] = # Replace with your value
 class_pnl: Dict[str, ShareClassAmount] = # Replace with your value

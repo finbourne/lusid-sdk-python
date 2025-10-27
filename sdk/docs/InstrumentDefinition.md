@@ -13,12 +13,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.instrument_definition import InstrumentDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: StrictStr = "example_name"
 identifiers: Dict[str, InstrumentIdValue] = # Replace with your value
-properties: Optional[conlist(ModelProperty)] = # Replace with your value
+properties: Optional[List[ModelProperty]] = # Replace with your value
 look_through_portfolio_id: Optional[ResourceId] = # Replace with your value
 definition: Optional[LusidInstrument] = None
 settlement_cycle: Optional[SettlementCycle] = # Replace with your value

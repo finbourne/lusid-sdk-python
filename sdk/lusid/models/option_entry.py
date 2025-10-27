@@ -17,17 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
 
 class OptionEntry(BaseModel):
     """
     Strike price against par and associated date for a bond call.  # noqa: E501
     """
-    strike: Union[StrictFloat, StrictInt] = Field(..., description="The strike on this date")
-    var_date: datetime = Field(..., alias="date", description="The date at which the option can be actioned at this strike")
-    end_date: Optional[datetime] = Field(None, alias="endDate", description="If American exercise, this is the end of the exercise period.  Optional field. Defaults to the Date field if not set.")
+    strike: Union[StrictFloat, StrictInt] = Field(description="The strike on this date")
+    var_date: datetime = Field(description="The date at which the option can be actioned at this strike", alias="date")
+    end_date: Optional[datetime] = Field(default=None, description="If American exercise, this is the end of the exercise period.  Optional field. Defaults to the Date field if not set.", alias="endDate")
     __properties = ["strike", "date", "endDate"]
 
     class Config:
@@ -84,3 +86,5 @@ class OptionEntry(BaseModel):
             "end_date": obj.get("endDate")
         })
         return _obj
+
+OptionEntry.update_forward_refs()

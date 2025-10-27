@@ -16,16 +16,18 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.fund_valuation_schedule import FundValuationSchedule
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 effective_from: Optional[StrictStr] = "example_effective_from"
 effective_at: Optional[StrictStr] = "example_effective_at"
 diary_entry: Optional[StrictStr] = "example_diary_entry"
 tenor: Optional[StrictStr] = "example_tenor"
 roll_convention: Optional[StrictStr] = "example_roll_convention"
-holiday_calendars: Optional[conlist(StrictStr)] = # Replace with your value
-valuation_date_times: Optional[conlist(StrictStr)] = # Replace with your value
+holiday_calendars: Optional[List[StrictStr]] = # Replace with your value
+valuation_date_times: Optional[List[StrictStr]] = # Replace with your value
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
 fund_valuation_schedule_instance = FundValuationSchedule(effective_from=effective_from, effective_at=effective_at, diary_entry=diary_entry, tenor=tenor, roll_convention=roll_convention, holiday_calendars=holiday_calendars, valuation_date_times=valuation_date_times, business_day_convention=business_day_convention)
 

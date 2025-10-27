@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.reconciliation_side_configuration import ReconciliationSideConfiguration
 from lusid.models.resource_id import ResourceId
 
@@ -29,7 +31,7 @@ class ReconciliationConfiguration(BaseModel):
     """
     left: Optional[ReconciliationSideConfiguration] = None
     right: Optional[ReconciliationSideConfiguration] = None
-    mapping_id: Optional[ResourceId] = Field(None, alias="mappingId")
+    mapping_id: Optional[ResourceId] = Field(default=None, alias="mappingId")
     __properties = ["left", "right", "mappingId"]
 
     class Config:
@@ -90,3 +92,5 @@ class ReconciliationConfiguration(BaseModel):
             "mapping_id": ResourceId.from_dict(obj.get("mappingId")) if obj.get("mappingId") is not None else None
         })
         return _obj
+
+ReconciliationConfiguration.update_forward_refs()

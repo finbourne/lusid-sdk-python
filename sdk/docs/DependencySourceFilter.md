@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.dependency_source_filter import DependencySourceFilter
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instrument_type: Optional[StrictStr] = "example_instrument_type"
 asset_class: Optional[StrictStr] = "example_asset_class"
 dom_ccy: Optional[StrictStr] = "example_dom_ccy"
 long_or_short_indicator: Optional[StrictStr] = "example_long_or_short_indicator"
-address_key_filters: Optional[conlist(AddressKeyFilter)] = # Replace with your value
+address_key_filters: Optional[List[AddressKeyFilter]] = # Replace with your value
 dependency_source_filter_instance = DependencySourceFilter(instrument_type=instrument_type, asset_class=asset_class, dom_ccy=dom_ccy, long_or_short_indicator=long_or_short_indicator, address_key_filters=address_key_filters)
 
 ```

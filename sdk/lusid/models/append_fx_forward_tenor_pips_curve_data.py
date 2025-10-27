@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, Field, StrictFloat, StrictInt, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.append_market_data import AppendMarketData
 
 class AppendFxForwardTenorPipsCurveData(AppendMarketData):
@@ -27,7 +29,7 @@ class AppendFxForwardTenorPipsCurveData(AppendMarketData):
     Used to append a new point to an FX curve defined using `FxForwardTenorPipsCurveData`.  # noqa: E501
     """
     tenor:  StrictStr = Field(...,alias="tenor", description="Tenor for which the forward rate applies.") 
-    pip_rate: Union[StrictFloat, StrictInt] = Field(..., alias="pipRate", description="Rate provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips.")
+    pip_rate: Union[StrictFloat, StrictInt] = Field(description="Rate provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips.", alias="pipRate")
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "tenor", "pipRate"]
@@ -82,14 +84,19 @@ class AppendFxForwardTenorPipsCurveData(AppendMarketData):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "market_data_type" != "type":
             return value
 
-        if value not in ('AppendFxForwardCurveByQuoteReference', 'AppendFxForwardCurveData', 'AppendFxForwardPipsCurveData', 'AppendFxForwardTenorCurveData', 'AppendFxForwardTenorPipsCurveData'):
+        if value not in ['AppendFxForwardCurveByQuoteReference', 'AppendFxForwardCurveData', 'AppendFxForwardPipsCurveData', 'AppendFxForwardTenorCurveData', 'AppendFxForwardTenorPipsCurveData']:
             raise ValueError("must be one of enum values ('AppendFxForwardCurveByQuoteReference', 'AppendFxForwardCurveData', 'AppendFxForwardPipsCurveData', 'AppendFxForwardTenorCurveData', 'AppendFxForwardTenorPipsCurveData')")
         return value
 
@@ -153,3 +160,5 @@ class AppendFxForwardTenorPipsCurveData(AppendMarketData):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+AppendFxForwardTenorPipsCurveData.update_forward_refs()

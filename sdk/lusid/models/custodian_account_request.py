@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.typed_resource_id import TypedResourceId
 
@@ -34,8 +36,8 @@ class CustodianAccountRequest(BaseModel):
     account_name:  StrictStr = Field(...,alias="accountName", description="The identifiable name given to the Custodian Account") 
     accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="The Accounting method to be used") 
     currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
-    custodian_identifier: TypedResourceId = Field(..., alias="custodianIdentifier")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
+    custodian_identifier: TypedResourceId = Field(alias="custodianIdentifier")
     account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin.") 
     __properties = ["scope", "code", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodianIdentifier", "accountType"]
 
@@ -130,3 +132,5 @@ class CustodianAccountRequest(BaseModel):
             "account_type": obj.get("accountType")
         })
         return _obj
+
+CustodianAccountRequest.update_forward_refs()

@@ -31,11 +31,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.portfolio import Portfolio
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 href: Optional[StrictStr] = "example_href"
-id: ResourceId = # Replace with your value
+id: ResourceId
 type: StrictStr = "example_type"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
@@ -47,8 +49,8 @@ is_derived: Optional[StrictBool] = # Replace with your value
 is_derived:Optional[StrictBool] = None
 base_currency: Optional[StrictStr] = "example_base_currency"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-relationships: Optional[conlist(Relationship)] = # Replace with your value
-instrument_scopes: Optional[conlist(StrictStr)] = # Replace with your value
+relationships: Optional[List[Relationship]] = # Replace with your value
+instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
 accounting_method: Optional[StrictStr] = "example_accounting_method"
 amortisation_method: Optional[StrictStr] = "example_amortisation_method"
 transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
@@ -57,7 +59,7 @@ instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Repla
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 tax_rule_set_scope: Optional[StrictStr] = "example_tax_rule_set_scope"
 settlement_configuration: Optional[PortfolioSettlementConfiguration] = # Replace with your value
-links: Optional[conlist(Link)] = None
+links: Optional[List[Link]] = None
 portfolio_instance = Portfolio(href=href, id=id, type=type, display_name=display_name, description=description, created=created, parent_portfolio_id=parent_portfolio_id, version=version, staged_modifications=staged_modifications, is_derived=is_derived, base_currency=base_currency, properties=properties, relationships=relationships, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, links=links)
 
 ```

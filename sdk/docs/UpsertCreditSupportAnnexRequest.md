@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.upsert_credit_support_annex_request import UpsertCreditSupportAnnexRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 credit_support_annex: Optional[CreditSupportAnnex] = # Replace with your value
 upsert_credit_support_annex_request_instance = UpsertCreditSupportAnnexRequest(credit_support_annex=credit_support_annex)

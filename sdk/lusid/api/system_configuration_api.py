@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
@@ -1007,15 +1004,15 @@ class SystemConfigurationApi:
 
 
     @overload
-    async def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[conlist(SetTransactionConfigurationSourceRequest), Field(..., description="The set of transaction configurations")], **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
+    async def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[List[SetTransactionConfigurationSourceRequest], Field(description="The set of transaction configurations")], **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
         ...
 
     @overload
-    def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[conlist(SetTransactionConfigurationSourceRequest), Field(..., description="The set of transaction configurations")], async_req: Optional[bool]=True, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
+    def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[List[SetTransactionConfigurationSourceRequest], Field(description="The set of transaction configurations")], async_req: Optional[bool]=True, **kwargs) -> TransactionSetConfigurationData:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[conlist(SetTransactionConfigurationSourceRequest), Field(..., description="The set of transaction configurations")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
+    def set_transaction_configuration_source(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[List[SetTransactionConfigurationSourceRequest], Field(description="The set of transaction configurations")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EXPERIMENTAL] SetTransactionConfigurationSource: Set transaction types for a source  # noqa: E501
 
         This will replace all the existing transaction configurations for the given source                WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
@@ -1048,7 +1045,7 @@ class SystemConfigurationApi:
         return self.set_transaction_configuration_source_with_http_info(source, set_transaction_configuration_source_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_transaction_configuration_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[conlist(SetTransactionConfigurationSourceRequest), Field(..., description="The set of transaction configurations")], **kwargs) -> ApiResponse:  # noqa: E501
+    def set_transaction_configuration_source_with_http_info(self, source : Annotated[StrictStr, Field(..., description="The source to set the transaction configurations for")], set_transaction_configuration_source_request : Annotated[List[SetTransactionConfigurationSourceRequest], Field(description="The set of transaction configurations")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] SetTransactionConfigurationSource: Set transaction types for a source  # noqa: E501
 
         This will replace all the existing transaction configurations for the given source                WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 
 class GroupReconciliationAggregateAttributeValues(BaseModel):
     """
     GroupReconciliationAggregateAttributeValues
     """
-    left_aggregate_attributes: conlist(ComparisonAttributeValuePair) = Field(..., alias="leftAggregateAttributes", description="Aggregate attribute names and values for the left hand entity being reconciled.")
-    right_aggregate_attributes: conlist(ComparisonAttributeValuePair) = Field(..., alias="rightAggregateAttributes", description="Aggregate attribute names and values for the right hand entity being reconciled.")
+    left_aggregate_attributes: List[ComparisonAttributeValuePair] = Field(description="Aggregate attribute names and values for the left hand entity being reconciled.", alias="leftAggregateAttributes")
+    right_aggregate_attributes: List[ComparisonAttributeValuePair] = Field(description="Aggregate attribute names and values for the right hand entity being reconciled.", alias="rightAggregateAttributes")
     __properties = ["leftAggregateAttributes", "rightAggregateAttributes"]
 
     class Config:
@@ -92,3 +94,5 @@ class GroupReconciliationAggregateAttributeValues(BaseModel):
             "right_aggregate_attributes": [ComparisonAttributeValuePair.from_dict(_item) for _item in obj.get("rightAggregateAttributes")] if obj.get("rightAggregateAttributes") is not None else None
         })
         return _obj
+
+GroupReconciliationAggregateAttributeValues.update_forward_refs()

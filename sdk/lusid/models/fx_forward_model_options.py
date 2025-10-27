@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, Field, StrictBool, StrictStr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_options import ModelOptions
 
 class FxForwardModelOptions(ModelOptions):
@@ -28,7 +30,7 @@ class FxForwardModelOptions(ModelOptions):
     """
     forward_rate_observable_type:  StrictStr = Field(...,alias="forwardRateObservableType", description="The available values are: ForwardPoints, ForwardRate, RatesCurve, FxForwardCurve, Invalid") 
     discounting_method:  StrictStr = Field(...,alias="discountingMethod", description="The available values are: Standard, ConstantTimeValueOfMoney, Invalid") 
-    convert_to_report_ccy: StrictBool = Field(..., alias="convertToReportCcy", description="Convert all FX flows to the report currency  By setting this all FX forwards will be priced using Forward Curves that have Report Currency as the base.")
+    convert_to_report_ccy: StrictBool = Field(description="Convert all FX flows to the report currency  By setting this all FX forwards will be priced using Forward Curves that have Report Currency as the base.", alias="convertToReportCcy")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "forwardRateObservableType", "discountingMethod", "convertToReportCcy"]
@@ -83,14 +85,19 @@ class FxForwardModelOptions(ModelOptions):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "forward_rate_observable_type" != "type":
             return value
 
-        if value not in ('ForwardPoints', 'ForwardRate', 'RatesCurve', 'FxForwardCurve', 'Invalid'):
+        if value not in ['ForwardPoints', 'ForwardRate', 'RatesCurve', 'FxForwardCurve', 'Invalid']:
             raise ValueError("must be one of enum values ('ForwardPoints', 'ForwardRate', 'RatesCurve', 'FxForwardCurve', 'Invalid')")
         return value
 
@@ -144,14 +151,19 @@ class FxForwardModelOptions(ModelOptions):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "discounting_method" != "type":
             return value
 
-        if value not in ('Standard', 'ConstantTimeValueOfMoney', 'Invalid'):
+        if value not in ['Standard', 'ConstantTimeValueOfMoney', 'Invalid']:
             raise ValueError("must be one of enum values ('Standard', 'ConstantTimeValueOfMoney', 'Invalid')")
         return value
 
@@ -205,14 +217,19 @@ class FxForwardModelOptions(ModelOptions):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "model_options_type" != "type":
             return value
 
-        if value not in ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions'):
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions']:
             raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions')")
         return value
 
@@ -277,3 +294,5 @@ class FxForwardModelOptions(ModelOptions):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+FxForwardModelOptions.update_forward_refs()

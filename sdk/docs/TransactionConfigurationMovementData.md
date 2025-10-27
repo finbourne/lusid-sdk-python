@@ -14,17 +14,19 @@ Name | Type | Description | Notes
 
 ```python
 from lusid.models.transaction_configuration_movement_data import TransactionConfigurationMovementData
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 movement_types: StrictStr = "example_movement_types"
 side: StrictStr = "example_side"
 direction: StrictInt = # Replace with your value
 direction: StrictInt = 42
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-mappings: Optional[conlist(TransactionPropertyMapping)] = # Replace with your value
+mappings: Optional[List[TransactionPropertyMapping]] = # Replace with your value
 name: Optional[StrictStr] = "example_name"
-movement_options: Optional[conlist(StrictStr)] = # Replace with your value
+movement_options: Optional[List[StrictStr]] = # Replace with your value
 transaction_configuration_movement_data_instance = TransactionConfigurationMovementData(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options)
 
 ```

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
 from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
@@ -28,9 +30,9 @@ class TransactionConfigurationDataRequest(BaseModel):
     """
     TransactionConfigurationDataRequest
     """
-    aliases: conlist(TransactionConfigurationTypeAlias) = Field(..., description="List of transaction codes that map to this specific transaction model")
-    movements: conlist(TransactionConfigurationMovementDataRequest) = Field(..., description="Movement data for the transaction code")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Properties attached to the underlying holding.")
+    aliases: List[TransactionConfigurationTypeAlias] = Field(description="List of transaction codes that map to this specific transaction model")
+    movements: List[TransactionConfigurationMovementDataRequest] = Field(description="Movement data for the transaction code")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties attached to the underlying holding.")
     __properties = ["aliases", "movements", "properties"]
 
     class Config:
@@ -113,3 +115,5 @@ class TransactionConfigurationDataRequest(BaseModel):
             else None
         })
         return _obj
+
+TransactionConfigurationDataRequest.update_forward_refs()

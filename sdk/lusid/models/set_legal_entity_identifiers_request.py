@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class SetLegalEntityIdentifiersRequest(BaseModel):
     """
     SetLegalEntityIdentifiersRequest
     """
-    identifiers: Optional[Dict[str, ModelProperty]] = Field(None, description="Identifiers to set for a Legal Entity. Identifiers not included in the request will not be amended.")
+    identifiers: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Identifiers to set for a Legal Entity. Identifiers not included in the request will not be amended.")
     __properties = ["identifiers"]
 
     class Config:
@@ -93,3 +95,5 @@ class SetLegalEntityIdentifiersRequest(BaseModel):
             else None
         })
         return _obj
+
+SetLegalEntityIdentifiersRequest.update_forward_refs()

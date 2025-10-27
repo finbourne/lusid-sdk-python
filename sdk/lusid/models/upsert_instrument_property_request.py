@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.model_property import ModelProperty
 
 class UpsertInstrumentPropertyRequest(BaseModel):
@@ -28,7 +30,7 @@ class UpsertInstrumentPropertyRequest(BaseModel):
     """
     identifier_type:  StrictStr = Field(...,alias="identifierType", description="The unique identifier type to search for the instrument, for example 'Figi'.") 
     identifier:  StrictStr = Field(...,alias="identifier", description="A value of that type to identify the instrument to upsert properties for, for example 'BBG000BLNNV0'.") 
-    properties: Optional[conlist(ModelProperty)] = Field(None, description="A set of instrument properties and associated values to store for the instrument. Each property must be from the 'Instrument' domain.")
+    properties: Optional[List[ModelProperty]] = Field(default=None, description="A set of instrument properties and associated values to store for the instrument. Each property must be from the 'Instrument' domain.")
     __properties = ["identifierType", "identifier", "properties"]
 
     class Config:
@@ -92,3 +94,5 @@ class UpsertInstrumentPropertyRequest(BaseModel):
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None
         })
         return _obj
+
+UpsertInstrumentPropertyRequest.update_forward_refs()

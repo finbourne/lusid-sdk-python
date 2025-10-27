@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -30,13 +32,13 @@ class CompleteRelationship(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    relationship_definition_id: ResourceId = Field(..., alias="relationshipDefinitionId")
-    source_entity: RelatedEntity = Field(..., alias="sourceEntity")
-    target_entity: RelatedEntity = Field(..., alias="targetEntity")
+    relationship_definition_id: ResourceId = Field(alias="relationshipDefinitionId")
+    source_entity: RelatedEntity = Field(alias="sourceEntity")
+    target_entity: RelatedEntity = Field(alias="targetEntity")
     outward_description:  StrictStr = Field(...,alias="outwardDescription", description="Description of the relationship based on relationship definition's outward description.") 
     inward_description:  StrictStr = Field(...,alias="inwardDescription", description="Description of the relationship based on relationship definition's inward description.") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime from which the relationship is valid.")
-    effective_until: Optional[datetime] = Field(None, alias="effectiveUntil", description="The effective datetime to which the relationship is valid until.")
+    effective_from: Optional[datetime] = Field(default=None, description="The effective datetime from which the relationship is valid.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The effective datetime to which the relationship is valid until.", alias="effectiveUntil")
     __properties = ["href", "version", "relationshipDefinitionId", "sourceEntity", "targetEntity", "outwardDescription", "inwardDescription", "effectiveFrom", "effectiveUntil"]
 
     class Config:
@@ -111,3 +113,5 @@ class CompleteRelationship(BaseModel):
             "effective_until": obj.get("effectiveUntil")
         })
         return _obj
+
+CompleteRelationship.update_forward_refs()

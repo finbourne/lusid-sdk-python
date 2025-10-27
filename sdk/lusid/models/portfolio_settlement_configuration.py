@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.transaction_matching_alternative_id import TransactionMatchingAlternativeId
 
@@ -27,10 +29,10 @@ class PortfolioSettlementConfiguration(BaseModel):
     """
     PortfolioSettlementConfiguration
     """
-    stock_settlement: Optional[SettlementConfigurationCategory] = Field(None, alias="stockSettlement")
-    cash_settlement: Optional[SettlementConfigurationCategory] = Field(None, alias="cashSettlement")
-    deferred_cash_receipt: Optional[SettlementConfigurationCategory] = Field(None, alias="deferredCashReceipt")
-    transaction_matching_alternative_id: Optional[TransactionMatchingAlternativeId] = Field(None, alias="transactionMatchingAlternativeId")
+    stock_settlement: Optional[SettlementConfigurationCategory] = Field(default=None, alias="stockSettlement")
+    cash_settlement: Optional[SettlementConfigurationCategory] = Field(default=None, alias="cashSettlement")
+    deferred_cash_receipt: Optional[SettlementConfigurationCategory] = Field(default=None, alias="deferredCashReceipt")
+    transaction_matching_alternative_id: Optional[TransactionMatchingAlternativeId] = Field(default=None, alias="transactionMatchingAlternativeId")
     __properties = ["stockSettlement", "cashSettlement", "deferredCashReceipt", "transactionMatchingAlternativeId"]
 
     class Config:
@@ -95,3 +97,5 @@ class PortfolioSettlementConfiguration(BaseModel):
             "transaction_matching_alternative_id": TransactionMatchingAlternativeId.from_dict(obj.get("transactionMatchingAlternativeId")) if obj.get("transactionMatchingAlternativeId") is not None else None
         })
         return _obj
+
+PortfolioSettlementConfiguration.update_forward_refs()

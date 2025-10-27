@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class MarketOptions(BaseModel):
     """
@@ -28,7 +30,7 @@ class MarketOptions(BaseModel):
     default_supplier:  Optional[StrictStr] = Field(None,alias="defaultSupplier", description="The default supplier of data. This controls which 'dialect' is used to find particular market data. e.g. one supplier might address data by RIC, another by PermId") 
     default_instrument_code_type:  Optional[StrictStr] = Field(None,alias="defaultInstrumentCodeType", description="When instrument quotes are searched for, what identifier should be used by default") 
     default_scope:  StrictStr = Field(...,alias="defaultScope", description="For default rules, which scope should data be searched for in") 
-    attempt_to_infer_missing_fx: Optional[StrictBool] = Field(None, alias="attemptToInferMissingFx", description="if true will calculate a missing Fx pair (e.g. THBJPY) from the inverse JPYTHB or from standardised pairs against USD, e.g. THBUSD and JPYUSD")
+    attempt_to_infer_missing_fx: Optional[StrictBool] = Field(default=None, description="if true will calculate a missing Fx pair (e.g. THBJPY) from the inverse JPYTHB or from standardised pairs against USD, e.g. THBUSD and JPYUSD", alias="attemptToInferMissingFx")
     calendar_scope:  Optional[StrictStr] = Field(None,alias="calendarScope", description="The scope in which holiday calendars stored") 
     convention_scope:  Optional[StrictStr] = Field(None,alias="conventionScope", description="The scope in which conventions stored") 
     __properties = ["defaultSupplier", "defaultInstrumentCodeType", "defaultScope", "attemptToInferMissingFx", "calendarScope", "conventionScope"]
@@ -105,3 +107,5 @@ class MarketOptions(BaseModel):
             "convention_scope": obj.get("conventionScope")
         })
         return _obj
+
+MarketOptions.update_forward_refs()

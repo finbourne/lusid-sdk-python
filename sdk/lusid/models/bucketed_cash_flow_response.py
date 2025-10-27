@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.result_data_schema import ResultDataSchema
@@ -29,11 +31,11 @@ class BucketedCashFlowResponse(BaseModel):
     BucketedCashFlowResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
-    data: Optional[conlist(Dict[str, Any])] = Field(None, description="List of dictionary bucketed cash flow result set.  Each dictionary represent a bucketed cashflow result set keyed by AddressKeys.  e.g. dictionary[\"Valuation/CashFlowAmount\"] for the aggregated cash flow amount for the bucket.  e.g. suppose \"RoundUp\" method, then dictionary[\"Valuation/CashFlowDate/RoundUp\"] returns the bucketed cashflow date.")
+    data: Optional[List[Dict[str, Any]]] = Field(default=None, description="List of dictionary bucketed cash flow result set.  Each dictionary represent a bucketed cashflow result set keyed by AddressKeys.  e.g. dictionary[\"Valuation/CashFlowAmount\"] for the aggregated cash flow amount for the bucket.  e.g. suppose \"RoundUp\" method, then dictionary[\"Valuation/CashFlowDate/RoundUp\"] returns the bucketed cashflow date.")
     report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCcy denominated queries.  If not present then the currency of the relevant portfolio will be used in its place where relevant.") 
-    data_schema: Optional[ResultDataSchema] = Field(None, alias="dataSchema")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="Information about where instruments have failed to return cashflows in so far as it is available.  e.g., failure to retrieve a market quote for a floating rate instrument.")
-    links: Optional[conlist(Link)] = None
+    data_schema: Optional[ResultDataSchema] = Field(default=None, alias="dataSchema")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="Information about where instruments have failed to return cashflows in so far as it is available.  e.g., failure to retrieve a market quote for a floating rate instrument.")
+    links: Optional[List[Link]] = None
     __properties = ["href", "data", "reportCurrency", "dataSchema", "failed", "links"]
 
     class Config:
@@ -135,3 +137,5 @@ class BucketedCashFlowResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+BucketedCashFlowResponse.update_forward_refs()

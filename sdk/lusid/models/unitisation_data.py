@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictFloat, StrictInt 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class UnitisationData(BaseModel):
     """
     UnitisationData
     """
-    shares_in_issue: Union[StrictFloat, StrictInt] = Field(..., alias="sharesInIssue", description="The number of shares in issue at a valuation point.")
-    unit_price: Union[StrictFloat, StrictInt] = Field(..., alias="unitPrice", description="The price of one unit of the share class at a valuation point.")
-    net_dealing_units: Union[StrictFloat, StrictInt] = Field(..., alias="netDealingUnits", description="The net dealing in units for the share class at a valuation point. This could be the sum of negative redemptions (in units) and positive subscriptions (in units).")
+    shares_in_issue: Union[StrictFloat, StrictInt] = Field(description="The number of shares in issue at a valuation point.", alias="sharesInIssue")
+    unit_price: Union[StrictFloat, StrictInt] = Field(description="The price of one unit of the share class at a valuation point.", alias="unitPrice")
+    net_dealing_units: Union[StrictFloat, StrictInt] = Field(description="The net dealing in units for the share class at a valuation point. This could be the sum of negative redemptions (in units) and positive subscriptions (in units).", alias="netDealingUnits")
     __properties = ["sharesInIssue", "unitPrice", "netDealingUnits"]
 
     class Config:
@@ -79,3 +81,5 @@ class UnitisationData(BaseModel):
             "net_dealing_units": obj.get("netDealingUnits")
         })
         return _obj
+
+UnitisationData.update_forward_refs()

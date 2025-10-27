@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -29,7 +31,7 @@ class RelationshipDefinition(BaseModel):
     RelationshipDefinition
     """
     version: Optional[Version] = None
-    relationship_definition_id: ResourceId = Field(..., alias="relationshipDefinitionId")
+    relationship_definition_id: ResourceId = Field(alias="relationshipDefinitionId")
     source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object.") 
     target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relationship.") 
@@ -37,7 +39,7 @@ class RelationshipDefinition(BaseModel):
     inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object") 
     life_time:  StrictStr = Field(...,alias="lifeTime", description="Describes how the relationships can change over time.") 
     relationship_cardinality:  StrictStr = Field(...,alias="relationshipCardinality", description="Describes the cardinality of the relationship between source entity and target entity.") 
-    links: Optional[conlist(Link)] = None
+    links: Optional[List[Link]] = None
     __properties = ["version", "relationshipDefinitionId", "sourceEntityType", "targetEntityType", "displayName", "outwardDescription", "inwardDescription", "lifeTime", "relationshipCardinality", "links"]
 
     class Config:
@@ -114,3 +116,5 @@ class RelationshipDefinition(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+RelationshipDefinition.update_forward_refs()
