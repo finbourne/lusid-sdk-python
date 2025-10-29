@@ -48,9 +48,11 @@ class FloatSchedule(Schedule):
     compounding: Optional[Compounding] = None
     reset_convention:  Optional[StrictStr] = Field(None,alias="resetConvention", description="Control how resets are generated relative to payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].  Defaults to \"InAdvance\" if not set.") 
     use_annualised_direct_rates: Optional[StrictBool] = Field(default=None, description="Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false.", alias="useAnnualisedDirectRates")
+    cap_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum floating rate which a cashflow can accrue.", alias="capRate")
+    floor_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The minimum floating rate which a cashflow can accrue.", alias="floorRate")
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates", "capRate", "floorRate"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -189,6 +191,16 @@ class FloatSchedule(Schedule):
         if self.reset_convention is None and "reset_convention" in self.__fields_set__:
             _dict['resetConvention'] = None
 
+        # set to None if cap_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cap_rate is None and "cap_rate" in self.__fields_set__:
+            _dict['capRate'] = None
+
+        # set to None if floor_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.floor_rate is None and "floor_rate" in self.__fields_set__:
+            _dict['floorRate'] = None
+
         return _dict
 
     @classmethod
@@ -216,7 +228,9 @@ class FloatSchedule(Schedule):
             "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None,
             "compounding": Compounding.from_dict(obj.get("compounding")) if obj.get("compounding") is not None else None,
             "reset_convention": obj.get("resetConvention"),
-            "use_annualised_direct_rates": obj.get("useAnnualisedDirectRates")
+            "use_annualised_direct_rates": obj.get("useAnnualisedDirectRates"),
+            "cap_rate": obj.get("capRate"),
+            "floor_rate": obj.get("floorRate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

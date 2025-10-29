@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **compounding** | [**Compounding**](Compounding.md) |  | [optional] 
 **reset_convention** | **str** | Control how resets are generated relative to payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].  Defaults to \&quot;InAdvance\&quot; if not set. | [optional] 
 **use_annualised_direct_rates** | **bool** | Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false. | [optional] 
+**cap_rate** | **float** | The maximum floating rate which a cashflow can accrue. | [optional] 
+**floor_rate** | **float** | The minimum floating rate which a cashflow can accrue. | [optional] 
 **schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
 ## Example
 
@@ -46,8 +48,10 @@ compounding: Optional[Compounding] = None
 reset_convention: Optional[StrictStr] = "example_reset_convention"
 use_annualised_direct_rates: Optional[StrictBool] = # Replace with your value
 use_annualised_direct_rates:Optional[StrictBool] = None
+cap_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+floor_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 schedule_type: StrictStr = "example_schedule_type"
-float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, schedule_type=schedule_type)
+float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, cap_rate=cap_rate, floor_rate=floor_rate, schedule_type=schedule_type)
 
 ```
 
