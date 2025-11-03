@@ -85,6 +85,7 @@ from lusid.models.append_fx_forward_tenor_pips_curve_data import AppendFxForward
 from lusid.models.append_market_data import AppendMarketData
 from lusid.models.append_market_data_type import AppendMarketDataType
 from lusid.models.applicable_entity import ApplicableEntity
+from lusid.models.applicable_entity_types import ApplicableEntityTypes
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
 from lusid.models.asset_class import AssetClass
 from lusid.models.asset_leg import AssetLeg
@@ -283,6 +284,7 @@ from lusid.models.create_relational_dataset_definition_request import CreateRela
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
+from lusid.models.create_series_identifier_field import CreateSeriesIdentifierField
 from lusid.models.create_simple_position_portfolio_request import CreateSimplePositionPortfolioRequest
 from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
@@ -370,6 +372,7 @@ from lusid.models.discounting_method import DiscountingMethod
 from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
 from lusid.models.drawdown_event import DrawdownEvent
+from lusid.models.early_close_out_event import EarlyCloseOutEvent
 from lusid.models.early_redemption_election import EarlyRedemptionElection
 from lusid.models.early_redemption_event import EarlyRedemptionEvent
 from lusid.models.economic_dependency import EconomicDependency
@@ -944,6 +947,8 @@ from lusid.models.relational_data_point_response import RelationalDataPointRespo
 from lusid.models.relational_data_series_response import RelationalDataSeriesResponse
 from lusid.models.relational_dataset_definition import RelationalDatasetDefinition
 from lusid.models.relational_dataset_field_definition import RelationalDatasetFieldDefinition
+from lusid.models.relational_dataset_fields_to_add import RelationalDatasetFieldsToAdd
+from lusid.models.relational_dataset_fields_to_update import RelationalDatasetFieldsToUpdate
 from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
 from lusid.models.relative_date_offset import RelativeDateOffset
@@ -1227,7 +1232,10 @@ from lusid.models.update_property_definition_request import UpdatePropertyDefini
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
 from lusid.models.update_reference_data_request import UpdateReferenceDataRequest
 from lusid.models.update_relational_dataset_definition_request import UpdateRelationalDatasetDefinitionRequest
+from lusid.models.update_relational_dataset_details import UpdateRelationalDatasetDetails
+from lusid.models.update_relational_dataset_field_schema import UpdateRelationalDatasetFieldSchema
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
+from lusid.models.update_series_identifier_field import UpdateSeriesIdentifierField
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
 from lusid.models.update_timeline_request import UpdateTimelineRequest
@@ -1404,6 +1412,7 @@ __all__ = [
     "AppendMarketData",
     "AppendMarketDataType",
     "ApplicableEntity",
+    "ApplicableEntityTypes",
     "ApplicableInstrumentEvent",
     "AssetClass",
     "AssetLeg",
@@ -1602,6 +1611,7 @@ __all__ = [
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
     "CreateSequenceRequest",
+    "CreateSeriesIdentifierField",
     "CreateSimplePositionPortfolioRequest",
     "CreateStagingRuleSetRequest",
     "CreateTaxRuleSetRequest",
@@ -1689,6 +1699,7 @@ __all__ = [
     "DividendOptionEvent",
     "DividendReinvestmentEvent",
     "DrawdownEvent",
+    "EarlyCloseOutEvent",
     "EarlyRedemptionElection",
     "EarlyRedemptionEvent",
     "EconomicDependency",
@@ -2263,6 +2274,8 @@ __all__ = [
     "RelationalDataSeriesResponse",
     "RelationalDatasetDefinition",
     "RelationalDatasetFieldDefinition",
+    "RelationalDatasetFieldsToAdd",
+    "RelationalDatasetFieldsToUpdate",
     "Relationship",
     "RelationshipDefinition",
     "RelativeDateOffset",
@@ -2546,7 +2559,10 @@ __all__ = [
     "UpdateReconciliationRequest",
     "UpdateReferenceDataRequest",
     "UpdateRelationalDatasetDefinitionRequest",
+    "UpdateRelationalDatasetDetails",
+    "UpdateRelationalDatasetFieldSchema",
     "UpdateRelationshipDefinitionRequest",
+    "UpdateSeriesIdentifierField",
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
     "UpdateTimelineRequest",

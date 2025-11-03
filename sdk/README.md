@@ -519,6 +519,8 @@ Class | Method | HTTP request | Description
 *RelationalDatasetDefinitionApi* | [**get_relational_dataset_definition**](docs/RelationalDatasetDefinitionApi.md#get_relational_dataset_definition) | **GET** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition
 *RelationalDatasetDefinitionApi* | [**list_relational_dataset_definitions**](docs/RelationalDatasetDefinitionApi.md#list_relational_dataset_definitions) | **GET** /api/relationaldatasetdefinitions | [EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions
 *RelationalDatasetDefinitionApi* | [**update_relational_dataset_definition**](docs/RelationalDatasetDefinitionApi.md#update_relational_dataset_definition) | **PUT** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
+*RelationalDatasetDefinitionApi* | [**update_relational_dataset_details**](docs/RelationalDatasetDefinitionApi.md#update_relational_dataset_details) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/details/$update | [EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+*RelationalDatasetDefinitionApi* | [**update_relational_dataset_field_schema**](docs/RelationalDatasetDefinitionApi.md#update_relational_dataset_field_schema) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/fieldschema/$update | [EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
 *RelationalDatasetsApi* | [**batch_upsert_relational_data**](docs/RelationalDatasetsApi.md#batch_upsert_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchUpsert | [EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
 *RelationalDatasetsApi* | [**query_relational_data**](docs/RelationalDatasetsApi.md#query_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$query | [EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
 *RelationsApi* | [**create_relation**](docs/RelationsApi.md#create_relation) | **POST** /api/relations/{scope}/{code} | [EXPERIMENTAL] CreateRelation: Create Relation
@@ -744,6 +746,7 @@ Class | Method | HTTP request | Description
  - [AppendMarketData](docs/AppendMarketData.md)
  - [AppendMarketDataType](docs/AppendMarketDataType.md)
  - [ApplicableEntity](docs/ApplicableEntity.md)
+ - [ApplicableEntityTypes](docs/ApplicableEntityTypes.md)
  - [ApplicableInstrumentEvent](docs/ApplicableInstrumentEvent.md)
  - [AssetClass](docs/AssetClass.md)
  - [AssetLeg](docs/AssetLeg.md)
@@ -942,6 +945,7 @@ Class | Method | HTTP request | Description
  - [CreateRelationshipDefinitionRequest](docs/CreateRelationshipDefinitionRequest.md)
  - [CreateRelationshipRequest](docs/CreateRelationshipRequest.md)
  - [CreateSequenceRequest](docs/CreateSequenceRequest.md)
+ - [CreateSeriesIdentifierField](docs/CreateSeriesIdentifierField.md)
  - [CreateSimplePositionPortfolioRequest](docs/CreateSimplePositionPortfolioRequest.md)
  - [CreateStagingRuleSetRequest](docs/CreateStagingRuleSetRequest.md)
  - [CreateTaxRuleSetRequest](docs/CreateTaxRuleSetRequest.md)
@@ -1029,6 +1033,7 @@ Class | Method | HTTP request | Description
  - [DividendOptionEvent](docs/DividendOptionEvent.md)
  - [DividendReinvestmentEvent](docs/DividendReinvestmentEvent.md)
  - [DrawdownEvent](docs/DrawdownEvent.md)
+ - [EarlyCloseOutEvent](docs/EarlyCloseOutEvent.md)
  - [EarlyRedemptionElection](docs/EarlyRedemptionElection.md)
  - [EarlyRedemptionEvent](docs/EarlyRedemptionEvent.md)
  - [EconomicDependency](docs/EconomicDependency.md)
@@ -1603,6 +1608,8 @@ Class | Method | HTTP request | Description
  - [RelationalDataSeriesResponse](docs/RelationalDataSeriesResponse.md)
  - [RelationalDatasetDefinition](docs/RelationalDatasetDefinition.md)
  - [RelationalDatasetFieldDefinition](docs/RelationalDatasetFieldDefinition.md)
+ - [RelationalDatasetFieldsToAdd](docs/RelationalDatasetFieldsToAdd.md)
+ - [RelationalDatasetFieldsToUpdate](docs/RelationalDatasetFieldsToUpdate.md)
  - [Relationship](docs/Relationship.md)
  - [RelationshipDefinition](docs/RelationshipDefinition.md)
  - [RelativeDateOffset](docs/RelativeDateOffset.md)
@@ -1886,7 +1893,10 @@ Class | Method | HTTP request | Description
  - [UpdateReconciliationRequest](docs/UpdateReconciliationRequest.md)
  - [UpdateReferenceDataRequest](docs/UpdateReferenceDataRequest.md)
  - [UpdateRelationalDatasetDefinitionRequest](docs/UpdateRelationalDatasetDefinitionRequest.md)
+ - [UpdateRelationalDatasetDetails](docs/UpdateRelationalDatasetDetails.md)
+ - [UpdateRelationalDatasetFieldSchema](docs/UpdateRelationalDatasetFieldSchema.md)
  - [UpdateRelationshipDefinitionRequest](docs/UpdateRelationshipDefinitionRequest.md)
+ - [UpdateSeriesIdentifierField](docs/UpdateSeriesIdentifierField.md)
  - [UpdateStagingRuleSetRequest](docs/UpdateStagingRuleSetRequest.md)
  - [UpdateTaxRuleSetRequest](docs/UpdateTaxRuleSetRequest.md)
  - [UpdateTimelineRequest](docs/UpdateTimelineRequest.md)

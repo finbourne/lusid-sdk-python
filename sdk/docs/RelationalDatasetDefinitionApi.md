@@ -9,6 +9,8 @@ Method | HTTP request | Description
 [**get_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#get_relational_dataset_definition) | **GET** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition
 [**list_relational_dataset_definitions**](RelationalDatasetDefinitionApi.md#list_relational_dataset_definitions) | **GET** /api/relationaldatasetdefinitions | [EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions
 [**update_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#update_relational_dataset_definition) | **PUT** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
+[**update_relational_dataset_details**](RelationalDatasetDefinitionApi.md#update_relational_dataset_details) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/details/$update | [EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+[**update_relational_dataset_field_schema**](RelationalDatasetDefinitionApi.md#update_relational_dataset_field_schema) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/fieldschema/$update | [EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
 
 
 # **create_relational_dataset_definition**
@@ -480,6 +482,208 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the relational dataset definition. | 
  **code** | **str**| The code of the relational dataset definition. | 
  **update_relational_dataset_definition_request** | [**UpdateRelationalDatasetDefinitionRequest**](UpdateRelationalDatasetDefinitionRequest.md)| The updated relational dataset definition. | [optional] 
+
+### Return type
+
+[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated relational dataset definition. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **update_relational_dataset_details**
+> RelationalDatasetDefinition update_relational_dataset_details(scope, code, update_relational_dataset_details=update_relational_dataset_details)
+
+[EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+
+Update an existing relational dataset definition.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RelationalDatasetDefinitionApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RelationalDatasetDefinitionApi)
+    scope = 'scope_example' # str | The scope of the relational dataset definition.
+    code = 'code_example' # str | The code of the relational dataset definition.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # update_relational_dataset_details = UpdateRelationalDatasetDetails.from_json("")
+    # update_relational_dataset_details = UpdateRelationalDatasetDetails.from_dict({})
+    update_relational_dataset_details = UpdateRelationalDatasetDetails()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_relational_dataset_details(scope, code, update_relational_dataset_details=update_relational_dataset_details, opts=opts)
+
+        # [EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+        api_response = api_instance.update_relational_dataset_details(scope, code, update_relational_dataset_details=update_relational_dataset_details)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RelationalDatasetDefinitionApi->update_relational_dataset_details: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the relational dataset definition. | 
+ **code** | **str**| The code of the relational dataset definition. | 
+ **update_relational_dataset_details** | [**UpdateRelationalDatasetDetails**](UpdateRelationalDatasetDetails.md)| The updated details of the relational dataset. | [optional] 
+
+### Return type
+
+[**RelationalDatasetDefinition**](RelationalDatasetDefinition.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated relational dataset definition. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **update_relational_dataset_field_schema**
+> RelationalDatasetDefinition update_relational_dataset_field_schema(scope, code, update_relational_dataset_field_schema=update_relational_dataset_field_schema)
+
+[EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
+
+Update an existing relational dataset definition with the new field schema.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RelationalDatasetDefinitionApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RelationalDatasetDefinitionApi)
+    scope = 'scope_example' # str | The scope of the relational dataset definition.
+    code = 'code_example' # str | The code of the relational dataset definition.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # update_relational_dataset_field_schema = UpdateRelationalDatasetFieldSchema.from_json("")
+    # update_relational_dataset_field_schema = UpdateRelationalDatasetFieldSchema.from_dict({})
+    update_relational_dataset_field_schema = UpdateRelationalDatasetFieldSchema()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_relational_dataset_field_schema(scope, code, update_relational_dataset_field_schema=update_relational_dataset_field_schema, opts=opts)
+
+        # [EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
+        api_response = api_instance.update_relational_dataset_field_schema(scope, code, update_relational_dataset_field_schema=update_relational_dataset_field_schema)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RelationalDatasetDefinitionApi->update_relational_dataset_field_schema: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the relational dataset definition. | 
+ **code** | **str**| The code of the relational dataset definition. | 
+ **update_relational_dataset_field_schema** | [**UpdateRelationalDatasetFieldSchema**](UpdateRelationalDatasetFieldSchema.md)| Relational dataset fields to add, update or remove. | [optional] 
 
 ### Return type
 

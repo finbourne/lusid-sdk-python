@@ -30,7 +30,8 @@ class PostCloseActivity(BaseModel):
     entity_type:  StrictStr = Field(...,alias="entityType") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId") 
     as_at: datetime = Field(alias="asAt")
-    __properties = ["entityType", "entityUniqueId", "asAt"]
+    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt") 
+    __properties = ["entityType", "entityUniqueId", "asAt", "effectiveAt"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +65,11 @@ class PostCloseActivity(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if effective_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_at is None and "effective_at" in self.__fields_set__:
+            _dict['effectiveAt'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +84,8 @@ class PostCloseActivity(BaseModel):
         _obj = PostCloseActivity.parse_obj({
             "entity_type": obj.get("entityType"),
             "entity_unique_id": obj.get("entityUniqueId"),
-            "as_at": obj.get("asAt")
+            "as_at": obj.get("asAt"),
+            "effective_at": obj.get("effectiveAt")
         })
         return _obj
 

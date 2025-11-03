@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **entity_type** | **str** |  | 
 **entity_unique_id** | **str** |  | 
 **as_at** | **datetime** |  | 
+**effective_at** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -18,7 +19,8 @@ from datetime import datetime
 entity_type: StrictStr = "example_entity_type"
 entity_unique_id: StrictStr = "example_entity_unique_id"
 as_at: datetime = # Replace with your value
-post_close_activity_instance = PostCloseActivity(entity_type=entity_type, entity_unique_id=entity_unique_id, as_at=as_at)
+effective_at: Optional[StrictStr] = "example_effective_at"
+post_close_activity_instance = PostCloseActivity(entity_type=entity_type, entity_unique_id=entity_unique_id, as_at=as_at, effective_at=effective_at)
 
 ```
 
