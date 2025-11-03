@@ -5,7 +5,7 @@ Allows a user to specify fallbacks/overrides using Holding fields for sources th
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dependency_source_filter** | [**DependencySourceFilter**](DependencySourceFilter.md) |  | 
-**var_field** | **str** | The Holding field which the fallback/override should use to create a price quote. | 
+**field** | **str** | The Holding field which the fallback/override should use to create a price quote. | 
 ## Example
 
 ```python
@@ -16,8 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 dependency_source_filter: DependencySourceFilter = # Replace with your value
-var_field: StrictStr = "example_var_field"
-specific_holding_pricing_info_instance = SpecificHoldingPricingInfo(dependency_source_filter=dependency_source_filter, var_field=var_field)
+field: StrictStr = "example_field"
+specific_holding_pricing_info_instance = SpecificHoldingPricingInfo(dependency_source_filter=dependency_source_filter, field=field)
 
 ```
 

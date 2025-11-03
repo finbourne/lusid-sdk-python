@@ -34,7 +34,8 @@ class TransactionQueryParameters(BaseModel):
     timeline_scope:  Optional[StrictStr] = Field(None,alias="timelineScope", description="Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
     timeline_code:  Optional[StrictStr] = Field(None,alias="timelineCode", description="Code of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
     include_economics: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Economics data would be populated in the response.", alias="includeEconomics")
-    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics"]
+    include_settlement_status: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Economics data would be populated in the response.", alias="includeSettlementStatus")
+    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus"]
 
     @validator('query_mode')
     def query_mode_validate_enum(cls, value):
@@ -165,7 +166,8 @@ class TransactionQueryParameters(BaseModel):
             "show_cancelled_transactions": obj.get("showCancelledTransactions"),
             "timeline_scope": obj.get("timelineScope"),
             "timeline_code": obj.get("timelineCode"),
-            "include_economics": obj.get("includeEconomics")
+            "include_economics": obj.get("includeEconomics"),
+            "include_settlement_status": obj.get("includeSettlementStatus")
         })
         return _obj
 

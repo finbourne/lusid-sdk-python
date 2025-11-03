@@ -22,15 +22,16 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.dependency_source_filter import DependencySourceFilter
+from lusid.models.settlement_problem import SettlementProblem
 
-class SpecificHoldingPricingInfo(BaseModel):
+class CategorySettlementStatus(BaseModel):
     """
-    Allows a user to specify fallbacks/overrides using Holding fields for sources that match a particular DependencySourceFilter.  # noqa: E501
+    CategorySettlementStatus
     """
-    dependency_source_filter: DependencySourceFilter = Field(alias="dependencySourceFilter")
-    field:  StrictStr = Field(...,alias="field", description="The Holding field which the fallback/override should use to create a price quote.") 
-    __properties = ["dependencySourceFilter", "field"]
+    status:  StrictStr = Field(...,alias="status", description="The Status of the settlement category - 'Settled', 'Part Settled' or 'Unsettled'.") 
+    is_overdue: StrictBool = Field(description="Whether the category has any overdue movements", alias="isOverdue")
+    problems: List[SettlementProblem] = Field(description="Instruction level detail of rejected or invalid settlement instructions")
+    __properties = ["status", "isOverdue", "problems"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,8 +55,8 @@ class SpecificHoldingPricingInfo(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> SpecificHoldingPricingInfo:
-        """Create an instance of SpecificHoldingPricingInfo from a JSON string"""
+    def from_json(cls, json_str: str) -> CategorySettlementStatus:
+        """Create an instance of CategorySettlementStatus from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,24 +65,29 @@ class SpecificHoldingPricingInfo(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of dependency_source_filter
-        if self.dependency_source_filter:
-            _dict['dependencySourceFilter'] = self.dependency_source_filter.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in problems (list)
+        _items = []
+        if self.problems:
+            for _item in self.problems:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['problems'] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> SpecificHoldingPricingInfo:
-        """Create an instance of SpecificHoldingPricingInfo from a dict"""
+    def from_dict(cls, obj: dict) -> CategorySettlementStatus:
+        """Create an instance of CategorySettlementStatus from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return SpecificHoldingPricingInfo.parse_obj(obj)
+            return CategorySettlementStatus.parse_obj(obj)
 
-        _obj = SpecificHoldingPricingInfo.parse_obj({
-            "dependency_source_filter": DependencySourceFilter.from_dict(obj.get("dependencySourceFilter")) if obj.get("dependencySourceFilter") is not None else None,
-            "field": obj.get("field")
+        _obj = CategorySettlementStatus.parse_obj({
+            "status": obj.get("status"),
+            "is_overdue": obj.get("isOverdue"),
+            "problems": [SettlementProblem.from_dict(_item) for _item in obj.get("problems")] if obj.get("problems") is not None else None
         })
         return _obj
 
-SpecificHoldingPricingInfo.update_forward_refs()
+CategorySettlementStatus.update_forward_refs()

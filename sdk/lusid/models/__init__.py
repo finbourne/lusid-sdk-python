@@ -160,6 +160,7 @@ from lusid.models.cash_flow_value_set import CashFlowValueSet
 from lusid.models.cash_ladder_record import CashLadderRecord
 from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.cash_perpetual import CashPerpetual
+from lusid.models.category_settlement_status import CategorySettlementStatus
 from lusid.models.cds_credit_event import CdsCreditEvent
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_index import CdsIndex
@@ -1074,6 +1075,7 @@ from lusid.models.settlement_in_lieu import SettlementInLieu
 from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.settlement_instruction_with_transaction import SettlementInstructionWithTransaction
+from lusid.models.settlement_problem import SettlementProblem
 from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
@@ -1166,6 +1168,7 @@ from lusid.models.transaction_settlement_bucket import TransactionSettlementBuck
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
 from lusid.models.transaction_settlement_movement import TransactionSettlementMovement
 from lusid.models.transaction_settlement_status import TransactionSettlementStatus
+from lusid.models.transaction_settlement_summary import TransactionSettlementSummary
 from lusid.models.transaction_status import TransactionStatus
 from lusid.models.transaction_template import TransactionTemplate
 from lusid.models.transaction_template_request import TransactionTemplateRequest
@@ -1476,6 +1479,7 @@ __all__ = [
     "CashLadderRecord",
     "CashOfferElection",
     "CashPerpetual",
+    "CategorySettlementStatus",
     "CdsCreditEvent",
     "CdsFlowConventions",
     "CdsIndex",
@@ -2390,6 +2394,7 @@ __all__ = [
     "SettlementInstructionQuery",
     "SettlementInstructionRequest",
     "SettlementInstructionWithTransaction",
+    "SettlementProblem",
     "SettlementSchedule",
     "ShareClassAmount",
     "ShareClassBreakdown",
@@ -2482,6 +2487,7 @@ __all__ = [
     "TransactionSettlementInstruction",
     "TransactionSettlementMovement",
     "TransactionSettlementStatus",
+    "TransactionSettlementSummary",
     "TransactionStatus",
     "TransactionTemplate",
     "TransactionTemplateRequest",

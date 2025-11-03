@@ -22,15 +22,15 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.dependency_source_filter import DependencySourceFilter
 
-class SpecificHoldingPricingInfo(BaseModel):
+class SettlementProblem(BaseModel):
     """
-    Allows a user to specify fallbacks/overrides using Holding fields for sources that match a particular DependencySourceFilter.  # noqa: E501
+    SettlementProblem
     """
-    dependency_source_filter: DependencySourceFilter = Field(alias="dependencySourceFilter")
-    field:  StrictStr = Field(...,alias="field", description="The Holding field which the fallback/override should use to create a price quote.") 
-    __properties = ["dependencySourceFilter", "field"]
+    settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId", description="The id of the problematic settlement instruction. Combined with the portfolio id this uniquely identifies a settlement instruction") 
+    category:  StrictStr = Field(...,alias="category", description="The category this instruction belongs to") 
+    status:  StrictStr = Field(...,alias="status", description="The status of the settlement instruction. Possible values are 'Invalid' or 'Rejected'.") 
+    __properties = ["settlementInstructionId", "category", "status"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,8 +54,8 @@ class SpecificHoldingPricingInfo(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> SpecificHoldingPricingInfo:
-        """Create an instance of SpecificHoldingPricingInfo from a JSON string"""
+    def from_json(cls, json_str: str) -> SettlementProblem:
+        """Create an instance of SettlementProblem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,24 +64,22 @@ class SpecificHoldingPricingInfo(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of dependency_source_filter
-        if self.dependency_source_filter:
-            _dict['dependencySourceFilter'] = self.dependency_source_filter.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> SpecificHoldingPricingInfo:
-        """Create an instance of SpecificHoldingPricingInfo from a dict"""
+    def from_dict(cls, obj: dict) -> SettlementProblem:
+        """Create an instance of SettlementProblem from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return SpecificHoldingPricingInfo.parse_obj(obj)
+            return SettlementProblem.parse_obj(obj)
 
-        _obj = SpecificHoldingPricingInfo.parse_obj({
-            "dependency_source_filter": DependencySourceFilter.from_dict(obj.get("dependencySourceFilter")) if obj.get("dependencySourceFilter") is not None else None,
-            "field": obj.get("field")
+        _obj = SettlementProblem.parse_obj({
+            "settlement_instruction_id": obj.get("settlementInstructionId"),
+            "category": obj.get("category"),
+            "status": obj.get("status")
         })
         return _obj
 
-SpecificHoldingPricingInfo.update_forward_refs()
+SettlementProblem.update_forward_refs()

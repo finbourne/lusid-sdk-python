@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **timeline_scope** | **str** | Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions | [optional] 
 **timeline_code** | **str** | Code of the Timeline for the Portfolio. The Timeline to be used while building transactions | [optional] 
 **include_economics** | **bool** | By default is false. When set to true the Economics data would be populated in the response. | [optional] 
+**include_settlement_status** | **bool** | By default is false. When set to true the Economics data would be populated in the response. | [optional] 
 ## Example
 
 ```python
@@ -28,7 +29,9 @@ timeline_scope: Optional[StrictStr] = "example_timeline_scope"
 timeline_code: Optional[StrictStr] = "example_timeline_code"
 include_economics: Optional[StrictBool] = # Replace with your value
 include_economics:Optional[StrictBool] = None
-transaction_query_parameters_instance = TransactionQueryParameters(start_date=start_date, end_date=end_date, query_mode=query_mode, show_cancelled_transactions=show_cancelled_transactions, timeline_scope=timeline_scope, timeline_code=timeline_code, include_economics=include_economics)
+include_settlement_status: Optional[StrictBool] = # Replace with your value
+include_settlement_status:Optional[StrictBool] = None
+transaction_query_parameters_instance = TransactionQueryParameters(start_date=start_date, end_date=end_date, query_mode=query_mode, show_cancelled_transactions=show_cancelled_transactions, timeline_scope=timeline_scope, timeline_code=timeline_code, include_economics=include_economics, include_settlement_status=include_settlement_status)
 
 ```
 

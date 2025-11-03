@@ -31,7 +31,7 @@ class MarketDataKeyRule(BaseModel):
     supplier:  StrictStr = Field(...,alias="supplier", description="The market data supplier (where the data comes from)") 
     data_scope:  StrictStr = Field(...,alias="dataScope", description="The scope in which the data should be found when using this rule.") 
     quote_type:  StrictStr = Field(...,alias="quoteType", description="The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor") 
-    var_field:  Optional[StrictStr] = Field(None,alias="field", description="The conceptual qualification for the field, typically 'bid', 'mid' (default), or 'ask', but can also be 'open', 'close', etc.  When resolving quotes from LUSID's database, only quotes whose Field is identical to the Field specified here  will be accepted as market data.  When resolving data from an external supplier, the Field must be one of a defined set for the given supplier.                Note: Applies to the retrieval of quotes only. Has no impact on the resolution of complex market data.") 
+    field:  Optional[StrictStr] = Field(None,alias="field", description="The conceptual qualification for the field, typically 'bid', 'mid' (default), or 'ask', but can also be 'open', 'close', etc.  When resolving quotes from LUSID's database, only quotes whose Field is identical to the Field specified here  will be accepted as market data.  When resolving data from an external supplier, the Field must be one of a defined set for the given supplier.                Note: Applies to the retrieval of quotes only. Has no impact on the resolution of complex market data.") 
     quote_interval:  Optional[StrictStr] = Field(None,alias="quoteInterval", description="Shorthand for the time interval used to select market data. This must be a dot-separated string              nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax              is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of              D(ay), Bd(business day), W(eek), M(onth) or Y(ear).              Business days are calculated using the calendars specified on the Valuation Request.              If no calendar is provided in the request, then it will default to only skipping weekends.              For example, if the valuation date is a Monday, then a quote interval of \"1Bd\" would behave as \"3D\",              looking back to the Friday. Data with effectiveAt on the weekend will still be found in that window.") 
     as_at: Optional[datetime] = Field(default=None, description="Deprecated field which no longer has any effect on market data resolution.", alias="asAt")
     price_source:  Optional[StrictStr] = Field(None,alias="priceSource", description="The source of the quote. For a given provider/supplier of market data there may be an additional qualifier, e.g. the exchange or bank that provided the quote") 
@@ -138,9 +138,9 @@ class MarketDataKeyRule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if var_field (nullable) is None
+        # set to None if field (nullable) is None
         # and __fields_set__ contains the field
-        if self.var_field is None and "var_field" in self.__fields_set__:
+        if self.field is None and "field" in self.__fields_set__:
             _dict['field'] = None
 
         # set to None if quote_interval (nullable) is None
@@ -184,7 +184,7 @@ class MarketDataKeyRule(BaseModel):
             "supplier": obj.get("supplier"),
             "data_scope": obj.get("dataScope"),
             "quote_type": obj.get("quoteType"),
-            "var_field": obj.get("field"),
+            "field": obj.get("field"),
             "quote_interval": obj.get("quoteInterval"),
             "as_at": obj.get("asAt"),
             "price_source": obj.get("priceSource"),

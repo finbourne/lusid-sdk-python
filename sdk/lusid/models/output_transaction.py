@@ -31,6 +31,7 @@ from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_price import TransactionPrice
+from lusid.models.transaction_settlement_summary import TransactionSettlementSummary
 from lusid.models.transaction_type_details import TransactionTypeDetails
 
 class OutputTransaction(BaseModel):
@@ -74,7 +75,8 @@ class OutputTransaction(BaseModel):
     data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
     sequence: Optional[StrictInt] = Field(default=None, description="The sequential position in which this transaction was processed.")
     sequence_priority: Optional[StrictInt] = Field(default=None, description="The calculated priority level for this transaction.", alias="sequencePriority")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority"]
+    settlement_summary: Optional[TransactionSettlementSummary] = Field(default=None, alias="settlementSummary")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -222,6 +224,9 @@ class OutputTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data_model_membership
         if self.data_model_membership:
             _dict['dataModelMembership'] = self.data_model_membership.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of settlement_summary
+        if self.settlement_summary:
+            _dict['settlementSummary'] = self.settlement_summary.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -365,7 +370,8 @@ class OutputTransaction(BaseModel):
             "economics": [Economics.from_dict(_item) for _item in obj.get("economics")] if obj.get("economics") is not None else None,
             "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "sequence": obj.get("sequence"),
-            "sequence_priority": obj.get("sequencePriority")
+            "sequence_priority": obj.get("sequencePriority"),
+            "settlement_summary": TransactionSettlementSummary.from_dict(obj.get("settlementSummary")) if obj.get("settlementSummary") is not None else None
         })
         return _obj
 

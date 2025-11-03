@@ -32,7 +32,7 @@ class QuoteAccessMetadataRuleId(BaseModel):
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="The value of the instrument identifier that uniquely identifies the instrument that the quote is for, e.g. 'BBG00JX0P539'.") 
     instrument_id_type:  Optional[StrictStr] = Field(None,alias="instrumentIdType", description="The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'.") 
     quote_type:  Optional[StrictStr] = Field(None,alias="quoteType", description="The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used.") 
-    var_field:  Optional[StrictStr] = Field(None,alias="field", description="The field of the quote e.g. bid, mid, ask etc. This should be consistent across a time series of quotes. The allowed values depend on the provider according to the following rules: Client : *Any value is accepted*; DataScope : 'bid', 'mid', 'ask'; Lusid : *Any value is accepted*; Edi : 'bid', 'mid', 'ask', 'open', 'close', 'last'; TraderMade : 'bid', 'mid', 'ask', 'open', 'close', 'high', 'low'; FactSet : 'bid', 'mid', 'ask', 'open', 'close'; SIX : 'bid', 'mid', 'ask', 'open', 'close', 'last', 'referencePrice', 'highPrice', 'lowPrice', 'maxRedemptionPrice', 'maxSubscriptionPrice', 'openPrice', 'bestBidPrice', 'lastBidPrice', 'bestAskPrice', 'lastAskPrice', 'finalSettlementOptions', 'finalSettlementFutures', 'valuationPriceAmount'; Bloomberg : 'bid', 'mid', 'ask', 'open', 'close', 'last'; Rimes : 'bid', 'mid', 'ask', 'open', 'close', 'last'; ICE : 'ask', 'bid', 'close', 'high', 'low', 'open', 'primaryExchangeTradePrice', 'vwap', 'mid'; LSEG : 'ASK', 'BID', 'MID_PRICE'") 
+    field:  Optional[StrictStr] = Field(None,alias="field", description="The field of the quote e.g. bid, mid, ask etc. This should be consistent across a time series of quotes. The allowed values depend on the provider according to the following rules: Client : *Any value is accepted*; DataScope : 'bid', 'mid', 'ask'; Lusid : *Any value is accepted*; Edi : 'bid', 'mid', 'ask', 'open', 'close', 'last'; TraderMade : 'bid', 'mid', 'ask', 'open', 'close', 'high', 'low'; FactSet : 'bid', 'mid', 'ask', 'open', 'close'; SIX : 'bid', 'mid', 'ask', 'open', 'close', 'last', 'referencePrice', 'highPrice', 'lowPrice', 'maxRedemptionPrice', 'maxSubscriptionPrice', 'openPrice', 'bestBidPrice', 'lastBidPrice', 'bestAskPrice', 'lastAskPrice', 'finalSettlementOptions', 'finalSettlementFutures', 'valuationPriceAmount'; Bloomberg : 'bid', 'mid', 'ask', 'open', 'close', 'last'; Rimes : 'bid', 'mid', 'ask', 'open', 'close', 'last'; ICE : 'ask', 'bid', 'close', 'high', 'low', 'open', 'primaryExchangeTradePrice', 'vwap', 'mid'; LSEG : 'ASK', 'BID', 'MID_PRICE'") 
     __properties = ["provider", "priceSource", "instrumentId", "instrumentIdType", "quoteType", "field"]
 
     class Config:
@@ -92,9 +92,9 @@ class QuoteAccessMetadataRuleId(BaseModel):
         if self.quote_type is None and "quote_type" in self.__fields_set__:
             _dict['quoteType'] = None
 
-        # set to None if var_field (nullable) is None
+        # set to None if field (nullable) is None
         # and __fields_set__ contains the field
-        if self.var_field is None and "var_field" in self.__fields_set__:
+        if self.field is None and "field" in self.__fields_set__:
             _dict['field'] = None
 
         return _dict
@@ -114,7 +114,7 @@ class QuoteAccessMetadataRuleId(BaseModel):
             "instrument_id": obj.get("instrumentId"),
             "instrument_id_type": obj.get("instrumentIdType"),
             "quote_type": obj.get("quoteType"),
-            "var_field": obj.get("field")
+            "field": obj.get("field")
         })
         return _obj
 
