@@ -747,7 +747,7 @@ class RelationalDatasetDefinitionApi:
     def update_relational_dataset_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_definition_request : Annotated[Optional[UpdateRelationalDatasetDefinitionRequest], Field(description="The updated relational dataset definition.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
         """[EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition  # noqa: E501
 
-        Update an existing relational dataset definition.  # noqa: E501
+        Update an existing relational dataset definition.  Applicable only to the definitions that are not yet in use i.e. there are no DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -782,7 +782,7 @@ class RelationalDatasetDefinitionApi:
     def update_relational_dataset_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_definition_request : Annotated[Optional[UpdateRelationalDatasetDefinitionRequest], Field(description="The updated relational dataset definition.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition  # noqa: E501
 
-        Update an existing relational dataset definition.  # noqa: E501
+        Update an existing relational dataset definition.  Applicable only to the definitions that are not yet in use i.e. there are no DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

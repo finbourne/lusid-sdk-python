@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
 
-Update an existing relational dataset definition.
+Update an existing relational dataset definition.  Applicable only to the definitions that are not yet in use i.e. there are no DataPoints associated with this definition.
 
 ### Example
 
