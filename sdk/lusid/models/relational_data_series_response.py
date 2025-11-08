@@ -31,7 +31,7 @@ class RelationalDataSeriesResponse(BaseModel):
     """
     series_scope:  StrictStr = Field(...,alias="seriesScope", description="The scope of the DataSeries.") 
     applicable_entity: ApplicableEntity = Field(alias="applicableEntity")
-    series_identifiers: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="seriesIdentifiers")
+    series_identifiers: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The identifiers that uniquely define this DataSeries, if any, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="seriesIdentifiers")
     __properties = ["seriesScope", "applicableEntity", "seriesIdentifiers"]
 
     class Config:

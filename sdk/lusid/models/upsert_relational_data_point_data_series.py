@@ -30,7 +30,7 @@ class UpsertRelationalDataPointDataSeries(BaseModel):
     """
     series_scope:  StrictStr = Field(...,alias="seriesScope", description="The scope of the DataSeries.") 
     applicable_entity: ApplicableEntity = Field(alias="applicableEntity")
-    series_identifiers: Dict[str, Any] = Field(description="The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="seriesIdentifiers")
+    series_identifiers: Optional[Dict[str, Any]] = Field(default=None, description="The identifiers that uniquely define this DataSeries, if any, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="seriesIdentifiers")
     __properties = ["seriesScope", "applicableEntity", "seriesIdentifiers"]
 
     class Config:
@@ -68,6 +68,11 @@ class UpsertRelationalDataPointDataSeries(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of applicable_entity
         if self.applicable_entity:
             _dict['applicableEntity'] = self.applicable_entity.to_dict()
+        # set to None if series_identifiers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.series_identifiers is None and "series_identifiers" in self.__fields_set__:
+            _dict['seriesIdentifiers'] = None
+
         return _dict
 
     @classmethod

@@ -23,16 +23,17 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.relational_dataset_fields_to_add import RelationalDatasetFieldsToAdd
+from lusid.models.relational_dataset_fields_to_remove import RelationalDatasetFieldsToRemove
 from lusid.models.relational_dataset_fields_to_update import RelationalDatasetFieldsToUpdate
 
 class UpdateRelationalDatasetFieldSchema(BaseModel):
     """
     UpdateRelationalDatasetFieldSchema
     """
-    relational_dataset_fields_to_add: Optional[RelationalDatasetFieldsToAdd] = Field(default=None, alias="relationalDatasetFieldsToAdd")
-    relational_dataset_fields_to_update: Optional[RelationalDatasetFieldsToUpdate] = Field(default=None, alias="relationalDatasetFieldsToUpdate")
-    field_names_to_remove: Optional[List[StrictStr]] = Field(default=None, description="An array of FieldName(s) to be removed from the FieldSchema. Only Value or Metadata fields can be removed.", alias="fieldNamesToRemove")
-    __properties = ["relationalDatasetFieldsToAdd", "relationalDatasetFieldsToUpdate", "fieldNamesToRemove"]
+    add: Optional[RelationalDatasetFieldsToAdd] = None
+    update: Optional[RelationalDatasetFieldsToUpdate] = None
+    remove: Optional[RelationalDatasetFieldsToRemove] = None
+    __properties = ["add", "update", "remove"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,17 +67,15 @@ class UpdateRelationalDatasetFieldSchema(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of relational_dataset_fields_to_add
-        if self.relational_dataset_fields_to_add:
-            _dict['relationalDatasetFieldsToAdd'] = self.relational_dataset_fields_to_add.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of relational_dataset_fields_to_update
-        if self.relational_dataset_fields_to_update:
-            _dict['relationalDatasetFieldsToUpdate'] = self.relational_dataset_fields_to_update.to_dict()
-        # set to None if field_names_to_remove (nullable) is None
-        # and __fields_set__ contains the field
-        if self.field_names_to_remove is None and "field_names_to_remove" in self.__fields_set__:
-            _dict['fieldNamesToRemove'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of add
+        if self.add:
+            _dict['add'] = self.add.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of update
+        if self.update:
+            _dict['update'] = self.update.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of remove
+        if self.remove:
+            _dict['remove'] = self.remove.to_dict()
         return _dict
 
     @classmethod
@@ -89,9 +88,9 @@ class UpdateRelationalDatasetFieldSchema(BaseModel):
             return UpdateRelationalDatasetFieldSchema.parse_obj(obj)
 
         _obj = UpdateRelationalDatasetFieldSchema.parse_obj({
-            "relational_dataset_fields_to_add": RelationalDatasetFieldsToAdd.from_dict(obj.get("relationalDatasetFieldsToAdd")) if obj.get("relationalDatasetFieldsToAdd") is not None else None,
-            "relational_dataset_fields_to_update": RelationalDatasetFieldsToUpdate.from_dict(obj.get("relationalDatasetFieldsToUpdate")) if obj.get("relationalDatasetFieldsToUpdate") is not None else None,
-            "field_names_to_remove": obj.get("fieldNamesToRemove")
+            "add": RelationalDatasetFieldsToAdd.from_dict(obj.get("add")) if obj.get("add") is not None else None,
+            "update": RelationalDatasetFieldsToUpdate.from_dict(obj.get("update")) if obj.get("update") is not None else None,
+            "remove": RelationalDatasetFieldsToRemove.from_dict(obj.get("remove")) if obj.get("remove") is not None else None
         })
         return _obj
 

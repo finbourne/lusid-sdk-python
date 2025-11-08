@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **series_scope** | **str** | The scope of the DataSeries. | 
 **applicable_entity** | [**ApplicableEntity**](ApplicableEntity.md) |  | 
-**series_identifiers** | **Dict[str, Optional[object]]** | The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition. | 
+**series_identifiers** | **Dict[str, Optional[object]]** | The identifiers that uniquely define this DataSeries, if any, structured according to the FieldSchema of the parent RelationalDatasetDefinition. | [optional] 
 ## Example
 
 ```python
@@ -17,7 +17,7 @@ from datetime import datetime
 
 series_scope: StrictStr = "example_series_scope"
 applicable_entity: ApplicableEntity = # Replace with your value
-series_identifiers: Dict[str, Any] = # Replace with your value
+series_identifiers: Optional[Dict[str, Any]] = # Replace with your value
 upsert_relational_data_point_data_series_instance = UpsertRelationalDataPointDataSeries(series_scope=series_scope, applicable_entity=applicable_entity, series_identifiers=series_identifiers)
 
 ```

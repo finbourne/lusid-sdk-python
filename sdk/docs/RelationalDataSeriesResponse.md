@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **series_scope** | **str** | The scope of the DataSeries. | 
 **applicable_entity** | [**ApplicableEntity**](ApplicableEntity.md) |  | 
-**series_identifiers** | [**Dict[str, RelationalDataPointFieldValueResponse]**](RelationalDataPointFieldValueResponse.md) | The identifiers that uniquely define this DataSeries, structured according to the FieldSchema of the parent RelationalDatasetDefinition. | 
+**series_identifiers** | [**Dict[str, RelationalDataPointFieldValueResponse]**](RelationalDataPointFieldValueResponse.md) | The identifiers that uniquely define this DataSeries, if any, structured according to the FieldSchema of the parent RelationalDatasetDefinition. | 
 ## Example
 
 ```python

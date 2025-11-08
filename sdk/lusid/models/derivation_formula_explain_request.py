@@ -30,10 +30,11 @@ class DerivationFormulaExplainRequest(BaseModel):
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity for which the derived property or partial formula is to be resolved against.") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="(Optional) The scope that entity exists in. If no scope is provided, the default scope for the entity type will be used.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="(Optional) The code of the entity, to be provided for entities that support scope/code retrieval. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.") 
+    subentity_id:  Optional[StrictStr] = Field(None,alias="subentityId", description="(Optional) The id of the sub-entity to explain the derived property for. This must be provided along with the scope/code of the parent entity.") 
     identifier: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="(Optional). An identifier key/value pair that uniquely identifies the entity to explain the derived property for. This can be either an instrument identifier, or an identifier property. If no code or identifier is provided, the logical evaluation tree without resolved values is returned.")
     property_key:  Optional[StrictStr] = Field(None,alias="propertyKey", description="(Optional) The key of the derived property to get an explanation for. This takes the format {domain}/{scope}/{code}. One of either property key or partial formula must be provided.") 
     partial_formula:  Optional[StrictStr] = Field(None,alias="partialFormula", description="(Optional) A partial derivation formula to get an explanation for. Can be provided in lieu of a property key. One of either property key or partial formula must be provided.") 
-    __properties = ["entityType", "scope", "code", "identifier", "propertyKey", "partialFormula"]
+    __properties = ["entityType", "scope", "code", "subentityId", "identifier", "propertyKey", "partialFormula"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +78,11 @@ class DerivationFormulaExplainRequest(BaseModel):
         if self.code is None and "code" in self.__fields_set__:
             _dict['code'] = None
 
+        # set to None if subentity_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.subentity_id is None and "subentity_id" in self.__fields_set__:
+            _dict['subentityId'] = None
+
         # set to None if identifier (nullable) is None
         # and __fields_set__ contains the field
         if self.identifier is None and "identifier" in self.__fields_set__:
@@ -107,6 +113,7 @@ class DerivationFormulaExplainRequest(BaseModel):
             "entity_type": obj.get("entityType"),
             "scope": obj.get("scope"),
             "code": obj.get("code"),
+            "subentity_id": obj.get("subentityId"),
             "identifier": obj.get("identifier"),
             "property_key": obj.get("propertyKey"),
             "partial_formula": obj.get("partialFormula")

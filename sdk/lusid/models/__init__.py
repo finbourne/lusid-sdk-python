@@ -948,6 +948,7 @@ from lusid.models.relational_data_series_response import RelationalDataSeriesRes
 from lusid.models.relational_dataset_definition import RelationalDatasetDefinition
 from lusid.models.relational_dataset_field_definition import RelationalDatasetFieldDefinition
 from lusid.models.relational_dataset_fields_to_add import RelationalDatasetFieldsToAdd
+from lusid.models.relational_dataset_fields_to_remove import RelationalDatasetFieldsToRemove
 from lusid.models.relational_dataset_fields_to_update import RelationalDatasetFieldsToUpdate
 from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
@@ -2275,6 +2276,7 @@ __all__ = [
     "RelationalDatasetDefinition",
     "RelationalDatasetFieldDefinition",
     "RelationalDatasetFieldsToAdd",
+    "RelationalDatasetFieldsToRemove",
     "RelationalDatasetFieldsToUpdate",
     "Relationship",
     "RelationshipDefinition",

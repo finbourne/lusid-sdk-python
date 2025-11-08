@@ -1609,6 +1609,7 @@ Class | Method | HTTP request | Description
  - [RelationalDatasetDefinition](docs/RelationalDatasetDefinition.md)
  - [RelationalDatasetFieldDefinition](docs/RelationalDatasetFieldDefinition.md)
  - [RelationalDatasetFieldsToAdd](docs/RelationalDatasetFieldsToAdd.md)
+ - [RelationalDatasetFieldsToRemove](docs/RelationalDatasetFieldsToRemove.md)
  - [RelationalDatasetFieldsToUpdate](docs/RelationalDatasetFieldsToUpdate.md)
  - [Relationship](docs/Relationship.md)
  - [RelationshipDefinition](docs/RelationshipDefinition.md)

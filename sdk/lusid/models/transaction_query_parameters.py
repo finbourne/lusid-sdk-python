@@ -34,8 +34,9 @@ class TransactionQueryParameters(BaseModel):
     timeline_scope:  Optional[StrictStr] = Field(None,alias="timelineScope", description="Scope of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
     timeline_code:  Optional[StrictStr] = Field(None,alias="timelineCode", description="Code of the Timeline for the Portfolio. The Timeline to be used while building transactions") 
     include_economics: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Economics data would be populated in the response.", alias="includeEconomics")
-    include_settlement_status: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Economics data would be populated in the response.", alias="includeSettlementStatus")
-    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus"]
+    include_settlement_status: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Settlement Status data would be populated in the response.", alias="includeSettlementStatus")
+    settlement_status_date:  Optional[StrictStr] = Field(None,alias="settlementStatusDate", description="Optional date used to specify end of an extended window for settlement information. When provided, transactions will be returned between start and end date, but settlement information between start date and this date will be included. When provided, the value must be greater than or equal to end date.") 
+    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus", "settlementStatusDate"]
 
     @validator('query_mode')
     def query_mode_validate_enum(cls, value):
@@ -148,6 +149,11 @@ class TransactionQueryParameters(BaseModel):
         if self.timeline_code is None and "timeline_code" in self.__fields_set__:
             _dict['timelineCode'] = None
 
+        # set to None if settlement_status_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.settlement_status_date is None and "settlement_status_date" in self.__fields_set__:
+            _dict['settlementStatusDate'] = None
+
         return _dict
 
     @classmethod
@@ -167,7 +173,8 @@ class TransactionQueryParameters(BaseModel):
             "timeline_scope": obj.get("timelineScope"),
             "timeline_code": obj.get("timelineCode"),
             "include_economics": obj.get("includeEconomics"),
-            "include_settlement_status": obj.get("includeSettlementStatus")
+            "include_settlement_status": obj.get("includeSettlementStatus"),
+            "settlement_status_date": obj.get("settlementStatusDate")
         })
         return _obj
 
