@@ -42,8 +42,9 @@ class InstrumentEventInstruction(BaseModel):
     entitlement_date_instructed: Optional[datetime] = Field(default=None, description="The instructed entitlement date for the event (where none is set on the event itself)", alias="entitlementDateInstructed")
     quantity_instructed: Optional[QuantityInstructed] = Field(default=None, alias="quantityInstructed")
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply") 
+    ignore_cost_impact: Optional[StrictBool] = Field(default=None, description="For loan facility holding instructions, set this flag to 'true' if you want the event to not impact cost. If you want to use this option, do not add multiple instructions to the same tax lot or you will get undefined behaviour.", alias="ignoreCostImpact")
     links: Optional[List[Link]] = None
-    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "taxLotId", "links"]
+    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "taxLotId", "ignoreCostImpact", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -161,6 +162,7 @@ class InstrumentEventInstruction(BaseModel):
             "entitlement_date_instructed": obj.get("entitlementDateInstructed"),
             "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None,
             "tax_lot_id": obj.get("taxLotId"),
+            "ignore_cost_impact": obj.get("ignoreCostImpact"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

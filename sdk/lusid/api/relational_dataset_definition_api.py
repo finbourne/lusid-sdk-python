@@ -228,7 +228,7 @@ class RelationalDatasetDefinitionApi:
     def delete_relational_dataset_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition  # noqa: E501
 
-        Delete a relational dataset definition.  # noqa: E501
+        Delete a relational dataset definition.  WARNING! This operation is irreversible. Deleting a relational dataset definition will also delete all associated data points.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -261,7 +261,7 @@ class RelationalDatasetDefinitionApi:
     def delete_relational_dataset_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition  # noqa: E501
 
-        Delete a relational dataset definition.  # noqa: E501
+        Delete a relational dataset definition.  WARNING! This operation is irreversible. Deleting a relational dataset definition will also delete all associated data points.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

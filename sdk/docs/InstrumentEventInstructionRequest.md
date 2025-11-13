@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **entitlement_date_instructed** | **datetime** | The instructed entitlement date for the event (where none is set on the event itself) | [optional] 
 **quantity_instructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] 
 **tax_lot_id** | **str** | For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply | [optional] 
+**ignore_cost_impact** | **bool** | For loan facility holding instructions, set this flag to &#39;true&#39; if you want the event to not impact cost. If you want to use this option, do not add multiple instructions to the same tax lot or you will get undefined behaviour. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,9 @@ holding_id: Optional[StrictInt] = # Replace with your value
 entitlement_date_instructed: Optional[datetime] = # Replace with your value
 quantity_instructed: Optional[QuantityInstructed] = # Replace with your value
 tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
-instrument_event_instruction_request_instance = InstrumentEventInstructionRequest(instrument_event_instruction_id=instrument_event_instruction_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, tax_lot_id=tax_lot_id)
+ignore_cost_impact: Optional[StrictBool] = # Replace with your value
+ignore_cost_impact:Optional[StrictBool] = None
+instrument_event_instruction_request_instance = InstrumentEventInstructionRequest(instrument_event_instruction_id=instrument_event_instruction_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, tax_lot_id=tax_lot_id, ignore_cost_impact=ignore_cost_impact)
 
 ```
 

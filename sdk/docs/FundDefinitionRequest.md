@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the Fund. | 
 **description** | **str** | A description for the Fund. | [optional] 
 **base_currency** | **str** | The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency. | 
-**investor_structure** | **str** | The Investor structure to be used by the Fund. Supported values are &#39;NonUnitised&#39;, &#39;Classes&#39; and &#39;Custom&#39;. | [optional] 
+**investor_structure** | **str** | The Investor structure to be used by the Fund. Supported values are &#39;NonUnitised&#39; and &#39;Classes&#39;. | [optional] 
 **portfolio_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency. | 
 **fund_configuration_id** | [**ResourceId**](ResourceId.md) |  | 
 **share_class_instrument_scopes** | **List[str]** | The scopes in which the instruments lie, currently limited to one. | [optional] 

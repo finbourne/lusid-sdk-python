@@ -27,7 +27,7 @@ class QueryRelationalDatasetRequest(BaseModel):
     """
     QueryRelationalDatasetRequest
     """
-    query_method:  StrictStr = Field(...,alias="queryMethod", description="The method used to query data points. Can be either 'Latest' or 'TimeSeries'.") 
+    query_method:  Optional[StrictStr] = Field(None,alias="queryMethod", description="The method used to query data points. Can be either 'Latest' or 'TimeSeries'.") 
     filter:  Optional[StrictStr] = Field(None,alias="filter", description="Expression to filter the result set. For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.") 
     custom_sort_by: Optional[List[StrictStr]] = Field(default=None, description="A list of fields to sort the results by. For example, to sort by a Value field 'AValueField' in descending order, specify 'AValueField DESC'.", alias="customSortBy")
     __properties = ["queryMethod", "filter", "customSortBy"]
@@ -64,6 +64,11 @@ class QueryRelationalDatasetRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if query_method (nullable) is None
+        # and __fields_set__ contains the field
+        if self.query_method is None and "query_method" in self.__fields_set__:
+            _dict['queryMethod'] = None
+
         # set to None if filter (nullable) is None
         # and __fields_set__ contains the field
         if self.filter is None and "filter" in self.__fields_set__:

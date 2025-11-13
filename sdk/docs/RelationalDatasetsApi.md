@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **query_relational_data**
-> PagedResourceListOfRelationalDataPointResponse query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, query_relational_dataset_request, as_at=as_at, effective_at=effective_at, page=page, limit=limit)
+> PagedResourceListOfRelationalDataPointResponse query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at=as_at, effective_at=effective_at, page=page, limit=limit, query_relational_dataset_request=query_relational_dataset_request)
 
 [EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
 
@@ -160,23 +160,23 @@ def main():
     api_instance = api_client_factory.build(RelationalDatasetsApi)
     relational_dataset_definition_scope = 'relational_dataset_definition_scope_example' # str | The Scope of the relational dataset definition.
     relational_dataset_definition_code = 'relational_dataset_definition_code_example' # str | The Code of the relational dataset definition.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # query_relational_dataset_request = QueryRelationalDatasetRequest.from_json("")
     # query_relational_dataset_request = QueryRelationalDatasetRequest.from_dict({})
     query_relational_dataset_request = QueryRelationalDatasetRequest()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request. (optional)
-    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, query_relational_dataset_request, as_at=as_at, effective_at=effective_at, page=page, limit=limit, opts=opts)
+        # api_response =  api_instance.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at=as_at, effective_at=effective_at, page=page, limit=limit, query_relational_dataset_request=query_relational_dataset_request, opts=opts)
 
         # [EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
-        api_response = api_instance.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, query_relational_dataset_request, as_at=as_at, effective_at=effective_at, page=page, limit=limit)
+        api_response = api_instance.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at=as_at, effective_at=effective_at, page=page, limit=limit, query_relational_dataset_request=query_relational_dataset_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -191,11 +191,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **relational_dataset_definition_scope** | **str**| The Scope of the relational dataset definition. | 
  **relational_dataset_definition_code** | **str**| The Code of the relational dataset definition. | 
- **query_relational_dataset_request** | [**QueryRelationalDatasetRequest**](QueryRelationalDatasetRequest.md)| The query request. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **query_relational_dataset_request** | [**QueryRelationalDatasetRequest**](QueryRelationalDatasetRequest.md)| The query request. | [optional] 
 
 ### Return type
 

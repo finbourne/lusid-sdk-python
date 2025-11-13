@@ -2858,7 +2858,7 @@ def main():
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
     success_mode = 'Partial' # str | Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (default to 'Partial')
-    request_body = {"request":{"instrumentEventInstructionId":"ExampleInstructionId","instrumentEventId":"ExampleInstrumentEventId","instructionType":"ElectForHolding","electionKey":"GBP","holdingId":123456789,"entitlementDateInstructed":"2020-01-01T12:00:00.0000000+00:00"}} # Dict[str, InstrumentEventInstructionRequest] | The instructions to be upserted to the portfolio.
+    request_body = {"request":{"instrumentEventInstructionId":"ExampleInstructionId","instrumentEventId":"ExampleInstrumentEventId","instructionType":"ElectForHolding","electionKey":"GBP","holdingId":123456789,"entitlementDateInstructed":"2020-01-01T12:00:00.0000000+00:00","ignoreCostImpact":false}} # Dict[str, InstrumentEventInstructionRequest] | The instructions to be upserted to the portfolio.
     portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
 
     try:

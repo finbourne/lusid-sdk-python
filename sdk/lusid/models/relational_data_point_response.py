@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.data_point_version import DataPointVersion
 from lusid.models.relational_data_point_field_value_response import RelationalDataPointFieldValueResponse
 from lusid.models.relational_data_series_response import RelationalDataSeriesResponse
 from lusid.models.resource_id import ResourceId
@@ -36,7 +37,8 @@ class RelationalDataPointResponse(BaseModel):
     value_fields: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="valueFields")
     meta_data_fields: Dict[str, RelationalDataPointFieldValueResponse] = Field(description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="metaDataFields")
     effective_at_entered:  StrictStr = Field(...,alias="effectiveAtEntered", description="The effectiveAt datetime as entered when the DataPoint was created.") 
-    __properties = ["relationalDatasetDefinitionId", "dataSeries", "effectiveAt", "valueFields", "metaDataFields", "effectiveAtEntered"]
+    data_point_version: Optional[DataPointVersion] = Field(default=None, alias="dataPointVersion")
+    __properties = ["relationalDatasetDefinitionId", "dataSeries", "effectiveAt", "valueFields", "metaDataFields", "effectiveAtEntered", "dataPointVersion"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +92,9 @@ class RelationalDataPointResponse(BaseModel):
                 if self.meta_data_fields[_key]:
                     _field_dict[_key] = self.meta_data_fields[_key].to_dict()
             _dict['metaDataFields'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of data_point_version
+        if self.data_point_version:
+            _dict['dataPointVersion'] = self.data_point_version.to_dict()
         return _dict
 
     @classmethod
@@ -117,7 +122,8 @@ class RelationalDataPointResponse(BaseModel):
             )
             if obj.get("metaDataFields") is not None
             else None,
-            "effective_at_entered": obj.get("effectiveAtEntered")
+            "effective_at_entered": obj.get("effectiveAtEntered"),
+            "data_point_version": DataPointVersion.from_dict(obj.get("dataPointVersion")) if obj.get("dataPointVersion") is not None else None
         })
         return _obj
 

@@ -238,30 +238,28 @@ class RelationalDatasetsApi:
 
 
     @overload
-    async def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], query_relational_dataset_request : Annotated[QueryRelationalDatasetRequest, Field(description="The query request.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> PagedResourceListOfRelationalDataPointResponse:  # noqa: E501
+    async def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, query_relational_dataset_request : Annotated[Optional[QueryRelationalDatasetRequest], Field(description="The query request.")] = None, **kwargs) -> PagedResourceListOfRelationalDataPointResponse:  # noqa: E501
         ...
 
     @overload
-    def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], query_relational_dataset_request : Annotated[QueryRelationalDatasetRequest, Field(description="The query request.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRelationalDataPointResponse:  # noqa: E501
+    def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, query_relational_dataset_request : Annotated[Optional[QueryRelationalDatasetRequest], Field(description="The query request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRelationalDataPointResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], query_relational_dataset_request : Annotated[QueryRelationalDatasetRequest, Field(description="The query request.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationalDataPointResponse, Awaitable[PagedResourceListOfRelationalDataPointResponse]]:  # noqa: E501
+    def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, query_relational_dataset_request : Annotated[Optional[QueryRelationalDatasetRequest], Field(description="The query request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationalDataPointResponse, Awaitable[PagedResourceListOfRelationalDataPointResponse]]:  # noqa: E501
         """[EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, query_relational_dataset_request, as_at, effective_at, page, limit, async_req=True)
+        >>> thread = api.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at, effective_at, page, limit, query_relational_dataset_request, async_req=True)
         >>> result = thread.get()
 
         :param relational_dataset_definition_scope: The Scope of the relational dataset definition. (required)
         :type relational_dataset_definition_scope: str
         :param relational_dataset_definition_code: The Code of the relational dataset definition. (required)
         :type relational_dataset_definition_code: str
-        :param query_relational_dataset_request: The query request. (required)
-        :type query_relational_dataset_request: QueryRelationalDatasetRequest
         :param as_at: The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.
         :type as_at: datetime
         :param effective_at: The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.
@@ -270,6 +268,8 @@ class RelationalDatasetsApi:
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
+        :param query_relational_dataset_request: The query request.
+        :type query_relational_dataset_request: QueryRelationalDatasetRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -286,25 +286,23 @@ class RelationalDatasetsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.query_relational_data_with_http_info(relational_dataset_definition_scope, relational_dataset_definition_code, query_relational_dataset_request, as_at, effective_at, page, limit, **kwargs)  # noqa: E501
+        return self.query_relational_data_with_http_info(relational_dataset_definition_scope, relational_dataset_definition_code, as_at, effective_at, page, limit, query_relational_dataset_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def query_relational_data_with_http_info(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], query_relational_dataset_request : Annotated[QueryRelationalDatasetRequest, Field(description="The query request.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def query_relational_data_with_http_info(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, query_relational_dataset_request : Annotated[Optional[QueryRelationalDatasetRequest], Field(description="The query request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.query_relational_data_with_http_info(relational_dataset_definition_scope, relational_dataset_definition_code, query_relational_dataset_request, as_at, effective_at, page, limit, async_req=True)
+        >>> thread = api.query_relational_data_with_http_info(relational_dataset_definition_scope, relational_dataset_definition_code, as_at, effective_at, page, limit, query_relational_dataset_request, async_req=True)
         >>> result = thread.get()
 
         :param relational_dataset_definition_scope: The Scope of the relational dataset definition. (required)
         :type relational_dataset_definition_scope: str
         :param relational_dataset_definition_code: The Code of the relational dataset definition. (required)
         :type relational_dataset_definition_code: str
-        :param query_relational_dataset_request: The query request. (required)
-        :type query_relational_dataset_request: QueryRelationalDatasetRequest
         :param as_at: The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.
         :type as_at: datetime
         :param effective_at: The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.
@@ -313,6 +311,8 @@ class RelationalDatasetsApi:
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
+        :param query_relational_dataset_request: The query request.
+        :type query_relational_dataset_request: QueryRelationalDatasetRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -342,11 +342,11 @@ class RelationalDatasetsApi:
         _all_params = [
             'relational_dataset_definition_scope',
             'relational_dataset_definition_code',
-            'query_relational_dataset_request',
             'as_at',
             'effective_at',
             'page',
-            'limit'
+            'limit',
+            'query_relational_dataset_request'
         ]
         _all_params.extend(
             [

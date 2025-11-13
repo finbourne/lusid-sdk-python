@@ -419,6 +419,7 @@ from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.data_model_summary import DataModelSummary
+from lusid.models.data_point_version import DataPointVersion
 from lusid.models.data_quality_check_result import DataQualityCheckResult
 from lusid.models.data_scope import DataScope
 from lusid.models.data_type import DataType
@@ -450,6 +451,7 @@ from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.dependency_source_filter import DependencySourceFilter
 from lusid.models.deposit_close_event import DepositCloseEvent
 from lusid.models.deposit_interest_payment_event import DepositInterestPaymentEvent
+from lusid.models.deposit_roll_event import DepositRollEvent
 from lusid.models.derivation_formula_explain_request import DerivationFormulaExplainRequest
 from lusid.models.derived_property_component import DerivedPropertyComponent
 from lusid.models.described_address_key import DescribedAddressKey
@@ -1143,6 +1145,8 @@ from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
+from lusid.models.roll_interest_updates import RollInterestUpdates
+from lusid.models.roll_principal_updates import RollPrincipalUpdates
 from lusid.models.rollover_constituent import RolloverConstituent
 from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
@@ -1838,6 +1842,7 @@ __all__ = [
     "DataMapping",
     "DataModelMembership",
     "DataModelSummary",
+    "DataPointVersion",
     "DataQualityCheckResult",
     "DataScope",
     "DataType",
@@ -1869,6 +1874,7 @@ __all__ = [
     "DependencySourceFilter",
     "DepositCloseEvent",
     "DepositInterestPaymentEvent",
+    "DepositRollEvent",
     "DerivationFormulaExplainRequest",
     "DerivedPropertyComponent",
     "DescribedAddressKey",
@@ -2562,6 +2568,8 @@ __all__ = [
     "ReturnZeroPvOptions",
     "ReturnsEntity",
     "ReverseStockSplitEvent",
+    "RollInterestUpdates",
+    "RollPrincipalUpdates",
     "RolloverConstituent",
     "RoundingConfiguration",
     "RoundingConfigurationComponent",

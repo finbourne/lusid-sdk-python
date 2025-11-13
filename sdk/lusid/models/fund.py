@@ -40,7 +40,7 @@ class Fund(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
-    investor_structure:  StrictStr = Field(...,alias="investorStructure", description="The Investor structure to be used by the Fund. Supported values are 'NonUnitised', 'Classes' and 'Custom'.") 
+    investor_structure:  StrictStr = Field(...,alias="investorStructure", description="The Investor structure to be used by the Fund. Supported values are 'NonUnitised' and 'Classes'.") 
     portfolio_ids: Optional[List[PortfolioEntityIdWithDetails]] = Field(default=None, description="A list of the portfolios on the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.", alias="portfolioIds")
     fund_configuration_id: Optional[ResourceId] = Field(default=None, alias="fundConfigurationId")
     abor_id: Optional[ResourceId] = Field(default=None, alias="aborId")

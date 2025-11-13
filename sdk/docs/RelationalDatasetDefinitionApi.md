@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
 
-Delete a relational dataset definition.
+Delete a relational dataset definition.  WARNING! This operation is irreversible. Deleting a relational dataset definition will also delete all associated data points.
 
 ### Example
 
