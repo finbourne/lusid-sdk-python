@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **identifier_scope** | **str** | The scope of the identifier used to uniquely identify the entity. | [optional] 
 **identifier_type** | **str** | The type of identifier (e.g., Figi, Isin) used to uniquely identify the entity. | [optional] 
 **identifier_value** | **str** | The value of the identifier used to uniquely identify the entity. | [optional] 
+**sub_entity_id** | **str** | An optional sub-entity identifier, if applicable. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,8 @@ entity_scope: Optional[StrictStr] = "example_entity_scope"
 identifier_scope: Optional[StrictStr] = "example_identifier_scope"
 identifier_type: Optional[StrictStr] = "example_identifier_type"
 identifier_value: Optional[StrictStr] = "example_identifier_value"
-applicable_entity_instance = ApplicableEntity(entity_type=entity_type, entity_scope=entity_scope, identifier_scope=identifier_scope, identifier_type=identifier_type, identifier_value=identifier_value)
+sub_entity_id: Optional[StrictStr] = "example_sub_entity_id"
+applicable_entity_instance = ApplicableEntity(entity_type=entity_type, entity_scope=entity_scope, identifier_scope=identifier_scope, identifier_type=identifier_type, identifier_value=identifier_value, sub_entity_id=sub_entity_id)
 
 ```
 

@@ -32,7 +32,8 @@ class ApplicableEntity(BaseModel):
     identifier_scope:  Optional[StrictStr] = Field(None,alias="identifierScope", description="The scope of the identifier used to uniquely identify the entity.") 
     identifier_type:  Optional[StrictStr] = Field(None,alias="identifierType", description="The type of identifier (e.g., Figi, Isin) used to uniquely identify the entity.") 
     identifier_value:  Optional[StrictStr] = Field(None,alias="identifierValue", description="The value of the identifier used to uniquely identify the entity.") 
-    __properties = ["entityType", "entityScope", "identifierScope", "identifierType", "identifierValue"]
+    sub_entity_id:  Optional[StrictStr] = Field(None,alias="subEntityId", description="An optional sub-entity identifier, if applicable.") 
+    __properties = ["entityType", "entityScope", "identifierScope", "identifierType", "identifierValue", "subEntityId"]
 
     class Config:
         """Pydantic configuration"""
@@ -86,6 +87,11 @@ class ApplicableEntity(BaseModel):
         if self.identifier_value is None and "identifier_value" in self.__fields_set__:
             _dict['identifierValue'] = None
 
+        # set to None if sub_entity_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sub_entity_id is None and "sub_entity_id" in self.__fields_set__:
+            _dict['subEntityId'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +108,8 @@ class ApplicableEntity(BaseModel):
             "entity_scope": obj.get("entityScope"),
             "identifier_scope": obj.get("identifierScope"),
             "identifier_type": obj.get("identifierType"),
-            "identifier_value": obj.get("identifierValue")
+            "identifier_value": obj.get("identifierValue"),
+            "sub_entity_id": obj.get("subEntityId")
         })
         return _obj
 
