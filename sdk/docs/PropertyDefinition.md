@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | [optional] 
 **custom_entity_types** | **List[str]** | The custom entity types that properties relating to this property definition can be applied to. | [optional] 
+**value_format** | **str** | The format in which values for this property definition should be represented. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -60,8 +61,9 @@ staged_modifications: Optional[StagedModificationsInfo] = # Replace with your va
 is_filterable: Optional[StrictBool] = # Replace with your value
 is_filterable:Optional[StrictBool] = None
 custom_entity_types: Optional[List[StrictStr]] = # Replace with your value
+value_format: Optional[StrictStr] = "example_value_format"
 links: Optional[List[Link]] = None
-property_definition_instance = PropertyDefinition(href=href, key=key, value_type=value_type, display_name=display_name, data_type_id=data_type_id, type=type, unit_schema=unit_schema, domain=domain, scope=scope, code=code, value_required=value_required, life_time=life_time, constraint_style=constraint_style, property_definition_type=property_definition_type, property_description=property_description, derivation_formula=derivation_formula, collection_type=collection_type, properties=properties, version=version, staged_modifications=staged_modifications, is_filterable=is_filterable, custom_entity_types=custom_entity_types, links=links)
+property_definition_instance = PropertyDefinition(href=href, key=key, value_type=value_type, display_name=display_name, data_type_id=data_type_id, type=type, unit_schema=unit_schema, domain=domain, scope=scope, code=code, value_required=value_required, life_time=life_time, constraint_style=constraint_style, property_definition_type=property_definition_type, property_description=property_description, derivation_formula=derivation_formula, collection_type=collection_type, properties=properties, version=version, staged_modifications=staged_modifications, is_filterable=is_filterable, custom_entity_types=custom_entity_types, value_format=value_format, links=links)
 
 ```
 

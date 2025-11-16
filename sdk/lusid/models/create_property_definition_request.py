@@ -39,7 +39,8 @@ class CreatePropertyDefinitionRequest(BaseModel):
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     collection_type:  Optional[StrictStr] = Field(None,alias="collectionType", description="Describes whether a collection property should behave as a set or as an array.") 
     custom_entity_types: Optional[List[StrictStr]] = Field(default=None, description="The custom entity types that properties relating to this property definition can be applied to.", alias="customEntityTypes")
-    __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription", "collectionType", "customEntityTypes"]
+    value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented.") 
+    __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription", "collectionType", "customEntityTypes", "valueFormat"]
 
     @validator('domain')
     def domain_validate_enum(cls, value):
@@ -231,6 +232,11 @@ class CreatePropertyDefinitionRequest(BaseModel):
         if self.custom_entity_types is None and "custom_entity_types" in self.__fields_set__:
             _dict['customEntityTypes'] = None
 
+        # set to None if value_format (nullable) is None
+        # and __fields_set__ contains the field
+        if self.value_format is None and "value_format" in self.__fields_set__:
+            _dict['valueFormat'] = None
+
         return _dict
 
     @classmethod
@@ -253,7 +259,8 @@ class CreatePropertyDefinitionRequest(BaseModel):
             "constraint_style": obj.get("constraintStyle"),
             "property_description": obj.get("propertyDescription"),
             "collection_type": obj.get("collectionType"),
-            "custom_entity_types": obj.get("customEntityTypes")
+            "custom_entity_types": obj.get("customEntityTypes"),
+            "value_format": obj.get("valueFormat")
         })
         return _obj
 
