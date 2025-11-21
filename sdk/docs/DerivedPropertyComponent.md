@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **component** | **str** | The component of the formula which is being evaluated. | [optional] 
+**display_name** | **str** | The display name of the component being evaluated. | [optional] 
 **type** | **str** | The type of the formula component. This can be a Literal, Variable, DerivedProperty, or PartialFormula. | [optional] 
 **value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **derivation_formula** | **str** | The derivation formula of the component. This field will only be populated if the component is a derived property. | [optional] 
@@ -19,12 +20,13 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 component: Optional[StrictStr] = "example_component"
+display_name: Optional[StrictStr] = "example_display_name"
 type: Optional[StrictStr] = "example_type"
 value: Optional[PropertyValue] = None
 derivation_formula: Optional[StrictStr] = "example_derivation_formula"
 sub_components: Optional[List[DerivedPropertyComponent]] = # Replace with your value
 links: Optional[List[Link]] = None
-derived_property_component_instance = DerivedPropertyComponent(component=component, type=type, value=value, derivation_formula=derivation_formula, sub_components=sub_components, links=links)
+derived_property_component_instance = DerivedPropertyComponent(component=component, display_name=display_name, type=type, value=value, derivation_formula=derivation_formula, sub_components=sub_components, links=links)
 
 ```
 

@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**delete_bookmark**](FundsApi.md#delete_bookmark) | **DELETE** /api/funds/{scope}/{code}/bookmarks/{bookmarkCode} | [EXPERIMENTAL] DeleteBookmark: Delete a Bookmark.
 [**delete_fee**](FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] DeleteFee: Delete a Fee.
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
+[**delete_nav_activity_adjustments**](FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
 [**delete_valuation_point**](FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
 [**finalise_candidate_valuation_point**](FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
 [**get_fee**](FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
@@ -27,6 +28,7 @@ Method | HTTP request | Description
 [**list_fees**](FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
 [**list_fund_calendar**](FundsApi.md#list_fund_calendar) | **GET** /api/funds/{scope}/{code}/calendar | [EXPERIMENTAL] ListFundCalendar: List Fund Calendar.
 [**list_funds**](FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
+[**list_nav_activity_adjustments**](FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
 [**list_valuation_point_overview**](FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 [**patch_fee**](FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] PatchFee: Patch Fee.
 [**patch_fund**](FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EXPERIMENTAL] PatchFund: Patch a Fund.
@@ -35,6 +37,7 @@ Method | HTTP request | Description
 [**upsert_diary_entry_type_valuation_point**](FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
 [**upsert_fee_properties**](FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
 [**upsert_fund_properties**](FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
+[**upsert_nav_activity_adjustments**](FundsApi.md#upsert_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
 
 
 # **accept_estimate_valuation_point**
@@ -724,6 +727,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the Fund was deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_nav_activity_adjustments**
+> DeletedEntityResponse delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+
+[EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
+
+Delete Nav activity adjustments on a Valuation Point.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope is the unique identifier for the given Fund.
+    valuation_point_code = 'valuation_point_code_example' # str | The valuation point Code to delete the adjustment from
+    nav_type_code = 'nav_type_code_example' # str | The Nav Type Code to delete the adjustment from
+    nav_activity_adjustment = [{"asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransaction"}] # List[NavActivityAdjustment] | The request describing the Nav activity adjustments to delete from a specific valuation point and nav type
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, opts=opts)
+
+        # [EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
+        api_response = api_instance.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->delete_nav_activity_adjustments: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | 
+ **valuation_point_code** | **str**| The valuation point Code to delete the adjustment from | 
+ **nav_type_code** | **str**| The Nav Type Code to delete the adjustment from | 
+ **nav_activity_adjustment** | [**List[NavActivityAdjustment]**](NavActivityAdjustment.md)| The request describing the Nav activity adjustments to delete from a specific valuation point and nav type | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the Nav activity adjustments were deleted |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2433,6 +2536,110 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_nav_activity_adjustments**
+> ResourceListOfNavActivityAdjustment list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit)
+
+[EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+
+Lists the NAV adjustment activities applied to the specified valuation point for a Fund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope is the unique identifier for the given Fund.
+    valuation_point_code = 'valuation_point_code_example' # str | Fetch all NAV adjustment activities for this valuation point.
+    nav_type_code = 'nav_type_code_example' # str | Fetch all NAV adjustment activities for this Nav type.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, opts=opts)
+
+        # [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+        api_response = api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->list_nav_activity_adjustments: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | 
+ **valuation_point_code** | **str**| Fetch all NAV adjustment activities for this valuation point. | 
+ **nav_type_code** | **str**| Fetch all NAV adjustment activities for this Nav type. | 
+ **as_at** | **datetime**| The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+
+### Return type
+
+[**ResourceListOfNavActivityAdjustment**](ResourceListOfNavActivityAdjustment.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested NAV activity adjustments for the specific valuation point and Nav type for the Fund. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_valuation_point_overview**
 > PagedResourceListOfValuationPointOverview list_valuation_point_overview(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
 
@@ -3231,6 +3438,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated or inserted properties |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_nav_activity_adjustments**
+> datetime upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+
+[EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
+
+Upserts the NAV adjustment activities to the specified valuation point for a Fund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope is the unique identifier for the given Fund.
+    valuation_point_code = 'valuation_point_code_example' # str | The valuation point Code to apply the adjustment to
+    nav_type_code = 'nav_type_code_example' # str | The Nav Type Code to apply the adjustment to
+    nav_activity_adjustment = [{"asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransaction"}] # List[NavActivityAdjustment] | The request describing the Nav activity adjustments to apply to a specific valuation point and nav type
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, opts=opts)
+
+        # [EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
+        api_response = api_instance.upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->upsert_nav_activity_adjustments: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope is the unique identifier for the given Fund. | 
+ **valuation_point_code** | **str**| The valuation point Code to apply the adjustment to | 
+ **nav_type_code** | **str**| The Nav Type Code to apply the adjustment to | 
+ **nav_activity_adjustment** | [**List[NavActivityAdjustment]**](NavActivityAdjustment.md)| The request describing the Nav activity adjustments to apply to a specific valuation point and nav type | 
+
+### Return type
+
+**datetime**
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The date and time of the successfully applied Nav Activity Adjustments. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

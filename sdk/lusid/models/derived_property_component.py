@@ -30,12 +30,13 @@ class DerivedPropertyComponent(BaseModel):
     DerivedPropertyComponent
     """
     component:  Optional[StrictStr] = Field(None,alias="component", description="The component of the formula which is being evaluated.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the component being evaluated.") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the formula component. This can be a Literal, Variable, DerivedProperty, or PartialFormula.") 
     value: Optional[PropertyValue] = None
     derivation_formula:  Optional[StrictStr] = Field(None,alias="derivationFormula", description="The derivation formula of the component. This field will only be populated if the component is a derived property.") 
     sub_components: Optional[List[DerivedPropertyComponent]] = Field(default=None, description="Any sub-components of this formula. If this formula cannot be further decomposed, this collection will be null.", alias="subComponents")
     links: Optional[List[Link]] = None
-    __properties = ["component", "type", "value", "derivationFormula", "subComponents", "links"]
+    __properties = ["component", "displayName", "type", "value", "derivationFormula", "subComponents", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +92,11 @@ class DerivedPropertyComponent(BaseModel):
         if self.component is None and "component" in self.__fields_set__:
             _dict['component'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
         # set to None if type (nullable) is None
         # and __fields_set__ contains the field
         if self.type is None and "type" in self.__fields_set__:
@@ -124,6 +130,7 @@ class DerivedPropertyComponent(BaseModel):
 
         _obj = DerivedPropertyComponent.parse_obj({
             "component": obj.get("component"),
+            "display_name": obj.get("displayName"),
             "type": obj.get("type"),
             "value": PropertyValue.from_dict(obj.get("value")) if obj.get("value") is not None else None,
             "derivation_formula": obj.get("derivationFormula"),

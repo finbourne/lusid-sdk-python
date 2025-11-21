@@ -31,7 +31,8 @@ class MembershipAndStatus(BaseModel):
     scope:  StrictStr = Field(...,alias="scope", description="The scope of the unique identifier associated with the Custom Data Model.") 
     code:  StrictStr = Field(...,alias="code", description="The code of the unique identifier associated with the Custom Data Model.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
-    __properties = ["status", "scope", "code", "displayName"]
+    validation_failures: List[StrictStr] = Field(description="A list of validation failures returned when the entity's status with respect to the current model is 'Invalid' or 'Inadmissible'", alias="validationFailures")
+    __properties = ["status", "scope", "code", "displayName", "validationFailures"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,7 +81,8 @@ class MembershipAndStatus(BaseModel):
             "status": obj.get("status"),
             "scope": obj.get("scope"),
             "code": obj.get("code"),
-            "display_name": obj.get("displayName")
+            "display_name": obj.get("displayName"),
+            "validation_failures": obj.get("validationFailures")
         })
         return _obj
 

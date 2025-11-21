@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **scope** | **str** | The scope of the unique identifier associated with the Custom Data Model. | 
 **code** | **str** | The code of the unique identifier associated with the Custom Data Model. | 
 **display_name** | **str** | The name of the Custom Data Model. | 
+**validation_failures** | **List[str]** | A list of validation failures returned when the entity&#39;s status with respect to the current model is &#39;Invalid&#39; or &#39;Inadmissible&#39; | 
 ## Example
 
 ```python
@@ -20,7 +21,8 @@ status: StrictStr = "example_status"
 scope: StrictStr = "example_scope"
 code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
-membership_and_status_instance = MembershipAndStatus(status=status, scope=scope, code=code, display_name=display_name)
+validation_failures: List[StrictStr] = # Replace with your value
+membership_and_status_instance = MembershipAndStatus(status=status, scope=scope, code=code, display_name=display_name, validation_failures=validation_failures)
 
 ```
 

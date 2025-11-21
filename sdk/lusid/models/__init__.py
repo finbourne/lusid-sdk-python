@@ -680,6 +680,8 @@ from lusid.models.moved_order_to_different_block_response import MovedOrderToDif
 from lusid.models.movement_settlement_summary import MovementSettlementSummary
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
+from lusid.models.nav_activity_adjustment import NavActivityAdjustment
+from lusid.models.nav_activity_adjustment_type import NavActivityAdjustmentType
 from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
@@ -852,6 +854,7 @@ from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
 from lusid.models.portfolio_search_result import PortfolioSearchResult
 from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
+from lusid.models.portfolio_transaction import PortfolioTransaction
 from lusid.models.portfolio_type import PortfolioType
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
@@ -1004,6 +1007,7 @@ from lusid.models.resource_list_of_legal_entity import ResourceListOfLegalEntity
 from lusid.models.resource_list_of_list_complex_market_data_with_meta_data_response import ResourceListOfListComplexMarketDataWithMetaDataResponse
 from lusid.models.resource_list_of_mapping import ResourceListOfMapping
 from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
+from lusid.models.resource_list_of_nav_activity_adjustment import ResourceListOfNavActivityAdjustment
 from lusid.models.resource_list_of_order import ResourceListOfOrder
 from lusid.models.resource_list_of_order_instruction import ResourceListOfOrderInstruction
 from lusid.models.resource_list_of_output_transaction import ResourceListOfOutputTransaction
@@ -2012,6 +2016,8 @@ __all__ = [
     "MovementSettlementSummary",
     "MovementType",
     "MultiCurrencyAmounts",
+    "NavActivityAdjustment",
+    "NavActivityAdjustmentType",
     "NavTypeDefinition",
     "NewInstrument",
     "NextValueInSequenceResponse",
@@ -2184,6 +2190,7 @@ __all__ = [
     "PortfolioSearchResult",
     "PortfolioSettlementConfiguration",
     "PortfolioTradeTicket",
+    "PortfolioTransaction",
     "PortfolioType",
     "PortfolioWithoutHref",
     "PortfoliosReconciliationRequest",
@@ -2336,6 +2343,7 @@ __all__ = [
     "ResourceListOfListComplexMarketDataWithMetaDataResponse",
     "ResourceListOfMapping",
     "ResourceListOfMovedOrderToDifferentBlockResponse",
+    "ResourceListOfNavActivityAdjustment",
     "ResourceListOfOrder",
     "ResourceListOfOrderInstruction",
     "ResourceListOfOutputTransaction",
