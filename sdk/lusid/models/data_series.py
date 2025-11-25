@@ -24,9 +24,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.applicable_entity import ApplicableEntity
 
-class UpsertRelationalDataPointDataSeries(BaseModel):
+class DataSeries(BaseModel):
     """
-    UpsertRelationalDataPointDataSeries
+    DataSeries
     """
     series_scope:  StrictStr = Field(...,alias="seriesScope", description="The scope of the DataSeries.") 
     applicable_entity: ApplicableEntity = Field(alias="applicableEntity")
@@ -55,8 +55,8 @@ class UpsertRelationalDataPointDataSeries(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertRelationalDataPointDataSeries:
-        """Create an instance of UpsertRelationalDataPointDataSeries from a JSON string"""
+    def from_json(cls, json_str: str) -> DataSeries:
+        """Create an instance of DataSeries from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -76,19 +76,19 @@ class UpsertRelationalDataPointDataSeries(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertRelationalDataPointDataSeries:
-        """Create an instance of UpsertRelationalDataPointDataSeries from a dict"""
+    def from_dict(cls, obj: dict) -> DataSeries:
+        """Create an instance of DataSeries from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertRelationalDataPointDataSeries.parse_obj(obj)
+            return DataSeries.parse_obj(obj)
 
-        _obj = UpsertRelationalDataPointDataSeries.parse_obj({
+        _obj = DataSeries.parse_obj({
             "series_scope": obj.get("seriesScope"),
             "applicable_entity": ApplicableEntity.from_dict(obj.get("applicableEntity")) if obj.get("applicableEntity") is not None else None,
             "series_identifiers": obj.get("seriesIdentifiers")
         })
         return _obj
 
-UpsertRelationalDataPointDataSeries.update_forward_refs()
+DataSeries.update_forward_refs()

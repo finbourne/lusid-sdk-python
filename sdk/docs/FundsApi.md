@@ -2537,7 +2537,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_nav_activity_adjustments**
-> ResourceListOfNavActivityAdjustment list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit)
+> ResourceListOfNavActivityAdjustment list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter)
 
 [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
 
@@ -2595,13 +2595,14 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, opts=opts)
+        # api_response =  api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
 
         # [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
-        api_response = api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit)
+        api_response = api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -2621,6 +2622,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 

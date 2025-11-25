@@ -422,6 +422,7 @@ from lusid.models.data_model_summary import DataModelSummary
 from lusid.models.data_point_version import DataPointVersion
 from lusid.models.data_quality_check_result import DataQualityCheckResult
 from lusid.models.data_scope import DataScope
+from lusid.models.data_series import DataSeries
 from lusid.models.data_type import DataType
 from lusid.models.data_type_entity import DataTypeEntity
 from lusid.models.data_type_summary import DataTypeSummary
@@ -1384,7 +1385,6 @@ from lusid.models.upsert_reference_portfolio_constituent_properties_request impo
 from lusid.models.upsert_reference_portfolio_constituent_properties_response import UpsertReferencePortfolioConstituentPropertiesResponse
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
-from lusid.models.upsert_relational_data_point_data_series import UpsertRelationalDataPointDataSeries
 from lusid.models.upsert_relational_data_point_request import UpsertRelationalDataPointRequest
 from lusid.models.upsert_result_values_data_request import UpsertResultValuesDataRequest
 from lusid.models.upsert_returns_response import UpsertReturnsResponse
@@ -1849,6 +1849,7 @@ __all__ = [
     "DataPointVersion",
     "DataQualityCheckResult",
     "DataScope",
+    "DataSeries",
     "DataType",
     "DataTypeEntity",
     "DataTypeSummary",
@@ -2811,7 +2812,6 @@ __all__ = [
     "UpsertReferencePortfolioConstituentPropertiesResponse",
     "UpsertReferencePortfolioConstituentsRequest",
     "UpsertReferencePortfolioConstituentsResponse",
-    "UpsertRelationalDataPointDataSeries",
     "UpsertRelationalDataPointRequest",
     "UpsertResultValuesDataRequest",
     "UpsertReturnsResponse",

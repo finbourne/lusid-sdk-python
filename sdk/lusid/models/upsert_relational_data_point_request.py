@@ -22,17 +22,17 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.upsert_relational_data_point_data_series import UpsertRelationalDataPointDataSeries
+from lusid.models.data_series import DataSeries
 
 class UpsertRelationalDataPointRequest(BaseModel):
     """
     UpsertRelationalDataPointRequest
     """
-    data_point_data_series: UpsertRelationalDataPointDataSeries = Field(alias="dataPointDataSeries")
+    data_series: DataSeries = Field(alias="dataSeries")
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effectiveAt or cut-label datetime of the DataPoint.") 
     value_fields: Dict[str, Any] = Field(description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="valueFields")
     meta_data_fields: Optional[Dict[str, Any]] = Field(default=None, description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="metaDataFields")
-    __properties = ["dataPointDataSeries", "effectiveAt", "valueFields", "metaDataFields"]
+    __properties = ["dataSeries", "effectiveAt", "valueFields", "metaDataFields"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,9 +66,9 @@ class UpsertRelationalDataPointRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of data_point_data_series
-        if self.data_point_data_series:
-            _dict['dataPointDataSeries'] = self.data_point_data_series.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of data_series
+        if self.data_series:
+            _dict['dataSeries'] = self.data_series.to_dict()
         # set to None if meta_data_fields (nullable) is None
         # and __fields_set__ contains the field
         if self.meta_data_fields is None and "meta_data_fields" in self.__fields_set__:
@@ -86,7 +86,7 @@ class UpsertRelationalDataPointRequest(BaseModel):
             return UpsertRelationalDataPointRequest.parse_obj(obj)
 
         _obj = UpsertRelationalDataPointRequest.parse_obj({
-            "data_point_data_series": UpsertRelationalDataPointDataSeries.from_dict(obj.get("dataPointDataSeries")) if obj.get("dataPointDataSeries") is not None else None,
+            "data_series": DataSeries.from_dict(obj.get("dataSeries")) if obj.get("dataSeries") is not None else None,
             "effective_at": obj.get("effectiveAt"),
             "value_fields": obj.get("valueFields"),
             "meta_data_fields": obj.get("metaDataFields")

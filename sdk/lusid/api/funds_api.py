@@ -4786,22 +4786,22 @@ class FundsApi:
 
 
     @overload
-    async def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ResourceListOfNavActivityAdjustment:  # noqa: E501
+    async def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfNavActivityAdjustment:  # noqa: E501
         ...
 
     @overload
-    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfNavActivityAdjustment:  # noqa: E501
+    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfNavActivityAdjustment:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfNavActivityAdjustment, Awaitable[ResourceListOfNavActivityAdjustment]]:  # noqa: E501
+    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfNavActivityAdjustment, Awaitable[ResourceListOfNavActivityAdjustment]]:  # noqa: E501
         """[EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
 
         Lists the NAV adjustment activities applied to the specified valuation point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at, page, limit, async_req=True)
+        >>> thread = api.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at, page, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -4818,6 +4818,8 @@ class FundsApi:
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -4834,17 +4836,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_type_code, as_at, page, limit, **kwargs)  # noqa: E501
+        return self.list_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_type_code, as_at, page, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this Nav type.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
 
         Lists the NAV adjustment activities applied to the specified valuation point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_type_code, as_at, page, limit, async_req=True)
+        >>> thread = api.list_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_type_code, as_at, page, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -4861,6 +4863,8 @@ class FundsApi:
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -4894,7 +4898,8 @@ class FundsApi:
             'nav_type_code',
             'as_at',
             'page',
-            'limit'
+            'limit',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -4949,6 +4954,9 @@ class FundsApi:
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

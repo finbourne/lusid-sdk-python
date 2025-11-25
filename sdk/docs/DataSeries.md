@@ -1,4 +1,4 @@
-# UpsertRelationalDataPointDataSeries
+# DataSeries
 
 ## Properties
 Name | Type | Description | Notes
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.upsert_relational_data_point_data_series import UpsertRelationalDataPointDataSeries
+from lusid.models.data_series import DataSeries
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
@@ -18,7 +18,7 @@ from datetime import datetime
 series_scope: StrictStr = "example_series_scope"
 applicable_entity: ApplicableEntity = # Replace with your value
 series_identifiers: Optional[Dict[str, Any]] = # Replace with your value
-upsert_relational_data_point_data_series_instance = UpsertRelationalDataPointDataSeries(series_scope=series_scope, applicable_entity=applicable_entity, series_identifiers=series_identifiers)
+data_series_instance = DataSeries(series_scope=series_scope, applicable_entity=applicable_entity, series_identifiers=series_identifiers)
 
 ```
 
