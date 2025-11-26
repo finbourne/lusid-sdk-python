@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **identifier_types** | [**List[CustomDataModelIdentifierTypeSpecificationWithDisplayName]**](CustomDataModelIdentifierTypeSpecificationWithDisplayName.md) | The identifier types that are required or allowed on the bound entity. | [optional] 
 **attribute_aliases** | [**List[Alias]**](Alias.md) | The aliases for property keys, identifier types, and fields on the bound entity. | [optional] 
 **recommended_sort_by** | [**List[RecommendedSortBy]**](RecommendedSortBy.md) | The preferred default sorting instructions. | [optional] 
+**supplemental_property_keys** | **List[str]** | Additional property keys that should be decorated on the bound entity. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,8 @@ properties: Optional[List[CustomDataModelPropertySpecificationWithDisplayName]] 
 identifier_types: Optional[List[CustomDataModelIdentifierTypeSpecificationWithDisplayName]] = # Replace with your value
 attribute_aliases: Optional[List[Alias]] = # Replace with your value
 recommended_sort_by: Optional[List[RecommendedSortBy]] = # Replace with your value
-custom_data_model_criteria_instance = CustomDataModelCriteria(conditions=conditions, properties=properties, identifier_types=identifier_types, attribute_aliases=attribute_aliases, recommended_sort_by=recommended_sort_by)
+supplemental_property_keys: Optional[List[StrictStr]] = # Replace with your value
+custom_data_model_criteria_instance = CustomDataModelCriteria(conditions=conditions, properties=properties, identifier_types=identifier_types, attribute_aliases=attribute_aliases, recommended_sort_by=recommended_sort_by, supplemental_property_keys=supplemental_property_keys)
 
 ```
 

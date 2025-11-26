@@ -404,7 +404,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_corporate_action_source(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source to be deleted")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[BETA] DeleteCorporateActionSource: Delete a corporate action source  # noqa: E501
+        """[EARLY ACCESS] DeleteCorporateActionSource: Delete a corporate action source  # noqa: E501
 
         Deletes a single corporate action source  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -437,7 +437,7 @@ class CorporateActionSourcesApi:
 
     @validate_arguments
     def delete_corporate_action_source_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source to be deleted")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[BETA] DeleteCorporateActionSource: Delete a corporate action source  # noqa: E501
+        """[EARLY ACCESS] DeleteCorporateActionSource: Delete a corporate action source  # noqa: E501
 
         Deletes a single corporate action source  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

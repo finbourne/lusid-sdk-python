@@ -35,7 +35,8 @@ class CreateClosedPeriodRequest(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Closed Period.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Closed Period.") 
     holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="holdingsAsAtClosedOverride")
-    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description", "holdingsAsAtClosedOverride"]
+    valuation_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for performing valuations in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="valuationAsAtClosedOverride")
+    __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description", "holdingsAsAtClosedOverride", "valuationAsAtClosedOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -101,6 +102,11 @@ class CreateClosedPeriodRequest(BaseModel):
         if self.holdings_as_at_closed_override is None and "holdings_as_at_closed_override" in self.__fields_set__:
             _dict['holdingsAsAtClosedOverride'] = None
 
+        # set to None if valuation_as_at_closed_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.valuation_as_at_closed_override is None and "valuation_as_at_closed_override" in self.__fields_set__:
+            _dict['valuationAsAtClosedOverride'] = None
+
         return _dict
 
     @classmethod
@@ -124,7 +130,8 @@ class CreateClosedPeriodRequest(BaseModel):
             "as_at_closed": obj.get("asAtClosed"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "holdings_as_at_closed_override": obj.get("holdingsAsAtClosedOverride")
+            "holdings_as_at_closed_override": obj.get("holdingsAsAtClosedOverride"),
+            "valuation_as_at_closed_override": obj.get("valuationAsAtClosedOverride")
         })
         return _obj
 

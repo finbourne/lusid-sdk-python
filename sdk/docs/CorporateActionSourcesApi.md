@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_upsert_corporate_actions**](CorporateActionSourcesApi.md#batch_upsert_corporate_actions) | **POST** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] BatchUpsertCorporateActions: Batch upsert corporate actions (instrument transition events) to corporate action source.
 [**create_corporate_action_source**](CorporateActionSourcesApi.md#create_corporate_action_source) | **POST** /api/corporateactionsources | [EARLY ACCESS] CreateCorporateActionSource: Create corporate action source
-[**delete_corporate_action_source**](CorporateActionSourcesApi.md#delete_corporate_action_source) | **DELETE** /api/corporateactionsources/{scope}/{code} | [BETA] DeleteCorporateActionSource: Delete a corporate action source
+[**delete_corporate_action_source**](CorporateActionSourcesApi.md#delete_corporate_action_source) | **DELETE** /api/corporateactionsources/{scope}/{code} | [EARLY ACCESS] DeleteCorporateActionSource: Delete a corporate action source
 [**delete_corporate_actions**](CorporateActionSourcesApi.md#delete_corporate_actions) | **DELETE** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions (instrument transition events) from a corporate action source
 [**delete_instrument_events**](CorporateActionSourcesApi.md#delete_instrument_events) | **DELETE** /api/corporateactionsources/{scope}/{code}/instrumentevents | [EARLY ACCESS] DeleteInstrumentEvents: Delete instrument events from a corporate action source
 [**get_corporate_actions**](CorporateActionSourcesApi.md#get_corporate_actions) | **GET** /api/corporateactionsources/{scope}/{code}/corporateactions | [EARLY ACCESS] GetCorporateActions: List corporate actions (instrument transition events) from the corporate action source.
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 # **delete_corporate_action_source**
 > DeletedEntityResponse delete_corporate_action_source(scope, code)
 
-[BETA] DeleteCorporateActionSource: Delete a corporate action source
+[EARLY ACCESS] DeleteCorporateActionSource: Delete a corporate action source
 
 Deletes a single corporate action source
 
@@ -267,7 +267,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_corporate_action_source(scope, code, opts=opts)
 
-        # [BETA] DeleteCorporateActionSource: Delete a corporate action source
+        # [EARLY ACCESS] DeleteCorporateActionSource: Delete a corporate action source
         api_response = api_instance.delete_corporate_action_source(scope, code)
         pprint(api_response)
 

@@ -32,7 +32,8 @@ class Collateral(BaseModel):
     buyer_receives_corporate_action_payments: StrictBool = Field(description="Does the buyer of the FlexibleRepo receive any dividend or cash payments as the result of a corporate action  on any of the collateral instruments, or are these amounts paid to the seller.  Referred to as \"manufactured payments\" in the UK, and valid only under a repo with GMRA in Europe", alias="buyerReceivesCorporateActionPayments")
     collateral_instruments: Optional[List[CollateralInstrument]] = Field(default=None, description="List of any collateral instruments.", alias="collateralInstruments")
     collateral_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total value of the collateral before any margin or haircut applied.  Can be provided instead of PurchasePrice, so that PurchasePrice can be inferred from the CollateralValue and one of  Haircut or Margin.", alias="collateralValue")
-    __properties = ["buyerReceivesCashflows", "buyerReceivesCorporateActionPayments", "collateralInstruments", "collateralValue"]
+    defer_manufactured_payments: Optional[StrictBool] = Field(default=None, description="Indicates whether manufactured collateral payments are capitalised (i.e. deferred). Capitalised payments will  be deferred to the maturity date of the repo and if applicable interest will be accrued at the repo rate.  Defaults to false.", alias="deferManufacturedPayments")
+    __properties = ["buyerReceivesCashflows", "buyerReceivesCorporateActionPayments", "collateralInstruments", "collateralValue", "deferManufacturedPayments"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,7 +99,8 @@ class Collateral(BaseModel):
             "buyer_receives_cashflows": obj.get("buyerReceivesCashflows"),
             "buyer_receives_corporate_action_payments": obj.get("buyerReceivesCorporateActionPayments"),
             "collateral_instruments": [CollateralInstrument.from_dict(_item) for _item in obj.get("collateralInstruments")] if obj.get("collateralInstruments") is not None else None,
-            "collateral_value": obj.get("collateralValue")
+            "collateral_value": obj.get("collateralValue"),
+            "defer_manufactured_payments": obj.get("deferManufacturedPayments")
         })
         return _obj
 

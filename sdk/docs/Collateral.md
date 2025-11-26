@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **buyer_receives_corporate_action_payments** | **bool** | Does the buyer of the FlexibleRepo receive any dividend or cash payments as the result of a corporate action  on any of the collateral instruments, or are these amounts paid to the seller.  Referred to as \&quot;manufactured payments\&quot; in the UK, and valid only under a repo with GMRA in Europe | 
 **collateral_instruments** | [**List[CollateralInstrument]**](CollateralInstrument.md) | List of any collateral instruments. | [optional] 
 **collateral_value** | **float** | Total value of the collateral before any margin or haircut applied.  Can be provided instead of PurchasePrice, so that PurchasePrice can be inferred from the CollateralValue and one of  Haircut or Margin. | [optional] 
+**defer_manufactured_payments** | **bool** | Indicates whether manufactured collateral payments are capitalised (i.e. deferred). Capitalised payments will  be deferred to the maturity date of the repo and if applicable interest will be accrued at the repo rate.  Defaults to false. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,9 @@ buyer_receives_corporate_action_payments: StrictBool = # Replace with your value
 buyer_receives_corporate_action_payments:StrictBool = True
 collateral_instruments: Optional[List[CollateralInstrument]] = # Replace with your value
 collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-collateral_instance = Collateral(buyer_receives_cashflows=buyer_receives_cashflows, buyer_receives_corporate_action_payments=buyer_receives_corporate_action_payments, collateral_instruments=collateral_instruments, collateral_value=collateral_value)
+defer_manufactured_payments: Optional[StrictBool] = # Replace with your value
+defer_manufactured_payments:Optional[StrictBool] = None
+collateral_instance = Collateral(buyer_receives_cashflows=buyer_receives_cashflows, buyer_receives_corporate_action_payments=buyer_receives_corporate_action_payments, collateral_instruments=collateral_instruments, collateral_value=collateral_value, defer_manufactured_payments=defer_manufactured_payments)
 
 ```
 
