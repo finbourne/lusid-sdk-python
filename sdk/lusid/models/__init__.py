@@ -1221,6 +1221,7 @@ from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
 from lusid.models.update_check_definition_request import UpdateCheckDefinitionRequest
+from lusid.models.update_check_definition_rule_set import UpdateCheckDefinitionRuleSet
 from lusid.models.update_compliance_template_request import UpdateComplianceTemplateRequest
 from lusid.models.update_custom_data_model_request import UpdateCustomDataModelRequest
 from lusid.models.update_custom_entity_definition_request import UpdateCustomEntityDefinitionRequest
@@ -2557,6 +2558,7 @@ __all__ = [
     "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
     "UpdateCheckDefinitionRequest",
+    "UpdateCheckDefinitionRuleSet",
     "UpdateComplianceTemplateRequest",
     "UpdateCustomDataModelRequest",
     "UpdateCustomEntityDefinitionRequest",

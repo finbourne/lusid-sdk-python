@@ -23,9 +23,9 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.check_definition_dataset_schema import CheckDefinitionDatasetSchema
-from lusid.models.check_definition_rule_set import CheckDefinitionRuleSet
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.update_check_definition_rule_set import UpdateCheckDefinitionRuleSet
 
 class CreateCheckDefinitionRequest(BaseModel):
     """
@@ -35,7 +35,7 @@ class CreateCheckDefinitionRequest(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Check Definition.") 
     description:  StrictStr = Field(...,alias="description", description="A description for the Check Definition.") 
     dataset_schema: Optional[CheckDefinitionDatasetSchema] = Field(default=None, alias="datasetSchema")
-    rule_sets: List[CheckDefinitionRuleSet] = Field(description="A collection of rule sets for the Check Definition.", alias="ruleSets")
+    rule_sets: List[UpdateCheckDefinitionRuleSet] = Field(description="A collection of rule sets for the Check Definition.", alias="ruleSets")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Check Definition.")
     __properties = ["id", "displayName", "description", "datasetSchema", "ruleSets", "properties"]
 
@@ -112,7 +112,7 @@ class CreateCheckDefinitionRequest(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "dataset_schema": CheckDefinitionDatasetSchema.from_dict(obj.get("datasetSchema")) if obj.get("datasetSchema") is not None else None,
-            "rule_sets": [CheckDefinitionRuleSet.from_dict(_item) for _item in obj.get("ruleSets")] if obj.get("ruleSets") is not None else None,
+            "rule_sets": [UpdateCheckDefinitionRuleSet.from_dict(_item) for _item in obj.get("ruleSets")] if obj.get("ruleSets") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()
