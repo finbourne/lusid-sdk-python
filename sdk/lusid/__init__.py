@@ -186,6 +186,7 @@ from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
+from lusid.models.batch_delete_relational_data_response import BatchDeleteRelationalDataResponse
 from lusid.models.batch_update_user_review_for_comparison_result_request import BatchUpdateUserReviewForComparisonResultRequest
 from lusid.models.batch_update_user_review_for_comparison_result_response import BatchUpdateUserReviewForComparisonResultResponse
 from lusid.models.batch_upsert_dates_for_calendar_response import BatchUpsertDatesForCalendarResponse
@@ -447,6 +448,7 @@ from lusid.models.delete_instrument_response import DeleteInstrumentResponse
 from lusid.models.delete_instruments_response import DeleteInstrumentsResponse
 from lusid.models.delete_modes import DeleteModes
 from lusid.models.delete_relation_request import DeleteRelationRequest
+from lusid.models.delete_relational_data_point_request import DeleteRelationalDataPointRequest
 from lusid.models.delete_relationship_request import DeleteRelationshipRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.dependency_source_filter import DependencySourceFilter
@@ -1614,6 +1616,7 @@ __all__ = [
     "BasketIdentifier",
     "BatchAdjustHoldingsResponse",
     "BatchAmendCustomDataModelMembershipResponse",
+    "BatchDeleteRelationalDataResponse",
     "BatchUpdateUserReviewForComparisonResultRequest",
     "BatchUpdateUserReviewForComparisonResultResponse",
     "BatchUpsertDatesForCalendarResponse",
@@ -1875,6 +1878,7 @@ __all__ = [
     "DeleteInstrumentsResponse",
     "DeleteModes",
     "DeleteRelationRequest",
+    "DeleteRelationalDataPointRequest",
     "DeleteRelationshipRequest",
     "DeletedEntityResponse",
     "DependencySourceFilter",

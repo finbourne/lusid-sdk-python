@@ -4,9 +4,108 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batch_delete_relational_data**](RelationalDatasetsApi.md#batch_delete_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchDelete | [EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
 [**batch_upsert_relational_data**](RelationalDatasetsApi.md#batch_upsert_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchUpsert | [EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
 [**query_relational_data**](RelationalDatasetsApi.md#query_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$query | [EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
 
+
+# **batch_delete_relational_data**
+> BatchDeleteRelationalDataResponse batch_delete_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
+
+[EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
+
+Batch Delete Relational Data Points for a given Relational Dataset Definition.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RelationalDatasetsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RelationalDatasetsApi)
+    relational_dataset_definition_scope = 'relational_dataset_definition_scope_example' # str | The Scope of the relational dataset definition.
+    relational_dataset_definition_code = 'relational_dataset_definition_code_example' # str | The Code of the relational dataset definition.
+    request_body = {"point1":{"dataSeries":{"seriesScope":"SeriesScope","applicableEntity":{"entityType":"Instrument","entityScope":"InstrumentScope","identifierScope":"default","identifierType":"default","identifierValue":"IdentifierValue"},"seriesIdentifiers":{"instrumentId":"SomeValue"}},"effectiveAt":"2019-01-01T12:00:00.0000000+00:00"},"point2":{"dataSeries":{"seriesScope":"SeriesScope","applicableEntity":{"entityType":"Instrument"},"seriesIdentifiers":{}},"effectiveAt":"2019-01-02T12:00:00.0000000+00:00"}} # Dict[str, DeleteRelationalDataPointRequest] | The Delete Request.
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code. (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_delete_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode, opts=opts)
+
+        # [EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
+        api_response = api_instance.batch_delete_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RelationalDatasetsApi->batch_delete_relational_data: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **relational_dataset_definition_scope** | **str**| The Scope of the relational dataset definition. | 
+ **relational_dataset_definition_code** | **str**| The Code of the relational dataset definition. | 
+ **request_body** | [**Dict[str, DeleteRelationalDataPointRequest]**](DeleteRelationalDataPointRequest.md)| The Delete Request. | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code. | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchDeleteRelationalDataResponse**](BatchDeleteRelationalDataResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The deleted DataPoint metadata. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **batch_upsert_relational_data**
 > BatchUpsertRelationalDatasetsResponse batch_upsert_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
