@@ -1103,7 +1103,7 @@ class CheckDefinitionsApi:
         }
 
         return self.api_client.call_api(
-            '/api/dataquality/checkdefinitions/{scope}/{code}/$run', 'PUT',
+            '/api/dataquality/checkdefinitions/{scope}/{code}/$run', 'POST',
             _path_params,
             _query_params,
             _header_params,
