@@ -72,6 +72,7 @@ from lusid.models.versioned_resource_list_of_holding_contributor import Versione
 from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
+from lusid.models.versioned_resource_list_of_transaction_settlement_instruction import VersionedResourceListOfTransactionSettlementInstruction
 from lusid.models.versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query import VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
 
@@ -7130,22 +7131,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, **kwargs) -> ResourceListOfTransactionSettlementInstruction:  # noqa: E501
+    async def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, **kwargs) -> VersionedResourceListOfTransactionSettlementInstruction:  # noqa: E501
         ...
 
     @overload
-    def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionSettlementInstruction:  # noqa: E501
+    def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListOfTransactionSettlementInstruction:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionSettlementInstruction, Awaitable[ResourceListOfTransactionSettlementInstruction]]:  # noqa: E501
+    def list_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfTransactionSettlementInstruction, Awaitable[VersionedResourceListOfTransactionSettlementInstruction]]:  # noqa: E501
         """[EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.  # noqa: E501
 
         Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_settlement_instructions(scope, code, from_date, to_date, page, limit, filter, as_at, async_req=True)
+        >>> thread = api.list_settlement_instructions(scope, code, from_date, to_date, page, limit, filter, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio to retrieve settlement instructions for. (required)
@@ -7164,6 +7165,8 @@ class TransactionPortfoliosApi:
         :type filter: str
         :param as_at: The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.
         :type as_at: datetime
+        :param property_keys: A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -7172,7 +7175,7 @@ class TransactionPortfoliosApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ResourceListOfTransactionSettlementInstruction
+        :rtype: VersionedResourceListOfTransactionSettlementInstruction
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -7180,17 +7183,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_settlement_instructions_with_http_info(scope, code, from_date, to_date, page, limit, filter, as_at, **kwargs)  # noqa: E501
+        return self.list_settlement_instructions_with_http_info(scope, code, from_date, to_date, page, limit, filter, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio to retrieve settlement instructions for.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio to retrieve settlement instructions for.")], from_date : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve instructions.              There is no lower bound if this is not specified.")] = None, to_date : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve instructions.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="The expression to filter out settlement instructions")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.  # noqa: E501
 
         Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_settlement_instructions_with_http_info(scope, code, from_date, to_date, page, limit, filter, as_at, async_req=True)
+        >>> thread = api.list_settlement_instructions_with_http_info(scope, code, from_date, to_date, page, limit, filter, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio to retrieve settlement instructions for. (required)
@@ -7209,6 +7212,8 @@ class TransactionPortfoliosApi:
         :type filter: str
         :param as_at: The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified.
         :type as_at: datetime
+        :param property_keys: A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -7230,7 +7235,7 @@ class TransactionPortfoliosApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ResourceListOfTransactionSettlementInstruction, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(VersionedResourceListOfTransactionSettlementInstruction, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -7243,7 +7248,8 @@ class TransactionPortfoliosApi:
             'page',
             'limit',
             'filter',
-            'as_at'
+            'as_at',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -7302,6 +7308,10 @@ class TransactionPortfoliosApi:
             else:
                 _query_params.append(('asAt', _params['as_at']))
 
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -7317,7 +7327,7 @@ class TransactionPortfoliosApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ResourceListOfTransactionSettlementInstruction",
+            '200': "VersionedResourceListOfTransactionSettlementInstruction",
             '400': "LusidValidationProblemDetails",
         }
 

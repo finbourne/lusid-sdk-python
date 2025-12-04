@@ -3692,7 +3692,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_settlement_instructions**
-> ResourceListOfTransactionSettlementInstruction list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at)
+> VersionedResourceListOfTransactionSettlementInstruction list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys)
 
 [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
 
@@ -3751,13 +3751,14 @@ def main():
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | The expression to filter out settlement instructions (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, opts=opts)
+        # api_response =  api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
-        api_response = api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at)
+        api_response = api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -3778,10 +3779,11 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| The expression to filter out settlement instructions | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;SettlementInstruction&#39;, &#39;Instrument&#39; or &#39;Portfolio&#39; domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39; or &#39;SettlementInstruction/strategy/quantsignal&#39;. | [optional] 
 
 ### Return type
 
-[**ResourceListOfTransactionSettlementInstruction**](ResourceListOfTransactionSettlementInstruction.md)
+[**VersionedResourceListOfTransactionSettlementInstruction**](VersionedResourceListOfTransactionSettlementInstruction.md)
 
 ### HTTP request headers
 

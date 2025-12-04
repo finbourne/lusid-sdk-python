@@ -1995,6 +1995,7 @@ Class | Method | HTTP request | Description
  - [VersionedResourceListOfOutputTransaction](docs/VersionedResourceListOfOutputTransaction.md)
  - [VersionedResourceListOfPortfolioHolding](docs/VersionedResourceListOfPortfolioHolding.md)
  - [VersionedResourceListOfTransaction](docs/VersionedResourceListOfTransaction.md)
+ - [VersionedResourceListOfTransactionSettlementInstruction](docs/VersionedResourceListOfTransactionSettlementInstruction.md)
  - [VersionedResourceListOfTrialBalance](docs/VersionedResourceListOfTrialBalance.md)
  - [VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery](docs/VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery.md)
  - [VersionedResourceListWithWarningsOfPortfolioHolding](docs/VersionedResourceListWithWarningsOfPortfolioHolding.md)
