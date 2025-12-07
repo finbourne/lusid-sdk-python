@@ -29,10 +29,10 @@ class LusidEntityDataset(BaseModel):
     """
     as_at: Optional[datetime] = Field(default=None, description="The asAt date to fetch the data. Nullable. Defaults to latest.", alias="asAt")
     effective_at: Optional[datetime] = Field(default=None, description="The effectiveAt date to fetch the data. Nullable. Defaults to latest.", alias="effectiveAt")
-    scope:  StrictStr = Field(...,alias="scope", description="The scope of the entities to check. Required.") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the entities to check. Required.") 
     as_at_modified_since: Optional[datetime] = Field(default=None, description="Nullable. Filters the dataset for version.asAtModified greater than or equal to this value.", alias="asAtModifiedSince")
-    selector_attribute:  StrictStr = Field(...,alias="selectorAttribute", description="An attribute (field name, propertyKey or identifierKey) to use to sub-divide the dataset.") 
-    selector_value:  StrictStr = Field(...,alias="selectorValue", description="The value of the above attribute used to sub-divide the dataset.") 
+    selector_attribute:  Optional[StrictStr] = Field(None,alias="selectorAttribute", description="An attribute (field name, propertyKey or identifierKey) to use to sub-divide the dataset.") 
+    selector_value:  Optional[StrictStr] = Field(None,alias="selectorValue", description="The value of the above attribute used to sub-divide the dataset.") 
     return_identifier_key:  Optional[StrictStr] = Field(None,alias="returnIdentifierKey", description="The preferred identifier to return for entities with multiple external identifiers.") 
     __properties = ["asAt", "effectiveAt", "scope", "asAtModifiedSince", "selectorAttribute", "selectorValue", "returnIdentifierKey"]
 
@@ -78,10 +78,25 @@ class LusidEntityDataset(BaseModel):
         if self.effective_at is None and "effective_at" in self.__fields_set__:
             _dict['effectiveAt'] = None
 
+        # set to None if scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.scope is None and "scope" in self.__fields_set__:
+            _dict['scope'] = None
+
         # set to None if as_at_modified_since (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at_modified_since is None and "as_at_modified_since" in self.__fields_set__:
             _dict['asAtModifiedSince'] = None
+
+        # set to None if selector_attribute (nullable) is None
+        # and __fields_set__ contains the field
+        if self.selector_attribute is None and "selector_attribute" in self.__fields_set__:
+            _dict['selectorAttribute'] = None
+
+        # set to None if selector_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.selector_value is None and "selector_value" in self.__fields_set__:
+            _dict['selectorValue'] = None
 
         # set to None if return_identifier_key (nullable) is None
         # and __fields_set__ contains the field

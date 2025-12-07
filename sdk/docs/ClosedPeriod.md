@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **post_close_activities** | [**List[PostCloseActivity]**](PostCloseActivity.md) | All the post close activities for the closed period. | [optional] 
 **holdings_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used. | [optional] 
 **valuation_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for performing valuations in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used. | [optional] 
+**branch_status** | **str** | The branch status of the closed period, e.g. Confirmed/Unconfirmed. | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
@@ -36,9 +37,10 @@ version: Optional[Version] = None
 post_close_activities: Optional[List[PostCloseActivity]] = # Replace with your value
 holdings_as_at_closed_override: Optional[datetime] = # Replace with your value
 valuation_as_at_closed_override: Optional[datetime] = # Replace with your value
+branch_status: Optional[StrictStr] = "example_branch_status"
 href: Optional[StrictStr] = "example_href"
 links: Optional[List[Link]] = None
-closed_period_instance = ClosedPeriod(closed_period_id=closed_period_id, display_name=display_name, description=description, effective_start=effective_start, effective_end=effective_end, as_at_closed=as_at_closed, properties=properties, version=version, post_close_activities=post_close_activities, holdings_as_at_closed_override=holdings_as_at_closed_override, valuation_as_at_closed_override=valuation_as_at_closed_override, href=href, links=links)
+closed_period_instance = ClosedPeriod(closed_period_id=closed_period_id, display_name=display_name, description=description, effective_start=effective_start, effective_end=effective_end, as_at_closed=as_at_closed, properties=properties, version=version, post_close_activities=post_close_activities, holdings_as_at_closed_override=holdings_as_at_closed_override, valuation_as_at_closed_override=valuation_as_at_closed_override, branch_status=branch_status, href=href, links=links)
 
 ```
 

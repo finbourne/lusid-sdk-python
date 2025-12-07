@@ -4,7 +4,9 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**confirm_closed_period**](TimelinesApi.md#confirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$confirm | [EXPERIMENTAL] ConfirmClosedPeriod: Confirm a Closed Period against a Timeline Entity
 [**create_closed_period**](TimelinesApi.md#create_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] CreateClosedPeriod: Create a new closed period against a timeline entity
+[**create_closed_period_candidate**](TimelinesApi.md#create_closed_period_candidate) | **POST** /api/timelines/{scope}/{code}/closedperiods/candidate | [EXPERIMENTAL] CreateClosedPeriodCandidate: Create a new closed period candidate against a timeline entity
 [**create_timeline**](TimelinesApi.md#create_timeline) | **POST** /api/timelines | [EXPERIMENTAL] CreateTimeline: Create a Timeline
 [**delete_timeline**](TimelinesApi.md#delete_timeline) | **DELETE** /api/timelines/{scope}/{code} | [EXPERIMENTAL] DeleteTimeline: Deletes a particular Timeline
 [**get_closed_period**](TimelinesApi.md#get_closed_period) | **GET** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId} | [EXPERIMENTAL] GetClosedPeriod: Gets a Closed Period entity.
@@ -12,8 +14,107 @@ Method | HTTP request | Description
 [**list_closed_periods**](TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
 [**list_timelines**](TimelinesApi.md#list_timelines) | **GET** /api/timelines | [EXPERIMENTAL] ListTimelines: List Timelines
 [**set_post_close_activity**](TimelinesApi.md#set_post_close_activity) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/postcloseactivity | [EXPERIMENTAL] SetPostCloseActivity: Sets post close activities to a closed period.
+[**unconfirm_closed_period**](TimelinesApi.md#unconfirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm | [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
 [**update_timeline**](TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 
+
+# **confirm_closed_period**
+> ClosedPeriod confirm_closed_period(scope, code, closed_period_id, body=body)
+
+[EXPERIMENTAL] ConfirmClosedPeriod: Confirm a Closed Period against a Timeline Entity
+
+Confirms a Closed Period against a Timeline Entity. Deletes any other unconfirmed Closed Periods on the Timeline.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TimelinesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TimelinesApi)
+    scope = 'scope_example' # str | The scope of the specified Timeline.
+    code = 'code_example' # str | The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.
+    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod
+    body = {} # object | Not in use at the moment (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.confirm_closed_period(scope, code, closed_period_id, body=body, opts=opts)
+
+        # [EXPERIMENTAL] ConfirmClosedPeriod: Confirm a Closed Period against a Timeline Entity
+        api_response = api_instance.confirm_closed_period(scope, code, closed_period_id, body=body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TimelinesApi->confirm_closed_period: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the specified Timeline. | 
+ **code** | **str**| The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. | 
+ **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod | 
+ **body** | **object**| Not in use at the moment | [optional] 
+
+### Return type
+
+[**ClosedPeriod**](ClosedPeriod.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The confirmed closed period |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_closed_period**
 > ClosedPeriod create_closed_period(scope, code, create_closed_period_request=create_closed_period_request)
@@ -96,6 +197,107 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified Timeline. | 
  **code** | **str**| The code of the specified Timeline. Together with the domain and scope this uniquely identifies the Timeline. | 
+ **create_closed_period_request** | [**CreateClosedPeriodRequest**](CreateClosedPeriodRequest.md)| The request containing the details of the Closed Period | [optional] 
+
+### Return type
+
+[**ClosedPeriod**](ClosedPeriod.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The created closed period |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **create_closed_period_candidate**
+> ClosedPeriod create_closed_period_candidate(scope, code, create_closed_period_request=create_closed_period_request)
+
+[EXPERIMENTAL] CreateClosedPeriodCandidate: Create a new closed period candidate against a timeline entity
+
+Creates a new closed period candidate against a timeline entity  Returns the newly created closed period candidate entity with properties
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TimelinesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TimelinesApi)
+    scope = 'scope_example' # str | The scope of the specified Timeline.
+    code = 'code_example' # str | The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_closed_period_request = CreateClosedPeriodRequest.from_json("")
+    # create_closed_period_request = CreateClosedPeriodRequest.from_dict({})
+    create_closed_period_request = CreateClosedPeriodRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_closed_period_candidate(scope, code, create_closed_period_request=create_closed_period_request, opts=opts)
+
+        # [EXPERIMENTAL] CreateClosedPeriodCandidate: Create a new closed period candidate against a timeline entity
+        api_response = api_instance.create_closed_period_candidate(scope, code, create_closed_period_request=create_closed_period_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TimelinesApi->create_closed_period_candidate: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the specified Timeline. | 
+ **code** | **str**| The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. | 
  **create_closed_period_request** | [**CreateClosedPeriodRequest**](CreateClosedPeriodRequest.md)| The request containing the details of the Closed Period | [optional] 
 
 ### Return type
@@ -815,6 +1017,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated closed period |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **unconfirm_closed_period**
+> ClosedPeriod unconfirm_closed_period(scope, code, closed_period_id, body=body)
+
+[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
+
+Unconfirm the last confirmed Closed Period against a Timeline Entity
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TimelinesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TimelinesApi)
+    scope = 'scope_example' # str | The scope of the specified Timeline.
+    code = 'code_example' # str | The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.
+    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.
+    body = {} # object | Not in use at the moment (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.unconfirm_closed_period(scope, code, closed_period_id, body=body, opts=opts)
+
+        # [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
+        api_response = api_instance.unconfirm_closed_period(scope, code, closed_period_id, body=body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TimelinesApi->unconfirm_closed_period: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the specified Timeline. | 
+ **code** | **str**| The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. | 
+ **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline. | 
+ **body** | **object**| Not in use at the moment | [optional] 
+
+### Return type
+
+[**ClosedPeriod**](ClosedPeriod.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The unconfirmed closed period |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

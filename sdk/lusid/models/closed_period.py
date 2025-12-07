@@ -42,9 +42,10 @@ class ClosedPeriod(BaseModel):
     post_close_activities: Optional[List[PostCloseActivity]] = Field(default=None, description="All the post close activities for the closed period.", alias="postCloseActivities")
     holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="holdingsAsAtClosedOverride")
     valuation_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for performing valuations in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="valuationAsAtClosedOverride")
+    branch_status:  Optional[StrictStr] = Field(None,alias="branchStatus", description="The branch status of the closed period, e.g. Confirmed/Unconfirmed.") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[List[Link]] = None
-    __properties = ["closedPeriodId", "displayName", "description", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "holdingsAsAtClosedOverride", "valuationAsAtClosedOverride", "href", "links"]
+    __properties = ["closedPeriodId", "displayName", "description", "effectiveStart", "effectiveEnd", "asAtClosed", "properties", "version", "postCloseActivities", "holdingsAsAtClosedOverride", "valuationAsAtClosedOverride", "branchStatus", "href", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -137,6 +138,11 @@ class ClosedPeriod(BaseModel):
         if self.valuation_as_at_closed_override is None and "valuation_as_at_closed_override" in self.__fields_set__:
             _dict['valuationAsAtClosedOverride'] = None
 
+        # set to None if branch_status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.branch_status is None and "branch_status" in self.__fields_set__:
+            _dict['branchStatus'] = None
+
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -175,6 +181,7 @@ class ClosedPeriod(BaseModel):
             "post_close_activities": [PostCloseActivity.from_dict(_item) for _item in obj.get("postCloseActivities")] if obj.get("postCloseActivities") is not None else None,
             "holdings_as_at_closed_override": obj.get("holdingsAsAtClosedOverride"),
             "valuation_as_at_closed_override": obj.get("valuationAsAtClosedOverride"),
+            "branch_status": obj.get("branchStatus"),
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

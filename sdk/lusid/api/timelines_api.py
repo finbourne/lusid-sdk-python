@@ -21,7 +21,7 @@ from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
 from pydantic.v1 import Field, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from lusid.models.closed_period import ClosedPeriod
 from lusid.models.create_closed_period_request import CreateClosedPeriodRequest
@@ -57,6 +57,189 @@ class TimelinesApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @overload
+    async def confirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
+        ...
+
+    @overload
+    def confirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def confirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
+        """[EXPERIMENTAL] ConfirmClosedPeriod: Confirm a Closed Period against a Timeline Entity  # noqa: E501
+
+        Confirms a Closed Period against a Timeline Entity. Deletes any other unconfirmed Closed Periods on the Timeline.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.confirm_closed_period(scope, code, closed_period_id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified Timeline. (required)
+        :type scope: str
+        :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
+        :type code: str
+        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod (required)
+        :type closed_period_id: str
+        :param body: Not in use at the moment
+        :type body: object
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ClosedPeriod
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the confirm_closed_period_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.confirm_closed_period_with_http_info(scope, code, closed_period_id, body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def confirm_closed_period_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ConfirmClosedPeriod: Confirm a Closed Period against a Timeline Entity  # noqa: E501
+
+        Confirms a Closed Period against a Timeline Entity. Deletes any other unconfirmed Closed Periods on the Timeline.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.confirm_closed_period_with_http_info(scope, code, closed_period_id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified Timeline. (required)
+        :type scope: str
+        :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
+        :type code: str
+        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod (required)
+        :type closed_period_id: str
+        :param body: Not in use at the moment
+        :type body: object
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ClosedPeriod, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'closed_period_id',
+            'body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method confirm_closed_period" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['closed_period_id']:
+            _path_params['closedPeriodId'] = _params['closed_period_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['body'] is not None:
+            _body_params = _params['body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ClosedPeriod",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$confirm', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
 
     @overload
@@ -217,6 +400,181 @@ class TimelinesApi:
 
         return self.api_client.call_api(
             '/api/timelines/{scope}/{code}/closedperiods', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def create_closed_period_candidate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], create_closed_period_request : Annotated[Optional[CreateClosedPeriodRequest], Field(description="The request containing the details of the Closed Period")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
+        ...
+
+    @overload
+    def create_closed_period_candidate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], create_closed_period_request : Annotated[Optional[CreateClosedPeriodRequest], Field(description="The request containing the details of the Closed Period")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_closed_period_candidate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], create_closed_period_request : Annotated[Optional[CreateClosedPeriodRequest], Field(description="The request containing the details of the Closed Period")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateClosedPeriodCandidate: Create a new closed period candidate against a timeline entity  # noqa: E501
+
+        Creates a new closed period candidate against a timeline entity  Returns the newly created closed period candidate entity with properties  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_closed_period_candidate(scope, code, create_closed_period_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified Timeline. (required)
+        :type scope: str
+        :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
+        :type code: str
+        :param create_closed_period_request: The request containing the details of the Closed Period
+        :type create_closed_period_request: CreateClosedPeriodRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ClosedPeriod
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_closed_period_candidate_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_closed_period_candidate_with_http_info(scope, code, create_closed_period_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_closed_period_candidate_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], create_closed_period_request : Annotated[Optional[CreateClosedPeriodRequest], Field(description="The request containing the details of the Closed Period")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateClosedPeriodCandidate: Create a new closed period candidate against a timeline entity  # noqa: E501
+
+        Creates a new closed period candidate against a timeline entity  Returns the newly created closed period candidate entity with properties  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_closed_period_candidate_with_http_info(scope, code, create_closed_period_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified Timeline. (required)
+        :type scope: str
+        :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
+        :type code: str
+        :param create_closed_period_request: The request containing the details of the Closed Period
+        :type create_closed_period_request: CreateClosedPeriodRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ClosedPeriod, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'create_closed_period_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_closed_period_candidate" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['create_closed_period_request'] is not None:
+            _body_params = _params['create_closed_period_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "ClosedPeriod",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/timelines/{scope}/{code}/closedperiods/candidate', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -1513,6 +1871,189 @@ class TimelinesApi:
 
         return self.api_client.call_api(
             '/api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/postcloseactivity', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
+        ...
+
+    @overload
+    def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
+        """[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+
+        Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.unconfirm_closed_period(scope, code, closed_period_id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified Timeline. (required)
+        :type scope: str
+        :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
+        :type code: str
+        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline. (required)
+        :type closed_period_id: str
+        :param body: Not in use at the moment
+        :type body: object
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ClosedPeriod
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the unconfirm_closed_period_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.unconfirm_closed_period_with_http_info(scope, code, closed_period_id, body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def unconfirm_closed_period_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+
+        Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.unconfirm_closed_period_with_http_info(scope, code, closed_period_id, body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified Timeline. (required)
+        :type scope: str
+        :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
+        :type code: str
+        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline. (required)
+        :type closed_period_id: str
+        :param body: Not in use at the moment
+        :type body: object
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ClosedPeriod, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'closed_period_id',
+            'body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method unconfirm_closed_period" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['closed_period_id']:
+            _path_params['closedPeriodId'] = _params['closed_period_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['body'] is not None:
+            _body_params = _params['body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ClosedPeriod",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm', 'POST',
             _path_params,
             _query_params,
             _header_params,
