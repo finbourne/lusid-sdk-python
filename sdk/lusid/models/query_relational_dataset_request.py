@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.custom_sort_by import CustomSortBy
 
 class QueryRelationalDatasetRequest(BaseModel):
     """
@@ -29,7 +30,7 @@ class QueryRelationalDatasetRequest(BaseModel):
     """
     query_method:  Optional[StrictStr] = Field(None,alias="queryMethod", description="The method used to query data points. Can be either 'Latest' or 'TimeSeries'.") 
     filter:  Optional[StrictStr] = Field(None,alias="filter", description="Expression to filter the result set. For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.") 
-    custom_sort_by: Optional[List[StrictStr]] = Field(default=None, description="A list of fields to sort the results by. For example, to sort by a Value field 'AValueField' in descending order, specify 'AValueField DESC'.", alias="customSortBy")
+    custom_sort_by: Optional[List[CustomSortBy]] = Field(default=None, description="A list of fields and values to sort the results by.", alias="customSortBy")
     __properties = ["queryMethod", "filter", "customSortBy"]
 
     class Config:
@@ -64,6 +65,13 @@ class QueryRelationalDatasetRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in custom_sort_by (list)
+        _items = []
+        if self.custom_sort_by:
+            for _item in self.custom_sort_by:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['customSortBy'] = _items
         # set to None if query_method (nullable) is None
         # and __fields_set__ contains the field
         if self.query_method is None and "query_method" in self.__fields_set__:
@@ -93,7 +101,7 @@ class QueryRelationalDatasetRequest(BaseModel):
         _obj = QueryRelationalDatasetRequest.parse_obj({
             "query_method": obj.get("queryMethod"),
             "filter": obj.get("filter"),
-            "custom_sort_by": obj.get("customSortBy")
+            "custom_sort_by": [CustomSortBy.from_dict(_item) for _item in obj.get("customSortBy")] if obj.get("customSortBy") is not None else None
         })
         return _obj
 

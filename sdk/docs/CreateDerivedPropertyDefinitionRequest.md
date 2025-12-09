@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **property_description** | **str** | Describes the property | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | 
 **is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | 
+**value_format** | **str** | The format in which values for this property definition should be represented. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ property_description: Optional[StrictStr] = "example_property_description"
 derivation_formula: StrictStr = "example_derivation_formula"
 is_filterable: StrictBool = # Replace with your value
 is_filterable:StrictBool = True
-create_derived_property_definition_request_instance = CreateDerivedPropertyDefinitionRequest(domain=domain, scope=scope, code=code, display_name=display_name, data_type_id=data_type_id, property_description=property_description, derivation_formula=derivation_formula, is_filterable=is_filterable)
+value_format: Optional[StrictStr] = "example_value_format"
+create_derived_property_definition_request_instance = CreateDerivedPropertyDefinitionRequest(domain=domain, scope=scope, code=code, display_name=display_name, data_type_id=data_type_id, property_description=property_description, derivation_formula=derivation_formula, is_filterable=is_filterable, value_format=value_format)
 
 ```
 

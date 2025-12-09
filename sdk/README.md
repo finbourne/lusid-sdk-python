@@ -990,6 +990,7 @@ Class | Method | HTTP request | Description
  - [CustomEntityRequest](docs/CustomEntityRequest.md)
  - [CustomEntityResponse](docs/CustomEntityResponse.md)
  - [CustomEntityType](docs/CustomEntityType.md)
+ - [CustomSortBy](docs/CustomSortBy.md)
  - [CutLabelDefinition](docs/CutLabelDefinition.md)
  - [CutLocalTime](docs/CutLocalTime.md)
  - [DataDefinition](docs/DataDefinition.md)

@@ -413,6 +413,7 @@ from lusid.models.custom_entity_properties import CustomEntityProperties
 from lusid.models.custom_entity_request import CustomEntityRequest
 from lusid.models.custom_entity_response import CustomEntityResponse
 from lusid.models.custom_entity_type import CustomEntityType
+from lusid.models.custom_sort_by import CustomSortBy
 from lusid.models.cut_label_definition import CutLabelDefinition
 from lusid.models.cut_local_time import CutLocalTime
 from lusid.models.data_definition import DataDefinition
@@ -1844,6 +1845,7 @@ __all__ = [
     "CustomEntityRequest",
     "CustomEntityResponse",
     "CustomEntityType",
+    "CustomSortBy",
     "CutLabelDefinition",
     "CutLocalTime",
     "DataDefinition",

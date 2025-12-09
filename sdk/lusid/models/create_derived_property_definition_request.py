@@ -36,7 +36,8 @@ class CreateDerivedPropertyDefinitionRequest(BaseModel):
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     derivation_formula:  StrictStr = Field(...,alias="derivationFormula", description="The rule that defines how data is composed for a derived property.") 
     is_filterable: StrictBool = Field(description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.", alias="isFilterable")
-    __properties = ["domain", "scope", "code", "displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable"]
+    value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented.") 
+    __properties = ["domain", "scope", "code", "displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable", "valueFormat"]
 
     @validator('domain')
     def domain_validate_enum(cls, value):
@@ -144,6 +145,11 @@ class CreateDerivedPropertyDefinitionRequest(BaseModel):
         if self.property_description is None and "property_description" in self.__fields_set__:
             _dict['propertyDescription'] = None
 
+        # set to None if value_format (nullable) is None
+        # and __fields_set__ contains the field
+        if self.value_format is None and "value_format" in self.__fields_set__:
+            _dict['valueFormat'] = None
+
         return _dict
 
     @classmethod
@@ -163,7 +169,8 @@ class CreateDerivedPropertyDefinitionRequest(BaseModel):
             "data_type_id": ResourceId.from_dict(obj.get("dataTypeId")) if obj.get("dataTypeId") is not None else None,
             "property_description": obj.get("propertyDescription"),
             "derivation_formula": obj.get("derivationFormula"),
-            "is_filterable": obj.get("isFilterable")
+            "is_filterable": obj.get("isFilterable"),
+            "value_format": obj.get("valueFormat")
         })
         return _obj
 
