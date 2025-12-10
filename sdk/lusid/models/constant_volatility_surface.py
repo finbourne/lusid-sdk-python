@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
+from lusid.models.version import Version
 
 class ConstantVolatilitySurface(ComplexMarketData):
     """
@@ -32,9 +33,10 @@ class ConstantVolatilitySurface(ComplexMarketData):
     asset_type:  StrictStr = Field(...,alias="assetType", description="What is the asset that the engine is for.  Supported string (enumeration) values are: [Cash, Commodity, Credit, Equity, Fx, Rates, FxVol, IrVol, EquityVol, HolidayCalendar, IndexConvention, FlowConvention, CdsFlowConvention, CorporateActions, FxForwards, Quote, Inflation, EquityCurve, All, VendorOpaque].") 
     lineage:  Optional[StrictStr] = Field(None,alias="lineage") 
     volatility: Union[StrictFloat, StrictInt] = Field(description="Volatility value.")
+    version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "assetType", "lineage", "volatility"]
+    __properties = ["marketDataType", "baseDate", "assetType", "lineage", "volatility", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -135,6 +137,9 @@ class ConstantVolatilitySurface(ComplexMarketData):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -161,7 +166,8 @@ class ConstantVolatilitySurface(ComplexMarketData):
             "base_date": obj.get("baseDate"),
             "asset_type": obj.get("assetType"),
             "lineage": obj.get("lineage"),
-            "volatility": obj.get("volatility")
+            "volatility": obj.get("volatility"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

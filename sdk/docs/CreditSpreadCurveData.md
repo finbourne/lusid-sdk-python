@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **maturities** | **List[datetime]** | The maturity dates for which the rates apply.  Either tenors or maturities should be provided, not both. | [optional] 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
 ## Example
 
@@ -32,8 +33,9 @@ reference_date: Optional[datetime] = # Replace with your value
 maturities: Optional[List[datetime]] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
+version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-credit_spread_curve_data_instance = CreditSpreadCurveData(base_date=base_date, dom_ccy=dom_ccy, tenors=tenors, spreads=spreads, recovery_rate=recovery_rate, reference_date=reference_date, maturities=maturities, lineage=lineage, market_data_options=market_data_options, market_data_type=market_data_type)
+credit_spread_curve_data_instance = CreditSpreadCurveData(base_date=base_date, dom_ccy=dom_ccy, tenors=tenors, spreads=spreads, recovery_rate=recovery_rate, reference_date=reference_date, maturities=maturities, lineage=lineage, market_data_options=market_data_options, version=version, market_data_type=market_data_type)
 
 ```
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **format** | **str** | What format is the document stored in, e.g. Xml.  Supported string (enumeration) values are: [Unknown, Xml, Json, Csv]. | 
 **name** | **str** | Internal name of document. This is not used for search, it is simply a designator that helps identify the document  and could be anything (filename, ftp address or similar) | 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
 ## Example
 
@@ -22,8 +23,9 @@ document: StrictStr = "example_document"
 format: StrictStr = "example_format"
 name: StrictStr = "example_name"
 lineage: Optional[StrictStr] = "example_lineage"
+version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-opaque_market_data_instance = OpaqueMarketData(document=document, format=format, name=name, lineage=lineage, market_data_type=market_data_type)
+opaque_market_data_instance = OpaqueMarketData(document=document, format=format, name=name, lineage=lineage, version=version, market_data_type=market_data_type)
 
 ```
 

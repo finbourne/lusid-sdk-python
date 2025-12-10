@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **quotes** | [**List[MarketQuote]**](MarketQuote.md) | The market quotes corresponding to the the instruments used to define the curve | 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
 ## Example
 
@@ -24,8 +25,9 @@ instruments: List[LusidInstrument] = # Replace with your value
 quotes: List[MarketQuote] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
+version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-yield_curve_data_instance = YieldCurveData(base_date=base_date, instruments=instruments, quotes=quotes, lineage=lineage, market_data_options=market_data_options, market_data_type=market_data_type)
+yield_curve_data_instance = YieldCurveData(base_date=base_date, instruments=instruments, quotes=quotes, lineage=lineage, market_data_options=market_data_options, version=version, market_data_type=market_data_type)
 
 ```
 

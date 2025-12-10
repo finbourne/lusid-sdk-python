@@ -26,6 +26,7 @@ from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.market_data_options import MarketDataOptions
 from lusid.models.market_quote import MarketQuote
+from lusid.models.version import Version
 
 class YieldCurveData(ComplexMarketData):
     """
@@ -36,9 +37,10 @@ class YieldCurveData(ComplexMarketData):
     quotes: List[MarketQuote] = Field(description="The market quotes corresponding to the the instruments used to define the curve")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
+    version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "marketDataOptions"]
+    __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "marketDataOptions", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -156,6 +158,9 @@ class YieldCurveData(ComplexMarketData):
         # override the default output from pydantic by calling `to_dict()` of market_data_options
         if self.market_data_options:
             _dict['marketDataOptions'] = self.market_data_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -183,7 +188,8 @@ class YieldCurveData(ComplexMarketData):
             "instruments": [LusidInstrument.from_dict(_item) for _item in obj.get("instruments")] if obj.get("instruments") is not None else None,
             "quotes": [MarketQuote.from_dict(_item) for _item in obj.get("quotes")] if obj.get("quotes") is not None else None,
             "lineage": obj.get("lineage"),
-            "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None
+            "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

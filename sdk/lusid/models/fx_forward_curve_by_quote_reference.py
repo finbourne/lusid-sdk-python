@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.fx_tenor_convention import FxTenorConvention
 from lusid.models.market_data_options import MarketDataOptions
+from lusid.models.version import Version
 
 class FxForwardCurveByQuoteReference(ComplexMarketData):
     """
@@ -38,9 +39,10 @@ class FxForwardCurveByQuoteReference(ComplexMarketData):
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
     calendars: Optional[List[FxTenorConvention]] = Field(default=None, description="The list of conventions that should be used when interpreting tenors as dates.")
     spot_days_calculation_type:  Optional[StrictStr] = Field(None,alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ]") 
+    version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "domCcy", "fgnCcy", "tenors", "quoteReferences", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType"]
+    __properties = ["marketDataType", "domCcy", "fgnCcy", "tenors", "quoteReferences", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -151,6 +153,9 @@ class FxForwardCurveByQuoteReference(ComplexMarketData):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['calendars'] = _items
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -191,7 +196,8 @@ class FxForwardCurveByQuoteReference(ComplexMarketData):
             "lineage": obj.get("lineage"),
             "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None,
             "calendars": [FxTenorConvention.from_dict(_item) for _item in obj.get("calendars")] if obj.get("calendars") is not None else None,
-            "spot_days_calculation_type": obj.get("spotDaysCalculationType")
+            "spot_days_calculation_type": obj.get("spotDaysCalculationType"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

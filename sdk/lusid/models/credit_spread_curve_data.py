@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.market_data_options import MarketDataOptions
+from lusid.models.version import Version
 
 class CreditSpreadCurveData(ComplexMarketData):
     """
@@ -38,9 +39,10 @@ class CreditSpreadCurveData(ComplexMarketData):
     maturities: Optional[List[datetime]] = Field(default=None, description="The maturity dates for which the rates apply.  Either tenors or maturities should be provided, not both.")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
+    version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "domCcy", "tenors", "spreads", "recoveryRate", "referenceDate", "maturities", "lineage", "marketDataOptions"]
+    __properties = ["marketDataType", "baseDate", "domCcy", "tenors", "spreads", "recoveryRate", "referenceDate", "maturities", "lineage", "marketDataOptions", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -144,6 +146,9 @@ class CreditSpreadCurveData(ComplexMarketData):
         # override the default output from pydantic by calling `to_dict()` of market_data_options
         if self.market_data_options:
             _dict['marketDataOptions'] = self.market_data_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -185,7 +190,8 @@ class CreditSpreadCurveData(ComplexMarketData):
             "reference_date": obj.get("referenceDate"),
             "maturities": obj.get("maturities"),
             "lineage": obj.get("lineage"),
-            "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None
+            "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
+from lusid.models.version import Version
 
 class OpaqueMarketData(ComplexMarketData):
     """
@@ -32,9 +33,10 @@ class OpaqueMarketData(ComplexMarketData):
     format:  StrictStr = Field(...,alias="format", description="What format is the document stored in, e.g. Xml.  Supported string (enumeration) values are: [Unknown, Xml, Json, Csv].") 
     name:  StrictStr = Field(...,alias="name", description="Internal name of document. This is not used for search, it is simply a designator that helps identify the document  and could be anything (filename, ftp address or similar)") 
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
+    version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "document", "format", "name", "lineage"]
+    __properties = ["marketDataType", "document", "format", "name", "lineage", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -135,6 +137,9 @@ class OpaqueMarketData(ComplexMarketData):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -161,7 +166,8 @@ class OpaqueMarketData(ComplexMarketData):
             "document": obj.get("document"),
             "format": obj.get("format"),
             "name": obj.get("name"),
-            "lineage": obj.get("lineage")
+            "lineage": obj.get("lineage"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

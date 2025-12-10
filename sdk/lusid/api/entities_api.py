@@ -614,22 +614,22 @@ class EntitiesApi:
 
 
     @overload
-    async def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> InstrumentEntity:  # noqa: E501
+    async def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use.")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use.")] = None, **kwargs) -> InstrumentEntity:  # noqa: E501
         ...
 
     @overload
-    def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstrumentEntity:  # noqa: E501
+    def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use.")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstrumentEntity:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEntity, Awaitable[InstrumentEntity]]:  # noqa: E501
+    def get_instrument_by_entity_unique_id(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use.")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEntity, Awaitable[InstrumentEntity]]:  # noqa: E501
         """GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular instrument.  If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_instrument_by_entity_unique_id(entity_unique_id, effective_at, as_at, previews, async_req=True)
+        >>> thread = api.get_instrument_by_entity_unique_id(entity_unique_id, effective_at, as_at, previews, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param entity_unique_id: The universally unique identifier of the instrument definition. (required)
@@ -640,6 +640,10 @@ class EntitiesApi:
         :type as_at: datetime
         :param previews: The ids of the staged modifications to be previewed in the response.
         :type previews: List[str]
+        :param data_model_scope: The optional scope of a Custom Data Model to use.
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use.
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -656,17 +660,17 @@ class EntitiesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_instrument_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, **kwargs)  # noqa: E501
+        return self.get_instrument_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_instrument_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_instrument_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[StrictStr, Field(..., description="The universally unique identifier of the instrument definition.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified.")] = None, previews : Annotated[Optional[List[StrictStr]], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use.")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular instrument.  If the instrument is deleted, this will return the state of the instrument immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_instrument_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, async_req=True)
+        >>> thread = api.get_instrument_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param entity_unique_id: The universally unique identifier of the instrument definition. (required)
@@ -677,6 +681,10 @@ class EntitiesApi:
         :type as_at: datetime
         :param previews: The ids of the staged modifications to be previewed in the response.
         :type previews: List[str]
+        :param data_model_scope: The optional scope of a Custom Data Model to use.
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use.
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -707,7 +715,9 @@ class EntitiesApi:
             'entity_unique_id',
             'effective_at',
             'as_at',
-            'previews'
+            'previews',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -754,6 +764,12 @@ class EntitiesApi:
         if _params.get('previews') is not None:  # noqa: E501
             _query_params.append(('previews', _params['previews']))
             _collection_formats['previews'] = 'multi'
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

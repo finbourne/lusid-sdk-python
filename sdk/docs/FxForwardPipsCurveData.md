@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **pip_rates** | **List[float]** | Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips | 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
 ## Example
 
@@ -28,8 +29,9 @@ dates: List[datetime] = # Replace with your value
 pip_rates: List[Union[StrictFloat, StrictInt]] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
+version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-fx_forward_pips_curve_data_instance = FxForwardPipsCurveData(base_date=base_date, dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, dates=dates, pip_rates=pip_rates, lineage=lineage, market_data_options=market_data_options, market_data_type=market_data_type)
+fx_forward_pips_curve_data_instance = FxForwardPipsCurveData(base_date=base_date, dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, dates=dates, pip_rates=pip_rates, lineage=lineage, market_data_options=market_data_options, version=version, market_data_type=market_data_type)
 
 ```
 

@@ -312,7 +312,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_instrument_by_entity_unique_id**
-> InstrumentEntity get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
+> InstrumentEntity get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, data_model_scope=data_model_scope, data_model_code=data_model_code)
 
 GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 
@@ -367,13 +367,15 @@ def main():
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified. (optional)
     previews = ['previews_example'] # List[str] | The ids of the staged modifications to be previewed in the response. (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, opts=opts)
+        # api_response =  api_instance.get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
 
         # GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
-        api_response = api_instance.get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
+        api_response = api_instance.get_instrument_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews, data_model_scope=data_model_scope, data_model_code=data_model_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -390,6 +392,8 @@ Name | Type | Description  | Notes
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the Instrument definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument definition. Defaults to returning the latest version of the instrument definition if not specified. | [optional] 
  **previews** | [**List[str]**](str.md)| The ids of the staged modifications to be previewed in the response. | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
 
 ### Return type
 

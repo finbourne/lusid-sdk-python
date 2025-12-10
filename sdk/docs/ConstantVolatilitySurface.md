@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **asset_type** | **str** | What is the asset that the engine is for.  Supported string (enumeration) values are: [Cash, Commodity, Credit, Equity, Fx, Rates, FxVol, IrVol, EquityVol, HolidayCalendar, IndexConvention, FlowConvention, CdsFlowConvention, CorporateActions, FxForwards, Quote, Inflation, EquityCurve, All, VendorOpaque]. | 
 **lineage** | **str** |  | [optional] 
 **volatility** | **float** | Volatility value. | 
+**version** | [**Version**](Version.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
 ## Example
 
@@ -22,8 +23,9 @@ base_date: datetime = # Replace with your value
 asset_type: StrictStr = "example_asset_type"
 lineage: Optional[StrictStr] = "example_lineage"
 volatility: Union[StrictFloat, StrictInt] = # Replace with your value
+version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-constant_volatility_surface_instance = ConstantVolatilitySurface(base_date=base_date, asset_type=asset_type, lineage=lineage, volatility=volatility, market_data_type=market_data_type)
+constant_volatility_surface_instance = ConstantVolatilitySurface(base_date=base_date, asset_type=asset_type, lineage=lineage, volatility=volatility, version=version, market_data_type=market_data_type)
 
 ```
 

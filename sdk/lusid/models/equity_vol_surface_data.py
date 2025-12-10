@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.market_quote import MarketQuote
+from lusid.models.version import Version
 
 class EquityVolSurfaceData(ComplexMarketData):
     """
@@ -34,9 +35,10 @@ class EquityVolSurfaceData(ComplexMarketData):
     instruments: List[LusidInstrument] = Field(description="The set of instruments that define the surface.")
     quotes: List[MarketQuote] = Field(description="The set of market quotes that define the surface, in NormalVol or LogNormalVol terms.")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
+    version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage"]
+    __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -151,6 +153,9 @@ class EquityVolSurfaceData(ComplexMarketData):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['quotes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -177,7 +182,8 @@ class EquityVolSurfaceData(ComplexMarketData):
             "base_date": obj.get("baseDate"),
             "instruments": [LusidInstrument.from_dict(_item) for _item in obj.get("instruments")] if obj.get("instruments") is not None else None,
             "quotes": [MarketQuote.from_dict(_item) for _item in obj.get("quotes")] if obj.get("quotes") is not None else None,
-            "lineage": obj.get("lineage")
+            "lineage": obj.get("lineage"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

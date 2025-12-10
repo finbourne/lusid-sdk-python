@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
 **calendars** | [**List[FxTenorConvention]**](FxTenorConvention.md) | The list of conventions that should be used when interpreting tenors as dates. | [optional] 
 **spot_days_calculation_type** | **str** | Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ] | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface | 
 ## Example
 
@@ -32,8 +33,9 @@ lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
 calendars: Optional[List[FxTenorConvention]] = # Replace with your value
 spot_days_calculation_type: Optional[StrictStr] = "example_spot_days_calculation_type"
+version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-fx_forward_tenor_pips_curve_data_instance = FxForwardTenorPipsCurveData(base_date=base_date, dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, tenors=tenors, pip_rates=pip_rates, lineage=lineage, market_data_options=market_data_options, calendars=calendars, spot_days_calculation_type=spot_days_calculation_type, market_data_type=market_data_type)
+fx_forward_tenor_pips_curve_data_instance = FxForwardTenorPipsCurveData(base_date=base_date, dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, tenors=tenors, pip_rates=pip_rates, lineage=lineage, market_data_options=market_data_options, calendars=calendars, spot_days_calculation_type=spot_days_calculation_type, version=version, market_data_type=market_data_type)
 
 ```
 
