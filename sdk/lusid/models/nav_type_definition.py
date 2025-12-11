@@ -41,7 +41,8 @@ class NavTypeDefinition(BaseModel):
     amortisation_method:  StrictStr = Field(...,alias="amortisationMethod") 
     transaction_type_scope:  StrictStr = Field(...,alias="transactionTypeScope") 
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
-    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
+    amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,9 @@ class NavTypeDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of holding_recipe_id
         if self.holding_recipe_id:
             _dict['holdingRecipeId'] = self.holding_recipe_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortisation_rule_set_id
+        if self.amortisation_rule_set_id:
+            _dict['amortisationRuleSetId'] = self.amortisation_rule_set_id.to_dict()
         # set to None if code (nullable) is None
         # and __fields_set__ contains the field
         if self.code is None and "code" in self.__fields_set__:
@@ -138,7 +142,8 @@ class NavTypeDefinition(BaseModel):
             "sub_holding_keys": obj.get("subHoldingKeys"),
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
-            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")
+            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
+            "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None
         })
         return _obj
 
