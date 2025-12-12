@@ -2946,7 +2946,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **revert_valuation_point_to_estimate**
-> ValuationPointDataResponse revert_valuation_point_to_estimate(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
+> ValuationPointDataResponse revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 
@@ -3002,17 +3002,17 @@ def main():
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
-    # valuation_point_data_request = ValuationPointDataRequest.from_json("")
-    # valuation_point_data_request = ValuationPointDataRequest.from_dict({})
-    valuation_point_data_request = ValuationPointDataRequest()
+    # revert_valuation_point_data_request = RevertValuationPointDataRequest.from_json("")
+    # revert_valuation_point_data_request = RevertValuationPointDataRequest.from_dict({})
+    revert_valuation_point_data_request = RevertValuationPointDataRequest()
     nav_type_code = 'nav_type_code_example' # str | When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.revert_valuation_point_to_estimate(scope, code, valuation_point_data_request, nav_type_code=nav_type_code, opts=opts)
+        # api_response =  api_instance.revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
-        api_response = api_instance.revert_valuation_point_to_estimate(scope, code, valuation_point_data_request, nav_type_code=nav_type_code)
+        api_response = api_instance.revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -3027,7 +3027,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **valuation_point_data_request** | [**ValuationPointDataRequest**](ValuationPointDataRequest.md)| The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. | 
+ **revert_valuation_point_data_request** | [**RevertValuationPointDataRequest**](RevertValuationPointDataRequest.md)| The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. | 
  **nav_type_code** | **str**| When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used. | [optional] 
 
 ### Return type

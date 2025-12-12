@@ -1061,6 +1061,7 @@ from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
+from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
 from lusid.models.roll_interest_updates import RollInterestUpdates
 from lusid.models.roll_principal_updates import RollPrincipalUpdates
 from lusid.models.rollover_constituent import RolloverConstituent
@@ -2402,6 +2403,7 @@ __all__ = [
     "ReturnZeroPvOptions",
     "ReturnsEntity",
     "ReverseStockSplitEvent",
+    "RevertValuationPointDataRequest",
     "RollInterestUpdates",
     "RollPrincipalUpdates",
     "RolloverConstituent",

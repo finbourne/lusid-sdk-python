@@ -44,6 +44,7 @@ from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.resource_list_of_nav_activity_adjustment import ResourceListOfNavActivityAdjustment
+from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
 from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
@@ -5575,30 +5576,30 @@ class FundsApi:
 
 
     @overload
-    async def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    async def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @overload
-    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
+    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
 
         Moves a 'Final' status Valuation Point to status 'Estimate'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.revert_valuation_point_to_estimate(scope, code, valuation_point_data_request, nav_type_code, async_req=True)
+        >>> thread = api.revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. (required)
-        :type valuation_point_data_request: ValuationPointDataRequest
+        :param revert_valuation_point_data_request: The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. (required)
+        :type revert_valuation_point_data_request: RevertValuationPointDataRequest
         :param nav_type_code: When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.
         :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
@@ -5617,25 +5618,25 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.revert_valuation_point_to_estimate_with_http_info(scope, code, valuation_point_data_request, nav_type_code, **kwargs)  # noqa: E501
+        return self.revert_valuation_point_to_estimate_with_http_info(scope, code, revert_valuation_point_data_request, nav_type_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def revert_valuation_point_to_estimate_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def revert_valuation_point_to_estimate_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
 
         Moves a 'Final' status Valuation Point to status 'Estimate'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.revert_valuation_point_to_estimate_with_http_info(scope, code, valuation_point_data_request, nav_type_code, async_req=True)
+        >>> thread = api.revert_valuation_point_to_estimate_with_http_info(scope, code, revert_valuation_point_data_request, nav_type_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. (required)
-        :type valuation_point_data_request: ValuationPointDataRequest
+        :param revert_valuation_point_data_request: The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status. (required)
+        :type revert_valuation_point_data_request: RevertValuationPointDataRequest
         :param nav_type_code: When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.
         :type nav_type_code: str
         :param async_req: Whether to execute the request asynchronously.
@@ -5667,7 +5668,7 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'valuation_point_data_request',
+            'revert_valuation_point_data_request',
             'nav_type_code'
         ]
         _all_params.extend(
@@ -5716,8 +5717,8 @@ class FundsApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['valuation_point_data_request'] is not None:
-            _body_params = _params['valuation_point_data_request']
+        if _params['revert_valuation_point_data_request'] is not None:
+            _body_params = _params['revert_valuation_point_data_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

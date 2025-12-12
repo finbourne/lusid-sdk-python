@@ -1730,6 +1730,7 @@ Class | Method | HTTP request | Description
  - [ReturnZeroPvOptions](docs/ReturnZeroPvOptions.md)
  - [ReturnsEntity](docs/ReturnsEntity.md)
  - [ReverseStockSplitEvent](docs/ReverseStockSplitEvent.md)
+ - [RevertValuationPointDataRequest](docs/RevertValuationPointDataRequest.md)
  - [RollInterestUpdates](docs/RollInterestUpdates.md)
  - [RollPrincipalUpdates](docs/RollPrincipalUpdates.md)
  - [RolloverConstituent](docs/RolloverConstituent.md)
