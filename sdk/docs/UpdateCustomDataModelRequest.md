@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The name of the Custom Data Model. | 
-**description** | **str** | A description for the Custom Data Model. | 
+**description** | **str** | A description for the Custom Data Model. | [optional] 
 **parent_data_model** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **conditions** | **str** | The conditions that the bound entity must meet to be valid. | [optional] 
 **properties** | [**List[CustomDataModelPropertySpecification]**](CustomDataModelPropertySpecification.md) | The properties that are required or allowed on the bound entity. | [optional] 
@@ -22,7 +22,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
-description: StrictStr = "example_description"
+description: Optional[StrictStr] = "example_description"
 parent_data_model: Optional[ResourceId] = # Replace with your value
 conditions: Optional[StrictStr] = "example_conditions"
 properties: Optional[List[CustomDataModelPropertySpecification]] = # Replace with your value

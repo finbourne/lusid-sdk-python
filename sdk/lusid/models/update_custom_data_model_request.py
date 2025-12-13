@@ -33,7 +33,7 @@ class UpdateCustomDataModelRequest(BaseModel):
     UpdateCustomDataModelRequest
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
-    description:  StrictStr = Field(...,alias="description", description="A description for the Custom Data Model.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Custom Data Model.") 
     parent_data_model: Optional[ResourceId] = Field(default=None, alias="parentDataModel")
     conditions:  Optional[StrictStr] = Field(None,alias="conditions", description="The conditions that the bound entity must meet to be valid.") 
     properties: Optional[List[CustomDataModelPropertySpecification]] = Field(default=None, description="The properties that are required or allowed on the bound entity.")
@@ -106,6 +106,11 @@ class UpdateCustomDataModelRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['recommendedSortBy'] = _items
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         # set to None if conditions (nullable) is None
         # and __fields_set__ contains the field
         if self.conditions is None and "conditions" in self.__fields_set__:

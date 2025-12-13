@@ -30,7 +30,7 @@ class DataModelSummary(BaseModel):
     """
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Custom Data Model.") 
-    description:  StrictStr = Field(...,alias="description", description="A description for the Custom Data Model.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Custom Data Model.") 
     entity_type:  StrictStr = Field(...,alias="entityType", description="The entity type that the Custom Data Model binds to.") 
     type:  StrictStr = Field(...,alias="type", description="Either Root or Leaf or Intermediate.") 
     precedence: StrictInt = Field(description="Where in the hierarchy this model sits.")
@@ -83,6 +83,11 @@ class DataModelSummary(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['children'] = _items
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod

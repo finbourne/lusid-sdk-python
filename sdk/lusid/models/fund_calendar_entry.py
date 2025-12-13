@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
+from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
 class FundCalendarEntry(BaseModel):
@@ -34,6 +35,7 @@ class FundCalendarEntry(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with.") 
+    timeline_id: Optional[ResourceId] = Field(default=None, alias="timelineId")
     previous_entry: Optional[PreviousFundCalendarEntry] = Field(default=None, alias="previousEntry")
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
     as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
@@ -43,7 +45,7 @@ class FundCalendarEntry(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties for the Calendar Entry. These will be from the 'ClosedPeriod' domain.")
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
-    __properties = ["code", "displayName", "description", "navTypeCode", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "properties", "version", "href"]
+    __properties = ["code", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "properties", "version", "href"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -143,6 +145,9 @@ class FundCalendarEntry(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of timeline_id
+        if self.timeline_id:
+            _dict['timelineId'] = self.timeline_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of previous_entry
         if self.previous_entry:
             _dict['previousEntry'] = self.previous_entry.to_dict()
@@ -192,6 +197,7 @@ class FundCalendarEntry(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "nav_type_code": obj.get("navTypeCode"),
+            "timeline_id": ResourceId.from_dict(obj.get("timelineId")) if obj.get("timelineId") is not None else None,
             "previous_entry": PreviousFundCalendarEntry.from_dict(obj.get("previousEntry")) if obj.get("previousEntry") is not None else None,
             "effective_at": obj.get("effectiveAt"),
             "as_at": obj.get("asAt"),

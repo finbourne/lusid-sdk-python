@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the Fund Calendar entry. | 
 **description** | **str** | A description for the Fund Calendar entry. | [optional] 
 **nav_type_code** | **str** | The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with. | 
+**timeline_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **previous_entry** | [**PreviousFundCalendarEntry**](PreviousFundCalendarEntry.md) |  | [optional] 
 **effective_at** | **datetime** | The effective at of the Calendar Entry. | [optional] 
 **as_at** | **datetime** | The asAt datetime for the Calendar Entry. | 
@@ -29,6 +30,7 @@ code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 nav_type_code: StrictStr = "example_nav_type_code"
+timeline_id: Optional[ResourceId] = # Replace with your value
 previous_entry: Optional[PreviousFundCalendarEntry] = # Replace with your value
 effective_at: Optional[datetime] = # Replace with your value
 as_at: datetime = # Replace with your value
@@ -39,7 +41,7 @@ apply_clear_down:StrictBool = True
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
 href: Optional[StrictStr] = "example_href"
-fund_calendar_entry_instance = FundCalendarEntry(code=code, display_name=display_name, description=description, nav_type_code=nav_type_code, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, properties=properties, version=version, href=href)
+fund_calendar_entry_instance = FundCalendarEntry(code=code, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, properties=properties, version=version, href=href)
 
 ```
 

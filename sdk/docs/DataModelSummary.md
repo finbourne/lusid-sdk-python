@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the Custom Data Model. | 
-**description** | **str** | A description for the Custom Data Model. | 
+**description** | **str** | A description for the Custom Data Model. | [optional] 
 **entity_type** | **str** | The entity type that the Custom Data Model binds to. | 
 **type** | **str** | Either Root or Leaf or Intermediate. | 
 **precedence** | **int** | Where in the hierarchy this model sits. | 
@@ -22,7 +22,7 @@ from datetime import datetime
 
 id: ResourceId
 display_name: StrictStr = "example_display_name"
-description: StrictStr = "example_description"
+description: Optional[StrictStr] = "example_description"
 entity_type: StrictStr = "example_entity_type"
 type: StrictStr = "example_type"
 precedence: StrictInt = # Replace with your value
